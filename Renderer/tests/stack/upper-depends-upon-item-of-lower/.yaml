@@ -1,0 +1,5 @@
+﻿stack: 
+  - id: Upper
+    dependsUpon: Item of Lower
+  - id: Lower
+    items: Item of Lower

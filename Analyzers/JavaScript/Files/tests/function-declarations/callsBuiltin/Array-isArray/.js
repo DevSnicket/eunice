@@ -1,0 +1,3 @@
+function Single() {
+	Array.isArray();
+}

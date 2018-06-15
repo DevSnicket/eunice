@@ -1,0 +1,62 @@
+{
+	"configurations": [
+		{
+			"args": [
+				//"empty"
+				//"empty-statement-block"
+				//"function-arrow/const"
+				//"function-declarations/callsBuiltin/Array-isArray"
+				//"function-declarations/first-calls-second"
+				//"function-declarations/nested"
+				//"function-declarations/second-calls-first"
+				//"function-declarations/single"
+				//"function-declarations/two"
+				//"function-declarations/two-calls-each-other"
+				//"function-expressions/module-exports"
+				//"function-expressions/module-exports"
+				//"function-expressions/module-exports/nested/function-declarations"
+				//"function-expressions/var/single"
+				//"function-expressions/var/second-calls-first"
+				"../../../Renderer/getSvgForYaml/createSvgElement.js"
+			],
+			"cwd": "${workspaceFolder}/Analyzers/JavaScript/Files/",
+			"program": "${workspaceFolder}/Analyzers/JavaScript/Files/test.js",
+			"request": "launch",
+			"type": "node",
+			"name": "analyse file test",
+			"useWSL": true
+		},
+	{
+		"args": [ 
+			//"empty"
+			//"single"
+			//"single-with-long-name"
+			//"two"
+			//"independency/first-and-second-depends-upon-third"
+			//"independency/first-depends-upon-second"
+			//"independency/first-depends-upon-second-and-third"
+			//"independency/first-depends-upon-second-and-third-third-depends-upon-first-and-second"
+			//"independency/first-depends-upon-third"
+			"independency/item-of-first-depends-upon-item-of-second"
+			//"independency/second-depends-upon-first"
+			//"independency/single-depends-upon-missing"
+			//"independency/third-depends-upon-first"
+			//"independency/two-interdependent"
+			//"stack/lower-depends-upon-upper"
+			//"stack/single"
+			//"stack/single-of-two-items"
+			//"stack/two"
+			//"stack/two-of-two-items-interdependent"
+			//"stack/two-interdependent"
+			//"stack/two-of-two-items"
+			//"stack/upper-depends-upon-lower"
+		],
+		"cwd": "${workspaceFolder}/Renderer/",
+		"program": "${workspaceFolder}/Renderer/test.js",
+		"request": "launch",
+		"type": "node",
+		"name": "renderer test",
+		"useWSL": true
+	}],
+	"version": "0.2.0"
+}

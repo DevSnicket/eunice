@@ -1,0 +1,9 @@
+{
+	"compilerOptions": {
+		"alwaysStrict": true,
+		"checkJs": true,
+		"module": "commonjs",
+		"noEmit": true,
+		"target": "es2017"
+	}
+}
