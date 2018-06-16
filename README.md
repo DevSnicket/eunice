@@ -7,3 +7,5 @@ Part of how this is achieved in Eunice is by defining stacks. When an item shoul
 This approach can be applied at all scales of software and across boundaries, from individual files, functions or classes, to multiple, large codebases in different languages, frameworks and runtimes.
 
 To support different sources of structure and dependency a common data format is defined in YAML. Generators are implemented to create the YAML files, which can then be optionally post-processed and combined. Currently in development is a single file JavaScript analyser.
+
+To visualise what's in the YAML files and statistically measure how well they match the intended structure a SVG renderer has been implemented.
