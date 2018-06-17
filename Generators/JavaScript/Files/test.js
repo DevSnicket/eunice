@@ -4,22 +4,22 @@ const
 	walk = require("acorn/dist/walk");
 
 const
-	analyze = require("./analyze"),
+	generate = require("./generate"),
 	runTestsInFileSystem = require("../../../runTestsInFileSystem.js");
 
 runTestsInFileSystem({
-	action: analyzeFile,
+	action: generateFile,
 	argument: process.argv[2],
 	caseFileName: ".js",
 	directory: "tests/",
 	expectedFileName: ".yaml",
 });
 
-function analyzeFile(
+function generateFile(
 	file
 ) {
 	const yaml =
-		analyze({
+		generate({
 			file: parse(file, { ecmaVersion: 9 }),
 			walk: walk.ancestor,
 		});
