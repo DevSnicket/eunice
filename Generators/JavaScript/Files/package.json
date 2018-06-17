@@ -6,6 +6,10 @@
 	"devDependencies": {
 		"@types/acorn": "^4.0.3",
 		"@types/jest": "22.2.3",
+		"babel-cli": "6.26.0",
+		"babel-loader": "7.1.4",
+		"babel-plugin-transform-object-rest-spread": "6.26.0",
+		"babel-preset-env": "1.7.0",
 		"jest": "23.0.1",
 		"webpack": "4.11.1",
 		"webpack-cli": "3.0.3"
