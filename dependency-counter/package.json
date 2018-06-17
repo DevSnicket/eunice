@@ -24,7 +24,7 @@
 	"main": "getSvgElementForYaml.js",
 	"name": "@dev-snicket/eunice-renderer",
 	"scripts": {
-		"build": "webpack",
+		"harness": "webpack",
 		"test": "jest"
 	},
 	"version": "0.1.0"
