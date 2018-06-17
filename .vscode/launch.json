@@ -19,11 +19,11 @@
 				//"function-expressions/var/second-calls-first"
 				"../../../Renderer/getSvgForYaml/createSvgElement.js"
 			],
-			"cwd": "${workspaceFolder}/Analyzers/JavaScript/Files/",
-			"program": "${workspaceFolder}/Analyzers/JavaScript/Files/test.js",
+			"cwd": "${workspaceFolder}/Generators/JavaScript/Files/",
+			"program": "${workspaceFolder}/Generators/JavaScript/Files/test.js",
 			"request": "launch",
 			"type": "node",
-			"name": "analyse file test",
+			"name": "generate file test",
 			"useWSL": true
 		},
 	{
@@ -55,7 +55,7 @@
 		"program": "${workspaceFolder}/Renderer/test.js",
 		"request": "launch",
 		"type": "node",
-		"name": "renderer test",
+		"name": "render test",
 		"useWSL": true
 	}],
 	"version": "0.2.0"
