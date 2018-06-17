@@ -11,7 +11,7 @@ runTestsInFileSystem({
 	action: generateFile,
 	argument: process.argv[2],
 	caseFileName: ".js",
-	directory: "tests/",
+	directory: __dirname + "/tests/",
 	expectedFileName: ".yaml",
 });
 
