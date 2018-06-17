@@ -73,7 +73,8 @@ module.exports =
 						`${rootDirectory}${testCase}/${expectedFileName}`,
 						`\uFEFF${content}`,
 						"utf-8"
-					));
+					)
+				);
 			}
 		}
 
@@ -100,7 +101,8 @@ module.exports =
 					.reduce(
 						(aggregation, testCases) =>
 							[ ...aggregation, ...testCases ]
-					));
+					)
+				);
 			}
 
 			function whenSubdirectory(
@@ -111,7 +113,8 @@ module.exports =
 				function isDirectory() {
 					return (
 						fs.lstatSync(rootDirectory + subFileOrDirectory)
-						.isDirectory());
+						.isDirectory()
+					);
 				}
 
 				function discoverTestCases() {
@@ -151,6 +154,7 @@ module.exports =
 				.replace(
 					/^\uFEFF/, // BOM
 					""
-				));
+				)
+			);
 		}
 	};

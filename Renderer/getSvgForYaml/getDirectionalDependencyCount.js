@@ -20,7 +20,8 @@ module.exports =
 					}),
 				same:
 					getForSame(),
-			}));
+			})
+		);
 
 		function getForSame() {
 			return (
@@ -42,7 +43,8 @@ module.exports =
 				getFromDirectionCount({
 					down: down && countSelector(down),
 					up: up && countSelector(up),
-				}));
+				})
+			);
 		}
 
 		function getFromDirectionCount({

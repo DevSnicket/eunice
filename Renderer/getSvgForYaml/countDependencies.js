@@ -51,7 +51,8 @@ function getFromItemRecursive({
 			...getFromItemsRecursive(item.items),
 		]
 		:
-		selector(item));
+		selector(item)
+	);
 
 	function getFromItemsRecursive(
 		items

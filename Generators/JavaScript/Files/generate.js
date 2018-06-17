@@ -64,7 +64,8 @@ function getVisitors({
 				return (
 					parent.type === "AssignmentExpression"
 					&&
-					isModuleExportMemberExpression(parent.left));
+					isModuleExportMemberExpression(parent.left)
+				);
 
 				function isModuleExportMemberExpression(
 					node
@@ -143,7 +144,8 @@ function getVisitors({
 				id: identifier,
 				...createDependsUpon({ dependent: node, walk }),
 				...createItems(node),
-			});
+			}
+		);
 	}
 
 	function createItems(
