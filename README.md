@@ -4,6 +4,8 @@ Eunice is a system of utilities based on the premise that unidirectional depende
 
 Part of how this is achieved in Eunice is by defining stacks. When an item should depend upon another it is placed above the other in their stack. When items are independent of each other they can be placed at the same level in their stack.
 
+[try it out](https://devsnicket.github.io/Eunice-harnesses/harness.html)
+
 This approach can be applied at all scales of software and across boundaries, from individual files, functions or classes, to multiple, large codebases in different languages, frameworks and runtimes.
 
 To support different sources of structure and dependency a common data format is defined in YAML. Generators are implemented to create the YAML files, which can then be optionally post-processed and combined. Currently in development is a single file JavaScript generator.
