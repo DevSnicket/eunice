@@ -7,10 +7,10 @@ const
 const getSvgForYaml = require("./getSvgElementForYaml");
 
 const
-	svgTextArea = document.getElementById("svg"),
-	yamlDiv = document.getElementById("yaml");
+	svgDiv = document.getElementById("svg"),
+	yamlTextArea = document.getElementById("yaml");
 
-yamlDiv.addEventListener("input", renderFromTextareaIntoDiv);
+yamlTextArea.addEventListener("input", renderFromTextareaIntoDiv);
 
 renderFromTextareaIntoDiv();
 
@@ -19,8 +19,8 @@ function renderFromTextareaIntoDiv() {
 		getSvgForYaml({
 			createElement,
 			getTextWidth,
-			yaml: parseYaml(yamlDiv.value),
+			yaml: parseYaml(yamlTextArea.value),
 		}),
-		svgTextArea
+		svgDiv
 	);
 }
