@@ -5,6 +5,7 @@
 		"jest": "23.0.1"
 	},
 	"scripts": {
+		"harness": "(cd Generators/JavaScript/Files; npx webpack); (cd Renderer; npx webpack)",
 		"lint": "eslint .",
 		"test": "jest"
 	}
