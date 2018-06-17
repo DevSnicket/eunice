@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <style>
-            html, body {
-                height: 100%;
-                margin: 0;
-            }
-            body {
-                display: flex;
-            }
-            div.column {
-                display: flex;
-                flex-direction: column;                
-                margin: 4px;
-                width: 50%;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="column">
-            YAML
-            <textarea id="yaml" style="flex: 1; resize: none;">stack: 
+
+<head>
+	<style>
+		html,
+		body {
+			height: 100%;
+			margin: 0;
+		}
+
+		body {
+			display: flex;
+		}
+
+		div.column {
+			display: flex;
+			flex-direction: column;
+			margin: 4px;
+			width: 50%;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="column">
+		YAML
+		<textarea id="yaml" style="flex: 1; resize: none;">stack: 
   - 
     - id: Upper First
       dependsUpon: 
@@ -43,11 +48,12 @@
         - Upper First
         - Upper Second
         - Lower First</textarea>
-        </div>
-        <div class="column">
-            SVG
-            <div id="svg" style="flex: 1; overflow: scroll;"></div>
-        </div>
-        <script src="harness.bundle.js"></script>
-    </body>
+	</div>
+	<div class="column">
+		SVG
+		<div id="svg" style="flex: 1; overflow: scroll;"></div>
+	</div>
+	<script src="harness.bundle.js"></script>
+</body>
+
 </html>
