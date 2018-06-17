@@ -46,7 +46,8 @@ module.exports =
 					paddingRight: 0,
 					preserveAspectRatio,
 					transform,
-				}));
+				})
+			);
 		}
 
 		function create({
@@ -81,7 +82,8 @@ module.exports =
 							viewBox: "0,0,1,1",
 						},
 						polygon
-					));
+					)
+				);
 			}
 
 			function createPolygon() {
@@ -95,7 +97,8 @@ module.exports =
 								.map(point => scaleAndFormatPoint(transform(point)))
 								.join(" "),
 						}
-					));
+					)
+				);
 
 				function scaleAndFormatPoint(
 					point
@@ -112,7 +115,8 @@ module.exports =
 				[
 					point[0],
 					withPrecision(1 - point[1]),
-				]);
+				]
+			);
 		}
 	};
 

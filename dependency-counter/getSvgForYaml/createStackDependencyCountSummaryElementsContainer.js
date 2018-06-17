@@ -117,7 +117,8 @@ function createDependencyCountGroupFactories({
 				count: countsByDirection.same,
 			}),
 		]
-		.filter(groupFactory => groupFactory));
+		.filter(groupFactory => groupFactory)
+	);
 }
 
 function createGroupsWhenRequired({

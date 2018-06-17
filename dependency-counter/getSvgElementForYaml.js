@@ -42,7 +42,8 @@ function createFont({
 			family,
 			measure: text => withPrecision(getTextWidth(text, getTextWidthOptions)),
 			size,
-		});
+		}
+	);
 }
 
 function getSvgElementForStack({
@@ -61,7 +62,8 @@ function getSvgElementForStack({
 			symbols:
 				Object.values(arrows)
 				.map(arrow => arrow.element),
-		}));
+		})
+	);
 
 	function initaliseAndCreateElementsContainer() {
 		standardiseStack(stack);
@@ -192,7 +194,8 @@ function getSvgElementForStack({
 					},
 					text
 				)
-			));
+			)
+		);
 
 		function getTextLeftOffset() {
 			return (width - paddingRight) / 2;
@@ -212,7 +215,8 @@ function addPadding(
 		?
 		0
 		:
-		withPrecision(offset + 15));
+		withPrecision(offset + 15)
+	);
 }
 
 function withPrecision(

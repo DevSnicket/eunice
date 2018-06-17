@@ -21,7 +21,8 @@ module.exports =
 			createGroupsFactoryWithoutDependencies({
 				identifierGroupFactory,
 				left,
-			}));
+			})
+		);
 
 		function calculateTopOffset() {
 			return (
@@ -29,7 +30,8 @@ module.exports =
 					(identifierGroupFactory.height - dependencies.arrow.height)
 					/
 					2
-				));
+				)
+			);
 		}
 	};
 
@@ -59,7 +61,8 @@ function createGroupsFactoryWithDependencies({
 	return (
 		createGroupsFactoryFromDependsUponGroupFactory(
 			createDependsUponGroupFactory()
-		));
+		)
+	);
 
 	function createDependsUponGroupFactory() {
 		return (
@@ -68,7 +71,8 @@ function createGroupsFactoryWithDependencies({
 				count: dependencies.dependsUpon,
 				createCountGroupFactoryWhenRequired,
 				left: withPrecision(identifierGroupLeft + identifierGroupFactory.width),
-			}));
+			})
+		);
 	}
 
 	function createGroupsFactoryFromDependsUponGroupFactory(
@@ -97,7 +101,8 @@ function createGroupsFactoryWithDependencies({
 					createDependentsGroup(dependentsGroupFactory),
 					createIdentifierGroup(),
 					createDependentsGroup(dependsUponGroupFactory),
-				]);
+				]
+			);
 
 			function createDependentsGroup(
 				groupFactory
@@ -105,7 +110,8 @@ function createGroupsFactoryWithDependencies({
 				return (
 					groupFactory
 					&&
-					groupFactory.createWithTop(top + topOffset));
+					groupFactory.createWithTop(top + topOffset)
+				);
 			}
 
 			function createIdentifierGroup() {
@@ -113,7 +119,8 @@ function createGroupsFactoryWithDependencies({
 					identifierGroupFactory.create({
 						left: identifierGroupLeft,
 						top,
-					}));
+					})
+				);
 			}
 		}
 
