@@ -12,7 +12,7 @@ runTestsInFileSystem({
 	action: getSvgForYaml,
 	argument: process.argv[2],
 	caseFileName: ".yaml",
-	directory: "tests/",
+	directory: __dirname + "/tests/",
 	expectedFileName: ".svg",
 });
 
@@ -26,5 +26,6 @@ function getSvgForYaml(
 				getTextWidth,
 				yaml: parseYaml(yaml),
 			})
-		));
+		)
+	);
 }
