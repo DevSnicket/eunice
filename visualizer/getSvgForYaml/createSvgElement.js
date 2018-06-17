@@ -9,7 +9,8 @@ module.exports =
 			createFromAttributesAndChildren({
 				...createAttributesWithChildren(),
 				createElement,
-			}));
+			})
+		);
 
 		function createAttributesWithChildren() {
 			return (
@@ -44,7 +45,8 @@ function getSvgStyleForFont(
 			"g.item rect{fill:lightgray}",
 			"g.item text{fill:black}",
 		]
-		.join(""));
+		.join("")
+	);
 }
 
 function createStyleElementInDefsElement({
@@ -60,7 +62,8 @@ function createStyleElementInDefsElement({
 				{ type: "text/css" },
 				style
 			)
-		));
+		)
+	);
 }
 
 function createFromAttributesAndChildren({
@@ -76,5 +79,6 @@ function createFromAttributesAndChildren({
 				xmlns: "http://www.w3.org/2000/svg",
 			},
 			children
-		));
+		)
+	);
 }

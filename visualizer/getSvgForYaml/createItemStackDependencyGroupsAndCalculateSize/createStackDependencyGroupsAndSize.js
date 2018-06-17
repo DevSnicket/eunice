@@ -14,7 +14,8 @@ module.exports =
 			createNotIndependentGroupsAndGetSize({
 				notIndependentGroupsFactory,
 				top,
-			}));
+			})
+		);
 
 		function createGroupsWithDependencies() {
 			const groupsAndHeightForDependenciesAbove =
@@ -58,7 +59,8 @@ module.exports =
 							withPrecision,
 						}),
 					]
-				));
+				)
+			);
 		}
 	};
 
@@ -75,7 +77,8 @@ function createGroupsAndCalculateHeightForDependenciesWhenRequired({
 		&&
 		createGroupsAndGetHeightFromFactory(
 			createFactory()
-		));
+		)
+	);
 
 	function createFactory() {
 		return (
@@ -109,7 +112,8 @@ function createGroupsAndCalculateHeightForDependenciesWhenRequired({
 						});
 				},
 				{ createGroupWithLefts: [], height: 0, width: 0 }
-			));
+			)
+		);
 	}
 
 	function createGroupsAndGetHeightFromFactory(
@@ -169,5 +173,6 @@ function aggregateGroupsAndSizes(
 				:
 				aggregation,
 			{ groups: [], height: 0, width: 0 }
-		));
+		)
+	);
 }
