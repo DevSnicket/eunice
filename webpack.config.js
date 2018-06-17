@@ -1,0 +1,1 @@
+module.exports = require("./getHarnessWebpackConfig")(__dirname);

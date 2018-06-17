@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		html,
+		body {
+			height: 100%;
+			margin: 0;
+		}
+
+		body {
+			display: flex;
+		}
+
+		div.column {
+			display: flex;
+			flex-direction: column;
+			margin: 4px;
+			width: 33%;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="column">
+		JavaScript
+		<textarea id="javascript" style="flex: 1; resize: none;">function Called() {}
+
+function NotCalled() {}
+
+function Callee() {
+  Called();
+  NestedInCallee();
+
+  function NestedInCallee() {}
+}
+		</textarea>
+	</div>
+	<div class="column">
+		YAML
+		<textarea id="yaml" style="flex: 1; resize: none;"></textarea>
+	</div>
+	<div class="column">
+		SVG
+		<div id="svg" style="flex: 1; overflow: scroll;"></div>
+	</div>
+	<script src="harness.bundle.js" charset="utf-8"></script>
+</body>
+
+</html>
