@@ -5,6 +5,7 @@
 		"jest": "23.0.1"
 	},
 	"scripts": {
+		"lint": "eslint .",
 		"test": "jest"
 	}
 }
