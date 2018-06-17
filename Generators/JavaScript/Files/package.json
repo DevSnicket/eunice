@@ -6,12 +6,15 @@
 	"devDependencies": {
 		"@types/acorn": "^4.0.3",
 		"@types/jest": "22.2.3",
-		"jest": "23.0.1"
+		"jest": "23.0.1",
+		"webpack": "4.11.1",
+		"webpack-cli": "3.0.3"
 	},
 	"license": "MIT",
 	"main": "analyze.js",
 	"name": "@dev-snicket/eunice-analyze-file",
 	"scripts": {
+		"build": "webpack",
 		"test": "jest"
 	},
 	"version": "0.1.0"

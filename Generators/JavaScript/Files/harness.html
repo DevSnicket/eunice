@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		html,
+		body {
+			height: 100%;
+			margin: 0;
+		}
+
+		body {
+			display: flex;
+		}
+
+		div.column {
+			display: flex;
+			flex-direction: column;
+			margin: 4px;
+			width: 50%;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="column">
+		JavaScript
+		<textarea id="javascript" style="flex: 1; resize: none;">function First() {}
+
+function Second() {
+  First();
+  NestedInSecond();
+
+  function NestedInSecond() {}
+}
+		</textarea>
+	</div>
+	<div class="column">
+		YAML
+		<pre style="flex: 1; overflow: scroll;"><code id="yaml"></code></pre>
+	</div>
+	<script src="harness.bundle.js" charset="utf-8"></script>
+</body>
+
+</html>

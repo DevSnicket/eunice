@@ -1,5 +1,6 @@
 {
 	"configurations": [
+
 		{
 			"args": [
 				//"empty"
@@ -25,6 +26,12 @@
 			"type": "node",
 			"name": "generate file test",
 			"useWSL": true
+		},
+		{
+			"name": "generate test harness",
+			"type": "chrome",
+			"request": "launch",
+			"file": "${workspaceFolder}/Generators/JavaScript/Files/harness.html"
 		},
 	{
 		"args": [ 
@@ -55,7 +62,7 @@
 		"program": "${workspaceFolder}/Renderer/test.js",
 		"request": "launch",
 		"type": "node",
-		"name": "render test",
+		"name": "renderer test",
 		"useWSL": true
 	}],
 	"version": "0.2.0"
