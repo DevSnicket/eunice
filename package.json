@@ -36,7 +36,7 @@
 		"coverageDirectory": "TestCoverage"
 	},
 	"scripts": {
-		"harness": "(cd Generators/JavaScript/Files; npx webpack); (cd Renderer; npx webpack) npx webpack",
+		"harness": "(cd Generators/JavaScript/Files; npx webpack); (cd Renderer; npx webpack); npx webpack",
 		"lint": "eslint .",
 		"test": "jest",
 		"test-travis": "jest && cat ./TestCoverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
