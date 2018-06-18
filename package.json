@@ -33,7 +33,14 @@
 			"!TestCoverage/**",
 			"!*.js"
 		],
-		"coverageDirectory": "TestCoverage"
+		"coverageDirectory": "TestCoverage",
+		"coverageThreshold": {
+			"global": {
+			  "branches": 100,
+			  "functions": 100,
+			  "lines": 100
+			}
+		}
 	},
 	"scripts": {
 		"harness": "(cd Generators/JavaScript/Files; npx webpack); (cd Renderer; npx webpack); npx webpack",
