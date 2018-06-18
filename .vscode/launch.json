@@ -6,6 +6,7 @@
 				//"empty"
 				//"empty-statement-block"
 				//"function-arrow/const"
+				"function-arrow/parameter"
 				//"function-declarations/callsBuiltin/Array-isArray"
 				//"function-declarations/first-calls-second"
 				//"function-declarations/nested"
@@ -18,7 +19,7 @@
 				//"function-expressions/module-exports/nested/function-declarations"
 				//"function-expressions/var/single"
 				//"function-expressions/var/second-calls-first"
-				"../../../Renderer/getSvgForYaml/createSvgElement.js"
+				//"../../../Renderer/getSvgForYaml/createSvgElement.js"
 			],
 			"cwd": "${workspaceFolder}/Generators/JavaScript/Files/",
 			"program": "${workspaceFolder}/Generators/JavaScript/Files/test.js",
