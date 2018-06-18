@@ -1,3 +1,4 @@
 /.vs
+/TestCoverage
 node_modules/
 *.bundle.js*
