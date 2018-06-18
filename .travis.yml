@@ -3,4 +3,7 @@ node_js:
   - "8.11.2"
 notifications:
   email: false
-script: npm run test-travis
+script:
+  - npm run test-travis
+  - npm run lint
+  - npm run harness
