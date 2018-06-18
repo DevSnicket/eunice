@@ -110,7 +110,7 @@ function getVisitors({
 		const parent = findParentWhenNested();
 
 		if (parent)
-			nestedFunctionMap.set(parent, item);
+			addToNestedFunctionMap();
 		else
 			items.push(item);
 
@@ -133,6 +133,15 @@ function getVisitors({
 				);
 			}
 		}
+
+		function addToNestedFunctionMap() {
+			const parentMap = nestedFunctionMap.get(parent);
+
+			if (parentMap)
+				parentMap.push(item);
+			else
+				nestedFunctionMap.set(parent, [ item ]);
+		}
 	}
 
 	function createItemForFunction({
@@ -153,7 +162,7 @@ function getVisitors({
 	) {
 		const nested = nestedFunctionMap.get(parent);
 
-		return nested && { items: [ nested ] };
+		return nested && { items: nested };
 	}
 }
 
