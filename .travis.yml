@@ -1,4 +1,4 @@
 language: node_js
 node_js:
   - "8.11.2"
-script: npx test-travis
+script: npm run test-travis
