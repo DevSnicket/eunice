@@ -6,6 +6,7 @@
 				//"empty"
 				//"empty-statement-block"
 				//"function-arrow/const"
+				"function-arrow/parameter"
 				//"function-declarations/callsBuiltin/Array-isArray"
 				//"function-declarations/first-calls-second"
 				//"function-declarations/nested"
@@ -18,7 +19,7 @@
 				//"function-expressions/module-exports/nested/function-declarations"
 				//"function-expressions/var/single"
 				//"function-expressions/var/second-calls-first"
-				"../../../Renderer/getSvgForYaml/createSvgElement.js"
+				//"../../../Renderer/getSvgForYaml/createSvgElement.js"
 			],
 			"cwd": "${workspaceFolder}/Generators/JavaScript/Files/",
 			"program": "${workspaceFolder}/Generators/JavaScript/Files/test.js",
@@ -37,14 +38,15 @@
 		"args": [ 
 			//"empty"
 			//"single"
-			//"single-with-long-name"
+			//"single/with-long-name"
+			"single/with-item-of-structure"
 			//"two"
 			//"independency/first-and-second-depends-upon-third"
 			//"independency/first-depends-upon-second"
 			//"independency/first-depends-upon-second-and-third"
 			//"independency/first-depends-upon-second-and-third-third-depends-upon-first-and-second"
 			//"independency/first-depends-upon-third"
-			"independency/item-of-first-depends-upon-item-of-second"
+			//"independency/item-of-first-depends-upon-item-of-second"
 			//"independency/second-depends-upon-first"
 			//"independency/single-depends-upon-missing"
 			//"independency/third-depends-upon-first"

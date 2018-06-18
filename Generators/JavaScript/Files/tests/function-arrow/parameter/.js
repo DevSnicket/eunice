@@ -1,0 +1,1 @@
+[].map(nothing => nothing)

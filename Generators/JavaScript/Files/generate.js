@@ -53,7 +53,7 @@ function getVisitors({
 			pushItemsWhenModuleExport();
 
 		function pushItemsWhenModuleExport() {
-			if (isModuleExportAssigment)
+			if (isModuleExportAssigment())
 				items.push(
 					createItemWithIdentifier(
 						getIdentifierWhenAssigment()
