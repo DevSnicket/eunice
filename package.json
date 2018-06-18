@@ -16,14 +16,29 @@
 		"babel-loader": "7.1.4",
 		"babel-plugin-transform-object-rest-spread": "6.26.0",
 		"babel-preset-env": "1.7.0",
+		"coveralls": "3.0.1",
 		"eslint": "4.19.1",
 		"jest": "23.0.1",
 		"webpack": "4.11.1",
 		"webpack-cli": "3.0.3"
 	},
+	"jest": {
+		"collectCoverage": true,
+		"collectCoverageFrom": [
+			"**/*.js",
+			"!**/node_modules/**",
+			"!**/tests/**/.js",
+			"!**/harness.*.js",
+			"!**/webpack.config.js",
+			"!TestCoverage/**",
+			"!*.js"
+		],
+		"coverageDirectory": "TestCoverage"
+	},
 	"scripts": {
 		"harness": "(cd Generators/JavaScript/Files; npx webpack); (cd Renderer; npx webpack) npx webpack",
 		"lint": "eslint .",
-		"test": "jest"
+		"test": "jest",
+		"test-travis": "jest && cat ./TestCoverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
 	}
 }
