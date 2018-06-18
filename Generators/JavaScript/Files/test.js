@@ -1,6 +1,7 @@
 const
 	formatYaml = require("js-yaml").safeDump,
 	parse = require("acorn").parse,
+	path = require("path"),
 	walk = require("acorn/dist/walk");
 
 const
@@ -11,7 +12,7 @@ runTestsInFileSystem({
 	action: generateFile,
 	argument: process.argv[2],
 	caseFileName: ".js",
-	directory: __dirname + "/tests/",
+	directory: path.join(__dirname, "tests/"),
 	expectedFileName: ".yaml",
 });
 
