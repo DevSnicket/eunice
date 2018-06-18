@@ -10,7 +10,7 @@ This approach can be applied at all scales of software and across boundaries, fr
 
 To support different sources of structure and dependency a common data format is defined in YAML. Generators are implemented to create the YAML files, which can then be optionally post-processed and combined. Currently in development is a single file JavaScript generator.
 
-To visualise what's in the YAML files and statistically measure how well they match the intended structure a SVG renderer has been implemented. The renderer doesn't use lines between items to show dependencies and instead marks items with counts for each dependency type.
+To visualise what's in the YAML files and statistically measure how well they match the intended structure a SVG renderer has been implemented. The renderer doesn't use lines between items to show dependencies and instead marks items with counts for each dependency type. At the bottom of each stack a summary the counts across all of its items is shown.
 
 scenario | svg | scenario | svg | scenario | svg
 -------- | :-: | -------- | :-: | -------- | :-:
