@@ -1,0 +1,9 @@
+mkdir -p Harnesses
+cp harness.html Harnesses/
+cp harness.bundle.* Harnesses/
+mkdir -p Harnesses/Generators/JavaScript/Files
+cp Generators/JavaScript/Files/harness.html Harnesses/Generators/JavaScript/Files/
+cp Generators/JavaScript/Files/harness.bundle.* Harnesses/Generators/JavaScript/Files/
+mkdir -p Harnesses/Renderer
+cp Renderer/harness.html Harnesses/Renderer/
+cp Renderer/harness.bundle.* Harnesses/Renderer/
