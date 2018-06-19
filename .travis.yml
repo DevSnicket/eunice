@@ -5,6 +5,8 @@ deploy:
   github-token: $GITHUB_HARNESSES_TOKEN
   keep-history: true
   local-dir: Harnesses
+  on:
+    branch: travis
   provider: pages
   skip-cleanup: true
 language: node_js
