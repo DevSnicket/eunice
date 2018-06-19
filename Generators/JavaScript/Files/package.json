@@ -16,7 +16,7 @@
 	},
 	"license": "MIT",
 	"main": "analyze.js",
-	"name": "@dev-snicket/eunice-analyze-file",
+	"name": "eunice-analyze-file",
 	"scripts": {
 		"harness": "webpack",
 		"test": "jest"
