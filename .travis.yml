@@ -8,7 +8,9 @@ deploy:
   on:
     branch: travis
   provider: pages
+  repo: https://github.com/DevSnicket/Eunice-harnesses.git
   skip-cleanup: true
+  target-branch: master
 language: node_js
 node_js:
   - "8.11.2"
