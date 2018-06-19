@@ -30,13 +30,21 @@ module.exports =
 function getDependents(
 	item
 ) {
-	return item.dependents;
+	return (
+		item.dependents
+		&&
+		item.dependents.filter(dependent => dependent !== item.parent.parent)
+	);
 }
 
 function getDependsUpon(
 	item
 ) {
-	return item.dependsUpon;
+	return (
+		item.dependsUpon
+		&&
+		item.dependsUpon.filter(dependUpon => dependUpon && dependUpon.parent.parent != item)
+	);
 }
 
 function getFromItemRecursive({
