@@ -8,7 +8,7 @@ deploy:
   on:
     branch: travis
   provider: pages
-  repo: DevSnicket/Eunice-harnesses.git
+  repo: DevSnicket/Eunice-harnesses
   skip-cleanup: true
   target-branch: master
 language: node_js
