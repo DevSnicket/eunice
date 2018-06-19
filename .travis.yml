@@ -2,13 +2,13 @@ cache:
   directories:
     - node_modules
 deploy:
+  github-token: $GITHUB_HARNESSES_TOKEN
   keep-history: true
   local-dir: Harnesses
   on:
     branch: master
   provider: pages
-    github-token: $GITHUB_HARNESSES_TOKEN
-    skip-cleanup: true
+  skip-cleanup: true
 language: node_js
 node_js:
   - "8.11.2"
