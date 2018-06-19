@@ -10,14 +10,10 @@ module.exports =
 		dependencies
 		.reduce(
 			(count, dependency) =>
-				dependency
-				?
 				countInDirection({
 					count,
 					direction: getStackDirection(dependency.parent),
-				})
-				:
-				count,
+				}),
 			{ above: 0, below: 0, same: 0 }
 		);
 
