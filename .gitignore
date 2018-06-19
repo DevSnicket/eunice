@@ -1,4 +1,5 @@
 /.vs
+/Harnesses
 /TestCoverage
 node_modules/
 *.bundle.js*

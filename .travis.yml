@@ -1,6 +1,14 @@
 cache:
   directories:
     - node_modules
+deploy:
+  keep-history: true
+  local-dir: Harnesses
+  on:
+    branch: master
+  provider: pages
+    github-token: $GITHUB_HARNESSES_TOKEN
+    skip-cleanup: true
 language: node_js
 node_js:
   - "8.11.2"
@@ -10,3 +18,12 @@ script:
   - npm run test-travis
   - npm run lint
   - npm run harness
+  - mkdir -p Harnesses
+  - cp harness.html Harnesses/
+  - cp harness.bundle.* Harnesses/
+  - mkdir -p Harnesses/Generators/JavaScript/Files
+  - cp Generators/JavaScript/Files/harness.html Harnesses/Generators/JavaScript/Files/
+  - cp Generators/JavaScript/Files/harness.bundle.* Harnesses/Generators/JavaScript/Files/
+  - mkdir -p Harnesses/Renderer
+  - cp Renderer/harness.html Harnesses/Renderer/
+  - cp Renderer/harness.bundle.* Harnesses/Renderer/
