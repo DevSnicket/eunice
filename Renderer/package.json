@@ -22,10 +22,10 @@
 	"homepage": "http://www.devsnicket.com",
 	"license": "MIT",
 	"main": "getSvgElementForYaml.js",
-	"name": "@dev-snicket/eunice-renderer",
+	"name": "eunice-renderer",
 	"scripts": {
 		"harness": "webpack",
 		"test": "jest"
 	},
-	"version": "0.1.0"
+	"version": "0.1.1"
 }

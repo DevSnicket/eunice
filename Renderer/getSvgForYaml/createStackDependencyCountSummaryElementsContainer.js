@@ -172,8 +172,6 @@ function createContainer({
 	top,
 }) {
 	return (
-		elements && elements.length
-		?
 		{
 			bottom:
 				top + arrowRight.height,
@@ -185,7 +183,5 @@ function createContainer({
 			right:
 				stackElementsContainer.right,
 		}
-		:
-		stackElementsContainer
 	);
 }
