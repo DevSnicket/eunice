@@ -5,8 +5,8 @@ const
 	createDependencyCountGroupFactoryWhenRequired = require("./getSvgForYaml/createDependencyCountGroupFactoryWhenRequired"),
 	createItemGroupsContainer = require("./getSvgForYaml/createItemGroupsContainer"),
 	createItemStackDependencyGroupsAndCalculateSize = require("./getSvgForYaml/createItemStackDependencyGroupsAndCalculateSize"),
-	createStackDependencyCountSummaryElementsContainer = require("./getSvgForYaml/createStackDependencyCountSummaryElementsContainer"),
 	createStackElementsContainer = require("./getSvgForYaml/createStackElementsContainer"),
+	createSummaryElementsContainer = require("./getSvgForYaml/createSummaryElementsContainer"),
 	createSvgElement = require("./getSvgForYaml/createSvgElement"),
 	getDirectionalDependencyCount = require("./getSvgForYaml/getDirectionalDependencyCount"),
 	getStackDirection = require("./getSvgForYaml/getStackDirection"),
@@ -72,7 +72,7 @@ function getSvgElementForStack({
 		const stackDependencyCounts = [];
 
 		return (
-			createStackDependencyCountSummaryElementsContainer({
+			createSummaryElementsContainer({
 				arrows,
 				counts:
 					stackDependencyCounts,
