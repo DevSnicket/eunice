@@ -10,7 +10,8 @@ const
 	createSvgElement = require("./getSvgForYaml/createSvgElement"),
 	getDirectionalDependencyCount = require("./getSvgForYaml/getDirectionalDependencyCount"),
 	getStackDirection = require("./getSvgForYaml/getStackDirection"),
-	standardiseStack = require("./getSvgForYaml/standardiseStack");
+	standardiseStack = require("./getSvgForYaml/standardiseStack"),
+	withPrecision = require("./getSvgForYaml/withPrecision");
 
 module.exports =
 	({
@@ -217,10 +218,4 @@ function addPadding(
 		:
 		withPrecision(offset + 15)
 	);
-}
-
-function withPrecision(
-	value
-) {
-	return (value * 100).toFixed() / 100;
 }
