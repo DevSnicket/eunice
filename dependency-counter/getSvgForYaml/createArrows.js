@@ -6,16 +6,15 @@ module.exports =
 		return (
 			{
 				down:
-					createVertical({
+					createArrowVertical({
 						fill: "darkgreen",
 						idPrefix: "down",
 						preserveAspectRatio: "xMidYMax slice",
 						transform: point => point,
 					}),
 				right:
-					create({
+					createArrow({
 						fill: "darkred",
-						height: 22,
 						horizontalMargin: 9,
 						idPrefix: "right",
 						paddingRight: 3,
@@ -23,7 +22,7 @@ module.exports =
 						transform: swapAxis,
 					}),
 				up:
-					createVertical({
+					createArrowVertical({
 						fill: "darkred",
 						idPrefix: "up",
 						preserveAspectRatio: "xMidYMin slice",
@@ -31,16 +30,15 @@ module.exports =
 					}),
 			});
 
-		function createVertical({
+		function createArrowVertical({
 			fill,
 			idPrefix,
 			preserveAspectRatio,
 			transform,
 		}) {
 			return (
-				create({
+				createArrow({
 					fill,
-					height: 22,
 					horizontalMargin: 10,
 					idPrefix,
 					paddingRight: 0,
@@ -50,9 +48,8 @@ module.exports =
 			);
 		}
 
-		function create({
+		function createArrow({
 			fill,
-			height,
 			horizontalMargin,
 			idPrefix,
 			paddingRight,
@@ -64,7 +61,7 @@ module.exports =
 			return (
 				{
 					element: createSymbolWithPolygon(createPolygon()),
-					height,
+					height: 22,
 					horizontalMargin,
 					id,
 					paddingRight,
