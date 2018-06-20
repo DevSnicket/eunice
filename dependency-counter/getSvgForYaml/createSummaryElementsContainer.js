@@ -13,7 +13,7 @@ module.exports =
 			stackElementsContainer);
 
 		function create() {
-			const top = stackElementsContainer.bottom + 10;
+			const top = stackElementsContainer.bottom + 15;
 
 			return (
 				createContainer({
