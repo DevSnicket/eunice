@@ -8,7 +8,7 @@ module.exports =
 		expectedFileName,
 		processArguments,
 	}) {
-		if (processArguments[1].endsWith("jest"))
+		if (processArguments[1].endsWith("jest") || processArguments[1].endsWith("jest-worker/build/child.js"))
 			discoverAndDescribeTestCases();
 		else if (processArguments.length == 3)
 			if (processArguments[2] == "update-expected")
