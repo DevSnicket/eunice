@@ -5,8 +5,12 @@ module.exports =
 		dependencyCounts,
 		stackElementsContainer,
 	}) => {
+		const count = sumCounts(dependencyCounts);
+
 		return (
-			dependencyCounts.length
+			count
+			&&
+			count.above + count.below + count.same > 1
 			?
 			create()
 			:
@@ -20,7 +24,7 @@ module.exports =
 					elements:
 						createInlineDependencyElements({
 							center: stackElementsContainer.right / 2,
-							count: sumCounts(dependencyCounts),
+							count,
 							top,
 						}),
 					height:
@@ -36,6 +40,8 @@ function sumCounts(
 	counts
 ) {
 	return (
+		counts.length > 1
+		&&
 		counts.reduce(
 			(aggregation, count) =>
 				count.dependsUpon
