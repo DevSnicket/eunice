@@ -1,85 +1,90 @@
-module.exports =
-	stack => {
-		for (let index = 0; index < stack.length; index++)
-			standardiseItems({
-				items: stack[index],
-				replace: replacement => stack[index] = replacement,
-			});
-	};
+module.exports = standariseStack;
 
-function standardiseItems({
-	items,
-	replace,
-}) {
-	if (Array.isArray(items))
-		whenArray(items);
-	else
-		replace(
-			isString(items)
-			?
-			whenIdentifier(items)
-			:
-			whenObject(items)
-		);
-}
-
-function whenArray(
-	items
+function standariseStack(
+	stack
 ) {
-	for (let index = 0; index < items.length; index++) {
-		const item = items[index];
+	for (let index = 0; index < stack.length; index++)
+		standardiseAsLevel({
+			identifierOrItemOrLevel: stack[index],
+			replace: replacement => stack[index] = replacement,
+		});
 
-		if (isString(item))
-			items[index] = {
-				id: item,
-				parent: items,
-			};
-		else {
-			whenObject(item);
-			item.parent = items;
-		}
-	}
-}
-
-function whenObject(
-	item
-) {
-	if (isString(item.dependsUpon))
-		item.dependsUpon = [ item.dependsUpon ];
-
-	if (item.items) {
-		if (isString(item.items))
-			item.items = whenIdentifier(item.items);
+	function standardiseAsLevel({
+		identifierOrItemOrLevel,
+		replace,
+	}) {
+		if (Array.isArray(identifierOrItemOrLevel))
+			whenLevel(identifierOrItemOrLevel);
 		else
-			standardiseItems({
-				items: item.items,
-				replace: replacement => item.items = replacement,
-			});
-
-		item.items.parent = item;
+			replace(
+				isString(identifierOrItemOrLevel)
+				?
+				createLevelWhenIdentifier(identifierOrItemOrLevel)
+				:
+				createLevelWhenObject(identifierOrItemOrLevel)
+			);
 	}
 
-	return createParentArray(item);
-}
+	function whenLevel(
+		items
+	) {
+		for (let index = 0; index < items.length; index++) {
+			const item = items[index];
 
-function isString(
-	value
-) {
-	return typeof value === "string";
-}
+			if (isString(item))
+				items[index] =
+					{
+						id: item,
+						level: items,
+					};
+			else {
+				createLevelWhenObject(item);
+				item.level = items;
+			}
+		}
 
-function whenIdentifier(
-	identifier
-) {
-	return createParentArray({ id: identifier });
-}
+		items.stack = stack;
+	}
 
-function createParentArray(
-	item
-) {
-	const parent = [ item ];
+	function createLevelWhenObject(
+		item
+	) {
+		if (isString(item.dependsUpon))
+			item.dependsUpon = [ item.dependsUpon ];
 
-	item.parent = parent;
+		if (item.items) {
+			if (!item.items.length || !Array.isArray(item.items[0]))
+				item.items = [ item.items ];
 
-	return parent;
+			standariseStack(item.items);
+
+			item.items.item = item;
+		}
+
+		return createLevel(item);
+	}
+
+	function isString(
+		value
+	) {
+		return typeof value === "string";
+	}
+
+	function createLevelWhenIdentifier(
+		identifier
+	) {
+		return createLevel({ id: identifier });
+	}
+
+	function createLevel(
+		item
+	) {
+		const level = [ item ];
+
+		level.stack = stack;
+
+		item.level = level;
+
+		return level;
+	}
 }

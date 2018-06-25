@@ -11,10 +11,10 @@ const
 
 runTestsInFileSystem({
 	action: getSvgForYaml,
-	argument: process.argv[2],
 	caseFileName: ".yaml",
 	directory: path.join(__dirname, "tests/"),
 	expectedFileName: ".svg",
+	processArguments: process.argv,
 });
 
 function getSvgForYaml(

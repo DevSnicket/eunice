@@ -1,0 +1,4 @@
+﻿- id: First
+  dependsUpon: Item of Second
+- id: Second
+  items: [[Item of Second]]
