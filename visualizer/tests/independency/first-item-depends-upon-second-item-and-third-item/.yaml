@@ -1,0 +1,6 @@
+﻿- id: Parent
+  items:
+  - id: First
+    dependsUpon: [Second, Third]
+  - Second
+  - Third

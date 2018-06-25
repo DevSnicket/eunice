@@ -28,6 +28,8 @@ module.exports =
 								top,
 								width,
 							}),
+					height:
+						arrow.height,
 					width,
 				}
 			);

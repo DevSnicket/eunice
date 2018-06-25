@@ -1,8 +1,8 @@
 module.exports =
 	({
-		createCountGroupFactoryWhenRequired,
+		createGroupFactoryWhenRequired,
 		dependencies,
-		identifierGroupFactory,
+		itemGroupFactory,
 		left,
 		withPrecision,
 	}) => {
@@ -10,16 +10,16 @@ module.exports =
 			dependencies
 			?
 			createGroupsFactoryWithDependencies({
-				createCountGroupFactoryWhenRequired,
+				createGroupFactoryWhenRequired,
 				dependencies,
-				identifierGroupFactory,
+				itemGroupFactory,
 				left,
 				topOffset: calculateTopOffset(),
 				withPrecision,
 			})
 			:
 			createGroupsFactoryWithoutDependencies({
-				identifierGroupFactory,
+				itemGroupFactory,
 				left,
 			})
 		);
@@ -27,7 +27,7 @@ module.exports =
 		function calculateTopOffset() {
 			return (
 				withPrecision(
-					(identifierGroupFactory.height - dependencies.arrow.height)
+					(itemGroupFactory.height - dependencies.arrow.height)
 					/
 					2
 				)
@@ -36,9 +36,9 @@ module.exports =
 	};
 
 function createGroupsFactoryWithDependencies({
-	createCountGroupFactoryWhenRequired,
+	createGroupFactoryWhenRequired,
 	dependencies,
-	identifierGroupFactory,
+	itemGroupFactory,
 	left,
 	topOffset,
 	withPrecision,
@@ -48,10 +48,10 @@ function createGroupsFactoryWithDependencies({
 			createGroupFactoryWithLeftWhenRequired({
 				arrow: dependencies.arrow,
 				count: dependencies.dependents,
-				createCountGroupFactoryWhenRequired,
+				createGroupFactoryWhenRequired,
 				left,
 			}),
-		identifierGroupLeft =
+		itemGroupLeft =
 			withPrecision(
 				left
 				+
@@ -69,8 +69,8 @@ function createGroupsFactoryWithDependencies({
 			createGroupFactoryWithLeftWhenRequired({
 				arrow: dependencies.arrow,
 				count: dependencies.dependsUpon,
-				createCountGroupFactoryWhenRequired,
-				left: withPrecision(identifierGroupLeft + identifierGroupFactory.width),
+				createGroupFactoryWhenRequired,
+				left: withPrecision(itemGroupLeft + itemGroupFactory.width),
 			})
 		);
 	}
@@ -83,11 +83,11 @@ function createGroupsFactoryWithDependencies({
 				createWithTop:
 					createGroupsWithTop,
 				height:
-					identifierGroupFactory.height,
-				identifierGroup:
+					itemGroupFactory.height,
+				itemGroup:
 					{
-						left: identifierGroupLeft,
-						width: identifierGroupFactory.width,
+						left: itemGroupLeft,
+						width: itemGroupFactory.width,
 					},
 				width:
 					calculateWidth(),
@@ -116,8 +116,8 @@ function createGroupsFactoryWithDependencies({
 
 			function createIdentifierGroup() {
 				return (
-					identifierGroupFactory.create({
-						left: identifierGroupLeft,
+					itemGroupFactory.create({
+						left: itemGroupLeft,
 						top,
 					})
 				);
@@ -128,7 +128,7 @@ function createGroupsFactoryWithDependencies({
 			return (
 				(dependentsGroupFactory && dependentsGroupFactory.width)
 				+
-				identifierGroupFactory.width
+				itemGroupFactory.width
 				+
 				(dependsUponGroupFactory && dependsUponGroupFactory.width));
 		}
@@ -138,11 +138,11 @@ function createGroupsFactoryWithDependencies({
 function createGroupFactoryWithLeftWhenRequired({
 	arrow,
 	count,
-	createCountGroupFactoryWhenRequired,
+	createGroupFactoryWhenRequired,
 	left,
 }) {
 	const factory =
-		createCountGroupFactoryWhenRequired({
+		createGroupFactoryWhenRequired({
 			arrow,
 			count,
 		});
@@ -157,21 +157,21 @@ function createGroupFactoryWithLeftWhenRequired({
 }
 
 function createGroupsFactoryWithoutDependencies({
-	identifierGroupFactory,
+	itemGroupFactory,
 	left,
 }) {
 	return (
 		{
 			createWithTop:
-				top => [ identifierGroupFactory.create({ left, top }) ],
+				top => [ itemGroupFactory.create({ left, top }) ],
 			height:
-				identifierGroupFactory.height,
-			identifierGroup:
+				itemGroupFactory.height,
+			itemGroup:
 				{
 					left,
-					width: identifierGroupFactory.width,
+					width: itemGroupFactory.width,
 				},
 			width:
-				identifierGroupFactory.width,
+				itemGroupFactory.width,
 		});
 }
