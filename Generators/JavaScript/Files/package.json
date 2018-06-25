@@ -21,7 +21,7 @@
 	"scripts": {
 		"harness": "webpack",
 		"lint": "eslint .",
-		"test": "jest"
+		"test": "jest --no-cache"
 	},
 	"version": "0.1.2"
 }
