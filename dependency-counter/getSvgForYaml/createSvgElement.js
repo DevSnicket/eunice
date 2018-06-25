@@ -41,9 +41,9 @@ function getSvgStyleForFont(
 	return (
 		[
 			`text{font-family:${font.family};font-size:${font.size}px;text-anchor:middle}`,
-			"g.dependency text{fill:white}",
 			"g.item rect{fill:lightgray}",
 			"g.item text{fill:black}",
+			"g.dependency text{fill:white}",
 		]
 		.join("")
 	);
