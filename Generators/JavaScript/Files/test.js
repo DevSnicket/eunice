@@ -10,10 +10,10 @@ const
 
 runTestsInFileSystem({
 	action: generateFile,
-	argument: process.argv[2],
 	caseFileName: ".js",
 	directory: path.join(__dirname, "tests/"),
 	expectedFileName: ".yaml",
+	processArguments: process.argv,
 });
 
 function generateFile(

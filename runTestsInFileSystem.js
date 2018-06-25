@@ -3,32 +3,20 @@ const fs = require("fs");
 module.exports =
 	function runTestsInFileSystem({
 		action,
-		argument,
 		caseFileName,
 		directory: rootDirectory,
 		expectedFileName,
+		processArguments,
 	}) {
-		if (argument == "update-expected")
-			updateExpectedFiles();
-		else if (argument)
-			// eslint-disable-next-line no-console
-			console.log(
-				isArgumentPath()
-				?
-				action(readFile(argument))
-				:
-				getActualForTestCase(argument)
-			);
-		else
+		if (processArguments[1].endsWith("jest"))
 			discoverAndDescribeTestCases();
-
-		function isArgumentPath() {
-			return (
-				argument.length > 1
-				&&
-				(argument[0] == "." || argument[0] == "/")
-			);
-		}
+		else if (processArguments.length == 3)
+			if (processArguments[2] == "update-expected")
+				discoverAndUpdateExpectedFiles();
+			else
+				logOutputOfActualWhenFileOrTestCase(processArguments[2]);
+		else
+			discoverAndLogOutputOfActual();
 
 		function discoverAndDescribeTestCases() {
 			for (const testCase of discover())
@@ -57,7 +45,7 @@ module.exports =
 			}
 		}
 
-		function updateExpectedFiles() {
+		function discoverAndUpdateExpectedFiles() {
 			for (const testCase of discover())
 				updateExpectedFile({
 					content: getActualForTestCase(testCase),
@@ -75,6 +63,15 @@ module.exports =
 						"utf-8"
 					)
 				);
+			}
+		}
+
+		function discoverAndLogOutputOfActual() {
+			for (const testCase of discover()) {
+				/* eslint-disable no-console */
+				console.log(testCase);
+				console.log(getActualForTestCase(testCase));
+				/* eslint-enable no-console */
 			}
 		}
 
@@ -120,6 +117,28 @@ module.exports =
 				function discoverTestCases() {
 					return inSubdirectory(`/${subFileOrDirectory}/`);
 				}
+			}
+		}
+
+		function logOutputOfActualWhenFileOrTestCase(
+			fileOrTestCase
+		) {
+			if (fileOrTestCase)
+				// eslint-disable-next-line no-console
+				console.log(
+					isArgumentPath()
+					?
+					action(readFile(fileOrTestCase))
+					:
+					getActualForTestCase(fileOrTestCase)
+				);
+
+			function isArgumentPath() {
+				return (
+					fileOrTestCase.length > 1
+					&&
+					(fileOrTestCase[0] == "." || fileOrTestCase[0] == "/")
+				);
 			}
 		}
 

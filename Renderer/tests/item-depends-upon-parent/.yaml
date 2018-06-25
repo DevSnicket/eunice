@@ -1,0 +1,5 @@
+stack:
+  - id: Parent
+    items:
+      - id: Nested
+        dependsUpon: Parent
