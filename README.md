@@ -24,7 +24,17 @@ Generators are implemented to create the YAML files, which can then be optionall
 
 ### Renderer
 
-To visualise what's in the YAML files and statistically measure how well they match the intended structure a SVG renderer has been implemented. The renderer doesn't use lines between items to show dependencies and instead marks items with counts for each dependency type. When there are multiple counts a summary of all counts is included at the bottom. When there are dependencies between items within an item they are shown within the items box and under its identifier text.
+To visualise what's in the YAML files and statistically measure how well they match the intended structure a SVG renderer has been implemented. The renderer doesn't use lines between items to show dependencies and instead marks items with counts for each dependency type:
+
+- matches stack (green down arrow)
+- does not match stack (red up arrow) 
+- is not independent (red horizontal arrow).
+
+![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/Renderer/tests/arrows.svg?sanitize=true)
+
+Dependency counts appear for both sides of the dependency, the dependent item and the item depended upon.
+
+When there are multiple counts a summary of all counts is rendered at the bottom. Dependencies within an item are also summarised and are rendered below the item's identifer text.
 
 scenario | svg | scenario | svg | scenario | svg
 -------- | :-: | -------- | :-: | -------- | :-:
