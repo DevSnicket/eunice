@@ -68,14 +68,19 @@ function updateItem({
 	item,
 }) {
 	for (let index = 0; index < dependsUpon.length; index++) {
-		const identifier = dependsUpon[index];
+		const dependsUponItem =
+			findItemWithIdentifier(
+				dependsUpon[index]
+			);
 
-		addDependent({
-			dependent:
-				item,
-			item:
-				dependsUpon[index] = findItemWithIdentifier(identifier) || identifier,
-		});
+		if (dependsUponItem) {
+			dependsUpon[index] = dependsUponItem;
+
+			addDependent({
+				dependent: item,
+				item: dependsUponItem,
+			});
+		}
 	}
 }
 
