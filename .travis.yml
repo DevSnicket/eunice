@@ -14,9 +14,9 @@ deploy:
 install:
   - npm install
   -
-    echo -en 'travis_fold:start:npm_install\\n' &&
-    npm ls;
-    echo -en 'travis_fold:end:npm_install\\n'
+    echo -en 'travis_fold:start:npm_install\n' &&
+    npm ls || true;
+    echo -en 'travis_fold:end:npm_install\n'
 language: node_js
 node_js:
   - "8.11.2"
