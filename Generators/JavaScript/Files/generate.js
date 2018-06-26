@@ -177,8 +177,8 @@ function getVisitorsForItems(
 	function createItems(
 		parent
 	) {
-		const nested = nestedFunctionMap.get(parent);
+		const childItems = nestedFunctionMap.get(parent);
 
-		return nested && { items: nested };
+		return childItems && { items: childItems.map(item => [ item ]) };
 	}
 }
