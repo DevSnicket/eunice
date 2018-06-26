@@ -1,4 +1,4 @@
 ﻿stack:
   - id: module.exports
     items:
-      - - id: Nested
+      - id: Nested

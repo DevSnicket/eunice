@@ -179,6 +179,17 @@ function getVisitorsForItems(
 	) {
 		const childItems = nestedFunctionMap.get(parent);
 
-		return childItems && { items: childItems.map(item => [ item ]) };
+		return (
+			childItems
+			&&
+			{
+				items:
+					childItems.length > 1
+					?
+					childItems.map(item => [ item ])
+					:
+					childItems,
+			}
+		);
 	}
 }
