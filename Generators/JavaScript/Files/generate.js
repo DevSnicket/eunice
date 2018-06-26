@@ -14,10 +14,8 @@ function getVisitorsForItems(
 	items
 ) {
 	const
-		dependsUpon = new Set(),
+		nestedCallMap = new Map(),
 		nestedFunctionMap = new Map();
-
-	let hasDependsUpon = false;
 
 	return (
 		{
@@ -29,11 +27,20 @@ function getVisitorsForItems(
 	);
 
 	function visitCallExpression(
-		callExpression
+		callExpression,
+		ancestors
 	) {
-		if (callExpression.callee.name) {
-			dependsUpon.add(callExpression.callee.name);
-			hasDependsUpon = true;
+		const callee = callExpression.callee.name;
+
+		if (callee) {
+			const parentFunction = findParentFunctionFromAncestors(ancestors);
+
+			const calls = nestedCallMap.get(parentFunction);
+
+			if (calls)
+				calls.add(callee);
+			else
+				nestedCallMap.set(parentFunction, new Set([ callee ]));
 		}
 	}
 
@@ -120,40 +127,20 @@ function getVisitorsForItems(
 		ancestors,
 		item,
 	}) {
-		const parent = findParentWhenNested();
+		const parentFunction = findParentFunctionFromAncestors(ancestors);
 
-		if (parent)
+		if (parentFunction)
 			addToNestedFunctionMap();
 		else
 			items.push(item);
 
-		function findParentWhenNested() {
-			for (let index = ancestors.length - 2; index; index--)
-				if (isFunctionType(ancestors[index].type))
-					return ancestors[index];
-
-			return false;
-
-			function isFunctionType(
-				type
-			) {
-				return (
-					type === "ArrowFunctionExpression"
-					||
-					type === "FunctionDeclaration"
-					||
-					type === "FunctionExpression"
-				);
-			}
-		}
-
 		function addToNestedFunctionMap() {
-			const parentMap = nestedFunctionMap.get(parent);
+			const functions = nestedFunctionMap.get(parentFunction);
 
-			if (parentMap)
-				parentMap.push(item);
+			if (functions)
+				functions.push(item);
 			else
-				nestedFunctionMap.set(parent, [ item ]);
+				nestedFunctionMap.set(parentFunction, [ item ]);
 		}
 	}
 
@@ -161,17 +148,17 @@ function getVisitorsForItems(
 		identifier,
 		node,
 	}) {
-		const item =
+		const calls = nestedCallMap.get(node);
+
+		nestedCallMap.delete(node);
+
+		return (
 			{
 				id: identifier,
-				...hasDependsUpon && { dependsUpon: [ ...dependsUpon ].sort() },
+				...calls && { dependsUpon: [ ...calls ].sort() },
 				...createItems(node),
-			};
-
-		dependsUpon.clear();
-		hasDependsUpon = false;
-
-		return item;
+			}
+		);
 	}
 
 	function createItems(
@@ -190,6 +177,28 @@ function getVisitorsForItems(
 					:
 					childItems,
 			}
+		);
+	}
+}
+
+function findParentFunctionFromAncestors(
+	ancestors
+) {
+	for (let index = ancestors.length - 2; index; index--)
+		if (isFunctionType(ancestors[index].type))
+			return ancestors[index];
+
+	return false;
+
+	function isFunctionType(
+		type
+	) {
+		return (
+			type === "ArrowFunctionExpression"
+			||
+			type === "FunctionDeclaration"
+			||
+			type === "FunctionExpression"
 		);
 	}
 }
