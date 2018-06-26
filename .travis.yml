@@ -6,7 +6,7 @@ deploy:
   keep-history: true
   local-dir: Harnesses
   on:
-    branch: travis
+    branch: master
   provider: pages
   repo: DevSnicket/Eunice-harnesses
   skip-cleanup: true
