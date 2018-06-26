@@ -68,6 +68,7 @@
 			//"stack/two-interdependent"
 			//"stack/two-of-two-items"
 			//"stack/upper-depends-upon-lower"
+			//"stack/upper-item-depends-upon-lower-item"
 		],
 		"cwd": "${workspaceFolder}/Renderer/",
 		"program": "${workspaceFolder}/Renderer/test.js",
