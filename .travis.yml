@@ -15,7 +15,7 @@ install:
   - npm install
   -
     echo -en 'travis_fold:start:npm_install\n' &&
-    npm ls || true;
+    npm ls ||
     echo -en 'travis_fold:end:npm_install\n'
 language: node_js
 node_js:
