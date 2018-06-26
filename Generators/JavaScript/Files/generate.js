@@ -4,25 +4,38 @@ module.exports =
 
 		walk(
 			file,
-			getVisitors({ items, walk })
+			getVisitorsForItems(items)
 		);
 
 		return items.length && { stack: items };
 	};
 
-function getVisitors({
-	items,
-	walk,
-}) {
-	const nestedFunctionMap = new Map();
+function getVisitorsForItems(
+	items
+) {
+	const
+		dependsUpon = new Set(),
+		nestedFunctionMap = new Map();
+
+	let hasDependsUpon = false;
 
 	return (
 		{
 			ArrowFunctionExpression: visitFunctionArrowOrExpression,
+			CallExpression: visitCallExpression,
 			FunctionDeclaration: visitFunctionDeclaration,
 			FunctionExpression: visitFunctionArrowOrExpression,
 		}
 	);
+
+	function visitCallExpression(
+		callExpression
+	) {
+		if (callExpression.callee.name) {
+			dependsUpon.add(callExpression.callee.name);
+			hasDependsUpon = true;
+		}
+	}
 
 	function visitFunctionDeclaration(
 		functionDeclaration,
@@ -148,13 +161,17 @@ function getVisitors({
 		identifier,
 		node,
 	}) {
-		return (
+		const item =
 			{
 				id: identifier,
-				...createDependsUpon({ dependent: node, walk }),
+				...hasDependsUpon && { dependsUpon: [ ...dependsUpon ].sort() },
 				...createItems(node),
-			}
-		);
+			};
+
+		dependsUpon.clear();
+		hasDependsUpon = false;
+
+		return item;
 	}
 
 	function createItems(
@@ -163,42 +180,5 @@ function getVisitors({
 		const nested = nestedFunctionMap.get(parent);
 
 		return nested && { items: nested };
-	}
-}
-
-function createDependsUpon({
-	dependent,
-	walk,
-}) {
-	const dependsUpon = [];
-
-	walk(
-		dependent,
-		{
-			CallExpression(node) {
-				if (node.callee.name)
-					dependsUpon.push(node.callee.name);
-			},
-		}
-	);
-
-	return (
-		dependsUpon.length
-		&&
-		{ dependsUpon: distinct(dependsUpon.sort()) }
-	);
-
-	function distinct(
-		items
-	) {
-		return (
-			items
-			.filter(
-				(element, index, elements) =>
-					!index
-					||
-					element != elements[index - 1]
-			)
-		);
 	}
 }
