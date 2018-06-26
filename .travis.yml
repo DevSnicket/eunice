@@ -13,8 +13,6 @@ deploy:
   target-branch: master
 install:
   - npm install
-  - npm ls || true
-  - echo -e travis_fold:end:install.2
 language: node_js
 node_js:
   - "8.11.2"
