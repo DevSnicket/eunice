@@ -188,7 +188,7 @@ function findParentFunctionFromAncestors(
 		if (isFunctionType(ancestors[index].type))
 			return ancestors[index];
 
-	return false;
+	return null;
 
 	function isFunctionType(
 		type
