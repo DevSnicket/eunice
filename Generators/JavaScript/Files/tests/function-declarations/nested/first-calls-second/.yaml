@@ -1,0 +1,7 @@
+﻿stack:
+  - id: Parent
+    items:
+      - - id: First
+          dependsUpon:
+            - Second
+      - - id: Second

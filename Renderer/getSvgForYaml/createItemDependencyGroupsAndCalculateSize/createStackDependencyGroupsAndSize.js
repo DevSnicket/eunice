@@ -1,6 +1,6 @@
 module.exports =
 	({
-		createCountGroupFactoryWhenRequired,
+		createGroupFactoryWhenRequired,
 		dependencies,
 		notIndependentGroupsFactory,
 		top,
@@ -20,9 +20,9 @@ module.exports =
 		function createGroupsWithDependencies() {
 			const groupsAndHeightForDependenciesAbove =
 				createGroupsAndCalculateHeightForDependenciesWhenRequired({
-					createCountGroupFactoryWhenRequired,
+					createGroupFactoryWhenRequired,
 					dependenciesInDirection: dependencies.above,
-					identifierGroup: notIndependentGroupsFactory.identifierGroup,
+					itemGroup: notIndependentGroupsFactory.itemGroup,
 					top,
 					withPrecision,
 				});
@@ -38,9 +38,9 @@ module.exports =
 							top: top + groupsAndHeightForDependenciesAbove.height,
 						}),
 						createGroupsAndCalculateHeightForDependenciesWhenRequired({
-							createCountGroupFactoryWhenRequired,
+							createGroupFactoryWhenRequired,
 							dependenciesInDirection: dependencies.below,
-							identifierGroup: notIndependentGroupsFactory.identifierGroup,
+							itemGroup: notIndependentGroupsFactory.itemGroup,
 							top: top + groupsAndHeightForDependenciesAbove.height + notIndependentGroupsFactory.height,
 							withPrecision,
 						}),
@@ -52,9 +52,9 @@ module.exports =
 							top,
 						}),
 						createGroupsAndCalculateHeightForDependenciesWhenRequired({
-							createCountGroupFactoryWhenRequired,
+							createGroupFactoryWhenRequired,
 							dependenciesInDirection: dependencies.below,
-							identifierGroup: notIndependentGroupsFactory.identifierGroup,
+							itemGroup: notIndependentGroupsFactory.itemGroup,
 							top: top + notIndependentGroupsFactory.height,
 							withPrecision,
 						}),
@@ -66,9 +66,9 @@ module.exports =
 
 
 function createGroupsAndCalculateHeightForDependenciesWhenRequired({
-	createCountGroupFactoryWhenRequired,
+	createGroupFactoryWhenRequired,
 	dependenciesInDirection,
-	identifierGroup,
+	itemGroup,
 	top,
 	withPrecision,
 }) {
@@ -87,7 +87,7 @@ function createGroupsAndCalculateHeightForDependenciesWhenRequired({
 				(aggregation, dependencies) => {
 					const
 						factory =
-							createCountGroupFactoryWhenRequired({
+							createGroupFactoryWhenRequired({
 								arrow: dependencies.arrow,
 								count: dependencies.count,
 							}),
@@ -121,9 +121,9 @@ function createGroupsAndCalculateHeightForDependenciesWhenRequired({
 	) {
 		const left =
 			withPrecision(
-				identifierGroup.left
+				itemGroup.left
 				+
-				((identifierGroup.width - factory.width) / 2)
+				((itemGroup.width - factory.width) / 2)
 			);
 
 		return (

@@ -1,16 +1,19 @@
 const
-	addDependentsFromDependsUpon = require("./getSvgForYaml/addDependentsFromDependsUpon"),
-	countDependencies = require("./getSvgForYaml/countDependencies"),
+	countDependenciesOfItemRecursive = require("./getSvgForYaml/countDependenciesOfItemRecursive"),
 	createArrows = require("./getSvgForYaml/createArrows"),
-	createDependencyCountGroupFactoryWhenRequired = require("./getSvgForYaml/createDependencyCountGroupFactoryWhenRequired"),
-	createItemGroupsContainer = require("./getSvgForYaml/createItemGroupsContainer"),
-	createItemStackDependencyGroupsAndCalculateSize = require("./getSvgForYaml/createItemStackDependencyGroupsAndCalculateSize"),
-	createStackDependencyCountSummaryElementsContainer = require("./getSvgForYaml/createStackDependencyCountSummaryElementsContainer"),
+	createDependenciesInlineElements = require("./getSvgForYaml/createDependenciesInlineElements"),
+	createDependenciesInlineGroupFactories = require("./getSvgForYaml/createDependenciesInlineGroupFactories"),
+	createDependencyGroupFactoryWhenRequired = require("./getSvgForYaml/createDependencyGroupFactoryWhenRequired"),
+	createItemAndDependencyGroupsContainer = require("./getSvgForYaml/createItemAndDependencyGroupsContainer"),
+	createItemDependencyGroupsAndCalculateSize = require("./getSvgForYaml/createItemDependencyGroupsAndCalculateSize"),
+	createItemGroupFactory = require("./getSvgForYaml/createItemGroupFactory"),
 	createStackElementsContainer = require("./getSvgForYaml/createStackElementsContainer"),
+	createSummaryElementsContainer = require("./getSvgForYaml/createSummaryElementsContainer"),
 	createSvgElement = require("./getSvgForYaml/createSvgElement"),
-	getDirectionalDependencyCount = require("./getSvgForYaml/getDirectionalDependencyCount"),
-	getStackDirection = require("./getSvgForYaml/getStackDirection"),
-	standardiseStack = require("./getSvgForYaml/standardiseStack");
+	getDependencyCountInBothDirections = require("./getSvgForYaml/getDependencyCountInBothDirections"),
+	replaceDependsUponWithReferencesAndSetDependents = require("./getSvgForYaml/replaceDependsUponWithReferencesAndSetDependents"),
+	standardiseStack = require("./getSvgForYaml/standardiseStack"),
+	withPrecision = require("./getSvgForYaml/withPrecision");
 
 module.exports =
 	({
@@ -67,95 +70,120 @@ function getSvgElementForStack({
 
 	function initaliseAndCreateElementsContainer() {
 		standardiseStack(stack);
-		addDependentsFromDependsUpon(stack);
+		replaceDependsUponWithReferencesAndSetDependents(stack);
 
-		const stackDependencyCounts = [];
+		const dependencyCounts = [];
 
 		return (
-			createStackDependencyCountSummaryElementsContainer({
+			createSummaryElementsContainer({
 				arrows,
-				counts:
-					stackDependencyCounts,
-				createDependencyCountGroupFactoryWhenRequired:
-					({ arrow, count }) =>
-						createDependencyCountGroupFactoryWhenRequired({
-							arrow,
-							count,
-							createTextGroup,
-							font,
+				createInlineDependencyElements:
+					({
+						center,
+						count,
+						top,
+					}) =>
+						createDependenciesInlineElements({
+							center,
+							groupFactories:
+								createDependenciesInlineGroupFactoriesForCount(
+									count
+								),
+							top,
 						}),
+				dependencyCounts,
 				stackElementsContainer:
 					createStackElementsContainer({
 						addPadding,
-						createItemGroupsContainer: createItemGroupsContainerWithStackDependencies,
+						createItemGroupsContainer:
+							({
+								items,
+								top,
+							}) =>
+								createItemAndDependencyGroupsContainer({
+									addPadding,
+									createItemAndDependencyGroup:
+										({
+											item,
+											left,
+										}) =>
+											countDependenciesOfAndCreateGroupsForItem({
+												item,
+												left,
+												top,
+											}),
+									items,
+									top,
+									withPrecision,
+								}),
 						stack,
 					}),
 			})
 		);
 
-		function createItemGroupsContainerWithStackDependencies({
-			items,
+		function countDependenciesOfAndCreateGroupsForItem({
+			item,
+			left,
 			top,
 		}) {
+			const dependencyCount = countDependenciesOfItemRecursive(item);
+
+			if (dependencyCount)
+				dependencyCounts.push(dependencyCount);
+
 			return (
-				createItemGroupsContainer({
-					addPadding,
-					createDependencyGroupsAndCalculateSize:
-						({ identifierGroupFactory, item, left }) =>
-							countStackDependenciesAndCreateGroupsAndCalculateSizeForItem({
-								identifierGroupFactory,
-								item,
-								left,
+				createItemDependencyGroupsAndCalculateSize({
+					createGroupFactoryWhenRequired:
+						({ arrow, count }) =>
+							createDependencyGroupFactoryWhenRequired({
+								arrow,
+								count,
+								createTextGroup,
+								font,
 							}),
-					createTextGroup,
-					font,
-					items,
+					dependencyCount:
+						getDependencyCountInBothDirections({
+							arrows,
+							dependencyCount,
+						}),
+					itemGroupFactory:
+						createItemGroupFactory({
+							createTextGroup,
+							dependencyGroupFactories:
+								dependencyCount
+								&&
+								dependencyCount.dependsUpon
+								&&
+								dependencyCount.dependsUpon.inner
+								&&
+								createDependenciesInlineGroupFactoriesForCount(dependencyCount.dependsUpon.inner),
+							font,
+							identifier: item.id,
+						}),
+					left,
 					top,
 					withPrecision,
 				})
 			);
+		}
 
-			function countStackDependenciesAndCreateGroupsAndCalculateSizeForItem({
-				identifierGroupFactory,
-				item,
-				left,
-			}) {
-				const itemStackDependencyCounts =
-					getDirectionalDependencyCount({
-						arrows,
-						...countDependencies({
-							getStackDirection:
-								to =>
-									getStackDirection({
-										from: items,
-										stack,
-										to,
-									}),
-							item,
-						}),
-					});
-
-				if (itemStackDependencyCounts)
-					stackDependencyCounts.push(itemStackDependencyCounts);
-
-				return (
-					createItemStackDependencyGroupsAndCalculateSize({
-						createDependencyCountGroupFactoryWhenRequired:
-							({ arrow, count }) =>
-								createDependencyCountGroupFactoryWhenRequired({
-									arrow,
-									count,
-									createTextGroup,
-									font,
-								}),
-						identifierGroupFactory,
-						left,
-						stackDependencies: itemStackDependencyCounts,
-						top,
-						withPrecision,
-					})
-				);
-			}
+		function createDependenciesInlineGroupFactoriesForCount(
+			countWithDirection
+		) {
+			return (
+				createDependenciesInlineGroupFactories({
+					arrows,
+					countWithDirection,
+					createDependencyGroupFactoryWhenRequired:
+						({ arrow, count }) =>
+							createDependencyGroupFactoryWhenRequired({
+								arrow,
+								count,
+								createTextGroup,
+								font,
+							}),
+				})
+			);
 		}
 	}
 
@@ -165,8 +193,10 @@ function getSvgElementForStack({
 		attributes,
 		className,
 		elementName,
+		elementsBelowText,
 		height,
 		left,
+		paddingBottom = 0,
 		paddingRight,
 		text,
 		top,
@@ -176,24 +206,27 @@ function getSvgElementForStack({
 			createElement(
 				"g",
 				className && { className },
-				createElement(
-					elementName,
-					{
-						...attributes,
-						height,
-						width,
-						...left > 0 && { x: left },
-						...top > 0 && { y: top },
-					}
-				),
-				createElement(
-					"text",
-					{
-						x: withPrecision(left + getTextLeftOffset()),
-						y: withPrecision(top + getTextTopOffset()),
-					},
-					text
-				)
+				[
+					createElement(
+						elementName,
+						{
+							...attributes,
+							height,
+							width,
+							...left > 0 && { x: left },
+							...top > 0 && { y: top },
+						}
+					),
+					createElement(
+						"text",
+						{
+							x: withPrecision(left + getTextLeftOffset()),
+							y: withPrecision(top + getTextTopOffset()),
+						},
+						text
+					),
+					...elementsBelowText || [],
+				]
 			)
 		);
 
@@ -202,7 +235,11 @@ function getSvgElementForStack({
 		}
 
 		function getTextTopOffset() {
-			return (height / 2) + (font.size * 0.375);
+			return (
+				((height - paddingBottom) / 2)
+				+
+				(font.size * 0.375)
+			);
 		}
 	}
 }
@@ -217,10 +254,4 @@ function addPadding(
 		:
 		withPrecision(offset + 15)
 	);
-}
-
-function withPrecision(
-	value
-) {
-	return (value * 100).toFixed() / 100;
 }

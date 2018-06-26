@@ -1,4 +1,4 @@
-stack:
+﻿stack:
   - id: First
     dependsUpon:
       - Second
