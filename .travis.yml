@@ -12,9 +12,9 @@ deploy:
   skip-cleanup: true
   target-branch: master
 install:
-  travis_fold:start:npm install &&
+  travis_fold:start:npm_install &&
   npm install &&
-  travis_fold:end:npm install
+  travis_fold:end:npm_install
 language: node_js
 node_js:
   - "8.11.2"
