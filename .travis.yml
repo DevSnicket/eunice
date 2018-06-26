@@ -13,7 +13,7 @@ deploy:
   target-branch: master
 install:
   - npm install
-  - npm ls || true;
+  - npm ls || true
   - echo -e travis_fold:end:install.2
 language: node_js
 node_js:
