@@ -1,5 +1,5 @@
-﻿- id: Parent
+﻿- id: parent
   items:
-  - id: First Item
-    dependsUpon: Second Item
-  - Second Item
+  - id: first item
+    dependsUpon: second item
+  - second item
