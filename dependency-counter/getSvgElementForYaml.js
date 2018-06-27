@@ -12,7 +12,7 @@ const
 	createSummaryElementsContainer = require("./getSvgForYaml/createSummaryElementsContainer"),
 	createSvgElement = require("./getSvgForYaml/createSvgElement"),
 	getDependencyCountInBothDirections = require("./getSvgForYaml/getDependencyCountInBothDirections"),
-	replaceDependsUponWithReferencesAndSetDependents = require("./getSvgForYaml/replaceDependsUponWithReferencesAndSetDependents"),
+	initializeDependenciesInStack = require("./getSvgForYaml/initializeDependenciesInStack"),
 	withPrecision = require("./getSvgForYaml/withPrecision");
 
 module.exports =
@@ -75,7 +75,7 @@ function initaliseAndCreateElementsContainer({
 }) {
 	const stack = createStackFromParsedYaml(yaml);
 
-	replaceDependsUponWithReferencesAndSetDependents(stack);
+	initializeDependenciesInStack(stack);
 
 	const dependencyCounts = [];
 
