@@ -1,6 +1,6 @@
-module.exports = replaceDependsUponWithReferencesAndSetDependents;
+module.exports = initializeDependenciesInStack;
 
-function replaceDependsUponWithReferencesAndSetDependents(
+function initializeDependenciesInStack(
 	stack
 ) {
 	for (const level of stack)
@@ -8,7 +8,7 @@ function replaceDependsUponWithReferencesAndSetDependents(
 			updateItemWhenRequired(item);
 
 			if (item.items)
-				replaceDependsUponWithReferencesAndSetDependents(item.items);
+				initializeDependenciesInStack(item.items);
 		}
 
 	function updateItemWhenRequired(
