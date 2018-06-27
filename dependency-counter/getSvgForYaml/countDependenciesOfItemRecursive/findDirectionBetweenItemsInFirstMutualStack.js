@@ -63,8 +63,8 @@ function findDirectionBetweenItemsInFirstMutualStack({
 
 	function findInParents() {
 		const
-			fromParent = from.level.stack.item,
-			toParent = to.level.stack.item;
+			fromParent = from.level.stack.parent,
+			toParent = to.level.stack.parent;
 
 		return (
 			getWhenToParent()
