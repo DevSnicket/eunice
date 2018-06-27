@@ -1,22 +1,22 @@
 ﻿- 
-  - id: Upper First
+  - id: upper first
     dependsUpon: 
-      - Upper Second
-      - Lower First
-      - Lower Second
-  - id: Upper Second
+      - upper second
+      - lower first
+      - lower second
+  - id: upper second
     dependsUpon: 
-      - Upper First
-      - Lower First
-      - Lower Second
+      - upper first
+      - lower first
+      - lower second
 -
-  - id: Lower First
+  - id: lower first
     dependsUpon: 
-      - Upper First
-      - Upper Second
-      - Lower Second
-  - id: Lower Second
+      - upper first
+      - upper second
+      - lower second
+  - id: lower second
     dependsUpon: 
-      - Upper First
-      - Upper Second
-      - Lower First
+      - upper first
+      - upper second
+      - lower first

@@ -1,4 +1,4 @@
-﻿- First
-- Second
-- id: Third
-  dependsUpon: First
+﻿- first
+- second
+- id: third
+  dependsUpon: first
