@@ -8,11 +8,11 @@ const
 	createItemDependencyGroupsAndCalculateSize = require("./getSvgForYaml/createItemDependencyGroupsAndCalculateSize"),
 	createItemGroupFactory = require("./getSvgForYaml/createItemGroupFactory"),
 	createStackElementsContainer = require("./getSvgForYaml/createStackElementsContainer"),
+	createStackFromParsedYaml = require("./getSvgForYaml/createStackFromParsedYaml"),
 	createSummaryElementsContainer = require("./getSvgForYaml/createSummaryElementsContainer"),
 	createSvgElement = require("./getSvgForYaml/createSvgElement"),
 	getDependencyCountInBothDirections = require("./getSvgForYaml/getDependencyCountInBothDirections"),
 	replaceDependsUponWithReferencesAndSetDependents = require("./getSvgForYaml/replaceDependsUponWithReferencesAndSetDependents"),
-	standardiseStack = require("./getSvgForYaml/standardiseStack"),
 	withPrecision = require("./getSvgForYaml/withPrecision");
 
 module.exports =
@@ -20,18 +20,36 @@ module.exports =
 		createElement,
 		getTextWidth,
 		yaml,
-	}) =>
-		getSvgElementForStack({
-			createElement,
-			font:
+	}) => {
+		const
+			arrows =
+				createArrows({ createElement, withPrecision }),
+			font =
 				createFont({
 					family: "arial",
 					getTextWidth,
 					size: 16,
-				}),
-			stack:
-				yaml && (yaml.stack || [ yaml ]),
-		});
+				});
+
+		return (
+			createSvgElement({
+				childElementsContainer:
+					yaml
+					&&
+					initaliseAndCreateElementsContainer({
+						arrows,
+						createElement,
+						font,
+						yaml,
+					}),
+				createElement,
+				font,
+				symbols:
+					Object.values(arrows)
+					.map(arrow => arrow.element),
+			})
+		);
+	};
 
 function createFont({
 	family,
@@ -49,142 +67,128 @@ function createFont({
 	);
 }
 
-function getSvgElementForStack({
+function initaliseAndCreateElementsContainer({
+	arrows,
 	createElement,
 	font,
-	stack,
+	yaml,
 }) {
-	const arrows = createArrows({ createElement, withPrecision });
+	const stack = createStackFromParsedYaml(yaml);
+
+	replaceDependsUponWithReferencesAndSetDependents(stack);
+
+	const dependencyCounts = [];
 
 	return (
-		createSvgElement({
-			childElementsContainer:
-				stack && initaliseAndCreateElementsContainer(),
-			createElement,
-			font,
-			symbols:
-				Object.values(arrows)
-				.map(arrow => arrow.element),
+		createSummaryElementsContainer({
+			arrows,
+			createInlineDependencyElements:
+				({
+					center,
+					count,
+					top,
+				}) =>
+					createDependenciesInlineElements({
+						center,
+						groupFactories:
+							createDependenciesInlineGroupFactoriesForCount(
+								count
+							),
+						top,
+					}),
+			dependencyCounts,
+			stackElementsContainer:
+				createStackElementsContainer({
+					addPadding,
+					createItemGroupsContainer:
+						({
+							items,
+							top,
+						}) =>
+							createItemAndDependencyGroupsContainer({
+								addPadding,
+								createItemAndDependencyGroup:
+									({
+										item,
+										left,
+									}) =>
+										countDependenciesOfAndCreateGroupsForItem({
+											item,
+											left,
+											top,
+										}),
+								items,
+								top,
+								withPrecision,
+							}),
+					stack,
+				}),
 		})
 	);
 
-	function initaliseAndCreateElementsContainer() {
-		standardiseStack(stack);
-		replaceDependsUponWithReferencesAndSetDependents(stack);
+	function countDependenciesOfAndCreateGroupsForItem({
+		item,
+		left,
+		top,
+	}) {
+		const dependencyCount = countDependenciesOfItemRecursive(item);
 
-		const dependencyCounts = [];
+		if (dependencyCount)
+			dependencyCounts.push(dependencyCount);
 
 		return (
-			createSummaryElementsContainer({
-				arrows,
-				createInlineDependencyElements:
-					({
-						center,
-						count,
-						top,
-					}) =>
-						createDependenciesInlineElements({
-							center,
-							groupFactories:
-								createDependenciesInlineGroupFactoriesForCount(
-									count
-								),
-							top,
+			createItemDependencyGroupsAndCalculateSize({
+				createGroupFactoryWhenRequired:
+					({ arrow, count }) =>
+						createDependencyGroupFactoryWhenRequired({
+							arrow,
+							count,
+							createTextGroup,
+							font,
 						}),
-				dependencyCounts,
-				stackElementsContainer:
-					createStackElementsContainer({
-						addPadding,
-						createItemGroupsContainer:
-							({
-								items,
-								top,
-							}) =>
-								createItemAndDependencyGroupsContainer({
-									addPadding,
-									createItemAndDependencyGroup:
-										({
-											item,
-											left,
-										}) =>
-											countDependenciesOfAndCreateGroupsForItem({
-												item,
-												left,
-												top,
-											}),
-									items,
-									top,
-									withPrecision,
-								}),
-						stack,
+				dependencyCount:
+					getDependencyCountInBothDirections({
+						arrows,
+						dependencyCount,
 					}),
+				itemGroupFactory:
+					createItemGroupFactory({
+						createTextGroup,
+						dependencyGroupFactories:
+							dependencyCount
+							&&
+							dependencyCount.dependsUpon
+							&&
+							dependencyCount.dependsUpon.inner
+							&&
+							createDependenciesInlineGroupFactoriesForCount(dependencyCount.dependsUpon.inner),
+						font,
+						identifier: item.id,
+					}),
+				left,
+				top,
+				withPrecision,
 			})
 		);
+	}
 
-		function countDependenciesOfAndCreateGroupsForItem({
-			item,
-			left,
-			top,
-		}) {
-			const dependencyCount = countDependenciesOfItemRecursive(item);
-
-			if (dependencyCount)
-				dependencyCounts.push(dependencyCount);
-
-			return (
-				createItemDependencyGroupsAndCalculateSize({
-					createGroupFactoryWhenRequired:
-						({ arrow, count }) =>
-							createDependencyGroupFactoryWhenRequired({
-								arrow,
-								count,
-								createTextGroup,
-								font,
-							}),
-					dependencyCount:
-						getDependencyCountInBothDirections({
-							arrows,
-							dependencyCount,
-						}),
-					itemGroupFactory:
-						createItemGroupFactory({
+	function createDependenciesInlineGroupFactoriesForCount(
+		countWithDirection
+	) {
+		return (
+			createDependenciesInlineGroupFactories({
+				arrows,
+				countWithDirection,
+				createDependencyGroupFactoryWhenRequired:
+					({ arrow, count }) =>
+						createDependencyGroupFactoryWhenRequired({
+							arrow,
+							count,
 							createTextGroup,
-							dependencyGroupFactories:
-								dependencyCount
-								&&
-								dependencyCount.dependsUpon
-								&&
-								dependencyCount.dependsUpon.inner
-								&&
-								createDependenciesInlineGroupFactoriesForCount(dependencyCount.dependsUpon.inner),
 							font,
-							identifier: item.id,
 						}),
-					left,
-					top,
-					withPrecision,
-				})
-			);
-		}
-
-		function createDependenciesInlineGroupFactoriesForCount(
-			countWithDirection
-		) {
-			return (
-				createDependenciesInlineGroupFactories({
-					arrows,
-					countWithDirection,
-					createDependencyGroupFactoryWhenRequired:
-						({ arrow, count }) =>
-							createDependencyGroupFactoryWhenRequired({
-								arrow,
-								count,
-								createTextGroup,
-								font,
-							}),
-				})
-			);
-		}
+			})
+		);
 	}
 
 	// x and y are attribute names in SVG

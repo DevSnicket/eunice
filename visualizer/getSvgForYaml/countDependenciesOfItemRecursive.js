@@ -142,7 +142,7 @@ function sumDirectionInStackWithScope({
 function isOuterStack(
 	stack
 ) {
-	return stack && !stack.item;
+	return stack && !stack.parent;
 }
 
 function getCountFromDirection(
