@@ -8,7 +8,7 @@ const
 	walk = require("acorn/dist/walk");
 
 const
-	generate = require("./Generators/JavaScript/Files/generate"),
+	analyze = require("./Analyzers/JavaScript/Files/analyze"),
 	getSvgForYaml = require("./Renderer/getSvgElementForYaml");
 
 const
@@ -24,7 +24,7 @@ renderFromTextareaIntoDiv();
 
 function generateFromTextareaIntoDiv() {
 	const yaml =
-		generate({
+		analyze({
 			file: parse(javascriptTextArea.value, { ecmaVersion: 9 }),
 			walk: walk.ancestor,
 		});

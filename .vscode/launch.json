@@ -24,18 +24,18 @@
 						//"function-expressions/var/second-calls-first"
 						//"../../../Renderer/getSvgForYaml/createSvgElement.js"
 					],
-				"cwd": "${workspaceFolder}/Generators/JavaScript/Files/",
-				"program": "${workspaceFolder}/Generators/JavaScript/Files/test.js",
+				"cwd": "${workspaceFolder}/Analyzers/JavaScript/Files/",
+				"program": "${workspaceFolder}/Analyzers/JavaScript/Files/test.js",
 				"request": "launch",
 				"type": "node",
-				"name": "generate file test",
+				"name": "analyze file test",
 				"useWSL": true
 			},
 			{
-				"name": "generate test harness",
+				"name": "analyze test harness",
 				"type": "chrome",
 				"request": "launch",
-				"file": "${workspaceFolder}/Generators/JavaScript/Files/harness.html"
+				"file": "${workspaceFolder}/Analyzers/JavaScript/Files/harness.html"
 			},
 			{
 				"args":

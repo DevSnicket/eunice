@@ -3,7 +3,7 @@ const
 	parse = require("acorn").parse,
 	walk = require("acorn/dist/walk");
 
-const generate = require("./generate");
+const analyze = require("./analyze");
 
 const
 	javascriptTextArea = document.getElementById("javascript"),
@@ -15,7 +15,7 @@ generateFromTextareaIntoDiv();
 
 function generateFromTextareaIntoDiv() {
 	const yaml =
-		generate({
+		analyze({
 			file: parse(javascriptTextArea.value, { ecmaVersion: 9 }),
 			walk: walk.ancestor,
 		});
