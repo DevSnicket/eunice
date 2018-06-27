@@ -1,5 +1,4 @@
-﻿stack:
-  - id: First
-  - id: Second
+﻿- - id: First
+- - id: Second
     dependsUpon:
       - First

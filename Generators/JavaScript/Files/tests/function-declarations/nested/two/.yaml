@@ -1,5 +1,4 @@
-﻿stack:
-  - id: Parent
+﻿- - id: Parent
     items:
       - - id: Nested1
       - - id: Nested2

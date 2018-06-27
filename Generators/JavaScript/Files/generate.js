@@ -7,7 +7,7 @@ module.exports =
 			getVisitorsForItems(items)
 		);
 
-		return items.length && { stack: items };
+		return items.length && items.map(item => [ item ]);
 	};
 
 function getVisitorsForItems(
