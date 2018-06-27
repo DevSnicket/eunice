@@ -199,15 +199,18 @@ function sumCountWithScope(
 	left,
 	right
 ) {
-	const
-		inner = sumCount(left.inner, right.inner),
-		outer = sumCount(left.outer, right.outer);
+	if (left && right) {
+		const
+			inner = sumCount(left.inner, right.inner),
+			outer = sumCount(left.outer, right.outer);
 
-	return (
-		(inner || outer)
-		&&
-		{ inner, outer }
-	);
+		return (
+			(inner || outer)
+			&&
+			{ inner, outer }
+		);
+	} else
+		return left || right;
 }
 
 function sumCount(
@@ -215,7 +218,7 @@ function sumCount(
 	right
 ) {
 	return (
-		left
+		left && right
 		?
 		{
 			above: left.above + right.above,
@@ -223,6 +226,6 @@ function sumCount(
 			same: left.same + right.same,
 		}
 		:
-		right
+		right || right
 	);
 }
