@@ -18,6 +18,17 @@ This approach can be applied at all scales of software and across boundaries, fr
 
 To support different sources of structure and dependency a common data format is defined in YAML.
 
+``` YAML
+- id: upper
+  dependsUpon: lower left
+  item:
+  - id: nested
+    dependsUpon: lower right
+-
+  - lower left
+  - lower right
+```
+
 ### Analyzers
 
 Analyzers are implemented to create the YAML files, which can then be optionally post-processed and combined. Currently in development is a single file JavaScript analyzer.
