@@ -21,7 +21,7 @@ To support different sources of structure and dependency a common data format is
 ``` YAML
 - id: upper
   dependsUpon: lower left
-  item:
+  items:
   - id: nested
     dependsUpon: lower right
 -
