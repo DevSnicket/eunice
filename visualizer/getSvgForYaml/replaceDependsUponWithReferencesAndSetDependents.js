@@ -1,45 +1,61 @@
-module.exports =
-	stack => {
-		for (const items of stack)
-			for (const item of items) {
-				updateItemWhenRequired(item);
+module.exports = replaceDependsUponWithReferencesAndSetDependents;
 
-				if (item.items)
-					for (const itemStack of item.items)
-						for (const childItem of itemStack)
-							updateItemWhenRequired(childItem);
-			}
+function replaceDependsUponWithReferencesAndSetDependents(
+	stack
+) {
+	for (const level of stack)
+		for (const item of level) {
+			updateItemWhenRequired(item);
 
-		function updateItemWhenRequired(
-			item
-		) {
-			if (item.dependsUpon)
-				updateItem({
-					dependsUpon: item.dependsUpon,
-					findItemWithIdentifier,
-					item,
-				});
+			if (item.items)
+				replaceDependsUponWithReferencesAndSetDependents(item.items);
 		}
 
-		function findItemWithIdentifier(
-			identifier
-		) {
-			return findItemWithIdentifierInStack({ identifier, stack });
-		}
-	};
+	function updateItemWhenRequired(
+		item
+	) {
+		if (item.dependsUpon)
+			updateItem({
+				dependsUpon: item.dependsUpon,
+				findItemWithIdentifier,
+				item,
+			});
+	}
 
-function findItemWithIdentifierInStack({
+	function findItemWithIdentifier(
+		identifier
+	) {
+		return (
+			findItemWithIdentifierInStacks({
+				identifier,
+				ignoreStack: null,
+				stack,
+			})
+		);
+	}
+}
+
+function findItemWithIdentifierInStacks({
+	ignoreStack,
 	identifier,
 	stack,
 }) {
-	for (const items of stack) {
-		const foundItem = findIn(items);
+	for (const level of stack) {
+		const foundItem = findIn(level);
 
 		if (foundItem)
 			return foundItem;
 	}
 
-	return null;
+	return (
+		stack.parent
+		&&
+		findItemWithIdentifierInStacks({
+			identifier,
+			ignoreStack: stack,
+			stack: stack.parent.level.stack,
+		})
+	);
 
 	function findIn(
 		items
@@ -47,10 +63,11 @@ function findItemWithIdentifierInStack({
 		for (const item of items)
 			if (item.id == identifier)
 				return item;
-			else if (item.items) {
+			else if (item.items != ignoreStack) {
 				const foundItem =
-					findItemWithIdentifierInStack({
+					findItemWithIdentifierInStacks({
 						identifier,
+						ignoreStack,
 						stack: item.items,
 					});
 
