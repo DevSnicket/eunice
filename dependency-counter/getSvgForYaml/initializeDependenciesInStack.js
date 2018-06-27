@@ -61,9 +61,9 @@ function findItemWithIdentifierInStacks({
 		items
 	) {
 		for (const item of items)
-			if (item.id == identifier)
+			if (item.id === identifier)
 				return item;
-			else if (item.items != ignoreStack) {
+			else if (item.items && (item.items !== ignoreStack)) {
 				const foundItem =
 					findItemWithIdentifierInStacks({
 						identifier,
