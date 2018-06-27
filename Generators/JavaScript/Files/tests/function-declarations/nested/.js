@@ -1,3 +1,3 @@
-function Parent() {
-	function Nested() {}
+function parent() {
+	function nested() {}
 }

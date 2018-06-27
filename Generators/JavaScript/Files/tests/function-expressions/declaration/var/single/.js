@@ -1,1 +1,1 @@
-var Single = function() {}
+var single = function() {}

@@ -1,4 +1,4 @@
-function Parent() {
-	function Nested1() {}
-	function Nested2() {}
+function parent() {
+	function nested1() {}
+	function nested2() {}
 }

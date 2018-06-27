@@ -1,5 +1,5 @@
-let First = function() {}
+let first = function() {}
 
-let Second = function() {
-	First();
+let second = function() {
+	first();
 }

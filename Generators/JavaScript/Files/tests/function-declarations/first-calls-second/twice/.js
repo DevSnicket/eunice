@@ -1,6 +1,6 @@
-function First() {
-	Second();
-	Second();
+function first() {
+	second();
+	second();
 }
 
-function Second() {}
+function second() {}

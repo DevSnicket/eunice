@@ -1,3 +1,3 @@
-module.exports = function Parent() {
-	const Nested = function() {}
+module.exports = function parent() {
+	const nested = function() {}
 }

@@ -1,5 +1,5 @@
-const First = function() {}
+const first = function() {}
 
-const Second = function() {
-	First();
+const second = function() {
+	first();
 }

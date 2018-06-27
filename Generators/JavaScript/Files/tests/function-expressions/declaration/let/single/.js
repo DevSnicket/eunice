@@ -1,1 +1,1 @@
-let Single = function() {}
+let single = function() {}

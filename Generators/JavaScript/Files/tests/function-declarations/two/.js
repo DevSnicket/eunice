@@ -1,2 +1,2 @@
-function First() {}
-function Second() {}
+function first() {}
+function second() {}

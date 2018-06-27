@@ -1,6 +1,6 @@
-﻿- - id: First
+﻿- - id: first
     dependsUpon:
-      - Second
-- - id: Second
+      - second
+- - id: second
     dependsUpon:
-      - First
+      - first

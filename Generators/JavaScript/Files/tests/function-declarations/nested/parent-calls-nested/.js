@@ -1,5 +1,5 @@
-function Parent() {
-	Nested();
+function parent() {
+	nested();
 	
-	function Nested() {}
+	function nested() {}
 }

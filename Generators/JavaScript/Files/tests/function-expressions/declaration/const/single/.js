@@ -1,1 +1,1 @@
-const Single = function() {}
+const single = function() {}

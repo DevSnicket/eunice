@@ -1,5 +1,5 @@
-var First = function() {}
+var first = function() {}
 
-var Second = function() {
-	First();
+var second = function() {
+	first();
 }

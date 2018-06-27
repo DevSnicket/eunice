@@ -1,7 +1,7 @@
-function Parent() {
-	function First() {
-		Second();
+function parent() {
+	function first() {
+		second();
 	}
 
-	function Second() {}
+	function second() {}
 }

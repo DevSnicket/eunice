@@ -1,1 +1,1 @@
-module.exports = function Single() {}
+module.exports = function single() {}

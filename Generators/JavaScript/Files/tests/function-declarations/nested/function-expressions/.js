@@ -1,3 +1,3 @@
-function Parent() {
-	const Nested = function() {}
+function parent() {
+	const nested = function() {}
 }

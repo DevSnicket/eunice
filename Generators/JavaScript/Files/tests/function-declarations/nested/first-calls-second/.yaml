@@ -1,6 +1,6 @@
-﻿- - id: Parent
+﻿- - id: parent
     items:
-      - - id: First
+      - - id: first
           dependsUpon:
-            - Second
-      - - id: Second
+            - second
+      - - id: second

@@ -1,4 +1,4 @@
-module.exports = function Parent() {
-	const Nested1 = function() {}
-	const Nested2 = function() {}
+module.exports = function parent() {
+	const nested1 = function() {}
+	const nested2 = function() {}
 }

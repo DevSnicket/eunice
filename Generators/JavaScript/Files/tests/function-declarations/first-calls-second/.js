@@ -1,5 +1,5 @@
-function First() {
-	Second();
+function first() {
+	second();
 }
 
-function Second() {}
+function second() {}

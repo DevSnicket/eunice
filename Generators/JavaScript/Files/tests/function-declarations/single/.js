@@ -1,1 +1,1 @@
-function Single() {}
+function single() {}

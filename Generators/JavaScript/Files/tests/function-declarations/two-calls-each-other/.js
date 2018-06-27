@@ -1,7 +1,7 @@
-function First() {
-	Second();
+function first() {
+	second();
 }
 
-function Second() {
-	First();
+function second() {
+	first();
 }

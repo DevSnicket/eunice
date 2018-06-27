@@ -1,1 +1,1 @@
-const Single = () => {}
+const single = () => {}

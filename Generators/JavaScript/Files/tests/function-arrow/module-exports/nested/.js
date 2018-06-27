@@ -1,3 +1,3 @@
 module.exports = () => {
-	const Nested = function() {}
+	const nested = function() {}
 }
