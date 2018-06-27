@@ -1,5 +1,5 @@
-﻿- - id: Upper
+﻿- - id: upper
     items:
-    -  id: Item of Upper
-       dependsUpon: Lower
-- - Lower
+    -  id: item of upper
+       dependsUpon: lower
+- - lower
