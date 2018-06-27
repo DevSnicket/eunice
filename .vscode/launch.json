@@ -1,82 +1,91 @@
 {
-	"configurations": [
-
-		{
-			"args": [
-				//"empty"
-				//"empty-statement-block"
-				//"function-arrow/const"
-				//"function-arrow/parameter"
-				//"function-declarations/callsBuiltin/Array-isArray"
-				//"function-declarations/first-calls-second"
-				//"function-declarations/nested"
-				//"function-declarations/nested/first-calls-second"
-				//"function-declarations/nested/parent-calls-nested"
-				//"function-declarations/second-calls-first"
-				//"function-declarations/single"
-				//"function-declarations/two"
-				//"function-declarations/two-calls-each-other"
-				//"function-expressions/module-exports"
-				//"function-expressions/module-exports"
-				//"function-expressions/module-exports/nested/function-declarations"
-				//"function-expressions/var/single"
-				//"function-expressions/var/second-calls-first"
-				//"../../../Renderer/getSvgForYaml/createSvgElement.js"
-			],
-			"cwd": "${workspaceFolder}/Generators/JavaScript/Files/",
-			"program": "${workspaceFolder}/Generators/JavaScript/Files/test.js",
-			"request": "launch",
-			"type": "node",
-			"name": "generate file test",
-			"useWSL": true
-		},
-		{
-			"name": "generate test harness",
-			"type": "chrome",
-			"request": "launch",
-			"file": "${workspaceFolder}/Generators/JavaScript/Files/harness.html"
-		},
-	{
-		"args": [
-			//"empty"
-			//"single"
-			//"single/depends-upon-itself"
-			//"single/with-long-name"
-			//"single/with-item-of-structure"
-			//"two"
-			//"independency/first-and-second-depends-upon-third"
-			//"independency/first-depends-upon-item-in-stack-of-second"
-			//"independency/first-depends-upon-second"
-			//"independency/first-depends-upon-second-and-third"
-			//"independency/first-depends-upon-second-and-third-third-depends-upon-first-and-second"
-			//"independency/first-depends-upon-third"
-			//"independency/first-item-and-second-item-depends-upon-third-item"
-			//"independency/first-item-and-second-item-of-first-depends-upon-second"
-			//"independency/item-of-first-depends-upon-item-of-second"
-			//"independency/second-depends-upon-first"
-			//"independency/single-depends-upon-missing"
-			//"independency/third-depends-upon-first"
-			//"independency/two-interdependent"
-			//"independency/single-depends-upon-missing"
-			//"nested-depends-upon-parent"
-			//"parent-depends-upon-nested"
-			//"stack/lower-depends-upon-upper"
-			//"stack/nested"
-			//"stack/single"
-			//"stack/single-of-two-items"
-			//"stack/two"
-			//"stack/two-of-two-items-interdependent"
-			//"stack/two-interdependent"
-			//"stack/two-of-two-items"
-			//"stack/upper-depends-upon-lower"
-			//"stack/upper-item-depends-upon-lower-item"
+	"configurations":
+		[
+			{
+				"args":
+					[
+						//"empty"
+						//"empty-statement-block"
+						//"function-arrow/const"
+						//"function-arrow/parameter"
+						//"function-declarations/callsBuiltin/Array-isArray"
+						//"function-declarations/first-calls-second"
+						//"function-declarations/nested"
+						//"function-declarations/nested/first-calls-second"
+						//"function-declarations/nested/parent-calls-nested"
+						//"function-declarations/second-calls-first"
+						//"function-declarations/single"
+						//"function-declarations/two"
+						//"function-declarations/two-calls-each-other"
+						//"function-expressions/module-exports"
+						//"function-expressions/module-exports"
+						//"function-expressions/module-exports/nested/function-declarations"
+						//"function-expressions/var/single"
+						//"function-expressions/var/second-calls-first"
+						//"../../../Renderer/getSvgForYaml/createSvgElement.js"
+					],
+				"cwd": "${workspaceFolder}/Generators/JavaScript/Files/",
+				"program": "${workspaceFolder}/Generators/JavaScript/Files/test.js",
+				"request": "launch",
+				"type": "node",
+				"name": "generate file test",
+				"useWSL": true
+			},
+			{
+				"name": "generate test harness",
+				"type": "chrome",
+				"request": "launch",
+				"file": "${workspaceFolder}/Generators/JavaScript/Files/harness.html"
+			},
+			{
+				"args":
+					[
+						//"empty"
+						//"single"
+						//"single/depends-upon-itself"
+						//"single/with-long-name"
+						//"single/with-item-of-structure"
+						//"two"
+						//"independency/first-and-second-depends-upon-third"
+						//"independency/first-depends-upon-item-in-stack-of-second"
+						//"independency/first-depends-upon-second"
+						//"independency/first-depends-upon-second-and-third"
+						//"independency/first-depends-upon-second-and-third-third-depends-upon-first-and-second"
+						//"independency/first-depends-upon-third"
+						//"independency/first-item-and-second-item-depends-upon-third-item"
+						//"independency/first-item-and-second-item-of-first-depends-upon-second"
+						//"independency/item-of-first-depends-upon-item-of-second"
+						//"independency/second-depends-upon-first"
+						//"independency/single-depends-upon-missing"
+						//"independency/third-depends-upon-first"
+						//"independency/two-interdependent"
+						//"independency/single-depends-upon-missing"
+						//"item-depends-upon-parent"
+						//"parent-depends-upon-nested"
+						//"stack/lower-depends-upon-upper"
+						//"stack/nested"
+						//"stack/single"
+						//"stack/single-of-two-items"
+						//"stack/two"
+						//"stack/two-of-two-items-interdependent"
+						//"stack/two-interdependent"
+						//"stack/two-of-two-items"
+						//"stack/upper-depends-upon-lower"
+						//"stack/upper-item-depends-upon-lower-item"
+					],
+				"cwd": "${workspaceFolder}/Renderer/",
+				"program": "${workspaceFolder}/Renderer/test.js",
+				"request": "launch",
+				"type": "node",
+				"name": "renderer file test",
+				"useWSL": true
+			},
+			{
+				"name": "renderer test harness",
+				"type": "chrome",
+				"request": "launch",
+				"file": "${workspaceFolder}/Renderer/harness.html"
+			}
 		],
-		"cwd": "${workspaceFolder}/Renderer/",
-		"program": "${workspaceFolder}/Renderer/test.js",
-		"request": "launch",
-		"type": "node",
-		"name": "renderer test",
-		"useWSL": true
-	}],
 	"version": "0.2.0"
 }

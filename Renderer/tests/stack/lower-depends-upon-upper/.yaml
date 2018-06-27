@@ -1,4 +1,3 @@
-﻿stack: 
-  - Upper
-  - id: Lower
+﻿- - Upper
+- - id: Lower
     dependsUpon: Upper
