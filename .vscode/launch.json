@@ -1,6 +1,7 @@
 {
 	"configurations":
 		[
+
 			{
 				"args":
 					[
@@ -25,10 +26,10 @@
 						//"../../../Renderer/getSvgForYaml/createSvgElement.js"
 					],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/Files/",
+				"name": "analyze file test(s)",
 				"program": "${workspaceFolder}/Analyzers/JavaScript/Files/test.js",
 				"request": "launch",
 				"type": "node",
-				"name": "analyze file test",
 				"useWSL": true
 			},
 			{
@@ -36,6 +37,14 @@
 				"type": "chrome",
 				"request": "launch",
 				"file": "${workspaceFolder}/Analyzers/JavaScript/Files/harness.html"
+			},
+			{
+				"cwd": "${workspaceFolder}/Renderer/",
+				"name": "renderer jest",
+				"program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
 			},
 			{
 				"args":
@@ -61,6 +70,7 @@
 						//"independency/two-interdependent"
 						//"independency/single-depends-upon-missing"
 						//"item-depends-upon-parent"
+						//"item-of-item-depends-upon-parent"
 						//"parent-depends-upon-nested"
 						//"stack/lower-depends-upon-upper"
 						//"stack/nested"
@@ -74,17 +84,17 @@
 						//"stack/upper-item-depends-upon-lower-item"
 					],
 				"cwd": "${workspaceFolder}/Renderer/",
+				"name": "renderer test file(s)",
 				"program": "${workspaceFolder}/Renderer/test.js",
 				"request": "launch",
 				"type": "node",
-				"name": "renderer file test",
 				"useWSL": true
 			},
 			{
+				"file": "${workspaceFolder}/Renderer/harness.html",
 				"name": "renderer test harness",
-				"type": "chrome",
 				"request": "launch",
-				"file": "${workspaceFolder}/Renderer/harness.html"
+				"type": "chrome"
 			}
 		],
 	"version": "0.2.0"

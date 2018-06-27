@@ -8,7 +8,7 @@ module.exports =
 		expectedFileName,
 		processArguments,
 	}) {
-		if (processArguments[1].endsWith("jest") || processArguments[1].endsWith("jest-worker/build/child.js"))
+		if (isFirstArgumentJest(processArguments[1]))
 			discoverAndDescribeTestCases();
 		else if (processArguments.length == 3)
 			if (processArguments[2] == "update-expected")
@@ -161,19 +161,31 @@ module.exports =
 		}) {
 			return readFile(`${rootDirectory}${testCase}/${fileName}`);
 		}
-
-		function readFile(
-			filePath
-		) {
-			return (
-				fs.readFileSync(
-					filePath,
-					"utf-8"
-				)
-				.replace(
-					/^\uFEFF/, // BOM
-					""
-				)
-			);
-		}
 	};
+
+function isFirstArgumentJest(
+	argument
+) {
+	return (
+		argument.endsWith("jest")
+		||
+		argument.endsWith("jest.js")
+		||
+		argument.endsWith("jest-worker/build/child.js")
+	);
+}
+
+function readFile(
+	filePath
+) {
+	return (
+		fs.readFileSync(
+			filePath,
+			"utf-8"
+		)
+		.replace(
+			/^\uFEFF/, // BOM
+			""
+		)
+	);
+}
