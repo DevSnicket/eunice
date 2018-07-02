@@ -226,6 +226,6 @@ function sumCount(
 			same: left.same + right.same,
 		}
 		:
-		right || right
+		left || right
 	);
 }
