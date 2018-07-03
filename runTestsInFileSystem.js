@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 const fs = require("fs");
 
 module.exports =
@@ -11,7 +13,10 @@ module.exports =
 		if (isFirstArgumentJest(processArguments[1]))
 			discoverAndDescribeTestCases();
 		else if (processArguments.length == 3)
-			if (processArguments[2] == "update-expected")
+			if (processArguments[2] == "list")
+				for (const testCase of discover())
+					console.log(testCase);
+			else if (processArguments[2] == "update-expected")
 				discoverAndUpdateExpectedFiles();
 			else
 				logOutputOfActualWhenFileOrTestCase(processArguments[2]);
@@ -68,10 +73,8 @@ module.exports =
 
 		function discoverAndLogOutputOfActual() {
 			for (const testCase of discover()) {
-				/* eslint-disable no-console */
 				console.log(testCase);
 				console.log(getActualForTestCase(testCase));
-				/* eslint-enable no-console */
 			}
 		}
 
@@ -124,7 +127,6 @@ module.exports =
 			fileOrTestCase
 		) {
 			if (fileOrTestCase)
-				// eslint-disable-next-line no-console
 				console.log(
 					isArgumentPath()
 					?
