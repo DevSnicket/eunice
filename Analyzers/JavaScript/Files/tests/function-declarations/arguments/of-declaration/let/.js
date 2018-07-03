@@ -1,5 +1,7 @@
-let aLet = 0;
+function container() {
+	let aLet = 0;
 
-function caller() {
-	called(aLet);
+	function caller() {
+		called(aLet);
+	}
 }

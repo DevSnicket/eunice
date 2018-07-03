@@ -2,22 +2,40 @@ module.exports =
 	({ file, walk }) => {
 		const items = [];
 
+		const
+			callsByFunctions = new Map(),
+			functionsInFunctions = new Map(),
+			variablesInFunctions = new Map();
+
 		walk(
 			file,
-			getVisitorsForItems(items)
+			getVisitors({
+				callsByFunctions,
+				functionsInFunctions,
+				items,
+				variablesInFunctions,
+			})
 		);
 
-		return items.length && items.map(item => [ item ]);
+		/* istanbul ignore next: error is only thrown when there is gap in the implementation */
+		if (callsByFunctions.size)
+			throw new Error("Unhandled calls.");
+		/* istanbul ignore next: error is only thrown when there is gap in the implementation */
+		else if (functionsInFunctions.size)
+			throw new Error("Unhandled functions.");
+		/* istanbul ignore next: error is only thrown when there is gap in the implementation */
+		else if (variablesInFunctions.size)
+			throw new Error("Unhandled variables.");
+		else
+			return items.length && items.map(item => [ item ]);
 	};
 
-function getVisitorsForItems(
-	items
-) {
-	const
-		callsByFunctions = new Map(),
-		functionsInFunctions = new Map(),
-		variablesInFunctions = new Map();
-
+function getVisitors({
+	callsByFunctions,
+	functionsInFunctions,
+	items,
+	variablesInFunctions,
+}) {
 	return (
 		{
 			ArrowFunctionExpression: visitFunctionArrowOrExpression,
@@ -268,6 +286,9 @@ function getVisitorsForItems(
 	) {
 		const childItems = functionsInFunctions.get(parent);
 
+		functionsInFunctions.delete(parent);
+		variablesInFunctions.delete(parent);
+
 		return (
 			childItems
 			&&
@@ -286,15 +307,18 @@ function getVisitorsForItems(
 		variableDeclaration,
 		ancestors
 	) {
-		const parentFunction = findParentFunctionFromAncestors(ancestors);
+		const
+			nonfunctionDeclarationIdentifiers = getNonfunctionDeclarationIdentifiers(),
+			parentFunction = findParentFunctionFromAncestors(ancestors);
 
-		variablesInFunctions.set(
-			parentFunction,
-			[
-				...variablesInFunctions.get(parentFunction) || [],
-				...getNonfunctionDeclarationIdentifiers(),
-			]
-		);
+		if (nonfunctionDeclarationIdentifiers.length)
+			variablesInFunctions.set(
+				parentFunction,
+				[
+					...variablesInFunctions.get(parentFunction) || [],
+					...nonfunctionDeclarationIdentifiers,
+				]
+			);
 
 		function getNonfunctionDeclarationIdentifiers() {
 			return (
@@ -309,9 +333,12 @@ function getVisitorsForItems(
 function findParentFunctionFromAncestors(
 	ancestors
 ) {
-	for (let index = ancestors.length - 2; index; index--)
-		if (isFunctionType(ancestors[index].type))
-			return ancestors[index];
+	for (let index = ancestors.length - 2; index; index--) {
+		const ancestor = ancestors[index];
+
+		if (isFunctionType(ancestor.type) && !ancestor.expression)
+			return ancestor;
+	}
 
 	return null;
 }

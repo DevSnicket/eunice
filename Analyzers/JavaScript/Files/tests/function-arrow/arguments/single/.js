@@ -1,1 +1,3 @@
-called(nothing => nothing)
+function caller() {
+	called(nothing => nothing);
+}

@@ -1,1 +1,3 @@
-called((nothing1, nothing2) => nothing1)
+function caller() {
+	called((nothing1, nothing2) => nothing1);
+}
