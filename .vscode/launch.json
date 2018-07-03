@@ -5,24 +5,24 @@
 			{
 				"args":
 					[
-						//"empty"
-						//"empty-statement-block"
-						//"function-arrow/arguments/of-object"
-						//"function-arrow/arguments/single"
-						//"function-arrow/arguments/two"
-						//"function-arrow/calls-function-declaration"
+						//"empty
+						//"fmpty-statement-block"
 						//"function-arrow/const"
 						//"function-arrow/module-exports"
 						//"function-arrow/module-exports/nested"
 						//"function-arrow/module-exports/nested/function-declaration"
 						//"function-declarations/arguments/of-declaration/const"
-						"function-declarations/arguments/of-declaration/const/second-of-two"
+						//"function-declarations/arguments/of-declaration/const/nested-in-parent-with-const"
 						//"function-declarations/arguments/of-declaration/const/two-callers"
 						//"function-declarations/arguments/of-declaration/let"
 						//"function-declarations/arguments/of-declaration/nested/const"
 						//"function-declarations/arguments/of-declaration/nested/let"
 						//"function-declarations/arguments/of-declaration/nested/var"
 						//"function-declarations/arguments/of-declaration/var"
+						//"function-declarations/arguments/of-function-arrow/calls-function-declaration"
+						//"function-declarations/arguments/of-function-arrow/of-object"
+						//"function-declarations/arguments/of-function-arrow/single"
+						//"function-declarations/arguments/of-function-arrow/two"
 						//"function-declarations/arguments/of-function-declaration"
 						//"function-declarations/arguments/of-function-declaration/nested"
 						//"function-declarations/arguments/of-function-declaration/of-object"
@@ -60,8 +60,8 @@
 						//"function-expressions/module-exports/anonymous"
 						//"function-expressions/module-exports/nested"
 						//"function-expressions/module-exports/nested/function-declaration"
-						//"function-expressions/module-exports/nested/two""
-						//"../../../Renderer/getSvgForYaml/createSvgElement.js"
+						//"function-expressions/module-exports/nested/two"
+						"../../../Renderer/getSvgForYaml/createArrows.js"
 						//"list"
 					],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/Files/",
