@@ -45,7 +45,7 @@
 	"scripts": {
 		"harness": "(cd Analyzers/JavaScript/Files; npx webpack); (cd Renderer; npx webpack); npx webpack",
 		"lint": "eslint .",
-		"test": "jest --no-cache",
-		"test-travis": "jest && cat ./TestCoverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+		"test": "jest --no-cache --runInBand",
+		"test-travis": "jest --no-cache --runInBand && cat ./TestCoverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
 	}
 }
