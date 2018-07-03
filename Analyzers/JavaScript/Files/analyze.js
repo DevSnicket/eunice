@@ -14,8 +14,9 @@ function getVisitorsForItems(
 	items
 ) {
 	const
-		nestedCallMap = new Map(),
-		nestedFunctionMap = new Map();
+		callsByFunctions = new Map(),
+		functionsInFunctions = new Map(),
+		variablesInFunctions = new Map();
 
 	return (
 		{
@@ -23,6 +24,7 @@ function getVisitorsForItems(
 			CallExpression: visitCallExpression,
 			FunctionDeclaration: visitFunctionDeclaration,
 			FunctionExpression: visitFunctionArrowOrExpression,
+			VariableDeclaration: visitVariableDeclaration,
 		}
 	);
 
@@ -35,13 +37,113 @@ function getVisitorsForItems(
 		if (callee) {
 			const parentFunction = findParentFunctionFromAncestors(ancestors);
 
-			const calls = nestedCallMap.get(parentFunction);
+			addToNestedCallMap({
+				callee,
+				parentFunction,
+			});
 
-			if (calls)
-				calls.add(callee);
-			else
-				nestedCallMap.set(parentFunction, new Set([ callee ]));
+			addArgumentsToNestedCallMap(
+				parentFunction
+			);
 		}
+
+		function addArgumentsToNestedCallMap(
+			parentFunction
+		) {
+			for (const argument of getArguments())
+				if (isArgumentRelevant(argument))
+					addToNestedCallMap({
+						callee: argument.name,
+						parentFunction,
+					});
+
+			function getArguments() {
+				return (
+					callExpression.arguments.reduce(
+						(aggregation, argument) =>
+							argument.type === "ObjectExpression"
+							?
+							[ ...aggregation, ...getPropertyValues(argument.properties) ]
+							:
+							[ ...aggregation, argument ],
+						[]
+					)
+				);
+			}
+
+			function getPropertyValues(
+				properties
+			) {
+				return (
+					properties
+					.map(
+						property =>
+							property.type === "SpreadElement"
+							?
+							property.argument
+							:
+							property.value
+					)
+				);
+			}
+
+			function isArgumentRelevant(
+				argument
+			) {
+				return (
+					isIdentifier(argument)
+					&&
+					!isParameterOfParent(argument.name)
+					&&
+					!isVariable(argument.name)
+				);
+			}
+
+			function isIdentifier(
+				argument
+			) {
+				return argument.type === "Identifier";
+			}
+
+			function isParameterOfParent(
+				name
+			) {
+				return (
+					parentFunction
+					&&
+					parentFunction.params.some(
+						parameter =>
+							parameter.type === "ObjectPattern"
+							?
+							parameter.properties.some(property => property.key.name === name)
+							:
+							parameter.name === name
+					)
+				);
+			}
+
+			function isVariable(
+				name
+			) {
+				for (const variables of variablesInFunctions.values())
+					if (variables.includes(name))
+						return true;
+
+				return false;
+			}
+		}
+	}
+
+	function addToNestedCallMap({
+		callee,
+		parentFunction,
+	}) {
+		const calls = callsByFunctions.get(parentFunction);
+
+		if (calls)
+			calls.add(callee);
+		else
+			callsByFunctions.set(parentFunction, new Set([ callee ]));
 	}
 
 	function visitFunctionDeclaration(
@@ -135,12 +237,12 @@ function getVisitorsForItems(
 			items.push(item);
 
 		function addToNestedFunctionMap() {
-			const functions = nestedFunctionMap.get(parentFunction);
+			const functions = functionsInFunctions.get(parentFunction);
 
 			if (functions)
 				functions.push(item);
 			else
-				nestedFunctionMap.set(parentFunction, [ item ]);
+				functionsInFunctions.set(parentFunction, [ item ]);
 		}
 	}
 
@@ -148,9 +250,9 @@ function getVisitorsForItems(
 		identifier,
 		node,
 	}) {
-		const calls = nestedCallMap.get(node);
+		const calls = callsByFunctions.get(node);
 
-		nestedCallMap.delete(node);
+		callsByFunctions.delete(node);
 
 		return (
 			{
@@ -164,7 +266,7 @@ function getVisitorsForItems(
 	function createItems(
 		parent
 	) {
-		const childItems = nestedFunctionMap.get(parent);
+		const childItems = functionsInFunctions.get(parent);
 
 		return (
 			childItems
@@ -179,6 +281,29 @@ function getVisitorsForItems(
 			}
 		);
 	}
+
+	function visitVariableDeclaration(
+		variableDeclaration,
+		ancestors
+	) {
+		const parentFunction = findParentFunctionFromAncestors(ancestors);
+
+		variablesInFunctions.set(
+			parentFunction,
+			[
+				...variablesInFunctions.get(parentFunction) || [],
+				...getNonfunctionDeclarationIdentifiers(),
+			]
+		);
+
+		function getNonfunctionDeclarationIdentifiers() {
+			return (
+				variableDeclaration.declarations
+				.filter(declaration => !isFunctionType(declaration.init.type))
+				.map(declaration => declaration.id.name)
+			);
+		}
+	}
 }
 
 function findParentFunctionFromAncestors(
@@ -189,16 +314,16 @@ function findParentFunctionFromAncestors(
 			return ancestors[index];
 
 	return null;
+}
 
-	function isFunctionType(
-		type
-	) {
-		return (
-			type === "ArrowFunctionExpression"
-			||
-			type === "FunctionDeclaration"
-			||
-			type === "FunctionExpression"
-		);
-	}
+function isFunctionType(
+	type
+) {
+	return (
+		type === "ArrowFunctionExpression"
+		||
+		type === "FunctionDeclaration"
+		||
+		type === "FunctionExpression"
+	);
 }

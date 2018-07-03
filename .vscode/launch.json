@@ -7,27 +7,72 @@
 					[
 						//"empty"
 						//"empty-statement-block"
+						//"function-arrow/arguments/of-object"
+						//"function-arrow/arguments/single"
+						//"function-arrow/arguments/two"
 						//"function-arrow/const"
-						//"function-arrow/parameter"
-						//"function-declarations/callsBuiltin/Array-isArray"
+						//"function-arrow/module-exports"
+						//"function-arrow/module-exports/nested"
+						//"function-arrow/module-exports/nested/function-declaration"
+						//"function-declarations/arguments/of-declaration/const"
+						//"function-declarations/arguments/of-declaration/const/two-callers"
+						//"function-declarations/arguments/of-declaration/let"
+						//"function-declarations/arguments/of-declaration/nested/const"
+						//"function-declarations/arguments/of-declaration/nested/let"
+						//"function-declarations/arguments/of-declaration/nested/var"
+						//"function-declarations/arguments/of-declaration/var"
+						//"function-declarations/arguments/of-function-declaration"
+						//"function-declarations/arguments/of-function-declaration/nested"
+						//"function-declarations/arguments/of-function-declaration/of-object"
+						//"function-declarations/arguments/of-identifier"
+						//"function-declarations/arguments/of-key-value/value-of-identifier"
+						"function-declarations/arguments/of-key-value/value-of-literal"
+						//"function-declarations/arguments/of-object-spread"
+						//"function-declarations/arguments/of-parameter"
+						//"function-declarations/arguments/of-parameter/of-object"
+						//"function-declarations/calls-is-array"
+						//"function-declarations/calls-parameter"
+						//"function-declarations/calls-parameter/of-object"
 						//"function-declarations/first-calls-second"
+						//"function-declarations/first-calls-second/twice"
 						//"function-declarations/nested"
 						//"function-declarations/nested/first-calls-second"
+						//"function-declarations/nested/function-expressions"
 						//"function-declarations/nested/parent-calls-nested"
+						//"function-declarations/nested/two"
 						//"function-declarations/second-calls-first"
 						//"function-declarations/single"
 						//"function-declarations/two"
 						//"function-declarations/two-calls-each-other"
+						//"function-expressions/arguments"
+						//"function-expressions/arguments/nested"
+						//"function-expressions/arguments/of-object"
+						//"function-expressions/arguments/two-callers"
+						//"function-expressions/declaration/const/second-calls-first"
+						//"function-expressions/declaration/const/single"
+						//"function-expressions/declaration/let/second-calls-first"
+						//"function-expressions/declaration/let/single"
+						//"function-expressions/declaration/var/second-calls-first"
+						//"function-expressions/declaration/var/single"
 						//"function-expressions/module-exports"
-						//"function-expressions/module-exports"
-						//"function-expressions/module-exports/nested/function-declarations"
-						//"function-expressions/var/single"
-						//"function-expressions/var/second-calls-first"
+						//"function-expressions/module-exports/anonymous"
+						//"function-expressions/module-exports/nested"
+						//"function-expressions/module-exports/nested/function-declaration"
+						//"function-expressions/module-exports/nested/two""
 						//"../../../Renderer/getSvgForYaml/createSvgElement.js"
+						//"list"
 					],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/Files/",
 				"name": "analyze file test(s)",
 				"program": "${workspaceFolder}/Analyzers/JavaScript/Files/test.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"cwd": "${workspaceFolder}/Analyzers/JavaScript/Files/",
+				"name": "analyze jest",
+				"program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
