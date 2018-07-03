@@ -118,7 +118,7 @@ module.exports =
 				}
 
 				function discoverTestCases() {
-					return inSubdirectory(`/${subFileOrDirectory}/`);
+					return inSubdirectory(`${subFileOrDirectory}/`);
 				}
 			}
 		}
