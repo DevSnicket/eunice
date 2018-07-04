@@ -90,7 +90,13 @@ module.exports =
 						{
 							fill,
 							points:
-								pointsForDownArrow
+								[
+									[ 0, 0.8 ],
+									[ 0, 0 ],
+									[ 1, 0 ],
+									[ 1, 0.8 ],
+									[ 0.5, 1 ],
+								]
 								.map(point => scaleAndFormatPoint(transform(point)))
 								.join(" "),
 						}
@@ -122,12 +128,3 @@ function swapAxis(
 ) {
 	return [ point[1], point[0] ];
 }
-
-const pointsForDownArrow =
-	[
-		[ 0, 0.8 ],
-		[ 0, 0 ],
-		[ 1, 0 ],
-		[ 1, 0.8 ],
-		[ 0.5, 1 ],
-	];
