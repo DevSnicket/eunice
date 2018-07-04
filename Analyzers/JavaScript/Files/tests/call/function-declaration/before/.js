@@ -1,0 +1,3 @@
+called();
+
+function called() {}
