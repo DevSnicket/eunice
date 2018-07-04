@@ -1,6 +1,6 @@
 module.exports =
 	({ file, walk }) => {
-		const items = [];
+		const functionItems = [];
 
 		const
 			callsByFunctions = new Map(),
@@ -11,8 +11,8 @@ module.exports =
 			file,
 			getVisitors({
 				callsByFunctions,
+				functionItems,
 				functionsInFunctions,
-				items,
 				variablesInFunctions,
 			})
 		);
@@ -20,7 +20,8 @@ module.exports =
 		const fileItem =
 			createFileItemWhenRequired({
 				callsByFunctions,
-				items,
+				functionItems,
+				variablesInFunctions,
 			});
 
 		/* istanbul ignore next: error is only thrown when there is gap in the implementation */
@@ -36,38 +37,14 @@ module.exports =
 			return (
 				fileItem
 				||
-				(items.length && items.map(item => [ item ]))
+				(functionItems.length && functionItems.map(item => [ item ]))
 			);
 	};
 
-function createFileItemWhenRequired({
-	callsByFunctions,
-	items,
-}) {
-	const dependsUponProperty =
-		createDependsUponProperty({
-			callsByFunctions,
-			node: null,
-		});
-
-	return (
-		dependsUponProperty
-		&&
-		[
-			[
-				{
-					...dependsUponProperty,
-					...items.length && { items },
-				},
-			],
-		]
-	);
-}
-
 function getVisitors({
 	callsByFunctions,
+	functionItems,
 	functionsInFunctions,
-	items,
 	variablesInFunctions,
 }) {
 	return (
@@ -247,8 +224,8 @@ function getVisitors({
 	) {
 		pushOrMapToParentWhenNested({
 			ancestors,
-			item:
-				createItemForFunction({
+			functionItem:
+				createFunctionItem({
 					identifier: functionDeclaration.id.name,
 					node: functionDeclaration,
 				}),
@@ -264,14 +241,14 @@ function getVisitors({
 		if (parent.type === "VariableDeclarator")
 			pushOrMapToParentWhenNested({
 				ancestors,
-				item: createItemWithIdentifier(parent.id.name),
+				functionItem: createItemWithIdentifier(parent.id.name),
 			});
 		else
 			pushItemsWhenModuleExport();
 
 		function pushItemsWhenModuleExport() {
 			if (isModuleExportAssigment())
-				items.push(
+				functionItems.push(
 					createItemWithIdentifier(
 						getIdentifierWhenAssigment()
 					)
@@ -312,7 +289,7 @@ function getVisitors({
 			identifier
 		) {
 			return (
-				createItemForFunction({
+				createFunctionItem({
 					identifier,
 					node: functionExpression,
 				})
@@ -322,74 +299,51 @@ function getVisitors({
 
 	function pushOrMapToParentWhenNested({
 		ancestors,
-		item,
+		functionItem,
 	}) {
 		const parentFunction = findParentFunctionFromAncestors(ancestors);
 
 		if (parentFunction)
 			addToNestedFunctionMap();
 		else
-			items.push(item);
+			functionItems.push(functionItem);
 
 		function addToNestedFunctionMap() {
 			const functions = functionsInFunctions.get(parentFunction);
 
 			if (functions)
-				functions.push(item);
+				functions.push(functionItem);
 			else
-				functionsInFunctions.set(parentFunction, [ item ]);
+				functionsInFunctions.set(parentFunction, [ functionItem ]);
 		}
 	}
 
-	function createItemForFunction({
+	function createFunctionItem({
 		identifier,
 		node,
 	}) {
+		const functionItemsOfNode = functionsInFunctions.get(node);
+
+		functionsInFunctions.delete(node);
+
 		return (
 			{
 				id: identifier,
-				...createDependsUponProperty({ callsByFunctions, node }),
-				...createItems(node),
+				...createDependsUponProperty({
+					callsByFunctions,
+					node,
+				}),
+				...concatItemsIntoProperty({
+					functionItems:
+						functionItemsOfNode,
+					variableItems:
+						createVariableItemsUsedInNested({
+							node,
+							variablesInFunctions,
+						}),
+				}),
 			}
 		);
-	}
-
-	function createItems(
-		parent
-	) {
-		const childItems =
-			[
-				...getVariablesUsedInNested(variablesInFunctions.get(parent)) || [],
-				...functionsInFunctions.get(parent) || [],
-			];
-
-		functionsInFunctions.delete(parent);
-		variablesInFunctions.delete(parent);
-
-		return (
-			childItems.length
-			&&
-			{
-				items:
-					childItems.length > 1
-					?
-					childItems.map(item => [ item ])
-					:
-					childItems,
-			}
-		);
-
-		function getVariablesUsedInNested(
-			variables
-		) {
-			return (
-				variables
-				&&
-				variables
-				.filter(variable => variable.isUsedInNested)
-				.map(variable => ({ id: variable.name }))
-			);
-		}
 	}
 
 	function visitVariableDeclaration(
@@ -444,6 +398,55 @@ function isFunctionType(
 	);
 }
 
+function createFileItemWhenRequired({
+	callsByFunctions,
+	functionItems,
+	variablesInFunctions,
+}) {
+	const
+		dependsUponProperty =
+			createDependsUponProperty({
+				callsByFunctions,
+				node: null,
+			}),
+		variableItems =
+			createVariableItemsUsedInNested({
+				node: null,
+				variablesInFunctions,
+			});
+
+	return (
+		createWhenAnyDependsUpon()
+		||
+		createWhenAnyVariables()
+	);
+
+	function createWhenAnyDependsUpon() {
+		return (
+			dependsUponProperty
+			&&
+			[
+				[
+					{
+						...dependsUponProperty,
+						...concatItemsIntoProperty({ functionItems, variableItems }),
+					},
+				],
+			]
+		);
+	}
+
+	function createWhenAnyVariables() {
+		return (
+			variableItems
+			&&
+			variableItems.length
+			&&
+			concatItems({ functionItems, variableItems })
+		);
+	}
+}
+
 function createDependsUponProperty({
 	callsByFunctions,
 	node,
@@ -453,4 +456,57 @@ function createDependsUponProperty({
 	callsByFunctions.delete(node);
 
 	return calls && { dependsUpon: [ ...calls ].sort() };
+}
+
+function createVariableItemsUsedInNested({
+	node,
+	variablesInFunctions,
+}) {
+	const variables = variablesInFunctions.get(node);
+
+	variablesInFunctions.delete(node);
+
+	return (
+		variables
+		&&
+		variables
+		.filter(variable => variable.isUsedInNested)
+		.map(variable => ({ id: variable.name }))
+	);
+}
+
+function concatItemsIntoProperty({
+	functionItems,
+	variableItems,
+}) {
+	const items = concatItems({ functionItems, variableItems });
+
+	return items && { items };
+}
+
+function concatItems({
+	functionItems,
+	variableItems,
+}) {
+	const items =
+		[
+			...variableItems || [],
+			...functionItems || [],
+		];
+
+	return (
+		items.length
+		&&
+		getInStackWhenMultiple()
+	);
+
+	function getInStackWhenMultiple() {
+		return (
+			items.length > 1
+			?
+			items.map(item => [ item ])
+			:
+			items
+		);
+	}
 }
