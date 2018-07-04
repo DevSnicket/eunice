@@ -5,8 +5,8 @@ const
 	renderElement = require("react-dom/server").renderToStaticMarkup;
 
 const
-	createArrows = require("./getSvgForYaml/createArrows"),
-	withPrecision = require("./getSvgForYaml/withPrecision");
+	createArrows = require("./getSvgElementForYaml/createArrows"),
+	withPrecision = require("./getSvgElementForYaml/withPrecision");
 
 describe(
 	"getSvgElementForYaml",

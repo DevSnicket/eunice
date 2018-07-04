@@ -1,10 +1,10 @@
 const
-	createArrows = require("./getSvgForYaml/createArrows"),
-	createElementsContainer = require("./getSvgForYaml/createElementsContainer"),
-	createStackFromParsedYaml = require("./getSvgForYaml/createStackFromParsedYaml"),
-	createSvgElement = require("./getSvgForYaml/createSvgElement"),
-	initializeDependenciesInStack = require("./getSvgForYaml/initializeDependenciesInStack"),
-	withPrecision = require("./getSvgForYaml/withPrecision");
+	createArrows = require("./getSvgElementForYaml/createArrows"),
+	createElementsContainer = require("./getSvgElementForYaml/createElementsContainer"),
+	createStackFromParsedYaml = require("./getSvgElementForYaml/createStackFromParsedYaml"),
+	createSvgElement = require("./getSvgElementForYaml/createSvgElement"),
+	initializeDependenciesInStack = require("./getSvgElementForYaml/initializeDependenciesInStack"),
+	withPrecision = require("./getSvgElementForYaml/withPrecision");
 
 module.exports =
 	({
