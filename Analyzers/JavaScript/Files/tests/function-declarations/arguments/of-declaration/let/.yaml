@@ -1,5 +1,3 @@
-﻿- - id: container
-    items:
-      - id: caller
-        dependsUpon:
-          - called
+﻿- - id: caller
+    dependsUpon:
+      - called

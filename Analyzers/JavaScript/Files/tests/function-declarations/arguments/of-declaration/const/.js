@@ -1,7 +1,5 @@
-function container() {
-	const aConst = 0;
+function caller() {
+	const variable = 0;
 
-	function caller() {
-		called(aConst);
-	}
+	called(variable);
 }

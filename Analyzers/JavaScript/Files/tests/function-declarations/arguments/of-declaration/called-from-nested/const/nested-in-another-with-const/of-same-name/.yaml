@@ -1,0 +1,9 @@
+﻿- - id: container1
+    items:
+      - id: container2
+        items:
+          - - id: variable
+          - - id: caller
+              dependsUpon:
+                - called
+                - variable

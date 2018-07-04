@@ -1,7 +1,5 @@
-function container() {
-	let aLet = 0;
+function caller() {
+	let variable = 0;
 
-	function caller() {
-		called(aLet);
-	}
+	called(variable);
 }

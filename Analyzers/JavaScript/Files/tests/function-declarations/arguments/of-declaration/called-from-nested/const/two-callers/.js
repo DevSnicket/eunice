@@ -1,11 +1,11 @@
 function container() {
-	const aConst = 0;
+	const variable = 0;
 
 	function caller1() {
-		called(aConst);
+		called(variable);
 	}
 
 	function caller2() {
-		called(aConst);
+		called(variable);
 	}
 }

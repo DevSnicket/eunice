@@ -113,7 +113,7 @@ function getVisitors({
 					&&
 					!isParameterOfParent(argument.name)
 					&&
-					!isVariable(argument.name)
+					!isVariableOfParentFunctionOrSetIsUsedInNested(argument.name)
 				);
 			}
 
@@ -140,14 +140,57 @@ function getVisitors({
 				);
 			}
 
-			function isVariable(
+			function isVariableOfParentFunctionOrSetIsUsedInNested(
 				name
 			) {
-				for (const variables of variablesInFunctions.values())
-					if (variables.includes(name))
-						return true;
+				if (isVariableOfParentFunction())
+					return true;
+				else {
+					const variable = getVariable();
 
-				return false;
+					if (variable)
+						variable.isUsedInNested = true;
+
+					return false;
+				}
+
+				function isVariableOfParentFunction() {
+					const variablesOfParentFunction =
+						variablesInFunctions.get(parentFunction);
+
+					return (
+						variablesOfParentFunction
+						&&
+						variablesOfParentFunction.some(isVariable)
+					);
+				}
+
+				function getVariable() {
+					return (
+						[ ...variablesInFunctions.keys() ]
+						.reverse()
+						.filter(
+							functionWithVariables =>
+								functionWithVariables != parentFunction
+						)
+						.map(
+							functionWithVariables =>
+								variablesInFunctions
+								.get(functionWithVariables)
+								.find(isVariable)
+						)
+						.filter(
+							variable =>
+								variable
+						)[0]
+					);
+				}
+
+				function isVariable(
+					variable
+				) {
+					return variable.name === name;
+				}
 			}
 		}
 	}
@@ -284,13 +327,17 @@ function getVisitors({
 	function createItems(
 		parent
 	) {
-		const childItems = functionsInFunctions.get(parent);
+		const childItems =
+			[
+				...getVariablesUsedInNested(variablesInFunctions.get(parent)) || [],
+				...functionsInFunctions.get(parent) || [],
+			];
 
 		functionsInFunctions.delete(parent);
 		variablesInFunctions.delete(parent);
 
 		return (
-			childItems
+			childItems.length
 			&&
 			{
 				items:
@@ -301,6 +348,18 @@ function getVisitors({
 					childItems,
 			}
 		);
+
+		function getVariablesUsedInNested(
+			variables
+		) {
+			return (
+				variables
+				&&
+				variables
+				.filter(variable => variable.isUsedInNested)
+				.map(variable => ({ id: variable.name }))
+			);
+		}
 	}
 
 	function visitVariableDeclaration(
@@ -324,7 +383,7 @@ function getVisitors({
 			return (
 				variableDeclaration.declarations
 				.filter(declaration => !isFunctionType(declaration.init.type))
-				.map(declaration => declaration.id.name)
+				.map(declaration => ({ name: declaration.id.name }))
 			);
 		}
 	}
