@@ -16,6 +16,7 @@
 		"webpack-cli": "3.0.3"
 	},
 	"license": "MIT",
+	"homepage": "https://github.com/DevSnicket/Eunice",
 	"main": "analyze.js",
 	"name": "eunice-analyze-file",
 	"scripts": {

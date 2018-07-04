@@ -20,7 +20,7 @@
 		"webpack": "4.11.1",
 		"webpack-cli": "3.0.3"
 	},
-	"homepage": "http://www.devsnicket.com",
+	"homepage": "https://github.com/DevSnicket/Eunice",
 	"license": "MIT",
 	"main": "getSvgElementForYaml.js",
 	"name": "eunice-renderer",
