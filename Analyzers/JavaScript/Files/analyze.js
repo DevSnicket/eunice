@@ -17,6 +17,12 @@ module.exports =
 			})
 		);
 
+		const fileItem =
+			createFileItemWhenRequired({
+				callsByFunctions,
+				items,
+			});
+
 		/* istanbul ignore next: error is only thrown when there is gap in the implementation */
 		if (callsByFunctions.size)
 			throw new Error("Unhandled calls.");
@@ -27,8 +33,36 @@ module.exports =
 		else if (variablesInFunctions.size)
 			throw new Error("Unhandled variables.");
 		else
-			return items.length && items.map(item => [ item ]);
+			return (
+				fileItem
+				||
+				(items.length && items.map(item => [ item ]))
+			);
 	};
+
+function createFileItemWhenRequired({
+	callsByFunctions,
+	items,
+}) {
+	const dependsUponProperty =
+		createDependsUponProperty({
+			callsByFunctions,
+			node: null,
+		});
+
+	return (
+		dependsUponProperty
+		&&
+		[
+			[
+				{
+					...dependsUponProperty,
+					...items.length && { items },
+				},
+			],
+		]
+	);
+}
 
 function getVisitors({
 	callsByFunctions,
@@ -311,14 +345,10 @@ function getVisitors({
 		identifier,
 		node,
 	}) {
-		const calls = callsByFunctions.get(node);
-
-		callsByFunctions.delete(node);
-
 		return (
 			{
 				id: identifier,
-				...calls && { dependsUpon: [ ...calls ].sort() },
+				...createDependsUponProperty({ callsByFunctions, node }),
 				...createItems(node),
 			}
 		);
@@ -412,4 +442,15 @@ function isFunctionType(
 		||
 		type === "FunctionExpression"
 	);
+}
+
+function createDependsUponProperty({
+	callsByFunctions,
+	node,
+}) {
+	const calls = callsByFunctions.get(node);
+
+	callsByFunctions.delete(node);
+
+	return calls && { dependsUpon: [ ...calls ].sort() };
 }

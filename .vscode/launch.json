@@ -5,6 +5,8 @@
 			{
 				"args":
 					[
+						"call"
+						//"call/after-function-declaration"
 						//"empty
 						//"empty-statement-block"
 						//"function-arrow/const"
@@ -63,7 +65,7 @@
 						//"function-expressions/module-exports/nested"
 						//"function-expressions/module-exports/nested/function-declaration"
 						//"function-expressions/module-exports/nested/two""
-						//"../../../Renderer/getSvgForYaml/createArrows.js"
+						//"../../../Renderer/getSvgElementForYaml/createArrows.js"
 						//"list"
 					],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/Files/",
