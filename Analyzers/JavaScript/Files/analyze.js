@@ -86,7 +86,7 @@ function getVisitors({
 				function isRelevant() {
 					return (
 						!isVariableNameOfParentFunctionOrSetIsUsedInNestedFunction(
-							calleeName,
+							calleeName
 						)
 					);
 				}
