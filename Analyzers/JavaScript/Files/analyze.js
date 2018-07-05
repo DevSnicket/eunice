@@ -4,7 +4,7 @@ module.exports =
 
 		const
 			callsByFunctions = new Map(),
-			functionsByParents = new Map(),
+			functionsByParentFunctions = new Map(),
 			variableDeclarationsByParents = new Map();
 
 		walk(
@@ -12,7 +12,7 @@ module.exports =
 			getVisitors({
 				callsByFunctions,
 				functionItems,
-				functionsByParents,
+				functionsByParentFunctions,
 				variableDeclarationsByParents,
 			})
 		);
@@ -28,7 +28,7 @@ module.exports =
 		if (callsByFunctions.size)
 			throw new Error("Unhandled calls.");
 		/* istanbul ignore next: error is only thrown when there is gap in the implementation */
-		else if (functionsByParents.size)
+		else if (functionsByParentFunctions.size)
 			throw new Error("Unhandled functions.");
 		/* istanbul ignore next: error is only thrown when there is gap in the implementation */
 		else if (variableDeclarationsByParents.size)
@@ -44,7 +44,7 @@ module.exports =
 function getVisitors({
 	callsByFunctions,
 	functionItems,
-	functionsByParents,
+	functionsByParentFunctions,
 	variableDeclarationsByParents,
 }) {
 	const ancestorsOfUndefinedVariables = new Map();
@@ -323,12 +323,12 @@ function getVisitors({
 			functionItems.push(functionItem);
 
 		function addToNestedFunctionMap() {
-			const functions = functionsByParents.get(parentFunction);
+			const functions = functionsByParentFunctions.get(parentFunction);
 
 			if (functions)
 				functions.push(functionItem);
 			else
-				functionsByParents.set(parentFunction, [ functionItem ]);
+				functionsByParentFunctions.set(parentFunction, [ functionItem ]);
 		}
 	}
 
@@ -336,9 +336,9 @@ function getVisitors({
 		identifier,
 		node,
 	}) {
-		const functionItemsOfNode = functionsByParents.get(node);
+		const functionItemsOfNode = functionsByParentFunctions.get(node);
 
-		functionsByParents.delete(node);
+		functionsByParentFunctions.delete(node);
 
 		return (
 			{
