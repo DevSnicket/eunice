@@ -47,6 +47,8 @@ function getVisitors({
 	functionsInFunctions,
 	variablesInFunctions,
 }) {
+	const ancestorsOfUndefinedVariables = new Map();
+
 	return (
 		{
 			ArrowFunctionExpression: visitFunctionArrowOrExpression,
@@ -124,7 +126,7 @@ function getVisitors({
 					&&
 					!isParameterOfParent(argument.name)
 					&&
-					!isVariableOfParentFunctionOrSetIsUsedInNested(argument.name)
+					!isVariableOfParentFunctionOrSetIsUsedInNestedFunction(argument.name)
 				);
 			}
 
@@ -151,7 +153,7 @@ function getVisitors({
 				);
 			}
 
-			function isVariableOfParentFunctionOrSetIsUsedInNested(
+			function isVariableOfParentFunctionOrSetIsUsedInNestedFunction(
 				name
 			) {
 				if (isVariableOfParentFunction())
@@ -160,7 +162,9 @@ function getVisitors({
 					const variable = getVariable();
 
 					if (variable)
-						variable.isUsedInNested = true;
+						variable.isUsedInNestedFunction = true;
+					else
+						addToPotentialDeclarersOfVariables();
 
 					return false;
 				}
@@ -201,6 +205,16 @@ function getVisitors({
 					variable
 				) {
 					return variable.name === name;
+				}
+
+				function addToPotentialDeclarersOfVariables() {
+					ancestorsOfUndefinedVariables.set(
+						name,
+						[
+							...ancestorsOfUndefinedVariables.get(name) || [],
+							...ancestors,
+						]
+					);
 				}
 			}
 		}
@@ -351,24 +365,45 @@ function getVisitors({
 		ancestors
 	) {
 		const
-			nonfunctionDeclarationIdentifiers = getNonfunctionDeclarationIdentifiers(),
-			parentFunction = findParentFunctionFromAncestors(ancestors);
+			parentFunction = findParentFunctionFromAncestors(ancestors),
+			variables = createVariables();
 
-		if (nonfunctionDeclarationIdentifiers.length)
+		if (variables.length)
 			variablesInFunctions.set(
 				parentFunction,
 				[
 					...variablesInFunctions.get(parentFunction) || [],
-					...nonfunctionDeclarationIdentifiers,
+					...variables,
 				]
 			);
 
-		function getNonfunctionDeclarationIdentifiers() {
+		function createVariables() {
 			return (
 				variableDeclaration.declarations
 				.filter(declaration => !isFunctionType(declaration.init.type))
-				.map(declaration => ({ name: declaration.id.name }))
+				.map(declaration => createVariableWithName(declaration.id.name))
 			);
+		}
+
+		function createVariableWithName(
+			name
+		) {
+			return (
+				{
+					isUsedInNestedFunction: isUsedInNestedFunction(),
+					name,
+				}
+			);
+
+			function isUsedInNestedFunction() {
+				const potentialDeclarers = ancestorsOfUndefinedVariables.get(name);
+
+				return (
+					potentialDeclarers
+					&&
+					(!parentFunction || potentialDeclarers.includes(parentFunction))
+				);
+			}
 		}
 	}
 }
@@ -470,7 +505,7 @@ function createVariableItemsUsedInNested({
 		variables
 		&&
 		variables
-		.filter(variable => variable.isUsedInNested)
+		.filter(variable => variable.isUsedInNestedFunction)
 		.map(variable => ({ id: variable.name }))
 	);
 }

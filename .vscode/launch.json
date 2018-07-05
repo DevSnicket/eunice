@@ -3,11 +3,7 @@
 		[
 
 			{
-				"args":
-					[ 
-						//"const/argument-of-call-in-function-declaration/before"
-						"function-declarations/arguments/of-declaration/called-from-nested/const/after"
-					],
+				"args": [ ],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/Files/",
 				"name": "analyze file test(s)",
 				"program": "${workspaceFolder}/Analyzers/JavaScript/Files/test.js",
