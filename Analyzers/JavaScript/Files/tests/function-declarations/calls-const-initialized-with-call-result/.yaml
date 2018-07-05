@@ -1,0 +1,7 @@
+﻿- - dependsUpon:
+      - called
+    items:
+      - - id: calledVariable
+      - - id: caller
+          dependsUpon:
+            - calledVariable

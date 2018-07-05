@@ -1,0 +1,3 @@
+const calledVariable = called();
+
+calledVariable();

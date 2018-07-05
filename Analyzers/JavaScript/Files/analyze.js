@@ -63,98 +63,118 @@ function getVisitors({
 		callExpression,
 		ancestors
 	) {
-		const callee = callExpression.callee.name;
+		const calleeName = callExpression.callee.name;
 
-		if (callee) {
-			const parentFunction = findParentFunctionFromAncestors(ancestors);
-
-			addToNestedCallMap({
-				callee,
-				parentFunction,
-			});
-
-			addArgumentsToNestedCallMap(
-				parentFunction
+		if (calleeName)
+			addFromParentFunction(
+				findParentFunctionFromAncestors(
+					ancestors
+				)
 			);
-		}
 
-		function addArgumentsToNestedCallMap(
+		function addFromParentFunction(
 			parentFunction
 		) {
-			for (const argument of getArguments())
-				if (isArgumentRelevant(argument))
+			addCalleeToNestedCallMapWhenRelevant();
+
+			addArgumentsToNestedCallMap();
+
+			function addCalleeToNestedCallMapWhenRelevant() {
+				if (isRelevant())
+					add();
+
+				function isRelevant() {
+					return (
+						!isVariableNameOfParentFunctionOrSetIsUsedInNestedFunction(
+							calleeName,
+						)
+					);
+				}
+
+				function add() {
 					addToNestedCallMap({
-						callee: argument.name,
+						calleeName,
 						parentFunction,
 					});
-
-			function getArguments() {
-				return (
-					callExpression.arguments.reduce(
-						(aggregation, argument) =>
-							argument.type === "ObjectExpression"
-							?
-							[ ...aggregation, ...getPropertyValues(argument.properties) ]
-							:
-							[ ...aggregation, argument ],
-						[]
-					)
-				);
+				}
 			}
 
-			function getPropertyValues(
-				properties
-			) {
-				return (
+			function addArgumentsToNestedCallMap() {
+				for (const argument of getArguments())
+					if (isArgumentRelevant(argument))
+						addToNestedCallMap({
+							calleeName: argument.name,
+							parentFunction,
+						});
+
+				function getArguments() {
+					return (
+						callExpression.arguments.reduce(
+							(aggregation, argument) =>
+								argument.type === "ObjectExpression"
+								?
+								[ ...aggregation, ...getPropertyValues(argument.properties) ]
+								:
+								[ ...aggregation, argument ],
+							[]
+						)
+					);
+				}
+
+				function getPropertyValues(
 					properties
-					.map(
-						property =>
-							property.type === "SpreadElement"
-							?
-							property.argument
-							:
-							property.value
-					)
-				);
+				) {
+					return (
+						properties
+						.map(
+							property =>
+								property.type === "SpreadElement"
+								?
+								property.argument
+								:
+								property.value
+						)
+					);
+				}
+
+				function isArgumentRelevant(
+					argument
+				) {
+					return (
+						isIdentifier()
+						&&
+						!isParameterOfParent(argument.name)
+						&&
+						!isVariableNameOfParentFunctionOrSetIsUsedInNestedFunction(
+							argument.name
+						)
+					);
+
+					function isIdentifier() {
+						return argument.type === "Identifier";
+					}
+				}
+
+				function isParameterOfParent(
+					name
+				) {
+					return (
+						parentFunction
+						&&
+						parentFunction.params.some(
+							parameter =>
+								parameter.type === "ObjectPattern"
+								?
+								parameter.properties.some(property => property.key.name === name)
+								:
+								parameter.name === name
+						)
+					);
+				}
 			}
 
-			function isArgumentRelevant(
-				argument
-			) {
-				return (
-					isIdentifier(argument)
-					&&
-					!isParameterOfParent(argument.name)
-					&&
-					!isVariableOfParentFunctionOrSetIsUsedInNestedFunction(argument.name)
-				);
-			}
-
-			function isIdentifier(
-				argument
-			) {
-				return argument.type === "Identifier";
-			}
-
-			function isParameterOfParent(
-				name
-			) {
-				return (
-					parentFunction
-					&&
-					parentFunction.params.some(
-						parameter =>
-							parameter.type === "ObjectPattern"
-							?
-							parameter.properties.some(property => property.key.name === name)
-							:
-							parameter.name === name
-					)
-				);
-			}
-
-			function isVariableOfParentFunctionOrSetIsUsedInNestedFunction(
-				name
+			function isVariableNameOfParentFunctionOrSetIsUsedInNestedFunction(
+				variableName
 			) {
 				if (isVariableOfParentFunction())
 					return true;
@@ -204,14 +224,14 @@ function getVisitors({
 				function isVariable(
 					variable
 				) {
-					return variable.name === name;
+					return variable.name === variableName;
 				}
 
 				function addToPotentialDeclarersOfVariables() {
 					ancestorsOfUndefinedVariables.set(
-						name,
+						variableName,
 						[
-							...ancestorsOfUndefinedVariables.get(name) || [],
+							...ancestorsOfUndefinedVariables.get(variableName) || [],
 							...ancestors,
 						]
 					);
@@ -221,15 +241,15 @@ function getVisitors({
 	}
 
 	function addToNestedCallMap({
-		callee,
+		calleeName,
 		parentFunction,
 	}) {
 		const calls = callsByFunctions.get(parentFunction);
 
 		if (calls)
-			calls.add(callee);
+			calls.add(calleeName);
 		else
-			callsByFunctions.set(parentFunction, new Set([ callee ]));
+			callsByFunctions.set(parentFunction, new Set([ calleeName ]));
 	}
 
 	function visitFunctionDeclaration(
@@ -369,13 +389,7 @@ function getVisitors({
 			variables = createVariables();
 
 		if (variables.length)
-			variableDeclarationsByParents.set(
-				parentFunction,
-				[
-					...variableDeclarationsByParents.get(parentFunction) || [],
-					...variables,
-				]
-			);
+			addDeclarationsByParent();
 
 		function createVariables() {
 			return (
@@ -404,6 +418,16 @@ function getVisitors({
 					(!parentFunction || potentialDeclarers.includes(parentFunction))
 				);
 			}
+		}
+
+		function addDeclarationsByParent() {
+			variableDeclarationsByParents.set(
+				parentFunction,
+				[
+					...variableDeclarationsByParents.get(parentFunction) || [],
+					...variables,
+				]
+			);
 		}
 	}
 }
