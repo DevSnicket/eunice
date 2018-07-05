@@ -1,51 +1,36 @@
 module.exports =
 	({ file, walk }) => {
-		const functionItems = [];
-
 		const
 			callsByFunctions = new Map(),
-			functionsByParentFunctions = new Map(),
-			variableDeclarationsByParents = new Map();
+			declarationsByParents = new Map();
 
 		walk(
 			file,
 			getVisitors({
 				callsByFunctions,
-				functionItems,
-				functionsByParentFunctions,
-				variableDeclarationsByParents,
+				declarationsByParents,
 			})
 		);
 
-		const fileItem =
-			createFileItemWhenRequired({
+		const items =
+			createRootItems({
 				callsByFunctions,
-				functionItems,
-				variableDeclarationsByParents,
+				declarationsByParents,
 			});
 
 		/* istanbul ignore next: error is only thrown when there is gap in the implementation */
 		if (callsByFunctions.size)
 			throw new Error("Unhandled calls.");
 		/* istanbul ignore next: error is only thrown when there is gap in the implementation */
-		else if (functionsByParentFunctions.size)
-			throw new Error("Unhandled functions.");
-		/* istanbul ignore next: error is only thrown when there is gap in the implementation */
-		else if (variableDeclarationsByParents.size)
-			throw new Error("Unhandled variables.");
+		else if (declarationsByParents.size)
+			throw new Error("Unhandled declarations.");
 		else
-			return (
-				fileItem
-				||
-				(functionItems.length && functionItems.map(item => [ item ]))
-			);
+			return items;
 	};
 
 function getVisitors({
 	callsByFunctions,
-	functionItems,
-	functionsByParentFunctions,
-	variableDeclarationsByParents,
+	declarationsByParents,
 }) {
 	const ancestorsOfUndefinedVariables = new Map();
 
@@ -190,29 +175,26 @@ function getVisitors({
 				}
 
 				function isVariableOfParentFunction() {
-					const variablesOfParentFunction =
-						variableDeclarationsByParents.get(parentFunction);
+					const declarationsOfParentFunction =
+						declarationsByParents.get(parentFunction);
 
 					return (
-						variablesOfParentFunction
+						declarationsOfParentFunction
 						&&
-						variablesOfParentFunction.some(isVariable)
+						declarationsOfParentFunction.some(isVariable)
 					);
 				}
 
 				function getVariable() {
 					return (
-						[ ...variableDeclarationsByParents.keys() ]
+						[ ...declarationsByParents.keys() ]
 						.reverse()
 						.filter(
-							functionWithVariables =>
-								functionWithVariables != parentFunction
+							declarationsParent =>
+								declarationsParent != parentFunction
 						)
 						.map(
-							functionWithVariables =>
-								variableDeclarationsByParents
-								.get(functionWithVariables)
-								.find(isVariable)
+							findVariableWhenDeclaredBy
 						)
 						.filter(
 							variable =>
@@ -221,10 +203,27 @@ function getVisitors({
 					);
 				}
 
-				function isVariable(
-					variable
+				function findVariableWhenDeclaredBy(
+					parent
 				) {
-					return variable.name === variableName;
+					const declarationsOfParent =
+						declarationsByParents.get(parent);
+
+					return (
+						declarationsOfParent
+						&&
+						declarationsOfParent.find(isVariable)
+					);
+				}
+
+				function isVariable(
+					item
+				) {
+					return (
+						item.isVariable
+						&&
+						item.id === variableName
+					);
 				}
 
 				function addToPotentialDeclarersOfVariables() {
@@ -256,10 +255,10 @@ function getVisitors({
 		functionDeclaration,
 		ancestors
 	) {
-		pushOrMapToParentWhenNested({
+		addDeclarationToParentFunctionInAncestors({
 			ancestors,
-			functionItem:
-				createFunctionItem({
+			declaration:
+				createFunctionDeclaration({
 					identifier: functionDeclaration.id.name,
 					node: functionDeclaration,
 				}),
@@ -273,19 +272,25 @@ function getVisitors({
 		const parent = ancestors[ancestors.length - 2];
 
 		if (parent.type === "VariableDeclarator")
-			pushOrMapToParentWhenNested({
+			addDeclarationToParentFunctionInAncestors({
 				ancestors,
-				functionItem: createItemWithIdentifier(parent.id.name),
+				declaration:
+					createDeclarationWithIdentifier(
+						parent.id.name
+					),
 			});
 		else
 			pushItemsWhenModuleExport();
 
 		function pushItemsWhenModuleExport() {
 			if (isModuleExportAssigment())
-				functionItems.push(
-					createItemWithIdentifier(
-						getIdentifierWhenAssigment()
-					)
+				addDeclarationsToParent(
+					[
+						createDeclarationWithIdentifier(
+							getIdentifierWhenAssigment()
+						),
+					],
+					null
 				);
 
 			function isModuleExportAssigment() {
@@ -319,11 +324,11 @@ function getVisitors({
 			}
 		}
 
-		function createItemWithIdentifier(
+		function createDeclarationWithIdentifier(
 			identifier
 		) {
 			return (
-				createFunctionItem({
+				createFunctionDeclaration({
 					identifier,
 					node: functionExpression,
 				})
@@ -331,51 +336,35 @@ function getVisitors({
 		}
 	}
 
-	function pushOrMapToParentWhenNested({
+	function addDeclarationToParentFunctionInAncestors({
 		ancestors,
-		functionItem,
+		declaration,
 	}) {
-		const parentFunction = findParentFunctionFromAncestors(ancestors);
-
-		if (parentFunction)
-			addToNestedFunctionMap();
-		else
-			functionItems.push(functionItem);
-
-		function addToNestedFunctionMap() {
-			const functions = functionsByParentFunctions.get(parentFunction);
-
-			if (functions)
-				functions.push(functionItem);
-			else
-				functionsByParentFunctions.set(parentFunction, [ functionItem ]);
-		}
+		addDeclarationsToParent(
+			[ declaration ],
+			findParentFunctionFromAncestors(ancestors)
+		);
 	}
 
-	function createFunctionItem({
+	function createFunctionDeclaration({
 		identifier,
 		node,
 	}) {
-		const functionItemsOfNode = functionsByParentFunctions.get(node);
-
-		functionsByParentFunctions.delete(node);
+		const items =
+			createItemsForParentFromDeclarations({
+				declarationsByParents,
+				parent: node,
+			});
 
 		return (
 			{
 				id: identifier,
+				isFunction: true,
 				...createDependsUponProperty({
 					callsByFunctions,
 					node,
 				}),
-				...concatItemsIntoProperty({
-					functionItems:
-						functionItemsOfNode,
-					variableItems:
-						createVariableItemsUsedInNested({
-							node,
-							variableDeclarationsByParents,
-						}),
-				}),
+				...items && { items },
 			}
 		);
 	}
@@ -395,22 +384,23 @@ function getVisitors({
 			return (
 				variableDeclaration.declarations
 				.filter(declaration => !isFunctionType(declaration.init.type))
-				.map(declaration => createVariableWithName(declaration.id.name))
+				.map(declaration => createVariableDeclaration(declaration.id.name))
 			);
 		}
 
-		function createVariableWithName(
-			name
+		function createVariableDeclaration(
+			id
 		) {
 			return (
 				{
+					id,
 					isUsedInNestedFunction: isUsedInNestedFunction(),
-					name,
+					isVariable: true,
 				}
 			);
 
 			function isUsedInNestedFunction() {
-				const potentialDeclarers = ancestorsOfUndefinedVariables.get(name);
+				const potentialDeclarers = ancestorsOfUndefinedVariables.get(id);
 
 				return (
 					potentialDeclarers
@@ -421,14 +411,24 @@ function getVisitors({
 		}
 
 		function addDeclarationsByParent() {
-			variableDeclarationsByParents.set(
-				parentFunction,
-				[
-					...variableDeclarationsByParents.get(parentFunction) || [],
-					...variables,
-				]
+			addDeclarationsToParent(
+				variables,
+				parentFunction
 			);
 		}
+	}
+
+	function addDeclarationsToParent(
+		declarations,
+		parent
+	) {
+		declarationsByParents.set(
+			parent,
+			[
+				...declarationsByParents.get(parent) || [],
+				...declarations,
+			]
+		);
 	}
 }
 
@@ -457,10 +457,9 @@ function isFunctionType(
 	);
 }
 
-function createFileItemWhenRequired({
+function createRootItems({
 	callsByFunctions,
-	functionItems,
-	variableDeclarationsByParents,
+	declarationsByParents,
 }) {
 	const
 		dependsUponProperty =
@@ -468,19 +467,19 @@ function createFileItemWhenRequired({
 				callsByFunctions,
 				node: null,
 			}),
-		variableItems =
-			createVariableItemsUsedInNested({
-				node: null,
-				variableDeclarationsByParents,
+		items =
+			createItemsForParentFromDeclarations({
+				declarationsByParents,
+				parent: null,
 			});
 
 	return (
-		createWhenAnyDependsUpon()
+		createItemWhenAnyDependsUpon()
 		||
-		createWhenAnyVariables()
+		(items && getItemInStackWhenSingle())
 	);
 
-	function createWhenAnyDependsUpon() {
+	function createItemWhenAnyDependsUpon() {
 		return (
 			dependsUponProperty
 			&&
@@ -488,20 +487,20 @@ function createFileItemWhenRequired({
 				[
 					{
 						...dependsUponProperty,
-						...concatItemsIntoProperty({ functionItems, variableItems }),
+						...items && { items },
 					},
 				],
 			]
 		);
 	}
 
-	function createWhenAnyVariables() {
+	function getItemInStackWhenSingle() {
 		return (
-			variableItems
-			&&
-			variableItems.length
-			&&
-			concatItems({ functionItems, variableItems })
+			items.length === 1
+			?
+			[ items ]
+			:
+			items
 		);
 	}
 }
@@ -517,55 +516,73 @@ function createDependsUponProperty({
 	return calls && { dependsUpon: [ ...calls ].sort() };
 }
 
-function createVariableItemsUsedInNested({
-	node,
-	variableDeclarationsByParents,
+function createItemsForParentFromDeclarations({
+	declarationsByParents,
+	parent,
 }) {
-	const variables = variableDeclarationsByParents.get(node);
+	const declarations = declarationsByParents.get(parent);
 
-	variableDeclarationsByParents.delete(node);
+	declarationsByParents.delete(parent);
 
-	return (
-		variables
-		&&
-		variables
-		.filter(variable => variable.isUsedInNestedFunction)
-		.map(variable => ({ id: variable.name }))
-	);
-}
+	return createItems();
 
-function concatItemsIntoProperty({
-	functionItems,
-	variableItems,
-}) {
-	const items = concatItems({ functionItems, variableItems });
-
-	return items && { items };
-}
-
-function concatItems({
-	functionItems,
-	variableItems,
-}) {
-	const items =
-		[
-			...variableItems || [],
-			...functionItems || [],
-		];
-
-	return (
-		items.length
-		&&
-		getInStackWhenMultiple()
-	);
-
-	function getInStackWhenMultiple() {
+	function createItems() {
 		return (
-			items.length > 1
-			?
-			items.map(item => [ item ])
-			:
-			items
+			declarations
+			&&
+			getItemsWhenAnyAndInStackWhenMultiple(
+				declarations
+				.map(createItemFromDeclarationWhenRequired)
+				.filter(item => item)
+			)
 		);
+
+		function createItemFromDeclarationWhenRequired(
+			declaration
+		) {
+			return createWhenFunction() || createWhenVariable();
+
+			function createWhenFunction() {
+				return (
+					declaration.isFunction
+					&&
+					{
+						id: declaration.id,
+						...declaration.dependsUpon && { dependsUpon: declaration.dependsUpon },
+						...declaration.items && { items: declaration.items },
+					}
+				);
+			}
+
+			function createWhenVariable() {
+				return (
+					declaration.isVariable
+					&&
+					declaration.isUsedInNestedFunction
+					&&
+					{ id: declaration.id }
+				);
+			}
+		}
+
+		function getItemsWhenAnyAndInStackWhenMultiple(
+			items
+		) {
+			return (
+				items.length
+				&&
+				getItemsInStackWhenMultiple()
+			);
+
+			function getItemsInStackWhenMultiple() {
+				return (
+					items.length > 1
+					?
+					items.map(item => [ item ])
+					:
+					items
+				);
+			}
+		}
 	}
 }

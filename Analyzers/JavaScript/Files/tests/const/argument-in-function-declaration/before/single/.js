@@ -1,5 +1,5 @@
+const variable = 0;
+
 function caller() {
 	called(variable);
 }
-
-const variable = 0;
