@@ -4,16 +4,16 @@ module.exports =
 
 		const
 			callsByFunctions = new Map(),
-			functionsInFunctions = new Map(),
-			variablesInFunctions = new Map();
+			functionsByParents = new Map(),
+			variableDeclarationsByParents = new Map();
 
 		walk(
 			file,
 			getVisitors({
 				callsByFunctions,
 				functionItems,
-				functionsInFunctions,
-				variablesInFunctions,
+				functionsByParents,
+				variableDeclarationsByParents,
 			})
 		);
 
@@ -21,17 +21,17 @@ module.exports =
 			createFileItemWhenRequired({
 				callsByFunctions,
 				functionItems,
-				variablesInFunctions,
+				variableDeclarationsByParents,
 			});
 
 		/* istanbul ignore next: error is only thrown when there is gap in the implementation */
 		if (callsByFunctions.size)
 			throw new Error("Unhandled calls.");
 		/* istanbul ignore next: error is only thrown when there is gap in the implementation */
-		else if (functionsInFunctions.size)
+		else if (functionsByParents.size)
 			throw new Error("Unhandled functions.");
 		/* istanbul ignore next: error is only thrown when there is gap in the implementation */
-		else if (variablesInFunctions.size)
+		else if (variableDeclarationsByParents.size)
 			throw new Error("Unhandled variables.");
 		else
 			return (
@@ -44,8 +44,8 @@ module.exports =
 function getVisitors({
 	callsByFunctions,
 	functionItems,
-	functionsInFunctions,
-	variablesInFunctions,
+	functionsByParents,
+	variableDeclarationsByParents,
 }) {
 	const ancestorsOfUndefinedVariables = new Map();
 
@@ -171,7 +171,7 @@ function getVisitors({
 
 				function isVariableOfParentFunction() {
 					const variablesOfParentFunction =
-						variablesInFunctions.get(parentFunction);
+						variableDeclarationsByParents.get(parentFunction);
 
 					return (
 						variablesOfParentFunction
@@ -182,7 +182,7 @@ function getVisitors({
 
 				function getVariable() {
 					return (
-						[ ...variablesInFunctions.keys() ]
+						[ ...variableDeclarationsByParents.keys() ]
 						.reverse()
 						.filter(
 							functionWithVariables =>
@@ -190,7 +190,7 @@ function getVisitors({
 						)
 						.map(
 							functionWithVariables =>
-								variablesInFunctions
+								variableDeclarationsByParents
 								.get(functionWithVariables)
 								.find(isVariable)
 						)
@@ -323,12 +323,12 @@ function getVisitors({
 			functionItems.push(functionItem);
 
 		function addToNestedFunctionMap() {
-			const functions = functionsInFunctions.get(parentFunction);
+			const functions = functionsByParents.get(parentFunction);
 
 			if (functions)
 				functions.push(functionItem);
 			else
-				functionsInFunctions.set(parentFunction, [ functionItem ]);
+				functionsByParents.set(parentFunction, [ functionItem ]);
 		}
 	}
 
@@ -336,9 +336,9 @@ function getVisitors({
 		identifier,
 		node,
 	}) {
-		const functionItemsOfNode = functionsInFunctions.get(node);
+		const functionItemsOfNode = functionsByParents.get(node);
 
-		functionsInFunctions.delete(node);
+		functionsByParents.delete(node);
 
 		return (
 			{
@@ -353,7 +353,7 @@ function getVisitors({
 					variableItems:
 						createVariableItemsUsedInNested({
 							node,
-							variablesInFunctions,
+							variableDeclarationsByParents,
 						}),
 				}),
 			}
@@ -369,10 +369,10 @@ function getVisitors({
 			variables = createVariables();
 
 		if (variables.length)
-			variablesInFunctions.set(
+			variableDeclarationsByParents.set(
 				parentFunction,
 				[
-					...variablesInFunctions.get(parentFunction) || [],
+					...variableDeclarationsByParents.get(parentFunction) || [],
 					...variables,
 				]
 			);
@@ -436,7 +436,7 @@ function isFunctionType(
 function createFileItemWhenRequired({
 	callsByFunctions,
 	functionItems,
-	variablesInFunctions,
+	variableDeclarationsByParents,
 }) {
 	const
 		dependsUponProperty =
@@ -447,7 +447,7 @@ function createFileItemWhenRequired({
 		variableItems =
 			createVariableItemsUsedInNested({
 				node: null,
-				variablesInFunctions,
+				variableDeclarationsByParents,
 			});
 
 	return (
@@ -495,11 +495,11 @@ function createDependsUponProperty({
 
 function createVariableItemsUsedInNested({
 	node,
-	variablesInFunctions,
+	variableDeclarationsByParents,
 }) {
-	const variables = variablesInFunctions.get(node);
+	const variables = variableDeclarationsByParents.get(node);
 
-	variablesInFunctions.delete(node);
+	variableDeclarationsByParents.delete(node);
 
 	return (
 		variables
