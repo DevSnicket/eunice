@@ -40,20 +40,36 @@ function createItemFromDeclarationWhenRequired(
 				&&
 				{
 					id: declaration.id,
-					...declaration.dependsUpon && { dependsUpon: declaration.dependsUpon },
-					...declaration.items && { items: getSingleItemOrItemsCollection() },
+					...getDependsUponProperty(declaration.dependsUpon),
+					...getItemsProperty(declaration.items),
 				}
 			);
 		}
 
-		function getSingleItemOrItemsCollection() {
+		function getDependsUponProperty(
+			dependsUpon
+		) {
+			return dependsUpon && { dependsUpon };
+		}
+
+		function getItemsProperty(
+			items
+		) {
 			return (
-				declaration.items.length === 1
-				?
-				declaration.items[0]
-				:
-				declaration.items
+				items
+				&&
+				{ items: getSingleOrCollection() }
 			);
+
+			function getSingleOrCollection() {
+				return (
+					items.length === 1
+					?
+					items[0]
+					:
+					items
+				);
+			}
 		}
 	}
 
