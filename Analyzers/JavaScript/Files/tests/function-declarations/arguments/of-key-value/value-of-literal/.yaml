@@ -1,3 +1,2 @@
 id: calleer
-dependsUpon:
-  - called
+dependsUpon: called

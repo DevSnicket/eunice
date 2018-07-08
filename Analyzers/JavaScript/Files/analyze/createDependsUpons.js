@@ -33,6 +33,20 @@ module.exports =
 
 			dependsUponsByParent.delete(parent);
 
-			return dependsUpons && { dependsUpon: [ ...dependsUpons ].sort() };
+			return (
+				dependsUpons
+				&&
+				{ dependsUpon: getFirstOrSort() }
+			);
+
+			function getFirstOrSort() {
+				return (
+					dependsUpons.size === 1
+					?
+					[ ...dependsUpons ][0]
+					:
+					[ ...dependsUpons ].sort()
+				);
+			}
 		}
 	};
