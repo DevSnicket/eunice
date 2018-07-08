@@ -31,6 +31,14 @@ function createItemFromDeclarationWhenRequired(
 		return (
 			declaration.isFunction
 			&&
+			(createFunctionWhenStructured() || declaration.id)
+		);
+	}
+
+	function createFunctionWhenStructured() {
+		return (
+			(declaration.dependsUpon || declaration.items)
+			&&
 			{
 				id: declaration.id,
 				...declaration.dependsUpon && { dependsUpon: declaration.dependsUpon },

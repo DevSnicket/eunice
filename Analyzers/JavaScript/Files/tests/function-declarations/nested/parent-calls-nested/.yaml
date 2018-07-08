@@ -2,4 +2,4 @@
 dependsUpon:
   - nested
 items:
-  - id: nested
+  - nested
