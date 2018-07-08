@@ -1,2 +1,2 @@
-﻿- - dependsUpon:
-      - called
+﻿dependsUpon:
+  - called

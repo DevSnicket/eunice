@@ -1,5 +1,5 @@
-﻿- - id: parent
-    dependsUpon:
-      - nested
-    items:
-      - id: nested
+﻿id: parent
+dependsUpon:
+  - nested
+items:
+  - id: nested

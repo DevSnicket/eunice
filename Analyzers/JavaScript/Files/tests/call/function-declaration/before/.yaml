@@ -1,4 +1,4 @@
-﻿- - dependsUpon:
-      - called
-    items:
-      - id: called
+﻿dependsUpon:
+  - called
+items:
+  - id: called

@@ -3,7 +3,7 @@
 		[
 
 			{
-				"args": [ "call/const-initialized-with-call-result" ],
+				"args": [ ],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/Files/",
 				"name": "analyze file test(s)",
 				"program": "${workspaceFolder}/Analyzers/JavaScript/Files/test.js",

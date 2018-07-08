@@ -1,4 +1,4 @@
-﻿- - id: calleer
-    dependsUpon:
-      - called
-      - spreaded
+﻿id: calleer
+dependsUpon:
+  - called
+  - spreaded

@@ -1,11 +1,11 @@
-﻿- - id: container
-    items:
-      - - id: variable
-      - - id: caller1
-          dependsUpon:
-            - called
-            - variable
-      - - id: caller2
-          dependsUpon:
-            - called
-            - variable
+﻿id: container
+items:
+  - - id: variable
+  - - id: caller1
+      dependsUpon:
+        - called
+        - variable
+  - - id: caller2
+      dependsUpon:
+        - called
+        - variable

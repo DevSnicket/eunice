@@ -1,6 +1,6 @@
-﻿- - id: caller
-    dependsUpon:
-      - argument
-      - called
-    items:
-      - id: argument
+﻿id: caller
+dependsUpon:
+  - argument
+  - called
+items:
+  - id: argument

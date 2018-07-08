@@ -19,14 +19,10 @@ module.exports =
 			return (
 				dependsUponProperty
 				&&
-				[
-					[
-						{
-							...dependsUponProperty,
-							...items && { items },
-						},
-					],
-				]
+				{
+					...dependsUponProperty,
+					...items && { items },
+				}
 			);
 		}
 
@@ -34,7 +30,7 @@ module.exports =
 			return (
 				items.length === 1
 				?
-				[ items ]
+				items[0]
 				:
 				items
 			);
