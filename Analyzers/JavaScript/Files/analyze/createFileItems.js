@@ -12,7 +12,7 @@ module.exports =
 		return (
 			createItemWhenAnyDependsUpon()
 			||
-			(items && getItemInStackWhenSingle())
+			(items && getSingleItemOrItemsCollection())
 		);
 
 		function createItemWhenAnyDependsUpon() {
@@ -21,12 +21,12 @@ module.exports =
 				&&
 				{
 					...dependsUponProperty,
-					...items && { items },
+					...items && { items: getSingleItemOrItemsCollection() },
 				}
 			);
 		}
 
-		function getItemInStackWhenSingle() {
+		function getSingleItemOrItemsCollection() {
 			return (
 				items.length === 1
 				?
