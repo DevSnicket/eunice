@@ -1,4 +1,4 @@
-﻿id: parent
+id: parent
 items:
   - - id: first
       dependsUpon:

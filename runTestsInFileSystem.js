@@ -64,7 +64,7 @@ module.exports =
 				return (
 					fs.writeFileSync(
 						`${rootDirectory}${testCase}/${expectedFileName}`,
-						`\uFEFF${content}`,
+						content,
 						"utf-8"
 					)
 				);

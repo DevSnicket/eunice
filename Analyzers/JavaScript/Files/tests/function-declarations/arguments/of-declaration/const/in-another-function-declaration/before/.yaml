@@ -1,4 +1,4 @@
-﻿- - declarer
+- - declarer
 - - id: caller
     dependsUpon:
       - called

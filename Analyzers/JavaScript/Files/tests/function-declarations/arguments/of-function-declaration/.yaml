@@ -1,4 +1,4 @@
-﻿- - id: caller
+- - id: caller
     dependsUpon:
       - argument
       - called
