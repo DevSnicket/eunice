@@ -2,5 +2,4 @@ id: caller
 dependsUpon:
   - argument
   - called
-items:
-  - argument
+items: argument

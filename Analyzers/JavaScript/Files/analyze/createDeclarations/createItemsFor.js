@@ -31,20 +31,30 @@ function createItemFromDeclarationWhenRequired(
 		return (
 			declaration.isFunction
 			&&
-			(createFunctionWhenStructured() || declaration.id)
+			(createWhenStructured() || declaration.id)
 		);
-	}
 
-	function createFunctionWhenStructured() {
-		return (
-			(declaration.dependsUpon || declaration.items)
-			&&
-			{
-				id: declaration.id,
-				...declaration.dependsUpon && { dependsUpon: declaration.dependsUpon },
-				...declaration.items && { items: declaration.items },
-			}
-		);
+		function createWhenStructured() {
+			return (
+				(declaration.dependsUpon || declaration.items)
+				&&
+				{
+					id: declaration.id,
+					...declaration.dependsUpon && { dependsUpon: declaration.dependsUpon },
+					...declaration.items && { items: getSingleItemOrItemsCollection() },
+				}
+			);
+		}
+
+		function getSingleItemOrItemsCollection() {
+			return (
+				declaration.items.length === 1
+				?
+				declaration.items[0]
+				:
+				declaration.items
+			);
+		}
 	}
 
 	function createWhenVariable() {

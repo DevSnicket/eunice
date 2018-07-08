@@ -1,4 +1,3 @@
 id: parent
 dependsUpon: nested
-items:
-  - nested
+items: nested
