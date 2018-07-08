@@ -25,7 +25,7 @@ module.exports =
 function createItemFromDeclarationWhenRequired(
 	declaration
 ) {
-	return createWhenFunction() || createWhenVariable();
+	return createWhenFunction() || createWhenVariableUsedInNestedFunction();
 
 	function createWhenFunction() {
 		return (
@@ -73,13 +73,16 @@ function createItemFromDeclarationWhenRequired(
 		}
 	}
 
-	function createWhenVariable() {
+	function createWhenVariableUsedInNestedFunction() {
 		return (
-			declaration.isVariable
+			declaration.type === "variable"
 			&&
 			declaration.isUsedInNestedFunction
 			&&
-			{ id: declaration.id }
+			{
+				id: declaration.id,
+				type: declaration.type,
+			}
 		);
 	}
 }

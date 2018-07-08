@@ -3,6 +3,7 @@ items:
   id: container2
   items:
     - - id: variable2
+        type: variable
     - - id: caller
         dependsUpon:
           - called

@@ -200,7 +200,7 @@ function isVariableOfOrAddUndeclaredReference({
 		declaration
 	) {
 		return (
-			declaration.isVariable
+			declaration.type === "variable"
 			&&
 			declaration.id === variableName
 		);

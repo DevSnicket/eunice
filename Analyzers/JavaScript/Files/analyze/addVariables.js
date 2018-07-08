@@ -29,7 +29,7 @@ module.exports =
 				{
 					id,
 					isUsedInNestedFunction: isUsedInNestedFunction(),
-					isVariable: true,
+					type: "variable",
 				}
 			);
 

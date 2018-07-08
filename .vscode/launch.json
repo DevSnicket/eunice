@@ -3,7 +3,7 @@
 		[
 
 			{
-				"args": [ ],
+				"args": [ "const/argument-in-function-declaration/after" ],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/Files/",
 				"name": "analyze file test(s)",
 				"program": "${workspaceFolder}/Analyzers/JavaScript/Files/test.js",

@@ -5,3 +5,4 @@ items:
         - called
         - variable
   - - id: variable
+      type: variable
