@@ -29,11 +29,12 @@
 		"collectCoverageFrom": [
 			"**/*.js",
 			"!**/node_modules/**",
+			"!**/harness.js",
 			"!**/tests/**/.js",
-			"!**/harness.*.js",
 			"!**/webpack.config.js",
-			"!TestCoverage/**",
-			"!*.js"
+			"!Harness/**",
+			"!runTestsInFileSystem.js",
+			"!TestCoverage/**"
 		],
 		"coverageDirectory": "TestCoverage",
 		"coverageThreshold": {
