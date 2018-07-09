@@ -17,17 +17,68 @@ module.exports =
 		function createVariableDeclarations() {
 			return (
 				variableDeclaration.declarations
-				.filter(declaration => !isFunctionType(declaration.init.type))
-				.map(declaration => createVariableDeclaration(declaration.id.name))
+				.map(
+					declaration =>
+						createFromDeclarationWhenRequire(declaration)
+						||
+						createFromDeclarationWhenNotFunction(declaration)
+				)
+				.filter(
+					declaration =>
+						declaration
+				)
 			);
 		}
 
-		function createVariableDeclaration(
-			id
+		function createFromDeclarationWhenRequire(
+			declaration
+		) {
+			const initalization = declaration.init;
+
+			return (
+				isRequire()
+				&&
+				{
+					...createFromIdentifierOfDeclaration(declaration),
+					dependsUpon: getArgument(),
+				}
+			);
+
+			function isRequire() {
+				return (
+					initalization.type === "CallExpression"
+					&&
+					initalization.callee.name === "require"
+				);
+			}
+
+			function getArgument() {
+				return initalization.arguments[0].value;
+			}
+		}
+
+		function createFromDeclarationWhenNotFunction(
+			declaration
 		) {
 			return (
+				!isFunctionType(
+					declaration.init.type
+				)
+				&&
+				createFromIdentifierOfDeclaration(
+					declaration
+				)
+			);
+		}
+
+		function createFromIdentifierOfDeclaration(
+			declaration
+		) {
+			const variableName = declaration.id.name;
+
+			return (
 				{
-					id,
+					id: variableName,
 					isUsedInNestedFunction: isUsedInNestedFunction(),
 					type: "variable",
 				}
@@ -37,7 +88,7 @@ module.exports =
 				return (
 					isVariableReferencedBy({
 						parent,
-						variableName: id,
+						variableName,
 					})
 				);
 			}

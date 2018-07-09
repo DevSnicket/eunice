@@ -3,7 +3,7 @@
 		[
 
 			{
-				"args": [ "const/argument-in-function-declaration/after" ],
+				"args": [ "require-file-called/from-function-declaration" ],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/Files/",
 				"name": "analyze file test(s)",
 				"program": "${workspaceFolder}/Analyzers/JavaScript/Files/test.js",

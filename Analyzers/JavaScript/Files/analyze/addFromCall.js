@@ -1,15 +1,14 @@
 module.exports =
 	({
-		addDependsUponFrom,
+		addDependsUponIdentifierFrom,
 		addUndeclaredVariableNameReference,
 		callExpression,
-		findDeclarationFrom,
-		findDeclarationIn,
+		findDeclarationAndParent,
 		findParentFunction,
 	}) => {
 		const calleeName = callExpression.callee.name;
 
-		if (calleeName)
+		if (calleeName && calleeName != "require")
 			addFromParentFunction(
 				findParentFunction()
 			);
@@ -17,78 +16,56 @@ module.exports =
 		function addFromParentFunction(
 			parentFunction
 		) {
-			addCalleeToNestedCallMapWhenRelevant({
-				addCallOf,
-				calleeName,
-				isVariableOfParentOrAddUndeclaredReference,
-			});
+			addDependsUponIdentifier(
+				getIdentifierNameFromAndAddOrUpdateVariable(
+					calleeName
+				)
+			);
 
 			addArgumentsToNestedCallMap({
-				addCallOf,
+				addDependsUponIdentifier,
 				callExpression,
-				isVariableOfParentOrAddUndeclaredReference,
+				getIdentifierNameFromAndAddOrUpdateVariable,
 				parentFunction,
 			});
 
-			function isVariableOfParentOrAddUndeclaredReference(
+			function getIdentifierNameFromAndAddOrUpdateVariable(
 				variableName
 			) {
 				return (
-					isVariableOfOrAddUndeclaredReference({
+					getIdentifierNameFromAndAddOrUpdateVariableOfParent({
 						addUndeclaredVariableNameReference,
-						findDeclarationFrom,
-						findDeclarationIn,
+						findDeclarationAndParent,
 						parent: parentFunction,
 						variableName,
 					})
 				);
 			}
 
-			function addCallOf(
-				name
+			function addDependsUponIdentifier(
+				identifier
 			) {
-				addDependsUponFrom({
-					name,
-					parent: parentFunction,
-				});
+				if (identifier)
+					addDependsUponIdentifierFrom({
+						identifier,
+						parent: parentFunction,
+					});
 			}
 		}
 	};
 
-function addCalleeToNestedCallMapWhenRelevant({
-	addCallOf,
-	calleeName,
-	isVariableOfParentOrAddUndeclaredReference,
-}) {
-	if (isRelevant())
-		add();
-
-	function isRelevant() {
-		return (
-			!isVariableOfParentOrAddUndeclaredReference(
-				calleeName
-			)
-		);
-	}
-
-	function add() {
-		addCallOf(
-			calleeName
-		);
-	}
-}
-
 function addArgumentsToNestedCallMap({
-	addCallOf,
+	addDependsUponIdentifier,
 	callExpression,
-	isVariableOfParentOrAddUndeclaredReference,
+	getIdentifierNameFromAndAddOrUpdateVariable,
 	parentFunction,
 }) {
 	for (const argument of getArguments())
-		if (isArgumentRelevant(argument))
-			addCallOf(
-				argument.name
-			);
+		addDependsUponIdentifier(
+			getIdentifierFromArgumentWhenRelevant(
+				argument
+			)
+		);
 
 	function getArguments() {
 		return (
@@ -120,22 +97,20 @@ function addArgumentsToNestedCallMap({
 		);
 	}
 
-	function isArgumentRelevant(
+	function getIdentifierFromArgumentWhenRelevant(
 		argument
 	) {
 		return (
-			isIdentifier()
+			argument.type === "Identifier"
 			&&
-			!isParameterOfParent(argument.name)
+			!isParameterOfParent(
+				argument.name
+			)
 			&&
-			!isVariableOfParentOrAddUndeclaredReference(
+			getIdentifierNameFromAndAddOrUpdateVariable(
 				argument.name
 			)
 		);
-
-		function isIdentifier() {
-			return argument.type === "Identifier";
-		}
 	}
 
 	function isParameterOfParent(
@@ -156,44 +131,25 @@ function addArgumentsToNestedCallMap({
 	}
 }
 
-function isVariableOfOrAddUndeclaredReference({
+function getIdentifierNameFromAndAddOrUpdateVariableOfParent({
 	addUndeclaredVariableNameReference,
-	findDeclarationFrom,
-	findDeclarationIn,
+	findDeclarationAndParent,
 	parent,
 	variableName,
 }) {
-	if (isVariableOfParentFunction())
-		return true;
+	const declarationAndParent =
+		findDeclarationAndParent(
+			isVariable
+		);
+
+	if (declarationAndParent)
+		return getNameFromDeclaration();
 	else {
-		const variable = getVariable();
-
-		if (variable)
-			variable.isUsedInNestedFunction = true;
-		else
-			addUndeclaredVariableNameReference(
-				variableName
-			);
-
-		return false;
-	}
-
-	function isVariableOfParentFunction() {
-		return (
-			findDeclarationIn({
-				parent,
-				predicate: isVariable,
-			})
+		addUndeclaredVariableNameReference(
+			variableName
 		);
-	}
 
-	function getVariable() {
-		return (
-			findDeclarationFrom({
-				parent,
-				predicate: isVariable,
-			})
-		);
+		return variableName;
 	}
 
 	function isVariable(
@@ -204,5 +160,17 @@ function isVariableOfOrAddUndeclaredReference({
 			&&
 			declaration.id === variableName
 		);
+	}
+
+	function getNameFromDeclaration() {
+		if (declarationAndParent.declaration.dependsUpon)
+			return declarationAndParent.declaration.dependsUpon;
+		else if (declarationAndParent.parent === parent)
+			return null;
+		else {
+			declarationAndParent.declaration.isUsedInNestedFunction = true;
+
+			return variableName;
+		}
 	}
 }

@@ -4,22 +4,22 @@ module.exports =
 
 		return (
 			{
-				addNameFrom,
+				addIdentifierFrom,
 				any,
 				createPropertyFor,
 			}
 		);
 
-		function addNameFrom({
-			name,
+		function addIdentifierFrom({
+			identifier,
 			parent,
 		}) {
 			const dependsUpons = dependsUponsByParent.get(parent);
 
 			if (dependsUpons)
-				dependsUpons.add(name);
+				dependsUpons.add(identifier);
 			else
-				dependsUponsByParent.set(parent, new Set([ name ]));
+				dependsUponsByParent.set(parent, new Set([ identifier ]));
 		}
 
 		function any() {

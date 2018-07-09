@@ -16,8 +16,7 @@ module.exports =
 							declarationsByParents,
 							parent,
 						}),
-				findDeclarationFrom,
-				findDeclarationIn,
+				findDeclarationAndParent,
 			}
 		);
 
@@ -48,27 +47,28 @@ module.exports =
 			return declarationsByParents.size != 0;
 		}
 
-		function findDeclarationFrom({
-			parent,
-			predicate,
-		}) {
+		function findDeclarationAndParent(
+			predicate
+		) {
 			return (
 				[ ...declarationsByParents.keys() ]
 				.reverse()
-				.filter(
-					declarationsParent =>
-						declarationsParent != parent
-				)
 				.map(
-					declarationsParent =>
-						findDeclarationIn({
-							parent: declarationsParent,
-							predicate,
-						})
+					declarationParent => (
+						{
+							declaration:
+								findDeclarationIn({
+									parent: declarationParent,
+									predicate,
+								}),
+							parent:
+								declarationParent,
+						}
+					)
 				)
 				.filter(
-					variable =>
-						variable
+					declarationAndParent =>
+						declarationAndParent.declaration
 				)[0]
 			);
 		}

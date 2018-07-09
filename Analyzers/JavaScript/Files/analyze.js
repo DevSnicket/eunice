@@ -77,8 +77,8 @@ function createVisitors({
 		ancestors
 	) {
 		addFromCall({
-			addDependsUponFrom:
-				dependsUpons.addNameFrom,
+			addDependsUponIdentifierFrom:
+				dependsUpons.addIdentifierFrom,
 			addUndeclaredVariableNameReference:
 				variableName =>
 					undeclaredVariableReferences.addAncestorsFor({
@@ -86,10 +86,8 @@ function createVisitors({
 						variableName,
 					}),
 			callExpression,
-			findDeclarationFrom:
-				declarations.findDeclarationFrom,
-			findDeclarationIn:
-				declarations.findDeclarationIn,
+			findDeclarationAndParent:
+				declarations.findDeclarationAndParent,
 			findParentFunction:
 				() => findParentFunctionFromAncestors(ancestors),
 		});
