@@ -1,5 +1,5 @@
 /.vs
 /.vscode
+/Harness/Output
 /TestCoverage
 node_modules/
-*.bundle.js*

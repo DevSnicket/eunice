@@ -25,7 +25,7 @@
 	"main": "getSvgElementForYaml.js",
 	"name": "eunice-renderer",
 	"scripts": {
-		"harness": "webpack",
+		"harness": "webpack -p",
 		"lint": "eslint .",
 		"test": "jest --no-cache"
 	},

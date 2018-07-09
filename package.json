@@ -18,7 +18,9 @@
 		"babel-preset-env": "1.7.0",
 		"coveralls": "3.0.1",
 		"eslint": "4.19.1",
+		"file-loader": "1.1.11",
 		"jest": "23.0.1",
+		"react-reflex": "2.2.8",
 		"webpack": "4.11.1",
 		"webpack-cli": "3.0.3"
 	},
@@ -43,7 +45,7 @@
 		}
 	},
 	"scripts": {
-		"harness": "(cd Analyzers/JavaScript/Files; npx webpack) & (cd Renderer; npx webpack) & npx webpack",
+		"harness": "(cd Analyzers/JavaScript/Files; npx webpack -p); (cd Renderer; npx webpack -p); npx webpack -p",
 		"lint": "eslint .",
 		"test": "jest --no-cache --runInBand",
 		"test-travis": "jest --no-cache --runInBand && cat ./TestCoverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"

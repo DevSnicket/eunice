@@ -1,5 +1,4 @@
 /.vs
-/Harnesses
+/Harness/Output
 /TestCoverage
 node_modules/
-*.bundle.js*

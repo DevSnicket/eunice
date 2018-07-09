@@ -4,7 +4,7 @@ module.exports =
 	directory => (
 		{
 			devtool: "source-map",
-			entry: "./harness.source.js",
+			entry: "./harness.js",
 			module:
 				{
 					rules:
@@ -26,7 +26,7 @@ module.exports =
 				},
 			output:
 				{
-					filename: "harness.bundle.js",
+					filename: "harness.js",
 					path: path.resolve(directory),
 				},
 		}

@@ -20,7 +20,7 @@
 	"main": "analyze.js",
 	"name": "eunice-analyze-file",
 	"scripts": {
-		"harness": "webpack",
+		"harness": "webpack -p",
 		"lint": "eslint .",
 		"test": "jest --no-cache"
 	},

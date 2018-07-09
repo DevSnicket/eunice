@@ -4,7 +4,7 @@ cache:
 deploy:
   github-token: $GITHUB_HARNESSES_TOKEN
   keep-history: true
-  local-dir: Harnesses
+  local-dir: Harness/Output
   on:
     branch: master
   provider: pages
@@ -22,13 +22,3 @@ script:
   - npm run test-travis
   - npm run lint
   - npm run harness
-  -
-    mkdir -p Harnesses &&
-    cp harness.html Harnesses/ &&
-    cp harness.bundle.* Harnesses/;
-    mkdir -p Harnesses/Analyzers/JavaScript/Files &&
-    cp Analyzers/JavaScript/Files/harness.html Harnesses/Analyzers/JavaScript/Files/ &&
-    cp Analyzers/JavaScript/Files/harness.bundle.* Harnesses/Analyzers/JavaScript/Files/;
-    mkdir -p Harnesses/Renderer &&
-    cp Renderer/harness.html Harnesses/Renderer/ &&
-    cp Renderer/harness.bundle.* Harnesses/Renderer/;

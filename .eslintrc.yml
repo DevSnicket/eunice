@@ -83,7 +83,7 @@ rules:
     - error
   id-match:
     - error
-    - ^[a-z]+([A-Z][a-z]+)*$
+    - ^__dirname|[a-z]+([A-Z][a-z]+)*$
   indent:
     - error
     - tab

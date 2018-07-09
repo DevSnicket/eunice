@@ -2,14 +2,21 @@ const
 	createElement = require("react").createElement,
 	formatYaml = require("js-yaml").safeDump,
 	getTextWidth = require("string-pixel-width"),
-	parse = require("acorn").parse,
+	parseJavaScript = require("acorn").parse,
 	parseYaml = require("js-yaml").safeLoad,
+	reactUiElements = require("./Harness/reactUiElements"),
 	render = require("react-dom").render,
 	walk = require("acorn/dist/walk");
 
 const
 	analyze = require("./Analyzers/JavaScript/Files/analyze"),
 	getSvgForYaml = require("./Renderer/getSvgElementForYaml");
+
+reactUiElements.renderColumnElementsIntoContainer(
+	reactUiElements.createResizableColumnForJavaScriptInput(),
+	reactUiElements.createResizableColumnForYamlInput(),
+	reactUiElements.createResizableColumnForSvgOutput()
+);
 
 const
 	javascriptTextArea = document.getElementById("javascript"),
@@ -25,7 +32,7 @@ renderFromTextareaIntoDiv();
 function generateFromTextareaIntoDiv() {
 	const yaml =
 		analyze({
-			file: parse(javascriptTextArea.value, { ecmaVersion: 9 }),
+			file: parseJavaScript(javascriptTextArea.value, { ecmaVersion: 9 }),
 			walk: walk.ancestor,
 		});
 
