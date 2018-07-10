@@ -6,7 +6,7 @@ const
 
 const
 	analyze = require("./analyze"),
-	runTestsInFileSystem = require("../../../runTestsInFileSystem.js");
+	runTestsInFileSystem = require("../../runTestsInFileSystem.js");
 
 runTestsInFileSystem({
 	action: analyzeFile,

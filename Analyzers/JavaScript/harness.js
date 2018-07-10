@@ -2,7 +2,7 @@ const
 	createElement = require("react").createElement,
 	formatYaml = require("js-yaml").safeDump,
 	parseJavaScript = require("acorn").parse,
-	reactUiElements = require("../../../Harness/reactUiElements"),
+	reactUiElements = require("../../Harness/reactUiElements"),
 	walk = require("acorn/dist/walk");
 
 const analyze = require("./analyze");

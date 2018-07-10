@@ -4,15 +4,15 @@
 
 			{
 				"args": [ ],
-				"cwd": "${workspaceFolder}/Analyzers/JavaScript/Files/",
+				"cwd": "${workspaceFolder}/Analyzers/JavaScript/",
 				"name": "analyze file test(s)",
-				"program": "${workspaceFolder}/Analyzers/JavaScript/Files/test.js",
+				"program": "${workspaceFolder}/Analyzers/JavaScript/test.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
 			},
 			{
-				"cwd": "${workspaceFolder}/Analyzers/JavaScript/Files/",
+				"cwd": "${workspaceFolder}/Analyzers/JavaScript/",
 				"name": "analyze jest",
 				"program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
 				"request": "launch",
@@ -23,7 +23,7 @@
 				"name": "analyze test harness",
 				"type": "chrome",
 				"request": "launch",
-				"file": "${workspaceFolder}/Analyzers/JavaScript/Files/harness.html"
+				"file": "${workspaceFolder}/Analyzers/JavaScript/harness.html"
 			},
 			{
 				"cwd": "${workspaceFolder}/Renderer/",

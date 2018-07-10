@@ -9,7 +9,7 @@ const
 	walk = require("acorn/dist/walk");
 
 const
-	analyze = require("./Analyzers/JavaScript/Files/analyze"),
+	analyze = require("./Analyzers/JavaScript/analyze"),
 	getSvgForYaml = require("./Renderer/getSvgElementForYaml");
 
 reactUiElements.renderColumnElementsIntoContainer(
