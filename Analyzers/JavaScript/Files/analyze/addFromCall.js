@@ -4,17 +4,17 @@ module.exports =
 		addUndeclaredVariableNameReference,
 		callExpression,
 		findDeclarationAndParent,
-		findParentFunction,
+		findParentFunctions,
 	}) => {
 		const calleeName = callExpression.callee.name;
 
 		if (calleeName && calleeName != "require")
 			addFromParentFunction(
-				findParentFunction()
+				findParentFunctions()
 			);
 
 		function addFromParentFunction(
-			parentFunction
+			parentFunctions
 		) {
 			addDependsUponIdentifier(
 				getIdentifierNameFromAndAddOrUpdateVariable(
@@ -26,7 +26,7 @@ module.exports =
 				addDependsUponIdentifier,
 				callExpression,
 				getIdentifierNameFromAndAddOrUpdateVariable,
-				parentFunction,
+				parentFunctions,
 			});
 
 			function getIdentifierNameFromAndAddOrUpdateVariable(
@@ -36,7 +36,7 @@ module.exports =
 					getIdentifierNameFromAndAddOrUpdateVariableOfParent({
 						addUndeclaredVariableNameReference,
 						findDeclarationAndParent,
-						parent: parentFunction,
+						parentFunctions,
 						variableName,
 					})
 				);
@@ -48,7 +48,7 @@ module.exports =
 				if (identifier)
 					addDependsUponIdentifierFrom({
 						identifier,
-						parent: parentFunction,
+						parent: parentFunctions && (parentFunctions.identifiable || null),
 					});
 			}
 		}
@@ -58,7 +58,7 @@ function addArgumentsToNestedCallMap({
 	addDependsUponIdentifier,
 	callExpression,
 	getIdentifierNameFromAndAddOrUpdateVariable,
-	parentFunction,
+	parentFunctions,
 }) {
 	for (const argument of getArguments())
 		addDependsUponIdentifier(
@@ -103,38 +103,58 @@ function addArgumentsToNestedCallMap({
 		return (
 			argument.type === "Identifier"
 			&&
-			!isParameterOfParent(
-				argument.name
-			)
+			!isParameterOfAnyParentFunction()
 			&&
 			getIdentifierNameFromAndAddOrUpdateVariable(
 				argument.name
 			)
 		);
-	}
 
-	function isParameterOfParent(
-		name
-	) {
-		return (
+		function isParameterOfAnyParentFunction() {
+			return (
+				parentFunctions
+				&&
+				(ofIdentifiable() || ofAnonymous())
+			);
+
+			function ofIdentifiable() {
+				return (
+					parentFunctions.identifiable
+					&&
+					isParameterOfParentFunction(parentFunctions.identifiable)
+				);
+			}
+
+			function ofAnonymous() {
+				return (
+					parentFunctions.anonymous
+					&&
+					parentFunctions.anonymous.some(isParameterOfParentFunction)
+				);
+			}
+		}
+
+		function isParameterOfParentFunction(
 			parentFunction
-			&&
-			parentFunction.params.some(
-				parameter =>
-					parameter.type === "ObjectPattern"
-					?
-					parameter.properties.some(property => property.key.name === name)
-					:
-					parameter.name === name
-			)
-		);
+		) {
+			return (
+				parentFunction.params.some(
+					parameter =>
+						parameter.type === "ObjectPattern"
+						?
+						parameter.properties.some(property => property.key.name === argument.name)
+						:
+						parameter.name === argument.name
+				)
+			);
+		}
 	}
 }
 
 function getIdentifierNameFromAndAddOrUpdateVariableOfParent({
 	addUndeclaredVariableNameReference,
 	findDeclarationAndParent,
-	parent,
+	parentFunctions,
 	variableName,
 }) {
 	const declarationAndParent =
@@ -165,12 +185,22 @@ function getIdentifierNameFromAndAddOrUpdateVariableOfParent({
 	function getNameFromDeclaration() {
 		if (declarationAndParent.declaration.dependsUpon)
 			return declarationAndParent.declaration.dependsUpon;
-		else if (declarationAndParent.parent === parent)
+		else if (isParent())
 			return null;
 		else {
 			declarationAndParent.declaration.isUsedInNestedFunction = true;
 
 			return variableName;
 		}
+	}
+
+	function isParent() {
+		return (
+			parentFunctions
+			?
+			declarationAndParent.parent === parentFunctions.identifiable
+			:
+			!declarationAndParent.parent
+		);
 	}
 }

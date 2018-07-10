@@ -3,7 +3,7 @@
 		[
 
 			{
-				"args": [ "require-file-called/from-function-declaration" ],
+				"args": [ "function-arrow/argument-of-parameter/nested" ],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/Files/",
 				"name": "analyze file test(s)",
 				"program": "${workspaceFolder}/Analyzers/JavaScript/Files/test.js",

@@ -1,5 +1,5 @@
 function caller() {
-  called(() => calledByCalled())
+	called(() => calledByCalled());
 }
 
 function calledByCalled() {}

@@ -1,7 +1,6 @@
 module.exports =
 	({
 		addDeclarationsIn,
-		isFunctionType,
 		isVariableReferencedBy,
 		parent,
 		variableDeclaration,
@@ -94,3 +93,15 @@ module.exports =
 			}
 		}
 	};
+
+function isFunctionType(
+	type
+) {
+	return (
+		type === "ArrowFunctionExpression"
+		||
+		type === "FunctionDeclaration"
+		||
+		type === "FunctionExpression"
+	);
+}

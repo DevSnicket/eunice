@@ -5,7 +5,8 @@ const
 	createDeclarations = require("./analyze/createDeclarations"),
 	createDependsUpons = require("./analyze/createDependsUpons"),
 	createFileItems = require("./analyze/createFileItems"),
-	createUndeclaredVariableReferences = require("./analyze/createUndeclaredVariableReferences");
+	createUndeclaredVariableReferences = require("./analyze/createUndeclaredVariableReferences"),
+	parentFunctionsFromAncestors = require("./analyze/parentFunctionsFromAncestors");
 
 module.exports =
 	({ file, walk }) => {
@@ -67,7 +68,7 @@ function createVisitors({
 				declarations.addDeclarationIn,
 			ancestors,
 			createFunctionDeclaration,
-			findParentFunctionFromAncestors,
+			findParentFunctionFromAncestors: parentFunctionsFromAncestors.findIdentifiableParent,
 			functionExpression,
 		});
 	}
@@ -88,8 +89,8 @@ function createVisitors({
 			callExpression,
 			findDeclarationAndParent:
 				declarations.findDeclarationAndParent,
-			findParentFunction:
-				() => findParentFunctionFromAncestors(ancestors),
+			findParentFunctions:
+				() => parentFunctionsFromAncestors.findParents(ancestors),
 		});
 	}
 
@@ -106,7 +107,7 @@ function createVisitors({
 						functionDeclaration,
 				}),
 			parent:
-				findParentFunctionFromAncestors(ancestors),
+				parentFunctionsFromAncestors.findIdentifiableParent(ancestors),
 		});
 	}
 
@@ -134,37 +135,11 @@ function createVisitors({
 		addVariables({
 			addDeclarationsIn:
 				declarations.addDeclarationsIn,
-			isFunctionType,
 			isVariableReferencedBy:
 				undeclaredVariableReferences.hasReferenceTo,
 			parent:
-				findParentFunctionFromAncestors(ancestors),
+				parentFunctionsFromAncestors.findIdentifiableParent(ancestors),
 			variableDeclaration,
 		});
 	}
-}
-
-function findParentFunctionFromAncestors(
-	ancestors
-) {
-	for (let index = ancestors.length - 2; index; index--) {
-		const ancestor = ancestors[index];
-
-		if (isFunctionType(ancestor.type) && !ancestor.expression)
-			return ancestor;
-	}
-
-	return null;
-}
-
-function isFunctionType(
-	type
-) {
-	return (
-		type === "ArrowFunctionExpression"
-		||
-		type === "FunctionDeclaration"
-		||
-		type === "FunctionExpression"
-	);
 }
