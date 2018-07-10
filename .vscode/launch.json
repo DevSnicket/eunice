@@ -3,7 +3,7 @@
 		[
 
 			{
-				"args": [ "function-arrow/argument-of-parameter/nested" ],
+				"args": [ ],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/Files/",
 				"name": "analyze file test(s)",
 				"program": "${workspaceFolder}/Analyzers/JavaScript/Files/test.js",
