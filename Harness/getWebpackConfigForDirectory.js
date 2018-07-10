@@ -4,7 +4,7 @@ module.exports =
 	directory => (
 		{
 			devtool: "source-map",
-			entry: "./harness.js",
+			entry: [ "babel-polyfill", "./harness.js" ],
 			module:
 				{
 					rules:
