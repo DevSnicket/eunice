@@ -5,25 +5,21 @@ const
 	walk = require("acorn/dist/walk");
 
 const
-	analyze = require("./analyze"),
-	runTestsInFileSystem = require("../../runTestsInFileSystem.js");
+	createVisitors = require("./createVisitors"),
+	runTestsInFileSystem = require("../../runTestsInFileSystem");
 
 runTestsInFileSystem({
-	action: analyzeFile,
+	action: getYamlForJavaScript,
 	caseFileName: ".js",
 	directory: path.join(__dirname, "tests/"),
 	expectedFileName: ".yaml",
 	processArguments: process.argv,
 });
 
-function analyzeFile(
-	file
+function getYamlForJavaScript(
+	javaScript
 ) {
-	const yaml =
-		analyze({
-			file: parse(file, { ecmaVersion: 9 }),
-			walk: walk.ancestor,
-		});
+	const yaml = getItemsForJavaScript(javaScript);
 
 	return (
 		yaml
@@ -31,5 +27,19 @@ function analyzeFile(
 		formatYaml(yaml)
 		.trim()
 		:
-		"");
+		""
+	);
+}
+
+function getItemsForJavaScript(
+	javaScript
+) {
+	const visitors = createVisitors();
+
+	walk.ancestor(
+		parse(javaScript, { ecmaVersion: 9 }),
+		visitors
+	);
+
+	return visitors.getItems();
 }
