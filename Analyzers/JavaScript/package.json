@@ -18,7 +18,7 @@
 	"license": "MIT",
 	"homepage": "https://github.com/DevSnicket/Eunice",
 	"main": "analyze.js",
-	"name": "eunice-analyze-file",
+	"name": "eunice-analyzer",
 	"scripts": {
 		"harness": "webpack -p",
 		"lint": "eslint .",
