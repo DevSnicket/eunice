@@ -82,6 +82,7 @@ function createItemFromDeclarationWhenRequired(
 			{
 				id: declaration.id,
 				type: declaration.type,
+				...declaration.dependsUpon && { dependsUpon: declaration.dependsUpon },
 			}
 		);
 	}

@@ -8,7 +8,7 @@ module.exports =
 	}) => {
 		const calleeName = callExpression.callee.name;
 
-		if (calleeName && calleeName != "require")
+		if (calleeName && calleeName !== "require")
 			addFromParentFunction(
 				findParentFunctions()
 			);
@@ -183,24 +183,38 @@ function getIdentifierNameFromAndAddOrUpdateVariableOfParent({
 	}
 
 	function getNameFromDeclaration() {
-		if (declarationAndParent.declaration.dependsUpon)
-			return declarationAndParent.declaration.dependsUpon;
-		else if (isParent())
-			return null;
-		else {
+		return (
+			declarationAndParent.declaration.dependsUpon
+			?
+			getNameWhenDependsUpon()
+			:
+			!isParent() && getNameAndSetWhenUsedInNestedFunction()
+		);
+
+		function getNameWhenDependsUpon() {
+			return (
+				isParent()
+				?
+				declarationAndParent.declaration.dependsUpon
+				:
+				getNameAndSetWhenUsedInNestedFunction()
+			);
+		}
+
+		function isParent() {
+			return (
+				parentFunctions
+				?
+				declarationAndParent.parent === parentFunctions.identifiable
+				:
+				!declarationAndParent.parent
+			);
+		}
+
+		function getNameAndSetWhenUsedInNestedFunction() {
 			declarationAndParent.declaration.isUsedInNestedFunction = true;
 
 			return variableName;
 		}
-	}
-
-	function isParent() {
-		return (
-			parentFunctions
-			?
-			declarationAndParent.parent === parentFunctions.identifiable
-			:
-			!declarationAndParent.parent
-		);
 	}
 }
