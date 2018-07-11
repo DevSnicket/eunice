@@ -2,7 +2,7 @@
 
 const fs = require("fs");
 
-const isJestProcessFromFirstArgument = require("./isJestProcessFromFirstArgument");
+const isJestProcessFromArguments = require("./isJestProcessFromArguments");
 
 module.exports =
 	function runTestsInFileSystem({
@@ -12,7 +12,7 @@ module.exports =
 		expectedFileName,
 		processArguments,
 	}) {
-		if (isJestProcessFromFirstArgument(processArguments[1]))
+		if (isJestProcessFromArguments(processArguments))
 			discoverAndDescribeTestCases();
 		else if (processArguments.length == 3)
 			if (processArguments[2] == "update-expected")
