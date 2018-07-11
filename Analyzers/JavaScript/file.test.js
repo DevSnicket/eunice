@@ -7,7 +7,7 @@ const
 runTestsInFileSystem({
 	action: getYamlForJavaScript,
 	caseFileName: ".js",
-	directory: path.join(__dirname, "file.test/"),
+	directory: path.join(__dirname, "file.testcases/"),
 	expectedFileName: ".yaml",
 	processArguments: process.argv,
 });
