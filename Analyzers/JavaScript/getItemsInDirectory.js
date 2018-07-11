@@ -14,21 +14,28 @@ module.exports =
 			(
 				items,
 				fileOrDirectory
-			) =>
-				[
-					...items,
-					...getItemsFromFilePathWhenJavaScript(path.join(directory, fileOrDirectory)) || [],
-				],
+			) => {
+				const item =
+					createItemFromPathWhenJavaScriptFile({
+						fileOrDirectory,
+						rootDirectory: directory,
+					});
+
+				return item ? [ ...items, item ] : items;
+			},
 			[]
 		);
 
-function getItemsFromFilePathWhenJavaScript(
-	filePath
-) {
+function createItemFromPathWhenJavaScriptFile({
+	fileOrDirectory,
+	rootDirectory,
+}) {
+	const fileOrDirectoryPath = path.parse(fileOrDirectory);
+
 	return (
 		isJavaScript()
 		&&
-		ensureInArrayWhenHasValue(
+		getItemOrCreateFileItem(
 			getItemOrItemsFromJavaScript(
 				readFile()
 			)
@@ -36,31 +43,49 @@ function getItemsFromFilePathWhenJavaScript(
 	);
 
 	function isJavaScript() {
-		return path.extname(filePath) === ".js";
+		return fileOrDirectoryPath.ext === ".js";
 	}
 
 	function readFile() {
 		return (
 			fs.readFileSync(
-				filePath,
+				path.join(rootDirectory, fileOrDirectory),
 				"utf-8"
 			)
 		);
 	}
-}
 
-function ensureInArrayWhenHasValue(
-	objectOrArray
-) {
-	return objectOrArray && ensureInArray();
-
-	function ensureInArray() {
+	function getItemOrCreateFileItem(
+		itemOrItems
+	) {
 		return (
-			Array.isArray(objectOrArray)
+			isItemWithFileIdentifier()
 			?
-			objectOrArray
+			itemOrItems
 			:
-			[ objectOrArray ]
+			createFileItem()
 		);
+
+		function isItemWithFileIdentifier() {
+			return (
+				itemOrItems
+				&&
+				[ itemOrItems, itemOrItems.id ]
+				.includes(fileOrDirectoryPath.name)
+			);
+		}
+
+		function createFileItem() {
+			return (
+				itemOrItems
+				?
+				{
+					id: fileOrDirectoryPath.name,
+					items: itemOrItems,
+				}
+				:
+				fileOrDirectoryPath.name
+			);
+		}
 	}
 }
