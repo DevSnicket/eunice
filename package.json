@@ -30,8 +30,7 @@
 			"**/*.js",
 			"!**/node_modules/**",
 			"!**/harness.js",
-			"!**/TestCoverage/**",
-			"!**/*test/**/.js",
+			"!**/*.testcases/**/.js",
 			"!**/webpack.config.js",
 			"!Harness/**",
 			"!Tests/**"
