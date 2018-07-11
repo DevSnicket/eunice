@@ -13,10 +13,7 @@ module.exports =
 		if (isFirstArgumentJest(processArguments[1]))
 			discoverAndDescribeTestCases();
 		else if (processArguments.length == 3)
-			if (processArguments[2] == "list")
-				for (const testCase of discover())
-					console.log(testCase);
-			else if (processArguments[2] == "update-expected")
+			if (processArguments[2] == "update-expected")
 				discoverAndUpdateExpectedFiles();
 			else
 				logOutputOfActualWhenFileOrTestCase(processArguments[2]);
