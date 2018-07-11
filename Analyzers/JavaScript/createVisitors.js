@@ -109,7 +109,7 @@ module.exports =
 
 			return (
 				{
-					id: identifier,
+					...identifier && { id: identifier },
 					isFunction: true,
 					...dependsUpons.createPropertyFor(node),
 					...items && { items },

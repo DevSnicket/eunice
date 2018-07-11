@@ -31,7 +31,7 @@ module.exports =
 				addDeclarationIn({
 					declaration:
 						createDeclarationWithIdentifier(
-							getIdentifierWhenAssigment()
+							getIdentifier()
 						),
 					parent:
 						null,
@@ -45,13 +45,11 @@ module.exports =
 				);
 			}
 
-			function getIdentifierWhenAssigment() {
+			function getIdentifier() {
 				return (
 					functionExpression.id
-					?
+					&&
 					functionExpression.id.name
-					:
-					`${parent.left.object.name}.${parent.left.property.name}`
 				);
 			}
 		}
