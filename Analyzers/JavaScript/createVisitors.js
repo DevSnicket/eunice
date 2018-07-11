@@ -27,11 +27,11 @@ module.exports =
 					visitFunctionExpression,
 				VariableDeclaration:
 					visitVariableDeclaration,
-				getItems,
+				getItemOrItems,
 			}
 		);
 
-		function getItems() {
+		function getItemOrItems() {
 			const items =
 				createFileItems({
 					declarations,
