@@ -24,7 +24,7 @@
 			"!harness.js",
 			"!webpack.config.js"
 		],
-		"coverageDirectory": "../Tests/Coverage",
+		"coverageDirectory": "../../Tests/Coverage",
 		"coverageThreshold": {
 			"global": {
 				"branches": 100,
