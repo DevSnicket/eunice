@@ -44,7 +44,7 @@
 	"scripts": {
 		"harness": "webpack -p",
 		"lint": "eslint .",
-		"test": "jest --no-cache"
+		"test": "jest --no-cache --runInBand"
 	},
 	"version": "0.3.4"
 }
