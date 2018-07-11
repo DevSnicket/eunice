@@ -1,5 +1,5 @@
 /.vs
 /.vscode
-/Harness/Output
-/TestCoverage
+/Harness/Output/
+Tests/Coverage/
 node_modules/

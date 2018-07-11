@@ -30,13 +30,13 @@
 			"**/*.js",
 			"!**/node_modules/**",
 			"!**/harness.js",
-			"!**/tests/**/.js",
+			"!**/TestCoverage/**",
+			"!**/*test/**/.js",
 			"!**/webpack.config.js",
 			"!Harness/**",
-			"!runTestsInFileSystem.js",
-			"!TestCoverage/**"
+			"!Tests/**"
 		],
-		"coverageDirectory": "TestCoverage",
+		"coverageDirectory": "Tests/Coverage",
 		"coverageThreshold": {
 			"global": {
 				"branches": 100,

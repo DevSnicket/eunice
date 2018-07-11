@@ -20,11 +20,11 @@
 		"collectCoverageFrom": [
 			"**/*.js",
 			"!node_modules/**",
-			"!TestCoverage/**",
-			"!tests/**/.js",
+			"!*test/**/.js",
+			"!harness.js",
 			"!webpack.config.js"
 		],
-		"coverageDirectory": "TestCoverage",
+		"coverageDirectory": "../Tests/Coverage",
 		"coverageThreshold": {
 			"global": {
 				"branches": 100,

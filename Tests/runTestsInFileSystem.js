@@ -2,6 +2,8 @@
 
 const fs = require("fs");
 
+const isJestProcessFromFirstArgument = require("./isJestProcessFromFirstArgument");
+
 module.exports =
 	function runTestsInFileSystem({
 		action,
@@ -10,7 +12,7 @@ module.exports =
 		expectedFileName,
 		processArguments,
 	}) {
-		if (isFirstArgumentJest(processArguments[1]))
+		if (isJestProcessFromFirstArgument(processArguments[1]))
 			discoverAndDescribeTestCases();
 		else if (processArguments.length == 3)
 			if (processArguments[2] == "update-expected")
@@ -161,18 +163,6 @@ module.exports =
 			return readFile(`${rootDirectory}${testCase}/${fileName}`);
 		}
 	};
-
-function isFirstArgumentJest(
-	argument
-) {
-	return (
-		argument.endsWith("jest")
-		||
-		argument.endsWith("jest.js")
-		||
-		argument.endsWith("jest-worker/build/child.js")
-	);
-}
 
 function readFile(
 	filePath

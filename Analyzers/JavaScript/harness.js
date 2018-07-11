@@ -1,11 +1,8 @@
 const
 	createElement = require("react").createElement,
-	formatYaml = require("js-yaml").safeDump,
-	parseJavaScript = require("acorn").parse,
-	reactUiElements = require("../../Harness/reactUiElements"),
-	walk = require("acorn/dist/walk");
+	reactUiElements = require("../../Harness/reactUiElements");
 
-const analyze = require("./analyze");
+const getYamlForJavaScript = require("./getYamlForJavaScript");
 
 reactUiElements.renderColumnElementsIntoContainer(
 	reactUiElements.createResizableColumnForJavaScriptInput(),
@@ -30,17 +27,5 @@ javascriptTextArea.addEventListener("input", generateFromTextareaIntoDiv);
 generateFromTextareaIntoDiv();
 
 function generateFromTextareaIntoDiv() {
-	const yaml =
-		analyze({
-			file: parseJavaScript(javascriptTextArea.value, { ecmaVersion: 9 }),
-			walk: walk.ancestor,
-		});
-
-	yamlCode.innerHTML =
-		yaml
-		?
-		formatYaml(yaml)
-		.trim()
-		:
-		"";
+	yamlCode.innerHTML = getYamlForJavaScript(javascriptTextArea.value);
 }

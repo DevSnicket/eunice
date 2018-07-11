@@ -1,16 +1,7 @@
 const
-	createElement = require("react").createElement,
-	formatYaml = require("js-yaml").safeDump,
-	getTextWidth = require("string-pixel-width"),
-	parseJavaScript = require("acorn").parse,
-	parseYaml = require("js-yaml").safeLoad,
-	reactUiElements = require("./Harness/reactUiElements"),
-	render = require("react-dom").render,
-	walk = require("acorn/dist/walk");
-
-const
-	analyze = require("./Analyzers/JavaScript/analyze"),
-	getSvgForYaml = require("./Renderer/getSvgElementForYaml");
+	getSvgForYaml = require("./Renderer/getSvgForYaml"),
+	getYamlForJavaScript = require("./Analyzers/JavaScript/getYamlForJavaScript"),
+	reactUiElements = require("./Harness/reactUiElements");
 
 reactUiElements.renderColumnElementsIntoContainer(
 	reactUiElements.createResizableColumnForJavaScriptInput(),
@@ -27,33 +18,13 @@ javascriptTextArea.addEventListener("input", generateFromTextareaIntoDiv);
 yamlTextArea.addEventListener("input", renderFromTextareaIntoDiv);
 
 generateFromTextareaIntoDiv();
-renderFromTextareaIntoDiv();
 
 function generateFromTextareaIntoDiv() {
-	const yaml =
-		analyze({
-			file: parseJavaScript(javascriptTextArea.value, { ecmaVersion: 9 }),
-			walk: walk.ancestor,
-		});
-
-	yamlTextArea.value =
-		yaml
-		?
-		formatYaml(yaml)
-		.trim()
-		:
-		"";
+	yamlTextArea.value = getYamlForJavaScript(javascriptTextArea.value);
 
 	renderFromTextareaIntoDiv();
 }
 
 function renderFromTextareaIntoDiv() {
-	render(
-		getSvgForYaml({
-			createElement,
-			getTextWidth,
-			yaml: parseYaml(yamlTextArea.value),
-		}),
-		svgDiv
-	);
+	svgDiv.innerHTML = getSvgForYaml(yamlTextArea.value);
 }

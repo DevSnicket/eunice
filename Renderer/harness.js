@@ -1,11 +1,6 @@
 const
-	createElement = require("react").createElement,
-	getTextWidth = require("string-pixel-width"),
-	parseYaml = require("js-yaml").safeLoad,
-	reactUiElements = require("../Harness/reactUiElements"),
-	render = require("react-dom").render;
-
-const getSvgForYaml = require("./getSvgElementForYaml");
+	getSvgForYaml = require("./getSvgForYaml"),
+	reactUiElements = require("../Harness/reactUiElements");
 
 reactUiElements.renderColumnElementsIntoContainer(
 	reactUiElements.createResizableColumnForYamlInput(`-
@@ -42,12 +37,5 @@ yamlTextArea.addEventListener("input", renderFromTextareaIntoDiv);
 renderFromTextareaIntoDiv();
 
 function renderFromTextareaIntoDiv() {
-	render(
-		getSvgForYaml({
-			createElement,
-			getTextWidth,
-			yaml: parseYaml(yamlTextArea.value),
-		}),
-		svgDiv
-	);
+	svgDiv.innerHTML = getSvgForYaml(yamlTextArea.value);
 }
