@@ -1,9 +1,13 @@
-const path = require("path");
+const
+	fs = require("fs"),
+	path = require("path");
 
 const
 	getItemsInDirectory = require("./getItemsInDirectory"),
 	getYamlForItemOrItems = require("./getYamlForItemOrItems"),
 	isJestProcessFromArguments = require("../../Tests/isJestProcessFromArguments");
+
+const testcasesDirectory = path.join(__dirname, "directory.testcases");
 
 if (isJestProcessFromArguments(process.argv))
 	describe(
@@ -13,9 +17,7 @@ if (isJestProcessFromArguments(process.argv))
 				"",
 				() =>
 					expect(getYamlForTestDirectory())
-					.toBe(`- emptyFunction
-- - twoEmptyFunctionsOne
-- - twoEmptyFunctionsTwo`)
+					.toBe(readExpectedFile())
 			)
 	);
 else
@@ -26,8 +28,17 @@ function getYamlForTestDirectory() {
 	return (
 		getYamlForItemOrItems(
 			getItemsInDirectory(
-				path.join(__dirname, "directory.testcases")
+				testcasesDirectory
 			)
+		)
+	);
+}
+
+function readExpectedFile() {
+	return (
+		fs.readFileSync(
+			path.join(testcasesDirectory, "expected.yaml"),
+			"utf-8"
 		)
 	);
 }
