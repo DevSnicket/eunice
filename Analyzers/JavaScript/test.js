@@ -19,19 +19,16 @@ runTestsInFileSystem({
 function getYamlForJavaScript(
 	javaScript
 ) {
-	const yaml = getItemsForJavaScript(javaScript);
-
 	return (
-		yaml
-		?
-		formatYaml(yaml)
-		.trim()
-		:
-		""
+		getYamlForItemOrItems(
+			getItemOrItemsForJavaScript(
+				javaScript
+			)
+		)
 	);
 }
 
-function getItemsForJavaScript(
+function getItemOrItemsForJavaScript(
 	javaScript
 ) {
 	const visitors = createVisitors();
@@ -41,5 +38,18 @@ function getItemsForJavaScript(
 		visitors
 	);
 
-	return visitors.getItems();
+	return visitors.getItemOrItems();
+}
+
+function getYamlForItemOrItems(
+	itemOrItems
+) {
+	return (
+		itemOrItems
+		?
+		formatYaml(itemOrItems)
+		.trim()
+		:
+		""
+	);
 }
