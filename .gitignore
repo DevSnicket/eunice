@@ -1,4 +1,4 @@
 /.vs
 /Harness/Output
-/TestCoverage
+TestCoverage/
 node_modules/

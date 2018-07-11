@@ -15,6 +15,24 @@
 		"webpack": "4.11.1",
 		"webpack-cli": "3.0.3"
 	},
+	"jest": {
+		"collectCoverage": true,
+		"collectCoverageFrom": [
+			"**/*.js",
+			"!node_modules/**",
+			"!TestCoverage/**",
+			"!tests/**/.js",
+			"!webpack.config.js"
+		],
+		"coverageDirectory": "TestCoverage",
+		"coverageThreshold": {
+			"global": {
+				"branches": 100,
+				"functions": 100,
+				"lines": 100
+			}
+		}
+	},
 	"license": "MIT",
 	"homepage": "https://github.com/DevSnicket/Eunice",
 	"main": "analyze.js",
