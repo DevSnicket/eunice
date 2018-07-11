@@ -39,7 +39,7 @@ function createItemFromDeclarationWhenRequired(
 				(declaration.dependsUpon || declaration.items)
 				&&
 				{
-					id: declaration.id,
+					...declaration.id && { id: declaration.id },
 					...getDependsUponProperty(declaration.dependsUpon),
 					...getItemsProperty(declaration.items),
 				}
