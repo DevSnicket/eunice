@@ -1,0 +1,3 @@
+function twoEmptyFunctionsOne() { }
+
+function twoEmptyFunctionsTwo() { }

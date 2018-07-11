@@ -12,8 +12,8 @@
 			},
 			{
 				"cwd": "${workspaceRoot}/Analyzers/JavaScript/",
-				"name": "analyzer folder test",
-				"program": "${workspaceRoot}/Analyzers/JavaScript/folder.test.js",
+				"name": "analyzer directory test",
+				"program": "${workspaceRoot}/Analyzers/JavaScript/directory.test.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true

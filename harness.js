@@ -1,6 +1,6 @@
 const
 	getSvgForYaml = require("./Renderer/getSvgForYaml"),
-	getYamlForJavaScript = require("./Analyzers/JavaScript/getYamlForJavaScript"),
+	getYamlFromJavaScript = require("./Analyzers/JavaScript/getYamlFromJavaScript"),
 	reactUiElements = require("./Harness/reactUiElements");
 
 reactUiElements.renderColumnElementsIntoContainer(
@@ -20,7 +20,7 @@ yamlTextArea.addEventListener("input", renderFromTextareaIntoDiv);
 generateFromTextareaIntoDiv();
 
 function generateFromTextareaIntoDiv() {
-	yamlTextArea.value = getYamlForJavaScript(javascriptTextArea.value);
+	yamlTextArea.value = getYamlFromJavaScript(javascriptTextArea.value);
 
 	renderFromTextareaIntoDiv();
 }

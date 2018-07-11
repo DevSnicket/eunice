@@ -20,6 +20,7 @@
 		"collectCoverageFrom": [
 			"**/*.js",
 			"!node_modules/**",
+			"!**/*.testcases/**",
 			"!*.testcases/**/.js",
 			"!harness.js",
 			"!webpack.config.js"
@@ -40,7 +41,7 @@
 	"scripts": {
 		"harness": "webpack -p",
 		"lint": "eslint .",
-		"test": "jest --no-cache"
+		"test": "jest --no-cache --runInBand"
 	},
-	"version": "0.18.0"
+	"version": "0.19.0"
 }

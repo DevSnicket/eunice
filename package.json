@@ -30,6 +30,7 @@
 			"**/*.js",
 			"!**/node_modules/**",
 			"!**/harness.js",
+			"!**/*.testcases/**",
 			"!**/*.testcases/**/.js",
 			"!**/webpack.config.js",
 			"!Harness/**",

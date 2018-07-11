@@ -2,7 +2,7 @@ const
 	createElement = require("react").createElement,
 	reactUiElements = require("../../Harness/reactUiElements");
 
-const getYamlForJavaScript = require("./getYamlForJavaScript");
+const getYamlFromJavaScript = require("./getYamlFromJavaScript");
 
 reactUiElements.renderColumnElementsIntoContainer(
 	reactUiElements.createResizableColumnForJavaScriptInput(),
@@ -27,5 +27,5 @@ javascriptTextArea.addEventListener("input", generateFromTextareaIntoDiv);
 generateFromTextareaIntoDiv();
 
 function generateFromTextareaIntoDiv() {
-	yamlCode.innerHTML = getYamlForJavaScript(javascriptTextArea.value);
+	yamlCode.innerHTML = getYamlFromJavaScript(javascriptTextArea.value);
 }

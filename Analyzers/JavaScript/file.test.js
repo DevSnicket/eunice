@@ -1,11 +1,11 @@
 const path = require("path");
 
 const
-	getYamlForJavaScript = require("./getYamlForJavaScript"),
+	getYamlFromJavaScript = require("./getYamlFromJavaScript"),
 	runTestsInFileSystem = require("../../Tests/runTestsInFileSystem");
 
 runTestsInFileSystem({
-	action: getYamlForJavaScript,
+	action: getYamlFromJavaScript,
 	caseFileName: ".js",
 	directory: path.join(__dirname, "file.testcases/"),
 	expectedFileName: ".yaml",
