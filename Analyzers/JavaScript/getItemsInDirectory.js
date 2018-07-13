@@ -35,11 +35,18 @@ function createItemFromPathWhenJavaScriptFile({
 	return (
 		isJavaScript()
 		&&
-		getItemOrCreateFileItem(
-			getItemOrItemsFromJavaScript(
-				readFile()
-			)
-		)
+		getItemOrCreateFileItem({
+			directory:
+				fileOrDirectoryPath.dir,
+			items:
+				ensureArray(
+					getItemOrItemsFromJavaScript(
+						readFile()
+					)
+				),
+			name:
+				fileOrDirectoryPath.name,
+		})
 	);
 
 	function isJavaScript() {
@@ -54,38 +61,95 @@ function createItemFromPathWhenJavaScriptFile({
 			)
 		);
 	}
+}
 
-	function getItemOrCreateFileItem(
-		itemOrItems
+function ensureArray(
+	objectOrArray
+) {
+	return (
+		Array.isArray(objectOrArray)
+		?
+		objectOrArray
+		:
+		objectOrArray && [ objectOrArray ]
+	);
+}
+
+function getItemOrCreateFileItem({
+	directory,
+	items,
+	name,
+}) {
+	return (
+		(!items && getIdentifier())
+		||
+		(items.length === 1 && getFromItem(items[0]))
+		||
+		createFileItem()
+	);
+
+	function getFromItem(
+		item
 	) {
 		return (
-			isItemWithFileIdentifier()
-			?
-			itemOrItems
-			:
-			createFileItem()
+			getIdentifierWhenFileName()
+			||
+			createWhenString()
+			||
+			resolveWhenSameNameAsFile()
+			||
+			resolveAndIdentifyAsFileWhenAnonymous()
 		);
 
-		function isItemWithFileIdentifier() {
+		function getIdentifierWhenFileName() {
 			return (
-				itemOrItems
+				item === name
 				&&
-				[ itemOrItems, itemOrItems.id ]
-				.includes(fileOrDirectoryPath.name)
+				getIdentifier()
 			);
 		}
 
-		function createFileItem() {
+		function createWhenString() {
 			return (
-				itemOrItems
-				?
+				typeof item === "string"
+				&&
 				{
-					id: fileOrDirectoryPath.name,
-					items: itemOrItems,
+					id: getIdentifier(),
+					items: item,
 				}
-				:
-				fileOrDirectoryPath.name
 			);
 		}
+
+		function resolveWhenSameNameAsFile() {
+			return (
+				item.id === name
+				&&
+				item
+			);
+		}
+
+		function resolveAndIdentifyAsFileWhenAnonymous() {
+			return (
+				!item.id
+				&&
+				{
+					id: getIdentifier(),
+					...item,
+				}
+			);
+		}
+	}
+
+	function createFileItem() {
+		return (
+			{
+				id: getIdentifier(),
+				items,
+			}
+		);
+	}
+
+	function getIdentifier() {
+		return `./${path.join(directory, name)}`;
 	}
 }

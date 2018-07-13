@@ -1,7 +1,29 @@
-- empty
-- emptyFunction
-- moduleExportsOfFunction
-- id: twoEmptyFunctions
+- ./empty
+- id: ./functionDeclarationWithDifferentNameToFile
+  items: differentName
+- ./functionDeclarationWithSameNameAsFile
+- id: functionDeclarationWithSameNameAsFileAndNestedFunction
+  items: nestedFunction
+- id: ./moduleExportsOFunctionExpressionWithDifferentNameToFileThatRequiresAndCallsFunctionInSameDirectory
+  items:
+    - - id: moduleExportsOfArrowFunction1
+        type: variable
+        dependsUpon: ./moduleExportsOfArrowFunction1
+    - - id: differentName
+        dependsUpon: moduleExportsOfArrowFunction1
+- ./moduleExportsOfArrowFunction1
+- ./moduleExportsOfArrowFunction2
+- id: ./moduleExportsOfArrowFunctionWithFileFunction
+  items: fileFunction
+- id: ./moduleExportsOfArrowFunctionWithNestedFunction
+  items: nestedFunction
+- id: ./requireAndCallFunctionInSameDirectory
+  dependsUpon: ./moduleExportsOfArrowFunction1
+- id: ./requireAndCallTwoFunctionsInSameDirectory
+  dependsUpon:
+    - ./moduleExportsOfArrowFunction1
+    - ./moduleExportsOfArrowFunction2
+- id: ./twoEmptyFunctions
   items:
     - - twoEmptyFunctionsOne
     - - twoEmptyFunctionsTwo
