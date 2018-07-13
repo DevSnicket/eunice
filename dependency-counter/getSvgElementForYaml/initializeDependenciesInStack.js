@@ -26,17 +26,42 @@ function initializeDependenciesInStack(
 		identifier
 	) {
 		return (
-			findItemWithIdentifierInStacks({
+			findItemWithIdentifierInStackOrParents({
 				identifier,
-				ignoreStack: null,
 				stack,
 			})
 		);
 	}
 }
 
-function findItemWithIdentifierInStacks({
-	ignoreStack,
+function findItemWithIdentifierInStackOrParents({
+	identifier,
+	stack,
+}) {
+	return findInStack() || findInParent();
+
+	function findInStack() {
+		return (
+			findItemWithIdentifierInStack({
+				identifier,
+				stack,
+			})
+		);
+	}
+
+	function findInParent() {
+		return (
+			stack.parent
+			&&
+			findItemWithIdentifierInStackOrParents({
+				identifier,
+				stack: stack.parent.level.stack,
+			})
+		);
+	}
+}
+
+function findItemWithIdentifierInStack({
 	identifier,
 	stack,
 }) {
@@ -47,15 +72,7 @@ function findItemWithIdentifierInStacks({
 			return foundItem;
 	}
 
-	return (
-		stack.parent
-		&&
-		findItemWithIdentifierInStacks({
-			identifier,
-			ignoreStack: stack,
-			stack: stack.parent.level.stack,
-		})
-	);
+	return null;
 
 	function findIn(
 		items
@@ -63,11 +80,10 @@ function findItemWithIdentifierInStacks({
 		for (const item of items)
 			if (item.id === identifier)
 				return item;
-			else if (item.items && (item.items !== ignoreStack)) {
+			else if (item.items) {
 				const foundItem =
-					findItemWithIdentifierInStacks({
+					findItemWithIdentifierInStack({
 						identifier,
-						ignoreStack,
 						stack: item.items,
 					});
 
