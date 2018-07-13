@@ -46,5 +46,5 @@
 		"lint": "eslint .",
 		"test": "jest --no-cache --runInBand"
 	},
-	"version": "0.3.4"
+	"version": "0.3.5"
 }
