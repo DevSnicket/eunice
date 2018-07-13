@@ -4,7 +4,7 @@ module.exports =
 	itemOrItems =>
 		itemOrItems
 		?
-		formatYaml(itemOrItems)
+		formatYaml(itemOrItems, { lineWidth: Number.MAX_SAFE_INTEGER })
 		.trim()
 		:
 		"";
