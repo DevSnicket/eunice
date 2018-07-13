@@ -16,19 +16,29 @@ if (isJestProcessFromArguments(process.argv))
 			it(
 				"",
 				() =>
-					expect(getYamlForTestDirectory())
+					expect(getYamlForDirectory(testcasesDirectory))
 					.toBe(readExpectedFile())
 			)
 	);
 else
 	// eslint-disable-next-line no-console
-	console.log(getYamlForTestDirectory());
+	console.log(
+		getYamlForDirectory(
+			process.argv.length == 3
+			?
+			path.join(__dirname, process.argv[2])
+			:
+			testcasesDirectory
+		)
+	);
 
-function getYamlForTestDirectory() {
+function getYamlForDirectory(
+	directory
+) {
 	return (
 		getYamlForItemOrItems(
 			getItemsInDirectory(
-				testcasesDirectory
+				directory
 			)
 		)
 	);
