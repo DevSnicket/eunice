@@ -1,13 +1,9 @@
-const path = require("path");
-
 module.exports =
 	({
-		directory,
+		identifier,
 		items,
 		name,
 	}) => {
-		const identifier = `./${path.join(directory, name)}`;
-
 		return (
 			(!items && identifier)
 			||

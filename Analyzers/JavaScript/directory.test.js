@@ -3,7 +3,7 @@ const
 	path = require("path");
 
 const
-	getItemsInDirectory = require("./getItemsInDirectory"),
+	getOrCreateItemsInDirectory = require("./getOrCreateItemsInDirectory"),
 	getYamlForItemOrItems = require("./getYamlForItemOrItems"),
 	isJestProcessFromArguments = require("../../Tests/isJestProcessFromArguments");
 
@@ -37,7 +37,7 @@ function getYamlForDirectory(
 ) {
 	return (
 		getYamlForItemOrItems(
-			getItemsInDirectory(
+			getOrCreateItemsInDirectory(
 				directory
 			)
 		)

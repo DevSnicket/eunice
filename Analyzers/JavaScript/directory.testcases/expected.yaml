@@ -23,6 +23,7 @@
   dependsUpon:
     - ./moduleExportsOfArrowFunction1
     - ./moduleExportsOfArrowFunction2
+- ./subdirectory/emptyInSubdirectory
 - id: ./twoEmptyFunctions
   items:
     - - twoEmptyFunctionsOne
