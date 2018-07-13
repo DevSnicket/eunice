@@ -1,3 +1,1 @@
-const variable = require("./called");
-
-variable();
+require("./called")();
