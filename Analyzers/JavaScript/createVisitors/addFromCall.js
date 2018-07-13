@@ -6,12 +6,30 @@ module.exports =
 		findDeclarationAndParent,
 		findParentFunctions,
 	}) => {
-		const calleeName = callExpression.callee.name;
+		const calleeName = getCalleeName();
 
 		if (calleeName && calleeName !== "require")
 			addFromParentFunction(
 				findParentFunctions()
 			);
+
+		function getCalleeName() {
+			return (
+				getRequireWhenCalled()
+				||
+				callExpression.callee.name
+			);
+		}
+
+		function getRequireWhenCalled() {
+			return (
+				callExpression.callee.callee
+				&&
+				callExpression.callee.callee.name === "require"
+				&&
+				callExpression.callee.arguments[0].value
+			);
+		}
 
 		function addFromParentFunction(
 			parentFunctions
