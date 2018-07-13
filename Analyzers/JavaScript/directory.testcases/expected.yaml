@@ -2,7 +2,7 @@
 - id: ./functionDeclarationWithDifferentNameToFile
   items: differentName
 - ./functionDeclarationWithSameNameAsFile
-- id: functionDeclarationWithSameNameAsFileAndNestedFunction
+- id: ./functionDeclarationWithSameNameAsFileAndNestedFunction
   items: nestedFunction
 - id: ./moduleExportsOFunctionExpressionWithDifferentNameToFileThatRequiresAndCallsFunctionInSameDirectory
   items:

@@ -3,7 +3,8 @@ const
 	path = require("path");
 
 const
-	getItemOrItemsFromJavaScript = require("./getItemOrItemsFromJavaScript");
+	getItemOrItemsFromJavaScript = require("./getItemOrItemsFromJavaScript"),
+	getOrCreateFileItem = require("./getItemsInDirectory/getOrCreateFileItem");
 
 module.exports =
 	directory =>
@@ -35,7 +36,7 @@ function createItemFromPathWhenJavaScriptFile({
 	return (
 		isJavaScript()
 		&&
-		getItemOrCreateFileItem({
+		getOrCreateFileItem({
 			directory:
 				fileOrDirectoryPath.dir,
 			items:
@@ -73,83 +74,4 @@ function ensureArray(
 		:
 		objectOrArray && [ objectOrArray ]
 	);
-}
-
-function getItemOrCreateFileItem({
-	directory,
-	items,
-	name,
-}) {
-	return (
-		(!items && getIdentifier())
-		||
-		(items.length === 1 && getFromItem(items[0]))
-		||
-		createFileItem()
-	);
-
-	function getFromItem(
-		item
-	) {
-		return (
-			getIdentifierWhenFileName()
-			||
-			createWhenString()
-			||
-			resolveWhenSameNameAsFile()
-			||
-			resolveAndIdentifyAsFileWhenAnonymous()
-		);
-
-		function getIdentifierWhenFileName() {
-			return (
-				item === name
-				&&
-				getIdentifier()
-			);
-		}
-
-		function createWhenString() {
-			return (
-				typeof item === "string"
-				&&
-				{
-					id: getIdentifier(),
-					items: item,
-				}
-			);
-		}
-
-		function resolveWhenSameNameAsFile() {
-			return (
-				item.id === name
-				&&
-				item
-			);
-		}
-
-		function resolveAndIdentifyAsFileWhenAnonymous() {
-			return (
-				!item.id
-				&&
-				{
-					id: getIdentifier(),
-					...item,
-				}
-			);
-		}
-	}
-
-	function createFileItem() {
-		return (
-			{
-				id: getIdentifier(),
-				items,
-			}
-		);
-	}
-
-	function getIdentifier() {
-		return `./${path.join(directory, name)}`;
-	}
 }
