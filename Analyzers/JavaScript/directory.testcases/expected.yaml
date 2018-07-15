@@ -8,7 +8,7 @@
   items:
     - - id: moduleExportsOfFunctionArrow1
         type: variable
-        dependsUpon: ./moduleExportsOfFunctionArrow1
+        dependsUpon: moduleExportsOfFunctionArrow1
     - - id: differentName
         dependsUpon: moduleExportsOfFunctionArrow1
 - ./moduleExportsOfFunctionArrow1
@@ -17,13 +17,26 @@
   items: fileFunction
 - id: ./moduleExportsOfFunctionArrowWithNestedFunction
   items: nestedFunction
-- id: ./requireAndCallFunctionInSameDirectory
-  dependsUpon: ./moduleExportsOfFunctionArrow1
-- id: ./requireAndCallTwoFunctionsInSameDirectory
+- id: ./moduleExportsOfFunctionArrowWithNestedFunctionDeclarationThatRequiresAndCallsFunctionInSameDirectory
+  items:
+    - - id: moduleExportsOfFunctionArrow1
+        type: variable
+        dependsUpon: moduleExportsOfFunctionArrow1
+    - - items:
+          id: nestedFunction
+          dependsUpon: moduleExportsOfFunctionArrow1
+- id: ./requireFunctionInSameDirectoryThatIsAssignedToConstAndCalled
+  dependsUpon: moduleExportsOfFunctionArrow1
+- id: ./requireFunctionInSubdirectoryThatIsAssignedToConstAndCalled
+  dependsUpon: subdirectory/moduleExportsOfFunctionArrowInSubdirectory
+- id: ./requireTwoFunctionsInSameDirectoryThatAreAssignedToConstsAndCalled
   dependsUpon:
-    - ./moduleExportsOfFunctionArrow1
-    - ./moduleExportsOfFunctionArrow2
+    - moduleExportsOfFunctionArrow1
+    - moduleExportsOfFunctionArrow2
 - ./subdirectory/emptyInSubdirectory
+- ./subdirectory/moduleExportsOfFunctionArrowInSubdirectory
+- id: ./subdirectory/requireFunctionInParentDirectoryThatIsAssignedToConstAndCalled
+  dependsUpon: moduleExportsOfFunctionArrow1
 - id: ./twoEmptyFunctions
   items:
     - - twoEmptyFunctionsOne

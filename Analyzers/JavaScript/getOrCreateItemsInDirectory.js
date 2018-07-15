@@ -4,7 +4,7 @@ const
 
 const
 	getItemOrItemsFromJavaScript = require("./getItemOrItemsFromJavaScript"),
-	getOrCreateFileItem = require("./getItemsInDirectory/getOrCreateFileItem");
+	getOrCreateFileItem = require("./getOrCreateItemsInDirectory/getOrCreateFileItem");
 
 module.exports =
 	directory =>
@@ -55,8 +55,9 @@ function getOrCreateItemsInRootedDirectory({
 				&&
 				[
 					getOrCreateFileItem({
-						identifier:
-							getIdentifier(),
+						directory,
+						filePath:
+							fileOrSubdirectoryPath,
 						items:
 							ensureArray(
 								getItemOrItemsFromJavaScript(
@@ -71,10 +72,6 @@ function getOrCreateItemsInRootedDirectory({
 
 			function isJavaScript() {
 				return fileOrSubdirectoryPath.ext === ".js";
-			}
-
-			function getIdentifier() {
-				return `${directory}/${path.join(fileOrSubdirectoryPath.dir, fileOrSubdirectoryPath.name)}`;
 			}
 
 			function readFile() {
