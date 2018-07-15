@@ -1,6 +1,6 @@
-const moduleExportsOfArrowFunction1 = require("./moduleExportsOfArrowFunction1");
+const moduleExportsOfFunctionArrow1 = require("./moduleExportsOfFunctionArrow1");
 
 module.exports =
 	function differentName() {
-		moduleExportsOfArrowFunction1();
+		moduleExportsOfFunctionArrow1();
 	};
