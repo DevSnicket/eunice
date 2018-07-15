@@ -1,6 +1,6 @@
 const
-	moduleExportsOfArrowFunction1 = require("./moduleExportsOfArrowFunction1"),
-	moduleExportsOfArrowFunction2 = require("./moduleExportsOfArrowFunction2");
+	moduleExportsOfFunctionArrow1 = require("./moduleExportsOfFunctionArrow1"),
+	moduleExportsOfFunctionArrow2 = require("./moduleExportsOfFunctionArrow2");
 
-moduleExportsOfArrowFunction1();
-moduleExportsOfArrowFunction2();
+moduleExportsOfFunctionArrow1();
+moduleExportsOfFunctionArrow2();

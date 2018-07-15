@@ -6,23 +6,23 @@
   items: nestedFunction
 - id: ./moduleExportsOFunctionExpressionWithDifferentNameToFileThatRequiresAndCallsFunctionInSameDirectory
   items:
-    - - id: moduleExportsOfArrowFunction1
+    - - id: moduleExportsOfFunctionArrow1
         type: variable
-        dependsUpon: ./moduleExportsOfArrowFunction1
+        dependsUpon: ./moduleExportsOfFunctionArrow1
     - - id: differentName
-        dependsUpon: moduleExportsOfArrowFunction1
-- ./moduleExportsOfArrowFunction1
-- ./moduleExportsOfArrowFunction2
-- id: ./moduleExportsOfArrowFunctionWithFileFunction
+        dependsUpon: moduleExportsOfFunctionArrow1
+- ./moduleExportsOfFunctionArrow1
+- ./moduleExportsOfFunctionArrow2
+- id: ./moduleExportsOfFunctionArrowWithFileFunction
   items: fileFunction
-- id: ./moduleExportsOfArrowFunctionWithNestedFunction
+- id: ./moduleExportsOfFunctionArrowWithNestedFunction
   items: nestedFunction
 - id: ./requireAndCallFunctionInSameDirectory
-  dependsUpon: ./moduleExportsOfArrowFunction1
+  dependsUpon: ./moduleExportsOfFunctionArrow1
 - id: ./requireAndCallTwoFunctionsInSameDirectory
   dependsUpon:
-    - ./moduleExportsOfArrowFunction1
-    - ./moduleExportsOfArrowFunction2
+    - ./moduleExportsOfFunctionArrow1
+    - ./moduleExportsOfFunctionArrow2
 - ./subdirectory/emptyInSubdirectory
 - id: ./twoEmptyFunctions
   items:

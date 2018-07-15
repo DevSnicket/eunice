@@ -1,3 +1,3 @@
-const moduleExportsOfArrowFunction1 = require("./moduleExportsOfArrowFunction1");
+const moduleExportsOfFunctionArrow1 = require("./moduleExportsOfFunctionArrow1");
 
-moduleExportsOfArrowFunction1();
+moduleExportsOfFunctionArrow1();
