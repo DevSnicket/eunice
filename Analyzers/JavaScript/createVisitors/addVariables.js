@@ -16,80 +16,72 @@ module.exports =
 		function createVariableDeclarations() {
 			return (
 				variableDeclaration.declarations
-				.map(
-					declaration =>
-						createFromDeclarationWhenRequire(declaration)
-						||
-						createFromDeclarationWhenNotFunction(declaration)
-				)
-				.filter(
-					declaration =>
-						declaration
-				)
+				.map(createFromDeclarationWhenInitialized)
+				.filter(declaration => declaration)
 			);
 		}
 
-		function createFromDeclarationWhenRequire(
+		function createFromDeclarationWhenInitialized(
 			declaration
 		) {
 			const initalization = declaration.init;
 
 			return (
-				isRequire()
+				initalization
 				&&
-				{
-					...createFromIdentifierOfDeclaration(declaration),
-					dependsUpon: getArgument(),
-				}
+				(createWhenRequire() || createWhenNotFunction())
 			);
 
-			function isRequire() {
+			function createWhenRequire() {
 				return (
-					initalization.type === "CallExpression"
+					isRequire()
 					&&
-					initalization.callee.name === "require"
+					{
+						...createFromDeclarationIdentifier(),
+						dependsUpon: getArgument(),
+					}
 				);
-			}
 
-			function getArgument() {
-				return initalization.arguments[0].value;
-			}
-		}
-
-		function createFromDeclarationWhenNotFunction(
-			declaration
-		) {
-			return (
-				!isFunctionType(
-					declaration.init.type
-				)
-				&&
-				createFromIdentifierOfDeclaration(
-					declaration
-				)
-			);
-		}
-
-		function createFromIdentifierOfDeclaration(
-			declaration
-		) {
-			const variableName = declaration.id.name;
-
-			return (
-				{
-					id: variableName,
-					isUsedInNestedFunction: isUsedInNestedFunction(),
-					type: "variable",
+				function isRequire() {
+					return (
+						initalization.type === "CallExpression"
+						&&
+						initalization.callee.name === "require"
+					);
 				}
-			);
 
-			function isUsedInNestedFunction() {
+				function getArgument() {
+					return initalization.arguments[0].value;
+				}
+			}
+
+			function createWhenNotFunction() {
 				return (
-					isVariableReferencedBy({
-						parent,
-						variableName,
-					})
+					!isFunctionType(initalization.type)
+					&&
+					createFromDeclarationIdentifier()
 				);
+			}
+
+			function createFromDeclarationIdentifier() {
+				const variableName = declaration.id.name;
+
+				return (
+					{
+						id: variableName,
+						isUsedInNestedFunction: isUsedInNestedFunction(),
+						type: "variable",
+					}
+				);
+
+				function isUsedInNestedFunction() {
+					return (
+						isVariableReferencedBy({
+							parent,
+							variableName,
+						})
+					);
+				}
 			}
 		}
 	};
