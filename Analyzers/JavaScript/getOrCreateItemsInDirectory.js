@@ -9,7 +9,7 @@ const
 module.exports =
 	directory =>
 		getOrCreateItemsInRootedDirectory({
-			directory: ".",
+			directory: "",
 			rootDirectory: directory,
 		});
 
@@ -89,7 +89,7 @@ function getOrCreateItemsInRootedDirectory({
 				isDirectory()
 				&&
 				getOrCreateItemsInRootedDirectory({
-					directory: `${directory}/${fileOrSubdirectory}`,
+					directory: path.join(directory, fileOrSubdirectory),
 					rootDirectory,
 				})
 			);

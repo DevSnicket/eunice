@@ -10,7 +10,7 @@ module.exports =
 		name,
 	}) => {
 		const identifier =
-			`${directory}/${path.join(filePath.dir, filePath.name)}`;
+			path.join(directory, filePath.dir, filePath.name);
 
 		const dependsUponFileResolver =
 			createDependsUponFileResolverForDirectory(
