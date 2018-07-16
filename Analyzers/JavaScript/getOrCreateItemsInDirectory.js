@@ -7,14 +7,19 @@ const
 	getOrCreateFileItem = require("./getOrCreateItemsInDirectory/getOrCreateFileItem");
 
 module.exports =
-	directory =>
+	({
+		directory,
+		ignoreDirectoryNames,
+	}) =>
 		getOrCreateItemsInRootedDirectory({
 			directory: "",
+			ignoreDirectoryNames,
 			rootDirectory: directory,
 		});
 
 function getOrCreateItemsInRootedDirectory({
 	directory,
+	ignoreDirectoryNames,
 	rootDirectory,
 }) {
 	const subDirectoryFull =
@@ -88,11 +93,22 @@ function getOrCreateItemsInRootedDirectory({
 			return (
 				isDirectory()
 				&&
+				!isIgnored()
+				&&
 				getOrCreateItemsInRootedDirectory({
 					directory: path.join(directory, fileOrSubdirectory),
+					ignoreDirectoryNames,
 					rootDirectory,
 				})
 			);
+
+			function isIgnored() {
+				return (
+					ignoreDirectoryNames
+					&&
+					ignoreDirectoryNames.includes(fileOrSubdirectory)
+				);
+			}
 
 			function isDirectory() {
 				return (

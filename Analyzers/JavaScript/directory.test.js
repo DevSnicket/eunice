@@ -37,9 +37,10 @@ function getYamlForDirectory(
 ) {
 	return (
 		getYamlForItemOrItems(
-			getOrCreateItemsInDirectory(
-				directory
-			)
+			getOrCreateItemsInDirectory({
+				directory,
+				ignoreDirectoryNames: [ "node_modules" ],
+			})
 		)
 	);
 }

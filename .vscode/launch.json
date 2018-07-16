@@ -2,7 +2,7 @@
 	"configurations":
 		[
 			{
-				"args": [ ],
+				"args": [ "call/for-of" ],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/",
 				"name": "analyzer file test",
 				"program": "${workspaceFolder}/Analyzers/JavaScript/file.test.js",
@@ -11,6 +11,7 @@
 				"useWSL": true
 			},
 			{
+				//"args": [ "../../Renderer" ],
 				"cwd": "${workspaceRoot}/Analyzers/JavaScript/",
 				"name": "analyzer directory test",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/directory.test.js",
