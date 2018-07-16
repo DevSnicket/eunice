@@ -40,6 +40,7 @@ function getOrCreateItemsInRootedDirectory({
 				],
 			[]
 		)
+		.sort(compareItemIdentifiers)
 	);
 
 	function createItemsFromFileOrSubdirectory(
@@ -141,4 +142,25 @@ function ensureArray(
 		:
 		objectOrArray && [ objectOrArray ]
 	);
+}
+
+function compareItemIdentifiers(
+	left,
+	right
+) {
+	const
+		leftIdentifier = getIdentifier(left),
+		rightIdentifier = getIdentifier(right);
+
+	return (
+		leftIdentifier !== rightIdentifier
+		&&
+		(leftIdentifier < rightIdentifier ? -1 : 1)
+	);
+
+	function getIdentifier(
+		item
+	) {
+		return item.id || item;
+	}
 }
