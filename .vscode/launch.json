@@ -2,27 +2,51 @@
 	"configurations":
 		[
 			{
+				"name": "attach to port 55263",
+				"port": 55263,
+				"request": "attach",
+				"type": "node"
+			},
+			{
 				"args": [ ],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/",
-				"name": "analyzer file test",
+				"name": "analyzer getYamlFromJavaScript test",
 				"program": "${workspaceFolder}/Analyzers/JavaScript/getYamlFromJavaScript.test.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
 			},
 			{
-				"args": [ ],
-				"cwd": "${workspaceRoot}/Analyzers/JavaScript/",
-				"name": "analyzer directory test",
-				"program": "${workspaceRoot}/Analyzers/JavaScript/getOrCreateItemsInDirectory.test",
+				"args": [ "getYamlFromJavaScript.test.js" ],
+				"cwd": "${workspaceFolder}/Analyzers/JavaScript/",
+				"name": "analyzer getYamlFromJavaScript jest",
+				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
 			},
 			{
+				"args":
+					[
+						"--directory=../../",
+						"--ignoreDirectoryNames=Coverage",
+						"--ignoreDirectoryNames=getOrCreateItemsInDirectory.testcases", 
+						"--ignoreDirectoryNames=getYamlFromJavaScript.testcases",
+						"--ignoreDirectoryNames=node_modules",
+						"--ignoreDirectoryNames=Output"
+					],
+				"cwd": "${workspaceRoot}/Analyzers/JavaScript/",
+				"name": "analyzer getOrCreateItemsInDirectory",
+				"program": "${workspaceRoot}/Analyzers/JavaScript/getOrCreateItemsInDirectory.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args": [ "getOrCreateItemsInDirectory.test.js" ],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/",
-				"name": "analyzer jest",
-				"program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+				"name": "analyzer getOrCreateItemsInDirectory jest",
+				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
