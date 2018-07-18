@@ -3,12 +3,12 @@ const
 
 const
 	getSvgForYaml = require("./getSvgForYaml"),
-	runTestsInFileSystem = require("../Tests/runTestsInFileSystem.js");
+	runTestsInFileSystem = require("../Tests/runTestsInFileSystem");
 
 runTestsInFileSystem({
 	action: getSvgForYaml,
 	caseFileName: ".yaml",
-	directory: path.join(__dirname, "testcases/"),
+	directory: path.join(__dirname, "getSvgForYaml.testcases/"),
 	expectedFileName: ".svg",
 	processArguments: process.argv,
 });
