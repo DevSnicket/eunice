@@ -20,7 +20,7 @@ describe(
 					)
 				)
 				.toBe(
-					readFile(path.join(__dirname, "testcases", "arrows.svg"))
+					readFile(path.join(__dirname, "arrows.testcase.svg"))
 				)
 		)
 );
