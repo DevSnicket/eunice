@@ -1,10 +1,20 @@
 const
+	yaml = require("js-yaml");
+
+const
 	aggregateIdentifiable = require("./groupItemsByIdentifierSeparator/aggregateIdentifiable"),
 	callWhenProcessEntryPoint = require("../callWhenProcessEntryPoint"),
 	getItemsFromAggregation = require("./groupItemsByIdentifierSeparator/getItemsFromAggregation");
 
 callWhenProcessEntryPoint(
-	groupItemsByIdentifierSeparator,
+	processArguments =>
+		yaml.safeDump(
+			groupItemsByIdentifierSeparator({
+				...processArguments,
+				items: yaml.safeLoad(processArguments.items),
+			}),
+			{ lineWidth: Number.MAX_SAFE_INTEGER }
+		),
 	{ standardInputParameter: "items" }
 );
 
