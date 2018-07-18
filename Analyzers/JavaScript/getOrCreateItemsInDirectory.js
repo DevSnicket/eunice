@@ -5,9 +5,17 @@ const
 const
 	callWhenProcessEntryPoint = require("../../callWhenProcessEntryPoint"),
 	getItemOrItemsFromJavaScript = require("./getItemOrItemsFromJavaScript"),
-	getOrCreateFileItem = require("./getOrCreateItemsInDirectory/getOrCreateFileItem");
+	getOrCreateFileItem = require("./getOrCreateItemsInDirectory/getOrCreateFileItem"),
+	getYamlForItemOrItems = require("./getYamlForItemOrItems");
 
-callWhenProcessEntryPoint(getOrCreateItemsInDirectory);
+callWhenProcessEntryPoint(
+	processArguments =>
+		getYamlForItemOrItems(
+			getOrCreateItemsInDirectory(
+				processArguments
+			)
+		)
+);
 
 module.exports = getOrCreateItemsInDirectory;
 

@@ -1,6 +1,4 @@
-const
-	minimist = require("minimist"),
-	yaml = require("js-yaml");
+const minimist = require("minimist");
 
 module.exports =
 	(
@@ -16,12 +14,10 @@ module.exports =
 		function callWithProcessArgumentsAndStandardStreams() {
 			const processArguments = minimist(process.argv.slice(2));
 
-			const standardInputArgument = processArguments[standardInputParameter];
-
-			if (!standardInputParameter || standardInputArgument)
-				callWithItems(standardInputArgument);
-			else
+			if (standardInputParameter && !processArguments[standardInputParameter])
 				callWithProcessArgumentsAndStandardInputStream();
+			else
+				call(processArguments);
 
 			function callWithProcessArgumentsAndStandardInputStream() {
 				const standardIn = process.stdin;
@@ -38,21 +34,21 @@ module.exports =
 
 				standardIn.on(
 					"end",
-					() => callWithItems(input)
+					() =>
+						call({
+							...processArguments,
+							[standardInputParameter]: input,
+						})
 				);
 			}
 
-			function callWithItems(
-				items
+			function call(
+				processArgumentsAndOrStandardInput
 			) {
 				// eslint-disable-next-line no-console
 				console.log(
-					yaml.safeDump(
-						action({
-							...processArguments,
-							items: yaml.safeLoad(items),
-						}),
-						{ lineWidth: Number.MAX_SAFE_INTEGER }
+					action(
+						processArgumentsAndOrStandardInput
 					)
 				);
 			}
