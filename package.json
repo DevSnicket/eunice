@@ -2,6 +2,7 @@
 	"dependencies": {
 		"acorn": "5.6.2",
 		"js-yaml": "3.11.0",
+		"minimist": "1.2.0",
 		"react": "16.4.0",
 		"react-dom": "16.4.0",
 		"string-pixel-width": "1.7.0"
@@ -34,7 +35,8 @@
 			"!**/*.testcases/**/.js",
 			"!**/webpack.config.js",
 			"!Harness/**",
-			"!Tests/**"
+			"!Tests/**",
+			"!Processors/callWhenProcessMainWithArgumentsAndOrStandardStreams.js"
 		],
 		"coverageDirectory": "Tests/Coverage",
 		"coverageThreshold": {
