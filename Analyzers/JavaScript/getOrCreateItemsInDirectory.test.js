@@ -7,7 +7,7 @@ const
 	getYamlForItemOrItems = require("./getYamlForItemOrItems"),
 	isJestProcessFromArguments = require("../../Tests/isJestProcessFromArguments");
 
-const testcasesDirectory = path.join(__dirname, "directory.testcases");
+const testcasesDirectory = path.join(__dirname, "getOrCreateItemsInDirectory.testcases");
 
 if (isJestProcessFromArguments(process.argv))
 	describe(
