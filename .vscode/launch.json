@@ -5,7 +5,7 @@
 				"args": [ ],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/",
 				"name": "analyzer file test",
-				"program": "${workspaceFolder}/Analyzers/JavaScript/file.test.js",
+				"program": "${workspaceFolder}/Analyzers/JavaScript/getYamlFromJavaScript.test.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -14,7 +14,7 @@
 				"args": [ ],
 				"cwd": "${workspaceRoot}/Analyzers/JavaScript/",
 				"name": "analyzer directory test",
-				"program": "${workspaceRoot}/Analyzers/JavaScript/directory.test.js",
+				"program": "${workspaceRoot}/Analyzers/JavaScript/getOrCreateItemsInDirectory.test",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
