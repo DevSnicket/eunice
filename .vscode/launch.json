@@ -70,8 +70,9 @@
 				"useWSL": true
 			},
 			{
+				"args": [ "getSvgForYaml.test.js" ],
 				"cwd": "${workspaceFolder}/Renderer/",
-				"name": "renderer jest",
+				"name": "renderer getSvgForYaml jest",
 				"program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
@@ -80,8 +81,8 @@
 			{
 				"args": [ ],
 				"cwd": "${workspaceFolder}/Renderer/",
-				"name": "renderer file test",
-				"program": "${workspaceFolder}/Renderer/test.js",
+				"name": "renderer getSvgForYaml test",
+				"program": "${workspaceFolder}/Renderer/getSvgForYaml.test.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
