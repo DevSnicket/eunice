@@ -6,6 +6,7 @@ const
 	callWhenProcessEntryPoint = require("../callWhenProcessEntryPoint"),
 	getItemsFromAggregation = require("./groupItemsByIdentifierSeparator/getItemsFromAggregation");
 
+/* istanbul ignore next: only used when JavaScript file is process entry point */
 callWhenProcessEntryPoint(
 	processArguments =>
 		yaml.safeDump(
