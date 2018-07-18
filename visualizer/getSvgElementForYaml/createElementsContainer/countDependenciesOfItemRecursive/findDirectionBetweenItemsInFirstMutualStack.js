@@ -5,7 +5,7 @@ function findDirectionBetweenItemsInFirstMutualStack({
 	to,
 }) {
 	return (
-		getWhenSame()
+		isSame()
 		||
 		getWhenSameLevel()
 		||
@@ -14,39 +14,28 @@ function findDirectionBetweenItemsInFirstMutualStack({
 		findInParents()
 	);
 
-	function getWhenSame() {
+	function isSame() {
 		return (
 			from === to
-			?
-			{
-				direction: 0,
-				stack: from.items,
-			}
-			:
-			null
 		);
 	}
 
 	function getWhenSameLevel() {
 		return (
 			from.level === to.level
-			?
+			&&
 			{
 				direction: 0,
 				stack: from.level.stack,
 			}
-			:
-			null
 		);
 	}
 
 	function getWhenSameStack() {
 		return (
 			from.level.stack === to.level.stack
-			?
+			&&
 			getForStack(from.level.stack)
-			:
-			null
 		);
 	}
 
@@ -79,26 +68,22 @@ function findDirectionBetweenItemsInFirstMutualStack({
 		function getWhenToParent() {
 			return (
 				from === toParent
-				?
+				&&
 				{
 					direction: 1,
 					stack: toParent.items,
 				}
-				:
-				null
 			);
 		}
 
 		function getWhenFromParent() {
 			return (
 				fromParent === to
-				?
+				&&
 				{
 					direction: -1,
 					stack: fromParent.items,
 				}
-				:
-				null
 			);
 		}
 
