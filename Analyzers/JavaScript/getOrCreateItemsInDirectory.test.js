@@ -4,33 +4,16 @@ const
 
 const
 	getOrCreateItemsInDirectory = require("./getOrCreateItemsInDirectory"),
-	getYamlForItemOrItems = require("./getYamlForItemOrItems"),
-	isJestProcessFromArguments = require("../../Tests/isJestProcessFromArguments");
+	getYamlForItemOrItems = require("./getYamlForItemOrItems");
 
 const testcasesDirectory = path.join(__dirname, "getOrCreateItemsInDirectory.testcases");
 
-if (isJestProcessFromArguments(process.argv))
-	describe(
-		getYamlForItemOrItems,
-		() =>
-			it(
-				"",
-				() =>
-					expect(getYamlForDirectory(testcasesDirectory))
-					.toBe(readExpectedFile())
-			)
-	);
-else
-	// eslint-disable-next-line no-console
-	console.log(
-		getYamlForDirectory(
-			process.argv.length == 3
-			?
-			path.join(__dirname, process.argv[2])
-			:
-			testcasesDirectory
-		)
-	);
+test(
+	"",
+	() =>
+		expect(getYamlForDirectory(testcasesDirectory))
+		.toBe(readExpectedFile())
+);
 
 function getYamlForDirectory(
 	directory

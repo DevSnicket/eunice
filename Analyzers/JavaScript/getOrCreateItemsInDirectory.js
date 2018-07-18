@@ -3,19 +3,26 @@ const
 	path = require("path");
 
 const
+	callWhenProcessEntryPoint = require("../../callWhenProcessEntryPoint"),
 	getItemOrItemsFromJavaScript = require("./getItemOrItemsFromJavaScript"),
 	getOrCreateFileItem = require("./getOrCreateItemsInDirectory/getOrCreateFileItem");
 
-module.exports =
-	({
-		directory,
-		ignoreDirectoryNames,
-	}) =>
+callWhenProcessEntryPoint(getOrCreateItemsInDirectory);
+
+module.exports = getOrCreateItemsInDirectory;
+
+function getOrCreateItemsInDirectory({
+	directory,
+	ignoreDirectoryNames,
+}) {
+	return (
 		getOrCreateItemsInRootedDirectory({
 			directory: "",
 			ignoreDirectoryNames,
 			rootDirectory: directory,
-		});
+		})
+	);
+}
 
 function getOrCreateItemsInRootedDirectory({
 	directory,

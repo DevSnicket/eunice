@@ -3,7 +3,10 @@ const
 	yaml = require("js-yaml");
 
 module.exports =
-	action => {
+	(
+		action,
+		{ standardInputParameter = null } = { standardInputParameter: null }
+	) => {
 		return isMain() && callWithProcessArgumentsAndStandardStreams();
 
 		function isMain() {
@@ -13,8 +16,10 @@ module.exports =
 		function callWithProcessArgumentsAndStandardStreams() {
 			const processArguments = minimist(process.argv.slice(2));
 
-			if (processArguments.items)
-				callWithItems(processArguments.items);
+			const standardInputArgument = processArguments[standardInputParameter];
+
+			if (!standardInputParameter || standardInputArgument)
+				callWithItems(standardInputArgument);
 			else
 				callWithProcessArgumentsAndStandardInputStream();
 

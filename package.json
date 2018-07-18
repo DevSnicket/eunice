@@ -36,7 +36,7 @@
 			"!**/webpack.config.js",
 			"!Harness/**",
 			"!Tests/**",
-			"!Processors/callWhenProcessMainWithArgumentsAndOrStandardStreams.js"
+			"!callWhenProcessEntryPoint.js"
 		],
 		"coverageDirectory": "Tests/Coverage",
 		"coverageThreshold": {

@@ -1,10 +1,11 @@
 const
 	aggregateIdentifiable = require("./groupItemsByIdentifierSeparator/aggregateIdentifiable"),
-	callWhenProcessMainWithArgumentsAndOrStandardStreams = require("./callWhenProcessMainWithArgumentsAndOrStandardStreams"),
+	callWhenProcessEntryPoint = require("../callWhenProcessEntryPoint"),
 	getItemsFromAggregation = require("./groupItemsByIdentifierSeparator/getItemsFromAggregation");
 
-callWhenProcessMainWithArgumentsAndOrStandardStreams(
-	groupItemsByIdentifierSeparator
+callWhenProcessEntryPoint(
+	groupItemsByIdentifierSeparator,
+	{ standardInputParameter: "items" }
 );
 
 module.exports = groupItemsByIdentifierSeparator;
