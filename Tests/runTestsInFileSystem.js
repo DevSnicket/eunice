@@ -2,7 +2,7 @@
 
 const fs = require("fs");
 
-const isJestProcessFromArguments = require("./isJestProcessFromArguments");
+const isJestProcessFromArguments = require("./runTestsInFileSystem/isJestProcessFromArguments");
 
 module.exports =
 	function runTestsInFileSystem({
