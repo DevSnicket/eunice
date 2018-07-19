@@ -91,6 +91,8 @@ module.exports =
 							group.lastItemOfGroup.item,
 						],
 					...createLastItemOfGroupProperty(),
+					parent:
+						group.parent,
 				}
 			);
 		}
