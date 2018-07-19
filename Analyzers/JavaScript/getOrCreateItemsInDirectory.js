@@ -177,6 +177,9 @@ function compareItemIdentifiers(
 	function getIdentifier(
 		item
 	) {
-		return item.id || item;
+		return (
+			(item.id || item)
+			.replace("/", String.fromCharCode(0))
+		);
 	}
 }

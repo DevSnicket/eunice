@@ -39,6 +39,7 @@
   dependsUpon: moduleExportsOfFunctionArrow1
 - subdirectoryWithSameNameAsFile
 - subdirectoryWithSameNameAsFile/emptyInsubdirectoryWithSameNameAsFile
+- subdirectoryWithSameNameAsFile.withdot
 - id: twoEmptyFunctions
   items:
     - - twoEmptyFunctionsOne
