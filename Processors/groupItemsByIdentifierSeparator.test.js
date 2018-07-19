@@ -121,6 +121,22 @@ assertGroupItems({
 		[
 			{
 				id: "item",
+				items:
+					[
+						{ id: "item/childItem1", items: "item/childItem1/grandchildItem" },
+						"item/childItem2",
+					],
+			},
+		],
+	name: "second item identifier prefixed with first item identifier and separator, third item identifier prefixed with second item identifier and four item identifier prefixed with first item identifier returns grouped item with grouped item and non-grouped item",
+	source: [ "item", "item/childItem1", "item/childItem1/grandchildItem", "item/childItem2" ],
+});
+
+assertGroupItems({
+	expected:
+		[
+			{
+				id: "item",
 				items: [ "item/childItem1", "item/childItem2", "item/childItem3" ],
 			},
 		],

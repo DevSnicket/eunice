@@ -70,6 +70,15 @@
 				"useWSL": true
 			},
 			{
+				"args": [ "groupItemsByIdentifierSeparator.test.js" ],
+				"cwd": "${workspaceFolder}/Processors/",
+				"name": "processor groupItemsByIdentifierSeparator jest",
+				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
 				"args": [ "getSvgForYaml.test.js" ],
 				"cwd": "${workspaceFolder}/Renderer/",
 				"name": "renderer getSvgForYaml jest",
