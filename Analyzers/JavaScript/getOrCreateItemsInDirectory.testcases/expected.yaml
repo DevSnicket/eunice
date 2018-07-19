@@ -37,6 +37,8 @@
 - subdirectory/moduleExportsOfFunctionArrowInSubdirectory
 - id: subdirectory/requireFunctionInParentDirectoryThatIsAssignedToConstAndCalled
   dependsUpon: moduleExportsOfFunctionArrow1
+- subdirectory/subdirectoryOfsubdirectoryWithSameNameAsFile/emptyInSubdirectoryOfsubdirectory
+- subdirectory/subdirectoryOfsubdirectoryWithSameNameAsFile.withdot
 - subdirectoryWithSameNameAsFile
 - subdirectoryWithSameNameAsFile/emptyInsubdirectoryWithSameNameAsFile
 - subdirectoryWithSameNameAsFile.withdot

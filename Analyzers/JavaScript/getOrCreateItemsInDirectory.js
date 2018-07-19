@@ -179,7 +179,7 @@ function compareItemIdentifiers(
 	) {
 		return (
 			(item.id || item)
-			.replace("/", String.fromCharCode(0))
+			.replace(/\//g, String.fromCharCode(0))
 		);
 	}
 }
