@@ -101,6 +101,18 @@
 				"useWSL": true
 			},
 			{
+				"args":
+					[
+						"--items=",
+						"--type=",
+					],
+				"name": "processor setTypeOfRootItems",
+				"program": "${workspaceRoot}/Processors/setTypeOfRootItems.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
 				"args": [ "getSvgForYaml.test.js" ],
 				"cwd": "${workspaceFolder}/Renderer/",
 				"name": "renderer getSvgForYaml jest",

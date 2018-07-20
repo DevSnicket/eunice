@@ -38,6 +38,7 @@ Analyzers are implemented to create the YAML files, one is currently in developm
 The YAML files can then be optionally post-processed including combining the output of different analyzers. Currently there are processors written in JavaScript to:
 - group items by their identifier
 - order items by their type
+- sets the type of root items
 
 ### Renderer
 
