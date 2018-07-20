@@ -232,25 +232,15 @@ function assertGroupItems({
 	name,
 	source,
 }) {
-	if (typeof test === "undefined")
-		// eslint-disable-next-line no-console
-		console.log(`${name}\n${groupItems(source)}`);
-	else
-		test(
-			name,
-			() =>
-				expect(groupItems(source))
-				.toEqual(expected)
-		);
-}
-
-function groupItems(
-	items
-) {
-	return (
-		groupItemsByIdentifierSeparator({
-			identifierSeparator: "/",
-			items,
-		})
+	test(
+		name,
+		() =>
+			expect(
+				groupItemsByIdentifierSeparator({
+					identifierSeparator: "/",
+					items: source,
+				})
+			)
+			.toEqual(expected)
 	);
 }
