@@ -1,18 +1,12 @@
 module.exports =
 	({
-		dependsUpons,
-		declarations,
+		dependsUponProperty,
+		items,
 	}) => {
-		const
-			dependsUponProperty =
-				dependsUpons.createPropertyFor(null),
-			items =
-				declarations.createItemsFor(null);
-
 		return (
 			createItemWhenAnyDependsUpon()
 			||
-			(items && getSingleItemOrItemsCollection())
+			items
 		);
 
 		function createItemWhenAnyDependsUpon() {
@@ -21,18 +15,8 @@ module.exports =
 				&&
 				{
 					...dependsUponProperty,
-					...items && { items: getSingleItemOrItemsCollection() },
+					...items && { items },
 				}
-			);
-		}
-
-		function getSingleItemOrItemsCollection() {
-			return (
-				items.length === 1
-				?
-				items[0]
-				:
-				items
 			);
 		}
 	};

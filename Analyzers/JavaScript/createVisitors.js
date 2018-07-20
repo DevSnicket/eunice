@@ -5,7 +5,9 @@ const
 	createDeclarations = require("./createVisitors/createDeclarations"),
 	createDependsUpons = require("./createVisitors/createDependsUpons"),
 	createFileItems = require("./createVisitors/createFileItems"),
-	createUndeclaredVariableReferences = require("./createVisitors/createUndeclaredVariableReferences"),
+	createFunctionDeclaration = require("./createVisitors/createFunctionDeclaration"),
+	createUndeclaredReferences = require("./createVisitors/createUndeclaredReferences"),
+	getItemWhenSingleOrStackItemsWhenMultiple = require("./createVisitors/getItemWhenSingleOrStackItemsWhenMultiple"),
 	parentFunctionsFromAncestors = require("./createVisitors/parentFunctionsFromAncestors");
 
 module.exports =
@@ -13,7 +15,7 @@ module.exports =
 		const
 			declarations = createDeclarations(),
 			dependsUpons = createDependsUpons(),
-			undeclaredVariableReferences = createUndeclaredVariableReferences();
+			undeclaredReferences = createUndeclaredReferences();
 
 		return (
 			{
@@ -34,8 +36,12 @@ module.exports =
 		function getItemOrItems() {
 			const items =
 				createFileItems({
-					declarations,
-					dependsUpons,
+					dependsUponProperty:
+						dependsUpons.createPropertyFor(null),
+					items:
+						getItemWhenSingleOrStackItemsWhenMultiple(
+							declarations.createItemsForAndRemoveDeclarationsIn(null)
+						),
 				});
 
 			/* istanbul ignore next: error is only thrown when there is gap in the implementation */
@@ -56,7 +62,7 @@ module.exports =
 				addDeclarationIn:
 					declarations.addDeclarationIn,
 				ancestors,
-				createFunctionDeclaration,
+				createFunctionDeclarationWithIdentifier,
 				findParentFunctionFromAncestors: parentFunctionsFromAncestors.findIdentifiableParent,
 				functionExpression,
 			});
@@ -69,11 +75,12 @@ module.exports =
 			addFromCall({
 				addDependsUponIdentifierFrom:
 					dependsUpons.addIdentifierFrom,
-				addUndeclaredVariableNameReference:
-					variableName =>
-						undeclaredVariableReferences.addAncestorsFor({
+				addUndeclaredReference:
+					({ parent, reference }) =>
+						undeclaredReferences.addAncestorsAndParentOfReference({
 							ancestors,
-							variableName,
+							parent,
+							reference,
 						}),
 				callExpression,
 				findDeclarationAndParent:
@@ -89,31 +96,33 @@ module.exports =
 		) {
 			declarations.addDeclarationIn({
 				declaration:
-					createFunctionDeclaration({
-						identifier:
-							functionDeclaration.id.name,
-						node:
-							functionDeclaration,
+					createFunctionDeclarationWithIdentifier({
+						functionDeclaration,
+						identifier: functionDeclaration.id.name,
 					}),
 				parent:
 					parentFunctionsFromAncestors.findIdentifiableParent(ancestors),
 			});
 		}
 
-		function createFunctionDeclaration({
+		function createFunctionDeclarationWithIdentifier({
+			functionDeclaration,
 			identifier,
-			node,
 		}) {
-			const items =
-				declarations.createItemsFor(node);
-
 			return (
-				{
-					...identifier && { id: identifier },
-					isFunction: true,
-					...dependsUpons.createPropertyFor(node),
-					...items && { items },
-				}
+				createFunctionDeclaration({
+					dependsUponProperty:
+						dependsUpons.createPropertyFor(
+							functionDeclaration
+						),
+					functionDeclaration,
+					hasUndeclaredReferenceTo: undeclaredReferences.hasReferenceTo,
+					identifier,
+					items:
+						declarations.createItemsForAndRemoveDeclarationsIn(
+							functionDeclaration
+						),
+				})
 			);
 		}
 
@@ -124,8 +133,8 @@ module.exports =
 			addVariables({
 				addDeclarationsIn:
 					declarations.addDeclarationsIn,
-				isVariableReferencedBy:
-					undeclaredVariableReferences.hasReferenceTo,
+				hasUndeclaredReferenceTo:
+					undeclaredReferences.hasReferenceTo,
 				parent:
 					parentFunctionsFromAncestors.findIdentifiableParent(ancestors),
 				variableDeclaration,

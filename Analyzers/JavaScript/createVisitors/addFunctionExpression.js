@@ -2,7 +2,7 @@ module.exports =
 	({
 		addDeclarationIn,
 		ancestors,
-		createFunctionDeclaration,
+		createFunctionDeclarationWithIdentifier,
 		findParentFunctionFromAncestors,
 		functionExpression,
 	}) => {
@@ -58,9 +58,9 @@ module.exports =
 			identifier
 		) {
 			return (
-				createFunctionDeclaration({
+				createFunctionDeclarationWithIdentifier({
+					functionDeclaration: functionExpression,
 					identifier,
-					node: functionExpression,
 				})
 			);
 		}

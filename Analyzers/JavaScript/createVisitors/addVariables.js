@@ -1,7 +1,7 @@
 module.exports =
 	({
 		addDeclarationsIn,
-		isVariableReferencedBy,
+		hasUndeclaredReferenceTo,
 		parent,
 		variableDeclaration,
 	}) => {
@@ -76,9 +76,9 @@ module.exports =
 
 				function isUsedInNestedFunction() {
 					return (
-						isVariableReferencedBy({
+						hasUndeclaredReferenceTo({
 							parent,
-							variableName,
+							reference: variableName,
 						})
 					);
 				}

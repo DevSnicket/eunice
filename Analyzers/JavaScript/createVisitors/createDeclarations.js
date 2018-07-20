@@ -1,5 +1,4 @@
-const
-	createItemsFor = require("./createDeclarations/createItemsFor");
+const createItemsFromDeclarations = require("./createDeclarations/createItemsFromDeclarations");
 
 module.exports =
 	() => {
@@ -10,12 +9,7 @@ module.exports =
 				addDeclarationIn,
 				addDeclarationsIn,
 				any,
-				createItemsFor:
-					parent =>
-						createItemsFor({
-							declarationsByParents,
-							parent,
-						}),
+				createItemsForAndRemoveDeclarationsIn,
 				findDeclarationAndParent,
 			}
 		);
@@ -85,5 +79,15 @@ module.exports =
 				&&
 				declarationsOfParent.find(predicate)
 			);
+		}
+
+		function createItemsForAndRemoveDeclarationsIn(
+			parent
+		) {
+			const declarations = declarationsByParents.get(parent);
+
+			declarationsByParents.delete(parent);
+
+			return createItemsFromDeclarations(declarations);
 		}
 	};

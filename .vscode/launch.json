@@ -8,7 +8,7 @@
 				"type": "node"
 			},
 			{
-				"args": [ ],
+				"args": [ "function-declarations/nested/nested" ],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/",
 				"name": "analyzer getYamlFromJavaScript test",
 				"program": "${workspaceFolder}/Analyzers/JavaScript/getYamlFromJavaScript.test.js",
@@ -28,14 +28,14 @@
 			{
 				"args":
 					[
-						"--directory=../../",
+						"--directory=Renderer",
 						"--ignoreDirectoryNames=Coverage",
 						"--ignoreDirectoryNames=getOrCreateItemsInDirectory.testcases", 
 						"--ignoreDirectoryNames=getYamlFromJavaScript.testcases",
 						"--ignoreDirectoryNames=node_modules",
 						"--ignoreDirectoryNames=Output"
 					],
-				"cwd": "${workspaceRoot}/Analyzers/JavaScript/",
+				"cwd": "${workspaceRoot}",
 				"name": "analyzer getOrCreateItemsInDirectory",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/getOrCreateItemsInDirectory.js",
 				"request": "launch",
@@ -60,7 +60,7 @@
 			{
 				"args":
 					[
-						"--items=",
+						"--items=[item, item/childItem, item/childItem/grandchildItem1, item/childItem/grandchildItem2, item/childItem/grandchildItem2/greatgrandchildItem ]",
 						"--identifierSeparator=/"
 					],
 				"name": "processor groupItemsByIdentifierSeparator",
