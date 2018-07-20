@@ -1,14 +1,21 @@
+/* istanbul ignore file: only used when JavaScript file is process entry point */
+
 const minimist = require("minimist");
 
 module.exports =
 	(
 		action,
-		{ standardInputParameter = null } = { standardInputParameter: null }
+		{
+			parentModule = module.parent,
+			standardInputParameter = null,
+		}
+		=
+		{}
 	) => {
 		return isMain() && callWithProcessArgumentsAndStandardStreams();
 
 		function isMain() {
-			return require.main === module.parent;
+			return require.main === parentModule;
 		}
 
 		function callWithProcessArgumentsAndStandardStreams() {
