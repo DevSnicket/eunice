@@ -90,6 +90,46 @@ assertOrderItemsByType({
 		],
 });
 
+assertOrderItemsByTypeEqualsSource({
+	name: "two items with types out of order in same stack level returns input",
+	source:
+		[
+			[
+				{ id: "item2", type: "type2" },
+				{ id: "item1", type: "type1" },
+			],
+		],
+});
+
+
+assertOrderItemsByType({
+	expected:
+		[
+			[
+				{
+					items:
+					[
+						[ "childItem2" ],
+						[ { id: "childItem1", type: "type1" } ],
+					],
+				},
+			],
+		],
+	name: "single item in a stack with two child items with types out of order in different stack levels return the child items in type order",
+	source:
+		[
+			[
+				{
+					items:
+						[
+							[ { id: "childItem1", type: "type1" } ],
+							[ "childItem2" ],
+						],
+				},
+			],
+		],
+});
+
 assertOrderItemsByType({
 	expected:
 		[
