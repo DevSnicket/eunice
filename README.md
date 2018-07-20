@@ -29,9 +29,15 @@ To support different sources of structure and dependency a common data format is
   - lower right
 ```
 
-### Analyzers / Processors
+### Analyzers
 
-Analyzers are implemented to create the YAML files, which can then be optionally post-processed and combined. Currently in development is a JavaScript analyzer and a processor that groups items by their identifiers.
+Analyzers are implemented to create the YAML files, one is currently in development for JavaScript analyzer.
+
+### Processors
+
+The YAML files can then be optionally post-processed including combining the output of different analyzers. Currently there are processors written in JavaScript to:
+- group items by their identifier
+- order items by their type
 
 ### Renderer
 

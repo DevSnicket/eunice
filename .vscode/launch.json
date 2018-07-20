@@ -8,7 +8,7 @@
 				"type": "node"
 			},
 			{
-				"args": [ "function-declarations/nested/nested" ],
+				"args": [ ],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/",
 				"name": "analyzer getYamlFromJavaScript test",
 				"program": "${workspaceFolder}/Analyzers/JavaScript/getYamlFromJavaScript.test.js",
@@ -28,7 +28,7 @@
 			{
 				"args":
 					[
-						"--directory=Renderer",
+						"--directory=./",
 						"--ignoreDirectoryNames=Coverage",
 						"--ignoreDirectoryNames=getOrCreateItemsInDirectory.testcases", 
 						"--ignoreDirectoryNames=getYamlFromJavaScript.testcases",
@@ -60,8 +60,8 @@
 			{
 				"args":
 					[
-						"--items=[item, item/childItem, item/childItem/grandchildItem1, item/childItem/grandchildItem2, item/childItem/grandchildItem2/greatgrandchildItem ]",
-						"--identifierSeparator=/"
+						"--items=",
+						"--identifierSeparator="
 					],
 				"name": "processor groupItemsByIdentifierSeparator",
 				"program": "${workspaceRoot}/Processors/groupItemsByIdentifierSeparator.js",
@@ -73,6 +73,28 @@
 				"args": [ "groupItemsByIdentifierSeparator.test.js" ],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor groupItemsByIdentifierSeparator jest",
+				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[
+						"--items=",
+						"--typesInOrder=",
+						"--typesInOrder=",
+					],
+				"name": "processor orderItemsByType",
+				"program": "${workspaceRoot}/Processors/orderItemsByType.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args": [ "orderItemsByType.test.js" ],
+				"cwd": "${workspaceFolder}/Processors/",
+				"name": "processor orderItemsByType jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
