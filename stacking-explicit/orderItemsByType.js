@@ -66,10 +66,12 @@ function createOrderItemsByType(
 					compareItemsOrLevels
 				)
 				.map(
-					item =>
-						createItemWithOrderedItemsWhenAny(item)
-						||
-						item
+					itemOrLevel =>
+						Array.isArray(itemOrLevel)
+						?
+						createLevelWithOrderedItems(itemOrLevel)
+						:
+						getItemOrCreateItemWithOrderedItemsWhenAny(itemOrLevel)
 				)
 			);
 		}
@@ -122,6 +124,22 @@ function createOrderItemsByType(
 		item
 	) {
 		return typesInOrder.indexOf(item.type);
+	}
+
+	function createLevelWithOrderedItems(
+		level
+	) {
+		return level.map(getItemOrCreateItemWithOrderedItemsWhenAny);
+	}
+
+	function getItemOrCreateItemWithOrderedItemsWhenAny(
+		item
+	) {
+		return (
+			createItemWithOrderedItemsWhenAny(item)
+			||
+			item
+		);
 	}
 
 	function createItemWithOrderedItemsWhenAny(
