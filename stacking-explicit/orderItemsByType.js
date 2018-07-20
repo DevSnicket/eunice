@@ -1,31 +1,23 @@
-const yaml = require("js-yaml");
-
-const callWhenProcessEntryPoint = require("../callWhenProcessEntryPoint");
+const callWithYamlItemsAndOutputWhenProcessEntryPoint = require("./callWithYamlItemsAndOutputWhenProcessEntryPoint");
 
 /* istanbul ignore next: only used when JavaScript file is process entry point */
-callWhenProcessEntryPoint(
+callWithYamlItemsAndOutputWhenProcessEntryPoint(
 	processArguments =>
-		yaml.safeDump(
-			orderItemsByType({
-				...processArguments,
-				items:
-					yaml.safeLoad(processArguments.items),
-				typesInOrder:
-					processArguments.typesInOrder
-					.map(
-						type =>
-							type === ""
-							?
-							// type array index of will only work when exact match
-							// eslint-disable-next-line no-undefined
-							undefined
-							:
-							type
-					),
-			}),
-			{ lineWidth: Number.MAX_SAFE_INTEGER }
-		),
-	{ standardInputParameter: "items" }
+		orderItemsByType({
+			...processArguments,
+			typesInOrder:
+				processArguments.typesInOrder
+				.map(
+					type =>
+						type === ""
+						?
+						// type array index of will only work when exact match
+						// eslint-disable-next-line no-undefined
+						undefined
+						:
+						type
+				),
+		})
 );
 
 module.exports = orderItemsByType;
