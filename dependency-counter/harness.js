@@ -1,6 +1,6 @@
 const
 	getSvgForYaml = require("./getSvgForYaml"),
-	reactUiElements = require("../Harness/reactUiElements");
+	reactUiElements = require("../Harnesses/reactUiElements");
 
 reactUiElements.renderColumnElementsIntoContainer(
 	reactUiElements.createResizableColumnForYamlInput(`-
