@@ -61,39 +61,46 @@ function createOrderItemsByType(
 
 		function orderItemsOrLevels() {
 			return (
-				[ ...itemsOrLevels ]
+				itemsOrLevels
+				.map(
+					(itemOrLevel, index) => ({ index, itemOrLevel })
+				)
 				.sort(
-					compareItemsOrLevels
+					compareIndexedItemsOrLevels
 				)
 				.map(
-					itemOrLevel =>
-						Array.isArray(itemOrLevel)
-						?
-						createLevelWithOrderedItems(itemOrLevel)
-						:
-						getItemOrCreateItemWithOrderedItemsWhenAny(itemOrLevel)
+					indexedItemOrLevel =>
+						getOrCreateItemOrLevel(
+							indexedItemOrLevel.itemOrLevel
+						)
 				)
 			);
 		}
 	}
 
-	function compareItemsOrLevels(
-		leftItemOrLevel,
-		rightItemOrLevel
+	function compareIndexedItemsOrLevels(
+		leftIndexedItemOrLevel,
+		rightIndexedItemOrLevel
 	) {
 		const
-			leftIndex = getIndexOfItemOrLevel(leftItemOrLevel),
-			rightIndex = getIndexOfItemOrLevel(rightItemOrLevel);
+			leftIndex = getIndexOfItemOrLevel(leftIndexedItemOrLevel.itemOrLevel),
+			rightIndex = getIndexOfItemOrLevel(rightIndexedItemOrLevel.itemOrLevel);
 
 		return (
-			leftIndex !== -1
-			&&
-			rightIndex !== -1
-			&&
-			leftIndex !== rightIndex
-			&&
-			(leftIndex < rightIndex ? -1 : 1)
+			compareIndex()
+			||
+			compare(leftIndexedItemOrLevel.index, rightIndexedItemOrLevel.index)
 		);
+
+		function compareIndex() {
+			return (
+				leftIndex !== -1
+				&&
+				rightIndex !== -1
+				&&
+				compare(leftIndex, rightIndex)
+			);
+		}
 	}
 
 	function getIndexOfItemOrLevel(
@@ -126,6 +133,18 @@ function createOrderItemsByType(
 		return typesInOrder.indexOf(item.type);
 	}
 
+	function getOrCreateItemOrLevel(
+		itemOrLevel
+	) {
+		return (
+			Array.isArray(itemOrLevel)
+			?
+			createLevelWithOrderedItems(itemOrLevel)
+			:
+			getItemOrCreateItemWithOrderedItemsWhenAny(itemOrLevel)
+		);
+	}
+
 	function createLevelWithOrderedItems(
 		level
 	) {
@@ -154,4 +173,15 @@ function createOrderItemsByType(
 			}
 		);
 	}
+}
+
+function compare(
+	left,
+	right
+) {
+	return (
+		left !== right
+		&&
+		(left < right ? -1 : 1)
+	);
 }
