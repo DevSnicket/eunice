@@ -34,7 +34,7 @@
 			"!**/*.testcases/**",
 			"!**/*.testcases/**/.js",
 			"!**/webpack.config.js",
-			"!Harness/**",
+			"!Harnesses/**",
 			"!Tests/**"
 		],
 		"coverageDirectory": "Tests/Coverage",

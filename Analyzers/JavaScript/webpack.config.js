@@ -1,1 +1,1 @@
-module.exports = require("../../Harness/getWebpackConfigForDirectory")(`${__dirname}/../../Harness/Output/Analyzers/JavaScript/`);
+module.exports = require("../../Harnesses/getWebpackConfigForDirectory")(`${__dirname}/../../Harnesses/Output/Analyzers/JavaScript/`);

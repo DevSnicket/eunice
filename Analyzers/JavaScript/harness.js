@@ -1,6 +1,6 @@
 const
 	createElement = require("react").createElement,
-	reactUiElements = require("../../Harness/reactUiElements");
+	reactUiElements = require("../../Harnesses/reactUiElements");
 
 const getYamlFromJavaScript = require("./getYamlFromJavaScript");
 

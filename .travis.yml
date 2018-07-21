@@ -4,7 +4,7 @@ cache:
 deploy:
   github-token: $GITHUB_HARNESSES_TOKEN
   keep-history: true
-  local-dir: Harness/Output
+  local-dir: Harnesses/Output
   on:
     branch: master
   provider: pages
