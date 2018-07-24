@@ -177,7 +177,7 @@ assertGroupItems({
 				items:
 					{
 						id: "item/childItem",
-						items: [ "/item/childItem/grandChildItem1", "/item/childItem/grandChildItem2" ],
+						items: [ "item/childItem/grandChildItem1", "item/childItem/grandChildItem2" ],
 					},
 			},
 		],
@@ -187,7 +187,7 @@ assertGroupItems({
 			"item",
 			{
 				id: "item/childItem",
-				items: [ "/item/childItem/grandChildItem1", "/item/childItem/grandChildItem2" ],
+				items: [ "item/childItem/grandChildItem1", "item/childItem/grandChildItem2" ],
 			},
 		],
 });
@@ -214,6 +214,81 @@ assertGroupItems({
 		],
 	name: "first item with two child items and second item identifier prefixed with first item`s identifier and separator returns grouped item",
 	source: [ { id: "item", items: [ "childItem1", "childItem2" ] }, "item/childItem2" ],
+});
+
+assertGroupItems({
+	expected:
+		[
+			{
+				id: "item",
+				items:
+					[
+						{
+							id: "item/childItem1",
+							items: "item/childItem1/grandchildItem",
+						},
+						"item/childItem2",
+					],
+			},
+		],
+	name: "second item identifier prefixed with same two elements as first item identifiers and separator, and third item prefixed with the same element as first item identifier and separator, returns item with element identifier, and one child item with child item and another child item",
+	source: [ "item/childItem1", "item/childItem1/grandchildItem", "item/childItem2" ],
+});
+
+assertGroupItems({
+	expected:
+		[
+			{
+				id: "item",
+				items: [ "item/childItem1", "item/childItem2" ],
+			},
+		],
+	name: "two item identifiers prefixed with same element and separators returns item with element identifier and two the items as children",
+	source: [ "item/childItem1", "item/childItem2" ],
+});
+
+assertGroupItems({
+	expected:
+		[
+			{
+				id: "item/childItem",
+				items: [ "item/childItem/grandchildItem1", "item/childItem/grandchildItem2" ],
+			},
+		],
+	name: "two item identifiers prefixed with same two elements and separators returns item with the two element identifiers and two the items as children",
+	source: [ "item/childItem/grandchildItem1", "item/childItem/grandchildItem2" ],
+});
+
+assertGroupItems({
+	expected:
+		[
+			{
+				id: "item/childItem1",
+				items: [ "item/childItem1/grandchildItem1", "item/childItem1/grandchildItem2" ],
+			},
+		],
+	name: "second and third item identifiers prefixed with two elements of first item identifier and separator returns item with two elements of first item identifier, and the second and third items as children",
+	source: [ "item/childItem1", "item/childItem1/grandchildItem1", "item/childItem1/grandchildItem2" ],
+});
+
+assertGroupItems({
+	expected:
+		[
+			{
+				id: "item",
+				items:
+					{
+						id: "item/childItem",
+						items:
+							{
+								id: "item/childItem/grandchildItem",
+								items: [ "item/childItem/grandchildItem/greatgrandchildItem1", "item/childItem/grandchildItem/greatgrandchildItem2" ],
+							},
+					},
+			},
+		],
+	name: "second item identifier prefixed with first item identifer and separator, third and four items prefixed with second item identifier separator, another element and separator returns first item with second item as child and child item of another element with third and forth items as children",
+	source: [ "item", "item/childItem", "item/childItem/grandchildItem/greatgrandchildItem1", "item/childItem/grandchildItem/greatgrandchildItem2" ],
 });
 
 function assertGroupItemsEqualsSource({
