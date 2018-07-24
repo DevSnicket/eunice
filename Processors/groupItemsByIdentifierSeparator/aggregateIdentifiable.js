@@ -1,13 +1,15 @@
 const
+	aggregateWhenIdentifierElementsInCommon = require("./aggregateIdentifiable/aggregateWhenIdentifierElementsInCommon"),
 	getItemOrCreateItemForGroup = require("./getItemOrCreateItemForGroup"),
 	getItemsFromAggregation = require("./getItemsFromAggregation");
 
 module.exports =
 	({
 		aggregation,
-		getItemOrGroupItems,
 		identifierElements,
-		item,
+		identifierSeparator,
+		itemWithItemsGrouped,
+		parentIdentifier,
 	}) => {
 		return (
 			aggregation
@@ -19,17 +21,25 @@ module.exports =
 
 		function aggregateSubsequentItem() {
 			return (
-				aggregateWhenNewSubgroup()
+				aggregateWhenSubgroup()
+				||
+				aggregateWhenIdentifierElementsInCommon({
+					aggregation,
+					createLastItemOfGroupProperty,
+					identifierElements,
+					identifierSeparator,
+					parentIdentifier,
+				})
 				||
 				aggregateWhenInCurrentGroup()
 				||
 				aggregateWhenInParentGroup()
 				||
-				aggregateWithNewGroup()
+				aggregateInNewGroup()
 			);
 		}
 
-		function aggregateWhenNewSubgroup() {
+		function aggregateWhenSubgroup() {
 			return (
 				aggregation.group.lastItemOfGroup
 				&&
@@ -48,7 +58,7 @@ module.exports =
 							lastItemOfGroup:
 								{
 									identifierElements,
-									item: createItemWithItemsGrouped(),
+									item: itemWithItemsGrouped,
 								},
 							...createLastItemOfGroupProperty(),
 							parent:
@@ -70,6 +80,31 @@ module.exports =
 				{
 					group: createGroupWithItemInCurrentGroup(aggregation.group),
 					items: aggregation.items,
+				}
+			);
+		}
+
+		function aggregateWhenInParentGroup() {
+			return (
+				aggregation.group.parent
+				&&
+				identifierElementsStartsWith(
+					identifierElements,
+					aggregation.group.parent.identifierElements
+				)
+				&&
+				{
+					group:
+						createGroupWithItemInCurrentGroup({
+							...aggregation.group.parent,
+							lastItemOfGroup:
+								{
+									identifierElements: aggregation.group.identifierElements,
+									item: getItemOrCreateItemForGroup(aggregation.group),
+								},
+						}),
+					items:
+						aggregation.items,
 				}
 			);
 		}
@@ -103,42 +138,19 @@ module.exports =
 					lastItemOfGroup:
 						{
 							identifierElements,
-							item: createItemWithItemsGrouped(),
+							item: itemWithItemsGrouped,
 						},
 				}
 			);
 		}
 
-		function aggregateWhenInParentGroup() {
+		function aggregateInNewGroup() {
 			return (
-				aggregation.group.parent
-				&&
-				identifierElementsStartsWith(
-					identifierElements,
-					aggregation.group.parent.identifierElements
-				)
-				&&
 				{
 					group:
-						createGroupWithItemInCurrentGroup({
-							...aggregation.group.parent,
-							lastItemOfGroup:
-								{
-									identiferElements: aggregation.group.identiferElements,
-									item: getItemOrCreateItemForGroup(aggregation.group),
-								},
-						}),
+						createGroupWithItemAsNewGroup(),
 					items:
-						aggregation.items,
-				}
-			);
-		}
-
-		function aggregateWithNewGroup() {
-			return (
-				{
-					group: createGroupWithItemAsNewGroup(),
-					items: getItemsFromAggregation(aggregation),
+						getItemsFromAggregation(aggregation),
 				}
 			);
 		}
@@ -147,33 +159,20 @@ module.exports =
 			return (
 				{
 					identifierElements,
-					item: createItemWithItemsGrouped(),
-				}
-			);
-		}
-
-		function createItemWithItemsGrouped() {
-			return (
-				typeof item === "string" || typeof item.items === "string"
-				?
-				item
-				:
-				{
-					...item,
-					...item.items && { items: getItemOrGroupItems(item.items) },
+					item: itemWithItemsGrouped,
 				}
 			);
 		}
 	};
 
 function identifierElementsStartsWith(
-	identiferElements,
+	identifierElements,
 	startsWithElements
 ) {
 	return (
 		startsWithElements.every(
 			(identifierElement, index) =>
-				identifierElement === identiferElements[index]
+				identifierElement === identifierElements[index]
 		)
 	);
 }

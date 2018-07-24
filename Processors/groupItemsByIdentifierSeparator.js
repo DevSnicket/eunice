@@ -19,11 +19,12 @@ function groupItemsByIdentifierSeparator({
 function createGroupItemsForIdentifierSeparator(
 	identifierSeparator
 ) {
-	return getItemOrGroupItems;
+	return itemOrItems => getItemOrGroupItemsInParentIdentifier({ itemOrItems, parentIdentifier: null });
 
-	function getItemOrGroupItems(
-		itemOrItems
-	) {
+	function getItemOrGroupItemsInParentIdentifier({
+		itemOrItems,
+		parentIdentifier,
+	}) {
 		return (
 			Array.isArray(itemOrItems)
 			?
@@ -40,9 +41,10 @@ function createGroupItemsForIdentifierSeparator(
 						(aggregation, item) =>
 							aggregate({
 								aggregation,
-								getItemOrGroupItems,
+								getItemOrGroupItemsInParentIdentifier,
 								identifierSeparator,
 								item,
+								parentIdentifier,
 							}),
 						null
 					)
@@ -54,9 +56,10 @@ function createGroupItemsForIdentifierSeparator(
 
 function aggregate({
 	aggregation,
-	getItemOrGroupItems,
+	getItemOrGroupItemsInParentIdentifier,
 	identifierSeparator,
 	item,
+	parentIdentifier,
 }) {
 	const identifier = getIdentifierWhenSpecified();
 
@@ -65,9 +68,10 @@ function aggregate({
 		?
 		aggregateIdentifiable({
 			aggregation,
-			getItemOrGroupItems,
 			identifierElements: identifier.split(identifierSeparator),
-			item,
+			identifierSeparator,
+			itemWithItemsGrouped: createItemWithItemsGrouped(),
+			parentIdentifier,
 		})
 		:
 		{
@@ -84,5 +88,31 @@ function aggregate({
 			:
 			item.id
 		);
+	}
+
+	function createItemWithItemsGrouped() {
+		return (
+			typeof item === "string" || typeof item.items === "string"
+			?
+			item
+			:
+			{
+				...item,
+				...createItemsPropertyWhenAny(),
+			}
+		);
+
+		function createItemsPropertyWhenAny() {
+			return (
+				item.items
+				&&
+				{
+					items:
+						getItemOrGroupItemsInParentIdentifier({
+							itemOrItems: item.items,
+							parentIdentifier: item.id,
+						}),
+				});
+		}
 	}
 }
