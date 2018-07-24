@@ -1,6 +1,6 @@
 const
 	aggregateWhenIdentifierElementsInCommon = require("./aggregateIdentifiable/aggregateWhenIdentifierElementsInCommon"),
-	getItemOrCreateItemForGroup = require("./getItemOrCreateItemForGroup"),
+	aggregateWhenInAncestorGroup = require("./aggregateIdentifiable/aggregateWhenInAncestorGroup"),
 	getItemsFromAggregation = require("./getItemsFromAggregation");
 
 module.exports =
@@ -33,7 +33,11 @@ module.exports =
 				||
 				aggregateWhenInCurrentGroup()
 				||
-				aggregateWhenInParentGroup()
+				aggregateWhenInAncestorGroup({
+					aggregation,
+					createGroupWithItemInGroup,
+					identifierElementsStartsWith,
+				})
 				||
 				aggregateInNewGroup()
 			);
@@ -44,7 +48,6 @@ module.exports =
 				aggregation.group.lastItemOfGroup
 				&&
 				identifierElementsStartsWith(
-					identifierElements,
 					aggregation.group.lastItemOfGroup.identifierElements
 				)
 				&&
@@ -73,43 +76,28 @@ module.exports =
 		function aggregateWhenInCurrentGroup() {
 			return (
 				identifierElementsStartsWith(
-					identifierElements,
 					aggregation.group.identifierElements
 				)
 				&&
 				{
-					group: createGroupWithItemInCurrentGroup(aggregation.group),
+					group: createGroupWithItemInGroup(aggregation.group),
 					items: aggregation.items,
 				}
 			);
 		}
 
-		function aggregateWhenInParentGroup() {
+		function identifierElementsStartsWith(
+			startsWithElements
+		) {
 			return (
-				aggregation.group.parent
-				&&
-				identifierElementsStartsWith(
-					identifierElements,
-					aggregation.group.parent.identifierElements
+				startsWithElements.every(
+					(identifierElement, index) =>
+						identifierElement === identifierElements[index]
 				)
-				&&
-				{
-					group:
-						createGroupWithItemInCurrentGroup({
-							...aggregation.group.parent,
-							lastItemOfGroup:
-								{
-									identifierElements: aggregation.group.identifierElements,
-									item: getItemOrCreateItemForGroup(aggregation.group),
-								},
-						}),
-					items:
-						aggregation.items,
-				}
 			);
 		}
 
-		function createGroupWithItemInCurrentGroup(
+		function createGroupWithItemInGroup(
 			group
 		) {
 			return (
@@ -164,15 +152,3 @@ module.exports =
 			);
 		}
 	};
-
-function identifierElementsStartsWith(
-	identifierElements,
-	startsWithElements
-) {
-	return (
-		startsWithElements.every(
-			(identifierElement, index) =>
-				identifierElement === identifierElements[index]
-		)
-	);
-}
