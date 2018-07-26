@@ -61,7 +61,7 @@ module.exports =
 			return (
 				{
 					element: createSymbolWithPolygon(createPolygon()),
-					height: 22,
+					height: 24,
 					horizontalMargin,
 					id,
 					paddingRight,
@@ -91,10 +91,10 @@ module.exports =
 							fill,
 							points:
 								[
-									[ 0, 0.8 ],
+									[ 0, 0.85 ],
 									[ 0, 0 ],
 									[ 1, 0 ],
-									[ 1, 0.8 ],
+									[ 1, 0.85 ],
 									[ 0.5, 1 ],
 								]
 								.map(point => scaleAndFormatPoint(transform(point)))
