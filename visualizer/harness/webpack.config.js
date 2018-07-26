@@ -8,7 +8,7 @@ module.exports =
 		...getWebpackConfigForDirectory(`${__dirname}/../../Harnesses/Output/Renderer/`),
 		plugins: [
 			new webpack.DefinePlugin({
-				yamlFromWebPack:
+				yamlFromWebpack:
 					`\`${readFileSync("../dogfooding.output/.yaml", "utf-8")}\``,
 			}),
 		],
