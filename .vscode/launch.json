@@ -113,6 +113,31 @@
 				"useWSL": true
 			},
 			{
+				"args":
+					[
+						/* "--items=[Analyzers/JavaScript,Harnesses,Processors,Renderer,Tests/runTestsInFileSystem,callWhenProcessEntryPoint,harness]",
+						"--levels=harness",
+						"--levels=Analyzers/JavaScript,Processors,Renderer",
+						"--levels=Tests/runTestsInFileSystem,callWhenProcessEntryPoint,Harnesses", */
+						"--items=[item1,item2,item3]",
+						"--levels=item1,item2",
+					],
+				"name": "processor stackRootItems",
+				"program": "${workspaceRoot}/Processors/stackRootItems.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args": [ "stackRootItems.test.js" ],
+				"cwd": "${workspaceFolder}/Processors/",
+				"name": "processor stackRootItems jest",
+				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
 				"args": [ "getSvgForYaml.test.js" ],
 				"cwd": "${workspaceFolder}/Renderer/",
 				"name": "renderer getSvgForYaml jest",
