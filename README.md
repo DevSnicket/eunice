@@ -8,7 +8,7 @@ try it out:
 
 > [JavaScript &rightarrow; YAML &rightarrow; SVG](https://devsnicket.github.io/Eunice-harnesses/harness.html) 
 >
->[Euince on Euince 🐶🥫](https://devsnicket.github.io/Eunice-harnesses/Renderer/harness.html)
+>[Euince on Euince](https://devsnicket.github.io/Eunice-harnesses/Renderer/harness.html) 🐶🥫
 
 ### Stacks
 
@@ -43,6 +43,7 @@ The YAML files can then be optionally post-processed including combining the out
 - group items by their identifier
 - order items by their type
 - sets the type of root items
+- stack root items
 
 ### Renderer
 
