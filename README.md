@@ -4,7 +4,11 @@
 
 Eunice is a system of utilities based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. It doesn't constrain this idea to direct dependencies, but includes indirect dependencies as well.
 
-[try it out](https://devsnicket.github.io/Eunice-harnesses/harness.html)
+try it out:
+
+> [JavaScript &rightarrow; YAML &rightarrow; SVG](https://devsnicket.github.io/Eunice-harnesses/harness.html) 
+>
+>[Euince on Euince 🐶🥫](https://devsnicket.github.io/Eunice-harnesses/Renderer/harness.html)
 
 ### Stacks
 
