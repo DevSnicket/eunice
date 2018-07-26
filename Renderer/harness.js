@@ -3,7 +3,9 @@ const
 	reactUiElements = require("../Harnesses/reactUiElements");
 
 reactUiElements.renderColumnElementsIntoContainer(
-	reactUiElements.createResizableColumnForYamlInput(yamlFromWebPack),
+	// yamlFromWebpack is replaced with literal by harness/webpack.config.js
+	// eslint-disable-next-line no-undef
+	reactUiElements.createResizableColumnForYamlInput(yamlFromWebpack),
 	reactUiElements.createResizableColumnForSvgOutput()
 );
 
