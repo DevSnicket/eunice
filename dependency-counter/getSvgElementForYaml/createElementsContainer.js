@@ -183,7 +183,7 @@ module.exports =
 				return (
 					((height - paddingBottom) / 2)
 					+
-					(font.size * 0.375)
+					(font.size * 0.36)
 				);
 			}
 		}
