@@ -21,4 +21,5 @@ notifications:
 script:
   - npm run test-travis
   - npm run lint
+  - ./dogfooding.sh
   - npm run harness
