@@ -8,7 +8,7 @@ try it out:
 
 > [JavaScript &rightarrow; YAML &rightarrow; SVG](https://devsnicket.github.io/Eunice-harnesses/harness.html) 
 >
->[Euince on Euince](https://devsnicket.github.io/Eunice-harnesses/Renderer/harness.html) 🐶🥫
+>[Eunice on Eunice](https://devsnicket.github.io/Eunice-harnesses/Renderer/harness.html) 🐶🥫
 
 ### Stacks
 
