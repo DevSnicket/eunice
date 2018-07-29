@@ -5,6 +5,6 @@ node Analyzers/JavaScript/getOrCreateItemsInDirectory.js --directory=. --ignoreD
 node Processors/setTypeOfRootItems.js --type=file |
 node Processors/groupItemsByIdentifierSeparator.js --identifierSeparator=/ |
 node Processors/orderItemsByType --typesInOrder= --typesInOrder=parameter --typesInOrder=variable --typesInOrder=file |
-node Processors/stackRootItems.js --levels=harness --levels=Analyzers/JavaScript,Processors,Renderer --levels=Tests/runTestsInFileSystem,callWhenProcessEntryPoint,Harnesses > dogfooding.output/.yaml
+node Processors/stackRootItems.js --levels=harness --levels=Analyzers/JavaScript,Processors,Renderer --levels=callWhenProcessEntryPoint,Harnesses,Tests > dogfooding.output/.yaml
 
-node Renderer/getSvgForYaml.test.js ./dogfooding.output/.yaml > dogfooding.output/.svg
+cat dogfooding.output/.yaml | node Renderer/getSvgForYaml.js > dogfooding.output/.svg

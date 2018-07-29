@@ -9,14 +9,15 @@ const
 	getYamlForItemOrItems = require("./getYamlForItemOrItems");
 
 /* istanbul ignore next: only used when JavaScript file is process entry point */
-callWhenProcessEntryPoint(
-	processArguments =>
-		getYamlForItemOrItems(
-			getOrCreateItemsInDirectory(
-				processArguments
-			)
-		)
-);
+callWhenProcessEntryPoint({
+	action:
+		processArguments =>
+			getYamlForItemOrItems(
+				getOrCreateItemsInDirectory(
+					processArguments
+				)
+			),
+});
 
 module.exports = getOrCreateItemsInDirectory;
 

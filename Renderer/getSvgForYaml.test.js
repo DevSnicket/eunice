@@ -6,7 +6,7 @@ const
 	runTestsInFileSystem = require("../Tests/runTestsInFileSystem");
 
 runTestsInFileSystem({
-	action: getSvgForYaml,
+	action: yaml => getSvgForYaml({ yaml }),
 	caseFileName: ".yaml",
 	directory: path.join(__dirname, "getSvgForYaml.testcases/"),
 	expectedFileName: ".svg",

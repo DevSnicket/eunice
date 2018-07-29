@@ -115,10 +115,6 @@
 			{
 				"args":
 					[
-						/* "--items=[Analyzers/JavaScript,Harnesses,Processors,Renderer,Tests/runTestsInFileSystem,callWhenProcessEntryPoint,harness]",
-						"--levels=harness",
-						"--levels=Analyzers/JavaScript,Processors,Renderer",
-						"--levels=Tests/runTestsInFileSystem,callWhenProcessEntryPoint,Harnesses", */
 						"--items=[item1,item2,item3]",
 						"--levels=item1,item2",
 					],
@@ -147,10 +143,31 @@
 				"useWSL": true
 			},
 			{
+				"args":
+					[
+						"--subsetIdentifierHierarchy=parent",
+						"--yaml={id: parent,items: single}",
+					],
+				"name": "renderer getSvgForYaml",
+				"program": "${workspaceRoot}/Renderer/getSvgForYaml.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
 				"args": [ ],
 				"cwd": "${workspaceFolder}/Renderer/",
 				"name": "renderer getSvgForYaml test",
 				"program": "${workspaceFolder}/Renderer/getSvgForYaml.test.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args": [ "getSvgForYaml.withSubset.test.js" ],
+				"cwd": "${workspaceFolder}/Renderer/",
+				"name": "renderer getSvgForYaml with subset jest",
+				"program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true

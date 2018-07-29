@@ -3,15 +3,11 @@
 const minimist = require("minimist");
 
 module.exports =
-	(
+	({
 		action,
-		{
-			parentModule = module.parent,
-			standardInputParameter = null,
-		}
-		=
-		{}
-	) => {
+		parentModule = module.parent,
+		standardInputParameter = null,
+	}) => {
 		return isMain() && callWithProcessArgumentsAndStandardStreams();
 
 		function isMain() {

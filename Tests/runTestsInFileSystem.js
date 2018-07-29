@@ -2,7 +2,9 @@
 
 const fs = require("fs");
 
-const isJestProcessFromArguments = require("./runTestsInFileSystem/isJestProcessFromArguments");
+const
+	isJestProcessFromArguments = require("./runTestsInFileSystem/isJestProcessFromArguments"),
+	readTextFile = require("./readTextFile");
 
 module.exports =
 	function runTestsInFileSystem({
@@ -129,7 +131,7 @@ module.exports =
 				console.log(
 					isArgumentPath()
 					?
-					action(readFile(fileOrTestCase))
+					action(readTextFile(fileOrTestCase))
 					:
 					getActualForTestCase(fileOrTestCase)
 				);
@@ -160,21 +162,6 @@ module.exports =
 			fileName,
 			testCase,
 		}) {
-			return readFile(`${rootDirectory}${testCase}/${fileName}`);
+			return readTextFile(`${rootDirectory}${testCase}/${fileName}`);
 		}
 	};
-
-function readFile(
-	filePath
-) {
-	return (
-		fs.readFileSync(
-			filePath,
-			"utf-8"
-		)
-		.replace(
-			/^\uFEFF/, // BOM
-			""
-		)
-	);
-}
