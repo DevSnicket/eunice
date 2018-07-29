@@ -6,17 +6,18 @@ const callWhenProcessEntryPoint = require("../callWhenProcessEntryPoint");
 
 module.exports =
 	action =>
-		callWhenProcessEntryPoint(
-			processArguments =>
-				yaml.safeDump(
-					action({
-						...processArguments,
-						items: yaml.safeLoad(processArguments.items),
-					}),
-					{ lineWidth: Number.MAX_SAFE_INTEGER }
-				),
-			{
-				parentModule: module.parent,
-				standardInputParameter: "items",
-			}
-		);
+		callWhenProcessEntryPoint({
+			action:
+				processArguments =>
+					yaml.safeDump(
+						action({
+							...processArguments,
+							items: yaml.safeLoad(processArguments.items),
+						}),
+						{ lineWidth: Number.MAX_SAFE_INTEGER }
+					),
+			parentModule:
+				module.parent,
+			standardInputParameter:
+				"items",
+		});
