@@ -18,5 +18,5 @@ yamlTextArea.addEventListener("input", renderFromTextareaIntoDiv);
 renderFromTextareaIntoDiv();
 
 function renderFromTextareaIntoDiv() {
-	svgDiv.innerHTML = getSvgForYaml(yamlTextArea.value);
+	svgDiv.innerHTML = getSvgForYaml({ yaml: yamlTextArea.value });
 }
