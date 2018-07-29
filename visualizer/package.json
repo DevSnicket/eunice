@@ -39,12 +39,12 @@
 	},
 	"homepage": "https://github.com/DevSnicket/Eunice",
 	"license": "MIT",
-	"main": "getSvgElementForYaml.js",
+	"main": "getSvgForYaml.js",
 	"name": "eunice-renderer",
 	"scripts": {
 		"harness": "webpack -p",
 		"lint": "eslint .",
 		"test": "jest --no-cache --runInBand"
 	},
-	"version": "0.5.0"
+	"version": "0.6.0"
 }
