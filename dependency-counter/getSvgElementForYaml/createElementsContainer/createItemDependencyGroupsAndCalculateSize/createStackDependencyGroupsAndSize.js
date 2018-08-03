@@ -23,6 +23,7 @@ module.exports =
 					createGroupFactoryWhenRequired,
 					dependenciesInDirection: dependencies.above,
 					itemGroup: notIndependentGroupsFactory.itemGroup,
+					keySuffix: "above",
 					top,
 					withPrecision,
 				});
@@ -37,13 +38,9 @@ module.exports =
 							notIndependentGroupsFactory,
 							top: top + groupsAndHeightForDependenciesAbove.height,
 						}),
-						createGroupsAndCalculateHeightForDependenciesWhenRequired({
-							createGroupFactoryWhenRequired,
-							dependenciesInDirection: dependencies.below,
-							itemGroup: notIndependentGroupsFactory.itemGroup,
-							top: top + groupsAndHeightForDependenciesAbove.height + notIndependentGroupsFactory.height,
-							withPrecision,
-						}),
+						createGroupsAndCalculateHeightForDependenciesBelowWhenRequiredWithTopOffset(
+							groupsAndHeightForDependenciesAbove.height
+						),
 					]
 					:
 					[
@@ -51,16 +48,27 @@ module.exports =
 							notIndependentGroupsFactory,
 							top,
 						}),
-						createGroupsAndCalculateHeightForDependenciesWhenRequired({
-							createGroupFactoryWhenRequired,
-							dependenciesInDirection: dependencies.below,
-							itemGroup: notIndependentGroupsFactory.itemGroup,
-							top: top + notIndependentGroupsFactory.height,
-							withPrecision,
-						}),
+						createGroupsAndCalculateHeightForDependenciesBelowWhenRequiredWithTopOffset(
+							0
+						),
 					]
 				)
 			);
+
+			function createGroupsAndCalculateHeightForDependenciesBelowWhenRequiredWithTopOffset(
+				topOffset
+			) {
+				return (
+					createGroupsAndCalculateHeightForDependenciesWhenRequired({
+						createGroupFactoryWhenRequired,
+						dependenciesInDirection: dependencies.below,
+						itemGroup: notIndependentGroupsFactory.itemGroup,
+						keySuffix: "below",
+						top: top + notIndependentGroupsFactory.height + topOffset,
+						withPrecision,
+					})
+				);
+			}
 		}
 	};
 
@@ -69,6 +77,7 @@ function createGroupsAndCalculateHeightForDependenciesWhenRequired({
 	createGroupFactoryWhenRequired,
 	dependenciesInDirection,
 	itemGroup,
+	keySuffix,
 	top,
 	withPrecision,
 }) {
@@ -90,6 +99,7 @@ function createGroupsAndCalculateHeightForDependenciesWhenRequired({
 							createGroupFactoryWhenRequired({
 								arrow: dependencies.arrow,
 								count: dependencies.count,
+								keySuffix: `stack dependency ${dependencies.arrow.id} ${keySuffix}`,
 							}),
 						leftOffset =
 							aggregation.width && aggregation.width + 4;
