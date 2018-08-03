@@ -42,7 +42,7 @@
 	"main": "getSvgForYaml.js",
 	"name": "eunice-renderer",
 	"scripts": {
-		"harness": "webpack -p",
+		"harness": "webpack -p --config harness/webpack.config.js",
 		"lint": "eslint .",
 		"test": "jest --no-cache --runInBand"
 	},
