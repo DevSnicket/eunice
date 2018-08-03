@@ -33,6 +33,8 @@ module.exports =
 									top: top + 34,
 								}),
 							height,
+							key:
+								identifier,
 							left,
 							paddingBottom,
 							paddingRight:
