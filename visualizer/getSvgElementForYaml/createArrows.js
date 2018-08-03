@@ -75,6 +75,7 @@ module.exports =
 						"symbol",
 						{
 							id,
+							key: id,
 							preserveAspectRatio,
 							viewBox: "0,0,1,1",
 						},
@@ -89,6 +90,7 @@ module.exports =
 						"polygon",
 						{
 							fill,
+							key: "polygon",
 							points:
 								[
 									[ 0, 0.85 ],

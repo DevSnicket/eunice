@@ -56,7 +56,7 @@ function createStyleElementInDefsElement({
 	return (
 		createElement(
 			"defs",
-			null,
+			{ key: "definition" },
 			createElement(
 				"style",
 				{ type: "text/css" },

@@ -32,9 +32,10 @@ module.exports =
 						createDependenciesInlineElements({
 							center,
 							groupFactories:
-								createDependenciesInlineGroupFactoriesForCount(
-									count
-								),
+								createDependenciesInlineGroupFactoriesForCount({
+									countWithDirection: count,
+									keyPrefix: "",
+								}),
 							top,
 						}),
 				dependencyCounts,
@@ -80,12 +81,13 @@ module.exports =
 			return (
 				createItemDependencyGroupsAndCalculateSize({
 					createGroupFactoryWhenRequired:
-						({ arrow, count }) =>
+						({ arrow, count, keySuffix }) =>
 							createDependencyGroupFactoryWhenRequired({
 								arrow,
 								count,
 								createTextGroup,
 								font,
+								key: `${item.id} dependency count outer ${keySuffix}`,
 							}),
 					dependencyCount:
 						getDependencyCountInBothDirections({
@@ -102,7 +104,10 @@ module.exports =
 								&&
 								dependencyCount.dependsUpon.inner
 								&&
-								createDependenciesInlineGroupFactoriesForCount(dependencyCount.dependsUpon.inner),
+								createDependenciesInlineGroupFactoriesForCount({
+									countWithDirection: dependencyCount.dependsUpon.inner,
+									keyPrefix: `${item.id} `,
+								}),
 							font,
 							identifier: item.id,
 						}),
@@ -113,20 +118,22 @@ module.exports =
 			);
 		}
 
-		function createDependenciesInlineGroupFactoriesForCount(
-			countWithDirection
-		) {
+		function createDependenciesInlineGroupFactoriesForCount({
+			countWithDirection,
+			keyPrefix,
+		}) {
 			return (
 				createDependenciesInlineGroupFactories({
 					arrows,
 					countWithDirection,
 					createDependencyGroupFactoryWhenRequired:
-						({ arrow, count }) =>
+						({ arrow, count, keySuffix }) =>
 							createDependencyGroupFactoryWhenRequired({
 								arrow,
 								count,
 								createTextGroup,
 								font,
+								key: `${keyPrefix}dependency count inner ${keySuffix}`,
 							}),
 				})
 			);
@@ -140,6 +147,7 @@ module.exports =
 			elementName,
 			elementsBelowText,
 			height,
+			key,
 			left,
 			paddingBottom = 0,
 			paddingRight,
@@ -150,13 +158,17 @@ module.exports =
 			return (
 				createElement(
 					"g",
-					className && { className },
+					{
+						...className && { className },
+						key,
+					},
 					[
 						createElement(
 							elementName,
 							{
 								...attributes,
 								height,
+								key: "shape",
 								width,
 								...left > 0 && { x: left },
 								...top > 0 && { y: top },
@@ -165,6 +177,7 @@ module.exports =
 						createElement(
 							"text",
 							{
+								key: "text",
 								x: withPrecision(left + getTextLeftOffset()),
 								y: withPrecision(top + getTextTopOffset()),
 							},

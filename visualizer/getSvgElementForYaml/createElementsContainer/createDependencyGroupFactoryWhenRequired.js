@@ -4,6 +4,7 @@ module.exports =
 		count,
 		createTextGroup,
 		font,
+		key,
 	}) => {
 		return (count > 0) && create();
 
@@ -22,6 +23,7 @@ module.exports =
 								className: "dependency",
 								elementName: "use",
 								height: arrow.height,
+								key,
 								left,
 								paddingRight: arrow.paddingRight,
 								text: count,

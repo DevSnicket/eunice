@@ -49,6 +49,7 @@ function createGroupsFactoryWithDependencies({
 				arrow: dependencies.arrow,
 				count: dependencies.dependents,
 				createGroupFactoryWhenRequired,
+				keySuffix: "dependents",
 				left,
 			}),
 		itemGroupLeft =
@@ -70,6 +71,7 @@ function createGroupsFactoryWithDependencies({
 				arrow: dependencies.arrow,
 				count: dependencies.dependsUpon,
 				createGroupFactoryWhenRequired,
+				keySuffix: "depends upon",
 				left: withPrecision(itemGroupLeft + itemGroupFactory.width),
 			})
 		);
@@ -139,12 +141,14 @@ function createGroupFactoryWithLeftWhenRequired({
 	arrow,
 	count,
 	createGroupFactoryWhenRequired,
+	keySuffix,
 	left,
 }) {
 	const factory =
 		createGroupFactoryWhenRequired({
 			arrow,
 			count,
+			keySuffix: `not independent ${keySuffix}`,
 		});
 
 	return (
