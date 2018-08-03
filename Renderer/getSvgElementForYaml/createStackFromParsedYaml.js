@@ -19,7 +19,9 @@ function createStackFromParsedYaml(
 		return (
 			yaml.some(Array.isArray)
 			?
-			yaml.map(createLevelFromIdentifierOrItemOrLevel)
+			yaml
+			.filter(itemOrLevel => itemOrLevel)
+			.map(createLevelFromIdentifierOrItemOrLevel)
 			:
 			[ createLevelFromIdentifierOrItemOrLevel(yaml) ]
 		);
