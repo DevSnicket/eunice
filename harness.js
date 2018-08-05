@@ -1,30 +1,37 @@
 const
-	getSvgForYaml = require("./Renderer/getSvgForYaml"),
+	createColumnFactoryFromStateful = require("./Harnesses/createColumnFactoryFromStateful"),
+	createContainerForColumns = require("./Harnesses/createContainerForColumns"),
+	getSvgElementFromYamlOrErrorElement = require("./Renderer/getSvgElementFromYamlOrErrorElement"),
 	getYamlFromJavaScript = require("./Analyzers/JavaScript/getYamlFromJavaScript"),
-	reactUiElements = require("./Harnesses/reactUiElements");
+	renderComponent = require("./Harnesses/renderComponent");
 
-reactUiElements.renderColumnElementsIntoContainer(
-	reactUiElements.createResizableColumnForJavaScriptInput(),
-	reactUiElements.createResizableColumnForYamlInput(),
-	reactUiElements.createResizableColumnForSvgOutput()
-);
+renderComponent({
+	render() {
+		const columnFactory = createColumnFactoryFromStateful(this);
 
-const
-	javascriptTextArea = document.getElementById("javascript"),
-	svgDiv = document.getElementById("svg"),
-	yamlTextArea = document.getElementById("yaml");
+		return (
+			createContainerForColumns(
+				columnFactory.createJavascriptInputResizableColumn({ createStateFromValue: value => ({ yaml: getYamlFromJavaScript(value) }) }),
+				columnFactory.createYamlInputResizableColumn(),
+				columnFactory.createSvgOutputResizableColumn(
+					getSvgElementFromYamlOrErrorElement(this.state.yaml)
+				)
+			)
+		);
+	},
+	state:
+		// javascriptFromWebpack is replaced with literal by harness/webpack.config.js
+		// eslint-disable-next-line no-undef
+		createStateFromJavascript(javascriptFromWebpack),
+});
 
-javascriptTextArea.addEventListener("input", generateFromTextareaIntoDiv);
-yamlTextArea.addEventListener("input", renderFromTextareaIntoDiv);
-
-generateFromTextareaIntoDiv();
-
-function generateFromTextareaIntoDiv() {
-	yamlTextArea.value = getYamlFromJavaScript(javascriptTextArea.value);
-
-	renderFromTextareaIntoDiv();
-}
-
-function renderFromTextareaIntoDiv() {
-	svgDiv.innerHTML = getSvgForYaml({ yaml: yamlTextArea.value });
+function createStateFromJavascript(
+	javascript
+) {
+	return (
+		{
+			javascript,
+			yaml: getYamlFromJavaScript(javascript),
+		}
+	);
 }

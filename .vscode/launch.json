@@ -173,7 +173,7 @@
 				"useWSL": true
 			},
 			{
-				"file": "${workspaceFolder}/Renderer/harness.html",
+				"file": "${workspaceFolder}/Harnesses/Output/Renderer/harness.html",
 				"name": "renderer test harness",
 				"request": "launch",
 				"type": "chrome"

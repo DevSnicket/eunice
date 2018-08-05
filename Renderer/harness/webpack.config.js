@@ -1,15 +1,15 @@
 const
-	getWebpackConfigForDirectory = require("../../Harnesses/getWebpackConfigForDirectory"),
-	readFileSync = require("fs").readFileSync,
-	webpack = require("webpack");
+	createWebpackPluginForFileContent = require("../../Harnesses/createWebpackPluginForFileContent"),
+	getWebpackConfigForDirectory = require("../../Harnesses/getWebpackConfigForDirectory");
 
 module.exports =
 	{
 		...getWebpackConfigForDirectory(`${__dirname}/../../Harnesses/Output/Renderer/`),
-		plugins: [
-			new webpack.DefinePlugin({
-				yamlFromWebpack:
-					`\`${readFileSync("../dogfooding.output/.yaml", "utf-8")}\``,
-			}),
-		],
+		plugins:
+			[
+				createWebpackPluginForFileContent({
+					file: "../dogfooding.output/.yaml",
+					name: "yamlFromWebpack",
+				}),
+			],
 	};

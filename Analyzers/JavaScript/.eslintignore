@@ -1,2 +1,3 @@
 *.testcases/
 node_modules/
+harness/example.js
