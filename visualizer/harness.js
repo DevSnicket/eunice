@@ -1,22 +1,23 @@
 const
-	getSvgForYaml = require("./getSvgForYaml"),
-	reactUiElements = require("../Harnesses/reactUiElements");
+	createColumnFactoryFromStateful = require("../Harnesses/createColumnFactoryFromStateful"),
+	createContainerForColumns = require("../Harnesses/createContainerForColumns"),
+	getSvgElementFromYamlOrErrorElement = require("./getSvgElementFromYamlOrErrorElement"),
+	renderComponent = require("../Harnesses/renderComponent");
 
-reactUiElements.renderColumnElementsIntoContainer(
+renderComponent({
+	render() {
+		const columnFactory = createColumnFactoryFromStateful(this);
+
+		return (
+			createContainerForColumns(
+				columnFactory.createYamlInputResizableColumn(),
+				columnFactory.createSvgOutputResizableColumn(
+					getSvgElementFromYamlOrErrorElement(this.state.yaml)
+				)
+			)
+		);
+	},
 	// yamlFromWebpack is replaced with literal by harness/webpack.config.js
 	// eslint-disable-next-line no-undef
-	reactUiElements.createResizableColumnForYamlInput(yamlFromWebpack),
-	reactUiElements.createResizableColumnForSvgOutput()
-);
-
-const
-	svgDiv = document.getElementById("svg"),
-	yamlTextArea = document.getElementById("yaml");
-
-yamlTextArea.addEventListener("input", renderFromTextareaIntoDiv);
-
-renderFromTextareaIntoDiv();
-
-function renderFromTextareaIntoDiv() {
-	svgDiv.innerHTML = getSvgForYaml({ yaml: yamlTextArea.value });
-}
+	state: { yaml: yamlFromWebpack },
+});
