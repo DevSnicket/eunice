@@ -23,6 +23,7 @@
 			"!node_modules/**",
 			"!**/*.testcases/**",
 			"!*.testcases/**/.js",
+			"!harness/**",
 			"!harness.js",
 			"!webpack.config.js"
 		],
