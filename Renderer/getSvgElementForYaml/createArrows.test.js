@@ -1,8 +1,8 @@
 const
-	createElement = require("react").createElement,
+	{ createElement } = require("react"),
 	fs = require("fs"),
 	path = require("path"),
-	renderElement = require("react-dom/server").renderToStaticMarkup;
+	{ renderToStaticMarkup } = require("react-dom/server");
 
 const
 	createArrows = require("./createArrows"),
@@ -25,7 +25,7 @@ function renderArrows(
 	arrows
 ) {
 	return (
-		renderElement(
+		renderToStaticMarkup(
 			createElement(
 				"svg",
 				{

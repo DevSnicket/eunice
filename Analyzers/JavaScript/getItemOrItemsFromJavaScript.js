@@ -1,5 +1,5 @@
 const
-	parse = require("acorn").parse,
+	{ parse } = require("acorn"),
 	walk = require("acorn/dist/walk");
 
 const
