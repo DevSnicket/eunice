@@ -1,9 +1,9 @@
 const
 	callWhenProcessEntryPoint = require("../callWhenProcessEntryPoint"),
-	createElement = require("react").createElement,
+	{ createElement } = require("react"),
 	getTextWidth = require("string-pixel-width"),
 	parseYaml = require("js-yaml").safeLoad,
-	renderElement = require("react-dom/server").renderToStaticMarkup;
+	{ renderToStaticMarkup } = require("react-dom/server");
 
 const getSvgElementForYaml = require("./getSvgElementForYaml");
 
@@ -31,7 +31,7 @@ function getSvgForYaml({
 	yaml,
 }) {
 	return (
-		renderElement(
+		renderToStaticMarkup(
 			getSvgElementForYaml({
 				createElement,
 				getTextWidth,
