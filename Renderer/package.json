@@ -25,8 +25,8 @@
 		"collectCoverageFrom": [
 			"**/*.js",
 			"!node_modules/**",
-			"!harness.js",
-			"!webpack.config.js"
+			"!harness/**",
+			"!harness.js"
 		],
 		"coverageDirectory": "../Tests/Coverage",
 		"coverageThreshold": {
