@@ -5,23 +5,19 @@ const
 	renderElement = require("react-dom/server").renderToStaticMarkup;
 
 const
-	createArrows = require("./getSvgElementForYaml/createArrows"),
-	withPrecision = require("./getSvgElementForYaml/withPrecision");
+	createArrows = require("./createArrows"),
+	withPrecision = require("./withPrecision");
 
-describe(
-	"getSvgElementForYaml",
+test(
+	"createArrows",
 	() =>
-		it(
-			"arrows",
-			() =>
-				expect(
-					renderArrows(
-						createArrows({ createElement, withPrecision })
-					)
-				)
-				.toBe(
-					readFile(path.join(__dirname, "arrows.testcase.svg"))
-				)
+		expect(
+			renderArrows(
+				createArrows({ createElement, withPrecision })
+			)
+		)
+		.toBe(
+			readFile(path.join(__dirname, "createArrows.testcase.svg"))
 		)
 );
 
