@@ -30,7 +30,7 @@
 		"collectCoverage": true,
 		"collectCoverageFrom": [
 			"**/*.js",
-			"!**/node_modules/**",			
+			"!**/node_modules/**",
 			"!**/harness/**",
 			"!**/harness.js",
 			"!**/*.testcases/**",
