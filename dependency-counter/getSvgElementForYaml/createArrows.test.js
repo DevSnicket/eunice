@@ -87,6 +87,7 @@ function renderArrows(
 						{
 							height: arrow.height,
 							href: `#${arrow.id}`,
+							key: arrow.id,
 							width,
 							x: aggregation.left,
 							y: padding,
