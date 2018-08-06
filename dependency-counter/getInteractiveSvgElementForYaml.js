@@ -16,7 +16,7 @@ module.exports =
 						createElement,
 						createItemGroupWrapperForIdentifier,
 						getTextWidth,
-						namespaces: { "xmlns:xlink": "http://www.w3.org/1999/xlink" },
+						namespaces: { xmlnsXlink: "http://www.w3.org/1999/xlink" },
 						style: "g.item{cursor:pointer}",
 						subsetIdentifierHierarchy: null,
 						yaml: parseYaml(yaml),
