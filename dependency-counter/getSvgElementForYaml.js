@@ -10,7 +10,10 @@ const
 module.exports =
 	({
 		createElement,
+		createItemGroupWrapperForIdentifier = ({ itemGroup }) => itemGroup,
 		getTextWidth,
+		namespaces = null,
+		style = "",
 		subsetIdentifierHierarchy,
 		yaml,
 	}) => {
@@ -32,6 +35,8 @@ module.exports =
 					initaliseAndCreateElementsContainer(),
 				createElement,
 				font,
+				namespaces,
+				style: `g.item rect{fill:lightgray}g.item text{fill:black}g.dependency text{fill:white}${style}`,
 				symbols:
 					Object.values(arrows)
 					.map(arrow => arrow.element),
@@ -47,6 +52,7 @@ module.exports =
 				createElementsContainer({
 					arrows,
 					createElement,
+					createItemGroupWrapperForIdentifier,
 					font,
 					stack:
 						subsetIdentifierHierarchy

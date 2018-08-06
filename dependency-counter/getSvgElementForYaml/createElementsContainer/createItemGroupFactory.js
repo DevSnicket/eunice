@@ -2,6 +2,7 @@ const createDependenciesInlineElements = require("./createDependenciesInlineElem
 
 module.exports =
 	({
+		createItemGroupWrapperForIdentifier,
 		createTextGroup,
 		dependencyGroupFactories,
 		font,
@@ -20,29 +21,33 @@ module.exports =
 						left,
 						top,
 					}) =>
-						createTextGroup({
-							attributes:
-								null,
-							className:
-								"item",
-							elementName:
-								"rect",
-							elementsBelowText:
-								createDependenciesInlineElementsWhenRequired({
-									center: left + (width / 2),
-									top: top + 34,
+						createItemGroupWrapperForIdentifier({
+							identifier,
+							itemGroup:
+								createTextGroup({
+									attributes:
+										null,
+									className:
+										"item",
+									elementName:
+										"rect",
+									elementsBelowText:
+										createDependenciesInlineElementsWhenRequired({
+											center: left + (width / 2),
+											top: top + 34,
+										}),
+									height,
+									key:
+										identifier,
+									left,
+									paddingBottom,
+									paddingRight:
+										0,
+									text:
+										identifier,
+									top,
+									width,
 								}),
-							height,
-							key:
-								identifier,
-							left,
-							paddingBottom,
-							paddingRight:
-								0,
-							text:
-								identifier,
-							top,
-							width,
 						}),
 				height,
 				width,
