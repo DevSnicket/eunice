@@ -7,18 +7,25 @@ require("file-loader?name=harness.html!./harness.html");
 require("file-loader?name=react-reflex.css!react-reflex/styles.css");
 
 module.exports =
-	component => {
+	component =>
 		render(
 			createElement(
-				(props, context) => (
-					{
-						...Component.prototype,
-						context,
-						props,
-						...component,
-					}
-				)
+				(props, context) => {
+					const componentMixin =
+						{
+							...Component.prototype,
+							context,
+							props,
+							...component,
+						};
+
+					window.addEventListener(
+						"hashchange",
+						() => componentMixin.forceUpdate()
+					);
+
+					return componentMixin;
+				}
 			),
 			document.getElementById("container")
 		);
-	};
