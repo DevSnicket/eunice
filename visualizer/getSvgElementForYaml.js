@@ -10,7 +10,7 @@ const
 module.exports =
 	({
 		createElement,
-		createItemGroupWrapperForIdentifier = ({ itemGroup }) => itemGroup,
+		createItemGroupWrapperForItem = ({ itemGroup }) => itemGroup,
 		getTextWidth,
 		namespaces = null,
 		style = "",
@@ -52,7 +52,7 @@ module.exports =
 				createElementsContainer({
 					arrows,
 					createElement,
-					createItemGroupWrapperForIdentifier,
+					createItemGroupWrapperForItem,
 					font,
 					stack:
 						subsetIdentifierHierarchy
