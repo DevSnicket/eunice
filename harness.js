@@ -14,7 +14,10 @@ renderComponent({
 				columnFactory.createJavascriptInputResizableColumn({ createStateFromValue: value => ({ yaml: getYamlFromJavaScript(value) }) }),
 				columnFactory.createYamlInputResizableColumn(),
 				columnFactory.createSvgOutputResizableColumn(
-					getInteractiveSvgElementForYaml(this.state.yaml)
+					getInteractiveSvgElementForYaml({
+						locationHash: location.hash,
+						yaml: this.state.yaml,
+					})
 				)
 			)
 		);
