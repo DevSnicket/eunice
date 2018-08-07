@@ -14,7 +14,7 @@ module.exports =
 	({
 		arrows,
 		createElement,
-		createItemGroupWrapperForIdentifier,
+		createItemGroupWrapperForItem,
 		font,
 		stack,
 		withPrecision,
@@ -97,7 +97,12 @@ module.exports =
 						}),
 					itemGroupFactory:
 						createItemGroupFactory({
-							createItemGroupWrapperForIdentifier,
+							createItemGroupWrapper:
+								itemGroup =>
+									createItemGroupWrapperForItem({
+										item,
+										itemGroup,
+									}),
 							createTextGroup,
 							dependencyGroupFactories:
 								dependencyCount

@@ -12,7 +12,10 @@ renderComponent({
 			createContainerForColumns(
 				columnFactory.createYamlInputResizableColumn(),
 				columnFactory.createSvgOutputResizableColumn(
-					getInteractiveSvgElementForYaml(this.state.yaml)
+					getInteractiveSvgElementForYaml({
+						locationHash: location.hash,
+						yaml: this.state.yaml,
+					})
 				)
 			)
 		);
