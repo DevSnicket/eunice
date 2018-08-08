@@ -16,7 +16,12 @@ module.exports =
 			return (
 				subsetIdentifierHierarchy
 				.reduce(
-					aggregate,
+					(aggregation, identifier) =>
+						aggregate({
+							aggregation,
+							count: subsetIdentifierHierarchy.length,
+							identifier,
+						}),
 					createInitialRootAggregation()
 				)
 				.elements
@@ -36,14 +41,17 @@ function createInitialRootAggregation() {
 				],
 			hrefBase:
 				"#",
+			index:
+				0,
 		}
 	);
 }
 
-function aggregate(
+function aggregate({
 	aggregation,
-	identifier
-) {
+	count,
+	identifier,
+}) {
 	const href = aggregation.hrefBase + encodeURIComponent(identifier);
 
 	return (
@@ -52,15 +60,27 @@ function aggregate(
 				[
 					...aggregation.elements,
 					" > ",
-					createAnchor({
-						href,
-						identifier,
-					}),
+					createAnchorOrGetIdentifierWhenLast(),
 				],
 			hrefBase:
 				`${href}/`,
+			index:
+				aggregation.index + 1,
 		}
 	);
+
+	function createAnchorOrGetIdentifierWhenLast() {
+		return (
+			aggregation.index === count - 1
+			?
+			identifier
+			:
+			createAnchor({
+				href,
+				identifier,
+			})
+		);
+	}
 }
 
 function createAnchor({
