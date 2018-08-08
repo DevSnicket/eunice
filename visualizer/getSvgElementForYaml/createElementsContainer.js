@@ -13,8 +13,8 @@ const
 module.exports =
 	({
 		arrows,
-		createElement,
 		createItemGroupWrapperForItem,
+		createTextGroup,
 		font,
 		stack,
 		withPrecision,
@@ -144,68 +144,6 @@ module.exports =
 							}),
 				})
 			);
-		}
-
-		// x and y are attribute names in SVG
-		/* eslint id-length: ["error", { "exceptions": ["x", "y"] }] */
-		function createTextGroup({
-			attributes,
-			className,
-			elementName,
-			elementsBelowText,
-			height,
-			key,
-			left,
-			paddingBottom = 0,
-			paddingRight,
-			text,
-			top,
-			width,
-		}) {
-			return (
-				createElement(
-					"g",
-					{
-						...className && { className },
-						key,
-					},
-					[
-						createElement(
-							elementName,
-							{
-								...attributes,
-								height,
-								key: "shape",
-								width,
-								...left > 0 && { x: left },
-								...top > 0 && { y: top },
-							}
-						),
-						createElement(
-							"text",
-							{
-								key: "text",
-								x: withPrecision(left + getTextLeftOffset()),
-								y: withPrecision(top + getTextTopOffset()),
-							},
-							text
-						),
-						...elementsBelowText || [],
-					]
-				)
-			);
-
-			function getTextLeftOffset() {
-				return (width - paddingRight) / 2;
-			}
-
-			function getTextTopOffset() {
-				return (
-					((height - paddingBottom) / 2)
-					+
-					(font.size * 0.36)
-				);
-			}
 		}
 
 		function addPadding(
