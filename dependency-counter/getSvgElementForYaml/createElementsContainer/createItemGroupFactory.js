@@ -8,11 +8,13 @@ module.exports =
 		font,
 		identifier,
 	}) => {
-		const paddingBottom = calculateMaximumDependencyHeight();
+		const
+			paddingBottom = calculateMaximumDependencyHeight(),
+			text = identifier || "anonymous";
 
 		const
 			height = 40 + paddingBottom,
-			width = font.measure(identifier) + 20;
+			width = font.measure(text) + 20;
 
 		return (
 			{
@@ -26,7 +28,9 @@ module.exports =
 								attributes:
 									null,
 								className:
-									"item",
+									getClassNameForHasIdentifier(
+										identifier
+									),
 								elementName:
 									"rect",
 								elementsBelowText:
@@ -41,8 +45,7 @@ module.exports =
 								paddingBottom,
 								paddingRight:
 									0,
-								text:
-									identifier,
+								text,
 								top,
 								width,
 							})
@@ -87,3 +90,15 @@ module.exports =
 			);
 		}
 	};
+
+function getClassNameForHasIdentifier(
+	hasIdentifier
+) {
+	return (
+		[
+			"item",
+			...hasIdentifier ? [] : [ "anonymous" ],
+		]
+		.join(" ")
+	);
+}
