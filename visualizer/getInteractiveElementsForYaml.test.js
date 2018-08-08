@@ -26,38 +26,49 @@ test(
 		})
 );
 
-const breadcrumbHtmlForParent = "<div><a href=\"#\">root</a> &gt; <a href=\"#parent\">parent</a></div>";
+const breadcrumbHtmlForRootAndParent = "<div><a href=\"#\">root</a> &gt; parent</div>";
 
 test(
-	"parent with identifier with child without items and location hash of parent identifier returns child without hyperlink",
+	"parent with identifier with child without items and location hash of parent identifier returns breadcrumb of root and parent, and child without hyperlink",
 	() =>
 		expectGetInteractiveElementsForYaml({
 			expectedFile: "without-hyperlink",
-			expectedPrefix: breadcrumbHtmlForParent,
+			expectedPrefix: breadcrumbHtmlForRootAndParent,
 			locationHash: "#parent",
 			yaml: "{ id: parent, items: single }",
 		})
 );
 
 test(
-	"parent without identifier with child without items and location hash of undefined returns child without hyperlink",
+	"parent without identifier with child without items and location hash of undefined returns breadcrumb of root and child without hyperlink",
 	() =>
 		expectGetInteractiveElementsForYaml({
 			expectedFile: "without-hyperlink",
-			expectedPrefix: "<div><a href=\"#\">root</a> &gt; <a href=\"#undefined\"></a></div>",
+			expectedPrefix: "<div><a href=\"#\">root</a> &gt; </div>",
 			locationHash: "#undefined",
 			yaml: "{ items: single }",
 		})
 );
 
 test(
-	"parent with identifier with child with items and location hash of parent identifier returns child with hyperlink prefixed with parent identifier",
+	"parent with identifier with child with items and location hash of parent identifier returns breadcrumb of root and parent, and child with hyperlink prefixed with parent identifier",
 	() =>
 		expectGetInteractiveElementsForYaml({
 			expectedFile: "with-hyperlink-prefixed-with-parent",
-			expectedPrefix: breadcrumbHtmlForParent,
+			expectedPrefix: breadcrumbHtmlForRootAndParent,
 			locationHash: "#parent",
 			yaml: "{ id: parent, items: { id: single, items: nested } }",
+		})
+);
+
+test(
+	"grandparent and parent with identifiers with child with items and location hash of grandparent and parent identifier returns breadcrumb of root, grandparent and parent, and child with hyperlink prefixed with parent identifier",
+	() =>
+		expectGetInteractiveElementsForYaml({
+			expectedFile: "with-hyperlink-prefixed-with-grandparent-and-parent",
+			expectedPrefix: "<div><a href=\"#\">root</a> &gt; <a href=\"#grandparent\">grandparent</a> &gt; parent</div>",
+			locationHash: "#grandparent/parent",
+			yaml: "{ id: grandparent, items: { id: parent, items: { id: single, items: nested } } }",
 		})
 );
 
