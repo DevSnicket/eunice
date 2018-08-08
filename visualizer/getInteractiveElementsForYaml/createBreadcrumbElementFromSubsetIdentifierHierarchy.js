@@ -35,8 +35,8 @@ function createInitialRootAggregation() {
 			elements:
 				[
 					createAnchor({
+						content: "root",
 						href: "#",
-						identifier: "root",
 					}),
 				],
 			hrefBase:
@@ -70,22 +70,37 @@ function aggregate({
 	);
 
 	function createAnchorOrGetIdentifierWhenLast() {
+		const content =
+			identifier
+			||
+			createAnonymousElement();
+
 		return (
 			aggregation.index === count - 1
 			?
-			identifier
+			content
 			:
 			createAnchor({
+				content,
 				href,
-				identifier,
 			})
 		);
 	}
 }
 
+function createAnonymousElement() {
+	return (
+		createElement(
+			"span",
+			{ style: { fontStyle: "italic" } },
+			"anonymous"
+		)
+	);
+}
+
 function createAnchor({
+	content,
 	href,
-	identifier,
 }) {
 	return (
 		createElement(
@@ -94,7 +109,7 @@ function createAnchor({
 				href,
 				key: href,
 			},
-			identifier
+			content
 		)
 	);
 }
