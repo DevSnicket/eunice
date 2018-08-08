@@ -134,6 +134,15 @@
 				"useWSL": true
 			},
 			{
+				"args": [ "getInteractiveElementsForYaml.test.js" ],
+				"cwd": "${workspaceFolder}/Renderer/",
+				"name": "renderer getInteractiveElementsForYaml jest",
+				"program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
 				"args": [ "getSvgForYaml.test.js" ],
 				"cwd": "${workspaceFolder}/Renderer/",
 				"name": "renderer getSvgForYaml jest",
