@@ -36,7 +36,7 @@ module.exports =
 				createElement,
 				font,
 				namespaces,
-				style: `g.item rect{fill:lightgray}g.item text{fill:black}g.dependency text{fill:white}${style}`,
+				style: `g.item rect{fill:lightgray}g.item text{fill:black}g.item.anonymous text{font-style:italic}g.dependency text{fill:white}${style}`,
 				symbols:
 					Object.values(arrows)
 					.map(arrow => arrow.element),
