@@ -11,7 +11,7 @@ module.exports =
 		height,
 		key,
 		left,
-		paddingBottom = 0,
+		paddingBottom,
 		paddingRight,
 		text,
 		top,
