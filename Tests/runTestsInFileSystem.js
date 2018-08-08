@@ -7,13 +7,13 @@ const
 	readTextFile = require("./readTextFile");
 
 module.exports =
-	function runTestsInFileSystem({
+	({
 		action,
 		caseFileName,
 		directory: rootDirectory,
 		expectedFileName,
 		processArguments,
-	}) {
+	}) => {
 		if (isJestProcessFromArguments(processArguments))
 			discoverAndDescribeTestCases();
 		else if (processArguments.length == 3)
