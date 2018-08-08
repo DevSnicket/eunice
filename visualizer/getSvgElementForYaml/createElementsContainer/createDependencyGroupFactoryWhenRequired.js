@@ -25,8 +25,11 @@ module.exports =
 								height: arrow.height,
 								key,
 								left,
-								paddingBottom: 0,
-								paddingRight: arrow.paddingRight,
+								padding:
+									{
+										bottom: 0,
+										right: arrow.paddingRight,
+									},
 								text: count,
 								top,
 								width,

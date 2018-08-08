@@ -11,8 +11,7 @@ module.exports =
 		height,
 		key,
 		left,
-		paddingBottom,
-		paddingRight,
+		padding,
 		text,
 		top,
 		width,
@@ -64,14 +63,14 @@ module.exports =
 		}
 
 		function getTextLeftOffset() {
-			return (width - paddingRight) / 2;
+			return (width - padding.Right) / 2;
 		}
 
 		function getTextTopOffset() {
 			return (
-				((height - paddingBottom) / 2)
+				((height - padding.Bottom) / 2)
 				+
 				(fontSize * 0.36)
 			);
 		}
-	}
+	};
