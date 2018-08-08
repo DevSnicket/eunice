@@ -3,6 +3,7 @@ const
 	createElementsContainer = require("./getSvgElementForYaml/createElementsContainer"),
 	createStackFromParsedYaml = require("./getSvgElementForYaml/createStackFromParsedYaml"),
 	createSvgElement = require("./getSvgElementForYaml/createSvgElement"),
+	createTextGroup = require("./getSvgElementForYaml/createTextGroup"),
 	findStackOfSubsetIdentifierHierarchyWhenSpecified = require("./getSvgElementForYaml/findStackOfSubsetIdentifierHierarchyWhenSpecified"),
 	initializeDependenciesInStack = require("./getSvgElementForYaml/initializeDependenciesInStack"),
 	withPrecision = require("./getSvgElementForYaml/withPrecision");
@@ -51,8 +52,15 @@ module.exports =
 			return (
 				createElementsContainer({
 					arrows,
-					createElement,
 					createItemGroupWrapperForItem,
+					createTextGroup:
+						parameters =>
+							createTextGroup({
+								createElement,
+								fontSize: font.size,
+								withPrecision,
+								...parameters,
+							}),
 					font,
 					stack:
 						subsetIdentifierHierarchy
