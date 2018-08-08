@@ -42,9 +42,11 @@ module.exports =
 								key:
 									identifier,
 								left,
-								paddingBottom,
-								paddingRight:
-									0,
+								padding:
+									{
+										bottom: paddingBottom,
+										right: 0,
+									},
 								text,
 								top,
 								width,
