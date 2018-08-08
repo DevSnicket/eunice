@@ -63,12 +63,12 @@ module.exports =
 		}
 
 		function getTextLeftOffset() {
-			return (width - padding.Right) / 2;
+			return (width - padding.right) / 2;
 		}
 
 		function getTextTopOffset() {
 			return (
-				((height - padding.Bottom) / 2)
+				((height - padding.bottom) / 2)
 				+
 				(fontSize * 0.36)
 			);
