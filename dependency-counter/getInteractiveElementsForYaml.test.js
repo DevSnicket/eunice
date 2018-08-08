@@ -44,7 +44,7 @@ test(
 	() =>
 		expectGetInteractiveElementsForYaml({
 			expectedFile: "without-hyperlink",
-			expectedPrefix: "<div><a href=\"#\">root</a> &gt; </div>",
+			expectedPrefix: "<div><a href=\"#\">root</a> &gt; <span style=\"font-style:italic\">anonymous</span></div>",
 			locationHash: "#undefined",
 			yaml: "{ items: single }",
 		})
