@@ -1,4 +1,6 @@
-const createDependenciesInlineElements = require("./createDependenciesInlineElements");
+const
+	createDependenciesInlineElements = require("./createDependenciesInlineElements"),
+	getIdentifierClassNameAndText = require("../getIdentifierClassNameAndText");
 
 module.exports =
 	({
@@ -8,7 +10,11 @@ module.exports =
 		font,
 		identifier,
 	}) => {
-		const text = identifier || "anonymous";
+		const { className, text } =
+			getIdentifierClassNameAndText({
+				baseClassName: "item",
+				identifier,
+			});
 
 		const
 			height = 40 + calculateMaximumDependencyHeight(),
@@ -25,10 +31,7 @@ module.exports =
 							createTextGroup({
 								attributes:
 									null,
-								className:
-									getClassNameForHasIdentifier(
-										identifier
-									),
+								className,
 								elementName:
 									"rect",
 								elementsBelowText:
@@ -38,7 +41,7 @@ module.exports =
 									}),
 								height,
 								key:
-									identifier,
+									text,
 								left,
 								padding:
 									{
@@ -90,15 +93,3 @@ module.exports =
 			);
 		}
 	};
-
-function getClassNameForHasIdentifier(
-	hasIdentifier
-) {
-	return (
-		[
-			"item",
-			...hasIdentifier ? [] : [ "anonymous" ],
-		]
-		.join(" ")
-	);
-}

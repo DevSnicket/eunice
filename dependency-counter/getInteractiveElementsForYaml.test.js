@@ -7,74 +7,74 @@ const
 	readTextFile = require("../Tests/readTextFile");
 
 test(
-	"item without items returns SVG without hyperlink",
+	"item without items returns item without breadcrumbs, parent and hyperlinks",
 	() =>
 		expectGetInteractiveElementsForYaml({
-			expectedFile: "without-hyperlink",
+			expectedSvgFile: "without-parent-and-hyperlinks",
 			locationHash: null,
 			yaml: "single",
 		})
 );
 
 test(
-	"item with items returns SVG with hyperlink",
+	"item with items returns item with hyperlinks, and without breadcrumbs and parent",
 	() =>
 		expectGetInteractiveElementsForYaml({
-			expectedFile: "with-hyperlink",
+			expectedSvgFile: "without-parent-and-with-hyperlinks",
 			locationHash: null,
 			yaml: "{ id: single, items: nested }",
 		})
 );
 
-const breadcrumbHtmlForRootAndParent = "<div><a href=\"#\">root</a> &gt; parent</div>";
+const breadcrumbHtmlForRoot = "<div><a href=\"#\">root</a></div>";
 
 test(
-	"parent with identifier with child without items and location hash of parent identifier returns breadcrumb of root and parent, and child without hyperlink",
+	"parent with identifier with child without items and location hash of parent identifier returns breadcrumb of root and child without hyperlink",
 	() =>
 		expectGetInteractiveElementsForYaml({
-			expectedFile: "without-hyperlink",
-			expectedPrefix: breadcrumbHtmlForRootAndParent,
+			expectedHtmlPrefix: breadcrumbHtmlForRoot,
+			expectedSvgFile: "with-parent-and-without-hyperlinks",
 			locationHash: "#parent",
 			yaml: "{ id: parent, items: single }",
 		})
 );
 
 test(
-	"parent without identifier with child without items and location hash of undefined returns breadcrumb of root and child without hyperlink",
+	"grandparent without identifier, parent with child without items and location hash of undefined and parent returns breadcrumb of root and anonymous, and child without hyperlink",
 	() =>
 		expectGetInteractiveElementsForYaml({
-			expectedFile: "without-hyperlink",
-			expectedPrefix: "<div><a href=\"#\">root</a> &gt; <span style=\"font-style:italic\">anonymous</span></div>",
-			locationHash: "#undefined",
-			yaml: "{ items: single }",
+			expectedHtmlPrefix: "<div><a href=\"#\">root</a> &gt; <a href=\"#undefined\" style=\"font-style:italic\">anonymous</a></div>",
+			expectedSvgFile: "with-parent-and-without-hyperlinks",
+			locationHash: "#undefined/parent",
+			yaml: "{ items: { id: parent, items: single } }",
 		})
 );
 
 test(
-	"parent with identifier with child with items and location hash of parent identifier returns breadcrumb of root and parent, and child with hyperlink prefixed with parent identifier",
+	"parent with identifier with child with items and location hash of parent identifier returns breadcrumb of root and child with hyperlink prefixed with parent identifier",
 	() =>
 		expectGetInteractiveElementsForYaml({
-			expectedFile: "with-hyperlink-prefixed-with-parent",
-			expectedPrefix: breadcrumbHtmlForRootAndParent,
+			expectedHtmlPrefix: breadcrumbHtmlForRoot,
+			expectedSvgFile: "with-parent-and-hyperlinks",
 			locationHash: "#parent",
 			yaml: "{ id: parent, items: { id: single, items: nested } }",
 		})
 );
 
 test(
-	"grandparent and parent with identifiers with child with items and location hash of grandparent and parent identifier returns breadcrumb of root, grandparent and parent, and child with hyperlink prefixed with parent identifier",
+	"grandparent and parent with identifiers, child with items and location hash of grandparent and parent identifier returns breadcrumb of root and grandparent, and child with hyperlink prefixed with parent identifier",
 	() =>
 		expectGetInteractiveElementsForYaml({
-			expectedFile: "with-hyperlink-prefixed-with-grandparent-and-parent",
-			expectedPrefix: "<div><a href=\"#\">root</a> &gt; <a href=\"#grandparent\">grandparent</a> &gt; parent</div>",
+			expectedHtmlPrefix: "<div><a href=\"#\">root</a> &gt; <a href=\"#grandparent\">grandparent</a></div>",
+			expectedSvgFile: "with-grandparent-and-parent-and-hyperlinks",
 			locationHash: "#grandparent/parent",
 			yaml: "{ id: grandparent, items: { id: parent, items: { id: single, items: nested } } }",
 		})
 );
 
 function expectGetInteractiveElementsForYaml({
-	expectedFile,
-	expectedPrefix = "",
+	expectedHtmlPrefix = "",
+	expectedSvgFile,
 	locationHash,
 	yaml,
 }) {
@@ -87,10 +87,10 @@ function expectGetInteractiveElementsForYaml({
 		)
 	)
 	.toEqual(
-		expectedPrefix
+		expectedHtmlPrefix
 		+
 		readTextFile(
-			path.join(__dirname, "getInteractiveElementsForYaml.testcases", `${expectedFile}.svg`)
+			path.join(__dirname, "getInteractiveElementsForYaml.testcases", `${expectedSvgFile}.svg`)
 		)
 	);
 }

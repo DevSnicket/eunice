@@ -1,6 +1,7 @@
 const
 	createArrows = require("./getSvgElementForYaml/createArrows"),
 	createElementsContainer = require("./getSvgElementForYaml/createElementsContainer"),
+	createParentContainer = require("./getSvgElementForYaml/createParentContainer"),
 	createStackFromParsedYaml = require("./getSvgElementForYaml/createStackFromParsedYaml"),
 	createSvgElement = require("./getSvgElementForYaml/createSvgElement"),
 	createTextGroup = require("./getSvgElementForYaml/createTextGroup"),
@@ -37,7 +38,7 @@ module.exports =
 				createElement,
 				font,
 				namespaces,
-				style: `g.item rect{fill:lightgray}g.item text{fill:black}g.item.anonymous text{font-style:italic}g.dependency text{fill:white}${style}`,
+				style: `g.anonymous text{font-style:italic}g.parent>rect{fill:none;stroke:gray}g.item>rect{fill:lightgray}g.dependency>text{fill:white}${style}`,
 				symbols:
 					Object.values(arrows)
 					.map(arrow => arrow.element),
@@ -50,30 +51,63 @@ module.exports =
 			initializeDependenciesInStack(stack);
 
 			return (
-				createElementsContainer({
-					arrows,
-					createItemGroupWrapperForItem,
+				subsetIdentifierHierarchy
+				?
+				createParentContainer({
 					createTextGroup:
-						parameters =>
-							createTextGroup({
-								createElement,
-								fontSize: font.size,
-								withPrecision,
-								...parameters,
-							}),
-					font,
-					stack:
-						subsetIdentifierHierarchy
-						?
-						findStackOfSubsetIdentifierHierarchyWhenSpecified({
-							stack,
-							subsetIdentifierHierarchy,
-						})
-						:
-						stack,
-					withPrecision,
+						createTextGroupWithFontSizeAndPrecision,
+					parent:
+						subsetIdentifierHierarchy.slice(-1)[0],
+					summaryElementsContainer:
+						createElementsContainerWithPadding({
+							left: 10,
+							top: 40,
+						}),
+				})
+				:
+				createElementsContainerWithPadding({
+					left: 0,
+					top: 0,
 				})
 			);
+
+			function createElementsContainerWithPadding(
+				padding
+			) {
+				return (
+					createElementsContainer({
+						arrows,
+						createItemGroupWrapperForItem,
+						createTextGroup:
+							createTextGroupWithFontSizeAndPrecision,
+						font,
+						padding,
+						stack:
+							subsetIdentifierHierarchy
+							?
+							findStackOfSubsetIdentifierHierarchyWhenSpecified({
+								stack,
+								subsetIdentifierHierarchy,
+							})
+							:
+							stack,
+						withPrecision,
+					})
+				);
+			}
+
+			function createTextGroupWithFontSizeAndPrecision(
+				parameters
+			) {
+				return (
+					createTextGroup({
+						createElement,
+						fontSize: font.size,
+						withPrecision,
+						...parameters,
+					})
+				);
+			}
 		}
 	};
 
