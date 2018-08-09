@@ -16,16 +16,25 @@ module.exports =
 			return (
 				subsetIdentifierHierarchy
 				.reduce(
-					(aggregation, identifier) =>
+					(aggregation, identifier, index) =>
+						isIndexOfLast(index)
+						?
+						aggregation
+						:
 						aggregate({
 							aggregation,
-							count: subsetIdentifierHierarchy.length,
 							identifier,
 						}),
 					createInitialRootAggregation()
 				)
 				.elements
 			);
+		}
+
+		function isIndexOfLast(
+			index
+		) {
+			return index === subsetIdentifierHierarchy.length - 1;
 		}
 	};
 
@@ -41,15 +50,12 @@ function createInitialRootAggregation() {
 				],
 			hrefBase:
 				"#",
-			index:
-				0,
 		}
 	);
 }
 
 function aggregate({
 	aggregation,
-	count,
 	identifier,
 }) {
 	const href = aggregation.hrefBase + encodeURIComponent(identifier);
@@ -60,47 +66,32 @@ function aggregate({
 				[
 					...aggregation.elements,
 					" > ",
-					createAnchorOrGetIdentifierWhenLast(),
+					createAnchor(
+						identifier
+						?
+						{
+							content: identifier,
+							href,
+						}
+						:
+						{
+							content: "anonymous",
+							href,
+							style: { fontStyle: "italic" },
+						}
+					),
 				],
 			hrefBase:
 				`${href}/`,
-			index:
-				aggregation.index + 1,
 		}
 	);
-
-	function createAnchorOrGetIdentifierWhenLast() {
-		const content =
-			identifier
-			||
-			createAnonymousElement();
-
-		return (
-			aggregation.index === count - 1
-			?
-			content
-			:
-			createAnchor({
-				content,
-				href,
-			})
-		);
-	}
 }
 
-function createAnonymousElement() {
-	return (
-		createElement(
-			"span",
-			{ style: { fontStyle: "italic" } },
-			"anonymous"
-		)
-	);
-}
 
 function createAnchor({
 	content,
 	href,
+	style = null,
 }) {
 	return (
 		createElement(
@@ -108,6 +99,7 @@ function createAnchor({
 			{
 				href,
 				key: href,
+				...style && { style },
 			},
 			content
 		)

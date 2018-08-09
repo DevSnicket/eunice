@@ -16,6 +16,7 @@ module.exports =
 		createItemGroupWrapperForItem,
 		createTextGroup,
 		font,
+		padding,
 		stack,
 		withPrecision,
 	}) => {
@@ -42,14 +43,12 @@ module.exports =
 				dependencyCounts,
 				stackElementsContainer:
 					createStackElementsContainer({
-						addPadding,
 						createItemGroupsContainer:
 							({
 								items,
 								top,
 							}) =>
 								createItemAndDependencyGroupsContainer({
-									addPadding,
 									createItemAndDependencyGroup:
 										({
 											item,
@@ -61,10 +60,13 @@ module.exports =
 												top,
 											}),
 									items,
+									left: padding.left,
 									top,
 									withPrecision,
 								}),
 						stack,
+						top: padding.top,
+						withPrecision,
 					}),
 			})
 		);
@@ -143,18 +145,6 @@ module.exports =
 								key: `${keyPrefix}dependency count inner ${keySuffix}`,
 							}),
 				})
-			);
-		}
-
-		function addPadding(
-			offset
-		) {
-			return (
-				offset == 0
-				?
-				0
-				:
-				withPrecision(offset + 15)
 			);
 		}
 	};

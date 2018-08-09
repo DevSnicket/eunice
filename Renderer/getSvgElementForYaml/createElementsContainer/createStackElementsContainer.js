@@ -1,24 +1,44 @@
 module.exports =
 	({
-		addPadding,
 		createItemGroupsContainer,
 		stack,
-	}) =>
-		stack
-		.reduce(
-			(aggregation, items) => {
-				const container =
-					createItemGroupsContainer({
-						items,
-						top: addPadding(aggregation.bottom),
-					});
-
-				return (
-					{
-						bottom: container.bottom,
-						elements: [ ...aggregation.elements, ...container.groups ],
-						right: Math.max(aggregation.right, container.right),
-					});
-			},
-			{ bottom: 0, elements: [], right: 0 }
+		top,
+		withPrecision,
+	}) => {
+		return (
+			stack
+			.reduce(
+				aggregate,
+				{ bottom: top, elements: [], right: 0 }
+			)
 		);
+
+		function aggregate(
+			aggregation,
+			items,
+			index
+		) {
+			const container =
+				createItemGroupsContainer({
+					items,
+					top: getTop(),
+				});
+
+			return (
+				{
+					bottom: container.bottom,
+					elements: [ ...aggregation.elements, ...container.groups ],
+					right: Math.max(aggregation.right, container.right),
+				});
+
+			function getTop() {
+				return (
+					withPrecision(
+						aggregation.bottom
+						+
+						(index ? 15 : 0)
+					)
+				);
+			}
+		}
+	};
