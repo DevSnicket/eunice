@@ -68,7 +68,7 @@ module.exports =
 
 		function getTextTopOffset() {
 			return (
-				((height - padding.bottom) / 2)
+				padding.top
 				+
 				(fontSize * 0.36)
 			);

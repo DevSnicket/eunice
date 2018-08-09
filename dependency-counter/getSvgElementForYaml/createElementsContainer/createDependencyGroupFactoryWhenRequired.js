@@ -27,8 +27,8 @@ module.exports =
 								left,
 								padding:
 									{
-										bottom: 0,
 										right: arrow.paddingRight,
+										top: 12,
 									},
 								text: count,
 								top,
