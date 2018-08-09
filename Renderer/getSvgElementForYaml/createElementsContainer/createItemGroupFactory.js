@@ -8,12 +8,10 @@ module.exports =
 		font,
 		identifier,
 	}) => {
-		const
-			paddingBottom = calculateMaximumDependencyHeight(),
-			text = identifier || "anonymous";
+		const text = identifier || "anonymous";
 
 		const
-			height = 40 + paddingBottom,
+			height = 40 + calculateMaximumDependencyHeight(),
 			width = font.measure(text) + 20;
 
 		return (
@@ -44,8 +42,8 @@ module.exports =
 								left,
 								padding:
 									{
-										bottom: paddingBottom,
 										right: 0,
+										top: 20,
 									},
 								text,
 								top,
