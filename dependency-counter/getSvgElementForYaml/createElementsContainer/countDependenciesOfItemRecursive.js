@@ -2,9 +2,10 @@ const findDirectionBetweenItemsInFirstMutualStack = require("./countDependencies
 
 module.exports = countDependenciesOfItemRecursive;
 
-function countDependenciesOfItemRecursive(
-	item
-) {
+function countDependenciesOfItemRecursive({
+	item,
+	parentStack,
+}) {
 	const itemCount = countDependenciesOfItem();
 
 	return (
@@ -70,7 +71,13 @@ function countDependenciesOfItemRecursive(
 						level =>
 							sumCountsOfItems({
 								counts:
-									level.map(countDependenciesOfItemRecursive),
+									level.map(
+										childitem =>
+											countDependenciesOfItemRecursive({
+												item: childitem,
+												parentStack,
+											})
+									),
 								initialValue:
 									null,
 							})
@@ -80,69 +87,73 @@ function countDependenciesOfItemRecursive(
 			})
 		);
 	}
-}
 
-function sumDirectionInStackWhenOuter({
-	aggregation,
-	directionInStack,
-}) {
-	return (
-		isOuterStack(directionInStack.stack)
-		?
-		sumCount(
-			aggregation,
-			getCountFromDirection(directionInStack.direction)
-		)
-		:
-		aggregation
-	);
-}
-
-function sumDirectionInStackWithScope({
-	aggregation,
-	directionInStack,
-}) {
-	const count = getCountFromDirection(directionInStack.direction);
-
-	return (
-		isOuterStack(directionInStack.stack)
-		?
-		sumDirectionInOuterStack()
-		:
-		sumDirectionInInnerStack()
-	);
-
-	function sumDirectionInOuterStack() {
+	function sumDirectionInStackWhenOuter({
+		aggregation,
+		directionInStack,
+	}) {
 		return (
-			aggregation
+			isOuterStack(directionInStack.stack)
 			?
-			{
-				inner: aggregation.inner,
-				outer: sumCount(aggregation.outer, count),
-			}
+			sumCount(
+				aggregation,
+				getCountFromDirection(directionInStack.direction)
+			)
 			:
-			{ outer: count }
+			aggregation
 		);
 	}
 
-	function sumDirectionInInnerStack() {
+	function sumDirectionInStackWithScope({
+		aggregation,
+		directionInStack,
+	}) {
+		const count = getCountFromDirection(directionInStack.direction);
+
 		return (
-			aggregation
+			isOuterStack(directionInStack.stack)
 			?
-			{
-				inner: sumCount(aggregation.inner, count),
-				outer: aggregation.outer,
-			}
+			sumDirectionInOuterStack()
 			:
-			{ inner: count }
+			sumDirectionInInnerStack()
+		);
+
+		function sumDirectionInOuterStack() {
+			return (
+				aggregation
+				?
+				{
+					inner: aggregation.inner,
+					outer: sumCount(aggregation.outer, count),
+				}
+				:
+				{ outer: count }
+			);
+		}
+
+		function sumDirectionInInnerStack() {
+			return (
+				aggregation
+				?
+				{
+					inner: sumCount(aggregation.inner, count),
+					outer: aggregation.outer,
+				}
+				:
+				{ inner: count }
+			);
+		}
+	}
+
+	function isOuterStack(
+		stack
+	) {
+		return (
+			stack
+			&&
+			(stack === parentStack || !stack.parent || stack.parent.level.stack !== parentStack)
 		);
 	}
-}
-
-function isOuterStack(
-	stack
-) {
-	return stack && !stack.parent;
 }
 
 function getCountFromDirection(
