@@ -31,21 +31,17 @@ module.exports =
 			function describeTestCase(
 				testCase
 			) {
-				describe(
-					"getSvgElementForYaml",
+				test(
+					testCase,
 					() =>
-						it(
-							testCase,
-							() =>
-								expect(
-									getActualForTestCase(testCase)
-								)
-								.toBe(
-									readTestCaseFile({
-										fileName: expectedFileName,
-										testCase,
-									})
-								)
+						expect(
+							getActualForTestCase(testCase)
+						)
+						.toBe(
+							readTestCaseFile({
+								fileName: expectedFileName,
+								testCase,
+							})
 						)
 				);
 			}
