@@ -151,7 +151,21 @@ function countDependenciesOfItemRecursive({
 		return (
 			stack
 			&&
-			(stack === parentStack || !stack.parent || stack.parent.level.stack !== parentStack)
+			(stack === parentStack || !isInnerStack(stack))
+		);
+	}
+
+	function isInnerStack(
+		stack
+	) {
+		return (
+			stack.parent
+			&&
+			(
+				stack.parent.level.stack === parentStack
+				||
+				isInnerStack(stack.parent.level.stack)
+			)
 		);
 	}
 }
