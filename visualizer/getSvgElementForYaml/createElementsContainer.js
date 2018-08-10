@@ -76,7 +76,11 @@ module.exports =
 			left,
 			top,
 		}) {
-			const dependencyCount = countDependenciesOfItemRecursive(item);
+			const dependencyCount =
+				countDependenciesOfItemRecursive({
+					item,
+					parentStack: stack,
+				});
 
 			if (dependencyCount)
 				dependencyCounts.push(dependencyCount);

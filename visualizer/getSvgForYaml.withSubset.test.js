@@ -34,31 +34,35 @@ test(
 );
 
 test(
-	"subset of root item with single child item returns parent with item",
+	"subset of root item with child item returns parent with item",
 	() =>
 		expect(
 			getSvgForYaml({
 				subsetIdentifierHierarchy: [ "parent" ],
-				yaml: "{id: parent, items: single}",
+				yaml: "{id: parent, items: item}",
 			})
 		)
-		.toEqual(readTextFile(path.join(testcasesDirectory, "parent-with-item.svg")))
+		.toEqual(
+			readSvgFile("item-with-parent")
+		)
 );
 
 test(
-	"subset of child item of root with single child item returns parent with item",
+	"subset of child item of root with child item returns parent with item",
 	() =>
 		expect(
 			getSvgForYaml({
 				subsetIdentifierHierarchy: [ "grandparent", "parent" ],
-				yaml: "{id: grandparent, items: {id: parent, items: single}}",
+				yaml: "{id: grandparent, items: {id: parent, items: item}}",
 			})
 		)
-		.toEqual(readTextFile(path.join(testcasesDirectory, "parent-with-item.svg")))
+		.toEqual(
+			readSvgFile("item-with-parent")
+		)
 );
 
 test(
-	"subset of root item and with single child item without identifier returns parent with anonymous item",
+	"subset of root item and with child item without identifier returns parent with anonymous item",
 	() =>
 		expect(
 			getSvgForYaml({
@@ -66,25 +70,29 @@ test(
 				yaml: "{id: parent, items: { } }",
 			})
 		)
-		.toEqual(readTextFile(path.join(testcasesDirectory, "parent-with-anonymous-item.svg")))
+		.toEqual(
+			readSvgFile("anonymous-item-with-parent")
+		)
 );
 
 test(
-	"subset of root item without identifier and with single child item returns anonymous parent with item",
+	"subset of root item without identifier and with child item returns anonymous parent with item",
 	() =>
 		expect(
 			getSvgForYaml({
 				// the item id property wont be defined
 				// eslint-disable-next-line no-undefined
 				subsetIdentifierHierarchy: [ undefined ],
-				yaml: "{ items: single }",
+				yaml: "{ items: item }",
 			})
 		)
-		.toEqual(readTextFile(path.join(testcasesDirectory, "anonymous-parent-with-item.svg")))
+		.toEqual(
+			readSvgFile("item-with-anonymous-parent")
+		)
 );
 
 test(
-	"subset of root item with single child that depends upon grandchild item returns parent with one inner dependency",
+	"subset of root item with child item that depends upon grandchild item returns parent with inner dependency",
 	() =>
 		expect(
 			getSvgForYaml({
@@ -92,5 +100,55 @@ test(
 				yaml: "{id: grandparent, items: {id: parent, dependsUpon: nested, items: nested}}",
 			})
 		)
-		.toEqual(readTextFile(path.join(testcasesDirectory, "parent-depends-upon-item.svg")))
+		.toEqual(
+			readSvgFile("parent-depends-upon-inner-below-with-grandparent")
+		)
 );
+
+test(
+	"subset of root item with child item that depends upon parent/root item returns item with outer dependency",
+	() =>
+		expect(
+			getSvgForYaml({
+				subsetIdentifierHierarchy: [ "parent" ],
+				yaml: "{id: parent, items: {id: item, dependsUpon: parent}}",
+			})
+		)
+		.toEqual(
+			readSvgFile("item-with-parent-depends-upon-outer-above")
+		)
+);
+
+test(
+	"subset of parent item with child item that depends upon grandparent/root item returns item with outer dependency",
+	() =>
+		expect(
+			getSvgForYaml({
+				subsetIdentifierHierarchy: [ "grandparent", "parent" ],
+				yaml: "{id: grandparent, items: {id: parent, items: {id: item, dependsUpon: grandparent}}}",
+			})
+		)
+		.toEqual(
+			readSvgFile("item-with-parent-depends-upon-outer-above")
+		)
+);
+
+test(
+	"subset of root item with stack of child item that depends upon lower child item returns item with outer dependency",
+	() =>
+		expect(
+			getSvgForYaml({
+				subsetIdentifierHierarchy: [ "parent" ],
+				yaml: "{id: parent, items: [[{id: upper, dependsUpon: lower}], [lower]]}",
+			})
+		)
+		.toEqual(
+			readSvgFile("upper-item-depends-upon-lower-item-with-parent")
+		)
+);
+
+function readSvgFile(
+	filename
+) {
+	return readTextFile(path.join(testcasesDirectory, `${filename}.svg`));
+}
