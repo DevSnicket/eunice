@@ -1,6 +1,8 @@
 {
 	"dependencies": {
 		"acorn": "5.6.2",
+		"array.prototype.flat": "1.2.1",
+		"array.prototype.flatmap": "1.2.1",
 		"js-yaml": "3.11.0",
 		"minimist": "1.2.0",
 		"react": "16.4.0",

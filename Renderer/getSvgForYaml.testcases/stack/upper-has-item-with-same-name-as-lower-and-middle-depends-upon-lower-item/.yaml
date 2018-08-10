@@ -1,0 +1,5 @@
+- - id: upper
+    items: lower
+- - id: middle
+    dependsUpon: lower
+- - lower

@@ -1,3 +1,9 @@
+require("array.prototype.flat")
+.shim();
+
+require("array.prototype.flatmap")
+.shim();
+
 module.exports = initializeDependenciesInStack;
 
 function initializeDependenciesInStack(
@@ -16,21 +22,22 @@ function initializeDependenciesInStack(
 	) {
 		if (item.dependsUpon)
 			updateItem({
-				dependsUpon: item.dependsUpon,
+				dependsUpon:
+					item.dependsUpon,
 				findItemWithIdentifier,
 				item,
 			});
-	}
 
-	function findItemWithIdentifier(
-		identifier
-	) {
-		return (
-			findItemWithIdentifierInStackOrParents({
-				identifier,
-				stack,
-			})
-		);
+		function findItemWithIdentifier(
+			identifier
+		) {
+			return (
+				findItemWithIdentifierInStackOrParents({
+					identifier,
+					stack: item.items || stack,
+				})
+			);
+		}
 	}
 }
 
@@ -65,33 +72,35 @@ function findItemWithIdentifierInStack({
 	identifier,
 	stack,
 }) {
-	for (const level of stack) {
-		const foundItem = findIn(level);
+	return findItemInStacks([ stack ]);
 
-		if (foundItem)
-			return foundItem;
+	function findItemInStacks(
+		stacks
+	) {
+		const itemsOfStacks = stacks.flat(3);
+
+		return (
+			findItemWithIdentifier(itemsOfStacks)
+			||
+			findItemInStacksOfItems()
+		);
+
+		function findItemInStacksOfItems() {
+			const stacksOfItems =
+				itemsOfStacks.flatMap(item => item.items || []);
+
+			return (
+				stacksOfItems.length
+				&&
+				findItemInStacks(stacksOfItems)
+			);
+		}
 	}
 
-	return null;
-
-	function findIn(
+	function findItemWithIdentifier(
 		items
 	) {
-		for (const item of items)
-			if (item.id === identifier)
-				return item;
-			else if (item.items) {
-				const foundItem =
-					findItemWithIdentifierInStack({
-						identifier,
-						stack: item.items,
-					});
-
-				if (foundItem)
-					return foundItem;
-			}
-
-		return null;
+		return items.find(item => item.id === identifier);
 	}
 }
 

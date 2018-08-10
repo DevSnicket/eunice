@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"alwaysStrict": true,
 		"checkJs": true,
-		"lib": [ "es2017" ],
+		"lib": [ "es2017", "esnext.array" ],
 		"module": "commonjs",
 		"noEmit": true,
 		"target": "es2017"

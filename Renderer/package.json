@@ -1,6 +1,8 @@
 {
 	"author": "Graham Dyson",
 	"dependencies": {
+		"array.prototype.flat": "1.2.1",
+		"array.prototype.flatmap": "1.2.1",
 		"js-yaml": "3.11.0",
 		"react": "16.4.0",
 		"react-dom": "16.4.0",
@@ -46,5 +48,5 @@
 		"lint": "eslint .",
 		"test": "jest --no-cache --runInBand"
 	},
-	"version": "0.13.2"
+	"version": "0.13.3"
 }
