@@ -134,6 +134,48 @@ test(
 );
 
 test(
+	"subset of grandparent item with grandchild item that depends upon grandparent returns item with outer dependency",
+	() =>
+		expect(
+			getSvgForYaml({
+				subsetIdentifierHierarchy: [ "grandparent" ],
+				yaml: "{id: grandparent, items: {id: parent, items: {id: item, dependsUpon: grandparent}}}",
+			})
+		)
+		.toEqual(
+			readSvgFile("parent-with-grandparent-depends-upon-outer-above")
+		)
+);
+
+test(
+	"subset of grandparent item with grandchild item that depends upon parent returns item with inner dependency",
+	() =>
+		expect(
+			getSvgForYaml({
+				subsetIdentifierHierarchy: [ "grandparent" ],
+				yaml: "{id: grandparent, items: {id: parent, items: {id: item, dependsUpon: parent}}}",
+			})
+		)
+		.toEqual(
+			readSvgFile("parent-with-grandparent-depends-upon-inner-above")
+		)
+);
+
+test(
+	"subset of parent item with grandchild item that depends upon parent returns item with outer dependency",
+	() =>
+		expect(
+			getSvgForYaml({
+				subsetIdentifierHierarchy: [ "grandparent", "parent" ],
+				yaml: "{id: grandparent, items: {id: parent, items: {id: item, dependsUpon: parent}}}",
+			})
+		)
+		.toEqual(
+			readSvgFile("item-with-parent-depends-upon-outer-above")
+		)
+);
+
+test(
 	"subset of root item with stack of child item that depends upon lower child item returns item with outer dependency",
 	() =>
 		expect(
