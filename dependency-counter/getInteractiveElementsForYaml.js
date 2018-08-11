@@ -19,28 +19,31 @@ module.exports =
 			);
 
 		return (
-			callOrCreateErrorElement(
-				() =>
-					[
-						createBreadcrumbElementFromSubsetIdentifierHierarchy(
-							subsetIdentifierHierarchy
-						),
-						getSvgElementForYaml({
-							createElement,
-							createItemGroupWrapperForItem:
-								({ item, itemGroup }) =>
-									createItemGroupWrapperForItem({ item, itemGroup, locationHash }),
-							getTextWidth,
-							namespaces:
-								{ xmlnsXlink: "http://www.w3.org/1999/xlink" },
-							style:
-								"a{cursor:pointer}",
-							subsetIdentifierHierarchy,
-							yaml:
-								parseYaml(yaml),
-						}),
-					]
-			)
+			callOrCreateErrorElement({
+				action:
+					() =>
+						[
+							createBreadcrumbElementFromSubsetIdentifierHierarchy({
+								createElement,
+								subsetIdentifierHierarchy,
+							}),
+							getSvgElementForYaml({
+								createElement,
+								createItemGroupWrapperForItem:
+									({ item, itemGroup }) =>
+										createItemGroupWrapperForItem({ item, itemGroup, locationHash }),
+								getTextWidth,
+								namespaces:
+									{ xmlnsXlink: "http://www.w3.org/1999/xlink" },
+								style:
+									"a{cursor:pointer}",
+								subsetIdentifierHierarchy,
+								yaml:
+									parseYaml(yaml),
+							}),
+						],
+				createElement,
+			})
 		);
 	};
 
