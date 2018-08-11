@@ -1,7 +1,8 @@
-const { createElement } = require("react");
-
 module.exports =
-	action => {
+	({
+		action,
+		createElement,
+	}) => {
 		try {
 			return action();
 		} catch (error) {

@@ -1,7 +1,8 @@
-const { createElement } = require("react");
-
 module.exports =
-	subsetIdentifierHierarchy => {
+	({
+		createElement,
+		subsetIdentifierHierarchy,
+	}) => {
 		return (
 			subsetIdentifierHierarchy
 			&&
@@ -36,72 +37,71 @@ module.exports =
 		) {
 			return index === subsetIdentifierHierarchy.length - 1;
 		}
+
+		function createInitialRootAggregation() {
+			return (
+				{
+					elements:
+						[
+							createAnchor({
+								content: "root",
+								href: "#",
+							}),
+						],
+					hrefBase:
+						"#",
+				}
+			);
+		}
+
+		function aggregate({
+			aggregation,
+			identifier,
+		}) {
+			const href = aggregation.hrefBase + encodeURIComponent(identifier);
+
+			return (
+				{
+					elements:
+						[
+							...aggregation.elements,
+							" > ",
+							createAnchor(
+								identifier
+								?
+								{
+									content: identifier,
+									href,
+								}
+								:
+								{
+									content: "anonymous",
+									href,
+									style: { fontStyle: "italic" },
+								}
+							),
+						],
+					hrefBase:
+						`${href}/`,
+				}
+			);
+		}
+
+		function createAnchor({
+			content,
+			href,
+			style = null,
+		}) {
+			return (
+				createElement(
+					"a",
+					{
+						href,
+						key: href,
+						...style && { style },
+					},
+					content
+				)
+			);
+		}
 	};
-
-function createInitialRootAggregation() {
-	return (
-		{
-			elements:
-				[
-					createAnchor({
-						content: "root",
-						href: "#",
-					}),
-				],
-			hrefBase:
-				"#",
-		}
-	);
-}
-
-function aggregate({
-	aggregation,
-	identifier,
-}) {
-	const href = aggregation.hrefBase + encodeURIComponent(identifier);
-
-	return (
-		{
-			elements:
-				[
-					...aggregation.elements,
-					" > ",
-					createAnchor(
-						identifier
-						?
-						{
-							content: identifier,
-							href,
-						}
-						:
-						{
-							content: "anonymous",
-							href,
-							style: { fontStyle: "italic" },
-						}
-					),
-				],
-			hrefBase:
-				`${href}/`,
-		}
-	);
-}
-
-
-function createAnchor({
-	content,
-	href,
-	style = null,
-}) {
-	return (
-		createElement(
-			"a",
-			{
-				href,
-				key: href,
-				...style && { style },
-			},
-			content
-		)
-	);
-}
