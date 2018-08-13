@@ -8,7 +8,9 @@
 				"type": "node"
 			},
 			{
-				"args": [ ],
+				//"args": [ "const/argument-in-function-declaration/before/two" ],
+				//"args": [ "require-file/called/from-const/from-function-declaration/with-property" ],
+				"args": [ "require-file/called/from-const/from-function-declaration/with-object-destructuring" ],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/",
 				"name": "analyzer getYamlFromJavaScript test",
 				"program": "${workspaceFolder}/Analyzers/JavaScript/getYamlFromJavaScript.test.js",
@@ -28,6 +30,7 @@
 			{
 				"args":
 					[
+						//"--directory=./Analyzers/JavaScript/getOrCreateItemsInDirectory.testcases",
 						"--directory=./",
 						"--ignoreDirectoryNames=Coverage",
 						"--ignoreDirectoryNames=getOrCreateItemsInDirectory.testcases", 

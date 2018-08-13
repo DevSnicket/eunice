@@ -1,3 +1,7 @@
+const
+	createWhenRequire = require("./addVariables/createWhenRequire"),
+	getIdentifiersAndIsDestructuredFromExpression = require("./addVariables/getIdentifiersAndIsDestructuredFromExpression");
+
 module.exports =
 	({
 		addDeclarationsIn,
@@ -16,8 +20,14 @@ module.exports =
 		function createVariableDeclarations() {
 			return (
 				variableDeclaration.declarations
-				.map(createFromDeclarationWhenInitialized)
-				.filter(declaration => declaration)
+				.reduce(
+					(declarations, declaration) =>
+						[
+							...declarations,
+							...createFromDeclarationWhenInitialized(declaration) || [],
+						],
+					[]
+				)
 			);
 		}
 
@@ -29,59 +39,53 @@ module.exports =
 			return (
 				initalization
 				&&
-				(createWhenRequire() || createWhenNotFunction())
+				createFromDeclaration()
 			);
 
-			function createWhenRequire() {
+			function createFromDeclaration() {
 				return (
-					isRequire()
-					&&
-					{
-						...createFromDeclarationIdentifier(),
-						dependsUpon: getArgument(),
-					}
+					createWhenRequire({
+						createVariablesFromIdentifier,
+						initalization,
+					})
+					||
+					createWhenNotFunction()
 				);
-
-				function isRequire() {
-					return (
-						initalization.type === "CallExpression"
-						&&
-						initalization.callee.name === "require"
-					);
-				}
-
-				function getArgument() {
-					return initalization.arguments[0].value;
-				}
 			}
 
 			function createWhenNotFunction() {
 				return (
 					!isFunctionType(initalization.type)
 					&&
-					createFromDeclarationIdentifier()
+					createVariablesFromIdentifier()
 				);
 			}
 
-			function createFromDeclarationIdentifier() {
-				const variableName = declaration.id.name;
+			function createVariablesFromIdentifier() {
+				const { identifiers, isDestructured } =
+					getIdentifiersAndIsDestructuredFromExpression(
+						declaration.id
+					);
 
 				return (
-					{
-						id: variableName,
-						isUsedInNestedFunction: isUsedInNestedFunction(),
-						type: "variable",
-					}
+					identifiers
+					.map(
+						identifier => (
+							{
+								...isDestructured && { dependsUpon: identifier },
+								id:
+									identifier,
+								isUsedInNestedFunction:
+									hasUndeclaredReferenceTo({
+										parent,
+										reference: identifier,
+									}),
+								type:
+									"variable",
+							}
+						)
+					)
 				);
-
-				function isUsedInNestedFunction() {
-					return (
-						hasUndeclaredReferenceTo({
-							parent,
-							reference: variableName,
-						})
-					);
-				}
 			}
 		}
 	};

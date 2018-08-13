@@ -66,27 +66,50 @@ module.exports =
 			return (
 				resolveWhenString()
 				||
-				resolveMultiple()
+				resolveWhenArray()
+				||
+				resolveObject()
 			);
 
 			function resolveWhenString() {
 				return (
 					typeof dependsUpon === "string"
 					&&
-					(resolveWhenPath() || dependsUpon)
+					(resolveIdentifierWhenPath(dependsUpon) || dependsUpon)
 				);
 			}
 
-			function resolveWhenPath() {
+			function resolveWhenArray() {
 				return (
-					dependsUpon.startsWith(".")
+					Array.isArray(dependsUpon)
 					&&
-					path.join(directory, dependsUpon)
+					dependsUpon.map(resolveDependsUpon)
 				);
 			}
 
-			function resolveMultiple() {
-				return dependsUpon.map(resolveDependsUpon);
+			function resolveObject() {
+				const resolvedIdentifier = resolveIdentifierWhenPath(dependsUpon.id);
+
+				return (
+					resolvedIdentifier
+					?
+					{
+						id: resolvedIdentifier,
+						items: dependsUpon.items,
+					}
+					:
+					dependsUpon
+				);
+			}
+
+			function resolveIdentifierWhenPath(
+				identifier
+			) {
+				return (
+					identifier.startsWith(".")
+					&&
+					path.join(directory, identifier)
+				);
 			}
 		}
 	};
