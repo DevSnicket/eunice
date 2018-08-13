@@ -1,0 +1,4 @@
+﻿- - id: upper
+    dependsUpon: { id: lower, items: item of lower }
+- - id: lower
+    items: item of lower
