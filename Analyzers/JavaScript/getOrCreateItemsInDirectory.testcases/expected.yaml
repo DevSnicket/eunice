@@ -25,10 +25,15 @@
     - - items:
           id: nestedFunction
           dependsUpon: moduleExportsOfFunctionArrow1
+- moduleExportsOfObjectWithFunctionArrowProperty
 - id: requireFunctionInSameDirectoryThatIsAssignedToConstAndCalled
   dependsUpon: moduleExportsOfFunctionArrow1
 - id: requireFunctionInSubdirectoryThatIsAssignedToConstAndCalled
   dependsUpon: subdirectory/moduleExportsOfFunctionArrowInSubdirectory
+- id: requireObjectWithFunctionArrowPropertyInSameDirectoryThatIsAssignedToConstAndCalled
+  dependsUpon:
+    id: moduleExportsOfObjectWithFunctionArrowProperty
+    items: functionArrowProperty
 - id: requireTwoFunctionsInSameDirectoryThatAreAssignedToConstsAndCalled
   dependsUpon:
     - moduleExportsOfFunctionArrow1
