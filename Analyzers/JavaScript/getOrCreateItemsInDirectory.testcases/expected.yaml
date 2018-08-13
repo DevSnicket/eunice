@@ -25,15 +25,18 @@
     - - items:
           id: nestedFunction
           dependsUpon: moduleExportsOfFunctionArrow1
-- moduleExportsOfObjectWithFunctionArrowProperty
+- id: requireFunctionArrowWithFileFunctionInSameDirectoryAndDestructureThatIsAssignedToConstAndCalled
+  dependsUpon:
+    id: moduleExportsOfFunctionArrowWithFileFunction
+    items: fileFunction
 - id: requireFunctionInSameDirectoryThatIsAssignedToConstAndCalled
   dependsUpon: moduleExportsOfFunctionArrow1
 - id: requireFunctionInSubdirectoryThatIsAssignedToConstAndCalled
   dependsUpon: subdirectory/moduleExportsOfFunctionArrowInSubdirectory
-- id: requireObjectWithFunctionArrowPropertyInSameDirectoryThatIsAssignedToConstAndCalled
+- id: requireMissingPackageAndDestructureThatIsAssignedToConstAndCalled
   dependsUpon:
-    id: moduleExportsOfObjectWithFunctionArrowProperty
-    items: functionArrowProperty
+    id: missingPackage
+    items: missingFunction
 - id: requireTwoFunctionsInSameDirectoryThatAreAssignedToConstsAndCalled
   dependsUpon:
     - moduleExportsOfFunctionArrow1
