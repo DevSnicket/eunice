@@ -4,6 +4,11 @@ require("array.prototype.flat")
 require("array.prototype.flatmap")
 .shim();
 
+const
+	findItemWithIdentifierInStackOrParents = require("./initializeDependenciesInStack/findItemWithIdentifierInStackOrParents"),
+	findItemsOfDependsUponOrGetIdentifiers = require("./initializeDependenciesInStack/findItemsOfDependsUponOrGetIdentifiers"),
+	updateItem = require("./initializeDependenciesInStack/updateItem");
+
 module.exports = initializeDependenciesInStack;
 
 function initializeDependenciesInStack(
@@ -22,116 +27,50 @@ function initializeDependenciesInStack(
 	) {
 		if (item.dependsUpon)
 			updateItem({
-				dependsUpon:
-					item.dependsUpon,
-				findItemWithIdentifier,
+				dependsUponItems:
+					item.dependsUpon.flatMap(findItemsFromDependsUpon),
 				item,
 			});
 
-		function findItemWithIdentifier(
-			identifier
+		function findItemsFromDependsUpon(
+			dependsUpon
 		) {
 			return (
-				findItemWithIdentifierInStackOrParents({
-					identifier,
-					stack: item.items || stack,
+				findItemsWhenString()
+				||
+				findItemsOfDependsUponOrGetIdentifiers({
+					dependsUpon,
+					dependsUponItem:
+						findItemWithIdentifier(
+							dependsUpon.id
+						),
 				})
 			);
+
+			function findItemsWhenString() {
+				return (
+					typeof dependsUpon === "string"
+					&&
+					[
+						findItemWithIdentifier(
+							dependsUpon
+						)
+						||
+						dependsUpon,
+					]
+				);
+			}
+
+			function findItemWithIdentifier(
+				identifier
+			) {
+				return (
+					findItemWithIdentifierInStackOrParents({
+						identifier,
+						stack: item.items || stack,
+					})
+				);
+			}
 		}
 	}
-}
-
-function findItemWithIdentifierInStackOrParents({
-	identifier,
-	stack,
-}) {
-	return findInStack() || findInParent();
-
-	function findInStack() {
-		return (
-			findItemWithIdentifierInStack({
-				identifier,
-				stack,
-			})
-		);
-	}
-
-	function findInParent() {
-		return (
-			stack.parent
-			&&
-			findItemWithIdentifierInStackOrParents({
-				identifier,
-				stack: stack.parent.level.stack,
-			})
-		);
-	}
-}
-
-function findItemWithIdentifierInStack({
-	identifier,
-	stack,
-}) {
-	return findItemInStacks([ stack ]);
-
-	function findItemInStacks(
-		stacks
-	) {
-		const itemsOfStacks = stacks.flat(3);
-
-		return (
-			findItemWithIdentifier(itemsOfStacks)
-			||
-			findItemInStacksOfItems()
-		);
-
-		function findItemInStacksOfItems() {
-			const stacksOfItems =
-				itemsOfStacks.flatMap(item => item.items || []);
-
-			return (
-				stacksOfItems.length
-				&&
-				findItemInStacks(stacksOfItems)
-			);
-		}
-	}
-
-	function findItemWithIdentifier(
-		items
-	) {
-		return items.find(item => item.id === identifier);
-	}
-}
-
-function updateItem({
-	dependsUpon,
-	findItemWithIdentifier,
-	item,
-}) {
-	for (let index = 0; index < dependsUpon.length; index++) {
-		const dependsUponItem =
-			findItemWithIdentifier(
-				dependsUpon[index]
-			);
-
-		if (dependsUponItem) {
-			dependsUpon[index] = dependsUponItem;
-
-			addDependent({
-				dependent: item,
-				item: dependsUponItem,
-			});
-		}
-	}
-}
-
-function addDependent({
-	item,
-	dependent,
-}) {
-	if (item.dependents)
-		item.dependents.push(dependent);
-	else
-		item.dependents = [ dependent ];
 }
