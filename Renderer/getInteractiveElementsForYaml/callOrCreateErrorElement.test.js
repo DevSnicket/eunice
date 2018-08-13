@@ -1,5 +1,6 @@
-const callOrCreateErrorElement = require("./callOrCreateErrorElement");
-const { createElement } = require("react");
+const
+	callOrCreateErrorElement = require("./callOrCreateErrorElement"),
+	{ createElement } = require("react");
 
 const expectedError = "This is a error thrown in test.";
 
