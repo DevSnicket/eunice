@@ -16,9 +16,15 @@ module.exports =
 				identifier,
 			});
 
+		const padding =
+			{
+				left: 10,
+				top: 20,
+			};
+
 		const
-			height = 40 + calculateMaximumDependencyHeight(),
-			width = font.measure(text) + 20;
+			height = calculateMaximumDependencyHeight() + (padding.top * 2),
+			width = font.measure(text) + (padding.left * 2);
 
 		return (
 			{
@@ -43,11 +49,7 @@ module.exports =
 								key:
 									text,
 								left,
-								padding:
-									{
-										right: 0,
-										top: 20,
-									},
+								padding,
 								text,
 								top,
 								width,

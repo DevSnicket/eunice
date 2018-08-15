@@ -54,20 +54,18 @@ module.exports =
 					"text",
 					{
 						key: "text",
-						x: withPrecision(left + getTextLeftOffset()),
-						y: withPrecision(top + getTextTopOffset()),
+						x: withPrecision(left + padding.left),
+						y: withPrecision(getTextTop()),
 					},
 					text
 				)
 			);
 		}
 
-		function getTextLeftOffset() {
-			return (width - padding.right) / 2;
-		}
-
-		function getTextTopOffset() {
+		function getTextTop() {
 			return (
+				top
+				+
 				padding.top
 				+
 				(fontSize * 0.36)

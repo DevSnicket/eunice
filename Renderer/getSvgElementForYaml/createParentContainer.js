@@ -30,7 +30,7 @@ module.exports =
 							height,
 							key: text,
 							left: 0,
-							padding: { right: 0, top: 20 },
+							padding: { left: 10, top: 20 },
 							parent,
 							text,
 							top: 0,
