@@ -1,4 +1,4 @@
-const getItemOrCreateItemForGroup = require("../getItemOrCreateItemForGroup");
+const getItemOrCreateItemForGroupAndParents = require("../getItemOrCreateItemForGroupAndParents");
 
 module.exports =
 	({
@@ -49,7 +49,7 @@ module.exports =
 							{
 								identifierElements: commonElements,
 								item: { id: identifier },
-								itemsOfGroup: [ getItemOrCreateItemForGroup(aggregation.group) ],
+								itemsOfGroup: [ getItemOrCreateItemForGroupAndParents(aggregation.group) ],
 								...createLastItemOfGroupProperty(),
 							},
 						items:
