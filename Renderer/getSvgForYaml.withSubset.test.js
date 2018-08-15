@@ -43,7 +43,7 @@ test(
 			})
 		)
 		.toEqual(
-			readSvgFile("item-with-parent")
+			readTestcaseFile("item-with-parent.svg")
 		)
 );
 
@@ -57,7 +57,7 @@ test(
 			})
 		)
 		.toEqual(
-			readSvgFile("item-with-parent")
+			readTestcaseFile("item-with-parent.svg")
 		)
 );
 
@@ -71,7 +71,7 @@ test(
 			})
 		)
 		.toEqual(
-			readSvgFile("anonymous-item-with-parent")
+			readTestcaseFile("anonymous-item-with-parent.svg")
 		)
 );
 
@@ -87,7 +87,7 @@ test(
 			})
 		)
 		.toEqual(
-			readSvgFile("item-with-anonymous-parent")
+			readTestcaseFile("item-with-anonymous-parent.svg")
 		)
 );
 
@@ -101,7 +101,7 @@ test(
 			})
 		)
 		.toEqual(
-			readSvgFile("parent-depends-upon-inner-below-with-grandparent")
+			readTestcaseFile("parent-depends-upon-inner-below-with-grandparent.svg")
 		)
 );
 
@@ -115,7 +115,7 @@ test(
 			})
 		)
 		.toEqual(
-			readSvgFile("item-with-parent-depends-upon-outer-above")
+			readTestcaseFile("item-with-parent-depends-upon-outer-above.svg")
 		)
 );
 
@@ -129,7 +129,7 @@ test(
 			})
 		)
 		.toEqual(
-			readSvgFile("item-with-parent-depends-upon-outer-above")
+			readTestcaseFile("item-with-parent-depends-upon-outer-above.svg")
 		)
 );
 
@@ -143,7 +143,7 @@ test(
 			})
 		)
 		.toEqual(
-			readSvgFile("parent-with-grandparent-depends-upon-outer-above")
+			readTestcaseFile("parent-with-grandparent-depends-upon-outer-above.svg")
 		)
 );
 
@@ -157,7 +157,7 @@ test(
 			})
 		)
 		.toEqual(
-			readSvgFile("parent-with-grandparent-depends-upon-inner-above")
+			readTestcaseFile("parent-with-grandparent-depends-upon-inner-above.svg")
 		)
 );
 
@@ -171,7 +171,7 @@ test(
 			})
 		)
 		.toEqual(
-			readSvgFile("item-with-parent-depends-upon-outer-above")
+			readTestcaseFile("item-with-parent-depends-upon-outer-above.svg")
 		)
 );
 
@@ -181,16 +181,30 @@ test(
 		expect(
 			getSvgForYaml({
 				subsetIdentifierHierarchy: [ "parent" ],
-				yaml: "{id: parent, items: [[{id: upper, dependsUpon: lower}], [lower]]}",
+				yaml: readTestcaseFile("upper-depends-upon-lower-with-parent.yaml"),
 			})
 		)
 		.toEqual(
-			readSvgFile("upper-item-depends-upon-lower-item-with-parent")
+			readTestcaseFile("upper-item-depends-upon-lower-item-with-parent.svg")
 		)
 );
 
-function readSvgFile(
+test(
+	"subset of root item with stack of grandchild item that depends upon lower child item returns item with outer dependency",
+	() =>
+		expect(
+			getSvgForYaml({
+				subsetIdentifierHierarchy: [ "parent" ],
+				yaml: readTestcaseFile("upper-item-depends-upon-lower-with-parent.yaml"),
+			})
+		)
+		.toEqual(
+			readTestcaseFile("upper-item-depends-upon-lower-item-with-parent.svg")
+		)
+);
+
+function readTestcaseFile(
 	filename
 ) {
-	return readTextFile(path.join(testcasesDirectory, `${filename}.svg`));
+	return readTextFile(path.join(testcasesDirectory, filename));
 }
