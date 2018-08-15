@@ -54,7 +54,7 @@ function findParents(
 	}
 }
 
-function *getParents(
+function * getParents(
 	ancestors
 ) {
 	let previous = null;

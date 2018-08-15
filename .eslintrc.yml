@@ -71,6 +71,8 @@ rules:
     - consistent
   generator-star-spacing:
     - error
+    - before: true
+      after: true
   global-require:
     - error
   guard-for-in:
