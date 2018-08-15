@@ -1,112 +1,37 @@
-module.exports = findDirectionBetweenItemsInFirstMutualStack;
+require("array.prototype.flatmap")
+.shim();
 
-function findDirectionBetweenItemsInFirstMutualStack({
-	from,
-	to,
-}) {
-	return (
-		isSame()
+const
+	generateAncestors = require("./findDirectionBetweenItemsInFirstMutualStack/generateAncestors"),
+	getDirectionBetweenWhenAny = require("./findDirectionBetweenItemsInFirstMutualStack/getDirectionBetweenWhenAny");
+
+module.exports =
+	({
+		from,
+		to,
+	}) =>
+		getDirectionBetweenWhenAny({
+			from,
+			to,
+		})
 		||
-		getWhenSameLevel()
-		||
-		getWhenSameStack()
-		||
-		findInParents()
-	);
-
-	function isSame() {
-		return (
-			from === to
-		);
-	}
-
-	function getWhenSameLevel() {
-		return (
-			from.level === to.level
-			&&
-			{
-				direction: 0,
-				stack: from.level.stack,
-			}
-		);
-	}
-
-	function getWhenSameStack() {
-		return (
-			from.level.stack === to.level.stack
-			&&
-			getForStack(from.level.stack)
-		);
-	}
-
-	function getForStack(
-		stack
-	) {
-		return (
-			{
-				direction: stack.indexOf(to.level) - stack.indexOf(from.level),
-				stack,
-			}
-		);
-	}
-
-	function findInParents() {
-		const
-			fromParent = from.level.stack.parent,
-			toParent = to.level.stack.parent;
-
-		return (
-			getWhenToParent()
-			||
-			getWhenFromParent()
-			||
-			findInParentOfFrom()
-			||
-			findInParentOfTo()
+		getDirectionBetweenFirstAncestorOrThrowError(
+			generateAncestors({
+				from,
+				to,
+			})
 		);
 
-		function getWhenToParent() {
-			return (
-				from === toParent
-				&&
-				{
-					direction: 1,
-					stack: toParent.items,
-				}
-			);
-		}
+function getDirectionBetweenFirstAncestorOrThrowError(
+	ancestors
+) {
+	for (const ancestor of ancestors) {
+		const direction = getDirectionBetweenWhenAny(ancestor);
 
-		function getWhenFromParent() {
-			return (
-				fromParent === to
-				&&
-				{
-					direction: -1,
-					stack: fromParent.items,
-				}
-			);
-		}
-
-		function findInParentOfFrom() {
-			return (
-				fromParent
-				&&
-				findDirectionBetweenItemsInFirstMutualStack({
-					from: fromParent,
-					to,
-				})
-			);
-		}
-
-		function findInParentOfTo() {
-			return (
-				toParent
-				&&
-				findDirectionBetweenItemsInFirstMutualStack({
-					from,
-					to: toParent,
-				})
-			);
-		}
+		if (direction)
+			return direction;
 	}
+
+	/* istanbul ignore next: error is only thrown when there is gap in the implementation */
+	throw Error("Could not find direction between items in first mutual stack.");
 }
