@@ -40,6 +40,18 @@ assertGroupItems({
 		[
 			{
 				id: "item",
+				items: [ "item/childItem1", "item/childItem2" ],
+			},
+		],
+	name: "first and second item identifiers with same prefix and separator returns group of prefix",
+	source: [ "item/childItem1", "item/childItem2" ],
+});
+
+assertGroupItems({
+	expected:
+		[
+			{
+				id: "item",
 				items: "item/childItem",
 			},
 		],
@@ -113,7 +125,7 @@ assertGroupItems({
 					},
 			},
 		],
-	name: "second item identifier prefixed with first item identifier and separator, third item identifier prefixed with second item identifier and separator, and four item identifier prefixed with third item identifier and separator returns second grouped by first, third grouped by second and and fourth grouped by third",
+	name: "second item identifier prefixed with first item identifier and separator, third item identifier prefixed with second item identifier and separator, and fourth item identifier prefixed with third item identifier and separator returns second grouped by first, third grouped by second and and fourth grouped by third",
 	source: [ "item", "item/childItem", "item/childItem/grandchildItem", "item/childItem/grandchildItem/greatgrandchildItem" ],
 });
 
@@ -130,7 +142,7 @@ assertGroupItems({
 					],
 			},
 		],
-	name: "second item identifier prefixed with first item identifier and separator, third item identifier prefixed with second item identifier and separator, and four item identifier prefixed with first item identifier and separator returns grouped item with grouped item and non-grouped item",
+	name: "second item identifier prefixed with first item identifier and separator, third item identifier prefixed with second item identifier and separator, and fourth item identifier prefixed with first item identifier and separator returns grouped item with grouped item and non-grouped item",
 	source: [ "item", "item/childItem1", "item/childItem1/grandchildItem", "item/childItem2" ],
 });
 
@@ -152,7 +164,7 @@ assertGroupItems({
 					},
 			},
 		],
-	name: "second item identifier prefixed with first item identifier and separator, third and fourth item identifiers prefixed with second item identifier and separator, and fifth item identifier prefixed with four item identifier and separator returns grouped item with grouped item with grouped item and non-grouped item",
+	name: "second item identifier prefixed with first item identifier and separator, third and fourth item identifiers prefixed with second item identifier and separator, and fifth item identifier prefixed with fourth item identifier and separator returns grouped item with grouped item with grouped item and non-grouped item",
 	source: [ "item", "item/childItem", "item/childItem/grandchildItem1", "item/childItem/grandchildItem2", "item/childItem/grandchildItem2/greatgrandchildItem" ],
 });
 
@@ -271,6 +283,18 @@ assertGroupItems({
 		[
 			{
 				id: "item",
+				items: [ "item/childItem1", "item/childItem2" ],
+			},
+		],
+	name: "two item identifiers prefixed with same element and separators returns item with element identifier and two the items as children",
+	source: [ "item/childItem1", "item/childItem2" ],
+});
+
+assertGroupItems({
+	expected:
+		[
+			{
+				id: "item",
 				items:
 					[
 						{
@@ -283,18 +307,6 @@ assertGroupItems({
 		],
 	name: "second item identifier prefixed with same two elements as first item identifiers and separator, and third item prefixed with the same element as first item identifier and separator, returns item with element identifier, and one child item with child item and another child item",
 	source: [ "item/childItem1", "item/childItem1/grandchildItem", "item/childItem2" ],
-});
-
-assertGroupItems({
-	expected:
-		[
-			{
-				id: "item",
-				items: [ "item/childItem1", "item/childItem2" ],
-			},
-		],
-	name: "two item identifiers prefixed with same element and separators returns item with element identifier and two the items as children",
-	source: [ "item/childItem1", "item/childItem2" ],
 });
 
 assertGroupItems({
@@ -337,8 +349,31 @@ assertGroupItems({
 					},
 			},
 		],
-	name: "second item identifier prefixed with first item identifer and separator, third and four items prefixed with second item identifier separator, another element and separator returns first item with second item as child and child item of another element with third and fourth items as children",
+	name: "second item identifier prefixed with first item identifer and separator, third and fourth items prefixed with second item identifier separator, another element and separator returns first item with second item as child and child item of another element with third and fourth items as children",
 	source: [ "item", "item/childItem", "item/childItem/grandchildItem/greatgrandchildItem1", "item/childItem/grandchildItem/greatgrandchildItem2" ],
+});
+
+assertGroupItems({
+	expected:
+		[
+			{
+				id: "item",
+				items:
+					[
+						{
+							id: "item/childItem1",
+							items:
+								{
+									id: "item/childItem1/grandchildItem",
+									items: "item/childItem1/grandchildItem/greatgrandchildItem",
+								},
+						},
+						"item/childItem2",
+					],
+			},
+		],
+	name: "second item identifier prefixed with first item identifer and separator, third item identifier prefixed with second item identifier and separator and fourth item",
+	source: [ "item/childItem1", "item/childItem1/grandchildItem", "item/childItem1/grandchildItem/greatgrandchildItem", "item/childItem2" ],
 });
 
 function assertGroupItemsEqualsSource({

@@ -1,4 +1,4 @@
-const getItemOrCreateItemForGroup = require("./getItemOrCreateItemForGroup");
+const getItemOrCreateItemForGroupAndParents = require("./getItemOrCreateItemForGroupAndParents");
 
 module.exports =
 	aggregation => {
@@ -17,18 +17,3 @@ module.exports =
 			);
 		}
 	};
-
-function getItemOrCreateItemForGroupAndParents(
-	group
-) {
-	return (
-		group.parent
-		?
-		getItemOrCreateItemForGroupAndParents({
-			...group.parent,
-			lastItemOfGroup: { item: getItemOrCreateItemForGroup(group) },
-		})
-		:
-		getItemOrCreateItemForGroup(group)
-	);
-}
