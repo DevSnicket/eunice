@@ -3,7 +3,7 @@ const
 	walk = require("acorn/dist/walk");
 
 const
-	createVisitors = require("./createVisitors");
+	createVisitors = require("./getItemOrItemsFromJavaScript/createVisitors");
 
 module.exports =
 	javaScript => {
