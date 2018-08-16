@@ -157,7 +157,8 @@
 			{
 				"args":
 					[
-						"--yaml=[{id: parent, dependsUpon: nested, items: nested}, nested]"
+						"--subsetIdentifierHierarchy=parent",
+						"--yaml={id: parent, items: { } }"
 					],
 				"name": "renderer getSvgForYaml",
 				"program": "${workspaceRoot}/Renderer/getSvgForYaml.js",
