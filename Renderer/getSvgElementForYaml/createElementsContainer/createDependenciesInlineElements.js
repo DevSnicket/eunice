@@ -2,6 +2,7 @@ module.exports =
 	({
 		center,
 		groupFactories,
+		spacing,
 		top,
 	}) => {
 		return (
@@ -17,7 +18,7 @@ module.exports =
 								groupFactory.create({ left: aggregation.left, top }),
 							],
 						left:
-							aggregation.left + groupFactory.width + 4,
+							aggregation.left + groupFactory.width + spacing,
 					}
 				),
 				{ groups: [], left: calculateLeft() }

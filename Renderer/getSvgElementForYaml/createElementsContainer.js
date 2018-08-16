@@ -20,7 +20,9 @@ module.exports =
 		stack,
 		withPrecision,
 	}) => {
-		const dependencyCounts = [];
+		const
+			dependencyCounts = [],
+			dependencySpacing = 4;
 
 		return (
 			createSummaryElementsContainer({
@@ -38,6 +40,7 @@ module.exports =
 									countWithDirection: count,
 									keyPrefix: "",
 								}),
+							spacing: dependencySpacing,
 							top,
 						}),
 				dependencyCounts,
@@ -121,6 +124,7 @@ module.exports =
 									countWithDirection: dependencyCount.dependsUpon.inner,
 									keyPrefix: `${item.id} `,
 								}),
+							dependencySpacing,
 							font,
 							identifier: item.id,
 						}),

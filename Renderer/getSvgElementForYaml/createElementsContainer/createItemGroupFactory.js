@@ -7,6 +7,7 @@ module.exports =
 		createItemGroupWrapper,
 		createTextGroup,
 		dependencyGroupFactories,
+		dependencySpacing,
 		font,
 		identifier,
 	}) => {
@@ -22,9 +23,12 @@ module.exports =
 				top: 20,
 			};
 
+		const dependencySize =
+			calculateDependencySize();
+
 		const
-			height = calculateMaximumDependencyHeight() + (padding.top * 2),
-			width = font.measure(text) + (padding.left * 2);
+			height = calculateHeight(),
+			width = calculateWidth();
 
 		return (
 			{
@@ -49,7 +53,11 @@ module.exports =
 								key:
 									text,
 								left,
-								padding,
+								padding:
+									{
+										left: width / 2,
+										top: padding.top,
+									},
 								text,
 								top,
 								width,
@@ -60,23 +68,52 @@ module.exports =
 			}
 		);
 
-		function calculateMaximumDependencyHeight() {
+		function calculateDependencySize() {
 			return (
 				dependencyGroupFactories
 				?
 				dependencyGroupFactories.reduce(
 					(
-						maximum,
+						size,
 						dependencyGroupFactory
-					) =>
-						Math.max(
-							maximum,
-							dependencyGroupFactory.height
-						),
-					0
+					) => (
+						{
+							height:
+								Math.max(
+									size.height,
+									dependencyGroupFactory.height
+								),
+							width:
+								size.width
+								+
+								(size.width && dependencySpacing)
+								+
+								dependencyGroupFactory.width,
+						}
+					),
+					{ height: 0, width: 0 }
 				)
 				:
-				0
+				{ height: 0, width: 0 }
+			);
+		}
+
+		function calculateHeight() {
+			return (
+				dependencySize.height
+				+
+				(padding.top * 2)
+			);
+		}
+
+		function calculateWidth() {
+			return (
+				Math.max(
+					font.measure(text),
+					dependencySize.width
+				)
+				+
+				(padding.left * 2)
 			);
 		}
 
@@ -90,6 +127,7 @@ module.exports =
 				createDependenciesInlineElements({
 					center,
 					groupFactories: dependencyGroupFactories,
+					spacing: dependencySpacing,
 					top,
 				})
 			);
