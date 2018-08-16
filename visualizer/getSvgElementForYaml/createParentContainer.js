@@ -3,18 +3,28 @@ const getIdentifierClassNameAndText = require("./getIdentifierClassNameAndText")
 module.exports =
 	({
 		createTextGroup,
+		getTextWidth,
 		parent,
 		summaryElementsContainer,
 	}) => {
-		const
-			height = summaryElementsContainer.bottom + 10,
-			width = summaryElementsContainer.right + 10;
-
 		const { className, text } =
 			getIdentifierClassNameAndText({
 				baseClassName: "parent",
 				identifier: parent,
 			});
+
+		const padding = 10;
+
+		const
+			height =
+				summaryElementsContainer.bottom + padding,
+			width =
+				Math.max(
+					summaryElementsContainer.right,
+					getTextWidth(text) + padding
+				)
+				+
+				padding;
 
 		return (
 			{

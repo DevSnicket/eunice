@@ -56,6 +56,7 @@ module.exports =
 				createParentContainer({
 					createTextGroup:
 						createTextGroupWithFontSizeAndPrecision,
+					getTextWidth: font.measure,
 					parent:
 						subsetIdentifierHierarchy.slice(-1)[0],
 					summaryElementsContainer:
