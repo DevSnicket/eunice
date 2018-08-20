@@ -1,8 +1,7 @@
-const countDependenciesOfItem = require("./countDependenciesOfItemRecursive/countDependenciesOfItem");
-
 module.exports = countDependenciesOfItemRecursive;
 
 function countDependenciesOfItemRecursive({
+	countDependenciesOfItem,
 	item,
 	parentStack,
 	sumCount,
@@ -46,6 +45,7 @@ function countDependenciesOfItemRecursive({
 	) {
 		return (
 			countDependenciesOfItemRecursive({
+				countDependenciesOfItem,
 				item: childitem,
 				parentStack,
 				sumCount,
