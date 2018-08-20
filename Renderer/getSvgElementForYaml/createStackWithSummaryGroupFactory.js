@@ -1,17 +1,18 @@
 const
 	countDependenciesOfItemRecursive = require("./createStackWithSummaryGroupFactory/countDependenciesOfItemRecursive"),
 	createDependenciesInlineGroupFactories = require("./createStackWithSummaryGroupFactory/createDependenciesInlineGroupFactories"),
-	createDependencyGroupFactoryWhenRequired = require("./createStackWithSummaryGroupFactory/createDependencyGroupFactoryWhenRequired"),
 	createGroupsCenteredHorizontally = require("./createStackWithSummaryGroupFactory/createGroupsCenteredHorizontally"),
 	createItemGroupFactory = require("./createStackWithSummaryGroupFactory/createItemGroupFactory"),
-	createOuterDependencyGroupFactory = require("./createStackWithSummaryGroupFactory/createOuterDependencyGroupFactory"),
 	createSummaryGroupFactory = require("./createStackWithSummaryGroupFactory/createSummaryGroupFactory");
 
 module.exports =
 	({
 		aggregateGroupFactoriesWithOrientation,
 		arrows,
+		countDependenciesOfItem,
+		createDependencyGroupFactoryWhenRequired,
 		createItemGroupWrapperForItem,
+		createOuterDependencyGroupFactory,
 		createTextGroup,
 		font,
 		getDependencyCountInBothDirections,
@@ -67,6 +68,7 @@ module.exports =
 		) {
 			const dependencyCount =
 				countDependenciesOfItemRecursive({
+					countDependenciesOfItem,
 					item,
 					parentStack: stack,
 					sumCount: sumDependencyCount,

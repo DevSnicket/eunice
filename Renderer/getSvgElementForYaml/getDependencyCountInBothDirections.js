@@ -91,5 +91,5 @@ module.exports =
 function whenCountHasValues(
 	count
 ) {
-	return (count.above || count.below || count.same || count.inner) && count;
+	return (count.above || count.below || count.same) && count;
 }
