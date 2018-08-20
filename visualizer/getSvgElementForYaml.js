@@ -1,6 +1,9 @@
 const
 	aggregateGroupFactoriesWithOrientation = require("./getSvgElementForYaml/aggregateGroupFactoriesWithOrientation"),
+	countDependenciesOfItem = require("./getSvgElementForYaml/countDependenciesOfItem"),
 	createArrows = require("./getSvgElementForYaml/createArrows"),
+	createDependencyGroupFactoryWhenRequired = require("./getSvgElementForYaml/createDependencyGroupFactoryWhenRequired"),
+	createOuterDependencyGroupFactory = require("./getSvgElementForYaml/createOuterDependencyGroupFactory"),
 	createParentGroupFactory = require("./getSvgElementForYaml/createParentGroupFactory"),
 	createStackFromParsedYaml = require("./getSvgElementForYaml/createStackFromParsedYaml"),
 	createStackWithSummaryGroupFactory = require("./getSvgElementForYaml/createStackWithSummaryGroupFactory"),
@@ -70,19 +73,68 @@ module.exports =
 					});
 
 				return (
-					createParentGroupFactory({
-						childGroupFactory:
-							createGroupFactoryForStack(
-								stackOfSubsetIdentifierHierarchy
-							),
-						createTextGroup:
-							createTextGroupWithFontSizeAndPrecision,
-						getTextWidth:
-							font.measure,
-						identifier:
-							stackOfSubsetIdentifierHierarchy.parent.id,
+					createOuterDependencyGroupFactory({
+						aggregateGroupFactoriesWithOrientation,
+						createGroupFactoryWhenRequired:
+							createParentOuterDependencyGroupFactoryWhenRequired,
+						dependencyCount:
+							getParentDependencyCount(),
+						itemGroupFactory:
+							createParentAndStackGroupFactory(),
 					})
 				);
+
+				function createParentOuterDependencyGroupFactoryWhenRequired({
+					arrow,
+					count,
+					keySuffix,
+				}) {
+					return (
+						createDependencyGroupFactoryWhenRequired({
+							arrow,
+							count,
+							createTextGroup:
+								createTextGroupWithFontSizeAndPrecision,
+							font,
+							key:
+								`${stackOfSubsetIdentifierHierarchy.parent.id} dependency count outer ${keySuffix}`,
+						})
+					);
+				}
+
+				function getParentDependencyCount() {
+					return (
+						getDependencyCountInBothDirections({
+							arrows,
+							dependencyCount:
+								countDependenciesOfItem({
+									item:
+										stackOfSubsetIdentifierHierarchy.parent,
+									parentStack:
+										stackOfSubsetIdentifierHierarchy.parent.level.stack,
+									sumCount:
+										sumDependencyCount,
+								}),
+						})
+					);
+				}
+
+				function createParentAndStackGroupFactory() {
+					return (
+						createParentGroupFactory({
+							childGroupFactory:
+								createGroupFactoryForStack(
+									stackOfSubsetIdentifierHierarchy
+								),
+							createTextGroup:
+								createTextGroupWithFontSizeAndPrecision,
+							getTextWidth:
+								font.measure,
+							identifier:
+								stackOfSubsetIdentifierHierarchy.parent.id,
+						})
+					);
+				}
 			}
 		}
 
@@ -93,7 +145,10 @@ module.exports =
 				createStackWithSummaryGroupFactory({
 					aggregateGroupFactoriesWithOrientation,
 					arrows,
+					countDependenciesOfItem,
+					createDependencyGroupFactoryWhenRequired,
 					createItemGroupWrapperForItem,
+					createOuterDependencyGroupFactory,
 					createTextGroup: createTextGroupWithFontSizeAndPrecision,
 					font,
 					getDependencyCountInBothDirections,
