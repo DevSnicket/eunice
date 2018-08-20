@@ -1,9 +1,9 @@
 module.exports =
 	({
 		arrows,
-		createInlineDependencyElements,
+		createInlineDependencyGroups,
 		dependencyCounts,
-		stackElementsContainer,
+		stackGroupFactory,
 	}) => {
 		const count = sumCounts(dependencyCounts);
 
@@ -14,25 +14,40 @@ module.exports =
 			?
 			create()
 			:
-			stackElementsContainer);
+			stackGroupFactory
+		);
 
 		function create() {
-			const top = stackElementsContainer.bottom + 15;
+			const topOffset = stackGroupFactory.height + 15;
 
 			return (
-				createContainer({
-					elements:
-						createInlineDependencyElements({
-							center: stackElementsContainer.right / 2,
-							count,
+				{
+					createAtPosition,
+					height:
+						topOffset + arrows.right.height,
+					width:
+						stackGroupFactory.width,
+				}
+			);
+
+			function createAtPosition({
+				left,
+				top,
+			}) {
+				return (
+					[
+						...stackGroupFactory.createAtPosition({
+							left,
 							top,
 						}),
-					height:
-						arrows.right.height,
-					stackElementsContainer,
-					top,
-				})
-			);
+						...createInlineDependencyGroups({
+							center: left + (stackGroupFactory.width / 2),
+							count,
+							top: top + topOffset,
+						}),
+					]
+				);
+			}
 		}
 	};
 
@@ -87,26 +102,5 @@ function sumCount(
 		}
 		:
 		left || right
-	);
-}
-
-function createContainer({
-	elements,
-	height,
-	stackElementsContainer,
-	top,
-}) {
-	return (
-		{
-			bottom:
-				top + height,
-			elements:
-				[
-					...stackElementsContainer.elements,
-					...elements,
-				],
-			right:
-				stackElementsContainer.right,
-		}
 	);
 }

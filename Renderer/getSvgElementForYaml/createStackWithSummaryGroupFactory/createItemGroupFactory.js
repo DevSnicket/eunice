@@ -1,5 +1,5 @@
 const
-	createDependenciesInlineElements = require("./createDependenciesInlineElements"),
+	createGroupsCenteredHorizontally = require("./createGroupsCenteredHorizontally"),
 	getIdentifierClassNameAndText = require("../getIdentifierClassNameAndText");
 
 module.exports =
@@ -32,7 +32,7 @@ module.exports =
 
 		return (
 			{
-				create:
+				createAtPosition:
 					({
 						left,
 						top,
@@ -45,7 +45,7 @@ module.exports =
 								elementName:
 									"rect",
 								elementsBelowText:
-									createDependenciesInlineElementsWhenRequired({
+									createDependencyGroupsWhenRequired({
 										center: left + (width / 2),
 										top: top + 34,
 									}),
@@ -117,14 +117,14 @@ module.exports =
 			);
 		}
 
-		function createDependenciesInlineElementsWhenRequired({
+		function createDependencyGroupsWhenRequired({
 			center,
 			top,
 		}) {
 			return (
 				dependencyGroupFactories
 				&&
-				createDependenciesInlineElements({
+				createGroupsCenteredHorizontally({
 					center,
 					groupFactories: dependencyGroupFactories,
 					spacing: dependencySpacing,

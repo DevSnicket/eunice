@@ -13,7 +13,7 @@ module.exports =
 
 			return (
 				{
-					create:
+					createAtPosition:
 						({
 							left,
 							top,
