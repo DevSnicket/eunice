@@ -15,7 +15,7 @@ module.exports =
 						groups:
 							[
 								...aggregation.groups,
-								groupFactory.create({ left: aggregation.left, top }),
+								groupFactory.createAtPosition({ left: aggregation.left, top }),
 							],
 						left:
 							aggregation.left + groupFactory.width + spacing,
