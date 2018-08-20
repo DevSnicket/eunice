@@ -38,11 +38,11 @@ module.exports =
 					elementName,
 					{
 						...attributes,
-						height,
+						height: withPrecision(height),
 						key: "shape",
-						width,
-						...left > 0 && { x: left },
-						...top > 0 && { y: top },
+						width: withPrecision(width),
+						...left > 0 && { x: withPrecision(left) },
+						...top > 0 && { y: withPrecision(top) },
 					}
 				)
 			);

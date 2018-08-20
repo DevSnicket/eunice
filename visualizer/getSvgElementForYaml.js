@@ -1,12 +1,15 @@
 const
+	aggregateGroupFactoriesWithOrientation = require("./getSvgElementForYaml/aggregateGroupFactoriesWithOrientation"),
 	createArrows = require("./getSvgElementForYaml/createArrows"),
-	createElementsContainer = require("./getSvgElementForYaml/createElementsContainer"),
-	createParentContainer = require("./getSvgElementForYaml/createParentContainer"),
+	createParentGroupFactory = require("./getSvgElementForYaml/createParentGroupFactory"),
 	createStackFromParsedYaml = require("./getSvgElementForYaml/createStackFromParsedYaml"),
+	createStackWithSummaryGroupFactory = require("./getSvgElementForYaml/createStackWithSummaryGroupFactory"),
 	createSvgElement = require("./getSvgElementForYaml/createSvgElement"),
 	createTextGroup = require("./getSvgElementForYaml/createTextGroup"),
-	findStackOfSubsetIdentifierHierarchyWhenSpecified = require("./getSvgElementForYaml/findStackOfSubsetIdentifierHierarchyWhenSpecified"),
+	findStackOfSubsetIdentifierHierarchyOrThrowError = require("./getSvgElementForYaml/findStackOfSubsetIdentifierHierarchyOrThrowError"),
+	getDependencyCountInBothDirections = require("./getSvgElementForYaml/getDependencyCountInBothDirections"),
 	initializeDependenciesInStack = require("./getSvgElementForYaml/initializeDependenciesInStack"),
+	sumDependencyCount = require("./getSvgElementForYaml/sumDependencyCount"),
 	withPrecision = require("./getSvgElementForYaml/withPrecision");
 
 module.exports =
@@ -31,10 +34,10 @@ module.exports =
 
 		return (
 			createSvgElement({
-				childElementsContainer:
+				childGroupFactory:
 					yaml
 					&&
-					initaliseAndCreateElementsContainer(),
+					initaliseAndCreateChildGroupFactory(),
 				createElement,
 				font,
 				namespaces,
@@ -42,10 +45,11 @@ module.exports =
 				symbols:
 					Object.values(arrows)
 					.map(arrow => arrow.element),
+				withPrecision,
 			})
 		);
 
-		function initaliseAndCreateElementsContainer() {
+		function initaliseAndCreateChildGroupFactory() {
 			const stack = createStackFromParsedYaml(yaml);
 
 			initializeDependenciesInStack(stack);
@@ -53,62 +57,63 @@ module.exports =
 			return (
 				subsetIdentifierHierarchy
 				?
-				createParentContainer({
-					createTextGroup:
-						createTextGroupWithFontSizeAndPrecision,
-					getTextWidth: font.measure,
-					parent:
-						subsetIdentifierHierarchy.slice(-1)[0],
-					summaryElementsContainer:
-						createElementsContainerWithPadding({
-							left: 10,
-							top: 40,
-						}),
-				})
+				createParentGroupFactoryFromSubsetIdentifierHierarchy()
 				:
-				createElementsContainerWithPadding({
-					left: 0,
-					top: 0,
-				})
+				createGroupFactoryForStack(stack)
 			);
 
-			function createElementsContainerWithPadding(
-				padding
-			) {
+			function createParentGroupFactoryFromSubsetIdentifierHierarchy() {
+				const stackOfSubsetIdentifierHierarchy =
+					findStackOfSubsetIdentifierHierarchyOrThrowError({
+						stack,
+						subsetIdentifierHierarchy,
+					});
+
 				return (
-					createElementsContainer({
-						arrows,
-						createItemGroupWrapperForItem,
+					createParentGroupFactory({
+						childGroupFactory:
+							createGroupFactoryForStack(
+								stackOfSubsetIdentifierHierarchy
+							),
 						createTextGroup:
 							createTextGroupWithFontSizeAndPrecision,
-						font,
-						padding,
-						stack:
-							subsetIdentifierHierarchy
-							?
-							findStackOfSubsetIdentifierHierarchyWhenSpecified({
-								stack,
-								subsetIdentifierHierarchy,
-							})
-							:
-							stack,
-						withPrecision,
+						getTextWidth:
+							font.measure,
+						identifier:
+							stackOfSubsetIdentifierHierarchy.parent.id,
 					})
 				);
 			}
+		}
 
-			function createTextGroupWithFontSizeAndPrecision(
-				parameters
-			) {
-				return (
-					createTextGroup({
-						createElement,
-						fontSize: font.size,
-						withPrecision,
-						...parameters,
-					})
-				);
-			}
+		function createGroupFactoryForStack(
+			stack
+		) {
+			return (
+				createStackWithSummaryGroupFactory({
+					aggregateGroupFactoriesWithOrientation,
+					arrows,
+					createItemGroupWrapperForItem,
+					createTextGroup: createTextGroupWithFontSizeAndPrecision,
+					font,
+					getDependencyCountInBothDirections,
+					stack,
+					sumDependencyCount,
+				})
+			);
+		}
+
+		function createTextGroupWithFontSizeAndPrecision(
+			parameters
+		) {
+			return (
+				createTextGroup({
+					createElement,
+					fontSize: font.size,
+					withPrecision,
+					...parameters,
+				})
+			);
 		}
 	};
 

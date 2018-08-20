@@ -1,11 +1,12 @@
 module.exports =
 	({
-		childElementsContainer,
+		childGroupFactory,
 		createElement,
 		font,
 		namespaces,
 		style,
 		symbols,
+		withPrecision,
 	}) => {
 		return (
 			createFromAttributesAndChildren({
@@ -17,13 +18,13 @@ module.exports =
 
 		function createAttributesWithChildren() {
 			return (
-				childElementsContainer
+				childGroupFactory
 				&&
 				{
 					attributes:
 						{
-							height: childElementsContainer.bottom,
-							width: childElementsContainer.right,
+							height: withPrecision(childGroupFactory.height),
+							width: withPrecision(childGroupFactory.width),
 						},
 					children:
 						[
@@ -32,7 +33,10 @@ module.exports =
 								style: `${getSvgStyleForFont(font)}${style}`,
 							}),
 							...symbols,
-							...childElementsContainer.elements,
+							...childGroupFactory.createAtPosition({
+								left: 0,
+								top: 0,
+							}),
 						],
 				});
 		}
