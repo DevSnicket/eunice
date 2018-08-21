@@ -6,9 +6,9 @@ Eunice is a system of utilities based on the premise that unidirectional depende
 
 try it out:
 
-> [JavaScript &rightarrow; YAML &rightarrow; SVG](https://devsnicket.github.io/Eunice-harnesses/harness.html) 
+>[JavaScript &rightarrow; YAML &rightarrow; SVG](https://devsnicket.github.io/Eunice-harnesses/harness.html)
 >
->[Eunice on Eunice](https://devsnicket.github.io/Eunice-harnesses/Renderer/harness.html) 🐶🥫
+>[Eunice on Eunice](https://devsnicket.github.io/Eunice-harnesses/Renderer/harness.html) 🐶🥫 ([created with](dogfooding.sh))
 
 ### Stacks
 
