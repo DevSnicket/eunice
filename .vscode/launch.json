@@ -8,6 +8,15 @@
 				"type": "node"
 			},
 			{
+				"args": [ "--javaScript=" ],
+				"cwd": "${workspaceFolder}/Analyzers/JavaScript/",
+				"name": "analyzer getYamlFromJavaScript",
+				"program": "${workspaceFolder}/Analyzers/JavaScript/getYamlFromJavaScript.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
 				//"args": [ "const/argument-in-function-declaration/before/two" ],
 				//"args": [ "require-file/called/from-const/from-function-declaration/with-property" ],
 				"args": [ "require-file/called/from-const/from-function-declaration/with-object-destructuring" ],
