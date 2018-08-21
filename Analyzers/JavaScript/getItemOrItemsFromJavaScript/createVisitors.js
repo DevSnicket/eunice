@@ -135,7 +135,7 @@ module.exports =
 					declarations.addDeclarationsIn,
 				hasUndeclaredReferenceTo:
 					undeclaredReferences.hasReferenceTo,
-				parent:
+				parentFunction:
 					parentFunctionsFromAncestors.findIdentifiableParent(ancestors),
 				variableDeclaration,
 			});

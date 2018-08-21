@@ -6,7 +6,7 @@ module.exports =
 	({
 		addDeclarationsIn,
 		hasUndeclaredReferenceTo,
-		parent,
+		parentFunction,
 		variableDeclaration,
 	}) => {
 		const variableDeclarations = createVariableDeclarations();
@@ -14,7 +14,7 @@ module.exports =
 		if (variableDeclarations.length)
 			addDeclarationsIn({
 				declarations: variableDeclarations,
-				parent,
+				parent: parentFunction,
 			});
 
 		function createVariableDeclarations() {
@@ -77,7 +77,7 @@ module.exports =
 									identifier,
 								isUsedInNestedFunction:
 									hasUndeclaredReferenceTo({
-										parent,
+										parent: parentFunction,
 										reference: identifier,
 									}),
 								type:
