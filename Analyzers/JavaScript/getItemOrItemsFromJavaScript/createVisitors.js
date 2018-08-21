@@ -63,7 +63,8 @@ module.exports =
 					declarations.addDeclarationIn,
 				ancestors,
 				createFunctionDeclarationWithIdentifier,
-				findParentFunctionFromAncestors: parentFunctionsFromAncestors.findIdentifiableParent,
+				findParentFunctionFromAncestors:
+					parentFunctionsFromAncestors.findIdentifiableParent,
 				functionExpression,
 			});
 		}
