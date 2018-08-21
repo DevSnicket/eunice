@@ -1,6 +1,6 @@
 module.exports =
 	() => {
-		const blocksAndScopedVariables = new Map();
+		const scopesAndVariables = new Map();
 
 		return (
 			{
@@ -10,13 +10,13 @@ module.exports =
 		);
 
 		function add({
-			block,
+			scope,
 			variables,
 		}) {
-			blocksAndScopedVariables.set(
-				block,
+			scopesAndVariables.set(
+				scope,
 				[
-					...blocksAndScopedVariables.get(block) || [],
+					...scopesAndVariables.get(scope) || [],
 					...variables,
 				]
 			);
@@ -29,7 +29,7 @@ module.exports =
 			return (
 				ancestors.some(
 					ancestor => {
-						const variablesInBlock = blocksAndScopedVariables.get(ancestor);
+						const variablesInBlock = scopesAndVariables.get(ancestor);
 
 						return (
 							variablesInBlock

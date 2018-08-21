@@ -2,11 +2,11 @@ const
 	addFromCall = require("./createVisitors/addFromCall"),
 	addFunctionExpression = require("./createVisitors/addFunctionExpression"),
 	addVariables = require("./createVisitors/addVariables"),
-	createBlockScopedVariables = require("./createVisitors/createBlockScopedVariables"),
 	createDeclarations = require("./createVisitors/createDeclarations"),
 	createDependsUpons = require("./createVisitors/createDependsUpons"),
 	createFileItems = require("./createVisitors/createFileItems"),
 	createFunctionDeclaration = require("./createVisitors/createFunctionDeclaration"),
+	createScopedVariables = require("./createVisitors/createScopedVariables"),
 	createUndeclaredReferences = require("./createVisitors/createUndeclaredReferences"),
 	getItemWhenSingleOrStackItemsWhenMultiple = require("./createVisitors/getItemWhenSingleOrStackItemsWhenMultiple"),
 	parentFunctionsFromAncestors = require("./createVisitors/parentFunctionsFromAncestors");
@@ -14,9 +14,9 @@ const
 module.exports =
 	() => {
 		const
-			blockScopedVariables = createBlockScopedVariables(),
 			declarations = createDeclarations(),
 			dependsUpons = createDependsUpons(),
+			scopedVariables = createScopedVariables(),
 			undeclaredReferences = createUndeclaredReferences();
 
 		return (
@@ -92,7 +92,7 @@ module.exports =
 					() => parentFunctionsFromAncestors.findParents(ancestors),
 				isVariableInBlockScoped:
 					variable =>
-						blockScopedVariables.isIn({
+						scopedVariables.isIn({
 							ancestors,
 							variable,
 						}),
@@ -140,10 +140,10 @@ module.exports =
 			ancestors
 		) {
 			addVariables({
-				addBlockScopedVariables:
-					blockScopedVariables.add,
 				addDeclarationsIn:
 					declarations.addDeclarationsIn,
+				addScopedVariables:
+					scopedVariables.add,
 				hasUndeclaredReferenceTo:
 					undeclaredReferences.hasReferenceTo,
 				parent:
