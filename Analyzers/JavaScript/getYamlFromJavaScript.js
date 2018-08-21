@@ -4,7 +4,7 @@ const
 	getYamlForItemOrItems = require("./getYamlForItemOrItems");
 
 callWhenProcessEntryPoint({
-	action: getYamlFromJavaScript,
+	action: parameters => getYamlFromJavaScript(parameters.javaScript),
 	standardInputParameter: "javaScript",
 });
 
