@@ -4,18 +4,30 @@ const
 
 module.exports =
 	({
+		addBlockScopedVariables,
 		addDeclarationsIn,
 		hasUndeclaredReferenceTo,
+		parent,
 		parentFunction,
 		variableDeclaration,
 	}) => {
 		const variableDeclarations = createVariableDeclarations();
 
 		if (variableDeclarations.length)
-			addDeclarationsIn({
-				declarations: variableDeclarations,
-				parent: parentFunction,
-			});
+			if (isBlockScopedVariableDeclaration())
+				addBlockScopedVariables({
+					block:
+						parent,
+					variables:
+						variableDeclarations.map(declaration => declaration.id),
+				});
+			else
+				addDeclarationsIn({
+					declarations:
+						variableDeclarations,
+					parent:
+						parentFunction,
+				});
 
 		function createVariableDeclarations() {
 			return (
@@ -87,6 +99,14 @@ module.exports =
 					)
 				);
 			}
+		}
+
+		function isBlockScopedVariableDeclaration() {
+			return (
+				parentFunction
+				&&
+				parentFunction.body !== parent
+			);
 		}
 	};
 

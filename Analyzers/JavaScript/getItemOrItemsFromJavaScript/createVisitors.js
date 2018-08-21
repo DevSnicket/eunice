@@ -2,6 +2,7 @@ const
 	addFromCall = require("./createVisitors/addFromCall"),
 	addFunctionExpression = require("./createVisitors/addFunctionExpression"),
 	addVariables = require("./createVisitors/addVariables"),
+	createBlockScopedVariables = require("./createVisitors/createBlockScopedVariables"),
 	createDeclarations = require("./createVisitors/createDeclarations"),
 	createDependsUpons = require("./createVisitors/createDependsUpons"),
 	createFileItems = require("./createVisitors/createFileItems"),
@@ -13,6 +14,7 @@ const
 module.exports =
 	() => {
 		const
+			blockScopedVariables = createBlockScopedVariables(),
 			declarations = createDeclarations(),
 			dependsUpons = createDependsUpons(),
 			undeclaredReferences = createUndeclaredReferences();
@@ -88,6 +90,12 @@ module.exports =
 					declarations.findDeclarationAndParent,
 				findParentFunctions:
 					() => parentFunctionsFromAncestors.findParents(ancestors),
+				isVariableInBlockScoped:
+					variable =>
+						blockScopedVariables.isIn({
+							ancestors,
+							variable,
+						}),
 			});
 		}
 
@@ -132,10 +140,14 @@ module.exports =
 			ancestors
 		) {
 			addVariables({
+				addBlockScopedVariables:
+					blockScopedVariables.add,
 				addDeclarationsIn:
 					declarations.addDeclarationsIn,
 				hasUndeclaredReferenceTo:
 					undeclaredReferences.hasReferenceTo,
+				parent:
+					ancestors[ancestors.length - 2],
 				parentFunction:
 					parentFunctionsFromAncestors.findIdentifiableParent(ancestors),
 				variableDeclaration,

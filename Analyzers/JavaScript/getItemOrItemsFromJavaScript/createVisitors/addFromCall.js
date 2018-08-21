@@ -9,11 +9,12 @@ module.exports =
 		callExpression,
 		findDeclarationAndParent,
 		findParentFunctions,
+		isVariableInBlockScoped,
 	}) => {
 		const calleeName = getCalleeName();
 
 		if (calleeName && calleeName !== "require")
-			addFromParentFunction(
+			addFromParentFunctions(
 				findParentFunctions()
 			);
 
@@ -35,7 +36,7 @@ module.exports =
 			);
 		}
 
-		function addFromParentFunction(
+		function addFromParentFunctions(
 			parentFunctions
 		) {
 			addDependsUponIdentifier(
@@ -66,11 +67,21 @@ module.exports =
 			function addDependsUponIdentifier(
 				identifier
 			) {
-				if (identifier && !isParameterOfAnyParentFunction(identifier))
+				if (isIdentifierRelevant())
 					addDependsUponIdentifierFrom({
 						identifier,
 						parent: parentFunctions && (parentFunctions.identifiable || null),
 					});
+
+				function isIdentifierRelevant() {
+					return (
+						identifier
+						&&
+						!isVariableInBlockScoped(identifier)
+						&&
+						!isParameterOfAnyParentFunction(identifier)
+					);
+				}
 			}
 
 			function isParameterOfAnyParentFunction(
