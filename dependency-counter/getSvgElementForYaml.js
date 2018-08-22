@@ -5,7 +5,7 @@ const
 	createDependencyGroupFactoryWhenRequired = require("./getSvgElementForYaml/createDependencyGroupFactoryWhenRequired"),
 	createOuterDependencyGroupFactory = require("./getSvgElementForYaml/createOuterDependencyGroupFactory"),
 	createParentGroupFactory = require("./getSvgElementForYaml/createParentGroupFactory"),
-	createStackFromParsedYaml = require("../createStackFromParsedYaml"),
+	createStackFromYaml = require("../dependencyAndStructure/createStackFromYaml"),
 	createStackWithSummaryGroupFactory = require("./getSvgElementForYaml/createStackWithSummaryGroupFactory"),
 	createSvgElement = require("./getSvgElementForYaml/createSvgElement"),
 	createTextGroup = require("./getSvgElementForYaml/createTextGroup"),
@@ -52,7 +52,7 @@ module.exports =
 		);
 
 		function initaliseAndCreateChildGroupFactory() {
-			const stack = createStackFromParsedYaml(yaml);
+			const stack = createStackFromYaml(yaml);
 
 			return (
 				subsetIdentifierHierarchy
