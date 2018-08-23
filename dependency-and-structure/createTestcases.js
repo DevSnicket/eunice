@@ -31,6 +31,12 @@ module.exports =
 			}),
 			createTestCase({
 				stack:
+					createStack(createLevel(createItem({ items: createStack(createLevel({ id: "item" })) }))),
+				yaml:
+					{ items: "item" },
+			}),
+			createTestCase({
+				stack:
 					createStack(
 						createLevel(
 							createItem({
@@ -43,6 +49,22 @@ module.exports =
 					{
 						id: "item",
 						items: "childItem",
+					},
+			}),
+			createTestCase({
+				stack:
+					createStack(
+						createLevel({
+							dependsUpon: [ "missing" ],
+							id: "item1",
+						})
+					),
+				yaml:
+					{
+						id: "item1",
+						// property order affects YAML output order and for readability id is the first property
+						// eslint-disable-next-line sort-keys
+						dependsUpon: "missing",
 					},
 			}),
 			createSingleDependencyTestCase(),
@@ -151,12 +173,12 @@ function createLevel(
 }
 
 function createItem({
-	id,
+	id = null,
 	items,
 }) {
 	const item =
 		{
-			id,
+			...id && { id },
 			items,
 		};
 

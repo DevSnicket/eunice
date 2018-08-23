@@ -41,7 +41,7 @@ function createFromItem(
 		dependsUponProperty || itemsProperty
 		?
 		{
-			id: item.id,
+			...item.id && { id: item.id },
 			...dependsUponProperty,
 			...itemsProperty,
 		}
@@ -60,11 +60,17 @@ function createDependsUponProperty(
 			dependsUpon:
 				dependsUpon.length === 1
 				?
-				dependsUpon[0].id
+				getIdentifierPropertyOrValue(dependsUpon[0])
 				:
-				dependsUpon.map(item => item.id),
+				dependsUpon.map(getIdentifierPropertyOrValue),
 		}
 	);
+}
+
+function getIdentifierPropertyOrValue(
+	value
+) {
+	return value.id || value;
 }
 
 function createItemsProperty(
