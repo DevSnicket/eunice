@@ -44,6 +44,7 @@ The YAML files can then be optionally post-processed including combining the out
 - order items by their type
 - sets the type of root items
 - stack root items
+- unstack independent items
 
 ### Renderer
 

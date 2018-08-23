@@ -146,6 +146,26 @@
 				"useWSL": true
 			},
 			{
+				"args":
+					[
+						"--items=",
+					],
+				"name": "processor unstackIndependent",
+				"program": "${workspaceRoot}/Processors/unstackIndependent.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args": [ "unstackIndependent.test.js" ],
+				"cwd": "${workspaceFolder}/Processors/",
+				"name": "processor unstackIndependent jest",
+				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
 				"args": [ "getInteractiveElementsForYaml.test.js" ],
 				"cwd": "${workspaceFolder}/Renderer/",
 				"name": "renderer getInteractiveElementsForYaml jest",
