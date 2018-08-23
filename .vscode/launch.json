@@ -2,8 +2,8 @@
 	"configurations":
 		[
 			{
-				"name": "attach to port 55263",
-				"port": 55263,
+				"name": "attach to port 9229",
+				"port": 9229,
 				"request": "attach",
 				"type": "node"
 			},
