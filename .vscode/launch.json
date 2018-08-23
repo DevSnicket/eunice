@@ -17,9 +17,7 @@
 				"useWSL": true
 			},
 			{
-				//"args": [ "const/argument-in-function-declaration/before/two" ],
-				//"args": [ "require-file/called/from-const/from-function-declaration/with-property" ],
-				"args": [ "require-file/called/from-const/from-function-declaration/with-object-destructuring" ],
+				"args": [ ],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/",
 				"name": "analyzer getYamlFromJavaScript test",
 				"program": "${workspaceFolder}/Analyzers/JavaScript/getYamlFromJavaScript.test.js",
@@ -39,7 +37,6 @@
 			{
 				"args":
 					[
-						//"--directory=./Analyzers/JavaScript/getOrCreateItemsInDirectory.testcases",
 						"--directory=./",
 						"--ignoreDirectoryNames=Coverage",
 						"--ignoreDirectoryNames=getOrCreateItemsInDirectory.testcases", 
@@ -127,8 +124,8 @@
 			{
 				"args":
 					[
-						"--items=[item1,item2,item3]",
-						"--levels=item1,item2",
+						"--items=",
+						"--levels=",
 					],
 				"name": "processor stackRootItems",
 				"program": "${workspaceRoot}/Processors/stackRootItems.js",
@@ -186,8 +183,8 @@
 			{
 				"args":
 					[
-						"--subsetIdentifierHierarchy=parent",
-						"--yaml={id: parent, items: item}"
+						"--subsetIdentifierHierarchy=",
+						"--yaml="
 					],
 				"name": "renderer getSvgForYaml",
 				"program": "${workspaceRoot}/Renderer/getSvgForYaml.js",
