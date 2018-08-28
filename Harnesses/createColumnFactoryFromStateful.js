@@ -35,9 +35,17 @@ module.exports =
 				createYamlInputResizableColumn:
 					() =>
 						createResizableColumnForInput({
-							createStateFromValue: value => ({ yaml: value }),
-							title: "YAML",
-							value: stateful.state.yaml,
+							createStateFromValue:
+								value => ({ yaml: value }),
+							title:
+								createElement(
+									"div",
+									{ style: { display: "flex", flexFlow: "wrap" } },
+									createElement("span", { style: { flexGrow: 1 } }, "YAML"),
+									...createProcessorMenuElements()
+								),
+							value:
+								stateful.state.yaml,
 						}),
 			}
 		);
@@ -95,5 +103,72 @@ function createResizableColumn({
 				element
 			)
 		)
+	);
+}
+
+function createProcessorMenuElements() {
+	const
+		className = "popup menu",
+		inputId = "processor-menu";
+
+	return (
+		[
+			createElement(
+				"input",
+				{
+					className,
+					id: inputId,
+					type: "checkbox",
+				}
+			),
+			createElement(
+				"label",
+				{
+					className,
+					for: inputId,
+				},
+				"processors"
+			),
+			createElement(
+				"ul",
+				{
+					className,
+					style: { flexBasis: "100%" },
+				},
+				createProcessorMenuItemElements()
+			),
+		]
+	);
+}
+
+function createProcessorMenuItemElements() {
+	return (
+		createProcessorMenuItems()
+		.map(
+			menuItem =>
+				createElement(
+					"li",
+					null,
+					createElement(
+						"label",
+						null,
+						createElement("input", { type: "checkbox" }),
+						menuItem.text
+					),
+					menuItem.elements
+				)
+		)
+	);
+}
+
+function createProcessorMenuItems() {
+	return (
+		[
+			{ elements: createElement("input"), text: "group items by identifier separator " },
+			{ elements: createElement("input"), text: "order items by type " },
+			{ elements: createElement("input"), text: "set type of root items " },
+			{ elements: createElement("input"), text: "stack root items " },
+			{ text: "unstack independent" },
+		]
 	);
 }
