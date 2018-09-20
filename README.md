@@ -4,21 +4,18 @@
 
 Eunice is a system of utilities based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. It doesn't constrain this idea to direct dependencies, but includes indirect dependencies as well.
 
-try it out:
+## [try out Eunince on Enuice 🐶🥫](https://devsnicket.github.io/Eunice-harnesses/Renderer/harness.html)
+([created with](dogfooding.sh))
 
->[JavaScript &rightarrow; YAML &rightarrow; SVG](https://devsnicket.github.io/Eunice-harnesses/harness.html)
->
->[Eunice on Eunice](https://devsnicket.github.io/Eunice-harnesses/Renderer/harness.html) 🐶🥫 ([created with](dogfooding.sh))
-
-### Stacks
+## Stacks
 
 Part of how this is achieved in Eunice is by defining stacks. When an item should depend upon another it is placed above the other in their stack. When items are independent of each other they can be placed at the same level in their stack.
 
-### Scale
+## Scale
 
 This approach can be applied at all scales of software and across boundaries, from individual files, functions or classes, to multiple, large codebases in different languages, frameworks and runtimes.
 
-### YAML
+## YAML
 
 To support different sources of structure and dependency a common data format is defined in YAML.
 
@@ -33,9 +30,11 @@ To support different sources of structure and dependency a common data format is
   - lower right
 ```
 
-### Analyzers
+## Analyzers
 
 Analyzers are implemented to create the YAML files, one is currently in development for JavaScript analyzer.
+
+>[try out JavaScript &rightarrow; YAML](https://devsnicket.github.io/Eunice-harnesses/Analyzers/JavaScript/harness.html)
 
 ### Processors
 
@@ -46,7 +45,7 @@ The YAML files can then be optionally post-processed including combining the out
 - stack root items
 - unstack independent items
 
-### Renderer
+## Renderer
 
 To visualise what's in the YAML files and statistically measure how well they match the intended structure a SVG renderer has been implemented. The renderer doesn't use lines between items to show dependencies and instead marks items with counts for each dependency type:
 
@@ -65,3 +64,5 @@ scenario | svg | scenario | svg | scenario | svg
 upper depends<br/>upon lower | [![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/Renderer/getSvgForYaml.testcases/stack/upper-depends-upon-lower/.svg?sanitize=true)](Renderer/getSvgForYaml.testcases/stack/upper-depends-upon-lower/.svg) | lower depends<br/>upon upper | [![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/Renderer/getSvgForYaml.testcases/stack/lower-depends-upon-upper/.svg?sanitize=true)](Renderer/getSvgForYaml.testcases/stack/lower-depends-upon-upper/.svg) | interdependent<br/>(stacked) | [![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/Renderer/getSvgForYaml.testcases/stack/two-interdependent/.svg?sanitize=true)](Renderer/getSvgForYaml.testcases/stack/two-interdependent/.svg)
 independent | [![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/Renderer/getSvgForYaml.testcases/two/.svg?sanitize=true)](Renderer/getSvgForYaml.testcases/two/.svg) | first depends<br/>upon second | [![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/Renderer/getSvgForYaml.testcases/independency/first-depends-upon-second/.svg?sanitize=true)](Renderer/getSvgForYaml.testcases/independency/first-depends-upon-second/.svg) | interdependent<br/>(not stacked) | [![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/Renderer/getSvgForYaml.testcases/independency/two-interdependent/.svg?sanitize=true)](Renderer/getSvgForYaml.testcases/independency/two-interdependent/.svg)
 parent depends<br />upon item | [![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/Renderer/getSvgForYaml.testcases/parent-depends-upon-item/.svg?sanitize=true)](Renderer/getSvgForYaml.testcases/parent-depends-upon-item/.svg) | item depends<br />upon parent | [![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/Renderer/getSvgForYaml.testcases/item-depends-upon-parent/.svg?sanitize=true)](Renderer/getSvgForYaml.testcases/item-depends-upon-parent/.svg) | first item<br/> depends upon<br/>second item<br/>(not stacked) | [![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/Renderer/getSvgForYaml.testcases/independency/first-item-depends-upon-second-item/.svg?sanitize=true)](Renderer/getSvgForYaml.testcases/independency/first-item-depends-upon-second-item/.svg)
+
+>[try out JavaScript &rightarrow; YAML &rightarrow; SVG](https://devsnicket.github.io/Eunice-harnesses/harness.html)
