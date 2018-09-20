@@ -67,6 +67,10 @@ scenario | svg | scenario | svg | scenario | svg
 -------- | :-: | -------- | :-: | -------- | :-:
 parent depends<br />upon item | [![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/Renderer/getSvgForYaml.testcases/parent-depends-upon-item/.svg?sanitize=true)](Renderer/getSvgForYaml.testcases/parent-depends-upon-item/.svg) | item depends<br />upon parent | [![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/Renderer/getSvgForYaml.testcases/item-depends-upon-parent/.svg?sanitize=true)](Renderer/getSvgForYaml.testcases/item-depends-upon-parent/.svg) | first item<br/> depends upon<br/>second item<br/>(not stacked) | [![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/Renderer/getSvgForYaml.testcases/independency/first-item-depends-upon-second-item/.svg?sanitize=true)](Renderer/getSvgForYaml.testcases/independency/first-item-depends-upon-second-item/.svg)
 
-Items and sub-item can also be opened by selecting their box which will display their contents and breadcrumb links for where they are in the hierarchy.
+Items and sub-item can also be opened by clicking/tapping on their box. Opening an item will show its contents and breadcrumb links for where it is in the hierarchy.
+
+root > grandparent
+
+[![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/Renderer/getSvgForYaml.withSubset.testcases/upper-item-depends-upon-lower-item-with-parent.svg?sanitize=true)](Renderer/getSvgForYaml.withSubset.testcases/upper-item-depends-upon-lower-item-with-parent.svg) 
 
 >[try out JavaScript &rightarrow; YAML &rightarrow; SVG](https://devsnicket.github.io/Eunice-harnesses/harness.html)
