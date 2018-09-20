@@ -17,11 +17,11 @@ module.exports =
 			addDeclarationIn({
 				declaration:
 					createDeclarationWithIdentifier(
-						parent.id.name
+						parent.id.name,
 					),
 				parent:
 					findParentFunctionFromAncestors(
-						ancestors
+						ancestors,
 					),
 			});
 		}
@@ -31,7 +31,7 @@ module.exports =
 				addDeclarationIn({
 					declaration:
 						createDeclarationWithIdentifier(
-							getIdentifier()
+							getIdentifier(),
 						),
 					parent:
 						null,
@@ -55,7 +55,7 @@ module.exports =
 		}
 
 		function createDeclarationWithIdentifier(
-			identifier
+			identifier,
 		) {
 			return (
 				createFunctionDeclarationWithIdentifier({
@@ -67,7 +67,7 @@ module.exports =
 	};
 
 function isModuleExportMemberExpression(
-	node
+	node,
 ) {
 	return (
 		node.type == "MemberExpression"

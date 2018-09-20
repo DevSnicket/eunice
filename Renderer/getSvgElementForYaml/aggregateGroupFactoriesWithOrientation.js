@@ -55,14 +55,14 @@ function aggregateGroupFactories({
 				createAtPosition: () => [],
 				height: 0,
 				width: 0,
-			}
+			},
 		)
 	);
 
 	function aggregate(
 		aggregation,
 		groupFactory,
-		index
+		index,
 	) {
 		const offset =
 			aggregation[properties.offset.size]
@@ -85,7 +85,7 @@ function aggregateGroupFactories({
 				[properties.align.size]:
 					Math.max(
 						aggregation[properties.align.size],
-						groupFactory[properties.align.size]
+						groupFactory[properties.align.size],
 					),
 				[properties.offset.size]:
 					groupFactory[properties.offset.size]

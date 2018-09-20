@@ -17,8 +17,8 @@ renderComponent({
 					getInteractiveElementsForYaml({
 						locationHash: location.hash,
 						yaml: this.state.yaml,
-					})
-				)
+					}),
+				),
 			)
 		);
 	},
@@ -29,7 +29,7 @@ renderComponent({
 });
 
 function createStateFromJavascript(
-	javascript
+	javascript,
 ) {
 	return (
 		{

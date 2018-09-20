@@ -29,20 +29,20 @@ module.exports =
 				describeTestCase(testCase);
 
 			function describeTestCase(
-				testCase
+				testCase,
 			) {
 				test(
 					testCase,
 					() =>
 						expect(
-							getActualForTestCase(testCase)
+							getActualForTestCase(testCase),
 						)
 						.toBe(
 							readTestCaseFile({
 								fileName: expectedFileName,
 								testCase,
-							})
-						)
+							}),
+						),
 				);
 			}
 		}
@@ -62,7 +62,7 @@ module.exports =
 					fs.writeFileSync(
 						`${rootDirectory}${testCase}/${expectedFileName}`,
 						content,
-						"utf-8"
+						"utf-8",
 					)
 				);
 			}
@@ -79,13 +79,13 @@ module.exports =
 			return inSubdirectory("");
 
 			function inSubdirectory(
-				directory
+				directory,
 			) {
 				return (
 					fs.readdirSync(rootDirectory + directory)
 					.map(
 						subFileOrDirectory =>
-							directory + subFileOrDirectory
+							directory + subFileOrDirectory,
 					)
 					.map(
 						subFileOrDirectory =>
@@ -93,17 +93,17 @@ module.exports =
 								fs.existsSync(`${rootDirectory}${subFileOrDirectory}/${caseFileName}`) && subFileOrDirectory,
 								...whenSubdirectory(subFileOrDirectory),
 							]
-							.filter(testCases => testCases)
+							.filter(testCases => testCases),
 					)
 					.reduce(
 						(aggregation, testCases) =>
-							[ ...aggregation, ...testCases ]
+							[ ...aggregation, ...testCases ],
 					)
 				);
 			}
 
 			function whenSubdirectory(
-				subFileOrDirectory
+				subFileOrDirectory,
 			) {
 				return isDirectory() ? discoverTestCases() : [];
 
@@ -121,7 +121,7 @@ module.exports =
 		}
 
 		function logOutputOfActualWhenFileOrTestCase(
-			fileOrTestCase
+			fileOrTestCase,
 		) {
 			if (fileOrTestCase)
 				console.log(
@@ -129,7 +129,7 @@ module.exports =
 					?
 					action(readTextFile(fileOrTestCase))
 					:
-					getActualForTestCase(fileOrTestCase)
+					getActualForTestCase(fileOrTestCase),
 				);
 
 			function isArgumentPath() {
@@ -142,14 +142,14 @@ module.exports =
 		}
 
 		function getActualForTestCase(
-			testCase
+			testCase,
 		) {
 			return (
 				action(
 					readTestCaseFile({
 						fileName: caseFileName,
 						testCase,
-					})
+					}),
 				)
 			);
 		}

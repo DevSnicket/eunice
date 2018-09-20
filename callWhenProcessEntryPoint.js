@@ -32,7 +32,7 @@ module.exports =
 
 				standardIn.on(
 					"data",
-					chunk => input += chunk
+					chunk => input += chunk,
 				);
 
 				standardIn.on(
@@ -41,18 +41,18 @@ module.exports =
 						call({
 							...processArguments,
 							[standardInputParameter]: input,
-						})
+						}),
 				);
 			}
 
 			function call(
-				processArgumentsAndOrStandardInput
+				processArgumentsAndOrStandardInput,
 			) {
 				// eslint-disable-next-line no-console
 				console.log(
 					action(
-						processArgumentsAndOrStandardInput
-					)
+						processArgumentsAndOrStandardInput,
+					),
 				);
 			}
 		}

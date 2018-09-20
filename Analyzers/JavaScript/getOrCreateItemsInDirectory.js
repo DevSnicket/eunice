@@ -14,8 +14,8 @@ callWhenProcessEntryPoint({
 		processArguments =>
 			getYamlForItemOrItems(
 				getOrCreateItemsInDirectory(
-					processArguments
-				)
+					processArguments,
+				),
 			),
 });
 
@@ -44,24 +44,24 @@ function getOrCreateItemsInRootedDirectory({
 
 	return (
 		fs.readdirSync(
-			subDirectoryFull
+			subDirectoryFull,
 		)
 		.reduce(
 			(
 				items,
-				fileOrDirectory
+				fileOrDirectory,
 			) =>
 				[
 					...items,
 					...createItemsFromFileOrSubdirectory(fileOrDirectory) || [],
 				],
-			[]
+			[],
 		)
 		.sort(compareItemIdentifiers)
 	);
 
 	function createItemsFromFileOrSubdirectory(
-		fileOrSubdirectory
+		fileOrSubdirectory,
 	) {
 		return (
 			getOrCreateItemsWhenJavaScriptFile()
@@ -84,8 +84,8 @@ function getOrCreateItemsInRootedDirectory({
 						items:
 							ensureArray(
 								getItemOrItemsFromJavaScript(
-									readFile()
-								)
+									readFile(),
+								),
 							),
 						name:
 							fileOrSubdirectoryPath.name,
@@ -101,7 +101,7 @@ function getOrCreateItemsInRootedDirectory({
 				return (
 					fs.readFileSync(
 						getFileOrSubdirectoryFull(),
-						"utf-8"
+						"utf-8",
 					)
 				);
 			}
@@ -131,7 +131,7 @@ function getOrCreateItemsInRootedDirectory({
 			function isDirectory() {
 				return (
 					fs.lstatSync(
-						getFileOrSubdirectoryFull()
+						getFileOrSubdirectoryFull(),
 					)
 					.isDirectory()
 				);
@@ -142,7 +142,7 @@ function getOrCreateItemsInRootedDirectory({
 			return (
 				path.join(
 					subDirectoryFull,
-					fileOrSubdirectory
+					fileOrSubdirectory,
 				)
 			);
 		}
@@ -150,7 +150,7 @@ function getOrCreateItemsInRootedDirectory({
 }
 
 function ensureArray(
-	objectOrArray
+	objectOrArray,
 ) {
 	return (
 		Array.isArray(objectOrArray)
@@ -163,7 +163,7 @@ function ensureArray(
 
 function compareItemIdentifiers(
 	left,
-	right
+	right,
 ) {
 	const
 		leftIdentifier = getIdentifier(left),
@@ -176,7 +176,7 @@ function compareItemIdentifiers(
 	);
 
 	function getIdentifier(
-		item
+		item,
 	) {
 		return (
 			(item.id || item)

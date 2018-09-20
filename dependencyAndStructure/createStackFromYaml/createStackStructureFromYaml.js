@@ -1,7 +1,7 @@
 module.exports = createStackFromParsedYaml;
 
 function createStackFromParsedYaml(
-	yaml
+	yaml,
 ) {
 	const stack =
 		Array.isArray(yaml)
@@ -29,7 +29,7 @@ function createStackFromParsedYaml(
 }
 
 function createLevelFromIdentifierOrItemOrLevel(
-	identifierOrItemOrLevel
+	identifierOrItemOrLevel,
 ) {
 	return (
 		Array.isArray(identifierOrItemOrLevel)
@@ -41,7 +41,7 @@ function createLevelFromIdentifierOrItemOrLevel(
 }
 
 function createLevelFromItems(
-	items
+	items,
 ) {
 	const level =
 		items
@@ -51,7 +51,7 @@ function createLevelFromItems(
 				?
 				{ id: item }
 				:
-				createItemFromObject(item)
+				createItemFromObject(item),
 		);
 
 	for (const item of level)
@@ -61,7 +61,7 @@ function createLevelFromItems(
 }
 
 function createLevelFromIdentifierOrItem(
-	identifierOrItem
+	identifierOrItem,
 ) {
 	return (
 		isString(identifierOrItem)
@@ -73,19 +73,19 @@ function createLevelFromIdentifierOrItem(
 }
 
 function isString(
-	value
+	value,
 ) {
 	return typeof value === "string";
 }
 
 function createLevelWhenIdentifier(
-	identifier
+	identifier,
 ) {
 	return createLevel({ id: identifier });
 }
 
 function createLevel(
-	item
+	item,
 ) {
 	const level = [ item ];
 
@@ -95,7 +95,7 @@ function createLevel(
 }
 
 function createItemFromObject(
-	object
+	object,
 ) {
 	const item =
 		{
@@ -118,7 +118,7 @@ function createItemFromObject(
 }
 
 function ensureIsArray(
-	item
+	item,
 ) {
 	return (
 		Array.isArray(item)

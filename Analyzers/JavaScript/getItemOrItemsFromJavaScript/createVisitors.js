@@ -42,7 +42,7 @@ module.exports =
 						dependsUpons.createPropertyFor(null),
 					items:
 						getItemWhenSingleOrStackItemsWhenMultiple(
-							declarations.createItemsForAndRemoveDeclarationsIn(null)
+							declarations.createItemsForAndRemoveDeclarationsIn(null),
 						),
 				});
 
@@ -58,7 +58,7 @@ module.exports =
 
 		function visitFunctionExpression(
 			functionExpression,
-			ancestors
+			ancestors,
 		) {
 			addFunctionExpression({
 				addDeclarationIn:
@@ -73,7 +73,7 @@ module.exports =
 
 		function visitCallExpression(
 			callExpression,
-			ancestors
+			ancestors,
 		) {
 			addFromCall({
 				addDependsUponIdentifierFrom:
@@ -101,7 +101,7 @@ module.exports =
 
 		function visitFunctionDeclaration(
 			functionDeclaration,
-			ancestors
+			ancestors,
 		) {
 			declarations.addDeclarationIn({
 				declaration:
@@ -122,14 +122,14 @@ module.exports =
 				createFunctionDeclaration({
 					dependsUponProperty:
 						dependsUpons.createPropertyFor(
-							functionDeclaration
+							functionDeclaration,
 						),
 					functionDeclaration,
 					hasUndeclaredReferenceTo: undeclaredReferences.hasReferenceTo,
 					identifier,
 					items:
 						declarations.createItemsForAndRemoveDeclarationsIn(
-							functionDeclaration
+							functionDeclaration,
 						),
 				})
 			);
@@ -137,7 +137,7 @@ module.exports =
 
 		function visitVariableDeclaration(
 			variableDeclaration,
-			ancestors
+			ancestors,
 		) {
 			addVariables({
 				addDeclarationsIn:

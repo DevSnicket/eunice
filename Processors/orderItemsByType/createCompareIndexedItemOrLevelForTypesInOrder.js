@@ -4,7 +4,7 @@ module.exports =
 
 		function compareIndexedItemOrLevel(
 			leftIndexedItemOrLevel,
-			rightIndexedItemOrLevel
+			rightIndexedItemOrLevel,
 		) {
 			const
 				leftIndex = getIndexOfItemOrLevel(leftIndexedItemOrLevel.itemOrLevel),
@@ -28,7 +28,7 @@ module.exports =
 		}
 
 		function getIndexOfItemOrLevel(
-			itemOrLevel
+			itemOrLevel,
 		) {
 			return (
 				Array.isArray(itemOrLevel)
@@ -40,7 +40,7 @@ module.exports =
 		}
 
 		function getIndexOfLevel(
-			level
+			level,
 		) {
 			return (
 				level.length === 1
@@ -52,7 +52,7 @@ module.exports =
 		}
 
 		function getIndexOfItem(
-			item
+			item,
 		) {
 			return typesInOrder.indexOf(item.type);
 		}
@@ -60,7 +60,7 @@ module.exports =
 
 function compare(
 	left,
-	right
+	right,
 ) {
 	return (
 		left !== right

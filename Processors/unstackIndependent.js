@@ -6,7 +6,7 @@ const
 
 /* istanbul ignore next: only used when JavaScript file is process entry point */
 callWithYamlItemsAndOutputWhenProcessEntryPoint(
-	parameters => unstackIndependent(parameters.items)
+	parameters => unstackIndependent(parameters.items),
 );
 
 processorPlugins.plugIn({
@@ -17,35 +17,35 @@ processorPlugins.plugIn({
 module.exports = unstackIndependent;
 
 function unstackIndependent(
-	items
+	items,
 ) {
 	return (
 		createYamlFromStack(
 			unstackIndependentInStack(
 				createStackFromYaml(
-					items
-				)
-			)
+					items,
+				),
+			),
 		)
 	);
 }
 
 function unstackIndependentInStack(
-	stack
+	stack,
 ) {
 	return (
 		getStackFromAggregation(
 			stack.reduce(
 				aggregate,
-				{ stack: [] }
-			)
+				{ stack: [] },
+			),
 		)
 	);
 }
 
 function aggregate(
 	{ lastLevel, stack },
-	currentLevel
+	currentLevel,
 ) {
 	unstackIndependentItemsInLevel();
 
@@ -64,7 +64,7 @@ function aggregate(
 	}
 
 	function anyDependenciesWithCurrentLevel(
-		level
+		level,
 	) {
 		return (
 			level.some(
@@ -73,13 +73,13 @@ function aggregate(
 					||
 					anyInCurrentLevel(item.dependsUpon)
 					||
-					(item.items && item.items.some(anyDependenciesWithCurrentLevel))
+					(item.items && item.items.some(anyDependenciesWithCurrentLevel)),
 			)
 		);
 	}
 
 	function anyInCurrentLevel(
-		items
+		items,
 	) {
 		return (
 			items
@@ -89,7 +89,7 @@ function aggregate(
 	}
 
 	function hasLevelOfOrInCurrentLevel(
-		level
+		level,
 	) {
 		return level && isOrIsInCurrentLevel();
 

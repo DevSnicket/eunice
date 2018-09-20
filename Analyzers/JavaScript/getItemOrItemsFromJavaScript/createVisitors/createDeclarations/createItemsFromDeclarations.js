@@ -7,7 +7,7 @@ module.exports =
 		.filter(item => item);
 
 function createItemFromDeclarationWhenRequired(
-	declaration
+	declaration,
 ) {
 	return createWhenFunction() || createWhenVariableUsedInNestedFunction();
 
@@ -31,7 +31,7 @@ function createItemFromDeclarationWhenRequired(
 		}
 
 		function getDependsUponProperty(
-			dependsUpon
+			dependsUpon,
 		) {
 			return dependsUpon && { dependsUpon };
 		}

@@ -37,7 +37,7 @@ function findItemWithIdentifierInStack({
 	return findItemInStacks([ stack ]);
 
 	function findItemInStacks(
-		stacks
+		stacks,
 	) {
 		const itemsOfStacks = stacks.flat(3);
 
@@ -60,7 +60,7 @@ function findItemWithIdentifierInStack({
 	}
 
 	function findItemWithIdentifier(
-		items
+		items,
 	) {
 		return items.find(item => item.id === identifier);
 	}

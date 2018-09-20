@@ -5,7 +5,7 @@ module.exports =
 	};
 
 function findIdentifiableParent(
-	ancestors
+	ancestors,
 ) {
 	for (const parent of getParents(ancestors)) {
 		const identifiableParent =
@@ -21,7 +21,7 @@ function findIdentifiableParent(
 }
 
 function findParents(
-	ancestors
+	ancestors,
 ) {
 	const anonymous = [];
 
@@ -39,7 +39,7 @@ function findParents(
 	return getAnonymousPropertyWhenAny();
 
 	function createParentFunctionsWithIdentifiable(
-		identifiable
+		identifiable,
 	) {
 		return (
 			{
@@ -55,7 +55,7 @@ function findParents(
 }
 
 function * getParents(
-	ancestors
+	ancestors,
 ) {
 	let previous = null;
 
@@ -91,7 +91,7 @@ function getParentFromCurrentAndPrevious({
 }
 
 function isFunctionExpressionType(
-	type
+	type,
 ) {
 	return (
 		type === "ArrowFunctionExpression"
@@ -101,7 +101,7 @@ function isFunctionExpressionType(
 }
 
 function isIdentifiableType(
-	type
+	type,
 ) {
 	return (
 		type === "AssignmentExpression"

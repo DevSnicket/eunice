@@ -7,8 +7,8 @@ module.exports =
 		for (const argument of getArguments())
 			addDependsUponIdentifier(
 				getIdentifierFromArgumentWhenRelevant(
-					argument
-				)
+					argument,
+				),
 			);
 
 		function getArguments() {
@@ -20,26 +20,26 @@ module.exports =
 						[ ...aggregation, ...getPropertyValues(argument.properties) ]
 						:
 						[ ...aggregation, argument ],
-					[]
+					[],
 				)
 			);
 		}
 
 		function getIdentifierFromArgumentWhenRelevant(
-			argument
+			argument,
 		) {
 			return (
 				argument.type === "Identifier"
 				&&
 				getIdentifierNameFromAndAddOrUpdateReference(
-					argument.name
+					argument.name,
 				)
 			);
 		}
 	};
 
 function getPropertyValues(
-	properties
+	properties,
 ) {
 	return (
 		properties
@@ -49,7 +49,7 @@ function getPropertyValues(
 				?
 				property.argument
 				:
-				property.value
+				property.value,
 		)
 	);
 }

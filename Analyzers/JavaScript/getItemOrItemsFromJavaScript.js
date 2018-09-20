@@ -11,7 +11,7 @@ module.exports =
 
 		walk.ancestor(
 			parse(javaScript, { ecmaVersion: 9 }),
-			visitors
+			visitors,
 		);
 
 		return visitors.getItemOrItems();

@@ -27,7 +27,7 @@ module.exports =
 		}
 
 		function createPropertyFor(
-			parent
+			parent,
 		) {
 			const dependsUpons = dependsUponsByParent.get(parent);
 

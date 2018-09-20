@@ -12,18 +12,18 @@ test(
 	"",
 	() =>
 		expect(getYamlForDirectory(testcasesDirectory))
-		.toBe(readExpectedFile())
+		.toBe(readExpectedFile()),
 );
 
 function getYamlForDirectory(
-	directory
+	directory,
 ) {
 	return (
 		getYamlForItemOrItems(
 			getOrCreateItemsInDirectory({
 				directory,
 				ignoreDirectoryNames: [ "node_modules" ],
-			})
+			}),
 		)
 	);
 }
@@ -32,7 +32,7 @@ function readExpectedFile() {
 	return (
 		fs.readFileSync(
 			path.join(testcasesDirectory, "expected.yaml"),
-			"utf-8"
+			"utf-8",
 		)
 	);
 }

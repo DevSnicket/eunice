@@ -17,7 +17,7 @@ module.exports =
 		function aggregateWhenInCommonWithGroup() {
 			const commonElements =
 				getIdentifierElementsInCommonWith(
-					aggregation.group.identifierElements
+					aggregation.group.identifierElements,
 				);
 
 			return (
@@ -29,7 +29,7 @@ module.exports =
 			);
 
 			function isSubgroupOfGroup(
-				group
+				group,
 			) {
 				return (
 					commonElements.length < group.identifierElements.length
@@ -62,7 +62,7 @@ module.exports =
 		function aggregateWhenInCommonWithLastItemOfGroup() {
 			const commonElements =
 				getIdentifierElementsInCommonWith(
-					aggregation.group.lastItemOfGroup.identifierElements
+					aggregation.group.lastItemOfGroup.identifierElements,
 				);
 
 			return (
@@ -94,7 +94,7 @@ module.exports =
 		}
 
 		function getIdentifierElementsInCommonWith(
-			otherIdentifierElements
+			otherIdentifierElements,
 		) {
 			let isCommon = true;
 
@@ -104,7 +104,7 @@ module.exports =
 						isCommon =
 							isCommon
 							&&
-							otherIdentifierElement === identifierElements[index]
+							otherIdentifierElement === identifierElements[index],
 				)
 			);
 		}

@@ -14,7 +14,7 @@ module.exports =
 
 		const dependsUponFileResolver =
 			createDependsUponFileResolverForDirectory(
-				directory
+				directory,
 			);
 
 		return (

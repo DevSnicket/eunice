@@ -21,11 +21,11 @@ module.exports =
 
 					window.addEventListener(
 						"hashchange",
-						() => componentMixin.forceUpdate()
+						() => componentMixin.forceUpdate(),
 					);
 
 					return componentMixin;
-				}
+				},
 			),
-			document.getElementById("container")
+			document.getElementById("container"),
 		);

@@ -14,7 +14,7 @@ test(
 						throw Error(expectedError);
 					},
 				createElement,
-			})
+			}),
 		)
-		.toHaveProperty("props.children", expectedError)
+		.toHaveProperty("props.children", expectedError),
 );

@@ -14,8 +14,8 @@ module.exports =
 					createStack(
 						createLevel(
 							{ id: "item1" },
-							{ id: "item2" }
-						)
+							{ id: "item2" },
+						),
 					),
 				yaml:
 					[ "item1", "item2" ],
@@ -24,7 +24,7 @@ module.exports =
 				stack:
 					createStack(
 						createLevel({ id: "item1" }),
-						createLevel({ id: "item2" })
+						createLevel({ id: "item2" }),
 					),
 				yaml:
 					[ [ "item1" ], [ "item2" ] ],
@@ -42,8 +42,8 @@ module.exports =
 							createItem({
 								id: "item",
 								items: createStack(createLevel({ id: "childItem" })),
-							})
-						)
+							}),
+						),
 					),
 				yaml:
 					{
@@ -57,7 +57,7 @@ module.exports =
 						createLevel({
 							dependsUpon: [ "missing" ],
 							id: "item1",
-						})
+						}),
 					),
 				yaml:
 					{
@@ -89,8 +89,8 @@ function createSingleDependencyTestCase() {
 				createStack(
 					createLevel(
 						itemWithDependsUpon,
-						dependentItem
-					)
+						dependentItem,
+					),
 				),
 			yaml:
 				[
@@ -132,8 +132,8 @@ function createMultipleDependencyTestCase() {
 						...[
 							itemWithDependsUpon,
 							...dependentItems,
-						]
-					)
+						],
+					),
 				),
 			yaml:
 				[

@@ -13,16 +13,16 @@ test(
 	() =>
 		expect(
 			renderArrows(
-				createArrows({ createElement, withPrecision })
-			)
+				createArrows({ createElement, withPrecision }),
+			),
 		)
 		.toBe(
-			readFile(path.join(__dirname, "createArrows.testcase.svg"))
-		)
+			readFile(path.join(__dirname, "createArrows.testcase.svg")),
+		),
 );
 
 function renderArrows(
-	arrows
+	arrows,
 ) {
 	return (
 		renderToStaticMarkup(
@@ -36,8 +36,8 @@ function renderArrows(
 				[
 					...getElements(),
 					...getUses(),
-				]
-			)
+				],
+			),
 		)
 	);
 
@@ -57,14 +57,14 @@ function renderArrows(
 			[ arrows.down, arrows.up, arrows.right ]
 			.reduce(
 				aggregate,
-				{ elements: [], left: padding }
+				{ elements: [], left: padding },
 			)
 			.elements
 		);
 
 		function aggregate(
 			aggregation,
-			arrow
+			arrow,
 		) {
 			const width = 8 + arrow.horizontalMargin;
 
@@ -91,7 +91,7 @@ function renderArrows(
 							width,
 							x: aggregation.left,
 							y: padding,
-						}
+						},
 					)
 				);
 			}
@@ -100,16 +100,16 @@ function renderArrows(
 }
 
 function readFile(
-	filePath
+	filePath,
 ) {
 	return (
 		fs.readFileSync(
 			filePath,
-			"utf-8"
+			"utf-8",
 		)
 		.replace(
 			/^\uFEFF/, // BOM
-			""
+			"",
 		)
 	);
 }

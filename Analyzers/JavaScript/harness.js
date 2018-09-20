@@ -28,11 +28,11 @@ renderComponent({
 							createElement(
 								"code",
 								{ id: "yaml" },
-								getYamlFromJavaScript(this.state.javascript)
-							)
+								getYamlFromJavaScript(this.state.javascript),
+							),
 						),
 					title: "YAML",
-				})
+				}),
 			)
 		);
 	},

@@ -9,7 +9,7 @@ module.exports =
 		variableDeclaration,
 	}) => {
 		addDeclarationsWhenAny(
-			createDeclarations()
+			createDeclarations(),
 		);
 
 		function createDeclarations() {
@@ -21,13 +21,13 @@ module.exports =
 							...declarations,
 							...createFromDeclarationIfInitialized(declaration) || [],
 						],
-					[]
+					[],
 				)
 			);
 		}
 
 		function createFromDeclarationIfInitialized(
-			declaration
+			declaration,
 		) {
 			return (
 				declaration.init
@@ -49,7 +49,7 @@ module.exports =
 			function createWhenNotFunction() {
 				return (
 					!isFunctionType(
-						declaration.init.type
+						declaration.init.type,
 					)
 					&&
 					createVariablesFromIdentifier()
@@ -60,15 +60,15 @@ module.exports =
 				return (
 					createVariablesFromIsDestructuredAndNames(
 						getIsDestructuredAndNamesOfIdentifier(
-							declaration.id
-						)
+							declaration.id,
+						),
 					)
 				);
 			}
 		}
 
 		function getIsDestructuredAndNamesOfIdentifier(
-			identifier
+			identifier,
 		) {
 			return (
 				getWhenObjectPattern()
@@ -113,13 +113,13 @@ module.exports =
 							type:
 								"variable",
 						}
-					)
+					),
 				)
 			);
 		}
 
 		function addDeclarationsWhenAny(
-			declarations
+			declarations,
 		) {
 			if (declarations.length)
 				addDeclarationsIn({
@@ -131,7 +131,7 @@ module.exports =
 	};
 
 function isFunctionType(
-	type
+	type,
 ) {
 	return (
 		type === "ArrowFunctionExpression"

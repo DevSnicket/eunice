@@ -3,7 +3,7 @@ const
 	processorPlugins = require("../Harnesses/processorPlugins");
 
 callWithYamlItemsAndOutputWhenProcessEntryPoint(
-	setTypeOfRootItems
+	setTypeOfRootItems,
 );
 
 processorPlugins.plugIn({
@@ -27,7 +27,7 @@ function setTypeOfRootItems({
 	);
 
 	function createItem(
-		item
+		item,
 	) {
 		return (
 			typeof item === "string"

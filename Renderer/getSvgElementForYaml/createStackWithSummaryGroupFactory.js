@@ -55,7 +55,7 @@ module.exports =
 											level.map(countDependenciesOfAndCreateGroupFactoryForItem),
 										spacing:
 											15,
-									})
+									}),
 							),
 						spacing:
 							15,
@@ -64,7 +64,7 @@ module.exports =
 		);
 
 		function countDependenciesOfAndCreateGroupFactoryForItem(
-			item
+			item,
 		) {
 			const dependencyCount =
 				countDependenciesOfItemRecursive({

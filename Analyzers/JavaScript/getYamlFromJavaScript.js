@@ -12,13 +12,13 @@ callWhenProcessEntryPoint({
 module.exports = getYamlFromJavaScript;
 
 function getYamlFromJavaScript(
-	javaScript
+	javaScript,
 ) {
 	return (
 		getYamlForItemOrItems(
 			getItemOrItemsFromJavaScript(
-				javaScript
-			)
+				javaScript,
+			),
 		)
 	);
 }

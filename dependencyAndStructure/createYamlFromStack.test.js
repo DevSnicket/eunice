@@ -4,10 +4,10 @@ const
 
 test.each(
 	createTestcases()
-	.map(testcase => [ testcase.stackFormatted, testcase.yaml, testcase.stack ])
+	.map(testcase => [ testcase.stackFormatted, testcase.yaml, testcase.stack ]),
 )(
 	"%s returns %j",
 	(stackFormatted, yaml, stack) =>
 		expect(createYamlFromStack(stack))
-		.toEqual(yaml)
+		.toEqual(yaml),
 );

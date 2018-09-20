@@ -33,7 +33,7 @@ module.exports =
 				[
 					...declarationsByParents.get(parent) || [],
 					...declarations,
-				]
+				],
 			);
 		}
 
@@ -42,7 +42,7 @@ module.exports =
 		}
 
 		function findDeclarationAndParent(
-			predicate
+			predicate,
 		) {
 			return (
 				[ ...declarationsByParents.keys() ]
@@ -58,11 +58,11 @@ module.exports =
 							parent:
 								declarationParent,
 						}
-					)
+					),
 				)
 				.filter(
 					declarationAndParent =>
-						declarationAndParent.declaration
+						declarationAndParent.declaration,
 				)[0]
 			);
 		}
@@ -82,7 +82,7 @@ module.exports =
 		}
 
 		function createItemsForAndRemoveDeclarationsIn(
-			parent
+			parent,
 		) {
 			const declarations = declarationsByParents.get(parent);
 

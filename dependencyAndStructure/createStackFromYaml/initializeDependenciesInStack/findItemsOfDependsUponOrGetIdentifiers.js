@@ -40,7 +40,7 @@ function findItemsWhenAny({
 	}
 
 	function findItemWithIdentifier(
-		identifier
+		identifier,
 	) {
 		return (
 			items

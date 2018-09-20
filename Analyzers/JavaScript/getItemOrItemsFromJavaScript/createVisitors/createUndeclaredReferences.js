@@ -19,7 +19,7 @@ module.exports =
 				[
 					...parentsOfParentByUndeclaredReferences.get(reference) || [],
 					...ancestors.filter(ancestor => ancestor !== parent),
-				]
+				],
 			);
 		}
 

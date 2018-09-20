@@ -48,7 +48,7 @@ module.exports =
 				aggregation.group.lastItemOfGroup
 				&&
 				identifierElementsStartsWith(
-					aggregation.group.lastItemOfGroup.identifierElements
+					aggregation.group.lastItemOfGroup.identifierElements,
 				)
 				&&
 				{
@@ -76,7 +76,7 @@ module.exports =
 		function aggregateWhenInCurrentGroup() {
 			return (
 				identifierElementsStartsWith(
-					aggregation.group.identifierElements
+					aggregation.group.identifierElements,
 				)
 				&&
 				{
@@ -87,18 +87,18 @@ module.exports =
 		}
 
 		function identifierElementsStartsWith(
-			startsWithElements
+			startsWithElements,
 		) {
 			return (
 				startsWithElements.every(
 					(identifierElement, index) =>
-						identifierElement === identifierElements[index]
+						identifierElement === identifierElements[index],
 				)
 			);
 		}
 
 		function createGroupWithItemInGroup(
-			group
+			group,
 		) {
 			return (
 				{

@@ -41,7 +41,7 @@ module.exports =
 		}
 
 		function getForStack(
-			stack
+			stack,
 		) {
 			return (
 				{

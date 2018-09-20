@@ -5,7 +5,7 @@ const
 	processorPlugins = require("../Harnesses/processorPlugins");
 
 callWithYamlItemsAndOutputWhenProcessEntryPoint(
-	groupItemsByIdentifierSeparator
+	groupItemsByIdentifierSeparator,
 );
 
 processorPlugins.plugIn({
@@ -24,7 +24,7 @@ function groupItemsByIdentifierSeparator({
 }
 
 function createGroupItemsForIdentifierSeparator(
-	identifierSeparator
+	identifierSeparator,
 ) {
 	return itemOrItems => getItemOrGroupItemsInParentIdentifier({ itemOrItems, parentIdentifier: null });
 
@@ -53,8 +53,8 @@ function createGroupItemsForIdentifierSeparator(
 								item,
 								parentIdentifier,
 							}),
-						null
-					)
+						null,
+					),
 				)
 			);
 		}

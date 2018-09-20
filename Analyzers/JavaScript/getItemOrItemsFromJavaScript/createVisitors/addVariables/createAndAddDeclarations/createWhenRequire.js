@@ -58,7 +58,7 @@ module.exports =
 										items: getOrCreateDependsUponForVariable(variable),
 									}),
 							}
-						)
+						),
 					)
 				);
 
@@ -68,7 +68,7 @@ module.exports =
 			}
 
 			function getOrCreateDependsUponForVariable(
-				variable
+				variable,
 			) {
 				return (
 					dependsUponItemIdentifier

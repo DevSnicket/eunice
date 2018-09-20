@@ -28,7 +28,7 @@ module.exports =
 					createShape(),
 					createText(),
 					...elementsBelowText || [],
-				]
+				],
 			)
 		);
 
@@ -43,7 +43,7 @@ module.exports =
 						width: withPrecision(width),
 						...left > 0 && { x: withPrecision(left) },
 						...top > 0 && { y: withPrecision(top) },
-					}
+					},
 				)
 			);
 		}
@@ -57,7 +57,7 @@ module.exports =
 						x: withPrecision(left + padding.left),
 						y: withPrecision(getTextTop()),
 					},
-					text
+					text,
 				)
 			);
 		}

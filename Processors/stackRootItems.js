@@ -8,7 +8,7 @@ callWithYamlItemsAndOutputWhenProcessEntryPoint(
 		stackRootItems({
 			...processArguments,
 			levels: processArguments.levels.map(level => level.split(",")),
-		})
+		}),
 );
 
 processorPlugins.plugIn({
@@ -63,7 +63,7 @@ function stackRootItems({
 					[
 						...itemsByLevel.get(stack) || [],
 						item,
-					]
+					],
 				);
 			}
 		}
@@ -75,23 +75,23 @@ function stackRootItems({
 					level =>
 						getItemWhenSingleOrCreateLevel(
 							itemsByLevel.get(
-								level
-							)
-						)
+								level,
+							),
+						),
 				)
 			);
 		}
 	}
 
 	function getStackOfItemIdentifier(
-		identifier
+		identifier,
 	) {
 		return levels.find(level => level.includes(identifier));
 	}
 }
 
 function getItemWhenSingleOrCreateLevel(
-	items
+	items,
 ) {
 	return items.length === 1 ? items[0] : items;
 }

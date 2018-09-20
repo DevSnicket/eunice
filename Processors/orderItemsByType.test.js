@@ -227,8 +227,8 @@ function assertOrderItemsByType({
 					// type array index of will only work when exact match
 					// eslint-disable-next-line no-undefined
 					typesInOrder: [ undefined, "type1", "type2" ],
-				})
+				}),
 			)
-			.toEqual(expected)
+			.toEqual(expected),
 	);
 }

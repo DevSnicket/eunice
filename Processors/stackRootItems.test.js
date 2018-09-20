@@ -75,8 +75,8 @@ function testStackRootItems({
 				stackRootItems({
 					items,
 					levels,
-				})
+				}),
 			)
-			.toEqual(expected)
+			.toEqual(expected),
 	);
 }

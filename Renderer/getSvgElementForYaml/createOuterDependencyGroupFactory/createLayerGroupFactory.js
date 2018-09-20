@@ -9,11 +9,11 @@ module.exports =
 			dependencies
 			?
 			createGroupFactoryWithTopOffset(
-				calculateTopOffset()
+				calculateTopOffset(),
 			)
 			:
 			createGroupsFactoryWithoutDependencies(
-				itemGroupFactory
+				itemGroupFactory,
 			)
 		);
 
@@ -26,7 +26,7 @@ module.exports =
 		}
 
 		function createGroupFactoryWithTopOffset(
-			topOffset
+			topOffset,
 		) {
 			const
 				dependentsGroupFactory =
@@ -60,7 +60,7 @@ module.exports =
 			);
 
 			function prefixKeySuffix(
-				keySuffix
+				keySuffix,
 			) {
 				return `not independent ${keySuffix}`;
 			}
@@ -90,7 +90,7 @@ module.exports =
 	};
 
 function createGroupsFactoryWithoutDependencies(
-	itemGroupFactory
+	itemGroupFactory,
 ) {
 	return (
 		{

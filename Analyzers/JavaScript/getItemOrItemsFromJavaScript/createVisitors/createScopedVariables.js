@@ -18,7 +18,7 @@ module.exports =
 				[
 					...scopesAndVariables.get(scope) || [],
 					...variables,
-				]
+				],
 			);
 		}
 
@@ -36,7 +36,7 @@ module.exports =
 							&&
 							variablesInBlock.includes(variable)
 						);
-					}
+					},
 				)
 			);
 		}

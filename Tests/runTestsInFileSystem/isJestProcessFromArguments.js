@@ -2,7 +2,7 @@ module.exports =
 	argumentsOfProcess => isSecondArgumentJest(argumentsOfProcess[1]);
 
 function isSecondArgumentJest(
-	argument
+	argument,
 ) {
 	return (
 		argument.endsWith("jest")

@@ -4,9 +4,9 @@ module.exports =
 	filePath =>
 		readFileSync(
 			filePath,
-			"utf-8"
+			"utf-8",
 		)
 		.replace(
 			/^\uFEFF/, // BOM
-			""
+			"",
 		);

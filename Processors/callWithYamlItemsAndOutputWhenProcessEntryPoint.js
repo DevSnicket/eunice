@@ -14,7 +14,7 @@ module.exports =
 							...processArguments,
 							items: yaml.safeLoad(processArguments.items),
 						}),
-						{ lineWidth: Number.MAX_SAFE_INTEGER }
+						{ lineWidth: Number.MAX_SAFE_INTEGER },
 					),
 			parentModule:
 				module.parent,

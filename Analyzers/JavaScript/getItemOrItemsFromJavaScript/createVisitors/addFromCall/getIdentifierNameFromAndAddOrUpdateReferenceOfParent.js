@@ -7,7 +7,7 @@ module.exports =
 	}) => {
 		const declarationAndParent =
 			findDeclarationAndParent(
-				isVariable
+				isVariable,
 			);
 
 		if (declarationAndParent)
@@ -22,7 +22,7 @@ module.exports =
 		}
 
 		function isVariable(
-			declaration
+			declaration,
 		) {
 			return (
 				declaration.type === "variable"

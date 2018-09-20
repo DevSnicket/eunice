@@ -11,7 +11,7 @@ module.exports =
 		);
 
 		function resolveInItem(
-			item
+			item,
 		) {
 			return (
 				{
@@ -39,7 +39,7 @@ module.exports =
 		}
 
 		function resolveInItemOrLevelOrStack(
-			itemOrLevelOrStack
+			itemOrLevelOrStack,
 		) {
 			return (
 				Array.isArray(itemOrLevelOrStack)
@@ -61,7 +61,7 @@ module.exports =
 		}
 
 		function resolveDependsUpon(
-			dependsUpon
+			dependsUpon,
 		) {
 			return (
 				resolveWhenString()
@@ -103,7 +103,7 @@ module.exports =
 			}
 
 			function resolveIdentifierWhenPath(
-				identifier
+				identifier,
 			) {
 				return (
 					identifier.startsWith(".")

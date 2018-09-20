@@ -42,7 +42,7 @@ module.exports =
 						declaration =>
 							getNamesFromIdentifierExpressionWhenObjectPattern(declaration.id)
 							||
-							[ declaration.id.name ]
+							[ declaration.id.name ],
 					),
 			});
 		}

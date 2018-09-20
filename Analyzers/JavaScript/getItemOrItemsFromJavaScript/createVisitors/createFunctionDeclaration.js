@@ -16,7 +16,7 @@ module.exports =
 						hasUndeclaredReferenceTo,
 					}),
 					...items || [],
-				]
+				],
 			);
 
 		return (
@@ -42,14 +42,14 @@ function createParameterItemsForFunction({
 				[ ...aggregation, ...parameter.properties.map(property => property.key.name) ]
 				:
 				[ ...aggregation, parameter.name ],
-			[]
+			[],
 		)
 		.filter(
 			parameter =>
 				hasUndeclaredReferenceTo({
 					parent: functionDeclaration,
 					reference: parameter,
-				})
+				}),
 		)
 		.map(
 			parameter => (
@@ -57,7 +57,7 @@ function createParameterItemsForFunction({
 					id: parameter,
 					type: "parameter",
 				}
-			)
+			),
 		)
 	);
 }

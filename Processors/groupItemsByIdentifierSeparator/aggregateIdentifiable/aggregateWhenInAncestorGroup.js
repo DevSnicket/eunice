@@ -9,7 +9,7 @@ module.exports =
 		return aggregateWhenInAncestorOfGroup(aggregation.group);
 
 		function aggregateWhenInAncestorOfGroup(
-			group
+			group,
 		) {
 			return (
 				group.parent
@@ -32,7 +32,7 @@ module.exports =
 			) {
 				return (
 					identifierElementsStartsWith(
-						group.parent.identifierElements
+						group.parent.identifierElements,
 					)
 					&&
 					{

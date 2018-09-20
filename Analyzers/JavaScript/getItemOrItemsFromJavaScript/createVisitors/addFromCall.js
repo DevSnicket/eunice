@@ -15,7 +15,7 @@ module.exports =
 
 		if (calleeName && calleeName !== "require")
 			addFromParentFunctions(
-				findParentFunctions()
+				findParentFunctions(),
 			);
 
 		function getCalleeName() {
@@ -37,12 +37,12 @@ module.exports =
 		}
 
 		function addFromParentFunctions(
-			parentFunctions
+			parentFunctions,
 		) {
 			addDependsUponIdentifier(
 				getIdentifierNameFromAndAddOrUpdateReference(
-					calleeName
-				)
+					calleeName,
+				),
 			);
 
 			addArgumentsToNestedCallMap({
@@ -52,7 +52,7 @@ module.exports =
 			});
 
 			function getIdentifierNameFromAndAddOrUpdateReference(
-				reference
+				reference,
 			) {
 				return (
 					getIdentifierNameFromAndAddOrUpdateReferenceOfParent({
@@ -65,7 +65,7 @@ module.exports =
 			}
 
 			function addDependsUponIdentifier(
-				identifier
+				identifier,
 			) {
 				if (isIdentifierRelevant())
 					addDependsUponIdentifierFrom({
@@ -85,7 +85,7 @@ module.exports =
 			}
 
 			function isParameterOfAnyParentFunction(
-				name
+				name,
 			) {
 				return (
 					parentFunctions
@@ -110,7 +110,7 @@ module.exports =
 				}
 
 				function isParameterOfParentFunction(
-					parentFunction
+					parentFunction,
 				) {
 					return (
 						parentFunction.params.some(
@@ -119,7 +119,7 @@ module.exports =
 								?
 								parameter.properties.some(property => property.key.name === name)
 								:
-								parameter.name === name
+								parameter.name === name,
 						)
 					);
 				}

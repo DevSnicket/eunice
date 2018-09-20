@@ -6,8 +6,8 @@ env:
   node: true
 extends: 'eslint:recommended'
 parserOptions:
-  ecmaFeatures:
-    experimentalObjectRestSpread: true
+  ecmaVersion:
+    2018
 rules:
   array-bracket-newline:
     - error
@@ -37,7 +37,12 @@ rules:
     - error
   comma-dangle:
     - error
-    - always-multiline
+    -
+      arrays: always-multiline
+      objects: always-multiline
+      imports: always-multiline
+      exports: always-multiline
+      functions: always-multiline
   comma-spacing:
     - error
   comma-style:
