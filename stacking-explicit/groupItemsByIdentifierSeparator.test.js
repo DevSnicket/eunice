@@ -399,8 +399,8 @@ function assertGroupItems({
 				groupItemsByIdentifierSeparator({
 					identifierSeparator: "/",
 					items: source,
-				})
+				}),
 			)
-			.toEqual(expected)
+			.toEqual(expected),
 	);
 }

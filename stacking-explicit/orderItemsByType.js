@@ -18,9 +18,9 @@ callWithYamlItemsAndOutputWhenProcessEntryPoint(
 						// eslint-disable-next-line no-undefined
 						undefined
 						:
-						type
+						type,
 				),
-		})
+		}),
 );
 
 processorPlugins.plugIn({
@@ -43,12 +43,12 @@ function orderItemsByType({
 }
 
 function createOrderItemsByType(
-	typesInOrder
+	typesInOrder,
 ) {
 	return getItemOrOrderItems;
 
 	function getItemOrOrderItems(
-		itemOrItems
+		itemOrItems,
 	) {
 		return (
 			orderWhenItemsOrLevels(itemOrItems)
@@ -60,7 +60,7 @@ function createOrderItemsByType(
 	}
 
 	function orderWhenItemsOrLevels(
-		itemsOrLevels
+		itemsOrLevels,
 	) {
 		return (
 			Array.isArray(itemsOrLevels)
@@ -72,23 +72,23 @@ function createOrderItemsByType(
 			return (
 				itemsOrLevels
 				.map(
-					(itemOrLevel, index) => ({ index, itemOrLevel })
+					(itemOrLevel, index) => ({ index, itemOrLevel }),
 				)
 				.sort(
-					createCompareIndexedItemOrLevelForTypesInOrder(typesInOrder)
+					createCompareIndexedItemOrLevelForTypesInOrder(typesInOrder),
 				)
 				.map(
 					indexedItemOrLevel =>
 						getOrCreateItemOrLevel(
-							indexedItemOrLevel.itemOrLevel
-						)
+							indexedItemOrLevel.itemOrLevel,
+						),
 				)
 			);
 		}
 	}
 
 	function getOrCreateItemOrLevel(
-		itemOrLevel
+		itemOrLevel,
 	) {
 		return (
 			Array.isArray(itemOrLevel)
@@ -100,13 +100,13 @@ function createOrderItemsByType(
 	}
 
 	function createLevelWithOrderedItems(
-		level
+		level,
 	) {
 		return level.map(getItemOrCreateItemWithOrderedItemsWhenAny);
 	}
 
 	function getItemOrCreateItemWithOrderedItemsWhenAny(
-		item
+		item,
 	) {
 		return (
 			createItemWithOrderedItemsWhenAny(item)
@@ -116,7 +116,7 @@ function createOrderItemsByType(
 	}
 
 	function createItemWithOrderedItemsWhenAny(
-		item
+		item,
 	) {
 		return (
 			item.items

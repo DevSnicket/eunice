@@ -46,8 +46,8 @@ function assertSetTypeOfRootItems({
 				setTypeOfRootItems({
 					items: source,
 					type: "testtype",
-				})
+				}),
 			)
-			.toEqual(expected)
+			.toEqual(expected),
 	);
 }

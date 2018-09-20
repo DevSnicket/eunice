@@ -147,10 +147,10 @@ test.each(
 					],
 			},
 		],
-	]
+	],
 )(
 	"%j returns %j",
 	(items, expected) =>
 		expect(unstackIndependent(items))
-		.toEqual(expected)
+		.toEqual(expected),
 );

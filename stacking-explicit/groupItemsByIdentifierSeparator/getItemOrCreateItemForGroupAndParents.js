@@ -3,7 +3,7 @@ const getItemOrCreateItemForGroup = require("./getItemOrCreateItemForGroup");
 module.exports = getItemOrCreateItemForGroupAndParents;
 
 function getItemOrCreateItemForGroupAndParents(
-	group
+	group,
 ) {
 	return (
 		group.parent
