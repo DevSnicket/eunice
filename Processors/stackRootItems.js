@@ -1,4 +1,6 @@
-const callWithYamlItemsAndOutputWhenProcessEntryPoint = require("./callWithYamlItemsAndOutputWhenProcessEntryPoint");
+const
+	callWithYamlItemsAndOutputWhenProcessEntryPoint = require("./callWithYamlItemsAndOutputWhenProcessEntryPoint"),
+	processorPlugins = require("../Harnesses/processorPlugins");
 
 /* istanbul ignore next: only used when JavaScript file is process entry point */
 callWithYamlItemsAndOutputWhenProcessEntryPoint(
@@ -8,6 +10,12 @@ callWithYamlItemsAndOutputWhenProcessEntryPoint(
 			levels: processArguments.levels.map(level => level.split(",")),
 		})
 );
+
+processorPlugins.plugIn({
+	action: stackRootItems,
+	parameter: "levels",
+	text: "stack root items",
+});
 
 module.exports = stackRootItems;
 
