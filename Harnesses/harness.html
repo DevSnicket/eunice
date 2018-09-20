@@ -43,14 +43,17 @@
 			visibility: hidden;
 		}
 
+		input.popup.menu,
+		label.popup.menu {
+			cursor: pointer;
+		}
+
 		input.popup.menu + label::after {
 			content: "\25BC";
-			cursor: pointer;
 		}
 
 		input.popup.menu:checked + label::after {
 			content: "\25B2";
-			cursor: pointer;
 		}
 
 		input.popup.menu:checked ~ ul.popup.menu,
