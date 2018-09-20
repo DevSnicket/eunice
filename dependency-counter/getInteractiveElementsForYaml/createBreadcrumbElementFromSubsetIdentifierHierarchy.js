@@ -9,7 +9,7 @@ module.exports =
 			createElement(
 				"div",
 				null,
-				createElements()
+				createElements(),
 			)
 		);
 
@@ -26,14 +26,14 @@ module.exports =
 							aggregation,
 							identifier,
 						}),
-					createInitialRootAggregation()
+					createInitialRootAggregation(),
 				)
 				.elements
 			);
 		}
 
 		function isIndexOfLast(
-			index
+			index,
 		) {
 			return index === subsetIdentifierHierarchy.length - 1;
 		}
@@ -78,7 +78,7 @@ module.exports =
 									content: "anonymous",
 									href,
 									style: { fontStyle: "italic" },
-								}
+								},
 							),
 						],
 					hrefBase:
@@ -100,7 +100,7 @@ module.exports =
 						key: href,
 						...style && { style },
 					},
-					content
+					content,
 				)
 			);
 		}

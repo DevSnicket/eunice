@@ -21,7 +21,7 @@ module.exports =
 							aggregation.left + groupFactory.width + spacing,
 					}
 				),
-				{ groups: [], left: calculateLeft() }
+				{ groups: [], left: calculateLeft() },
 			)
 			.groups
 		);
@@ -34,7 +34,7 @@ module.exports =
 			return (
 				groupFactories.reduce(
 					(sum, groupFactory) => sum + groupFactory.width,
-					0
+					0,
 				)
 			);
 		}

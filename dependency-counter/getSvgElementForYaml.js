@@ -121,7 +121,7 @@ module.exports =
 						createParentGroupFactory({
 							childGroupFactory:
 								createGroupFactoryForStack(
-									stackOfSubsetIdentifierHierarchy
+									stackOfSubsetIdentifierHierarchy,
 								),
 							createTextGroup:
 								createTextGroupWithFontSizeAndPrecision,
@@ -136,7 +136,7 @@ module.exports =
 		}
 
 		function createGroupFactoryForStack(
-			stack
+			stack,
 		) {
 			return (
 				createStackWithSummaryGroupFactory({
@@ -156,7 +156,7 @@ module.exports =
 		}
 
 		function createTextGroupWithFontSizeAndPrecision(
-			parameters
+			parameters,
 		) {
 			return (
 				createTextGroup({

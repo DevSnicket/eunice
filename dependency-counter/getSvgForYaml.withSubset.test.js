@@ -17,9 +17,9 @@ if (!isUpdateExpected) {
 					getSvgForYaml({
 						subsetIdentifierHierarchy: [ "missing" ],
 						yaml: "not missing",
-					})
+					}),
 			)
-			.toThrowError("Identifier of \"missing\" in subset hierarchy not found.")
+			.toThrowError("Identifier of \"missing\" in subset hierarchy not found."),
 	);
 
 	test(
@@ -30,9 +30,9 @@ if (!isUpdateExpected) {
 					getSvgForYaml({
 						subsetIdentifierHierarchy: [ "parent" ],
 						yaml: "parent",
-					})
+					}),
 			)
-			.toThrowError("Final item of subset identifier hierarchy \"parent\" has no child items.")
+			.toThrowError("Final item of subset identifier hierarchy \"parent\" has no child items."),
 	);
 }
 
@@ -175,13 +175,13 @@ function getSvgForYamlTestOrUpdateExpected({
 	if (isUpdateExpected)
 		writeFileSync(
 			getPathOfFilename(
-				expectedFilenameWithExtension
+				expectedFilenameWithExtension,
 			),
 			getSvgForYaml({
 				subsetIdentifierHierarchy,
 				yaml,
 			}),
-			"utf-8"
+			"utf-8",
 		);
 	else
 		test(
@@ -191,22 +191,22 @@ function getSvgForYamlTestOrUpdateExpected({
 					getSvgForYaml({
 						subsetIdentifierHierarchy,
 						yaml,
-					})
+					}),
 				)
 				.toEqual(
-					readTestcaseFile(expectedFilenameWithExtension)
-				)
+					readTestcaseFile(expectedFilenameWithExtension),
+				),
 		);
 }
 
 function readTestcaseFile(
-	filename
+	filename,
 ) {
 	return readTextFile(getPathOfFilename(filename));
 }
 
 function getPathOfFilename(
-	filename
+	filename,
 ) {
 	return path.join(__dirname, "getSvgForYaml.withSubset.testcases/", filename);
 }

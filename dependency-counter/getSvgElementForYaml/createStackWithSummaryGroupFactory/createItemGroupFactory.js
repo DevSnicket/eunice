@@ -61,7 +61,7 @@ module.exports =
 								text,
 								top,
 								width,
-							})
+							}),
 						),
 				height,
 				width,
@@ -75,13 +75,13 @@ module.exports =
 				dependencyGroupFactories.reduce(
 					(
 						size,
-						dependencyGroupFactory
+						dependencyGroupFactory,
 					) => (
 						{
 							height:
 								Math.max(
 									size.height,
-									dependencyGroupFactory.height
+									dependencyGroupFactory.height,
 								),
 							width:
 								size.width
@@ -91,7 +91,7 @@ module.exports =
 								dependencyGroupFactory.width,
 						}
 					),
-					{ height: 0, width: 0 }
+					{ height: 0, width: 0 },
 				)
 				:
 				{ height: 0, width: 0 }
@@ -110,7 +110,7 @@ module.exports =
 			return (
 				Math.max(
 					font.measure(text),
-					dependencySize.width
+					dependencySize.width,
 				)
 				+
 				(padding.left * 2)

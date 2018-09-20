@@ -1,7 +1,7 @@
 module.exports =
 	(
 		left,
-		right
+		right,
 	) =>
 		left && right
 		?

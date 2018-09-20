@@ -7,20 +7,20 @@ module.exports =
 			subsetIdentifierHierarchy.reduce(
 				(
 					stackInHierarchy,
-					identifier
+					identifier,
 				) =>
 					getItemsOfOrThrowError(
 						findItemWithIdentifierOrThrowError({
 							identifier,
 							stack: stackInHierarchy,
-						})
+						}),
 					),
-				stack
+				stack,
 			)
 		);
 
 		function getItemsOfOrThrowError(
-			item
+			item,
 		) {
 			if (item.items)
 				return item.items;
@@ -37,15 +37,15 @@ function findItemWithIdentifierOrThrowError({
 		stack.reduce(
 			(
 				foundItem,
-				level
+				level,
 			) =>
 				foundItem
 				||
 				level.find(
 					item =>
-						item.id === identifier
+						item.id === identifier,
 				),
-			null
+			null,
 		);
 
 	if (itemWithIdentifier)

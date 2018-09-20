@@ -41,7 +41,7 @@ function getParents({
 }
 
 function getParentItem(
-	item
+	item,
 ) {
 	return item.level.stack.parent;
 }
