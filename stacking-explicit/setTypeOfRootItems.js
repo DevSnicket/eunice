@@ -1,8 +1,16 @@
-const callWithYamlItemsAndOutputWhenProcessEntryPoint = require("./callWithYamlItemsAndOutputWhenProcessEntryPoint");
+const
+	callWithYamlItemsAndOutputWhenProcessEntryPoint = require("./callWithYamlItemsAndOutputWhenProcessEntryPoint"),
+	processorPlugins = require("../Harnesses/processorPlugins");
 
 callWithYamlItemsAndOutputWhenProcessEntryPoint(
 	setTypeOfRootItems
 );
+
+processorPlugins.plugIn({
+	action: setTypeOfRootItems,
+	parameter: "type",
+	text: "set type of root items",
+});
 
 module.exports = setTypeOfRootItems;
 

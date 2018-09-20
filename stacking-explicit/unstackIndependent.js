@@ -1,12 +1,18 @@
 const
 	callWithYamlItemsAndOutputWhenProcessEntryPoint = require("./callWithYamlItemsAndOutputWhenProcessEntryPoint"),
 	createStackFromYaml = require("../dependencyAndStructure/createStackFromYaml"),
-	createYamlFromStack = require("../dependencyAndStructure/createYamlFromStack");
+	createYamlFromStack = require("../dependencyAndStructure/createYamlFromStack"),
+	processorPlugins = require("../Harnesses/processorPlugins");
 
 /* istanbul ignore next: only used when JavaScript file is process entry point */
 callWithYamlItemsAndOutputWhenProcessEntryPoint(
 	parameters => unstackIndependent(parameters.items)
 );
+
+processorPlugins.plugIn({
+	action: unstackIndependent,
+	text: "unstack independent",
+});
 
 module.exports = unstackIndependent;
 

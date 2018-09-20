@@ -1,11 +1,18 @@
 const
 	aggregateIdentifiable = require("./groupItemsByIdentifierSeparator/aggregateIdentifiable"),
 	callWithYamlItemsAndOutputWhenProcessEntryPoint = require("./callWithYamlItemsAndOutputWhenProcessEntryPoint"),
-	getItemsFromAggregation = require("./groupItemsByIdentifierSeparator/getItemsFromAggregation");
+	getItemsFromAggregation = require("./groupItemsByIdentifierSeparator/getItemsFromAggregation"),
+	processorPlugins = require("../Harnesses/processorPlugins");
 
 callWithYamlItemsAndOutputWhenProcessEntryPoint(
 	groupItemsByIdentifierSeparator
 );
+
+processorPlugins.plugIn({
+	action: groupItemsByIdentifierSeparator,
+	parameter: "identifierSeparator",
+	text: "group items by identifier separator",
+});
 
 module.exports = groupItemsByIdentifierSeparator;
 
