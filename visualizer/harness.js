@@ -15,8 +15,8 @@ renderComponent({
 					getInteractiveElementsForYaml({
 						locationHash: location.hash,
 						yaml: this.state.yaml,
-					})
-				)
+					}),
+				),
 			)
 		);
 	},

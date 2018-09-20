@@ -68,7 +68,7 @@ module.exports =
 				});
 
 			function createSymbolWithPolygon(
-				polygon
+				polygon,
 			) {
 				return (
 					createElement(
@@ -79,7 +79,7 @@ module.exports =
 							preserveAspectRatio,
 							viewBox: "0,0,1,1",
 						},
-						polygon
+						polygon,
 					)
 				);
 			}
@@ -101,12 +101,12 @@ module.exports =
 								]
 								.map(point => scaleAndFormatPoint(transform(point)))
 								.join(" "),
-						}
+						},
 					)
 				);
 
 				function scaleAndFormatPoint(
-					point
+					point,
 				) {
 					return `${point[0]},${point[1]}`;
 				}
@@ -114,7 +114,7 @@ module.exports =
 		}
 
 		function flipFirstAxis(
-			point
+			point,
 		) {
 			return (
 				[
@@ -126,7 +126,7 @@ module.exports =
 	};
 
 function swapAxis(
-	point
+	point,
 ) {
 	return [ point[1], point[0] ];
 }

@@ -32,7 +32,7 @@ function countDependenciesOfItemRecursive({
 									level.map(countDependenciesOfChildItemRecursive),
 								initialValue:
 									null,
-							})
+							}),
 					),
 				initialValue:
 					itemCount,
@@ -41,7 +41,7 @@ function countDependenciesOfItemRecursive({
 	}
 
 	function countDependenciesOfChildItemRecursive(
-		childitem
+		childitem,
 	) {
 		return (
 			countDependenciesOfItemRecursive({
@@ -60,26 +60,26 @@ function countDependenciesOfItemRecursive({
 		return (
 			counts.reduce(
 				sumCountOfItem,
-				initialValue
+				initialValue,
 			)
 		);
 	}
 
 	function sumCountOfItem(
 		left,
-		right
+		right,
 	) {
 		if (left && right) {
 			const
 				dependents =
 					sumCount(
 						left.dependents,
-						right.dependents
+						right.dependents,
 					),
 				dependsUpon =
 					sumCountWithScope(
 						left.dependsUpon,
-						right.dependsUpon
+						right.dependsUpon,
 					);
 
 			return (
@@ -93,7 +93,7 @@ function countDependenciesOfItemRecursive({
 
 	function sumCountWithScope(
 		left,
-		right
+		right,
 	) {
 		if (left && right) {
 			const

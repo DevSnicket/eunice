@@ -15,7 +15,7 @@ module.exports =
 	}) => {
 		const subsetIdentifierHierarchy =
 			getSubsetIdentifierHierarchyFromLocationHash(
-				locationHash
+				locationHash,
 			);
 
 		return (
@@ -48,7 +48,7 @@ module.exports =
 	};
 
 function getSubsetIdentifierHierarchyFromLocationHash(
-	locationHash
+	locationHash,
 ) {
 	return (
 		locationHash
@@ -64,7 +64,7 @@ function getSubsetIdentifierHierarchyFromLocationHash(
 				// eslint-disable-next-line no-undefined
 				undefined
 				:
-				decodeURIComponent(identifier)
+				decodeURIComponent(identifier),
 		)
 	);
 }
@@ -90,7 +90,7 @@ function createItemGroupWrapperForItem({
 					key: item.id,
 					xlinkHref: getHrefBase() + encodeURIComponent(item.id),
 				},
-				itemGroup
+				itemGroup,
 			)
 		);
 	}

@@ -46,7 +46,7 @@ module.exports =
 									to: dependency,
 								}),
 						}),
-					null
+					null,
 				)
 			);
 		}
@@ -60,7 +60,7 @@ module.exports =
 				?
 				sumCount(
 					aggregation,
-					getCountFromDirection(directionInStack.direction)
+					getCountFromDirection(directionInStack.direction),
 				)
 				:
 				aggregation
@@ -109,7 +109,7 @@ module.exports =
 		}
 
 		function isOuterStack(
-			stack
+			stack,
 		) {
 			return (
 				stack
@@ -119,7 +119,7 @@ module.exports =
 		}
 
 		function isInnerStack(
-			stack
+			stack,
 		) {
 			return (
 				stack.parent
@@ -134,7 +134,7 @@ module.exports =
 	};
 
 function getCountFromDirection(
-	direction
+	direction,
 ) {
 	return (
 		{

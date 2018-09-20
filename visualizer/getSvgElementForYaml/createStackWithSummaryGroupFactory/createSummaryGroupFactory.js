@@ -52,7 +52,7 @@ module.exports =
 	};
 
 function sumCounts(
-	counts
+	counts,
 ) {
 	return (
 		counts.length > 1
@@ -67,7 +67,7 @@ function sumCounts(
 				})
 				:
 				aggregation,
-			null
+			null,
 		)
 	);
 }
@@ -81,7 +81,7 @@ function sumDependsUpon({
 		?
 		sumCount(
 			sumCount(aggregation, dependsUpon.inner),
-			dependsUpon.outer
+			dependsUpon.outer,
 		)
 		:
 		sumCount(dependsUpon.inner, dependsUpon.outer)
@@ -90,7 +90,7 @@ function sumDependsUpon({
 
 function sumCount(
 	left,
-	right
+	right,
 ) {
 	return (
 		left && right

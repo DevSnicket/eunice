@@ -37,7 +37,7 @@ function getSvgForYaml({
 				getTextWidth,
 				subsetIdentifierHierarchy,
 				yaml: parseYaml(yaml),
-			})
+			}),
 		)
 	);
 }

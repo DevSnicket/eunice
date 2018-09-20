@@ -13,7 +13,7 @@ test(
 			expectedSvgFile: "without-parent-and-hyperlinks",
 			locationHash: null,
 			yaml: "single",
-		})
+		}),
 );
 
 test(
@@ -23,7 +23,7 @@ test(
 			expectedSvgFile: "without-parent-and-with-hyperlinks",
 			locationHash: null,
 			yaml: "{ id: single, items: nested }",
-		})
+		}),
 );
 
 const breadcrumbHtmlForRoot = "<div><a href=\"#\">root</a></div>";
@@ -36,7 +36,7 @@ test(
 			expectedSvgFile: "with-parent-and-without-hyperlinks",
 			locationHash: "#parent",
 			yaml: "{ id: parent, items: single }",
-		})
+		}),
 );
 
 test(
@@ -47,7 +47,7 @@ test(
 			expectedSvgFile: "with-parent-and-without-hyperlinks",
 			locationHash: "#undefined/parent",
 			yaml: "{ items: { id: parent, items: single } }",
-		})
+		}),
 );
 
 test(
@@ -58,7 +58,7 @@ test(
 			expectedSvgFile: "with-parent-and-hyperlinks",
 			locationHash: "#parent",
 			yaml: "{ id: parent, items: { id: single, items: nested } }",
-		})
+		}),
 );
 
 test(
@@ -69,7 +69,7 @@ test(
 			expectedSvgFile: "with-grandparent-and-parent-and-hyperlinks",
 			locationHash: "#grandparent/parent",
 			yaml: "{ id: grandparent, items: { id: parent, items: { id: single, items: nested } } }",
-		})
+		}),
 );
 
 function expectGetInteractiveElementsForYaml({
@@ -83,14 +83,14 @@ function expectGetInteractiveElementsForYaml({
 			getInteractiveElementsForYaml({
 				locationHash,
 				yaml,
-			})
-		)
+			}),
+		),
 	)
 	.toEqual(
 		expectedHtmlPrefix
 		+
 		readTextFile(
-			path.join(__dirname, "getInteractiveElementsForYaml.testcases", `${expectedSvgFile}.svg`)
-		)
+			path.join(__dirname, "getInteractiveElementsForYaml.testcases", `${expectedSvgFile}.svg`),
+		),
 	);
 }

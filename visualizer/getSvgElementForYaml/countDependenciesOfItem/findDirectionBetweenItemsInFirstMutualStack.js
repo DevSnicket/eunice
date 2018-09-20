@@ -19,11 +19,11 @@ module.exports =
 			generateAncestors({
 				from,
 				to,
-			})
+			}),
 		);
 
 function getDirectionBetweenFirstAncestorOrThrowError(
-	ancestors
+	ancestors,
 ) {
 	for (const ancestor of ancestors) {
 		const direction = getDirectionBetweenWhenAny(ancestor);

@@ -78,11 +78,11 @@ function createGroupFactoryForDependenciesWhenRequired({
 								arrow: dependencies.arrow,
 								count: dependencies.count,
 								keySuffix: `stack dependency ${dependencies.arrow.id} ${keySuffix}`,
-							})
+							}),
 					),
 				spacing:
 					4,
-			})
+			}),
 		)
 	);
 

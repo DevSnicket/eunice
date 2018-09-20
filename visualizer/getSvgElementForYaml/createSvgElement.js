@@ -43,7 +43,7 @@ module.exports =
 	};
 
 function getSvgStyleForFont(
-	font
+	font,
 ) {
 	return `text{font-family:${font.family};font-size:${font.size}px}`;
 }
@@ -59,8 +59,8 @@ function createStyleElementInDefsElement({
 			createElement(
 				"style",
 				{ type: "text/css" },
-				style
-			)
+				style,
+			),
 		)
 	);
 }
@@ -79,7 +79,7 @@ function createFromAttributesAndChildren({
 				xmlns: "http://www.w3.org/2000/svg",
 				...namespaces,
 			},
-			children
+			children,
 		)
 	);
 }

@@ -23,7 +23,7 @@ module.exports =
 			width =
 				Math.max(
 					childGroupFactory.width,
-					getTextWidth(text)
+					getTextWidth(text),
 				)
 				+
 				(padding * 2);

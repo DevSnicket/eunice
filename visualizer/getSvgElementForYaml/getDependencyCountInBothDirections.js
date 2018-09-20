@@ -32,7 +32,7 @@ module.exports =
 						}),
 					same:
 						getForSame(),
-				}
+				},
 			)
 		);
 
@@ -89,7 +89,7 @@ module.exports =
 	};
 
 function whenCountHasValues(
-	count
+	count,
 ) {
 	return (count.above || count.below || count.same) && count;
 }
