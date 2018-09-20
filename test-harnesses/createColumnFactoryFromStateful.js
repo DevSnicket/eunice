@@ -1,6 +1,7 @@
 const
 	{ ReflexElement } = require("react-reflex"),
-	{ createElement } = require("react");
+	{ createElement } = require("react"),
+	processorPlugins = require("./processorPlugins");
 
 module.exports =
 	stateful => {
@@ -125,7 +126,7 @@ function createProcessorMenuElements() {
 				"label",
 				{
 					className,
-					for: inputId,
+					htmlFor: inputId,
 				},
 				"processors"
 			),
@@ -135,40 +136,47 @@ function createProcessorMenuElements() {
 					className,
 					style: { flexBasis: "100%" },
 				},
-				createProcessorMenuItemElements()
+				...createProcessorMenuItemElements()
 			),
 		]
 	);
 }
 
-function createProcessorMenuItemElements() {
-	return (
-		createProcessorMenuItems()
-		.map(
-			menuItem =>
+function * createProcessorMenuItemElements() {
+	for (const processor of processorPlugins)
+		yield (
+			createElement(
+				"li",
+				{ style: { display: "flex" } },
 				createElement(
-					"li",
+					"label",
 					null,
-					createElement(
-						"label",
-						null,
-						createElement("input", { type: "checkbox" }),
-						menuItem.text
-					),
-					menuItem.elements
-				)
-		)
-	);
+					createElement("input", { type: "checkbox" }),
+					processor.text
+				),
+				createInputForProcessorParameter(processor.parameter)
+			)
+		);
 }
 
-function createProcessorMenuItems() {
+function createInputForProcessorParameter(
+	parameter
+) {
 	return (
-		[
-			{ elements: createElement("input"), text: "group items by identifier separator " },
-			{ elements: createElement("input"), text: "order items by type " },
-			{ elements: createElement("input"), text: "set type of root items " },
-			{ elements: createElement("input"), text: "stack root items " },
-			{ text: "unstack independent" },
-		]
+		parameter
+		&&
+		createElement(
+			"textarea",
+			{
+				rows:
+					1,
+				style:
+					{
+						flexGrow: 1,
+						marginLeft: "1em",
+						minWidth: "8em",
+					},
+			}
+		)
 	);
 }

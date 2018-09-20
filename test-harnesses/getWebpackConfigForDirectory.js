@@ -1,10 +1,15 @@
-const path = require("path");
+const
+	path = require("path"),
+	pluginDiscoveryCommonjsBabelPlugin = require("@devsnicket/plugin-discovery-commonjs-babel-plugin"),
+	transformObjectRestSpreadBabelPlugin = require("babel-plugin-transform-object-rest-spread");
 
 module.exports =
 	directory => (
 		{
-			devtool: "source-map",
-			entry: [ "babel-polyfill", "./harness.js" ],
+			devtool:
+				"source-map",
+			entry:
+				[ "babel-polyfill", "./harness.js" ],
 			module:
 				{
 					rules:
@@ -17,8 +22,16 @@ module.exports =
 										loader: "babel-loader",
 										options:
 											{
-												plugins: [ "transform-object-rest-spread" ],
-												presets: [ "env" ],
+												plugins:
+													[
+														[
+															pluginDiscoveryCommonjsBabelPlugin,
+															{ rootDirectory: path.join(__dirname, "..") },
+														],
+														transformObjectRestSpreadBabelPlugin,
+													],
+												presets:
+													[ "env" ],
 											},
 									},
 							},
