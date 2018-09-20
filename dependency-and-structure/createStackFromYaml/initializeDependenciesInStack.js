@@ -12,7 +12,7 @@ const
 module.exports = initializeDependenciesInStack;
 
 function initializeDependenciesInStack(
-	stack
+	stack,
 ) {
 	for (const level of stack)
 		for (const item of level) {
@@ -23,7 +23,7 @@ function initializeDependenciesInStack(
 		}
 
 	function updateItemWhenRequired(
-		item
+		item,
 	) {
 		if (item.dependsUpon)
 			updateItem({
@@ -33,7 +33,7 @@ function initializeDependenciesInStack(
 			});
 
 		function findItemsFromDependsUpon(
-			dependsUpon
+			dependsUpon,
 		) {
 			return (
 				findItemsWhenString()
@@ -42,7 +42,7 @@ function initializeDependenciesInStack(
 					dependsUpon,
 					dependsUponItem:
 						findItemWithIdentifier(
-							dependsUpon.id
+							dependsUpon.id,
 						),
 				})
 			);
@@ -53,7 +53,7 @@ function initializeDependenciesInStack(
 					&&
 					[
 						findItemWithIdentifier(
-							dependsUpon
+							dependsUpon,
 						)
 						||
 						dependsUpon,
@@ -62,7 +62,7 @@ function initializeDependenciesInStack(
 			}
 
 			function findItemWithIdentifier(
-				identifier
+				identifier,
 			) {
 				return (
 					findItemWithIdentifierInStackOrParents({

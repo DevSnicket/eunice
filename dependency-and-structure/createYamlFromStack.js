@@ -1,7 +1,7 @@
 module.exports = createYamlFromStack;
 
 function createYamlFromStack(
-	stack
+	stack,
 ) {
 	return (
 		stack.length === 1
@@ -12,7 +12,7 @@ function createYamlFromStack(
 	);
 
 	function createFromLevel(
-		level
+		level,
 	) {
 		return (
 			stack.length === 1 && level.length === 1
@@ -25,16 +25,16 @@ function createYamlFromStack(
 }
 
 function createFromItem(
-	item
+	item,
 ) {
 	const
 		dependsUponProperty =
 			createDependsUponProperty(
-				item.dependsUpon
+				item.dependsUpon,
 			),
 		itemsProperty =
 			createItemsProperty(
-				item.items
+				item.items,
 			);
 
 	return (
@@ -51,7 +51,7 @@ function createFromItem(
 }
 
 function createDependsUponProperty(
-	dependsUpon
+	dependsUpon,
 ) {
 	return (
 		dependsUpon
@@ -68,13 +68,13 @@ function createDependsUponProperty(
 }
 
 function getIdentifierPropertyOrValue(
-	value
+	value,
 ) {
 	return value.id || value;
 }
 
 function createItemsProperty(
-	items
+	items,
 ) {
 	return (
 		items
