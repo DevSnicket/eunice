@@ -2,8 +2,7 @@
 	"configurations":
 		[
 			{
-				"name": "attach to port 9229",
-				"port": 9229,
+				"name": "attach",
 				"request": "attach",
 				"type": "node"
 			},
@@ -145,7 +144,7 @@
 			{
 				"args":
 					[
-						"--items=",
+						"--items=[[item1],[item2]]",
 					],
 				"name": "processor unstackIndependent",
 				"program": "${workspaceRoot}/Processors/unstackIndependent.js",
