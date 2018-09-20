@@ -11,7 +11,7 @@ module.exports =
 					(
 						{ createStateFromValue = null }
 						=
-						{}
+						{},
 					) =>
 						createResizableColumnForInput({
 							createStateFromValue:
@@ -43,7 +43,7 @@ module.exports =
 									"div",
 									{ style: { display: "flex", flexFlow: "wrap" } },
 									createElement("span", { style: { flexGrow: 1 } }, "YAML"),
-									...createProcessorMenuElements()
+									...createProcessorMenuElements(),
 								),
 							value:
 								stateful.state.yaml,
@@ -64,7 +64,7 @@ module.exports =
 							{
 								onChange: event => stateful.setState(createStateFromValue(event.target.value)),
 								value,
-							}
+							},
 						),
 					title,
 				})
@@ -82,7 +82,7 @@ function createResizableColumnForOutput({
 				createElement(
 					"div",
 					{ style: { flex: 1 } },
-					value
+					value,
 				),
 			title,
 		})
@@ -101,8 +101,8 @@ function createResizableColumn({
 				"div",
 				{ className: "column" },
 				title,
-				element
-			)
+				element,
+			),
 		)
 	);
 }
@@ -120,7 +120,7 @@ function createProcessorMenuElements() {
 					className,
 					id: inputId,
 					type: "checkbox",
-				}
+				},
 			),
 			createElement(
 				"label",
@@ -128,7 +128,7 @@ function createProcessorMenuElements() {
 					className,
 					htmlFor: inputId,
 				},
-				"processors"
+				"processors",
 			),
 			createElement(
 				"ul",
@@ -136,7 +136,7 @@ function createProcessorMenuElements() {
 					className,
 					style: { flexBasis: "100%" },
 				},
-				...createProcessorMenuItemElements()
+				...createProcessorMenuItemElements(),
 			),
 		]
 	);
@@ -152,15 +152,15 @@ function * createProcessorMenuItemElements() {
 					"label",
 					null,
 					createElement("input", { type: "checkbox" }),
-					processor.text
+					processor.text,
 				),
-				createInputForProcessorParameter(processor.parameter)
+				createInputForProcessorParameter(processor.parameter),
 			)
 		);
 }
 
 function createInputForProcessorParameter(
-	parameter
+	parameter,
 ) {
 	return (
 		parameter
@@ -176,7 +176,7 @@ function createInputForProcessorParameter(
 						marginLeft: "1em",
 						minWidth: "8em",
 					},
-			}
+			},
 		)
 	);
 }

@@ -18,18 +18,18 @@ module.exports =
 						elements.length ? createSplitterWithIndex(elements.length - 1) : null,
 						column,
 					],
-				[]
-			)
+				[],
+			),
 		);
 
 function createSplitterWithIndex(
-	index
+	index,
 ) {
 	return (
 		createElement(
 			ReflexSplitter,
 			{ key: `splitter ${index}` },
-			createElement("div", null, "|".repeat(3))
+			createElement("div", null, "|".repeat(3)),
 		)
 	);
 }
