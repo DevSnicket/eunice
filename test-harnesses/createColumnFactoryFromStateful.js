@@ -41,9 +41,26 @@ module.exports =
 							title:
 								createElement(
 									"div",
-									{ style: { display: "flex", flexFlow: "wrap" } },
-									createElement("span", { style: { flexGrow: 1 } }, "YAML"),
-									...createProcessorMenuElements(),
+									{
+										style:
+											{
+												display: "flex",
+												flexFlow: "wrap",
+											},
+									},
+									createElement(
+										"span",
+										{ style: { flexGrow: 1 } },
+										"YAML",
+									),
+									...createProcessorMenuElementsFromItemElements(
+										createProcessorMenuItemElements({
+											setStateToValue:
+												value => stateful.setState({ yamlProcessorActions: value }),
+											value:
+												stateful.state.yamlProcessorActions,
+										}),
+									),
 								),
 							value:
 								stateful.state.yaml,
@@ -107,7 +124,80 @@ function createResizableColumn({
 	);
 }
 
-function createProcessorMenuElements() {
+
+function * createProcessorMenuItemElements({
+	setStateToValue,
+	value,
+}) {
+	for (const processorPlugin of processorPlugins)
+		yield (
+			createElement(
+				"li",
+				{ style: { display: "flex" } },
+				createElement(
+					"label",
+					null,
+					createElement(
+						"input",
+						{
+							onChange:
+								event =>
+									onCheckboxChange({
+										action: processorPlugin.action,
+										event,
+									}),
+							type:
+								"checkbox",
+						},
+					),
+					processorPlugin.text,
+				),
+				createInputForProcessorParameter(processorPlugin.parameter),
+			)
+		);
+
+	function onCheckboxChange({
+		action,
+		event,
+	}) {
+		setStateToValue(
+			event.target.checked
+			?
+			[
+				...value || [],
+				action,
+			]
+			:
+			value.filter(currentProcess => currentProcess !== action),
+		);
+	}
+}
+
+function createInputForProcessorParameter(
+	parameter,
+) {
+	return (
+		parameter
+		&&
+		createElement(
+			"textarea",
+			{
+				rows:
+					1,
+				style:
+					{
+						flexGrow: 1,
+						marginLeft: "1em",
+						minWidth: "8em",
+					},
+			},
+		)
+	);
+}
+
+function createProcessorMenuElementsFromItemElements(
+	itemElements,
+) {
 	const
 		className = "popup menu",
 		inputId = "processor-menu";
@@ -136,47 +226,8 @@ function createProcessorMenuElements() {
 					className,
 					style: { flexBasis: "100%" },
 				},
-				...createProcessorMenuItemElements(),
+				...itemElements,
 			),
 		]
-	);
-}
-
-function * createProcessorMenuItemElements() {
-	for (const processor of processorPlugins)
-		yield (
-			createElement(
-				"li",
-				{ style: { display: "flex" } },
-				createElement(
-					"label",
-					null,
-					createElement("input", { type: "checkbox" }),
-					processor.text,
-				),
-				createInputForProcessorParameter(processor.parameter),
-			)
-		);
-}
-
-function createInputForProcessorParameter(
-	parameter,
-) {
-	return (
-		parameter
-		&&
-		createElement(
-			"textarea",
-			{
-				rows:
-					1,
-				style:
-					{
-						flexGrow: 1,
-						marginLeft: "1em",
-						minWidth: "8em",
-					},
-			},
-		)
 	);
 }
