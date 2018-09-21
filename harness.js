@@ -1,5 +1,9 @@
 const
-	createColumnFactoryFromStateful = require("./Harnesses/createColumnFactoryFromStateful"),
+	{ createElement } = require("react"),
+	{ ReflexElement } = require("react-reflex");
+
+const
+	createColumnFactory = require("./Harnesses/createColumnFactory"),
 	createContainerForColumns = require("./Harnesses/createContainerForColumns"),
 	getInteractiveElementsForYaml = require("./Renderer/getInteractiveElementsForYaml"),
 	getProcessedYamlFromState = require("./Harnesses/getProcessedYamlFromState"),
@@ -8,7 +12,12 @@ const
 
 renderComponent({
 	render() {
-		const columnFactory = createColumnFactoryFromStateful(this);
+		const columnFactory =
+			createColumnFactory({
+				createElement,
+				resizableColumn: ReflexElement,
+				stateful: this,
+			});
 
 		return (
 			createContainerForColumns(
