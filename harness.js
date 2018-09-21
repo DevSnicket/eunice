@@ -2,6 +2,7 @@ const
 	createColumnFactoryFromStateful = require("./Harnesses/createColumnFactoryFromStateful"),
 	createContainerForColumns = require("./Harnesses/createContainerForColumns"),
 	getInteractiveElementsForYaml = require("./Renderer/getInteractiveElementsForYaml"),
+	getProcessedYamlFromState = require("./Harnesses/getProcessedYamlFromState"),
 	getYamlFromJavaScript = require("./Analyzers/JavaScript/getYamlFromJavaScript"),
 	renderComponent = require("./Harnesses/renderComponent");
 
@@ -16,7 +17,7 @@ renderComponent({
 				columnFactory.createSvgOutputResizableColumn(
 					getInteractiveElementsForYaml({
 						locationHash: location.hash,
-						yaml: this.state.yaml,
+						yaml: getProcessedYamlFromState(this.state),
 					}),
 				),
 			)
