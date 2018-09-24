@@ -3,6 +3,7 @@ const
 	{ ReflexElement } = require("react-reflex");
 
 const
+	callOrCreateErrorElement = require("../Harnesses/callOrCreateErrorElement"),
 	createColumnFactory = require("../Harnesses/createColumnFactory"),
 	createContainerForColumns = require("../Harnesses/createContainerForColumns"),
 	getInteractiveElementsForYaml = require("./getInteractiveElementsForYaml"),
@@ -22,9 +23,14 @@ renderComponent({
 			createContainerForColumns(
 				columnFactory.createYamlInputResizableColumn(),
 				columnFactory.createSvgOutputResizableColumn(
-					getInteractiveElementsForYaml({
-						locationHash: location.hash,
-						yaml: getProcessedYamlFromState(this.state),
+					callOrCreateErrorElement({
+						action:
+							() =>
+								getInteractiveElementsForYaml({
+									locationHash: location.hash,
+									yaml: getProcessedYamlFromState(this.state),
+								}),
+						createElement,
 					}),
 				),
 			)
