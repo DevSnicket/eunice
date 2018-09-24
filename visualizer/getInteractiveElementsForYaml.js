@@ -4,7 +4,6 @@ const
 	parseYaml = require("js-yaml").safeLoad;
 
 const
-	callOrCreateErrorElement = require("./getInteractiveElementsForYaml/callOrCreateErrorElement"),
 	createBreadcrumbElementFromSubsetIdentifierHierarchy = require("./getInteractiveElementsForYaml/createBreadcrumbElementFromSubsetIdentifierHierarchy"),
 	getSvgElementForYaml = require("./getSvgElementForYaml");
 
@@ -19,31 +18,26 @@ module.exports =
 			);
 
 		return (
-			callOrCreateErrorElement({
-				action:
-					() =>
-						[
-							createBreadcrumbElementFromSubsetIdentifierHierarchy({
-								createElement,
-								subsetIdentifierHierarchy,
-							}),
-							getSvgElementForYaml({
-								createElement,
-								createItemGroupWrapperForItem:
-									({ item, itemGroup }) =>
-										createItemGroupWrapperForItem({ item, itemGroup, locationHash }),
-								getTextWidth,
-								namespaces:
-									{ xmlnsXlink: "http://www.w3.org/1999/xlink" },
-								style:
-									"a{cursor:pointer}",
-								subsetIdentifierHierarchy,
-								yaml:
-									parseYaml(yaml),
-							}),
-						],
-				createElement,
-			})
+			[
+				createBreadcrumbElementFromSubsetIdentifierHierarchy({
+					createElement,
+					subsetIdentifierHierarchy,
+				}),
+				getSvgElementForYaml({
+					createElement,
+					createItemGroupWrapperForItem:
+						({ item, itemGroup }) =>
+							createItemGroupWrapperForItem({ item, itemGroup, locationHash }),
+					getTextWidth,
+					namespaces:
+						{ xmlnsXlink: "http://www.w3.org/1999/xlink" },
+					style:
+						"a{cursor:pointer}",
+					subsetIdentifierHierarchy,
+					yaml:
+						parseYaml(yaml),
+				}),
+			]
 		);
 	};
 
