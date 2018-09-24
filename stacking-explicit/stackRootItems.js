@@ -7,15 +7,40 @@ callWithYamlItemsAndOutputWhenProcessEntryPoint(
 	processArguments =>
 		stackRootItems({
 			...processArguments,
-			levels: processArguments.levels.map(level => level.split(",")),
+			levels: splitCommaSeparatedLevels(processArguments.levels),
 		}),
 );
 
+/* istanbul ignore next: only used from test harness */
 processorPlugins.plugIn({
-	action: stackRootItems,
-	parameter: "levels",
-	text: "stack root items",
+	action:
+		({
+			items,
+			levels,
+		}) =>
+			levels
+			?
+			stackRootItems({
+				items,
+				levels: splitCommaSeparatedLevels(levels),
+			})
+			:
+			items,
+	parameter:
+		{
+			isMultiple: true,
+			name: "levels",
+		},
+	text:
+		"stack root items",
 });
+
+/* istanbul ignore next: only used when JavaScript file is process entry point or from test harness */
+function splitCommaSeparatedLevels(
+	levels,
+) {
+	return levels.map(level => level.split(","));
+}
 
 module.exports = stackRootItems;
 

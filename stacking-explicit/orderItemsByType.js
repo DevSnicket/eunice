@@ -24,9 +24,15 @@ callWithYamlItemsAndOutputWhenProcessEntryPoint(
 );
 
 processorPlugins.plugIn({
-	action: orderItemsByType,
-	parameter: "typesInOrder",
-	text: "order items by type",
+	action:
+		orderItemsByType,
+	parameter:
+		{
+			isMultiple: true,
+			name: "typesInOrder",
+		},
+	text:
+		"order items by type",
 });
 
 module.exports = orderItemsByType;
