@@ -8,7 +8,7 @@ callWithYamlItemsAndOutputWhenProcessEntryPoint(
 
 processorPlugins.plugIn({
 	action: setTypeOfRootItems,
-	parameter: "type",
+	parameter: { name: "type" },
 	text: "set type of root items",
 });
 

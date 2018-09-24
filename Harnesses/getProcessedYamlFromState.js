@@ -38,7 +38,7 @@ function processItems({
 			?
 			{
 				items,
-				[processor.parameter]: processor.argument,
+				[processor.parameter.name]: processor.argument,
 			}
 			:
 			items

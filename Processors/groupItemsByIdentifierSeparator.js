@@ -10,7 +10,7 @@ callWithYamlItemsAndOutputWhenProcessEntryPoint(
 
 processorPlugins.plugIn({
 	action: groupItemsByIdentifierSeparator,
-	parameter: "identifierSeparator",
+	parameter: { name: "identifierSeparator" },
 	text: "group items by identifier separator",
 });
 

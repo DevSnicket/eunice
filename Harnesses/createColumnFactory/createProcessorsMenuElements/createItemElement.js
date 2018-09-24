@@ -1,3 +1,5 @@
+const createParameterTextareas = require("./createItemElement/createParameterTextareas");
+
 module.exports =
 	({
 		createElement,
@@ -14,7 +16,11 @@ module.exports =
 					createCheckbox(),
 					processor.text,
 				),
-				createTextareaWhenParameterized(),
+				...createParameterTextareas({
+					createElement,
+					processor,
+					setState,
+				}),
 			)
 		);
 
@@ -28,29 +34,6 @@ module.exports =
 								setState({ isEnabled: event.target.checked }),
 						type:
 							"checkbox",
-					},
-				)
-			);
-		}
-
-		function createTextareaWhenParameterized() {
-			return (
-				processor.parameter
-				&&
-				createElement(
-					"textarea",
-					{
-						onChange:
-							event =>
-								setState({ argument: event.target.value }),
-						rows:
-							1,
-						style:
-							{
-								flexGrow: 1,
-								marginLeft: "1em",
-								minWidth: "8em",
-							},
 					},
 				)
 			);
