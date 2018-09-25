@@ -1,6 +1,6 @@
 const
-	createProcessorsMenuElements = require("./createColumnFactory/createProcessorsMenuElements"),
-	processorPlugins = require("./processorPlugins");
+	createProcessorsMenuElements = require("./createProcessorsMenuElements"),
+	processorPlugins = require("../processorPlugins");
 
 module.exports =
 	({

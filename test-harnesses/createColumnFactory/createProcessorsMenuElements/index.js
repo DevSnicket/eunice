@@ -1,4 +1,4 @@
-const createItemElement = require("./createProcessorsMenuElements/createItemElement");
+const createItemElement = require("./createItemElement");
 
 module.exports =
 	({

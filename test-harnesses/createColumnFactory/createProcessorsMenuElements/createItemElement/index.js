@@ -1,4 +1,4 @@
-const createParameterTextareas = require("./createItemElement/createParameterTextareas");
+const createParameterTextareas = require("./createParameterTextareas");
 
 module.exports =
 	({
