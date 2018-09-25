@@ -10,7 +10,7 @@
 				"args": [ "--javaScript=" ],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/",
 				"name": "analyzer getYamlFromJavaScript",
-				"program": "${workspaceFolder}/Analyzers/JavaScript/getYamlFromJavaScript.js",
+				"program": "${workspaceFolder}/Analyzers/JavaScript/getYamlFromJavaScript/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -19,13 +19,13 @@
 				"args": [ ],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/",
 				"name": "analyzer getYamlFromJavaScript test",
-				"program": "${workspaceFolder}/Analyzers/JavaScript/getYamlFromJavaScript.test.js",
+				"program": "${workspaceFolder}/Analyzers/JavaScript/getYamlFromJavaScript/test.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
 			},
 			{
-				"args": [ "getYamlFromJavaScript.test.js" ],
+				"args": [ "getYamlFromJavaScript/test.js" ],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/",
 				"name": "analyzer getYamlFromJavaScript jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
@@ -44,13 +44,13 @@
 					],
 				"cwd": "${workspaceRoot}",
 				"name": "analyzer getOrCreateItemsInDirectory",
-				"program": "${workspaceRoot}/Analyzers/JavaScript/getOrCreateItemsInDirectory.js",
+				"program": "${workspaceRoot}/Analyzers/JavaScript/getOrCreateItemsInDirectory/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
 			},
 			{
-				"args": [ "getOrCreateItemsInDirectory.test.js" ],
+				"args": [ "getOrCreateItemsInDirectory/test.js" ],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/",
 				"name": "analyzer getOrCreateItemsInDirectory jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
@@ -71,13 +71,13 @@
 						"--identifierSeparator="
 					],
 				"name": "processor groupItemsByIdentifierSeparator",
-				"program": "${workspaceRoot}/Processors/groupItemsByIdentifierSeparator.js",
+				"program": "${workspaceRoot}/Processors/groupItemsByIdentifierSeparator/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
 			},
 			{
-				"args": [ "groupItemsByIdentifierSeparator.test.js" ],
+				"args": [ "groupItemsByIdentifierSeparator/test.js" ],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor groupItemsByIdentifierSeparator jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
@@ -93,13 +93,13 @@
 						"--typesInOrder=",
 					],
 				"name": "processor orderItemsByType",
-				"program": "${workspaceRoot}/Processors/orderItemsByType.js",
+				"program": "${workspaceRoot}/Processors/orderItemsByType/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
 			},
 			{
-				"args": [ "orderItemsByType.test.js" ],
+				"args": [ "orderItemsByType/test.js" ],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor orderItemsByType jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
@@ -114,7 +114,7 @@
 						"--type=",
 					],
 				"name": "processor setTypeOfRootItems",
-				"program": "${workspaceRoot}/Processors/setTypeOfRootItems.js",
+				"program": "${workspaceRoot}/Processors/setTypeOfRootItems/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -126,13 +126,13 @@
 						"--levels=",
 					],
 				"name": "processor stackRootItems",
-				"program": "${workspaceRoot}/Processors/stackRootItems.js",
+				"program": "${workspaceRoot}/Processors/stackRootItems/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
 			},
 			{
-				"args": [ "stackRootItems.test.js" ],
+				"args": [ "stackRootItems/test.js" ],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor stackRootItems jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
@@ -146,13 +146,13 @@
 						"--items=[[item1],[item2]]",
 					],
 				"name": "processor unstackIndependent",
-				"program": "${workspaceRoot}/Processors/unstackIndependent.js",
+				"program": "${workspaceRoot}/Processors/unstackIndependent/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
 			},
 			{
-				"args": [ "unstackIndependent.test.js" ],
+				"args": [ "unstackIndependent/test.js" ],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor unstackIndependent jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
@@ -161,7 +161,7 @@
 				"useWSL": true
 			},
 			{
-				"args": [ "getInteractiveElementsForYaml.test.js" ],
+				"args": [ "getInteractiveElementsForYaml/test.js" ],
 				"cwd": "${workspaceFolder}/Renderer/",
 				"name": "renderer getInteractiveElementsForYaml jest",
 				"program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
@@ -170,7 +170,7 @@
 				"useWSL": true
 			},
 			{
-				"args": [ "getSvgForYaml.test.js" ],
+				"args": [ "getSvgForYaml/test.js" ],
 				"cwd": "${workspaceFolder}/Renderer/",
 				"name": "renderer getSvgForYaml jest",
 				"program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
@@ -185,7 +185,7 @@
 						"--yaml="
 					],
 				"name": "renderer getSvgForYaml",
-				"program": "${workspaceRoot}/Renderer/getSvgForYaml.js",
+				"program": "${workspaceRoot}/Renderer/getSvgForYaml/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -194,13 +194,13 @@
 				"args": [ ],
 				"cwd": "${workspaceFolder}/Renderer/",
 				"name": "renderer getSvgForYaml test",
-				"program": "${workspaceFolder}/Renderer/getSvgForYaml.test.js",
+				"program": "${workspaceFolder}/Renderer/getSvgForYaml/test.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
 			},
 			{
-				"args": [ "getSvgForYaml.withSubset.test.js" ],
+				"args": [ "getSvgForYaml/withSubset.test.js" ],
 				"cwd": "${workspaceFolder}/Renderer/",
 				"name": "renderer getSvgForYaml with subset jest",
 				"program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
