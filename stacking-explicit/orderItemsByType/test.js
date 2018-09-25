@@ -1,4 +1,4 @@
-const orderItemsByType = require("./orderItemsByType");
+const orderItemsByType = require(".");
 
 assertOrderItemsByTypeEqualsSource({
 	name: "null returns null",

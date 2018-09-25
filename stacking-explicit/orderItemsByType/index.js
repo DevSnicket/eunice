@@ -1,7 +1,7 @@
 const
-	callWithYamlItemsAndOutputWhenProcessEntryPoint = require("./callWithYamlItemsAndOutputWhenProcessEntryPoint"),
-	createCompareIndexedItemOrLevelForTypesInOrder = require("./orderItemsByType/createCompareIndexedItemOrLevelForTypesInOrder"),
-	processorPlugins = require("../Harnesses/processorPlugins");
+	callWithYamlItemsAndOutputWhenProcessEntryPoint = require("../callWithYamlItemsAndOutputWhenProcessEntryPoint"),
+	createCompareIndexedItemOrLevelForTypesInOrder = require("./createCompareIndexedItemOrLevelForTypesInOrder"),
+	processorPlugins = require("../../Harnesses/processorPlugins");
 
 /* istanbul ignore next: only used when JavaScript file is process entry point */
 callWithYamlItemsAndOutputWhenProcessEntryPoint(

@@ -1,4 +1,4 @@
-const setTypeOfRootItems = require("./setTypeOfRootItems");
+const setTypeOfRootItems = require(".");
 
 assertSetTypeOfRootItems({
 	expected: null,

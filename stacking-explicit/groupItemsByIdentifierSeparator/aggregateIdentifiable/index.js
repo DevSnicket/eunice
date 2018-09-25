@@ -1,7 +1,7 @@
 const
-	aggregateWhenIdentifierElementsInCommon = require("./aggregateIdentifiable/aggregateWhenIdentifierElementsInCommon"),
-	aggregateWhenInAncestorGroup = require("./aggregateIdentifiable/aggregateWhenInAncestorGroup"),
-	getItemsFromAggregation = require("./getItemsFromAggregation");
+	aggregateWhenIdentifierElementsInCommon = require("./aggregateWhenIdentifierElementsInCommon"),
+	aggregateWhenInAncestorGroup = require("./aggregateWhenInAncestorGroup"),
+	getItemsFromAggregation = require("../getItemsFromAggregation");
 
 module.exports =
 	({

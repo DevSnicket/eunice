@@ -1,4 +1,4 @@
-const groupItemsByIdentifierSeparator = require("./groupItemsByIdentifierSeparator");
+const groupItemsByIdentifierSeparator = require(".");
 
 assertGroupItemsEqualsSource({
 	name: "null returns",

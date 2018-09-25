@@ -1,4 +1,4 @@
-const unstackIndependent = require("./unstackIndependent");
+const unstackIndependent = require(".");
 
 test.each(
 	[

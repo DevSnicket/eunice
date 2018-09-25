@@ -1,4 +1,4 @@
-const stackRootItems = require("./stackRootItems");
+const stackRootItems = require(".");
 
 testStackRootItems({
 	expected:
