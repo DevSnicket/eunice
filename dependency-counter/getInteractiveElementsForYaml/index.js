@@ -4,8 +4,8 @@ const
 	parseYaml = require("js-yaml").safeLoad;
 
 const
-	createBreadcrumbElementFromSubsetIdentifierHierarchy = require("./getInteractiveElementsForYaml/createBreadcrumbElementFromSubsetIdentifierHierarchy"),
-	getSvgElementForYaml = require("./getSvgElementForYaml");
+	createBreadcrumbElementFromSubsetIdentifierHierarchy = require("./createBreadcrumbElementFromSubsetIdentifierHierarchy"),
+	getSvgElementForYaml = require("../getSvgElementForYaml");
 
 module.exports =
 	({

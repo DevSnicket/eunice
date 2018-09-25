@@ -3,8 +3,8 @@ const
 	path = require("path");
 
 const
-	getInteractiveElementsForYaml = require("./getInteractiveElementsForYaml"),
-	readTextFile = require("../Tests/readTextFile");
+	getInteractiveElementsForYaml = require("."),
+	readTextFile = require("../../Tests/readTextFile");
 
 test(
 	"item without items returns item without breadcrumbs, parent and hyperlinks",
@@ -90,7 +90,7 @@ function expectGetInteractiveElementsForYaml({
 		expectedHtmlPrefix
 		+
 		readTextFile(
-			path.join(__dirname, "getInteractiveElementsForYaml.testcases", `${expectedSvgFile}.svg`),
+			path.join(__dirname, "testcases", `${expectedSvgFile}.svg`),
 		),
 	);
 }

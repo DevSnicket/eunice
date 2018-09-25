@@ -1,4 +1,4 @@
-const findDirectionBetweenItemsInFirstMutualStack = require("./countDependenciesOfItem/findDirectionBetweenItemsInFirstMutualStack");
+const findDirectionBetweenItemsInFirstMutualStack = require("./findDirectionBetweenItemsInFirstMutualStack");
 
 module.exports =
 	({

@@ -1,9 +1,9 @@
 const
-	countDependenciesOfItemRecursive = require("./createStackWithSummaryGroupFactory/countDependenciesOfItemRecursive"),
-	createDependenciesInlineGroupFactories = require("./createStackWithSummaryGroupFactory/createDependenciesInlineGroupFactories"),
-	createGroupsCenteredHorizontally = require("./createStackWithSummaryGroupFactory/createGroupsCenteredHorizontally"),
-	createItemGroupFactory = require("./createStackWithSummaryGroupFactory/createItemGroupFactory"),
-	createSummaryGroupFactory = require("./createStackWithSummaryGroupFactory/createSummaryGroupFactory");
+	countDependenciesOfItemRecursive = require("./countDependenciesOfItemRecursive"),
+	createDependenciesInlineGroupFactories = require("./createDependenciesInlineGroupFactories"),
+	createGroupsCenteredHorizontally = require("./createGroupsCenteredHorizontally"),
+	createItemGroupFactory = require("./createItemGroupFactory"),
+	createSummaryGroupFactory = require("./createSummaryGroupFactory");
 
 module.exports =
 	({

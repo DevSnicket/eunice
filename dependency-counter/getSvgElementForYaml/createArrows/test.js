@@ -5,8 +5,8 @@ const
 	{ renderToStaticMarkup } = require("react-dom/server");
 
 const
-	createArrows = require("./createArrows"),
-	withPrecision = require("./withPrecision");
+	createArrows = require("."),
+	withPrecision = require("../withPrecision");
 
 test(
 	"createArrows",
@@ -17,7 +17,7 @@ test(
 			),
 		)
 		.toBe(
-			readFile(path.join(__dirname, "createArrows.testcase.svg")),
+			readFile(path.join(__dirname, "testcase.svg")),
 		),
 );
 
