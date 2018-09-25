@@ -3,8 +3,8 @@ const
 	{ writeFileSync } = require("fs");
 
 const
-	getSvgForYaml = require("./getSvgForYaml"),
-	readTextFile = require("../Tests/readTextFile");
+	getSvgForYaml = require("."),
+	readTextFile = require("../../Tests/readTextFile");
 
 const isUpdateExpected = process.argv[2] === "update-expected";
 
@@ -208,5 +208,5 @@ function readTestcaseFile(
 function getPathOfFilename(
 	filename,
 ) {
-	return path.join(__dirname, "getSvgForYaml.withSubset.testcases/", filename);
+	return path.join(__dirname, "withSubset.testcases/", filename);
 }

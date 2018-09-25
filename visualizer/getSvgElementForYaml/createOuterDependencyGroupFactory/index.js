@@ -1,6 +1,6 @@
 const
-	createLayerGroupFactory = require("./createOuterDependencyGroupFactory/createLayerGroupFactory"),
-	createStackGroupFactory = require("./createOuterDependencyGroupFactory/createStackGroupFactory");
+	createLayerGroupFactory = require("./createLayerGroupFactory"),
+	createStackGroupFactory = require("./createStackGroupFactory");
 
 module.exports =
 	({

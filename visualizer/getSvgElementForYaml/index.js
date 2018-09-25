@@ -1,18 +1,18 @@
 const
-	aggregateGroupFactoriesWithOrientation = require("./getSvgElementForYaml/aggregateGroupFactoriesWithOrientation"),
-	countDependenciesOfItem = require("./getSvgElementForYaml/countDependenciesOfItem"),
-	createArrows = require("./getSvgElementForYaml/createArrows"),
-	createDependencyGroupFactoryWhenRequired = require("./getSvgElementForYaml/createDependencyGroupFactoryWhenRequired"),
-	createOuterDependencyGroupFactory = require("./getSvgElementForYaml/createOuterDependencyGroupFactory"),
-	createParentGroupFactory = require("./getSvgElementForYaml/createParentGroupFactory"),
-	createStackFromYaml = require("../dependencyAndStructure/createStackFromYaml"),
-	createStackWithSummaryGroupFactory = require("./getSvgElementForYaml/createStackWithSummaryGroupFactory"),
-	createSvgElement = require("./getSvgElementForYaml/createSvgElement"),
-	createTextGroup = require("./getSvgElementForYaml/createTextGroup"),
-	findStackOfSubsetIdentifierHierarchyOrThrowError = require("./getSvgElementForYaml/findStackOfSubsetIdentifierHierarchyOrThrowError"),
-	getDependencyCountInBothDirections = require("./getSvgElementForYaml/getDependencyCountInBothDirections"),
-	sumDependencyCount = require("./getSvgElementForYaml/sumDependencyCount"),
-	withPrecision = require("./getSvgElementForYaml/withPrecision");
+	aggregateGroupFactoriesWithOrientation = require("./aggregateGroupFactoriesWithOrientation"),
+	countDependenciesOfItem = require("./countDependenciesOfItem"),
+	createArrows = require("./createArrows"),
+	createDependencyGroupFactoryWhenRequired = require("./createDependencyGroupFactoryWhenRequired"),
+	createOuterDependencyGroupFactory = require("./createOuterDependencyGroupFactory"),
+	createParentGroupFactory = require("./createParentGroupFactory"),
+	createStackFromYaml = require("../../dependencyAndStructure/createStackFromYaml"),
+	createStackWithSummaryGroupFactory = require("./createStackWithSummaryGroupFactory"),
+	createSvgElement = require("./createSvgElement"),
+	createTextGroup = require("./createTextGroup"),
+	findStackOfSubsetIdentifierHierarchyOrThrowError = require("./findStackOfSubsetIdentifierHierarchyOrThrowError"),
+	getDependencyCountInBothDirections = require("./getDependencyCountInBothDirections"),
+	sumDependencyCount = require("./sumDependencyCount"),
+	withPrecision = require("./withPrecision");
 
 module.exports =
 	({
