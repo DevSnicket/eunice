@@ -25,8 +25,8 @@
 		"collectCoverageFrom": [
 			"**/*.js",
 			"!node_modules/**",
-			"!**/*.testcases/**",
-			"!*.testcases/**/.js",
+			"!**/testcases/**",
+			"!testcases/**/.js",
 			"!harness/**",
 			"!harness.js",
 			"!webpack.config.js"

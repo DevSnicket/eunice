@@ -38,8 +38,7 @@
 					[
 						"--directory=./",
 						"--ignoreDirectoryNames=Coverage",
-						"--ignoreDirectoryNames=getOrCreateItemsInDirectory.testcases", 
-						"--ignoreDirectoryNames=getYamlFromJavaScript.testcases",
+						"--ignoreDirectoryNames=testcases",
 						"--ignoreDirectoryNames=node_modules",
 						"--ignoreDirectoryNames=Output"
 					],

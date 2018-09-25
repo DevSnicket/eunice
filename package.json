@@ -38,8 +38,8 @@
 			"!**/node_modules/**",
 			"!**/harness/**",
 			"!**/harness.js",
-			"!**/*.testcases/**",
-			"!**/*.testcases/**/.js",
+			"!**/testcases/**",
+			"!**/testcases/**/.js",
 			"!**/webpack.config.js",
 			"!Harnesses/**",
 			"!Tests/**"
