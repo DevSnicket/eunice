@@ -38,11 +38,12 @@ Analyzers are implemented to create the YAML files, one is currently in developm
 ### Processors
 
 The YAML files can then be optionally post-processed including combining the output of different analyzers. Currently there are processors written in JavaScript to:
-- group items by their identifier
-- order items by their type
-- sets the type of root items
-- stack root items
-- unstack independent items
+- [group items by their identifier](Processors/groupItemsByIdentifierSeparator)
+- [order items by their type](Processors/orderItemsByType)
+- [remove suffixes from identifiers](Processors/removeIdentifierSuffix)
+- [sets the type of root items](Processors/setTypeOfRootItems)
+- [stack root items](Processors/stackRootItems)
+- [unstack independent items](Processors/unstackIndependent)
 
 ## Renderer
 
