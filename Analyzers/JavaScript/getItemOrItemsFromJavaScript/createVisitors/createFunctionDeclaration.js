@@ -1,4 +1,6 @@
-const getItemWhenSingleOrStackItemsWhenMultiple = require("./getItemWhenSingleOrStackItemsWhenMultiple");
+const
+	getItemWhenSingleOrStackItemsWhenMultiple = require("./getItemWhenSingleOrStackItemsWhenMultiple"),
+	getPropertyName = require("./getPropertyName");
 
 module.exports =
 	({
@@ -13,6 +15,7 @@ module.exports =
 				[
 					...createParameterItemsForFunction({
 						functionDeclaration,
+						getPropertyName,
 						hasUndeclaredReferenceTo,
 					}),
 					...items || [],
@@ -39,7 +42,7 @@ function createParameterItemsForFunction({
 			(aggregation, parameter) =>
 				parameter.type === "ObjectPattern"
 				?
-				[ ...aggregation, ...parameter.properties.map(property => property.key.name) ]
+				[ ...aggregation, ...parameter.properties.map(getPropertyName) ]
 				:
 				[ ...aggregation, parameter.name ],
 			[],

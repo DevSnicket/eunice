@@ -1,6 +1,7 @@
 const
 	addArgumentsToNestedCallMap = require("./addArgumentsToNestedCallMap"),
-	getIdentifierNameFromAndAddOrUpdateReferenceOfParent = require("./getIdentifierNameFromAndAddOrUpdateReferenceOfParent");
+	getIdentifierNameFromAndAddOrUpdateReferenceOfParent = require("./getIdentifierNameFromAndAddOrUpdateReferenceOfParent"),
+	getPropertyName = require("../getPropertyName");
 
 module.exports =
 	({
@@ -117,7 +118,7 @@ module.exports =
 							parameter =>
 								parameter.type === "ObjectPattern"
 								?
-								parameter.properties.some(property => property.key.name === name)
+								parameter.properties.some(property => getPropertyName(property) === name)
 								:
 								parameter.name === name,
 						)
