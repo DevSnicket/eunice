@@ -11,7 +11,7 @@ module.exports =
 			[
 				...config.plugins || [],
 				createWebpackPluginForFileContent({
-					file: "../dogfooding.output/.yaml",
+					file: "../dogfooding/output/.yaml",
 					name: "yamlFromWebpack",
 				}),
 			],

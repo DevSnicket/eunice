@@ -2,4 +2,4 @@
 /Harnesses/Output
 /Tests/Coverage/
 node_modules/
-/dogfooding.output/
+/dogfooding/output/
