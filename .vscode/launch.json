@@ -111,6 +111,27 @@
 				"args":
 					[
 						"--items=",
+						"--suffix="
+					],
+				"name": "processor removeIdentifierSuffix",
+				"program": "${workspaceRoot}/Processors/removeIdentifierSuffix/index.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args": [ "removeIdentifierSuffix/test.js" ],
+				"cwd": "${workspaceFolder}/Processors/",
+				"name": "processor removeIdentifierSuffix jest",
+				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[
+						"--items=",
 						"--type=",
 					],
 				"name": "processor setTypeOfRootItems",
