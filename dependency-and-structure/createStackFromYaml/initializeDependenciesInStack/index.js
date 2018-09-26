@@ -5,9 +5,9 @@ require("array.prototype.flatmap")
 .shim();
 
 const
-	findItemWithIdentifierInStackOrParents = require("./initializeDependenciesInStack/findItemWithIdentifierInStackOrParents"),
-	findItemsOfDependsUponOrGetIdentifiers = require("./initializeDependenciesInStack/findItemsOfDependsUponOrGetIdentifiers"),
-	updateItem = require("./initializeDependenciesInStack/updateItem");
+	findItemWithIdentifierInStackOrParents = require("./findItemWithIdentifierInStackOrParents"),
+	findItemsOfDependsUponOrGetIdentifiers = require("./findItemsOfDependsUponOrGetIdentifiers"),
+	updateItem = require("./updateItem");
 
 module.exports = initializeDependenciesInStack;
 

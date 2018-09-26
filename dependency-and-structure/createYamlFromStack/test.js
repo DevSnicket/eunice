@@ -1,6 +1,6 @@
 const
-	createTestcases = require("./createTestcases"),
-	createYamlFromStack = require("./createYamlFromStack");
+	createTestcases = require("../createTestcases"),
+	createYamlFromStack = require(".");
 
 test.each(
 	createTestcases()
