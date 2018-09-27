@@ -10,7 +10,7 @@ Eunice is a system of utilities based on the premise that unidirectional depende
 
 ## Stacks
 
-Part of how Eunince aims to achieve it's premise is by defining stacks. When its indended that an item is to be dependent upon another item, the first item is placed above the second item in a stack. When items are indended to be independent of each other they can be placed at the same level in a stack.
+Part of how Eunince works is by defining stacks. When its indended that an item is to be dependent upon another item, the first item is placed above the second item in a stack. When items are indended to be independent of each other they can be placed at the same level in a stack.
 
 In some programming languages there are implied stacks, such as the order of functions in a file.
 
@@ -24,7 +24,7 @@ The approach of defining stacks can be applied at all scales of software and acr
 
 ## YAML
 
-So Euince has composability, for example multiple sources of dependency and structure, a common data format is described using YAML.
+So Euince has composability, e.g. multiple sources of dependency and structure, a common data format is described using YAML.
 
 ``` YAML
 - id: item in upper level of stack
