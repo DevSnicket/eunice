@@ -1,0 +1,41 @@
+<svg height="73" width="555" xmlns="http://www.w3.org/2000/svg">
+	<defs><style type="text/css">polyline{fill:none;stroke:black}rect{fill:lightgray}text{font-family:arial}text.transition{font-size:10px}text.stage{font-size:16px}</style></defs>
+	<symbol id="arrow-head">
+		<polygon points="0,0 0,20 10,10"/>
+	</symbol>
+	<symbol id="analyze">
+		<rect width="75" height="32"/>
+		<text class="stage" x="10" y="22">analyze</text>
+	</symbol>
+	<symbol id="yaml-arrow">
+		<polyline points="0,16 45,16"/>
+		<text class="transition" x="5" y="10">YAML</text>
+		<use href="#arrow-head" x="35" y="6"/>
+	</symbol>
+	<symbol id="process">
+		<rect width="75" height="32"/>
+		<text class="stage" x="10" y="22">process</text>    
+	</symbol>
+	<use href="#analyze"/> 
+	<polyline points="75,16 230,16 230,26 250,26"/>
+	<text class="transition" x="80" y="10">YAML</text>
+	<use href="#arrow-head" x="240" y="16"/>  
+	<use href="#analyze" y="42"/>
+	<use href="#yaml-arrow" x="75" y="42"/> 
+	<use href="#process" x="120" y="42"/>
+	<polyline points="195,58 230,58 230,48, 250,48"/>
+	<text class="transition" x="200" y="52">YAML</text>
+	<use href="#arrow-head" x="240" y="38"/>
+	<use href="#process" x="250" y="21"/>
+	<use href="#yaml-arrow" x="325" y="21"/>
+	<rect x="370" y="21" width="67" height="32"/>
+	<text class="stage" x="380" y="43">render</text>    
+	<polyline points="437,37 478,37"/>
+	<text class="transition" x="442" y="31">SVG</text>
+	<use href="#arrow-head" x="468" y="27"/>
+	<rect x="478" y="21" width="77" height="32"/>
+	<text class="stage" x="488" y="43">browser</text>    
+	<polyline points="516.5,53 516.5,73 400.5,73 400,53"/>
+	<text class="transition" x="464" y="67">interaction</text>
+	<polygon points="410,63 390,63 400,53"/>
+</svg>
