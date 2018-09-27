@@ -1,5 +1,5 @@
 module.exports =
-	typesInOrder => {
+	getItemIndex => {
 		return compareIndexedItemOrLevel;
 
 		function compareIndexedItemOrLevel(
@@ -35,7 +35,7 @@ module.exports =
 				?
 				getIndexOfLevel(itemOrLevel)
 				:
-				getIndexOfItem(itemOrLevel)
+				getItemIndex(itemOrLevel)
 			);
 		}
 
@@ -45,16 +45,10 @@ module.exports =
 			return (
 				level.length === 1
 				?
-				getIndexOfItem(level[0])
+				getItemIndex(level[0])
 				:
 				-1
 			);
-		}
-
-		function getIndexOfItem(
-			item,
-		) {
-			return typesInOrder.indexOf(item.type);
 		}
 	};
 
