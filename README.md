@@ -59,7 +59,7 @@ To visualise what's in the YAML files and statistically measure how well they ma
 - does not match stack (red up arrow) 
 - is not independent (red horizontal arrow).
 
-[![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/Renderer/getSvgElementForYaml/createArrows.testcase.svg?sanitize=true)](Renderer/getSvgElementForYaml/createArrows.testcase.svg)
+[![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/Renderer/getSvgElementForYaml/createArrows/testcase.svg?sanitize=true)](Renderer/getSvgElementForYaml/createArrows/testcase.svg)
 
 Dependency counts appear for both sides of the dependency, the dependent item and the item depended upon. When there are multiple counts a summary of all counts is rendered at the bottom. <sup>[1]</sup>.
 
