@@ -49,6 +49,8 @@ The YAML files can then be optionally post-processed including combining the out
 - [stack root items](Processors/stackRootItems)
 - [unstack independent items](Processors/unstackIndependent)
 
+Processors can be run from the command line and ([example](dogfooding/generate.sh)) from test harnesses through a [plug-in discovery](https://github.com/DevSnicket/plugin-discovery) system.
+
 ## Renderer
 
 To visualise what's in the YAML files and statistically measure how well they match the intended structure a SVG renderer has been implemented. The renderer doesn't use lines between items to show dependencies and instead marks items with counts for each dependency type:
