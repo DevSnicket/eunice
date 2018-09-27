@@ -35,7 +35,7 @@ Analyzers are implemented to create the YAML files, one is currently in developm
 
 >[try out JavaScript &rightarrow; YAML](https://devsnicket.github.io/Eunice-harnesses/Analyzers/JavaScript/harness.html)
 
-### Processors
+## Processors
 
 The YAML files can then be optionally post-processed including combining the output of different analyzers. Currently there are processors written in JavaScript to:
 - [group items by their identifier](Processors/groupItemsByIdentifierSeparator)
