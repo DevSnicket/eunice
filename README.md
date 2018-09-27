@@ -20,17 +20,17 @@ The approach of defining stacks can be applied at all scales of software and acr
 
 ## YAML
 
-To support different sources of structure and dependency a common data format is defined in YAML.
+So Euince has composability, for example multiple sources of dependency and structure, a common data format is described using YAML.
 
 ``` YAML
-- id: upper
-  dependsUpon: lower left
+- id: item in upper level of stack
+  dependsUpon: first item in lower level of stack
   items:
-  - id: nested
-    dependsUpon: lower right
+  - id: nested item
+    dependsUpon: second item in lower level of stack
 -
-  - lower left
-  - lower right
+  - first item in lower level of stack
+  - second item in lower level of stack
 ```
 
 ## Analyzers
