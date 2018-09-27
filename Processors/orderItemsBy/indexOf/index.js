@@ -1,55 +1,19 @@
 const
-	callWithYamlItemsAndOutputWhenProcessEntryPoint = require("../callWithYamlItemsAndOutputWhenProcessEntryPoint"),
-	createCompareIndexedItemOrLevelForTypesInOrder = require("./createCompareIndexedItemOrLevelForTypesInOrder"),
-	processorPlugins = require("../../Harnesses/processorPlugins");
+	createCompareIndexedItemOrLevel = require("./createCompareIndexedItemOrLevel");
 
-/* istanbul ignore next: only used when JavaScript file is process entry point */
-callWithYamlItemsAndOutputWhenProcessEntryPoint(
-	processArguments =>
-		orderItemsByType({
-			...processArguments,
-			typesInOrder:
-				processArguments.typesInOrder
-				.map(
-					type =>
-						type === ""
-						?
-						// type array index of will only work when exact match
-						// eslint-disable-next-line no-undefined
-						undefined
-						:
-						type,
-				),
-		}),
-);
-
-processorPlugins.plugIn({
-	action:
-		orderItemsByType,
-	parameter:
-		{
-			isMultiple: true,
-			name: "typesInOrder",
-		},
-	text:
-		"order items by type",
-});
-
-module.exports = orderItemsByType;
-
-function orderItemsByType({
-	items,
-	typesInOrder,
-}) {
-	return (
+module.exports =
+	({
+		getItemIndex,
+		items,
+	}) =>
 		items
 		&&
-		createOrderItemsByType(typesInOrder)(items)
-	);
-}
+		createOrderItemsByCompareIndexedItemOrLevel(
+			createCompareIndexedItemOrLevel(getItemIndex),
+		)(items);
 
-function createOrderItemsByType(
-	typesInOrder,
+function createOrderItemsByCompareIndexedItemOrLevel(
+	compareIndexedItemOrLevel,
 ) {
 	return getItemOrOrderItems;
 
@@ -81,7 +45,7 @@ function createOrderItemsByType(
 					(itemOrLevel, index) => ({ index, itemOrLevel }),
 				)
 				.sort(
-					createCompareIndexedItemOrLevelForTypesInOrder(typesInOrder),
+					compareIndexedItemOrLevel,
 				)
 				.map(
 					indexedItemOrLevel =>

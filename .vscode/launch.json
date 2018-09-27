@@ -89,20 +89,11 @@
 				"args":
 					[
 						"--items=",
-						"--typesInOrder=",
-						"--typesInOrder=",
+						"--identifierSuffixesInOrder=",
+						"--identifierSuffixesInOrder=",
 					],
-				"name": "processor orderItemsByType",
-				"program": "${workspaceRoot}/Processors/orderItemsByType/index.js",
-				"request": "launch",
-				"type": "node",
-				"useWSL": true
-			},
-			{
-				"args": [ "orderItemsByType/test.js" ],
-				"cwd": "${workspaceFolder}/Processors/",
-				"name": "processor orderItemsByType jest",
-				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
+				"name": "processor orderItemsBy/indexOf/identifierSuffix",
+				"program": "${workspaceRoot}/Processors/orderItemsBy/indexOf/identifierSuffix/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -111,7 +102,29 @@
 				"args":
 					[
 						"--items=",
-						"--suffix="
+						"--typesInOrder=",
+						"--typesInOrder=",
+					],
+				"name": "processor orderItemsBy/indexOf/type",
+				"program": "${workspaceRoot}/Processors/orderItemsBy/indexOf/type/index.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args": [ "orderItemsBy/test.js" ],
+				"cwd": "${workspaceFolder}/Processors/",
+				"name": "processor orderItemsBy jest",
+				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[
+						"--items={ id: Analyzers/JavaScript/getItemOrItemsFromJavaScript/createVisitors/addFromCall/index }",
+						"--suffix=/index"
 					],
 				"name": "processor removeIdentifierSuffix",
 				"program": "${workspaceRoot}/Processors/removeIdentifierSuffix/index.js",
