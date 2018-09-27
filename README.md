@@ -18,6 +18,8 @@ In some programming languages there are implied stacks, such as the order of fun
 
 The approach of defining stacks can be applied at all scales of software and across boundaries, from individual files, functions or classes, to multiple, large codebases in different languages, frameworks and runtimes.
 
+## Stages
+
 ![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/stages%20and%20transitions.svg?sanitize=true)
 
 ## YAML
