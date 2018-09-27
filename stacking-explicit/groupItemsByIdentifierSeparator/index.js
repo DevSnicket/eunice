@@ -73,13 +73,15 @@ function aggregate({
 	return (
 		identifier
 		?
-		aggregateIdentifiable({
-			aggregation,
-			identifierElements: identifier.split(identifierSeparator),
-			identifierSeparator,
-			itemWithItemsGrouped: createItemWithItemsGrouped(),
-			parentIdentifier,
-		})
+		throwErrorOnUnordered(
+			aggregateIdentifiable({
+				aggregation,
+				identifierElements: identifier.split(identifierSeparator),
+				identifierSeparator,
+				itemWithItemsGrouped: createItemWithItemsGrouped(),
+				parentIdentifier,
+			}),
+		)
 		:
 		{
 			group: { item },
@@ -121,5 +123,19 @@ function aggregate({
 						}),
 				});
 		}
+	}
+
+	function throwErrorOnUnordered(
+		newAggregation,
+	) {
+		if (aggregation && identifier < aggregation.previousIdentifier)
+			throw Error(`Item identifiers must be in order, "${identifier}" can not follow "${aggregation.previousIdentifier}".`);
+		else
+			return (
+				{
+					...newAggregation,
+					previousIdentifier: identifier,
+				}
+			);
 	}
 }
