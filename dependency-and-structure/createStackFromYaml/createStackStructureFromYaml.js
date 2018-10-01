@@ -94,21 +94,22 @@ function createLevel(
 	return level;
 }
 
-function createItemFromObject(
-	object,
-) {
+function createItemFromObject({
+	dependsUpon,
+	items,
+	...restOfObject
+}) {
 	const item =
 		{
 			dependsUpon:
-				object.dependsUpon
+				dependsUpon
 				&&
-				ensureIsArray(object.dependsUpon),
-			id:
-				object.id,
+				ensureIsArray(dependsUpon),
+			...restOfObject,
 			items:
-				object.items
+				items
 				&&
-				createStackFromParsedYaml(object.items),
+				createStackFromParsedYaml(items),
 		};
 
 	if (item.items)

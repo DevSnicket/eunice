@@ -12,6 +12,20 @@ module.exports =
 			createTestCase({
 				stack:
 					createStack(
+						createLevel({
+							id: "item",
+							otherProperty: "otherValue",
+						}),
+					),
+				yaml:
+					{
+						id: "item",
+						otherProperty: "otherValue",
+					},
+			}),
+			createTestCase({
+				stack:
+					createStack(
 						createLevel(
 							{ id: "item1" },
 							{ id: "item2" },

@@ -24,29 +24,39 @@ function createYamlFromStack(
 	}
 }
 
-function createFromItem(
-	item,
-) {
+function createFromItem({
+	// parameter specified, but not used to remove it from the rest property
+	// eslint-disable-next-line no-unused-vars
+	dependents,
+	dependsUpon,
+	id: identifier,
+	items,
+	// parameter specified, but not used to remove it from the rest property
+	// eslint-disable-next-line no-unused-vars
+	level,
+	...restOfItem
+}) {
 	const
 		dependsUponProperty =
 			createDependsUponProperty(
-				item.dependsUpon,
+				dependsUpon,
 			),
 		itemsProperty =
 			createItemsProperty(
-				item.items,
+				items,
 			);
 
 	return (
-		dependsUponProperty || itemsProperty
+		dependsUponProperty || itemsProperty || Object.keys(restOfItem).length
 		?
 		{
-			...item.id && { id: item.id },
+			...identifier && { id: identifier },
+			...restOfItem,
 			...dependsUponProperty,
 			...itemsProperty,
 		}
 		:
-		item.id
+		identifier
 	);
 }
 
