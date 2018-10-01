@@ -8,6 +8,7 @@ node Processors/setTypeOfRootItems --type=file |
 node Processors/removeIdentifierSuffix --suffix=/index |
 node Processors/orderItemsBy/identifier |
 node Processors/groupItemsByIdentifierSeparator --identifierSeparator=/ |
+node Processors/removeRedundantParentIdentifierPrefix --identifierSeparator=/ |
 node Processors/orderItemsBy/indexOf/type --typesInOrder= --typesInOrder=parameter --typesInOrder=variable --typesInOrder=file |
 node Processors/orderItemsBy/indexOf/identifierSuffix --identifierSuffixesInOrder=/test |
 node Processors/unstackIndependent |
