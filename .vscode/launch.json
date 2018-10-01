@@ -144,6 +144,27 @@
 			{
 				"args":
 					[
+						"--identifierSeparator=/",
+						"--items="
+					],
+				"name": "processor removeRedundantParentIdentifierPrefix",
+				"program": "${workspaceRoot}/Processors/removeRedundantParentIdentifierPrefix/index.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args": [ "removeRedundantParentIdentifierPrefix/test.js" ],
+				"cwd": "${workspaceFolder}/Processors/",
+				"name": "processor removeRedundantParentIdentifierPrefix jest",
+				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[
 						"--items=",
 						"--type=",
 					],
