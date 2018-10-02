@@ -65,6 +65,10 @@ function initializeDependenciesInStack(
 				identifier,
 			) {
 				return (
+					item.id === identifier
+					?
+					item
+					:
 					findItemWithIdentifierInStackOrParents({
 						identifier,
 						stack: item.items || stack,

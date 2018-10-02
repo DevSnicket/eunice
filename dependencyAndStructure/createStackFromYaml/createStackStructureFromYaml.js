@@ -96,20 +96,16 @@ function createLevel(
 
 function createItemFromObject({
 	dependsUpon,
+	id,
 	items,
 	...restOfObject
 }) {
 	const item =
 		{
-			dependsUpon:
-				dependsUpon
-				&&
-				ensureIsArray(dependsUpon),
+			...id && { id },
+			...dependsUpon && { dependsUpon: ensureIsArray(dependsUpon) },
 			...restOfObject,
-			items:
-				items
-				&&
-				createStackFromParsedYaml(items),
+			...items && { items: createStackFromParsedYaml(items) },
 		};
 
 	if (item.items)
