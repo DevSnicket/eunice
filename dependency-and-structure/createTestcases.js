@@ -74,53 +74,176 @@ module.exports =
 						}),
 					),
 				yaml:
-					{
-						id: "item1",
-						// property order affects YAML output order and for readability id is the first property
-						// eslint-disable-next-line sort-keys
+					createItemYaml({
 						dependsUpon: "missing",
-					},
+						id: "item1",
+					}),
 			}),
-			createSingleDependencyTestCase(),
-			createMultipleDependencyTestCase(),
+			createParentDependsUponChildTestCase(),
+			createChildDependsUponParentTestCase(),
+			createFirstDependsUponSecondTestCase(),
+			createSecondDependsUponFirstTestCase(),
+			createFirstDependsUponSecondAndThirdTestCase(),
+			createUpperDependsUponLowerTestCase(),
+			createLowerDependsUponUpperTestCase(),
+			createSelfDependentTestCase(),
+			createSelfDependentInParentOfSameIdentifierTestCase(),
+			createSelfDependentWithChildOfSameIdentifierTestCase(),
 		];
 
-function createSingleDependencyTestCase() {
-	const itemWithDependsUpon =
-		{ id: "item1" };
-
-	const dependentItem =
-		{
-			dependents: [ itemWithDependsUpon ],
-			id: "item2",
-		};
-
-	itemWithDependsUpon.dependsUpon = [ dependentItem ];
-
+function createTestCase({
+	stack,
+	yaml,
+}) {
 	return (
-		createTestCase({
-			stack:
-				createStack(
-					createLevel(
-						itemWithDependsUpon,
-						dependentItem,
-					),
-				),
-			yaml:
-				[
-					{
-						id: itemWithDependsUpon.id,
-						// property order affects YAML output order and for readability id is the first property
-						// eslint-disable-next-line sort-keys
-						dependsUpon: dependentItem.id,
-					},
-					dependentItem.id,
-				],
-		})
+		{
+			stack,
+			stackFormatted: prettyFormat(stack, { min: true }),
+			yaml,
+		}
 	);
 }
 
-function createMultipleDependencyTestCase() {
+function createParentDependsUponChildTestCase() {
+	const child = { id: "child" };
+
+	const parent =
+		createItem({
+			id: "parent",
+			items: createStack(createLevel(child)),
+		});
+
+	parent.dependsUpon = [ child ];
+	child.dependents = [ parent ];
+
+	return (
+		{
+			stack:
+				createStack(createLevel(parent)),
+			stackFormatted:
+				getStackFormattedFromCreateTestCaseFunction(
+					createParentDependsUponChildTestCase,
+				),
+			yaml:
+				createItemYaml({
+					dependsUpon:
+						child.id,
+					id:
+						parent.id,
+					items:
+						child.id,
+				}),
+		}
+	);
+}
+
+function createChildDependsUponParentTestCase() {
+	const child = { id: "child" };
+
+	const parent =
+		createItem({
+			id: "parent",
+			items: createStack(createLevel(child)),
+		});
+
+	child.dependsUpon = [ parent ];
+	parent.dependents = [ child ];
+
+	return (
+		{
+			stack:
+				createStack(createLevel(parent)),
+			stackFormatted:
+				getStackFormattedFromCreateTestCaseFunction(
+					createChildDependsUponParentTestCase,
+				),
+			yaml:
+				{
+					id:
+						parent.id,
+					items:
+						createItemYaml({
+							dependsUpon: parent.id,
+							id: child.id,
+						}),
+				},
+		}
+	);
+}
+
+function createFirstDependsUponSecondTestCase() {
+	const first = { id: "first" };
+
+	const second =
+		{
+			dependents: [ first ],
+			id: "second",
+		};
+
+	first.dependsUpon = [ second ];
+
+	return (
+		{
+			stack:
+				createStack(
+					createLevel(
+						first,
+						second,
+					),
+				),
+			stackFormatted:
+				getStackFormattedFromCreateTestCaseFunction(
+					createFirstDependsUponSecondTestCase,
+				),
+			yaml:
+				[
+					createItemYaml({
+						dependsUpon: second.id,
+						id: first.id,
+					}),
+					second.id,
+				],
+		}
+	);
+}
+
+function createSecondDependsUponFirstTestCase() {
+	const first = { id: "first" };
+
+	const second =
+		{
+			dependsUpon: [ first ],
+			id: "second",
+		};
+
+	first.dependents = [ second ];
+
+	return (
+		{
+			stack:
+				createStack(
+					createLevel(
+						first,
+						second,
+					),
+				),
+			stackFormatted:
+				getStackFormattedFromCreateTestCaseFunction(
+					createSecondDependsUponFirstTestCase,
+				),
+			yaml:
+				[
+					first.id,
+					createItemYaml({
+						dependsUpon: first.id,
+						id: second.id,
+					}),
+				],
+		}
+	);
+}
+
+function createFirstDependsUponSecondAndThirdTestCase() {
 	const itemWithDependsUpon =
 		{ id: "item1" };
 
@@ -139,7 +262,7 @@ function createMultipleDependencyTestCase() {
 	itemWithDependsUpon.dependsUpon = dependentItems;
 
 	return (
-		createTestCase({
+		{
 			stack:
 				createStack(
 					createLevel(
@@ -149,22 +272,219 @@ function createMultipleDependencyTestCase() {
 						],
 					),
 				),
+			stackFormatted:
+				getStackFormattedFromCreateTestCaseFunction(
+					createFirstDependsUponSecondAndThirdTestCase,
+				),
 			yaml:
 				[
-					{
-						id: itemWithDependsUpon.id,
-						// property order affects YAML output order and for readability id is the first property
-						// eslint-disable-next-line sort-keys
+					createItemYaml({
 						dependsUpon:
 							[
 								dependentItems[0].id,
 								dependentItems[1].id,
 							],
-					},
+						id:
+							itemWithDependsUpon.id,
+					}),
 					dependentItems[0].id,
 					dependentItems[1].id,
 				],
-		})
+		}
+	);
+}
+
+function createUpperDependsUponLowerTestCase() {
+	const upper = { id: "upper" };
+
+	const lower =
+		{
+			dependents: [ upper ],
+			id: "lower",
+		};
+
+	upper.dependsUpon = [ lower ];
+
+	return (
+		{
+			stack:
+				createStack(
+					createLevel(upper),
+					createLevel(lower),
+				),
+			stackFormatted:
+				getStackFormattedFromCreateTestCaseFunction(
+					createUpperDependsUponLowerTestCase,
+				),
+			yaml:
+				[
+					[
+						createItemYaml({
+							dependsUpon: lower.id,
+							id: upper.id,
+						}),
+					],
+					[ lower.id ],
+				],
+		}
+	);
+}
+
+function createLowerDependsUponUpperTestCase() {
+	const lower = { id: "lower" };
+
+	const upper =
+		{
+			dependents: [ lower ],
+			id: "upper",
+		};
+
+	lower.dependsUpon = [ upper ];
+
+	return (
+		{
+			stack:
+				createStack(
+					createLevel(upper),
+					createLevel(lower),
+				),
+			stackFormatted:
+				getStackFormattedFromCreateTestCaseFunction(
+					createLowerDependsUponUpperTestCase,
+				),
+			yaml:
+				[
+					[ upper.id ],
+					[
+						createItemYaml({
+							dependsUpon: upper.id,
+							id: lower.id,
+						}),
+					],
+				],
+		}
+	);
+}
+
+function createSelfDependentTestCase(
+) {
+	const item = { id: "single" };
+
+	item.dependents = [ item ];
+	item.dependsUpon = [ item ];
+
+	return (
+		{
+			stack:
+				createStack(createLevel(item)),
+			stackFormatted:
+				getStackFormattedFromCreateTestCaseFunction(
+					createSelfDependentTestCase,
+				),
+			yaml:
+				createItemYaml({
+					dependsUpon: item.id,
+					id: item.id,
+				}),
+		}
+	);
+}
+
+function createSelfDependentInParentOfSameIdentifierTestCase() {
+	const id = "single";
+
+	const child =
+		{
+			id,
+			otherIdentifier: "child",
+		};
+
+	child.dependents = [ child ];
+	child.dependsUpon = [ child ];
+
+	const parent =
+		createItem({
+			id,
+			items: createStack(createLevel(child)),
+			otherIdentifier: "parent",
+		});
+
+	return (
+		{
+			stack:
+				createStack(createLevel(parent)),
+			stackFormatted:
+				getStackFormattedFromCreateTestCaseFunction(
+					createSelfDependentInParentOfSameIdentifierTestCase,
+				),
+			yaml:
+				createItemYaml({
+					id,
+					items:
+						createItemYaml({
+							dependsUpon: id,
+							id,
+							otherIdentifier: child.otherIdentifier,
+						}),
+					otherIdentifier:
+						parent.otherIdentifier,
+				}),
+		}
+	);
+}
+
+function createSelfDependentWithChildOfSameIdentifierTestCase() {
+	const id = "single";
+
+	const child =
+		{
+			id,
+			otherIdentifier: "child",
+		};
+
+	const parent =
+		createItem({
+			id,
+			items: createStack(createLevel(child)),
+			otherIdentifier: "parent",
+		});
+
+	parent.dependents = [ parent ];
+	parent.dependsUpon = [ parent ];
+
+	return (
+		{
+			stack:
+				createStack(createLevel(parent)),
+			stackFormatted:
+				getStackFormattedFromCreateTestCaseFunction(
+					createSelfDependentWithChildOfSameIdentifierTestCase,
+				),
+			yaml:
+				createItemYaml({
+					dependsUpon:
+						id,
+					id,
+					items:
+						createItemYaml({
+							id,
+							otherIdentifier: child.otherIdentifier,
+						}),
+					otherIdentifier:
+						parent.otherIdentifier,
+				}),
+		}
+	);
+}
+
+function getStackFormattedFromCreateTestCaseFunction(
+	createTestCaseFunction,
+) {
+	return (
+		createTestCaseFunction.name.substring(
+			"create".length,
+			createTestCaseFunction.name.length - "TestCase".length,
+		)
 	);
 }
 
@@ -189,10 +509,12 @@ function createLevel(
 function createItem({
 	id = null,
 	items,
+	...restOfItem
 }) {
 	const item =
 		{
 			...id && { id },
+			...restOfItem,
 			items,
 		};
 
@@ -201,15 +523,16 @@ function createItem({
 	return item;
 }
 
-function createTestCase({
-	stack,
-	yaml,
+function createItemYaml({
+	id,
+	items = null,
+	...restOfYamlItem
 }) {
 	return (
 		{
-			stack,
-			stackFormatted: prettyFormat(stack, { min: true }),
-			yaml,
+			id,
+			...restOfYamlItem,
+			...items && { items },
 		}
 	);
 }
