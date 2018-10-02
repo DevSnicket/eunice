@@ -81,10 +81,9 @@ function withSuffix(
 				&&
 				{
 					items:
-						removeIdentifierSuffix({
-							items: itemWithoutId.items,
-							suffix,
-						}),
+						removeFromItemsOrItem(
+							itemWithoutId.items,
+						),
 				}
 			);
 		}
