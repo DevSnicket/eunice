@@ -19,36 +19,51 @@ function removeIdentifierSuffix({
 	suffix,
 }) {
 	return (
-		Array.isArray(items)
-		?
-		items.map(fromIdentifierOrItemOrLevel)
-		:
-		items && fromIdentifierOrItem(items)
+		withSuffix(suffix)
+		.removeFromItemsOrItem(items)
 	);
+}
 
-	function fromIdentifierOrItemOrLevel(
+function withSuffix(
+	suffix,
+) {
+	return { removeFromItemsOrItem };
+
+	function removeFromItemsOrItem(
+		itemsOrItem,
+	) {
+		return (
+			Array.isArray(itemsOrItem)
+			?
+			itemsOrItem.map(removeFromIdentifierOrItemOrLevel)
+			:
+			itemsOrItem && removeFromIdentifierOrItem(itemsOrItem)
+		);
+	}
+
+	function removeFromIdentifierOrItemOrLevel(
 		identifierOrItemOrLevel,
 	) {
 		return (
 			Array.isArray(identifierOrItemOrLevel)
 			?
-			identifierOrItemOrLevel.map(fromIdentifierOrItem)
+			identifierOrItemOrLevel.map(removeFromIdentifierOrItem)
 			:
-			fromIdentifierOrItem(identifierOrItemOrLevel)
+			removeFromIdentifierOrItem(identifierOrItemOrLevel)
 		);
 	}
 
-	function fromIdentifierOrItem(
+	function removeFromIdentifierOrItem(
 		identifierOrItem,
 	) {
 		return (
 			(typeof identifierOrItem === "string" && removeFromIdentifier(identifierOrItem))
 			||
-			fromItem(identifierOrItem)
+			removeFromItem(identifierOrItem)
 		);
 	}
 
-	function fromItem({
+	function removeFromItem({
 		id,
 		...itemWithoutId
 	}) {
