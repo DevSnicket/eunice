@@ -64,14 +64,7 @@ function withGetIdentifierWithoutParentWhenPrefixed(
 	function removeFromStack(
 		stack,
 	) {
-		return (
-			stack.map(
-				level =>
-					removeDuplicateItemsOrThrowWhenNotRedundant(
-						level.map(removeFromItem),
-					),
-			)
-		);
+		return stack.map(level => level.map(removeFromItem));
 	}
 
 	function removeFromItem({
@@ -159,84 +152,6 @@ function withGetIdentifierWithoutParentWhenPrefixed(
 					parentIdentifier: parent.id,
 				})
 			);
-		}
-	}
-}
-
-function removeDuplicateItemsOrThrowWhenNotRedundant(
-	items,
-) {
-	const removedItems = new Set();
-
-	return items.filter(item => !isDuplicateItemOrThrowWhenNotRedundant(item));
-
-	function isDuplicateItemOrThrowWhenNotRedundant(
-		item,
-	) {
-		if (isDuplicate()) {
-			const errorMessage =
-				getErrorMessage();
-
-			if (errorMessage)
-				throw Error(`Item with duplicate identifier ${errorMessage}.`);
-			else {
-				removedItems.add(item);
-
-				return true;
-			}
-		} else
-			return false;
-
-		function isDuplicate() {
-			return (
-				items.some(
-					otherItem =>
-						otherItem !== item
-						&&
-						otherItem.id === item.id
-						&&
-						!removedItems.has(otherItem),
-				)
-			);
-		}
-
-		function getErrorMessage() {
-			return (
-				[ forDependsUpon(), forRelevantProperties() ]
-				.filter(message => message)
-				.join(" and ")
-			);
-
-			function forDependsUpon() {
-				return (
-					(!item.dependsUpon && "does not depend upon any items")
-					||
-					(item.dependsUpon.length !== 1 && "does not depend upon a single item")
-					||
-					(item.id !== item.dependsUpon[0].id && "does not depend upon an item with same identifier")
-				);
-			}
-
-			function forRelevantProperties() {
-				return formatRelevantProperties(getRelevantProperties());
-
-				function getRelevantProperties() {
-					const buildInProperties = [ "dependsUpon", "id", "items", "level" ];
-
-					return (
-						Object.keys(item)
-						.filter(property => !buildInProperties.includes(property))
-					);
-				}
-
-				function formatRelevantProperties(
-					relevantProperties,
-				) {
-					return (
-						relevantProperties.length && `has relevant properties (${relevantProperties})`
-					);
-				}
-			}
 		}
 	}
 }

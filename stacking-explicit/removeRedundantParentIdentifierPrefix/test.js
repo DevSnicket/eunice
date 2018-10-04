@@ -59,20 +59,6 @@ test.each(
 				{ dependsUpon: "child" },
 			],
 		],
-		[
-			{
-				id: "parent",
-				items:
-					[
-						{ dependsUpon: "parent/child", id: "child" },
-						{ id: "parent/child", otherProperty: "otherValue" },
-					],
-			},
-			{
-				id: "parent",
-				items: { id: "child", otherProperty: "otherValue" },
-			},
-		],
 	],
 )(
 	"%j items returns %j",
@@ -84,64 +70,4 @@ test.each(
 			}),
 		)
 		.toEqual(expected),
-);
-
-test.each(
-	[
-		[
-			{
-				id: "parent",
-				items:
-					[
-						{ id: "child" },
-						{ id: "parent/child" },
-					],
-			},
-			"Item with duplicate identifier does not depend upon any items.",
-		],
-		[
-			{
-				id: "parent",
-				items:
-					[
-						{ dependsUpon: [ "dependsUpon1", "dependsUpon2" ], id: "child" },
-						{ id: "parent/child" },
-					],
-			},
-			"Item with duplicate identifier does not depend upon a single item.",
-		],
-		[
-			{
-				id: "parent",
-				items:
-					[
-						{ dependsUpon: "dependsUpon1", id: "child" },
-						{ id: "parent/child" },
-					],
-			},
-			"Item with duplicate identifier does not depend upon an item with same identifier.",
-		],
-		[
-			{
-				id: "parent",
-				items:
-					[
-						{ dependsUpon: "parent/child", id: "child", otherProperty: "otherValue" },
-						{ id: "parent/child" },
-					],
-			},
-			"Item with duplicate identifier has relevant properties (otherProperty).",
-		],
-	],
-)(
-	"%j items throws error %j",
-	(items, expected) =>
-		expect(
-			() =>
-				removeRedundantParentIdentifierPrefix({
-					identifierSeparator: "/",
-					items,
-				}),
-		)
-		.toThrowError(expected),
 );
