@@ -147,8 +147,8 @@
 			{
 				"args":
 					[
-						"--items={ id: Analyzers/JavaScript/getItemOrItemsFromJavaScript/createVisitors/addFromCall/index }",
-						"--suffix=/index"
+						"--items=",
+						"--suffix="
 					],
 				"name": "processor removeIdentifierSuffix",
 				"program": "${workspaceRoot}/Processors/removeIdentifierSuffix/index.js",
@@ -168,7 +168,7 @@
 			{
 				"args":
 					[
-						"--identifierSeparator=/",
+						"--identifierSeparator=",
 						"--items="
 					],
 				"name": "processor removeRedundantParentIdentifierPrefix",
@@ -241,10 +241,7 @@
 				"useWSL": true
 			},
 			{
-				"args":
-					[
-						"--items=[[item1],[item2]]",
-					],
+				"args": [ "--items=", ],
 				"name": "processor unstackIndependent",
 				"program": "${workspaceRoot}/Processors/unstackIndependent/index.js",
 				"request": "launch",
@@ -281,8 +278,8 @@
 			{
 				"args":
 					[
-						//"--subsetIdentifierHierarchy=",
-						"--yaml=[single,{ id: single, dependsUpon: single }]"
+						"--subsetIdentifierHierarchy=",
+						"--yaml="
 					],
 				"name": "renderer getSvgForYaml",
 				"program": "${workspaceRoot}/Renderer/getSvgForYaml/index.js",
