@@ -25,7 +25,11 @@
 				"useWSL": true
 			},
 			{
-				"args": [ "getYamlFromJavaScript/test.js" ],
+				"args":
+					[ 
+						"--runInBand",
+						"getYamlFromJavaScript/test.js"
+					],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/",
 				"name": "analyzer getYamlFromJavaScript jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
@@ -50,7 +54,11 @@
 				"useWSL": true
 			},
 			{
-				"args": [ "getOrCreateItemsInDirectory/test.js" ],
+				"args": 
+					[ 
+						"--runInBand",
+						"getOrCreateItemsInDirectory/test.js"
+					],
 				"cwd": "${workspaceFolder}/Analyzers/JavaScript/",
 				"name": "analyzer getOrCreateItemsInDirectory jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
@@ -66,7 +74,7 @@
 			},
 			{
 				"args":
-					[ 
+					[
 						"--runInBand",
 						"dependencyAndStructure/createStackFromYaml/test.js"
 					],
@@ -78,7 +86,7 @@
 			},
 			{
 				"args":
-					[ 
+					[
 						"--runInBand", 
 						"dependencyAndStructure/createYamlFromStack/test.js"
 					],
@@ -101,7 +109,11 @@
 				"useWSL": true
 			},
 			{
-				"args": [ "groupItemsByIdentifierSeparator/test.js" ],
+				"args":
+					[ 
+						"--runInBand",
+						"groupItemsByIdentifierSeparator/test.js"
+					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor groupItemsByIdentifierSeparator jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
@@ -136,7 +148,11 @@
 				"useWSL": true
 			},
 			{
-				"args": [ "orderItemsBy/test.js" ],
+				"args":
+					[ 
+						"--runInBand",
+						"orderItemsBy/test.js"
+					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor orderItemsBy jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
@@ -157,7 +173,11 @@
 				"useWSL": true
 			},
 			{
-				"args": [ "removeIdentifierSuffix/test.js" ],
+				"args":
+					[ 
+						"--runInBand",
+						"removeIdentifierSuffix/test.js",
+					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor removeIdentifierSuffix jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
@@ -178,7 +198,11 @@
 				"useWSL": true
 			},
 			{
-				"args": [ "removeRedundantParentIdentifierPrefix/test.js" ],
+				"args":
+					[ 
+						"--runInBand",
+						"removeRedundantParentIdentifierPrefix/test.js"
+					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor removeRedundantParentIdentifierPrefix jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
@@ -199,7 +223,11 @@
 				"useWSL": true
 			},
 			{
-				"args": [ "removeSelfDependentItemsOfType/test.js" ],
+				"args":
+					[ 
+						"--runInBand",
+						"removeSelfDependentItemsOfType/test.js"
+					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor removeSelfDependentItemsOfType jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
@@ -232,7 +260,11 @@
 				"useWSL": true
 			},
 			{
-				"args": [ "stackRootItems/test.js" ],
+				"args":
+					[ 
+						"--runInBand",
+						"stackRootItems/test.js"
+					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor stackRootItems jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
@@ -249,7 +281,11 @@
 				"useWSL": true
 			},
 			{
-				"args": [ "unstackIndependent/test.js" ],
+				"args":
+					[ 
+						"--runInBand",
+						"unstackIndependent/test.js",
+					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor unstackIndependent jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
@@ -258,7 +294,11 @@
 				"useWSL": true
 			},
 			{
-				"args": [ "getInteractiveElementsForYaml/test.js" ],
+				"args":
+					[ 
+						"--runInBand",
+						"getInteractiveElementsForYaml/test.js"
+					],
 				"cwd": "${workspaceFolder}/Renderer/",
 				"name": "renderer getInteractiveElementsForYaml jest",
 				"program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
@@ -267,7 +307,11 @@
 				"useWSL": true
 			},
 			{
-				"args": [ "getSvgForYaml/test.js" ],
+				"args":
+					[ 
+						"--runInBand",
+						"getSvgForYaml/test.js"
+					],
 				"cwd": "${workspaceFolder}/Renderer/",
 				"name": "renderer getSvgForYaml jest",
 				"program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
@@ -297,7 +341,11 @@
 				"useWSL": true
 			},
 			{
-				"args": [ "getSvgForYaml/withSubset.test.js" ],
+				"args":
+					[ 
+						"--runInBand",
+						"getSvgForYaml/withSubset.test.js"
+					],
 				"cwd": "${workspaceFolder}/Renderer/",
 				"name": "renderer getSvgForYaml with subset jest",
 				"program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
