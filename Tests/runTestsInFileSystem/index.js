@@ -16,8 +16,8 @@ module.exports =
 	}) => {
 		if (isJestProcessFromArguments(processArguments))
 			discoverAndDescribeTestCases();
-		else if (processArguments.length == 3)
-			if (processArguments[2] == "update-expected")
+		else if (processArguments.length === 3)
+			if (processArguments[2] === "update-expected")
 				discoverAndUpdateExpectedFiles();
 			else
 				logOutputOfActualWhenFileOrTestCase(processArguments[2]);
@@ -136,7 +136,7 @@ module.exports =
 				return (
 					fileOrTestCase.length > 1
 					&&
-					(fileOrTestCase[0] == "." || fileOrTestCase[0] == "/")
+					(fileOrTestCase[0] === "." || fileOrTestCase[0] === "/")
 				);
 			}
 		}
