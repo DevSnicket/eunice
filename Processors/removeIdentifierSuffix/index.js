@@ -20,24 +20,24 @@ function removeIdentifierSuffix({
 }) {
 	return (
 		withSuffix(suffix)
-		.removeFromItemsOrItem(items)
+		.removeFromIdentifierOrItemOrLevelOrStack(items)
 	);
 }
 
 function withSuffix(
 	suffix,
 ) {
-	return { removeFromItemsOrItem };
+	return { removeFromIdentifierOrItemOrLevelOrStack };
 
-	function removeFromItemsOrItem(
-		itemsOrItem,
+	function removeFromIdentifierOrItemOrLevelOrStack(
+		stackOrLevelOrItemOrIdentifier,
 	) {
 		return (
-			Array.isArray(itemsOrItem)
+			Array.isArray(stackOrLevelOrItemOrIdentifier)
 			?
-			itemsOrItem.map(removeFromIdentifierOrItemOrLevel)
+			stackOrLevelOrItemOrIdentifier.map(removeFromIdentifierOrItemOrLevel)
 			:
-			itemsOrItem && removeFromIdentifierOrItem(itemsOrItem)
+			stackOrLevelOrItemOrIdentifier && removeFromIdentifierOrItem(stackOrLevelOrItemOrIdentifier)
 		);
 	}
 
@@ -81,7 +81,7 @@ function withSuffix(
 				&&
 				{
 					items:
-						removeFromItemsOrItem(
+						removeFromIdentifierOrItemOrLevelOrStack(
 							itemWithoutId.items,
 						),
 				}
