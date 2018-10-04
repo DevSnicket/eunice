@@ -190,6 +190,27 @@
 				"args":
 					[
 						"--items=",
+						"--type="
+					],
+				"name": "processor removeSelfDependentItemsOfType",
+				"program": "${workspaceRoot}/Processors/removeSelfDependentItemsOfType/index.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args": [ "removeSelfDependentItemsOfType/test.js" ],
+				"cwd": "${workspaceFolder}/Processors/",
+				"name": "processor removeSelfDependentItemsOfType jest",
+				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[
+						"--items=",
 						"--type=",
 					],
 				"name": "processor setTypeOfRootItems",
