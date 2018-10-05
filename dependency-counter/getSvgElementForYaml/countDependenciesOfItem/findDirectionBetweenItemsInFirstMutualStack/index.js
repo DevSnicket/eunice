@@ -16,10 +16,14 @@ module.exports =
 		})
 		||
 		getDirectionBetweenFirstAncestorOrThrowError(
-			generateAncestors({
-				from,
-				to,
-			}),
+			generateAncestors(
+				[
+					{
+						from,
+						to,
+					},
+				],
+			),
 		);
 
 function getDirectionBetweenFirstAncestorOrThrowError(

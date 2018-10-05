@@ -164,6 +164,20 @@ getSvgForYamlTestOrUpdateExpected({
 	yaml: readTestcaseFile("upper-item-depends-upon-lower-with-parent.yaml"),
 });
 
+getSvgForYamlTestOrUpdateExpected({
+	expectedFilename: "upper-item-depends-upon-lower-item-with-parent",
+	scenario: "subset of root item with stack of great-grandchild item that depends upon lower child item",
+	subsetIdentifierHierarchy: [ "parent" ],
+	yaml: readTestcaseFile("upper-item-of-item-depends-upon-lower-with-parent.yaml"),
+});
+
+getSvgForYamlTestOrUpdateExpected({
+	expectedFilename: "upper-item-depends-upon-lower-item-with-parent",
+	scenario: "subset of root item with stack of great-great-grandchild item that depends upon lower child item",
+	subsetIdentifierHierarchy: [ "parent" ],
+	yaml: readTestcaseFile("upper-item-of-item-of-item-depends-upon-lower-with-parent.yaml"),
+});
+
 function getSvgForYamlTestOrUpdateExpected({
 	expectedFilename,
 	scenario,
