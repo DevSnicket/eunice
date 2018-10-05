@@ -1,17 +1,15 @@
 module.exports = generateAncestors;
 
-function * generateAncestors({
-	from,
-	to,
-}) {
-	const parents = getParents({ from, to });
+function * generateAncestors(
+	items,
+) {
+	const parents = items.flatMap(getParents);
 
 	for (const parent of parents)
 		yield parent;
 
-	for (const parent of parents)
-		for (const ancestor of generateAncestors(parent))
-			yield ancestor;
+	for (const ancestor of generateAncestors(parents))
+		yield ancestor;
 }
 
 function getParents({
