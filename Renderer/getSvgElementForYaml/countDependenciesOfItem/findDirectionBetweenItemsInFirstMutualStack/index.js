@@ -2,8 +2,8 @@ require("array.prototype.flatmap")
 .shim();
 
 const
-	generateAncestors = require("./findDirectionBetweenItemsInFirstMutualStack/generateAncestors"),
-	getDirectionBetweenWhenAny = require("./findDirectionBetweenItemsInFirstMutualStack/getDirectionBetweenWhenAny");
+	generateAncestors = require("./generateAncestors"),
+	getDirectionBetweenWhenAny = require("./getDirectionBetweenWhenAny");
 
 module.exports =
 	({
