@@ -69,10 +69,7 @@ function withDirectory(
 				fs.existsSync(stackFilePath)
 				&&
 				stackItems({
-					identifierStack:
-						addRelativeDirectoryPrefixToStack(
-							readStack(),
-						),
+					identifierStack: readStack(),
 					items,
 				})
 			);
@@ -96,31 +93,6 @@ function withDirectory(
 						),
 					)
 				);
-			}
-
-			function addRelativeDirectoryPrefixToStack(
-				stack,
-			) {
-				return (
-					relativeDirectory
-					?
-					stack.map(
-						identiferOrLevel =>
-							Array.isArray(identiferOrLevel)
-							?
-							identiferOrLevel.map(addRelativeDirectoryPrefix)
-							:
-							addRelativeDirectoryPrefix(identiferOrLevel),
-					)
-					:
-					stack
-				);
-			}
-
-			function addRelativeDirectoryPrefix(
-				identifier,
-			) {
-				return path.join(relativeDirectory, identifier);
 			}
 		}
 	}
