@@ -249,12 +249,25 @@
 			},
 			{
 				"args":
+					[ 
+						"--runInBand",
+						"stackItems/test.js"
+					],
+				"cwd": "${workspaceFolder}/Processors/",
+				"name": "processor stackItems jest",
+				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
 					[
 						"--items=",
-						"--levels=",
+						"--rootDirectory="
 					],
-				"name": "processor stackRootItems",
-				"program": "${workspaceRoot}/Processors/stackRootItems/index.js",
+				"name": "processor stackItems usingFileSystem",
+				"program": "${workspaceRoot}/Processors/stackItems/usingFileSystem/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -263,11 +276,23 @@
 				"args":
 					[ 
 						"--runInBand",
-						"stackRootItems/test.js"
+						"stackItems/usingFileSystem/test.js"
 					],
 				"cwd": "${workspaceFolder}/Processors/",
-				"name": "processor stackRootItems jest",
+				"name": "processor stackItems usingFileSystem jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[
+						"--identifierStack=",
+						"--items=",
+					],
+				"name": "processor stackItems atRoot",
+				"program": "${workspaceRoot}/Processors/stackItems/atRoot.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true

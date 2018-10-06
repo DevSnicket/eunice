@@ -5,7 +5,7 @@ const
 const
 	callWhenProcessEntryPoint = require("../../../callWhenProcessEntryPoint"),
 	getItemOrItemsFromJavaScript = require("../getItemOrItemsFromJavaScript"),
-	getOrCreateFileItem = require("../getOrCreateItemsInDirectory/getOrCreateFileItem"),
+	getOrCreateFileItem = require("./getOrCreateFileItem"),
 	getYamlForItemOrItems = require("../getYamlForItemOrItems");
 
 /* istanbul ignore next: only used when JavaScript file is process entry point */
