@@ -8,8 +8,8 @@ node Processors/setTypeOfRootItems --type=file |
 node Processors/removeIdentifierSuffix --suffix=/index |
 node Processors/orderItemsBy/identifier |
 node Processors/groupItemsByIdentifierSeparator --identifierSeparator=/ |
-node Processors/stackItems/usingFileSystem --rootDirectory=$(dirname $0)/.. |
 node Processors/removeRedundantParentIdentifierPrefix --identifierSeparator=/ |
+node Processors/stackItems/usingFileSystem --rootDirectory=$(dirname $0)/.. |
 node Processors/removeSelfDependentItemsOfType --type=variable |
 node Processors/orderItemsBy/indexOf/type --typesInOrder= --typesInOrder=parameter --typesInOrder=variable --typesInOrder=file |
 node Processors/unstackIndependent > $outputDirectory/.yaml
