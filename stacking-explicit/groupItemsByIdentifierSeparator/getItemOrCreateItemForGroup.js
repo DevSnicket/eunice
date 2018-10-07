@@ -47,12 +47,26 @@ function getItemOrCreateGroupItem({
 
 	function getItemsOfGroupAndGroupItemItems() {
 		return (
-			Array.isArray(groupItem.items)
-			?
-			[ ...groupItem.items, ...itemsOfGroup ]
-			:
+			whenLevelOrStack()
+			||
 			[ groupItem.items, ...itemsOfGroup ]
 		);
+
+		function whenLevelOrStack() {
+			return (
+				Array.isArray(groupItem.items)
+				&&
+				(whenStack() || [ ...groupItem.items, ...itemsOfGroup ])
+			);
+
+			function whenStack() {
+				return (
+					groupItem.items.length && Array.isArray(groupItem.items[0])
+					&&
+					[ ...groupItem.items, itemsOfGroup ]
+				);
+			}
+		}
 	}
 
 	function getItemOrItemsOfGroup() {
