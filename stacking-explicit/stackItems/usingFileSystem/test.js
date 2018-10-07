@@ -23,27 +23,28 @@ test.each(
 		],
 		[
 			{
-				id:
-					"directoryWithoutStack",
-				items:
-					[ "firstItem", "secondItem" ],
+				id: "directoryWithoutStack",
+				items: [ "firstItem", "secondItem" ],
 			},
 			{
-				id:
-					"directoryWithoutStack",
-				items:
-					[ "firstItem", "secondItem" ],
+				id: "directoryWithoutStack",
+				items: [ "firstItem", "secondItem" ],
 			},
 		],
 		[
 			{
-				id:
-					"directoryWithStack",
-				items:
-					[
-						"lowerItem2",
-						"upperItem2",
-					],
+				id: "directoryWithStack",
+				items: [ "lowerItem2", "upperItem2" ],
+			},
+			{
+				id: "directoryWithStack",
+				items: [ [ "upperItem2" ], [ "lowerItem2" ] ],
+			},
+		],
+		[
+			{
+				id: "directoryWithStack",
+				items: [ "lowerItem2", "lowerItem3", "upperItem2" ],
 			},
 			{
 				id:
@@ -51,34 +52,28 @@ test.each(
 				items:
 					[
 						[ "upperItem2" ],
-						[ "lowerItem2" ],
+						[ "lowerItem2", "lowerItem3" ],
 					],
 			},
 		],
 		[
 			{
 				id:
-					"directoryWithStack",
+					"directoryWithSubdirectoryWithStack",
 				items:
-					[
-						"lowerItem2",
-						"lowerItem3",
-						"upperItem2",
-					],
+					{
+						id: "subdirectoryWithStack",
+						items: [ "lowerItem4", "upperItem3" ],
+					},
 			},
 			{
 				id:
-					"directoryWithStack",
+					"directoryWithSubdirectoryWithStack",
 				items:
-					[
-						[
-							"upperItem2",
-						],
-						[
-							"lowerItem2",
-							"lowerItem3",
-						],
-					],
+					{
+						id: "subdirectoryWithStack",
+						items: [ [ "upperItem3" ], [ "lowerItem4" ] ],
+					},
 			},
 		],
 	],
@@ -87,8 +82,8 @@ test.each(
 	(items, expected) =>
 		expect(
 			stackItemsUsingFileSystem({
+				directory: path.join(__dirname, "testcases"),
 				items,
-				rootDirectory: path.join(__dirname, "testcases"),
 			}),
 		)
 		.toEqual(
