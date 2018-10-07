@@ -1,79 +1,28 @@
+const
+	appendToOrCreateStack = require("./appendToOrCreateStack"),
+	createNewLevelMap = require("./createNewLevelMap");
+
 module.exports =
 	({
-		identifierStack,
-		items,
+		identifierOrItemOrLevelOrStack,
+		identifiersToStack,
 	}) => {
 		return (
-			items
-			&&
-			(stackWhenMultipleRootItemsWithLevels() || items)
+			stackWhenLevelOrStack()
+			||
+			identifierOrItemOrLevelOrStack
 		);
 
-		function stackWhenMultipleRootItemsWithLevels() {
+		function stackWhenLevelOrStack() {
 			return (
-				identifierStack
+				identifiersToStack
 				&&
-				Array.isArray(items)
+				Array.isArray(identifierOrItemOrLevelOrStack)
 				&&
-				stackMultipleRootItemsWithLevels()
+				appendToOrCreateStack({
+					...createNewLevelMap(identifiersToStack),
+					levelOrStack: identifierOrItemOrLevelOrStack,
+				})
 			);
-		}
-
-		function stackMultipleRootItemsWithLevels() {
-			const itemsByIdentifierLevel = new Map();
-
-			setItemsByIdentifierLevel();
-
-			return (
-				[
-					...getStackFromItemsByIdentifierLevel(),
-					...itemsByIdentifierLevel.get(null) || [],
-				]
-			);
-
-			function setItemsByIdentifierLevel() {
-				for (const item of items) {
-					const stack =
-						getStackOfItemIdentifier(item.id || item)
-						||
-						null;
-
-					itemsByIdentifierLevel.set(
-						stack,
-						[
-							...itemsByIdentifierLevel.get(stack) || [],
-							item,
-						],
-					);
-				}
-			}
-
-			function getStackFromItemsByIdentifierLevel() {
-				return identifierStack.reduce(aggregate, []);
-
-				function aggregate(
-					stack,
-					identifierLevel,
-				) {
-					const level =
-						itemsByIdentifierLevel.get(
-							identifierLevel,
-						);
-
-					return (
-						level
-						?
-						[ ...stack, level ]
-						:
-						stack
-					);
-				}
-			}
-		}
-
-		function getStackOfItemIdentifier(
-			identifier,
-		) {
-			return identifierStack.find(level => level.includes(identifier));
 		}
 	};
