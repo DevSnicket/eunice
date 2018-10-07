@@ -18,10 +18,37 @@ test.each(
 		],
 		[
 			{
+				identifierStack: [ "itemSpecified" ],
+				items: [ "itemNotSpecified" ],
+			},
+			[ "itemNotSpecified" ],
+		],
+		[
+			{
 				identifierStack: [ [ "item1", "item2" ] ],
 				items: [ "item1", "item2" ],
 			},
 			[ [ "item1", "item2" ] ],
+		],
+		[
+			{
+				identifierStack: [ "item1", "item2" ],
+				items: [ "item1", "item2" ],
+			},
+			[
+				[ "item1" ],
+				[ "item2" ],
+			],
+		],
+		[
+			{
+				identifierStack: [ "item2", "item1" ],
+				items: [ "item1", "item2" ],
+			},
+			[
+				[ "item2" ],
+				[ "item1" ],
+			],
 		],
 		[
 			{
@@ -32,13 +59,6 @@ test.each(
 				[ "item1", "item2" ],
 				"item3",
 			],
-		],
-		[
-			{
-				identifierStack: [ "itemSpecified" ],
-				items: [ "itemNotSpecified" ],
-			},
-			[ "itemNotSpecified" ],
 		],
 	],
 )(
