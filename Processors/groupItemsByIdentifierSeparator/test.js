@@ -57,6 +57,53 @@ test.each(
 			],
 		],
 		[
+			[
+				{ id: "item", items: "childItem1" },
+				"item/childItem2",
+			],
+			[
+				{
+					id: "item",
+					items: [ "childItem1", "item/childItem2" ],
+				},
+			],
+		],
+		[
+			[
+				{ id: "item", items: [ [ "childItem1" ] ] },
+				"item/childItem2",
+			],
+			[
+				{
+					id:
+						"item",
+					items:
+						[
+							[ "childItem1" ],
+							[ "item/childItem2" ],
+						],
+				},
+			],
+		],
+		[
+			[
+				{ id: "item", items: [ [ "childItem1" ] ] },
+				"item/childItem2",
+				"item/childItem3",
+			],
+			[
+				{
+					id:
+						"item",
+					items:
+						[
+							[ "childItem1" ],
+							[ "item/childItem2", "item/childItem3" ],
+						],
+				},
+			],
+		],
+		[
 			[ "item1", "item1/childItem", "item2" ],
 			[
 				{
