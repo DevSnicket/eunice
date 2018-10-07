@@ -10,53 +10,49 @@ callWithYamlItemsAndOutputWhenProcessEntryPoint(stackFromFileSystem);
 module.exports = stackFromFileSystem;
 
 function stackFromFileSystem({
+	directory,
 	items,
-	rootDirectory,
 }) {
 	return (
 		items
 		&&
 		withDirectory(
-			rootDirectory,
+			directory,
 		)
-		.getIdentifierOrStackItemOrItems({
-			identifierOrItemOrItems: items,
-			relativeDirectory: null,
-		})
+		.getIdentifierOrStackItemOrItems(
+			items,
+		)
 	);
 }
 
 function withDirectory(
-	rootDirectory,
+	directory,
 ) {
 	return { getIdentifierOrStackItemOrItems };
 
-	function getIdentifierOrStackItemOrItems({
-		identifierOrItemOrItems,
-		relativeDirectory,
-	}) {
+	function getIdentifierOrStackItemOrItems(
+		identifierOrItemOrLevelOrStack,
+	) {
 		return (
 			stackWhenLevel()
 			||
-			getIdentifierOrStackItemsWhenItem(identifierOrItemOrItems)
+			getIdentifierOrStackItemsWhenItem(identifierOrItemOrLevelOrStack)
 		);
 
 		function stackWhenLevel() {
 			return (
-				Array.isArray(identifierOrItemOrItems)
+				Array.isArray(identifierOrItemOrLevelOrStack)
 				&&
-				stackItemsUsingFileIn({
-					items: identifierOrItemOrItems,
-					relativeDirectory,
-				})
+				stackItemsUsingFileIn(
+					identifierOrItemOrLevelOrStack,
+				)
 			);
 		}
 	}
 
-	function stackItemsUsingFileIn({
+	function stackItemsUsingFileIn(
 		items,
-		relativeDirectory,
-	}) {
+	) {
 		return (
 			(stackWhenFileExists() || items)
 			.map(getIdentifierOrStackItemsWhenItemOrLevel)
@@ -77,8 +73,7 @@ function withDirectory(
 			function getStackFilePath() {
 				return (
 					path.join(
-						rootDirectory,
-						...relativeDirectory ? [ relativeDirectory ] : [],
+						directory,
 						".devsnicket.eunice.stack.yaml",
 					)
 				);
@@ -148,10 +143,12 @@ function withDirectory(
 
 			function stackItemsWithIdentifierAsRelativeDirectory() {
 				return (
-					getIdentifierOrStackItemOrItems({
-						identifierOrItemOrItems: item.items,
-						relativeDirectory: item.id,
-					})
+					withDirectory(
+						path.join(directory, item.id),
+					)
+					.getIdentifierOrStackItemOrItems(
+						item.items,
+					)
 				);
 			}
 		}

@@ -263,8 +263,8 @@
 			{
 				"args":
 					[
-						"--items=",
-						"--rootDirectory="
+						"--directory=",
+						"--items="
 					],
 				"name": "processor stackItems usingFileSystem",
 				"program": "${workspaceRoot}/Processors/stackItems/usingFileSystem/index.js",
