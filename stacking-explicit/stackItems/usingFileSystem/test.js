@@ -41,8 +41,8 @@ test.each(
 					"directoryWithStack",
 				items:
 					[
-						"directoryWithStack/lowerItem2",
-						"directoryWithStack/upperItem2",
+						"lowerItem2",
+						"upperItem2",
 					],
 			},
 			{
@@ -50,8 +50,8 @@ test.each(
 					"directoryWithStack",
 				items:
 					[
-						[ "directoryWithStack/upperItem2" ],
-						[ "directoryWithStack/lowerItem2" ],
+						[ "upperItem2" ],
+						[ "lowerItem2" ],
 					],
 			},
 		],
@@ -61,9 +61,9 @@ test.each(
 					"directoryWithStack",
 				items:
 					[
-						"directoryWithStack/lowerItem2",
-						"directoryWithStack/lowerItem3",
-						"directoryWithStack/upperItem2",
+						"lowerItem2",
+						"lowerItem3",
+						"upperItem2",
 					],
 			},
 			{
@@ -72,11 +72,11 @@ test.each(
 				items:
 					[
 						[
-							"directoryWithStack/upperItem2",
+							"upperItem2",
 						],
 						[
-							"directoryWithStack/lowerItem2",
-							"directoryWithStack/lowerItem3",
+							"lowerItem2",
+							"lowerItem3",
 						],
 					],
 			},
