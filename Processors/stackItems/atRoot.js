@@ -21,8 +21,8 @@ processorPlugins.plugIn({
 			identifierStack
 			?
 			stackItems({
-				identifierStack: splitCommaSeparatedLevels(identifierStack),
-				items,
+				identifierOrItemOrLevelOrStack: items,
+				identifiersToStack: splitCommaSeparatedLevels(identifierStack),
 			})
 			:
 			items,

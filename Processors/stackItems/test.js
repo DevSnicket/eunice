@@ -4,36 +4,36 @@ test.each(
 	[
 		[
 			{
-				identifierStack: null,
-				items: null,
+				identifierOrItemOrLevelOrStack: null,
+				identifiersToStack: null,
 			},
 			null,
 		],
 		[
 			{
-				identifierStack: [],
-				items: "item",
+				identifierOrItemOrLevelOrStack: "item",
+				identifiersToStack: [],
 			},
 			"item",
 		],
 		[
 			{
-				identifierStack: [ "itemSpecified" ],
-				items: [ "itemNotSpecified" ],
+				identifierOrItemOrLevelOrStack: [ "itemNotSpecified" ],
+				identifiersToStack: [ "itemSpecified" ],
 			},
 			[ "itemNotSpecified" ],
 		],
 		[
 			{
-				identifierStack: [ [ "item1", "item2" ] ],
-				items: [ "item1", "item2" ],
+				identifierOrItemOrLevelOrStack: [ "item1", "item2" ],
+				identifiersToStack: [ [ "item1", "item2" ] ],
 			},
 			[ [ "item1", "item2" ] ],
 		],
 		[
 			{
-				identifierStack: [ "item1", "item2" ],
-				items: [ "item1", "item2" ],
+				identifierOrItemOrLevelOrStack: [ "item1", "item2" ],
+				identifiersToStack: [ "item1", "item2" ],
 			},
 			[
 				[ "item1" ],
@@ -42,8 +42,8 @@ test.each(
 		],
 		[
 			{
-				identifierStack: [ "item2", "item1" ],
-				items: [ "item1", "item2" ],
+				identifierOrItemOrLevelOrStack: [ "item1", "item2" ],
+				identifiersToStack: [ "item2", "item1" ],
 			},
 			[
 				[ "item2" ],
@@ -52,12 +52,26 @@ test.each(
 		],
 		[
 			{
-				identifierStack: [ [ "item1", "item2" ] ],
-				items: [ "item1", "item2", "item3" ],
+				identifierOrItemOrLevelOrStack: [ "item1", "item2", "item3" ],
+				identifiersToStack: [ [ "item1", "item2" ] ],
 			},
 			[
 				[ "item1", "item2" ],
 				"item3",
+			],
+		],
+		[
+			{
+				identifierOrItemOrLevelOrStack:
+					[
+						[ "item1" ],
+						[ "item2", "item3" ],
+					],
+				identifiersToStack:
+					[ "item2", "item3" ],
+			},
+			[
+				[ "item1" ], [ "item2" ], [ "item3" ],
 			],
 		],
 	],

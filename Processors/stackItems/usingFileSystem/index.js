@@ -43,18 +43,18 @@ function withDirectory(
 			return (
 				Array.isArray(identifierOrItemOrLevelOrStack)
 				&&
-				stackItemsUsingFileIn(
+				stackLevelOrStackUsingFileIn(
 					identifierOrItemOrLevelOrStack,
 				)
 			);
 		}
 	}
 
-	function stackItemsUsingFileIn(
-		items,
+	function stackLevelOrStackUsingFileIn(
+		levelOrStack,
 	) {
 		return (
-			(stackWhenFileExists() || items)
+			(stackWhenFileExists() || levelOrStack)
 			.map(getIdentifierOrStackItemsWhenItemOrLevel)
 		);
 
@@ -65,8 +65,8 @@ function withDirectory(
 				fs.existsSync(stackFilePath)
 				&&
 				stackItems({
-					identifierStack: readStack(),
-					items,
+					identifierOrItemOrLevelOrStack: levelOrStack,
+					identifiersToStack: readStack(),
 				})
 			);
 
