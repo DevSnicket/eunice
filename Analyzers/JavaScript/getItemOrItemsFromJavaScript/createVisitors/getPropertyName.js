@@ -4,4 +4,4 @@ module.exports =
 		?
 		property.argument.name
 		:
-		property.key.name;
+		property.value.name;
