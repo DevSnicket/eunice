@@ -1,0 +1,4 @@
+- aggregateIdentifier
+- getItemsFromAggregation
+- getItemOrCreateItemForGroupAndParents
+- getItemOrCreateItemForGroup
