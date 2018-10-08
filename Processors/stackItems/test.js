@@ -42,6 +42,16 @@ test.each(
 		],
 		[
 			{
+				identifierOrItemOrLevelOrStack: [ "otherItem", "anotherItemWithFirstItemInItsIdentifier" ],
+				identifiersToStack: [ "anotherItemWithFirstItemInItsIdentifier", "otherItem" ],
+			},
+			[
+				[ "anotherItemWithFirstItemInItsIdentifier" ],
+				[ "otherItem" ],
+			],
+		],
+		[
+			{
 				identifierOrItemOrLevelOrStack: [ "item1", "item2" ],
 				identifiersToStack: [ "item2", "item1" ],
 			},
