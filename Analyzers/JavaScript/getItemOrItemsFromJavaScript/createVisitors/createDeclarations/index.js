@@ -38,7 +38,7 @@ module.exports =
 		}
 
 		function any() {
-			return declarationsByParents.size != 0;
+			return declarationsByParents.size !== 0;
 		}
 
 		function findDeclarationAndParent(

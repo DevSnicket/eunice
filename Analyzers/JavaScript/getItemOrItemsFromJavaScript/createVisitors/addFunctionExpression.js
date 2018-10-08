@@ -70,7 +70,7 @@ function isModuleExportMemberExpression(
 	node,
 ) {
 	return (
-		node.type == "MemberExpression"
+		node.type === "MemberExpression"
 		&&
 		node.object.name === "module"
 		&&

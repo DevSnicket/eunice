@@ -23,7 +23,7 @@ module.exports =
 		}
 
 		function any() {
-			return dependsUponsByParent.size != 0;
+			return dependsUponsByParent.size !== 0;
 		}
 
 		function createPropertyFor(
