@@ -60,6 +60,15 @@ module.exports =
 		function getNewLevelOfIdentifierWhenSpecified(
 			identifier,
 		) {
-			return newLevels.find(newLevel => newLevel.includes(identifier));
+			return (
+				newLevels.find(
+					newLevel =>
+						Array.isArray(newLevel)
+						?
+						newLevel.includes(identifier)
+						:
+						newLevel === identifier,
+				)
+			);
 		}
 	};
