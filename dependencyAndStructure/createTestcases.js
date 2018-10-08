@@ -81,6 +81,7 @@ module.exports =
 			}),
 			createParentDependsUponChildTestCase(),
 			createChildDependsUponParentTestCase(),
+			createFirstChildDependsUponParentAndSecondChildWithGrandchildWithParentIdentifierTestCase(),
 			createFirstDependsUponSecondTestCase(),
 			createSecondDependsUponFirstTestCase(),
 			createFirstDependsUponSecondAndThirdTestCase(),
@@ -166,6 +167,55 @@ function createChildDependsUponParentTestCase() {
 							dependsUpon: parent.id,
 							id: child.id,
 						}),
+				},
+		}
+	);
+}
+
+function createFirstChildDependsUponParentAndSecondChildWithGrandchildWithParentIdentifierTestCase() {
+	const parentIdentifier = "parent";
+
+	const children =
+		[
+			{ id: "firstChild" },
+			createItem({
+				id: "secondChild",
+				items: createStack(createLevel({ id: parentIdentifier })),
+			}),
+		];
+
+	const parent =
+		createItem({
+			dependents: [ children[0] ],
+			id: parentIdentifier,
+			items: createStack(createLevel(...children)),
+		});
+
+	children[0].dependsUpon = [ parent ];
+
+	return (
+		{
+			stack:
+				createStack(createLevel(parent)),
+			stackFormatted:
+				getStackFormattedFromCreateTestCaseFunction(
+					createFirstChildDependsUponParentAndSecondChildWithGrandchildWithParentIdentifierTestCase,
+				),
+			yaml:
+				{
+					id:
+						parent.id,
+					items:
+						[
+							createItemYaml({
+								dependsUpon: parent.id,
+								id: children[0].id,
+							}),
+							createItemYaml({
+								id: children[1].id,
+								items: parentIdentifier,
+							}),
+						],
 				},
 		}
 	);

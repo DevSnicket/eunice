@@ -5,7 +5,7 @@ require("array.prototype.flatmap")
 .shim();
 
 const
-	findItemWithIdentifierInStackOrParents = require("./findItemWithIdentifierInStackOrParents"),
+	findItemWithIdentifierFromStack = require("./findItemWithIdentifierFromStack"),
 	findItemsOfDependsUponOrGetIdentifiers = require("./findItemsOfDependsUponOrGetIdentifiers"),
 	updateItem = require("./updateItem");
 
@@ -69,7 +69,7 @@ function initializeDependenciesInStack(
 					?
 					item
 					:
-					findItemWithIdentifierInStackOrParents({
+					findItemWithIdentifierFromStack({
 						identifier,
 						stack: item.items || stack,
 					})
