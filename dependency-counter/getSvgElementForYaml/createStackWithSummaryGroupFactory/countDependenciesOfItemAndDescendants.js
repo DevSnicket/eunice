@@ -1,6 +1,6 @@
-module.exports = countDependenciesOfItemRecursive;
+module.exports = countDependenciesOfItemAndDescendants;
 
-function countDependenciesOfItemRecursive({
+function countDependenciesOfItemAndDescendants({
 	countDependenciesOfItem,
 	item,
 	parentStack,
@@ -44,7 +44,7 @@ function countDependenciesOfItemRecursive({
 		childitem,
 	) {
 		return (
-			countDependenciesOfItemRecursive({
+			countDependenciesOfItemAndDescendants({
 				countDependenciesOfItem,
 				item: childitem,
 				parentStack,
