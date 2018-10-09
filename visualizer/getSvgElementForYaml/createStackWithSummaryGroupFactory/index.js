@@ -1,5 +1,5 @@
 const
-	countDependenciesOfItemRecursive = require("./countDependenciesOfItemRecursive"),
+	countDependenciesOfItemAndDescendants = require("./countDependenciesOfItemAndDescendants"),
 	createDependenciesInlineGroupFactories = require("./createDependenciesInlineGroupFactories"),
 	createGroupsCenteredHorizontally = require("./createGroupsCenteredHorizontally"),
 	createItemGroupFactory = require("./createItemGroupFactory"),
@@ -67,7 +67,7 @@ module.exports =
 			item,
 		) {
 			const dependencyCount =
-				countDependenciesOfItemRecursive({
+				countDependenciesOfItemAndDescendants({
 					countDependenciesOfItem,
 					item,
 					parentStack: stack,
