@@ -9,8 +9,8 @@ node Processors/removeIdentifierSuffix --suffix=/index |
 node Processors/orderItemsBy/identifier |
 node Processors/groupItemsByIdentifierSeparator --identifierSeparator=/ |
 node Processors/removeRedundantParentIdentifierPrefix --identifierSeparator=/ |
-node Processors/stackItems/usingFileSystem --directory=$(dirname $0)/.. |
 node Processors/removeSelfDependentItemsOfType --type=variable |
+node Processors/stackItems/usingFileSystem --directory=$(dirname $0)/.. |
 node Processors/orderItemsBy/indexOf/type --typesInOrder= --typesInOrder=parameter --typesInOrder=variable --typesInOrder=file |
 node Processors/unstackIndependent > $outputDirectory/.yaml
 
