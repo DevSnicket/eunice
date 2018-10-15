@@ -251,10 +251,10 @@
 				"args":
 					[ 
 						"--runInBand",
-						"stackItems/test.js"
+						"createOrAddToStacks/getIdentifierOrItemOrStackLevelOrStack/test.js"
 					],
 				"cwd": "${workspaceFolder}/Processors/",
-				"name": "processor stackItems jest",
+				"name": "processor createOrAddToStacks getIdentifierOrItemOrStackLevelOrStack jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
@@ -266,8 +266,8 @@
 						"--directory=",
 						"--items="
 					],
-				"name": "processor stackItems usingFileSystem",
-				"program": "${workspaceRoot}/Processors/stackItems/usingFileSystem/index.js",
+				"name": "processor createOrAddToStacks usingFileSystem",
+				"program": "${workspaceRoot}/Processors/createOrAddToStacks/usingFileSystem/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -276,10 +276,10 @@
 				"args":
 					[ 
 						"--runInBand",
-						"stackItems/usingFileSystem/test.js"
+						"createOrAddToStacks/usingFileSystem/test.js"
 					],
 				"cwd": "${workspaceFolder}/Processors/",
-				"name": "processor stackItems usingFileSystem jest",
+				"name": "processor createOrAddToStacks usingFileSystem jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
@@ -291,8 +291,8 @@
 						"--identifierStack=",
 						"--items=",
 					],
-				"name": "processor stackItems atRoot",
-				"program": "${workspaceRoot}/Processors/stackItems/atRoot.js",
+				"name": "processor createOrAddToStacks uniformly",
+				"program": "${workspaceRoot}/Processors/createOrAddToStacks/uniformly.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true

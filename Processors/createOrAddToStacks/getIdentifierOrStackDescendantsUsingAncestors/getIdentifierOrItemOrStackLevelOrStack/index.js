@@ -1,6 +1,6 @@
 const
-	appendToOrCreateStack = require("./appendToOrCreateStack"),
-	createNewLevelMap = require("./createNewLevelMap");
+	createNewLevelMap = require("./createNewLevelMap"),
+	createOrAddToStack = require("./createOrAddToStack");
 
 module.exports =
 	({
@@ -19,7 +19,7 @@ module.exports =
 				&&
 				Array.isArray(identifierOrItemOrLevelOrStack)
 				&&
-				appendToOrCreateStack({
+				createOrAddToStack({
 					...createNewLevelMap(identifiersToStack),
 					levelOrStack: identifierOrItemOrLevelOrStack,
 				})
