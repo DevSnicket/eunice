@@ -1,10 +1,9 @@
 const
 	path = require("path"),
-	stackItemsUsingFileSystem = require("./");
+	stackItemsUsingFileSystem = require(".");
 
 test.each(
 	[
-		[ null, null ],
 		[ "aItem", "aItem" ],
 		[ {}, {} ],
 		[
