@@ -319,6 +319,23 @@ test.each(
 			],
 		],
 		[
+			[ "item/child1", "item/child2/grandchild1", "item/child2/grandchild2" ],
+			[
+				{
+					id:
+						"item",
+					items:
+						[
+							"item/child1",
+							{
+								id: "item/child2",
+								items: [ "item/child2/grandchild1", "item/child2/grandchild2" ],
+							},
+						],
+				},
+			],
+		],
+		[
 			[ "item", "item/childItem", "item/childItem/grandchildItem/greatgrandchildItem1", "item/childItem/grandchildItem/greatgrandchildItem2" ],
 			[
 				{

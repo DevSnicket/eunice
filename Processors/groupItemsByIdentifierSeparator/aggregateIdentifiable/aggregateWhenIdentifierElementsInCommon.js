@@ -76,10 +76,7 @@ module.exports =
 							item:
 								{ id: commonElements.join(identifierSeparator) },
 							itemsOfGroup:
-								[
-									...aggregation.group.itemsOfGroup || [],
-									aggregation.group.lastItemOfGroup.item,
-								],
+								[ aggregation.group.lastItemOfGroup.item ],
 							...createLastItemOfGroupProperty(),
 							parent: aggregation.group,
 						},
