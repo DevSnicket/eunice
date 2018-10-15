@@ -229,11 +229,13 @@ test.each(
 			[ "item", "item/childItem1", "item/childItem1/grandchildItem", "item/childItem1/grandchildItem/greatgrandchildItem", "item/childItem2" ],
 			[
 				{
-					id: "item",
+					id:
+						"item",
 					items:
 						[
 							{
-								id: "item/childItem1",
+								id:
+									"item/childItem1",
 								items:
 									{
 										id: "item/childItem1/grandchildItem",
@@ -249,14 +251,17 @@ test.each(
 			[ "item", "item/childItem1", "item/childItem1/grandchildItem", "item/childItem1/grandchildItem/greatgrandchildItem", "item/childItem1/grandchildItem/greatgrandchildItem/greatgreatgrandchildItem", "item/childItem2" ],
 			[
 				{
-					id: "item",
+					id:
+						"item",
 					items:
 						[
 							{
-								id: "item/childItem1",
+								id:
+									"item/childItem1",
 								items:
 									{
-										id: "item/childItem1/grandchildItem",
+										id:
+											"item/childItem1/grandchildItem",
 										items:
 											{
 												id: "item/childItem1/grandchildItem/greatgrandchildItem",
@@ -282,7 +287,8 @@ test.each(
 			[ "item/childItem1", "item/childItem1/grandchildItem", "item/childItem2" ],
 			[
 				{
-					id: "item",
+					id:
+						"item",
 					items:
 						[
 							{
@@ -316,10 +322,12 @@ test.each(
 			[ "item", "item/childItem", "item/childItem/grandchildItem/greatgrandchildItem1", "item/childItem/grandchildItem/greatgrandchildItem2" ],
 			[
 				{
-					id: "item",
+					id:
+						"item",
 					items:
 						{
-							id: "item/childItem",
+							id:
+								"item/childItem",
 							items:
 								{
 									id: "item/childItem/grandchildItem",
@@ -333,7 +341,8 @@ test.each(
 			[ "item/childItem1", "item/childItem1/grandchildItem", "item/childItem1/grandchildItem/greatgrandchildItem", "item/childItem2" ],
 			[
 				{
-					id: "item",
+					id:
+						"item",
 					items:
 						[
 							{
