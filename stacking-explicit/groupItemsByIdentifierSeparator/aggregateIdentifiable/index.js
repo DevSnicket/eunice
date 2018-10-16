@@ -1,14 +1,15 @@
 const
-	aggregateWhenIdentifierElementsInCommon = require("./aggregateWhenIdentifierElementsInCommon"),
-	aggregateWhenInAncestorGroup = require("./aggregateWhenInAncestorGroup"),
+	aggregateWhenGroupInAncestors = require("./aggregateWhenGroupInAncestors"),
+	aggregateWhenNewGroupCommonality = require("./aggregateWhenNewGroupCommonality"),
+	aggregateWhenSubgroupCommonality = require("./aggregateWhenSubgroupCommonality"),
 	getItemsFromAggregation = require("../getItemsFromAggregation");
 
 module.exports =
 	({
 		aggregation,
 		identifierElements,
-		identifierSeparator,
 		itemWithItemsGrouped,
+		joinIdentifierSeparatorElements,
 		parentIdentifier,
 	}) => {
 		return (
@@ -23,20 +24,30 @@ module.exports =
 			return (
 				aggregateWhenSubgroup()
 				||
-				aggregateWhenIdentifierElementsInCommon({
+				aggregateWhenSubgroupCommonality({
 					aggregation,
 					createLastItemOfGroupProperty,
-					identifierElements,
-					identifierSeparator,
+					getIdentifierElementsInCommonWith,
+					joinIdentifierSeparatorElements,
+				})
+				||
+				aggregateWhenNewGroupCommonality({
+					aggregation,
+					createLastItemOfGroupProperty,
+					getIdentifierElementsInCommonWith,
+					joinIdentifierSeparatorElements,
 					parentIdentifier,
 				})
 				||
 				aggregateWhenInCurrentGroup()
 				||
-				aggregateWhenInAncestorGroup({
+				aggregateWhenGroupInAncestors({
 					aggregation,
 					createGroupWithItemInGroup,
+					createLastItemOfGroupProperty,
+					getIdentifierElementsInCommonWith,
 					identifierElementsStartsWith,
+					joinIdentifierSeparatorElements,
 				})
 				||
 				aggregateInNewGroup()
@@ -83,6 +94,22 @@ module.exports =
 					group: createGroupWithItemInGroup(aggregation.group),
 					items: aggregation.items,
 				}
+			);
+		}
+
+		function getIdentifierElementsInCommonWith(
+			otherIdentifierElements,
+		) {
+			let isCommon = true;
+
+			return (
+				otherIdentifierElements.filter(
+					(otherIdentifierElement, index) =>
+						isCommon =
+							isCommon
+							&&
+							otherIdentifierElement === identifierElements[index],
+				)
 			);
 		}
 

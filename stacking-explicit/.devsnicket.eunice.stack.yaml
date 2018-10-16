@@ -1,2 +1,2 @@
-- [ createOrAddToStacks, groupItemsByIdentifierSeparator, orderItemsBy/identifier, orderItemsBy/indexOf, removeIdentifierSuffix, removeRedundantParentIdentifierPrefix, removeSelfDependentItemsOfType, setTypeOfRootItems, unstackIndependent ]
+- [ createOrAddToStacks, groupItemsByIdentifierSeparator, orderItemsBy, removeIdentifierSuffix, removeRedundantParentIdentifierPrefix, removeSelfDependentItemsOfType, setTypeOfRootItems, unstackIndependent ]
 - callWithYamlItemsAndOutputWhenProcessEntryPoint

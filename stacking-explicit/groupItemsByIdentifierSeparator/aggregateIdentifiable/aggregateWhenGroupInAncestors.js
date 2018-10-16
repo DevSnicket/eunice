@@ -4,20 +4,25 @@ module.exports =
 	({
 		aggregation,
 		createGroupWithItemInGroup,
+		createLastItemOfGroupProperty,
+		getIdentifierElementsInCommonWith,
 		identifierElementsStartsWith,
+		joinIdentifierSeparatorElements,
 	}) => {
-		return aggregateWhenInAncestorOfGroup(aggregation.group);
+		return aggregateWhenGroupInAncestors(aggregation.group);
 
-		function aggregateWhenInAncestorOfGroup(
+		function aggregateWhenGroupInAncestors(
 			group,
 		) {
 			return (
 				group.parent
 				&&
 				(
+					aggregateSubgroupOfParentWhenCommonality()
+					||
 					aggregateWhenInGroupParent()
 					||
-					aggregateWhenInAncestorOfGroup({
+					aggregateWhenGroupInAncestors({
 						...group.parent,
 						lastItemOfGroup:
 							{
@@ -27,6 +32,31 @@ module.exports =
 					})
 				)
 			);
+
+			function aggregateSubgroupOfParentWhenCommonality() {
+				const commonElements = getIdentifierElementsInCommonWith(group.identifierElements);
+
+				return (
+					commonElements.length > group.parent.identifierElements.length
+					&&
+					{
+						group:
+							{
+								identifierElements:
+									commonElements,
+								item:
+									{ id: joinIdentifierSeparatorElements(commonElements) },
+								itemsOfGroup:
+									[ getItemOrCreateItemForGroup(group) ],
+								...createLastItemOfGroupProperty(),
+								parent:
+									group.parent,
+							},
+						items:
+							aggregation.items,
+					}
+				);
+			}
 
 			function aggregateWhenInGroupParent(
 			) {
