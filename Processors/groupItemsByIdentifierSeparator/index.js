@@ -77,8 +77,8 @@ function aggregate({
 			aggregateIdentifiable({
 				aggregation,
 				identifierElements: identifier.split(identifierSeparator),
-				identifierSeparator,
 				itemWithItemsGrouped: createItemWithItemsGrouped(),
+				joinIdentifierSeparatorElements,
 				parentIdentifier,
 			}),
 		)
@@ -97,6 +97,12 @@ function aggregate({
 			:
 			item.id
 		);
+	}
+
+	function joinIdentifierSeparatorElements(
+		identifierElements,
+	) {
+		return identifierElements.join(identifierSeparator);
 	}
 
 	function createItemWithItemsGrouped() {

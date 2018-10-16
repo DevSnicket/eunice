@@ -275,15 +275,6 @@ test.each(
 			],
 		],
 		[
-			[ "item/childItem1", "item/childItem2" ],
-			[
-				{
-					id: "item",
-					items: [ "item/childItem1", "item/childItem2" ],
-				},
-			],
-		],
-		[
 			[ "item/childItem1", "item/childItem1/grandchildItem", "item/childItem2" ],
 			[
 				{
@@ -371,6 +362,65 @@ test.each(
 									},
 							},
 							"item/childItem2",
+						],
+				},
+			],
+		],
+		[
+			[ "item/child1", "item/child2/grandchild1", "item/child2/grandchild1/greatgrandchild", "item/child2/grandchild2", "item/child2/grandchild3" ],
+			[
+				{
+					id:
+						"item",
+					items:
+						[
+							"item/child1",
+							{
+								id:
+									"item/child2",
+								items:
+									[
+										{
+											id: "item/child2/grandchild1",
+											items: "item/child2/grandchild1/greatgrandchild",
+										},
+										"item/child2/grandchild2",
+										"item/child2/grandchild3",
+									],
+							},
+						],
+				},
+			],
+		],
+		[
+			[
+				"item/child1",
+				"item/child2/grandchild1",
+				"item/child2/grandchild1/greatgrandchild2",
+				"item/child2/grandchild1/greatgrandchild2/greatgreatgrandchild",
+				"item/child2/grandchild2",
+			],
+			[
+				{
+					id: "item",
+					items:
+						[
+							"item/child1",
+							{
+								id: "item/child2",
+								items:
+									[
+										{
+											id: "item/child2/grandchild1",
+											items:
+												{
+													id: "item/child2/grandchild1/greatgrandchild2",
+													items: "item/child2/grandchild1/greatgrandchild2/greatgreatgrandchild",
+												},
+										},
+										"item/child2/grandchild2",
+									],
+							},
 						],
 				},
 			],
