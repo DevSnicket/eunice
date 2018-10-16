@@ -178,6 +178,6 @@ test(
 				}),
 		)
 		.toThrowError(
-			"Single item level of \"existing\" not specified.",
+			"Single item level of \"existing\" not specified in \"itemMissingAndSpecified\".",
 		),
 );

@@ -26,7 +26,7 @@ module.exports =
 
 			function throwErrorWhenExistingNotSpecified() {
 				if (exisitingLevels.length && !newLevels.some(isNewLevelForExisting))
-					throw Error(`Single item level of "${existingIdentifier}" not specified.`);
+					throw Error(`Single item level of "${existingIdentifier}" not specified in "${newLevels}".`);
 			}
 
 			function aggregate(
