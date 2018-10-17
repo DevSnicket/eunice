@@ -9,7 +9,6 @@ callWithYamlItemsAndOutputWhenProcessEntryPoint(createOrAddToStacksUsingFileSyst
 
 module.exports = createOrAddToStacksUsingFileSystem;
 
-/* istanbul ignore next: only used when JavaScript file is process entry point or from test harness */
 function createOrAddToStacksUsingFileSystem({
 	directory,
 	items,
@@ -34,7 +33,7 @@ function createOrAddToStacksUsingFileSystem({
 			return (
 				path.join(
 					directory,
-					...ancestors.map(ancestor => ancestor.id || ancestor),
+					...ancestors.map(ancestor => ancestor.id),
 					".devsnicket.eunice.stack.yaml",
 				)
 			);
