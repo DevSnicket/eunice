@@ -1,9 +1,9 @@
 /* istanbul ignore file: only used when JavaScript file is process entry point or from test harness */
 const
-	callWithYamlItemsAndOutputWhenProcessEntryPoint = require("../../callWithYamlItemsAndOutputWhenProcessEntryPoint"),
-	getIdentifierOrStackDescendantsUsingAncestors = require("../getIdentifierOrStackDescendantsUsingAncestors"),
+	callWithYamlItemsAndOutputWhenProcessEntryPoint = require("../callWithYamlItemsAndOutputWhenProcessEntryPoint"),
+	getIdentifierOrStackDescendantsUsingAncestors = require("./getIdentifierOrStackDescendantsUsingAncestors"),
 	parseCommaSeparated = require("./parseCommaSeparated"),
-	processorPlugins = require("../../../Harnesses/processorPlugins");
+	processorPlugins = require("../../Harnesses/processorPlugins");
 
 callWithYamlItemsAndOutputWhenProcessEntryPoint(
 	createOrAddToStacksUniformly,
