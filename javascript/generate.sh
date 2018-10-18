@@ -12,6 +12,7 @@ node Processors/removeRedundantParentIdentifierPrefix --identifierSeparator=/ |
 node Processors/removeSelfDependentItemsOfType --type=variable |
 node Processors/orderItemsBy/indexOf/type --typesInOrder= --typesInOrder=parameter --typesInOrder=variable --typesInOrder=file |
 node Processors/createOrAddToStacks/uniformly --commaSeparatedLevels=test --commaSeparatedLevels=existing |
+node Processors/createOrAddToStacks/toItemsWithIdentifier --commaSeparatedLevels=existing --commaSeparatedLevels=expect,test --toIdentifier=test |
 node Processors/createOrAddToStacks/usingFileSystem --directory=$(dirname $0)/.. |
 node Processors/unstackIndependent > $outputDirectory/.yaml
 
