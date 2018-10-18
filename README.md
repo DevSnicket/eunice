@@ -10,9 +10,9 @@ DevSnicket Eunice is a system of utilities based on the premise that unidirectio
 
 ## Stacks
 
-Part of how Eunince works is by defining stacks. When its indended that an item is to be dependent upon another item, the first item is placed above the second item in a stack. When items are indended to be independent of each other they can be placed at the same level in a stack.
+Fundamental to Eunince is the act of defining stacks. When its indended that an item is to be dependent upon another item, the first item is placed above the second item in a stack. When items are indended to be independent of each other they can be placed at the same level in a stack.
 
-In some programming languages there are implied stacks, such as the order of functions in a file.
+In some programming languages there are implied stacks, such as the order of functions in a file or the order of files in a project.
 
 ## Scale
 
@@ -39,7 +39,7 @@ So Euince has composability, e.g. multiple sources of dependency and structure, 
 
 ## Analyzers
 
-Analyzers are implemented to create the YAML files, one is currently in development for JavaScript analyzer.
+Analyzers are implemented to create the YAML files. An analyzer exists for JavaScript with support for many of the language's features.
 
 >[try out JavaScript &rightarrow; YAML](https://devsnicket.github.io/Eunice-harnesses/Analyzers/JavaScript/harness.html)
 
