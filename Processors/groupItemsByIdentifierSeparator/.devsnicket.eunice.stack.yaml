@@ -1,5 +1,4 @@
 - existing
-- aggregateIdentifier
 - getItemsFromAggregation
 - getItemOrCreateItemForGroupAndParents
 - getItemOrCreateItemForGroup

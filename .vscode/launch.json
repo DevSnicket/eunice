@@ -100,11 +100,36 @@
 				"args":
 					[ 
 						"--runInBand",
-						"createOrAddToStacks/getIdentifierOrItemOrStackLevelOrStack/test.js"
+						"createOrAddToStacks/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/test.js"
 					],
 				"cwd": "${workspaceFolder}/Processors/",
-				"name": "processor createOrAddToStacks getIdentifierOrItemOrStackLevelOrStack jest",
+				"name": "processor createOrAddToStacks createStackWhenIdentifierOrItemOrLevelOrAddWhenStack jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
+						"createOrAddToStacks/replaceItemsAndInItems/test.js"
+					],
+				"cwd": "${workspaceFolder}/Processors/",
+				"name": "processor createOrAddToStacks replaceItemsAndInItems jest",
+				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[
+						"--identifierStack=",
+						"--items=",
+					],
+				"name": "processor createOrAddToStacks uniformly",
+				"program": "${workspaceRoot}/Processors/createOrAddToStacks/uniformly.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -130,18 +155,6 @@
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor createOrAddToStacks usingFileSystem jest",
 				"program": "${workspaceRoot}/Analyzers/JavaScript/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node",
-				"useWSL": true
-			},
-			{
-				"args":
-					[
-						"--identifierStack=",
-						"--items=",
-					],
-				"name": "processor createOrAddToStacks uniformly",
-				"program": "${workspaceRoot}/Processors/createOrAddToStacks/uniformly.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true

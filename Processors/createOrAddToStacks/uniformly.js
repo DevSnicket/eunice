@@ -1,9 +1,10 @@
 /* istanbul ignore file: only used when JavaScript file is process entry point or from test harness */
 const
 	callWithYamlItemsAndOutputWhenProcessEntryPoint = require("../callWithYamlItemsAndOutputWhenProcessEntryPoint"),
-	getIdentifierOrStackDescendantsUsingAncestors = require("./getIdentifierOrStackDescendantsUsingAncestors"),
+	createStackWhenIdentifierOrItemOrLevelOrAddWhenStack = require("./createStackWhenIdentifierOrItemOrLevelOrAddWhenStack"),
 	parseCommaSeparated = require("./parseCommaSeparated"),
-	processorPlugins = require("../../Harnesses/processorPlugins");
+	processorPlugins = require("../../Harnesses/processorPlugins"),
+	replaceItemsAndInItems = require("./replaceItemsAndInItems");
 
 callWithYamlItemsAndOutputWhenProcessEntryPoint(
 	createOrAddToStacksUniformly,
@@ -27,12 +28,18 @@ function createOrAddToStacksUniformly({
 	commaSeparatedLevels,
 	items,
 }) {
-	const identifiersToStack = parseCommaSeparated(commaSeparatedLevels);
+	const identifiersInNewStack = parseCommaSeparated(commaSeparatedLevels);
 
 	return (
-		getIdentifierOrStackDescendantsUsingAncestors({
-			getIdentifiersToStackForAncestors: () => identifiersToStack,
-			identifierOrItemOrLevelOrStack: items,
+		replaceItemsAndInItems({
+			identifierOrItemOrLevelOrStack:
+				items,
+			replace:
+				({ identifierOrItemOrLevelOrStack }) =>
+					createStackWhenIdentifierOrItemOrLevelOrAddWhenStack({
+						identifierOrItemOrLevelOrStack,
+						identifiersInNewStack,
+					}),
 		})
 	);
 }
