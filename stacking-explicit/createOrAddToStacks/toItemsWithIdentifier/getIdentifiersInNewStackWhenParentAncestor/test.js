@@ -1,6 +1,6 @@
-const getIdentifiersToStack = require(".");
+const getIdentifiersInNewStackWhenParentAncestor = require(".");
 
-const identifiersToStack = { toJSON: () => "identifiersToStack" };
+const identifiersInNewStack = { toJSON: () => "identifiersInNewStack" };
 
 test.each(
 	[
@@ -19,20 +19,20 @@ test.each(
 		],
 		[
 			[ { id: "addToParent" } ],
-			identifiersToStack,
+			identifiersInNewStack,
 		],
 		[
 			[ { id: "ancestor" }, { id: "addToParent" } ],
-			identifiersToStack,
+			identifiersInNewStack,
 		],
 	],
 )(
 	"%j ancestors returns %j",
 	(ancestors, expected) =>
 		expect(
-			getIdentifiersToStack({
+			getIdentifiersInNewStackWhenParentAncestor({
 				ancestors,
-				identifiersToStack,
+				identifiersInNewStack,
 				parentIdentifier: "addToParent",
 			}),
 		)

@@ -1,13 +1,13 @@
 module.exports =
 	({
 		ancestors,
-		identifiersToStack,
+		identifiersInNewStack,
 		parentIdentifier,
 	}) => {
 		return (
 			hasParentWithIdentifier()
 			?
-			identifiersToStack
+			identifiersInNewStack
 			:
 			null
 		);

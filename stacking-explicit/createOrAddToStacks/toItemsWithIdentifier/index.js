@@ -1,9 +1,10 @@
 /* istanbul ignore file: only used when JavaScript file is process entry point */
 const
 	callWithYamlItemsAndOutputWhenProcessEntryPoint = require("../../callWithYamlItemsAndOutputWhenProcessEntryPoint"),
-	getIdentifierOrStackDescendantsUsingAncestors = require("../getIdentifierOrStackDescendantsUsingAncestors"),
-	getIdentifiersToStackWhenParentAncestorIdentifier = require("./getIdentifiersToStackWhenParentAncestorIdentifier"),
-	parseCommaSeparated = require("../parseCommaSeparated");
+	createStackWhenIdentifierOrItemOrLevelOrAddWhenStack = require("../createStackWhenIdentifierOrItemOrLevelOrAddWhenStack"),
+	getIdentifiersInNewStackWhenParentAncestor = require("./getIdentifiersInNewStackWhenParentAncestor"),
+	parseCommaSeparated = require("../parseCommaSeparated"),
+	replaceItemsAndInItems = require("../replaceItemsAndInItems");
 
 callWithYamlItemsAndOutputWhenProcessEntryPoint(
 	createOrAddToStacksToItemsWithIdentifier,
@@ -14,21 +15,30 @@ module.exports = createOrAddToStacksToItemsWithIdentifier;
 function createOrAddToStacksToItemsWithIdentifier({
 	commaSeparatedLevels,
 	items,
-	toItemsWithIdentifier,
+	toIdentifier,
 }) {
-	const identifiersToStack = parseCommaSeparated(commaSeparatedLevels);
+	const identifiersInNewStack = parseCommaSeparated(commaSeparatedLevels);
 
 	return (
-		getIdentifierOrStackDescendantsUsingAncestors({
-			getIdentifiersToStackForAncestors:
-				ancestors =>
-					getIdentifiersToStackWhenParentAncestorIdentifier({
-						ancestors,
-						identifiersToStack,
-						parentIdentifier: toItemsWithIdentifier,
-					}),
+		replaceItemsAndInItems({
 			identifierOrItemOrLevelOrStack:
 				items,
+			replace:
+				({
+					ancestors,
+					identifierOrItemOrLevelOrStack,
+				}) =>
+					createStackWhenIdentifierOrItemOrLevelOrAddWhenStack({
+						addMissing:
+							true,
+						identifierOrItemOrLevelOrStack,
+						identifiersInNewStack:
+							getIdentifiersInNewStackWhenParentAncestor({
+								ancestors,
+								identifiersInNewStack,
+								parentIdentifier: toIdentifier,
+							}),
+					}),
 		})
 	);
 }

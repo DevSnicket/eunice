@@ -1,8 +1,11 @@
 module.exports =
-	newLevels => {
+	({
+		addMissing,
+		identifiersInNewStack,
+	}) => {
 		const existingIdentifier = "existing";
 
-		const itemsByNewLevel = new Map();
+		const itemsByIdentifiersInNewLevel = new Map();
 
 		return (
 			{
@@ -17,34 +20,42 @@ module.exports =
 			throwErrorWhenExistingNotSpecified();
 
 			return (
-				itemsByNewLevel.size
+				itemsByIdentifiersInNewLevel.size || addMissing
 				?
-				newLevels.reduce(aggregate, [])
+				identifiersInNewStack.reduce(aggregate, [])
 				:
 				getExistingWhenNoNewLevels()
 			);
 
 			function throwErrorWhenExistingNotSpecified() {
-				if (exisitingLevels.length && !newLevels.some(isNewLevelForExisting))
-					throw Error(`Single item level of "${existingIdentifier}" not specified in "${newLevels}".`);
+				if (exisitingLevels.length && !identifiersInNewStack.some(isNewLevelForExisting))
+					throw Error(`Single item level of "${existingIdentifier}" not specified in new stack "${identifiersInNewStack}".`);
 			}
 
 			function aggregate(
 				stack,
 				identifiersInNewLevel,
 			) {
-				if (isNewLevelForExisting(identifiersInNewLevel))
+				return whenExisting() || asNew();
+
+				function whenExisting() {
 					return (
+						isNewLevelForExisting(identifiersInNewLevel)
+						&&
 						[
 							...stack,
 							...exisitingLevels,
 						]
 					);
-				else {
+				}
+
+				function asNew() {
 					const level =
-						itemsByNewLevel.get(
+						itemsByIdentifiersInNewLevel.get(
 							identifiersInNewLevel,
-						);
+						)
+						||
+						(addMissing && createMissingLevel());
 
 					return (
 						level
@@ -52,6 +63,16 @@ module.exports =
 						[ ...stack, level ]
 						:
 						stack
+					);
+				}
+
+				function createMissingLevel() {
+					return (
+						Array.isArray(identifiersInNewLevel)
+						?
+						identifiersInNewLevel
+						:
+						[ identifiersInNewLevel ]
 					);
 				}
 			}
@@ -95,10 +116,10 @@ module.exports =
 			return newLevel;
 
 			function addItemToIdentifiersInLevel() {
-				itemsByNewLevel.set(
+				itemsByIdentifiersInNewLevel.set(
 					newLevel,
 					[
-						...itemsByNewLevel.get(newLevel) || [],
+						...itemsByIdentifiersInNewLevel.get(newLevel) || [],
 						identifierOrItem,
 					],
 				);
@@ -109,7 +130,7 @@ module.exports =
 			identifier,
 		) {
 			return (
-				newLevels.find(
+				identifiersInNewStack.find(
 					newLevel =>
 						Array.isArray(newLevel)
 						?
