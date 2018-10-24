@@ -43,10 +43,18 @@
     - moduleExportsOfFunctionArrow2
 - subdirectory/emptyInSubdirectory
 - subdirectory/moduleExportsOfFunctionArrowInSubdirectory
+- id: subdirectory/requireCurrentDirectoryThatIsCalled
+  dependsUpon: subdirectory
+- id: subdirectory/requireCurrentDirectoryWithTrailingSlashThatIsCalled
+  dependsUpon: subdirectory
 - id: subdirectory/requireFunctionInParentDirectoryThatIsCalled
   dependsUpon: moduleExportsOfFunctionArrow1
 - subdirectory/subdirectoryOfsubdirectoryWithSameNameAsFile/emptyInSubdirectoryOfsubdirectory
 - subdirectory/subdirectoryOfsubdirectoryWithSameNameAsFile.withdot
+- id: subdirectory/subsubdirectory/requireParentDirectoryThatIsCalled
+  dependsUpon: subdirectory
+- id: subdirectory/subsubdirectory/requireParentDirectoryWithTrailingSlashThatIsCalled
+  dependsUpon: subdirectory
 - subdirectoryWithSameNameAsFile
 - subdirectoryWithSameNameAsFile/emptyInsubdirectoryWithSameNameAsFile
 - subdirectoryWithSameNameAsFile.withdot

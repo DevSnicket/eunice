@@ -108,8 +108,19 @@ module.exports =
 				return (
 					identifier.startsWith(".")
 					&&
-					path.join(directory, identifier)
+					path.join(directory, getIdentifierWithTrailingSlashTrimmed())
 				);
+
+				function getIdentifierWithTrailingSlashTrimmed(
+				) {
+					return (
+						identifier.endsWith("/")
+						?
+						identifier.substring(0, identifier.length - 1)
+						:
+						identifier
+					);
+				}
 			}
 		}
 	};
