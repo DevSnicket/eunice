@@ -3,12 +3,12 @@ const
 	{ ReflexElement } = require("react-reflex");
 
 const
-	callOrCreateErrorElement = require("../Harnesses/callOrCreateErrorElement"),
-	createColumnFactory = require("../Harnesses/createColumnFactory"),
-	createContainerForColumns = require("../Harnesses/createContainerForColumns"),
-	getInteractiveElementsForYaml = require("./getInteractiveElementsForYaml"),
-	getProcessedYamlFromState = require("../Harnesses/getProcessedYamlFromState"),
-	renderComponent = require("../Harnesses/renderComponent");
+	callOrCreateErrorElement = require("../../Harnesses/callOrCreateErrorElement"),
+	createColumnFactory = require("../../Harnesses/createColumnFactory"),
+	createContainerForColumns = require("../../Harnesses/createContainerForColumns"),
+	getInteractiveElementsForYaml = require("../getInteractiveElementsForYaml"),
+	getProcessedYamlFromState = require("../../Harnesses/getProcessedYamlFromState"),
+	renderComponent = require("../../Harnesses/renderComponent");
 
 renderComponent({
 	render() {

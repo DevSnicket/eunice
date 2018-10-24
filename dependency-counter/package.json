@@ -30,8 +30,7 @@
 		"collectCoverageFrom": [
 			"**/*.js",
 			"!node_modules/**",
-			"!harness/**",
-			"!harness.js"
+			"!harness/**"
 		],
 		"coverageDirectory": "../Tests/Coverage",
 		"coverageThreshold": {
