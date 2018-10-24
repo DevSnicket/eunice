@@ -5,7 +5,7 @@ mkdir $outputDirectory
 
 node Analyzer/getOrCreateItemsInDirectory \
   --directory=. \
-  --ignoreDirectoryNames=Coverage --ignoreDirectoryNames=testcases --ignoreDirectoryNames=node_modules --ignoreDirectoryNames=Output \
+  --ignoreDirectoryNames=Coverage --ignoreDirectoryNames=testcases --ignoreDirectoryNames=node_modules --ignoreDirectoryNames=output \
 > $outputDirectory/analysis.yaml
 
 cat $outputDirectory/analysis.yaml \
