@@ -9,7 +9,7 @@ module.exports =
 			devtool:
 				"source-map",
 			entry:
-				[ "babel-polyfill", "./harness.js" ],
+				[ "babel-polyfill", "./harness/index.js" ],
 			module:
 				{
 					rules:
