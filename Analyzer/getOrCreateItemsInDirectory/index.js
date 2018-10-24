@@ -3,7 +3,7 @@ const
 	path = require("path");
 
 const
-	callWhenProcessEntryPoint = require("../../../callWhenProcessEntryPoint"),
+	callWhenProcessEntryPoint = require("../../callWhenProcessEntryPoint"),
 	getItemOrItemsFromJavaScript = require("../getItemOrItemsFromJavaScript"),
 	getOrCreateFileItem = require("./getOrCreateFileItem"),
 	getYamlForItemOrItems = require("../getYamlForItemOrItems");

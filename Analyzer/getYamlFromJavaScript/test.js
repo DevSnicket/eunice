@@ -2,7 +2,7 @@ const path = require("path");
 
 const
 	getYamlFromJavaScript = require("."),
-	runTestsInFileSystem = require("../../../Tests/runTestsInFileSystem");
+	runTestsInFileSystem = require("../../Tests/runTestsInFileSystem");
 
 runTestsInFileSystem({
 	action: getYamlFromJavaScript,

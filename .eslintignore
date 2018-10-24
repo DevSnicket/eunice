@@ -2,6 +2,6 @@
 /.vscode
 /Harnesses/Output/
 testcases/
-Analyzers/JavaScript/harness/example.js
+Analyzer/harness/example.js
 node_modules/
 Tests/Coverage/

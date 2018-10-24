@@ -3,7 +3,7 @@ outputDirectory=$(dirname $0)/output
 
 mkdir $outputDirectory
 
-node Analyzers/JavaScript/getOrCreateItemsInDirectory --directory=. --ignoreDirectoryNames=Coverage --ignoreDirectoryNames=testcases --ignoreDirectoryNames=node_modules --ignoreDirectoryNames=Output | 
+node Analyzer/getOrCreateItemsInDirectory --directory=. --ignoreDirectoryNames=Coverage --ignoreDirectoryNames=testcases --ignoreDirectoryNames=node_modules --ignoreDirectoryNames=Output | 
 node Processors/setTypeOfRootItems --type=file |
 node Processors/removeIdentifierSuffix --suffix=/index |
 node Processors/orderItemsBy/identifier |

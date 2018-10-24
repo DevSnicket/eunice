@@ -31,7 +31,7 @@
 			"!harness.js",
 			"!webpack.config.js"
 		],
-		"coverageDirectory": "../../Tests/Coverage",
+		"coverageDirectory": "../Tests/Coverage",
 		"coverageThreshold": {
 			"global": {
 				"branches": 100,
@@ -44,7 +44,7 @@
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
 	"main": "analyze.js",
 	"name": "@devsnicket/eunice-analyzer",
-	"repository": "https://github.com/DevSnicket/Eunice/tree/master/Analyzers/JavaScript",
+	"repository": "https://github.com/DevSnicket/Eunice/tree/master/Analyzer",
 	"scripts": {
 		"harness": "webpack -p --config harness/webpack.config.js",
 		"lint": "eslint .",

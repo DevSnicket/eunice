@@ -1,5 +1,5 @@
 const
-	callWhenProcessEntryPoint = require("../../../callWhenProcessEntryPoint"),
+	callWhenProcessEntryPoint = require("../../callWhenProcessEntryPoint"),
 	getItemOrItemsFromJavaScript = require("../getItemOrItemsFromJavaScript"),
 	getYamlForItemOrItems = require("../getYamlForItemOrItems");
 
