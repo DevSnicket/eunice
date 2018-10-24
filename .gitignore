@@ -1,5 +1,8 @@
 /.vs
-/Harnesses/Output
+/Analyzer/harness/output
+/harness/output
+/Harnesses/output
+/Renderer/harness/output
 /Tests/Coverage/
 node_modules/
 /dogfooding/output/

@@ -54,10 +54,9 @@
 		}
 	},
 	"scripts": {
-		"harness": "(cd Analyzer; npx webpack -p --config harness/webpack.config.js); (cd Renderer; npx webpack -p --config harness/webpack.config.js); npx webpack -p --config harness/webpack.config.js",
-		"lint": "eslint .",
-		"pack": "npm pack ./Analyzer; npm pack ./Renderer",
-		"test": "jest --no-cache --runInBand",
-		"test-travis": "jest --no-cache --runInBand && cat ./Tests/Coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+		"harness": "(cd Analyzer; npm run harness); (cd Renderer; npm run harness); npx webpack -p --config harness/webpack.config.js",
+		"lint": "npx eslint .",
+		"test": "npx jest",
+		"test-travis": "npx jest && cat ./Tests/Coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
 	}
 }

@@ -1,7 +1,10 @@
 /.vs
 /.vscode
-/Harnesses/Output/
+/Analyzer/harness/example.js
+/Analyzer/harness/output
+/harness/output
+/Harnesses/output/
+/Renderer/harness/output
 testcases/
-Analyzer/harness/example.js
 node_modules/
 Tests/Coverage/

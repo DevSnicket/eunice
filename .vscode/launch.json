@@ -44,7 +44,7 @@
 						"--ignoreDirectoryNames=Coverage",
 						"--ignoreDirectoryNames=testcases",
 						"--ignoreDirectoryNames=node_modules",
-						"--ignoreDirectoryNames=Output"
+						"--ignoreDirectoryNames=output"
 					],
 				"cwd": "${workspaceRoot}",
 				"name": "analyzer getOrCreateItemsInDirectory",
@@ -390,12 +390,6 @@
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
-			},
-			{
-				"file": "${workspaceFolder}/Harnesses/Output/Renderer/harness.html",
-				"name": "renderer test harness",
-				"request": "launch",
-				"type": "chrome"
 			}
 		],
 	"version": "0.2.0"
