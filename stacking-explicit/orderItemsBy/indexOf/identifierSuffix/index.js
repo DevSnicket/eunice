@@ -1,6 +1,6 @@
 const
 	callWithYamlItemsAndOutputWhenProcessEntryPoint = require("../../../callWithYamlItemsAndOutputWhenProcessEntryPoint"),
-	orderItemsByIndexOf = require("../"),
+	orderItemsByIndexOf = require(".."),
 	processorPlugins = require("../../../../Harnesses/processorPlugins");
 
 /* istanbul ignore next: only used when JavaScript file is process entry point */
