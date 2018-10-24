@@ -1,5 +1,7 @@
 - - id: variable
     type: variable
-    dependsUpon: ./called
+    dependsUpon:
+      id: called
+      items: property
 - - id: caller
     dependsUpon: variable

@@ -1,12 +1,12 @@
 - - id: variable1
     type: variable
     dependsUpon:
-      id: ./called
+      id: called
       items: variable1
 - - id: variable2
     type: variable
     dependsUpon:
-      id: ./called
+      id: called
       items: variable2
 - - id: caller
     dependsUpon:
