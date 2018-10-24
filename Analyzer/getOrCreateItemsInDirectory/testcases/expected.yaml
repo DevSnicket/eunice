@@ -29,9 +29,9 @@
   dependsUpon:
     id: moduleExportsOfFunctionArrowWithFileFunction
     items: fileFunction
-- id: requireFunctionInSameDirectoryThatIsAssignedToConstAndCalled
+- id: requireFunctionInSameDirectoryThatIsCalled
   dependsUpon: moduleExportsOfFunctionArrow1
-- id: requireFunctionInSubdirectoryThatIsAssignedToConstAndCalled
+- id: requireFunctionInSubdirectoryThatIsCalled
   dependsUpon: subdirectory/moduleExportsOfFunctionArrowInSubdirectory
 - id: requireMissingPackageAndDestructureThatIsAssignedToConstAndCalled
   dependsUpon:
@@ -43,7 +43,7 @@
     - moduleExportsOfFunctionArrow2
 - subdirectory/emptyInSubdirectory
 - subdirectory/moduleExportsOfFunctionArrowInSubdirectory
-- id: subdirectory/requireFunctionInParentDirectoryThatIsAssignedToConstAndCalled
+- id: subdirectory/requireFunctionInParentDirectoryThatIsCalled
   dependsUpon: moduleExportsOfFunctionArrow1
 - subdirectory/subdirectoryOfsubdirectoryWithSameNameAsFile/emptyInSubdirectoryOfsubdirectory
 - subdirectory/subdirectoryOfsubdirectoryWithSameNameAsFile.withdot
