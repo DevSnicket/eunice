@@ -16,9 +16,9 @@ cat $outputDirectory/analysis.yaml \
 cat $outputDirectory/setTypeOfRootItemsToFile.yaml \
 | node Processors/removeIdentifierSuffix \
   --suffix=/index \
-> $outputDirectory/removeIdentifierSuffixOfItem.yaml
+> $outputDirectory/removeIdentifierSuffixOfIndex.yaml
 
-cat $outputDirectory/removeIdentifierSuffixOfItem.yaml \
+cat $outputDirectory/removeIdentifierSuffixOfIndex.yaml \
 | node Processors/orderItemsBy/identifier \
 > $outputDirectory/orderItemsByIdentifier.yaml
 

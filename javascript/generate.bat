@@ -17,9 +17,9 @@ node Processors/setTypeOfRootItems ^
 type %outputDirectory%\setTypeOfRootItemsToFile.yaml | ^
 node Processors/removeIdentifierSuffix ^
   --suffix=\index > ^
-%outputDirectory%\removeIdentifierSuffixOfItem.yaml
+%outputDirectory%\removeIdentifierSuffixOfIndex.yaml
 
-type %outputDirectory%\removeIdentifierSuffixOfItem.yaml | ^
+type %outputDirectory%\removeIdentifierSuffixOfIndex.yaml | ^
 node Processors/orderItemsBy/identifier > ^
 %outputDirectory%\orderItemsByIdentifier.yaml
 
