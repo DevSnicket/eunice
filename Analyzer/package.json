@@ -28,7 +28,6 @@
 			"!**/testcases/**",
 			"!testcases/**/.js",
 			"!harness/**",
-			"!harness.js",
 			"!webpack.config.js"
 		],
 		"coverageDirectory": "../Tests/Coverage",

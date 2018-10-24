@@ -3,10 +3,10 @@ const
 	{ ReflexElement } = require("react-reflex");
 
 const
-	createColumnFactory = require("../Harnesses/createColumnFactory"),
-	createContainerForColumns = require("../Harnesses/createContainerForColumns"),
-	getYamlFromJavaScript = require("./getYamlFromJavaScript"),
-	renderComponent = require("../Harnesses/renderComponent");
+	createColumnFactory = require("../../Harnesses/createColumnFactory"),
+	createContainerForColumns = require("../../Harnesses/createContainerForColumns"),
+	getYamlFromJavaScript = require("../getYamlFromJavaScript"),
+	renderComponent = require("../../Harnesses/renderComponent");
 
 renderComponent({
 	render() {

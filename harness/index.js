@@ -6,8 +6,9 @@ const
 	callOrCreateErrorElement = require("../Harnesses/callOrCreateErrorElement"),
 	createColumnFactory = require("../Harnesses/createColumnFactory"),
 	createContainerForColumns = require("../Harnesses/createContainerForColumns"),
-	getInteractiveElementsForYaml = require("./getInteractiveElementsForYaml"),
+	getInteractiveElementsForYaml = require("../Renderer/getInteractiveElementsForYaml"),
 	getProcessedYamlFromState = require("../Harnesses/getProcessedYamlFromState"),
+	getYamlFromJavaScript = require("../Analyzer/getYamlFromJavaScript"),
 	renderComponent = require("../Harnesses/renderComponent");
 
 renderComponent({
@@ -21,6 +22,7 @@ renderComponent({
 
 		return (
 			createContainerForColumns(
+				columnFactory.createJavascriptInputResizableColumn({ createStateFromValue: value => ({ yaml: getYamlFromJavaScript(value) }) }),
 				columnFactory.createYamlInputResizableColumn(),
 				columnFactory.createSvgOutputResizableColumn(
 					callOrCreateErrorElement({
@@ -36,7 +38,19 @@ renderComponent({
 			)
 		);
 	},
-	// yamlFromWebpack is replaced with literal by harness/webpack.config.js
-	// eslint-disable-next-line no-undef
-	state: { yaml: yamlFromWebpack },
+	state:
+		// javascriptFromWebpack is replaced with literal by harness/webpack.config.js
+		// eslint-disable-next-line no-undef
+		createStateFromJavascript(javascriptFromWebpack),
 });
+
+function createStateFromJavascript(
+	javascript,
+) {
+	return (
+		{
+			javascript,
+			yaml: getYamlFromJavaScript(javascript),
+		}
+	);
+}
