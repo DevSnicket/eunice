@@ -15,7 +15,7 @@ module.exports =
 			[
 				...config.plugins || [],
 				createWebpackPluginForFileContent({
-					file: `${__dirname}/../Analyzer/harness/example.js`,
+					file: `${__dirname}/../javascript-analyzer/harness/example.js`,
 					name: "javascriptFromWebpack",
 				}),
 			],

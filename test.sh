@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-(cd Analyzer && npm run test) \
+(cd javascript-analyzer && npm run test) \
 && \
 (cd dependencyAndStructure && npm run test) \
 && \

@@ -3,7 +3,7 @@ cache:
     - node_modules
 before_deploy:
   - cp -r harness/output Harnesses/output
-  - cp -r Analyzer/harness/output Harnesses/output/Analyzer
+  - cp -r javascript-analyzer/harness/output Harnesses/output/javascript-analyzer
   - cp -r Renderer/harness/output Harnesses/output/Renderer
 deploy:
   github-token: $GITHUB_HARNESSES_TOKEN
@@ -16,7 +16,7 @@ deploy:
   skip-cleanup: true
   target-branch: master
 install:
-  - (cd Analyzer && npm install)
+  - (cd javascript-analyzer && npm install)
   - (cd callWhenProcessEntryPoint && npm install)
   - (cd dependencyAndStructure && npm install)
   - (cd harness && npm install)
@@ -32,6 +32,6 @@ notifications:
 script:
   - bash lint.sh
   - bash test.sh
-  - (mkdir test-coverage && cd test-coverage && echo -n {}>package.json && npm install coveralls@3.0.1 && (cat ../Analyzer/test-coverage/lcov.info && cat ../dependencyAndStructure/test-coverage/lcov.info && cat ../Processors/test-coverage/lcov.info && cat ../Renderer/test-coverage/lcov.info) | ./node_modules/coveralls/bin/coveralls.js)
+  - (mkdir test-coverage && cd test-coverage && echo -n {}>package.json && npm install coveralls@3.0.1 && (cat ../javascript-analyzer/test-coverage/lcov.info && cat ../dependencyAndStructure/test-coverage/lcov.info && cat ../Processors/test-coverage/lcov.info && cat ../Renderer/test-coverage/lcov.info) | ./node_modules/coveralls/bin/coveralls.js)
   - bash dogfooding/generate.sh
   - bash harnesses.sh

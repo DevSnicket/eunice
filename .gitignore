@@ -1,8 +1,8 @@
 **/node_modules/
 **/test-coverage/
 /.vs
-/Analyzer/harness/output
 /dogfooding/output/
 /harness/output
 /Harnesses/output
+/javascript-analyzer/harness/output
 /Renderer/harness/output

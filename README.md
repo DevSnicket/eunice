@@ -41,7 +41,7 @@ So Euince has composability, e.g. multiple sources of dependency and structure, 
 
 Analyzers are implemented to create the YAML files. An analyzer exists for JavaScript with support for many of the language's features.
 
->[try out JavaScript &rightarrow; YAML](https://devsnicket.github.io/Eunice-harnesses/Analyzer/harness.html)
+>[try out JavaScript &rightarrow; YAML](https://devsnicket.github.io/Eunice-harnesses/javascript-analyzer/harness.html)
 
 ## Processors
 

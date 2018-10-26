@@ -8,18 +8,18 @@
 			},
 			{
 				"args": [ "--javaScript=" ],
-				"cwd": "${workspaceFolder}/Analyzer/",
+				"cwd": "${workspaceFolder}/javascript-analyzer/",
 				"name": "analyzer getYamlFromJavaScript",
-				"program": "${workspaceFolder}/Analyzer/getYamlFromJavaScript/index.js",
+				"program": "${workspaceFolder}/javascript-analyzer/getYamlFromJavaScript/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
 			},
 			{
 				"args": [ ],
-				"cwd": "${workspaceFolder}/Analyzer/",
+				"cwd": "${workspaceFolder}/javascript-analyzer/",
 				"name": "analyzer getYamlFromJavaScript test",
-				"program": "${workspaceFolder}/Analyzer/getYamlFromJavaScript/test.js",
+				"program": "${workspaceFolder}/javascript-analyzer/getYamlFromJavaScript/test.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -30,9 +30,9 @@
 						"--runInBand",
 						"getYamlFromJavaScript/test.js"
 					],
-				"cwd": "${workspaceFolder}/Analyzer/",
+				"cwd": "${workspaceFolder}/javascript-analyzer/",
 				"name": "analyzer getYamlFromJavaScript jest",
-				"program": "${workspaceRoot}/Analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -49,7 +49,7 @@
 					],
 				"cwd": "${workspaceRoot}",
 				"name": "analyzer getOrCreateItemsInDirectory",
-				"program": "${workspaceRoot}/Analyzer/getOrCreateItemsInDirectory/index.js",
+				"program": "${workspaceRoot}/javascript-analyzer/getOrCreateItemsInDirectory/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -60,9 +60,9 @@
 						"--runInBand",
 						"getOrCreateItemsInDirectory/test.js"
 					],
-				"cwd": "${workspaceFolder}/Analyzer/",
+				"cwd": "${workspaceFolder}/javascript-analyzer/",
 				"name": "analyzer getOrCreateItemsInDirectory jest",
-				"program": "${workspaceRoot}/Analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -71,7 +71,7 @@
 				"name": "analyzer test harness",
 				"type": "chrome",
 				"request": "launch",
-				"file": "${workspaceFolder}/Analyzer/harness.html"
+				"file": "${workspaceFolder}/javascript-analyzer/harness.html"
 			},
 			{
 				"args":
@@ -80,7 +80,7 @@
 						"dependencyAndStructure/createStackFromYaml/test.js"
 					],
 				"name": "dependency & structure createStackFromYaml jest",
-				"program": "${workspaceRoot}/Analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -92,7 +92,7 @@
 						"dependencyAndStructure/createYamlFromStack/test.js"
 					],
 				"name": "dependency & structure createYamlFromStack jest",
-				"program": "${workspaceRoot}/Analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -105,7 +105,7 @@
 					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor createOrAddToStacks createStackWhenIdentifierOrItemOrLevelOrAddWhenStack jest",
-				"program": "${workspaceRoot}/Analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -118,7 +118,7 @@
 					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor createOrAddToStacks replaceItemsAndInItems jest",
-				"program": "${workspaceRoot}/Analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -155,7 +155,7 @@
 					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor createOrAddToStacks usingFileSystem jest",
-				"program": "${workspaceRoot}/Analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -180,7 +180,7 @@
 					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor groupItemsByIdentifierSeparator jest",
-				"program": "${workspaceRoot}/Analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -219,7 +219,7 @@
 					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor orderItemsBy jest",
-				"program": "${workspaceRoot}/Analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -244,7 +244,7 @@
 					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor removeIdentifierSuffix jest",
-				"program": "${workspaceRoot}/Analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -269,7 +269,7 @@
 					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor removeRedundantParentIdentifierPrefix jest",
-				"program": "${workspaceRoot}/Analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -294,7 +294,7 @@
 					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor removeSelfDependentItemsOfType jest",
-				"program": "${workspaceRoot}/Analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -327,7 +327,7 @@
 					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor unstackIndependent jest",
-				"program": "${workspaceRoot}/Analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-(cd Analyzer && npm run lint) \
+(cd javascript-analyzer && npm run lint) \
 && \
 (cd callWhenProcessEntryPoint && npm run lint) \
 && \

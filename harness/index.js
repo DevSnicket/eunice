@@ -8,7 +8,7 @@ const
 	createContainerForColumns = require("../Harnesses/createContainerForColumns"),
 	getInteractiveElementsForYaml = require("../Renderer/getInteractiveElementsForYaml"),
 	getProcessedYamlFromState = require("../Harnesses/getProcessedYamlFromState"),
-	getYamlFromJavaScript = require("../Analyzer/getYamlFromJavaScript"),
+	getYamlFromJavaScript = require("../javascript-analyzer/getYamlFromJavaScript"),
 	renderComponent = require("../Harnesses/renderComponent");
 
 renderComponent({

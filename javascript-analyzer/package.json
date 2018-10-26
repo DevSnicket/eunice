@@ -44,8 +44,8 @@
 	"license": "MIT",
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
 	"main": "analyze.js",
-	"name": "@devsnicket/eunice-analyzer",
-	"repository": "https://github.com/DevSnicket/Eunice/tree/master/Analyzer",
+	"name": "@devsnicket/eunice-javascript-analyzer",
+	"repository": "https://github.com/DevSnicket/Eunice/tree/master/javascript-analyzer",
 	"scripts": {
 		"harness": "npx webpack -p --config harness/webpack.config.js",
 		"lint": "npx eslint .",
