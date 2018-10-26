@@ -39,7 +39,7 @@ renderComponent({
 		);
 	},
 	state:
-		// javascriptFromWebpack is replaced with literal by harness/webpack.config.js
+		// javascriptFromWebpack is replaced with literal by webpack.config.js
 		// eslint-disable-next-line no-undef
 		createStateFromJavascript(javascriptFromWebpack),
 });

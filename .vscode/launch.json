@@ -68,12 +68,6 @@
 				"useWSL": true
 			},
 			{
-				"name": "analyzer test harness",
-				"type": "chrome",
-				"request": "launch",
-				"file": "${workspaceFolder}/javascript-analyzer/harness.html"
-			},
-			{
 				"args":
 					[
 						"--runInBand",

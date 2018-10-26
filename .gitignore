@@ -2,7 +2,7 @@
 **/test-coverage/
 /.vs
 /dogfooding/output/
-/harness/output
 /Harnesses/output
 /javascript-analyzer/harness/output
+/javascript-analyzer-and-renderer-harness/output
 /Renderer/harness/output
