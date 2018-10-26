@@ -23,7 +23,7 @@ install:
   - (cd Harnesses && npm install)
   - (cd Processors && npm install)
   - (cd Renderer && npm install)
-  - (cd Tests && npm install)
+  - (cd runTestsFromFileSystem && npm install)
 language: node_js
 node_js:
   - "8.11.2"
