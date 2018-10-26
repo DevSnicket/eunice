@@ -4,7 +4,7 @@ set outputDirectory=%~dp0output
 
 mkdir %outputDirectory%
 
-node Analyzer/getOrCreateItemsInDirectory ^
+node javascript-analyzer/getOrCreateItemsInDirectory ^
   --directory=. ^
   --ignoreDirectoryNames=coverage --ignoreDirectoryNames=node_modules --ignoreDirectoryNames=output --ignoreDirectoryNames=test-cases --ignoreDirectoryNames=test-coverage > ^
 %outputDirectory%\analysis.yaml
