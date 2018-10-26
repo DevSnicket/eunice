@@ -1,2 +1,2 @@
-node_modules/
-harness/output
+/harness/output/
+/test-coverage/
