@@ -4,7 +4,7 @@ const fs = require("fs");
 
 const
 	isJestProcessFromArguments = require("./isJestProcessFromArguments"),
-	readTextFile = require("../readTextFile");
+	readTextFile = require("./readTextFile");
 
 module.exports =
 	({

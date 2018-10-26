@@ -2,9 +2,9 @@ const path = require("path");
 
 const
 	getYamlFromJavaScript = require("."),
-	runTestsInFileSystem = require("../../Tests/runTestsInFileSystem");
+	runTestsFromFileSystem = require("../../runTestsFromFileSystem");
 
-runTestsInFileSystem({
+runTestsFromFileSystem({
 	action: getYamlFromJavaScript,
 	caseFileName: ".js",
 	directory: path.join(__dirname, "test-cases/"),
