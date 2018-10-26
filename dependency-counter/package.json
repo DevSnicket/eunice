@@ -6,6 +6,7 @@
 	"dependencies": {
 		"array.prototype.flat": "1.2.1",
 		"array.prototype.flatmap": "1.2.1",
+		"babel-preset-env": "^1.7.0",
 		"js-yaml": "3.11.0",
 		"react": "16.4.0",
 		"react-dom": "16.4.0",
@@ -16,12 +17,12 @@
 		"@types/js-yaml": "3.11.1",
 		"@types/react": "16.3.14",
 		"@types/react-dom": "16.0.5",
-		"babel-cli": "6.26.0",
 		"babel-loader": "7.1.4",
-		"babel-plugin-transform-object-rest-spread": "6.26.0",
-		"babel-preset-env": "1.7.0",
+		"babel-polyfill": "6.26.0",
 		"eslint": "4.19.1",
 		"jest": "23.3.0",
+		"react": "16.4.0",
+		"react-reflex": "2.2.8",
 		"webpack": "4.11.1",
 		"webpack-cli": "3.0.3"
 	},
@@ -30,9 +31,10 @@
 		"collectCoverageFrom": [
 			"**/*.js",
 			"!node_modules/**",
-			"!harness/**"
+			"!harness/**",
+			"!test-coverage/**"
 		],
-		"coverageDirectory": "../Tests/Coverage",
+		"coverageDirectory": "test-coverage",
 		"coverageThreshold": {
 			"global": {
 				"branches": 100,
@@ -47,9 +49,9 @@
 	"name": "@devsnicket/eunice-renderer",
 	"repository": "https://github.com/DevSnicket/Eunice/tree/master/Renderer",
 	"scripts": {
-		"harness": "webpack -p --config harness/webpack.config.js",
-		"lint": "eslint .",
-		"test": "jest --no-cache --runInBand"
+		"harness": "npx webpack -p --config harness/webpack.config.js",
+		"lint": "npx eslint .",
+		"test": "npx jest --runInBand"
 	},
 	"version": "0.21.0"
 }
