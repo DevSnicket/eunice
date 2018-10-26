@@ -4,12 +4,15 @@ const
 	transformObjectRestSpreadBabelPlugin = require("babel-plugin-transform-object-rest-spread");
 
 module.exports =
-	directory => (
+	({
+		directory,
+		indexFile,
+	}) => (
 		{
 			devtool:
 				"source-map",
 			entry:
-				[ "babel-polyfill", "./harness/index.js" ],
+				[ "babel-polyfill", indexFile ],
 			module:
 				{
 					rules:

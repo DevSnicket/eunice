@@ -1,8 +1,8 @@
+**/node_modules/
+**/test-coverage/
 /.vs
 /Analyzer/harness/output
+/dogfooding/output/
 /harness/output
 /Harnesses/output
 /Renderer/harness/output
-/Tests/Coverage/
-node_modules/
-/dogfooding/output/

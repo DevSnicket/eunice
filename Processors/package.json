@@ -1,0 +1,35 @@
+{
+	"author": "Graham Dyson",
+	"description": "Framework that creates test harnesses for analysis of JavaScript, editing and processing of YAML, and rendering SVG using JavaScript, HTML and React.",
+	"dependencies": {
+		"babel-preset-env": "1.7.0",
+		"js-yaml": "3.11.0"
+	},
+	"devDependencies": {
+		"@types/jest": "23.3.1",
+		"eslint": "4.19.1",
+		"jest": "23.3.0"
+	},
+	"jest": {
+		"collectCoverage": true,
+		"collectCoverageFrom": [
+			"**/*.js",
+			"!node_modules/**",
+			"!harness/**",
+			"!test-coverage/**"
+		],
+		"coverageDirectory": "test-coverage",
+		"coverageThreshold": {
+			"global": {
+				"branches": 100,
+				"functions": 100,
+				"lines": 100
+			}
+		}
+	},
+	"license": "MIT",
+	"scripts": {
+		"lint": "npx eslint .",
+		"test": "npx jest --runInBand"
+	}
+}

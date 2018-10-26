@@ -6,7 +6,7 @@ const
 	getOrCreateItemsInDirectory = require("."),
 	getYamlForItemOrItems = require("../getYamlForItemOrItems");
 
-const testcasesDirectory = path.join(__dirname, "testcases");
+const testcasesDirectory = path.join(__dirname, "test-cases");
 
 test(
 	"",

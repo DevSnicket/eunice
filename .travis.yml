@@ -17,13 +17,22 @@ deploy:
   target-branch: master
 install:
   - npm install
+  - (cd Analyzer && npm install)
+  - (cd callWhenProcessEntryPoint && npm install)
+  - (cd dependencyAndStructure && npm install)
+  - (cd harness && npm install)
+  - (cd Harnesses && npm install)
+  - (cd Processors && npm install)
+  - (cd Renderer && npm install)
+  - (cd Tests && npm install)
 language: node_js
 node_js:
   - "8.11.2"
 notifications:
   email: false
 script:
-  - npm run test-travis
   - npm run lint
+  - npm run test
+  - (cat Analyzer/test-coverage/lcov.info && cat dependencyAndStructure/test-coverage/lcov.info && cat Processors/test-coverage/lcov.info && cat Renderer/test-coverage/lcov.info) | ./node_modules/coveralls/bin/coveralls.js
   - bash dogfooding/generate.sh
   - npm run harness

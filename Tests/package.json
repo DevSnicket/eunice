@@ -1,0 +1,11 @@
+{
+	"author": "Graham Dyson",
+	"description": "Frameworkd use to create test harnesses in JavaScript, HTML and React.",
+	"devDependencies": {
+		"eslint": "4.19.1"
+	},
+	"license": "MIT",
+	"scripts": {
+		"lint": "npx eslint ."
+	}
+}

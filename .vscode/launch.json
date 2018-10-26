@@ -41,10 +41,11 @@
 				"args":
 					[
 						"--directory=./",
-						"--ignoreDirectoryNames=Coverage",
-						"--ignoreDirectoryNames=testcases",
+						"--ignoreDirectoryNames=coverage",
 						"--ignoreDirectoryNames=node_modules",
-						"--ignoreDirectoryNames=output"
+						"--ignoreDirectoryNames=output",
+						"--ignoreDirectoryNames=test-cases",
+						"--ignoreDirectoryNames=test-coverage"
 					],
 				"cwd": "${workspaceRoot}",
 				"name": "analyzer getOrCreateItemsInDirectory",

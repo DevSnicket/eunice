@@ -3,4 +3,4 @@
 harness*
 jsconfig.json
 *test.js
-*testcases
+*test-cases

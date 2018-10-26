@@ -6,7 +6,7 @@ mkdir %outputDirectory%
 
 node Analyzer/getOrCreateItemsInDirectory ^
   --directory=. ^
-  --ignoreDirectoryNames=Coverage --ignoreDirectoryNames=testcases --ignoreDirectoryNames=node_modules --ignoreDirectoryNames=output > ^
+  --ignoreDirectoryNames=coverage --ignoreDirectoryNames=node_modules --ignoreDirectoryNames=output --ignoreDirectoryNames=test-cases --ignoreDirectoryNames=test-coverage > ^
 %outputDirectory%\analysis.yaml
 
 type %outputDirectory%\analysis.yaml | ^

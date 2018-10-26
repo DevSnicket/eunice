@@ -1,11 +1,15 @@
 #!/bin/bash
+set -e
+
 outputDirectory=$(dirname $0)/output
 
-mkdir $outputDirectory
+if [ ! -d $outputDirectory ]; then
+	mkdir $outputDirectory
+fi
 
 node Analyzer/getOrCreateItemsInDirectory \
   --directory=. \
-  --ignoreDirectoryNames=Coverage --ignoreDirectoryNames=testcases --ignoreDirectoryNames=node_modules --ignoreDirectoryNames=output \
+  --ignoreDirectoryNames=coverage --ignoreDirectoryNames=node_modules --ignoreDirectoryNames=output --ignoreDirectoryNames=test-cases --ignoreDirectoryNames=test-coverage \
 > $outputDirectory/analysis.yaml
 
 cat $outputDirectory/analysis.yaml \

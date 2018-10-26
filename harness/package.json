@@ -1,0 +1,22 @@
+{
+	"author": "Graham Dyson",
+	"description": "Test harness with three columns, JavaScript analysis, YAML with processors and SVG renderer.",
+	"devDependencies": {
+		"@types/react": "16.3.14",
+		"babel-core": "6.26.3",
+		"babel-loader": "7.1.4",
+		"babel-polyfill": "6.26.0",
+		"babel-preset-env": "1.7.0",
+		"eslint": "4.19.1",
+		"react": "16.4.0",
+		"react-dom": "16.4.0",
+		"react-reflex": "2.2.8",
+		"webpack": "4.11.1",
+		"webpack-cli": "3.0.3"
+	},
+	"license": "MIT",
+	"scripts": {
+		"harness": "npx webpack -p --config webpack.config.js",
+		"lint": "npx eslint ."
+	}
+}

@@ -1,8 +1,12 @@
 const
 	createWebpackPluginForFileContent = require("../Harnesses/createWebpackPluginForFileContent"),
-	getWebpackConfigForDirectory = require("../Harnesses/getWebpackConfigForDirectory");
+	getWebpackConfigForDirectory = require("../Harnesses/createWebpackConfiguration");
 
-const config = getWebpackConfigForDirectory(`${__dirname}/output/`);
+const config =
+	getWebpackConfigForDirectory({
+		directory: `${__dirname}/output/`,
+		indexFile: "./index.js",
+	});
 
 module.exports =
 	{

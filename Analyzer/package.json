@@ -5,18 +5,20 @@
 	},
 	"dependencies": {
 		"acorn": "5.6.2",
-		"array.prototype.flatmap": "^1.2.1",
+		"array.prototype.flatmap": "1.2.1",
 		"js-yaml": "3.11.0"
 	},
 	"devDependencies": {
 		"@types/acorn": "4.0.3",
 		"@types/jest": "23.3.1",
-		"babel-cli": "6.26.0",
 		"babel-loader": "7.1.4",
-		"babel-plugin-transform-object-rest-spread": "6.26.0",
+		"babel-polyfill": "6.26.0",
 		"babel-preset-env": "1.7.0",
 		"eslint": "4.19.1",
 		"jest": "23.3.0",
+		"react": "16.4.0",
+		"react-dom": "16.4.0",
+		"react-reflex": "2.2.8",
 		"webpack": "4.11.1",
 		"webpack-cli": "3.0.3"
 	},
@@ -24,13 +26,13 @@
 		"collectCoverage": true,
 		"collectCoverageFrom": [
 			"**/*.js",
+			"!**/test-cases/**",
+			"!**/test-cases/**/.js",
 			"!node_modules/**",
-			"!**/testcases/**",
-			"!testcases/**/.js",
 			"!harness/**",
-			"!webpack.config.js"
+			"!test-coverage/**"
 		],
-		"coverageDirectory": "../Tests/Coverage",
+		"coverageDirectory": "test-coverage",
 		"coverageThreshold": {
 			"global": {
 				"branches": 100,
@@ -45,9 +47,9 @@
 	"name": "@devsnicket/eunice-analyzer",
 	"repository": "https://github.com/DevSnicket/Eunice/tree/master/Analyzer",
 	"scripts": {
-		"harness": "webpack -p --config harness/webpack.config.js",
-		"lint": "eslint .",
-		"test": "jest --no-cache --runInBand"
+		"harness": "npx webpack -p --config harness/webpack.config.js",
+		"lint": "npx eslint .",
+		"test": "npx jest --runInBand"
 	},
 	"version": "0.38.0"
 }
