@@ -1,0 +1,15 @@
+{
+	"author": "Graham Dyson",
+	"description": "Detects when its callee is the process entry point, and makes arguments and standard input available to a function.",
+	"dependencies": {
+		"babel-preset-env": "1.7.0",
+		"minimist": "1.2.0"
+	},
+	"devDependencies": {
+		"eslint": "4.19.1"
+	},
+	"license": "MIT",
+	"scripts": {
+		"lint": "npx eslint ."
+	}
+}
