@@ -1,0 +1,11 @@
+{
+	"author": "Graham Dyson",
+	"description": "Runs tests by reading test cases and expected behaviour from the file system. Tests are automatically named based on the directory hierarchy.",
+	"devDependencies": {
+		"eslint": "4.19.1"
+	},
+	"license": "MIT",
+	"scripts": {
+		"lint": "npx eslint ."
+	}
+}
