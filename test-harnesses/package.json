@@ -1,0 +1,24 @@
+{
+	"author": "Graham Dyson",
+	"description": "Framework that creates test harnesses for analysis of JavaScript, editing and processing of YAML, and rendering SVG using JavaScript, HTML and React.",
+	"devDependencies": {
+		"@devsnicket/plugin-discovery-commonjs-babel-plugin": "1.2.0",
+		"@devsnicket/plugin-discovery-create-repository": "1.1.0",
+		"@types/react": "16.3.14",
+		"@types/react-dom": "16.0.5",
+		"babel-plugin-transform-object-rest-spread": "6.26.0",
+		"babel-preset-env": "1.7.0",
+		"eslint": "4.19.1",
+		"file-loader": "1.1.11",
+		"js-yaml": "3.11.0",
+		"react": "16.4.0",
+		"react-dom": "16.4.0",
+		"react-reflex": "2.2.8",
+		"webpack": "4.11.1",
+		"webpack-cli": "3.0.3"
+	},
+	"license": "MIT",
+	"scripts": {
+		"lint": "npx eslint ."
+	}
+}
