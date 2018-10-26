@@ -1,0 +1,9 @@
+- - id: variable
+    type: variable
+    dependsUpon:
+      id: called
+      items:
+        id: property
+        items: variable
+- - id: caller
+    dependsUpon: variable

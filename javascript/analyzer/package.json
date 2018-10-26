@@ -1,0 +1,55 @@
+{
+	"author": "Graham Dyson",
+	"bugs": {
+		"url": "https://github.com/DevSnicket/eunice/issues"
+	},
+	"dependencies": {
+		"acorn": "5.6.2",
+		"array.prototype.flatmap": "1.2.1",
+		"js-yaml": "3.11.0"
+	},
+	"devDependencies": {
+		"@types/acorn": "4.0.3",
+		"@types/jest": "23.3.1",
+		"babel-loader": "7.1.4",
+		"babel-polyfill": "6.26.0",
+		"babel-preset-env": "1.7.0",
+		"eslint": "4.19.1",
+		"jest": "23.3.0",
+		"react": "16.4.0",
+		"react-dom": "16.4.0",
+		"react-reflex": "2.2.8",
+		"webpack": "4.11.1",
+		"webpack-cli": "3.0.3"
+	},
+	"jest": {
+		"collectCoverage": true,
+		"collectCoverageFrom": [
+			"**/*.js",
+			"!**/test-cases/**",
+			"!**/test-cases/**/.js",
+			"!node_modules/**",
+			"!harness/**",
+			"!test-coverage/**"
+		],
+		"coverageDirectory": "test-coverage",
+		"coverageThreshold": {
+			"global": {
+				"branches": 100,
+				"functions": 100,
+				"lines": 100
+			}
+		}
+	},
+	"license": "MIT",
+	"homepage": "https://github.com/DevSnicket/Eunice#readme",
+	"main": "analyze.js",
+	"name": "@devsnicket/eunice-javascript-analyzer",
+	"repository": "https://github.com/DevSnicket/Eunice/tree/master/javascript-analyzer",
+	"scripts": {
+		"harness": "npx webpack -p --config harness/webpack.config.js",
+		"lint": "npx eslint .",
+		"test": "npx jest --runInBand"
+	},
+	"version": "0.38.0"
+}

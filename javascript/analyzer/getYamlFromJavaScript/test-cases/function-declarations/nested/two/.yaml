@@ -1,0 +1,4 @@
+id: parent
+items:
+  - - nested1
+  - - nested2
