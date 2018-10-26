@@ -4,7 +4,7 @@ const
 
 const
 	getSvgForYaml = require("."),
-	readTextFile = require("../../Tests/readTextFile");
+	readTestSvgFile = require("../readTestSvgFile");
 
 const isUpdateExpected = process.argv[2] === "update-expected";
 
@@ -216,7 +216,7 @@ function getSvgForYamlTestOrUpdateExpected({
 function readTestcaseFile(
 	filename,
 ) {
-	return readTextFile(getPathOfFilename(filename));
+	return readTestSvgFile(getPathOfFilename(filename));
 }
 
 function getPathOfFilename(

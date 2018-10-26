@@ -1,3 +1,3 @@
 - harness
 - [ getInteractiveElementsForYaml, getSvgForYaml]
-- getSvgElementForYaml
+- [ getSvgElementForYaml, readTestSvgFile ]
