@@ -25,7 +25,7 @@ module.exports =
 				path.join(
 					directory,
 					...ancestors.map(ancestor => ancestor.id),
-					".devsnicket.eunice.stack.yaml",
+					".devsnicket-eunice-stack.yaml",
 				)
 			);
 		}
