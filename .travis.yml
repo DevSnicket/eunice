@@ -16,7 +16,6 @@ deploy:
   skip-cleanup: true
   target-branch: master
 install:
-  - npm install
   - (cd Analyzer && npm install)
   - (cd callWhenProcessEntryPoint && npm install)
   - (cd dependencyAndStructure && npm install)
@@ -33,6 +32,6 @@ notifications:
 script:
   - npm run lint
   - npm run test
-  - (cat Analyzer/test-coverage/lcov.info && cat dependencyAndStructure/test-coverage/lcov.info && cat Processors/test-coverage/lcov.info && cat Renderer/test-coverage/lcov.info) | ./node_modules/coveralls/bin/coveralls.js
+  - (mkdir test-coverage && cd test-coverage && echo -n {}>package.json && npm install coveralls@3.0.1 && (cat ../Analyzer/test-coverage/lcov.info && cat ../dependencyAndStructure/test-coverage/lcov.info && cat ../Processors/test-coverage/lcov.info && cat ../Renderer/test-coverage/lcov.info) | ./node_modules/coveralls/bin/coveralls.js)
   - bash dogfooding/generate.sh
   - npm run harness
