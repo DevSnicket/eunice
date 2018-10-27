@@ -4,7 +4,7 @@
 
 ## Run tests from file system
 
-This package is used to help create tests for other [Eunice](https://github.com/DevSnicket/Eunice) packages. 
+This package is used to help create [Jest](https://jestjs.io/) tests for other [Eunice](https://github.com/DevSnicket/Eunice) packages. 
 
 It runs tests by reading test cases and expected behaviour from the file system. Tests are automatically named based on the directory hierarchy.
 
