@@ -3,11 +3,27 @@
 	"bugs": {
 		"url": "https://github.com/DevSnicket/eunice/issues"
 	},
-	"description": "Runs tests by reading test cases and expected behaviour from the file system. Tests are automatically named based on the directory hierarchy.",
+	"description": "Runs tests by discovering test cases and expected behaviour from the file system. Tests are automatically named based on the directory hierarchy.",
 	"devDependencies": {
 		"eslint": "4.19.1"
 	},
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
+	"keywords": [
+		"automatic",
+		"directory",
+		"directories",
+		"discovery",
+		"file",
+		"files",
+		"folder",
+		"folders",
+		"hierarchy",
+		"hierarchical",
+		"jest",
+		"naming",
+		"test",
+		"testing"
+	],
 	"license": "MIT",
 	"main": "index.js",
 	"name": "@devsnicket/eunice-run-tests-from-file-system",
@@ -18,5 +34,5 @@
 	"scripts": {
 		"lint": "npx eslint ."
 	},
-	"version": "1.0.0"
+	"version": "1.1.0"
 }
