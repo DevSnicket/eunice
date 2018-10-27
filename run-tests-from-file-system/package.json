@@ -11,6 +11,9 @@
 	"license": "MIT",
 	"main": "index.js",
 	"name": "@devsnicket/eunice-runTestsFromFileSystem",
+	"publishConfig": {
+		"access": "public"
+	},
 	"repository": "https://github.com/DevSnicket/Eunice-runTestsFromFileSystem/tree/master/Renderer",
 	"scripts": {
 		"lint": "npx eslint ."
