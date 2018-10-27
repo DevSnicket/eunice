@@ -1,11 +1,19 @@
 {
 	"author": "Graham Dyson",
+	"bugs": {
+		"url": "https://github.com/DevSnicket/eunice/issues"
+	},
 	"description": "Runs tests by reading test cases and expected behaviour from the file system. Tests are automatically named based on the directory hierarchy.",
 	"devDependencies": {
 		"eslint": "4.19.1"
 	},
+	"homepage": "https://github.com/DevSnicket/Eunice#readme",
 	"license": "MIT",
+	"main": "index.js",
+	"name": "@devsnicket/eunice-runTestFromFileSystem",
+	"repository": "https://github.com/DevSnicket/Eunice-runTestFromFileSystem/tree/master/Renderer",
 	"scripts": {
 		"lint": "npx eslint ."
-	}
+	},
+	"version": "1.0.0"
 }
