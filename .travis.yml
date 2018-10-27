@@ -32,6 +32,6 @@ notifications:
 script:
   - bash lint.sh
   - bash test.sh
-  - (mkdir test-coverage && cd test-coverage && echo -n {}>package.json && npm install coveralls@3.0.1 && (cat ../javascript-analyzer/test-coverage/lcov.info && cat ../dependencyAndStructure/test-coverage/lcov.info && cat ../Processors/test-coverage/lcov.info && cat ../Renderer/test-coverage/lcov.info) | ./node_modules/coveralls/bin/coveralls.js)
+  - (mkdir -p test-coverage && npm install --prefix test-coverage coveralls@3.0.1 && (cat javascript-analyzer/test-coverage/lcov.info && cat dependencyAndStructure/test-coverage/lcov.info && cat Processors/test-coverage/lcov.info && cat Renderer/test-coverage/lcov.info) | test-coverage/node_modules/coveralls/bin/coveralls.js)
   - bash dogfooding/generate.sh
   - bash harnesses.sh
