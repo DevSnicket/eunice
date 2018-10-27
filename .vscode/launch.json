@@ -32,7 +32,7 @@
 					],
 				"cwd": "${workspaceFolder}/javascript-analyzer/",
 				"name": "analyzer getYamlFromJavaScript jest",
-				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceFolder}/javascript-analyzer/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -47,9 +47,9 @@
 						"--ignoreDirectoryNames=test-cases",
 						"--ignoreDirectoryNames=test-coverage"
 					],
-				"cwd": "${workspaceRoot}",
+				"cwd": "${workspaceFolder}",
 				"name": "analyzer getOrCreateItemsInDirectory",
-				"program": "${workspaceRoot}/javascript-analyzer/getOrCreateItemsInDirectory/index.js",
+				"program": "${workspaceFolder}/javascript-analyzer/getOrCreateItemsInDirectory/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -62,7 +62,7 @@
 					],
 				"cwd": "${workspaceFolder}/javascript-analyzer/",
 				"name": "analyzer getOrCreateItemsInDirectory jest",
-				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceFolder}/javascript-analyzer/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -74,7 +74,7 @@
 						"dependencyAndStructure/createStackFromYaml/test.js"
 					],
 				"name": "dependency & structure createStackFromYaml jest",
-				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceFolder}/dependencyAndStructure/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -86,7 +86,7 @@
 						"dependencyAndStructure/createYamlFromStack/test.js"
 					],
 				"name": "dependency & structure createYamlFromStack jest",
-				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceFolder}/dependencyAndStructure/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -99,7 +99,7 @@
 					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor createOrAddToStacks createStackWhenIdentifierOrItemOrLevelOrAddWhenStack jest",
-				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceFolder}/Processors/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -112,7 +112,7 @@
 					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor createOrAddToStacks replaceItemsAndInItems jest",
-				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceFolder}/Processors/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -124,7 +124,7 @@
 						"--items=",
 					],
 				"name": "processor createOrAddToStacks uniformly",
-				"program": "${workspaceRoot}/Processors/createOrAddToStacks/uniformly.js",
+				"program": "${workspaceFolder}/Processors/createOrAddToStacks/uniformly.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -136,7 +136,7 @@
 						"--items="
 					],
 				"name": "processor createOrAddToStacks usingFileSystem",
-				"program": "${workspaceRoot}/Processors/createOrAddToStacks/usingFileSystem/index.js",
+				"program": "${workspaceFolder}/Processors/createOrAddToStacks/usingFileSystem/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -145,11 +145,11 @@
 				"args":
 					[ 
 						"--runInBand",
-						"createOrAddToStacks/usingFileSystem/test.js"
+						"createOrAddToStacks/usingFileSystem/getIdentifiersInNewStackForAncestorsAndDirectory/test.js"
 					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor createOrAddToStacks usingFileSystem jest",
-				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceFolder}/Processors/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -161,7 +161,7 @@
 						"--identifierSeparator="
 					],
 				"name": "processor groupItemsByIdentifierSeparator",
-				"program": "${workspaceRoot}/Processors/groupItemsByIdentifierSeparator/index.js",
+				"program": "${workspaceFolder}/Processors/groupItemsByIdentifierSeparator/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -174,7 +174,7 @@
 					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor groupItemsByIdentifierSeparator jest",
-				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceFolder}/Processors/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -187,7 +187,7 @@
 						"--identifierSuffixesInOrder=",
 					],
 				"name": "processor orderItemsBy/indexOf/identifierSuffix",
-				"program": "${workspaceRoot}/Processors/orderItemsBy/indexOf/identifierSuffix/index.js",
+				"program": "${workspaceFolder}/Processors/orderItemsBy/indexOf/identifierSuffix/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -200,7 +200,7 @@
 						"--typesInOrder=",
 					],
 				"name": "processor orderItemsBy/indexOf/type",
-				"program": "${workspaceRoot}/Processors/orderItemsBy/indexOf/type/index.js",
+				"program": "${workspaceFolder}/Processors/orderItemsBy/indexOf/type/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -213,7 +213,7 @@
 					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor orderItemsBy jest",
-				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceFolder}/Processors/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -225,7 +225,7 @@
 						"--suffix="
 					],
 				"name": "processor removeIdentifierSuffix",
-				"program": "${workspaceRoot}/Processors/removeIdentifierSuffix/index.js",
+				"program": "${workspaceFolder}/Processors/removeIdentifierSuffix/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -238,7 +238,7 @@
 					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor removeIdentifierSuffix jest",
-				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceFolder}/Processors/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -250,7 +250,7 @@
 						"--items="
 					],
 				"name": "processor removeRedundantParentIdentifierPrefix",
-				"program": "${workspaceRoot}/Processors/removeRedundantParentIdentifierPrefix/index.js",
+				"program": "${workspaceFolder}/Processors/removeRedundantParentIdentifierPrefix/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -263,7 +263,7 @@
 					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor removeRedundantParentIdentifierPrefix jest",
-				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceFolder}/Processors/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -275,7 +275,7 @@
 						"--type="
 					],
 				"name": "processor removeSelfDependentItemsOfType",
-				"program": "${workspaceRoot}/Processors/removeSelfDependentItemsOfType/index.js",
+				"program": "${workspaceFolder}/Processors/removeSelfDependentItemsOfType/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -288,7 +288,7 @@
 					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor removeSelfDependentItemsOfType jest",
-				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceFolder}/Processors/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -300,7 +300,7 @@
 						"--type=",
 					],
 				"name": "processor setTypeOfRootItems",
-				"program": "${workspaceRoot}/Processors/setTypeOfRootItems/index.js",
+				"program": "${workspaceFolder}/Processors/setTypeOfRootItems/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -308,7 +308,7 @@
 			{
 				"args": [ "--items=", ],
 				"name": "processor unstackIndependent",
-				"program": "${workspaceRoot}/Processors/unstackIndependent/index.js",
+				"program": "${workspaceFolder}/Processors/unstackIndependent/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -321,7 +321,7 @@
 					],
 				"cwd": "${workspaceFolder}/Processors/",
 				"name": "processor unstackIndependent jest",
-				"program": "${workspaceRoot}/javascript-analyzer/node_modules/jest/bin/jest.js",
+				"program": "${workspaceFolder}/Processors/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -334,7 +334,7 @@
 					],
 				"cwd": "${workspaceFolder}/Renderer/",
 				"name": "renderer getInteractiveElementsForYaml jest",
-				"program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -347,7 +347,7 @@
 					],
 				"cwd": "${workspaceFolder}/Renderer/",
 				"name": "renderer getSvgForYaml jest",
-				"program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -359,7 +359,7 @@
 						"--yaml="
 					],
 				"name": "renderer getSvgForYaml",
-				"program": "${workspaceRoot}/Renderer/getSvgForYaml/index.js",
+				"program": "${workspaceFolder}/Renderer/getSvgForYaml/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -381,7 +381,7 @@
 					],
 				"cwd": "${workspaceFolder}/Renderer/",
 				"name": "renderer getSvgForYaml with subset jest",
-				"program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
