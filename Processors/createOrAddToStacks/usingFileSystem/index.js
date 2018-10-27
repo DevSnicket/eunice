@@ -12,6 +12,7 @@ module.exports = createOrAddToStacksUsingFileSystem;
 function createOrAddToStacksUsingFileSystem({
 	directory,
 	items,
+	subsetIdentifierHierarchy,
 }) {
 	return (
 		replaceItemsAndInItems({
@@ -30,6 +31,7 @@ function createOrAddToStacksUsingFileSystem({
 							getIdentifiersInNewStackForAncestorsAndDirectory({
 								ancestors,
 								directory,
+								subsetIdentifierHierarchy,
 							}),
 					}),
 		})

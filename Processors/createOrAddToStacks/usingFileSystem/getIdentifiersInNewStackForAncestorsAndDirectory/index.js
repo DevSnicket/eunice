@@ -1,5 +1,6 @@
 const
 	fs = require("fs"),
+	getAncestorIdentifiersWhenValid = require("./getAncestorIdentifiersWhenValid"),
 	parseYaml = require("js-yaml").safeLoad,
 	path = require("path");
 
@@ -7,24 +8,27 @@ module.exports =
 	({
 		ancestors,
 		directory,
+		subsetIdentifierHierarchy,
 	}) => {
+		const ancestorIdentifiers =
+			getAncestorIdentifiersWhenValid({
+				ancestors,
+				subsetIdentifierHierarchy,
+			});
+
 		return (
-			everyAncestorHasIdentifier()
+			ancestorIdentifiers
 			&&
 			getIdentifiersInNewStackFromPath(
 				getStackFilePath(),
 			)
 		);
 
-		function everyAncestorHasIdentifier() {
-			return ancestors.every(ancestor => ancestor.id);
-		}
-
 		function getStackFilePath() {
 			return (
 				path.join(
 					directory,
-					...ancestors.map(ancestor => ancestor.id),
+					...ancestorIdentifiers,
 					".devsnicket-eunice-stack.yaml",
 				)
 			);
