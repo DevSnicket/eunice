@@ -10,11 +10,11 @@
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
 	"license": "MIT",
 	"main": "index.js",
-	"name": "@devsnicket/eunice-runTestsFromFileSystem",
+	"name": "@devsnicket/eunice-run-tests-from-file-system",
 	"publishConfig": {
 		"access": "public"
 	},
-	"repository": "https://github.com/DevSnicket/Eunice-runTestsFromFileSystem/tree/master/Renderer",
+	"repository": "https://github.com/DevSnicket/eunice-run-tests-from-file-system/tree/master/Renderer",
 	"scripts": {
 		"lint": "npx eslint ."
 	},
