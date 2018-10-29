@@ -15,6 +15,11 @@ test.each(
 			[ "upperItem1", "lowerItem1" ],
 		],
 		[
+			[],
+			[ "parent" ],
+			false,
+		],
+		[
 			[ { id: "directoryWithoutStack" } ],
 			null,
 			false,

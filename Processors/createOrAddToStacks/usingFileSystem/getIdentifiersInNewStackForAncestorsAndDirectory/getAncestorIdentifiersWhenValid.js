@@ -4,20 +4,22 @@ module.exports =
 		subsetIdentifierHierarchy,
 	}) => {
 		return (
-			ancestors.reduce(
-				getAggregate(),
-				[],
-			)
+			subsetIdentifierHierarchy
+			?
+			whenInSubset()
+			:
+			whenAllIdentifiable(ancestors)
 		);
 
-		function getAggregate() {
+		function whenInSubset() {
 			return (
-				subsetIdentifierHierarchy
-				?
-				withSubsetIdentifierHierarchy(subsetIdentifierHierarchy)
-				.aggregateAncestorIdentifiersInSubset
-				:
-				aggregateWhenAllIdentifiable
+				ancestors.length >= subsetIdentifierHierarchy.length
+				&&
+				ancestors.reduce(
+					withSubsetIdentifierHierarchy(subsetIdentifierHierarchy)
+					.aggregateAncestorIdentifiersInSubset,
+					[],
+				)
 			);
 		}
 	};
@@ -58,15 +60,21 @@ function withSubsetIdentifierHierarchy(
 	}
 }
 
-function aggregateWhenAllIdentifiable(
-	identifiers,
-	ancestor,
+function whenAllIdentifiable(
+	ancestors,
 ) {
 	return (
-		identifiers
-		&&
-		ancestor.id
-		&&
-		[ ...identifiers, ancestor.id ]
+		ancestors.reduce(
+			(
+				identifiers,
+				ancestor,
+			) =>
+				identifiers
+				&&
+				ancestor.id
+				&&
+				[ ...identifiers, ancestor.id ],
+			[],
+		)
 	);
 }
