@@ -5,7 +5,23 @@ const
 	getIdentifiersInNewStackForAncestorsAndDirectory = require("./getIdentifiersInNewStackForAncestorsAndDirectory"),
 	replaceItemsAndInItems = require("../replaceItemsAndInItems");
 
-callWithYamlItemsAndOutputWhenProcessEntryPoint(createOrAddToStacksUsingFileSystem);
+callWithYamlItemsAndOutputWhenProcessEntryPoint(
+	({
+		directory,
+		items,
+		subsetIdentifierHierarchy,
+	}) =>
+		createOrAddToStacksUsingFileSystem({
+			directory,
+			items,
+			subsetIdentifierHierarchy:
+				typeof subsetIdentifierHierarchy === "string"
+				?
+				[ subsetIdentifierHierarchy ]
+				:
+				subsetIdentifierHierarchy,
+		}),
+);
 
 module.exports = createOrAddToStacksUsingFileSystem;
 
