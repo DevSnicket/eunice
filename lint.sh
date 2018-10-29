@@ -9,6 +9,4 @@
 && \
 (cd Processors && npm run lint) \
 && \
-(cd Renderer && npm run lint) \
-&& \
-(cd runTestsFromFileSystem && npm run lint)
+(cd Renderer && npm run lint)
