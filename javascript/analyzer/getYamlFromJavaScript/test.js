@@ -2,7 +2,7 @@ const path = require("path");
 
 const
 	getYamlFromJavaScript = require("."),
-	runTestsFromFileSystem = require("../../runTestsFromFileSystem");
+	runTestsFromFileSystem = require("@devsnicket/eunice-run-tests-from-file-system");
 
 runTestsFromFileSystem({
 	action: getYamlFromJavaScript,
