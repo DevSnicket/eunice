@@ -11,13 +11,13 @@ It runs tests by reading test cases and expected behaviour from the file system.
 [![NPM](https://img.shields.io/npm/v/@devsnicket/eunice-run-tests-from-file-system.svg)](https://www.npmjs.com/package/@devsnicket/eunice-run-tests-from-file-system
 )
 
-Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-run-tests-from-file-system.):
+Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-run-tests-from-file-system):
 
 ```bash
-npm install @devsnicket/eunice-run-tests-from-file-system.
+npm install @devsnicket/eunice-run-tests-from-file-system --save-dev
 ```
-Or with [`yarn`](https://yarnpkg.com/en/package/@devsnicket/eunice-run-tests-from-file-system.):
+Or with [`yarn`](https://yarnpkg.com/en/package/@devsnicket/eunice-run-tests-from-file-system):
 
 ```bash
-yarn add @devsnicket/eunice-run-tests-from-file-system.
+yarn add @devsnicket/eunice-run-tests-from-file-system --dev
 ```
