@@ -1,5 +1,5 @@
 const
-	callWhenProcessEntryPoint = require("../../callWhenProcessEntryPoint"),
+	callWhenProcessEntryPoint = require("@devsnicket/eunice-call-when-process-entry-point"),
 	{ createElement } = require("react"),
 	getTextWidth = require("string-pixel-width"),
 	parseYaml = require("js-yaml").safeLoad,

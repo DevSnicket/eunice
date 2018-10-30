@@ -4,6 +4,7 @@
 		"url": "https://github.com/DevSnicket/eunice/issues"
 	},
 	"dependencies": {
+		"@devsnicket/eunice-call-when-process-entry-point": "1.1.0",
 		"array.prototype.flat": "1.2.1",
 		"array.prototype.flatmap": "1.2.1",
 		"babel-preset-env": "^1.7.0",
