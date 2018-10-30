@@ -1,5 +1,5 @@
 const
-	callWhenProcessEntryPoint = require("../../callWhenProcessEntryPoint"),
+	callWhenProcessEntryPoint = require("@devsnicket/eunice-call-when-process-entry-point"),
 	getItemOrItemsFromJavaScript = require("../getItemOrItemsFromJavaScript"),
 	getYamlForItemOrItems = require("../getYamlForItemOrItems");
 
