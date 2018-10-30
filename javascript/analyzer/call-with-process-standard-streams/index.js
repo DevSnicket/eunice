@@ -1,5 +1,3 @@
-/* istanbul ignore file: only used when JavaScript file is process entry point */
-
 const minimist = require("minimist");
 
 module.exports =
