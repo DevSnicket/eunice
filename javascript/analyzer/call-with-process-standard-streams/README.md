@@ -13,13 +13,13 @@ Used by [Eunice](https://github.com/DevSnicket/Eunice) JavaScript analyzer, proc
 [![NPM](https://img.shields.io/npm/v/@devsnicket/eunice-call-when-process-entry-point.svg)](https://www.npmjs.com/package/@devsnicket/eunice-call-when-process-entry-point
 )
 
-Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-call-when-process-entry-point.):
+Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-call-when-process-entry-point):
 
 ```bash
-npm install @devsnicket/eunice-call-when-process-entry-point.
+npm install @devsnicket/eunice-call-when-process-entry-point
 ```
-Or with [`yarn`](https://yarnpkg.com/en/package/@devsnicket/eunice-call-when-process-entry-point.):
+Or with [`yarn`](https://yarnpkg.com/en/package/@devsnicket/eunice-call-when-process-entry-point):
 
 ```bash
-yarn add @devsnicket/eunice-call-when-process-entry-point.
+yarn add @devsnicket/eunice-call-when-process-entry-point
 ```
