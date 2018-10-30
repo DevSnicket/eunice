@@ -8,6 +8,7 @@
 		"minimist": "1.2.0"
 	},
 	"devDependencies": {
+		"@types/node": "10.12.1",
 		"eslint": "4.19.1"
 	},
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
