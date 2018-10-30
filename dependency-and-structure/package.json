@@ -1,18 +1,36 @@
 {
 	"author": "Graham Dyson",
-	"description": "Takes YAML objects, replaces identifiers of whats depended upon with references, adds dependent references and normalises structure.",
+	"bugs": {
+		"url": "https://github.com/DevSnicket/eunice/issues"
+	},
+	"description": "Takes YAML objects, replaces the identifiers of whats depended upon with references, adds dependent references in other direction and normalises the hierarchical structure.",
 	"dependencies": {
-		"@types/jest": "23.3.1",
 		"array.prototype.flat": "1.2.1",
 		"array.prototype.flatmap": "1.2.1",
-		"babel-preset-env": "1.7.0",
-		"jest": "23.3.0",
 		"pretty-format": "23.5.0"
 	},
 	"devDependencies": {
-		"eslint": "4.19.1"
+		"@types/jest": "23.3.1",
+		"babel-cli": "6.26.0",
+		"babel-plugin-transform-object-rest-spread": "6.26.0",
+		"babel-preset-env": "1.7.0",
+		"eslint": "4.19.1",
+		"jest": "23.3.0"
 	},
+	"homepage": "https://github.com/DevSnicket/Eunice#readme",
+	"keywords": [
+		"dependency",
+		"dependencies",
+		"euince",
+		"stack",
+		"structure",
+		"uince",
+		"unice",
+		"yaml"
+	],
 	"license": "MIT",
+	"main": "dist/index.js",
+	"name": "@devsnicket/eunice-dependency-and-structure",
 	"jest": {
 		"collectCoverage": true,
 		"collectCoverageFrom": [
@@ -29,8 +47,14 @@
 			}
 		}
 	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/DevSnicket/eunice-dependency-and-structure.git"
+	},
 	"scripts": {
+		"build": "npx babel -d dist --ignore dist/*,dist/**/*,node_modules/**/*,**/test/**,**/testcases/**,test-coverage/**,**/test.js --plugins transform-object-rest-spread -s true .",
 		"lint": "npx eslint .",
 		"test": "npx jest --runInBand"
-	}
+	},
+	"version": "1.0.0"
 }
