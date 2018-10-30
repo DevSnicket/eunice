@@ -3,7 +3,7 @@ const
 	path = require("path");
 
 const
-	callWhenProcessEntryPoint = require("../../callWhenProcessEntryPoint"),
+	callWhenProcessEntryPoint = require("@devsnicket/eunice-call-when-process-entry-point"),
 	getItemOrItemsFromJavaScript = require("../getItemOrItemsFromJavaScript"),
 	getOrCreateFileItem = require("./getOrCreateFileItem"),
 	getYamlForItemOrItems = require("../getYamlForItemOrItems");

@@ -2,7 +2,7 @@
 
 const yaml = require("js-yaml");
 
-const callWhenProcessEntryPoint = require("../callWhenProcessEntryPoint");
+const callWhenProcessEntryPoint = require("@devsnicket/eunice-call-when-process-entry-point");
 
 module.exports =
 	action =>

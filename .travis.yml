@@ -16,7 +16,6 @@ deploy:
   skip-cleanup: true
   target-branch: master
 install:
-  - (cd callWhenProcessEntryPoint && npm install)
   - (cd dependencyAndStructure && npm install)
   - (cd Harnesses && npm install)
   - (cd javascript-analyzer && npm install)

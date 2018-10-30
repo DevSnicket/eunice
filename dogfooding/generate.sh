@@ -13,89 +13,103 @@ fi
 node $rootDirectory/javascript-analyzer/getOrCreateItemsInDirectory \
   --directory=$rootDirectory \
   --ignoreDirectoryNames=coverage --ignoreDirectoryNames=node_modules --ignoreDirectoryNames=output --ignoreDirectoryNames=test-cases --ignoreDirectoryNames=test-coverage \
-> $outputDirectory/analysis.yaml
+> $outputDirectory/analysis-of-repository.yaml
 
-sed -e \
-  "s/'@devsnicket\/eunice-run-tests-from-file-system'/run-tests-from-file-system/g" \
-  $outputDirectory/analysis.yaml \
-> $outputDirectory/analysis-without-prefix.yaml
+# analyze packages
 
-# analyze run-tests-from-file-system package
+packages=(call-when-process-entry-point run-tests-from-file-system)
 
-npm install --prefix $outputDirectory @devsnicket/eunice-run-tests-from-file-system
+sed \
+  -e "s/'@devsnicket\/eunice-${packages[0]}'/${packages[0]}/g" \
+  -e "s/'@devsnicket\/eunice-${packages[1]}'/${packages[1]}/g" \
+  $outputDirectory/analysis-of-repository.yaml \
+> $outputDirectory/analysis-of-repository-without-package-prefixes.yaml
 
-node $rootDirectory/javascript-analyzer/getOrCreateItemsInDirectory \
-  --directory=$outputDirectory/node_modules/@devsnicket/eunice-run-tests-from-file-system \
-> $outputDirectory/run-tests-from-file-system.yaml
+for package in ${packages[@]}; do
+  npm install --no-save --prefix $outputDirectory @devsnicket/eunice-$package
 
-sed -e \
-  's/^- id: /- id: run-tests-from-file-system\//g' \
-  $outputDirectory/run-tests-from-file-system.yaml \
-> $outputDirectory/run-tests-from-file-system-with-prefix.yaml
+  node $rootDirectory/javascript-analyzer/getOrCreateItemsInDirectory \
+    --directory=$outputDirectory/node_modules/@devsnicket/eunice-$package \
+    --ignoreDirectoryNames=node_modules \
+  > $outputDirectory/analysis-of-package-$package.yaml
+
+  sed \
+    -e "s/^- id: /- id: $package\//g" \
+    $outputDirectory/analysis-of-package-$package.yaml \
+  > $outputDirectory/analysis-of-package-$package-with-root-prefix.yaml
+done
 
 # process and render this repository and packages
 
 ( \
-  cat $outputDirectory/analysis-without-prefix.yaml \
+  cat $outputDirectory/analysis-of-repository-without-package-prefixes.yaml \
   &&
-  cat $outputDirectory/run-tests-from-file-system-with-prefix.yaml \
+  cat $outputDirectory/analysis-of-package-${packages[0]}-with-root-prefix.yaml \
+  &&
+  cat $outputDirectory/analysis-of-package-${packages[1]}-with-root-prefix.yaml \
 ) \
 | node $rootDirectory/Processors/setTypeOfRootItems \
   --type=file \
-> $outputDirectory/setTypeOfRootItemsToFile.yaml
+> $outputDirectory/set-type-of-root-items-to-file.yaml
 
-cat $outputDirectory/setTypeOfRootItemsToFile.yaml \
+cat $outputDirectory/set-type-of-root-items-to-file.yaml \
 | node $rootDirectory/Processors/removeIdentifierSuffix \
   --suffix=/index \
-> $outputDirectory/removeIdentifierSuffixOfIndex.yaml
+> $outputDirectory/remove-identifier-suffix-of-index.yaml
 
-cat $outputDirectory/removeIdentifierSuffixOfIndex.yaml \
+cat $outputDirectory/remove-identifier-suffix-of-index.yaml \
 | node $rootDirectory/Processors/orderItemsBy/identifier \
-> $outputDirectory/orderItemsByIdentifier.yaml
+> $outputDirectory/order-items-by-identifier.yaml
 
-cat $outputDirectory/orderItemsByIdentifier.yaml \
+cat $outputDirectory/order-items-by-identifier.yaml \
 | node $rootDirectory/Processors/groupItemsByIdentifierSeparator \
   --identifierSeparator=/ \
-> $outputDirectory/groupItemsByIdentifierSeparatorOfSlash.yaml
+> $outputDirectory/group-items-by-identifier-separator-of-slash.yaml
 
-cat $outputDirectory/groupItemsByIdentifierSeparatorOfSlash.yaml \
+cat $outputDirectory/group-items-by-identifier-separator-of-slash.yaml \
 | node $rootDirectory/Processors/removeRedundantParentIdentifierPrefix \
   --identifierSeparator=/ \
-> $outputDirectory/removeRedundantParentIdentifierPrefixOfSlash.yaml
+> $outputDirectory/remove-redundant-parent-identifier-prefix-of-slash.yaml
 
-cat $outputDirectory/removeRedundantParentIdentifierPrefixOfSlash.yaml \
+cat $outputDirectory/remove-redundant-parent-identifier-prefix-of-slash.yaml \
 | node $rootDirectory/Processors/removeSelfDependentItemsOfType \
   --type=variable \
-> $outputDirectory/removeSelfDependentItemsOfTypeVariable.yaml
+> $outputDirectory/remove-self-dependent-items-of-type-variable.yaml
 
-cat $outputDirectory/removeSelfDependentItemsOfTypeVariable.yaml \
+cat $outputDirectory/remove-self-dependent-items-of-type-variable.yaml \
 | node $rootDirectory/Processors/orderItemsBy/indexOf/type \
   --typesInOrder= --typesInOrder=parameter --typesInOrder=variable --typesInOrder=file \
-> $outputDirectory/orderItemsByIndexOfType.yaml
+> $outputDirectory/order-items-by-index-of-type.yaml
 
-cat $outputDirectory/orderItemsByIndexOfType.yaml \
+cat $outputDirectory/order-items-by-index-of-type.yaml \
 | node $rootDirectory/Processors/createOrAddToStacks/uniformly \
   --commaSeparatedLevels=test --commaSeparatedLevels=existing \
-> $outputDirectory/createOrAddToStacksStackUniformlyForTest.yaml
+> $outputDirectory/stack-test-in-top-level.yaml
 
-cat $outputDirectory/createOrAddToStacksStackUniformlyForTest.yaml \
+cat $outputDirectory/stack-test-in-top-level.yaml \
 | node $rootDirectory/Processors/createOrAddToStacks/toItemsWithIdentifier \
   --commaSeparatedLevels=existing --commaSeparatedLevels=expect,test \
   --toIdentifier=test \
-> $outputDirectory/createOrAddToStacksStackToItemsWithIdentifierOfTest.yaml
+> $outputDirectory/add-to-stack-test-identifiers.yaml
 
-cat $outputDirectory/createOrAddToStacksStackToItemsWithIdentifierOfTest.yaml \
+cat $outputDirectory/add-to-stack-test-identifiers.yaml \
 | node $rootDirectory/Processors/createOrAddToStacks/usingFileSystem \
   --directory=$rootDirectory \
-> $outputDirectory/createOrAddToStacksStackUsingFileSystemInRepository.yaml
+> $outputDirectory/stack-using-files-in-repository.yaml
 
-cat $outputDirectory/createOrAddToStacksStackUsingFileSystemInRepository.yaml \
-| node $rootDirectory/Processors/createOrAddToStacks/usingFileSystem \
-   --directory=$outputDirectory/node_modules/@devsnicket/eunice-run-tests-from-file-system \
-   --subsetIdentifierHierarchy=run-tests-from-file-system \
-> $outputDirectory/createOrAddToStacksStackUsingFileSystemInRunTestsFromFileSystemPackage.yaml
+lastStackUsingFiles=repository
 
-cat $outputDirectory/createOrAddToStacksStackUsingFileSystemInRunTestsFromFileSystemPackage.yaml \
+for package in ${packages[@]}; do
+  cat $outputDirectory/stack-using-files-in-$lastStackUsingFiles.yaml \
+  | node $rootDirectory/Processors/createOrAddToStacks/usingFileSystem \
+    --directory=$outputDirectory/node_modules/@devsnicket/eunice-$package \
+    --subsetIdentifierHierarchy=$package \
+  > $outputDirectory/stack-using-files-in-$package.yaml
+
+  lastStackUsingFiles=$package
+done
+
+cat $outputDirectory/stack-using-files-in-$lastStackUsingFiles.yaml \
 | node $rootDirectory/Processors/unstackIndependent \
 > $outputDirectory/.yaml
 
