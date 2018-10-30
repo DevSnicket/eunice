@@ -4,10 +4,9 @@
 		"url": "https://github.com/DevSnicket/eunice/issues"
 	},
 	"dependencies": {
-		"@devsnicket/eunice-call-when-process-entry-point": "1.1.0",
+		"@devsnicket/eunice-call-when-process-entry-point": "1.2.1",
 		"array.prototype.flat": "1.2.1",
 		"array.prototype.flatmap": "1.2.1",
-		"babel-preset-env": "^1.7.0",
 		"js-yaml": "3.11.0",
 		"react": "16.4.0",
 		"react-dom": "16.4.0",
@@ -21,6 +20,7 @@
 		"@types/react-dom": "16.0.5",
 		"babel-loader": "7.1.4",
 		"babel-polyfill": "6.26.0",
+		"babel-preset-env": "1.7.0",
 		"eslint": "4.19.1",
 		"jest": "23.3.0",
 		"react": "16.4.0",
