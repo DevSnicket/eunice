@@ -3,6 +3,7 @@
 	"description": "Framework that creates test harnesses for analysis of JavaScript, editing and processing of YAML, and rendering SVG using JavaScript, HTML and React.",
 	"dependencies": {
 		"@devsnicket/eunice-call-when-process-entry-point": "1.2.1",
+		"@devsnicket/eunice-dependency-and-structure": "1.1.0",
 		"babel-preset-env": "1.7.0",
 		"js-yaml": "3.11.0"
 	},

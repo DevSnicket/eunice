@@ -69,30 +69,6 @@
 			},
 			{
 				"args":
-					[
-						"--runInBand",
-						"dependencyAndStructure/createStackFromYaml/test.js"
-					],
-				"name": "dependency & structure createStackFromYaml jest",
-				"program": "${workspaceFolder}/dependencyAndStructure/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node",
-				"useWSL": true
-			},
-			{
-				"args":
-					[
-						"--runInBand", 
-						"dependencyAndStructure/createYamlFromStack/test.js"
-					],
-				"name": "dependency & structure createYamlFromStack jest",
-				"program": "${workspaceFolder}/dependencyAndStructure/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node",
-				"useWSL": true
-			},
-			{
-				"args":
 					[ 
 						"--runInBand",
 						"createOrAddToStacks/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/test.js"

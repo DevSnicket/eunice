@@ -5,7 +5,7 @@ const
 	createDependencyGroupFactoryWhenRequired = require("./createDependencyGroupFactoryWhenRequired"),
 	createOuterDependencyGroupFactory = require("./createOuterDependencyGroupFactory"),
 	createParentGroupFactory = require("./createParentGroupFactory"),
-	createStackFromYaml = require("../../dependencyAndStructure/createStackFromYaml"),
+	{ createStackFromYaml } = require("@devsnicket/eunice-dependency-and-structure"),
 	createStackWithSummaryGroupFactory = require("./createStackWithSummaryGroupFactory"),
 	createSvgElement = require("./createSvgElement"),
 	createTextGroup = require("./createTextGroup"),
