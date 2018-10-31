@@ -17,11 +17,12 @@ node $rootDirectory/javascript-analyzer/getOrCreateItemsInDirectory \
 
 # analyze packages
 
-packages=(call-when-process-entry-point run-tests-from-file-system)
+packages=(call-when-process-entry-point dependency-and-structure run-tests-from-file-system)
 
 sed \
   -e "s/'@devsnicket\/eunice-${packages[0]}'/${packages[0]}/g" \
   -e "s/'@devsnicket\/eunice-${packages[1]}'/${packages[1]}/g" \
+  -e "s/'@devsnicket\/eunice-${packages[2]}'/${packages[2]}/g" \
   $outputDirectory/analysis-of-repository.yaml \
 > $outputDirectory/analysis-of-repository-without-package-prefixes.yaml
 
@@ -30,11 +31,13 @@ for package in ${packages[@]}; do
 
   node $rootDirectory/javascript-analyzer/getOrCreateItemsInDirectory \
     --directory=$outputDirectory/node_modules/@devsnicket/eunice-$package \
+    --ignoreDirectoryNames=dist \
     --ignoreDirectoryNames=node_modules \
   > $outputDirectory/analysis-of-package-$package.yaml
 
   sed \
     -e "s/^- id: /- id: $package\//g" \
+    -e "/^- id: /! s/^- /- $package\//g" \
     $outputDirectory/analysis-of-package-$package.yaml \
   > $outputDirectory/analysis-of-package-$package-with-root-prefix.yaml
 done
@@ -47,6 +50,8 @@ done
   cat $outputDirectory/analysis-of-package-${packages[0]}-with-root-prefix.yaml \
   &&
   cat $outputDirectory/analysis-of-package-${packages[1]}-with-root-prefix.yaml \
+  &&
+  cat $outputDirectory/analysis-of-package-${packages[2]}-with-root-prefix.yaml \
 ) \
 | node $rootDirectory/Processors/setTypeOfRootItems \
   --type=file \
