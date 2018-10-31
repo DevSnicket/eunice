@@ -1,7 +1,6 @@
 const
 	callWithYamlItemsAndOutputWhenProcessEntryPoint = require("../callWithYamlItemsAndOutputWhenProcessEntryPoint"),
-	createStackFromYaml = require("../../dependencyAndStructure/createStackFromYaml"),
-	createYamlFromStack = require("../../dependencyAndStructure/createYamlFromStack"),
+	{ createStackFromYaml, createYamlFromStack } = require("@devsnicket/eunice-dependency-and-structure"),
 	processorPlugins = require("../../Harnesses/processorPlugins");
 
 callWithYamlItemsAndOutputWhenProcessEntryPoint(
