@@ -1,22 +1,35 @@
 const orderItemsByIdentifier = require(".");
 
-const
-	expected =
+test.each(
+	[
 		[
-			{ id: "item1" },
-			{ id: "item2" },
-			{ id: "item3" },
+			null,
+			null,
 		],
-	items =
+		[
+			"item1",
+			"item1",
+		],
 		[
 			{ id: "item1" },
-			{ id: "item3" },
-			{ id: "item2" },
-		];
-
-test(
-	`${JSON.stringify(items)} items returns ${JSON.stringify(expected)}`,
-	() =>
+			{ id: "item1" },
+		],
+		[
+			[
+				{ id: "item1" },
+				{ id: "item3" },
+				{ id: "item2" },
+			],
+			[
+				{ id: "item1" },
+				{ id: "item2" },
+				{ id: "item3" },
+			],
+		],
+	]
+) (
+	"%j items returns %j",
+	(items, expected) =>
 		expect(
 			orderItemsByIdentifier(items),
 		)

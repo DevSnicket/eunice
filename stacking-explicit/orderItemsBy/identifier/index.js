@@ -17,15 +17,21 @@ module.exports = orderItemsByIdentifier;
 function orderItemsByIdentifier(
 	items,
 ) {
-	return (
-		items.sort(
-			(left, right) =>
-				compareIdentifiers(
-					getItemIdentifier(left),
-					getItemIdentifier(right),
-				),
-		)
-	);
+	return whenArray() || items;
+
+	function whenArray() {
+		return (
+			Array.isArray(items)
+			&&
+			items.sort(
+				(left, right) =>
+					compareIdentifiers(
+						getItemIdentifier(left),
+						getItemIdentifier(right),
+					),
+			)
+		);
+	}
 }
 
 function getItemIdentifier(
