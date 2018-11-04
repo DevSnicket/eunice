@@ -26,8 +26,20 @@ test.each(
 				{ id: "item3" },
 			],
 		],
-	]
-) (
+		[
+			[
+				{ id: "item2" },
+				{ anotherIdentifier: "item3" },
+				{ id: "item1" },
+			],
+			[
+				{ anotherIdentifier: "item3" },
+				{ id: "item1" },
+				{ id: "item2" },
+			],
+		],
+	],
+)(
 	"%j items returns %j",
 	(items, expected) =>
 		expect(
