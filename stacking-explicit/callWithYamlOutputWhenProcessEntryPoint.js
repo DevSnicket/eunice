@@ -5,19 +5,18 @@ const yaml = require("js-yaml");
 const callWhenProcessEntryPoint = require("@devsnicket/eunice-call-when-process-entry-point");
 
 module.exports =
-	action =>
+	({
+		action,
+		parentModule = module.parent,
+		standardInputParameter,
+	}) =>
 		callWhenProcessEntryPoint({
 			action:
 				processArguments =>
 					yaml.safeDump(
-						action({
-							...processArguments,
-							items: yaml.safeLoad(processArguments.items),
-						}),
+						action(processArguments),
 						{ lineWidth: Number.MAX_SAFE_INTEGER },
 					),
-			parentModule:
-				module.parent,
-			standardInputParameter:
-				"items",
+			parentModule,
+			standardInputParameter,
 		});

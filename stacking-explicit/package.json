@@ -4,6 +4,7 @@
 	"dependencies": {
 		"@devsnicket/eunice-call-when-process-entry-point": "1.2.1",
 		"@devsnicket/eunice-dependency-and-structure": "1.1.0",
+		"array.prototype.flat": "1.2.1",
 		"babel-preset-env": "1.7.0",
 		"js-yaml": "3.11.0"
 	},

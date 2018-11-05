@@ -1,9 +1,9 @@
 const
-	callWithYamlItemsAndOutputWhenProcessEntryPoint = require("../../callWithYamlItemsAndOutputWhenProcessEntryPoint"),
+	callWithYamlInputAndOutputWhenProcessEntryPoint = require("../../callWithYamlInputAndOutputWhenProcessEntryPoint"),
 	processorPlugins = require("../../../Harnesses/processorPlugins");
 
 /* istanbul ignore next: only used when JavaScript file is process entry point */
-callWithYamlItemsAndOutputWhenProcessEntryPoint(
+callWithYamlInputAndOutputWhenProcessEntryPoint(
 	parameters => orderItemsByIdentifier(parameters.items),
 );
 
