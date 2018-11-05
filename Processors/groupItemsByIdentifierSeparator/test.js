@@ -27,6 +27,18 @@ test.each(
 			input,
 		],
 		[
+			[
+				{ otherIdentifier: "item1" },
+				{ id: "item2" },
+			],
+			[
+				{
+					items: { id: "item2" },
+					otherIdentifier: "item1",
+				},
+			],
+		],
+		[
 			[ "item/childItem1", "item/childItem2" ],
 			[
 				{

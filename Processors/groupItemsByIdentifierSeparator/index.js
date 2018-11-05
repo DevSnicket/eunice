@@ -84,8 +84,13 @@ function aggregate({
 		)
 		:
 		{
-			group: { item },
-			items: getItemsFromAggregation(aggregation),
+			group:
+				{
+					identifierElements: [],
+					item,
+				},
+			items:
+				getItemsFromAggregation(aggregation),
 		}
 	);
 
