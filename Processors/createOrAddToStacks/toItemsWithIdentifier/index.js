@@ -1,12 +1,12 @@
 /* istanbul ignore file: only used when JavaScript file is process entry point */
 const
-	callWithYamlItemsAndOutputWhenProcessEntryPoint = require("../../callWithYamlItemsAndOutputWhenProcessEntryPoint"),
+	callWithYamlInputAndOutputWhenProcessEntryPoint = require("../../callWithYamlInputAndOutputWhenProcessEntryPoint"),
 	createStackWhenIdentifierOrItemOrLevelOrAddWhenStack = require("../createStackWhenIdentifierOrItemOrLevelOrAddWhenStack"),
 	getIdentifiersInNewStackWhenParentAncestor = require("./getIdentifiersInNewStackWhenParentAncestor"),
 	parseCommaSeparated = require("../parseCommaSeparated"),
 	replaceItemsAndInItems = require("../replaceItemsAndInItems");
 
-callWithYamlItemsAndOutputWhenProcessEntryPoint(
+callWithYamlInputAndOutputWhenProcessEntryPoint(
 	createOrAddToStacksToItemsWithIdentifier,
 );
 

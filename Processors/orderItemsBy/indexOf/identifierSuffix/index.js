@@ -1,22 +1,22 @@
 const
-	callWithYamlItemsAndOutputWhenProcessEntryPoint = require("../../../callWithYamlItemsAndOutputWhenProcessEntryPoint"),
+	callWithYamlInputAndOutputWhenProcessEntryPoint = require("../../../callWithYamlInputAndOutputWhenProcessEntryPoint"),
 	orderItemsByIndexOf = require(".."),
 	processorPlugins = require("../../../../Harnesses/processorPlugins");
 
 /* istanbul ignore next: only used when JavaScript file is process entry point */
-callWithYamlItemsAndOutputWhenProcessEntryPoint(
+callWithYamlInputAndOutputWhenProcessEntryPoint(
 	({
 		identifierSuffixesInOrder,
-		...restOfArguments
+		items,
 	}) =>
 		orderItemsByIdentifierSuffix({
-			...restOfArguments,
 			identifierSuffixesInOrder:
 				Array.isArray(identifierSuffixesInOrder)
 				?
 				identifierSuffixesInOrder
 				:
 				identifierSuffixesInOrder && [ identifierSuffixesInOrder ],
+			items,
 		}),
 );
 
