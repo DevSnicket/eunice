@@ -132,9 +132,9 @@
 			},
 			{
 				"args":
-					[
-						"--items=",
-						"--identifierSeparator="
+				[
+					"--items=",
+					"--identifierSeparator="
 					],
 				"name": "processor groupItemsByIdentifierSeparator",
 				"program": "${workspaceFolder}/Processors/groupItemsByIdentifierSeparator/index.js",
@@ -198,10 +198,12 @@
 				"args":
 					[
 						"--items=",
-						"--suffix="
+						"--pattern=",
+						"--replacement=",
+						"--rootOnly="
 					],
-				"name": "processor removeIdentifierSuffix",
-				"program": "${workspaceFolder}/Processors/removeIdentifierSuffix/index.js",
+				"name": "processor replaceIdentifiers",
+				"program": "${workspaceFolder}/Processors/replaceIdentifiers/index.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -210,10 +212,10 @@
 				"args":
 					[ 
 						"--runInBand",
-						"removeIdentifierSuffix/test.js",
+						"replaceIdentifiers/test.js",
 					],
 				"cwd": "${workspaceFolder}/Processors/",
-				"name": "processor removeIdentifierSuffix jest",
+				"name": "processor replaceIdentifiers jest",
 				"program": "${workspaceFolder}/Processors/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
