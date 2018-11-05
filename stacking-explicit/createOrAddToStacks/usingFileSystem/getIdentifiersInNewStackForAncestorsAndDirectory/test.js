@@ -39,6 +39,14 @@ test.each(
 		],
 		[
 			[
+				{ },
+				{ id: "directoryWithStack" },
+			],
+			[ null ],
+			[ "upperItem2", "lowerItem2" ],
+		],
+		[
+			[
 				{ id: "directoryWithSubdirectoryWithStack" },
 				{ id: "subdirectoryWithStack" },
 			],
