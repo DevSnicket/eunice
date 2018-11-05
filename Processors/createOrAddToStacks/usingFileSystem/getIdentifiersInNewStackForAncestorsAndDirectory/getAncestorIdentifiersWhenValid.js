@@ -37,25 +37,48 @@ function withSubsetIdentifierHierarchy(
 		return (
 			identifiers
 			&&
-			ancestor.id
-			&&
-			(whenInSubset() || whenMatchesSubset())
+			whenIdentifiableOrInSubset()
 		);
 
-		function whenInSubset() {
+		function whenIdentifiableOrInSubset() {
 			return (
-				index >= subsetIdentifierHierarchy.length
+				isInSubset()
+				?
+				whenIdentifiable()
+				:
+				whenSubsetMatch()
+			);
+		}
+
+		function isInSubset() {
+			return index >= subsetIdentifierHierarchy.length;
+		}
+
+		function whenIdentifiable() {
+			return (
+				ancestor.id
 				&&
 				[ ...identifiers, ancestor.id ]
 			);
 		}
 
-		function whenMatchesSubset() {
+		function whenSubsetMatch(
+		) {
 			return (
-				subsetIdentifierHierarchy[index] === ancestor.id
+				isSubsetMatch()
 				&&
 				identifiers
 			);
+
+			function isSubsetMatch() {
+				const subsetIdentifier = subsetIdentifierHierarchy[index];
+
+				return (
+					subsetIdentifier === ancestor.id
+					||
+					(!subsetIdentifier && !ancestor.id)
+				);
+			}
 		}
 	}
 }
