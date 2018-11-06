@@ -1,5 +1,5 @@
 const
-	concatenateFromFileSystem = require(".."),
+	concatenateFromFileSystem = require("."),
 	path = require("path");
 
 const
@@ -11,7 +11,7 @@ const
 		],
 	files =
 		[ "item", "stack" ]
-		.map(file => path.join(__dirname, "cases", `${file}.yaml`));
+		.map(file => path.join(__dirname, "testcases", `${file}.yaml`));
 
 test(
 	`${JSON.stringify(files)} files returns ${JSON.stringify(expected)}`,
