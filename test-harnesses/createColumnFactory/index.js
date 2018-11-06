@@ -30,12 +30,7 @@ module.exports =
 								stateful.state.javascript,
 						}),
 				createResizableColumn,
-				createSvgOutputResizableColumn:
-					svg =>
-						createResizableColumnForOutput({
-							title: "SVG",
-							value: svg,
-						}),
+				createResizableColumnForOutput,
 				createYamlInputResizableColumn:
 					() =>
 						createResizableColumnForInput({
