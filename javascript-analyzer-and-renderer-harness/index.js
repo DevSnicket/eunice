@@ -3,12 +3,9 @@ const
 	{ ReflexElement } = require("react-reflex");
 
 const
-	callOrCreateErrorElement = require("../Harnesses/callOrCreateErrorElement"),
 	createColumnFactory = require("../Harnesses/createColumnFactory"),
 	createContainerForColumns = require("../Harnesses/createContainerForColumns"),
-	getInteractiveElementsForYaml = require("../Renderer/getInteractiveElementsForYaml"),
-	getProcessedYamlFromState = require("../Harnesses/getProcessedYamlFromState"),
-	getYamlFromJavaScript = require("../javascript-analyzer/getYamlFromJavaScript"),
+	createSvgOutputResizableColumn = require("../Renderer/harness/createSvgOutputResizableColumn"),
 	renderComponent = require("../Harnesses/renderComponent");
 
 renderComponent({
@@ -24,17 +21,12 @@ renderComponent({
 			createContainerForColumns(
 				columnFactory.createJavascriptInputResizableColumn({ createStateFromValue: value => ({ yaml: getYamlFromJavaScript(value) }) }),
 				columnFactory.createYamlInputResizableColumn(),
-				columnFactory.createSvgOutputResizableColumn(
-					callOrCreateErrorElement({
-						action:
-							() =>
-								getInteractiveElementsForYaml({
-									locationHash: location.hash,
-									yaml: getProcessedYamlFromState(this.state),
-								}),
-						createElement,
-					}),
-				),
+				createSvgOutputResizableColumn({
+					createElement,
+					createResizableColumnForOutput: columnFactory.createResizableColumnForOutput,
+					location,
+					state: this.state,
+				}),
 			)
 		);
 	},
