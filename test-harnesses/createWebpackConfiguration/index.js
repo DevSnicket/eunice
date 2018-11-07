@@ -7,9 +7,9 @@ const
 module.exports =
 	({
 		babelPlugins = [],
+		contentFromFile,
 		directory,
 		indexFile,
-		contentFromFile,
 	}) => (
 		{
 			devtool:
