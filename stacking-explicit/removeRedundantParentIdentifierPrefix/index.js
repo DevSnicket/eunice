@@ -1,7 +1,7 @@
 const
 	callWithYamlInputAndOutputWhenProcessEntryPoint = require("../callWithYamlInputAndOutputWhenProcessEntryPoint"),
 	{ createStackFromYaml, createYamlFromStack } = require("@devsnicket/eunice-dependency-and-structure"),
-	processorPlugins = require("../../Harnesses/processorPlugins");
+	processorPlugins = require("../../Renderer/harness/processorPlugins");
 
 callWithYamlInputAndOutputWhenProcessEntryPoint(
 	removeRedundantParentIdentifierPrefix,

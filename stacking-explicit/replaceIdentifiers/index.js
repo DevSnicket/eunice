@@ -4,7 +4,7 @@ require("array.prototype.flat")
 const
 	callWithYamlInputAndOutputWhenProcessEntryPoint = require("../callWithYamlInputAndOutputWhenProcessEntryPoint"),
 	{ createStackFromYaml, createYamlFromStack } = require("@devsnicket/eunice-dependency-and-structure"),
-	processorPlugins = require("../../Harnesses/processorPlugins");
+	processorPlugins = require("../../Renderer/harness/processorPlugins");
 
 /* istanbul ignore next: only used when JavaScript file is process entry point */
 callWithYamlInputAndOutputWhenProcessEntryPoint(
