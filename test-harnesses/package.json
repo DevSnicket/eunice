@@ -1,21 +1,41 @@
 {
 	"author": "Graham Dyson",
-	"description": "Framework that creates test harnesses for analysis of JavaScript, editing and processing of YAML, and rendering SVG using JavaScript, HTML and React.",
-	"devDependencies": {
-		"@types/react": "16.3.14",
-		"@types/react-dom": "16.0.5",
+	"bugs": {
+		"url": "https://github.com/DevSnicket/eunice/issues"
+	},
+	"description": "Shared implementation for analyzer and renderer test harnesses, using JavaScript, HTML, React and Webpack.",
+	"dependencies": {
 		"babel-plugin-transform-object-rest-spread": "6.26.0",
-		"babel-preset-env": "1.7.0",
-		"eslint": "4.19.1",
 		"file-loader": "1.1.11",
 		"react": "16.4.0",
 		"react-dom": "16.4.0",
 		"react-reflex": "2.2.8",
-		"webpack": "4.11.1",
-		"webpack-cli": "3.0.3"
+		"webpack": "4.11.1"
 	},
+	"devDependencies": {
+		"@types/react": "16.3.14",
+		"@types/react-dom": "16.0.5",
+		"eslint": "4.19.1"
+	},
+	"homepage": "https://github.com/DevSnicket/Eunice#readme",
+	"keywords": [
+		"euince",
+		"harness",
+		"test",
+		"uince",
+		"unice"
+	],
 	"license": "MIT",
+	"name": "@devsnicket/eunice-test-harnesses",
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/DevSnicket/eunice-test-harnesses.git"
+	},
 	"scripts": {
 		"lint": "npx eslint ."
-	}
+	},
+	"version": "1.0.0"
 }

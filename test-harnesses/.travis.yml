@@ -1,0 +1,17 @@
+cache:
+  directories:
+    - node_modules
+deploy:
+  api_key: $NPM_TOKEN
+  email: grahamdyson@hotmail.com
+  provider: npm
+  skip_cleanup: true
+install: 
+  - npm install
+language: node_js
+node_js:
+  - "8.11.2"
+notifications:
+  email: false
+script:
+  - npm run lint
