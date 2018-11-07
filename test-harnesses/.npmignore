@@ -1,3 +1,5 @@
 /.eslintrc.yml
+/.gitattributes
 /.travis.yml
+/.vscode
 /jsconfig.json
