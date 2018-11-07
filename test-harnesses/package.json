@@ -6,7 +6,7 @@
 	"description": "Shared implementation for analyzer and renderer test harnesses, using JavaScript, HTML, React and Webpack.",
 	"dependencies": {
 		"babel-plugin-transform-object-rest-spread": "6.26.0",
-		"file-loader": "1.1.11",
+		"copy-webpack-plugin": "4.6.0",
 		"react": "16.4.0",
 		"react-dom": "16.4.0",
 		"react-reflex": "2.2.8",
@@ -15,7 +15,6 @@
 	"devDependencies": {
 		"@types/react": "16.3.14",
 		"@types/react-dom": "16.0.5",
-		"copy-webpack-plugin": "4.6.0",
 		"eslint": "4.19.1"
 	},
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
@@ -39,5 +38,5 @@
 	"scripts": {
 		"lint": "npx eslint ."
 	},
-	"version": "2.1.3"
+	"version": "2.1.4"
 }
