@@ -15,6 +15,7 @@
 	"devDependencies": {
 		"@types/react": "16.3.14",
 		"@types/react-dom": "16.0.5",
+		"copy-webpack-plugin": "4.6.0",
 		"eslint": "4.19.1"
 	},
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",

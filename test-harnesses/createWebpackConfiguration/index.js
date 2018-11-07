@@ -1,4 +1,5 @@
 const
+	CopyPlugin = require("copy-webpack-plugin"),
 	createModuleWithBabelPlugins = require("./createModuleWithBabelPlugins"),
 	{ DefinePlugin } = require("webpack"),
 	path = require("path"),
@@ -26,6 +27,10 @@ module.exports =
 			plugins:
 				[
 					new DefinePlugin({ [contentFromFile.placeholder]: `\`${readFileSync(contentFromFile.file, "utf-8")}\`` }),
+					new CopyPlugin(
+						[ "harness.html", "react-reflex.css" ]
+						.map(filename => path.join(__dirname, "..", filename)),
+					),
 				],
 		}
 	);
