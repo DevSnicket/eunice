@@ -10,26 +10,8 @@ module.exports =
 	}) => {
 		return (
 			{
-				createJavascriptInputResizableColumn:
-					(
-						{ createStateFromValue = null }
-						=
-						{},
-					) =>
-						createResizableColumnForInput({
-							createStateFromValue:
-								value => (
-									{
-										...createStateFromValue && createStateFromValue(value),
-										javascript: value,
-									}
-								),
-							title:
-								"JavaScript",
-							value:
-								stateful.state.javascript,
-						}),
 				createResizableColumn,
+				createResizableColumnForInput,
 				createResizableColumnForOutput,
 				createYamlInputResizableColumn:
 					() =>

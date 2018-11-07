@@ -5,6 +5,7 @@ const
 const
 	createColumnFactory = require("../../Harnesses/createColumnFactory"),
 	createContainerForColumns = require("../../Harnesses/createContainerForColumns"),
+	createJavascriptInputResizableColumn = require("./createJavascriptInputResizableColumn"),
 	getYamlFromJavaScript = require("../getYamlFromJavaScript"),
 	renderComponent = require("../../Harnesses/renderComponent");
 
@@ -19,7 +20,10 @@ renderComponent({
 
 		return (
 			createContainerForColumns(
-				columnFactory.createJavascriptInputResizableColumn(),
+				createJavascriptInputResizableColumn({
+					createResizableColumnForInput: columnFactory.createResizableColumnForInput,
+					state: this.state,
+				}),
 				columnFactory.createResizableColumn({
 					element:
 						createElement(
