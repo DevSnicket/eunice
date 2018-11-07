@@ -6,7 +6,7 @@ const
 	} = require("react-reflex");
 
 module.exports =
-	(...columns) =>
+	columns =>
 		createElement(
 			ReflexContainer,
 			{ orientation: "vertical" },
