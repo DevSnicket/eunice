@@ -6,7 +6,7 @@ module.exports =
 			rules:
 				[
 					{
-						exclude: /node_modules/,
+						exclude: /node_modules(?!\/@devsnicket\/eunice-test-harnesses)/,
 						test: /\.js$/,
 						use:
 							{

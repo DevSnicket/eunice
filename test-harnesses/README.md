@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/DevSnicket/eunice-test-harnesses.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-test-harnesses)
 
-## Test harnresses
+## Test harnesses
 
 Shared implementation for analyzer and renderer test harnesses, using JavaScript, HTML, React and Webpack.
 
