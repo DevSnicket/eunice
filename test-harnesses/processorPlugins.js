@@ -1,1 +1,0 @@
-module.exports = require("@devsnicket/plugin-discovery-create-repository")();
