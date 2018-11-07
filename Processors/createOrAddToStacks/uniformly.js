@@ -3,7 +3,7 @@ const
 	callWithYamlInputAndOutputWhenProcessEntryPoint = require("../callWithYamlInputAndOutputWhenProcessEntryPoint"),
 	createStackWhenIdentifierOrItemOrLevelOrAddWhenStack = require("./createStackWhenIdentifierOrItemOrLevelOrAddWhenStack"),
 	parseCommaSeparated = require("./parseCommaSeparated"),
-	processorPlugins = require("../../Harnesses/processorPlugins"),
+	processorPlugins = require("../../Renderer/harness/processorPlugins"),
 	replaceItemsAndInItems = require("./replaceItemsAndInItems");
 
 callWithYamlInputAndOutputWhenProcessEntryPoint(

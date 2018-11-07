@@ -1,6 +1,6 @@
 const
 	callOrCreateErrorElement = require("./callOrCreateErrorElement"),
-	getInteractiveElementsForYaml = require("../../getInteractiveElementsForYaml"),
+	getInteractiveElementsForYaml = require("../../../getInteractiveElementsForYaml"),
 	getProcessedYamlFromState = require("./getProcessedYamlFromState");
 
 module.exports =

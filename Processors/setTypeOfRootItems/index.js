@@ -1,6 +1,6 @@
 const
 	callWithYamlInputAndOutputWhenProcessEntryPoint = require("../callWithYamlInputAndOutputWhenProcessEntryPoint"),
-	processorPlugins = require("../../Harnesses/processorPlugins");
+	processorPlugins = require("../../Renderer/harness/processorPlugins");
 
 callWithYamlInputAndOutputWhenProcessEntryPoint(
 	setTypeOfRootItems,

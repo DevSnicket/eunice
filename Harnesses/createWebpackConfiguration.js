@@ -1,10 +1,10 @@
 const
 	path = require("path"),
-	pluginDiscoveryCommonjsBabelPlugin = require("@devsnicket/plugin-discovery-commonjs-babel-plugin"),
 	transformObjectRestSpreadBabelPlugin = require("babel-plugin-transform-object-rest-spread");
 
 module.exports =
 	({
+		babelPlugins = [],
 		directory,
 		indexFile,
 	}) => (
@@ -27,10 +27,7 @@ module.exports =
 											{
 												plugins:
 													[
-														[
-															pluginDiscoveryCommonjsBabelPlugin,
-															{ rootDirectory: path.join(__dirname, "..") },
-														],
+														...babelPlugins,
 														transformObjectRestSpreadBabelPlugin,
 													],
 												presets:

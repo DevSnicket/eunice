@@ -2,7 +2,7 @@ const
 	aggregateIdentifiable = require("./aggregateIdentifiable"),
 	callWithYamlInputAndOutputWhenProcessEntryPoint = require("../callWithYamlInputAndOutputWhenProcessEntryPoint"),
 	getItemsFromAggregation = require("./getItemsFromAggregation"),
-	processorPlugins = require("../../Harnesses/processorPlugins");
+	processorPlugins = require("../../Renderer/harness/processorPlugins");
 
 callWithYamlInputAndOutputWhenProcessEntryPoint(
 	groupItemsByIdentifierSeparator,
