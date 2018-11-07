@@ -26,6 +26,7 @@
 		"unice"
 	],
 	"license": "MIT",
+	"main": "index.js",
 	"name": "@devsnicket/eunice-test-harnesses",
 	"publishConfig": {
 		"access": "public"
@@ -37,5 +38,5 @@
 	"scripts": {
 		"lint": "npx eslint ."
 	},
-	"version": "1.0.0"
+	"version": "2.0.0"
 }
