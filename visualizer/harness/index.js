@@ -5,26 +5,22 @@ const
 const
 	createColumnFactory = require("../../Harnesses/createColumnFactory"),
 	createContainerForColumns = require("../../Harnesses/createContainerForColumns"),
-	createSvgOutputResizableColumn = require("./createSvgOutputResizableColumn"),
+	createYamlAndSvgResizableColumns = require("./createYamlAndSvgResizableColumns"),
 	renderComponent = require("../../Harnesses/renderComponent");
 
 renderComponent({
 	render() {
-		const columnFactory =
-			createColumnFactory({
-				createElement,
-				resizableColumn: ReflexElement,
-				stateful: this,
-			});
-
 		return (
 			createContainerForColumns(
-				columnFactory.createYamlInputResizableColumn(),
-				createSvgOutputResizableColumn({
+				...createYamlAndSvgResizableColumns({
+					columnFactory:
+						createColumnFactory({
+							createElement,
+							resizableColumn: ReflexElement,
+							stateful: this,
+						}),
 					createElement,
-					createResizableColumnForOutput: columnFactory.createResizableColumnForOutput,
-					location,
-					state: this.state,
+					stateful: this,
 				}),
 			)
 		);
