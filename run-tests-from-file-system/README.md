@@ -14,10 +14,10 @@ It runs tests by reading test cases and expected behaviour from the file system.
 Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-run-tests-from-file-system.):
 
 ```bash
-npm install @devsnicket/eunice-run-tests-from-file-system.
+npm install --save-dev @devsnicket/eunice-run-tests-from-file-system.
 ```
 Or with [`yarn`](https://yarnpkg.com/en/package/@devsnicket/eunice-run-tests-from-file-system.):
 
 ```bash
-yarn add @devsnicket/eunice-run-tests-from-file-system.
+yarn add --dev @devsnicket/eunice-run-tests-from-file-system.
 ```
