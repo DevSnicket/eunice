@@ -1,6 +1,8 @@
-.eslintignore
-*.svg
-harness*
-jsconfig.json
-*test.js
-*test-cases
+/devsnicket-eunice-javascript-analyzer-*.tgz
+/.eslintrc.yml
+/.eslintignore
+/.travis.yml
+/.vscode
+/harness/output
+/test-coverage
+/jsconfig.json

@@ -1,0 +1,5 @@
+/dist/
+/devsnicket-eunice-javascript-analyzer-*.tgz
+/harness/output/
+/node_modules/
+/test-coverage/

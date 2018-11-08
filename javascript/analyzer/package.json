@@ -3,6 +3,7 @@
 	"bugs": {
 		"url": "https://github.com/DevSnicket/eunice/issues"
 	},
+	"description": "Analyzes JavaScript files/directories and writes a YAML file of the dependencies which can then be processed, rendered and interacted with using the rest of Eunice.",
 	"dependencies": {
 		"@devsnicket/eunice-call-when-process-entry-point": "1.2.1",
 		"acorn": "5.6.2",
@@ -15,6 +16,7 @@
 		"@devsnicket/eunice-test-harnesses": "2.1.6",
 		"@types/acorn": "4.0.3",
 		"@types/jest": "23.3.1",
+		"babel-cli": "6.26.0",
 		"babel-loader": "7.1.4",
 		"babel-preset-env": "1.7.0",
 		"eslint": "4.19.1",
@@ -25,6 +27,7 @@
 		"webpack": "4.11.1",
 		"webpack-cli": "3.0.3"
 	},
+	"homepage": "https://github.com/DevSnicket/Eunice#readme",
 	"jest": {
 		"collectCoverage": true,
 		"collectCoverageFrom": [
@@ -44,15 +47,29 @@
 			}
 		}
 	},
+	"keywords": [
+		"analyze",
+		"analyzer",
+		"architecture",
+		"dependency",
+		"dependencies",
+		"euince",
+		"javascript",
+		"stack",
+		"structure",
+		"uince",
+		"unice",
+		"yaml"
+	],
 	"license": "MIT",
-	"homepage": "https://github.com/DevSnicket/Eunice#readme",
 	"main": "analyze.js",
 	"name": "@devsnicket/eunice-javascript-analyzer",
 	"repository": "https://github.com/DevSnicket/Eunice/tree/master/javascript-analyzer",
 	"scripts": {
+		"build": "npx babel -d dist --ignore dist/*,dist/**/*,harness/*,node_modules/**/*,**/test/**,**/testcases/**,test-coverage/**,**/test.js --plugins transform-object-rest-spread -s true .",
 		"harness": "npx webpack -p --config harness/webpack.config.js",
 		"lint": "npx eslint .",
 		"test": "npx jest --runInBand"
 	},
-	"version": "0.38.0"
+	"version": "1.0.0"
 }
