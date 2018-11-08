@@ -1,3 +1,4 @@
-.eslintrc.yml
-.vscode
-jsconfig.json
+/.eslintrc.yml
+/.vscode
+/devsnicket-eunice-call-when-process-entry-point-*.tgz
+/jsconfig.json
