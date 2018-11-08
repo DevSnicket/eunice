@@ -2,13 +2,13 @@ cache:
   directories:
     - node_modules
 before_deploy:
-  - cp -r javascript-analyzer-and-renderer-harness/output Harnesses/output
-  - cp -r javascript-analyzer/harness/output Harnesses/output/javascript-analyzer
-  - cp -r Renderer/harness/output Harnesses/output/Renderer
+  - cp -r javascript-analyzer-and-renderer-harness/output harness-output/
+  - cp -r javascript-analyzer/harness/output harness-output/javascript-analyzer
+  - cp -r Renderer/harness/output harness-output/Renderer
 deploy:
   github-token: $GITHUB_HARNESSES_TOKEN
   keep-history: true
-  local-dir: Harnesses/output
+  local-dir: harness-output
   on:
     branch: master
   provider: pages
