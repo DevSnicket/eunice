@@ -6,6 +6,8 @@
 
 This package analyzes JavaScript files/directories and writes a YAML file of the dependencies. These YAML file can then be processed, rendered and interacted with using the rest of [Eunice](https://www.github.com/DevSnicket/Eunice).
 
+>[try out JavaScript &rightarrow; YAML](https://devsnicket.github.io/eunice-javascript-analyzer/harness.html)
+
 [![NPM](https://img.shields.io/npm/v/@devsnicket/eunice-javascript-analyzer.svg)](https://www.npmjs.com/package/@devsnicket/eunice-javascript-analyzer
 )
 
