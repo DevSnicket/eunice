@@ -13,7 +13,7 @@ function ensureDirectoryExists() {
 	}
 }
 
-ensureDirectoryExists outputDirectory
+ensureDirectoryExists $outputDirectory
 
 function processInDirectory {
 	$yamlDirectory = $args[0]
