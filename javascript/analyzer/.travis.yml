@@ -2,10 +2,18 @@ cache:
   directories:
     - node_modules
 deploy:
-  api_key: $NPM_TOKEN
-  email: grahamdyson@hotmail.com
-  provider: npm
-  skip_cleanup: true
+  - api_key: $NPM_TOKEN
+    email: grahamdyson@hotmail.com
+    provider: npm
+    skip_cleanup: true
+  - github-token: $GITHUB_HARNESSES_TOKEN
+    keep-history: true
+    local-dir: harness/output
+    on:
+      branch: master
+    provider: pages
+    skip-cleanup: true
+    target-branch: test-harness
 install: 
   - npm install
 language: node_js
