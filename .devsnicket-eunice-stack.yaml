@@ -1,3 +1,3 @@
 - javascript-analyzer-and-renderer-harness 
 - [ javascript-analyzer, Processors, Renderer ]
-- [ call-when-process-entry-point, dependency-and-structure, Harnesses, run-tests-from-file-system ]
+- [ call-when-process-entry-point, dependency-and-structure, run-tests-from-file-system, test-harnesses ]

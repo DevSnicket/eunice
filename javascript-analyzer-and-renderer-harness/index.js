@@ -1,46 +1,33 @@
 const
-	{ createElement } = require("react"),
-	{ ReflexElement } = require("react-reflex");
-
-const
-	createColumnFactory = require("../Harnesses/createColumnFactory"),
-	createContainerForColumns = require("../Harnesses/createContainerForColumns"),
 	createJavascriptInputResizableColumn = require("../javascript-analyzer/harness/createJavascriptInputResizableColumn"),
 	createYamlAndSvgResizableColumns = require("../Renderer/harness/createYamlAndSvgResizableColumns"),
 	getYamlFromJavaScript =	require("../javascript-analyzer/getYamlFromJavaScript"),
-	renderComponent = require("../Harnesses/renderComponent");
+	renderHarness = require("@devsnicket/eunice-test-harnesses/renderHarness");
 
-renderComponent({
-	render() {
-		const columnFactory =
-			createColumnFactory({
-				createElement,
-				resizableColumn: ReflexElement,
-				stateful: this,
-			});
-
-		return (
-			createContainerForColumns(
+renderHarness({
+	createColumns:
+		({
+			columnFactory,
+			stateful,
+		}) =>
+			[
 				createJavascriptInputResizableColumn({
 					createResizableColumnForInput: columnFactory.createResizableColumnForInput,
 					createStateFromValue: value => ({ yaml: getYamlFromJavaScript(value) }),
-					state: this.state,
+					state: stateful.state,
 				}),
 				...createYamlAndSvgResizableColumns({
 					columnFactory,
-					createElement,
-					stateful: this,
+					stateful,
 				}),
-			)
-		);
-	},
-	state:
+			],
+	initialState:
 		// javascriptFromWebpack is replaced with literal by webpack.config.js
 		// eslint-disable-next-line no-undef
-		createStateFromJavascript(javascriptFromWebpack),
+		createInitialStateFromJavascript(javascriptFromWebpack),
 });
 
-function createStateFromJavascript(
+function createInitialStateFromJavascript(
 	javascript,
 ) {
 	return (

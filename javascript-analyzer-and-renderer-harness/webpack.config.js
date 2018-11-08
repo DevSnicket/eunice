@@ -1,11 +1,10 @@
 const
-	createWebpackPluginForFileContent = require("../Harnesses/createWebpackPluginForFileContent"),
-	getWebpackConfigForDirectory = require("../Harnesses/createWebpackConfiguration"),
+	{ createWebpackConfiguration } = require("@devsnicket/eunice-test-harnesses"),
 	path = require("path"),
 	pluginDiscoveryCommonjsBabelPlugin = require("@devsnicket/plugin-discovery-commonjs-babel-plugin");
 
-const config =
-	getWebpackConfigForDirectory({
+module.exports =
+	createWebpackConfiguration({
 		babelPlugins:
 			[
 				[
@@ -13,19 +12,13 @@ const config =
 					{ rootDirectory: path.join(__dirname, "..", "Processors") },
 				],
 			],
-		directory: `${__dirname}/output/`,
-		indexFile: "./index.js",
+		contentFromFile:
+			{
+				file: `${__dirname}/../javascript-analyzer/harness/example.js`,
+				placeholder: "javascriptFromWebpack",
+			},
+		directory:
+			`${__dirname}/output/`,
+		indexFile:
+			"./index.js",
 	});
-
-module.exports =
-	{
-		...config,
-		plugins:
-			[
-				...config.plugins || [],
-				createWebpackPluginForFileContent({
-					file: `${__dirname}/../javascript-analyzer/harness/example.js`,
-					name: "javascriptFromWebpack",
-				}),
-			],
-	};

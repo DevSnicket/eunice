@@ -7,14 +7,15 @@
 		"@devsnicket/eunice-call-when-process-entry-point": "1.2.1",
 		"acorn": "5.6.2",
 		"array.prototype.flatmap": "1.2.1",
+		"babel-polyfill": "6.26.0",
 		"js-yaml": "3.11.0"
 	},
 	"devDependencies": {
 		"@devsnicket/eunice-run-tests-from-file-system": "1.1.0",
+		"@devsnicket/eunice-test-harnesses": "2.1.6",
 		"@types/acorn": "4.0.3",
 		"@types/jest": "23.3.1",
 		"babel-loader": "7.1.4",
-		"babel-polyfill": "6.26.0",
 		"babel-preset-env": "1.7.0",
 		"eslint": "4.19.1",
 		"jest": "23.3.0",

@@ -3,8 +3,6 @@
 && \
 (cd javascript-analyzer-and-renderer-harness && npm i) \
 && \
-(cd Harnesses && npm i) \
-&& \
 (cd Processors && npm i) \
 && \
 (cd Renderer && npm i)

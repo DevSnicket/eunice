@@ -67,7 +67,7 @@ function processInDirectory {
 
 ensureDirectoryExists $outputDirectory
 
-packages=(call-when-process-entry-point dependency-and-structure run-tests-from-file-system)
+packages=(call-when-process-entry-point dependency-and-structure run-tests-from-file-system test-harnesses)
 
 # repository
 
@@ -84,6 +84,7 @@ sed \
   -e "s/'@devsnicket\/eunice-${packages[0]}'/${packages[0]}/g" \
   -e "s/'@devsnicket\/eunice-${packages[1]}'/${packages[1]}/g" \
   -e "s/'@devsnicket\/eunice-${packages[2]}'/${packages[2]}/g" \
+  -e "s/'@devsnicket\/eunice-${packages[3]}'/${packages[3]}/g" \
   $outputDirectory/repository/unstack-independent.yaml \
 > $outputDirectory/repository/without-package-prefixes.yaml
 
@@ -125,6 +126,7 @@ node $rootDirectory/Processors/concatenateFromFileSystem \
   --files $outputDirectory/${packages[0]}/with-root-prefix.yaml \
   --files $outputDirectory/${packages[1]}/with-root-prefix.yaml \
   --files $outputDirectory/${packages[2]}/with-root-prefix.yaml \
+  --files $outputDirectory/${packages[3]}/with-root-prefix.yaml \
 > $outputDirectory/concatenate.yaml
   
 cat $outputDirectory/concatenate.yaml \
