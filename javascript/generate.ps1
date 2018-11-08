@@ -69,7 +69,7 @@ function processInDirectory {
 	> $yamlDirectory/unstack-independent.yaml
 }
 
-$packages = "call-when-process-entry-point", "dependency-and-structure", "run-tests-from-file-system"
+$packages = "call-when-process-entry-point", "dependency-and-structure", "run-tests-from-file-system", "test-harnesses"
 
 # repository
 
@@ -86,6 +86,7 @@ cat -Path $outputDirectory/repository/unstack-independent.yaml `
 | % {$_ -replace "'@devsnicket/eunice-$($packages[0])'", $packages[0] } `
 | % {$_ -replace "'@devsnicket/eunice-$($packages[1])'", $packages[1] } `
 | % {$_ -replace "'@devsnicket/eunice-$($packages[2])'", $packages[2] } `
+| % {$_ -replace "'@devsnicket/eunice-$($packages[3])'", $packages[3] } `
 > $outputDirectory/repository/without-package-prefixes.yaml
 
 # packages
@@ -127,6 +128,7 @@ node $rootDirectory/Processors/concatenateFromFileSystem `
 	--files $outputDirectory/$($packages[0])/with-root-prefix.yaml `
 	--files $outputDirectory/$($packages[1])/with-root-prefix.yaml `
 	--files $outputDirectory/$($packages[2])/with-root-prefix.yaml `
+	--files $outputDirectory/$($packages[3])/with-root-prefix.yaml `
 > $outputDirectory/concatenate.yaml
 
 cat $outputDirectory/concatenate.yaml `
