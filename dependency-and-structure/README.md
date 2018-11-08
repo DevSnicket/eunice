@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/DevSnicket/eunice-dependency-and-structure.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-dependency-and-structure) [![Coverage Status](https://coveralls.io/repos/github/DevSnicket/eunice-dependency-and-structure/badge.svg?branch=master&c=1)](https://coveralls.io/github/DevSnicket/eunice-dependency-and-structure?branch=master)
 
-## Run tests from file system
+## Dependency and structure
 
 This package takes YAML objects, replaces the identifiers of whats depended upon with references, adds dependent references in other direction and normalises the hierarchical structure.
 
