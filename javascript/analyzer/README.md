@@ -4,7 +4,7 @@
 
 ## JavaScript analyzer
 
-This package analyzes JavaScript files/directories and writes a YAML file of the dependencies. These YAML file can then be processed, rendered and interacted with using the rest of Eunice.
+This package analyzes JavaScript files/directories and writes a YAML file of the dependencies. These YAML file can then be processed, rendered and interacted with using the rest of [Eunice](https://www.github.com/DevSnicket/Eunice).
 
 [![NPM](https://img.shields.io/npm/v/@devsnicket/eunice-javascript-analyzer.svg)](https://www.npmjs.com/package/@devsnicket/eunice-javascript-analyzer
 )
