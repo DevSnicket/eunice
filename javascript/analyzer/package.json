@@ -1,5 +1,6 @@
 {
 	"author": "Graham Dyson",
+	"bin": "getOrCreateItemsInDirectory/index.js",
 	"bugs": {
 		"url": "https://github.com/DevSnicket/eunice/issues"
 	},
@@ -62,7 +63,6 @@
 		"yaml"
 	],
 	"license": "MIT",
-	"main": "getOrCreateItemsInDirectory/index.js",
 	"name": "@devsnicket/eunice-javascript-analyzer",
 	"publishConfig": {
 		"access": "public"
@@ -74,5 +74,5 @@
 		"lint": "npx eslint .",
 		"test": "npx jest --runInBand"
 	},
-	"version": "1.1.0"
+	"version": "1.2.0"
 }
