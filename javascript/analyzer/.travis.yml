@@ -13,7 +13,7 @@ deploy:
       branch: master
     provider: pages
     skip-cleanup: true
-    target-branch: test-harness
+    target-branch: gh-pages
 install: 
   - npm install
 language: node_js
