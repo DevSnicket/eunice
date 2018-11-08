@@ -14,8 +14,8 @@ Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-javascrip
 ```bash
 npm install @devsnicket/eunice-javascript-analyzer
 ```
-Or with [`yarn`](https://yarnpkg.com/en/package/@devsnicket/eunice-javascript-analyzer):
+Or with --save-dev [`yarn`](https://yarnpkg.com/en/package/@devsnicket/eunice-javascript-analyzer):
 
 ```bash
-yarn add @devsnicket/eunice-javascript-analyzer
+yarn add --dev @devsnicket/eunice-javascript-analyzer
 ```
