@@ -62,7 +62,6 @@
 		"yaml"
 	],
 	"license": "MIT",
-	"main": "analyze.js",
 	"name": "@devsnicket/eunice-javascript-analyzer",
 	"publishConfig": {
 		"access": "public"
