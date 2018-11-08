@@ -16,10 +16,10 @@ Used by [Eunice](https://github.com/DevSnicket/Eunice) JavaScript analyzer, proc
 Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-call-when-process-entry-point):
 
 ```bash
-npm install --save-dev @devsnicket/eunice-call-when-process-entry-point
+npm install @devsnicket/eunice-call-when-process-entry-point
 ```
 Or with [`yarn`](https://yarnpkg.com/en/package/@devsnicket/eunice-call-when-process-entry-point):
 
 ```bash
-yarn add --dev @devsnicket/eunice-call-when-process-entry-point
+yarn add @devsnicket/eunice-call-when-process-entry-point
 ```
