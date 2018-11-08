@@ -18,19 +18,6 @@
 		"jest": "23.3.0"
 	},
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
-	"keywords": [
-		"dependency",
-		"dependencies",
-		"euince",
-		"stack",
-		"structure",
-		"uince",
-		"unice",
-		"yaml"
-	],
-	"license": "MIT",
-	"main": "dist/index.js",
-	"name": "@devsnicket/eunice-dependency-and-structure",
 	"jest": {
 		"collectCoverage": true,
 		"collectCoverageFrom": [
@@ -48,6 +35,20 @@
 			}
 		}
 	},
+	"keywords": [
+		"architecture",
+		"dependency",
+		"dependencies",
+		"euince",
+		"stack",
+		"structure",
+		"uince",
+		"unice",
+		"yaml"
+	],
+	"license": "MIT",
+	"main": "dist/index.js",
+	"name": "@devsnicket/eunice-dependency-and-structure",
 	"publishConfig": {
 		"access": "public"
 	},
