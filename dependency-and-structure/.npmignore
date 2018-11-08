@@ -1,4 +1,6 @@
 /.eslintrc.yml
+/.eslintignore
+/.travis.yml
 /.vscode
 /jsconfig.json
 /test-coverage
