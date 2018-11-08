@@ -39,5 +39,5 @@
 		"build": "npx babel -d dist --ignore dist/*,dist/**/*,node_modules/**/* --plugins transform-object-rest-spread -s true .",
 		"lint": "npx eslint ."
 	},
-	"version": "1.2.1"
+	"version": "1.3.0"
 }
