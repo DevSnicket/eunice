@@ -1,11 +1,11 @@
 const
+	{ createElement } = require("react"),
 	createSvgOutputResizableColumn = require("./createSvgOutputResizableColumn"),
 	createYamlInputResizableColumn = require("./createYamlInputResizableColumn");
 
 module.exports =
 	({
 		columnFactory,
-		createElement,
 		stateful,
 	}) =>
 		[
