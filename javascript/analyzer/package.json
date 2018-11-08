@@ -64,6 +64,9 @@
 	"license": "MIT",
 	"main": "analyze.js",
 	"name": "@devsnicket/eunice-javascript-analyzer",
+	"publishConfig": {
+		"access": "public"
+	},
 	"repository": "https://github.com/DevSnicket/Eunice/tree/master/javascript-analyzer",
 	"scripts": {
 		"build": "npx babel -d dist --ignore dist/*,dist/**/*,harness/*,node_modules/**/*,**/test/**,**/testcases/**,test-coverage/**,**/test.js --plugins transform-object-rest-spread -s true .",
