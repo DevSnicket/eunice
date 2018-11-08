@@ -2,4 +2,5 @@
 /.gitattributes
 /.travis.yml
 /.vscode
+/devsnicket-eunice-test-harnesses-*.tgz
 /jsconfig.json
