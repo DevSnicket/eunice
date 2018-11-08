@@ -1,28 +1,16 @@
 const
 	{ createElement } = require("react"),
-	{ ReflexElement } = require("react-reflex");
-
-const
-	createColumnFactory = require("../../Harnesses/createColumnFactory"),
-	createContainerForColumns = require("../../Harnesses/createContainerForColumns"),
 	createJavascriptInputResizableColumn = require("./createJavascriptInputResizableColumn"),
 	getYamlFromJavaScript = require("../getYamlFromJavaScript"),
-	renderComponent = require("../../Harnesses/renderComponent");
+	renderHarness = require("@devsnicket/eunice-test-harnesses/renderHarness");
 
-renderComponent({
-	render() {
-		const columnFactory =
-			createColumnFactory({
-				createElement,
-				resizableColumn: ReflexElement,
-				stateful: this,
-			});
-
-		return (
-			createContainerForColumns(
+renderHarness({
+	createColumns:
+		({ columnFactory, stateful }) =>
+			[
 				createJavascriptInputResizableColumn({
 					createResizableColumnForInput: columnFactory.createResizableColumnForInput,
-					state: this.state,
+					state: stateful.state,
 				}),
 				columnFactory.createResizableColumn({
 					element:
@@ -38,15 +26,13 @@ renderComponent({
 							createElement(
 								"code",
 								{ id: "yaml" },
-								getYamlFromJavaScript(this.state.javascript),
+								getYamlFromJavaScript(stateful.state.javascript),
 							),
 						),
 					title: "YAML",
 				}),
-			)
-		);
-	},
-	state:
+			],
+	initialState:
 		// javascriptFromWebpack is replaced with literal by harness/webpack.config.js
 		// eslint-disable-next-line no-undef
 		{ javascript: javascriptFromWebpack },
