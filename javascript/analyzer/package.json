@@ -73,7 +73,7 @@
 	},
 	"scripts": {
 		"build": "babel -d dist --ignore dist/*,dist/**/*,harness/*,node_modules/**/*,**/test/**,**/testcases/**,test-coverage/**,**/test.js --plugins transform-object-rest-spread -s true .",
-		"dogfooding": "node getOrCreateItemsInDirectory --directory=. --ignoreDirectoryNames=dist --ignoreDirectoryNames=node_modules",
+		"dogfooding": "node getOrCreateItemsInDirectory --directory=. --ignoreDirectoryNames=dist --ignoreDirectoryNames=node_modules --ignoreDirectoryNames=output --ignoreDirectoryNames=test-cases --ignoreDirectoryNames=test-coverage",
 		"harness": "webpack -p --config harness/webpack.config.js",
 		"lint": "eslint .",
 		"test": "jest --runInBand"
