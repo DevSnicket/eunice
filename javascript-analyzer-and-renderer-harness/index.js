@@ -1,7 +1,7 @@
 const
-	createJavascriptInputResizableColumn = require("../javascript-analyzer/harness/createJavascriptInputResizableColumn"),
+	createJavascriptInputResizableColumn = require("@devsnicket/eunice-javascript-analyzer/harness/createJavascriptInputResizableColumn"),
 	createYamlAndSvgResizableColumns = require("../Renderer/harness/createYamlAndSvgResizableColumns"),
-	getYamlFromJavaScript =	require("../javascript-analyzer/getYamlFromJavaScript"),
+	getYamlFromJavaScript =	require("@devsnicket/eunice-javascript-analyzer/getYamlFromJavaScript"),
 	renderHarness = require("@devsnicket/eunice-test-harnesses/renderHarness");
 
 renderHarness({

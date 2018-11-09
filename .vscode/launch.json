@@ -7,65 +7,11 @@
 				"type": "node"
 			},
 			{
-				"args": [ "--javaScript=" ],
-				"cwd": "${workspaceFolder}/javascript-analyzer/",
-				"name": "analyzer getYamlFromJavaScript",
-				"program": "${workspaceFolder}/javascript-analyzer/getYamlFromJavaScript/index.js",
-				"request": "launch",
-				"type": "node",
-				"useWSL": true
-			},
-			{
-				"args": [ ],
-				"cwd": "${workspaceFolder}/javascript-analyzer/",
-				"name": "analyzer getYamlFromJavaScript test",
-				"program": "${workspaceFolder}/javascript-analyzer/getYamlFromJavaScript/test.js",
-				"request": "launch",
-				"type": "node",
-				"useWSL": true
-			},
-			{
-				"args":
-					[ 
-						"--runInBand",
-						"getYamlFromJavaScript/test.js"
-					],
-				"cwd": "${workspaceFolder}/javascript-analyzer/",
-				"name": "analyzer getYamlFromJavaScript jest",
-				"program": "${workspaceFolder}/javascript-analyzer/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node",
-				"useWSL": true
-			},
-			{
-				"args":
-					[
-						"--directory=./",
-						"--ignoreDirectoryNames=coverage",
-						"--ignoreDirectoryNames=node_modules",
-						"--ignoreDirectoryNames=output",
-						"--ignoreDirectoryNames=test-cases",
-						"--ignoreDirectoryNames=test-coverage"
-					],
 				"cwd": "${workspaceFolder}",
-				"name": "analyzer getOrCreateItemsInDirectory",
-				"program": "${workspaceFolder}/javascript-analyzer/getOrCreateItemsInDirectory/index.js",
+				"name": "dogfooding generate with bash",
+				"program": "${workspaceFolder}/dogfooding/generate.sh",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
-			},
-			{
-				"args": 
-					[ 
-						"--runInBand",
-						"getOrCreateItemsInDirectory/test.js"
-					],
-				"cwd": "${workspaceFolder}/javascript-analyzer/",
-				"name": "analyzer getOrCreateItemsInDirectory jest",
-				"program": "${workspaceFolder}/javascript-analyzer/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "bashdb"
 			},
 			{
 				"args":

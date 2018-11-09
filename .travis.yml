@@ -3,7 +3,6 @@ cache:
     - node_modules
 before_deploy:
   - cp -r javascript-analyzer-and-renderer-harness/output harness-output/
-  - cp -r javascript-analyzer/harness/output harness-output/javascript-analyzer
   - cp -r Renderer/harness/output harness-output/Renderer
 deploy:
   github-token: $GITHUB_HARNESSES_TOKEN
@@ -16,7 +15,6 @@ deploy:
   skip-cleanup: true
   target-branch: master
 install:
-  - (cd javascript-analyzer && npm install)
   - (cd javascript-analyzer-and-renderer-harness && npm install)
   - (cd Processors && npm install)
   - (cd Renderer && npm install)
@@ -28,6 +26,6 @@ notifications:
 script:
   - bash lint.sh
   - bash test.sh
-  - mkdir -p test-coverage && npm install --no-save --prefix test-coverage coveralls@3.0.1 && (cat javascript-analyzer/test-coverage/lcov.info && cat Processors/test-coverage/lcov.info && cat Renderer/test-coverage/lcov.info) | test-coverage/node_modules/coveralls/bin/coveralls.js
+  - mkdir -p test-coverage && npm install --no-save --prefix test-coverage coveralls@3.0.1 && (cat Processors/test-coverage/lcov.info && cat Renderer/test-coverage/lcov.info) | test-coverage/node_modules/coveralls/bin/coveralls.js
   - bash dogfooding/generate.sh
   - bash harnesses.sh

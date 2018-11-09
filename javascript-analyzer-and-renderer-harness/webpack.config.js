@@ -14,7 +14,7 @@ module.exports =
 			],
 		contentFromFile:
 			{
-				file: `${__dirname}/../javascript-analyzer/harness/example.js`,
+				file: `${__dirname}/example.js`,
 				placeholder: "javascriptFromWebpack",
 			},
 		directory:
