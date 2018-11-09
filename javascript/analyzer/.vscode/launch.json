@@ -41,7 +41,7 @@
 				"args":
 					[
 						"--directory=./",
-						"--ignoreDirectoryNames=coverage",
+						"--ignoreDirectoryNames=dist",
 						"--ignoreDirectoryNames=node_modules",
 						"--ignoreDirectoryNames=output",
 						"--ignoreDirectoryNames=test-cases",
