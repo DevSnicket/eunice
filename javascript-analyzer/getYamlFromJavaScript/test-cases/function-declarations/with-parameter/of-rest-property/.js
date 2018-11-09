@@ -1,4 +1,0 @@
-function caller({
-	...parameter
-}) {
-}

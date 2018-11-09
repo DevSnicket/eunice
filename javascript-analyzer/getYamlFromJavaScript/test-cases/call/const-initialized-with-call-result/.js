@@ -1,3 +1,0 @@
-const calledVariable = called();
-
-calledVariable();

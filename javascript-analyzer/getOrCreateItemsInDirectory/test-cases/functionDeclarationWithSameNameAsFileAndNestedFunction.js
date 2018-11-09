@@ -1,4 +1,0 @@
-function functionDeclarationWithSameNameAsFileAndNestedFunction() {
-	function nestedFunction() {
-	} 
-}

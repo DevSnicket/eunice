@@ -1,4 +1,0 @@
-id: grandparent
-items:
-  id: parent
-  items: nested

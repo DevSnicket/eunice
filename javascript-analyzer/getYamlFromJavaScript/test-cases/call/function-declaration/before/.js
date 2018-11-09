@@ -1,3 +1,0 @@
-called();
-
-function called() {}

@@ -1,6 +1,0 @@
-- - id: variable
-    type: variable
-- - id: caller
-    dependsUpon:
-      - called
-      - variable

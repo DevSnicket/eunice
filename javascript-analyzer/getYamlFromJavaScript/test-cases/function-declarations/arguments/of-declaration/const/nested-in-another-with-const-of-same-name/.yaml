@@ -1,4 +1,0 @@
-id: container
-items:
-  id: caller
-  dependsUpon: called

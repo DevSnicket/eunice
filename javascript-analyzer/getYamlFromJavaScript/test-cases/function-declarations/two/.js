@@ -1,2 +1,0 @@
-function first() {}
-function second() {}
