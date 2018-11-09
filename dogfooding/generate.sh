@@ -73,6 +73,9 @@ function processYamlFile {
 }
 
 outputDirectory=$(dirname $0)/output
+
+echo Output directory is \"$outputDirectory\"
+
 ensureDirectoryExists $outputDirectory
 cd $outputDirectory
 
