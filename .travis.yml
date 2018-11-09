@@ -24,8 +24,8 @@ node_js:
 notifications:
   email: false
 script:
-  - ./lint.sh
-  - ./test.sh
+  - bash lint.sh
+  - bash test.sh
   - mkdir -p test-coverage && npm install --no-save --prefix test-coverage coveralls@3.0.1 && (cat Processors/test-coverage/lcov.info && cat Renderer/test-coverage/lcov.info) | test-coverage/node_modules/coveralls/bin/coveralls.js
-  - ./dogfooding/generate.sh
-  - ./harnesses.sh
+  - bash dogfooding/generate.sh
+  - bash harnesses.sh
