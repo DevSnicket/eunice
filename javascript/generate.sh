@@ -2,8 +2,7 @@
 set -e
 
 identifierSeparator=/
-rootDirectory=$(dirname $0)/..
-outputDirectory=$(dirname $0)/output
+rootDirectory=../..
 
 function ensureDirectoryExists() {
   if [ ! -d $1 ]; then
@@ -11,21 +10,29 @@ function ensureDirectoryExists() {
   fi
 }
 
-function processInDirectory {
-  yamlDirectory=$1
+function installEuniceNpmPackage() {
+	npm install --no-save @devsnicket/eunice-$1
+}
+
+function removeIdentifierSuffix {
+  local yamlDirectory=$1
 
   cat $yamlDirectory/analysis.yaml \
+  | node $rootDirectory/Processors/replaceIdentifiers \
+    --pattern="${identifierSeparator}index$|^index" \
+    --replacement= \
+  > $yamlDirectory/remove-identifier-suffix-of-index.yaml
+}
+
+function processYamlFile {
+  local yamlDirectory=$(dirname $1)
+
+  cat $1 \
   | node $rootDirectory/Processors/setTypeOfRootItems \
     --type=file \
   > $yamlDirectory/set-type-of-root-items-to-file.yaml
 
   cat $yamlDirectory/set-type-of-root-items-to-file.yaml \
-  | node $rootDirectory/Processors/replaceIdentifiers \
-    --pattern="${identifierSeparator}index$|^index" \
-    --replacement= \
-  > $yamlDirectory/remove-identifier-suffix-of-index.yaml
-
-  cat $yamlDirectory/remove-identifier-suffix-of-index.yaml \
   | node $rootDirectory/Processors/orderItemsBy/identifier \
   > $yamlDirectory/order-items-by-identifier.yaml
 
@@ -65,51 +72,57 @@ function processInDirectory {
   > $yamlDirectory/unstack-independent.yaml
 }
 
+outputDirectory=$(dirname $0)/output
 ensureDirectoryExists $outputDirectory
+cd $outputDirectory
 
-packages=(call-when-process-entry-point dependency-and-structure run-tests-from-file-system test-harnesses)
+installEuniceNpmPackage "javascript-analyzer"
 
-# repository
+packages=(call-when-process-entry-point dependency-and-structure javascript-analyzer run-tests-from-file-system test-harnesses)
 
-ensureDirectoryExists $outputDirectory/repository
+echo Analyze and process repository
 
-node $rootDirectory/javascript-analyzer/getOrCreateItemsInDirectory \
+ensureDirectoryExists repository
+
+npx @devsnicket/eunice-javascript-analyzer \
   --directory=$rootDirectory \
-  --ignoreDirectoryNames=coverage --ignoreDirectoryNames=node_modules --ignoreDirectoryNames=output --ignoreDirectoryNames=test-cases --ignoreDirectoryNames=test-coverage \
-> $outputDirectory/repository/analysis.yaml
+  --ignoreDirectoryNames=coverage \
+  --ignoreDirectoryNames=node_modules \
+  --ignoreDirectoryNames=output \
+  --ignoreDirectoryNames=test-cases \
+  --ignoreDirectoryNames=test-coverage \
+> repository/analysis.yaml
 
-processInDirectory $outputDirectory/repository
+removeIdentifierSuffix repository
+
+processYamlFile repository/remove-identifier-suffix-of-index.yaml
 
 sed \
+  repository/unstack-independent.yaml \
   -e "s/'@devsnicket\/eunice-${packages[0]}'/${packages[0]}/g" \
   -e "s/'@devsnicket\/eunice-${packages[1]}'/${packages[1]}/g" \
   -e "s/'@devsnicket\/eunice-${packages[2]}'/${packages[2]}/g" \
   -e "s/'@devsnicket\/eunice-${packages[3]}'/${packages[3]}/g" \
-  $outputDirectory/repository/unstack-independent.yaml \
-> $outputDirectory/repository/without-package-prefixes.yaml
-
-# packages
+  -e "s/'@devsnicket\/eunice-${packages[4]}'/${packages[4]}/g" \
+> repository/without-package-prefixes.yaml
 
 for package in ${packages[@]}; do
-  npm install --no-save --prefix $outputDirectory @devsnicket/eunice-$package
+  echo Analyze and process package $package
 
-  ensureDirectoryExists $outputDirectory/$package
+  installEuniceNpmPackage $package
 
-  node $rootDirectory/javascript-analyzer/getOrCreateItemsInDirectory \
-    --directory=$outputDirectory/node_modules/@devsnicket/eunice-$package \
+  ensureDirectoryExists $package
+
+  npx @devsnicket/eunice-javascript-analyzer \
+    --directory=node_modules/@devsnicket/eunice-$package \
     --ignoreDirectoryNames=dist \
     --ignoreDirectoryNames=node_modules \
-  > $outputDirectory/$package/analysis.yaml
+    --ignoreDirectoryNames=test-cases \
+  > $package/analysis.yaml
 
-  processInDirectory $outputDirectory/$package
-  
-  cat $outputDirectory/$package/unstack-independent.yaml \
-  | node $rootDirectory/Processors/createOrAddToStacks/usingFileSystem \
-    --directory=$outputDirectory/node_modules/@devsnicket/eunice-$package \
-    --subsetIdentifierHierarchy= \
-  > $outputDirectory/$package/stack-using-files.yaml
+  removeIdentifierSuffix $package
 
-  cat $outputDirectory/$package/stack-using-files.yaml \
+  cat $package/remove-identifier-suffix-of-index.yaml \
 	| node $rootDirectory/Processors/replaceIdentifiers \
     --pattern=.+ \
     --replacement="$package$identifierSeparator$&" \
@@ -118,22 +131,33 @@ for package in ${packages[@]}; do
     --pattern=^$ \
     --replacement=$package \
     --rootOnly=true \
-  > $outputDirectory/$package/with-root-prefix.yaml
+  > $package/with-root-prefix.yaml
+
+  processYamlFile $package/with-root-prefix.yaml
+
+  cat $package/unstack-independent.yaml \
+  | node $rootDirectory/Processors/createOrAddToStacks/usingFileSystem \
+    --directory=node_modules/@devsnicket/eunice-$package \
+    --subsetIdentifierHierarchy=$package \
+  > $package/stack-using-files.yaml
 done
 
+echo combine repository and package, and process
+
 node $rootDirectory/Processors/concatenateFromFileSystem \
-  --files $outputDirectory/repository/without-package-prefixes.yaml \
-  --files $outputDirectory/${packages[0]}/with-root-prefix.yaml \
-  --files $outputDirectory/${packages[1]}/with-root-prefix.yaml \
-  --files $outputDirectory/${packages[2]}/with-root-prefix.yaml \
-  --files $outputDirectory/${packages[3]}/with-root-prefix.yaml \
-> $outputDirectory/concatenate.yaml
+  --files repository/without-package-prefixes.yaml \
+  --files ${packages[0]}/stack-using-files.yaml \
+  --files ${packages[1]}/stack-using-files.yaml \
+  --files ${packages[2]}/stack-using-files.yaml \
+  --files ${packages[3]}/stack-using-files.yaml \
+  --files ${packages[4]}/stack-using-files.yaml \
+> concatenate.yaml
   
-cat $outputDirectory/concatenate.yaml \
+cat concatenate.yaml \
 | node $rootDirectory/Processors/createOrAddToStacks/usingFileSystem \
   --directory=$rootDirectory \
-> $outputDirectory/.yaml
+> .yaml
 
-cat $outputDirectory/.yaml \
+cat .yaml \
 | node $rootDirectory/Renderer/getSvgForYaml \
-> $outputDirectory/.svg
+> .svg
