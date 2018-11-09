@@ -11,3 +11,10 @@ runTestsFromFileSystem({
 	expectedFileName: ".yaml",
 	processArguments: process.argv,
 });
+
+test(
+	"unix shebang for node",
+	() =>
+		expect(getYamlFromJavaScript("#!/usr/bin/env node"))
+		.toEqual(""),
+);

@@ -10,9 +10,26 @@ module.exports =
 		const visitors = createVisitors();
 
 		walk.ancestor(
-			parse(javaScript, { ecmaVersion: 9 }),
+			parse(
+				removeUnixShebangForNode(javaScript),
+				{ ecmaVersion: 9 },
+			),
 			visitors,
 		);
 
 		return visitors.getItemOrItems();
 	};
+
+function removeUnixShebangForNode(
+	javascript,
+) {
+	const shebang = "#!/usr/bin/env node";
+
+	return (
+		javascript.startsWith(shebang)
+		?
+		javascript.substring(shebang.length)
+		:
+		javascript
+	);
+}
