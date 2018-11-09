@@ -20,6 +20,22 @@ test.each(
 		],
 		[
 			{
+				items: "item",
+				pattern: /.*/,
+				replacement: "",
+			},
+			"",
+		],
+		[
+			{
+				items: { anotherProperty: "anotherValue", id: "item" },
+				pattern: /.*/,
+				replacement: "",
+			},
+			{ anotherProperty: "anotherValue" },
+		],
+		[
+			{
 				items: { otherIdentifier: "item" },
 				pattern: /.+/,
 				replacement: "replacement",
