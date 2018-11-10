@@ -14,6 +14,8 @@ deploy:
   repo: DevSnicket/Eunice-harnesses
   skip-cleanup: true
   target-branch: master
+before_install:
+  - npm i -g npm@6.1.0
 install:
   - (cd javascript-analyzer-and-renderer-harness && npm install)
   - (cd Processors && npm install)
