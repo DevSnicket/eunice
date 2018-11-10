@@ -11,7 +11,7 @@ function ensureDirectoryExists() {
 }
 
 function installEuniceNpmPackage() {
-	npm install --no-save @devsnicket/eunice-$1
+	npm install --no-save --prefix=. @devsnicket/eunice-$1
 }
 
 function removeIdentifierSuffix {
