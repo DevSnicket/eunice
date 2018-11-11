@@ -1,6 +1,6 @@
 const
 	callWithYamlInputAndOutputWhenProcessEntryPoint = require("../callWithYamlInputAndOutputWhenProcessEntryPoint"),
-	processorPlugins = require("../../Renderer/harness/processorPlugins");
+	processorPlugins = require("@devsnicket/eunice-test-harnesses/processorPlugins");
 
 callWithYamlInputAndOutputWhenProcessEntryPoint(
 	removeSelfDependentItemsOfType,

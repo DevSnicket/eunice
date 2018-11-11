@@ -1,6 +1,6 @@
 const
 	callWithYamlInputAndOutputWhenProcessEntryPoint = require("../../callWithYamlInputAndOutputWhenProcessEntryPoint"),
-	processorPlugins = require("../../../Renderer/harness/processorPlugins");
+	processorPlugins = require("@devsnicket/eunice-test-harnesses/processorPlugins");
 
 /* istanbul ignore next: only used when JavaScript file is process entry point */
 callWithYamlInputAndOutputWhenProcessEntryPoint(
