@@ -74,8 +74,6 @@ function processYamlFile {
 
 outputDirectory=$(dirname $0)/output
 
-echo Output directory is \"$outputDirectory\"
-
 ensureDirectoryExists $outputDirectory
 cd $outputDirectory
 
@@ -145,7 +143,7 @@ for package in ${packages[@]}; do
   > $package/stack-using-files.yaml
 done
 
-echo combine repository and package, and process
+echo Combine repository and package, and process
 
 node $rootDirectory/Processors/concatenateFromFileSystem \
   --files repository/without-package-prefixes.yaml \
