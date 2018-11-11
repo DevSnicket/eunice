@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/DevSnicket/eunice-call-when-process-entry-point.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-call-when-process-entry-point)
 
-## Run tests from file system
+## Call when process entry point
 
 This package detects when its callee is the process entry point (e.g. from CLI and scripts), and makes arguments and standard input available to a function.
 
