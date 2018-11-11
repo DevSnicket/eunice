@@ -43,7 +43,7 @@ Analyzers are implemented to create the YAML files (e.g. from source code in a s
 
 An analyzer exists for JavaScript with support for many of the language's features.
 
-JavaScript Analyzer [![NPM](https://img.shields.io/npm/v/@devsnicket/eunice-javascript-analyzer.svg)](https://www.npmjs.com/package/@devsnicket/eunice-javascript-analyzer
+[![NPM](https://img.shields.io/npm/v/@devsnicket/eunice-javascript-analyzer.svg)](https://www.npmjs.com/package/@devsnicket/eunice-javascript-analyzer
 ) [![Git](https://raw.githubusercontent.com/DevSnicket/Eunice/master/docs/git.svg?sanitize=true) ![GitHub](https://raw.githubusercontent.com/DevSnicket/Eunice/master/docs/github.svg?sanitize=true)](https://github.com/DevSnicket/eunice-javascript-analyzer) [![Build Status](https://travis-ci.org/DevSnicket/Eunice.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-javascript-analyzer) [![Coverage Status](https://coveralls.io/repos/github/DevSnicket/Eunice/badge.svg?branch=master&c=1)](https://coveralls.io/github/DevSnicket/eunice-javascript-analyzer?branch=master)
 
 ## Processors
