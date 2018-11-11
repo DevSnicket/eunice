@@ -1,0 +1,367 @@
+env:
+  browser: true
+  commonjs: true
+  es6: true
+  jest: true
+  node: true
+extends: 'eslint:recommended'
+parserOptions:
+  ecmaVersion:
+    2018
+rules:
+  array-bracket-newline:
+    - error
+    - consistent
+  array-bracket-spacing:
+    - error
+    - always
+  array-callback-return:
+    - error
+  arrow-body-style:
+    - error
+    - as-needed
+  arrow-parens:
+    - error
+    - as-needed
+  arrow-spacing:
+    - error
+  block-spacing:
+    - error
+  brace-style:
+    - error
+  callback-return:
+    - error
+  class-methods-use-this:
+    - error
+  camelcase:
+    - error
+  comma-dangle:
+    - error
+    -
+      arrays: always-multiline
+      objects: always-multiline
+      imports: always-multiline
+      exports: always-multiline
+      functions: always-multiline
+  comma-spacing:
+    - error
+  comma-style:
+    - error
+  computed-property-spacing:
+    - error
+  consistent-return:
+    - error
+  consistent-this:
+    - error
+  curly:
+    - error
+    - multi
+  default-case:
+    - error
+  eol-last:
+    - error
+    - never
+  eqeqeq:
+    - error
+  func-call-spacing:
+    - error
+  func-name-matching:
+    - error
+  func-names:
+    - error
+    - as-needed
+  func-style:
+    - error
+    - declaration
+  function-paren-newline:
+    - error
+    - consistent
+  generator-star-spacing:
+    - error
+    - before: true
+      after: true
+  global-require:
+    - error
+  guard-for-in:
+    - error
+  handle-callback-err:
+    - error
+  id-blacklist:
+    - error
+  id-length:
+    - error
+  id-match:
+    - error
+    - ^__dirname|[a-z]+([A-Z][a-z]+)*$
+  indent:
+    - error
+    - tab
+    - ignoredNodes: [ ConditionalExpression ]
+      MemberExpression: 0
+  init-declarations:
+    - error
+  key-spacing:
+    - error
+  keyword-spacing:
+    - error
+  linebreak-style:
+    - error
+  lines-between-class-members:
+    - error
+  max-statements-per-line:
+    - error
+  multiline-comment-style:
+    - error
+    - bare-block
+  multiline-ternary:
+    - error
+    - always-multiline
+  new-cap:
+    - error
+  new-parens:
+    - error
+  newline-per-chained-call:
+    - error
+    - ignoreChainWithDepth: 1
+  no-alert:
+    - error
+  no-array-constructor:
+    - error
+  no-await-in-loop:
+    - error
+  no-bitwise:
+    - error
+  no-caller:
+    - error
+  no-catch-shadow:
+    - error
+  no-continue:
+    - error
+  no-empty-function:
+    - error
+  no-eq-null:
+    - error
+  no-eval:
+    - error
+  no-extend-native:
+    - error
+  no-extra-bind:
+    - error
+  no-extra-label:
+    - error
+  no-extra-parens:
+    - error
+    - all
+    - nestedBinaryExpressions: false
+  no-floating-decimal:
+    - error
+  no-iterator:
+    - error
+  no-implicit-coercion:
+    - error
+  no-implicit-globals:
+    - error
+  no-implied-eval:
+    - error
+  no-invalid-this:
+    - error
+  no-labels:
+    - error
+  no-label-var:
+    - error
+  no-lone-blocks:
+    - error
+  no-lonely-if:
+    - error
+  no-loop-func:
+    - error
+  no-mixed-operators:
+    - error
+  no-mixed-requires:
+    - error
+  no-multi-assign:
+    - error
+  no-multiple-empty-lines:
+    - error
+  no-multi-spaces:
+    - error
+  no-negated-condition:
+    - error
+  no-nested-ternary:
+    - error
+  no-new:
+    - error
+  no-new-func:
+    - error
+  no-new-require:
+    - error
+  no-new-wrappers:
+    - error
+  no-new-object:
+    - error
+  no-param-reassign:
+    - error
+  no-path-concat:
+    - error
+  no-plusplus:
+    - error
+    - allowForLoopAfterthoughts: true
+  no-process-env:
+    - error
+  no-process-exit:
+    - error
+  no-proto:
+    - error
+  no-prototype-builtins:
+    - error
+  no-return-await:
+    - error
+  no-script-url:
+    - error
+  no-self-compare:
+    - error
+  no-sequences:
+    - error
+  no-shadow:
+    - error
+  no-shadow-restricted-names:
+    - error
+  no-template-curly-in-string:
+    - error
+  no-throw-literal:
+    - error
+  no-trailing-spaces:
+    - error
+  no-undef-init:
+    - error
+  no-undefined:
+    - error
+  no-underscore-dangle:
+    - error
+  no-unneeded-ternary:
+    - error
+  no-unused-expressions:
+    - error
+  no-useless-call:
+    - error
+  no-useless-computed-key:
+    - error
+  no-useless-concat:
+    - error
+  no-useless-constructor:
+    - error
+  no-useless-return:
+    - error
+  no-var:
+    - error
+  no-void:
+    - error
+  no-warning-comments:
+    - error
+  no-whitespace-before-property:
+    - error
+  no-with:
+    - error
+  nonblock-statement-body-position:
+    - error
+    - below
+  object-curly-newline:
+    - error
+    - multiline: true
+  object-curly-spacing:
+    - error
+    - always
+  object-property-newline:
+    - error
+    - allowAllPropertiesOnSameLine: true
+  object-shorthand:
+    - error
+  one-var:
+    - error
+    - separateRequires: true
+  one-var-declaration-per-line:
+    - error
+  operator-assignment:
+    - error
+  padded-blocks:
+    - error
+    - never
+  padding-line-between-statements:
+    - error
+    - blankLine: always
+      prev: "*"
+      next: return
+    - blankLine: always
+      prev: [ const, let, var ]
+      next: "*"
+    - blankLine: always
+      prev: if
+      next: "*"
+    - blankLine: always
+      prev: "*"
+      next: if
+  prefer-arrow-callback:
+    - error
+  prefer-const:
+    - error
+  prefer-numeric-literals:
+    - error
+  prefer-promise-reject-errors:
+    - error
+  prefer-rest-params:
+    - error
+  prefer-spread:
+    - error
+  prefer-template:
+    - error
+  quote-props:
+    - error
+    - as-needed
+  quotes:
+    - error
+    - double
+  radix:
+    - error
+  require-await:
+    - error
+  rest-spread-spacing:
+    - error
+  semi:
+    - error
+    - always
+  strict:
+    - error
+    - never
+  semi-spacing:
+    - error
+  semi-style:
+    - error
+  sort-keys:
+    - error
+  sort-vars:
+    - error
+  space-before-blocks:
+    - error
+  space-before-function-paren:
+    - error
+    - never
+  space-in-parens:
+    - error
+  space-infix-ops:
+    - error
+  space-unary-ops:
+    - error
+  spaced-comment:
+    - error
+  template-curly-spacing:
+    - error
+  unicode-bom:
+    - error
+  vars-on-top:
+    - error
+  wrap-regex:
+    - error
+  yield-star-spacing:
+    - error
+  yoda:
+    - error

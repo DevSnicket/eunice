@@ -1,0 +1,7 @@
+/devsnicket-eunice-processors-*.tgz
+/.eslintrc.yml 
+/.eslintignore 
+/.travis.yml 
+/.vscode 
+/test-coverage 
+/jsconfig.json
