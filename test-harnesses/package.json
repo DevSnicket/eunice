@@ -5,6 +5,7 @@
 	},
 	"description": "Shared implementation for analyzer and renderer test harnesses, using JavaScript, HTML, React and Webpack.",
 	"dependencies": {
+		"@devsnicket/plugin-discovery-create-repository": "1.4.0",
 		"babel-plugin-transform-object-rest-spread": "6.26.0",
 		"copy-webpack-plugin": "4.6.0",
 		"react": "16.4.0",
@@ -38,5 +39,5 @@
 	"scripts": {
 		"lint": "npx eslint ."
 	},
-	"version": "2.1.6"
+	"version": "2.2.0"
 }
