@@ -1,6 +1,6 @@
 # Eunice [![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/Renderer/getSvgElementForYaml/createArrows/testcase.svg?sanitize=true)](Renderer/getSvgElementForYaml/createArrows/testcase.svg)
 
-[![Build Status](https://travis-ci.org/DevSnicket/eunice-javascript-analyzer.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-javascript-analyzer) [![Coverage Status](https://coveralls.io/repos/github/DevSnicket/eunice-javascript-analyzer/badge.svg?branch=master&c=1)](https://coveralls.io/github/DevSnicket/eunice-javascript-analyzer?branch=master)
+[![Build Status](https://travis-ci.org/DevSnicket/eunice-javascript-analyzer.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-javascript-analyzer) [![Coverage Status](https://coveralls.io/repos/github/DevSnicket/eunice-javascript-analyzer/badge.svg?branch=master&c=1)](https://coveralls.io/github/DevSnicket/eunice-javascript-analyzer?branch=master) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
 
 ## JavaScript analyzer
 
