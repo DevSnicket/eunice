@@ -1,6 +1,6 @@
 const
 	createProcessorsMenuElements = require("./createProcessorsMenuElements"),
-	processorPlugins = require("../../processorPlugins");
+	processorPlugins = require("@devsnicket/eunice-test-harnesses/processorPlugins");
 
 module.exports =
 	({
