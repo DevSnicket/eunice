@@ -3,8 +3,10 @@
 	"description": "Test harness with three columns, JavaScript analysis, YAML with processors and SVG renderer.",
 	"devDependencies": {
 		"@devsnicket/eunice-javascript-analyzer": "1.5.0",
-		"@devsnicket/eunice-test-harnesses": "2.1.6",
-		"@devsnicket/plugin-discovery-commonjs-babel-plugin": "1.7.0",
+		"@devsnicket/eunice-processors": "1.1.0",
+		"@devsnicket/eunice-test-harnesses": "2.2.0",
+		"@devsnicket/plugin-discovery-commonjs-babel-plugin": "1.10.1",
+		"@devsnicket/plugin-discovery-create-repository": "1.5.1",
 		"@types/react": "16.3.14",
 		"babel-core": "6.26.3",
 		"babel-loader": "7.1.4",

@@ -18,7 +18,6 @@ before_install:
   - npm i -g npm@6.1.0
 install:
   - (cd javascript-analyzer-and-renderer-harness && npm install)
-  - (cd Processors && npm install)
   - (cd Renderer && npm install)
 language: node_js
 node_js:
@@ -28,6 +27,6 @@ notifications:
 script:
   - bash lint.sh
   - bash test.sh
-  - mkdir -p test-coverage && npm install --no-save --prefix test-coverage coveralls@3.0.1 && (cat Processors/test-coverage/lcov.info && cat Renderer/test-coverage/lcov.info) | test-coverage/node_modules/coveralls/bin/coveralls.js
+  - mkdir -p test-coverage && npm install --no-save --prefix test-coverage coveralls@3.0.1 && cat Renderer/test-coverage/lcov.info | test-coverage/node_modules/coveralls/bin/coveralls.js
   - bash dogfooding/generate.sh
   - bash harnesses.sh
