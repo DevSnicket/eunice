@@ -9,8 +9,11 @@
 		"js-yaml": "3.11.0"
 	},
 	"devDependencies": {
+		"@devsnicket/plugin-discovery-commonjs-babel-plugin": "1.10.0",
 		"@types/jest": "23.3.10",
 		"@types/node": "10.12.12",
+		"babel-cli": "6.26.0",
+		"babel-plugin-transform-object-rest-spread": "6.26.0",
 		"babel-preset-env": "1.7.0",
 		"eslint": "5.9.0",
 		"jest": "23.6.0"
@@ -55,7 +58,7 @@
 		"url": "https://github.com/DevSnicket/eunice-processors.git"
 	},
 	"scripts": {
-		"build": "npx babel -d dist --ignore dist/*,dist/**/*,harness/*,node_modules/**/*,**/test/**,**/testcases/**,test-coverage/**,**/test.js --plugins transform-object-rest-spread -s true .",
+		"build": "npx babel -d dist --ignore dist/*,dist/**/*,harness/*,node_modules/**/*,**/test/**,**/testcases/**,test-coverage/**,**/test.js --plugins @devsnicket/plugin-discovery-commonjs-babel-plugin,transform-object-rest-spread -s true .",
 		"lint": "npx eslint .",
 		"test": "npx jest --runInBand"
 	},
