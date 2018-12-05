@@ -3,25 +3,26 @@
 	"description": "Test harness with three columns, JavaScript analysis, YAML with processors and SVG renderer.",
 	"devDependencies": {
 		"@devsnicket/eunice-javascript-analyzer": "1.5.0",
-		"@devsnicket/eunice-processors": "1.1.0",
-		"@devsnicket/eunice-test-harnesses": "2.2.0",
 		"@devsnicket/plugin-discovery-commonjs-babel-plugin": "1.10.1",
 		"@devsnicket/plugin-discovery-create-repository": "1.5.1",
-		"@types/react": "16.3.14",
+		"@types/react": "16.4.18",
 		"babel-core": "6.26.3",
 		"babel-loader": "7.1.4",
 		"babel-polyfill": "6.26.0",
 		"babel-preset-env": "1.7.0",
-		"eslint": "4.19.1",
+		"eslint": "5.9.0",
 		"react": "16.4.0",
 		"react-dom": "16.4.0",
 		"react-reflex": "2.2.8",
-		"webpack": "4.11.1",
-		"webpack-cli": "3.0.3"
+		"webpack": "4.27.1",
+		"webpack-cli": "3.1.2"
 	},
 	"license": "MIT",
 	"scripts": {
 		"harness": "npx webpack -p --config webpack.config.js",
 		"lint": "npx eslint ."
+	},
+	"dependencies": {
+		"@devsnicket/eunice-test-harnesses": "2.2.0"
 	}
 }
