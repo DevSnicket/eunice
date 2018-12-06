@@ -16,5 +16,5 @@ notifications:
 script:
   - npm run lint
   - npm run test
-#  - mkdir -p test-coverage && npm install --no-save --prefix test-coverage coveralls@3.0.1 && cat test-coverage/lcov.info | test-coverage/node_modules/coveralls/bin/coveralls.js
+  - mkdir -p test-coverage && npm install --no-save --prefix test-coverage coveralls@3.0.1 && cat test-coverage/lcov.info | test-coverage/node_modules/coveralls/bin/coveralls.js
   - npm run build
