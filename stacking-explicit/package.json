@@ -23,6 +23,7 @@
 		"collectCoverage": true,
 		"collectCoverageFrom": [
 			"**/*.js",
+			"!dist/**",
 			"!node_modules/**",
 			"!test-coverage/**"
 		],
