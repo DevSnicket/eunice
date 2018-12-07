@@ -1,6 +1,0 @@
-**/node_modules/
-**/test-coverage/
-/.vs
-/dogfooding/output/
-/javascript-analyzer-and-renderer-harness/output
-/Renderer/harness/output
