@@ -2,6 +2,12 @@
 
 [![Build Status](https://travis-ci.org/DevSnicket/eunice-dependency-and-structure.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-dependency-and-structure) [![Coverage Status](https://coveralls.io/repos/github/DevSnicket/eunice-dependency-and-structure/badge.svg?branch=master&c=1)](https://coveralls.io/github/DevSnicket/eunice-dependency-and-structure?branch=master) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
 
+## Premise
+
+DevSnicket Eunice is a toolkit based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. Euince's approach isn't limited to direct dependencies, but includes indirect dependencies as well.
+
+[try out Eunice on Eunice 🐶🥫](https://devsnicket.github.io/Eunice-harnesses/Renderer/harness.html) ([created with](dogfooding/generate.sh))
+
 ## Dependency and structure
 
 This package takes YAML objects, replaces the identifiers of whats depended upon with references, adds dependent references in other direction and normalises the hierarchical structure.
