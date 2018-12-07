@@ -1,5 +1,0 @@
-id: grandparent
-items:
-  - id: parent
-    dependsUpon: nested
-    items: nested
