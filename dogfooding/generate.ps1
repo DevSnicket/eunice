@@ -85,6 +85,7 @@ try
 		| % {$_ -replace "'@devsnicket/eunice-$($packages[3])'", $packages[3] } `
 		| % {$_ -replace "'@devsnicket/eunice-$($packages[4])'", $packages[4] } `
 		| % {$_ -replace "'@devsnicket/eunice-$($packages[5])'", $packages[5] } `
+		| % {$_ -replace "'@devsnicket/eunice-$($packages[6])'", $packages[6] } `
 		> $yamlDirectory/without-package-prefixes.yaml
 	}
 
@@ -95,7 +96,7 @@ try
 	installEuniceNpmPackage "javascript-analyzer"
 	installEuniceNpmPackage "processors"
 
-	$packages = "call-when-process-entry-point", "dependency-and-structure", "javascript-analyzer", "processors", "run-tests-from-file-system", "test-harnesses"
+	$packages = "call-when-process-entry-point", "dependency-and-structure", "javascript-analyzer", "processors", "renderer", "run-tests-from-file-system", "test-harnesses"
 
 	echo "Analyze and process repository"
 
@@ -159,6 +160,7 @@ try
 		--files "$($packages[3])/stack-using-files.yaml" `
 		--files "$($packages[4])/stack-using-files.yaml" `
 		--files "$($packages[5])/stack-using-files.yaml" `
+		--files "$($packages[6])/stack-using-files.yaml" `
 	> concatenate.yaml
 
 	cat concatenate.yaml `
@@ -167,7 +169,7 @@ try
 	> .yaml
 
 	cat .yaml `
-	| node $rootDirectory/Renderer/getSvgForYaml `
+	| node node_modules/@devsnicket/eunice-renderer/getSvgForYaml `
 	> .svg
 }
 finally
