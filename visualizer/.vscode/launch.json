@@ -1,0 +1,83 @@
+{
+	"configurations":
+		[
+			{
+				"localRoot": "${workspaceFolder}",
+				"name": "attach",
+				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
+				"request": "attach",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
+						"getInteractiveElementsForYaml/test.js"
+					],
+				"cwd": "${workspaceFolder}/",
+				"localRoot": "${workspaceFolder}",
+				"name": "getInteractiveElementsForYaml jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
+						"getSvgForYaml/test.js"
+					],
+				"cwd": "${workspaceFolder}/",
+				"localRoot": "${workspaceFolder}",
+				"name": "getSvgForYaml jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[
+						"--subsetIdentifierHierarchy=",
+						"--yaml="
+					],
+				"cwd": "${workspaceFolder}/",
+				"localRoot": "${workspaceFolder}",
+				"name": "getSvgForYaml",
+				"program": "${workspaceFolder}/Renderer/getSvgForYaml/index.js",
+				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args": [ ],
+				"cwd": "${workspaceFolder}/",
+				"localRoot": "${workspaceFolder}",
+				"name": "getSvgForYaml test",
+				"program": "${workspaceFolder}/Renderer/getSvgForYaml/test.js",
+				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
+						"getSvgForYaml/withSubset.test.js"
+					],
+				"cwd": "${workspaceFolder}/",
+				"localRoot": "${workspaceFolder}",
+				"name": "getSvgForYaml with subset jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			}
+		],
+	"version": "0.2.0"
+}
