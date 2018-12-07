@@ -2,6 +2,12 @@
 
 [![Build Status](https://travis-ci.org/DevSnicket/eunice-run-tests-from-file-system.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-run-tests-from-file-system) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
 
+## Premise
+
+DevSnicket Eunice is a toolkit based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. Euince's approach isn't limited to direct dependencies, but includes indirect dependencies as well.
+
+[try out Eunice on Eunice 🐶🥫](https://devsnicket.github.io/Eunice-harnesses/Renderer/harness.html) ([created with](dogfooding/generate.sh))
+
 ## Run tests from file system
 
 This package is used to help create [Jest](https://jestjs.io/) tests for other [Eunice](https://github.com/DevSnicket/Eunice) packages. 
