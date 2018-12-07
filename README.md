@@ -102,7 +102,10 @@ Items and sub-item can also be opened by clicking/tapping on their box. Opening 
 
 root > grandparent
 
-[![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/Renderer/getSvgForYaml/withSubset.testcases/upper-item-depends-upon-lower-item-with-parent.svg?sanitize=true)](Renderer/getSvgForYaml/withSubset.testcases/upper-item-depends-upon-lower-item-with-parent.svg) 
+[![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/Renderer/getSvgForYaml/withSubset.testcases/upper-item-depends-upon-lower-item-with-parent.svg?sanitize=true)](Renderer/getSvgForYaml/withSubset.testcases/upper-item-depends-upon-lower-item-with-parent.svg)
+
+[![NPM](https://img.shields.io/npm/v/@devsnicket/eunice-renderer.svg)](https://www.npmjs.com/package/@devsnicket/eunice-renderer
+) [![Git](https://raw.githubusercontent.com/DevSnicket/Eunice/master/docs/git.svg?sanitize=true) ![GitHub](https://raw.githubusercontent.com/DevSnicket/Eunice/master/docs/github.svg?sanitize=true)](https://github.com/DevSnicket/eunice-renderer) [![Build Status](https://travis-ci.org/DevSnicket/eunice-renderer.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-renderer) [![Coverage Status](https://coveralls.io/repos/github/DevSnicket/eunice-renderer/badge.svg?branch=master&c=1)](https://coveralls.io/github/DevSnicket/eunice-renderer?branch=master)
 
 >[try out JavaScript &rightarrow; YAML &rightarrow; SVG](https://devsnicket.github.io/Eunice-harnesses/harness.html)
 
