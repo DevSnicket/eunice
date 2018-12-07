@@ -1,32 +1,26 @@
 cache:
   directories:
     - node_modules
-before_deploy:
-  - cp -r javascript-analyzer-and-renderer-harness/output harness-output/
-  - cp -r Renderer/harness/output harness-output/Renderer
 deploy:
   github-token: $GITHUB_HARNESSES_TOKEN
   keep-history: true
-  local-dir: harness-output
+  local-dir: harness/output
   on:
     branch: master
   provider: pages
-  repo: DevSnicket/Eunice-harnesses
   skip-cleanup: true
-  target-branch: master
+  target-branch: gh-pages
 before_install:
   - npm i -g npm@6.1.0
 install:
-  - (cd javascript-analyzer-and-renderer-harness && npm install)
-  - (cd Renderer && npm install)
+  - (cd harness/javascript-analyzer-and-renderer && npm install)
+  - (cd harness/renderer && npm install)
 language: node_js
 node_js:
   - "8.11.2"
 notifications:
   email: false
 script:
-  - bash lint.sh
-  - bash test.sh
-  - mkdir -p test-coverage && npm install --no-save --prefix test-coverage coveralls@3.0.1 && cat Renderer/test-coverage/lcov.info | test-coverage/node_modules/coveralls/bin/coveralls.js
   - bash dogfooding/generate.sh
-  - bash harnesses.sh
+  - bash harnesses/lint.sh
+  - bash harnesses/build.sh
