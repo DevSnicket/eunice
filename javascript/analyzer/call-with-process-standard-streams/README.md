@@ -2,6 +2,12 @@
 
 [![Build Status](https://travis-ci.org/DevSnicket/eunice-call-when-process-entry-point.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-call-when-process-entry-point) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
 
+## Premise
+
+DevSnicket Eunice is a toolkit based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. Euince's approach isn't limited to direct dependencies, but includes indirect dependencies as well.
+
+[try out Eunice on Eunice 🐶🥫](https://devsnicket.github.io/Eunice-harnesses/Renderer/harness.html) ([created with](dogfooding/generate.sh))
+
 ## Call when process entry point
 
 This package detects when its callee is the process entry point (e.g. from CLI and scripts), and makes arguments and standard input available to a function.
