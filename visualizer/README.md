@@ -38,3 +38,5 @@ Items and sub-item can also be opened by clicking/tapping on their box. Opening 
 root > grandparent
 
 [![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/Renderer/getSvgForYaml/withSubset.testcases/upper-item-depends-upon-lower-item-with-parent.svg?sanitize=true)](Renderer/getSvgForYaml/withSubset.testcases/upper-item-depends-upon-lower-item-with-parent.svg)
+
+>[try out JavaScript &rightarrow; YAML &rightarrow; SVG](https://devsnicket.github.io/Eunice-harnesses/harness.html)
