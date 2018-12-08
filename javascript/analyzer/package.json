@@ -1,6 +1,9 @@
 {
 	"author": "Graham Dyson",
-	"bin": "bin/getOrCreateItemsInDirectory.js",
+	"bin": {
+	  "eunice-javascript-analyzer-getOrCreateItemsInDirectory": "bin/getOrCreateItemsInDirectory.js",
+	  "eunice-javascript-analyzer-getYamlFromJavaScript": "bin/getYamlFromJavaScript.js"
+	},
 	"bugs": {
 		"url": "https://github.com/DevSnicket/eunice/issues"
 	},
