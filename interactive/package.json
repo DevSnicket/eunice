@@ -4,7 +4,7 @@
 	"dependencies": {
 		"@devsnicket/eunice-processors": "1.2.0",
 		"@devsnicket/eunice-renderer": "1.0.0",
-		"@devsnicket/eunice-test-harnesses": "2.2.0",
+		"@devsnicket/eunice-test-harnesses": "2.4.0",
 		"@devsnicket/plugin-discovery-create-repository": "1.5.1",
 		"babel-polyfill": "6.26.0",
 		"react": "16.4.0",
