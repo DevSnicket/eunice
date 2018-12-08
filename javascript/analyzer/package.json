@@ -1,6 +1,6 @@
 {
 	"author": "Graham Dyson",
-	"bin": "bin/getOrCreateItemsInDirectory/index.js",
+	"bin": "bin/getOrCreateItemsInDirectory.js",
 	"bugs": {
 		"url": "https://github.com/DevSnicket/eunice/issues"
 	},
@@ -80,5 +80,5 @@
 		"lint": "eslint .",
 		"test": "jest --runInBand"
 	},
-	"version": "1.8.0"
+	"version": "1.8.1"
 }
