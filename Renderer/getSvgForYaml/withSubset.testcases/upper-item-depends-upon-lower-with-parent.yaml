@@ -1,7 +1,0 @@
-- id: parent
-  items:
-    - - id: upper
-        items:
-          id: item of upper
-          dependsUpon: lower
-    - - id: lower

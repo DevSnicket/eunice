@@ -1,6 +1,0 @@
-.eslintignore
-*.svg
-harness*
-jsconfig.json
-*test.js
-*testcases

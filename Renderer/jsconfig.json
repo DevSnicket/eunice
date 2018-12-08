@@ -1,7 +1,0 @@
-{
-	"extends": "../jsconfig.json",
-	"exclude": [
-		"*.bundle.js*",
-		"node_modules"
-	]
-}

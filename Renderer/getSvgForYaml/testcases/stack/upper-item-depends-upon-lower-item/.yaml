@@ -1,6 +1,0 @@
-id: parent
-items:
-  - - id: first
-      dependsUpon:
-        - second
-  - - id: second
