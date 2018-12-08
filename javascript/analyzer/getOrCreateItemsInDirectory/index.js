@@ -1,39 +1,19 @@
-#!/usr/bin/env node
 const
 	fs = require("fs"),
-	path = require("path");
-
-const
-	callWhenProcessEntryPoint = require("@devsnicket/eunice-call-when-process-entry-point"),
 	getItemOrItemsFromJavaScript = require("../getItemOrItemsFromJavaScript"),
 	getOrCreateFileItem = require("./getOrCreateFileItem"),
-	getYamlForItemOrItems = require("../getYamlForItemOrItems");
+	path = require("path");
 
-/* istanbul ignore next: only used when JavaScript file is process entry point */
-callWhenProcessEntryPoint({
-	action:
-		processArguments =>
-			getYamlForItemOrItems(
-				getOrCreateItemsInDirectory(
-					processArguments,
-				),
-			),
-});
-
-module.exports = getOrCreateItemsInDirectory;
-
-function getOrCreateItemsInDirectory({
-	directory,
-	ignoreDirectoryNames,
-}) {
-	return (
+module.exports =
+	({
+		directory,
+		ignoreDirectoryNames,
+	}) =>
 		getOrCreateItemsInRootedDirectory({
 			directory: "",
 			ignoreDirectoryNames,
 			rootDirectory: directory,
-		})
-	);
-}
+		});
 
 function getOrCreateItemsInRootedDirectory({
 	directory,
