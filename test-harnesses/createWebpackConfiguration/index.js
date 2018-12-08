@@ -19,6 +19,8 @@ module.exports =
 				[ "babel-polyfill", indexFile ],
 			module:
 				createModuleWithBabelPlugins(babelPlugins),
+			node:
+				{ fs: "empty" },
 			output:
 				{
 					filename: "harness.js",
