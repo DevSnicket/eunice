@@ -2,8 +2,8 @@
 	"author": "Graham Dyson",
 	"description": "Test harness with three columns, JavaScript analysis, YAML with processors and SVG renderer.",
 	"dependencies": {
-		"@devsnicket/eunice-javascript-analyzer": "1.5.0",
-		"@devsnicket/eunice-test-harnesses": "2.2.0",
+		"@devsnicket/eunice-javascript-analyzer": "1.9.0",
+		"@devsnicket/eunice-test-harnesses": "2.4.0",
 		"@devsnicket/plugin-discovery-create-repository": "1.5.1",
 		"babel-polyfill": "6.26.0",
 		"react": "16.4.0",
