@@ -77,11 +77,11 @@
 		"url": "https://github.com/DevSnicket/eunice-javascript-analyzer.git"
 	},
 	"scripts": {
-		"build": "babel -d dist --ignore dist/*,dist/**/*,harness/*,node_modules/**/*,**/test/**,**/testcases/**,test-coverage/**,**/test.js --plugins transform-object-rest-spread -s true .",
+		"build": "babel -d dist --ignore dist/*,dist/**/*,node_modules/**/*,**/test/**,**/testcases/**,test-coverage/**,**/test.js --plugins transform-object-rest-spread -s true .",
 		"dogfooding": "node getOrCreateItemsInDirectory --directory=. --ignoreDirectoryNames=dist --ignoreDirectoryNames=node_modules --ignoreDirectoryNames=output --ignoreDirectoryNames=test-cases --ignoreDirectoryNames=test-coverage",
 		"harness": "webpack -p --config harness/webpack.config.js",
 		"lint": "eslint .",
 		"test": "jest --runInBand"
 	},
-	"version": "1.9.0"
+	"version": "1.10.0"
 }
