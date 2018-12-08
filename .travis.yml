@@ -4,7 +4,7 @@ cache:
 deploy:
   github-token: $GITHUB_HARNESSES_TOKEN
   keep-history: true
-  local-dir: harness/output
+  local-dir: harnesses/output
   on:
     branch: master
   provider: pages
@@ -13,8 +13,8 @@ deploy:
 before_install:
   - npm i -g npm@6.1.0
 install:
-  - (cd harness/javascript-analyzer-and-renderer && npm install)
-  - (cd harness/renderer && npm install)
+  - (cd harnesses/javascript-analyzer-and-renderer && npm install)
+  - (cd harnesses/renderer && npm install)
 language: node_js
 node_js:
   - "8.11.2"
