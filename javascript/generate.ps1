@@ -125,6 +125,7 @@ try
 
 		npx @devsnicket/eunice-javascript-analyzer `
 			--directory=node_modules/@devsnicket/eunice-$package `
+			--ignoreDirectoryNames=.devsnicket-plugin-discovery `
 			--ignoreDirectoryNames=dist `
 			--ignoreDirectoryNames=node_modules `
 			--ignoreDirectoryNames=test-cases `
