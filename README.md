@@ -1,6 +1,6 @@
 # Eunice ![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgElementForYaml/createArrows/testcase.svg?sanitize=true) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
 
-DevSnicket Eunice is a toolkit based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. Euince's approach isn't limited to direct dependencies, but includes indirect dependencies as well.
+DevSnicket Eunice is based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. Euince's approach isn't limited to direct dependencies, but includes indirect dependencies as well.
 
 [try out Eunice on Eunice 🐶🥫](https://devsnicket.github.io/Eunice/renderer/harness.html) ([created with](dogfooding/generate.sh)) [![Build Status](https://travis-ci.org/DevSnicket/Eunice.svg?branch=master)](https://travis-ci.org/DevSnicket/Eunice) 
 
@@ -15,6 +15,8 @@ In some programming languages there are implied stacks, such as the order of fun
 The approach of defining stacks can be applied at all scales of software and across boundaries, from individual files, functions or classes, to multiple, large codebases in different languages, frameworks and runtimes.
 
 ## Stages
+
+Eunice includes the stages shown below. Transitions are made between the stages using YAML. An explanation of the YAML and stages follows.
 
 ![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/docs/stages-and-transitions.svg?sanitize=true)
 
