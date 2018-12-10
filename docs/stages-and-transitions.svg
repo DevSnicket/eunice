@@ -1,11 +1,13 @@
-<svg height="73" width="555" xmlns="http://www.w3.org/2000/svg">
+<svg height="73" width="555" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 	<defs><style type="text/css">polyline{fill:none;stroke:black}rect{fill:lightgray}text{font-family:arial}text.transition{font-size:10px}text.stage{font-size:16px}</style></defs>
 	<symbol id="arrow-head">
 		<polygon points="0,0 0,20 10,10"/>
 	</symbol>
 	<symbol id="analyze">
-		<rect width="75" height="32"/>
-		<text class="stage" x="10" y="22">analyze</text>
+		<a xlink:href="#analyzers">
+			<rect width="75" height="32"/>
+			<text class="stage" x="10" y="22">analyze</text>
+		</a>
 	</symbol>
 	<symbol id="yaml-arrow">
 		<polyline points="0,16 45,16"/>
