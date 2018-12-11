@@ -1,6 +1,7 @@
+#!/usr/bin/env node
 const
 	callWhenProcessEntryPoint = require("@devsnicket/eunice-call-with-process-standard-streams"),
-	getSvgForYaml = require("../getSvgForYaml");
+	getSvgForYaml = require(".");
 
 callWhenProcessEntryPoint({
 	action:
