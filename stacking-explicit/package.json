@@ -7,8 +7,8 @@
 		"eunice-processors-createOrAddToStacksUsingFileSystem": "dist/createOrAddToStacks/usingFileSystem/bin.js",
 		"eunice-processors-groupItemsByIdentifierSeparator": "dist/groupItemsByIdentifierSeparator/bin.js",
 		"eunice-processors-orderItemsByIdentifier": "dist/orderItemsBy/identifier/bin.js",
-		"eunice-processors-orderItemsByIdentifierSuffix": "dist/orderItemsBy/indexOf/identifierSuffix/bin.js",
-		"eunice-processors-orderItemsByType": "dist/orderItemsBy/indexOf/type/bin.js",
+		"eunice-processors-orderItemsByIndexOfIdentifierSuffix": "dist/orderItemsBy/indexOf/identifierSuffix/bin.js",
+		"eunice-processors-orderItemsByIndexOfType": "dist/orderItemsBy/indexOf/type/bin.js",
 		"eunice-processors-removeRedundantParentIdentifierPrefix": "dist/removeRedundantParentIdentifierPrefix/bin.js",
 		"eunice-processors-removeSelfDependentItemsOfType": "dist/removeSelfDependentItemsOfType/bin.js",
 		"eunice-processors-replaceIdentifiers": "dist/replaceIdentifiers/bin.js",
@@ -82,5 +82,5 @@
 		"lint": "npx eslint .",
 		"test": "npx jest --runInBand"
 	},
-	"version": "1.6.0"
+	"version": "1.6.1"
 }
