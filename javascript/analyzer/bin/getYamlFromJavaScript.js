@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 const
-	callWhenProcessEntryPoint = require("@devsnicket/eunice-call-when-process-entry-point"),
+	callWithProcessStandardStreams = require("@devsnicket/eunice-call-with-process-standard-streams"),
 	getYamlFromJavaScript = require("../getYamlFromJavaScript");
 
-callWhenProcessEntryPoint({
+callWithProcessStandardStreams({
 	action: parameters => getYamlFromJavaScript(parameters.javaScript),
 	standardInputParameter: "javaScript",
 });

@@ -1,15 +1,15 @@
 {
 	"author": "Graham Dyson",
 	"bin": {
-	  "eunice-javascript-analyzer-getOrCreateItemsInDirectory": "bin/getOrCreateItemsInDirectory.js",
-	  "eunice-javascript-analyzer-getYamlFromJavaScript": "bin/getYamlFromJavaScript.js"
+		"eunice-javascript-analyzer-getOrCreateItemsInDirectory": "bin/getOrCreateItemsInDirectory.js",
+		"eunice-javascript-analyzer-getYamlFromJavaScript": "bin/getYamlFromJavaScript.js"
 	},
 	"bugs": {
 		"url": "https://github.com/DevSnicket/eunice/issues"
 	},
 	"description": "Analyzes JavaScript files/directories and writes a YAML file of the dependencies which can then be processed, rendered and interacted with using the rest of Eunice.",
 	"dependencies": {
-		"@devsnicket/eunice-call-when-process-entry-point": "1.2.1",
+		"@devsnicket/eunice-call-with-process-standard-streams": "1.0.0",
 		"acorn": "5.6.2",
 		"array.prototype.flatmap": "1.2.1",
 		"babel-polyfill": "6.26.0",
@@ -84,5 +84,5 @@
 		"lint": "eslint .",
 		"test": "jest --runInBand"
 	},
-	"version": "1.10.0"
+	"version": "1.11.0"
 }
