@@ -4,24 +4,24 @@ DevSnicket Eunice is a toolkit based on the premise that unidirectional dependen
 
 [try out Eunice on Eunice 🐶🥫](https://devsnicket.github.io/Eunice/renderer/harness.html) ([created with](dogfooding/generate.sh))
 
-## Call when process entry point
+## Call with process standard streams
 
-[![NPM](https://img.shields.io/npm/v/@devsnicket/eunice-call-when-process-entry-point.svg)](https://www.npmjs.com/package/@devsnicket/eunice-call-when-process-entry-point
-) [![Build Status](https://travis-ci.org/DevSnicket/eunice-call-when-process-entry-point.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-call-when-process-entry-point) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
+[![NPM](https://img.shields.io/npm/v/@devsnicket/eunice-call-with-process-standard-streams.svg)](https://www.npmjs.com/package/@devsnicket/eunice-call-with-process-standard-streams
+) [![Build Status](https://travis-ci.org/DevSnicket/eunice-call-with-process-standard-streams.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-call-with-process-standard-streams) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
 
-This package detects when its callee is the process entry point (e.g. from CLI and scripts), and makes arguments and standard input available to a function.
+This package calls a specified function with arguments taken from the process and standard input streams. The return value is writen to the standard output stream with console.log (e.g. a string).
 
 It depends upon [minimist](https://github.com/substack/minimist) to parse the arguments.
 
-Used by [Eunice](https://github.com/DevSnicket/Eunice) JavaScript analyzer, processors and renderer so they can be run from CLI and scripts, and have large amounts of YAML passed into (and out of) them.
+Its used by [Eunice](https://github.com/DevSnicket/Eunice) JavaScript analyzer, processors and renderer so they can be run from CLI and scripts, and have large amounts of YAML passed into (and out of) them.
 
-Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-call-when-process-entry-point):
+Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-call-with-process-standard-streams):
 
 ```bash
-npm install @devsnicket/eunice-call-when-process-entry-point
+npm install @devsnicket/eunice-call-with-process-standard-streams
 ```
-Or with [`yarn`](https://yarnpkg.com/en/package/@devsnicket/eunice-call-when-process-entry-point):
+Or with [`yarn`](https://yarnpkg.com/en/package/@devsnicket/eunice-call-with-process-standard-streams):
 
 ```bash
-yarn add @devsnicket/eunice-call-when-process-entry-point
+yarn add @devsnicket/eunice-call-with-process-standard-streams
 ```
