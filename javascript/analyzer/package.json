@@ -38,6 +38,7 @@
 			"**/*.js",
 			"!**/test-cases/**",
 			"!**/test-cases/**/.js",
+			"!bin/**",
 			"!dist/**",
 			"!node_modules/**",
 			"!harness/**",
