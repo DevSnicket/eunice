@@ -1,4 +1,4 @@
-/* istanbul ignore file: only used when JavaScript file is process entry point */
+#!/usr/bin/env node
 const
 	callWithProcessStandardStreamsOfYaml = require("../../callWithProcessStandardStreamsOfYaml"),
 	createOrAddToStacksUsingFileSystem = require("./");

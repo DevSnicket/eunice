@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const
 	callWithProcessStandardStreamsOfYaml = require("../../callWithProcessStandardStreamsOfYaml"),
 	orderItemsByIdentifier = require("./");
