@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const
 	callWithProcessStandardStreams = require("@devsnicket/eunice-call-with-process-standard-streams"),
-	getYamlFromJavaScript = require("../getYamlFromJavaScript");
+	getYamlFromJavaScript = require(".");
 
 callWithProcessStandardStreams({
 	action: parameters => getYamlFromJavaScript(parameters.javaScript),

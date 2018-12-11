@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const
 	callWithProcessStandardStreams = require("@devsnicket/eunice-call-with-process-standard-streams"),
-	getOrCreateItemsInDirectory = require("../getOrCreateItemsInDirectory"),
+	getOrCreateItemsInDirectory = require("."),
 	getYamlForItemOrItems = require("../getYamlForItemOrItems");
 
 callWithProcessStandardStreams({

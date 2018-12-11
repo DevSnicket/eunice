@@ -1,8 +1,8 @@
 {
 	"author": "Graham Dyson",
 	"bin": {
-		"eunice-javascript-analyzer-getOrCreateItemsInDirectory": "bin/getOrCreateItemsInDirectory.js",
-		"eunice-javascript-analyzer-getYamlFromJavaScript": "bin/getYamlFromJavaScript.js"
+		"eunice-javascript-analyzer-getOrCreateItemsInDirectory": "dist/getOrCreateItemsInDirectory/bin.js",
+		"eunice-javascript-analyzer-getYamlFromJavaScript": "dist/getYamlFromJavaScript/bin.js"
 	},
 	"bugs": {
 		"url": "https://github.com/DevSnicket/eunice/issues"
@@ -36,9 +36,9 @@
 		"collectCoverage": true,
 		"collectCoverageFrom": [
 			"**/*.js",
+			"!**/bin.js",
 			"!**/test-cases/**",
 			"!**/test-cases/**/.js",
-			"!bin/**",
 			"!dist/**",
 			"!node_modules/**",
 			"!harness/**",
@@ -79,10 +79,10 @@
 	},
 	"scripts": {
 		"build": "babel -d dist --ignore dist/*,dist/**/*,node_modules/**/*,**/test/**,**/testcases/**,test-coverage/**,**/test.js --plugins transform-object-rest-spread -s true .",
-		"dogfooding": "node getOrCreateItemsInDirectory --directory=. --ignoreDirectoryNames=dist --ignoreDirectoryNames=node_modules --ignoreDirectoryNames=output --ignoreDirectoryNames=test-cases --ignoreDirectoryNames=test-coverage",
+		"dogfooding": "node getOrCreateItemsInDirectory/bin.js --directory=. --ignoreDirectoryNames=dist --ignoreDirectoryNames=node_modules --ignoreDirectoryNames=output --ignoreDirectoryNames=test-cases --ignoreDirectoryNames=test-coverage",
 		"harness": "webpack -p --config harness/webpack.config.js",
 		"lint": "eslint .",
 		"test": "jest --runInBand"
 	},
-	"version": "1.11.0"
+	"version": "1.12.0"
 }
