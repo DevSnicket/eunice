@@ -1,4 +1,6 @@
+/.eslintignore
 /.eslintrc.yml
+/.travis.yml
 /.vscode
 /devsnicket-eunice-call-when-process-entry-point-*.tgz
 /jsconfig.json
