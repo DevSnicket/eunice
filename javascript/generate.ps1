@@ -7,8 +7,8 @@ try
 
 	$identifierSeparator="\"
 	$outputDirectory = "$PSScriptRoot\output"
+	$replaceIdentifiers = "node_modules/@devsnicket/eunice-processors/replaceIdentifiers/bin.js"
 	$rootDirectory = "$PSScriptRoot\.."
-	$processorsDirectory = "node_modules\@devsnicket\eunice-processors"
 
 	function ensureDirectoryExists() {
 		if (!(test-path $args[0]))
@@ -22,60 +22,61 @@ try
 	}
 
 	function removeIdentifierSuffix {
-	  $yamlDirectory=$args[0]
+		$yamlDirectory=$args[0]
 	
-	  cat $yamlDirectory/analysis.yaml `
-	  | node $processorsDirectory/replaceIdentifiers `
+		# can't use npx or node_modules/.bin as there is a pipe character in the regular expression
+		cat $yamlDirectory/analysis.yaml `
+		| node $replaceIdentifiers `
 		--pattern="\${identifierSeparator}index$|^index" `
 		--replacement= `
-	  > $yamlDirectory/remove-identifier-suffix-of-index.yaml
+		> $yamlDirectory/remove-identifier-suffix-of-index.yaml
 	}
 
 	function processYamlFile {
 		$yamlDirectory = Split-Path $args[0]
 
 		cat $args[0] `
-		| node $processorsDirectory/setTypeOfRootItems `
+		| npx eunice-processors-setTypeOfRootItems `
 			--type=file `
 		> $yamlDirectory/set-type-of-root-items-to-file.yaml
 
 		cat $yamlDirectory/set-type-of-root-items-to-file.yaml `
-		| node $processorsDirectory/orderItemsBy/identifier `
+		| npx eunice-processors-orderItemsByIdentifier `
 		> $yamlDirectory/order-items-by-identifier.yaml
 
 		cat $yamlDirectory/order-items-by-identifier.yaml `
-		| node $processorsDirectory/groupItemsByIdentifierSeparator `
+		| npx eunice-processors-groupItemsByIdentifierSeparator `
 			--identifierSeparator=$identifierSeparator `
 		> $yamlDirectory/group-items-by-identifier-separator-of-slash.yaml
 
 		cat $yamlDirectory/group-items-by-identifier-separator-of-slash.yaml `
-		| node $processorsDirectory/removeRedundantParentIdentifierPrefix `
+		| npx eunice-processors-removeRedundantParentIdentifierPrefix `
 			--identifierSeparator=$identifierSeparator `
 		> $yamlDirectory/remove-redundant-parent-identifier-prefix-of-slash.yaml
 
 		cat $yamlDirectory/remove-redundant-parent-identifier-prefix-of-slash.yaml `
-		| node $processorsDirectory/removeSelfDependentItemsOfType `
+		| npx eunice-processors-removeSelfDependentItemsOfType `
 			--type=variable `
 		> $yamlDirectory/remove-self-dependent-items-of-type-variable.yaml
 
 		cat $yamlDirectory/remove-self-dependent-items-of-type-variable.yaml `
-		| node $processorsDirectory/orderItemsBy/indexOf/type `
+		| npx eunice-processors-orderItemsByIndexOfType `
 			--typesInOrder= --typesInOrder=parameter --typesInOrder=variable --typesInOrder=file `
 		> $yamlDirectory/order-items-by-index-of-type.yaml
 
 		cat $yamlDirectory/order-items-by-index-of-type.yaml `
-		| node $processorsDirectory/createOrAddToStacks/uniformly `
-			--commaSeparatedLevels=test --commaSeparatedLevels=existing `
+		| npx eunice-processors-createOrAddToStacksUniformly `
+			--commaSeparatedLevels=bin,test --commaSeparatedLevels=existing `
 		> $yamlDirectory/stack-test-in-top-level.yaml
 
 		cat $yamlDirectory/stack-test-in-top-level.yaml `
-		| node $processorsDirectory/createOrAddToStacks/toItemsWithIdentifier `
+		| npx eunice-processors-createOrAddToStacksToItemsWithIdentifier `
 			--commaSeparatedLevels=existing --commaSeparatedLevels=expect,test `
 			--toIdentifier=test `
 		> $yamlDirectory/add-to-stack-test-identifiers.yaml
 
 		cat $yamlDirectory/add-to-stack-test-identifiers.yaml `
-		| node $processorsDirectory/unstackIndependent `
+		| npx eunice-processors-unstackIndependent `
 		> $yamlDirectory/unstack-independent.yaml
 
 		cat -Path $yamlDirectory/unstack-independent.yaml `
@@ -96,19 +97,16 @@ try
 	installEuniceNpmPackage "javascript-analyzer"
 	installEuniceNpmPackage "processors"
 
-	$packages = "call-when-process-entry-point", "dependency-and-structure", "javascript-analyzer", "processors", "renderer", "run-tests-from-file-system", "test-harnesses"
+	$packages = "call-with-process-standard-streams", "dependency-and-structure", "javascript-analyzer", "processors", "renderer", "run-tests-from-file-system", "test-harnesses"
 
 	echo "Analyze and process repository"
 
 	ensureDirectoryExists repository
 
-	npx @devsnicket/eunice-javascript-analyzer `
+	npx eunice-javascript-analyzer-getOrCreateItemsInDirectory `
 		--directory=$rootDirectory `
-		--ignoreDirectoryNames=coverage `
 		--ignoreDirectoryNames=node_modules `
 		--ignoreDirectoryNames=output `
-		--ignoreDirectoryNames=test-cases `
-		--ignoreDirectoryNames=test-coverage `
 	> repository/analysis.yaml
 
 	removeIdentifierSuffix repository
@@ -123,7 +121,7 @@ try
 
 		ensureDirectoryExists $package
 
-		npx @devsnicket/eunice-javascript-analyzer `
+		npx eunice-javascript-analyzer-getOrCreateItemsInDirectory `
 			--directory=node_modules/@devsnicket/eunice-$package `
 			--ignoreDirectoryNames=.devsnicket-plugin-discovery `
 			--ignoreDirectoryNames=dist `
@@ -133,12 +131,13 @@ try
 
 		removeIdentifierSuffix $package
 
+		# can't use npx or node_modules/.bin as there is an ampersand character in the regular expression
 		cat $package/remove-identifier-suffix-of-index.yaml `
-		| node $processorsDirectory/replaceIdentifiers `
+		| node $replaceIdentifiers `
 			--pattern=.+ `
 			--replacement="$package$identifierSeparator$&" `
 			--rootOnly=true `
-		| node $processorsDirectory/replaceIdentifiers `
+		| node $replaceIdentifiers `
 			--pattern=^$ `
 			--replacement=$package `
 			--rootOnly=true `
@@ -147,13 +146,13 @@ try
 		processYamlFile $package/with-root-prefix.yaml
 
 		cat $package/without-package-prefixes.yaml `
-		| node $processorsDirectory/createOrAddToStacks/usingFileSystem `
+		| npx eunice-processors-createOrAddToStacksUsingFileSystem `
 			--directory=node_modules/@devsnicket/eunice-$package `
-			--subsetIdentifierHierarchy=$package  `
+			--subsetIdentifierHierarchy=$package `
 		> $package/stack-using-files.yaml
 	}
 
-	node $processorsDirectory/concatenateFromFileSystem `
+	npx eunice-processors-concatenateFromFileSystem `
 		--files repository/without-package-prefixes.yaml `
 		--files "$($packages[0])/stack-using-files.yaml" `
 		--files "$($packages[1])/stack-using-files.yaml" `
@@ -165,12 +164,12 @@ try
 	> concatenate.yaml
 
 	cat concatenate.yaml `
-	| node $processorsDirectory/createOrAddToStacks/usingFileSystem `
+	| npx eunice-processors-createOrAddToStacksUsingFileSystem `
 		--directory=$rootDirectory `
 	> .yaml
 
 	cat .yaml `
-	| node node_modules/@devsnicket/eunice-renderer/getSvgForYaml `
+	| npx eunice-renderer `
 	> .svg
 }
 finally
