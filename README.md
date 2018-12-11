@@ -22,18 +22,9 @@ Eunice includes the stages shown below. Transitions are made between the stages 
 
 ## YAML
 
-So Euince has composability, e.g. multiple sources of dependency and structure, a common data format is described using YAML.
+To give Euince [composability](https://en.wikipedia.org/wiki/Composability) within and between stages, a common data format for structure and dependency is described using [YAML](https://yaml.org/).
 
-``` YAML
-- id: item in upper level of stack
-  dependsUpon: first item in lower level of stack
-  items:
-  - id: nested item
-    dependsUpon: second item in lower level of stack
--
-  - first item in lower level of stack
-  - second item in lower level of stack
-```
+What's supported in the YAML is specified [here](docs/yaml.md).
 
 ## Analyzers
 
