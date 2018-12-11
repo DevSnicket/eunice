@@ -1,19 +1,19 @@
 {
 	"author": "Graham Dyson",
 	"bin": {
-		"eunice-processors-concatenateFromFileSystem": "concatenateFromFileSystem/bin.js",
-		"eunice-processors-createOrAddToStacksToItemsWithIdentifier": "createOrAddToStacks/toItemsWithIdentifier/bin.js",
-		"eunice-processors-createOrAddToStacksUniformly": "createOrAddToStacks/uniformly/bin.js",
-		"eunice-processors-createOrAddToStacksUsingFileSystem": "createOrAddToStacks/usingFileSystem/bin.js",
-		"eunice-processors-groupItemsByIdentifierSeparator": "groupItemsByIdentifierSeparator/bin.js",
-		"eunice-processors-orderItemsByIdentifier": "orderItemsBy/identifier/bin.js",
-		"eunice-processors-orderItemsByIdentifierSuffix": "orderItemsBy/indexOf/identifierSuffix/bin.js",
-		"eunice-processors-orderItemsByType": "orderItemsBy/indexOf/type/bin.js",
-		"eunice-processors-removeRedundantParentIdentifierPrefix": "removeRedundantParentIdentifierPrefix/bin.js",
-		"eunice-processors-removeSelfDependentItemsOfType": "removeSelfDependentItemsOfType/bin.js",
-		"eunice-processors-replaceIdentifiers": "replaceIdentifiers/bin.js",
-		"eunice-processors-setTypeOfRootItems": "setTypeOfRootItems/bin.js",
-		"eunice-processors-unstackIndependent": "unstackIndependent/bin.js"
+		"eunice-processors-concatenateFromFileSystem": "dist/concatenateFromFileSystem/bin.js",
+		"eunice-processors-createOrAddToStacksToItemsWithIdentifier": "dist/createOrAddToStacks/toItemsWithIdentifier/bin.js",
+		"eunice-processors-createOrAddToStacksUniformly": "dist/createOrAddToStacks/uniformly/bin.js",
+		"eunice-processors-createOrAddToStacksUsingFileSystem": "dist/createOrAddToStacks/usingFileSystem/bin.js",
+		"eunice-processors-groupItemsByIdentifierSeparator": "dist/groupItemsByIdentifierSeparator/bin.js",
+		"eunice-processors-orderItemsByIdentifier": "dist/orderItemsBy/identifier/bin.js",
+		"eunice-processors-orderItemsByIdentifierSuffix": "dist/orderItemsBy/indexOf/identifierSuffix/bin.js",
+		"eunice-processors-orderItemsByType": "dist/orderItemsBy/indexOf/type/bin.js",
+		"eunice-processors-removeRedundantParentIdentifierPrefix": "dist/removeRedundantParentIdentifierPrefix/bin.js",
+		"eunice-processors-removeSelfDependentItemsOfType": "dist/removeSelfDependentItemsOfType/bin.js",
+		"eunice-processors-replaceIdentifiers": "dist/replaceIdentifiers/bin.js",
+		"eunice-processors-setTypeOfRootItems": "dist/setTypeOfRootItems/bin.js",
+		"eunice-processors-unstackIndependent": "dist/unstackIndependent/bin.js"
 	},
 	"bugs": {
 		"url": "https://github.com/DevSnicket/eunice/issues"
