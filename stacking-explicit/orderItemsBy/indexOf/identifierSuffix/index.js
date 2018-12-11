@@ -1,24 +1,6 @@
 const
-	callWithYamlInputAndOutputWhenProcessEntryPoint = require("../../../callWithYamlInputAndOutputWhenProcessEntryPoint"),
 	orderItemsByIndexOf = require(".."),
 	processorPlugins = require("@devsnicket/eunice-test-harnesses/processorPlugins");
-
-/* istanbul ignore next: only used when JavaScript file is process entry point */
-callWithYamlInputAndOutputWhenProcessEntryPoint(
-	({
-		identifierSuffixesInOrder,
-		items,
-	}) =>
-		orderItemsByIdentifierSuffix({
-			identifierSuffixesInOrder:
-				Array.isArray(identifierSuffixesInOrder)
-				?
-				identifierSuffixesInOrder
-				:
-				identifierSuffixesInOrder && [ identifierSuffixesInOrder ],
-			items,
-		}),
-);
 
 processorPlugins.plugIn({
 	action:

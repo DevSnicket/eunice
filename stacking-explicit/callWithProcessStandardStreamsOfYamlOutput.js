@@ -1,22 +1,20 @@
 /* istanbul ignore file: only used when JavaScript file is process entry point */
 
-const yaml = require("js-yaml");
-
-const callWhenProcessEntryPoint = require("@devsnicket/eunice-call-when-process-entry-point");
+const
+	callWithProcessStandardStreams = require("@devsnicket/eunice-call-with-process-standard-streams"),
+	yaml = require("js-yaml");
 
 module.exports =
 	({
 		action,
-		parentModule = module.parent,
 		standardInputParameter,
 	}) =>
-		callWhenProcessEntryPoint({
+		callWithProcessStandardStreams({
 			action:
 				processArguments =>
 					yaml.safeDump(
 						action(processArguments),
 						{ lineWidth: Number.MAX_SAFE_INTEGER },
 					),
-			parentModule,
 			standardInputParameter,
 		});

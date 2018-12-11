@@ -1,27 +1,6 @@
 const
-	callWithYamlInputAndOutputWhenProcessEntryPoint = require("../../../callWithYamlInputAndOutputWhenProcessEntryPoint"),
 	orderItemsByIndexOf = require("../"),
 	processorPlugins = require("@devsnicket/eunice-test-harnesses/processorPlugins");
-
-/* istanbul ignore next: only used when JavaScript file is process entry point */
-callWithYamlInputAndOutputWhenProcessEntryPoint(
-	processArguments =>
-		orderItemsByType({
-			...processArguments,
-			typesInOrder:
-				processArguments.typesInOrder
-				.map(
-					type =>
-						type === ""
-						?
-						// type array index of will only work when exact match
-						// eslint-disable-next-line no-undefined
-						undefined
-						:
-						type,
-				),
-		}),
-);
 
 processorPlugins.plugIn({
 	action:

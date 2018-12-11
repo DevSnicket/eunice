@@ -2,25 +2,8 @@ require("array.prototype.flat")
 .shim();
 
 const
-	callWithYamlInputAndOutputWhenProcessEntryPoint = require("../callWithYamlInputAndOutputWhenProcessEntryPoint"),
 	{ createStackFromYaml, createYamlFromStack } = require("@devsnicket/eunice-dependency-and-structure"),
 	processorPlugins = require("@devsnicket/eunice-test-harnesses/processorPlugins");
-
-/* istanbul ignore next: only used when JavaScript file is process entry point */
-callWithYamlInputAndOutputWhenProcessEntryPoint(
-	({
-		items,
-		pattern,
-		replacement,
-		rootOnly,
-	}) =>
-		replaceIdentifiers({
-			items,
-			pattern: new RegExp(pattern),
-			replacement,
-			rootOnly,
-		}),
-);
 
 processorPlugins.plugIn({
 	action: replaceIdentifiers,

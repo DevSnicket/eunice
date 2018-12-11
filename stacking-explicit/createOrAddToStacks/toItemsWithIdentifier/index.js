@@ -1,25 +1,14 @@
-/* istanbul ignore file: only used when JavaScript file is process entry point */
 const
-	callWithYamlInputAndOutputWhenProcessEntryPoint = require("../../callWithYamlInputAndOutputWhenProcessEntryPoint"),
 	createStackWhenIdentifierOrItemOrLevelOrAddWhenStack = require("../createStackWhenIdentifierOrItemOrLevelOrAddWhenStack"),
 	getIdentifiersInNewStackWhenParentAncestor = require("./getIdentifiersInNewStackWhenParentAncestor"),
-	parseCommaSeparated = require("../parseCommaSeparated"),
 	replaceItemsAndInItems = require("../replaceItemsAndInItems");
 
-callWithYamlInputAndOutputWhenProcessEntryPoint(
-	createOrAddToStacksToItemsWithIdentifier,
-);
-
-module.exports = createOrAddToStacksToItemsWithIdentifier;
-
-function createOrAddToStacksToItemsWithIdentifier({
-	commaSeparatedLevels,
-	items,
-	toIdentifier,
-}) {
-	const identifiersInNewStack = parseCommaSeparated(commaSeparatedLevels);
-
-	return (
+module.exports =
+	({
+		identifiersInNewStack,
+		items,
+		toIdentifier,
+	}) =>
 		replaceItemsAndInItems({
 			identifierOrItemOrLevelOrStack:
 				items,
@@ -39,6 +28,4 @@ function createOrAddToStacksToItemsWithIdentifier({
 								parentIdentifier: toIdentifier,
 							}),
 					}),
-		})
-	);
-}
+		});

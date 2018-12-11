@@ -1,11 +1,4 @@
-const
-	callWithYamlInputAndOutputWhenProcessEntryPoint = require("../../callWithYamlInputAndOutputWhenProcessEntryPoint"),
-	processorPlugins = require("@devsnicket/eunice-test-harnesses/processorPlugins");
-
-/* istanbul ignore next: only used when JavaScript file is process entry point */
-callWithYamlInputAndOutputWhenProcessEntryPoint(
-	parameters => orderItemsByIdentifier(parameters.items),
-);
+const processorPlugins = require("@devsnicket/eunice-test-harnesses/processorPlugins");
 
 processorPlugins.plugIn({
 	action: orderItemsByIdentifier,

@@ -1,14 +1,7 @@
-/* istanbul ignore file: only used when JavaScript file is process entry point or from test harness */
 const
-	callWithYamlInputAndOutputWhenProcessEntryPoint = require("../callWithYamlInputAndOutputWhenProcessEntryPoint"),
-	createStackWhenIdentifierOrItemOrLevelOrAddWhenStack = require("./createStackWhenIdentifierOrItemOrLevelOrAddWhenStack"),
-	parseCommaSeparated = require("./parseCommaSeparated"),
+	createStackWhenIdentifierOrItemOrLevelOrAddWhenStack = require("../createStackWhenIdentifierOrItemOrLevelOrAddWhenStack"),
 	processorPlugins = require("@devsnicket/eunice-test-harnesses/processorPlugins"),
-	replaceItemsAndInItems = require("./replaceItemsAndInItems");
-
-callWithYamlInputAndOutputWhenProcessEntryPoint(
-	createOrAddToStacksUniformly,
-);
+	replaceItemsAndInItems = require("../replaceItemsAndInItems");
 
 processorPlugins.plugIn({
 	action:
@@ -25,11 +18,9 @@ processorPlugins.plugIn({
 module.exports = createOrAddToStacksUniformly;
 
 function createOrAddToStacksUniformly({
-	commaSeparatedLevels,
+	identifiersInNewStack,
 	items,
 }) {
-	const identifiersInNewStack = parseCommaSeparated(commaSeparatedLevels);
-
 	return (
 		replaceItemsAndInItems({
 			identifierOrItemOrLevelOrStack:

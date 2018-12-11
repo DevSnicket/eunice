@@ -1,3 +1,3 @@
 - existing
-- callWithYamlInputAndOutputWhenProcessEntryPoint
-- callWithYamlOutputWhenProcessEntryPoint
+- callWithProcessStandardStreamsOfYaml
+- callWithProcessStandardStreamsOfYamlOutput

@@ -1,12 +1,7 @@
 const
 	aggregateIdentifiable = require("./aggregateIdentifiable"),
-	callWithYamlInputAndOutputWhenProcessEntryPoint = require("../callWithYamlInputAndOutputWhenProcessEntryPoint"),
 	getItemsFromAggregation = require("./getItemsFromAggregation"),
 	processorPlugins = require("@devsnicket/eunice-test-harnesses/processorPlugins");
-
-callWithYamlInputAndOutputWhenProcessEntryPoint(
-	groupItemsByIdentifierSeparator,
-);
 
 processorPlugins.plugIn({
 	action: groupItemsByIdentifierSeparator,
