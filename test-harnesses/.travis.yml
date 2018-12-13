@@ -1,13 +1,17 @@
-cache:
-  directories:
-    - node_modules
+jobs:
+  include:
+    - install: 
+        - npm install
+      script:
+        - npm run lint
+        - cp node_modules/react-reflex/styles.css react-reflex.css
+    - before_install:
+        - cd processor-plugins
 deploy:
   api_key: $NPM_TOKEN
   email: grahamdyson@hotmail.com
   provider: npm
   skip_cleanup: true
-install: 
-  - npm install
 language: node_js
 node_js:
   - "8.11.2"
@@ -15,6 +19,3 @@ notifications:
   email:
     on_success: never
     on_failure: always
-script:
-  - npm run lint
-  - cp node_modules/react-reflex/styles.css react-reflex.css

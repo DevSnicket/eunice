@@ -1,0 +1,22 @@
+{
+	"author": "Graham Dyson",
+	"bugs": {
+		"url": "https://github.com/DevSnicket/eunice/issues"
+	},
+	"description": "Test harnesses discovery repository for YAML processor plug-ins.",
+	"dependencies": {
+		"@devsnicket/plugin-discovery-create-repository": "1.4.0"
+	},
+	"homepage": "https://github.com/DevSnicket/Eunice#readme",
+	"license": "MIT",
+	"main": "index.js",
+	"name": "@devsnicket/eunice-test-harnesses-processor-plugins",
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/DevSnicket/eunice-test-harnesses.git"
+	},
+	"version": "1.0.0"
+}
