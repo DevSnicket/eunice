@@ -1,6 +1,6 @@
 const
 	createStackWhenIdentifierOrItemOrLevelOrAddWhenStack = require("../createStackWhenIdentifierOrItemOrLevelOrAddWhenStack"),
-	processorPlugins = require("@devsnicket/eunice-test-harnesses/processorPlugins"),
+	processorPlugins = require("@devsnicket/eunice-test-harnesses-processor-plugins"),
 	replaceItemsAndInItems = require("../replaceItemsAndInItems");
 
 processorPlugins.plugIn({

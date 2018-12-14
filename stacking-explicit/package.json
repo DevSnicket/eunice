@@ -22,7 +22,7 @@
 	"dependencies": {
 		"@devsnicket/eunice-call-with-process-standard-streams": "1.0.0",
 		"@devsnicket/eunice-dependency-and-structure": "1.1.2",
-		"@devsnicket/eunice-test-harnesses": "2.2.0",
+		"@devsnicket/eunice-test-harnesses-processor-plugins": "1.0.0",
 		"array.prototype.flat": "1.2.1",
 		"js-yaml": "3.11.0"
 	},
@@ -82,5 +82,5 @@
 		"lint": "npx eslint .",
 		"test": "npx jest --runInBand"
 	},
-	"version": "1.6.1"
+	"version": "1.7.0"
 }

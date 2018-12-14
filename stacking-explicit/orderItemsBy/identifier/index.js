@@ -1,4 +1,4 @@
-const processorPlugins = require("@devsnicket/eunice-test-harnesses/processorPlugins");
+const processorPlugins = require("@devsnicket/eunice-test-harnesses-processor-plugins");
 
 processorPlugins.plugIn({
 	action: orderItemsByIdentifier,

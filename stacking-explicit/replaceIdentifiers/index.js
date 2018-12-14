@@ -3,7 +3,7 @@ require("array.prototype.flat")
 
 const
 	{ createStackFromYaml, createYamlFromStack } = require("@devsnicket/eunice-dependency-and-structure"),
-	processorPlugins = require("@devsnicket/eunice-test-harnesses/processorPlugins");
+	processorPlugins = require("@devsnicket/eunice-test-harnesses-processor-plugins");
 
 processorPlugins.plugIn({
 	action: replaceIdentifiers,

@@ -1,7 +1,7 @@
 const
 	aggregateIdentifiable = require("./aggregateIdentifiable"),
 	getItemsFromAggregation = require("./getItemsFromAggregation"),
-	processorPlugins = require("@devsnicket/eunice-test-harnesses/processorPlugins");
+	processorPlugins = require("@devsnicket/eunice-test-harnesses-processor-plugins");
 
 processorPlugins.plugIn({
 	action: groupItemsByIdentifierSeparator,
