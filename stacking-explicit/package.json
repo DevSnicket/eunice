@@ -27,7 +27,7 @@
 		"js-yaml": "3.11.0"
 	},
 	"devDependencies": {
-		"@devsnicket/plugin-discovery-commonjs-babel-plugin": "1.10.0",
+		"@devsnicket/plugin-discovery-commonjs-babel-plugin": "1.11.0",
 		"@types/jest": "23.3.10",
 		"@types/node": "10.12.12",
 		"babel-cli": "6.26.0",
@@ -82,5 +82,5 @@
 		"lint": "npx eslint .",
 		"test": "npx jest --runInBand"
 	},
-	"version": "1.7.0"
+	"version": "1.7.1"
 }
