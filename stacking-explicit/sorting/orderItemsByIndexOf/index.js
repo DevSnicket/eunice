@@ -1,5 +1,4 @@
-const
-	createCompareIndexedItemOrLevel = require("./createCompareIndexedItemOrLevel");
+const createCompareIndexedItemOrLevel = require("./createCompareIndexedItemOrLevel");
 
 module.exports =
 	({
