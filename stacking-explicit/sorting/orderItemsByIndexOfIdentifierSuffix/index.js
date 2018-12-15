@@ -1,4 +1,4 @@
-const orderItemsByIndexOf = require("..");
+const orderItemsByIndexOf = require("../orderItemsByIndex");
 
 module.exports =
 	({
