@@ -2,9 +2,9 @@
 	"author": "Graham Dyson",
 	"bin": {
 		"eunice-processors-concatenateFromFileSystem": "dist/concatenateFromFileSystem/bin.js",
-		"eunice-processors-createOrAddToStacksToItemsWithIdentifier": "dist/createOrAddToStacks/toItemsWithIdentifier/bin.js",
-		"eunice-processors-createOrAddToStacksUniformly": "dist/createOrAddToStacks/uniformly/bin.js",
-		"eunice-processors-createOrAddToStacksUsingFileSystem": "dist/createOrAddToStacks/usingFileSystem/bin.js",
+		"eunice-processors-createOrAddToStacksToItemsWithIdentifier": "dist/stacking/createOrAddToStacksToItemsWithIdentifier/bin.js",
+		"eunice-processors-createOrAddToStacksUniformly": "dist/stacking/createOrAddToStacksUniformly/bin.js",
+		"eunice-processors-createOrAddToStacksUsingFileSystem": "dist/stacking/createOrAddToStacksUsingFileSystem/bin.js",
 		"eunice-processors-groupItemsByIdentifierSeparator": "dist/groupItemsByIdentifierSeparator/bin.js",
 		"eunice-processors-orderItemsByIdentifier": "dist/orderItemsBy/identifier/bin.js",
 		"eunice-processors-orderItemsByIndexOfIdentifierSuffix": "dist/orderItemsBy/indexOf/identifierSuffix/bin.js",
