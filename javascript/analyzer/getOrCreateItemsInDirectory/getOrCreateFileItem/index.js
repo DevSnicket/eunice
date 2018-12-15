@@ -99,7 +99,7 @@ function getOrCreateFromItem({
 				return resolvedValue;
 			else
 				/* istanbul ignore next: error is only thrown when there is gap in the implementation */
-				throw Error(`Resolution not definted for item value key/value of ${key}/${value}`);
+				throw Error(`Resolution not defined for item value key/value of ${key}/${value}`);
 
 			function resolveWhenDependsUpon() {
 				return (
