@@ -42,6 +42,7 @@
 		"collectCoverageFrom": [
 			"**/*.js",
 			"!**/bin.js",
+			"!**/testHarnessPlugin.js",
 			"!dist/**",
 			"!node_modules/**",
 			"!test-coverage/**"

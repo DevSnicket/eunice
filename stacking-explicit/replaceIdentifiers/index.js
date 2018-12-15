@@ -1,34 +1,22 @@
 require("array.prototype.flat")
 .shim();
 
-const
-	{ createStackFromYaml, createYamlFromStack } = require("@devsnicket/eunice-dependency-and-structure"),
-	processorPlugins = require("@devsnicket/eunice-test-harnesses-processor-plugins");
+const { createStackFromYaml, createYamlFromStack } = require("@devsnicket/eunice-dependency-and-structure");
 
-processorPlugins.plugIn({
-	action: replaceIdentifiers,
-	parameter: { name: "prefix" },
-	text: "replace identifiers",
-});
-
-module.exports = replaceIdentifiers;
-
-function replaceIdentifiers({
-	items,
-	pattern,
-	replacement,
-	rootOnly,
-}) {
-	return (
+module.exports =
+	({
+		items,
+		pattern,
+		replacement,
+		rootOnly,
+	}) =>
 		items
 		&&
 		updateItems({
 			items,
 			rootOnly,
 			updateItem: item => replaceInItem({ item, pattern, replacement }),
-		})
-	);
-}
+		});
 
 function updateItems({
 	items,

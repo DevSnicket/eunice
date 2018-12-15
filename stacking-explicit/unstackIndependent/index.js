@@ -1,27 +1,14 @@
-const
-	{ createStackFromYaml, createYamlFromStack } = require("@devsnicket/eunice-dependency-and-structure"),
-	processorPlugins = require("@devsnicket/eunice-test-harnesses-processor-plugins");
+const { createStackFromYaml, createYamlFromStack } = require("@devsnicket/eunice-dependency-and-structure");
 
-processorPlugins.plugIn({
-	action: unstackIndependent,
-	text: "unstack independent",
-});
-
-module.exports = unstackIndependent;
-
-function unstackIndependent(
-	items,
-) {
-	return (
+module.exports =
+	items =>
 		createYamlFromStack(
 			unstackIndependentInStack(
 				createStackFromYaml(
 					items,
 				),
 			),
-		)
-	);
-}
+		);
 
 function unstackIndependentInStack(
 	stack,

@@ -1,31 +1,21 @@
-const processorPlugins = require("@devsnicket/eunice-test-harnesses-processor-plugins");
+module.exports =
+	items => {
+		return whenArray() || items;
 
-processorPlugins.plugIn({
-	action: orderItemsByIdentifier,
-	text: "order items by identifier",
-});
-
-module.exports = orderItemsByIdentifier;
-
-function orderItemsByIdentifier(
-	items,
-) {
-	return whenArray() || items;
-
-	function whenArray() {
-		return (
-			Array.isArray(items)
-			&&
-			items.sort(
-				(left, right) =>
-					compareIdentifiers(
-						getItemIdentifier(left),
-						getItemIdentifier(right),
-					),
-			)
-		);
-	}
-}
+		function whenArray() {
+			return (
+				Array.isArray(items)
+				&&
+				items.sort(
+					(left, right) =>
+						compareIdentifiers(
+							getItemIdentifier(left),
+							getItemIdentifier(right),
+						),
+				)
+			);
+		}
+	};
 
 function getItemIdentifier(
 	item,

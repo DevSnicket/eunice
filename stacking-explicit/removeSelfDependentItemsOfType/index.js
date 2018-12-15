@@ -1,26 +1,14 @@
-const processorPlugins = require("@devsnicket/eunice-test-harnesses-processor-plugins");
-
-processorPlugins.plugIn({
-	action: removeSelfDependentItemsOfType,
-	parameter: { name: "type" },
-	text: "remove self dependent items of a type",
-});
-
-module.exports = removeSelfDependentItemsOfType;
-
-function removeSelfDependentItemsOfType({
-	items,
-	type,
-}) {
-	return (
+module.exports =
+	({
+		items,
+		type,
+	}) =>
 		whenItemMatch(
 			item => item.type !== type || !isSelfDependent(item),
 		)
 		.getIdentifierOrItemMatchOrFilterItemsInLevelOrStack(
 			items,
-		)
-	);
-}
+		);
 
 function isSelfDependent({
 	id: identifier,

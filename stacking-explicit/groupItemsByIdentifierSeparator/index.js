@@ -1,22 +1,13 @@
 const
 	aggregateIdentifiable = require("./aggregateIdentifiable"),
-	getItemsFromAggregation = require("./getItemsFromAggregation"),
-	processorPlugins = require("@devsnicket/eunice-test-harnesses-processor-plugins");
+	getItemsFromAggregation = require("./getItemsFromAggregation");
 
-processorPlugins.plugIn({
-	action: groupItemsByIdentifierSeparator,
-	parameter: { name: "identifierSeparator" },
-	text: "group items by identifier separator",
-});
-
-module.exports = groupItemsByIdentifierSeparator;
-
-function groupItemsByIdentifierSeparator({
-	identifierSeparator,
-	items,
-}) {
-	return createGroupItemsForIdentifierSeparator(identifierSeparator)(items);
-}
+module.exports =
+	({
+		identifierSeparator,
+		items,
+	}) =>
+		createGroupItemsForIdentifierSeparator(identifierSeparator)(items);
 
 function createGroupItemsForIdentifierSeparator(
 	identifierSeparator,

@@ -1,20 +1,10 @@
-const
-	{ createStackFromYaml, createYamlFromStack } = require("@devsnicket/eunice-dependency-and-structure"),
-	processorPlugins = require("@devsnicket/eunice-test-harnesses-processor-plugins");
+const { createStackFromYaml, createYamlFromStack } = require("@devsnicket/eunice-dependency-and-structure");
 
-processorPlugins.plugIn({
-	action: removeRedundantParentIdentifierPrefix,
-	parameter: { name: "identifierSeparator" },
-	text: "remove redundant identifier prefix of parent and separator",
-});
-
-module.exports = removeRedundantParentIdentifierPrefix;
-
-function removeRedundantParentIdentifierPrefix({
-	identifierSeparator,
-	items,
-}) {
-	return (
+module.exports =
+	({
+		identifierSeparator,
+		items,
+	}) =>
 		createYamlFromStack(
 			withGetIdentifierWithoutParentWhenPrefixed(
 				({
@@ -30,9 +20,7 @@ function removeRedundantParentIdentifierPrefix({
 			.removeFromStack(
 				createStackFromYaml(items),
 			),
-		)
-	);
-}
+		);
 
 function getIdentifierWithoutParentAndSeparatorWhenPrefixed({
 	identifier,
