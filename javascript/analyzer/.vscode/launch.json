@@ -13,7 +13,7 @@
 				"cwd": "${workspaceFolder}/",
 				"localRoot": "${workspaceFolder}",
 				"name": "analyzer getYamlFromJavaScript",
-				"program": "${workspaceFolder}/getYamlFromJavaScript/index.js",
+				"program": "${workspaceFolder}/getYamlFromJavaScript/bin.js",
 				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
 				"type": "node",
@@ -47,18 +47,18 @@
 			},
 			{
 				"args":
-					[
-						"--directory=./",
-						"--ignoreDirectoryNames=dist",
-						"--ignoreDirectoryNames=node_modules",
-						"--ignoreDirectoryNames=output",
-						"--ignoreDirectoryNames=test-cases",
-						"--ignoreDirectoryNames=test-coverage"
-					],
+				[
+					"--directory=./",
+					"--ignoreDirectoryNames=dist",
+					"--ignoreDirectoryNames=node_modules",
+					"--ignoreDirectoryNames=output",
+					"--ignoreDirectoryNames=test-cases",
+					"--ignoreDirectoryNames=test-coverage"
+				],
 				"cwd": "${workspaceFolder}",
 				"localRoot": "${workspaceFolder}",
 				"name": "analyzer getOrCreateItemsInDirectory",
-				"program": "${workspaceFolder}/getOrCreateItemsInDirectory/index.js",
+				"program": "${workspaceFolder}/getOrCreateItemsInDirectory/bin.js",
 				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
 				"type": "node",
