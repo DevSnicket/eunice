@@ -1,12 +1,12 @@
 /* istanbul ignore file: only used when JavaScript file is process entry point */
 
 const
-	callWithProcessStandardStreamsAndYamlOutput = require("./callWithProcessStandardStreamsOfYamlOutput"),
+	callWithProcessStandardStreamsOfYamlOutput = require("./callWithProcessStandardStreamsOfYamlOutput"),
 	yaml = require("js-yaml");
 
 module.exports =
 	action =>
-		callWithProcessStandardStreamsAndYamlOutput({
+		callWithProcessStandardStreamsOfYamlOutput({
 			action:
 				processArguments =>
 					action({
