@@ -1,8 +1,8 @@
-id: caller
-items:
-  - - id: parameter
-      type: parameter
-  - - id: nested
-      dependsUpon:
-        - called
-        - parameter
+- id: caller
+  items:
+    - - id: parameter
+        type: parameter
+    - - id: nested
+        dependsUpon:
+          - called
+          - parameter

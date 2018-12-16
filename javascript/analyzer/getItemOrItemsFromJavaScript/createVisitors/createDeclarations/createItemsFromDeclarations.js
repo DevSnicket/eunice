@@ -15,7 +15,7 @@ function createItemFromDeclarationWhenRequired(
 		return (
 			declaration.isFunction
 			&&
-			(createWhenStructured() || declaration.id)
+			(createWhenStructured() || declaration.id || {})
 		);
 
 		function createWhenStructured() {

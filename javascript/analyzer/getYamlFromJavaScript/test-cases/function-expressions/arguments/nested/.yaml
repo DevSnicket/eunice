@@ -1,5 +1,5 @@
-id: caller
-dependsUpon:
-  - argument
-  - called
-items: argument
+- id: caller
+  dependsUpon:
+    - argument
+    - called
+  items: argument

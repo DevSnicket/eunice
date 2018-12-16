@@ -4,12 +4,12 @@ const
 	addVariables = require("./addVariables"),
 	createDeclarations = require("./createDeclarations"),
 	createDependsUpons = require("./createDependsUpons"),
-	createFileItems = require("./createFileItems"),
+	createFileItemOrItems = require("./createFileItemOrItems"),
 	createFunctionDeclaration = require("./createFunctionDeclaration"),
 	createScopedVariables = require("./createScopedVariables"),
 	createUndeclaredReferences = require("./createUndeclaredReferences"),
-	getItemWhenSingleOrStackItemsWhenMultiple = require("./getItemWhenSingleOrStackItemsWhenMultiple"),
-	parentFunctionsFromAncestors = require("./parentFunctionsFromAncestors");
+	parentFunctionsFromAncestors = require("./parentFunctionsFromAncestors"),
+	stackItemsWhenMultiple = require("./stackItemsWhenMultiple");
 
 module.exports =
 	() => {
@@ -36,14 +36,19 @@ module.exports =
 		);
 
 		function getItemOrItems() {
-			const items =
-				createFileItems({
-					dependsUponProperty:
-						dependsUpons.createPropertyFor(null),
+			const dependsUponProperty =
+				dependsUpons.createPropertyFor(null);
+
+			const itemOrItems =
+				createFileItemOrItems({
+					dependsUponProperty,
 					items:
-						getItemWhenSingleOrStackItemsWhenMultiple(
-							declarations.createItemsForAndRemoveDeclarationsIn(null),
-						),
+						stackItemsWhenMultiple({
+							items:
+								declarations.createItemsForAndRemoveDeclarationsIn(null),
+							withSingleInArray:
+								!dependsUponProperty,
+						}),
 				});
 
 			/* istanbul ignore next: error is only thrown when there is gap in the implementation */
@@ -53,7 +58,7 @@ module.exports =
 			else if (dependsUpons.any())
 				throw new Error("Unhandled dependencies.");
 			else
-				return items;
+				return itemOrItems;
 		}
 
 		function visitFunctionExpression(

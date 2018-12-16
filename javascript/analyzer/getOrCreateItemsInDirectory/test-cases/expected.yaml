@@ -1,9 +1,15 @@
 - empty
+- id: functionDeclarationThatsCalled
+  dependsUpon: fileFunction
+  items: fileFunction
 - id: functionDeclarationWithDifferentNameToFile
   items: differentName
-- functionDeclarationWithSameNameAsFile
+- id: functionDeclarationWithSameNameAsFile
+  items: functionDeclarationWithSameNameAsFile
 - id: functionDeclarationWithSameNameAsFileAndNestedFunction
-  items: nestedFunction
+  items:
+    id: functionDeclarationWithSameNameAsFileAndNestedFunction
+    items: nestedFunction
 - id: moduleExportsOFunctionExpressionWithDifferentNameToFileThatRequiresAndCallsFunctionInSameDirectory
   items:
     - - id: moduleExportsOfFunctionArrow1
@@ -11,12 +17,17 @@
         dependsUpon: moduleExportsOfFunctionArrow1
     - - id: differentName
         dependsUpon: moduleExportsOfFunctionArrow1
-- moduleExportsOfFunctionArrow1
-- moduleExportsOfFunctionArrow2
+- id: moduleExportsOfFunctionArrow1
+  items: {}
+- id: moduleExportsOfFunctionArrow2
+  items: {}
 - id: moduleExportsOfFunctionArrowWithFileFunction
-  items: fileFunction
+  items:
+    - - {}
+    - - fileFunction
 - id: moduleExportsOfFunctionArrowWithNestedFunction
-  items: nestedFunction
+  items:
+    items: nestedFunction
 - id: moduleExportsOfFunctionArrowWithNestedFunctionDeclarationThatRequiresAndCallsFunctionInSameDirectory
   items:
     - - id: moduleExportsOfFunctionArrow1
@@ -42,7 +53,8 @@
     - moduleExportsOfFunctionArrow1
     - moduleExportsOfFunctionArrow2
 - subdirectory/emptyInSubdirectory
-- subdirectory/moduleExportsOfFunctionArrowInSubdirectory
+- id: subdirectory/moduleExportsOfFunctionArrowInSubdirectory
+  items: {}
 - id: subdirectory/requireCurrentDirectoryThatIsCalled
   dependsUpon: subdirectory
 - id: subdirectory/requireCurrentDirectoryWithTrailingSlashThatIsCalled
@@ -58,7 +70,14 @@
 - subdirectoryWithSameNameAsFile
 - subdirectoryWithSameNameAsFile/emptyInsubdirectoryWithSameNameAsFile
 - subdirectoryWithSameNameAsFile.withdot
-- id: twoEmptyFunctions
+- id: twoFunctionDeclarations
   items:
-    - - twoEmptyFunctionsOne
-    - - twoEmptyFunctionsTwo
+    - - twoFunctionsFirst
+    - - twoFunctionsSecond
+- id: twoFunctionDeclarationsThatsCalled
+  dependsUpon:
+    - twoFunctionsFirst
+    - twoFunctionsSecond
+  items:
+    - - twoFunctionsFirst
+    - - twoFunctionsSecond

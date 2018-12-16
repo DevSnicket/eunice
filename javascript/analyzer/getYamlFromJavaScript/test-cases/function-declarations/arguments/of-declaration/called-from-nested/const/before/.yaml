@@ -1,8 +1,8 @@
-id: container
-items:
-  - - id: variable
-      type: variable
-  - - id: caller
-      dependsUpon:
-        - called
-        - variable
+- id: container
+  items:
+    - - id: variable
+        type: variable
+    - - id: caller
+        dependsUpon:
+          - called
+          - variable

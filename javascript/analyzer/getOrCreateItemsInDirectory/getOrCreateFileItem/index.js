@@ -1,13 +1,12 @@
-const path = require("path");
-
-const createDependsUponFileResolverForDirectory = require("./createDependsUponFileResolverForDirectory");
+const
+	createDependsUponFileResolverForDirectory = require("./createDependsUponFileResolverForDirectory"),
+	path = require("path");
 
 module.exports =
 	({
 		directory,
 		filePath,
-		items,
-		name,
+		itemOrItems,
 	}) => {
 		const identifier =
 			path.join(directory, filePath.dir, filePath.name);
@@ -18,104 +17,88 @@ module.exports =
 			);
 
 		return (
-			(!items && identifier)
+			(!itemOrItems && identifier)
 			||
-			getOrCreateWhenItem()
+			whenArray()
 			||
-			createWithItems()
+			withIdentifier()
 		);
 
-		function getOrCreateWhenItem() {
+		function whenArray() {
 			return (
-				items.length === 1
+				Array.isArray(itemOrItems)
 				&&
-				getOrCreateFromItem({
-					dependsUponFileResolver,
-					identifier,
-					item: items[0],
-					name,
-				})
+				(getOrCreateWhenItem() || createWithItems())
 			);
+
+			function getOrCreateWhenItem() {
+				return (
+					itemOrItems.length === 1
+					&&
+					{
+						id:
+							identifier,
+						items:
+							dependsUponFileResolver.resolveInItem(
+								itemOrItems[0],
+							),
+					}
+				);
+			}
+
+			function createWithItems() {
+				return (
+					{
+						id:
+							identifier,
+						items:
+							dependsUponFileResolver.resolveInItemOrLevelOrStack(
+								itemOrItems,
+							),
+					}
+				);
+			}
 		}
 
-		function createWithItems() {
+		function withIdentifier() {
 			return (
 				{
 					id: identifier,
-					items: items.map(dependsUponFileResolver.resolveInItemOrLevelOrStack),
+					...getDependsUponProperty(),
+					...getItemsProperty(),
 				}
 			);
+
+			function getDependsUponProperty() {
+				return (
+					itemOrItems.dependsUpon
+					&&
+					{ dependsUpon: getDependsUpon() }
+				);
+
+				function getDependsUpon() {
+					return (
+						dependsUponFileResolver.resolve(
+							itemOrItems.dependsUpon,
+						)
+					);
+				}
+			}
+
+			function getItemsProperty() {
+				return (
+					itemOrItems.items
+					&&
+					{ items: getItems() }
+				);
+
+				function getItems() {
+					return (
+						dependsUponFileResolver.resolveInItemOrLevelOrStack(
+							itemOrItems.items,
+						)
+					);
+				}
+			}
 		}
 	};
-
-function getOrCreateFromItem({
-	dependsUponFileResolver,
-	identifier,
-	item,
-	name,
-}) {
-	return (
-		(item === name && identifier)
-		||
-		(isString() && createParentWithIdentifier())
-		||
-		(isAnonymousOrSameName() && cloneWithIdentifier())
-	);
-
-	function isString() {
-		return typeof item === "string";
-	}
-
-	function createParentWithIdentifier() {
-		return (
-			{
-				id: identifier,
-				items: item,
-			}
-		);
-	}
-
-	function isAnonymousOrSameName() {
-		return !item.id || item.id === name;
-	}
-
-	function cloneWithIdentifier() {
-		const clone = { id: identifier };
-
-		for (const key of Object.keys(item))
-			if (key !== "id")
-				clone[key] = resolveValueOfKey({ key, value: item[key] });
-
-		return clone;
-
-		function resolveValueOfKey({
-			key,
-			value,
-		}) {
-			const resolvedValue = resolveWhenItems() || resolveWhenDependsUpon();
-
-			/* istanbul ignore next: error is only thrown when there is gap in the implementation */
-			if (resolvedValue)
-				return resolvedValue;
-			else
-				/* istanbul ignore next: error is only thrown when there is gap in the implementation */
-				throw Error(`Resolution not defined for item value key/value of ${key}/${value}`);
-
-			function resolveWhenDependsUpon() {
-				return (
-					key === "dependsUpon"
-					&&
-					dependsUponFileResolver.resolve(value)
-				);
-			}
-
-			function resolveWhenItems() {
-				return (
-					key === "items"
-					&&
-					dependsUponFileResolver.resolveInItemOrLevelOrStack(value)
-				);
-			}
-		}
-	}
-}

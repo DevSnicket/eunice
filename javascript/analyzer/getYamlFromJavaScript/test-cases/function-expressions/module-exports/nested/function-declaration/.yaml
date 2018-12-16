@@ -1,2 +1,2 @@
-id: parent
-items: nested
+- id: parent
+  items: nested

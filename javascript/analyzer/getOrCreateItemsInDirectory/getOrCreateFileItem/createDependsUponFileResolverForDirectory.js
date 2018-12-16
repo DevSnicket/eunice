@@ -14,6 +14,10 @@ module.exports =
 			item,
 		) {
 			return (
+				typeof item === "string"
+				?
+				item
+				:
 				{
 					...item,
 					...resolveDependsUponProperty(),
@@ -46,18 +50,8 @@ module.exports =
 				?
 				itemOrLevelOrStack.map(resolveInItemOrLevelOrStack)
 				:
-				resolvedItemFileDependsUponOfItem()
+				resolveInItem(itemOrLevelOrStack)
 			);
-
-			function resolvedItemFileDependsUponOfItem() {
-				return (
-					typeof itemOrLevelOrStack === "string"
-					?
-					itemOrLevelOrStack
-					:
-					resolveInItem(itemOrLevelOrStack)
-				);
-			}
 		}
 
 		function resolveDependsUpon(

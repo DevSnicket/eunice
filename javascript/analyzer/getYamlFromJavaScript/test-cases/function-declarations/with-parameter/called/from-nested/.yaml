@@ -1,6 +1,6 @@
-id: container
-items:
-  - - id: called
-      type: parameter
-  - - id: caller
-      dependsUpon: called
+- id: container
+  items:
+    - - id: called
+        type: parameter
+    - - id: caller
+        dependsUpon: called

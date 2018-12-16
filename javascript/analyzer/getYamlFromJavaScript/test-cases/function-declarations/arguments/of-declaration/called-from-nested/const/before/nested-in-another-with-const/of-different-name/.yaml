@@ -1,10 +1,10 @@
-id: container1
-items:
-  id: container2
+- id: container1
   items:
-    - - id: variable2
-        type: variable
-    - - id: caller
-        dependsUpon:
-          - called
-          - variable2
+    id: container2
+    items:
+      - - id: variable2
+          type: variable
+      - - id: caller
+          dependsUpon:
+            - called
+            - variable2

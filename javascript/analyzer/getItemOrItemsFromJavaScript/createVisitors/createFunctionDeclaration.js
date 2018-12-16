@@ -1,6 +1,6 @@
 const
-	getItemWhenSingleOrStackItemsWhenMultiple = require("./getItemWhenSingleOrStackItemsWhenMultiple"),
-	getPropertyName = require("./getPropertyName");
+	getPropertyName = require("./getPropertyName"),
+	stackItemsWhenMultiple = require("./stackItemsWhenMultiple");
 
 module.exports =
 	({
@@ -11,16 +11,19 @@ module.exports =
 		items,
 	}) => {
 		const itemOrItems =
-			getItemWhenSingleOrStackItemsWhenMultiple(
-				[
-					...createParameterItemsForFunction({
-						functionDeclaration,
-						getPropertyName,
-						hasUndeclaredReferenceTo,
-					}),
-					...items || [],
-				],
-			);
+			stackItemsWhenMultiple({
+				items:
+					[
+						...createParameterItemsForFunction({
+							functionDeclaration,
+							getPropertyName,
+							hasUndeclaredReferenceTo,
+						}),
+						...items || [],
+					],
+				withSingleInArray:
+					false,
+			});
 
 		return (
 			{

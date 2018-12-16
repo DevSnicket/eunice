@@ -1,2 +1,2 @@
-id: container
-items: caller
+- id: container
+  items: caller

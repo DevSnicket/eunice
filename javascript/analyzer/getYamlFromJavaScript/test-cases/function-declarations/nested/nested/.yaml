@@ -1,4 +1,4 @@
-id: grandparent
-items:
-  id: parent
-  items: nested
+- id: grandparent
+  items:
+    id: parent
+    items: nested

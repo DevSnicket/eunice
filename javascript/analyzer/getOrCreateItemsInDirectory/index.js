@@ -62,14 +62,10 @@ function getOrCreateItemsInRootedDirectory({
 						directory,
 						filePath:
 							fileOrSubdirectoryPath,
-						items:
-							ensureArray(
-								getItemOrItemsFromJavaScript(
-									readFile(),
-								),
+						itemOrItems:
+							getItemOrItemsFromJavaScript(
+								readFile(),
 							),
-						name:
-							fileOrSubdirectoryPath.name,
 					}),
 				]
 			);
@@ -128,18 +124,6 @@ function getOrCreateItemsInRootedDirectory({
 			);
 		}
 	}
-}
-
-function ensureArray(
-	objectOrArray,
-) {
-	return (
-		Array.isArray(objectOrArray)
-		?
-		objectOrArray
-		:
-		objectOrArray && [ objectOrArray ]
-	);
 }
 
 function compareItemIdentifiers(
