@@ -16,7 +16,6 @@ module.exports =
 					[
 						...createParameterItemsForFunction({
 							functionDeclaration,
-							getPropertyName,
 							hasUndeclaredReferenceTo,
 						}),
 						...items || [],
