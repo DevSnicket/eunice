@@ -55,6 +55,11 @@ try
 		> $yamlDirectory/remove-redundant-parent-identifier-prefix-of-slash.yaml
 
 		cat $yamlDirectory/remove-redundant-parent-identifier-prefix-of-slash.yaml `
+		| npx eunice-processors-setIdentifierOfAnonymousToParent `
+			--identifierSeparator=$identifierSeparator `
+		> $yamlDirectory/set-identifier-of-anonymous-to-parent.yaml
+
+		cat $yamlDirectory/set-identifier-of-anonymous-to-parent.yaml `
 		| npx eunice-processors-removeSelfDependentItemsOfType `
 			--type=variable `
 		> $yamlDirectory/remove-self-dependent-items-of-type-variable.yaml
