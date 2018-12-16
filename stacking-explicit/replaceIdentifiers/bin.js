@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const
 	callWithProcessStandardStreamsOfYaml = require("../callWithProcessStandardStreamsOfYaml"),
-	replaceIdentifiers = require("./");
+	replaceIdentifiers = require(".");
 
 callWithProcessStandardStreamsOfYaml(
 	({
