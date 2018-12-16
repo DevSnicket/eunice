@@ -213,6 +213,29 @@
 			{
 				"args":
 					[
+						"--items=[item1,item2]",
+					],
+				"name": "processor setIdentifierOfAnonymousToParent",
+				"program": "${workspaceFolder}/setIdentifierOfAnonymousToParent/bin.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
+						"setIdentifierOfAnonymousToParent/test.js",
+					],
+				"name": "processor setIdentifierOfAnonymousToParent jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			}
+			{
+				"args":
+					[
 						"--items=",
 						"--type=",
 					],
