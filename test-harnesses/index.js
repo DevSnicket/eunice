@@ -1,5 +1,11 @@
 const
+	callOrCreateElementOnError = require("./callOrCreateElementOnError"),
 	createWebpackConfiguration = require("./createWebpackConfiguration"),
 	renderHarness = require("./renderHarness");
 
-module.exports = { createWebpackConfiguration, renderHarness };
+module.exports =
+	{
+		callOrCreateElementOnError,
+		createWebpackConfiguration,
+		renderHarness,
+	};
