@@ -1,12 +1,12 @@
 # Eunice ![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgElementForYaml/createArrows/testcase.svg?sanitize=true) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
 
-DevSnicket Eunice is based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. Euince's approach isn't limited to direct dependencies, but includes indirect dependencies as well.
+DevSnicket Eunice is based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. Eunice's approach isn't limited to direct dependencies, but includes indirect dependencies as well.
 
 [try out Eunice on Eunice 🐶🥫](https://devsnicket.github.io/Eunice/renderer/harness.html) ([created with](dogfooding/generate.sh)) [![Build Status](https://travis-ci.org/DevSnicket/Eunice.svg?branch=master)](https://travis-ci.org/DevSnicket/Eunice) 
 
 ## Stacks
 
-Fundamental to Eunince is the act of defining stacks. When its indended that an item is to be dependent upon another item, the first item is placed above the second item in a stack. When items are indended to be independent of each other they can be placed at the same level in a stack.
+Fundamental to Eunice is the act of defining stacks. When it's intended that an item is to be dependent upon another item, the first item is placed above the second item in a stack. When items are intended to be independent of each other they can be placed at the same level in a stack.
 
 In some programming languages there are implied stacks, such as the order of functions in a file or the order of files in a project.
 
@@ -22,7 +22,7 @@ Eunice includes the stages shown below. Transitions are made between the stages 
 
 ## YAML
 
-To give Euince [composability](https://en.wikipedia.org/wiki/Composability) within and between stages, a common data format for structure and dependency is described using [YAML](https://yaml.org/).
+To give Eunice [composability](https://en.wikipedia.org/wiki/Composability) within and between stages, a common data format for structure and dependency is described using [YAML](https://yaml.org/).
 
 What's supported in the YAML is specified [here](docs/yaml.md).
 
