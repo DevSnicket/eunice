@@ -12,9 +12,18 @@ renderHarness({
 		}) =>
 			[
 				createJavascriptInputResizableColumn({
-					createResizableColumnForInput: columnFactory.createResizableColumnForInput,
-					createStateFromValue: value => ({ yaml: getYamlFromJavaScript(value) }),
-					state: stateful.state,
+					createResizableColumnForInput:
+						columnFactory.createResizableColumnForInput,
+					createStateFromValue:
+						value =>
+							({
+								yaml:
+									callOrGetMessageOnError(
+										() => getYamlFromJavaScript(value),
+									),
+							}),
+					state:
+						stateful.state,
 				}),
 				...createYamlAndSvgResizableColumns({
 					columnFactory,
@@ -26,6 +35,16 @@ renderHarness({
 		// eslint-disable-next-line no-undef
 		createInitialStateFromJavascript(javascriptFromWebpack),
 });
+
+function callOrGetMessageOnError(
+	action,
+) {
+	try {
+		return action();
+	} catch (error) {
+		return error.message;
+	}
+}
 
 function createInitialStateFromJavascript(
 	javascript,

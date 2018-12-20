@@ -1,5 +1,5 @@
 const
-	callOrCreateErrorElement = require("./callOrCreateErrorElement"),
+	callOrCreateElementOnError = require("@devsnicket/eunice-test-harnesses/callOrCreateElementOnError"),
 	getInteractiveElementsForYaml = require("@devsnicket/eunice-renderer/dist/getInteractiveElementsForYaml"),
 	getProcessedYamlFromState = require("./getProcessedYamlFromState");
 
@@ -14,7 +14,7 @@ module.exports =
 			title:
 				"SVG",
 			value:
-				callOrCreateErrorElement({
+				callOrCreateElementOnError({
 					action:
 						() =>
 							getInteractiveElementsForYaml({
