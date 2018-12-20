@@ -14,7 +14,7 @@ item 1
 ``` YAML
 id: item 1
 ```
-Identifiers need to be unique within at least the scope of a [sequence](https://yaml.org/spec/1.2/spec.html#id2759963) (independent) or sequence of sequences (stack) (see below) so dependencies can be resolved unambigiously.
+Identifiers need to be unique within at least the scope of a [sequence](https://yaml.org/spec/1.2/spec.html#id2759963) ([independent](#independent-items)) or sequence of sequences ([stack](#stacked-items)) so dependencies can be resolved unambigiously.
 ### Dependencies
 Dependencies are specified in the value of [mapping](https://yaml.org/spec/1.2/spec.html#id2759963) key "dependsUpon".
 ``` YAML
