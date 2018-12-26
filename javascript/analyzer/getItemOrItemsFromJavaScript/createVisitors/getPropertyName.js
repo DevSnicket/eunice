@@ -4,4 +4,16 @@ module.exports =
 		?
 		property.argument.name
 		:
-		property.value.name;
+		getNameFromValue(property.value);
+
+function getNameFromValue(
+	value,
+) {
+	return (
+		value.type === "AssignmentPattern"
+		?
+		value.left.name
+		:
+		value.name
+	);
+}
