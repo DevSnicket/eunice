@@ -14,17 +14,24 @@ item 1
 ``` YAML
 id: item 1
 ```
-Identifiers need to be unique within at least the scope of a [sequence](https://yaml.org/spec/1.2/spec.html#id2759963) (independent) or sequence of sequences (stack) (see below) so dependencies can be resolved unambigiously.
+Identifiers need to be unique within at least the scope of a [sequence](https://yaml.org/spec/1.2/spec.html#id2759963) ([independent](#independent-items)) or sequence of sequences ([stack](#stacked-items)) so dependencies can be resolved unambigiously.
 ### Dependencies
 Dependencies are specified in the value of [mapping](https://yaml.org/spec/1.2/spec.html#id2759963) key "dependsUpon".
 ``` YAML
 id: item 1
 dependsUpon: item 2
 ```
-"dependsUpon" can be a [sequence](https://yaml.org/spec/1.2/spec.html#id2759963) of multiple item identifiers.
+The value of "dependsUpon" can be a [sequence](https://yaml.org/spec/1.2/spec.html#id2759963) of multiple item identifiers.
 ``` YAML
 id: item 1
 dependsUpon: [item 2, item 3]
+```
+The value or [sequence](https://yaml.org/spec/1.2/spec.html#id2759963) of "dependsUpon" can also contain a [mapping](https://yaml.org/spec/1.2/spec.html#id2759963) with keys of id and items. This specifies a dependency on a [nested / child item](#nested--child-items).
+``` YAML
+id: item 1
+dependsUpon:
+  id: item 2
+  items: child of item 2
 ```
 ### Independent items
 A [sequence](https://yaml.org/spec/1.2/spec.html#id2759963) specifies items intended to be independent of each other.
