@@ -1,5 +1,5 @@
 const
-	callOrCreateElementOnError = require("@devsnicket/eunice-test-harnesses/callOrCreateElementOnError"),
+	{ callOrCreateElementOnError } = require("@devsnicket/eunice-test-harnesses"),
 	{ getInteractiveElementsForYaml } = require("@devsnicket/eunice-renderer"),
 	getProcessedYamlFromState = require("./getProcessedYamlFromState");
 
