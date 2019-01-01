@@ -1,9 +1,8 @@
 const
-	callOrCreateElementOnError = require("@devsnicket/eunice-test-harnesses/callOrCreateElementOnError"),
+	{ callOrCreateElementOnError, renderHarness } = require("@devsnicket/eunice-test-harnesses"),
 	{ createElement } = require("react"),
 	createJavascriptInputResizableColumn = require("./createJavascriptInputResizableColumn"),
-	getYamlFromJavaScript = require("../getYamlFromJavaScript"),
-	renderHarness = require("@devsnicket/eunice-test-harnesses/renderHarness");
+	getYamlFromJavaScript = require("../getYamlFromJavaScript");
 
 renderHarness({
 	createColumns:
