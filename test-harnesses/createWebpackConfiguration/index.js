@@ -17,6 +17,8 @@ module.exports =
 				"source-map",
 			entry:
 				[ "babel-polyfill", indexFile ],
+			externals:
+				{ "./createWebpackConfiguration": "null" },
 			module:
 				createModuleWithBabelPlugins(babelPlugins),
 			node:
