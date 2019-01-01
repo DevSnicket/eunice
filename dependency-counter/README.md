@@ -11,7 +11,7 @@ DevSnicket Eunice is a toolkit based on the premise that unidirectional dependen
 
 [Eunice](https://www.github.com/DevSnicket/Eunice) includes a YAML file format to store dependency and structure, it also includes analyzers to produce this YAML and processors of the YAML.
 
-To visualise and explorer what's in the YAML files, and to statistically measure how well they match the intended structure, a SVG renderer has been implemented. The renderer doesn't use lines between items to show dependencies and instead marks items with counts for each dependency type:
+To visualise and explore what's in the YAML files, and to statistically measure how well they match the intended structure, a SVG renderer has been implemented in Javascript. The renderer doesn't use lines between items to show dependencies and instead marks items with counts for each dependency type:
 
 - matches stack (green down arrow)
 - does not match stack (red up arrow) 
