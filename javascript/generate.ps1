@@ -92,6 +92,7 @@ try
 		| % {$_ -replace "'@devsnicket/eunice-$($packages[4])'", $packages[4] } `
 		| % {$_ -replace "'@devsnicket/eunice-$($packages[5])'", $packages[5] } `
 		| % {$_ -replace "'@devsnicket/eunice-$($packages[6])'", $packages[6] } `
+		| % {$_ -replace "'@devsnicket/eunice-$($packages[7])'", $packages[7] } `
 		> $yamlDirectory/without-package-prefixes.yaml
 	}
 
@@ -102,7 +103,7 @@ try
 	installEuniceNpmPackage "javascript-analyzer"
 	installEuniceNpmPackage "processors"
 
-	$packages = "call-with-process-standard-streams", "dependency-and-structure", "javascript-analyzer", "processors", "renderer", "run-tests-from-file-system", "test-harnesses"
+	$packages = "call-with-process-standard-streams", "dependency-and-structure", "javascript-analyzer", "processors", "renderer", "run-tests-from-file-system", "test-harnesses", " test-harnesses-processor-plugins"
 
 	echo "Analyze and process repository"
 
@@ -166,6 +167,7 @@ try
 		--files "$($packages[4])/stack-using-files.yaml" `
 		--files "$($packages[5])/stack-using-files.yaml" `
 		--files "$($packages[6])/stack-using-files.yaml" `
+		--files "$($packages[7])/stack-using-files.yaml" `
 	> concatenate.yaml
 
 	cat concatenate.yaml `

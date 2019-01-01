@@ -85,6 +85,7 @@ function processYamlFile {
     -e "s/'@devsnicket\/eunice-${packages[4]}'/${packages[4]}/g" \
     -e "s/'@devsnicket\/eunice-${packages[5]}'/${packages[5]}/g" \
     -e "s/'@devsnicket\/eunice-${packages[6]}'/${packages[6]}/g" \
+    -e "s/'@devsnicket\/eunice-${packages[7]}'/${packages[7]}/g" \
   > $yamlDirectory/without-package-prefixes.yaml
 }
 
@@ -96,7 +97,7 @@ cd $outputDirectory
 installEuniceNpmPackage "javascript-analyzer"
 installEuniceNpmPackage "processors"
 
-packages=(call-with-process-standard-streams dependency-and-structure javascript-analyzer processors renderer run-tests-from-file-system test-harnesses)
+packages=(call-with-process-standard-streams dependency-and-structure javascript-analyzer processors renderer run-tests-from-file-system test-harnesses test-harnesses-processor-plugins)
 
 echo Analyze and process repository
 
@@ -160,6 +161,7 @@ npx eunice-processors-concatenateFromFileSystem \
   --files ${packages[4]}/stack-using-files.yaml \
   --files ${packages[5]}/stack-using-files.yaml \
   --files ${packages[6]}/stack-using-files.yaml \
+  --files ${packages[7]}/stack-using-files.yaml \
 > concatenate.yaml
   
 cat concatenate.yaml \
