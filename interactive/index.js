@@ -1,6 +1,6 @@
 const
 	createYamlAndSvgResizableColumns = require("./createYamlAndSvgResizableColumns"),
-	renderHarness = require("@devsnicket/eunice-test-harnesses/renderHarness");
+	{ renderHarness } = require("@devsnicket/eunice-test-harnesses");
 
 renderHarness({
 	createColumns:
