@@ -6,25 +6,21 @@ DevSnicket Eunice is based on the premise that unidirectional dependencies can b
 
 ## Stacks
 
-Fundamental to Eunice is the act of defining stacks. When it's intended that an item is to be dependent upon another item, the first item is placed above the second item in a stack. When items are intended to be independent of each other they can be placed at the same level in a stack.
+Fundamental to Eunice is the act of defining stacks. When it's intended that an item is to be dependent upon another, the first item is placed above the second item in a stack. When items are intended to be independent of each other, they can be placed at the same level in a stack.
 
-In some programming languages there are implied stacks, such as the order of functions in a file or the order of files in a project.
+In some programming languages there are implied stacks, such as the order of functions in a file, or the order of files in a project.
 
 ## Scale
 
-The approach of defining stacks can be applied at all scales of software and across boundaries, from individual files, functions or classes, to multiple, large codebases in different languages, frameworks and runtimes.
+Stacks can be defined in Eunice at different scales and across boundaries, from individual functions, classes or files; to multiple, large codebases in different languages, frameworks and runtimes.
 
-## Stages
+## Stages / YAML
 
-Eunice includes the stages shown below. Transitions are made between the stages using YAML. An explanation of the YAML and stages follows.
+Eunice includes the stages shown below.
 
 ![](https://raw.githubusercontent.com/DevSnicket/Eunice/master/docs/stages-and-transitions.svg?sanitize=true)
 
-## YAML
-
-To give Eunice [composability](https://en.wikipedia.org/wiki/Composability) within and between stages, a common data format for structure and dependency is described using [YAML](https://yaml.org/).
-
-What's supported in the YAML is specified [here](docs/yaml.md).
+To give Eunice [composability](https://en.wikipedia.org/wiki/Composability) within and between stages, a common data format for structure and dependency is described using [YAML](https://yaml.org/). What's supported in this YAML is specified [here](docs/yaml.md).
 
 ## Analyzers
 
