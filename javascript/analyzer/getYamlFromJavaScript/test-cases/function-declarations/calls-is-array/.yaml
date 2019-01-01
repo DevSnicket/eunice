@@ -1,1 +1,2 @@
-- single
+- id: single
+  dependsUpon: Array

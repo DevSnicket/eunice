@@ -1,6 +1,7 @@
 const
 	addArgumentsToNestedCallMap = require("./addArgumentsToNestedCallMap"),
 	getIdentifierNameFromAndAddOrUpdateReferenceOfParent = require("./getIdentifierNameFromAndAddOrUpdateReferenceOfParent"),
+	getNameFromCallee = require("./getNameFromCallee"),
 	getPropertyName = require("../getPropertyName");
 
 module.exports =
@@ -12,30 +13,12 @@ module.exports =
 		findParentFunctions,
 		isVariableInBlockScoped,
 	}) => {
-		const calleeName = getCalleeName();
+		const calleeName = getNameFromCallee(callExpression.callee);
 
 		if (calleeName && calleeName !== "require")
 			addFromParentFunctions(
 				findParentFunctions(),
 			);
-
-		function getCalleeName() {
-			return (
-				getRequireWhenCalled()
-				||
-				callExpression.callee.name
-			);
-		}
-
-		function getRequireWhenCalled() {
-			return (
-				callExpression.callee.callee
-				&&
-				callExpression.callee.callee.name === "require"
-				&&
-				callExpression.callee.arguments[0].value
-			);
-		}
 
 		function addFromParentFunctions(
 			parentFunctions,
