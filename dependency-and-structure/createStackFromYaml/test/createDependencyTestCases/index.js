@@ -1,5 +1,5 @@
 const
-	createChildOfFirstDependsUponSecond = require("./createChildOfFirstDependsUponSecond"),
+	createChildOfFirstDependsUponSecondTestCase = require("./createChildOfFirstDependsUponSecondTestCase"),
 	createDependsUponIdentifierTestCases = require("./createDependsUponIdentifierTestCases"),
 	createFirstAndSecondDependsUponThirdTestCase = require("./createFirstAndSecondDependsUponThirdTestCase"),
 	createFirstChildDependsUponParentAndSecondChildWithGrandchildWithParentIdentifierTestCase = require("./createFirstChildDependsUponParentAndSecondChildWithGrandchildWithParentIdentifierTestCase"),
@@ -13,7 +13,7 @@ const
 module.exports =
 	() =>
 		[
-			createChildOfFirstDependsUponSecond(),
+			createChildOfFirstDependsUponSecondTestCase(),
 			...createDependsUponIdentifierTestCases(),
 			createFirstAndSecondDependsUponThirdTestCase(),
 			createFirstChildDependsUponParentAndSecondChildWithGrandchildWithParentIdentifierTestCase(),
