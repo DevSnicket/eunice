@@ -10,11 +10,11 @@
 				"args":
 					[
 						"--runInBand",
-						"dependencyAndStructure/createStackFromYaml/test.js"
+						"createStackFromYaml/test.js"
 					],
 				"localRoot": "${workspaceFolder}",
 				"name": "dependency & structure createStackFromYaml jest",
-				"program": "${workspaceFolder}/dependencyAndStructure/node_modules/jest/bin/jest.js",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
 				"type": "node",
@@ -24,11 +24,11 @@
 				"args":
 					[
 						"--runInBand", 
-						"dependencyAndStructure/createYamlFromStack/test.js"
+						"createYamlFromStack/test.js"
 					],
 				"localRoot": "${workspaceFolder}",
 				"name": "dependency & structure createYamlFromStack jest",
-				"program": "${workspaceFolder}/dependencyAndStructure/node_modules/jest/bin/jest.js",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
 				"type": "node",
