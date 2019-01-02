@@ -3,7 +3,7 @@ const path = require("path");
 module.exports =
 	{
 		getFromFunction: _function => getFromName(_function.name),
-		getFromModule: () => getFromName(path.parse(module.parent.filename).base),
+		getFromModule: () => getFromName(path.parse(module.parent.filename).name),
 	};
 
 function getFromName(
