@@ -6,20 +6,20 @@ const
 module.exports =
 	() =>
 		[
-			createSelfDependentChildWithParentTestCases(),
-			createSelfDependentParentWithChildTestCases(),
+			createSelfDependentChildWithParentTestCase(),
+			createSelfDependentParentWithChildTestCase(),
 		];
 
 const sameIdentifier = "same";
 
-function createSelfDependentChildWithParentTestCases() {
+function createSelfDependentChildWithParentTestCase() {
 	return (
 		{
 			stack:
 				createStackWithDependencies(),
 			stackDescription:
 				stackDescriptionFromCreateTestCase.getFromFunction(
-					createSelfDependentChildWithParentTestCases,
+					createSelfDependentChildWithParentTestCase,
 				),
 			yaml:
 				createYaml(),
@@ -54,14 +54,14 @@ function createSelfDependentChildWithParentTestCases() {
 	}
 }
 
-function createSelfDependentParentWithChildTestCases() {
+function createSelfDependentParentWithChildTestCase() {
 	return (
 		{
 			stack:
 				createStackWithDependencies(),
 			stackDescription:
 				stackDescriptionFromCreateTestCase.getFromFunction(
-					createSelfDependentParentWithChildTestCases,
+					createSelfDependentParentWithChildTestCase,
 				),
 			yaml:
 				createYaml(),
