@@ -7,13 +7,14 @@ const
 callWithProcessStandardStreamsOfYaml(
 	({
 		commaSeparatedLevels,
+		identifierPattern,
 		items,
-		toIdentifier,
 	}) =>
 		createOrAddToStacksToItemsWithIdentifier({
+			identifierPattern:
+				new RegExp(identifierPattern),
 			identifiersInNewStack:
 				parseCommaSeparated(commaSeparatedLevels),
 			items,
-			toIdentifier,
 		}),
 );

@@ -5,6 +5,8 @@ test(
 	() =>
 		expect(
 			createOrAddToStacksToItemsWithIdentifier({
+				identifierPattern:
+					"^parent",
 				identifiersInNewStack:
 					[
 						[ "child 1" ],
@@ -20,8 +22,6 @@ test(
 								items: [ "child 1", "child 2" ],
 							},
 					},
-				toIdentifier:
-					"parent",
 			}),
 		)
 		.toEqual(

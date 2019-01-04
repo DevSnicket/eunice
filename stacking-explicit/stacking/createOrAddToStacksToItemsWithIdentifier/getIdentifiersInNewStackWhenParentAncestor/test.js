@@ -33,7 +33,7 @@ test.each(
 			getIdentifiersInNewStackWhenParentAncestor({
 				ancestors,
 				identifiersInNewStack,
-				parentIdentifier: "addToParent",
+				parentIdentifierPattern: "addToParent",
 			}),
 		)
 		.toBe(

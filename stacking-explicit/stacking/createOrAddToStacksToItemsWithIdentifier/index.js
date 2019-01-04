@@ -5,9 +5,9 @@ const
 
 module.exports =
 	({
+		identifierPattern,
 		identifiersInNewStack,
 		items,
-		toIdentifier,
 	}) =>
 		replaceItemsAndInItems({
 			identifierOrItemOrLevelOrStack:
@@ -25,7 +25,7 @@ module.exports =
 							getIdentifiersInNewStackWhenParentAncestor({
 								ancestors,
 								identifiersInNewStack,
-								parentIdentifier: toIdentifier,
+								parentIdentifierPattern: identifierPattern,
 							}),
 					}),
 		});

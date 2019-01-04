@@ -2,7 +2,7 @@ module.exports =
 	({
 		ancestors,
 		identifiersInNewStack,
-		parentIdentifier,
+		parentIdentifierPattern,
 	}) => {
 		return (
 			hasParentWithIdentifier()
@@ -15,13 +15,27 @@ module.exports =
 		function hasParentWithIdentifier(
 		) {
 			return (
-				ancestors.length
-				&&
-				getParent().id === parentIdentifier
+				isParentIdentifierMatch(
+					getParentIdentifier(),
+				)
 			);
 		}
 
-		function getParent() {
-			return ancestors[ancestors.length - 1];
+		function getParentIdentifier() {
+			return (
+				ancestors.length
+				&&
+				ancestors[ancestors.length - 1].id
+			);
+		}
+
+		function isParentIdentifierMatch(
+			identifier,
+		) {
+			return (
+				identifier
+				&&
+				identifier.match(parentIdentifierPattern)
+			);
 		}
 	};
