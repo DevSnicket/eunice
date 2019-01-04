@@ -1,5 +1,9 @@
 module.exports = createYamlFromStack;
 
+/**
+ * @param {import("../index").Stack} stack
+ * @returns {import("../index").Yaml}
+ */
 function createYamlFromStack(
 	stack,
 ) {
