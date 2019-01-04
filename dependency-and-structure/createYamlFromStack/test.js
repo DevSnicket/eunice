@@ -1,17 +1,21 @@
 const
-	createSymmetricalTestCases = require("../testcases/createSymmetricalTestCases"),
+	callTestForSymmetrical = require("../tests/callTestForSymmetrical"),
 	createYamlFromStack = require(".");
 
 describe(
 	"createYamlFromStack",
 	() =>
-		test.each(
-			createSymmetricalTestCases()
-			.map(testcase => [ testcase.stackDescription, testcase.yaml, testcase.stack ]),
-		)(
-			"%s returns %j",
-			(stackDescription, yaml, stack) =>
-				expect(createYamlFromStack(stack))
-				.toEqual(yaml),
+		callTestForSymmetrical(
+			({
+				stack,
+				stackDescription,
+				yaml,
+			}) =>
+				test(
+					`${stackDescription} returns ${JSON.stringify(yaml)}`,
+					() =>
+						expect(createYamlFromStack(stack))
+						.toEqual(yaml),
+				),
 		),
 );

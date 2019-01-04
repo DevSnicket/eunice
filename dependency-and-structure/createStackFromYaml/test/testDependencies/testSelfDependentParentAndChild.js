@@ -1,30 +1,25 @@
 const
-	createItemYaml = require("../../../testcases/createItemYaml"),
-	createStack = require("../../../testcases/createStack"),
-	stackDescriptionFromCreateTestCase = require("../../../testcases/stackDescriptionFromCreateTestCase");
+	createItemYaml = require("../../../tests/createItemYaml"),
+	createStackFromLevels = require("../../../tests/createStackFromLevels"),
+	testCreateStackFromYaml = require("../testCreateStackFromYaml");
 
 module.exports =
-	() =>
-		[
-			createSelfDependentChildWithParentTestCase(),
-			createSelfDependentParentWithChildTestCase(),
-		];
+	() => {
+		testSelfDependentChildWithParent();
+		testSelfDependentParentWithChild();
+	};
 
 const sameIdentifier = "same";
 
-function createSelfDependentChildWithParentTestCase() {
-	return (
-		{
-			stack:
-				createStackWithDependencies(),
-			stackDescription:
-				stackDescriptionFromCreateTestCase.getFromFunction(
-					createSelfDependentChildWithParentTestCase,
-				),
-			yaml:
-				createYaml(),
-		}
-	);
+function testSelfDependentChildWithParent() {
+	testCreateStackFromYaml({
+		stack:
+			createStackWithDependencies(),
+		stackDescription:
+			"self dependent child with parent",
+		yaml:
+			createYaml(),
+	});
 
 	function createStackWithDependencies() {
 		const { parent, stack } = createStackAndGetParent();
@@ -54,15 +49,13 @@ function createSelfDependentChildWithParentTestCase() {
 	}
 }
 
-function createSelfDependentParentWithChildTestCase() {
+function testSelfDependentParentWithChild() {
 	return (
 		{
 			stack:
 				createStackWithDependencies(),
 			stackDescription:
-				stackDescriptionFromCreateTestCase.getFromFunction(
-					createSelfDependentParentWithChildTestCase,
-				),
+				"self dependent parent with child",
 			yaml:
 				createYaml(),
 		}
@@ -97,7 +90,7 @@ function createSelfDependentParentWithChildTestCase() {
 
 function createStackAndGetParent() {
 	const stack =
-		createStack(
+		createStackFromLevels(
 			[
 				[
 					{

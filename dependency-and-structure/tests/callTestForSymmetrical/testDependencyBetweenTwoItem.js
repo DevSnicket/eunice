@@ -1,25 +1,25 @@
 const
-	createFirstAndSecondLevel = require("../createFirstAndSecondLevel"),
-	createItemYaml = require("../../createItemYaml"),
-	createStack = require("../../createStack"),
-	stackDescriptionFromCreateTestCase = require("../../stackDescriptionFromCreateTestCase");
+	createFirstAndSecondLevel = require("./createFirstAndSecondLevel"),
+	createItemYaml = require("../createItemYaml"),
+	createStackFromLevels = require("../createStackFromLevels");
 
 module.exports =
-	() =>
+	test =>
 		[
 			createFirstDependsUponSecondTestCase(),
 			createSecondDependsUponFirstTestCase(),
-		];
+		]
+		.forEach(
+			test,
+		);
 
 function createFirstDependsUponSecondTestCase() {
 	return (
 		{
 			stack:
-				createStackWithDependencies(),
+				createStack(),
 			stackDescription:
-				stackDescriptionFromCreateTestCase.getFromFunction(
-					createFirstDependsUponSecondTestCase,
-				),
+				"first depends upon second",
 			yaml:
 				[
 					createItemYaml({
@@ -31,7 +31,7 @@ function createFirstDependsUponSecondTestCase() {
 		}
 	);
 
-	function createStackWithDependencies() {
+	function createStack() {
 		const { first, second, stack } = createStackAndGetFirstAndSecond();
 
 		first.dependsUpon = [ second ];
@@ -45,11 +45,9 @@ function createSecondDependsUponFirstTestCase() {
 	return (
 		{
 			stack:
-				createStackWithDependencies(),
+				createStack(),
 			stackDescription:
-				stackDescriptionFromCreateTestCase.getFromFunction(
-					createSecondDependsUponFirstTestCase,
-				),
+				"second depends upon first",
 			yaml:
 				[
 					"first",
@@ -61,7 +59,7 @@ function createSecondDependsUponFirstTestCase() {
 		}
 	);
 
-	function createStackWithDependencies() {
+	function createStack() {
 		const { first, second, stack } = createStackAndGetFirstAndSecond();
 
 		second.dependsUpon = [ first ];
@@ -72,7 +70,7 @@ function createSecondDependsUponFirstTestCase() {
 }
 
 function createStackAndGetFirstAndSecond() {
-	const stack = createStack([ createFirstAndSecondLevel() ]);
+	const stack = createStackFromLevels([ createFirstAndSecondLevel() ]);
 
 	const level = stack[0];
 

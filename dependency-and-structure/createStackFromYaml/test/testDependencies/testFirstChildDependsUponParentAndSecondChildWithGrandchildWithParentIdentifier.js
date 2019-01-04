@@ -1,24 +1,24 @@
 const
-	createItemYaml = require("../../../testcases/createItemYaml"),
-	createStack = require("../../../testcases/createStack"),
-	stackDescriptionFromCreateTestCase = require("../../../testcases/stackDescriptionFromCreateTestCase");
+	createItemYaml = require("../../../tests/createItemYaml"),
+	createStackFromLevels = require("../../../tests/createStackFromLevels"),
+	testCreateStackFromYaml = require("../testCreateStackFromYaml");
 
 const parentIdentifier = "parent";
 
 module.exports =
-	() => (
-		{
+	() =>
+		testCreateStackFromYaml({
 			stack:
 				createStackWithDependencies(),
 			stackDescription:
-				stackDescriptionFromCreateTestCase.getFromModule(),
-			yaml: createYaml(),
-		}
-	);
+				"first child depends upon parent and second child with grandchild with parent identifier",
+			yaml:
+				createYaml(),
+		});
 
 function createStackWithDependencies() {
 	const stack =
-		createStack(
+		createStackFromLevels(
 			[
 				[
 					{

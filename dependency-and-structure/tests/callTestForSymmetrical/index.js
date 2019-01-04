@@ -1,21 +1,55 @@
 const
-	createDependencyTestCases = require("./createDependencyTestCases"),
 	createFirstAndSecondLevel = require("./createFirstAndSecondLevel"),
 	createItemYaml = require("../createItemYaml"),
 	createParentChildLevels = require("../createParentChildLevels"),
-	createTestCase = require("../createTestCase"),
-	createUpperAndLowerStack = require("../createUpperAndLowerStack");
+	createStackFromLevels = require("../createStackFromLevels"),
+	createUpperAndLowerStack = require("../createUpperAndLowerStack"),
+	formatStackForDescription = require("../formatStackForDescription"),
+	testDependencyBetweenTwoItem = require("./testDependencyBetweenTwoItem"),
+	testFirstDependsUponSecondAndThird = require("./testFirstDependsUponSecondAndThird");
 
 module.exports =
-	() =>
+	test => {
+		describe(
+			"symmetrical",
+			() => {
+				createTestCasesWithSimpleLevels()
+				.forEach(testSideWithSimpleLevels);
+
+				describe(
+					"dependency",
+					() => {
+						testDependencyBetweenTwoItem(test);
+						testFirstDependsUponSecondAndThird(test);
+					},
+				);
+			},
+		);
+
+		function testSideWithSimpleLevels({
+			levels,
+			yaml,
+		}) {
+			const stack = createStackFromLevels(levels);
+
+			test({
+				stack,
+				stackDescription: formatStackForDescription(stack),
+				yaml,
+			});
+		}
+	};
+
+function createTestCasesWithSimpleLevels() {
+	return (
 		[
-			createTestCase({
+			{
 				levels:
 					[ [ { id: "item" } ] ],
 				yaml:
 					"item",
-			}),
-			createTestCase({
+			},
+			{
 				levels:
 					[
 						[
@@ -30,20 +64,20 @@ module.exports =
 						id: "item",
 						otherProperty: "otherValue",
 					},
-			}),
-			createTestCase({
+			},
+			{
 				levels:
 					[ createFirstAndSecondLevel() ],
 				yaml:
 					[ "first", "second" ],
-			}),
-			createTestCase({
+			},
+			{
 				levels:
 					createUpperAndLowerStack(),
 				yaml:
 					[ [ "upper" ], [ "lower" ] ],
-			}),
-			createTestCase({
+			},
+			{
 				levels:
 					[
 						[
@@ -52,8 +86,8 @@ module.exports =
 					],
 				yaml:
 					{ items: "item" },
-			}),
-			createTestCase({
+			},
+			{
 				levels:
 					createParentChildLevels(),
 				yaml:
@@ -61,8 +95,8 @@ module.exports =
 						id: "parent",
 						items: "child",
 					},
-			}),
-			createTestCase({
+			},
+			{
 				levels:
 					[
 						[
@@ -77,6 +111,7 @@ module.exports =
 						dependsUpon: "missing",
 						id: "item1",
 					}),
-			}),
-			...createDependencyTestCases(),
-		];
+			},
+		]
+	);
+}

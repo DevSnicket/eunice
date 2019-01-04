@@ -11,6 +11,7 @@
 	},
 	"devDependencies": {
 		"@types/jest": "23.3.1",
+		"@types/node": "10.12.18",
 		"babel-cli": "6.26.0",
 		"babel-plugin-transform-object-rest-spread": "6.26.0",
 		"babel-preset-env": "1.7.0",
@@ -57,7 +58,7 @@
 		"url": "https://github.com/DevSnicket/eunice-dependency-and-structure.git"
 	},
 	"scripts": {
-		"build": "npx babel -d dist --ignore dist/*,dist/**/*,node_modules/**/*,**/test/**,**/testcases/**,test-coverage/**,**/test.js --plugins transform-object-rest-spread -s true .",
+		"build": "npx babel -d dist --ignore dist/*,dist/**/*,node_modules/**/*,**/tests/**,**/tests/**,test-coverage/**,**/test.js --plugins transform-object-rest-spread -s true .",
 		"lint": "npx eslint .",
 		"test": "npx jest --runInBand"
 	},

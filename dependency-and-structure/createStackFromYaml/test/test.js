@@ -1,31 +1,37 @@
 const
-	createDependencyTestCases = require("./createDependencyTestCases"),
-	createStackFromYaml = require(".."),
-	createSymmetricalTestCases = require("../../testcases/createSymmetricalTestCases"),
-	createTestCase = require("../../testcases/createTestCase");
+	callTestForSymmetrical = require("../../tests/callTestForSymmetrical"),
+	createStackFromLevels = require("../../tests/createStackFromLevels"),
+	formatStackForDescription = require("../../tests/formatStackForDescription"),
+	testCreateStackFromYaml = require("./testCreateStackFromYaml"),
+	testDependencies = require("./testDependencies");
 
 describe(
 	"createStackFromYaml",
-	() =>
-		test.each(
-			[
-				...createSymmetricalTestCases(),
-				createTestCase({
-					levels:
-						[
-							[ { id: "item1" } ],
-							[ { id: "item2" } ],
-						],
-					yaml:
-						[ [ "item1" ], "item2" ],
-				}),
-				...createDependencyTestCases(),
-			]
-			.map(testcase => [ testcase.yaml, testcase.stackDescription, testcase.stack ]),
-		)(
-			"%j returns %s",
-			(yaml, stackDescription, stack) =>
-				expect(createStackFromYaml(yaml))
-				.toEqual(stack),
-		),
+	() => {
+		callTestForSymmetrical(
+			testCreateStackFromYaml,
+		);
+
+		testStackOfCollectionAndScalarLevels();
+
+		testDependencies();
+	},
 );
+
+function testStackOfCollectionAndScalarLevels() {
+	const stack =
+		createStackFromLevels(
+			[
+				[ { id: "item1" } ],
+				[ { id: "item2" } ],
+			],
+		);
+
+	testCreateStackFromYaml({
+		stack,
+		stackDescription:
+			formatStackForDescription(stack),
+		yaml:
+			[ [ "item1" ], "item2" ],
+	});
+}
