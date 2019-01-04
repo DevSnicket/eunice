@@ -69,7 +69,7 @@ function processYamlFile {
   cat $yamlDirectory/stack-test-in-top-level.yaml \
   | npx eunice-processors-createOrAddToStacksToItemsWithIdentifier \
     --commaSeparatedLevels=existing --commaSeparatedLevels=expect,test \
-    --toIdentifier=test \
+    --identifierPattern="^test$|test[A-Z]" \
   > $yamlDirectory/add-to-stack-test-identifiers.yaml
   
   cat $yamlDirectory/add-to-stack-test-identifiers.yaml \
