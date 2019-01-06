@@ -1,0 +1,1 @@
+module.exports = items => items.map(item => ({ item }));

@@ -2,6 +2,7 @@ const
 	createItemYaml = require("../../../tests/createItemYaml"),
 	createStackFromLevels = require("../../../tests/createStackFromLevels"),
 	createUpperAndLowerStack = require("../../../tests/createUpperAndLowerStack"),
+	mapItemsToDependsUpon = require("../../../tests/mapItemsToDependsUpon"),
 	testCreateStackFromYaml = require("../testCreateStackFromYaml");
 
 module.exports =
@@ -31,7 +32,7 @@ function testUpperDependsUponLower() {
 	function createStackWithDependencies() {
 		const { lower, stack, upper } = createStackAndGetUpperAndLower();
 
-		upper.dependsUpon = [ lower ];
+		upper.dependsUpon = mapItemsToDependsUpon([ lower ]);
 		lower.dependents = [ upper ];
 
 		return stack;
@@ -59,7 +60,7 @@ function testLowerDependsUponUpper() {
 	function createStackWithDependencies() {
 		const { lower, stack, upper } = createStackAndGetUpperAndLower();
 
-		lower.dependsUpon = [ upper ];
+		lower.dependsUpon = mapItemsToDependsUpon([ upper ]);
 		upper.dependents = [ lower ];
 
 		return stack;

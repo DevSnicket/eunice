@@ -22,7 +22,7 @@ module.exports =
 
 		const child = level[1].items[0][0];
 
-		level[0].dependsUpon = [ child ];
+		level[0].dependsUpon = [ { item: child, parent: level[1] } ];
 		child.dependents = [ level[0] ];
 
 		testCreateStackFromYaml({
@@ -33,8 +33,13 @@ module.exports =
 				[
 					[
 						createItemYaml({
-							dependsUpon: { id: "item2", items: "child" },
-							id: "item1",
+							dependsUpon:
+								{
+									id: "item2",
+									items: "child",
+								},
+							id:
+								"item1",
 						}),
 						createItemYaml({
 							id: "item2",

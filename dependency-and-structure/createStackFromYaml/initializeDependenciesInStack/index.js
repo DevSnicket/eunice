@@ -5,8 +5,8 @@ require("array.prototype.flatmap")
 .shim();
 
 const
+	findChildItemsAndCreateDependsUpon = require("./findChildItemsAndCreateDependsUpon"),
 	findItemWithIdentifierFromStack = require("./findItemWithIdentifierFromStack"),
-	findItemsOfDependsUponOrGetIdentifiers = require("./findItemsOfDependsUponOrGetIdentifiers"),
 	updateItem = require("./updateItem");
 
 module.exports = initializeDependenciesInStack;
@@ -27,36 +27,39 @@ function initializeDependenciesInStack(
 	) {
 		if (item.dependsUpon)
 			updateItem({
-				dependsUponItems:
-					item.dependsUpon.flatMap(findItemsFromDependsUpon),
+				dependsUpon:
+					item.dependsUpon.flatMap(findItemsAndCreateDependsUpon),
 				item,
 			});
 
-		function findItemsFromDependsUpon(
-			dependsUpon,
+		function findItemsAndCreateDependsUpon(
+			dependUpon,
 		) {
 			return (
-				findItemsWhenString()
+				whenString()
 				||
-				findItemsOfDependsUponOrGetIdentifiers({
-					dependsUpon,
-					dependsUponItem:
+				findChildItemsAndCreateDependsUpon({
+					dependUpon,
+					parent:
 						findItemWithIdentifier(
-							dependsUpon.id,
+							dependUpon.id,
 						),
 				})
 			);
 
-			function findItemsWhenString() {
+			function whenString() {
 				return (
-					typeof dependsUpon === "string"
+					typeof dependUpon === "string"
 					&&
 					[
-						findItemWithIdentifier(
-							dependsUpon,
-						)
-						||
-						dependsUpon,
+						{
+							item:
+								findItemWithIdentifier(
+									dependUpon,
+								)
+								||
+								dependUpon,
+						},
 					]
 				);
 			}

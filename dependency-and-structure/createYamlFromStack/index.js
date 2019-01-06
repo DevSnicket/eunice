@@ -74,17 +74,23 @@ function createDependsUponProperty(
 			dependsUpon:
 				dependsUpon.length === 1
 				?
-				getIdentifierPropertyOrValue(dependsUpon[0])
+				createDependUpon(dependsUpon[0])
 				:
-				dependsUpon.map(getIdentifierPropertyOrValue),
+				dependsUpon.map(createDependUpon),
 		}
 	);
 }
 
-function getIdentifierPropertyOrValue(
-	value,
+function createDependUpon(
+	dependUpon,
 ) {
-	return value.id || value;
+	return getIdentifierPropertyOrValue(dependUpon.item);
+
+	function getIdentifierPropertyOrValue(
+		value,
+	) {
+		return value.id || value;
+	}
 }
 
 function createItemsProperty(

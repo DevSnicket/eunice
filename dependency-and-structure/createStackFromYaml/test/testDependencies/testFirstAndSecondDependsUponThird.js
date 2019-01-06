@@ -1,6 +1,7 @@
 const
 	createItemYaml = require("../../../tests/createItemYaml"),
 	createStackFromLevels = require("../../../tests/createStackFromLevels"),
+	mapItemsToDependsUpon = require("../../../tests/mapItemsToDependsUpon"),
 	testCreateStackFromYaml = require("../testCreateStackFromYaml");
 
 module.exports =
@@ -39,8 +40,8 @@ module.exports =
 		function addDependencies() {
 			const level = stack[0];
 
-			level[0].dependsUpon = [ level[2] ];
-			level[1].dependsUpon = [ level[2] ];
+			level[0].dependsUpon = mapItemsToDependsUpon([ level[2] ]);
+			level[1].dependsUpon = mapItemsToDependsUpon([ level[2] ]);
 
 			level[2].dependents = [ level[0], level[1] ];
 		}

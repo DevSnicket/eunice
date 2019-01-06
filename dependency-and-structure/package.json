@@ -62,5 +62,5 @@
 		"lint": "npx eslint .",
 		"test": "npx jest --runInBand"
 	},
-	"version": "1.4.1"
+	"version": "2.0.0"
 }

@@ -1,7 +1,8 @@
 const
 	createFirstAndSecondLevel = require("./createFirstAndSecondLevel"),
 	createItemYaml = require("../createItemYaml"),
-	createStackFromLevels = require("../createStackFromLevels");
+	createStackFromLevels = require("../createStackFromLevels"),
+	mapItemsToDependsUpon = require("../mapItemsToDependsUpon");
 
 module.exports =
 	test =>
@@ -34,7 +35,7 @@ function createFirstDependsUponSecondTestCase() {
 	function createStack() {
 		const { first, second, stack } = createStackAndGetFirstAndSecond();
 
-		first.dependsUpon = [ second ];
+		first.dependsUpon = [ { item: second } ];
 		second.dependents = [ first ];
 
 		return stack;
@@ -62,7 +63,7 @@ function createSecondDependsUponFirstTestCase() {
 	function createStack() {
 		const { first, second, stack } = createStackAndGetFirstAndSecond();
 
-		second.dependsUpon = [ first ];
+		second.dependsUpon = mapItemsToDependsUpon([ first ]);
 		first.dependents = [ second ];
 
 		return stack;

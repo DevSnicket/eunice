@@ -18,11 +18,23 @@ module.exports =
   * @property {Stack} stack
   *
   * @typedef Item
-  * @property {(Item | String)[]} [dependsUpon]
+  * @property {(DependUpon|DependUponMissingItem|DependUponMissingParent)[]} [dependsUpon]
   * @property {Item[]} [dependents]
   * @property {String} [id]
   * @property {Stack} [items]
   * @property {Level} level
+  *
+  * @typedef DependUpon
+  * @property {Item} item
+  * @property {Item} [parent]
+  *
+  * @typedef DependUponMissingItem
+  * @property {String} item
+  * @property {Item} [parent]
+  *
+  * @typedef DependUponMissingParent
+  * @property {String} item
+  * @property {String} [parent]
   *
   * @typedef {String | (String | YamlItem | (String | YamlItem)[])[]} Yaml
   *

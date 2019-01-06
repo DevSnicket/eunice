@@ -1,6 +1,7 @@
 const
 	createItemYaml = require("../../../tests/createItemYaml"),
 	createStackFromLevels = require("../../../tests/createStackFromLevels"),
+	mapItemsToDependsUpon = require("../../../tests/mapItemsToDependsUpon"),
 	testCreateStackFromYaml = require("../testCreateStackFromYaml");
 
 module.exports =
@@ -26,8 +27,8 @@ function testSelfDependentChildWithParent() {
 
 		const child = parent.items[0][0];
 
+		child.dependsUpon = mapItemsToDependsUpon([ child ]);
 		child.dependents = [ child ];
-		child.dependsUpon = [ child ];
 
 		return stack;
 	}
@@ -64,8 +65,8 @@ function testSelfDependentParentWithChild() {
 	function createStackWithDependencies() {
 		const { parent, stack } = createStackAndGetParent();
 
+		parent.dependsUpon = mapItemsToDependsUpon([ parent ]);
 		parent.dependents = [ parent ];
-		parent.dependsUpon = [ parent ];
 
 		return stack;
 	}

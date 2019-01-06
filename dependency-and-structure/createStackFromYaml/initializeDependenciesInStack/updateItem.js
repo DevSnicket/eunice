@@ -1,15 +1,15 @@
 module.exports =
 	({
-		dependsUponItems,
+		dependsUpon,
 		item,
 	}) => {
-		item.dependsUpon = dependsUponItems;
+		item.dependsUpon = dependsUpon;
 
-		for (const dependsUponItem of dependsUponItems)
-			if (typeof dependsUponItem === "object")
+		for (const { item: dependUponItem } of dependsUpon)
+			if (typeof dependUponItem === "object")
 				addDependent({
 					dependent: item,
-					item: dependsUponItem,
+					item: dependUponItem,
 				});
 	};
 

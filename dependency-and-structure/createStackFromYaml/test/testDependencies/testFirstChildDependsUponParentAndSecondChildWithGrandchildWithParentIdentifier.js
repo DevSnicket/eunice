@@ -1,6 +1,7 @@
 const
 	createItemYaml = require("../../../tests/createItemYaml"),
 	createStackFromLevels = require("../../../tests/createStackFromLevels"),
+	mapItemsToDependsUpon = require("../../../tests/mapItemsToDependsUpon"),
 	testCreateStackFromYaml = require("../testCreateStackFromYaml");
 
 const parentIdentifier = "parent";
@@ -47,7 +48,7 @@ function createStackWithDependencies() {
 
 		const firstChild = parent.items[0][0];
 
-		firstChild.dependsUpon = [ parent ];
+		firstChild.dependsUpon = mapItemsToDependsUpon([ parent ]);
 		parent.dependents = [ firstChild ];
 	}
 }

@@ -1,6 +1,7 @@
 const
 	createItemYaml = require("../../../tests/createItemYaml"),
 	createStackFromLevels = require("../../../tests/createStackFromLevels"),
+	mapItemsToDependsUpon = require("../../../tests/mapItemsToDependsUpon"),
 	testCreateStackFromYaml = require("../testCreateStackFromYaml");
 
 module.exports =
@@ -42,7 +43,7 @@ module.exports =
 
 			const child = level[0].items[0][0];
 
-			child.dependsUpon = [ level[1] ];
+			child.dependsUpon = mapItemsToDependsUpon([ level[1] ]);
 			level[1].dependents = [ child ];
 
 			return stack;
