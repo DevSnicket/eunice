@@ -2,7 +2,9 @@
 	"configurations":
 		[
 			{
+				"localRoot": "${workspaceFolder}",
 				"name": "attach",
+				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "attach",
 				"type": "node"
 			},
