@@ -12,7 +12,7 @@
 				"args":
 					[
 						"--runInBand",
-						"createStackFromYaml/test.js"
+						"createStackFromYaml/test/test.js"
 					],
 				"localRoot": "${workspaceFolder}",
 				"name": "dependency & structure createStackFromYaml jest",
