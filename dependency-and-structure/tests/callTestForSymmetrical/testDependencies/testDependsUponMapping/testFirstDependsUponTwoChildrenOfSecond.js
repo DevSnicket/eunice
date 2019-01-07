@@ -1,10 +1,9 @@
 const
-	createItemYaml = require("../../../../tests/createItemYaml"),
-	createStackFromLevels = require("../../../../tests/createStackFromLevels"),
-	testCreateStackFromYaml = require("../../testCreateStackFromYaml");
+	createItemYaml = require("../../../createItemYaml"),
+	createStackFromLevels = require("../../../createStackFromLevels");
 
 module.exports =
-	() => {
+	test => {
 		const stack =
 			createStackFromLevels(
 				[
@@ -42,27 +41,25 @@ module.exports =
 		children[0].dependents = [ level[0] ];
 		children[1].dependents = [ level[0] ];
 
-		testCreateStackFromYaml({
+		test({
 			stack,
 			stackDescription:
 				"first depends upon two children of second",
 			yaml:
 				[
-					[
-						createItemYaml({
-							dependsUpon:
-								{
-									id: "item2",
-									items: [ "child1", "child2" ],
-								},
-							id:
-								"item1",
-						}),
-						createItemYaml({
-							id: "item2",
-							items: [ "child1", "child2" ],
-						}),
-					],
+					createItemYaml({
+						dependsUpon:
+							{
+								id: "item2",
+								items: [ "child1", "child2" ],
+							},
+						id:
+							"item1",
+					}),
+					createItemYaml({
+						id: "item2",
+						items: [ "child1", "child2" ],
+					}),
 				],
 		});
 	};

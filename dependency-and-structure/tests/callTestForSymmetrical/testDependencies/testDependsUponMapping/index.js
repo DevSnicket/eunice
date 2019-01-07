@@ -1,6 +1,9 @@
 const
 	testDependsUponChildMissingFromMissing = require("./testDependsUponChildMissingFromMissing"),
-	testDependsUponTwoChildrenMissingFromMissing = require("./testDependsUponTwoChildrenMissingFromMissing");
+	testDependsUponTwoChildrenMissingFromMissing = require("./testDependsUponTwoChildrenMissingFromMissing"),
+	testFirstDependsUponChildMissingFromSecond = require("./testFirstDependsUponChildMissingFromSecond"),
+	testFirstDependsUponChildOfSecond = require("./testFirstDependsUponChildOfSecond"),
+	testFirstDependsUponTwoChildrenOfSecond = require("./testFirstDependsUponTwoChildrenOfSecond");
 
 module.exports =
 	test =>
@@ -9,5 +12,8 @@ module.exports =
 			() => {
 				testDependsUponChildMissingFromMissing(test);
 				testDependsUponTwoChildrenMissingFromMissing(test);
+				testFirstDependsUponChildMissingFromSecond(test);
+				testFirstDependsUponChildOfSecond(test);
+				testFirstDependsUponTwoChildrenOfSecond(test);
 			},
 		);
