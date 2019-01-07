@@ -1,7 +1,7 @@
 const
-	createItemYaml = require("../createItemYaml"),
-	createStackFromLevels = require("../createStackFromLevels"),
-	mapItemsToDependsUpon = require("../mapItemsToDependsUpon");
+	createItemYaml = require("../../createItemYaml"),
+	createStackFromLevels = require("../../createStackFromLevels"),
+	mapItemsToDependsUpon = require("../../mapItemsToDependsUpon");
 
 module.exports =
 	test =>

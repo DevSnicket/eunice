@@ -84,7 +84,24 @@ function createDependsUponProperty(
 function createDependUpon(
 	dependUpon,
 ) {
-	return getIdentifierPropertyOrValue(dependUpon.item);
+	return getWhenParent() || getIdentifierPropertyOrValue(dependUpon.item);
+
+	function getWhenParent() {
+		return (
+			dependUpon.parent
+			&&
+			{
+				id:
+					getIdentifierPropertyOrValue(
+						dependUpon.parent,
+					),
+				items:
+					getIdentifierPropertyOrValue(
+						dependUpon.item,
+					),
+			}
+		);
+	}
 
 	function getIdentifierPropertyOrValue(
 		value,

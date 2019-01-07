@@ -6,8 +6,7 @@ const
 	createUpperAndLowerStack = require("../createUpperAndLowerStack"),
 	formatStackForDescription = require("../formatStackForDescription"),
 	mapItemsToDependsUpon = require("../mapItemsToDependsUpon"),
-	testDependencyBetweenTwoItem = require("./testDependencyBetweenTwoItem"),
-	testFirstDependsUponSecondAndThird = require("./testFirstDependsUponSecondAndThird");
+	testDependencies = require("./testDependencies");
 
 module.exports =
 	test => {
@@ -17,13 +16,7 @@ module.exports =
 				createTestCasesWithSimpleLevels()
 				.forEach(testSideWithSimpleLevels);
 
-				describe(
-					"dependency",
-					() => {
-						testDependencyBetweenTwoItem(test);
-						testFirstDependsUponSecondAndThird(test);
-					},
-				);
+				testDependencies(test);
 			},
 		);
 
