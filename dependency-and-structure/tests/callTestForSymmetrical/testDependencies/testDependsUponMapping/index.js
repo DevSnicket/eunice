@@ -1,9 +1,13 @@
-const testDependsUponChildMissingFromMissing = require("./testDependsUponChildMissingFromMissing");
+const
+	testDependsUponChildMissingFromMissing = require("./testDependsUponChildMissingFromMissing"),
+	testDependsUponTwoChildrenMissingFromMissing = require("./testDependsUponTwoChildrenMissingFromMissing");
 
 module.exports =
 	test =>
 		describe(
 			"mapping",
-			() =>
-				testDependsUponChildMissingFromMissing(test),
+			() => {
+				testDependsUponChildMissingFromMissing(test);
+				testDependsUponTwoChildrenMissingFromMissing(test);
+			},
 		);

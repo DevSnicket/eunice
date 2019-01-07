@@ -1,3 +1,5 @@
+const createDependsUpon = require("./createDependsUpon");
+
 module.exports = createYamlFromStack;
 
 /**
@@ -70,44 +72,8 @@ function createDependsUponProperty(
 	return (
 		dependsUpon
 		&&
-		{
-			dependsUpon:
-				dependsUpon.length === 1
-				?
-				createDependUpon(dependsUpon[0])
-				:
-				dependsUpon.map(createDependUpon),
-		}
+		{ dependsUpon: createDependsUpon(dependsUpon) }
 	);
-}
-
-function createDependUpon(
-	dependUpon,
-) {
-	return getWhenParent() || getIdentifierPropertyOrValue(dependUpon.item);
-
-	function getWhenParent() {
-		return (
-			dependUpon.parent
-			&&
-			{
-				id:
-					getIdentifierPropertyOrValue(
-						dependUpon.parent,
-					),
-				items:
-					getIdentifierPropertyOrValue(
-						dependUpon.item,
-					),
-			}
-		);
-	}
-
-	function getIdentifierPropertyOrValue(
-		value,
-	) {
-		return value.id || value;
-	}
 }
 
 function createItemsProperty(

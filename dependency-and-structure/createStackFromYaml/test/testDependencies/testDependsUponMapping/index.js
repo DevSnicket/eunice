@@ -1,6 +1,5 @@
 const
 	testDependsUponMissing = require("./testDependsUponMissing"),
-	testDependsUponTwoChildrenMissingFromMissing = require("./testDependsUponTwoChildrenMissingFromMissing"),
 	testFirstDependsUponChildMissingFromSecond = require("./testFirstDependsUponChildMissingFromSecond"),
 	testFirstDependsUponChildOfSecond = require("./testFirstDependsUponChildOfSecond"),
 	testFirstDependsUponSecond = require("./testFirstDependsUponSecond"),
@@ -12,7 +11,6 @@ module.exports =
 			"mapping",
 			() => {
 				testDependsUponMissing();
-				testDependsUponTwoChildrenMissingFromMissing();
 				testFirstDependsUponChildMissingFromSecond();
 				testFirstDependsUponChildOfSecond();
 				testFirstDependsUponSecond();
