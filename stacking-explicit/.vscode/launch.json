@@ -8,75 +8,12 @@
 			},
 			{
 				"args":
-					[ 
-						"--runInBand",
-						"createOrAddToStacks/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/test.js"
-					],
-				"cwd": "${workspaceFolder}/",
-				"name": "processor createOrAddToStacks createStackWhenIdentifierOrItemOrLevelOrAddWhenStack jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node",
-				"useWSL": true
-			},
-			{
-				"args":
-					[ 
-						"--runInBand",
-						"createOrAddToStacks/replaceItemsAndInItems/test.js"
-					],
-				"cwd": "${workspaceFolder}/",
-				"name": "processor createOrAddToStacks replaceItemsAndInItems jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node",
-				"useWSL": true
-			},
-			{
-				"args":
-					[
-						"--identifierStack=",
-						"--items=",
-					],
-				"name": "processor createOrAddToStacks uniformly",
-				"program": "${workspaceFolder}/createOrAddToStacks/uniformly.js",
-				"request": "launch",
-				"type": "node",
-				"useWSL": true
-			},
-			{
-				"args":
-					[
-						"--directory=",
-						"--items="
-					],
-				"name": "processor createOrAddToStacks usingFileSystem",
-				"program": "${workspaceFolder}/createOrAddToStacks/usingFileSystem/index.js",
-				"request": "launch",
-				"type": "node",
-				"useWSL": true
-			},
-			{
-				"args":
-					[ 
-						"--runInBand",
-						"createOrAddToStacks/usingFileSystem/getIdentifiersInNewStackForAncestorsAndDirectory/test.js"
-					],
-				"cwd": "${workspaceFolder}/",
-				"name": "processor createOrAddToStacks usingFileSystem jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node",
-				"useWSL": true
-			},
-			{
-				"args":
 				[
 					"--items=",
 					"--identifierSeparator="
 					],
-				"name": "processor groupItemsByIdentifierSeparator",
-				"program": "${workspaceFolder}/groupItemsByIdentifierSeparator/index.js",
+				"name": "groupItemsByIdentifierSeparator",
+				"program": "${workspaceFolder}/groupItemsByIdentifierSeparator/bin.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -88,7 +25,32 @@
 						"groupItemsByIdentifierSeparator/test.js"
 					],
 				"cwd": "${workspaceFolder}/",
-				"name": "processor groupItemsByIdentifierSeparator jest",
+				"name": "groupItemsByIdentifierSeparator jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[
+						"--identifierSeparator=",
+						"--items="
+					],
+				"name": "removeRedundantParentIdentifierPrefix",
+				"program": "${workspaceFolder}/removeRedundantParentIdentifierPrefix/bin.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
+						"removeRedundantParentIdentifierPrefix/test.js"
+					],
+				"cwd": "${workspaceFolder}/",
+				"name": "removeRedundantParentIdentifierPrefix jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
@@ -98,24 +60,10 @@
 				"args":
 					[
 						"--items=",
-						"--identifierSuffixesInOrder=",
-						"--identifierSuffixesInOrder=",
+						"--type="
 					],
-				"name": "processor orderItemsBy/indexOf/identifierSuffix",
-				"program": "${workspaceFolder}/orderItemsBy/indexOf/identifierSuffix/index.js",
-				"request": "launch",
-				"type": "node",
-				"useWSL": true
-			},
-			{
-				"args":
-					[
-						"--items=",
-						"--typesInOrder=",
-						"--typesInOrder=",
-					],
-				"name": "processor orderItemsBy/indexOf/type",
-				"program": "${workspaceFolder}/orderItemsBy/indexOf/type/index.js",
+				"name": "removeSelfDependentItemsOfType",
+				"program": "${workspaceFolder}/removeSelfDependentItemsOfType/bin.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -124,10 +72,10 @@
 				"args":
 					[ 
 						"--runInBand",
-						"orderItemsBy/test.js"
+						"removeSelfDependentItemsOfType/test.js"
 					],
 				"cwd": "${workspaceFolder}/",
-				"name": "processor orderItemsBy jest",
+				"name": "removeSelfDependentItemsOfType jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
@@ -141,8 +89,8 @@
 						"--replacement=",
 						"--rootOnly="
 					],
-				"name": "processor replaceIdentifiers",
-				"program": "${workspaceFolder}/replaceIdentifiers/index.js",
+				"name": "replaceIdentifiers",
+				"program": "${workspaceFolder}/replaceIdentifiers/bin.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -154,57 +102,7 @@
 						"replaceIdentifiers/test.js",
 					],
 				"cwd": "${workspaceFolder}/",
-				"name": "processor replaceIdentifiers jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node",
-				"useWSL": true
-			},
-			{
-				"args":
-					[
-						"--identifierSeparator=",
-						"--items="
-					],
-				"name": "processor removeRedundantParentIdentifierPrefix",
-				"program": "${workspaceFolder}/removeRedundantParentIdentifierPrefix/index.js",
-				"request": "launch",
-				"type": "node",
-				"useWSL": true
-			},
-			{
-				"args":
-					[ 
-						"--runInBand",
-						"removeRedundantParentIdentifierPrefix/test.js"
-					],
-				"cwd": "${workspaceFolder}/",
-				"name": "processor removeRedundantParentIdentifierPrefix jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node",
-				"useWSL": true
-			},
-			{
-				"args":
-					[
-						"--items=",
-						"--type="
-					],
-				"name": "processor removeSelfDependentItemsOfType",
-				"program": "${workspaceFolder}/removeSelfDependentItemsOfType/index.js",
-				"request": "launch",
-				"type": "node",
-				"useWSL": true
-			},
-			{
-				"args":
-					[ 
-						"--runInBand",
-						"removeSelfDependentItemsOfType/test.js"
-					],
-				"cwd": "${workspaceFolder}/",
-				"name": "processor removeSelfDependentItemsOfType jest",
+				"name": "replaceIdentifiers jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
@@ -215,7 +113,7 @@
 					[
 						"--items=[item1,item2]",
 					],
-				"name": "processor setIdentifierOfAnonymousToParent",
+				"name": "setIdentifierOfAnonymousToParent",
 				"program": "${workspaceFolder}/setIdentifierOfAnonymousToParent/bin.js",
 				"request": "launch",
 				"type": "node",
@@ -227,28 +125,180 @@
 						"--runInBand",
 						"setIdentifierOfAnonymousToParent/test.js",
 					],
-				"name": "processor setIdentifierOfAnonymousToParent jest",
+				"name": "setIdentifierOfAnonymousToParent jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
-			}
+			},
 			{
 				"args":
 					[
 						"--items=",
 						"--type=",
 					],
-				"name": "processor setTypeOfRootItems",
-				"program": "${workspaceFolder}/setTypeOfRootItems/index.js",
+				"name": "setTypeOfRootItems",
+				"program": "${workspaceFolder}/setTypeOfRootItems/bin.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[
+						"--items=",
+					],
+				"name": "sorting orderItemsByIdentifier",
+				"program": "${workspaceFolder}/sorting/orderItemsByIdentifier/bin.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
+						"sorting/orderItemsByIdentifier/test.js"
+					],
+				"cwd": "${workspaceFolder}/",
+				"name": "sorting orderItemsByIdentifier jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
+						"sorting/orderItemsByIndex/test.js"
+					],
+				"cwd": "${workspaceFolder}/",
+				"name": "sorting orderItemsByIndex jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[
+						"--items=",
+						"--identifierSuffixesInOrder=",
+						"--identifierSuffixesInOrder=",
+					],
+				"name": "sorting orderItemsByIndexOfIdentifierSuffix",
+				"program": "${workspaceFolder}/sorting/orderItemsByIndexOfIdentifierSuffix/bin.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
+						"sorting/orderItemsByIndexOfIdentifierSuffix/test.js"
+					],
+				"cwd": "${workspaceFolder}/",
+				"name": "sorting orderItemsByIndexOfIdentifierSuffix jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[
+						"--items=",
+						"--typesInOrder=",
+						"--typesInOrder=",
+					],
+				"name": "sorting orderItemsByIndexOfType",
+				"program": "${workspaceFolder}/sorting/orderItemsByIndexOfType/bin.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
+						"sorting/orderItemsByIndexOfType/test.js"
+					],
+				"cwd": "${workspaceFolder}/",
+				"name": "sorting orderItemsByIndexOfType jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[
+						"--identifierStack=",
+						"--items=",
+					],
+				"name": "stacking createOrAddToStacksUniformly",
+				"program": "${workspaceFolder}/stacking/createOrAddToStacksUniformly/bin.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[
+						"--directory=",
+						"--items="
+					],
+				"name": "stacking createOrAddToStacksUsingFileSystem",
+				"program": "${workspaceFolder}/stacking/createOrAddToStacksUsingFileSystem/bin.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
+						"stacking/createOrAddToStacksUsingFileSystem/test.js"
+					],
+				"cwd": "${workspaceFolder}/",
+				"name": "stacking createOrAddToStacksUsingFileSystem jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
+						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/test.js"
+					],
+				"cwd": "${workspaceFolder}/",
+				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
+						"stacking/replaceItemsAndInItems/test.js"
+					],
+				"cwd": "${workspaceFolder}/",
+				"name": "stacking replaceItemsAndInItems jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
 			},
 			{
 				"args": [ "--items=", ],
-				"name": "processor unstackIndependent",
-				"program": "${workspaceFolder}/unstackIndependent/index.js",
+				"name": "unstackIndependent",
+				"program": "${workspaceFolder}/unstackIndependent/bin.js",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
@@ -260,7 +310,7 @@
 						"unstackIndependent/test.js",
 					],
 				"cwd": "${workspaceFolder}/",
-				"name": "processor unstackIndependent jest",
+				"name": "unstackIndependent jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node",
