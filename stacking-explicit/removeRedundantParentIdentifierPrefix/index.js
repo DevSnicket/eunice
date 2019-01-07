@@ -73,14 +73,7 @@ function withGetIdentifierWithoutParentWhenPrefixed(
 			return (
 				dependsUpon
 				&&
-				dependsUpon.map(
-					dependUpon =>
-						typeof dependUpon === "string"
-						?
-						dependUpon
-						:
-						removeFromDependsUponItem(dependUpon),
-				)
+				dependsUpon.map(removeFromDependUpon)
 			);
 		}
 
@@ -89,7 +82,28 @@ function withGetIdentifierWithoutParentWhenPrefixed(
 		}
 	}
 
-	function removeFromDependsUponItem({
+	function removeFromDependUpon(
+		dependUpon,
+	) {
+		return (
+			whenString()
+			||
+			{
+				item: removeFromDependUponItem(dependUpon.item),
+				parent: dependUpon.parent,
+			}
+		);
+
+		function whenString() {
+			return (
+				typeof dependUpon.item === "string"
+				&&
+				dependUpon
+			);
+		}
+	}
+
+	function removeFromDependUponItem({
 		id: identifier,
 		...restOfItem
 	}) {

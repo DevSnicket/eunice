@@ -46,25 +46,54 @@ function aggregate(
 	function anyDependenciesWithCurrentLevel(
 		level,
 	) {
-		return (
-			level.some(
-				item =>
-					anyInCurrentLevel(item.dependents)
-					||
-					anyInCurrentLevel(item.dependsUpon)
-					||
-					(item.items && item.items.some(anyDependenciesWithCurrentLevel)),
-			)
-		);
+		return level.some(isItemDependentOnCurrentLevel);
 	}
 
-	function anyInCurrentLevel(
-		items,
+	function isItemDependentOnCurrentLevel(
+		item,
 	) {
+		return (
+			fromDependents()
+			||
+			fromDependsUpon()
+			||
+			fromItems()
+		);
+
+		function fromDependents() {
+			return (
+				anyInCurrentLevel(
+					{ items: item.dependents },
+				)
+			);
+		}
+
+		function fromDependsUpon() {
+			return (
+				anyInCurrentLevel({
+					itemSelector: dependUpon => dependUpon.item,
+					items: item.dependsUpon,
+				})
+			);
+		}
+
+		function fromItems() {
+			return (
+				item.items
+				&&
+				item.items.some(anyDependenciesWithCurrentLevel)
+			);
+		}
+	}
+
+	function anyInCurrentLevel({
+		itemSelector = item => item,
+		items,
+	}) {
 		return (
 			items
 			&&
-			items.some(item => hasLevelOfOrInCurrentLevel(item.level))
+			items.some(item => hasLevelOfOrInCurrentLevel(itemSelector(item).level))
 		);
 	}
 
