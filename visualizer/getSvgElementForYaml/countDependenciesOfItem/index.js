@@ -6,50 +6,23 @@ module.exports =
 		parentStack,
 		sumCount,
 	}) => {
-		const
-			dependents =
-				countDependencies({
-					dependencies: item.dependents,
-					sumDirectionInStack: sumDirectionInStackWhenOuter,
-				}),
-			dependsUpon =
-				countDependencies({
-					dependencies: item.dependsUpon,
-					sumDirectionInStack: sumDirectionInStackWithScope,
-				});
-
 		return (
-			(dependents || dependsUpon)
-			&&
-			{ dependents, dependsUpon }
+			createWhenDependentsOrDependsUpon({
+				dependents:
+					countDependencies({
+						dependencies: item.dependents,
+						from: item,
+						sumDirectionInStack: sumDirectionInStackWhenOuter,
+					}),
+				dependsUpon:
+					countDependencies({
+						dependencies: item.dependsUpon,
+						from: item,
+						itemSelector: dependsUpon => dependsUpon.item,
+						sumDirectionInStack: sumDirectionInStackWithScope,
+					}),
+			})
 		);
-
-		function countDependencies({
-			sumDirectionInStack,
-			dependencies,
-		}) {
-			return (
-				dependencies
-				&&
-				dependencies
-				.reduce(
-					(aggregation, dependency) =>
-						typeof dependency === "string"
-						?
-						aggregation
-						:
-						sumDirectionInStack({
-							aggregation,
-							directionInStack:
-								findDirectionBetweenItemsInFirstMutualStack({
-									from: item,
-									to: dependency,
-								}),
-						}),
-					null,
-				)
-			);
-		}
 
 		function sumDirectionInStackWhenOuter({
 			aggregation,
@@ -133,6 +106,47 @@ module.exports =
 		}
 	};
 
+function countDependencies({
+	dependencies,
+	from,
+	itemSelector = item => item,
+	sumDirectionInStack,
+}) {
+	return (
+		dependencies
+		&&
+		dependencies
+		.reduce(
+			(aggregation, dependency) =>
+				sumDependency({
+					aggregation,
+					to: itemSelector(dependency),
+				}),
+			null,
+		)
+	);
+
+	function sumDependency({
+		aggregation,
+		to,
+	}) {
+		return (
+			typeof to === "string"
+			?
+			aggregation
+			:
+			sumDirectionInStack({
+				aggregation,
+				directionInStack:
+					findDirectionBetweenItemsInFirstMutualStack({
+						from,
+						to,
+					}),
+			})
+		);
+	}
+}
+
 function getCountFromDirection(
 	direction,
 ) {
@@ -142,5 +156,16 @@ function getCountFromDirection(
 			below: Number(direction > 0),
 			same: Number(direction === 0),
 		}
+	);
+}
+
+function createWhenDependentsOrDependsUpon({
+	dependents,
+	dependsUpon,
+}) {
+	return (
+		(dependents || dependsUpon)
+		&&
+		{ dependents, dependsUpon }
 	);
 }
