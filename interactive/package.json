@@ -2,8 +2,8 @@
 	"author": "Graham Dyson",
 	"description": "Test harness with two columns, YAML with processors for dogfooding the whole of Eunice and SVG renderer.",
 	"dependencies": {
-		"@devsnicket/eunice-processors": "1.7.1",
-		"@devsnicket/eunice-renderer": "1.4.0",
+		"@devsnicket/eunice-processors": "3.0.0",
+		"@devsnicket/eunice-renderer": "1.5.0",
 		"@devsnicket/eunice-test-harnesses": "2.5.2",
 		"@devsnicket/eunice-test-harnesses-processor-plugins": "1.0.0",
 		"@devsnicket/plugin-discovery-create-repository": "1.5.1",
