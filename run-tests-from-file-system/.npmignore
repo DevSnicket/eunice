@@ -1,3 +1,4 @@
 .eslintrc.yml
 .vscode
 jsconfig.json
+/cspell.json
