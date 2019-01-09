@@ -1,0 +1,22 @@
+﻿- 
+  - id: upper first
+    dependsUpon: 
+      - upper second
+      - lower first
+      - lower second
+  - id: upper second
+    dependsUpon: 
+      - upper first
+      - lower first
+      - lower second
+-
+  - id: lower first
+    dependsUpon: 
+      - upper first
+      - upper second
+      - lower second
+  - id: lower second
+    dependsUpon: 
+      - upper first
+      - upper second
+      - lower first

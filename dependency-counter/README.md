@@ -1,6 +1,6 @@
 # Eunice [![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgElementForYaml/createArrows/testcase.svg?sanitize=true)](Renderer/getSvgElementForYaml/createArrows/testcase.svg)
 
-DevSnicket Eunice is a toolkit based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. Euince's approach isn't limited to direct dependencies, but includes indirect dependencies as well.
+DevSnicket Eunice is a toolkit based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. Eunice's approach isn't limited to direct dependencies, but includes indirect dependencies as well.
 
 [try out Eunice on Eunice 🐶🥫](https://devsnicket.github.io/Eunice/renderer/harness.html) ([created with](dogfooding/generate.sh))
 
@@ -11,7 +11,7 @@ DevSnicket Eunice is a toolkit based on the premise that unidirectional dependen
 
 [Eunice](https://www.github.com/DevSnicket/Eunice) includes a YAML file format to store dependency and structure, it also includes analyzers to produce this YAML and processors of the YAML.
 
-To visualise and explore what's in the YAML files, and to statistically measure how well they match the intended structure, a SVG renderer has been implemented in Javascript. The renderer doesn't use lines between items to show dependencies and instead marks items with counts for each dependency type:
+To visualize and explore what's in the YAML files, and to statistically measure how well they match the intended structure, a SVG renderer has been implemented in Javascript. The renderer doesn't use lines between items to show dependencies and instead marks items with counts for each dependency type:
 
 - matches stack (green down arrow)
 - does not match stack (red up arrow) 
@@ -26,7 +26,7 @@ scenario | svg | scenario | svg | scenario | svg
 upper depends<br/>upon lower | [![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgForYaml/testcases/stack/upper-depends-upon-lower/.svg?sanitize=true)](Renderer/getSvgForYaml/testcases/stack/upper-depends-upon-lower/.svg) | lower depends<br/>upon upper | [![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgForYaml/testcases/stack/lower-depends-upon-upper/.svg?sanitize=true)](Renderer/getSvgForYaml/testcases/stack/lower-depends-upon-upper/.svg) | interdependent<br/>(stacked) | [![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgForYaml/testcases/stack/two-interdependent/.svg?sanitize=true)](Renderer/getSvgForYaml/testcases/stack/two-interdependent/.svg)
 independent | [![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgForYaml/testcases/two/.svg?sanitize=true)](Renderer/getSvgForYaml/testcases/two/.svg) | first depends<br/>upon second | [![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgForYaml/testcases/independency/first-depends-upon-second/.svg?sanitize=true)](Renderer/getSvgForYaml/testcases/independency/first-depends-upon-second/.svg) | interdependent<br/>(not stacked)<sup>[1]</sup> | [![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgForYaml/testcases/independency/two-interdependent/.svg?sanitize=true)](Renderer/getSvgForYaml/testcases/independency/two-interdependent/.svg)
 
-Dependencies within an item are also summarised and rendered inside the item box, below the identifer text.
+Dependencies within an item are also summarized and rendered inside the item box, below the identifer text.
 
 scenario | svg | scenario | svg | scenario | svg
 -------- | :-: | -------- | :-: | -------- | :-:

@@ -90,7 +90,7 @@ function expectGetInteractiveElementsForYaml({
 		expectedHtmlPrefix
 		+
 		readTestSvgFile(
-			path.join(__dirname, "testcases", `${expectedSvgFile}.svg`),
+			path.join(__dirname, "testCases", `${expectedSvgFile}.svg`),
 		),
 	);
 }

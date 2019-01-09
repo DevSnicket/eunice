@@ -1,10 +1,11 @@
-*testcase.svg
-*testcases
+*testCase.svg
+*testCases
 /.eslintrc.yml
 /.eslintignore
 .gitattributes
 /.travis.yml
 /.vscode
+/cspell.json
 /devsnicket-eunice-renderer-*.tgz
 /harness
 /test-coverage
