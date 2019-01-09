@@ -3,6 +3,7 @@
 /.eslintignore
 /.travis.yml
 /.vscode
+/cspell.json
 /harness/output
 /test-coverage
 /jsconfig.json

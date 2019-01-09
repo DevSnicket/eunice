@@ -23,6 +23,7 @@
 		"babel-cli": "6.26.0",
 		"babel-loader": "7.1.4",
 		"babel-preset-env": "1.7.0",
+		"cspell": "3.1.3",
 		"eslint": "4.19.1",
 		"jest": "23.3.0",
 		"react": "16.4.0",
@@ -78,10 +79,11 @@
 		"url": "https://github.com/DevSnicket/eunice-javascript-analyzer.git"
 	},
 	"scripts": {
-		"build": "babel -d dist --ignore dist/*,dist/**/*,node_modules/**/*,**/test/**,**/testcases/**,test-coverage/**,**/test.js --plugins transform-object-rest-spread -s true .",
+		"build": "babel -d dist --ignore dist/*,dist/**/*,node_modules/**/*,**/test/**,**/testCases/**,test-coverage/**,**/test.js --plugins transform-object-rest-spread -s true .",
 		"dogfooding": "node getOrCreateItemsInDirectory/bin.js --directory=. --ignoreDirectoryNames=dist --ignoreDirectoryNames=node_modules --ignoreDirectoryNames=output --ignoreDirectoryNames=test-cases --ignoreDirectoryNames=test-coverage",
 		"harness": "webpack -p --config harness/webpack.config.js",
 		"lint": "eslint .",
+		"spellcheck": "npx cspell *.js **/*.js *.md **/*.md",
 		"test": "jest --runInBand"
 	},
 	"version": "1.18.0"
