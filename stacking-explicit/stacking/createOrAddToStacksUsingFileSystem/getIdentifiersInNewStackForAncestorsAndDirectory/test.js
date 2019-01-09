@@ -60,7 +60,7 @@ test.each(
 		expect(
 			getIdentifiersInNewStackForAncestorsAndDirectory({
 				ancestors,
-				directory: path.join(__dirname, "testcases"),
+				directory: path.join(__dirname, "testCases"),
 				subsetIdentifierHierarchy,
 			}),
 		)

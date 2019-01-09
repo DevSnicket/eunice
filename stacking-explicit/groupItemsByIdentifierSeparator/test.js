@@ -23,7 +23,7 @@ test.each(
 			input,
 		],
 		[
-			[ "item", "itemchildItem" ],
+			[ "item", "itemChildItem" ],
 			input,
 		],
 		[
@@ -379,7 +379,7 @@ test.each(
 			],
 		],
 		[
-			[ "item/child1", "item/child2/grandchild1", "item/child2/grandchild1/greatgrandchild", "item/child2/grandchild2", "item/child2/grandchild3" ],
+			[ "item/child1", "item/child2/grandchild1", "item/child2/grandchild1/greatGrandchild", "item/child2/grandchild2", "item/child2/grandchild3" ],
 			[
 				{
 					id:
@@ -394,7 +394,7 @@ test.each(
 									[
 										{
 											id: "item/child2/grandchild1",
-											items: "item/child2/grandchild1/greatgrandchild",
+											items: "item/child2/grandchild1/greatGrandchild",
 										},
 										"item/child2/grandchild2",
 										"item/child2/grandchild3",

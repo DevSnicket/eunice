@@ -11,7 +11,7 @@ const
 		],
 	files =
 		[ "item", "stack" ]
-		.map(file => path.join(__dirname, "testcases", `${file}.yaml`));
+		.map(file => path.join(__dirname, "testCases", `${file}.yaml`));
 
 test(
 	`${JSON.stringify(files)} files returns ${JSON.stringify(expected)}`,

@@ -7,13 +7,13 @@ assertSetTypeOfRootItems({
 });
 
 assertSetTypeOfRootItems({
-	expected: { id: "item", type: "testtype" },
+	expected: { id: "item", type: "testType" },
 	name: "item identifier returns item identifier",
 	source: "item",
 });
 
 assertSetTypeOfRootItems({
-	expected: [ { id: "item", type: "testtype" } ],
+	expected: [ { id: "item", type: "testType" } ],
 	name: "single item identifier returns single item identifier",
 	source: [ "item" ],
 });
@@ -21,15 +21,15 @@ assertSetTypeOfRootItems({
 assertSetTypeOfRootItems({
 	expected:
 		[
-			{ id: "item1", type: "testtype" },
-			{ id: "item2", type: "testtype" },
+			{ id: "item1", type: "testType" },
+			{ id: "item2", type: "testType" },
 		],
 	name: "two item identifier returns two item identifier",
 	source: [ "item1", "item2" ],
 });
 
 assertSetTypeOfRootItems({
-	expected: { id: "item", type: "testtype" },
+	expected: { id: "item", type: "testType" },
 	name: "single item returns single item",
 	source: { id: "item" },
 });
@@ -45,7 +45,7 @@ function assertSetTypeOfRootItems({
 			expect(
 				setTypeOfRootItems({
 					items: source,
-					type: "testtype",
+					type: "testType",
 				}),
 			)
 			.toEqual(expected),

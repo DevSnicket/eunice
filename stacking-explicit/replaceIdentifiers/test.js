@@ -12,11 +12,11 @@ test.each(
 		],
 		[
 			{
-				items: "item",
+				items: "Item",
 				pattern: "",
 				replacement: "replacement",
 			},
-			"replacementitem",
+			"replacementItem",
 		],
 		[
 			{
@@ -57,17 +57,17 @@ test.each(
 			{
 				items: "item",
 				pattern: /$/,
-				replacement: "replacement",
+				replacement: "Replacement",
 			},
-			"itemreplacement",
+			"itemReplacement",
 		],
 		[
 			{
-				items: { items: "item" },
+				items: { items: "Item" },
 				pattern: "",
 				replacement: "replacement",
 			},
-			{ id: "replacement", items: "replacementitem" },
+			{ id: "replacement", items: "replacementItem" },
 		],
 		[
 			{

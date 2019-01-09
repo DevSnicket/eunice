@@ -11,7 +11,7 @@ test(
 					path.join(
 						__dirname,
 						"getIdentifiersInNewStackForAncestorsAndDirectory",
-						"testcases",
+						"testCases",
 					),
 				items:
 					[
