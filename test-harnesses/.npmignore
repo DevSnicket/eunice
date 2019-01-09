@@ -2,6 +2,7 @@
 /.gitattributes
 /.travis.yml
 /.vscode
+/cspell.json
 /devsnicket-eunice-test-harnesses-*.tgz
 /jsconfig.json
 /processor-plugins
