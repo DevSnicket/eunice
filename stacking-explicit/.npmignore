@@ -3,5 +3,6 @@
 /.eslintignore 
 /.travis.yml 
 /.vscode 
+/cspell.json
 /test-coverage 
 /jsconfig.json
