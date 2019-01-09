@@ -2,6 +2,7 @@
 /.eslintignore
 /.travis.yml
 /.vscode
+/cspell.json
 /devsnicket-eunice-dependency-and-structure-*.tgz
 /jsconfig.json
 /test-coverage
