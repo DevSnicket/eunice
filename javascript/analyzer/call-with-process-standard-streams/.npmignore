@@ -2,5 +2,6 @@
 /.eslintrc.yml
 /.travis.yml
 /.vscode
+/cspell.json
 /devsnicket-eunice-call-with-process-standard-streams-*.tgz
 /jsconfig.json

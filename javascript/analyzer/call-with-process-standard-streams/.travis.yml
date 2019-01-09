@@ -17,4 +17,5 @@ notifications:
     on_failure: always
 script:
   - npm run lint
+  - npm run spellcheck
   - npm run build
