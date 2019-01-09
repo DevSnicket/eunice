@@ -1,5 +1,0 @@
-id: parent
-items: 
-  - - id: upper
-      dependsUpon: lower
-  - - lower
