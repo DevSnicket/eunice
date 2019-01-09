@@ -6,12 +6,12 @@ const
 	getOrCreateItemsInDirectory = require("."),
 	getYamlForItemOrItems = require("../getYamlForItemOrItems");
 
-const testcasesDirectory = path.join(__dirname, "test-cases");
+const testCasesDirectory = path.join(__dirname, "test-cases");
 
 test(
 	"",
 	() =>
-		expect(getYamlForDirectory(testcasesDirectory))
+		expect(getYamlForDirectory(testCasesDirectory))
 		.toBe(readExpectedFile()),
 );
 
@@ -31,7 +31,7 @@ function getYamlForDirectory(
 function readExpectedFile() {
 	return (
 		fs.readFileSync(
-			path.join(testcasesDirectory, "expected.yaml"),
+			path.join(testCasesDirectory, "expected.yaml"),
 			"utf-8",
 		)
 	);
