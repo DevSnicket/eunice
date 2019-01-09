@@ -1,6 +1,0 @@
-- id: itemWithDependsUpon
-  dependsUpon: missing
-- id: item1WithItems
-  items: itemOfItem1WithItems
-- id: item2WithItems
-  items: itemOfItem2WithItems
