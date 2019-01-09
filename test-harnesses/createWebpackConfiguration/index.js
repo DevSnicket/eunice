@@ -1,3 +1,5 @@
+// cSpell:words devtool
+
 const
 	CopyPlugin = require("copy-webpack-plugin"),
 	createModuleWithBabelPlugins = require("./createModuleWithBabelPlugins"),
