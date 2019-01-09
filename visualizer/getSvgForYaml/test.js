@@ -8,7 +8,7 @@ const
 runTestsFromFileSystem({
 	action: yaml => getSvgForYaml({ yaml }),
 	caseFileName: ".yaml",
-	directory: path.join(__dirname, "testcases/"),
+	directory: path.join(__dirname, "testCases/"),
 	expectedFileName: ".svg",
 	processArguments: process.argv,
 });

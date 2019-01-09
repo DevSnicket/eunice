@@ -39,11 +39,13 @@ module.exports =
 				childGroupFactory:
 					yaml
 					&&
-					initaliseAndCreateChildGroupFactory(),
+					initializeAndCreateChildGroupFactory(),
 				createElement,
 				font,
 				namespaces,
-				style: `g.anonymous>text{font-style:italic}g.parent>rect{fill:none;stroke:gray}g.item>rect{fill:lightgray}g.item>text{text-anchor:middle}g.dependency>text{fill:white;text-anchor:middle}${style}`,
+				style:
+					/* cspell:disable-next-line */
+					`g.anonymous>text{font-style:italic}g.parent>rect{fill:none;stroke:gray}g.item>rect{fill:lightgray}g.item>text{text-anchor:middle}g.dependency>text{fill:white;text-anchor:middle}${style}`,
 				symbols:
 					Object.values(arrows)
 					.map(arrow => arrow.element),
@@ -51,7 +53,7 @@ module.exports =
 			})
 		);
 
-		function initaliseAndCreateChildGroupFactory() {
+		function initializeAndCreateChildGroupFactory() {
 			const stack = createStackFromYaml(yaml);
 
 			return (

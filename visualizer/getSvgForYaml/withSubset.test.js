@@ -154,28 +154,28 @@ getSvgForYamlTestOrUpdateExpected({
 	expectedFilename: "upper-item-depends-upon-lower-item-with-parent",
 	scenario: "subset of root item with stack of child item that depends upon lower child item",
 	subsetIdentifierHierarchy: [ "parent" ],
-	yaml: readTestcaseFile("upper-depends-upon-lower-with-parent.yaml"),
+	yaml: readTestCaseFile("upper-depends-upon-lower-with-parent.yaml"),
 });
 
 getSvgForYamlTestOrUpdateExpected({
 	expectedFilename: "upper-item-depends-upon-lower-item-with-parent",
 	scenario: "subset of root item with stack of grandchild item that depends upon lower child item",
 	subsetIdentifierHierarchy: [ "parent" ],
-	yaml: readTestcaseFile("upper-item-depends-upon-lower-with-parent.yaml"),
+	yaml: readTestCaseFile("upper-item-depends-upon-lower-with-parent.yaml"),
 });
 
 getSvgForYamlTestOrUpdateExpected({
 	expectedFilename: "upper-item-depends-upon-lower-item-with-parent",
 	scenario: "subset of root item with stack of great-grandchild item that depends upon lower child item",
 	subsetIdentifierHierarchy: [ "parent" ],
-	yaml: readTestcaseFile("upper-item-of-item-depends-upon-lower-with-parent.yaml"),
+	yaml: readTestCaseFile("upper-item-of-item-depends-upon-lower-with-parent.yaml"),
 });
 
 getSvgForYamlTestOrUpdateExpected({
 	expectedFilename: "upper-item-depends-upon-lower-item-with-parent",
 	scenario: "subset of root item with stack of great-great-grandchild item that depends upon lower child item",
 	subsetIdentifierHierarchy: [ "parent" ],
-	yaml: readTestcaseFile("upper-item-of-item-of-item-depends-upon-lower-with-parent.yaml"),
+	yaml: readTestCaseFile("upper-item-of-item-of-item-depends-upon-lower-with-parent.yaml"),
 });
 
 function getSvgForYamlTestOrUpdateExpected({
@@ -208,12 +208,12 @@ function getSvgForYamlTestOrUpdateExpected({
 					}),
 				)
 				.toEqual(
-					readTestcaseFile(expectedFilenameWithExtension),
+					readTestCaseFile(expectedFilenameWithExtension),
 				),
 		);
 }
 
-function readTestcaseFile(
+function readTestCaseFile(
 	filename,
 ) {
 	return readTestSvgFile(getPathOfFilename(filename));
@@ -222,5 +222,5 @@ function readTestcaseFile(
 function getPathOfFilename(
 	filename,
 ) {
-	return path.join(__dirname, "withSubset.testcases/", filename);
+	return path.join(__dirname, "withSubset.testCases/", filename);
 }

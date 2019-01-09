@@ -1,0 +1,11 @@
+- id: parent
+  items:
+    - - id: upper
+        items:
+        - id: item of upper
+          items:
+          - id: item of item of upper
+            items:
+            - id: item of item of item of upper
+              dependsUpon: lower
+    - - lower
