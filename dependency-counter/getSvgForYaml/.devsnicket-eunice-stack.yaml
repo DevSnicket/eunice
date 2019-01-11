@@ -1,3 +1,4 @@
-- withSubset.test
+- [ withGroupContainer, withSubset.test ]
 - test
 - existing
+- readTestFile

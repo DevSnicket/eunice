@@ -1,27 +1,20 @@
 const
-	aggregateGroupFactoriesWithOrientation = require("./aggregateGroupFactoriesWithOrientation"),
-	countDependenciesOfItem = require("./countDependenciesOfItem"),
 	createArrows = require("./createArrows"),
-	createDependencyGroupFactoryWhenRequired = require("./createDependencyGroupFactoryWhenRequired"),
-	createOuterDependencyGroupFactory = require("./createOuterDependencyGroupFactory"),
-	createParentGroupFactory = require("./createParentGroupFactory"),
+	createParentGroupFactoryFromSubsetIdentifierHierarchy = require("./createParentGroupFactoryFromSubsetIdentifierHierarchy"),
 	{ createStackFromYaml } = require("@devsnicket/eunice-dependency-and-structure"),
 	createStackWithSummaryGroupFactory = require("./createStackWithSummaryGroupFactory"),
 	createSvgElement = require("./createSvgElement"),
 	createTextGroup = require("./createTextGroup"),
-	findStackOfSubsetIdentifierHierarchyOrThrowError = require("./findStackOfSubsetIdentifierHierarchyOrThrowError"),
-	getDependencyCountInBothDirections = require("./getDependencyCountInBothDirections"),
-	sumDependencyCount = require("./sumDependencyCount"),
 	withPrecision = require("./withPrecision");
 
 module.exports =
 	({
 		createElement,
-		createItemGroupWrapperForItem = ({ itemGroup }) => itemGroup,
 		getTextWidth,
+		groupContainerFactory = null,
 		namespaces = null,
 		style = "",
-		subsetIdentifierHierarchy,
+		subsetIdentifierHierarchy = null,
 		yaml,
 	}) => {
 		const
@@ -59,82 +52,17 @@ module.exports =
 			return (
 				subsetIdentifierHierarchy
 				?
-				createParentGroupFactoryFromSubsetIdentifierHierarchy()
+				createParentGroupFactoryFromSubsetIdentifierHierarchy({
+					arrows,
+					createGroupFactoryForStack,
+					createTextGroup: createTextGroupWithFontSizeAndPrecision,
+					font,
+					stack,
+					subsetIdentifierHierarchy,
+				})
 				:
 				createGroupFactoryForStack(stack)
 			);
-
-			function createParentGroupFactoryFromSubsetIdentifierHierarchy() {
-				const stackOfSubsetIdentifierHierarchy =
-					findStackOfSubsetIdentifierHierarchyOrThrowError({
-						stack,
-						subsetIdentifierHierarchy,
-					});
-
-				return (
-					createOuterDependencyGroupFactory({
-						aggregateGroupFactoriesWithOrientation,
-						createGroupFactoryWhenRequired:
-							createParentOuterDependencyGroupFactoryWhenRequired,
-						dependencyCount:
-							getParentDependencyCount(),
-						itemGroupFactory:
-							createParentAndStackGroupFactory(),
-					})
-				);
-
-				function createParentOuterDependencyGroupFactoryWhenRequired({
-					arrow,
-					count,
-					keySuffix,
-				}) {
-					return (
-						createDependencyGroupFactoryWhenRequired({
-							arrow,
-							count,
-							createTextGroup:
-								createTextGroupWithFontSizeAndPrecision,
-							font,
-							key:
-								`${stackOfSubsetIdentifierHierarchy.parent.id} dependency count outer ${keySuffix}`,
-						})
-					);
-				}
-
-				function getParentDependencyCount() {
-					return (
-						getDependencyCountInBothDirections({
-							arrows,
-							dependencyCount:
-								countDependenciesOfItem({
-									item:
-										stackOfSubsetIdentifierHierarchy.parent,
-									parentStack:
-										stackOfSubsetIdentifierHierarchy.parent.level.stack,
-									sumCount:
-										sumDependencyCount,
-								}),
-						})
-					);
-				}
-
-				function createParentAndStackGroupFactory() {
-					return (
-						createParentGroupFactory({
-							childGroupFactory:
-								createGroupFactoryForStack(
-									stackOfSubsetIdentifierHierarchy,
-								),
-							createTextGroup:
-								createTextGroupWithFontSizeAndPrecision,
-							getTextWidth:
-								font.measure,
-							identifier:
-								stackOfSubsetIdentifierHierarchy.parent.id,
-						})
-					);
-				}
-			}
 		}
 
 		function createGroupFactoryForStack(
@@ -142,17 +70,11 @@ module.exports =
 		) {
 			return (
 				createStackWithSummaryGroupFactory({
-					aggregateGroupFactoriesWithOrientation,
 					arrows,
-					countDependenciesOfItem,
-					createDependencyGroupFactoryWhenRequired,
-					createItemGroupWrapperForItem,
-					createOuterDependencyGroupFactory,
 					createTextGroup: createTextGroupWithFontSizeAndPrecision,
 					font,
-					getDependencyCountInBothDirections,
+					groupContainerFactory,
 					stack,
-					sumDependencyCount,
 				})
 			);
 		}

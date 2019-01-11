@@ -7,14 +7,14 @@ const
 
 module.exports =
 	({
-		subsetIdentifierHierarchy,
 		yaml,
+		...restOfParameters
 	}) =>
 		renderToStaticMarkup(
 			getSvgElementForYaml({
+				...restOfParameters,
 				createElement,
 				getTextWidth,
-				subsetIdentifierHierarchy,
 				yaml: parseYaml(yaml),
 			}),
 		);

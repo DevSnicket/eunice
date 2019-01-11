@@ -1,19 +1,18 @@
 {
 	"language": "en",
 	"overrides": [
-        {
-            "filename": "README.md",
-            "words": [ "rightarrow" ]
+		{
+			"filename": "README.md",
+			"words": [ "rightarrow" ]
 		}
 	],
-    "version": "0.1",
-    "words": [
+	"version": "0.1",
+	"words": [
 		"arial",
-        "devsnicket",
+		"devsnicket",
 		"dogfooding",
 		"gitter",
 		"snicket",
-		"xlink",
 		"xmlns"
-    ]
+	]
 }

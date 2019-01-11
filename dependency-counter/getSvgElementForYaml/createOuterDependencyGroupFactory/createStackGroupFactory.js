@@ -4,14 +4,14 @@ module.exports =
 		createGroupFactoryWhenRequired,
 		dependencies,
 		itemGroupWidth,
-		layerGroupFactory,
+		levelGroupFactory,
 	}) => {
 		return (
 			dependencies && (dependencies.above || dependencies.below)
 			?
 			createGroupFactoryWithDependencies()
 			:
-			layerGroupFactory
+			levelGroupFactory
 		);
 
 		function createGroupFactoryWithDependencies() {
@@ -19,25 +19,22 @@ module.exports =
 				aggregateGroupFactoriesWithOrientation.vertical({
 					groupFactories:
 						[
-							...createGroupFactoriesForDependenciesInDirection({
-								dependenciesInDirection: dependencies.above,
-								keySuffix: "above",
-							}),
-							layerGroupFactory,
-							...createGroupFactoriesForDependenciesInDirection({
-								dependenciesInDirection: dependencies.below,
-								keySuffix: "below",
-							}),
+							...createGroupFactoriesForDependenciesInDirection(
+								dependencies.above,
+							),
+							levelGroupFactory,
+							...createGroupFactoriesForDependenciesInDirection(
+								dependencies.below,
+							),
 						],
 					spacing:
 						0,
 				})
 			);
 
-			function createGroupFactoriesForDependenciesInDirection({
+			function createGroupFactoriesForDependenciesInDirection(
 				dependenciesInDirection,
-				keySuffix,
-			}) {
+			) {
 				const groupFactory =
 					createGroupFactoryForDependenciesWhenRequired({
 						aggregateGroupFactoriesHorizontal:
@@ -46,10 +43,9 @@ module.exports =
 						dependenciesInDirection,
 						itemGroup:
 							{
-								left: layerGroupFactory.itemGroupLeft,
+								left: levelGroupFactory.itemGroupLeft,
 								width: itemGroupWidth,
 							},
-						keySuffix,
 					});
 
 				return groupFactory ? [ groupFactory ] : [];
@@ -63,7 +59,6 @@ function createGroupFactoryForDependenciesWhenRequired({
 	createGroupFactoryWhenRequired,
 	dependenciesInDirection,
 	itemGroup,
-	keySuffix,
 }) {
 	return (
 		dependenciesInDirection
@@ -75,9 +70,17 @@ function createGroupFactoryForDependenciesWhenRequired({
 					.map(
 						dependencies =>
 							createGroupFactoryWhenRequired({
-								arrow: dependencies.arrow,
-								count: dependencies.count,
-								keySuffix: `stack dependency ${dependencies.arrow.id} ${keySuffix}`,
+								arrow:
+									dependencies.arrow,
+								count:
+									dependencies.count,
+								keys:
+									{
+										relationship:
+											dependencies.relationship,
+										structure:
+											"stack",
+									},
 							}),
 					),
 				spacing:

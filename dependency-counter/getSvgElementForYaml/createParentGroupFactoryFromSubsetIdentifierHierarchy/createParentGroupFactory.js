@@ -1,4 +1,4 @@
-const getIdentifierClassNameAndText = require("./getIdentifierClassNameAndText");
+const getIdentifierClassNameAndText = require("../getIdentifierClassNameAndText");
 
 module.exports =
 	({

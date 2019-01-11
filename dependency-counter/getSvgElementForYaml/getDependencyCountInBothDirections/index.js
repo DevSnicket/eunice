@@ -1,3 +1,5 @@
+const getWithDirection = require("./getWithDirection");
+
 module.exports =
 	({
 		arrows,
@@ -10,25 +12,47 @@ module.exports =
 				{
 					above:
 						getWithDirection({
+							arrows,
 							countSelector:
 								dependencies => dependencies.above,
 							down:
-								dependencyCount.dependents,
+								{
+									dependencies:
+										dependencyCount.dependents,
+									relationship:
+										"dependents",
+								},
 							up:
-								dependencyCount.dependsUpon
-								&&
-								dependencyCount.dependsUpon.outer,
+								{
+									dependencies:
+										dependencyCount.dependsUpon
+										&&
+										dependencyCount.dependsUpon.outer,
+									relationship:
+										"dependsUpon",
+								},
 						}),
 					below:
 						getWithDirection({
+							arrows,
 							countSelector:
 								dependencies => dependencies.below,
 							down:
-								dependencyCount.dependsUpon
-								&&
-								dependencyCount.dependsUpon.outer,
+								{
+									dependencies:
+										dependencyCount.dependsUpon
+										&&
+										dependencyCount.dependsUpon.outer,
+									relationship:
+										"dependsUpon",
+								},
 							up:
-								dependencyCount.dependents,
+								{
+									dependencies:
+										dependencyCount.dependents,
+									relationship:
+										"dependents",
+								},
 						}),
 					same:
 						getForSame(),
@@ -59,37 +83,14 @@ module.exports =
 				}
 			);
 		}
-
-		function getWithDirection({
-			countSelector,
-			down,
-			up,
-		}) {
-			return (
-				getFromDirectionCount({
-					down: down && countSelector(down),
-					up: up && countSelector(up),
-				})
-			);
-		}
-
-		function getFromDirectionCount({
-			down,
-			up,
-		}) {
-			return (
-				(down || up)
-				&&
-				[
-					down && { arrow: arrows.down, count: down },
-					up && { arrow: arrows.up, count: up },
-				]
-				.filter(dependencies => dependencies));
-		}
 	};
 
 function whenCountHasValues(
 	count,
 ) {
-	return (count.above || count.below || count.same) && count;
+	return (
+		(count.above || count.below || count.same)
+		&&
+		count
+	);
 }
