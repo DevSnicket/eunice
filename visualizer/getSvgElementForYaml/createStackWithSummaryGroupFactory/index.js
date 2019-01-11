@@ -1,23 +1,23 @@
 const
+	aggregateGroupFactoriesWithOrientation = require("../aggregateGroupFactoriesWithOrientation"),
+	countDependenciesOfItem = require("../countDependenciesOfItem"),
 	countDependenciesOfItemAndDescendants = require("./countDependenciesOfItemAndDescendants"),
 	createDependenciesInlineGroupFactories = require("./createDependenciesInlineGroupFactories"),
+	createDependencyGroupFactoryWhenRequired = require("../createDependencyGroupFactoryWhenRequired"),
 	createGroupsCenteredHorizontally = require("./createGroupsCenteredHorizontally"),
 	createItemGroupFactory = require("./createItemGroupFactory"),
-	createSummaryGroupFactory = require("./createSummaryGroupFactory");
+	createOuterDependencyGroupFactory = require("../createOuterDependencyGroupFactory"),
+	createSummaryGroupFactory = require("./createSummaryGroupFactory"),
+	getDependencyCountInBothDirections = require("../getDependencyCountInBothDirections"),
+	sumDependencyCount = require("../sumDependencyCount");
 
 module.exports =
 	({
-		aggregateGroupFactoriesWithOrientation,
 		arrows,
-		countDependenciesOfItem,
-		createDependencyGroupFactoryWhenRequired,
-		createItemGroupWrapperForItem,
-		createOuterDependencyGroupFactory,
 		createTextGroup,
 		font,
-		getDependencyCountInBothDirections,
+		groupContainerFactory,
 		stack,
-		sumDependencyCount,
 	}) => {
 		const
 			dependencyCounts = [],
@@ -80,15 +80,7 @@ module.exports =
 			return (
 				createOuterDependencyGroupFactory({
 					aggregateGroupFactoriesWithOrientation,
-					createGroupFactoryWhenRequired:
-						({ arrow, count, keySuffix }) =>
-							createDependencyGroupFactoryWhenRequired({
-								arrow,
-								count,
-								createTextGroup,
-								font,
-								key: `${item.id} dependency count outer ${keySuffix}`,
-							}),
+					createGroupFactoryWhenRequired,
 					dependencyCount:
 						getDependencyCountInBothDirections({
 							arrows,
@@ -99,16 +91,56 @@ module.exports =
 				})
 			);
 
+			function createGroupFactoryWhenRequired({
+				arrow,
+				count,
+				keys,
+			}) {
+				return (
+					createDependencyGroupFactoryWhenRequired({
+						arrow,
+						count,
+						createTextGroup:
+							getCreateTextGroupWhenInContainer()
+							||
+							createTextGroup,
+						font,
+						key:
+							`${item.id} dependency count outer ${keys.relationship} ${keys.structure}`,
+					})
+				);
+
+				function getCreateTextGroupWhenInContainer() {
+					return (
+						groupContainerFactory
+						&&
+						groupContainerFactory.createForDependencyCount
+						&&
+						createInContainer
+					);
+
+					function createInContainer(
+						parameters,
+					) {
+						return (
+							groupContainerFactory.createForDependencyCount({
+								group: createTextGroup(parameters),
+								item,
+								relationship: keys.relationship,
+								structure: keys.structure,
+							})
+						);
+					}
+				}
+			}
+
 			function createItemGroupFactoryWithDependsUponCounts() {
 				return (
 					createItemGroupFactory({
-						createItemGroupWrapper:
-							itemGroup =>
-								createItemGroupWrapperForItem({
-									item,
-									itemGroup,
-								}),
-						createTextGroup,
+						createTextGroup:
+							getCreateTextGroupWhenInContainer()
+							||
+							createTextGroup,
 						dependencyGroupFactories:
 							dependencyCount
 							&&
@@ -126,6 +158,27 @@ module.exports =
 							item.id,
 					})
 				);
+
+				function getCreateTextGroupWhenInContainer() {
+					return (
+						groupContainerFactory
+						&&
+						groupContainerFactory.createForItem
+						&&
+						createInContainer
+					);
+
+					function createInContainer(
+						parameters,
+					) {
+						return (
+							groupContainerFactory.createForItem({
+								group: createTextGroup(parameters),
+								item,
+							})
+						);
+					}
+				}
 			}
 		}
 

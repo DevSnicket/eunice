@@ -4,7 +4,6 @@ const
 
 module.exports =
 	({
-		createItemGroupWrapper,
 		createTextGroup,
 		dependencyGroupFactories,
 		dependencySpacing,
@@ -37,32 +36,30 @@ module.exports =
 						left,
 						top,
 					}) =>
-						createItemGroupWrapper(
-							createTextGroup({
-								attributes:
-									null,
-								className,
-								elementName:
-									"rect",
-								elementsBelowText:
-									createDependencyGroupsWhenRequired({
-										center: left + (width / 2),
-										top: top + 34,
-									}),
-								height,
-								key:
-									text,
-								left,
-								padding:
-									{
-										left: width / 2,
-										top: padding.top,
-									},
+						createTextGroup({
+							attributes:
+								null,
+							className,
+							elementName:
+								"rect",
+							elementsBelowText:
+								createDependencyGroupsWhenRequired({
+									center: left + (width / 2),
+									top: top + 34,
+								}),
+							height,
+							key:
 								text,
-								top,
-								width,
-							}),
-						),
+							left,
+							padding:
+								{
+									left: width / 2,
+									top: padding.top,
+								},
+							text,
+							top,
+							width,
+						}),
 				height,
 				width,
 			}

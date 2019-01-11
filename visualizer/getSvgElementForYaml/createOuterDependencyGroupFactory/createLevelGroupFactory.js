@@ -33,13 +33,13 @@ module.exports =
 					createGroupFactoryWhenRequired({
 						arrow: dependencies.arrow,
 						count: dependencies.dependents,
-						keySuffix: prefixKeySuffix("dependents"),
+						keys: createKeysForRelationship("dependents"),
 					}),
 				dependsUponGroupFactory =
 					createGroupFactoryWhenRequired({
 						arrow: dependencies.arrow,
 						count: dependencies.dependsUpon,
-						keySuffix: prefixKeySuffix("depends upon"),
+						keys: createKeysForRelationship("depends upon"),
 					});
 
 			return (
@@ -59,10 +59,15 @@ module.exports =
 				}
 			);
 
-			function prefixKeySuffix(
-				keySuffix,
+			function createKeysForRelationship(
+				relationship,
 			) {
-				return `not independent ${keySuffix}`;
+				return (
+					{
+						relationship,
+						structure: "level",
+					}
+				);
 			}
 
 			function withTopOffset({

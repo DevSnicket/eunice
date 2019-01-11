@@ -1,5 +1,5 @@
 const
-	createLayerGroupFactory = require("./createLayerGroupFactory"),
+	createLevelGroupFactory = require("./createLevelGroupFactory"),
 	createStackGroupFactory = require("./createStackGroupFactory");
 
 module.exports =
@@ -16,8 +16,8 @@ module.exports =
 				dependencyCount,
 			itemGroupWidth:
 				itemGroupFactory.width,
-			layerGroupFactory:
-				createLayerGroupFactory({
+			levelGroupFactory:
+				createLevelGroupFactory({
 					aggregateGroupFactoriesHorizontally:
 						aggregateGroupFactoriesWithOrientation.horizontal,
 					createGroupFactoryWhenRequired,
