@@ -2,6 +2,8 @@
 set -e
 
 identifierSeparator=/
+#packagePathOrScope=../../../
+packagePathOrScope=@devsnicket/
 rootDirectory=../..
 
 function ensureDirectoryExists() {
@@ -11,7 +13,7 @@ function ensureDirectoryExists() {
 }
 
 function installEuniceNpmPackage() {
-	npm install --no-save --prefix=. @devsnicket/eunice-$1
+  npm install --no-save --prefix=. ${packagePathOrScope}eunice-$1
 }
 
 function removeIdentifierSuffix {
@@ -125,7 +127,9 @@ for package in ${packages[@]}; do
     --ignoreDirectoryNames=.devsnicket-plugin-discovery \
     --ignoreDirectoryNames=dist \
     --ignoreDirectoryNames=node_modules \
+    --ignoreDirectoryNames=output \
     --ignoreDirectoryNames=test-cases \
+    --ignoreDirectoryNames=test-coverage \
   > $package/analysis.yaml
 
   removeIdentifierSuffix $package
