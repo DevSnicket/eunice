@@ -1,22 +1,12 @@
-const
-	{ createWebpackConfiguration } = require("@devsnicket/eunice-test-harnesses"),
-	pluginDiscoveryCommonjsBabelPlugin = require("@devsnicket/plugin-discovery-commonjs-babel-plugin");
+const createWebpackConfiguration = require("./createWebpackConfiguration");
 
 module.exports =
 	createWebpackConfiguration({
-		babelPlugins:
-			[
-				[
-					pluginDiscoveryCommonjsBabelPlugin,
-				],
-			],
 		contentFromFile:
 			{
 				file: "../../dogfooding/output/.yaml",
 				placeholder: "yamlFromWebpack",
 			},
-		directory:
-			`${__dirname}/../output/renderer`,
-		indexFile:
-			"./index.js",
+		outputDirectoryName:
+			"renderer",
 	});
