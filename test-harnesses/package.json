@@ -39,7 +39,7 @@
 	},
 	"scripts": {
 		"lint": "npx eslint .",
-		"spellcheck": "npx cspell *.js **/*.js *.md **/*.md"
+		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" -exec npx cspell {} +"
 	},
 	"version": "2.6.0"
 }
