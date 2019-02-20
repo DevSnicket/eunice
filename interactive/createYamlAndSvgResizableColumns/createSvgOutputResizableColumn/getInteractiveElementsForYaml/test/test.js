@@ -58,34 +58,6 @@ test.each(
 				yaml: "{ id: grandparent, items: { id: parent, items: { id: single, items: nested } } }",
 			},
 		],
-		[
-			"first depends upon second",
-			{
-				expectedSvgFile: "dependencyCounts/first-depends-upon-second",
-				yaml: "[{ id: first, dependsUpon: second }, second ]",
-			},
-		],
-		[
-			"second depends upon first",
-			{
-				expectedSvgFile: "dependencyCounts/second-depends-upon-first",
-				yaml: "[ first, { id: second, dependsUpon: first } ]",
-			},
-		],
-		[
-			"upper depends upon lower",
-			{
-				expectedSvgFile: "dependencyCounts/upper-depends-upon-lower",
-				yaml: "[ [ { id: upper, dependsUpon: lower } ], [ lower ] ]",
-			},
-		],
-		[
-			"lower depends upon upper",
-			{
-				expectedSvgFile: "dependencyCounts/lower-depends-upon-upper",
-				yaml: "[ [ upper ], [ { id: lower, dependsUpon: upper } ] ]",
-			},
-		],
 	],
 )(
 	"%s",
