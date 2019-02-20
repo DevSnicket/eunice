@@ -5,13 +5,13 @@ const
 
 module.exports =
 	({
+		elementContainerFactory,
 		expectedSvgDirectoryPath,
-		groupContainerFactory,
 		yamlDirectory,
 	}) =>
 		expect(
 			getSvgForYaml({
-				groupContainerFactory,
+				elementContainerFactory,
 				yaml:
 					readTestFile(
 						path.join(__dirname, "..", "testCases", yamlDirectory, ".yaml"),
