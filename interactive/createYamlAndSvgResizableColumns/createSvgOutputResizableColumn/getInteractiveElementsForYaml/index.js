@@ -44,15 +44,6 @@ module.exports =
 		function createGroupContainerFactory() {
 			return (
 				{
-					createForDependencyCount:
-						({ group, item, relationship, structure }) =>
-							createGroupContainerForDependencyCount({
-								group,
-								item,
-								locationHash,
-								relationship,
-								structure,
-							}),
 					createForItem:
 						({ group, item }) =>
 							createGroupContainerForItem({
@@ -83,42 +74,6 @@ function splitSubsetIdentifierHierarchy(
 				undefined
 				:
 				decodeURIComponent(identifier),
-		)
-	);
-}
-
-function createGroupContainerForDependencyCount({
-	group,
-	item,
-	locationHash,
-	relationship,
-	structure,
-}) {
-	return (
-		createElement(
-			"a",
-			{
-				xlinkHref:
-					locationHashOfKeyValue.getWithKeysAndValues({
-						keysAndValues:
-							[
-								{
-									key: "list-dependencies-item",
-									value: item.id,
-								},
-								{
-									key: "list-dependencies-relationship",
-									value: relationship,
-								},
-								{
-									key: "list-dependencies-structure",
-									value: structure,
-								},
-							],
-						locationHash,
-					}),
-			},
-			group,
 		)
 	);
 }
