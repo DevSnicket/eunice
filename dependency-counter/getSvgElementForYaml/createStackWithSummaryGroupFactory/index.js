@@ -15,8 +15,8 @@ module.exports =
 	({
 		arrows,
 		createTextGroup,
+		elementContainerFactory,
 		font,
-		groupContainerFactory,
 		stack,
 	}) => {
 		const
@@ -112,9 +112,9 @@ module.exports =
 
 				function getCreateTextGroupWhenInContainer() {
 					return (
-						groupContainerFactory
+						elementContainerFactory
 						&&
-						groupContainerFactory.createForDependencyCount
+						elementContainerFactory.createForDependencyCount
 						&&
 						createInContainer
 					);
@@ -123,8 +123,8 @@ module.exports =
 						parameters,
 					) {
 						return (
-							groupContainerFactory.createForDependencyCount({
-								group: createTextGroup(parameters),
+							elementContainerFactory.createForDependencyCount({
+								element: createTextGroup(parameters),
 								item,
 								relationship: keys.relationship,
 								structure: keys.structure,
@@ -161,9 +161,9 @@ module.exports =
 
 				function getCreateTextGroupWhenInContainer() {
 					return (
-						groupContainerFactory
+						elementContainerFactory
 						&&
-						groupContainerFactory.createForItem
+						elementContainerFactory.createForItem
 						&&
 						createInContainer
 					);
@@ -172,8 +172,8 @@ module.exports =
 						parameters,
 					) {
 						return (
-							groupContainerFactory.createForItem({
-								group: createTextGroup(parameters),
+							elementContainerFactory.createForItem({
+								element: createTextGroup(parameters),
 								item,
 							})
 						);

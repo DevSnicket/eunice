@@ -52,7 +52,7 @@
 				"args":
 					[ 
 						"--runInBand",
-						"getSvgForYaml/withGroupContainer/forDependencyCount/test.js"
+						"getSvgForYaml/withElementContainer/forDependencyCount/test.js"
 					],
 				"cwd": "${workspaceFolder}/",
 				"localRoot": "${workspaceFolder}",
@@ -68,7 +68,7 @@
 				"args":
 					[ 
 						"--runInBand",
-						"getSvgForYaml/withGroupContainer/forItems/test.js"
+						"getSvgForYaml/withElementContainer/forItems/test.js"
 					],
 				"cwd": "${workspaceFolder}/",
 				"localRoot": "${workspaceFolder}",

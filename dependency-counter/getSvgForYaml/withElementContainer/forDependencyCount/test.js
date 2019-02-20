@@ -4,15 +4,13 @@ const
 	path = require("path");
 
 test(
-	"dependency count groups can be created with a container",
+	"dependency count elements can be created in a container",
 	() =>
 		assertGetSvgForYaml({
-			expectedSvgDirectoryPath:
-				__dirname,
-			groupContainerFactory:
+			elementContainerFactory:
 				{
 					createForDependencyCount:
-						({ group, item, relationship, structure }) =>
+						({ element, item, relationship, structure }) =>
 							createElement(
 								"containerElement",
 								{
@@ -20,9 +18,11 @@ test(
 									relationship,
 									structure,
 								},
-								group,
+								element,
 							),
 				},
+			expectedSvgDirectoryPath:
+				__dirname,
 			yamlDirectory:
 				path.join("stack", "two-of-two-items-interdependent"),
 		}),

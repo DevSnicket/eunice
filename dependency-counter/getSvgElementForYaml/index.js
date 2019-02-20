@@ -10,8 +10,8 @@ const
 module.exports =
 	({
 		createElement,
+		elementContainerFactory = null,
 		getTextWidth,
-		groupContainerFactory = null,
 		namespaces = null,
 		style = "",
 		subsetIdentifierHierarchy = null,
@@ -72,8 +72,8 @@ module.exports =
 				createStackWithSummaryGroupFactory({
 					arrows,
 					createTextGroup: createTextGroupWithFontSizeAndPrecision,
+					elementContainerFactory,
 					font,
-					groupContainerFactory,
 					stack,
 				})
 			);

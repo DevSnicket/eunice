@@ -3,21 +3,21 @@ const
 	{ createElement } = require("react");
 
 test(
-	"item groups can be created with a container",
+	"item elements can be created in a container",
 	() =>
 		assertGetSvgForYaml({
-			expectedSvgDirectoryPath:
-				__dirname,
-			groupContainerFactory:
+			elementContainerFactory:
 				{
 					createForItem:
-						({ group, item }) =>
+						({ element, item }) =>
 							createElement(
 								"containerElement",
 								{ item: item.id },
-								group,
+								element,
 							),
 				},
+			expectedSvgDirectoryPath:
+				__dirname,
 			yamlDirectory:
 				"single",
 		}),
