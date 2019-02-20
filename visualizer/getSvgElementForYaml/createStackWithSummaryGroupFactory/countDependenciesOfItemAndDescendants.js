@@ -41,12 +41,12 @@ function countDependenciesOfItemAndDescendants({
 	}
 
 	function countDependenciesOfChildItemRecursive(
-		childitem,
+		childItem,
 	) {
 		return (
 			countDependenciesOfItemAndDescendants({
 				countDependenciesOfItem,
-				item: childitem,
+				item: childItem,
 				parentStack,
 				sumCount,
 			})

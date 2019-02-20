@@ -7,6 +7,7 @@ module.exports =
 			{
 				down:
 					createArrowVertical({
+						/* cspell:disable-next-line */
 						fill: "darkgreen",
 						idPrefix: "down",
 						preserveAspectRatio: "xMidYMax slice",
@@ -14,6 +15,7 @@ module.exports =
 					}),
 				right:
 					createArrow({
+						/* cspell:disable-next-line */
 						fill: "darkred",
 						horizontalMargin: 9,
 						idPrefix: "right",
@@ -23,6 +25,7 @@ module.exports =
 					}),
 				up:
 					createArrowVertical({
+						/* cspell:disable-next-line */
 						fill: "darkred",
 						idPrefix: "up",
 						preserveAspectRatio: "xMidYMin slice",
