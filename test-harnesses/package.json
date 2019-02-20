@@ -41,5 +41,5 @@
 		"lint": "npx eslint .",
 		"spellcheck": "npx cspell *.js **/*.js *.md **/*.md"
 	},
-	"version": "2.5.2"
+	"version": "2.6.0"
 }

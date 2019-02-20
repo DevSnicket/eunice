@@ -27,14 +27,23 @@
 			resize: none;
 		}
 
+		.reflex-layout > .reflex-splitter {
+			user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			-webkit-user-select: none;
+		}
+
+		.reflex-layout.horizontal > .reflex-splitter {
+			height: 1em;
+			line-height: 0.2em;
+			text-align: center;
+		}
+
 		.reflex-layout.vertical > .reflex-splitter {
 			align-items: center;
 			display: flex;
 			justify-content: center;
-			user-select: none;
-  			-moz-user-select: none;
-  			-ms-user-select: none;
-			-webkit-user-select: none;
 			width: 1em;
 		}
 
