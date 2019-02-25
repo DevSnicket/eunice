@@ -12,7 +12,7 @@
 		"babel-polyfill": "6.26.0",
 		"js-yaml": "3.12.0",
 		"react": "16.4.0",
-		"react-dom": "16.4.0",
+		"react-dom": "16.4.2",
 		"string-pixel-width": "1.7.0"
 	},
 	"devDependencies": {
@@ -78,5 +78,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./dist/**/*\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "npx jest --runInBand"
 	},
-	"version": "3.0.1"
+	"version": "3.0.2"
 }
