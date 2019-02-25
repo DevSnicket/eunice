@@ -10,7 +10,7 @@
 		"@ungap/url-search-params": "0.1.2",
 		"babel-polyfill": "6.26.0",
 		"react": "16.4.0",
-		"react-dom": "16.4.0",
+		"react-dom": "16.4.2",
 		"react-reflex": "2.2.8",
 		"string-pixel-width": "1.7.0"
 	},
