@@ -1,7 +1,6 @@
 const
 	createArrows = require("./createArrows"),
 	createParentGroupFactoryFromSubsetIdentifierHierarchy = require("./createParentGroupFactoryFromSubsetIdentifierHierarchy"),
-	{ createStackFromYaml } = require("@devsnicket/eunice-dependency-and-structure"),
 	createStackWithSummaryGroupFactory = require("./createStackWithSummaryGroupFactory"),
 	createSvgElement = require("./createSvgElement"),
 	createTextGroup = require("./createTextGroup"),
@@ -13,9 +12,9 @@ module.exports =
 		elementContainerFactory = null,
 		getTextWidth,
 		namespaces = null,
+		stack,
 		style = "",
 		subsetIdentifierHierarchy = null,
-		yaml,
 	}) => {
 		const
 			arrows =
@@ -30,7 +29,7 @@ module.exports =
 		return (
 			createSvgElement({
 				childGroupFactory:
-					yaml
+					stack
 					&&
 					initializeAndCreateChildGroupFactory(),
 				createElement,
@@ -47,8 +46,6 @@ module.exports =
 		);
 
 		function initializeAndCreateChildGroupFactory() {
-			const stack = createStackFromYaml(yaml);
-
 			return (
 				subsetIdentifierHierarchy
 				?
@@ -66,15 +63,17 @@ module.exports =
 		}
 
 		function createGroupFactoryForStack(
-			stack,
+			stackOrStackOfSubset,
 		) {
 			return (
 				createStackWithSummaryGroupFactory({
 					arrows,
-					createTextGroup: createTextGroupWithFontSizeAndPrecision,
+					createTextGroup:
+						createTextGroupWithFontSizeAndPrecision,
 					elementContainerFactory,
 					font,
-					stack,
+					stack:
+						stackOrStackOfSubset,
 				})
 			);
 		}

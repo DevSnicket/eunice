@@ -1,6 +1,7 @@
 const
 	{ createElement } = require("react"),
-	getSvgElementForYaml = require("../getSvgElementForYaml"),
+	{ createStackFromYaml } = require("@devsnicket/eunice-dependency-and-structure"),
+	getSvgElementForStack = require("../getSvgElementForStack"),
 	getTextWidth = require("string-pixel-width"),
 	parseYaml = require("js-yaml").safeLoad,
 	{ renderToStaticMarkup } = require("react-dom/server");
@@ -11,10 +12,13 @@ module.exports =
 		...restOfParameters
 	}) =>
 		renderToStaticMarkup(
-			getSvgElementForYaml({
+			getSvgElementForStack({
 				...restOfParameters,
 				createElement,
 				getTextWidth,
-				yaml: parseYaml(yaml),
+				stack:
+					yaml
+					&&
+					createStackFromYaml(parseYaml(yaml)),
 			}),
 		);

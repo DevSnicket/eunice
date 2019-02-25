@@ -1,10 +1,10 @@
 /* istanbul ignore file: test would be a mirror of implementation */
 const
-	getSvgElementForYaml = require("./getSvgElementForYaml"),
+	getSvgElementForStack = require("./getSvgElementForStack"),
 	getSvgForYaml = require("./getSvgForYaml");
 
 module.exports =
 	{
-		getSvgElementForYaml,
+		getSvgElementForStack,
 		getSvgForYaml,
 	};
