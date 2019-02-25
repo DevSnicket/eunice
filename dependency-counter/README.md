@@ -1,4 +1,4 @@
-# Eunice [![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgElementForYaml/createArrows/testcase.svg?sanitize=true)](Renderer/getSvgElementForYaml/createArrows/testcase.svg)
+# Eunice [![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgElementForStack/createArrows/testcase.svg?sanitize=true)](Renderer/getSvgElementForStack/createArrows/testcase.svg)
 
 DevSnicket Eunice is a toolkit based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. Eunice's approach isn't limited to direct dependencies, but includes indirect dependencies as well.
 
@@ -17,7 +17,7 @@ To visualize and explore what's in the YAML files, and to statistically measure 
 - does not match stack (red up arrow) 
 - is not independent (red horizontal arrow).
 
-[![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgElementForYaml/createArrows/testcase.svg?sanitize=true)](Renderer/getSvgElementForYaml/createArrows/testcase.svg)
+[![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgElementForStack/createArrows/testcase.svg?sanitize=true)](Renderer/getSvgElementForStack/createArrows/testcase.svg)
 
 Dependency counts appear for both sides of the dependency, the dependent item and the item depended upon. When there are multiple counts a summary of all counts is rendered at the bottom. <sup>[1]</sup>.
 
