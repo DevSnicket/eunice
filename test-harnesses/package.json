@@ -9,7 +9,7 @@
 		"babel-plugin-transform-object-rest-spread": "6.26.0",
 		"copy-webpack-plugin": "4.6.0",
 		"react": "16.4.0",
-		"react-dom": "16.4.0",
+		"react-dom": "16.4.2",
 		"react-reflex": "2.2.8",
 		"webpack": "4.11.1"
 	},
@@ -41,5 +41,5 @@
 		"lint": "npx eslint .",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" -exec npx cspell {} +"
 	},
-	"version": "2.6.0"
+	"version": "2.6.1"
 }
