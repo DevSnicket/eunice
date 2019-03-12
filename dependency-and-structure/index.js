@@ -1,11 +1,13 @@
 const
 	createStackFromYaml = require("./createStackFromYaml"),
-	createYamlFromStack = require("./createYamlFromStack");
+	createYamlFromStack = require("./createYamlFromStack"),
+	findItemInStackWithIdentifierHierarchy = require("./findItemInStackWithIdentifierHierarchy");
 
 module.exports =
 	{
 		createStackFromYaml,
 		createYamlFromStack,
+		findItemInStackWithIdentifierHierarchy,
 	};
 
 /**

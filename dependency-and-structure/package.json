@@ -65,5 +65,5 @@
 		"spellcheck": "npx cspell *.js **/*.js *.md **/*.md",
 		"test": "npx jest --runInBand"
 	},
-	"version": "2.3.2"
+	"version": "2.4.0"
 }
