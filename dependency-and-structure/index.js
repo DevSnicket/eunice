@@ -10,7 +10,7 @@ module.exports =
 
 /**
   * @typedef {Level[]} Stack
-  * @property {Stack} [parent]
+  * @property {Item} [parent]
   *
   * @typedef {Item[]} Level
   * @property {Stack} stack
