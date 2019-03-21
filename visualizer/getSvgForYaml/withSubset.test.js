@@ -8,22 +8,9 @@ const
 
 const isUpdateExpected = process.argv[2] === "update-expected";
 
-if (!isUpdateExpected) {
+if (!isUpdateExpected)
 	test(
-		"subset of missing item throws subset identifier not found error",
-		() =>
-			expect(
-				() =>
-					getSvgForYaml({
-						subsetIdentifierHierarchy: [ "missing" ],
-						yaml: "not missing",
-					}),
-			)
-			.toThrowError("Identifier of \"missing\" in subset hierarchy not found."),
-	);
-
-	test(
-		"subset of missing item throws subset identifier not found error",
+		"subset of item with no child items throws error",
 		() =>
 			expect(
 				() =>
@@ -34,7 +21,6 @@ if (!isUpdateExpected) {
 			)
 			.toThrowError("Final item of subset identifier hierarchy \"parent\" has no child items."),
 	);
-}
 
 getSvgForYamlTestOrUpdateExpected({
 	expectedFilename: "item-with-parent",
