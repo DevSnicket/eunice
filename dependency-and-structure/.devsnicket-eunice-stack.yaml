@@ -1,2 +1,3 @@
-- existing
+- findItemInStackWithIdentifierHierarchy
+- [ createStackFromYaml, createYamlFromStack ]
 - tests
