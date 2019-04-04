@@ -1,3 +1,6 @@
+require("array.prototype.flatmap")
+.shim();
+
 module.exports = generateAncestors;
 
 function * generateAncestors(
