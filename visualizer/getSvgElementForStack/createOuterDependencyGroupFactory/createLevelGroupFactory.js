@@ -39,7 +39,7 @@ module.exports =
 					createGroupFactoryWhenRequired({
 						arrow: dependencies.arrow,
 						count: dependencies.dependsUpon,
-						keys: createKeysForRelationship("depends upon"),
+						keys: createKeysForRelationship("dependsUpon"),
 					});
 
 			return (
