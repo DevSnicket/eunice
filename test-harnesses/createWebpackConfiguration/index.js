@@ -1,7 +1,7 @@
 // cSpell:words devtool
 
 const
-	CopyPlugin = require("copy-webpack-plugin"),
+	createCopyPluginsForHtmlWithCssFiles = require("./createCopyPluginsForHtmlWithCssFiles"),
 	createModuleWithBabelPlugins = require("./createModuleWithBabelPlugins"),
 	{ DefinePlugin } = require("webpack"),
 	path = require("path"),
@@ -11,6 +11,7 @@ module.exports =
 	({
 		babelPlugins = [],
 		contentFromFile,
+		cssFiles,
 		directory,
 		indexFile,
 	}) => (
@@ -33,9 +34,8 @@ module.exports =
 			plugins:
 				[
 					new DefinePlugin({ [contentFromFile.placeholder]: `\`${readFileSync(contentFromFile.file, "utf-8")}\`` }),
-					new CopyPlugin(
-						[ "harness.html", "react-reflex.css" ]
-						.map(filename => path.join(__dirname, "..", filename)),
+					...createCopyPluginsForHtmlWithCssFiles(
+						cssFiles || [],
 					),
 				],
 		}
