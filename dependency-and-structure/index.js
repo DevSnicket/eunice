@@ -1,21 +1,20 @@
 const
 	createStackFromYaml = require("./createStackFromYaml"),
 	createYamlFromStack = require("./createYamlFromStack"),
-	findItemInStackWithIdentifierHierarchy = require("./findItemInStackWithIdentifierHierarchy");
+	findItemInStackWithIdentifierHierarchy = require("./findItemInStackWithIdentifierHierarchy"),
+	isInnerStack = require("./isInnerStack");
 
 module.exports =
 	{
 		createStackFromYaml,
 		createYamlFromStack,
 		findItemInStackWithIdentifierHierarchy,
+		isInnerStack,
 	};
 
 /**
   * @typedef {Level[]} Stack
   * @property {Item} [parent]
-  *
-  * @typedef {Item[]} Level
-  * @property {Stack} stack
   *
   * @typedef Item
   * @property {(DependUpon|DependUponMissingItem|DependUponMissingParent)[]} [dependsUpon]
@@ -23,6 +22,9 @@ module.exports =
   * @property {String} [id]
   * @property {Stack} [items]
   * @property {Level} level
+  *
+  * @typedef {Item[]} Level
+  * @property {Stack} stack
   *
   * @typedef DependUpon
   * @property {Item} item
