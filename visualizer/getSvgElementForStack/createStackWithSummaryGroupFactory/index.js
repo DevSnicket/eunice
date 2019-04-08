@@ -1,6 +1,5 @@
 const
 	aggregateGroupFactoriesWithOrientation = require("../aggregateGroupFactoriesWithOrientation"),
-	countDependenciesOfItem = require("../countDependenciesOfItem"),
 	countDependenciesOfItemAndDescendants = require("./countDependenciesOfItemAndDescendants"),
 	createDependenciesInlineGroupFactories = require("./createDependenciesInlineGroupFactories"),
 	createDependencyGroupFactoryWhenRequired = require("../createDependencyGroupFactoryWhenRequired"),
@@ -8,8 +7,7 @@ const
 	createItemGroupFactory = require("./createItemGroupFactory"),
 	createOuterDependencyGroupFactory = require("../createOuterDependencyGroupFactory"),
 	createSummaryGroupFactory = require("./createSummaryGroupFactory"),
-	getDependencyCountInBothDirections = require("../getDependencyCountInBothDirections"),
-	sumDependencyCount = require("../sumDependencyCount");
+	getDependencyCountInBothDirections = require("../getDependencyCountInBothDirections");
 
 module.exports =
 	({
@@ -68,10 +66,8 @@ module.exports =
 		) {
 			const dependencyCount =
 				countDependenciesOfItemAndDescendants({
-					countDependenciesOfItem,
 					item,
 					parentStack: stack,
-					sumCount: sumDependencyCount,
 				});
 
 			if (dependencyCount)
