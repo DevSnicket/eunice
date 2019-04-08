@@ -1,4 +1,6 @@
-const findDirectionBetweenItemsInFirstMutualStack = require("./findDirectionBetweenItemsInFirstMutualStack");
+const
+	findDirectionBetweenItemsInFirstMutualStack = require("./findDirectionBetweenItemsInFirstMutualStack"),
+	{ isInnerStack } = require("@devsnicket/eunice-dependency-and-structure");
 
 module.exports =
 	({
@@ -29,7 +31,7 @@ module.exports =
 			directionInStack,
 		}) {
 			return (
-				isOuterStack(directionInStack.stack)
+				hasSameOrOuterStack(directionInStack)
 				?
 				sumCount(
 					aggregation,
@@ -47,7 +49,7 @@ module.exports =
 			const count = getCountFromDirection(directionInStack.direction);
 
 			return (
-				isOuterStack(directionInStack.stack)
+				hasSameOrOuterStack(directionInStack)
 				?
 				sumDirectionInOuterStack()
 				:
@@ -81,28 +83,23 @@ module.exports =
 			}
 		}
 
-		function isOuterStack(
-			stack,
+		function hasSameOrOuterStack(
+			{ stack },
 		) {
 			return (
 				stack
 				&&
-				(stack === parentStack || !isInnerStack(stack))
+				isSameOrOuterStack()
 			);
-		}
 
-		function isInnerStack(
-			stack,
-		) {
-			return (
-				stack.parent
-				&&
-				(
-					stack.parent.level.stack === parentStack
-					||
-					isInnerStack(stack.parent.level.stack)
-				)
-			);
+			function isSameOrOuterStack() {
+				return (
+					!isInnerStack({
+						source: parentStack,
+						target: stack,
+					})
+				);
+			}
 		}
 	};
 
