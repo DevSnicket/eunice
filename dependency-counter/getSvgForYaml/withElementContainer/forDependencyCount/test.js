@@ -10,13 +10,13 @@ test(
 			elementContainerFactory:
 				{
 					createForDependencyCount:
-						({ element, item, relationship, structure }) =>
+						({ element, item, level, relationship }) =>
 							createElement(
 								"containerElement",
 								{
 									id: item.id,
+									level,
 									relationship,
-									structure,
 								},
 								element,
 							),

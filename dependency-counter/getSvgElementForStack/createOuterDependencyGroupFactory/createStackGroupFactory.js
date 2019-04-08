@@ -76,10 +76,10 @@ function createGroupFactoryForDependenciesWhenRequired({
 									dependencies.count,
 								keys:
 									{
+										level:
+											dependencies.level,
 										relationship:
 											dependencies.relationship,
-										structure:
-											"stack",
 									},
 							}),
 					),

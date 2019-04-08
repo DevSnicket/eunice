@@ -22,6 +22,8 @@ module.exports =
 									relationship:
 										"dependents",
 								},
+							level:
+								"above",
 							up:
 								{
 									dependencies:
@@ -46,6 +48,8 @@ module.exports =
 									relationship:
 										"dependsUpon",
 								},
+							level:
+								"below",
 							up:
 								{
 									dependencies:
