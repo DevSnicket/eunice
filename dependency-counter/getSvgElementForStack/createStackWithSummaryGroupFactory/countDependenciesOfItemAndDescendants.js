@@ -1,16 +1,18 @@
+const
+	countDependenciesOfItem = require("../countDependenciesOfItem"),
+	sumDependencyCount = require("../sumDependencyCount");
+
 module.exports = countDependenciesOfItemAndDescendants;
 
 function countDependenciesOfItemAndDescendants({
-	countDependenciesOfItem,
 	item,
 	parentStack,
-	sumCount,
 }) {
 	const itemCount =
 		countDependenciesOfItem({
 			item,
 			parentStack,
-			sumCount,
+			sumCount: sumDependencyCount,
 		});
 
 	return (
@@ -45,10 +47,8 @@ function countDependenciesOfItemAndDescendants({
 	) {
 		return (
 			countDependenciesOfItemAndDescendants({
-				countDependenciesOfItem,
 				item: childItem,
 				parentStack,
-				sumCount,
 			})
 		);
 	}
@@ -72,7 +72,7 @@ function countDependenciesOfItemAndDescendants({
 		if (left && right) {
 			const
 				dependents =
-					sumCount(
+					sumDependencyCount(
 						left.dependents,
 						right.dependents,
 					),
@@ -97,8 +97,8 @@ function countDependenciesOfItemAndDescendants({
 	) {
 		if (left && right) {
 			const
-				inner = sumCount(left.inner, right.inner),
-				outer = sumCount(left.outer, right.outer);
+				inner = sumDependencyCount(left.inner, right.inner),
+				outer = sumDependencyCount(left.outer, right.outer);
 
 			return (
 				(inner || outer)
