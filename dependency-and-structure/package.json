@@ -60,6 +60,7 @@
 		"url": "https://github.com/DevSnicket/eunice-dependency-and-structure.git"
 	},
 	"scripts": {
+		"all": "npm run spellcheck && npm run lint && npm run build && npm run test",
 		"build": "rm -rf dist && npx babel -d dist --ignore dist/*,dist/**/*,node_modules/**/*,**/tests/**,**/tests/**,test-coverage/**,**/test.js --plugins transform-object-rest-spread -s true .",
 		"lint": "npx eslint .",
 		"spellcheck": "npx cspell *.js **/*.js *.md **/*.md",
