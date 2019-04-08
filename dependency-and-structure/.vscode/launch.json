@@ -15,7 +15,7 @@
 						"createStackFromYaml/test/test.js"
 					],
 				"localRoot": "${workspaceFolder}",
-				"name": "dependency & structure createStackFromYaml jest",
+				"name": "createStackFromYaml jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
@@ -29,7 +29,7 @@
 						"createYamlFromStack/test.js"
 					],
 				"localRoot": "${workspaceFolder}",
-				"name": "dependency & structure createYamlFromStack jest",
+				"name": "createYamlFromStack jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
