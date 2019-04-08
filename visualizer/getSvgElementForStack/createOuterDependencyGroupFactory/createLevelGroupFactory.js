@@ -64,8 +64,8 @@ module.exports =
 			) {
 				return (
 					{
+						level: "same",
 						relationship,
-						structure: "level",
 					}
 				);
 			}

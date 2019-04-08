@@ -122,8 +122,8 @@ module.exports =
 							elementContainerFactory.createForDependencyCount({
 								element: createTextGroup(parameters),
 								item,
+								level: keys.level,
 								relationship: keys.relationship,
-								structure: keys.structure,
 							})
 						);
 					}

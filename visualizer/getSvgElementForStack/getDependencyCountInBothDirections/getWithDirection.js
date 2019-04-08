@@ -3,6 +3,7 @@ module.exports =
 		arrows,
 		countSelector,
 		down,
+		level,
 		up,
 	}) => {
 		return (
@@ -21,6 +22,7 @@ module.exports =
 						arrows.down,
 					count:
 						countSelector(down.dependencies),
+					level,
 					relationship:
 						down.relationship,
 				})
@@ -36,6 +38,7 @@ module.exports =
 						arrows.up,
 					count:
 						countSelector(up.dependencies),
+					level,
 					relationship:
 						up.relationship,
 				})
@@ -46,12 +49,13 @@ module.exports =
 function getForDirectionWhenAny({
 	arrow,
 	count,
+	level,
 	relationship,
 }) {
 	return (
 		count
 		&&
-		{ arrow, count, relationship }
+		{ arrow, count, level, relationship }
 	);
 }
 
