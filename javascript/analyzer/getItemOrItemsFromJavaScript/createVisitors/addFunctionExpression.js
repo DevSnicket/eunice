@@ -27,7 +27,7 @@ module.exports =
 		}
 
 		function addWhenModuleExport() {
-			if (isModuleExportAssigment())
+			if (isModuleExportAssignment())
 				addDeclarationIn({
 					declaration:
 						createDeclarationWithIdentifier(
@@ -37,7 +37,7 @@ module.exports =
 						null,
 				});
 
-			function isModuleExportAssigment() {
+			function isModuleExportAssignment() {
 				return (
 					parent.type === "AssignmentExpression"
 					&&

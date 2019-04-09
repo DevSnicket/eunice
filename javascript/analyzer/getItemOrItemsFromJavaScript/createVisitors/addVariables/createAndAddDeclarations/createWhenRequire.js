@@ -1,12 +1,12 @@
 module.exports =
 	({
 		createVariablesFromIdentifier,
-		initalization,
+		initialization,
 	}) => {
 		return (
 			createFromWhenRequire({
 				dependsUponItemIdentifier: null,
-				expression: initalization,
+				expression: initialization,
 			})
 			||
 			createWhenMember()
@@ -14,11 +14,11 @@ module.exports =
 
 		function createWhenMember() {
 			return (
-				initalization.type === "MemberExpression"
+				initialization.type === "MemberExpression"
 				&&
 				createFromWhenRequire({
-					dependsUponItemIdentifier: initalization.property.name,
-					expression: initalization.object,
+					dependsUponItemIdentifier: initialization.property.name,
+					expression: initialization.object,
 				})
 			);
 		}

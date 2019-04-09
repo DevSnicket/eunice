@@ -39,7 +39,7 @@ module.exports =
 				return (
 					createWhenRequire({
 						createVariablesFromIdentifier,
-						initalization: declaration.init,
+						initialization: declaration.init,
 					})
 					||
 					createWhenNotFunction()

@@ -83,7 +83,7 @@
 		"dogfooding": "node getOrCreateItemsInDirectory/bin.js --directory=. --ignoreDirectoryNames=dist --ignoreDirectoryNames=node_modules --ignoreDirectoryNames=output --ignoreDirectoryNames=test-cases --ignoreDirectoryNames=test-coverage",
 		"harness": "webpack -p --config harness/webpack.config.js",
 		"lint": "eslint .",
-		"spellcheck": "npx cspell *.js **/*.js *.md **/*.md",
+		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./dist/**/*\" ! -path \"./harness/output/*\" ! -path \"./node_modules/**/*\" ! -path \"**/test-cases/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest --runInBand"
 	},
 	"version": "1.18.1"

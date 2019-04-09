@@ -3,7 +3,7 @@ const
 	addFunctionExpression = require("./addFunctionExpression"),
 	addVariables = require("./addVariables"),
 	createDeclarations = require("./createDeclarations"),
-	createDependsUpons = require("./createDependsUpons"),
+	createDependsUponIdentifiers = require("./createDependsUponIdentifiers"),
 	createFileItemOrItems = require("./createFileItemOrItems"),
 	createFunctionDeclaration = require("./createFunctionDeclaration"),
 	createScopedVariables = require("./createScopedVariables"),
@@ -15,7 +15,7 @@ module.exports =
 	() => {
 		const
 			declarations = createDeclarations(),
-			dependsUpons = createDependsUpons(),
+			dependsUponIdentifiers = createDependsUponIdentifiers(),
 			scopedVariables = createScopedVariables(),
 			undeclaredReferences = createUndeclaredReferences();
 
@@ -37,7 +37,7 @@ module.exports =
 
 		function getItemOrItems() {
 			const dependsUponProperty =
-				dependsUpons.createPropertyFor(null);
+				dependsUponIdentifiers.createPropertyFor(null);
 
 			const itemOrItems =
 				createFileItemOrItems({
@@ -55,7 +55,7 @@ module.exports =
 			if (declarations.any())
 				throw new Error("Unhandled declarations.");
 			/* istanbul ignore next: error is only thrown when there is gap in the implementation */
-			else if (dependsUpons.any())
+			else if (dependsUponIdentifiers.any())
 				throw new Error("Unhandled dependencies.");
 			else
 				return itemOrItems;
@@ -82,7 +82,7 @@ module.exports =
 		) {
 			addFromCall({
 				addDependsUponIdentifierFrom:
-					dependsUpons.addIdentifierFrom,
+					dependsUponIdentifiers.addIdentifierFrom,
 				addUndeclaredReference:
 					({ parent, reference }) =>
 						undeclaredReferences.addAncestorsAndParentOfReference({
@@ -126,7 +126,7 @@ module.exports =
 			return (
 				createFunctionDeclaration({
 					dependsUponProperty:
-						dependsUpons.createPropertyFor(
+						dependsUponIdentifiers.createPropertyFor(
 							functionDeclaration,
 						),
 					functionDeclaration,
