@@ -7,7 +7,7 @@ const
 module.exports =
 	({
 		directory,
-		ignoreDirectoryNames,
+		ignoreDirectoryNames = null,
 	}) =>
 		getOrCreateItemsInRootedDirectory({
 			directory: "",
@@ -63,7 +63,7 @@ function getOrCreateItemsInRootedDirectory({
 						filePath:
 							fileOrSubdirectoryPath,
 						itemOrItems:
-							getItemOrItemsFromJavaScript(
+							getItemOrItemsFromJavaScriptOrRethrowErrorWithPath(
 								readFile(),
 							),
 					}),
@@ -72,6 +72,16 @@ function getOrCreateItemsInRootedDirectory({
 
 			function isJavaScript() {
 				return fileOrSubdirectoryPath.ext === ".js";
+			}
+
+			function getItemOrItemsFromJavaScriptOrRethrowErrorWithPath(
+				javaScript,
+			) {
+				try {
+					return getItemOrItemsFromJavaScript(javaScript);
+				} catch (error) {
+					throw new Error(`Analysis of file "${path.join(directory, fileOrSubdirectory)}" raised the following error.\n\n${error.message}`);
+				}
 			}
 
 			function readFile() {

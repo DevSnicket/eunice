@@ -9,30 +9,45 @@ const
 const testCasesDirectory = path.join(__dirname, "test-cases");
 
 test(
-	"",
-	() =>
-		expect(getYamlForDirectory(testCasesDirectory))
-		.toBe(readExpectedFile()),
+	"Valid JavaScript files return expected YAML",
+	() => {
+		const supportedTestCasesDirectory =
+			path.join(
+				testCasesDirectory,
+				"valid",
+			);
+
+		expect(
+			getYamlForItemOrItems(
+				getOrCreateItemsInDirectory({
+					directory: supportedTestCasesDirectory,
+					ignoreDirectoryNames: [ "node_modules" ],
+				}),
+			),
+		)
+		.toBe(readExpectedFile());
+
+		function readExpectedFile() {
+			return (
+				fs.readFileSync(
+					path.join(supportedTestCasesDirectory, "expected.yaml"),
+					"utf-8",
+				)
+			);
+		}
+	},
 );
 
-function getYamlForDirectory(
-	directory,
-) {
-	return (
-		getYamlForItemOrItems(
-			getOrCreateItemsInDirectory({
-				directory,
-				ignoreDirectoryNames: [ "node_modules" ],
-			}),
+test(
+	"File with not supported declaration throws error with file path",
+	() =>
+		expect(
+			() =>
+				getOrCreateItemsInDirectory(
+					{ directory: path.join(testCasesDirectory, "invalid") },
+				),
 		)
-	);
-}
-
-function readExpectedFile() {
-	return (
-		fs.readFileSync(
-			path.join(testCasesDirectory, "expected.yaml"),
-			"utf-8",
-		)
-	);
-}
+		.toThrowError(
+			"Analysis of file \"index.js\" raised the following error.\n\nUnexpected token (1:1)",
+		),
+);
