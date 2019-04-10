@@ -8,9 +8,9 @@ module.exports =
 			{
 				addDeclarationIn,
 				addDeclarationsIn,
-				any,
 				createItemsForAndRemoveDeclarationsIn,
 				findDeclarationAndParent,
+				getGroupedByParent,
 			}
 		);
 
@@ -35,10 +35,6 @@ module.exports =
 					...declarations,
 				],
 			);
-		}
-
-		function any() {
-			return declarationsByParents.size !== 0;
 		}
 
 		function findDeclarationAndParent(
@@ -89,5 +85,15 @@ module.exports =
 			declarationsByParents.delete(parent);
 
 			return createItemsFromDeclarations(declarations);
+		}
+
+		function * getGroupedByParent() {
+			for (const [ parent, declarations ] of declarationsByParents.entries())
+				yield (
+					{
+						declarations,
+						parent,
+					}
+				);
 		}
 	};

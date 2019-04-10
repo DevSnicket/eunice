@@ -9,7 +9,8 @@ const
 	createScopedVariables = require("./createScopedVariables"),
 	createUndeclaredReferences = require("./createUndeclaredReferences"),
 	parentFunctionsFromAncestors = require("./parentFunctionsFromAncestors"),
-	stackItemsWhenMultiple = require("./stackItemsWhenMultiple");
+	stackItemsWhenMultiple = require("./stackItemsWhenMultiple"),
+	throwErrorWhenAnyUnhandled = require("./throwErrorWhenAnyUnhandled");
 
 module.exports =
 	() => {
@@ -51,14 +52,14 @@ module.exports =
 						}),
 				});
 
-			/* istanbul ignore next: error is only thrown when there is gap in the implementation */
-			if (declarations.any())
-				throw new Error("Unhandled declarations.");
-			/* istanbul ignore next: error is only thrown when there is gap in the implementation */
-			else if (dependsUponIdentifiers.any())
-				throw new Error("Unhandled dependencies.");
-			else
-				return itemOrItems;
+			throwErrorWhenAnyUnhandled({
+				declarations:
+					[ ...declarations.getGroupedByParent() ],
+				dependsUponIdentifiers:
+					[ ...dependsUponIdentifiers.getGroupedByParent() ],
+			});
+
+			return itemOrItems;
 		}
 
 		function visitFunctionExpression(

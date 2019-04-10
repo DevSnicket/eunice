@@ -5,8 +5,8 @@ module.exports =
 		return (
 			{
 				addIdentifierFrom,
-				any,
 				createPropertyFor,
+				getGroupedByParent,
 			}
 		);
 
@@ -20,10 +20,6 @@ module.exports =
 				dependsUponIdentifiers.add(identifier);
 			else
 				dependsUponIdentifiersByParent.set(parent, new Set([ identifier ]));
-		}
-
-		function any() {
-			return dependsUponIdentifiersByParent.size !== 0;
 		}
 
 		function createPropertyFor(
@@ -48,5 +44,15 @@ module.exports =
 					[ ...dependsUponIdentifiers ].sort()
 				);
 			}
+		}
+
+		function * getGroupedByParent() {
+			for (const [ parent, identifiers ] of dependsUponIdentifiersByParent.entries())
+				yield (
+					{
+						identifiers: [ ...identifiers ],
+						parent,
+					}
+				);
 		}
 	};
