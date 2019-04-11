@@ -45,9 +45,9 @@ function getOrCreateItemsInRootedDirectory({
 		fileOrSubdirectory,
 	) {
 		return (
-			getOrCreateItemsWhenJavaScriptFile()
-			||
 			createItemsWhenSubdirectory()
+			||
+			getOrCreateItemsWhenJavaScriptFile()
 		);
 
 		function getOrCreateItemsWhenJavaScriptFile() {
