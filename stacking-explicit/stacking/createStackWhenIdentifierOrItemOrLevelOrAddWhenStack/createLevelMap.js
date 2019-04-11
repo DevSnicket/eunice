@@ -15,7 +15,7 @@ module.exports =
 		);
 
 		function getNewWithExistingLevels(
-			exisitingLevels,
+			existingLevels,
 		) {
 			throwErrorWhenExistingNotSpecified();
 
@@ -28,7 +28,7 @@ module.exports =
 			);
 
 			function throwErrorWhenExistingNotSpecified() {
-				if (exisitingLevels.length && !identifiersInNewStack.some(isNewLevelForExisting))
+				if (existingLevels.length && !identifiersInNewStack.some(isNewLevelForExisting))
 					throw Error(`Single item level of "${existingIdentifier}" not specified in new stack "${identifiersInNewStack}".`);
 			}
 
@@ -44,7 +44,7 @@ module.exports =
 						&&
 						[
 							...stack,
-							...exisitingLevels,
+							...existingLevels,
 						]
 					);
 				}
@@ -91,11 +91,11 @@ module.exports =
 
 			function getExistingWhenNoNewLevels() {
 				return (
-					exisitingLevels.length === 1
+					existingLevels.length === 1
 					?
-					exisitingLevels[0]
+					existingLevels[0]
 					:
-					exisitingLevels
+					existingLevels
 				);
 			}
 		}

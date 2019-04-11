@@ -124,7 +124,7 @@ test.each(
 		[
 			{
 				id: "item1",
-				items: [ "childitem1", "childitem2" ],
+				items: [ "childItem1", "childItem2" ],
 			},
 			input,
 		],
@@ -133,8 +133,8 @@ test.each(
 				id: "item1",
 				items:
 					[
-						{ id: "childitem1", index: 1 },
-						{ id: "childitem2", index: 2 },
+						{ id: "childItem1", index: 1 },
+						{ id: "childItem2", index: 2 },
 					],
 			},
 			input,
@@ -144,16 +144,16 @@ test.each(
 				id: "item1",
 				items:
 					[
-						{ id: "childitem2", index: 2 },
-						{ id: "childitem1", index: 1 },
+						{ id: "childItem2", index: 2 },
+						{ id: "childItem1", index: 1 },
 					],
 			},
 			{
 				id: "item1",
 				items:
 					[
-						{ id: "childitem1", index: 1 },
-						{ id: "childitem2", index: 2 },
+						{ id: "childItem1", index: 1 },
+						{ id: "childItem2", index: 2 },
 					],
 			},
 		],
