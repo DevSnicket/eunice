@@ -8,50 +8,49 @@ module.exports =
 	}) => {
 		const parent = ancestors[ancestors.length - 2];
 
-		if (parent.type === "VariableDeclarator")
-			addWhenVariable();
-		else
-			addWhenModuleExport();
+		switch (parent.type) {
+			case "AssignmentExpression":
+				addAssignment();
+				break;
+			case "VariableDeclarator":
+				addVariable(parent.id.name);
+				break;
+			default:
+		}
 
-		function addWhenVariable() {
+		function addAssignment() {
+			if (isModuleExportMemberExpression(parent.left))
+				addModuleExport();
+			else
+				addVariable(parent.left.name);
+
+			function addModuleExport() {
+				addDeclarationIn({
+					declaration:
+						createDeclarationWithIdentifier(
+							functionExpression.id
+							&&
+							functionExpression.id.name,
+						),
+					parent:
+						null,
+				});
+			}
+		}
+
+		function addVariable(
+			identifier,
+		) {
 			addDeclarationIn({
 				declaration:
 					createDeclarationWithIdentifier(
-						parent.id.name,
+						identifier,
 					),
 				parent:
 					findParentFunctionFromAncestors(
 						ancestors,
 					),
 			});
-		}
-
-		function addWhenModuleExport() {
-			if (isModuleExportAssignment())
-				addDeclarationIn({
-					declaration:
-						createDeclarationWithIdentifier(
-							getIdentifier(),
-						),
-					parent:
-						null,
-				});
-
-			function isModuleExportAssignment() {
-				return (
-					parent.type === "AssignmentExpression"
-					&&
-					isModuleExportMemberExpression(parent.left)
-				);
-			}
-
-			function getIdentifier() {
-				return (
-					functionExpression.id
-					&&
-					functionExpression.id.name
-				);
-			}
 		}
 
 		function createDeclarationWithIdentifier(

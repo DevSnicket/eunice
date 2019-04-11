@@ -1,0 +1,4 @@
+- - id: variable
+    dependsUpon: calledFirst
+- - id: variable
+    dependsUpon: calledSecond
