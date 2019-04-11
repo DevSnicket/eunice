@@ -1,4 +1,4 @@
-const createWhenRequire = require("./createAndAddDeclarations/createWhenRequire");
+const createWhenRequire = require("./createWhenRequire");
 
 module.exports =
 	({
