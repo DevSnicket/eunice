@@ -12,7 +12,7 @@ module.exports =
 		walk.ancestor(
 			parse(
 				removeUnixShebangForNode(javaScript),
-				{ ecmaVersion: 9 },
+				{ ecmaVersion: 9, sourceType: "module" },
 			),
 			visitors,
 		);
@@ -28,7 +28,12 @@ function removeUnixShebangForNode(
 	return (
 		javascript.startsWith(shebang)
 		?
-		javascript.substring(shebang.length)
+		javascript.substring(
+			Math.max(
+				shebang.length,
+				javascript.indexOf("\n"),
+			),
+		)
 		:
 		javascript
 	);

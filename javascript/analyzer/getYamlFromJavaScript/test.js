@@ -12,9 +12,14 @@ runTestsFromFileSystem({
 	processArguments: process.argv,
 });
 
-test(
-	"unix shebang for node",
-	() =>
-		expect(getYamlFromJavaScript("#!/usr/bin/env node"))
+test.each(
+	[
+		"",
+		" --parameter=argument",
+	],
+)(
+	"unix shebang for node with suffix \"%s\"",
+	suffix =>
+		expect(getYamlFromJavaScript(`#!/usr/bin/env node${suffix}`))
 		.toEqual(""),
 );
