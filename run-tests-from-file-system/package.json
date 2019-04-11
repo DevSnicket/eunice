@@ -39,6 +39,7 @@
 		"url": "https://github.com/DevSnicket/eunice-run-tests-from-file-system.git"
 	},
 	"scripts": {
+		"all": "npm run spellcheck && npm run lint",
 		"lint": "npx eslint .",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./dist/**/*\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +"
 	},
