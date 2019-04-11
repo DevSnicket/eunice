@@ -53,6 +53,7 @@
 						"getYamlFromJavaScript/test.js"
 					],
 				"cwd": "${workspaceFolder}/",
+				"disableOptimisticBPs": true,
 				"localRoot": "${workspaceFolder}",
 				"name": "getYamlFromJavaScript jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
@@ -83,6 +84,7 @@
 						"getOrCreateItemsInDirectory/test.js"
 					],
 				"cwd": "${workspaceFolder}/",
+				"disableOptimisticBPs": true,
 				"localRoot": "${workspaceFolder}",
 				"name": "getOrCreateItemsInDirectory jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
