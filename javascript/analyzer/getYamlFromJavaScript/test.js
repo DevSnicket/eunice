@@ -20,6 +20,6 @@ test.each(
 )(
 	"unix shebang for node with suffix \"%s\"",
 	suffix =>
-		expect(getYamlFromJavaScript(`#!/usr/bin/env node${suffix}`))
+		expect(getYamlFromJavaScript(`#!/usr/bin/env node${suffix}\n`))
 		.toEqual(""),
 );
