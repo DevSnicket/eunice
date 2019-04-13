@@ -15,6 +15,7 @@
 						"getSvgForYaml/test.js"
 					],
 				"cwd": "${workspaceFolder}/",
+				"disableOptimisticBPs": true,
 				"localRoot": "${workspaceFolder}",
 				"name": "getSvgForYaml jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
@@ -24,10 +25,10 @@
 			},
 			{
 				"args":
-					[
-						"--subsetIdentifierHierarchy=",
-						"--yaml="
-					],
+				[
+					"--subsetIdentifierHierarchy=",
+					"--yaml="
+				],
 				"cwd": "${workspaceFolder}/",
 				"localRoot": "${workspaceFolder}",
 				"name": "getSvgForYaml",
@@ -55,6 +56,7 @@
 						"getSvgForYaml/withElementContainer/forDependencyCount/test.js"
 					],
 				"cwd": "${workspaceFolder}/",
+				"disableOptimisticBPs": true,
 				"localRoot": "${workspaceFolder}",
 				"name": "getSvgForYaml with group container for dependency count jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
@@ -86,6 +88,7 @@
 						"getSvgForYaml/withSubset.test.js"
 					],
 				"cwd": "${workspaceFolder}/",
+				"disableOptimisticBPs": true,
 				"localRoot": "${workspaceFolder}",
 				"name": "getSvgForYaml with subset jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
