@@ -19,6 +19,7 @@
 				"localRoot": "${workspaceFolder}",
 				"name": "getSvgForYaml jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
 				"type": "node",
 				"useWSL": true
