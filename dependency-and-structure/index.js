@@ -1,6 +1,7 @@
 const
 	createStackFromYaml = require("./createStackFromYaml"),
 	createYamlFromStack = require("./createYamlFromStack"),
+	findDirectionBetweenItemsInFirstMutualStack = require("./findDirectionBetweenItemsInFirstMutualStack"),
 	findItemInStackWithIdentifierHierarchy = require("./findItemInStackWithIdentifierHierarchy"),
 	isInnerStack = require("./isInnerStack");
 
@@ -8,6 +9,7 @@ module.exports =
 	{
 		createStackFromYaml,
 		createYamlFromStack,
+		findDirectionBetweenItemsInFirstMutualStack,
 		findItemInStackWithIdentifierHierarchy,
 		isInnerStack,
 	};

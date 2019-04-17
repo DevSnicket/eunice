@@ -41,6 +41,21 @@
 				"args":
 					[
 						"--runInBand",
+						"findDirectionBetweenItemsInFirstMutualStack/test.js"
+					],
+				"disableOptimisticBPs": true,
+				"localRoot": "${workspaceFolder}",
+				"name": "findDirectionBetweenItemsInFirstMutualStack jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
+				"request": "launch",
+				"type": "node",
+				"useWSL": true
+			},
+			{
+				"args":
+					[
+						"--runInBand",
 						"findItemInStackWithIdentifierHierarchy/test.js"
 					],
 				"disableOptimisticBPs": true,
