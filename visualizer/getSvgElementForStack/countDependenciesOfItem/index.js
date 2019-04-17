@@ -1,6 +1,4 @@
-const
-	findDirectionBetweenItemsInFirstMutualStack = require("./findDirectionBetweenItemsInFirstMutualStack"),
-	{ isInnerStack } = require("@devsnicket/eunice-dependency-and-structure");
+const { findDirectionBetweenItemsInFirstMutualStack, isInnerStack } = require("@devsnicket/eunice-dependency-and-structure");
 
 module.exports =
 	({
@@ -149,9 +147,9 @@ function getCountFromDirection(
 ) {
 	return (
 		{
-			above: Number(direction < 0),
-			below: Number(direction > 0),
-			same: Number(direction === 0),
+			above: Number(direction === "above"),
+			below: Number(direction === "below"),
+			same: Number(direction === "same"),
 		}
 	);
 }
