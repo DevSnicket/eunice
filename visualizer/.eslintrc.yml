@@ -98,6 +98,7 @@ rules:
     - tab
     - ignoredNodes: [ ConditionalExpression ]
       MemberExpression: 0
+      SwitchCase: 1
   init-declarations:
     - error
   key-spacing:
