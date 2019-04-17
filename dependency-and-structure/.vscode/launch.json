@@ -56,11 +56,11 @@
 				"args":
 					[
 						"--runInBand",
-						"isDescendantStack/test.js"
+						"isInnerStack/test.js"
 					],
 				"disableOptimisticBPs": true,
 				"localRoot": "${workspaceFolder}",
-				"name": "isDescendantStack jest",
+				"name": "isInnerStack jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
