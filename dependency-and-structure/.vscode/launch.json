@@ -28,6 +28,7 @@
 						"--runInBand", 
 						"createYamlFromStack/test.js"
 					],
+				"disableOptimisticBPs": true,
 				"localRoot": "${workspaceFolder}",
 				"name": "createYamlFromStack jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
@@ -42,6 +43,7 @@
 						"--runInBand",
 						"findItemInStackWithIdentifierHierarchy/test.js"
 					],
+				"disableOptimisticBPs": true,
 				"localRoot": "${workspaceFolder}",
 				"name": "findItemInStackWithIdentifierHierarchy jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
@@ -56,6 +58,7 @@
 						"--runInBand",
 						"isDescendantStack/test.js"
 					],
+				"disableOptimisticBPs": true,
 				"localRoot": "${workspaceFolder}",
 				"name": "isDescendantStack jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
