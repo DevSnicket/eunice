@@ -1,17 +1,33 @@
+/**
+ * @typedef {import("./formatAncestorIdentifiersOfStackForError").Stack} StackForError
+ *
+ * @typedef {Level[] & StackForError} Stack
+ *
+ * @typedef Item
+ * @property {String} [id]
+ * @property {Stack} [items]
+ * @property {Level} level
+ *
+ * @typedef HasStack
+ * @property {Stack} stack
+ *
+ * @typedef {Item[] & HasStack} Level
+ */
 const formatAncestorIdentifiersOfStackForError = require("./formatAncestorIdentifiersOfStackForError");
 
 module.exports =
 	/**
 	 * @param {Object} parameter
 	 * @param {String[]} parameter.identifierHierarchy
-	 * @param {import("../index").Stack} parameter.stack
-	 * @returns {import("../index").Item}
+	 * @param {Stack} parameter.stack
+	 * @returns {Item}
 	 */
 	({
 		identifierHierarchy,
 		stack,
 	}) =>
 		identifierHierarchy.reduce(
+			/** @param {Item} item */
 			(
 				item,
 				identifier,
@@ -28,6 +44,7 @@ module.exports =
 			null,
 		);
 
+/** @param {Item} item */
 function getItemsOfOrThrowError(
 	item,
 ) {
@@ -37,12 +54,19 @@ function getItemsOfOrThrowError(
 		throw new Error(`Item with identifier "${item.id}" found${formatAncestorIdentifiersOfStackForError(item.level.stack)} has no child items.`);
 }
 
+/**
+ * @param {Object} parameter
+ * @param {String} parameter.identifier
+ * @param {Stack} parameter.stack
+ * @returns {Item}
+ */
 function findItemWithIdentifierOrThrowError({
 	identifier,
 	stack,
 }) {
 	const itemWithIdentifier =
 		stack.reduce(
+			/** @param {Item} foundItem */
 			(
 				foundItem,
 				level,

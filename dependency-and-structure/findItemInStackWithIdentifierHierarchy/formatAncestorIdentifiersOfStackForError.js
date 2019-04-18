@@ -1,9 +1,23 @@
+/**
+ * @typedef Stack
+ * @property {Item} parent
+ *
+ * @typedef Item
+ * @property {String} [id]
+ * @property {Level} level
+ *
+ * @typedef Level
+ * @property {Stack} stack
+ */
+
 module.exports =
+	/** @param {Stack} stack */
 	stack =>
 		ofItemWhenHasValue(stack.parent)
 		||
 		"";
 
+/** @param {Item} item */
 function ofItemWhenHasValue(
 	item,
 ) {
@@ -24,6 +38,10 @@ function ofItemWhenHasValue(
 	}
 }
 
+/**
+ * @param {Item} item
+ * @returns {IterableIterator<String>}
+ */
 function * getIdentifiersOfItemAndAncestors(
 	item,
 ) {
@@ -34,6 +52,8 @@ function * getIdentifiersOfItemAndAncestors(
 			yield ancestor;
 }
 
+
+/** @param {IterableIterator<String>} identifiers */
 function joinIdentifiers(
 	identifiers,
 ) {
