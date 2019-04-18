@@ -15,8 +15,10 @@ module.exports =
 	};
 
 /**
-  * @typedef {Level[]} Stack
-  * @property {Item} [parent]
+  * @typedef HasParentItem
+  * @property {Item} parent
+  *
+  * @typedef {Level[] & HasParentItem} Stack
   *
   * @typedef Item
   * @property {(DependUpon|DependUponMissingItem|DependUponMissingParent)[]} [dependsUpon]
@@ -25,8 +27,10 @@ module.exports =
   * @property {Stack} [items]
   * @property {Level} level
   *
-  * @typedef {Item[]} Level
+  * @typedef HasStack
   * @property {Stack} stack
+  *
+  * @typedef {Item[] & HasStack} Level
   *
   * @typedef DependUpon
   * @property {Item} item
