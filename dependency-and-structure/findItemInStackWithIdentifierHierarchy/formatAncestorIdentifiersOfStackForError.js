@@ -38,10 +38,7 @@ function ofItemWhenHasValue(
 	}
 }
 
-/**
- * @param {Item} item
- * @returns {IterableIterator<String>}
- */
+/** @param {Item} item */
 function * getIdentifiersOfItemAndAncestors(
 	item,
 ) {
@@ -52,8 +49,6 @@ function * getIdentifiersOfItemAndAncestors(
 			yield ancestor;
 }
 
-
-/** @param {IterableIterator<String>} identifiers */
 function joinIdentifiers(
 	identifiers,
 ) {
