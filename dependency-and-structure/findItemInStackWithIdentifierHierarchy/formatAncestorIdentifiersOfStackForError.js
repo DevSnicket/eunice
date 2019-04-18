@@ -1,6 +1,6 @@
 /**
  * @typedef Stack
- * @property {Item} parent
+ * @property {Item} [parent]
  *
  * @typedef Item
  * @property {String} [id]

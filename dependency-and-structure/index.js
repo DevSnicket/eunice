@@ -15,10 +15,10 @@ module.exports =
 	};
 
 /**
-  * @typedef HasParentItem
-  * @property {Item} parent
+  * @typedef HasOptionalParentItem
+  * @property {Item} [parent]
   *
-  * @typedef {Level[] & HasParentItem} Stack
+  * @typedef {Level[] & HasOptionalParentItem} Stack
   *
   * @typedef Item
   * @property {(DependUpon|DependUponMissingItem|DependUponMissingParent)[]} [dependsUpon]
