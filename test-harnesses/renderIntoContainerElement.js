@@ -15,7 +15,7 @@ module.exports =
 	 * @typedef Stateful
 	 * @property {State} state
 	 * @property {setState} setState
-	 * 
+	 *
 	 * @callback setState
 	 * @param {State} state
 	 */
