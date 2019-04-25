@@ -2,21 +2,26 @@ const
 	{ createElement } = require("react"),
 	{
 		ReflexContainer,
+		ReflexElement,
 		ReflexSplitter,
 	} = require("react-reflex");
 
 module.exports =
-	columns =>
+	elements =>
 		createElement(
 			ReflexContainer,
 			{ orientation: "vertical" },
-			columns
+			elements
 			.reduce(
-				(elements, column) =>
+				(columns, column, index) =>
 					[
-						...elements,
-						elements.length ? createSplitterWithIndex(elements.length - 1) : null,
-						column,
+						...columns,
+						index.length ? createSplitterWithIndex(index) : null,
+						createElement(
+							ReflexElement,
+							null,
+							column,
+						),
 					],
 				[],
 			),

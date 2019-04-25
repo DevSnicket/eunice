@@ -5,19 +5,22 @@ body,
 	margin: 0;
 }
 
-div.column {
+div.fill-with-title {
 	display: flex;
 	bottom: 0;
 	flex-direction: column;
 	left: 0;
-	margin: 0.5em;
+	padding: 0.5em;
 	position: absolute;
 	right: 0;
 	top: 0;
 }
 
-textarea {
+div.fill-with-title :nth-child(2) {
 	flex: 1;
+}
+
+div.fill-with-title textarea:nth-child(2) {
 	resize: none;
 }
 
