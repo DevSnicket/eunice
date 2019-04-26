@@ -16,7 +16,7 @@ module.exports =
 				(columns, column, index) =>
 					[
 						...columns,
-						index.length ? createSplitterWithIndex(index) : null,
+						index > 0 ? createSplitterWithIndex(index - 1) : null,
 						createElement(
 							ReflexElement,
 							null,
