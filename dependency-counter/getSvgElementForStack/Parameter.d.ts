@@ -10,6 +10,6 @@ interface Parameter {
 	getTextWidth
 	namespaces?: Namespaces
 	stack: Stack
-	style?: String
-	subsetIdentifierHierarchy?: String[]
+	style?: string
+	subsetIdentifierHierarchy?: string[]
 }
