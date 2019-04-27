@@ -7,7 +7,7 @@ const
 	{ renderToStaticMarkup } = require("react-dom/server");
 
 module.exports =
-	(/** @type {import("./Parameter")} */{
+	(/** @type {import("./Parameter.d")} */{
 		yaml,
 		...restOfParameters
 	}) =>
