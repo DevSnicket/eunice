@@ -1,4 +1,4 @@
-import ElementContainerFactory from "./createStackWithSummaryGroupFactory/ElementContainerFactory";
+import ElementContainerFactory from "../getSvgElementForStack/createStackWithSummaryGroupFactory/ElementContainerFactory";
 import { Stack } from "@devsnicket/eunice-dependency-and-structure";
 
 export = Parameter
