@@ -10,7 +10,7 @@ const
 	getDependencyCountInBothDirections = require("../getDependencyCountInBothDirections");
 
 module.exports =
-	({
+	(/** @type {import("./Parameter")} */{
 		arrows,
 		createTextGroup,
 		elementContainerFactory,
