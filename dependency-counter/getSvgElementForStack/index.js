@@ -7,7 +7,7 @@ const
 	withPrecision = require("./withPrecision");
 
 module.exports =
-	(/** @type {import("./Parameter")} */{
+	(/** @type {import("./Parameter.d")} */{
 		createElement,
 		elementContainerFactory = null,
 		getTextWidth,
