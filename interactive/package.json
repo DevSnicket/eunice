@@ -29,6 +29,7 @@
 	},
 	"license": "MIT",
 	"scripts": {
+		"all": "npm run spellcheck && npm run lint && npm run test && npm run build",
 		"build": "npx webpack --config webpack.config.js -p",
 		"lint": "npx eslint .",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./output/**\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell --config ../../cspell.json {} +",
