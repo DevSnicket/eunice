@@ -26,16 +26,33 @@ function getWithKeysAndValues({
 	urlSearchParams,
 }) {
 	for (const { key, value } of keysAndValues)
-		urlSearchParams.set(
+		setWhenHasValueOrDelete({
 			key,
+			urlSearchParams,
 			value,
-		);
+		});
 
 	return (
 		addHashPrefix(
 			urlSearchParams.toString(),
 		)
 	);
+}
+
+function setWhenHasValueOrDelete({
+	key,
+	urlSearchParams,
+	value,
+}) {
+	if (value)
+		urlSearchParams.set(
+			key,
+			value,
+		);
+	else
+		urlSearchParams.delete(
+			key,
+		);
 }
 
 function addHashPrefix(

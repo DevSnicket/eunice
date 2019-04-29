@@ -1,18 +1,30 @@
 const
-	createYamlAndSvgResizableColumns = require("./createYamlAndSvgResizableColumns"),
-	{ renderHarness } = require("@devsnicket/eunice-test-harnesses");
+	{ createElement } = require("react"),
+	createYamlInputElement = require("./createYamlInputElement"),
+	createYamlOutputElement = require("./createYamlOutputElement"),
+	{
+		createReflexContainerForColumnElements,
+		renderIntoContainerElement,
+	} = require("@devsnicket/eunice-test-harnesses");
 
-renderHarness({
-	createColumns:
-		({
-			columnFactory,
-			stateful,
-		}) =>
-			createYamlAndSvgResizableColumns({
-				columnFactory,
-				stateful,
-			}),
-	// yamlFromWebpack is replaced with literal by harness/webpack.config.js
-	// eslint-disable-next-line no-undef
-	initialState: { yaml: yamlFromWebpack },
+renderIntoContainerElement({
+	initialState:
+		// yamlFromWebpack is replaced with literal by harness/webpack.config.js
+		// eslint-disable-next-line no-undef
+		{ yaml: yamlFromWebpack },
+	renderStateful:
+		stateful =>
+			createReflexContainerForColumnElements(
+				[
+					createYamlInputElement({
+						createElement,
+						stateful,
+					}),
+					createYamlOutputElement({
+						createElement,
+						location,
+						state: stateful.state,
+					}),
+				],
+			),
 });

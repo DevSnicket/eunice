@@ -1,6 +1,7 @@
 module.exports =
 	({
 		createElement,
+		getHrefWithIdentifierHierarchy,
 		subsetIdentifierHierarchy,
 	}) => {
 		return (
@@ -48,8 +49,8 @@ module.exports =
 								href: "#",
 							}),
 						],
-					hrefBase:
-						"#",
+					identifierHierarchy:
+						[],
 				}
 			);
 		}
@@ -58,7 +59,11 @@ module.exports =
 			aggregation,
 			identifier,
 		}) {
-			const href = aggregation.hrefBase + encodeURIComponent(identifier);
+			const identifierHierarchy =
+				[
+					...aggregation.identifierHierarchy,
+					identifier,
+				];
 
 			return (
 				{
@@ -70,21 +75,31 @@ module.exports =
 								identifier
 								?
 								{
+									...getHrefProperty(),
 									content: identifier,
-									href,
 								}
 								:
 								{
+									...getHrefProperty(),
 									content: "anonymous",
-									href,
 									style: { fontStyle: "italic" },
 								},
 							),
 						],
-					hrefBase:
-						`${href}/`,
+					identifierHierarchy,
 				}
 			);
+
+			function getHrefProperty() {
+				return (
+					{
+						href:
+							getHrefWithIdentifierHierarchy(
+								identifierHierarchy,
+							),
+					}
+				);
+			}
 		}
 
 		function createAnchor({

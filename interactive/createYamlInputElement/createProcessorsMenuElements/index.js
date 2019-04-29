@@ -7,7 +7,7 @@ module.exports =
 		setProcessors,
 	}) => {
 		return (
-			createMenuElementsWithItemElements({
+			createMenuElements({
 				createElement,
 				itemElements: createMenuItemElements(),
 			})
@@ -55,7 +55,7 @@ function getAndCreateProcessorsWithState({
 	);
 }
 
-function createMenuElementsWithItemElements({
+function createMenuElements({
 	createElement,
 	itemElements,
 }) {

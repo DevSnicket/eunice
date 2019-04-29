@@ -1,16 +1,24 @@
 const
 	createProcessorsMenuElements = require("./createProcessorsMenuElements"),
-	processorPlugins = require("@devsnicket/eunice-test-harnesses-processor-plugins");
+	processorPlugins = require("@devsnicket/eunice-test-harnesses-processor-plugins"),
+	{
+		createFillWithTitleElement,
+		createTextareaElement,
+	} = require("@devsnicket/eunice-test-harnesses");
 
 module.exports =
 	({
 		createElement,
-		createResizableColumnForInput,
 		stateful,
 	}) =>
-		createResizableColumnForInput({
-			createStateFromValue:
-				value => ({ yaml: value }),
+		createFillWithTitleElement({
+			content:
+				createTextareaElement({
+					setStateFromValue:
+						value => stateful.setState({ yaml: value }),
+					value:
+						stateful.state.yaml,
+				}),
 			title:
 				createTitleElement({
 					createElement,
@@ -23,8 +31,6 @@ module.exports =
 								processors => stateful.setState({ processors }),
 						}),
 				}),
-			value:
-				stateful.state.yaml,
 		});
 
 function createTitleElement({
