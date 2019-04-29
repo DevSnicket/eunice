@@ -1,0 +1,68 @@
+.dependency-list {
+	margin: 0.5em;
+}
+
+.dependency-list ul {
+	list-style: none;
+	margin: 0;
+}
+
+.dependency-list ul.child-items {
+	border-left: 2px solid darkgray;
+	margin-left: 1ch;
+	padding-left: 1ch;
+}
+
+.dependency-list ul.item-dependencies {
+	padding-left: 1ch;
+}
+
+.dependency-list ul.item-dependencies > li:before {
+	padding-right: 1ch;
+}
+
+.dependency-list.dependents ul.item-dependencies > li:before {
+	content: "<";
+}
+
+.dependency-list.dependsUpon ul.item-dependencies > li:before {
+	content: ">";
+}
+
+input.popup.menu {
+	display: none;
+	visibility: hidden;
+}
+
+input.popup.menu,
+label.popup.menu {
+	cursor: pointer;
+}
+
+input.popup.menu + label::after {
+	content: "\25BC";
+}
+
+input.popup.menu:checked + label::after {
+	content: "\25B2";
+}
+
+input.popup.menu:checked ~ ul.popup.menu,
+label.popup.menu:hover ~ ul.popup.menu,
+ul.popup.menu:hover {
+	display: block;
+	visibility: visible;
+}
+
+ul.popup.menu {
+	background-color: menu;
+	display: none;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	visibility: hidden;
+}
+
+ul.popup.menu li {
+	padding: 4px;
+}

@@ -1,0 +1,45 @@
+html,
+body,
+#container {
+	height: 100%;
+	margin: 0;
+}
+
+div.fill-with-title {
+	display: flex;
+	bottom: 0;
+	flex-direction: column;
+	left: 0;
+	padding: 0.5em;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+div.fill-with-title :nth-child(2) {
+	flex: 1;
+}
+
+div.fill-with-title textarea:nth-child(2) {
+	resize: none;
+}
+
+.reflex-layout > .reflex-splitter {
+	user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+}
+
+.reflex-layout.horizontal > .reflex-splitter {
+	height: 1em;
+	line-height: 0.2em;
+	text-align: center;
+}
+
+.reflex-layout.vertical > .reflex-splitter {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	width: 1em;
+}
