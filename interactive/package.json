@@ -28,8 +28,9 @@
 	},
 	"license": "MIT",
 	"scripts": {
-		"build": "npx webpack -p --config webpack.config.js",
+		"build": "npx webpack --config webpack.config.js -p",
 		"lint": "npx eslint .",
-		"test": "npx jest"
+		"test": "npx jest",
+		"watch": "npx webpack --config webpack.config.js -d --watch"
 	}
 }
