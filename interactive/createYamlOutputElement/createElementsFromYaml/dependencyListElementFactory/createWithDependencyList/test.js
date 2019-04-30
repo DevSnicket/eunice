@@ -12,15 +12,24 @@ const
 
 test(
 	"subset of item that depends upon item in same level returns element and dependency list in Reflex resize",
-	() =>
+	() => {
+		const itemIdentifier = "item";
+
 		testDependsUponInSameLevel({
-			createItemsWrapper:
-				items => items,
 			identifier:
-				"item",
+				itemIdentifier,
+			items:
+				[
+					{
+						dependsUpon: dependsUponIdentifier,
+						id: itemIdentifier,
+					},
+					{ id: dependsUponIdentifier },
+				],
 			subsetIdentifierHierarchy:
 				null,
-		}),
+		});
+	},
 );
 
 test(
@@ -31,17 +40,23 @@ test(
 			parentIdentifier = "parent";
 
 		testDependsUponInSameLevel({
-			createItemsWrapper:
-				items =>
-					[
-						{
-							id:
-								parentIdentifier,
-							items,
-						},
-					],
 			identifier:
 				childIdentifier,
+			items:
+				[
+					{
+						id:
+							parentIdentifier,
+						items:
+							[
+								{
+									dependsUpon: dependsUponIdentifier,
+									id: childIdentifier,
+								},
+							],
+					},
+					{ id: dependsUponIdentifier },
+				],
 			subsetIdentifierHierarchy:
 				[ parentIdentifier ],
 		});
@@ -49,8 +64,8 @@ test(
 );
 
 function testDependsUponInSameLevel({
-	createItemsWrapper,
 	identifier,
+	items,
 	subsetIdentifierHierarchy,
 }) {
 	expect(
@@ -73,15 +88,7 @@ function testDependsUponInSameLevel({
 					},
 				stack:
 					createStackFromYaml(
-						createItemsWrapper(
-							[
-								{
-									dependsUpon: dependsUponIdentifier,
-									id: identifier,
-								},
-								{ id: dependsUponIdentifier },
-							],
-						),
+						items,
 					),
 				subsetIdentifierHierarchy,
 			}),

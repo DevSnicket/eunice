@@ -1,3 +1,5 @@
+const formatDependency = require("./formatDependency");
+
 module.exports =
 	({
 		createElement,
@@ -56,7 +58,7 @@ function withCreateElement(
 						createElement(
 							"li",
 							{ key: dependency.id },
-							dependency.id,
+							formatDependency(dependency),
 						),
 				),
 			)

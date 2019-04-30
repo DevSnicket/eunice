@@ -15,30 +15,54 @@ test(
 					relationship:
 						"dependsUpon",
 					subset:
-						{
-							item:
-								{ id: "item 1" },
+						createSubset({
+							identifier:
+								"item 1",
 							items:
 								[
-									{
+									createSubset({
 										dependencies:
-											[ { id: "dependency 1" } ],
-										item:
-											{ id: "child 1" },
-									},
-									{
+											[ createItem({ identifier: "dependency 1" }) ],
+										identifier:
+											"child 1",
+									}),
+									createSubset({
 										dependencies:
 											[
-												{ id: "dependency 2" },
-												{ id: "dependency 3" },
+												createItem({
+													identifier:
+														"dependency 2",
+													parent:
+														createItem({ identifier: "parent of dependency 2" }),
+												}),
 											],
-										item:
-											{ id: "child 2" },
+										identifier:
+											"child 2",
+									}),
+									createSubset({
+										dependencies:
+											[
+												createItem({
+													identifier: "dependency 3",
+													parent: createItem({}),
+												}),
+											],
+										identifier:
+											"child 3",
+									}),
+									createSubset({
+										dependencies:
+											[
+												createItem({ identifier: "dependency 4" }),
+												createItem({ identifier: "dependency 5" }),
+											],
+										identifier:
+											"child 4",
 										items:
 											[ { item: { id: "grandchild" } } ],
-									},
+									}),
 								],
-						},
+						}),
 				}),
 			),
 		)
@@ -51,6 +75,32 @@ test(
 			.replace(/\n|\t/g, ""),
 		),
 );
+
+function createSubset({
+	dependencies = null,
+	identifier,
+	items = null,
+}) {
+	return (
+		{
+			dependencies,
+			item: { id: identifier },
+			items,
+		}
+	);
+}
+
+function createItem({
+	identifier = null,
+	parent = null,
+}) {
+	return (
+		{
+			id: identifier,
+			level: { stack: { parent } },
+		}
+	);
+}
 
 function getBodyTagContents(
 	html,
