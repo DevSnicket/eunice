@@ -70,7 +70,7 @@ module.exports =
 					elements:
 						[
 							...aggregation.elements,
-							" > ",
+							": ",
 							createAnchor(
 								identifier
 								?
