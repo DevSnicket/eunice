@@ -1,6 +1,7 @@
 const
 	{ createStackFromYaml } = require("@devsnicket/eunice-dependency-and-structure"),
 	createSubsetSelection = require("./createSubsetSelection"),
+	dependencyListElementFactory = require("./dependencyListElementFactory"),
 	{ getSvgElementForStack } = require("@devsnicket/eunice-renderer"),
 	getTextWidth = require("string-pixel-width"),
 	locationHashOfKeyValue = require("./locationHashOfKeyValue"),
@@ -10,6 +11,7 @@ module.exports =
 	({
 		createElement,
 		locationHash,
+		resizableElementTypes,
 		yaml,
 	}) => {
 		const
@@ -20,11 +22,38 @@ module.exports =
 			subsetSelection =
 				createSubsetSelection({
 					createElement,
-					getHrefWithKeysAndValues,
+					getHrefWithKeysAndValues:
+						keysAndValues =>
+							getHrefKeysAndValues(
+								dependencyListElementFactory.clearFromKeysAndValues(
+									keysAndValues,
+								),
+							),
 					getValueOfKey,
 				});
 
-		return createBreadcrumbAndSvgElement();
+		return (
+			createWithDependencyList(
+				createBreadcrumbAndSvgElement(),
+			)
+		);
+
+		function createWithDependencyList(
+			element,
+		) {
+			return (
+				dependencyListElementFactory.createWithDependencyList({
+					createElement,
+					element,
+					getValueOfKey,
+					resizableElementTypes,
+					stack,
+					subsetIdentifierHierarchy:
+						subsetSelection.identifierHierarchy,
+				})
+
+			);
+		}
 
 		function getValueOfKey(
 			key,
@@ -61,7 +90,30 @@ module.exports =
 		}
 
 		function createElementContainerFactory() {
-			return { createForItem: createElementContainerForItem };
+			return (
+				{
+					createForDependencyCount: createElementContainerForDependencyCount,
+					createForItem: createElementContainerForItem,
+				}
+			);
+
+			function createElementContainerForDependencyCount({
+				element,
+				item,
+				level,
+				relationship,
+			}) {
+				return (
+					dependencyListElementFactory.createForDependencyCount({
+						createElement,
+						element,
+						getHrefKeysAndValues,
+						identifier: item.id,
+						level,
+						relationship,
+					})
+				);
+			}
 
 			function createElementContainerForItem({
 				element,
@@ -76,7 +128,7 @@ module.exports =
 			}
 		}
 
-		function getHrefWithKeysAndValues(
+		function getHrefKeysAndValues(
 			keysAndValues,
 		) {
 			return (

@@ -7,6 +7,7 @@ module.exports =
 	({
 		createElement,
 		location,
+		resizableElementTypes,
 		state,
 	}) =>
 		callOrInProductionCreateElementOnError({
@@ -15,6 +16,7 @@ module.exports =
 					createElementsFromYaml({
 						createElement,
 						locationHash: location.hash,
+						resizableElementTypes,
 						yaml: getProcessedYamlFromState(state),
 					}),
 			createElement,

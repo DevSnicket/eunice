@@ -29,6 +29,20 @@
 		"webpack": "4.27.1",
 		"webpack-cli": "3.1.2"
 	},
+	"jest": {
+		"collectCoverage": true,
+		"collectCoverageFrom": [
+			"createYamlOutputElement/createElementsFromYaml/**/*.js"
+		],
+		"coverageDirectory": "test-coverage",
+		"coverageThreshold": {
+			"global": {
+				"branches": 100,
+				"functions": 100,
+				"lines": 100
+			}
+		}
+	},
 	"license": "MIT",
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run test && npm run build",

@@ -132,6 +132,65 @@ describe(
 	},
 );
 
+describe(
+	"dependency counts",
+	() =>
+		test.each(
+			[
+				[
+					"first depends upon second",
+					{
+						expectedSvgFile:
+							"first depends upon second",
+						yaml:
+							"[{ id: first, dependsUpon: second }, second ]",
+					},
+				],
+				[
+					"second depends upon first",
+					{
+						expectedSvgFile:
+							"second depends upon first",
+						yaml:
+							"[ first, { id: second, dependsUpon: first } ]",
+					},
+				],
+				[
+					"upper depends upon lower",
+					{
+						expectedSvgFile:
+							"upper depends upon lower",
+						yaml:
+							"[ [ { id: upper, dependsUpon: lower } ], [ lower ] ]",
+					},
+				],
+				[
+					"lower depends upon upper",
+					{
+						expectedSvgFile:
+							"lower depends upon upper",
+						yaml:
+							"[ [ upper ], [ { id: lower, dependsUpon: upper } ] ]",
+					},
+				],
+			],
+		)(
+			"%s",
+			(
+				description,
+				{
+					expectedSvgFile,
+					yaml,
+				},
+			) =>
+				testTestCase({
+					expectedFile:
+						path.join("dependencyCounts", `${expectedSvgFile}.svg`),
+					yaml,
+				}),
+		),
+);
+
 function testTestCase({
 	expectedFile,
 	expectedHtmlPrefix = "",

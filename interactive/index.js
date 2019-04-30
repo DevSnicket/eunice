@@ -5,7 +5,12 @@ const
 	{
 		createReflexContainerForColumnElements,
 		renderIntoContainerElement,
-	} = require("@devsnicket/eunice-test-harnesses");
+	} = require("@devsnicket/eunice-test-harnesses"),
+	{
+		ReflexContainer,
+		ReflexElement,
+		ReflexSplitter,
+	} = require("react-reflex");
 
 renderIntoContainerElement({
 	initialState:
@@ -23,7 +28,14 @@ renderIntoContainerElement({
 					createYamlOutputElement({
 						createElement,
 						location,
-						state: stateful.state,
+						resizableElementTypes:
+							{
+								container: ReflexContainer,
+								element: ReflexElement,
+								splitter: ReflexSplitter,
+							},
+						state:
+							stateful.state,
 					}),
 				],
 			),
