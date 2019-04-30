@@ -109,6 +109,7 @@ npx eunice-javascript-analyzer-getOrCreateItemsInDirectory \
   --directory=$rootDirectory \
   --ignoreDirectoryNames=node_modules \
   --ignoreDirectoryNames=output \
+  --ignoreDirectoryNames=test-coverage \
 > repository/analysis.yaml
 
 removeIdentifierSuffix repository

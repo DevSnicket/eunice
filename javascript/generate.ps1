@@ -113,6 +113,7 @@ try
 		--directory=$rootDirectory `
 		--ignoreDirectoryNames=node_modules `
 		--ignoreDirectoryNames=output `
+		--ignoreDirectoryNames=test-coverage `
 	> repository/analysis.yaml
 
 	removeIdentifierSuffix repository
@@ -132,7 +133,9 @@ try
 			--ignoreDirectoryNames=.devsnicket-plugin-discovery `
 			--ignoreDirectoryNames=dist `
 			--ignoreDirectoryNames=node_modules `
+			--ignoreDirectoryNames=output `
 			--ignoreDirectoryNames=test-cases `
+			--ignoreDirectoryNames=test-coverage `
 		> $package/analysis.yaml
 
 		removeIdentifierSuffix $package
