@@ -18,7 +18,7 @@ function clearFromKeysAndValues(
 
 function getKeysAndNoValues() {
 	return (
-		Object.keys(keys)
+		Object.values(keys)
 		.map(key => ({ key }))
 	);
 }
