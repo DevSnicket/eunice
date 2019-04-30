@@ -77,7 +77,7 @@
 		"url": "https://github.com/DevSnicket/eunice-renderer.git"
 	},
 	"scripts": {
-		"all": "npm run spellcheck && npm run lint && npm run build && npm run test",
+		"all": "npm run spellcheck && npm run lint && npm run typescript && npm run build && npm run test",
 		"build": "rm -rf dist && npx babel -d dist --ignore dist/*,dist/**/*,node_modules/**/*,**/test/**,test-coverage/**,**/test.js --plugins transform-object-rest-spread -s true . && find -type f -name \"*.d.ts\" ! -path \"./dist/*\" ! -path \"./dist/**/*\" ! -path \"./node_modules/**/*\" -exec cp --parent {} dist \";\"",
 		"lint": "npx eslint .",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./dist/**/*\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
