@@ -3,7 +3,7 @@ const createSplitterContentWithCreateElement = require("./createSplitterContentW
 module.exports =
 	({
 		createElement,
-		elements,
+		elements: { upper, lower },
 		resizableElementTypes,
 	}) =>
 		createElement(
@@ -12,7 +12,7 @@ module.exports =
 			createElement(
 				resizableElementTypes.element,
 				null,
-				elements.upper,
+				upper,
 			),
 			createElement(
 				resizableElementTypes.splitter,
@@ -24,6 +24,6 @@ module.exports =
 			createElement(
 				resizableElementTypes.element,
 				null,
-				elements.lower,
+				lower,
 			),
 		);

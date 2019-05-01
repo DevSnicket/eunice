@@ -1,16 +1,22 @@
 const
 	{ createElement } = require("react"),
+	createHorizontalResize = require("./createHorizontalResize"),
 	createYamlInputElement = require("./createYamlInputElement"),
 	createYamlOutputElement = require("./createYamlOutputElement"),
-	{
-		createReflexContainerForColumnElements,
-		renderIntoContainerElement,
-	} = require("@devsnicket/eunice-test-harnesses"),
 	{
 		ReflexContainer,
 		ReflexElement,
 		ReflexSplitter,
-	} = require("react-reflex");
+	} = require("react-reflex"),
+	{ renderIntoContainerElement } = require("@devsnicket/eunice-test-harnesses");
+
+
+const resizableElementTypes =
+	{
+		container: ReflexContainer,
+		element: ReflexElement,
+		splitter: ReflexSplitter,
+	};
 
 renderIntoContainerElement({
 	initialState:
@@ -19,24 +25,24 @@ renderIntoContainerElement({
 		{ yaml: yamlFromWebpack },
 	renderStateful:
 		stateful =>
-			createReflexContainerForColumnElements(
-				[
-					createYamlInputElement({
-						createElement,
-						stateful,
-					}),
-					createYamlOutputElement({
-						createElement,
-						location,
-						resizableElementTypes:
-							{
-								container: ReflexContainer,
-								element: ReflexElement,
-								splitter: ReflexSplitter,
-							},
-						state:
-							stateful.state,
-					}),
-				],
-			),
+			createHorizontalResize({
+				createElement,
+				elements:
+					{
+						left:
+							createYamlInputElement({
+								createElement,
+								stateful,
+							}),
+						right:
+							createYamlOutputElement({
+								createElement,
+								location,
+								resizableElementTypes,
+								state:
+									stateful.state,
+							}),
+					},
+				resizableElementTypes,
+			}),
 });

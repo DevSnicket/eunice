@@ -1,7 +1,7 @@
 const
 	createListElement = require("./createListElement"),
 	createSubsetOfItem = require("./createSubsetOfItem"),
-	createWithVerticalResize = require("./createWithVerticalResize"),
+	createVerticalResize = require("./createVerticalResize"),
 	{
 		findDirectionBetweenItemsInFirstMutualStack,
 		findItemInStackWithIdentifierHierarchy,
@@ -30,7 +30,7 @@ module.exports =
 			return (
 				allParametersSpecified()
 				&&
-				createWithElementsInVerticalResize(
+				createVerticalResizeWithLowerElement(
 					createListElement({
 						createElement,
 						relationship,
@@ -78,13 +78,13 @@ module.exports =
 			);
 		}
 
-		function createWithElementsInVerticalResize(
+		function createVerticalResizeWithLowerElement(
 			lowerElement,
 		) {
 			return (
 				lowerElement
 				&&
-				createWithVerticalResize({
+				createVerticalResize({
 					createElement,
 					elements:
 						{

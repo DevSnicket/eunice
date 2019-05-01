@@ -1,5 +1,5 @@
 const
-	createWithVerticalResize = require("./"),
+	createVerticalResize = require("."),
 	{ createElement } = require("react"),
 	{ renderToStaticMarkup } = require("react-dom/server"),
 	path = require("path"),
@@ -10,7 +10,7 @@ test(
 	() =>
 		expect(
 			renderToStaticMarkup(
-				createWithVerticalResize({
+				createVerticalResize({
 					createElement,
 					elements:
 						{
