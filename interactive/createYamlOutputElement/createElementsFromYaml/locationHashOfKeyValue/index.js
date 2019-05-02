@@ -3,7 +3,10 @@ const createUrlSearchParamsFromLocationHash = require("./createUrlSearchParamsFr
 module.exports =
 	{
 		getValue:
-			({ key, locationHash }) =>
+			({
+				key,
+				locationHash,
+			}) =>
 				createUrlSearchParamsFromLocationHash(
 					locationHash,
 				)
@@ -11,7 +14,10 @@ module.exports =
 					key,
 				),
 		getWithKeysAndValues:
-			({ keysAndValues, locationHash }) =>
+			({
+				keysAndValues,
+				locationHash,
+			}) =>
 				getWithKeysAndValues({
 					keysAndValues,
 					urlSearchParams:
