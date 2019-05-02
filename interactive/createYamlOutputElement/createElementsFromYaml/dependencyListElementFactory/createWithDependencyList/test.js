@@ -11,24 +11,35 @@ const
 	element = "element";
 
 test(
-	"subset of item that depends upon item in same level returns element and dependency list in Reflex resize",
+	"item not in subset with no dependencies returns only element",
 	() => {
 		const itemIdentifier = "item";
 
-		testDependsUponInSameLevel({
-			identifier:
-				itemIdentifier,
-			items:
-				[
-					{
-						dependsUpon: dependsUponIdentifier,
-						id: itemIdentifier,
-					},
-					{ id: dependsUponIdentifier },
-				],
-			subsetIdentifierHierarchy:
-				null,
-		});
+		expect(
+			renderToStaticMarkup(
+				createWithDependencyList({
+					createAncestorSeparatorElement:
+						null,
+					createElement,
+					createIdentifierHierarchyAnchor:
+						null,
+					element,
+					identifier:
+						itemIdentifier,
+					level:
+						{},
+					relationship:
+						"dependsUpon",
+					resizableElementTypes:
+						null,
+					stack:
+						[ [ { id: itemIdentifier } ] ],
+					subsetIdentifierHierarchy:
+						null,
+				}),
+			),
+		)
+		.toBe(element);
 	},
 );
 
@@ -39,81 +50,56 @@ test(
 			childIdentifier = "item",
 			parentIdentifier = "parent";
 
-		testDependsUponInSameLevel({
-			identifier:
-				childIdentifier,
-			items:
-				[
-					{
-						id:
-							parentIdentifier,
-						items:
+		expect(
+			renderToStaticMarkup(
+				createWithDependencyList({
+					createAncestorSeparatorElement:
+						null,
+					createElement,
+					createIdentifierHierarchyAnchor:
+						identifierHierarchy => `[${identifierHierarchy}]`,
+					element,
+					identifier:
+						childIdentifier,
+					level:
+						"same",
+					relationship:
+						"dependsUpon",
+					resizableElementTypes:
+						{
+							/* cSpell:disable */
+							container: "resizablecontainer",
+							element: "resizableelement",
+							splitter: "resizablesplitter",
+							/* cSpell:enable */
+						},
+					stack:
+						createStackFromYaml(
 							[
 								{
-									dependsUpon: dependsUponIdentifier,
-									id: childIdentifier,
+									id:
+										parentIdentifier,
+									items:
+										[
+											{
+												dependsUpon: dependsUponIdentifier,
+												id: childIdentifier,
+											},
+										],
 								},
+								{ id: dependsUponIdentifier },
 							],
-					},
-					{ id: dependsUponIdentifier },
-				],
-			subsetIdentifierHierarchy:
-				[ parentIdentifier ],
-		});
+						),
+					subsetIdentifierHierarchy:
+						[ parentIdentifier ],
+				}),
+			),
+		)
+		.toBe(
+			readTestFile(
+				path.join(__dirname, "testCase.html"),
+			)
+			.replace(/\n|\t/g, ""),
+		);
 	},
 );
-
-function testDependsUponInSameLevel({
-	identifier,
-	items,
-	subsetIdentifierHierarchy,
-}) {
-	expect(
-		renderToStaticMarkup(
-			createWithDependencyList({
-				createAncestorSeparatorElement:
-					null,
-				createElement,
-				createItemAnchor,
-				element,
-				identifier,
-				level:
-					"same",
-				relationship:
-					"dependsUpon",
-				resizableElementTypes:
-					{
-						/* cSpell:disable */
-						container: "resizablecontainer",
-						element: "resizableelement",
-						splitter: "resizablesplitter",
-						/* cSpell:enable */
-					},
-				stack:
-					createStackFromYaml(
-						items,
-					),
-				subsetIdentifierHierarchy,
-			}),
-		),
-	)
-	.toBe(
-		readTestFile(
-			path.join(__dirname, "testCase.html"),
-		)
-		.replace(/\n|\t/g, ""),
-	);
-}
-
-function createItemAnchor({
-	identifier,
-	identifierHierarchy,
-}) {
-	return (
-		createElement(
-			"a",
-			{ href: identifierHierarchy },
-			identifier,
-		)
-	);
-}

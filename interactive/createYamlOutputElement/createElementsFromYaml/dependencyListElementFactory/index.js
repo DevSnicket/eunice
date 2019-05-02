@@ -33,7 +33,7 @@ module.exports =
 			({
 				createAncestorSeparatorElement,
 				createElement,
-				createItemAnchor,
+				createIdentifierHierarchyAnchor,
 				element,
 				getValueOfKey,
 				resizableElementTypes,
@@ -44,7 +44,7 @@ module.exports =
 					...keysAndValues.getObjectFromGetValueOfKey(getValueOfKey),
 					createAncestorSeparatorElement,
 					createElement,
-					createItemAnchor,
+					createIdentifierHierarchyAnchor,
 					element,
 					resizableElementTypes,
 					stack,

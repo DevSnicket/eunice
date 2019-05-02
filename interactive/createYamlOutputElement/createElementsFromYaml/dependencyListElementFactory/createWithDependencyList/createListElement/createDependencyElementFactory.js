@@ -1,7 +1,7 @@
 module.exports =
 	({
 		createAncestorSeparatorElement,
-		createItemAnchor,
+		createIdentifierHierarchyAnchor,
 	}) => {
 		return (
 			{
@@ -41,15 +41,12 @@ module.exports =
 						elements:
 							[
 								...elements,
-								createItemAnchor({
-									identifier:
+								createIdentifierHierarchyAnchor(
+									[
+										...identifierHierarchy,
 										item.id,
-									identifierHierarchy:
-										[
-											...identifierHierarchy,
-											item.id,
-										],
-								}),
+									],
+								),
 							],
 						identifierHierarchy,
 					}

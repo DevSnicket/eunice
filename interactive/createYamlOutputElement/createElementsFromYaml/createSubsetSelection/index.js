@@ -23,7 +23,7 @@ module.exports =
 						createBreadcrumbElement({
 							createAncestorSeparatorElement,
 							createElement,
-							createItemAnchor,
+							createIdentifierHierarchyAnchor,
 							subsetIdentifierHierarchy,
 						}),
 				createContainerForItemElement:
@@ -38,7 +38,7 @@ module.exports =
 							item,
 							subsetIdentifierHierarchy,
 						}),
-				createItemAnchor,
+				createIdentifierHierarchyAnchor,
 				identifierHierarchy:
 					subsetIdentifierHierarchy,
 			}
@@ -54,15 +54,16 @@ module.exports =
 			);
 		}
 
-		function createItemAnchor({
-			identifier,
+		function createIdentifierHierarchyAnchor(
 			identifierHierarchy,
-		}) {
+		) {
 			return (
 				createIdentifierAnchor({
 					createElement,
-					href: getHrefWithIdentifierHierarchy(identifierHierarchy),
-					identifier,
+					href:
+						getHrefWithIdentifierHierarchy(identifierHierarchy),
+					identifier:
+						identifierHierarchy[identifierHierarchy.length - 1],
 				})
 			);
 		}

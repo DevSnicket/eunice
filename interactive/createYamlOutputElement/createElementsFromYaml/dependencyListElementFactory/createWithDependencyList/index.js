@@ -13,7 +13,7 @@ module.exports =
 	({
 		createAncestorSeparatorElement,
 		createElement,
-		createItemAnchor,
+		createIdentifierHierarchyAnchor,
 		element,
 		identifier,
 		level,
@@ -36,7 +36,7 @@ module.exports =
 					createListElement({
 						createAncestorSeparatorElement,
 						createElement,
-						createItemAnchor,
+						createIdentifierHierarchyAnchor,
 						relationship,
 						subset: createSubset(),
 					}),

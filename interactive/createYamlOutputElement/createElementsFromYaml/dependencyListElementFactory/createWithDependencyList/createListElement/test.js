@@ -11,9 +11,11 @@ test(
 		expect(
 			renderToStaticMarkup(
 				createListElement({
-					createAncestorSeparatorElement,
+					createAncestorSeparatorElement:
+						() => "-",
 					createElement,
-					createItemAnchor,
+					createIdentifierHierarchyAnchor:
+						identifierHierarchy => `[${identifierHierarchy}]`,
 					relationship:
 						"dependsUpon",
 					subset:
@@ -61,7 +63,7 @@ test(
 										identifier:
 											"child 4",
 										items:
-											[ { item: { id: "grandchild" } } ],
+											[ createSubset({ identifier: "grandchild" }) ],
 									}),
 								],
 						}),
@@ -76,28 +78,6 @@ test(
 		),
 );
 
-function createAncestorSeparatorElement() {
-	return (
-		createElement(
-			/* cspell:disable-next-line */
-			"ancestorseparator",
-		)
-	);
-}
-
-function createItemAnchor({
-	identifier,
-	identifierHierarchy,
-}) {
-	return (
-		createElement(
-			"a",
-			{ href: identifierHierarchy },
-			identifier,
-		)
-	);
-}
-
 function createSubset({
 	dependencies = null,
 	identifier,
@@ -106,7 +86,7 @@ function createSubset({
 	return (
 		{
 			dependencies,
-			item: { id: identifier },
+			item: createItem({ identifier }),
 			items,
 		}
 	);

@@ -1,10 +1,12 @@
-const createDependencyElementFactory = require("./createDependencyElementFactory");
+const
+	createDependencyElementFactory = require("./createDependencyElementFactory"),
+	getItemIdentifierHierarchy = require("./getItemIdentifierHierarchy");
 
 module.exports =
 	({
 		createAncestorSeparatorElement,
 		createElement,
-		createItemAnchor,
+		createIdentifierHierarchyAnchor,
 		relationship,
 		subset,
 	}) => {
@@ -24,9 +26,10 @@ module.exports =
 					createDependencyElements:
 						createDependencyElementFactory({
 							createAncestorSeparatorElement,
-							createItemAnchor,
+							createIdentifierHierarchyAnchor,
 						}).createElements,
 					createElement,
+					createIdentifierHierarchyAnchor,
 				})
 				.createElementsForSubset(subset)
 			);
@@ -36,6 +39,7 @@ module.exports =
 function withElementFactory({
 	createDependencyElements,
 	createElement,
+	createIdentifierHierarchyAnchor,
 }) {
 	return { createElementsForSubset };
 
@@ -44,9 +48,17 @@ function withElementFactory({
 	) {
 		return (
 			[
-				subset.item.id,
-				createDependenciesElement(subset.dependencies),
-				createChildItemsElement(subset.items),
+				createIdentifierHierarchyAnchor(
+					getItemIdentifierHierarchy(
+						subset.item,
+					),
+				),
+				createDependenciesElement(
+					subset.dependencies,
+				),
+				createChildItemsElement(
+					subset.items,
+				),
 			]
 		);
 	}

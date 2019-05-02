@@ -46,8 +46,8 @@ module.exports =
 					createAncestorSeparatorElement:
 						subsetSelection.createAncestorSeparatorElement,
 					createElement,
-					createItemAnchor:
-						subsetSelection.createItemAnchor,
+					createIdentifierHierarchyAnchor:
+						subsetSelection.createIdentifierHierarchyAnchor,
 					element,
 					getValueOfKey,
 					resizableElementTypes,

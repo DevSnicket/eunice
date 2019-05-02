@@ -2,7 +2,7 @@ module.exports =
 	({
 		createAncestorSeparatorElement,
 		createElement,
-		createItemAnchor,
+		createIdentifierHierarchyAnchor,
 		subsetIdentifierHierarchy,
 	}) => {
 		return (
@@ -73,10 +73,7 @@ module.exports =
 						[
 							...aggregation.elements,
 							createAncestorSeparatorElement(),
-							createItemAnchor({
-								identifier,
-								identifierHierarchy,
-							}),
+							createIdentifierHierarchyAnchor(identifierHierarchy),
 						],
 					identifierHierarchy,
 				}
