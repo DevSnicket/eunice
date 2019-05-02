@@ -1,4 +1,4 @@
-const createSubsetOfItem = require("../createSubsetOfItem");
+const createSubsetOfItem = require(".");
 
 test(
 	"Relationship of \"unexpected relationship\" throws error",
