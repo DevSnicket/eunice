@@ -1,42 +1,33 @@
-<html>
-	<head>
-		<link href="../../../../../../renderer.css" rel="stylesheet" />
-	</head>
-	<body>
-		<div class="dependency-list dependsUpon">
-			item 1
-			<ul class="child-items">
-				<li>
-					child 1
-					<ul class="item-dependencies">
-						<li>dependency 1</li>
-					</ul>
-				</li>
-				<li>
-					child 2
-					<ul class="item-dependencies">
-						<li>parent of dependency 2: dependency 2</li>
-					</ul>
-				</li>
-				<li>
-					child 3
-					<ul class="item-dependencies">
-						<li>anonymous: dependency 3</li>
-					</ul>
-				</li>
-				<li>
-					child 4
-					<ul class="item-dependencies">
-						<li>dependency 4</li>
-						<li>dependency 5</li>
-					</ul>
-					<ul class="child-items">
-						<li>
-							grandchild
-						</li>
-					</ul>
-				</li>
+<div class="dependency-list dependsUpon">
+	item 1
+	<ul class="child-items">
+		<li>
+			child 1
+			<ul class="item-dependencies">
+				<li><a href="dependency 1">dependency 1</a></li>
 			</ul>
-		</div>
-	</body>
-</html>
+		</li>
+		<li>
+			child 2
+			<ul class="item-dependencies">
+				<li><a href="parent of dependency 2">parent of dependency 2</a><ancestorseparator></ancestorseparator><a href="parent of dependency 2,dependency 2">dependency 2</a></li>
+			</ul>
+		</li>
+		<li>
+			child 3
+			<ul class="item-dependencies">
+				<li><a href=""></a><ancestorseparator></ancestorseparator><a href=",dependency 3">dependency 3</a></li>
+			</ul>
+		</li>
+		<li>
+			child 4
+			<ul class="item-dependencies">
+				<li><a href="dependency 4">dependency 4</a></li>
+				<li><a href="dependency 5">dependency 5</a></li>
+			</ul>
+			<ul class="child-items">
+				<li>grandchild</li>
+			</ul>
+		</li>
+	</ul>
+</div>

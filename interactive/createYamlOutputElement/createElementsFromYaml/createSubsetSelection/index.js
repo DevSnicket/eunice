@@ -1,7 +1,8 @@
 const
 	createBreadcrumbElement = require("./createBreadcrumbElement"),
 	createContainerForItemElement = require("./createContainerForItemElement"),
-	identifierHierarchyArgument = require("../identifierHierarchyArgument");
+	createIdentifierAnchor = require("./createIdentifierAnchor"),
+	identifierHierarchyArgument = require("./identifierHierarchyArgument");
 
 module.exports =
 	({
@@ -16,11 +17,13 @@ module.exports =
 
 		return (
 			{
+				createAncestorSeparatorElement,
 				createBreadcrumbElement:
 					() =>
 						createBreadcrumbElement({
+							createAncestorSeparatorElement,
 							createElement,
-							getHrefWithIdentifierHierarchy,
+							createItemAnchor,
 							subsetIdentifierHierarchy,
 						}),
 				createContainerForItemElement:
@@ -35,10 +38,34 @@ module.exports =
 							item,
 							subsetIdentifierHierarchy,
 						}),
+				createItemAnchor,
 				identifierHierarchy:
 					subsetIdentifierHierarchy,
 			}
 		);
+
+		function createAncestorSeparatorElement() {
+			return (
+				createElement(
+					"span",
+					{ className: "ancestor-separator" },
+					"\u2013",
+				)
+			);
+		}
+
+		function createItemAnchor({
+			identifier,
+			identifierHierarchy,
+		}) {
+			return (
+				createIdentifierAnchor({
+					createElement,
+					href: getHrefWithIdentifierHierarchy(identifierHierarchy),
+					identifier,
+				})
+			);
+		}
 
 		function getHrefWithIdentifierHierarchy(
 			identifierHierarchy,

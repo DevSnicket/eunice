@@ -1,7 +1,8 @@
 module.exports =
 	({
+		createAncestorSeparatorElement,
 		createElement,
-		getHrefWithIdentifierHierarchy,
+		createItemAnchor,
 		subsetIdentifierHierarchy,
 	}) => {
 		return (
@@ -10,7 +11,7 @@ module.exports =
 			createElement(
 				"div",
 				null,
-				createElements(),
+				...createElements(),
 			)
 		);
 
@@ -44,10 +45,11 @@ module.exports =
 				{
 					elements:
 						[
-							createAnchor({
-								content: "root",
-								href: "#",
-							}),
+							createElement(
+								"a",
+								{ href: "#" },
+								"root",
+							),
 						],
 					identifierHierarchy:
 						[],
@@ -70,53 +72,14 @@ module.exports =
 					elements:
 						[
 							...aggregation.elements,
-							": ",
-							createAnchor(
-								identifier
-								?
-								{
-									...getHrefProperty(),
-									content: identifier,
-								}
-								:
-								{
-									...getHrefProperty(),
-									content: "anonymous",
-									style: { fontStyle: "italic" },
-								},
-							),
+							createAncestorSeparatorElement(),
+							createItemAnchor({
+								identifier,
+								identifierHierarchy,
+							}),
 						],
 					identifierHierarchy,
 				}
-			);
-
-			function getHrefProperty() {
-				return (
-					{
-						href:
-							getHrefWithIdentifierHierarchy(
-								identifierHierarchy,
-							),
-					}
-				);
-			}
-		}
-
-		function createAnchor({
-			content,
-			href,
-			style = null,
-		}) {
-			return (
-				createElement(
-					"a",
-					{
-						href,
-						key: href,
-						...style && { style },
-					},
-					content,
-				)
 			);
 		}
 	};

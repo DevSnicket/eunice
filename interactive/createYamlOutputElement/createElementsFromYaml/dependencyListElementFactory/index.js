@@ -31,7 +31,9 @@ module.exports =
 				),
 		createWithDependencyList:
 			({
+				createAncestorSeparatorElement,
 				createElement,
+				createItemAnchor,
 				element,
 				getValueOfKey,
 				resizableElementTypes,
@@ -40,7 +42,9 @@ module.exports =
 			}) =>
 				createWithDependencyList({
 					...keysAndValues.getObjectFromGetValueOfKey(getValueOfKey),
+					createAncestorSeparatorElement,
 					createElement,
+					createItemAnchor,
 					element,
 					resizableElementTypes,
 					stack,
