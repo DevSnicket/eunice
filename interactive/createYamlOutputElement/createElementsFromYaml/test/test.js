@@ -56,7 +56,7 @@ describe(
 					"anonymous grandparent without identifier, parent with child without items and location hash of undefined and parent returns breadcrumb of root and anonymous, and child without hyperlink",
 					{
 						expectedHtmlPrefix:
-							"<div><a href=\"#\">root</a>: <a href=\"#subset-item=undefined\" style=\"font-style:italic\">anonymous</a></div>",
+							"<div><a href=\"#\">root</a><span class=\"ancestor-separator\">–</span><a href=\"#subset-item=undefined\" style=\"font-style:italic\">anonymous</a></div>",
 						expectedSvgFile:
 							"with parent and without hyperlinks",
 						locationHash:
@@ -82,7 +82,7 @@ describe(
 					"grandparent and parent with identifiers, child with items and location hash of grandparent and parent identifier returns breadcrumb of root and grandparent, and child with hyperlink prefixed with parent identifier",
 					{
 						expectedHtmlPrefix:
-							"<div><a href=\"#\">root</a>: <a href=\"#subset-item=grandparent\">grandparent</a></div>",
+							"<div><a href=\"#\">root</a><span class=\"ancestor-separator\">–</span><a href=\"#subset-item=grandparent\">grandparent</a></div>",
 						expectedSvgFile:
 							"with grandparent and parent and hyperlinks",
 						locationHash:
@@ -120,8 +120,12 @@ describe(
 						renderToStaticMarkup(
 							createElementsFromYaml({
 								createElement,
-								locationHash: "no hash prefix",
-								yaml: "{}",
+								locationHash:
+									"no hash prefix",
+								resizableElementTypes:
+									null,
+								yaml:
+									"{}",
 							}),
 						),
 				)
@@ -202,6 +206,7 @@ function testTestCase({
 			createElementsFromYaml({
 				createElement,
 				locationHash,
+				resizableElementTypes: null,
 				yaml,
 			}),
 		),

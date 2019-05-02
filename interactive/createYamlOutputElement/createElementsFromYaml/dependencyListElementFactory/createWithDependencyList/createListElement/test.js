@@ -11,7 +11,9 @@ test(
 		expect(
 			renderToStaticMarkup(
 				createListElement({
+					createAncestorSeparatorElement,
 					createElement,
+					createItemAnchor,
 					relationship:
 						"dependsUpon",
 					subset:
@@ -67,14 +69,34 @@ test(
 			),
 		)
 		.toEqual(
-			getBodyTagContents(
-				readTestFile(
-					path.join(__dirname, "testCase.html"),
-				),
+			readTestFile(
+				path.join(__dirname, "testCase.html"),
 			)
 			.replace(/\n|\t/g, ""),
 		),
 );
+
+function createAncestorSeparatorElement() {
+	return (
+		createElement(
+			/* cspell:disable-next-line */
+			"ancestorseparator",
+		)
+	);
+}
+
+function createItemAnchor({
+	identifier,
+	identifierHierarchy,
+}) {
+	return (
+		createElement(
+			"a",
+			{ href: identifierHierarchy },
+			identifier,
+		)
+	);
+}
 
 function createSubset({
 	dependencies = null,
@@ -100,10 +122,4 @@ function createItem({
 			level: { stack: { parent } },
 		}
 	);
-}
-
-function getBodyTagContents(
-	html,
-) {
-	return html.match(/<body>(.*)<\/body>/s)[1];
 }

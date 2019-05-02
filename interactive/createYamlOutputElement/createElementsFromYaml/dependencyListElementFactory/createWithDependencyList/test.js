@@ -71,7 +71,10 @@ function testDependsUponInSameLevel({
 	expect(
 		renderToStaticMarkup(
 			createWithDependencyList({
+				createAncestorSeparatorElement:
+					null,
 				createElement,
+				createItemAnchor,
 				element,
 				identifier,
 				level:
@@ -99,5 +102,18 @@ function testDependsUponInSameLevel({
 			path.join(__dirname, "testCase.html"),
 		)
 		.replace(/\n|\t/g, ""),
+	);
+}
+
+function createItemAnchor({
+	identifier,
+	identifierHierarchy,
+}) {
+	return (
+		createElement(
+			"a",
+			{ href: identifierHierarchy },
+			identifier,
+		)
 	);
 }

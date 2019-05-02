@@ -1,8 +1,10 @@
-const formatDependency = require("./formatDependency");
+const createDependencyElementFactory = require("./createDependencyElementFactory");
 
 module.exports =
 	({
+		createAncestorSeparatorElement,
 		createElement,
+		createItemAnchor,
 		relationship,
 		subset,
 	}) => {
@@ -18,15 +20,23 @@ module.exports =
 
 		function createChildElements() {
 			return (
-				withCreateElement(createElement)
+				withElementFactory({
+					createDependencyElements:
+						createDependencyElementFactory({
+							createAncestorSeparatorElement,
+							createItemAnchor,
+						}).createElements,
+					createElement,
+				})
 				.createElementsForSubset(subset)
 			);
 		}
 	};
 
-function withCreateElement(
+function withElementFactory({
+	createDependencyElements,
 	createElement,
-) {
+}) {
 	return { createElementsForSubset };
 
 	function createElementsForSubset(
@@ -58,7 +68,7 @@ function withCreateElement(
 						createElement(
 							"li",
 							{ key: dependency.id },
-							formatDependency(dependency),
+							...createDependencyElements(dependency),
 						),
 				),
 			)

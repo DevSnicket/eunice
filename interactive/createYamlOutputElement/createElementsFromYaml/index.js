@@ -43,7 +43,11 @@ module.exports =
 		) {
 			return (
 				dependencyListElementFactory.createWithDependencyList({
+					createAncestorSeparatorElement:
+						subsetSelection.createAncestorSeparatorElement,
 					createElement,
+					createItemAnchor:
+						subsetSelection.createItemAnchor,
 					element,
 					getValueOfKey,
 					resizableElementTypes,

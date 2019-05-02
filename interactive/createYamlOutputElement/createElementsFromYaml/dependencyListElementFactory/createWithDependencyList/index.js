@@ -11,7 +11,9 @@ const
 
 module.exports =
 	({
+		createAncestorSeparatorElement,
 		createElement,
+		createItemAnchor,
 		element,
 		identifier,
 		level,
@@ -32,7 +34,9 @@ module.exports =
 				&&
 				createVerticalResizeWithLowerElement(
 					createListElement({
+						createAncestorSeparatorElement,
 						createElement,
+						createItemAnchor,
 						relationship,
 						subset: createSubset(),
 					}),
