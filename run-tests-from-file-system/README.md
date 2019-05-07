@@ -1,10 +1,8 @@
-# Eunice [![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgElementForStack/createArrows/testCase.svg?sanitize=true)](Renderer/getSvgElementForYaml/createArrows/testcase.svg)
+# Eunice ![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgElementForStack/createArrows/testCase.svg?sanitize=true) Run tests from file system
 
 DevSnicket Eunice is a toolkit based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. Eunice's approach isn't limited to direct dependencies, but includes indirect dependencies as well.
 
 [try out Eunice on Eunice 🐶🥫](https://devsnicket.github.io/Eunice/renderer/harness.html) ([created with](dogfooding/generate.sh))
-
-## Run tests from file system
 
 [![NPM](https://img.shields.io/npm/v/@devsnicket/eunice-run-tests-from-file-system.svg)](https://www.npmjs.com/package/@devsnicket/eunice-run-tests-from-file-system
 ) [![Build Status](https://travis-ci.org/DevSnicket/eunice-run-tests-from-file-system.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-run-tests-from-file-system) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
