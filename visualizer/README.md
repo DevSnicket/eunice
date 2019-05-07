@@ -1,17 +1,26 @@
-# Eunice [![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgElementForStack/createArrows/testCase.svg?sanitize=true)](Renderer/getSvgElementForStack/createArrows/testcase.svg)
+# Eunice ![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgElementForStack/createArrows/testCase.svg?sanitize=true) Renderer
 
 DevSnicket Eunice is a toolkit based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. Eunice's approach isn't limited to direct dependencies, but includes indirect dependencies as well.
 
 [try out Eunice on Eunice 🐶🥫](https://devsnicket.github.io/Eunice/renderer/harness.html) ([created with](dogfooding/generate.sh))
 
-## Renderer
-
 [![NPM](https://img.shields.io/npm/v/@devsnicket/eunice-renderer.svg)](https://www.npmjs.com/package/@devsnicket/eunice-renderer
 ) [![Build Status](https://travis-ci.org/DevSnicket/eunice-renderer.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-renderer) [![Coverage Status](https://coveralls.io/repos/github/DevSnicket/eunice-renderer/badge.svg?branch=master&c=1)](https://coveralls.io/github/DevSnicket/eunice-renderer?branch=master) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
 
-[Eunice](https://www.github.com/DevSnicket/Eunice) includes a YAML file format to store dependency and structure, it also includes analyzers to produce this YAML and processors of the YAML.
+[Eunice](https://www.github.com/DevSnicket/Eunice) includes a YAML file format to store dependency and structure, it also includes analyzers to produce this YAML and processors of the YAML. To visualize and explore what's in the YAML files, and to statistically measure how well they match the intended structure, a SVG renderer has been implemented in Javascript.
 
-To visualize and explore what's in the YAML files, and to statistically measure how well they match the intended structure, a SVG renderer has been implemented in Javascript. The renderer doesn't use lines between items to show dependencies and instead marks items with counts for each dependency type:
+Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-renderer):
+
+```bash
+npm install --save-dev @devsnicket/eunice-renderer
+```
+Or with [`yarn`](https://yarnpkg.com/en/package/@devsnicket/eunice-renderer):
+
+```bash
+yarn add --dev @devsnicket/eunice-renderer
+```
+
+The renderer doesn't use lines between items to show dependencies and instead marks items with counts for each dependency type:
 
 - matches stack (green down arrow)
 - does not match stack (red up arrow) 
@@ -39,14 +48,3 @@ root > grandparent
 [![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgForYaml/withSubset.testCases/upper-item-depends-upon-lower-item-with-parent.svg?sanitize=true)](Renderer/getSvgForYaml/withSubset.testCases/upper-item-depends-upon-lower-item-with-parent.svg)
 
 >[try out JavaScript &rightarrow; YAML &rightarrow; SVG](https://devsnicket.github.io/Eunice/javascript-analyzer-and-renderer/harness.html)
-
-Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-renderer):
-
-```bash
-npm install --save-dev @devsnicket/eunice-renderer
-```
-Or with [`yarn`](https://yarnpkg.com/en/package/@devsnicket/eunice-renderer):
-
-```bash
-yarn add --dev @devsnicket/eunice-renderer
-```
