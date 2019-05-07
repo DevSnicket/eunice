@@ -6,6 +6,8 @@ env:
   node: true
 extends: 'eslint:recommended'
 parserOptions:
+  ecmaFeatures:
+    impliedStrict: true
   ecmaVersion:
     2018
 rules:
