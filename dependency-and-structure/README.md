@@ -4,11 +4,15 @@ DevSnicket Eunice is a toolkit based on the premise that unidirectional dependen
 
 [try out Eunice on Eunice 🐶🥫](https://devsnicket.github.io/Eunice/renderer/harness.html) ([created with](dogfooding/generate.sh))
 
-This package takes YAML objects, replaces the identifiers of whats depended upon with object references, adds dependent object references (so dependencies are available in both directions) and standardizes hierarchical structure (to support varying YAML verbosity). It is used by the renderer and some of the processors in [Eunice](https://github.com/DevSnicket/Eunice).
+This package takes YAML that contains dependencies and structure, represented as objects and does the following:
+* Standardizes structure (to support varying YAML verbosity)
+* Replaces the identifiers of whats depended upon with object references
+* Adds dependent object references (so dependencies are available in both directions)
+
+It is used by the renderer and some of the processors in [Eunice](https://github.com/DevSnicket/Eunice).
 
 [![NPM](https://img.shields.io/npm/v/@devsnicket/eunice-dependency-and-structure.svg)](https://www.npmjs.com/package/@devsnicket/eunice-dependency-and-structure
 ) [![Build Status](https://travis-ci.org/DevSnicket/eunice-dependency-and-structure.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-dependency-and-structure) [![Coverage Status](https://coveralls.io/repos/github/DevSnicket/eunice-dependency-and-structure/badge.svg?branch=master&c=1)](https://coveralls.io/github/DevSnicket/eunice-dependency-and-structure?branch=master) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
-
 
 Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-dependency-and-structure):
 
@@ -25,11 +29,11 @@ yarn add @devsnicket/eunice-dependency-and-structure
 
 The YAML objects are expected to be in a structure that matches how YAML is parsed and formatted by [js-yaml](https://github.com/nodeca/js-yaml).
 
-YAML is read using the function createStackFromYaml and can be written/rewritten using createYamlFromStack.
+YAML is read using the function createStackFromYaml and can be written using createYamlFromStack.
 
 ## Stack based functions
 
-When a stack has been read/created from YAML using createStackFromYaml (see above), the following functions can be used on the stack or sub-stacks:
+After a stack has been read/created from YAML using createStackFromYaml (see above), the following functions can be used on the stack or sub-stacks:
 
 ### findDirectionBetweenItemsInFirstMutualStack
 
