@@ -33,7 +33,7 @@ test(
 	"with descriptions",
 	() => {
 		const
-			height = 80,
+			height = 120,
 			spacing = 10,
 			width = 120;
 
