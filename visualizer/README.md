@@ -1,4 +1,4 @@
-# Eunice ![](https://devsnicket.github.io/eunice-renderer/getSvgElementForStack/createArrows/test/withUse/testCases/default-height.svg) Renderer
+# Eunice ![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgElementForStack/createArrows/test/withUse/testCases/default-height.svg?sanitize=true) Renderer
 
 DevSnicket Eunice is a toolkit based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. Eunice's approach isn't limited to direct dependencies, but includes indirect dependencies as well.
 
@@ -22,7 +22,7 @@ yarn add --dev @devsnicket/eunice-renderer
 
 Instead of rendering dependencies as lines between items each dependency is counted into the following categories:
 
-![](https://devsnicket.github.io/eunice-renderer/getSvgElementForStack/createArrows/test/withUse/testCases/with-descriptions.svg)
+![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgElementForStack/createArrows/test/withUse/testCases/with-descriptions.svg?sanitize=true)
 
 - matches stack (green down arrow)
 - does not match stack (red up arrow)
