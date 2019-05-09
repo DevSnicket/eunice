@@ -44,7 +44,7 @@ function renderArrows(
 	function getElements() {
 		return (
 			Object.values(arrows)
-			.map(arrow => arrow.element)
+			.map(arrow => arrow.symbol)
 		);
 	}
 
