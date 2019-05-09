@@ -63,11 +63,11 @@ module.exports =
 
 			return (
 				{
-					element: createSymbolWithPolygon(createPolygon()),
 					height: 24,
 					horizontalMargin,
 					id,
 					paddingRight,
+					symbol: createSymbolWithPolygon(createPolygon()),
 				});
 
 			function createSymbolWithPolygon(

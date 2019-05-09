@@ -40,7 +40,7 @@ module.exports =
 					`g.anonymous>text{font-style:italic}g.parent>rect{fill:none;stroke:gray}g.item>rect{fill:lightgray}g.item>text{text-anchor:middle}g.dependency>text{fill:white;text-anchor:middle}${style}`,
 				symbols:
 					Object.values(arrows)
-					.map(arrow => arrow.element),
+					.map(arrow => arrow.symbol),
 				withPrecision,
 			})
 		);
