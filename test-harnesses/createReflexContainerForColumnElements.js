@@ -19,7 +19,7 @@ module.exports =
 						index > 0 ? createSplitterWithIndex(index - 1) : null,
 						createElement(
 							ReflexElement,
-							null,
+							{ key: `element ${index}` },
 							column,
 						),
 					],
