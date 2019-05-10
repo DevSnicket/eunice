@@ -11,7 +11,7 @@ module.exports =
 	({
 		babelPlugins = [],
 		contentFromFile,
-		cssFiles,
+		cssFiles = [],
 		directory,
 		indexFile,
 	}) => (
@@ -35,7 +35,7 @@ module.exports =
 				[
 					new DefinePlugin({ [contentFromFile.placeholder]: `\`${readFileSync(contentFromFile.file, "utf-8")}\`` }),
 					...createCopyPluginsForHtmlWithCssFiles(
-						cssFiles || [],
+						cssFiles,
 					),
 				],
 		}
