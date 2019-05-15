@@ -6,11 +6,14 @@ module.exports =
 			rules:
 				[
 					{
-						exclude: /node_modules(?!\/@devsnicket\/eunice-test-harnesses)/,
-						test: /\.js$/,
+						exclude:
+							/node_modules(?!\/@devsnicket\/eunice-test-harnesses)/,
+						test:
+							/\.js$/,
 						use:
 							{
-								loader: "babel-loader",
+								loader:
+									"babel-loader",
 								options:
 									{
 										plugins:
@@ -22,6 +25,11 @@ module.exports =
 											[ "env" ],
 									},
 							},
+					},
+					// required by Monaco editor
+					{
+						test: /\.css$/,
+						use: [ "style-loader", "css-loader" ],
 					},
 				],
 		}
