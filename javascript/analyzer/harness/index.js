@@ -24,10 +24,9 @@ renderIntoContainerElement({
 				[
 					createFillWithTitleElement({
 						content:
-							javascriptEditor.createEditorElement({
-								createElement,
-								stateful,
-							}),
+							javascriptEditor.createEditorElement(
+								{ stateful },
+							),
 						title:
 							"JavaScript",
 					}),
