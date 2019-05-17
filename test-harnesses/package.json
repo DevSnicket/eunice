@@ -44,5 +44,5 @@
 		"lint": "npx eslint .",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" -exec npx cspell {} +"
 	},
-	"version": "5.0.0"
+	"version": "5.1.0"
 }
