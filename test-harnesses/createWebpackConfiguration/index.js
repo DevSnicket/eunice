@@ -22,7 +22,7 @@ module.exports =
 				"source-map",
 			entry:
 				{
-					harness: [ "babel-polyfill", indexFile ],
+					harness: [ "@babel/polyfill", indexFile ],
 					...createCodeEditorEntryForLanguages(codeEditorLanguages),
 				},
 			externals:

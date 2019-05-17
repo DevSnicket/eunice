@@ -1,4 +1,4 @@
-const transformObjectRestSpreadBabelPlugin = require("babel-plugin-transform-object-rest-spread");
+const pluginProposalObjectRestSpreadBabel = require("@babel/plugin-proposal-object-rest-spread");
 
 module.exports =
 	babelPlugins => (
@@ -19,10 +19,10 @@ module.exports =
 										plugins:
 											[
 												...babelPlugins,
-												transformObjectRestSpreadBabelPlugin,
+												pluginProposalObjectRestSpreadBabel,
 											],
 										presets:
-											[ "env" ],
+											[ "@babel/env" ],
 									},
 							},
 					},
