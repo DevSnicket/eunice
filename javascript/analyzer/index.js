@@ -1,6 +1,6 @@
 /* istanbul ignore file: test would be a mirror of implementation */
 const
-	createJavascriptInputElement = require("./harness/createJavascriptInputElement"),
+	createJavascriptEditor = require("./harness/createJavascriptEditor"),
 	getOrCreateItemsInDirectory = require("./getOrCreateItemsInDirectory"),
 	getYamlFromJavaScript = require("./getYamlFromJavaScript");
 
@@ -8,5 +8,5 @@ module.exports =
 	{
 		getOrCreateItemsInDirectory,
 		getYamlFromJavaScript,
-		harness: { createJavascriptInputElement },
+		harness: { createJavascriptEditor },
 	};
