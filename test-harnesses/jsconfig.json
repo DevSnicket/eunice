@@ -5,6 +5,7 @@
 		"lib": [ "dom", "es2017", "esnext.array" ],
 		"module": "commonjs",
 		"noEmit": true,
+		"resolveJsonModule": true,
 		"target": "es2017"
 	}
 }

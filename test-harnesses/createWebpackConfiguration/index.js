@@ -1,7 +1,6 @@
 // cSpell:words devtool
 
 const
-	createCodeEditorEntryForLanguages = require("../codeEditor/serviceWorkers").createWebpackEntryForLanguages,
 	createCopyPluginsForHtmlWithCssFiles = require("./createCopyPluginsForHtmlWithCssFiles"),
 	createModuleWithBabelPlugins = require("./createModuleWithBabelPlugins"),
 	{ DefinePlugin } = require("webpack"),
@@ -11,10 +10,10 @@ const
 module.exports =
 	({
 		babelPlugins = [],
-		codeEditorLanguages = [],
 		contentFromFile,
 		cssFiles = [],
 		directory,
+		entry = null,
 		indexFile,
 	}) => (
 		{
@@ -22,8 +21,8 @@ module.exports =
 				"source-map",
 			entry:
 				{
+					...entry,
 					harness: [ "@babel/polyfill", indexFile ],
-					...createCodeEditorEntryForLanguages(codeEditorLanguages),
 				},
 			externals:
 				{ "./createWebpackConfiguration": "null" },
