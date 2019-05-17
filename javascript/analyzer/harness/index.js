@@ -1,5 +1,4 @@
 const
-	{ createElement } = require("react"),
 	{
 		createFillWithTitleElement,
 		createReflexContainerForColumnElements,
