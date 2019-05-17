@@ -10,14 +10,12 @@ module.exports =
 		return { createEditorElement };
 
 		function createEditorElement({
-			createElement,
 			createStateFromValue = null,
 			stateful,
 		}) {
 			return (
 				codeEditor
 				.createEditorElement({
-					createElement,
 					setStateFromValue:
 						value =>
 							stateful.setState({
