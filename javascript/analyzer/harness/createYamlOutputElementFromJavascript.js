@@ -1,8 +1,5 @@
 const
-	{
-		callOrCreateElementOnError,
-		createFillWithTitleElement,
-	} = require("@devsnicket/eunice-test-harnesses"),
+	{ callOrCreateElementOnError, createFillWithTitleElement } = require("@devsnicket/eunice-test-harnesses"),
 	{ createElement } = require("react"),
 	getYamlFromJavaScript = require("../getYamlFromJavaScript");
 

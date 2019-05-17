@@ -1,10 +1,17 @@
 const
+	{ createElement } = require("react"),
 	{
+		createFillWithTitleElement,
 		createReflexContainerForColumnElements,
 		renderIntoContainerElement,
 	} = require("@devsnicket/eunice-test-harnesses"),
-	createJavascriptInputElement = require("./createJavascriptInputElement"),
-	createYamlOutputElementFromJavascript = require("./createYamlOutputElementFromJavascript");
+	createJavascriptEditor = require("./createJavascriptEditor"),
+	createYamlOutputElementFromJavascript = require("./createYamlOutputElementFromJavascript"),
+	initializeCodeEditorGlobal = require("@devsnicket/eunice-test-harnesses/codeEditor/serviceWorkers/initializeGlobal");
+
+initializeCodeEditorGlobal();
+
+const javascriptEditor = createJavascriptEditor();
 
 renderIntoContainerElement({
 	initialState:
@@ -15,9 +22,15 @@ renderIntoContainerElement({
 		stateful =>
 			createReflexContainerForColumnElements(
 				[
-					createJavascriptInputElement(
-						{ stateful },
-					),
+					createFillWithTitleElement({
+						content:
+							javascriptEditor.createEditorElement({
+								createElement,
+								stateful,
+							}),
+						title:
+							"JavaScript",
+					}),
 					createYamlOutputElementFromJavascript(
 						stateful.state.javascript,
 					),
