@@ -1,19 +1,17 @@
 const
 	createProcessorsMenuElements = require("./createProcessorsMenuElements"),
-	processorPlugins = require("@devsnicket/eunice-test-harnesses-processor-plugins"),
-	{
-		createFillWithTitleElement,
-		createTextareaElement,
-	} = require("@devsnicket/eunice-test-harnesses");
+	processorPlugins = require("@devsnicket/eunice-test-harnesses-processor-plugins");
 
 module.exports =
 	({
 		createElement,
+		createFillWithTitleElement,
+		createYamlEditorElement,
 		stateful,
 	}) =>
 		createFillWithTitleElement({
 			content:
-				createTextareaElement({
+				createYamlEditorElement({
 					setStateFromValue:
 						value => stateful.setState({ yaml: value }),
 					value:

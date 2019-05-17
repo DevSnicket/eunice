@@ -1,10 +1,10 @@
 const
-	{ callOrCreateElementOnError } = require("@devsnicket/eunice-test-harnesses"),
 	createElementsFromYaml = require("./createElementsFromYaml"),
 	getProcessedYamlFromState = require("./getProcessedYamlFromState");
 
 module.exports =
 	({
+		callOrCreateElementOnError,
 		createElement,
 		location,
 		resizableElementTypes,
@@ -19,11 +19,13 @@ module.exports =
 						resizableElementTypes,
 						yaml: getProcessedYamlFromState(state),
 					}),
+			callOrCreateElementOnError,
 			createElement,
 		});
 
 function callOrInProductionCreateElementOnError({
 	action,
+	callOrCreateElementOnError,
 	createElement,
 }) {
 	return (
