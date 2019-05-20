@@ -1,0 +1,25 @@
+{
+	"devDependencies": {
+		"@devsnicket/eunice-call-with-process-standard-streams": "*",
+		"@devsnicket/eunice-dependency-and-structure": "*",
+		"@devsnicket/eunice-processors": "*",
+		"@devsnicket/eunice-run-tests-from-file-system": "*",
+		"@devsnicket/eunice-test-harnesses": "*",
+		"@devsnicket/eunice-test-harnesses-processor-plugins": "*",
+		"@types/node": "12.0.2",
+		"cspell": "4.0.7",
+		"eslint": "5.16.0"
+	},
+	"dependencies": {
+		"@devsnicket/eunice-javascript-analyzer": "*",
+		"@devsnicket/eunice-processors": "^3.1.0",
+		"@devsnicket/eunice-renderer": "*",
+		"js-yaml": "3.13.1"
+	},
+	"scripts": {
+		"all": "npm run spellcheck && npm run lint && npm run analyze-process-render",
+		"analyze-process-render": "npm update && mkdir -p output && node index.js",
+		"lint": "npx eslint .",
+		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./output/**\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell --config ../cspell.json {} +"
+	}
+}
