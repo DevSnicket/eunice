@@ -1,0 +1,19 @@
+{
+	"configurations": [
+		{
+			"name": "attach",
+			"request": "attach",
+			"type": "node"
+		},
+		{
+			"cwd": "${workspaceFolder}",
+			"localRoot": "${workspaceFolder}",
+			"name": "bin no arguments",
+			"program": "${workspaceFolder}/bin/index.js",
+			"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
+			"request": "launch",
+			"type": "node",
+			"useWSL": true
+		}
+	]
+}

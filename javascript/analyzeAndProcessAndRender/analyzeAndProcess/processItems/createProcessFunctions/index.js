@@ -1,6 +1,5 @@
 const
 	{
-		groupItemsByIdentifierSeparator,
 		sorting:
 			{
 				orderItemsByIdentifier,
@@ -10,20 +9,20 @@ const
 			{
 				createOrAddToStacksToItemsWithIdentifier,
 				createOrAddToStacksUniformly,
+				createOrAddToStacksUsingFileSystem,
 			},
-		removeRedundantParentIdentifierPrefix,
 		removeSelfDependentItemsOfType,
-		replaceIdentifiers,
 		setIdentifierOfAnonymousToParent,
 		setTypeOfRootItems,
 		unstackIndependent,
-	} = require("@devsnicket/eunice-processors");
+	} = require("@devsnicket/eunice-processors"),
+	createIdentifierSeparatorSpecific = require("./createIdentifierSeparatorSpecific");
 
 module.exports =
 	({
+		directoryToCreateOrAddToStacksFrom,
+		identifierPrefixOfRootItems,
 		identifierSeparator,
-		items,
-		rootPrefix,
 	}) => {
 		const
 			{
@@ -31,8 +30,8 @@ module.exports =
 				groupItems,
 				removeIndexFileSuffix,
 			} = createIdentifierSeparatorSpecific({
+				identifierPrefixOfRootItems,
 				identifierSeparator,
-				rootPrefix,
 			});
 
 		return (
@@ -48,94 +47,26 @@ module.exports =
 				stackBinAndTestAtTop,
 				addJestMethodsToBottom,
 				unstackIndependent,
+				createOrAddToStacks,
 			]
-			.reduce(
-				(itemsAggregation, process) =>
-					process(itemsAggregation),
-				items,
-			)
 		);
-	};
 
-function createIdentifierSeparatorSpecific({
-	identifierSeparator,
-	rootPrefix,
-}) {
-	return { addPrefixToRoot, groupItems, removeIndexFileSuffix };
-
-	function removeIndexFileSuffix(
-		items,
-	) {
-		return (
-			replaceIdentifiers({
-				items,
-				pattern:
-					new RegExp(`${identifierSeparator}index$|^index$`),
-				replacement:
-					"",
-				rootOnly:
-					false,
-			})
-		);
-	}
-
-	function addPrefixToRoot(
-		items,
-	) {
-		return (
-			rootPrefix
-			?
-			addPrefixToRootAnonymous(
-				addPrefixToRootIdentifiable(
+		function createOrAddToStacks(
+			items,
+		) {
+			return (
+				createOrAddToStacksUsingFileSystem({
+					directory:
+						directoryToCreateOrAddToStacksFrom,
 					items,
-				),
-			)
-			:
-			items
-		);
-	}
-
-	function addPrefixToRootIdentifiable(
-		items,
-	) {
-		return (
-			replaceIdentifiers({
-				items,
-				pattern: /.+/,
-				replacement: `${rootPrefix}${identifierSeparator}$&`,
-				rootOnly: true,
-			})
-		);
-	}
-
-	function addPrefixToRootAnonymous(
-		items,
-	) {
-		return (
-			replaceIdentifiers({
-				items,
-				pattern: /^$/,
-				replacement: rootPrefix,
-				rootOnly: true,
-			})
-		);
-	}
-
-	function groupItems(
-		items,
-	) {
-		return (
-			removeRedundantParentIdentifierPrefix({
-				identifierSeparator,
-				items:
-					groupItemsByIdentifierSeparator({
-						identifierSeparator,
-						items,
-					}),
-			})
-		);
-	}
-}
+					subsetIdentifierHierarchy:
+						identifierPrefixOfRootItems
+						&&
+						[ identifierPrefixOfRootItems ],
+				})
+			);
+		}
+	};
 
 function setTypeOfRootToFile(
 	items,

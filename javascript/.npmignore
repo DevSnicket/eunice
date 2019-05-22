@@ -1,0 +1,10 @@
+/devsnicket-eunice-*.tgz
+/.eslintrc.yml
+/.eslintignore
+/.travis.yml
+/.vscode
+/cspell.json
+/eunice.svg
+/eunice.yaml
+/dogfooding
+/jsconfig.json
