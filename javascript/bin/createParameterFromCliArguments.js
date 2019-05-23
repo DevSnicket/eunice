@@ -2,14 +2,30 @@ module.exports =
 	({
 		directories = ".",
 		identifierPrefixesOfRootItems,
+		ignoreDirectoryNames,
 		...restOfOptions
 	}) => {
 		return (
 			{
 				...restOfOptions,
+				ignoreDirectoryNames: ensureArray(ignoreDirectoryNames),
 				sources: [ ...createSources() ],
 			}
 		);
+
+		function ensureArray(
+			argument,
+		) {
+			return (
+				// property wont be defined by minimalist package
+				// eslint-disable-next-line no-undefined
+				argument === undefined || Array.isArray(argument)
+				?
+				argument
+				:
+				[ argument ]
+			);
+		}
 
 		function * createSources() {
 			const

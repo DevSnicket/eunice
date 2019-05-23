@@ -1,5 +1,5 @@
 const
-	analyzeDirectory = require("./analyzeDirectory"),
+	analyzer = require("@devsnicket/eunice-javascript-analyzer"),
 	{ createOrAddToStacksUsingFileSystem } = require("@devsnicket/eunice-processors").stacking,
 	path = require("path"),
 	processItems = require("./processItems");
@@ -7,6 +7,7 @@ const
 module.exports =
 	({
 		directoryToCreateOrAddToStacksFrom,
+		ignoreDirectoryNames,
 		sources,
 	}) => {
 		return (
@@ -31,7 +32,10 @@ module.exports =
 					identifierSeparator:
 						path.sep,
 					items:
-						analyzeDirectory(directory),
+						analyzer.getOrCreateItemsInDirectory({
+							directory,
+							ignoreDirectoryNames,
+						}),
 				})
 			);
 		}

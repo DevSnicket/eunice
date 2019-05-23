@@ -7,11 +7,25 @@ const
 	{ promisify } = require("util"),
 	removePackagePrefixFromYaml = require("./removePackagePrefixFromYaml");
 
-const writeFile = promisify(fs.writeFile);
+const
+	ignoreDirectoryNamesDefault =
+		[
+			".devsnicket-plugin-discovery",
+			".git",
+			".vscode",
+			"dist",
+			"node_modules",
+			"output",
+			"test-cases",
+			"test-coverage",
+		],
+	writeFile =
+		promisify(fs.writeFile);
 
 module.exports =
 	({
 		directoryToCreateOrAddToStacksFrom = null,
+		ignoreDirectoryNames = ignoreDirectoryNamesDefault,
 		outputFilePrefix = "eunice",
 		packageNames = [],
 		packagePrefix = null,
@@ -24,6 +38,7 @@ module.exports =
 					formatYaml(
 						analyzeAndProcess({
 							directoryToCreateOrAddToStacksFrom,
+							ignoreDirectoryNames,
 							sources:
 								[
 									...createSourcesFromPackages({
