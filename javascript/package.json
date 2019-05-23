@@ -8,7 +8,7 @@
 	},
 	"description": "Analyzes JavaScript on the file system, processes the analysis and renders the processed analysis to an SVG.",
 	"dependencies": {
-		"@devsnicket/eunice-javascript-analyzer": "*",
+		"@devsnicket/eunice-javascript-analyzer": "^2.0.1",
 		"@devsnicket/eunice-processors": "^3.1.0",
 		"@devsnicket/eunice-renderer": "*",
 		"js-yaml": "3.13.1",
@@ -57,5 +57,5 @@
 		"lint": "npx eslint .",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./output/**\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +"
 	},
-	"version": "1.1.0"
+	"version": "1.1.1"
 }
