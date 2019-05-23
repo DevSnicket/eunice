@@ -17,10 +17,20 @@ module.exports =
 				initialization.type === "MemberExpression"
 				&&
 				createFromWhenRequire({
-					dependsUponItemIdentifier: initialization.property.name,
+					dependsUponItemIdentifier: getProperty(),
 					expression: initialization.object,
 				})
 			);
+
+			function getProperty() {
+				return (
+					initialization.computed
+					?
+					initialization.property.value
+					:
+					initialization.property.name
+				);
+			}
 		}
 
 		function createFromWhenRequire({
