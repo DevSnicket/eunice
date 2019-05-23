@@ -22,16 +22,16 @@ yarn add --dev @devsnicket/eunice-processors
 
 Currently there are processors written in JavaScript to:
 - create or add to stacks
-	- [applied uniformly](createOrAddToStacks/uniformly.js)
-	- [to items with an identifier](createOrAddToStacks/toItemsWithIdentifier)*
-	- [using the file system (.devsnicket-eunice-stack.yaml)](createOrAddToStacks/usingFileSystem)*
+	- [applied uniformly](stacking/createOrAddToStacksUniformly)
+	- [to items with an identifier](stacking/createOrAddToStacksToItemsWithIdentifier)*
+	- [using the file system (.devsnicket-eunice-stack.yaml)](stacking/createOrAddToStacksUsingFileSystem)*
 - [concatenate multiple sources of analysis from the file system](concatenateFromFileSystem)*
 - [group items by their identifier](groupItemsByIdentifierSeparator)
 - order items by
-	- [identifier](orderItemsBy/identifier)
+	- [identifier](sorting/orderItemsByIdentifier)
 	- index of
-		- [identifier suffix](orderItemsBy/indexOf/identifierSuffix)
-		- [type](orderItemsBy/indexOf/type)
+		- [identifier suffix](sorting/orderItemsByIndexOfIdentifierSuffix)
+		- [type](sorting/orderItemsByIndexOfType)
 - [remove redundant prefix of parent identifier and separator](removeRedundantParentIdentifierPrefix)
 - [remove self dependent items of a type](removeSelfDependentItemsOfType)
 - [replace identifiers using a regular expression](replaceIdentifiers)
