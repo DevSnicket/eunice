@@ -16,9 +16,9 @@ module.exports =
 				iterators =
 					{
 						directory:
-							getIterator(directories)(),
+							getIterator(directories),
 						identifierPrefixOfRootItems:
-							getIterator(identifierPrefixesOfRootItems)(),
+							getIterator(identifierPrefixesOfRootItems),
 					};
 
 			let source = null;
@@ -37,9 +37,9 @@ module.exports =
 				return (
 					Array.isArray(argument)
 					?
-					argument[Symbol.iterator]
+					argument[Symbol.iterator]()
 					:
-					yieldArgument
+					yieldArgument()
 				);
 
 				function * yieldArgument() {
