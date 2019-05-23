@@ -4,7 +4,7 @@ module.exports =
 	createWebpackConfiguration({
 		contentFromFile:
 			{
-				file: "../../dogfooding/output/.yaml",
+				file: "../../dogfooding/.yaml",
 				placeholder: "yamlFromWebpack",
 			},
 		outputDirectoryName:
