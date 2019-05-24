@@ -83,7 +83,7 @@ npx @devsnicket/eunice --packageNames=package1 --packageNames=package2
 ```
 To aid readability a package prefix can also be specified that will not be visible in the rendered output:
 ```bash
-npx @devsnicket/eunice --packagePrefix=@myscope/
+npx @devsnicket/eunice --packagePrefix=@myScope/
 ```
 
 When multiple sources of analysis are specified, [processing](#Processing) step 12 can also be applied to the combined sources:
