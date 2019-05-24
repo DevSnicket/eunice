@@ -5,7 +5,6 @@ jobs:
       script:
         - npm run lint
         - npm run spellcheck
-        - cp node_modules/react-reflex/styles.css react-reflex.css
     - before_install:
         - cd processor-plugins
 deploy:

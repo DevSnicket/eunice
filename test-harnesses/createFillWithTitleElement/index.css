@@ -1,0 +1,18 @@
+div.fill-with-title {
+	display: flex;
+	bottom: 0;
+	flex-direction: column;
+	left: 0;
+	padding: 0.5em;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+div.fill-with-title :nth-child(2) {
+	flex: 1;
+}
+
+div.fill-with-title textarea:nth-child(2) {
+	resize: none;
+}

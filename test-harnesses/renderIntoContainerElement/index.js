@@ -2,6 +2,8 @@ const
 	{ Component, createElement } = require("react"),
 	{ render } = require("react-dom");
 
+require("./index.css");
+
 module.exports =
 	/**
 	 * @param {Object} parameter

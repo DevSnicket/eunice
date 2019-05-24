@@ -6,6 +6,9 @@ const
 		ReflexSplitter,
 	} = require("react-reflex");
 
+require("react-reflex/styles.css");
+require("./index.css");
+
 module.exports =
 	elements =>
 		createElement(

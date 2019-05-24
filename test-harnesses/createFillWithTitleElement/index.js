@@ -1,5 +1,7 @@
 const { createElement } = require("react");
 
+require("./index.css");
+
 module.exports =
 	({
 		content,
