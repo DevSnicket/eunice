@@ -5,7 +5,7 @@
 		"@devsnicket/eunice-dependency-and-structure": "2.8.0",
 		"@devsnicket/eunice-processors": "3.0.0",
 		"@devsnicket/eunice-renderer": "4.5.2",
-		"@devsnicket/eunice-test-harnesses": "5.1.0",
+		"@devsnicket/eunice-test-harnesses": "6.0.0",
 		"@devsnicket/eunice-test-harnesses-processor-plugins": "1.0.0",
 		"@devsnicket/plugin-discovery-create-repository": "1.5.1",
 		"@ungap/url-search-params": "0.1.2",
@@ -39,6 +39,9 @@
 				"functions": 100,
 				"lines": 100
 			}
+		},
+		"moduleNameMapper": {
+			"\\.css$": "<rootDir>tests/styleMock.js"
 		}
 	},
 	"license": "MIT",

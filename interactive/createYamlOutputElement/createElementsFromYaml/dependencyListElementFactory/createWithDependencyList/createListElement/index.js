@@ -2,6 +2,8 @@ const
 	createDependencyElementFactory = require("./createDependencyElementFactory"),
 	getItemIdentifierHierarchy = require("./getItemIdentifierHierarchy");
 
+require("./index.css");
+
 module.exports =
 	({
 		createAncestorSeparatorElement,

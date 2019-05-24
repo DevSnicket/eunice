@@ -1,7 +1,6 @@
 const
 	createCodeEditorWebpackEntryForLanguages = require("@devsnicket/eunice-test-harnesses/codeEditor/serviceWorkers/createWebpackEntryForLanguages"),
-	{ createWebpackConfiguration } = require("@devsnicket/eunice-test-harnesses"),
-	path = require("path"),
+	createWebpackConfiguration = require("@devsnicket/eunice-test-harnesses/createWebpackConfiguration"),
 	pluginDiscoveryCommonjsBabelPlugin = require("@devsnicket/plugin-discovery-commonjs-babel-plugin");
 
 module.exports =
@@ -21,8 +20,6 @@ module.exports =
 						],
 					],
 				contentFromFile,
-				cssFiles:
-					[ path.join(__dirname, "renderer.css") ],
 				directory:
 					`${__dirname}/../output/${outputDirectoryName}`,
 				entry:

@@ -4,6 +4,8 @@ const
 	createIdentifierAnchor = require("./createIdentifierAnchor"),
 	identifierHierarchyArgument = require("./identifierHierarchyArgument");
 
+require("./index.css");
+
 module.exports =
 	({
 		createElement,

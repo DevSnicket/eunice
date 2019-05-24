@@ -1,5 +1,7 @@
 const createItemElement = require("./createItemElement");
 
+require("./index.css");
+
 module.exports =
 	({
 		createElement,
