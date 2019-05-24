@@ -36,6 +36,8 @@ yarn add --dev @devsnicket/eunice
 yarn eunice
 ```
 
+This GitHub repository is named eunice-javascript, but the NPM package contained is called just eunice. This stops the main eunice repository from being JavaScript specific (e.g. for multiple analysis sources and programming languages), but gives this package a shorter name.
+
 ## Processing
 From the processors available in [eunice-processors](https://github.com/DevSnicket/eunice-processors
 ), this package runs the following automatically, the same processing as Eunice uses when analyzing itself:
