@@ -23,7 +23,7 @@ const
 		promisify(fs.writeFile);
 
 module.exports =
-	({
+	async({
 		directoryToCreateOrAddToStacksFrom = null,
 		ignoreDirectoryNames = ignoreDirectoryNamesDefault,
 		outputFilePrefix = "eunice",
@@ -52,20 +52,13 @@ module.exports =
 					),
 			});
 
-		writeYaml();
-		renderAndWriteSvg();
+		await writeFile(
+			`${outputFilePrefix}.yaml`,
+			yaml,
+		);
 
-		async function writeYaml() {
-			await writeFile(
-				`${outputFilePrefix}.yaml`,
-				yaml,
-			);
-		}
-
-		async function renderAndWriteSvg() {
-			await writeFile(
-				`${outputFilePrefix}.svg`,
-				getSvgForYaml({ yaml }),
-			);
-		}
+		await writeFile(
+			`${outputFilePrefix}.svg`,
+			getSvgForYaml({ yaml }),
+		);
 	};
