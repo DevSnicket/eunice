@@ -24,20 +24,28 @@ module.exports =
 			directory,
 			identifierPrefixOfRootItems,
 		}) {
-			return (
-				processItems({
-					directoryToCreateOrAddToStacksFrom:
-						directory,
-					identifierPrefixOfRootItems,
-					identifierSeparator:
-						path.sep,
-					items:
-						analyzer.getOrCreateItemsInDirectory({
+			const items =
+				analyzer.getOrCreateItemsInDirectory({
+					directory,
+					ignoreDirectoryNames,
+				});
+
+			return processWhenAnyItems() || [];
+
+			function processWhenAnyItems() {
+				return (
+					items.length
+					&&
+					processItems({
+						directoryToCreateOrAddToStacksFrom:
 							directory,
-							ignoreDirectoryNames,
-						}),
-				})
-			);
+						identifierPrefixOfRootItems,
+						identifierSeparator:
+							path.sep,
+						items,
+					})
+				);
+			}
 		}
 
 		function createOrAddToStacks(
