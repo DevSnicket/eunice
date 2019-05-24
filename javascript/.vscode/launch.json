@@ -14,7 +14,7 @@
 			"request": "launch",
 			"type": "node",
 			"useWSL": true
-		}
+		},
 		{
 			"cwd": "${workspaceFolder}/packageWithoutScope",
 			"localRoot": "${workspaceFolder}",
