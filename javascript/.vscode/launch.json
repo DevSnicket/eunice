@@ -15,5 +15,15 @@
 			"type": "node",
 			"useWSL": true
 		}
+		{
+			"cwd": "${workspaceFolder}/packageWithoutScope",
+			"localRoot": "${workspaceFolder}",
+			"name": "packageWithoutScope createPackageJson",
+			"program": "${workspaceFolder}/packageWithoutScope/createPackageJson.js",
+			"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
+			"request": "launch",
+			"type": "node",
+			"useWSL": true
+		}
 	]
 }

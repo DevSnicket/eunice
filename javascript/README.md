@@ -14,7 +14,7 @@ This package brings together JavaScript analysis, an example configuration to pr
 To try the package out on JavaScript source code in the current directory the following [npx](https://www.npmjs.com/package/npx) command can be used:
 
 ```bash
-npx @devsnicket/eunice
+npx eunice
 ```
 
 The package produces the following two output files:
@@ -36,7 +36,7 @@ yarn add --dev @devsnicket/eunice
 yarn eunice
 ```
 
-This GitHub repository is named eunice-javascript, but the NPM package contained is called just eunice. This stops the main eunice repository from being JavaScript specific (e.g. for multiple analysis sources and programming languages), but gives this package a shorter name.
+This GitHub repository is named eunice-javascript, but the NPM package contained is called just eunice. This stops the main eunice repository from being JavaScript specific (e.g. for multiple analysis sources and programming languages), but gives this package a shorter name. An additional package without the @devsnicket scope is also created that redirects to the scoped package.
 
 ## Processing
 From the processors available in [eunice-processors](https://github.com/DevSnicket/eunice-processors
