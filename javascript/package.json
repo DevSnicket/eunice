@@ -54,9 +54,9 @@
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run dogfooding && npm run createPackageJsonWithoutScope",
 		"dogfooding": "npm update && node bin --directoryToCreateOrAddToStacksFrom=dogfooding --outputFilePrefix=dogfooding/ --packageNames=call-with-process-standard-streams --packageNames=dependency-and-structure --packageNames=javascript-analyzer --packageNames=processors --packageNames=renderer --packageNames=run-tests-from-file-system --packageNames=test-harnesses --packageNames=test-harnesses-processor-plugins --packagePrefix=@devsnicket/eunice- --directories=. --identifierPrefixesOfRootItems=@devsnicket/eunice-javascript",
-		"createPackageJsonWithoutScope": "cd packageWithoutScope && node createPackageJson.js",
+		"createPackageWithoutScopeFiles": "cp README.md packageWithoutScope && cd packageWithoutScope && node createPackageJson.js",
 		"lint": "npx eslint .",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./output/**\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +"
 	},
-	"version": "1.3.1"
+	"version": "1.4.0"
 }
