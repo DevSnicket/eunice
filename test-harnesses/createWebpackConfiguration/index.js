@@ -1,19 +1,18 @@
 // cSpell:words devtool
 
 const
-	CopyPlugin = require("copy-webpack-plugin"),
 	createModuleWithBabelPlugins = require("./createModuleWithBabelPlugins"),
-	{ DefinePlugin } = require("webpack"),
+	createTransformJavascriptToHtmlPlugin = require("./createTransformJavascriptToHtmlPlugin"),
 	path = require("path"),
-	{ readFileSync } = require("fs");
+	webpack = require("webpack");
 
 module.exports =
 	({
 		babelPlugins = [],
-		contentFromFile,
 		directory,
 		entry = null,
 		indexFile,
+		javascriptSubstitution = null,
 	}) => (
 		{
 			devtool:
@@ -36,8 +35,11 @@ module.exports =
 				},
 			plugins:
 				[
-					new DefinePlugin({ [contentFromFile.placeholder]: `\`${readFileSync(contentFromFile.file, "utf-8")}\`` }),
-					new CopyPlugin([ path.join(__dirname, "..", "harness.html") ]),
+					createTransformJavascriptToHtmlPlugin({
+						directory,
+						javascriptSubstitution,
+					}),
+					new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
 				],
 		}
 	);
