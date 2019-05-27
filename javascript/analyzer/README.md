@@ -9,7 +9,7 @@ DevSnicket Eunice is a toolkit based on the premise that unidirectional dependen
 
 This package analyzes Javascript files/directories and writes a YAML file of the dependencies. These YAML file can then be processed, rendered and interacted with using the rest of [Eunice](https://www.github.com/DevSnicket/Eunice).
 
->[try out Javascript &rightarrow; YAML](https://devsnicket.github.io/eunice-javascript-analyzer/harness.html)
+>[try out Javascript &rightarrow; YAML](https://devsnicket.github.io/eunice-javascript-analyzer/index.html)
 
 Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-javascript-analyzer):
 
