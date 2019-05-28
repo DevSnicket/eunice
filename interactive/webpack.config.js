@@ -2,10 +2,10 @@ const createWebpackConfiguration = require("./createWebpackConfiguration");
 
 module.exports =
 	createWebpackConfiguration({
-		contentFromFile:
+		javascriptSubstitution:
 			{
-				file: "../../dogfooding/.yaml",
-				placeholder: "yamlFromWebpack",
+				pattern: "yamlFromWebpack",
+				replacementFilePath: "../../dogfooding/.yaml",
 			},
 		outputDirectoryName:
 			"renderer",

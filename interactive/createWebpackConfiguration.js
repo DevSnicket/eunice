@@ -6,8 +6,8 @@ const
 module.exports =
 	({
 		babelPlugins = [],
-		contentFromFile,
 		codeEditorLanguages = [],
+		javascriptSubstitution,
 		outputDirectoryName,
 	}) => (
 		{
@@ -19,13 +19,13 @@ module.exports =
 							...babelPlugins,
 						],
 					],
-				contentFromFile,
 				directory:
 					`${__dirname}/../output/${outputDirectoryName}`,
 				entry:
 					createCodeEditorWebpackEntryForLanguages(codeEditorLanguages),
 				indexFile:
 					"./index.js",
+				javascriptSubstitution,
 			}),
 			// Workaround for renderer harness that requires @ungap/url-search-params using ES (which needs to specify default) instead of CommonJS (which does not and is used by tests).
 			resolve:
