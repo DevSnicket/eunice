@@ -2,9 +2,9 @@
 
 DevSnicket Eunice is a toolkit based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. Eunice's approach isn't limited to direct dependencies, but includes indirect dependencies as well.
 
-[try out Eunice on Eunice 🐶🥫](https://devsnicket.github.io/Eunice/renderer/harness.html)
+[try out Eunice on Eunice 🐶🥫](https://devsnicket.github.io/Eunice/renderer/index.html)
 
-[try out Eunice on some Javascript](https://devsnicket.github.io/Eunice/javascript-analyzer-and-renderer/harness.html)
+[try out Eunice on some Javascript](https://devsnicket.github.io/Eunice/javascript-analyzer-and-renderer/index.html)
 
 [![NPM](https://img.shields.io/npm/v/@devsnicket/eunice.svg)](https://www.npmjs.com/package/@devsnicket/eunice
 ) [![Build Status](https://travis-ci.org/DevSnicket/eunice-javascript-analyzer.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-javascript) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
@@ -21,7 +21,7 @@ The package produces the following two output files:
 * a YAML file (eunice.yaml) of the processed analysis
 * an SVG file (eunice.svg) with a renderer of the analysis showing the root directory
 
-The SVG file can be viewed in a compatible web browser. To interact with and explorer the rendered analysis (e.g. view the contents of sub-directories, to list dependencies etc) the YAML file can be copied and pasted into the [renderer test harness](https://devsnicket.github.io/Eunice/renderer/harness.html).
+The SVG file can be viewed in a compatible web browser. To interact with and explorer the rendered analysis (e.g. view the contents of sub-directories, to list dependencies etc) the YAML file can be copied and pasted into the [renderer test harness](https://devsnicket.github.io/Eunice/renderer/index.html).
 
 Install and run using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice):
 
