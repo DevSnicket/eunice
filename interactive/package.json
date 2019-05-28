@@ -1,6 +1,6 @@
 {
 	"author": "Graham Dyson",
-		"description": "Test harness with two columns, YAML with processors for dogfooding the whole of Eunice and SVG renderer.",
+	"description": "Test harness with two columns, YAML with processors for dogfooding the whole of Eunice and SVG renderer.",
 	"dependencies": {
 		"@devsnicket/eunice-dependency-and-structure": "2.8.0",
 		"@devsnicket/eunice-processors": "3.0.0",
@@ -52,5 +52,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./node_modules/*\" ! -path \"./test-coverage/*\" -exec npx cspell {} +",
 		"test": "npx jest",
 		"watch": "npx webpack --config webpack.config.js -d --watch"
-	},
+	}
 }
