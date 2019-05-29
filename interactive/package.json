@@ -1,6 +1,9 @@
 {
 	"author": "Graham Dyson",
-	"description": "Test harness with two columns, YAML with processors for dogfooding the whole of Eunice and SVG renderer.",
+	"bugs": {
+		"url": "https://github.com/DevSnicket/eunice/issues"
+	},
+	"description": "HTML page that renders Eunice YAML as SVG, so the structure and dependencies can be investigated.",
 	"dependencies": {
 		"@devsnicket/eunice-dependency-and-structure": "2.8.0",
 		"@devsnicket/eunice-processors": "3.0.0",
@@ -27,10 +30,21 @@
 		"jest": "24.1.0",
 		"webpack-cli": "3.3.2"
 	},
+	"homepage": "https://github.com/DevSnicket/eunice-renderer-test-harness#readme",
 	"jest": {
 		"collectCoverage": true,
 		"collectCoverageFrom": [
-			"createYamlOutputElement/createElementsFromYaml/**/*.js"
+			"**/*.js",
+			"!createHorizontalResize.js",
+  			"!createWebpackConfiguration.js",
+			"!createYamlInputElement/**",
+			"!createYamlOutputElement/**",
+			"!dist/**",
+			"!harness.js",
+			"!node_modules/**",
+			"!test-coverage/**",
+			"!tests/styleMock.js",
+			"!webpack.config.js"
 		],
 		"coverageDirectory": "test-coverage",
 		"coverageThreshold": {
@@ -44,7 +58,30 @@
 			"\\.css$": "<rootDir>tests/styleMock.js"
 		}
 	},
+	"keywords": [
+		"architecture",
+		"dependency",
+		"dependencies",
+		"euince",
+		"javascript",
+		"render",
+		"stack",
+		"structure",
+		"svg",
+		"uince",
+		"unice",
+		"yaml"
+	],
 	"license": "MIT",
+	"main": "index.js",
+	"name": "@devsnicket/eunice-renderer-test-harness",
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/DevSnicket/eunice-renderer-test-harness.git"
+	},
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run test && npm run harness",
 		"harness": "rm -rf dist/harness && npx webpack --config webpack.config.js -p",
@@ -52,5 +89,6 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./node_modules/*\" ! -path \"./test-coverage/*\" -exec npx cspell {} +",
 		"test": "npx jest",
 		"watch": "npx webpack --config webpack.config.js -d --watch"
-	}
+	},
+	"version": "1.0.0"
 }
