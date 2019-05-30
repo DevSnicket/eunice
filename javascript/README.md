@@ -52,6 +52,7 @@ From the processors available in [eunice-processors](https://github.com/DevSnick
 10. Items that have identifiers starting with "test" have child items for the [Jest](https://jestjs.io/) methods "expect" and "test" added together in a level below the other items.
 11. Independent items (i.e. those that don't depend on each other) are unstacked into the same level.
 12. The source directory is scanned for any files named .devsnicket-eunice-stack.yaml. Any structure defined inside these files is applied to any files also in the directory.
+13. If there is a single root item, that is anonymous and has only items and type, its items are flattened out into the root
 
 ## Options
 Only the current directory is included in analysis by default. Multiple sources of analysis can be specified:

@@ -54,6 +54,7 @@ module.exports =
 						identifierPrefixOfRootItems,
 						items,
 					}),
+				flattenSingleRootItemWhenHasOnlyItemsAndType,
 			]
 		);
 	};
@@ -124,4 +125,23 @@ function addJestMethodsToBottom(
 			items,
 		})
 	);
+}
+
+function flattenSingleRootItemWhenHasOnlyItemsAndType(
+	items,
+) {
+	return (
+		Array.isArray(items) || hasOtherProperties()
+		?
+		items
+		:
+		items.items
+	);
+
+	function hasOtherProperties() {
+		return (
+			Object.keys(items)
+			.some(property => property !== "items" && property !== "type")
+		);
+	}
 }
