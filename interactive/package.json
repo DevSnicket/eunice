@@ -36,9 +36,10 @@
 		"collectCoverageFrom": [
 			"**/*.js",
 			"!createHorizontalResize.js",
-  			"!createWebpackConfiguration.js",
+			"!createWebpackConfiguration.js",
 			"!createYamlInputElement/**",
-			"!createYamlOutputElement/**",
+			"!createYamlOutputElement/getProcessedYamlFromState.js",
+			"!createYamlOutputElement/index.js",
 			"!dist/**",
 			"!harness.js",
 			"!node_modules/**",
