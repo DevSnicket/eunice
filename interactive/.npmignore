@@ -1,0 +1,10 @@
+/devsnicket-eunice-renderer-test-harness-*.tgz
+/.eslintignore
+/.eslintrc.yml
+/.travis.yml
+/.vscode
+/cspell.json
+/harness.js
+/jsconfig.json
+/test-coverage
+/tests
