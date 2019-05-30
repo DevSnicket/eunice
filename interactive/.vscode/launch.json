@@ -96,6 +96,18 @@
 			"useWSL": true
 		},
 		{
+			"args":
+				[ 
+					"--runInBand",
+					"writeHarness/test/test.js"
+				],
+			"disableOptimisticBPs": true,
+			"name": "writeHarness jest",
+			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+			"request": "launch",
+			"type": "node"
+		},
+		{
 			"name": "launch Chrome",
 			"port": 9222,
 			"request": "launch",

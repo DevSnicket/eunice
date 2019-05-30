@@ -2,11 +2,13 @@
 const
 	createWebpackConfiguration = require("./createWebpackConfiguration"),
 	createYamlInputElement = require("./createYamlInputElement"),
-	createYamlOutputElement = require("./createYamlOutputElement");
+	createYamlOutputElement = require("./createYamlOutputElement"),
+	writeHarness = require("./writeHarness");
 
 module.exports =
 	{
 		createWebpackConfiguration,
 		createYamlInputElement,
 		createYamlOutputElement,
+		writeHarness,
 	};
