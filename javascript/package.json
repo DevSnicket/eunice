@@ -11,6 +11,7 @@
 		"@devsnicket/eunice-javascript-analyzer": "^2.0.1",
 		"@devsnicket/eunice-processors": "^3.1.0",
 		"@devsnicket/eunice-renderer": "*",
+		"@devsnicket/eunice-renderer-test-harness": "*",
 		"js-yaml": "3.13.1",
 		"minimist": "1.2.0"
 	},
@@ -53,9 +54,9 @@
 	},
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run dogfooding",
-		"dogfooding": "npm update && node bin --directoryToCreateOrAddToStacksFrom=dogfooding --outputFilePrefix=dogfooding/ --packageNames=call-with-process-standard-streams --packageNames=dependency-and-structure --packageNames=javascript-analyzer --packageNames=processors --packageNames=renderer --packageNames=run-tests-from-file-system --packageNames=test-harnesses --packageNames=test-harnesses-processor-plugins --packagePrefix=@devsnicket/eunice- --directories=. --identifierPrefixesOfRootItems=@devsnicket/eunice-javascript",
+		"dogfooding": "npm update && node bin --directoryToCreateOrAddToStacksFrom=dogfooding --outputDirectoryPath=dogfooding --packageNames=call-with-process-standard-streams --packageNames=dependency-and-structure --packageNames=javascript-analyzer --packageNames=processors --packageNames=renderer --packageNames=renderer-test-harness --packageNames=run-tests-from-file-system --packageNames=test-harnesses --packageNames=test-harnesses-processor-plugins --packagePrefix=@devsnicket/eunice- --directories=. --identifierPrefixesOfRootItems=@devsnicket/eunice-javascript",
 		"lint": "npx eslint .",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./output/**\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +"
 	},
-	"version": "1.4.1"
+	"version": "2.0.0"
 }

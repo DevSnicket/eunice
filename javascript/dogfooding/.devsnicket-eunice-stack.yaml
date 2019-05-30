@@ -1,5 +1,5 @@
-- - harnesses
-  - "@devsnicket/eunice-javascript"
+- - "@devsnicket/eunice-javascript"
+- - "@devsnicket/eunice-renderer-test-harness"
 - - "@devsnicket/eunice-javascript-analyzer"
   - "@devsnicket/eunice-processors"
   - "@devsnicket/eunice-renderer"

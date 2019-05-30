@@ -17,11 +17,10 @@ To try the package out on JavaScript source code in the current directory the fo
 npx eunice
 ```
 
-The package produces the following two output files:
-* a YAML file (eunice.yaml) of the processed analysis
-* an SVG file (eunice.svg) with a renderer of the analysis showing the root directory
-
-The SVG file can be viewed in a compatible web browser. To interact with and explorer the rendered analysis (e.g. view the contents of sub-directories, to list dependencies etc) the YAML file can be copied and pasted into the [renderer test harness](https://devsnicket.github.io/Eunice/renderer/index.html).
+The package produces the following output files:
+* a YAML file (eunice.yaml) containing processed analysis
+* an SVG file (eunice.svg) containing a render scoped to the root directory
+* a HTML file (eunice.html) containing an interactive render, where the scope can be set to sub-items (e.g. sub-directories, files, functions etc), and dependencies can be listed
 
 Install and run using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice):
 
@@ -94,7 +93,7 @@ npx @devsnicket/eunice --directories=directory1 --directories=directory2 --direc
 ```
 
 To name the output files differently or in a different directory:
-npx @devsnicket/eunice --outputFilePrefix=euniceOutput/
+npx @devsnicket/eunice --outputBaseFileName=eunice-file --outputDirectoryPath=eunice-directory
 
 ## Dogfooding
 

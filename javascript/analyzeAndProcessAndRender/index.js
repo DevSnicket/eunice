@@ -4,8 +4,10 @@ const
 	formatYaml = require("js-yaml").safeDump,
 	fs = require("fs"),
 	{ getSvgForYaml } = require("@devsnicket/eunice-renderer"),
+	path = require("path"),
 	{ promisify } = require("util"),
-	removePackagePrefixFromYaml = require("./removePackagePrefixFromYaml");
+	removePackagePrefixFromYaml = require("./removePackagePrefixFromYaml"),
+	writeHarness = require("@devsnicket/eunice-renderer-test-harness/writeHarness");
 
 const
 	ignoreDirectoryNamesDefault =
@@ -26,7 +28,7 @@ module.exports =
 	async({
 		directoryToCreateOrAddToStacksFrom = null,
 		ignoreDirectoryNames = ignoreDirectoryNamesDefault,
-		outputFilePrefix = "eunice",
+		outputPath = { baseFileName: "eunice", directoryPath: "." },
 		packageNames = [],
 		packagePrefix = null,
 		sources,
@@ -52,13 +54,41 @@ module.exports =
 					),
 			});
 
-		await writeFile(
-			`${outputFilePrefix}.yaml`,
+		await writeOutput({
+			...outputPath,
 			yaml,
-		);
-
-		await writeFile(
-			`${outputFilePrefix}.svg`,
-			getSvgForYaml({ yaml }),
-		);
+		});
 	};
+
+async function writeOutput({
+	baseFileName,
+	directoryPath,
+	yaml,
+}) {
+	const baseFilePath =
+		baseFileName
+		?
+		path.join(directoryPath, baseFileName)
+		:
+		`${directoryPath}${path.sep}`;
+
+	const yamlFilePath = `${baseFilePath}.yaml`;
+
+	await writeFile(
+		yamlFilePath,
+		yaml,
+	);
+
+	await writeFile(
+		`${baseFilePath}.svg`,
+		getSvgForYaml({ yaml }),
+	);
+
+	await writeHarness({
+		directoryPath,
+		htmlFileName: `${baseFileName || ""}.html`,
+		includeServiceWorkers: false,
+		includeSourceMap: false,
+		yamlFilePath,
+	});
+}
