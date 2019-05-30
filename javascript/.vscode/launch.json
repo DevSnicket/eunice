@@ -6,24 +6,17 @@
 			"type": "node"
 		},
 		{
-			"cwd": "${workspaceFolder}",
-			"localRoot": "${workspaceFolder}",
 			"name": "bin no arguments",
 			"program": "${workspaceFolder}/bin/index.js",
-			"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 			"request": "launch",
-			"type": "node",
-			"useWSL": true
+			"type": "node"
 		},
 		{
 			"cwd": "${workspaceFolder}/packageWithoutScope",
-			"localRoot": "${workspaceFolder}",
 			"name": "packageWithoutScope createPackageJson",
 			"program": "${workspaceFolder}/packageWithoutScope/createPackageJson.js",
-			"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 			"request": "launch",
-			"type": "node",
-			"useWSL": true
+			"type": "node"
 		}
 	]
 }
