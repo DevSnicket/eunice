@@ -1,4 +1,6 @@
 const
+	createIdentifierSeparatorSpecific = require("./createIdentifierSeparatorSpecific"),
+	createOrAddToStacks = require("./createOrAddToStacks"),
 	{
 		sorting:
 			{
@@ -9,14 +11,12 @@ const
 			{
 				createOrAddToStacksToItemsWithIdentifier,
 				createOrAddToStacksUniformly,
-				createOrAddToStacksUsingFileSystem,
 			},
 		removeSelfDependentItemsOfType,
 		setIdentifierOfAnonymousToParent,
 		setTypeOfRootItems,
 		unstackIndependent,
-	} = require("@devsnicket/eunice-processors"),
-	createIdentifierSeparatorSpecific = require("./createIdentifierSeparatorSpecific");
+	} = require("@devsnicket/eunice-processors");
 
 module.exports =
 	({
@@ -47,25 +47,15 @@ module.exports =
 				stackBinAndTestAtTop,
 				addJestMethodsToBottom,
 				unstackIndependent,
-				createOrAddToStacks,
+				items =>
+					createOrAddToStacks({
+						directory:
+							directoryToCreateOrAddToStacksFrom,
+						identifierPrefixOfRootItems,
+						items,
+					}),
 			]
 		);
-
-		function createOrAddToStacks(
-			items,
-		) {
-			return (
-				createOrAddToStacksUsingFileSystem({
-					directory:
-						directoryToCreateOrAddToStacksFrom,
-					items,
-					subsetIdentifierHierarchy:
-						identifierPrefixOfRootItems
-						&&
-						[ identifierPrefixOfRootItems ],
-				})
-			);
-		}
 	};
 
 function setTypeOfRootToFile(
