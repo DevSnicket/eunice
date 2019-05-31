@@ -2,7 +2,7 @@ const
 	{ createElement } = require("react"),
 	createElementsFromYaml = require("../../createElementsFromYaml"),
 	path = require("path"),
-	readTestSvgFile = require("./readTestFile"),
+	readTextFile = require("../../../readTextFile"),
 	{ renderToStaticMarkup } = require("react-dom/server");
 
 const breadcrumbHtmlForRoot = "<div><a href=\"#\">root</a></div>";
@@ -195,7 +195,7 @@ describe(
 		),
 );
 
-function testTestCase({
+async function testTestCase({
 	expectedFile,
 	expectedHtmlPrefix = "",
 	locationHash = null,
@@ -215,7 +215,7 @@ function testTestCase({
 		wrapInPaddingDiv(
 			expectedHtmlPrefix
 			+
-			readTestSvgFile(
+			await readTextFile(
 				path.join(__dirname, "testCases", expectedFile),
 			),
 		),

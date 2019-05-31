@@ -3,11 +3,12 @@ const
 	{ createElement } = require("react"),
 	{ renderToStaticMarkup } = require("react-dom/server"),
 	path = require("path"),
-	readTestFile = require("../../../test/readTestFile");
+	readTextFile = require("../../../../../readTextFile"),
+	removeWhitespaceFromExpected = require("../test/removeWhitespaceFromExpected");
 
 test(
 	"creates and includes elements",
-	() =>
+	async() =>
 		expect(
 			renderToStaticMarkup(
 				createVerticalResize({
@@ -27,9 +28,10 @@ test(
 			),
 		)
 		.toEqual(
-			readTestFile(
-				path.join(__dirname, "testCase.html"),
-			)
-			.replace(/\n|\t/g, ""),
+			removeWhitespaceFromExpected(
+				await readTextFile(
+					path.join(__dirname, "testCase.html"),
+				),
+			),
 		),
 );

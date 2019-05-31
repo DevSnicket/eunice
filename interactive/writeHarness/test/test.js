@@ -3,7 +3,7 @@ const
 	getSourcePath = require("../getSourcePath"),
 	path = require("path"),
 	readDirectoryPathRecursive = require("./readDirectoryPathRecursive"),
-	readTextFile = require("../readTextFile"),
+	readTextFile = require("../../readTextFile"),
 	writeHarness = require("..");
 
 const htmlFileName = "eunice.html";

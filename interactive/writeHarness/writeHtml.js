@@ -2,7 +2,7 @@ const
 	fs = require("fs-extra"),
 	getSourcePath = require("./getSourcePath"),
 	path = require("path"),
-	readTextFile = require("./readTextFile");
+	readTextFile = require("../readTextFile");
 
 module.exports =
 	async({

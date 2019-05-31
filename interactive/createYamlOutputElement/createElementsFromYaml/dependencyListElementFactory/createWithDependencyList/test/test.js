@@ -1,10 +1,11 @@
 const
 	{ createElement } = require("react"),
 	{ createStackFromYaml } = require("@devsnicket/eunice-dependency-and-structure"),
-	createWithDependencyList = require("."),
+	createWithDependencyList = require(".."),
 	{ renderToStaticMarkup } = require("react-dom/server"),
 	path = require("path"),
-	readTestFile = require("../../test/readTestFile");
+	readTextFile = require("../../../../../readTextFile"),
+	removeWhitespaceFromExpected = require("./removeWhitespaceFromExpected");
 
 const
 	dependsUponIdentifier = "depends upon",
@@ -45,7 +46,7 @@ test(
 
 test(
 	"subset of child item that depends upon item in same level returns element and dependency list in Reflex resize",
-	() => {
+	async() => {
 		const
 			childIdentifier = "item",
 			parentIdentifier = "parent";
@@ -96,10 +97,11 @@ test(
 			),
 		)
 		.toBe(
-			readTestFile(
-				path.join(__dirname, "testCase.html"),
-			)
-			.replace(/\n|\t/g, ""),
+			removeWhitespaceFromExpected(
+				await readTextFile(
+					path.join(__dirname, "testCase.html"),
+				),
+			),
 		);
 	},
 );

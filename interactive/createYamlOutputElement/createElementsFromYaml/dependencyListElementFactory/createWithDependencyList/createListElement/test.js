@@ -3,11 +3,12 @@ const
 	{ renderToStaticMarkup } = require("react-dom/server"),
 	createListElement = require("../createListElement"),
 	path = require("path"),
-	readTestFile = require("../../../test/readTestFile");
+	readTextFile = require("../../../../../readTextFile"),
+	removeWhitespaceFromExpected = require("../test/removeWhitespaceFromExpected");
 
 test(
 	"child items with depends upon",
-	() =>
+	async() =>
 		expect(
 			renderToStaticMarkup(
 				createListElement({
@@ -71,10 +72,11 @@ test(
 			),
 		)
 		.toEqual(
-			readTestFile(
-				path.join(__dirname, "testCase.html"),
-			)
-			.replace(/\n|\t/g, ""),
+			removeWhitespaceFromExpected(
+				await readTextFile(
+					path.join(__dirname, "testCase.html"),
+				),
+			),
 		),
 );
 

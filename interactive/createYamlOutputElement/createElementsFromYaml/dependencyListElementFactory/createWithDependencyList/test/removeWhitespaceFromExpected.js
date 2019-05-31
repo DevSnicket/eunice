@@ -1,0 +1,1 @@
+module.exports = expected => expected.replace(/\n|\t/g, "");
