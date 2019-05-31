@@ -93,5 +93,5 @@
 		"test": "npx jest",
 		"watch": "npx webpack --config webpack.config.js -d --watch"
 	},
-	"version": "1.1.0"
+	"version": "1.2.0"
 }
