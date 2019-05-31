@@ -1,11 +1,11 @@
 const
 	{ createElement } = require("react"),
 	{ createStackFromYaml } = require("@devsnicket/eunice-dependency-and-structure"),
-	createWithDependencyList = require(".."),
+	createWithDependencyList = require("."),
 	{ renderToStaticMarkup } = require("react-dom/server"),
 	path = require("path"),
-	readTextFile = require("../../../../../readTextFile"),
-	removeWhitespaceFromExpected = require("./removeWhitespaceFromExpected");
+	readTextFile = require("../../../../readTextFile"),
+	removeWhitespaceFromTestExpected = require("./removeWhitespaceFromTestExpected");
 
 const
 	dependsUponIdentifier = "depends upon",
@@ -97,7 +97,7 @@ test(
 			),
 		)
 		.toBe(
-			removeWhitespaceFromExpected(
+			removeWhitespaceFromTestExpected(
 				await readTextFile(
 					path.join(__dirname, "testCase.html"),
 				),

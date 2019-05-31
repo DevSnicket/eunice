@@ -4,7 +4,7 @@ const
 	createListElement = require("../createListElement"),
 	path = require("path"),
 	readTextFile = require("../../../../../readTextFile"),
-	removeWhitespaceFromExpected = require("../test/removeWhitespaceFromExpected");
+	removeWhitespaceFromTestExpected = require("../removeWhitespaceFromTestExpected");
 
 test(
 	"child items with depends upon",
@@ -72,7 +72,7 @@ test(
 			),
 		)
 		.toEqual(
-			removeWhitespaceFromExpected(
+			removeWhitespaceFromTestExpected(
 				await readTextFile(
 					path.join(__dirname, "testCase.html"),
 				),

@@ -4,7 +4,7 @@ const
 	{ renderToStaticMarkup } = require("react-dom/server"),
 	path = require("path"),
 	readTextFile = require("../../../../../readTextFile"),
-	removeWhitespaceFromExpected = require("../test/removeWhitespaceFromExpected");
+	removeWhitespaceFromTestExpected = require("../removeWhitespaceFromTestExpected");
 
 test(
 	"creates and includes elements",
@@ -28,7 +28,7 @@ test(
 			),
 		)
 		.toEqual(
-			removeWhitespaceFromExpected(
+			removeWhitespaceFromTestExpected(
 				await readTextFile(
 					path.join(__dirname, "testCase.html"),
 				),
