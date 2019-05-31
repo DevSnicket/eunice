@@ -1,8 +1,8 @@
 const
 	{ createElement } = require("react"),
-	createElementsFromYaml = require("../../createElementsFromYaml"),
+	createElementsFromYaml = require("."),
 	path = require("path"),
-	readTextFile = require("../../../readTextFile"),
+	readTextFile = require("../../readTextFile"),
 	{ renderToStaticMarkup } = require("react-dom/server");
 
 const breadcrumbHtmlForRoot = "<div><a href=\"#\">root</a></div>";
