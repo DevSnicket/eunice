@@ -4,6 +4,7 @@
 /.travis.yml
 /.vscode
 /cspell.json
-/eunice.*
 /dogfooding
+/eunice.*
+/harness
 /jsconfig.json

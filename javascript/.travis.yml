@@ -6,6 +6,14 @@ deploy:
     email: grahamdyson@hotmail.com
     provider: npm
     skip_cleanup: true
+  - github-token: $GITHUB_HARNESSES_TOKEN
+    keep-history: true
+    local-dir: harness/output
+    on:
+      branch: master
+    provider: pages
+    skip-cleanup: true
+    target-branch: gh-pages
 jobs:
   include:
     - stage: root

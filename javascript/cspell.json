@@ -6,6 +6,7 @@
 		"devsnicket",
 		"gitter",
 		"promisify",
-		"snicket"
+		"snicket",
+		"stateful"
 	]
 }
