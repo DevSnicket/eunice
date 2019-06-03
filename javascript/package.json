@@ -8,10 +8,10 @@
 	},
 	"description": "Analyzes JavaScript on the file system, processes the analysis and renders the processed analysis to an SVG.",
 	"dependencies": {
-		"@devsnicket/eunice-javascript-analyzer": "2.0.1",
-		"@devsnicket/eunice-processors": "3.4.0",
-		"@devsnicket/eunice-renderer": "4.5.2",
-		"@devsnicket/eunice-renderer-test-harness": "1.5.1",
+		"@devsnicket/eunice-javascript-analyzer": "^2.0.1",
+		"@devsnicket/eunice-processors": "^3.4.0",
+		"@devsnicket/eunice-renderer": "^4.5.2",
+		"@devsnicket/eunice-renderer-test-harness": "^1.5.1",
 		"js-yaml": "3.13.1",
 		"minimist": "1.2.0"
 	},
