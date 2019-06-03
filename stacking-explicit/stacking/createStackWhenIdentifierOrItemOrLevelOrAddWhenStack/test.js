@@ -259,6 +259,21 @@ test(
 				}),
 		)
 		.toThrowError(
-			"Single item level of \"existing\" not specified in new stack \"itemMissingAndSpecified\".",
+			"Neither the following items were specified \"itemNotSpecified\", nor was a single item level of \"existing\", in new the stack \"itemMissingAndSpecified\".",
+		),
+);
+
+test(
+	"Items and existing not specified throws error",
+	() =>
+		expect(
+			() =>
+				getIdentifierOrItemOrStackLevelOrStack({
+					identifierOrItemOrLevelOrStack: [ "item1NotSpecified", "item2NotSpecified" ],
+					identifiersInNewStack: [ "itemMissingAndSpecified" ],
+				}),
+		)
+		.toThrowError(
+			"Neither the following items were specified \"item1NotSpecified\", \"item2NotSpecified\", nor was a single item level of \"existing\", in new the stack \"itemMissingAndSpecified\".",
 		),
 );

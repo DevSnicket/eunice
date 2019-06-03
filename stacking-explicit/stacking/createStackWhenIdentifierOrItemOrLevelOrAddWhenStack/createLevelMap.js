@@ -1,3 +1,6 @@
+require("array.prototype.flat")
+.shim();
+
 module.exports =
 	({
 		addMissing,
@@ -29,7 +32,16 @@ module.exports =
 
 			function throwErrorWhenExistingNotSpecified() {
 				if (existingLevels.length && !identifiersInNewStack.some(isNewLevelForExisting))
-					throw Error(`Single item level of "${existingIdentifier}" not specified in new stack "${identifiersInNewStack}".`);
+					throw Error(`Neither the following items were specified ${formatExistingLevels()}, nor was a single item level of "${existingIdentifier}", in new the stack "${identifiersInNewStack}".`);
+
+				function formatExistingLevels() {
+					return (
+						existingLevels
+						.flat()
+						.map(existing => `"${existing}"`)
+						.join(", ")
+					);
+				}
 			}
 
 			function aggregate(
