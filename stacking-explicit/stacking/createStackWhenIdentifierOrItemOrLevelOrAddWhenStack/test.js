@@ -249,7 +249,7 @@ test.each(
 );
 
 test(
-	"Item and existing not specified throws error",
+	"Item of identifier and existing not specified throws error",
 	() =>
 		expect(
 			() =>
@@ -264,7 +264,7 @@ test(
 );
 
 test(
-	"Items and existing not specified throws error",
+	"Items of identifier and existing not specified throws error",
 	() =>
 		expect(
 			() =>
@@ -275,5 +275,20 @@ test(
 		)
 		.toThrowError(
 			"Neither the following items were specified \"item1NotSpecified\", \"item2NotSpecified\", nor was a single item level of \"existing\", in new the stack \"itemMissingAndSpecified\".",
+		),
+);
+
+test(
+	"Item and existing not specified throws error",
+	() =>
+		expect(
+			() =>
+				getIdentifierOrItemOrStackLevelOrStack({
+					identifierOrItemOrLevelOrStack: [ { id: "itemNotSpecified" } ],
+					identifiersInNewStack: [ "itemMissingAndSpecified" ],
+				}),
+		)
+		.toThrowError(
+			"Neither the following items were specified \"itemNotSpecified\", nor was a single item level of \"existing\", in new the stack \"itemMissingAndSpecified\".",
 		),
 );

@@ -38,7 +38,7 @@ module.exports =
 					return (
 						existingLevels
 						.flat()
-						.map(existing => `"${existing}"`)
+						.map(existing => `"${existing.id || existing}"`)
 						.join(", ")
 					);
 				}
