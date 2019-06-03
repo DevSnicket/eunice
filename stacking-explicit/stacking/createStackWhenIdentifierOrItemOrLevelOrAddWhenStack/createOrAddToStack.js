@@ -5,7 +5,7 @@ module.exports =
 		levelOrStack,
 	}) => {
 		return (
-			Array.isArray(levelOrStack[0])
+			levelOrStack.some(Array.isArray)
 			?
 			addToStack()
 			:

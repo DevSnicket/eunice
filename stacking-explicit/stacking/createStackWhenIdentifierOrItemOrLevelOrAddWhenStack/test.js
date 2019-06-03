@@ -240,6 +240,13 @@ test.each(
 				[ "item1" ], [ "item2" ], [ "item3" ],
 			],
 		],
+		[
+			{
+				identifierOrItemOrLevelOrStack: [ "item1", [] ],
+				identifiersInNewStack: [ "item1" ],
+			},
+			[ [ "item1" ] ],
+		],
 	],
 )(
 	"%j returns %j",
