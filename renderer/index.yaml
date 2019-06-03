@@ -1200,6 +1200,7 @@
                             dependsUpon: readReplacement
                         - - id: readReplacement
                             dependsUpon:
+                              - getStringLiteral
                               - readTextFile
                               - yamlFilePath
                           - id: directoryPath
@@ -1213,6 +1214,11 @@
                       dependsUpon:
                         id: fs-extra
                         items: writeFile
+                    - id: getStringLiteral
+                      type: variable
+                      dependsUpon:
+                        id: test-harnesses
+                        items: getStringLiteral
             - - id: getSourcePath
                 type: file
                 items:
@@ -5358,242 +5364,253 @@
   - id: test-harnesses
     type: file
     items:
-      - id: codeEditor
-        items:
-          - id: serviceWorkers
-            items:
-              - - id: createWebpackEntryForLanguages
-                  type: file
-                  items:
-                    - - id: createWebpackEntryForLanguages
-                        dependsUpon:
-                          - Object
-                          - createEntries
-                        items:
-                          - - id: createEntries
-                              dependsUpon:
-                                - formatPackageUrl
-                                - languages
-                                - workers
-                          - - id: languages
-                              type: parameter
-                    - - id: workers
-                        type: variable
-                        dependsUpon: codeEditor/serviceWorkers/workers.json
-                - id: initializeGlobal
-                  type: file
-                  items:
-                    - - id: initializeGlobal
-                        items:
-                          - - id: getWorkerUrl
-                              dependsUpon:
-                                - Error
-                                - findWorkerWithLabel
-                                - formatPackageUrl
-                          - - id: findWorkerWithLabel
-                              dependsUpon: workers
-                    - - id: workers
-                        type: variable
-                        dependsUpon: codeEditor/serviceWorkers/workers.json
-              - - id: formatPackageUrl
-                  type: file
-          - id: createEditorForLanguage
-            type: file
-            items:
-              - - id: createEditorForLanguage
-                  items:
-                    - - id: createEditorElement
-                        dependsUpon:
-                          - createElement
-                          - setDomContainerElement
-                        items:
-                          - - id: setDomContainerElement
-                              dependsUpon:
-                                - initializeMonacoEditor
-                                - isNewEditorRequired
-                                - updateMonacoEditor
-                              items:
-                                - - id: isNewEditorRequired
-                                    dependsUpon:
-                                      - disposeWhenDomElementHasChanged
-                                      - domElement
-                                      - monacoEditor
-                                  - id: initializeMonacoEditor
-                                    dependsUpon:
-                                      - createMonacoEditor
-                                      - domElement
-                                      - initializeOnDidChangeModelContent
-                                      - language
-                                      - value
-                                  - id: updateMonacoEditor
-                                    dependsUpon:
-                                      - updateOnDidChangeModelContent
-                                      - updateValue
-                                    items:
-                                      - id: updateValue
-                                        dependsUpon:
-                                          - monacoEditor
-                                          - value
-                                      - id: updateOnDidChangeModelContent
-                                        dependsUpon:
-                                          - initializeOnDidChangeModelContent
-                                          - onDidChangeModelContent
-                                - - id: initializeOnDidChangeModelContent
-                                    dependsUpon:
-                                      - monacoEditor
-                                      - setStateFromValue
-                                  - id: domElement
-                                    type: parameter
-                          - - id: setStateFromValue
-                              type: parameter
-                            - id: value
-                              type: parameter
-                    - - id: language
-                        type: parameter
-                      - id: monacoEditor
-                        type: variable
-                      - id: onDidChangeModelContent
-                        type: variable
-              - - disposeWhenDomElementHasChanged
-                - id: createElement
-                  type: variable
-                  dependsUpon:
-                    id: react
-                    items: createElement
-      - id: callOrCreateElementOnError
-        type: file
-      - id: createFillWithTitleElement
-        type: file
-        items:
-          - - id: createFillWithTitleElement
-              dependsUpon: createElement
-          - - id: createElement
-              type: variable
-              dependsUpon:
-                id: react
-                items: createElement
-      - id: createReflexContainerForColumnElements
-        type: file
-        items:
-          - - id: createReflexContainerForColumnElements
-              dependsUpon:
-                - ReflexContainer
-                - ReflexElement
-                - createElement
-                - createSplitterWithIndex
-          - - id: createSplitterWithIndex
-              dependsUpon:
-                - ReflexSplitter
-                - createElement
-          - - id: createElement
-              type: variable
-              dependsUpon:
-                id: react
-                items: createElement
-            - id: ReflexContainer
-              type: variable
-              dependsUpon:
-                id: react-reflex
-                items: ReflexContainer
-            - id: ReflexElement
-              type: variable
-              dependsUpon:
-                id: react-reflex
-                items: ReflexElement
-            - id: ReflexSplitter
-              type: variable
-              dependsUpon:
-                id: react-reflex
-                items: ReflexSplitter
-      - id: createTextareaElement
-        type: file
-        items:
-          - - id: createTextareaElement
-              dependsUpon: createElement
-          - - id: createElement
-              type: variable
-              dependsUpon:
-                id: react
-                items: createElement
-      - id: createWebpackConfiguration
-        type: file
-        items:
-          - - id: createWebpackConfiguration
-              dependsUpon:
-                - createModuleWithBabelPlugins
-                - createTransformJavascriptToHtmlPlugin
-                - path
-          - - id: createModuleWithBabelPlugins
-              type: file
-            - id: createTransformJavascriptToHtmlPlugin
-              type: file
-              dependsUpon:
-                id: util
-                items: promisify
+      - - id: codeEditor
+          items:
+            - id: serviceWorkers
               items:
-                - - id: createTransformJavascriptToHtmlPlugin
+                - - id: createWebpackEntryForLanguages
+                    type: file
                     items:
-                      - - apply
-                        - id: transform
+                      - - id: createWebpackEntryForLanguages
                           dependsUpon:
-                            - deleteFile
-                            - directory
-                            - getHtmlWithJavascript
-                            - getJavascriptSubstituted
-                            - path
-                            - readJavascript
-                            - writeHtml
+                            - Object
+                            - createEntries
                           items:
-                            - - id: readJavascript
+                            - - id: createEntries
                                 dependsUpon:
-                                  - javascriptPath
-                                  - readTextFile
-                              - id: getJavascriptSubstituted
-                                dependsUpon: readReplacement
-                                items:
-                                  id: readReplacement
-                                  dependsUpon: readTextFile
-                              - getHtmlWithJavascript
-                            - - id: readTextFile
-                                dependsUpon: readFile
-                              - id: writeHtml
+                                  - formatPackageUrl
+                                  - languages
+                                  - workers
+                            - - id: languages
+                                type: parameter
+                      - - id: workers
+                          type: variable
+                          dependsUpon: codeEditor/serviceWorkers/workers.json
+                  - id: initializeGlobal
+                    type: file
+                    items:
+                      - - id: initializeGlobal
+                          items:
+                            - - id: getWorkerUrl
                                 dependsUpon:
-                                  - getFilePath
-                                  - writeFile
+                                  - Error
+                                  - findWorkerWithLabel
+                                  - formatPackageUrl
+                            - - id: findWorkerWithLabel
+                                dependsUpon: workers
+                      - - id: workers
+                          type: variable
+                          dependsUpon: codeEditor/serviceWorkers/workers.json
+                - - id: formatPackageUrl
+                    type: file
+            - id: createEditorForLanguage
+              type: file
+              items:
+                - - id: createEditorForLanguage
+                    items:
+                      - - id: createEditorElement
+                          dependsUpon:
+                            - createElement
+                            - setDomContainerElement
+                          items:
+                            - - id: setDomContainerElement
+                                dependsUpon:
+                                  - initializeMonacoEditor
+                                  - isNewEditorRequired
+                                  - updateMonacoEditor
                                 items:
-                                  id: getFilePath
-                                  dependsUpon:
-                                    - directory
-                                    - path
-                              - id: javascriptPath
-                                type: variable
-                      - - id: directory
+                                  - - id: isNewEditorRequired
+                                      dependsUpon:
+                                        - disposeWhenDomElementHasChanged
+                                        - domElement
+                                        - monacoEditor
+                                    - id: initializeMonacoEditor
+                                      dependsUpon:
+                                        - createMonacoEditor
+                                        - domElement
+                                        - initializeOnDidChangeModelContent
+                                        - language
+                                        - value
+                                    - id: updateMonacoEditor
+                                      dependsUpon:
+                                        - updateOnDidChangeModelContent
+                                        - updateValue
+                                      items:
+                                        - id: updateValue
+                                          dependsUpon:
+                                            - monacoEditor
+                                            - value
+                                        - id: updateOnDidChangeModelContent
+                                          dependsUpon:
+                                            - initializeOnDidChangeModelContent
+                                            - onDidChangeModelContent
+                                  - - id: initializeOnDidChangeModelContent
+                                      dependsUpon:
+                                        - monacoEditor
+                                        - setStateFromValue
+                                    - id: domElement
+                                      type: parameter
+                            - - id: setStateFromValue
+                                type: parameter
+                              - id: value
+                                type: parameter
+                      - - id: language
                           type: parameter
-                - - id: deleteFile
+                        - id: monacoEditor
+                          type: variable
+                        - id: onDidChangeModelContent
+                          type: variable
+                - - disposeWhenDomElementHasChanged
+                  - id: createElement
                     type: variable
-                  - id: readFile
-                    type: variable
-                  - id: writeFile
-                    type: variable
-      - id: renderIntoContainerElement
-        type: file
-        items:
-          - - id: renderIntoContainerElement
-              dependsUpon:
-                - createElement
-                - document
-                - render
-                - window
-          - - id: createElement
-              type: variable
-              dependsUpon:
-                id: react
-                items: createElement
-            - id: render
-              type: variable
-              dependsUpon:
-                id: react-dom
-                items: render
+                    dependsUpon:
+                      id: react
+                      items: createElement
+        - id: callOrCreateElementOnError
+          type: file
+        - id: createFillWithTitleElement
+          type: file
+          items:
+            - - id: createFillWithTitleElement
+                dependsUpon: createElement
+            - - id: createElement
+                type: variable
+                dependsUpon:
+                  id: react
+                  items: createElement
+        - id: createReflexContainerForColumnElements
+          type: file
+          items:
+            - - id: createReflexContainerForColumnElements
+                dependsUpon:
+                  - ReflexContainer
+                  - ReflexElement
+                  - createElement
+                  - createSplitterWithIndex
+            - - id: createSplitterWithIndex
+                dependsUpon:
+                  - ReflexSplitter
+                  - createElement
+            - - id: createElement
+                type: variable
+                dependsUpon:
+                  id: react
+                  items: createElement
+              - id: ReflexContainer
+                type: variable
+                dependsUpon:
+                  id: react-reflex
+                  items: ReflexContainer
+              - id: ReflexElement
+                type: variable
+                dependsUpon:
+                  id: react-reflex
+                  items: ReflexElement
+              - id: ReflexSplitter
+                type: variable
+                dependsUpon:
+                  id: react-reflex
+                  items: ReflexSplitter
+        - id: createTextareaElement
+          type: file
+          items:
+            - - id: createTextareaElement
+                dependsUpon: createElement
+            - - id: createElement
+                type: variable
+                dependsUpon:
+                  id: react
+                  items: createElement
+        - id: createWebpackConfiguration
+          type: file
+          items:
+            - - id: createWebpackConfiguration
+                dependsUpon:
+                  - createModuleWithBabelPlugins
+                  - createTransformJavascriptToHtmlPlugin
+                  - path
+            - - id: createModuleWithBabelPlugins
+                type: file
+              - id: createTransformJavascriptToHtmlPlugin
+                type: file
+                dependsUpon:
+                  id: util
+                  items: promisify
+                items:
+                  - - id: createTransformJavascriptToHtmlPlugin
+                      items:
+                        - - apply
+                          - id: transform
+                            dependsUpon:
+                              - deleteFile
+                              - directory
+                              - getHtmlWithJavascript
+                              - getJavascriptSubstituted
+                              - path
+                              - readJavascript
+                              - writeHtml
+                            items:
+                              - - id: readJavascript
+                                  dependsUpon:
+                                    - javascriptPath
+                                    - readTextFile
+                                - id: getJavascriptSubstituted
+                                  dependsUpon: readReplacement
+                                  items:
+                                    id: readReplacement
+                                    dependsUpon:
+                                      - getStringLiteral
+                                      - readTextFile
+                                - getHtmlWithJavascript
+                              - - id: readTextFile
+                                  dependsUpon: readFile
+                                - id: writeHtml
+                                  dependsUpon:
+                                    - getFilePath
+                                    - writeFile
+                                  items:
+                                    id: getFilePath
+                                    dependsUpon:
+                                      - directory
+                                      - path
+                                - id: javascriptPath
+                                  type: variable
+                        - - id: directory
+                            type: parameter
+                  - - id: deleteFile
+                      type: variable
+                    - id: readFile
+                      type: variable
+                    - id: writeFile
+                      type: variable
+        - id: renderIntoContainerElement
+          type: file
+          items:
+            - - id: renderIntoContainerElement
+                dependsUpon:
+                  - createElement
+                  - document
+                  - render
+                  - window
+            - - id: createElement
+                type: variable
+                dependsUpon:
+                  id: react
+                  items: createElement
+              - id: render
+                type: variable
+                dependsUpon:
+                  id: react-dom
+                  items: render
+      - - id: getStringLiteral
+          type: file
+          items:
+            - - id: getStringLiteral
+                dependsUpon:
+                  - getEscaped
+                  - getQuoted
+            - - getQuoted
+              - getEscaped
   - id: test-harnesses-processor-plugins
     type: file
     dependsUpon: '@devsnicket/plugin-discovery-create-repository'
