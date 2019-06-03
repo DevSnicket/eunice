@@ -2,9 +2,7 @@
 	"configurations":
 		[
 			{
-				"localRoot": "${workspaceFolder}",
 				"name": "attach",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "attach",
 				"type": "node"
 			},
@@ -14,13 +12,10 @@
 						"--items=",
 						"--identifierSeparator="
 					],
-				"localRoot": "${workspaceFolder}",
 				"name": "groupItemsByIdentifierSeparator",
 				"program": "${workspaceFolder}/groupItemsByIdentifierSeparator/bin.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -28,14 +23,10 @@
 						"--runInBand",
 						"groupItemsByIdentifierSeparator/test.js"
 					],
-				"localRoot": "${workspaceFolder}",
-				"cwd": "${workspaceFolder}/",
 				"name": "groupItemsByIdentifierSeparator jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -43,13 +34,10 @@
 						"--identifierSeparator=",
 						"--items="
 					],
-				"localRoot": "${workspaceFolder}",
 				"name": "removeRedundantParentIdentifierPrefix",
 				"program": "${workspaceFolder}/removeRedundantParentIdentifierPrefix/bin.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -57,14 +45,10 @@
 						"--runInBand",
 						"removeRedundantParentIdentifierPrefix/test.js"
 					],
-				"cwd": "${workspaceFolder}/",
-				"localRoot": "${workspaceFolder}",
 				"name": "removeRedundantParentIdentifierPrefix jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -72,13 +56,10 @@
 						"--items=",
 						"--type="
 					],
-				"localRoot": "${workspaceFolder}",
 				"name": "removeSelfDependentItemsOfType",
 				"program": "${workspaceFolder}/removeSelfDependentItemsOfType/bin.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -86,14 +67,10 @@
 						"--runInBand",
 						"removeSelfDependentItemsOfType/test.js"
 					],
-				"cwd": "${workspaceFolder}/",
-				"localRoot": "${workspaceFolder}",
 				"name": "removeSelfDependentItemsOfType jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -103,13 +80,10 @@
 						"--replacement=",
 						"--rootOnly="
 					],
-				"localRoot": "${workspaceFolder}",
 				"name": "replaceIdentifiers",
 				"program": "${workspaceFolder}/replaceIdentifiers/bin.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -117,27 +91,20 @@
 						"--runInBand",
 						"replaceIdentifiers/test.js",
 					],
-				"cwd": "${workspaceFolder}/",
-				"localRoot": "${workspaceFolder}",
 				"name": "replaceIdentifiers jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
 					[
 						"--items=[item1,item2]",
 					],
-				"localRoot": "${workspaceFolder}",
 				"name": "setIdentifierOfAnonymousToParent",
 				"program": "${workspaceFolder}/setIdentifierOfAnonymousToParent/bin.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -145,13 +112,10 @@
 						"--runInBand",
 						"setIdentifierOfAnonymousToParent/test.js",
 					],
-				"localRoot": "${workspaceFolder}",
 				"name": "setIdentifierOfAnonymousToParent jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -159,26 +123,20 @@
 						"--items=",
 						"--type=",
 					],
-				"localRoot": "${workspaceFolder}",
 				"name": "setTypeOfRootItems",
 				"program": "${workspaceFolder}/setTypeOfRootItems/bin.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
 					[
 						"--items=",
 					],
-				"localRoot": "${workspaceFolder}",
 				"name": "sorting orderItemsByIdentifier",
 				"program": "${workspaceFolder}/sorting/orderItemsByIdentifier/bin.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -186,14 +144,10 @@
 						"--runInBand",
 						"sorting/orderItemsByIdentifier/test.js"
 					],
-				"cwd": "${workspaceFolder}/",
-				"localRoot": "${workspaceFolder}",
 				"name": "sorting orderItemsByIdentifier jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -201,14 +155,10 @@
 						"--runInBand",
 						"sorting/orderItemsByIndex/test.js"
 					],
-				"cwd": "${workspaceFolder}/",
-				"localRoot": "${workspaceFolder}",
 				"name": "sorting orderItemsByIndex jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -217,13 +167,10 @@
 						"--identifierSuffixesInOrder=",
 						"--identifierSuffixesInOrder=",
 					],
-				"localRoot": "${workspaceFolder}",
 				"name": "sorting orderItemsByIndexOfIdentifierSuffix",
 				"program": "${workspaceFolder}/sorting/orderItemsByIndexOfIdentifierSuffix/bin.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -231,14 +178,10 @@
 						"--runInBand",
 						"sorting/orderItemsByIndexOfIdentifierSuffix/test.js"
 					],
-				"cwd": "${workspaceFolder}/",
-				"localRoot": "${workspaceFolder}",
 				"name": "sorting orderItemsByIndexOfIdentifierSuffix jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -247,13 +190,10 @@
 						"--typesInOrder=",
 						"--typesInOrder=",
 					],
-				"localRoot": "${workspaceFolder}",
 				"name": "sorting orderItemsByIndexOfType",
 				"program": "${workspaceFolder}/sorting/orderItemsByIndexOfType/bin.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -261,14 +201,10 @@
 						"--runInBand",
 						"sorting/orderItemsByIndexOfType/test.js"
 					],
-				"cwd": "${workspaceFolder}/",
-				"localRoot": "${workspaceFolder}",
 				"name": "sorting orderItemsByIndexOfType jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -276,13 +212,10 @@
 						"--identifierStack=",
 						"--items=",
 					],
-				"localRoot": "${workspaceFolder}",
 				"name": "stacking createOrAddToStacksUniformly",
 				"program": "${workspaceFolder}/stacking/createOrAddToStacksUniformly/bin.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -290,13 +223,10 @@
 						"--directory=",
 						"--items="
 					],
-				"localRoot": "${workspaceFolder}",
 				"name": "stacking createOrAddToStacksUsingFileSystem",
 				"program": "${workspaceFolder}/stacking/createOrAddToStacksUsingFileSystem/bin.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -304,14 +234,10 @@
 						"--runInBand",
 						"stacking/createOrAddToStacksUsingFileSystem/test.js"
 					],
-				"cwd": "${workspaceFolder}/",
-				"localRoot": "${workspaceFolder}",
 				"name": "stacking createOrAddToStacksUsingFileSystem jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -319,14 +245,10 @@
 						"--runInBand",
 						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/test.js"
 					],
-				"cwd": "${workspaceFolder}/",
-				"localRoot": "${workspaceFolder}",
 				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -334,24 +256,17 @@
 						"--runInBand",
 						"stacking/replaceItemsAndInItems/test.js"
 					],
-				"cwd": "${workspaceFolder}/",
-				"localRoot": "${workspaceFolder}",
 				"name": "stacking replaceItemsAndInItems jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args": [ "--items=", ],
-				"localRoot": "${workspaceFolder}",
 				"name": "unstackIndependent",
 				"program": "${workspaceFolder}/unstackIndependent/bin.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -359,14 +274,10 @@
 						"--runInBand",
 						"unstackIndependent/test.js",
 					],
-				"cwd": "${workspaceFolder}/",
-				"localRoot": "${workspaceFolder}",
 				"name": "unstackIndependent jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			}
 		],
 	"version": "0.2.0"
