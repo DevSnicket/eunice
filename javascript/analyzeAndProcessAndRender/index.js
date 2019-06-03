@@ -28,7 +28,7 @@ module.exports =
 	async({
 		directoryToCreateOrAddToStacksFrom = null,
 		ignoreDirectoryNames = ignoreDirectoryNamesDefault,
-		outputPath = { baseFileName: "eunice", directoryPath: "." },
+		outputPath,
 		packageNames = [],
 		packagePrefix = null,
 		sources,

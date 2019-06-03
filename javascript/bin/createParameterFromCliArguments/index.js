@@ -1,4 +1,6 @@
-const createSources = require("./createSources");
+const
+	createOutputPath = require("./createOutputPath"),
+	createSources = require("./createSources");
 
 module.exports =
 	({
@@ -13,10 +15,11 @@ module.exports =
 			...restOfOptions,
 			ignoreDirectoryNames:
 				ensureArray(ignoreDirectoryNames),
-			...createOutputPathProperty({
-				baseFileName: outputBaseFileName,
-				directoryPath: outputDirectoryPath,
-			}),
+			outputPath:
+				createOutputPath({
+					outputBaseFileName,
+					outputDirectoryPath,
+				}),
 			sources:
 				[
 					...createSources({
@@ -38,16 +41,5 @@ function ensureArray(
 		argument
 		:
 		[ argument ]
-	);
-}
-
-function createOutputPathProperty({
-	baseFileName,
-	directoryPath,
-}) {
-	return (
-		(baseFileName || directoryPath)
-		&&
-		{ outputPath: { baseFileName, directoryPath } }
 	);
 }

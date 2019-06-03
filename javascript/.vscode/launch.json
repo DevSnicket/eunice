@@ -12,6 +12,30 @@
 			"type": "node"
 		},
 		{
+			"args":
+				[
+					"--directoryToCreateOrAddToStacksFrom=dogfooding",
+					"--outputBaseFileName=",
+					"--outputDirectoryPath=dogfooding",
+					"--packageNames=call-with-process-standard-streams",
+					"--packageNames=dependency-and-structure",
+					"--packageNames=javascript-analyzer",
+					"--packageNames=processors",
+					"--packageNames=renderer",
+					"--packageNames=renderer-test-harness",
+					"--packageNames=run-tests-from-file-system",
+					"--packageNames=test-harnesses",
+					"--packageNames=test-harnesses-processor-plugins",
+					"--packagePrefix=@devsnicket/eunice-",
+					"--directories=.",
+					"--identifierPrefixesOfRootItems=@devsnicket/eunice-javascript"
+				],
+			"name": "bin dogfooding",
+			"program": "${workspaceFolder}/bin/index.js",
+			"request": "launch",
+			"type": "node"
+		},
+		{
 			"cwd": "${workspaceFolder}/packageWithoutScope",
 			"name": "packageWithoutScope createPackageJson",
 			"program": "${workspaceFolder}/packageWithoutScope/createPackageJson.js",
