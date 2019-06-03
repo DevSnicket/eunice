@@ -1,5 +1,5 @@
 const
-	fs = require("fs-extra"),
+	{ lstat, readdir } = require("fs-extra"),
 	path = require("path");
 
 module.exports = readDirectoryPathRecursive;
@@ -9,7 +9,7 @@ async function readDirectoryPathRecursive(
 ) {
 	return (
 		Promise.all(
-			(await fs.readdir(directoryPath))
+			(await readdir(directoryPath))
 			.map(getFileNameOrReadDirectoryRecursive),
 		)
 	);
@@ -29,7 +29,7 @@ async function readDirectoryPathRecursive(
 
 		async function isDirectory() {
 			return (
-				(await fs.lstat(fileOrDirectoryPath))
+				(await lstat(fileOrDirectoryPath))
 				.isDirectory()
 			);
 		}

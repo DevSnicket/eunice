@@ -1,5 +1,5 @@
 const
-	fs = require("fs-extra"),
+	{ writeFile } = require("fs-extra"),
 	getSourcePath = require("./getSourcePath"),
 	path = require("path"),
 	readTextFile = require("../readTextFile");
@@ -10,7 +10,7 @@ module.exports =
 		htmlFileName,
 		yamlFilePath,
 	}) => {
-		await fs.writeFile(
+		await writeFile(
 			getOutputPath(),
 			await substituteInHtml(await readSourceHtml()),
 		);

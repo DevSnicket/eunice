@@ -1,9 +1,9 @@
-const fs = require("fs-extra");
+const { readFile } = require("fs-extra");
 
 module.exports =
 	async filePath =>
 		removeBom(
-			await fs.readFile(
+			await readFile(
 				filePath,
 				"utf-8",
 			),

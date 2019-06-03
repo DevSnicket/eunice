@@ -1,5 +1,5 @@
 const
-	fs = require("fs-extra"),
+	{ emptyDir, pathExists } = require("fs-extra"),
 	getSourcePath = require("../getSourcePath"),
 	path = require("path"),
 	readDirectoryPathRecursive = require("./readDirectoryPathRecursive"),
@@ -52,7 +52,7 @@ async function testInOutputDirectory({
 
 	const directoryPath = path.join(__dirname, "output", outputDirectoryName);
 
-	await fs.emptyDir(directoryPath);
+	await emptyDir(directoryPath);
 
 	await writeHarness({
 		directoryPath,
@@ -75,7 +75,7 @@ async function testInOutputDirectory({
 	async function throwErrorWhenSourceDoesNotExist() {
 		const sourceDirectoryPath = getSourcePath(".");
 
-		if (!await fs.pathExists(sourceDirectoryPath))
+		if (!await pathExists(sourceDirectoryPath))
 			throw Error(`Source directory "${sourceDirectoryPath}" not found. NPM package script "harness" must be run before this test.`);
 	}
 

@@ -1,5 +1,5 @@
 const
-	fs = require("fs-extra"),
+	{ copy } = require("fs-extra"),
 	getSourcePath = require("./getSourcePath"),
 	path = require("path");
 
@@ -7,7 +7,7 @@ const directoryName = "monaco-editor";
 
 module.exports =
 	directory =>
-		fs.copy(
+		copy(
 			getSourcePath(directoryName),
 			path.join(directory, directoryName),
 		);
