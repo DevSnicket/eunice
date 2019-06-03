@@ -2,7 +2,7 @@
 
 DevSnicket Eunice is a toolkit based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. Eunice's approach isn't limited to direct dependencies, but includes indirect dependencies as well.
 
-[try out Eunice on Eunice 🐶🥫](https://devsnicket.github.io/Eunice/renderer/index.html) ([created with](dogfooding/generate.sh))
+[try out Eunice on Eunice 🐶🥫](https://devsnicket.github.io/Eunice) ([created with](dogfooding/generate.sh))
 
 This package takes YAML that contains dependencies and structure, represented as objects and does the following:
 * Standardizes structure (to support varying YAML verbosity)
