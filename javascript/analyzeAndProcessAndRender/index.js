@@ -28,6 +28,7 @@ module.exports =
 	async({
 		directoryToCreateOrAddToStacksFrom = null,
 		ignoreDirectoryNames = ignoreDirectoryNamesDefault,
+		isHtmlSingleFile = true,
 		outputPath,
 		packageNames = [],
 		packagePrefix = null,
@@ -55,6 +56,7 @@ module.exports =
 			});
 
 		await writeOutput({
+			isHtmlSingleFile,
 			...outputPath,
 			yaml,
 		});
@@ -63,6 +65,7 @@ module.exports =
 async function writeOutput({
 	baseFileName,
 	directoryPath,
+	isHtmlSingleFile,
 	yaml,
 }) {
 	const baseFilePath =
@@ -87,8 +90,8 @@ async function writeOutput({
 	await writeHarness({
 		directoryPath,
 		htmlFileName: `${baseFileName || ""}.html`,
-		includeServiceWorkers: false,
-		includeSourceMap: false,
+		includeServiceWorkers: !isHtmlSingleFile,
+		includeSourceMap: !isHtmlSingleFile,
 		yamlFilePath,
 	});
 }
