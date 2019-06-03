@@ -23,6 +23,7 @@
 						"--runInBand",
 						"groupItemsByIdentifierSeparator/test.js"
 					],
+				"disableOptimisticBPs": true,
 				"name": "groupItemsByIdentifierSeparator jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
@@ -45,6 +46,7 @@
 						"--runInBand",
 						"removeRedundantParentIdentifierPrefix/test.js"
 					],
+				"disableOptimisticBPs": true,
 				"name": "removeRedundantParentIdentifierPrefix jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
@@ -67,6 +69,7 @@
 						"--runInBand",
 						"removeSelfDependentItemsOfType/test.js"
 					],
+				"disableOptimisticBPs": true,
 				"name": "removeSelfDependentItemsOfType jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
@@ -91,6 +94,7 @@
 						"--runInBand",
 						"replaceIdentifiers/test.js",
 					],
+				"disableOptimisticBPs": true,
 				"name": "replaceIdentifiers jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
@@ -112,6 +116,7 @@
 						"--runInBand",
 						"setIdentifierOfAnonymousToParent/test.js",
 					],
+				"disableOptimisticBPs": true,
 				"name": "setIdentifierOfAnonymousToParent jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
@@ -144,6 +149,7 @@
 						"--runInBand",
 						"sorting/orderItemsByIdentifier/test.js"
 					],
+				"disableOptimisticBPs": true,
 				"name": "sorting orderItemsByIdentifier jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
@@ -155,6 +161,7 @@
 						"--runInBand",
 						"sorting/orderItemsByIndex/test.js"
 					],
+				"disableOptimisticBPs": true,
 				"name": "sorting orderItemsByIndex jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
@@ -178,6 +185,7 @@
 						"--runInBand",
 						"sorting/orderItemsByIndexOfIdentifierSuffix/test.js"
 					],
+				"disableOptimisticBPs": true,
 				"name": "sorting orderItemsByIndexOfIdentifierSuffix jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
@@ -201,6 +209,7 @@
 						"--runInBand",
 						"sorting/orderItemsByIndexOfType/test.js"
 					],
+				"disableOptimisticBPs": true,
 				"name": "sorting orderItemsByIndexOfType jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
@@ -234,6 +243,7 @@
 						"--runInBand",
 						"stacking/createOrAddToStacksUsingFileSystem/test.js"
 					],
+				"disableOptimisticBPs": true,
 				"name": "stacking createOrAddToStacksUsingFileSystem jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
@@ -245,6 +255,7 @@
 						"--runInBand",
 						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/test.js"
 					],
+				"disableOptimisticBPs": true,
 				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
@@ -256,6 +267,7 @@
 						"--runInBand",
 						"stacking/replaceItemsAndInItems/test.js"
 					],
+				"disableOptimisticBPs": true,
 				"name": "stacking replaceItemsAndInItems jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
@@ -274,6 +286,7 @@
 						"--runInBand",
 						"unstackIndependent/test.js",
 					],
+				"disableOptimisticBPs": true,
 				"name": "unstackIndependent jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
