@@ -6,6 +6,7 @@ const
 
 const
 	deleteFile = promisify(fs.unlink),
+	fileExists = promisify(fs.exists),
 	readFile = promisify(fs.readFile),
 	writeFile = promisify(fs.writeFile);
 
@@ -25,18 +26,23 @@ module.exports =
 			);
 		}
 
-		async function transform() {
+		async function transform(
+			{ compilation: { errors } },
+		) {
 			const javascriptPath = path.join(directory, "harness.js");
 
-			await writeHtml(
-				getHtmlWithJavascript(
-					await getJavascriptSubstituted(
-						await readJavascript(),
+			if (await fileExists(javascriptPath)) {
+				await writeHtml(
+					getHtmlWithJavascript(
+						await getJavascriptSubstituted(
+							await readJavascript(),
+						),
 					),
-				),
-			);
+				);
 
-			await deleteFile(javascriptPath);
+				await deleteFile(javascriptPath);
+			} else
+				errors.push(`JavaScript file "${javascriptPath}" not found to transform into a HTML file.`);
 
 			function readJavascript() {
 				return readTextFile(javascriptPath);
