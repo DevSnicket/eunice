@@ -4,6 +4,7 @@ const
 	createReflexContainerForColumnElements = require("./createReflexContainerForColumnElements"),
 	createTextareaElement = require("./createTextareaElement"),
 	createWebpackConfiguration = require("./createWebpackConfiguration"),
+	getStringLiteral = require("./getStringLiteral"),
 	renderIntoContainerElement = require("./renderIntoContainerElement");
 
 module.exports =
@@ -13,5 +14,6 @@ module.exports =
 		createReflexContainerForColumnElements,
 		createTextareaElement,
 		createWebpackConfiguration,
+		getStringLiteral,
 		renderIntoContainerElement,
 	};

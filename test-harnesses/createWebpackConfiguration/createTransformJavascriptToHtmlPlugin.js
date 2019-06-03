@@ -1,5 +1,6 @@
 const
 	fs = require("fs"),
+	getStringLiteral = require("../getStringLiteral"),
 	path = require("path"),
 	{ promisify } = require("util");
 
@@ -49,7 +50,7 @@ module.exports =
 					?
 					javascript.replace(
 						javascriptSubstitution.pattern,
-						`\`${await readReplacement()}\``,
+						await readReplacement(),
 					)
 					:
 					javascript
@@ -57,8 +58,9 @@ module.exports =
 
 				async function readReplacement() {
 					return (
-						(await readTextFile(javascriptSubstitution.replacementFilePath))
-						.replace("`", "\\`")
+						getStringLiteral(
+							await readTextFile(javascriptSubstitution.replacementFilePath),
+						)
 					);
 				}
 			}
