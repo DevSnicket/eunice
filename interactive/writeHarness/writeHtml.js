@@ -1,7 +1,7 @@
 const
 	{ writeFile } = require("fs-extra"),
 	getSourcePath = require("./getSourcePath"),
-	{ getStringLiteral } = require("@devsnicket/eunice-test-harnesses"),
+	getStringLiteral = require("@devsnicket/eunice-test-harnesses/getStringLiteral"),
 	path = require("path"),
 	readTextFile = require("../readTextFile");
 
