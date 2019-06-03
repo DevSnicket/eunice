@@ -2,9 +2,9 @@
 
 DevSnicket Eunice is a toolkit based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. Eunice's approach isn't limited to direct dependencies, but includes indirect dependencies as well.
 
-[try out Eunice on Eunice 🐶🥫](https://devsnicket.github.io/Eunice/renderer/index.html)
+[try out Eunice on Eunice 🐶🥫](https://devsnicket.github.io/Eunice)
 
-[try out Eunice on some Javascript](https://devsnicket.github.io/eunice-javascript/index.html)
+[try out Eunice on some Javascript](https://devsnicket.github.io/eunice-javascript)
 
 [![NPM](https://img.shields.io/npm/v/@devsnicket/eunice.svg)](https://www.npmjs.com/package/@devsnicket/eunice
 ) [![Build Status](https://travis-ci.org/DevSnicket/eunice-javascript-analyzer.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-javascript) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
