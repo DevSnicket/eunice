@@ -94,7 +94,9 @@ npx @devsnicket/eunice --directories=directory1 --directories=directory2 --direc
 ```
 
 To name the output files differently or in a different directory:
+```bash
 npx @devsnicket/eunice --outputBaseFileName=eunice-file --outputDirectoryPath=eunice-directory
+```
 
 ## Dogfooding
 
