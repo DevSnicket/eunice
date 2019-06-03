@@ -7,6 +7,7 @@ module.exports =
 		directories = ".",
 		identifierPrefixesOfRootItems,
 		ignoreDirectoryNames,
+		isHtmlSingleFile,
 		outputDirectoryPath,
 		outputBaseFileName,
 		...restOfOptions
@@ -15,6 +16,8 @@ module.exports =
 			...restOfOptions,
 			ignoreDirectoryNames:
 				ensureArray(ignoreDirectoryNames),
+			isHtmlSingleFile:
+				isHtmlSingleFile && isHtmlSingleFile === "true",
 			outputPath:
 				createOutputPath({
 					outputBaseFileName,

@@ -9,7 +9,6 @@ analyzeAndProcessAndRender(
 	createParameterFromCliArguments(
 		minimist(
 			process.argv.slice(2),
-			{ boolean: [ "isHtmlSingleFile" ] },
 		),
 	),
 );
