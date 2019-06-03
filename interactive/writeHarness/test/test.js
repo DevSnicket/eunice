@@ -82,6 +82,6 @@ async function testInOutputDirectory({
 	async function readHtmlFileContainsYamlFileContent() {
 		const html = await readTextFile(path.join(directoryPath, htmlFileName));
 
-		return html.includes("test yaml file contents");
+		return html.includes("\"test yaml file contents\\non multiple lines with a quote character \\\"\"");
 	}
 }

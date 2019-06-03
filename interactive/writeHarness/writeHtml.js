@@ -1,6 +1,7 @@
 const
 	{ writeFile } = require("fs-extra"),
 	getSourcePath = require("./getSourcePath"),
+	{ getStringLiteral } = require("@devsnicket/eunice-test-harnesses"),
 	path = require("path"),
 	readTextFile = require("../readTextFile");
 
@@ -29,15 +30,16 @@ module.exports =
 			return (
 				html.replace(
 					"yamlFromWebpack",
-					`\`${await readReplacement()}\``,
+					await readReplacement(),
 				)
 			);
 		}
 
 		async function readReplacement() {
 			return (
-				(await readTextFile(yamlFilePath))
-				.replace("`", "\\`")
+				getStringLiteral(
+					await readTextFile(yamlFilePath),
+				)
 			);
 		}
 	};
