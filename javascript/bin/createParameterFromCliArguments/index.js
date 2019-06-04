@@ -10,6 +10,7 @@ module.exports =
 		isHtmlSingleFile,
 		outputDirectoryPath,
 		outputBaseFileName,
+		packageNames,
 		...restOfOptions
 	}) => (
 		{
@@ -23,6 +24,8 @@ module.exports =
 					outputBaseFileName,
 					outputDirectoryPath,
 				}),
+			packageNames:
+				ensureArray(packageNames),
 			sources:
 				[
 					...createSources({
