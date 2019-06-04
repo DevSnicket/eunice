@@ -7,7 +7,7 @@ DevSnicket Eunice is a toolkit based on the premise that unidirectional dependen
 [![NPM](https://img.shields.io/npm/v/@devsnicket/eunice-run-tests-from-file-system.svg)](https://www.npmjs.com/package/@devsnicket/eunice-run-tests-from-file-system
 ) [![Build Status](https://travis-ci.org/DevSnicket/eunice-run-tests-from-file-system.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-run-tests-from-file-system) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
 
-This package is used to help create [Jest](https://jestjs.io/) tests for other [Eunice](https://github.com/DevSnicket/Eunice) packages. 
+This package is used to help create [Jest](https://jestjs.io/) tests for other Eunice packages. More information can be found [in the main Eunice repository](https://github.com/DevSnicket/Eunice#readme).
 
 It runs tests by reading test cases and expected behavior from the file system. Tests are automatically named based on the directory hierarchy.
 
