@@ -155,7 +155,14 @@ function compareItemIdentifiers(
 	) {
 		return (
 			(item.id || item)
-			.replace(/\//g, String.fromCharCode(0))
+			.replace(
+				new RegExp(getPathSeparatorEscaped(), "g"),
+				String.fromCharCode(0),
+			)
 		);
+
+		function getPathSeparatorEscaped() {
+			return path.sep.replace("\\", "\\\\");
+		}
 	}
 }
