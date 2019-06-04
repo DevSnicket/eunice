@@ -11,7 +11,7 @@ This package calls a specified function with arguments taken from the process an
 
 It depends upon [minimist](https://github.com/substack/minimist) to parse the arguments.
 
-Its used by [Eunice](https://github.com/DevSnicket/Eunice) JavaScript analyzer, processors and renderer so they can be run from CLI and scripts, and have large amounts of YAML passed into and out of them.
+Its used by Eunice JavaScript analyzer, processors and renderer so they can be run from CLI and scripts, and have large amounts of YAML passed into and out of them. More information can be found [in the main Eunice repository](https://github.com/DevSnicket/Eunice#readme).
 
 Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-call-with-process-standard-streams):
 
