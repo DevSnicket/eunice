@@ -19,13 +19,17 @@ module.exports =
 				replaceIdentifiers({
 					items,
 					pattern:
-						new RegExp(`${identifierSeparator}index$|^index$`),
+						new RegExp(`${getIdentifierSeparatorEscaped()}index$|^index$`),
 					replacement:
 						"",
 					rootOnly:
 						false,
 				})
 			);
+
+			function getIdentifierSeparatorEscaped() {
+				return identifierSeparator.replace("\\", "\\\\");
+			}
 		}
 
 		function addPrefixToRoot(
