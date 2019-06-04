@@ -7,6 +7,8 @@ DevSnicket Eunice is a toolkit based on the premise that unidirectional dependen
 [![NPM](https://img.shields.io/npm/v/@devsnicket/eunice-renderer-test-harness.svg)](https://www.npmjs.com/package/@devsnicket/eunice-renderer-test-harness
 ) [![Build Status](https://travis-ci.org/DevSnicket/eunice-renderer-test-harness.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-renderer-test-harness) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
 
+This package creates a HTML page where structure and dependencies can be entered as [YAML](https://yaml.org/) and viewed as rendered SVG. The render is interactive, its possible to look inside the structure and also list the dependencies counted. More information can be found [in the main Eunice repository](https://github.com/DevSnicket/Eunice#readme).
+
 Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-renderer-test-harness):
 
 ```bash
