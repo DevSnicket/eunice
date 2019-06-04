@@ -89,10 +89,20 @@ function createFromObjectEntry(
 			[
 				{
 					id: key,
-					items,
+					items: getItemsOrItemWhenSingle(),
 				},
 			]
 		);
+
+		function getItemsOrItemWhenSingle() {
+			return (
+				items.length === 1
+				?
+				items[0]
+				:
+				items
+			);
+		}
 	}
 }
 
