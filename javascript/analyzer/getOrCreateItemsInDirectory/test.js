@@ -33,6 +33,7 @@ test(
 					path.join(supportedTestCasesDirectory, "expected.yaml"),
 					"utf-8",
 				)
+				.replace(/\//g, path.sep)
 			);
 		}
 	},
