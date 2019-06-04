@@ -21,3 +21,7 @@ Or with [`yarn`](https://yarnpkg.com/en/package/@devsnicket/eunice-javascript-an
 ```bash
 yarn add --dev @devsnicket/eunice-javascript-analyzer
 ```
+
+Examples of analyzer behavior can be found in the following test cases:
+* [single file](getYamlFromJavaScript/test-cases)
+* [multiple files and directories](getOrCreateItemsInDirectory/test-cases)
