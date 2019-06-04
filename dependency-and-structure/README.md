@@ -29,7 +29,7 @@ yarn add @devsnicket/eunice-dependency-and-structure
 
 * YAML is read using the function createStackFromYaml and written using createYamlFromStack.
 * Parsing and formatting of YAML is not included in this package. Javascript objects are expected for the parameter of createStackFromYaml and will be returned by createYamlFromStack. These objects are expected to be in a form that matches the [js-yaml](https://github.com/nodeca/js-yaml) package.
-* The YAML content supported is specified [here](https://github.com/DevSnicket/Eunice/blob/master/docs/yaml.md). Any additional content will be preserved when reading and writing.
+* The YAML content supported is specified [in the main Eunice repository](https://github.com/DevSnicket/Eunice/blob/master/docs/yaml.md). Any additional content will be preserved when reading and writing.
 
 ## Stacks
 
