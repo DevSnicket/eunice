@@ -9,7 +9,7 @@ DevSnicket Eunice is a toolkit based on the premise that unidirectional dependen
 [![NPM](https://img.shields.io/npm/v/@devsnicket/eunice.svg)](https://www.npmjs.com/package/@devsnicket/eunice
 ) [![Build Status](https://travis-ci.org/DevSnicket/eunice-javascript-analyzer.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-javascript) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
 
-This package brings together JavaScript analysis, an example configuration to process that analysis and a render of the processed analysis. A description of how these stages work can be found [here in main Eunice repository](https://github.com/DevSnicket/Eunice#how-eunice-works).
+This package brings together JavaScript analysis, an example configuration to process that analysis and a render of the processed analysis. A description of how these stages work can be found [in the main Eunice repository](https://github.com/DevSnicket/Eunice#how-eunice-works).
 
 To try the package out on JavaScript source code in the current directory the following [npx](https://www.npmjs.com/package/npx) command can be used:
 
