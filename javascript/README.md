@@ -18,9 +18,15 @@ npx eunice
 ```
 
 The package produces the following output files:
-* a YAML file (eunice.yaml) containing processed analysis
-* an SVG file (eunice.svg) containing a render scoped to the root directory
-* a HTML file (eunice.html) containing an interactive render, where the scope can be set to sub-items (e.g. sub-directories, files, functions etc), and dependencies can be listed
+* a YAML file containing processed analysis (eunice.yaml)
+  
+  (runs [JavaScript analyzer](https://github.com/DevSnicket/eunice-javascript-analyzer) and [processors](https://github.com/DevSnicket/eunice-processors))
+* an SVG file containing a render scoped to the root directory (eunice.svg)
+  
+  (runs [renderer](https://github.com/DevSnicket/eunice-renderer))
+* a HTML file containing an interactive render, where the scope can be set to sub-items (e.g. sub-directories, files, functions etc), and dependencies can be listed (eunice.html)
+  
+  (runs [renderer test harness](https://github.com/DevSnicket/eunice-renderer-test-harness))
 
 Install and run using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice):
 
