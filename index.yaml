@@ -3549,58 +3549,132 @@
                 type: file
                 items:
                   - - id: test
-                      type: file
-                      dependsUpon:
-                        - __dirname
-                        - createArrows
-                        - createElement
-                        - expect
-                        - path
-                        - readFile
-                        - renderArrows
-                        - test
-                        - withPrecision
                       items:
-                        - - id: renderArrows
-                            dependsUpon:
-                              - createElement
-                              - getElements
-                              - getUses
-                              - renderToStaticMarkup
+                        - - id: withUse
                             items:
-                              - - id: getElements
+                              - - id: test
+                                  type: file
                                   dependsUpon:
-                                    - Object
-                                    - arrows
-                                - id: getUses
+                                    - createArrows
+                                    - createDescriptionTexts
+                                    - createElement
+                                    - createSymbolAndUseElementsAndGetSize
+                                    - expectRenderedToBe
+                                    - height
+                                    - size
+                                    - spacing
+                                    - test
+                                    - width
+                                    - withPrecision
                                   items:
-                                    - - id: aggregate
-                                        dependsUpon: createUse
+                                    - - id: createDescriptionTexts
+                                        dependsUpon:
+                                          - createText
+                                          - getXFromIndex
                                         items:
-                                          - - id: createUse
+                                          - - id: createText
                                               dependsUpon:
                                                 - createElement
-                                                - padding
-                                                - width
-                                          - - id: width
+                                                - createTspan
+                                                - middle
+                                            - getXFromIndex
+                                          - - id: createTspan
+                                              dependsUpon: createElement
+                                            - id: middle
                                               type: variable
-                                    - - id: padding
+                                      - id: expectRenderedToBe
+                                        dependsUpon:
+                                          - __dirname
+                                          - createElement
+                                          - createSvgElement
+                                          - expect
+                                          - path
+                                          - readTestCaseFile
+                                          - renderToStaticMarkup
+                                    - - id: createElement
                                         type: variable
-                              - - id: arrows
-                                  type: parameter
-                          - id: readFile
-                            dependsUpon: fs
-                        - - id: createElement
-                            type: variable
+                                        dependsUpon:
+                                          id: react
+                                          items: createElement
+                                      - id: renderToStaticMarkup
+                                        type: variable
+                                        dependsUpon:
+                                          id: react-dom/server
+                                          items: renderToStaticMarkup
+                                      - id: height
+                                        type: variable
+                                      - id: spacing
+                                        type: variable
+                                      - id: width
+                                        type: variable
+                                      - expect
+                                      - test
+                              - - id: createSvgElement
+                                  type: file
+                                  items:
+                                    id: createSvgElement
+                                    dependsUpon:
+                                      - height
+                                      - width
+                                - id: createSymbolAndUseElementsAndGetSize
+                                  type: file
+                                  items:
+                                    id: createSymbolAndUseElementsAndGetSize
+                                    dependsUpon: getArrowSymbols
+                                    items:
+                                      - - id: getArrowSymbols
+                                          dependsUpon:
+                                            - Object
+                                            - arrows
+                                        - id: aggregate
+                                          dependsUpon:
+                                            - calculateSize
+                                            - createUse
+                                          items:
+                                            - id: createUse
+                                              dependsUpon:
+                                                - createElement
+                                                - width
+                                            - id: calculateSize
+                                              dependsUpon: Math
+                                      - - id: arrows
+                                          type: parameter
+                                        - id: createElement
+                                          type: parameter
+                                        - id: width
+                                          type: parameter
+                          - id: readTestCaseFile
+                            type: file
+                            items:
+                              - - id: readTestCaseFile
+                                  dependsUpon:
+                                    - fs
+                                    - removeBom
+                              - - removeBom
+                          - id: symbols/test
+                            type: file
                             dependsUpon:
-                              id: react
-                              items: createElement
-                          - id: renderToStaticMarkup
-                            type: variable
-                            dependsUpon:
-                              id: react-dom/server
-                              items: renderToStaticMarkup
-                          - expect
+                              - __dirname
+                              - createArrows
+                              - createElement
+                              - expect
+                              - path
+                              - readTestCaseFile
+                              - renderToStaticMarkup
+                              - test
+                              - withPrecision
+                            items:
+                              - id: createElement
+                                type: variable
+                                dependsUpon:
+                                  id: react
+                                  items: createElement
+                              - id: renderToStaticMarkup
+                                type: variable
+                                dependsUpon:
+                                  id: react-dom/server
+                                  items: renderToStaticMarkup
+                        - - expect
                           - test
                   - - id: createArrows
                       dependsUpon:
