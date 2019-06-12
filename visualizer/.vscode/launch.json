@@ -55,6 +55,7 @@
 						"--runInBand",
 						"getSvgForYaml/withElementContainer/forItems/test.js"
 					],
+				"disableOptimisticBPs": true,
 				"name": "getSvgForYaml with group container for items jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
