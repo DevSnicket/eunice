@@ -7,8 +7,18 @@ module.exports =
 		yaml,
 	}) =>
 		test(
-			`${JSON.stringify(yaml)} returns ${stackDescription}`,
+			formatTestName({
+				stackDescription,
+				yaml,
+			}),
 			() =>
 				expect(createStackFromYaml(yaml))
 				.toEqual(stack),
 		);
+
+function formatTestName({
+	stackDescription,
+	yaml,
+}) {
+	return `${JSON.stringify(yaml)} returns "${stackDescription}"`;
+}

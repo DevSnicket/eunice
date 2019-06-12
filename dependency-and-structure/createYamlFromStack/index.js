@@ -1,4 +1,4 @@
-const createDependsUpon = require("./createDependsUpon");
+const createDependsUponIdentifierHierarchy = require("./createDependsUponIdentifierHierarchy");
 
 module.exports = createYamlFromStack;
 
@@ -72,7 +72,7 @@ function createDependsUponProperty(
 	return (
 		dependsUpon
 		&&
-		{ dependsUpon: createDependsUpon(dependsUpon) }
+		{ dependsUpon: createDependsUponIdentifierHierarchy(dependsUpon) }
 	);
 }
 

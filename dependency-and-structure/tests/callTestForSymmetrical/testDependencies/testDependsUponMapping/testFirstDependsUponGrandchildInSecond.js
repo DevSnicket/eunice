@@ -12,12 +12,10 @@ module.exports =
 						{
 							id: "item2",
 							items:
-								[
-									[
-										{ id: "child1" },
-										{ id: "child2" },
-									],
-								],
+								[ [ {
+									id: "child",
+									items: [ [ { id: "grandchild" } ] ],
+								} ] ],
 						},
 					],
 				],
@@ -25,40 +23,43 @@ module.exports =
 
 		const level = stack[0];
 
-		const children = level[1].items[0];
+		const grandchild = level[1].items[0][0].items[0][0];
 
 		level[0].dependsUpon =
-			[
-				{
-					item: children[0],
-					parent: level[1],
-				},
-				{
-					item: children[1],
-					parent: level[1],
-				},
-			];
-		children[0].dependents = [ level[0] ];
-		children[1].dependents = [ level[0] ];
+			[ {
+				ancestor: level[1],
+				item: grandchild,
+			} ];
+		grandchild.dependents = [ level[0] ];
 
 		test({
 			stack,
 			stackDescription:
-				"first depends upon two children of second",
+				"first depends upon grandchild in second",
 			yaml:
 				[
 					createItemYaml({
 						dependsUpon:
 							{
-								id: "item2",
-								items: [ "child1", "child2" ],
+								id:
+									"item2",
+								items:
+									{
+										id: "child",
+										items: "grandchild",
+									},
 							},
 						id:
 							"item1",
 					}),
 					createItemYaml({
-						id: "item2",
-						items: [ "child1", "child2" ],
+						id:
+							"item2",
+						items:
+							createItemYaml({
+								id: "child",
+								items: "grandchild",
+							}),
 					}),
 				],
 		});

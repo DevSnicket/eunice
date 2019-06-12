@@ -12,7 +12,7 @@ describe(
 				yaml,
 			}) =>
 				test(
-					`${stackDescription} returns ${JSON.stringify(yaml)}`,
+					`"${stackDescription}" returns ${JSON.stringify(yaml)}`,
 					() =>
 						expect(createYamlFromStack(stack))
 						.toEqual(yaml),

@@ -106,6 +106,22 @@ function createTestCasesWithSimpleLevels() {
 						id: "item1",
 					}),
 			},
+			{
+				levels:
+					[
+						[
+							{
+								dependsUpon: mapItemsToDependsUpon([ "missing1", "missing2" ]),
+								id: "item1",
+							},
+						],
+					],
+				yaml:
+					createItemYaml({
+						dependsUpon: [ "missing1", "missing2" ],
+						id: "item1",
+					}),
+			},
 		]
 	);
 }

@@ -21,7 +21,7 @@ module.exports =
   * @typedef {Level[] & HasOptionalParentItem} Stack
   *
   * @typedef Item
-  * @property {(DependUpon|DependUponMissingItem|DependUponMissingParent)[]} [dependsUpon]
+  * @property {(DependUpon | DependUponMissing)[]} [dependsUpon]
   * @property {Item[]} [dependents]
   * @property {String} [id]
   * @property {Stack} [items]
@@ -33,16 +33,12 @@ module.exports =
   * @typedef {Item[] & HasStack} Level
   *
   * @typedef DependUpon
+  * @property {Item} [ancestor]
   * @property {Item} item
-  * @property {Item} [parent]
   *
-  * @typedef DependUponMissingItem
+  * @typedef DependUponMissing
+  * @property {(Item | String)[]} [ancestors]
   * @property {String} item
-  * @property {Item} [parent]
-  *
-  * @typedef DependUponMissingParent
-  * @property {String} item
-  * @property {String} [parent]
   *
   * @typedef {String | (String | YamlItem | (String | YamlItem)[])[]} Yaml
   *

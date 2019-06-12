@@ -9,19 +9,19 @@ module.exports =
 		stack[0][0].dependsUpon =
 			[
 				{
+					ancestors: [ "missingParent" ],
 					item: "missingChild1",
-					parent: "missingParent",
 				},
 				{
+					ancestors: [ "missingParent" ],
 					item: "missingChild2",
-					parent: "missingParent",
 				},
 			];
 
 		test({
 			stack,
 			stackDescription:
-				"depends upon two children missing from missing",
+				"depends upon two missing children in missing parent",
 			yaml:
 				createItemYaml({
 					dependsUpon:

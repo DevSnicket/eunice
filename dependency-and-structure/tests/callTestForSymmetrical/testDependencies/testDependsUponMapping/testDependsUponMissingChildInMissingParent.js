@@ -1,6 +1,6 @@
 const
 	createItemYaml = require("../../../createItemYaml"),
-	createStackFromLevels = require("../../../../tests/createStackFromLevels");
+	createStackFromLevels = require("../../../createStackFromLevels");
 
 module.exports =
 	test => {
@@ -9,15 +9,15 @@ module.exports =
 		stack[0][0].dependsUpon =
 			[
 				{
+					ancestors: [ "missingParent" ],
 					item: "missingChild",
-					parent: "missingParent",
 				},
 			];
 
 		test({
 			stack,
 			stackDescription:
-				"depends upon missing",
+				"depends upon missing child in missing parent",
 			yaml:
 				createItemYaml({
 					dependsUpon:
