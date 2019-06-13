@@ -5929,10 +5929,13 @@
                                 - id: getJavascriptSubstituted
                                   dependsUpon: readReplacement
                                   items:
-                                    id: readReplacement
-                                    dependsUpon:
-                                      - getStringLiteral
-                                      - readTextFile
+                                    - - id: readReplacement
+                                        dependsUpon:
+                                          - escapeStringLiteralWhenSpecified
+                                          - getStringLiteral
+                                          - readTextFile
+                                    - - id: escapeStringLiteralWhenSpecified
+                                        dependsUpon: escapeStringLiteral
                                 - getHtmlWithJavascript
                               - - id: readTextFile
                                   dependsUpon: readFile
@@ -5957,6 +5960,15 @@
                       type: variable
                     - id: writeFile
                       type: variable
+                    - id: escapeStringLiteral
+                      type: file
+                      items:
+                        - - id: escapeStringLiteral
+                            dependsUpon:
+                              - escapeBackslash
+                              - escapeDoubleQuote
+                        - - escapeBackslash
+                          - escapeDoubleQuote
         - id: renderIntoContainerElement
           type: file
           items:
