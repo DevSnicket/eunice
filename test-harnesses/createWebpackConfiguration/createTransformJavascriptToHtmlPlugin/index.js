@@ -1,6 +1,7 @@
 const
+	escapeStringLiteral = require("./escapeStringLiteral"),
 	fs = require("fs"),
-	getStringLiteral = require("../getStringLiteral"),
+	getStringLiteral = require("../../getStringLiteral"),
 	path = require("path"),
 	{ promisify } = require("util");
 
@@ -64,9 +65,25 @@ module.exports =
 
 				async function readReplacement() {
 					return (
-						getStringLiteral(
-							await readTextFile(javascriptSubstitution.replacementFilePath),
+						escapeStringLiteralWhenSpecified(
+							getStringLiteral(
+								await readTextFile(
+									javascriptSubstitution.replacementFilePath,
+								),
+							),
 						)
+					);
+				}
+
+				function escapeStringLiteralWhenSpecified(
+					stringLiteral,
+				) {
+					return (
+						javascriptSubstitution.escape
+						?
+						escapeStringLiteral(stringLiteral)
+						:
+						stringLiteral
 					);
 				}
 			}
