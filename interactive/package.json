@@ -45,7 +45,7 @@
 			"!harness.js",
 			"!node_modules/**",
 			"!test-coverage/**",
-			"!tests/styleMock.js",
+			"!tests/**",
 			"!webpack.config.js",
 			"!writeHarness/test/output/**"
 		],
