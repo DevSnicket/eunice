@@ -12,6 +12,8 @@ module.exports =
 		createFillWithTitleElement({
 			content:
 				createYamlEditorElement({
+					foldAll:
+						true,
 					setStateFromValue:
 						value => stateful.setState({ yaml: value }),
 					value:
