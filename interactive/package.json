@@ -88,6 +88,8 @@
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run harness && npm run test",
 		"harness": "rm -rf dist/harness && npx webpack --config webpack.config.js -p",
+		"harness-dogfooding-development": "npx webpack --config tests/dogfoodingFromEuniceRepositoryRelativeDirectory/webpack.config.js -d",
+		"harness-dogfooding-production": "npx webpack --config tests/dogfoodingFromEuniceRepositoryRelativeDirectory/webpack.config.js -p",
 		"lint": "npx eslint .",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./node_modules/*\" ! -path \"./writeHarness/test/output/*\" ! -path \"./test-coverage/*\" -exec npx cspell {} +",
 		"test": "npx jest",
