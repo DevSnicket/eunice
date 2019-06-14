@@ -5800,6 +5800,7 @@
                                         - domElement
                                         - initializeOnDidChangeModelContent
                                         - language
+                                        - monacoEditor
                                         - value
                                     - id: updateMonacoEditor
                                       dependsUpon:
