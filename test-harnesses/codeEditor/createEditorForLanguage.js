@@ -13,6 +13,7 @@ module.exports =
 		return { createEditorElement };
 
 		function createEditorElement({
+			foldAll = false,
 			setStateFromValue,
 			value,
 		}) {
@@ -62,6 +63,10 @@ module.exports =
 								value,
 							},
 						);
+
+					if (foldAll)
+						monacoEditor.getAction("editor.foldAll")
+						.run();
 
 					initializeOnDidChangeModelContent();
 				}
