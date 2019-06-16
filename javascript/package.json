@@ -11,7 +11,7 @@
 		"@devsnicket/eunice-javascript-analyzer": "^2.0.2",
 		"@devsnicket/eunice-processors": "^3.5.0",
 		"@devsnicket/eunice-renderer": "^4.6.0",
-		"@devsnicket/eunice-renderer-test-harness": "^1.6.0",
+		"@devsnicket/eunice-renderer-test-harness": "^1.7.0",
 		"js-yaml": "3.13.1",
 		"minimist": "1.2.0"
 	},
@@ -22,7 +22,7 @@
 		"@devsnicket/eunice-call-with-process-standard-streams": "*",
 		"@devsnicket/eunice-dependency-and-structure": "*",
 		"@devsnicket/eunice-run-tests-from-file-system": "*",
-		"@devsnicket/eunice-test-harnesses": ">=7.3.0",
+		"@devsnicket/eunice-test-harnesses": ">=7.4.0",
 		"@devsnicket/eunice-test-harnesses-processor-plugins": "*",
 		"@devsnicket/plugin-discovery-commonjs-babel-plugin": "1.11.1",
 		"@types/node": "12.0.2",
@@ -65,5 +65,5 @@
 		"harness": "(cd harness && rm -rf output && mkdir output && npx webpack -p --config webpack.config.js)",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./packageWithoutScope/node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +"
 	},
-	"version": "2.7.0"
+	"version": "2.8.0"
 }
