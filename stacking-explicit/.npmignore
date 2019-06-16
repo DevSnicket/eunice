@@ -4,5 +4,6 @@
 /.travis.yml 
 /.vscode 
 /cspell.json
+/eunice.*
 /test-coverage 
 /jsconfig.json

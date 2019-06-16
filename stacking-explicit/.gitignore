@@ -1,5 +1,6 @@
 /.devsnicket-plugin-discovery
 /dist/
 /devsnicket-eunice-processors-*.tgz
+/eunice.*
 /node_modules/
 /test-coverage/
