@@ -9,20 +9,71 @@ module.exports =
 	}) =>
 		items
 		&&
-		getIdentifierOrReplaceItemOrItemsInLevelOrStack({
-			identifierOrItemOrLevelOrStack: items,
-			replaceItem:
-				({
+		withIdentifierSeparator(identifierSeparator)
+		.getIdentifierOrReplaceDependsUponInItemOrItemsInLevelOrStack(items);
+
+function withIdentifierSeparator(
+	identifierSeparator,
+) {
+	return { getIdentifierOrReplaceDependsUponInItemOrItemsInLevelOrStack };
+
+	function getIdentifierOrReplaceDependsUponInItemOrItemsInLevelOrStack(
+		identifierOrItemOrLevelOrStack,
+	) {
+		return (
+			getIdentifierOrReplaceItemOrItemsInLevelOrStack({
+				identifierOrItemOrLevelOrStack,
+				replaceItem: replaceInItem,
+			})
+		);
+	}
+
+	function replaceInItem({
+		dependsUpon,
+		items,
+		...restOfItem
+	}) {
+		return (
+			{
+				...replaceDependsUponAsProperty(
 					dependsUpon,
-					...restOfItem
-				}) => (
-					{
-						dependsUpon:
-							replaceDependsUpon({
-								dependsUpon,
-								identifierSeparator,
-							}),
-						...restOfItem,
-					}
 				),
-		});
+				...replaceInItemsAsProperty(
+					items,
+				),
+				...restOfItem,
+			}
+		);
+	}
+
+	function replaceDependsUponAsProperty(
+		dependsUpon,
+	) {
+		return (
+			dependsUpon
+			&&
+			{
+				dependsUpon:
+					replaceDependsUpon({
+						dependsUpon,
+						identifierSeparator,
+					}),
+			}
+		);
+	}
+
+	function replaceInItemsAsProperty(
+		items,
+	) {
+		return (
+			items
+			&&
+			{
+				items:
+					getIdentifierOrReplaceDependsUponInItemOrItemsInLevelOrStack(
+						items,
+					),
+			}
+		);
+	}
+}

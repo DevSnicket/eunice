@@ -32,6 +32,10 @@ test.each(
 			{ dependsUpon: "dependsUpon" },
 		],
 		[
+			{ dependsUpon: {} },
+			{ dependsUpon: {} },
+		],
+		[
 			{
 				dependsUpon:
 					{
@@ -271,6 +275,29 @@ test.each(
 											"dependsUponGreatGrandchild",
 									},
 							},
+					},
+			},
+		],
+		[
+			{
+				id: "parent",
+				items:
+					{
+						dependsUpon: "dependsUponParent/dependsUponChild",
+						id: "child",
+					},
+			},
+			{
+				id: "parent",
+				items:
+					{
+						dependsUpon:
+							{
+								id: "dependsUponParent",
+								items: "dependsUponChild",
+							},
+						id:
+							"child",
 					},
 			},
 		],
