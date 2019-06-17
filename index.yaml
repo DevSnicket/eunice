@@ -3898,14 +3898,6 @@
                                           type: parameter
                                         - id: width
                                           type: parameter
-                          - id: readTestCaseFile
-                            type: file
-                            items:
-                              - - id: readTestCaseFile
-                                  dependsUpon:
-                                    - fs
-                                    - removeBom
-                              - - removeBom
                           - id: symbols/test
                             type: file
                             dependsUpon:
@@ -3933,6 +3925,14 @@
                                     items: renderToStaticMarkup
                         - - expect
                           - test
+                        - - id: readTestCaseFile
+                            type: file
+                            items:
+                              - - id: readTestCaseFile
+                                  dependsUpon:
+                                    - fs
+                                    - removeBom
+                              - - removeBom
                   - - id: createArrows
                       dependsUpon:
                         - createArrow
