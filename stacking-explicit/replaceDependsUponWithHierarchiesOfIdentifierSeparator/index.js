@@ -35,13 +35,13 @@ function withIdentifierSeparator(
 	}) {
 		return (
 			{
+				...restOfItem,
 				...replaceDependsUponAsProperty(
 					dependsUpon,
 				),
 				...replaceInItemsAsProperty(
 					items,
 				),
-				...restOfItem,
 			}
 		);
 	}
