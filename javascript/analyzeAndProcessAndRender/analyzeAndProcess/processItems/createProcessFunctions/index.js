@@ -2,7 +2,10 @@ const
 	createIdentifierSeparatorSpecific = require("./createIdentifierSeparatorSpecific"),
 	createOrAddToStacks = require("./createOrAddToStacks"),
 	ensureRootItemWithIdentifier = require("./ensureRootItemWithIdentifier"),
+	removePackagePrefixAndScopeInDependsUpon = require("./removePackagePrefixAndScopeInDependsUpon"),
 	{
+		removeSelfDependentItemsOfType,
+		replaceDependsUponWithHierarchyFromSeparator,
 		sorting:
 			{
 				orderItemsByIdentifier,
@@ -13,12 +16,10 @@ const
 				createOrAddToStacksToItemsWithIdentifier,
 				createOrAddToStacksUniformly,
 			},
-		removeSelfDependentItemsOfType,
 		setIdentifierOfAnonymousToParent,
 		setTypeOfRootItems,
 		unstackIndependent,
-	} = require("@devsnicket/eunice-processors"),
-	removePackagePrefixAndScopeFromDependsUpon = require("./removePackagePrefixAndScopeFromDependsUpon");
+	} = require("@devsnicket/eunice-processors");
 
 module.exports =
 	({
@@ -42,6 +43,11 @@ module.exports =
 				orderItemsByIdentifier,
 				groupItems,
 				items =>
+					replaceDependsUponWithHierarchyFromSeparator({
+						identifierSeparator: "/",
+						items,
+					}),
+				items =>
 					ensureRootItemWithIdentifier({
 						identifier: rootItemIdentifier,
 						items,
@@ -60,7 +66,7 @@ module.exports =
 						rootItemIdentifier,
 					}),
 				items =>
-					removePackagePrefixAndScopeFromDependsUpon({
+					removePackagePrefixAndScopeInDependsUpon({
 						items,
 						...packagePrefixAndScope,
 					}),
