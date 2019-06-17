@@ -8,6 +8,7 @@ module.exports =
 	({
 		directoryToCreateOrAddToStacksFrom,
 		ignoreDirectoryNames,
+		packagePrefixAndScope,
 		sources,
 	}) => {
 		return (
@@ -42,6 +43,7 @@ module.exports =
 						identifierSeparator:
 							path.sep,
 						items,
+						packagePrefixAndScope,
 						rootItemIdentifier,
 					})
 				);

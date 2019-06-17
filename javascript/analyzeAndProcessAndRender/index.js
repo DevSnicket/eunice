@@ -6,7 +6,6 @@ const
 	{ getSvgForYaml } = require("@devsnicket/eunice-renderer"),
 	path = require("path"),
 	{ promisify } = require("util"),
-	removePackageScopeAndPrefixFromYaml = require("./removePackageScopeAndPrefixFromYaml"),
 	writeHarness = require("@devsnicket/eunice-renderer-test-harness/writeHarness");
 
 const
@@ -37,22 +36,20 @@ module.exports =
 			isHtmlSingleFile,
 			...outputPath,
 			yaml:
-				removePackageScopeAndPrefixFromYaml({
-					packages,
-					yaml:
-						formatYaml(
-							analyzeAndProcess({
-								directoryToCreateOrAddToStacksFrom,
-								ignoreDirectoryNames,
-								sources:
-									createSourcesWithPackages({
-										packages,
-										sources,
-									}),
+				formatYaml(
+					analyzeAndProcess({
+						directoryToCreateOrAddToStacksFrom,
+						ignoreDirectoryNames,
+						packagePrefixAndScope:
+							packages,
+						sources:
+							createSourcesWithPackages({
+								packages,
+								sources,
 							}),
-							{ lineWidth: Number.MAX_SAFE_INTEGER },
-						),
-				}),
+					}),
+					{ lineWidth: Number.MAX_SAFE_INTEGER },
+				),
 		});
 
 function createSourcesWithPackages({

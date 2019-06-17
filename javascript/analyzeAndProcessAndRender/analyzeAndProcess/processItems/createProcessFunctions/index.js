@@ -17,12 +17,14 @@ const
 		setIdentifierOfAnonymousToParent,
 		setTypeOfRootItems,
 		unstackIndependent,
-	} = require("@devsnicket/eunice-processors");
+	} = require("@devsnicket/eunice-processors"),
+	removePackagePrefixAndScopeFromDependsUpon = require("./removePackagePrefixAndScopeFromDependsUpon");
 
 module.exports =
 	({
 		directoryToCreateOrAddToStacksFrom,
 		identifierSeparator,
+		packagePrefixAndScope,
 		rootItemIdentifier,
 	}) => {
 		const
@@ -56,6 +58,11 @@ module.exports =
 							directoryToCreateOrAddToStacksFrom,
 						items,
 						rootItemIdentifier,
+					}),
+				items =>
+					removePackagePrefixAndScopeFromDependsUpon({
+						items,
+						...packagePrefixAndScope,
 					}),
 				flattenSingleRootItemWhenHasOnlyItemsAndType,
 			]

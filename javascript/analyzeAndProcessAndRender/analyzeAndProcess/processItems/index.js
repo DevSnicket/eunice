@@ -5,6 +5,7 @@ module.exports =
 		directoryToCreateOrAddToStacksFrom,
 		identifierSeparator,
 		items,
+		packagePrefixAndScope,
 		rootItemIdentifier,
 	}) =>
 		invokeProcessFunctions({
@@ -13,6 +14,7 @@ module.exports =
 				createProcessFunctions({
 					directoryToCreateOrAddToStacksFrom,
 					identifierSeparator,
+					packagePrefixAndScope,
 					rootItemIdentifier,
 				}),
 		});
