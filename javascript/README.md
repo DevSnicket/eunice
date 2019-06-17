@@ -47,7 +47,7 @@ This GitHub repository is named eunice-javascript, but the NPM package contained
 From the processors available in [eunice-processors](https://github.com/DevSnicket/eunice-processors
 ), this package runs the following automatically, the same processing as Eunice uses when analyzing itself:
 1. The filename "index" is removed from identifiers.
-2. The identifiers of root items can be optionally prefixed (e.g. with their package name).
+2. Optionally ensure there is a single root item with an identifier (e.g. the package's name).
 3. Items that are files have "type: file" added to them.
 4. Items are ordered by their identifiers.
 5. Items are grouped by their identifiers (this is requires the previous ordering step).
@@ -65,9 +65,9 @@ Only the current directory is included in analysis by default. Multiple sources 
 ```bash
 npx @devsnicket/eunice --directories=directory1 --directories=directory2
 ```
-A prefix can also be specified for each source directory to be used in [processing](#Processing) step 2:
+An identifier for a root item can also be specified for each source directory to be used in [processing](#Processing) step 2:
 ```bash
-npx @devsnicket/eunice --directories=directory1 --identifierPrefixesOfRootItems=prefixForDirectory1
+npx @devsnicket/eunice --directories=directory1 --rootItemIdentifiers=prefixForDirectory1 --directories=directory2 --rootItemIdentifiers=prefixForDirectory2
 ```
 
 The following sub-directories are ignored by default:

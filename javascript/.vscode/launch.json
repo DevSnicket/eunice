@@ -29,7 +29,7 @@
 					"--packagePrefix=eunice-",
 					"--packageScope=devsnicket",
 					"--directories=.",
-					"--identifierPrefixesOfRootItems=@devsnicket/eunice-javascript"
+					"--rootItemIdentifiers=javascript"
 				],
 			"name": "bin dogfooding",
 			"program": "${workspaceFolder}/bin/index.js",

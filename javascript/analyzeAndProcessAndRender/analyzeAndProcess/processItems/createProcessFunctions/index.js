@@ -1,6 +1,7 @@
 const
 	createIdentifierSeparatorSpecific = require("./createIdentifierSeparatorSpecific"),
 	createOrAddToStacks = require("./createOrAddToStacks"),
+	ensureRootItemWithIdentifier = require("./ensureRootItemWithIdentifier"),
 	{
 		sorting:
 			{
@@ -21,26 +22,28 @@ const
 module.exports =
 	({
 		directoryToCreateOrAddToStacksFrom,
-		identifierPrefixOfRootItems,
 		identifierSeparator,
+		rootItemIdentifier,
 	}) => {
 		const
 			{
-				addPrefixToRoot,
 				groupItems,
 				removeIndexFileSuffix,
-			} = createIdentifierSeparatorSpecific({
-				identifierPrefixOfRootItems,
+			} = createIdentifierSeparatorSpecific(
 				identifierSeparator,
-			});
+			);
 
 		return (
 			[
 				removeIndexFileSuffix,
-				addPrefixToRoot,
 				setTypeOfRootToFile,
 				orderItemsByIdentifier,
 				groupItems,
+				items =>
+					ensureRootItemWithIdentifier({
+						identifier: rootItemIdentifier,
+						items,
+					}),
 				setIdentifierOfAnonymousToParent,
 				removeSelfDependentVariables,
 				orderItemsByType,
@@ -51,8 +54,8 @@ module.exports =
 					createOrAddToStacks({
 						directory:
 							directoryToCreateOrAddToStacksFrom,
-						identifierPrefixOfRootItems,
 						items,
+						rootItemIdentifier,
 					}),
 				flattenSingleRootItemWhenHasOnlyItemsAndType,
 			]

@@ -3,8 +3,8 @@ const { createOrAddToStacksUsingFileSystem } = require("@devsnicket/eunice-proce
 module.exports =
 	({
 		directory,
-		identifierPrefixOfRootItems,
 		items,
+		rootItemIdentifier,
 	}) => {
 		return (
 			createOrAddToStacksUsingFileSystem({
@@ -17,16 +17,16 @@ module.exports =
 
 		function createSubsetIdentifierHierarchy() {
 			return (
-				whenPrefixed()
+				whenHasRootItem()
 				||
 				whenSingleAnonymous()
 			);
 
-			function whenPrefixed() {
+			function whenHasRootItem() {
 				return (
-					identifierPrefixOfRootItems
+					rootItemIdentifier
 					&&
-					[ identifierPrefixOfRootItems ]
+					[ rootItemIdentifier ]
 				);
 			}
 

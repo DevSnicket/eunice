@@ -22,7 +22,7 @@ module.exports =
 
 		function analyzeAndProcessSource({
 			directory,
-			identifierPrefixOfRootItems,
+			rootItemIdentifier,
 		}) {
 			const items =
 				analyzer.getOrCreateItemsInDirectory({
@@ -39,10 +39,10 @@ module.exports =
 					processItems({
 						directoryToCreateOrAddToStacksFrom:
 							directory,
-						identifierPrefixOfRootItems,
 						identifierSeparator:
 							path.sep,
 						items,
+						rootItemIdentifier,
 					})
 				);
 			}

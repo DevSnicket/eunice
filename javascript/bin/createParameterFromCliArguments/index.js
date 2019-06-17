@@ -5,7 +5,6 @@ const
 module.exports =
 	({
 		directories = ".",
-		identifierPrefixesOfRootItems,
 		ignoreDirectoryNames,
 		isHtmlSingleFile,
 		outputDirectoryPath,
@@ -13,6 +12,7 @@ module.exports =
 		packageNames,
 		packagePrefix,
 		packageScope,
+		rootItemIdentifiers,
 		...restOfOptions
 	}) => (
 		{
@@ -38,7 +38,7 @@ module.exports =
 				[
 					...createSources({
 						directories,
-						identifierPrefixesOfRootItems,
+						rootItemIdentifiers,
 					}),
 				],
 		}

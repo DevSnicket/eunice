@@ -37,48 +37,38 @@ module.exports =
 			isHtmlSingleFile,
 			...outputPath,
 			yaml:
-				createYaml({
-					directoryToCreateOrAddToStacksFrom,
-					ignoreDirectoryNames,
+				removePackageScopeAndPrefixFromYaml({
 					packages,
-					sources,
+					yaml:
+						formatYaml(
+							analyzeAndProcess({
+								directoryToCreateOrAddToStacksFrom,
+								ignoreDirectoryNames,
+								sources:
+									createSourcesWithPackages({
+										packages,
+										sources,
+									}),
+							}),
+							{ lineWidth: Number.MAX_SAFE_INTEGER },
+						),
 				}),
 		});
 
-function createYaml({
-	directoryToCreateOrAddToStacksFrom,
-	ignoreDirectoryNames,
+function createSourcesWithPackages({
 	packages,
 	sources,
 }) {
 	return (
-		removePackageScopeAndPrefixFromYaml({
-			packages,
-			yaml:
-				formatYaml(
-					analyzeAndProcess({
-						directoryToCreateOrAddToStacksFrom,
-						ignoreDirectoryNames,
-						sources:
-							createSourcesWithPackages(),
-					}),
-					{ lineWidth: Number.MAX_SAFE_INTEGER },
-				),
-		})
+		packages
+		?
+		[
+			...createSourcesFromPackages(packages),
+			...sources,
+		]
+		:
+		sources
 	);
-
-	function createSourcesWithPackages() {
-		return (
-			packages
-			?
-			[
-				...createSourcesFromPackages(packages),
-				...sources,
-			]
-			:
-			sources
-		);
-	}
 }
 
 async function writeOutput({

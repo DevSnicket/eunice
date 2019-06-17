@@ -1,15 +1,15 @@
 module.exports =
 	function * createSources({
 		directories,
-		identifierPrefixesOfRootItems,
+		rootItemIdentifiers,
 	}) {
 		const
 			iterators =
 				{
 					directory:
 						getIterator(directories),
-					identifierPrefixOfRootItems:
-						getIterator(identifierPrefixesOfRootItems),
+					rootItemIdentifier:
+						getIterator(rootItemIdentifiers),
 				};
 
 		let source = null;
@@ -41,14 +41,14 @@ module.exports =
 		function getNext() {
 			const
 				directory = iterators.directory.next().value,
-				identifierPrefixOfRootItems = iterators.identifierPrefixOfRootItems.next().value;
+				rootItemIdentifier = iterators.rootItemIdentifier.next().value;
 
 			return (
-				(directory || identifierPrefixOfRootItems)
+				(directory || rootItemIdentifier)
 				&&
 				{
 					...{ directory },
-					...{ identifierPrefixOfRootItems },
+					...{ rootItemIdentifier },
 				}
 			);
 		}

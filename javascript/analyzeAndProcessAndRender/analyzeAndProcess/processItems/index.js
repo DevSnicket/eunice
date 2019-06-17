@@ -3,17 +3,17 @@ const createProcessFunctions = require("./createProcessFunctions");
 module.exports =
 	({
 		directoryToCreateOrAddToStacksFrom,
-		identifierPrefixOfRootItems,
 		identifierSeparator,
 		items,
+		rootItemIdentifier,
 	}) =>
 		invokeProcessFunctions({
 			items,
 			processFunctions:
 				createProcessFunctions({
 					directoryToCreateOrAddToStacksFrom,
-					identifierPrefixOfRootItems,
 					identifierSeparator,
+					rootItemIdentifier,
 				}),
 		});
 

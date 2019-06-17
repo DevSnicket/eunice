@@ -6,11 +6,8 @@ const
 	} = require("@devsnicket/eunice-processors");
 
 module.exports =
-	({
-		identifierPrefixOfRootItems,
-		identifierSeparator,
-	}) => {
-		return { addPrefixToRoot, groupItems, removeIndexFileSuffix };
+	identifierSeparator => {
+		return { groupItems, removeIndexFileSuffix };
 
 		function removeIndexFileSuffix(
 			items,
@@ -30,48 +27,6 @@ module.exports =
 			function getIdentifierSeparatorEscaped() {
 				return identifierSeparator.replace("\\", "\\\\");
 			}
-		}
-
-		function addPrefixToRoot(
-			items,
-		) {
-			return (
-				identifierPrefixOfRootItems
-				?
-				addPrefixToRootAnonymous(
-					addPrefixToRootIdentifiable(
-						items,
-					),
-				)
-				:
-				items
-			);
-		}
-
-		function addPrefixToRootIdentifiable(
-			items,
-		) {
-			return (
-				replaceIdentifiers({
-					items,
-					pattern: /.+/,
-					replacement: `${identifierPrefixOfRootItems}${identifierSeparator}$&`,
-					rootOnly: true,
-				})
-			);
-		}
-
-		function addPrefixToRootAnonymous(
-			items,
-		) {
-			return (
-				replaceIdentifiers({
-					items,
-					pattern: /^$/,
-					replacement: identifierPrefixOfRootItems,
-					rootOnly: true,
-				})
-			);
 		}
 
 		function groupItems(
