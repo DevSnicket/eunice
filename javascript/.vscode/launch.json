@@ -26,7 +26,8 @@
 					"--packageNames=run-tests-from-file-system",
 					"--packageNames=test-harnesses",
 					"--packageNames=test-harnesses-processor-plugins",
-					"--packagePrefix=@devsnicket/eunice-",
+					"--packagePrefix=eunice-",
+					"--packageScope=devsnicket",
 					"--directories=.",
 					"--identifierPrefixesOfRootItems=@devsnicket/eunice-javascript"
 				],

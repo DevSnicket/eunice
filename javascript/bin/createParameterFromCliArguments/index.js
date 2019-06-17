@@ -11,6 +11,8 @@ module.exports =
 		outputDirectoryPath,
 		outputBaseFileName,
 		packageNames,
+		packagePrefix,
+		packageScope,
 		...restOfOptions
 	}) => (
 		{
@@ -24,8 +26,14 @@ module.exports =
 					outputBaseFileName,
 					outputDirectoryPath,
 				}),
-			packageNames:
-				ensureArray(packageNames),
+			packages:
+				(packageNames || packagePrefix || packageScope)
+				&&
+				{
+					names: ensureArray(packageNames),
+					prefix: packagePrefix,
+					scope: packageScope,
+				},
 			sources:
 				[
 					...createSources({

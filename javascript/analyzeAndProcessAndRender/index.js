@@ -6,7 +6,7 @@ const
 	{ getSvgForYaml } = require("@devsnicket/eunice-renderer"),
 	path = require("path"),
 	{ promisify } = require("util"),
-	removePackagePrefixFromYaml = require("./removePackagePrefixFromYaml"),
+	removePackageScopeAndPrefixFromYaml = require("./removePackageScopeAndPrefixFromYaml"),
 	writeHarness = require("@devsnicket/eunice-renderer-test-harness/writeHarness");
 
 const
@@ -25,42 +25,61 @@ const
 		promisify(fs.writeFile);
 
 module.exports =
-	async({
+	({
 		directoryToCreateOrAddToStacksFrom = null,
 		ignoreDirectoryNames = ignoreDirectoryNamesDefault,
 		isHtmlSingleFile = true,
 		outputPath,
-		packageNames = [],
-		packagePrefix = null,
+		packages = null,
 		sources,
-	}) => {
-		const yaml =
-			removePackagePrefixFromYaml({
-				packagePrefix,
-				yaml:
-					formatYaml(
-						analyzeAndProcess({
-							directoryToCreateOrAddToStacksFrom,
-							ignoreDirectoryNames,
-							sources:
-								[
-									...createSourcesFromPackages({
-										names: packageNames,
-										prefix: packagePrefix,
-									}),
-									...sources,
-								],
-						}),
-						{ lineWidth: Number.MAX_SAFE_INTEGER },
-					),
-			});
-
-		await writeOutput({
+	}) =>
+		writeOutput({
 			isHtmlSingleFile,
 			...outputPath,
-			yaml,
+			yaml:
+				createYaml({
+					directoryToCreateOrAddToStacksFrom,
+					ignoreDirectoryNames,
+					packages,
+					sources,
+				}),
 		});
-	};
+
+function createYaml({
+	directoryToCreateOrAddToStacksFrom,
+	ignoreDirectoryNames,
+	packages,
+	sources,
+}) {
+	return (
+		removePackageScopeAndPrefixFromYaml({
+			packages,
+			yaml:
+				formatYaml(
+					analyzeAndProcess({
+						directoryToCreateOrAddToStacksFrom,
+						ignoreDirectoryNames,
+						sources:
+							createSourcesWithPackages(),
+					}),
+					{ lineWidth: Number.MAX_SAFE_INTEGER },
+				),
+		})
+	);
+
+	function createSourcesWithPackages() {
+		return (
+			packages
+			?
+			[
+				...createSourcesFromPackages(packages),
+				...sources,
+			]
+			:
+			sources
+		);
+	}
+}
 
 async function writeOutput({
 	baseFileName,

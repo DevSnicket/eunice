@@ -89,9 +89,10 @@ Packages installed in the node_modules directory are not analysed by default. Th
 ```bash
 npx @devsnicket/eunice --packageNames=package1 --packageNames=package2
 ```
-To aid readability a package prefix can also be specified that will not be visible in the rendered output:
+To aid readability a package prefix and scope can also be specified that will not be visible in the rendered output:
 ```bash
-npx @devsnicket/eunice --packagePrefix=@myScope/
+// e.g. @scope/prefix-package
+npx @devsnicket/eunice --packageNames=package --packagePrefix=prefix- --packageScope=scope
 ```
 
 When multiple sources of analysis are specified, [processing](#Processing) step 12 can also be applied to the combined sources:

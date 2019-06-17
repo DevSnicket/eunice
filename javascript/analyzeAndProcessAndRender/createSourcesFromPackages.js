@@ -4,8 +4,17 @@ module.exports =
 	({
 		names,
 		prefix,
-	}) =>
-		names.map(name => createSourceWithName(`${prefix}${name}`));
+		scope,
+	}) => {
+		const scopeAndPrefix =
+			scope
+			?
+			`@${scope}/${prefix}`
+			:
+			prefix;
+
+		return names.map(name => createSourceWithName(`${scopeAndPrefix}${name}`));
+	};
 
 function createSourceWithName(
 	name,
