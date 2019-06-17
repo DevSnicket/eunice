@@ -1,17 +1,17 @@
 module.exports =
 	({
+		getDependsUponReplacement,
 		identifierOrItemOrLevelOrStack,
-		replaceItem,
 	}) =>
-		withReplaceItem(
-			replaceItem,
+		withGetDependsUponReplacement(
+			getDependsUponReplacement,
 		)
 		.getIdentifierOrReplaceItemOrItemsInLevelOrStack(
 			identifierOrItemOrLevelOrStack,
 		);
 
-function withReplaceItem(
-	replaceItem,
+function withGetDependsUponReplacement(
+	getDependsUponReplacement,
 ) {
 	return { getIdentifierOrReplaceItemOrItemsInLevelOrStack };
 
@@ -57,7 +57,7 @@ function withReplaceItem(
 		return (
 			whenIdentifier()
 			||
-			replaceItem(itemOrIdentifier)
+			replaceItemAndInItems(itemOrIdentifier)
 		);
 
 		function whenIdentifier() {
@@ -67,5 +67,41 @@ function withReplaceItem(
 				itemOrIdentifier
 			);
 		}
+	}
+
+	function replaceItemAndInItems({
+		dependsUpon,
+		items,
+		...restOfItem
+	}) {
+		return (
+			{
+				...restOfItem,
+				...createPropertyFromDependsUpon(dependsUpon),
+				...createPropertyFromItems(items),
+			}
+		);
+	}
+
+	function createPropertyFromDependsUpon(
+		dependsUpon,
+	) {
+		const replacement = getDependsUponReplacement(dependsUpon);
+
+		return (
+			replacement
+			&&
+			{ dependsUpon: replacement }
+		);
+	}
+
+	function createPropertyFromItems(
+		items,
+	) {
+		return (
+			items
+			&&
+			{ items: getIdentifierOrReplaceItemOrItemsInLevelOrStack(items) }
+		);
 	}
 }

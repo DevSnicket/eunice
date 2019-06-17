@@ -11,7 +11,7 @@
 		"eunice-processors-orderItemsByIndexOfType": "dist/sorting/orderItemsByIndexOfType/bin.js",
 		"eunice-processors-removeRedundantParentIdentifierPrefix": "dist/removeRedundantParentIdentifierPrefix/bin.js",
 		"eunice-processors-removeSelfDependentItemsOfType": "dist/removeSelfDependentItemsOfType/bin.js",
-		"eunice-processors-replaceDependsUponWithHierarchiesOfIdentifierSeparator": "dist/replaceDependsUponWithHierarchiesOfIdentifierSeparator/bin.js",
+		"eunice-processors-replaceDependsUponWithHierarchyFromSeparator": "dist/replaceDependsUpon/withHierarchyFromSeparator/bin.js",
 		"eunice-processors-replaceIdentifiers": "dist/replaceIdentifiers/bin.js",
 		"eunice-processors-setIdentifierOfAnonymousToParent": "dist/setIdentifierOfAnonymousToParent/bin.js",
 		"eunice-processors-setTypeOfRootItems": "dist/setTypeOfRootItems/bin.js",
@@ -89,5 +89,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./dist/**/*\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "npx jest --runInBand"
 	},
-	"version": "3.6.2"
+	"version": "4.0.0"
 }
