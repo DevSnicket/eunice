@@ -8,10 +8,11 @@
 		"minimist": "1.2.0"
 	},
 	"devDependencies": {
+		"@babel/cli": "7.4.4",
+		"@babel/core": "7.4.5",
+		"@babel/plugin-proposal-object-rest-spread": "7.4.4",
+		"@babel/preset-env": "7.4.5",
 		"@types/node": "10.12.1",
-		"babel-cli": "6.26.0",
-		"babel-plugin-transform-object-rest-spread": "6.26.0",
-		"babel-preset-env": "1.7.0",
 		"cspell": "4.0.21",
 		"eslint": "5.15.0"
 	},
@@ -42,5 +43,5 @@
 		"lint": "npx eslint .",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./dist/**/*\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +"
 	},
-	"version": "1.0.0"
+	"version": "1.0.1"
 }
