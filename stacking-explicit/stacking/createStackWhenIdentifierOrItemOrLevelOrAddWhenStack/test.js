@@ -76,6 +76,13 @@ test.each(
 		],
 		[
 			{
+				identifierOrItemOrLevelOrStack: "itemSpecified",
+				identifiersInNewStack: [ "itemSpecified" ],
+			},
+			"itemSpecified",
+		],
+		[
+			{
 				identifierOrItemOrLevelOrStack: [ "itemSpecified", "itemNotSpecified" ],
 				identifiersInNewStack: [ "itemMissingAndSpecified", "itemSpecified", "existing" ],
 			},
@@ -179,7 +186,7 @@ test.each(
 				identifierOrItemOrLevelOrStack: [ "item1", "item2" ],
 				identifiersInNewStack: [ [ "item1", "item2" ] ],
 			},
-			[ [ "item1", "item2" ] ],
+			[ "item1", "item2" ],
 		],
 		[
 			{
@@ -245,7 +252,7 @@ test.each(
 				identifierOrItemOrLevelOrStack: [ "item1", [] ],
 				identifiersInNewStack: [ "item1" ],
 			},
-			[ [ "item1" ] ],
+			"item1",
 		],
 	],
 )(

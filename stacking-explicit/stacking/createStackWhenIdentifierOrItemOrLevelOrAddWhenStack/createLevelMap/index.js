@@ -1,6 +1,8 @@
 require("array.prototype.flat")
 .shim();
 
+const getStackOrSingleLevelOrSingleItem = require("./getStackOrSingleLevelOrSingleItem");
+
 module.exports =
 	({
 		addMissing,
@@ -25,7 +27,9 @@ module.exports =
 			return (
 				itemsByIdentifiersInNewLevel.size || addMissing
 				?
-				identifiersInNewStack.reduce(aggregate, [])
+				getStackOrSingleLevelOrSingleItem(
+					identifiersInNewStack.reduce(aggregate, []),
+				)
 				:
 				getExistingWhenNoNewLevels()
 			);
