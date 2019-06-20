@@ -3306,68 +3306,80 @@
                   - - id: createLevelMap
                       type: file
                       items:
-                        id: createLevelMap
-                        items:
-                          - - id: getNewWithExistingLevels
-                              dependsUpon:
-                                - aggregate
-                                - getExistingWhenNoNewLevels
-                                - identifiersInNewStack
-                                - throwErrorWhenExistingNotSpecified
-                              items:
-                                - - id: throwErrorWhenExistingNotSpecified
-                                    dependsUpon:
-                                      - Error
-                                      - formatExistingLevels
-                                      - identifiersInNewStack
-                                      - isNewLevelForExisting
-                                    items:
-                                      id: formatExistingLevels
-                                      dependsUpon: existingLevels
-                                  - id: aggregate
-                                    dependsUpon:
-                                      - asNew
-                                      - whenExisting
-                                    items:
-                                      - - id: whenExisting
-                                          dependsUpon:
-                                            - identifiersInNewLevel
-                                            - isNewLevelForExisting
-                                        - id: asNew
-                                          dependsUpon:
-                                            - createMissingLevel
-                                            - identifiersInNewLevel
-                                            - itemsByIdentifiersInNewLevel
-                                      - - id: createMissingLevel
-                                          dependsUpon:
-                                            - Array
-                                            - identifiersInNewLevel
-                                      - - id: identifiersInNewLevel
-                                          type: parameter
-                                - - id: isNewLevelForExisting
-                                    dependsUpon: Array
-                                  - getExistingWhenNoNewLevels
-                                  - id: existingLevels
-                                    type: parameter
-                            - id: addIdentifierOrItemWhenInNewLevel
-                              dependsUpon:
-                                - addItemToIdentifiersInLevel
-                                - getNewLevelOfIdentifierWhenSpecified
-                              items:
-                                - - id: addItemToIdentifiersInLevel
-                                    dependsUpon:
-                                      - itemsByIdentifiersInNewLevel
-                                      - newLevel
-                                - - id: newLevel
-                                    type: variable
-                          - - id: getNewLevelOfIdentifierWhenSpecified
-                              dependsUpon:
-                                - Array
-                                - identifiersInNewStack
-                          - - id: identifiersInNewStack
-                              type: parameter
-                            - id: itemsByIdentifiersInNewLevel
-                              type: variable
+                        - - id: createLevelMap
+                            items:
+                              - - id: getNewWithExistingLevels
+                                  dependsUpon:
+                                    - aggregate
+                                    - getExistingWhenNoNewLevels
+                                    - getStackOrSingleLevelOrSingleItem
+                                    - identifiersInNewStack
+                                    - throwErrorWhenExistingNotSpecified
+                                  items:
+                                    - - id: throwErrorWhenExistingNotSpecified
+                                        dependsUpon:
+                                          - Error
+                                          - formatExistingLevels
+                                          - identifiersInNewStack
+                                          - isNewLevelForExisting
+                                        items:
+                                          id: formatExistingLevels
+                                          dependsUpon: existingLevels
+                                      - id: aggregate
+                                        dependsUpon:
+                                          - asNew
+                                          - whenExisting
+                                        items:
+                                          - - id: whenExisting
+                                              dependsUpon:
+                                                - identifiersInNewLevel
+                                                - isNewLevelForExisting
+                                            - id: asNew
+                                              dependsUpon:
+                                                - createMissingLevel
+                                                - identifiersInNewLevel
+                                                - itemsByIdentifiersInNewLevel
+                                          - - id: createMissingLevel
+                                              dependsUpon:
+                                                - Array
+                                                - identifiersInNewLevel
+                                          - - id: identifiersInNewLevel
+                                              type: parameter
+                                    - - id: isNewLevelForExisting
+                                        dependsUpon: Array
+                                      - getExistingWhenNoNewLevels
+                                      - id: existingLevels
+                                        type: parameter
+                                - id: addIdentifierOrItemWhenInNewLevel
+                                  dependsUpon:
+                                    - addItemToIdentifiersInLevel
+                                    - getNewLevelOfIdentifierWhenSpecified
+                                  items:
+                                    - - id: addItemToIdentifiersInLevel
+                                        dependsUpon:
+                                          - itemsByIdentifiersInNewLevel
+                                          - newLevel
+                                    - - id: newLevel
+                                        type: variable
+                              - - id: getNewLevelOfIdentifierWhenSpecified
+                                  dependsUpon:
+                                    - Array
+                                    - identifiersInNewStack
+                              - - id: identifiersInNewStack
+                                  type: parameter
+                                - id: itemsByIdentifiersInNewLevel
+                                  type: variable
+                        - - id: getStackOrSingleLevelOrSingleItem
+                            type: file
+                            items:
+                              - - id: getStackOrSingleLevelOrSingleItem
+                                  dependsUpon: whenSingleLevel
+                                  items:
+                                    id: whenSingleLevel
+                                    dependsUpon: getLevelOrSingleItem
+                              - - id: getLevelOrSingleItem
+                                  dependsUpon: whenSingleItem
+                                  items: whenSingleItem
                     - id: createOrAddToStack
                       type: file
                       items:
