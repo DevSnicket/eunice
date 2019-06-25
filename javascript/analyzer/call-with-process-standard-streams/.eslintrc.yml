@@ -10,6 +10,8 @@ parserOptions:
     impliedStrict: true
   ecmaVersion:
     2018
+plugins:
+  - notice
 rules:
   array-bracket-newline:
     - error
@@ -268,6 +270,16 @@ rules:
   nonblock-statement-body-position:
     - error
     - below
+  notice/notice:
+    - error
+    - mustMatch: |+
+        /\* Copyright \(c\) [0-9]{4} Graham Dyson\. All Rights Reserved\.
+        Licensed under the MIT license. See LICENSE file in the repository root for full license information. \*/
+        
+      template: |+
+        /* Copyright (c) <%= YEAR %> Graham Dyson. All Rights Reserved.
+        Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
+        
   object-curly-newline:
     - error
     - multiline: true
