@@ -6,7 +6,8 @@
 	"description": "Runs tests by discovering test cases and expected behaviour from the file system. Tests are automatically named based on the directory hierarchy.",
 	"devDependencies": {
 		"cspell": "4.0.21",
-		"eslint": "5.16.0"
+		"eslint": "5.16.0",
+		"eslint-plugin-notice": "0.8.8"
 	},
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
 	"keywords": [
