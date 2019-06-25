@@ -17,6 +17,7 @@
 		"babel-preset-env": "1.7.0",
 		"cspell": "4.0.21",
 		"eslint": "5.16.0",
+		"eslint-plugin-notice": "0.8.8",
 		"jest": "24.8.0"
 	},
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
