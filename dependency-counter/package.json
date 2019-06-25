@@ -29,6 +29,7 @@
 		"babel-preset-env": "1.7.0",
 		"cspell": "4.0.21",
 		"eslint": "5.16.0",
+		"eslint-plugin-notice": "0.8.8",
 		"jest": "24.8.0",
 		"react-reflex": "2.2.8",
 		"typescript": "3.4.5"
@@ -84,5 +85,5 @@
 		"test": "npx jest --runInBand",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "4.7.0"
+	"version": "5.0.0"
 }
