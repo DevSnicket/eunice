@@ -119,12 +119,12 @@ function stackBinAndTestAtTop(
 ) {
 	return (
 		createOrAddToStacksUniformly({
-			identifiersInNewStack:
+			items,
+			targetLevelOrStack:
 				[
 					[ "bin", "test" ],
 					"existing",
 				],
-			items,
 		})
 	);
 }
@@ -136,12 +136,12 @@ function addJestMethodsToBottom(
 		createOrAddToStacksToItemsWithIdentifier({
 			identifierPattern:
 				/^test$|test[A-Z]/,
-			identifiersInNewStack:
+			items,
+			targetLevelOrStack:
 				[
 					[ "existing" ],
 					[ "expect", "test" ],
 				],
-			items,
 		})
 	);
 }

@@ -1,9 +1,11 @@
 - - javascript
 - - renderer-test-harness
-- - javascript-analyzer
+-
+  - javascript-analyzer
   - processors
   - renderer
-- - call-with-process-standard-streams
+-
+  - call-with-process-standard-streams
   - dependency-and-structure
   - run-tests-from-file-system
   - test-harnesses
