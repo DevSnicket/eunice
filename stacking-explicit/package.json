@@ -37,6 +37,7 @@
 		"babel-preset-env": "1.7.0",
 		"cspell": "4.0.21",
 		"eslint": "5.16.0",
+		"eslint-plugin-notice": "0.8.8",
 		"jest": "24.8.0"
 	},
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
@@ -89,5 +90,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./dist/**/*\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "npx jest --runInBand"
 	},
-	"version": "4.1.0"
+	"version": "5.0.0"
 }
