@@ -1,2 +1,3 @@
 /dist/
+/tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output/
 /writeHarness/test/output
