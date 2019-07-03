@@ -73,7 +73,7 @@
 		"unice",
 		"yaml"
 	],
-	"license": "MIT",
+	"license": "GPL-3.0-or-later",
 	"main": "dist/index.js",
 	"name": "@devsnicket/eunice-processors",
 	"publishConfig": {
@@ -90,5 +90,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./dist/**/*\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "npx jest --runInBand"
 	},
-	"version": "6.0.1"
+	"version": "6.0.2"
 }
