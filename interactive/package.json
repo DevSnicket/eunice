@@ -76,7 +76,7 @@
 		"unice",
 		"yaml"
 	],
-	"license": "MIT",
+	"license": "GPL-3.0-or-later",
 	"main": "index.js",
 	"name": "@devsnicket/eunice-renderer-test-harness",
 	"publishConfig": {
@@ -96,5 +96,5 @@
 		"test": "npx jest",
 		"watch": "npx webpack --config webpack.config.js -d --watch"
 	},
-	"version": "2.0.0"
+	"version": "2.0.1"
 }
