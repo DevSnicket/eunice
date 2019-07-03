@@ -67,7 +67,7 @@
 		"yaml"
 	],
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
-	"license": "MIT",
+	"license": "GPL-3.0-or-later",
 	"main": "dist/index.js",
 	"name": "@devsnicket/eunice-renderer",
 	"publishConfig": {
@@ -85,5 +85,5 @@
 		"test": "npx jest --runInBand",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "5.2.0"
+	"version": "5.2.1"
 }
