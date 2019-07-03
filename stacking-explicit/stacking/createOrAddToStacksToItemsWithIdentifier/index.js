@@ -3,14 +3,14 @@ This library is free software, licensed under the terms of the GNU General Publi
 
 const
 	createStackWhenIdentifierOrItemOrLevelOrAddWhenStack = require("../createStackWhenIdentifierOrItemOrLevelOrAddWhenStack"),
-	getIdentifiersInNewStackWhenParentAncestor = require("./getIdentifiersInNewStackWhenParentAncestor"),
+	hasParentInAncestors = require("./hasParentInAncestors"),
 	replaceItemsAndInItems = require("../replaceItemsAndInItems");
 
 module.exports =
 	({
 		identifierPattern,
-		identifiersInNewStack,
 		items,
+		targetLevelOrStack,
 	}) =>
 		replaceItemsAndInItems({
 			identifierOrItemOrLevelOrStack:
@@ -20,15 +20,16 @@ module.exports =
 					ancestors,
 					identifierOrItemOrLevelOrStack,
 				}) =>
+					hasParentInAncestors({
+						ancestors,
+						parentIdentifierPattern: identifierPattern,
+					})
+					?
 					createStackWhenIdentifierOrItemOrLevelOrAddWhenStack({
-						addMissing:
-							true,
+						addNewInTarget: true,
 						identifierOrItemOrLevelOrStack,
-						identifiersInNewStack:
-							getIdentifiersInNewStackWhenParentAncestor({
-								ancestors,
-								identifiersInNewStack,
-								parentIdentifierPattern: identifierPattern,
-							}),
-					}),
+						targetLevelOrStack,
+					})
+					:
+					identifierOrItemOrLevelOrStack,
 		});

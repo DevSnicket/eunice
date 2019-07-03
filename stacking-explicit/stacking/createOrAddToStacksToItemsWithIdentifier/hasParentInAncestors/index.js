@@ -2,28 +2,33 @@
 This library is free software, licensed under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 module.exports =
-	stack => {
-		return whenSingleLevel() || stack;
+	({
+		ancestors,
+		parentIdentifierPattern,
+	}) => {
+		return (
+			Boolean(
+				isParentIdentifierMatch(
+					getParentIdentifier(),
+				),
+			)
+		);
 
-		function whenSingleLevel() {
+		function getParentIdentifier() {
 			return (
-				stack.length === 1
+				ancestors.length
 				&&
-				getLevelOrSingleItem(stack[0])
+				ancestors[ancestors.length - 1].id
+			);
+		}
+
+		function isParentIdentifierMatch(
+			identifier,
+		) {
+			return (
+				identifier
+				&&
+				identifier.match(parentIdentifierPattern)
 			);
 		}
 	};
-
-function getLevelOrSingleItem(
-	level,
-) {
-	return whenSingleItem() || level;
-
-	function whenSingleItem() {
-		return (
-			level.length === 1
-			&&
-			level[0]
-		);
-	}
-}

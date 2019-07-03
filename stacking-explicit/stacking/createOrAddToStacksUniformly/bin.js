@@ -13,8 +13,8 @@ callWithProcessStandardStreamsOfYaml(
 		items,
 	}) =>
 		createOrAddToStacksUniformly({
-			identifiersInNewStack:
-				parseCommaSeparated(commaSeparatedLevels),
 			items,
+			targetLevelOrStack:
+				parseCommaSeparated(commaSeparatedLevels),
 		}),
 );

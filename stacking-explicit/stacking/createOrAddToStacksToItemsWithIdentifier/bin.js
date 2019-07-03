@@ -16,8 +16,8 @@ callWithProcessStandardStreamsOfYaml(
 		createOrAddToStacksToItemsWithIdentifier({
 			identifierPattern:
 				new RegExp(identifierPattern),
-			identifiersInNewStack:
-				parseCommaSeparated(commaSeparatedLevels),
 			items,
+			targetLevelOrStack:
+				parseCommaSeparated(commaSeparatedLevels),
 		}),
 );

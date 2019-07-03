@@ -2,7 +2,7 @@
 This library is free software, licensed under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 const
-	getIdentifiersInNewStackForAncestorsAndDirectory = require("."),
+	getTargetLevelOrStackForAncestorsAndDirectory = require("."),
 	path = require("path");
 
 test.each(
@@ -10,12 +10,12 @@ test.each(
 		[
 			[],
 			null,
-			[ "upperItem1", "lowerItem1" ],
+			[ [ "upperItem1" ], [ "lowerItem1" ] ],
 		],
 		[
 			[ { id: "parent" } ],
 			[ "parent" ],
-			[ "upperItem1", "lowerItem1" ],
+			[ [ "upperItem1" ], [ "lowerItem1" ] ],
 		],
 		[
 			[],
@@ -30,7 +30,7 @@ test.each(
 		[
 			[ { id: "directoryWithStack" } ],
 			null,
-			[ "upperItem2", "lowerItem2" ],
+			[ [ "upperItem2" ], [ "lowerItem2" ] ],
 		],
 		[
 			[
@@ -38,7 +38,7 @@ test.each(
 				{ id: "directoryWithStack" },
 			],
 			[ "parent" ],
-			[ "upperItem2", "lowerItem2" ],
+			[ [ "upperItem2" ], [ "lowerItem2" ] ],
 		],
 		[
 			[
@@ -46,7 +46,7 @@ test.each(
 				{ id: "directoryWithStack" },
 			],
 			[ null ],
-			[ "upperItem2", "lowerItem2" ],
+			[ [ "upperItem2" ], [ "lowerItem2" ] ],
 		],
 		[
 			[
@@ -54,14 +54,14 @@ test.each(
 				{ id: "subdirectoryWithStack" },
 			],
 			null,
-			[ "upperItem3", "lowerItem3" ],
+			[ [ "upperItem3" ], [ "lowerItem3" ] ],
 		],
 	],
 )(
 	"%j ancestors with subset identifier hierarchy %j returns %j",
 	(ancestors, subsetIdentifierHierarchy, expected) =>
 		expect(
-			getIdentifiersInNewStackForAncestorsAndDirectory({
+			getTargetLevelOrStackForAncestorsAndDirectory({
 				ancestors,
 				directory: path.join(__dirname, "testCases"),
 				subsetIdentifierHierarchy,

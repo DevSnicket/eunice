@@ -13,7 +13,7 @@ test(
 				directory:
 					path.join(
 						__dirname,
-						"getIdentifiersInNewStackForAncestorsAndDirectory",
+						"getTargetLevelOrStackForAncestorsAndDirectory",
 						"testCases",
 					),
 				items:
@@ -22,14 +22,14 @@ test(
 						{ id: "directoryWithStack" },
 					],
 				subsetIdentifierHierarchy:
-				[ "parent" ],
+					[ "parent" ],
 			}),
 		)
 		.toEqual(
 			[
 				{
 					id: "parent",
-					items: [ "upperItem1", "lowerItem1" ],
+					items: [ [ "upperItem1" ], [ "lowerItem1" ] ],
 				},
 				{ id: "directoryWithStack" },
 			],

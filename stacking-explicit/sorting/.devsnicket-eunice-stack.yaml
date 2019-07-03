@@ -1,2 +1,6 @@
-- [ orderItemsByIdentifier, orderItemsByIndex ]
-- [ orderItemsByIndexOfIdentifierSuffix, orderItemsByIndexOfType ]
+-
+  - orderItemsByIdentifier
+  - orderItemsByIndex
+-
+  - orderItemsByIndexOfIdentifierSuffix
+  - orderItemsByIndexOfType

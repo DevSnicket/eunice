@@ -7,8 +7,8 @@ const
 
 module.exports =
 	({
-		identifiersInNewStack,
 		items,
+		targetLevelOrStack,
 	}) =>
 		replaceItemsAndInItems({
 			identifierOrItemOrLevelOrStack:
@@ -17,6 +17,6 @@ module.exports =
 				({ identifierOrItemOrLevelOrStack }) =>
 					createStackWhenIdentifierOrItemOrLevelOrAddWhenStack({
 						identifierOrItemOrLevelOrStack,
-						identifiersInNewStack,
+						targetLevelOrStack,
 					}),
 		});

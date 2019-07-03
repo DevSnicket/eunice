@@ -1,41 +1,35 @@
 /* Copyright (c) 2019 Graham Dyson. All Rights Reserved.
 This library is free software, licensed under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-const getIdentifiersInNewStackWhenParentAncestor = require(".");
-
-const identifiersInNewStack = { toJSON: () => "identifiersInNewStack" };
+const hasParentInAncestors = require(".");
 
 test.each(
 	[
-		[ [], null ],
-		[
-			[ { } ],
-			null,
-		],
+		[ [], false ],
+		[ [ { } ], false ],
 		[
 			[ { id: "parent" } ],
-			null,
+			false,
 		],
 		[
 			[ { id: "addToParent" }, { id: "ancestor" } ],
-			null,
+			false,
 		],
 		[
 			[ { id: "addToParent" } ],
-			identifiersInNewStack,
+			true,
 		],
 		[
 			[ { id: "ancestor" }, { id: "addToParent" } ],
-			identifiersInNewStack,
+			true,
 		],
 	],
 )(
 	"%j ancestors returns %j",
 	(ancestors, expected) =>
 		expect(
-			getIdentifiersInNewStackWhenParentAncestor({
+			hasParentInAncestors({
 				ancestors,
-				identifiersInNewStack,
 				parentIdentifierPattern: "addToParent",
 			}),
 		)

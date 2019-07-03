@@ -3,7 +3,7 @@ This library is free software, licensed under the terms of the GNU General Publi
 
 const
 	createStackWhenIdentifierOrItemOrLevelOrAddWhenStack = require("../createStackWhenIdentifierOrItemOrLevelOrAddWhenStack"),
-	getIdentifiersInNewStackForAncestorsAndDirectory = require("./getIdentifiersInNewStackForAncestorsAndDirectory"),
+	getTargetLevelOrStackForAncestorsAndDirectory = require("./getTargetLevelOrStackForAncestorsAndDirectory"),
 	replaceItemsAndInItems = require("../replaceItemsAndInItems");
 
 module.exports =
@@ -19,16 +19,24 @@ module.exports =
 				({
 					ancestors,
 					identifierOrItemOrLevelOrStack,
-				}) =>
-					createStackWhenIdentifierOrItemOrLevelOrAddWhenStack({
-						addMissing:
-							true,
-						identifierOrItemOrLevelOrStack,
-						identifiersInNewStack:
-							getIdentifiersInNewStackForAncestorsAndDirectory({
-								ancestors,
-								directory,
-								subsetIdentifierHierarchy,
-							}),
-					}),
+				}) => {
+					const targetLevelOrStack =
+						getTargetLevelOrStackForAncestorsAndDirectory({
+							ancestors,
+							directory,
+							subsetIdentifierHierarchy,
+						});
+
+					return (
+						targetLevelOrStack
+						?
+						createStackWhenIdentifierOrItemOrLevelOrAddWhenStack({
+							addNewInTarget: true,
+							identifierOrItemOrLevelOrStack,
+							targetLevelOrStack,
+						})
+						:
+						identifierOrItemOrLevelOrStack
+					);
+				},
 		});

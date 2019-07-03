@@ -98,7 +98,6 @@
 				"request": "launch",
 				"type": "node"
 			},
-
 			{
 				"args":
 					[
@@ -242,7 +241,7 @@
 			{
 				"args":
 					[
-						"--identifierStack=",
+						"--commaSeparatedLevels=",
 						"--items=",
 					],
 				"name": "stacking createOrAddToStacksUniformly",
@@ -277,10 +276,34 @@
 				"args":
 					[ 
 						"--runInBand",
-						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/test.js"
+						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/createGetItemWithIdentifier/test.js"
 					],
 				"disableOptimisticBPs": true,
-				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack jest",
+				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack createGetItemWithIdentifier jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
+						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/getExisting/test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack getExisting jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
+						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/getStackForTargetLevelOrStack/test.js",
+					],
+				"disableOptimisticBPs": true,
+				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack getStackForTargetLevelOrStack jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node"

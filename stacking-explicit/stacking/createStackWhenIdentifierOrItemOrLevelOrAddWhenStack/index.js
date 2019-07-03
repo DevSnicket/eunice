@@ -2,51 +2,62 @@
 This library is free software, licensed under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 const
-	createLevelMap = require("./createLevelMap"),
-	createOrAddToStack = require("./createOrAddToStack");
+	createGetItemWithIdentifier = require("./createGetItemWithIdentifier"),
+	getExisting = require("./getExisting"),
+	getStackForTargetLevelOrStack = require("./getStackForTargetLevelOrStack"),
+	getStackOrSingleLevelOrSingleItem = require("./getStackOrSingleLevelOrSingleItem");
 
 module.exports =
 	({
-		addMissing = false,
+		addNewInTarget = false,
 		identifierOrItemOrLevelOrStack,
-		identifiersInNewStack,
+		targetLevelOrStack,
 	}) => {
+		const getItemForIdentifier = createGetItemWithIdentifier(identifierOrItemOrLevelOrStack);
+
 		return (
-			whenNewStack()
-			||
-			identifierOrItemOrLevelOrStack
+			getStackOrSingleLevelOrSingleItem(
+				getStackForTargetLevelOrStack({
+					getLevelOrStackForTargetIdentifier,
+					targetLevelOrStack,
+				}),
+			)
 		);
 
-		function whenNewStack() {
+		function getLevelOrStackForTargetIdentifier(
+			targetIdentifier,
+		) {
 			return (
-				identifiersInNewStack
-				&&
-				(whenHasValue() || (addMissing && identifiersInNewStack))
+				whenIsExisting()
+				||
+				getItemForIdentifier(targetIdentifier)
+				||
+				createWhenNewInTarget()
+				||
+				[]
 			);
-		}
 
-		function whenHasValue() {
-			return (
-				identifierOrItemOrLevelOrStack
-				&&
-				createOrAddToStack({
-					...createLevelMap({
-						addMissing,
-						identifiersInNewStack,
-					}),
-					levelOrStack:
-						getOrCreateLevelOrStack(),
-				})
-			);
-		}
+			function whenIsExisting() {
+				return (
+					targetIdentifier === "existing"
+					&&
+					getExistingOrNone()
+				);
 
-		function getOrCreateLevelOrStack() {
-			return (
-				Array.isArray(identifierOrItemOrLevelOrStack)
-				?
-				identifierOrItemOrLevelOrStack
-				:
-				[ identifierOrItemOrLevelOrStack ]
-			);
+				function getExistingOrNone() {
+					return (
+						getExisting({
+							identifierOrItemOrLevelOrStack,
+							targetLevelOrStack,
+						})
+						||
+						[]
+					);
+				}
+			}
+
+			function createWhenNewInTarget() {
+				return addNewInTarget && targetIdentifier;
+			}
 		}
 	};

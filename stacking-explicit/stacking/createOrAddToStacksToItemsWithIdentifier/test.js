@@ -10,11 +10,6 @@ test(
 			createOrAddToStacksToItemsWithIdentifier({
 				identifierPattern:
 					"^parent",
-				identifiersInNewStack:
-					[
-						[ "child 1" ],
-						[ "child 2" ],
-					],
 				items:
 					{
 						id:
@@ -25,6 +20,11 @@ test(
 								items: [ "child 1", "child 2" ],
 							},
 					},
+				targetLevelOrStack:
+					[
+						[ "child 1" ],
+						[ "child 2" ],
+					],
 			}),
 		)
 		.toEqual(

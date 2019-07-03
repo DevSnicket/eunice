@@ -1,2 +1,8 @@
-- [ createOrAddToStacksToItemsWithIdentifier, createOrAddToStacksUniformly, createOrAddToStacksUsingFileSystem ]
-- [ createStackWhenIdentifierOrItemOrLevelOrAddWhenStack, parseCommaSeparated, replaceItemsAndInItems ]
+-
+  - createOrAddToStacksToItemsWithIdentifier
+  - createOrAddToStacksUniformly
+  - createOrAddToStacksUsingFileSystem
+-
+  - createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
+  - parseCommaSeparated
+  - replaceItemsAndInItems
