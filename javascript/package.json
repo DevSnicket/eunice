@@ -9,7 +9,7 @@
 	"description": "Analyzes JavaScript on the file system, processes the analysis and renders the processed analysis to an SVG.",
 	"dependencies": {
 		"@devsnicket/eunice-javascript-analyzer": "^3.0.0",
-		"@devsnicket/eunice-processors": "^6.0.2",
+		"@devsnicket/eunice-processors": "^6.1.3",
 		"@devsnicket/eunice-renderer": "^5.2.0",
 		"@devsnicket/eunice-renderer-test-harness": "^2.0.1",
 		"array.prototype.flatmap": "1.2.1",
@@ -67,5 +67,5 @@
 		"harness": "(cd harness && rm -rf output && mkdir output && npx webpack -p --config webpack.config.js)",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./packageWithoutScope/node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +"
 	},
-	"version": "5.1.0"
+	"version": "5.2.0"
 }

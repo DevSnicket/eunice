@@ -59,7 +59,6 @@ module.exports =
 				removeSelfDependentVariables,
 				orderItemsByType,
 				stackBinAndTestAtTop,
-				addJestMethodsToBottom,
 				unstackIndependent,
 				items =>
 					createOrAddToStacks({
@@ -68,6 +67,7 @@ module.exports =
 						items,
 						rootItemIdentifier,
 					}),
+				addJestMethodsToBottom,
 				items =>
 					removePackagePrefixAndScopeInDependsUpon({
 						items,
