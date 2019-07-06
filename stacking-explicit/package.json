@@ -29,6 +29,7 @@
 		"@devsnicket/eunice-dependency-and-structure": "^2.10.0",
 		"@devsnicket/eunice-test-harnesses-processor-plugins": "1.0.0",
 		"array.prototype.flat": "1.2.1",
+		"array.prototype.flatmap": "1.2.1",
 		"js-yaml": "3.13.1"
 	},
 	"devDependencies": {
@@ -90,5 +91,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./dist/**/*\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "npx jest --runInBand"
 	},
-	"version": "6.1.0"
+	"version": "6.1.1"
 }
