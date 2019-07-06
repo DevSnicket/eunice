@@ -8,6 +8,7 @@ const
 
 module.exports =
 	({
+		addNewInTarget = true,
 		directory,
 		items,
 		subsetIdentifierHierarchy,
@@ -31,7 +32,7 @@ module.exports =
 						targetLevelOrStack
 						?
 						createStackWhenIdentifierOrItemOrLevelOrAddWhenStack({
-							addNewInTarget: true,
+							addNewInTarget,
 							identifierOrItemOrLevelOrStack,
 							targetLevelOrStack,
 						})

@@ -8,6 +8,7 @@ const
 
 module.exports =
 	({
+		addNewInTarget = true,
 		items,
 		keysAndPatterns,
 		targetLevelOrStack,
@@ -26,7 +27,7 @@ module.exports =
 					})
 					?
 					createStackWhenIdentifierOrItemOrLevelOrAddWhenStack({
-						addNewInTarget: true,
+						addNewInTarget,
 						identifierOrItemOrLevelOrStack,
 						targetLevelOrStack,
 					})

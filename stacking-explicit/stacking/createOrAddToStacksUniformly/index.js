@@ -7,6 +7,7 @@ const
 
 module.exports =
 	({
+		addNewInTarget = false,
 		items,
 		targetLevelOrStack,
 	}) =>
@@ -16,6 +17,7 @@ module.exports =
 			replace:
 				({ identifierOrItemOrLevelOrStack }) =>
 					createStackWhenIdentifierOrItemOrLevelOrAddWhenStack({
+						addNewInTarget,
 						identifierOrItemOrLevelOrStack,
 						targetLevelOrStack,
 					}),
