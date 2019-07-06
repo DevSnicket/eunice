@@ -6,7 +6,8 @@ const
 	getExisting = require("./getExisting"),
 	getLevelOrStackForTargetIdentifier = require("./getLevelOrStackForTargetIdentifier"),
 	getStackForTargetLevelOrStack = require("./getStackForTargetLevelOrStack"),
-	getStackOrSingleLevelOrSingleItem = require("./getStackOrSingleLevelOrSingleItem");
+	getStackOrSingleLevelOrSingleItem = require("./getStackOrSingleLevelOrSingleItem"),
+	throwErrorWhenIdentifiersNotUsed = require("./throwErrorWhenIdentifiersNotUsed");
 
 module.exports =
 	({
@@ -34,9 +35,10 @@ module.exports =
 			});
 
 		if (!existingFactory.hasExisting)
-			throwErrorWhenIdentifiersNotUsed(
-				itemLookup.getIdentifiersNotUsed(),
-			);
+			throwErrorWhenIdentifiersNotUsed({
+				identifiersNotUsed: itemLookup.getIdentifiersNotUsed(),
+				targetLevelOrStack,
+			});
 
 		return getStackOrSingleLevelOrSingleItem(stackForTarget);
 
@@ -65,18 +67,3 @@ module.exports =
 			}
 		}
 	};
-
-function throwErrorWhenIdentifiersNotUsed(
-	identifiersNotUsed,
-) {
-	if (identifiersNotUsed)
-		throw new Error(`Neither the following items were specified ${formatIdentifiers()}, nor was a single item level of "existing", in new the stack "newInTarget".`);
-
-	function formatIdentifiers() {
-		return (
-			identifiersNotUsed
-			.map(identifier => `"${identifier}"`)
-			.join(", ")
-		);
-	}
-}

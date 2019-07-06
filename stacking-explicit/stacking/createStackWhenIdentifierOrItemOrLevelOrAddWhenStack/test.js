@@ -42,6 +42,6 @@ test(
 				}),
 		)
 		.toThrowError(
-			"Neither the following items were specified \"item\", nor was a single item level of \"existing\", in new the stack \"newInTarget\".",
+			"Neither the following items were specified \"item\", nor was a single item level of \"existing\", in new the stack [].",
 		),
 );
