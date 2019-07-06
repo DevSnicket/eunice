@@ -15,10 +15,7 @@ const
 				orderItemsByIndexOfType,
 			},
 		stacking:
-			{
-				createOrAddToStacksOfParentMatch,
-				createOrAddToStacksUniformly,
-			},
+			{ createOrAddToStacksOfParentMatch },
 		setIdentifierOfAnonymousToParent,
 		setTypeOfRootItems,
 		unstackIndependent,
@@ -118,8 +115,15 @@ function stackBinAndTestAtTop(
 	items,
 ) {
 	return (
-		createOrAddToStacksUniformly({
+		createOrAddToStacksOfParentMatch({
+			addNewInTarget:
+				false,
 			items,
+			keysAndPatterns:
+				[ {
+					key: "type",
+					pattern: /^file$/,
+				} ],
 			targetLevelOrStack:
 				[
 					[ "bin", "test" ],
