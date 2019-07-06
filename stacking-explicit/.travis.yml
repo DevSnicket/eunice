@@ -9,8 +9,7 @@ deploy:
 install: 
   - npm install
 language: node_js
-node_js:
-  - "8.11.2"
+node_js: [ "8.16.0" ]
 notifications:
   email:
     on_success: never
