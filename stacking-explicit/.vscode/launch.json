@@ -251,6 +251,18 @@
 			},
 			{
 				"args":
+					[ 
+						"--runInBand",
+						"stacking/createOrAddToStacksUniformly/test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "stacking createOrAddToStacksUniformly jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
 					[
 						"--directory=",
 						"--items="
@@ -276,10 +288,10 @@
 				"args":
 					[ 
 						"--runInBand",
-						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/createGetItemWithIdentifier/test.js"
+						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/createItemLookup/test.js"
 					],
 				"disableOptimisticBPs": true,
-				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack createGetItemWithIdentifier jest",
+				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack createItemLookup jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node"
