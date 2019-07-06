@@ -16,7 +16,7 @@ const
 			},
 		stacking:
 			{
-				createOrAddToStacksToItemsWithIdentifier,
+				createOrAddToStacksOfParentMatch,
 				createOrAddToStacksUniformly,
 			},
 		setIdentifierOfAnonymousToParent,
@@ -67,7 +67,7 @@ module.exports =
 						items,
 						rootItemIdentifier,
 					}),
-				addJestMethodsToBottom,
+				addJestMethodsToBottomOfTestFiles,
 				items =>
 					removePackagePrefixAndScopeInDependsUpon({
 						items,
@@ -129,14 +129,23 @@ function stackBinAndTestAtTop(
 	);
 }
 
-function addJestMethodsToBottom(
+function addJestMethodsToBottomOfTestFiles(
 	items,
 ) {
 	return (
-		createOrAddToStacksToItemsWithIdentifier({
-			identifierPattern:
-				/^test$|test[A-Z]/,
+		createOrAddToStacksOfParentMatch({
 			items,
+			keysAndPatterns:
+				[
+					{
+						key: "id",
+						pattern: /^test$|test[A-Z]/,
+					},
+					{
+						key: "type",
+						pattern: /^file$/,
+					},
+				],
 			targetLevelOrStack:
 				[
 					[ "existing" ],
