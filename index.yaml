@@ -174,8 +174,8 @@
                                 - id: stackBinAndTestAtTop
                                   dependsUpon: createOrAddToStacksUniformly
                                   items: []
-                                - id: addJestMethodsToBottom
-                                  dependsUpon: createOrAddToStacksToItemsWithIdentifier
+                                - id: addJestMethodsToBottomOfTestFiles
+                                  dependsUpon: createOrAddToStacksOfParentMatch
                                   items: []
                                 - id: flattenSingleRootItemWhenHasOnlyItemsAndType
                                   dependsUpon:
@@ -567,9 +567,7 @@
                               - readTextFile
                               - renderToStaticMarkup
                               - wrapInPaddingDiv
-                            items:
-                              - expect
-                              - test
+                            items: []
                         - - wrapInPaddingDiv
                           - id: createElement
                             type: variable
@@ -585,7 +583,7 @@
                                 id: server
                                 items: renderToStaticMarkup
                             items: []
-                          - expect
+                        - - expect
                           - test
                   - - id: createElementsFromYaml
                       dependsUpon:
@@ -802,37 +800,37 @@
                                   - renderToStaticMarkup
                                   - test
                                 items:
-                                  - id: createElement
-                                    type: variable
-                                    dependsUpon:
-                                      id: react
-                                      items: createElement
-                                    items: []
-                                  - id: createStackFromYaml
-                                    type: variable
-                                    dependsUpon:
-                                      id: dependency-and-structure
-                                      items: createStackFromYaml
-                                    items: []
-                                  - id: renderToStaticMarkup
-                                    type: variable
-                                    dependsUpon:
-                                      id: react-dom
-                                      items:
-                                        id: server
-                                        items: renderToStaticMarkup
-                                    items: []
-                                  - id: element
-                                    type: variable
-                                    items: []
-                                  - id: itemIdentifier
-                                    type: variable
-                                    items: []
-                                  - id: childIdentifier
-                                    type: variable
-                                    items: []
-                                  - expect
-                                  - test
+                                  - - id: createElement
+                                      type: variable
+                                      dependsUpon:
+                                        id: react
+                                        items: createElement
+                                      items: []
+                                    - id: createStackFromYaml
+                                      type: variable
+                                      dependsUpon:
+                                        id: dependency-and-structure
+                                        items: createStackFromYaml
+                                      items: []
+                                    - id: renderToStaticMarkup
+                                      type: variable
+                                      dependsUpon:
+                                        id: react-dom
+                                        items:
+                                          id: server
+                                          items: renderToStaticMarkup
+                                      items: []
+                                    - id: element
+                                      type: variable
+                                      items: []
+                                    - id: itemIdentifier
+                                      type: variable
+                                      items: []
+                                    - id: childIdentifier
+                                      type: variable
+                                      items: []
+                                  - - expect
+                                    - test
                             - - id: createWithDependencyList
                                 dependsUpon: createListInContainerWhenAny
                                 items:
@@ -940,7 +938,7 @@
                                                 id: server
                                                 items: renderToStaticMarkup
                                             items: []
-                                          - expect
+                                        - - expect
                                           - test
                                   - - id: createListElement
                                       dependsUpon: createChildElements
@@ -1056,18 +1054,15 @@
                                         - test
                                         - testRelationship
                                       items:
-                                        - id: testRelationship
-                                          dependsUpon:
-                                            - createSubsetOfItem
-                                            - expect
-                                            - isDependencyRelevant
-                                            - test
-                                          items:
-                                            - isDependencyRelevant
-                                            - expect
-                                            - test
-                                        - expect
-                                        - test
+                                        - - id: testRelationship
+                                            dependsUpon:
+                                              - createSubsetOfItem
+                                              - expect
+                                              - isDependencyRelevant
+                                              - test
+                                            items: isDependencyRelevant
+                                        - - expect
+                                          - test
                                   - - id: createSubsetOfItem
                                       dependsUpon: withSubsetCriteriaOf
                                       items: []
@@ -1111,22 +1106,22 @@
                                         - renderToStaticMarkup
                                         - test
                                       items:
-                                        - id: createElement
-                                          type: variable
-                                          dependsUpon:
-                                            id: react
-                                            items: createElement
-                                          items: []
-                                        - id: renderToStaticMarkup
-                                          type: variable
-                                          dependsUpon:
-                                            id: react-dom
-                                            items:
-                                              id: server
-                                              items: renderToStaticMarkup
-                                          items: []
-                                        - expect
-                                        - test
+                                        - - id: createElement
+                                            type: variable
+                                            dependsUpon:
+                                              id: react
+                                              items: createElement
+                                            items: []
+                                          - id: renderToStaticMarkup
+                                            type: variable
+                                            dependsUpon:
+                                              id: react-dom
+                                              items:
+                                                id: server
+                                                items: renderToStaticMarkup
+                                            items: []
+                                        - - expect
+                                          - test
                                   - - id: createVerticalResize
                                       dependsUpon:
                                         - createSplitterContentWithCreateElement
@@ -1158,14 +1153,14 @@
                                         - level
                                         - test
                                       items:
-                                        - id: item
-                                          type: variable
-                                          items: []
-                                        - id: level
-                                          type: variable
-                                          items: []
-                                        - expect
-                                        - test
+                                        - - id: item
+                                            type: variable
+                                            items: []
+                                          - id: level
+                                            type: variable
+                                            items: []
+                                        - - expect
+                                          - test
                                   - - id: isDependencyRelevant
                                       dependsUpon:
                                         - hasLevel
@@ -1315,8 +1310,6 @@
                               - - id: directoryPath
                                   type: variable
                                   items: []
-                                - expect
-                                - test
                         - - id: emptyDir
                             type: variable
                             dependsUpon:
@@ -1332,7 +1325,7 @@
                           - id: htmlFileName
                             type: variable
                             items: []
-                          - expect
+                        - - expect
                           - test
                   - - id: readDirectoryPathRecursive
                       type: file
@@ -1372,7 +1365,6 @@
                               id: fs-extra
                               items: readdir
                             items: []
-                  - - expect
             - - id: writeHarness
                 dependsUpon:
                   - copyServiceWorkersIntoDirectoryPath
@@ -1649,13 +1641,11 @@
                       items: []
                     - id: testCasesDirectory
                       type: variable
-                      items:
-                        - expect
-                        - test
+                      items: []
                   - - id: supportedTestCasesDirectory
                       type: variable
                       items: []
-                    - expect
+                  - - expect
                     - test
             - - id: getOrCreateItemsInDirectory
                 dependsUpon: getOrCreateItemsInRootedDirectory
@@ -2217,29 +2207,29 @@
                               - test
                               - throwErrorWhenAnyUnhandled
                             items:
-                              - id: parse
-                                type: variable
-                                dependsUpon:
-                                  id: acorn
-                                  items: parse
-                                items: []
-                              - id: identifier
-                                type: variable
-                                items: []
-                              - id: javaScript
-                                type: variable
-                                items: []
-                              - id: declarations
-                                type: variable
-                                items: []
-                              - id: parent
-                                type: variable
-                                items: []
-                              - id: dependsUponIdentifiers
-                                type: variable
-                                items: []
-                              - expect
-                              - test
+                              - - id: parse
+                                  type: variable
+                                  dependsUpon:
+                                    id: acorn
+                                    items: parse
+                                  items: []
+                                - id: identifier
+                                  type: variable
+                                  items: []
+                                - id: javaScript
+                                  type: variable
+                                  items: []
+                                - id: declarations
+                                  type: variable
+                                  items: []
+                                - id: parent
+                                  type: variable
+                                  items: []
+                                - id: dependsUponIdentifiers
+                                  type: variable
+                                  items: []
+                              - - expect
+                                - test
                         - - id: throwErrorWhenAnyUnhandled
                             dependsUpon:
                               - formatMessageForDeclarations
@@ -2527,11 +2517,11 @@
                   - path
                   - test
                 items:
-                  - id: files
-                    type: variable
-                    items: []
-                  - expect
-                  - test
+                  - - id: files
+                      type: variable
+                      items: []
+                  - - expect
+                    - test
             - - id: concatenateFromFileSystem
                 dependsUpon:
                   - ensureInLevel
@@ -2565,11 +2555,11 @@
                   - groupItems
                   - test
                 items:
-                  - id: groupItems
-                    dependsUpon: groupItemsByIdentifierSeparator
-                    items: []
-                  - expect
-                  - test
+                  - - id: groupItems
+                      dependsUpon: groupItemsByIdentifierSeparator
+                      items: []
+                  - - expect
+                    - test
               - id: testHarnessPlugin
                 type: file
                 dependsUpon:
@@ -3090,12 +3080,12 @@
                         - replaceDependsUponWithHierarchiesOfIdentifierSeparator
                         - test
                       items:
-                        - id: replaceDependsUponWithHierarchiesOfIdentifierSeparator
-                          type: variable
-                          dependsUpon: withHierarchyFromSeparator
-                          items: []
-                        - expect
-                        - test
+                        - - id: replaceDependsUponWithHierarchiesOfIdentifierSeparator
+                            type: variable
+                            dependsUpon: withHierarchyFromSeparator
+                            items: []
+                        - - expect
+                          - test
                   - - id: withHierarchyFromSeparator
                       dependsUpon:
                         - createDependsUponHierarchy
@@ -3368,12 +3358,12 @@
                         - orderItemsByIndexOf
                         - test
                       items:
-                        - id: orderItemsByIndexOf
-                          type: variable
-                          dependsUpon: orderItemsByIndex
-                          items: []
-                        - expect
-                        - test
+                        - - id: orderItemsByIndexOf
+                            type: variable
+                            dependsUpon: orderItemsByIndex
+                            items: []
+                        - - expect
+                          - test
                   - - id: orderItemsByIndex
                       dependsUpon:
                         - createCompareIndexedItemOrLevel
@@ -3474,18 +3464,18 @@
                         - orderItemsByIdentifierSuffix
                         - test
                       items:
-                        - id: orderItemsByIdentifierSuffix
-                          type: variable
-                          dependsUpon: orderItemsByIndexOfIdentifierSuffix
-                          items: []
-                        - id: identifierSuffixesInOrder
-                          type: variable
-                          items: []
-                        - id: items
-                          type: variable
-                          items: []
-                        - expect
-                        - test
+                        - - id: orderItemsByIdentifierSuffix
+                            type: variable
+                            dependsUpon: orderItemsByIndexOfIdentifierSuffix
+                            items: []
+                          - id: identifierSuffixesInOrder
+                            type: variable
+                            items: []
+                          - id: items
+                            type: variable
+                            items: []
+                        - - expect
+                          - test
                     - id: testHarnessPlugin
                       type: file
                       dependsUpon:
@@ -3534,18 +3524,18 @@
                         - test
                         - typesInOrder
                       items:
-                        - id: orderItemsByType
-                          type: variable
-                          dependsUpon: orderItemsByIndexOfType
-                          items: []
-                        - id: items
-                          type: variable
-                          items: []
-                        - id: typesInOrder
-                          type: variable
-                          items: []
-                        - expect
-                        - test
+                        - - id: orderItemsByType
+                            type: variable
+                            dependsUpon: orderItemsByIndexOfType
+                            items: []
+                          - id: items
+                            type: variable
+                            items: []
+                          - id: typesInOrder
+                            type: variable
+                            items: []
+                        - - expect
+                          - test
                     - id: testHarnessPlugin
                       type: file
                       dependsUpon:
@@ -3564,26 +3554,26 @@
         - id: stacking
           type: file
           items:
-            - - id: createOrAddToStacksToItemsWithIdentifier
+            - - id: createOrAddToStacksOfParentMatch
                 type: file
                 items:
                   - - id: bin
                       type: file
                       dependsUpon:
                         - callWithProcessStandardStreamsOfYaml
-                        - createOrAddToStacksToItemsWithIdentifier
+                        - createOrAddToStacksOfParentMatch
                         - parseCommaSeparated
                       items: []
                     - id: test
                       type: file
                       dependsUpon:
-                        - createOrAddToStacksToItemsWithIdentifier
+                        - createOrAddToStacksOfParentMatch
                         - expect
                         - test
                       items:
                         - expect
                         - test
-                  - - id: createOrAddToStacksToItemsWithIdentifier
+                  - - id: createOrAddToStacksOfParentMatch
                       dependsUpon:
                         - createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
                         - hasParentInAncestors
@@ -3595,6 +3585,7 @@
                         - - id: test
                             type: file
                             dependsUpon:
+                              - describe
                               - expect
                               - hasParentInAncestors
                               - test
@@ -3604,16 +3595,14 @@
                         - - id: hasParentInAncestors
                             dependsUpon:
                               - Boolean
-                              - getParentIdentifier
-                              - isParentIdentifierMatch
-                            items:
-                              - - getParentIdentifier
-                                - id: isParentIdentifierMatch
-                                  dependsUpon: parentIdentifierPattern
-                                  items: []
-                              - - id: parentIdentifierPattern
-                                  type: parameter
-                                  items: []
+                              - allMatchParent
+                              - getParentFromAncestors
+                            items: []
+                        - - getParentFromAncestors
+                          - id: allMatchParent
+                            dependsUpon: isMatch
+                            items: []
+                        - - isMatch
               - id: createOrAddToStacksUniformly
                 type: file
                 items:
@@ -3760,53 +3749,59 @@
             - - id: createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
                 type: file
                 items:
+                  - - id: test
+                      type: file
+                      dependsUpon:
+                        - createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
+                        - expect
+                        - test
+                      items:
+                        - expect
+                        - test
                   - - id: createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
                       dependsUpon:
-                        - createGetItemWithIdentifier
+                        - createExistingFactory
+                        - createItemLookup
                         - getLevelOrStackForTargetIdentifier
                         - getStackForTargetLevelOrStack
                         - getStackOrSingleLevelOrSingleItem
+                        - throwErrorWhenIdentifiersNotUsed
                       items:
-                        - - id: getLevelOrStackForTargetIdentifier
-                            dependsUpon:
-                              - createWhenNewInTarget
-                              - getItemForIdentifier
-                              - whenIsExisting
+                        - - id: createExistingFactory
                             items:
-                              - id: whenIsExisting
-                                dependsUpon: getExistingOrNone
-                                items:
-                                  id: getExistingOrNone
-                                  dependsUpon:
-                                    - getExisting
-                                    - identifierOrItemOrLevelOrStack
-                                    - targetLevelOrStack
-                                  items: []
-                              - createWhenNewInTarget
+                              id: getExistingAndSetFlag
+                              dependsUpon:
+                                - getExisting
+                                - identifierOrItemOrLevelOrStack
+                                - targetLevelOrStack
+                              items: []
                         - - id: identifierOrItemOrLevelOrStack
                             type: parameter
                             items: []
                           - id: targetLevelOrStack
                             type: parameter
                             items: []
-                          - id: getItemForIdentifier
-                            type: variable
-                            items: []
-                  - - id: createGetItemWithIdentifier
+                  - - id: createItemLookup
                       type: file
                       items:
                         - - id: test
                             type: file
                             dependsUpon:
                               - createTestItemWithIdentifier
-                              - createGetItemWithIdentifier
+                              - createItemLookup
+                              - describe
                               - expect
+                              - itemLookup
                               - test
                             items:
-                              - expect
-                              - test
-                        - - id: createGetItemWithIdentifier
+                              - - id: itemLookup
+                                  type: variable
+                                  items: []
+                              - - expect
+                                - test
+                        - - id: createItemLookup
                             dependsUpon:
+                              - createForSingle
                               - whenItem
                               - whenLevelOrStack
                               - whenNoValue
@@ -3815,30 +3810,56 @@
                                 - id: whenLevelOrStack
                                   dependsUpon:
                                     - Array
-                                    - createGetItemWithIdentifierFromLevelOrStack
+                                    - createForLevelOrStack
                                     - identifierOrItemOrLevelOrStack
                                   items: []
                                 - id: whenItem
-                                  items: getItemWhenHasIdentifier
-                                - getIdentifierWhenIsIdentifier
+                                  dependsUpon:
+                                    - createForSingle
+                                    - identifierOrItemOrLevelOrStack
+                                  items: []
                               - - id: identifierOrItemOrLevelOrStack
                                   type: parameter
                                   items: []
-                        - - id: createGetItemWithIdentifierFromLevelOrStack
-                            dependsUpon: generateKeyValuePairs
+                        - - id: createForLevelOrStack
+                            type: file
                             items:
-                              - - id: generateKeyValuePairs
-                                  dependsUpon:
-                                    - Array
-                                    - getKeyValuePairForIdentifierOrItem
+                              - - id: createForLevelOrStack
+                                  dependsUpon: generateKeyValuePairs
+                                  items:
+                                    - - id: generateKeyValuePairs
+                                        dependsUpon:
+                                          - Array
+                                          - getKeyValuePairForIdentifierOrItem
+                                        items: []
+                                      - id: getIdentifiersNotUsed
+                                        dependsUpon:
+                                          - generate
+                                          - getIterableAsArrayWhenHasItems
+                                        items:
+                                          - id: generate
+                                            dependsUpon:
+                                              - getIdentifier
+                                              - itemsByIdentifier
+                                            items: []
+                                          - getIterableAsArrayWhenHasItems
+                                      - id: getItemWithIdentifier
+                                        dependsUpon: itemsByIdentifier
+                                        items: []
+                                    - - id: itemsByIdentifier
+                                        type: variable
+                                        items: []
+                              - - id: getKeyValuePairForIdentifierOrItem
+                                  dependsUpon: getIdentifier
                                   items: []
-                                - id: getItemWithIdentifier
-                                  dependsUpon: itemsByIdentifier
-                                  items: []
-                              - - id: itemsByIdentifier
-                                  type: variable
-                                  items: []
-                        - - getKeyValuePairForIdentifierOrItem
+                              - - getIdentifier
+                          - id: createForSingle
+                            type: file
+                            items:
+                              id: createForSingle
+                              items:
+                                - getIdentifiersNotUsed
+                                - getItemWithIdentifier
                     - id: getExisting
                       type: file
                       items:
@@ -3932,6 +3953,39 @@
                                     - - id: identifierOrItemPredicate
                                         type: parameter
                                         items: []
+                    - id: getLevelOrStackForTargetIdentifier
+                      type: file
+                      items:
+                        - - id: test
+                            type: file
+                            dependsUpon:
+                              - actualIdentifier
+                              - expect
+                              - getItemWithIdentifier
+                              - getLevelOrStackForTargetIdentifier
+                              - test
+                            items:
+                              - - getItemWithIdentifier
+                                - id: actualIdentifier
+                                  type: variable
+                                  items: []
+                              - - expect
+                                - test
+                        - - id: getLevelOrStackForTargetIdentifier
+                            dependsUpon:
+                              - createWhenNewInTarget
+                              - whenIsExisting
+                            items:
+                              - - id: whenIsExisting
+                                  dependsUpon: getExistingOrNone
+                                  items:
+                                    id: getExistingOrNone
+                                    dependsUpon: getExisting
+                                    items: []
+                                - createWhenNewInTarget
+                              - - id: getExisting
+                                  type: parameter
+                                  items: []
                     - id: getStackForTargetLevelOrStack
                       type: file
                       items:
@@ -4023,6 +4077,46 @@
                                   type: parameter
                                   items: []
                         - - isStack
+                    - id: throwErrorWhenIdentifiersNotUsed
+                      type: file
+                      items:
+                        - - id: test
+                            type: file
+                            dependsUpon:
+                              - describe
+                              - expect
+                              - test
+                              - throwErrorWhenIdentifiersNotUsed
+                            items:
+                              - expect
+                              - test
+                        - - id: throwErrorWhenIdentifiersNotUsed
+                            dependsUpon:
+                              - formatIdentifiers
+                              - formatTargetLevelOrStack
+                            items:
+                              - - id: formatTargetLevelOrStack
+                                  dependsUpon:
+                                    - formatIdentifierOrLevel
+                                    - joinIdentifiers
+                                    - targetLevelOrStack
+                                  items: []
+                              - - id: targetLevelOrStack
+                                  type: parameter
+                                  items: []
+                        - - id: formatIdentifierOrLevel
+                            dependsUpon:
+                              - Array
+                              - formatIdentifier
+                              - formatIdentifiers
+                            items: []
+                        - - id: formatIdentifiers
+                            dependsUpon:
+                              - formatIdentifier
+                              - joinIdentifiers
+                            items: []
+                        - - formatIdentifier
+                          - joinIdentifiers
                   - - id: createTestItemWithIdentifier
                       type: file
                       items: []
@@ -4086,15 +4180,15 @@
                         - replaceDescendantItemsUsingAncestors
                         - test
                       items:
-                        - id: replaceDescendantItemsUsingAncestors
-                          type: variable
-                          dependsUpon: replaceItemsAndInItems
-                          items: []
-                        - id: actual
-                          type: variable
-                          items: []
-                        - expect
-                        - test
+                        - - id: replaceDescendantItemsUsingAncestors
+                            type: variable
+                            dependsUpon: replaceItemsAndInItems
+                            items: []
+                          - id: actual
+                            type: variable
+                            items: []
+                        - - expect
+                          - test
                   - - id: replaceItemsAndInItems
                       dependsUpon: withReplace
                       items: []
@@ -4559,7 +4653,7 @@
                                       - id: width
                                         type: variable
                                         items: []
-                                      - expect
+                                    - - expect
                                       - test
                               - - id: createSvgElement
                                   type: file
@@ -4629,8 +4723,6 @@
                                     id: server
                                     items: renderToStaticMarkup
                                 items: []
-                        - - expect
-                          - test
                         - - id: readTestCaseFile
                             type: file
                             items:
@@ -5351,16 +5443,14 @@
                         - testDependencies
                         - testStackOfCollectionAndScalarLevels
                       items:
-                        - id: testStackOfCollectionAndScalarLevels
-                          dependsUpon:
-                            - createStackFromLevels
-                            - formatStackForDescription
-                            - testCreateStackFromYaml
-                          items:
-                            - expect
-                            - test
-                        - expect
-                        - test
+                        - - id: testStackOfCollectionAndScalarLevels
+                            dependsUpon:
+                              - createStackFromLevels
+                              - formatStackForDescription
+                              - testCreateStackFromYaml
+                            items: []
+                        - - expect
+                          - test
                   - - id: testDependencies
                       type: file
                       items:
@@ -5377,27 +5467,23 @@
                               - testSelfDependent
                               - testSelfDependentParentAndChild
                               - testUpperAndLower
-                            items:
-                              - expect
-                              - test
+                            items: []
                         - - id: testChildOfFirstDependsUponSecond
                             type: file
                             items:
-                              - id: testChildOfFirstDependsUponSecond
-                                dependsUpon:
-                                  - createItemYaml
-                                  - createStackWithDependencies
-                                  - testCreateStackFromYaml
-                                items:
-                                  - id: createStackWithDependencies
+                              - - id: testChildOfFirstDependsUponSecond
+                                  dependsUpon:
+                                    - createItemYaml
+                                    - createStackWithDependencies
+                                    - testCreateStackFromYaml
+                                  items:
+                                    id: createStackWithDependencies
                                     dependsUpon:
                                       - createStackFromLevels
                                       - mapItemsToDependsUpon
                                     items: []
-                                  - expect
-                                  - test
-                              - expect
-                              - test
+                              - - expect
+                                - test
                           - id: testDependsUponMapping
                             type: file
                             items:
@@ -5406,56 +5492,48 @@
                                     - describe
                                     - testDependsUponMissing
                                     - testFirstDependsUponSecond
-                                  items:
-                                    - expect
-                                    - test
+                                  items: []
                               - - id: testDependsUponMissing
                                   type: file
                                   items:
-                                    - id: testDependsUponMissing
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                        - mapItemsToDependsUpon
-                                        - testCreateStackFromYaml
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
+                                    - - id: testDependsUponMissing
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                          - mapItemsToDependsUpon
+                                          - testCreateStackFromYaml
+                                        items: []
+                                    - - expect
+                                      - test
                                 - id: testFirstDependsUponSecond
                                   type: file
                                   items:
-                                    - id: testFirstDependsUponSecond
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                        - mapItemsToDependsUpon
-                                        - testCreateStackFromYaml
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
-                                - expect
+                                    - - id: testFirstDependsUponSecond
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                          - mapItemsToDependsUpon
+                                          - testCreateStackFromYaml
+                                        items: []
+                                    - - expect
+                                      - test
+                              - - expect
                                 - test
                           - id: testFirstAndSecondDependsUponThird
                             type: file
                             items:
-                              - id: testFirstAndSecondDependsUponThird
-                                dependsUpon:
-                                  - addDependencies
-                                  - createItemYaml
-                                  - createStackFromLevels
-                                  - testCreateStackFromYaml
-                                items:
-                                  - id: addDependencies
+                              - - id: testFirstAndSecondDependsUponThird
+                                  dependsUpon:
+                                    - addDependencies
+                                    - createItemYaml
+                                    - createStackFromLevels
+                                    - testCreateStackFromYaml
+                                  items:
+                                    id: addDependencies
                                     dependsUpon: mapItemsToDependsUpon
                                     items: []
-                                  - expect
-                                  - test
-                              - expect
-                              - test
+                              - - expect
+                                - test
                           - id: testFirstChildDependsUponParentAndSecondChildWithGrandchildWithParentIdentifier
                             type: file
                             items:
@@ -5464,9 +5542,7 @@
                                     - createStackWithDependencies
                                     - createYaml
                                     - testCreateStackFromYaml
-                                  items:
-                                    - expect
-                                    - test
+                                  items: []
                               - - id: createStackWithDependencies
                                   dependsUpon:
                                     - addDependencies
@@ -5483,7 +5559,7 @@
                               - - id: parentIdentifier
                                   type: variable
                                   items: []
-                                - expect
+                              - - expect
                                 - test
                           - id: testFirstDependsUponChildOfSecond
                             type: file
@@ -5493,15 +5569,13 @@
                                     - createItemYaml
                                     - createStackAndAddDependencies
                                     - testCreateStackFromYaml
-                                  items:
-                                    - expect
-                                    - test
+                                  items: []
                               - - id: createStackAndAddDependencies
                                   dependsUpon:
                                     - createStackFromLevels
                                     - mapItemsToDependsUpon
                                   items: []
-                                - expect
+                              - - expect
                                 - test
                           - id: testFirstDependsUponGrandchildOfSecond
                             type: file
@@ -5511,15 +5585,13 @@
                                     - createItemYaml
                                     - createStackAndAddDependencies
                                     - testCreateStackFromYaml
-                                  items:
-                                    - expect
-                                    - test
+                                  items: []
                               - - id: createStackAndAddDependencies
                                   dependsUpon:
                                     - createStackFromLevels
                                     - mapItemsToDependsUpon
                                   items: []
-                                - expect
+                              - - expect
                                 - test
                           - id: testParentAndChild
                             type: file
@@ -5528,59 +5600,51 @@
                                   dependsUpon:
                                     - testChildDependsUponParent
                                     - testParentDependsUponChild
-                                  items:
-                                    - expect
-                                    - test
+                                  items: []
                               - - id: testParentDependsUponChild
                                   dependsUpon:
                                     - createItemYaml
                                     - createStackWithDependencies
                                     - testCreateStackFromYaml
                                   items:
-                                    - id: createStackWithDependencies
-                                      dependsUpon:
-                                        - createStackAndGetParentAndChild
-                                        - mapItemsToDependsUpon
-                                      items: []
-                                    - expect
-                                    - test
+                                    id: createStackWithDependencies
+                                    dependsUpon:
+                                      - createStackAndGetParentAndChild
+                                      - mapItemsToDependsUpon
+                                    items: []
                                 - id: testChildDependsUponParent
                                   dependsUpon:
                                     - createItemYaml
                                     - createStackWithDependencies
                                     - testCreateStackFromYaml
                                   items:
-                                    - id: createStackWithDependencies
-                                      dependsUpon:
-                                        - createStackAndGetParentAndChild
-                                        - mapItemsToDependsUpon
-                                      items: []
-                                    - expect
-                                    - test
+                                    id: createStackWithDependencies
+                                    dependsUpon:
+                                      - createStackAndGetParentAndChild
+                                      - mapItemsToDependsUpon
+                                    items: []
                               - - id: createStackAndGetParentAndChild
                                   dependsUpon:
                                     - createParentChildLevels
                                     - createStackFromLevels
                                   items: []
-                                - expect
+                              - - expect
                                 - test
                           - id: testSelfDependent
                             type: file
                             items:
-                              - id: testSelfDependent
-                                dependsUpon:
-                                  - addDependencies
-                                  - createItemYaml
-                                  - createStackFromLevels
-                                  - testCreateStackFromYaml
-                                items:
-                                  - id: addDependencies
+                              - - id: testSelfDependent
+                                  dependsUpon:
+                                    - addDependencies
+                                    - createItemYaml
+                                    - createStackFromLevels
+                                    - testCreateStackFromYaml
+                                  items:
+                                    id: addDependencies
                                     dependsUpon: mapItemsToDependsUpon
                                     items: []
-                                  - expect
-                                  - test
-                              - expect
-                              - test
+                              - - expect
+                                - test
                           - id: testSelfDependentParentAndChild
                             type: file
                             items:
@@ -5588,9 +5652,7 @@
                                   dependsUpon:
                                     - testSelfDependentChildWithParent
                                     - testSelfDependentParentWithChild
-                                  items:
-                                    - expect
-                                    - test
+                                  items: []
                               - - id: testSelfDependentChildWithParent
                                   dependsUpon:
                                     - createStackWithDependencies
@@ -5607,8 +5669,6 @@
                                         - createItemYaml
                                         - sameIdentifier
                                       items: []
-                                    - expect
-                                    - test
                                 - id: testSelfDependentParentWithChild
                                   dependsUpon:
                                     - createStackWithDependencies
@@ -5624,15 +5684,13 @@
                                         - createItemYaml
                                         - sameIdentifier
                                       items: []
-                                    - expect
-                                    - test
                               - - id: createStackAndGetParent
                                   dependsUpon: createStackFromLevels
                                   items: []
                                 - id: sameIdentifier
                                   type: variable
                                   items: []
-                                - expect
+                              - - expect
                                 - test
                           - id: testUpperAndLower
                             type: file
@@ -5641,43 +5699,37 @@
                                   dependsUpon:
                                     - testLowerDependsUponUpper
                                     - testUpperDependsUponLower
-                                  items:
-                                    - expect
-                                    - test
+                                  items: []
                               - - id: testUpperDependsUponLower
                                   dependsUpon:
                                     - createItemYaml
                                     - createStackWithDependencies
                                     - testCreateStackFromYaml
                                   items:
-                                    - id: createStackWithDependencies
-                                      dependsUpon:
-                                        - createStackAndGetUpperAndLower
-                                        - mapItemsToDependsUpon
-                                      items: []
-                                    - expect
-                                    - test
+                                    id: createStackWithDependencies
+                                    dependsUpon:
+                                      - createStackAndGetUpperAndLower
+                                      - mapItemsToDependsUpon
+                                    items: []
                                 - id: testLowerDependsUponUpper
                                   dependsUpon:
                                     - createItemYaml
                                     - createStackWithDependencies
                                     - testCreateStackFromYaml
                                   items:
-                                    - id: createStackWithDependencies
-                                      dependsUpon:
-                                        - createStackAndGetUpperAndLower
-                                        - mapItemsToDependsUpon
-                                      items: []
-                                    - expect
-                                    - test
+                                    id: createStackWithDependencies
+                                    dependsUpon:
+                                      - createStackAndGetUpperAndLower
+                                      - mapItemsToDependsUpon
+                                    items: []
                               - - id: createStackAndGetUpperAndLower
                                   dependsUpon:
                                     - createStackFromLevels
                                     - createUpperAndLowerStack
                                   items: []
-                                - expect
+                              - - expect
                                 - test
-                          - expect
+                        - - expect
                           - test
                   - - id: testCreateStackFromYaml
                       type: file
@@ -5688,13 +5740,11 @@
                               - expect
                               - formatTestName
                               - test
-                            items:
-                              - expect
-                              - test
+                            items: []
                         - - id: formatTestName
                             dependsUpon: JSON
                             items: []
-                          - expect
+                        - - expect
                           - test
                   - - formatTestName
             - - id: createStackFromYaml
@@ -6193,9 +6243,7 @@
                         - expect
                         - findDirectionBetweenItemsInFirstMutualStack
                         - test
-                      items:
-                        - expect
-                        - test
+                      items: []
                   - - id: createItemWithoutImplementation
                       dependsUpon: createStackWithoutImplementation
                       items: []
@@ -6212,7 +6260,7 @@
                     - id: to
                       type: variable
                       items: []
-                    - expect
+                  - - expect
                     - test
             - - id: findDirectionBetweenItemsInFirstMutualStack
                 dependsUpon:
@@ -6300,7 +6348,7 @@
                       type: variable
                       dependsUpon: findItemInStackWithIdentifierHierarchy
                       items: []
-                    - expect
+                  - - expect
                     - test
             - - id: findItemInStackWithIdentifierHierarchy
                 dependsUpon:
@@ -6351,24 +6399,24 @@
                   - same
                   - test
                 items:
-                  - createStackWithParent
-                  - id: same
-                    type: variable
-                    items: []
-                  - id: parent
-                    type: variable
-                    items: []
-                  - id: child
-                    type: variable
-                    items: []
-                  - id: grandparent
-                    type: variable
-                    items: []
-                  - id: grandchild
-                    type: variable
-                    items: []
-                  - expect
-                  - test
+                  - - createStackWithParent
+                    - id: same
+                      type: variable
+                      items: []
+                    - id: parent
+                      type: variable
+                      items: []
+                    - id: child
+                      type: variable
+                      items: []
+                    - id: grandparent
+                      type: variable
+                      items: []
+                    - id: grandchild
+                      type: variable
+                      items: []
+                  - - expect
+                    - test
             - - id: isInnerStack
                 dependsUpon: withSource
                 items: []
@@ -6396,19 +6444,15 @@
                         - describe
                         - testDependencies
                       items:
-                        - id: test
-                          type: parameter
-                          items:
-                            - expect
-                            - test
-                        - id: testSideWithSimpleLevels
-                          dependsUpon:
-                            - createStackFromLevels
-                            - formatStackForDescription
-                            - test
-                          items:
-                            - expect
-                            - test
+                        - - id: test
+                            type: parameter
+                            items: []
+                        - - id: testSideWithSimpleLevels
+                            dependsUpon:
+                              - createStackFromLevels
+                              - formatStackForDescription
+                              - test
+                            items: []
                   - - id: createTestCasesWithSimpleLevels
                       dependsUpon:
                         - createFirstAndSecondLevel
@@ -6426,9 +6470,7 @@
                               - testDependencyBetweenTwoItem
                               - testDependsUponMapping
                               - testFirstDependsUponSecondAndThird
-                            items:
-                              - expect
-                              - test
+                            items: []
                         - - id: testDependencyBetweenTwoItem
                             type: file
                             items:
@@ -6436,9 +6478,7 @@
                                   dependsUpon:
                                     - createFirstDependsUponSecondTestCase
                                     - createSecondDependsUponFirstTestCase
-                                  items:
-                                    - expect
-                                    - test
+                                  items: []
                               - - id: createFirstDependsUponSecondTestCase
                                   dependsUpon:
                                     - createItemYaml
@@ -6462,7 +6502,7 @@
                                     - createFirstAndSecondLevel
                                     - createStackFromLevels
                                   items: []
-                                - expect
+                              - - expect
                                 - test
                           - id: testDependsUponMapping
                             type: file
@@ -6490,250 +6530,208 @@
                                     - testFirstDependsUponTwoGrandchildrenInTwoChildrenInSecond
                                     - testFirstDependsUponTwoMissingGrandchildrenInTwoChildrenInSecond
                                     - testFirstDependsUponTwoMissingGrandchildrenInTwoMissingChildInSecond
-                                  items:
-                                    - expect
-                                    - test
+                                  items: []
                               - - id: testDependsUponMissingChildInMissingParent
                                   type: file
                                   items:
-                                    - id: testDependsUponMissingChildInMissingParent
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
+                                    - - id: testDependsUponMissingChildInMissingParent
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                        items: []
+                                    - - expect
+                                      - test
                                 - id: testDependsUponMissingGrandchildInMissingChildInMissingParent
                                   type: file
                                   items:
-                                    - id: testDependsUponMissingGrandchildInMissingChildInMissingParent
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
+                                    - - id: testDependsUponMissingGrandchildInMissingChildInMissingParent
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                        items: []
+                                    - - expect
+                                      - test
                                 - id: testDependsUponMissingGreatGrandchildInMssingGrandchildInMissingChildInMissingParent
                                   type: file
                                   items:
-                                    - id: testDependsUponMissingGreatGrandchildInMssingGrandchildInMissingChildInMissingParent
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
+                                    - - id: testDependsUponMissingGreatGrandchildInMssingGrandchildInMissingChildInMissingParent
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                        items: []
+                                    - - expect
+                                      - test
                                 - id: testDependsUponTwoMissingChildrenInMissingParent
                                   type: file
                                   items:
-                                    - id: testDependsUponTwoMissingChildrenInMissingParent
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
+                                    - - id: testDependsUponTwoMissingChildrenInMissingParent
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                        items: []
+                                    - - expect
+                                      - test
                                 - id: testFirstDependsUponChildAndMissingChildInSecond
                                   type: file
                                   items:
-                                    - id: testFirstDependsUponChildAndMissingChildInSecond
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
+                                    - - id: testFirstDependsUponChildAndMissingChildInSecond
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                        items: []
+                                    - - expect
+                                      - test
                                 - id: testFirstDependsUponChildInSecond
                                   type: file
                                   items:
-                                    - id: testFirstDependsUponChildInSecond
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
+                                    - - id: testFirstDependsUponChildInSecond
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                        items: []
+                                    - - expect
+                                      - test
                                 - id: testFirstDependsUponChildInSecondAndSecond
                                   type: file
                                   items:
-                                    - id: testFirstDependsUponChildInSecondAndSecond
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
+                                    - - id: testFirstDependsUponChildInSecondAndSecond
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                        items: []
+                                    - - expect
+                                      - test
                                 - id: testFirstDependsUponGrandchildInSecond
                                   type: file
                                   items:
-                                    - id: testFirstDependsUponGrandchildInSecond
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
+                                    - - id: testFirstDependsUponGrandchildInSecond
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                        items: []
+                                    - - expect
+                                      - test
                                 - id: testFirstDependsUponGrandchildInSecondAndChildInSecond
                                   type: file
                                   items:
-                                    - id: testFirstDependsUponGrandchildInSecondAndChildInSecond
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
+                                    - - id: testFirstDependsUponGrandchildInSecondAndChildInSecond
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                        items: []
+                                    - - expect
+                                      - test
                                 - id: testFirstDependsUponMissingChildInSecond
                                   type: file
                                   items:
-                                    - id: testFirstDependsUponMissingChildInSecond
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
+                                    - - id: testFirstDependsUponMissingChildInSecond
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                        items: []
+                                    - - expect
+                                      - test
                                 - id: testFirstDependsUponMissingChildInSecondAndSecond
                                   type: file
                                   items:
-                                    - id: testFirstDependsUponMissingChildInSecondAndSecond
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
+                                    - - id: testFirstDependsUponMissingChildInSecondAndSecond
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                        items: []
+                                    - - expect
+                                      - test
                                 - id: testFirstDependsUponMissingGrandchildInMissingChildInSecond
                                   type: file
                                   items:
-                                    - id: testFirstDependsUponMissingGrandchildInMissingChildInSecond
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
+                                    - - id: testFirstDependsUponMissingGrandchildInMissingChildInSecond
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                        items: []
+                                    - - expect
+                                      - test
                                 - id: testFirstDependsUponMissingGrandchildInSecond
                                   type: file
                                   items:
-                                    - id: testFirstDependsUponMissingGrandchildInSecond
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
+                                    - - id: testFirstDependsUponMissingGrandchildInSecond
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                        items: []
+                                    - - expect
+                                      - test
                                 - id: testFirstDependsUponMissingGreatGrandchildInMissingGrandchildInMissingChildInSecond
                                   type: file
                                   items:
-                                    - id: testFirstDependsUponMissingGreatGrandchildInMissingGrandchildInMissingChildInSecond
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
+                                    - - id: testFirstDependsUponMissingGreatGrandchildInMissingGrandchildInMissingChildInSecond
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                        items: []
+                                    - - expect
+                                      - test
                                 - id: testFirstDependsUponTwoChildrenInSecond
                                   type: file
                                   items:
-                                    - id: testFirstDependsUponTwoChildrenInSecond
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
+                                    - - id: testFirstDependsUponTwoChildrenInSecond
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                        items: []
+                                    - - expect
+                                      - test
                                 - id: testFirstDependsUponTwoChildrenInSecondAndSecond
                                   type: file
                                   items:
-                                    - id: testFirstDependsUponTwoChildrenInSecondAndSecond
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
+                                    - - id: testFirstDependsUponTwoChildrenInSecondAndSecond
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                        items: []
+                                    - - expect
+                                      - test
                                 - id: testFirstDependsUponTwoGrandchildrenInChildInSecond
                                   type: file
                                   items:
-                                    - id: testFirstDependsUponTwoGrandchildrenInChildInSecond
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
+                                    - - id: testFirstDependsUponTwoGrandchildrenInChildInSecond
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                        items: []
+                                    - - expect
+                                      - test
                                 - id: testFirstDependsUponTwoGrandchildrenInTwoChildrenInSecond
                                   type: file
                                   items:
-                                    - id: testFirstDependsUponTwoGrandchildrenInTwoChildrenInSecond
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
+                                    - - id: testFirstDependsUponTwoGrandchildrenInTwoChildrenInSecond
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                        items: []
+                                    - - expect
+                                      - test
                                 - id: testFirstDependsUponTwoMissingGrandchildrenInTwoChildrenInSecond
                                   type: file
                                   items:
-                                    - id: testFirstDependsUponTwoMissingGrandchildrenInTwoChildrenInSecond
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
+                                    - - id: testFirstDependsUponTwoMissingGrandchildrenInTwoChildrenInSecond
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                        items: []
+                                    - - expect
+                                      - test
                                 - id: testFirstDependsUponTwoMissingGrandchildrenInTwoMissingChildInSecond
                                   type: file
                                   items:
-                                    - id: testFirstDependsUponTwoMissingGrandchildrenInTwoMissingChildInSecond
-                                      dependsUpon:
-                                        - createItemYaml
-                                        - createStackFromLevels
-                                      items:
-                                        - expect
-                                        - test
-                                    - expect
-                                    - test
-                                - expect
+                                    - - id: testFirstDependsUponTwoMissingGrandchildrenInTwoMissingChildInSecond
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                        items: []
+                                    - - expect
+                                      - test
+                              - - expect
                                 - test
                           - id: testFirstDependsUponSecondAndThird
                             type: file
@@ -6742,9 +6740,7 @@
                                   dependsUpon:
                                     - createStack
                                     - createYaml
-                                  items:
-                                    - expect
-                                    - test
+                                  items: []
                               - - id: createStack
                                   dependsUpon:
                                     - addDependencies
@@ -6756,9 +6752,9 @@
                                 - id: createYaml
                                   dependsUpon: createItemYaml
                                   items: []
-                                - expect
+                              - - expect
                                 - test
-                          - expect
+                        - - expect
                           - test
                   - - createDependencyTestCases
                   - - id: createFirstAndSecondLevel
