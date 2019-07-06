@@ -3,13 +3,13 @@ This library is free software, licensed under the terms of the GNU General Publi
 
 /* istanbul ignore file: test would be a mirror of implementation */
 const
-	createOrAddToStacksToItemsWithIdentifier = require("./createOrAddToStacksToItemsWithIdentifier"),
+	createOrAddToStacksOfParentMatch = require("./createOrAddToStacksOfParentMatch"),
 	createOrAddToStacksUniformly = require("./createOrAddToStacksUniformly"),
 	createOrAddToStacksUsingFileSystem = require("./createOrAddToStacksUsingFileSystem");
 
 module.exports =
 	{
-		createOrAddToStacksToItemsWithIdentifier,
+		createOrAddToStacksOfParentMatch,
 		createOrAddToStacksUniformly,
 		createOrAddToStacksUsingFileSystem,
 	};

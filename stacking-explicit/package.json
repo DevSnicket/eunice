@@ -2,7 +2,7 @@
 	"author": "Graham Dyson",
 	"bin": {
 		"eunice-processors-concatenateFromFileSystem": "dist/concatenateFromFileSystem/bin.js",
-		"eunice-processors-createOrAddToStacksToItemsWithIdentifier": "dist/stacking/createOrAddToStacksToItemsWithIdentifier/bin.js",
+		"eunice-processors-createOrAddToStacksOfParentMatch": "dist/stacking/createOrAddToStacksOfParentMatch/bin.js",
 		"eunice-processors-createOrAddToStacksUniformly": "dist/stacking/createOrAddToStacksUniformly/bin.js",
 		"eunice-processors-createOrAddToStacksUsingFileSystem": "dist/stacking/createOrAddToStacksUsingFileSystem/bin.js",
 		"eunice-processors-groupItemsByIdentifierSeparator": "dist/groupItemsByIdentifierSeparator/bin.js",
@@ -91,5 +91,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./dist/**/*\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "npx jest --runInBand"
 	},
-	"version": "6.1.3"
+	"version": "7.0.0"
 }

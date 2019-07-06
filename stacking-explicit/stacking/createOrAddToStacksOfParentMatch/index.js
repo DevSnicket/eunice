@@ -8,8 +8,8 @@ const
 
 module.exports =
 	({
-		identifierPattern,
 		items,
+		keysAndPatterns,
 		targetLevelOrStack,
 	}) =>
 		replaceItemsAndInItems({
@@ -22,7 +22,7 @@ module.exports =
 				}) =>
 					hasParentInAncestors({
 						ancestors,
-						parentIdentifierPattern: identifierPattern,
+						keysAndPatterns,
 					})
 					?
 					createStackWhenIdentifierOrItemOrLevelOrAddWhenStack({

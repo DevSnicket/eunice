@@ -4,19 +4,23 @@ This library is free software, licensed under the terms of the GNU General Publi
 
 const
 	callWithProcessStandardStreamsOfYaml = require("../../callWithProcessStandardStreamsOfYaml"),
-	createOrAddToStacksToItemsWithIdentifier = require("./"),
+	createOrAddToStacksOfParentMatch = require("."),
 	parseCommaSeparated = require("../parseCommaSeparated");
 
 callWithProcessStandardStreamsOfYaml(
 	({
 		commaSeparatedLevels,
-		identifierPattern,
+		key,
 		items,
+		pattern,
 	}) =>
-		createOrAddToStacksToItemsWithIdentifier({
-			identifierPattern:
-				new RegExp(identifierPattern),
+		createOrAddToStacksOfParentMatch({
 			items,
+			keysAndPatterns:
+				[ {
+					key,
+					pattern: new RegExp(pattern),
+				} ],
 			targetLevelOrStack:
 				parseCommaSeparated(commaSeparatedLevels),
 		}),

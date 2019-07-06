@@ -23,7 +23,7 @@ yarn add --dev @devsnicket/eunice-processors
 Currently there are processors written in JavaScript to:
 - create or add to stacks
 	- [applied uniformly](stacking/createOrAddToStacksUniformly)
-	- [to items with an identifier](stacking/createOrAddToStacksToItemsWithIdentifier)*
+	- [of parents with keys that match regular expressions](stacking/createOrAddToStacksOfParentMatch)*
 	- [using the file system (.devsnicket-eunice-stack.yaml)](stacking/createOrAddToStacksUsingFileSystem)*
 - [concatenate multiple sources of analysis from the file system](concatenateFromFileSystem)*
 - [group items by their identifier](groupItemsByIdentifierSeparator)
