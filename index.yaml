@@ -3981,99 +3981,99 @@
                       items:
                         - - id: withUse
                             items:
-                              - id: createSvgElement
-                                type: file
-                                items:
-                                  id: createSvgElement
+                              - - id: test
+                                  type: file
                                   dependsUpon:
+                                    - createArrows
+                                    - createDescriptionTexts
+                                    - createElement
+                                    - createSymbolAndUseElementsAndGetSize
+                                    - expectRenderedToBe
                                     - height
-                                    - width
-                              - id: createSymbolAndUseElementsAndGetSize
-                                type: file
-                                items:
-                                  id: createSymbolAndUseElementsAndGetSize
-                                  dependsUpon: getArrowSymbols
-                                  items:
-                                    - - id: getArrowSymbols
-                                        dependsUpon:
-                                          - Object
-                                          - arrows
-                                      - id: aggregate
-                                        dependsUpon:
-                                          - calculateSize
-                                          - createUse
-                                        items:
-                                          - id: createUse
-                                            dependsUpon:
-                                              - createElement
-                                              - width
-                                          - id: calculateSize
-                                            dependsUpon: Math
-                                    - - id: arrows
-                                        type: parameter
-                                      - id: createElement
-                                        type: parameter
-                                      - id: width
-                                        type: parameter
-                              - id: test
-                                type: file
-                                dependsUpon:
-                                  - createArrows
-                                  - createDescriptionTexts
-                                  - createElement
-                                  - createSymbolAndUseElementsAndGetSize
-                                  - expectRenderedToBe
-                                  - height
-                                  - size
-                                  - spacing
-                                  - test
-                                  - width
-                                  - withPrecision
-                                items:
-                                  - - id: createDescriptionTexts
-                                      dependsUpon:
-                                        - createText
-                                        - getXFromIndex
-                                      items:
-                                        - - id: createText
-                                            dependsUpon:
-                                              - createElement
-                                              - createTspan
-                                              - middle
-                                          - getXFromIndex
-                                        - - id: createTspan
-                                            dependsUpon: createElement
-                                          - id: middle
-                                            type: variable
-                                    - id: expectRenderedToBe
-                                      dependsUpon:
-                                        - __dirname
-                                        - createElement
-                                        - createSvgElement
-                                        - expect
-                                        - path
-                                        - readTestCaseFile
-                                        - renderToStaticMarkup
-                                  - - id: createElement
-                                      type: variable
-                                      dependsUpon:
-                                        id: react
-                                        items: createElement
-                                    - id: renderToStaticMarkup
-                                      type: variable
-                                      dependsUpon:
-                                        id: react-dom
-                                        items:
-                                          id: server
-                                          items: renderToStaticMarkup
-                                    - id: height
-                                      type: variable
-                                    - id: spacing
-                                      type: variable
-                                    - id: width
-                                      type: variable
-                                  - - expect
+                                    - size
+                                    - spacing
                                     - test
+                                    - width
+                                    - withPrecision
+                                  items:
+                                    - - id: createDescriptionTexts
+                                        dependsUpon:
+                                          - createText
+                                          - getXFromIndex
+                                        items:
+                                          - - id: createText
+                                              dependsUpon:
+                                                - createElement
+                                                - createTspan
+                                                - middle
+                                            - getXFromIndex
+                                          - - id: createTspan
+                                              dependsUpon: createElement
+                                            - id: middle
+                                              type: variable
+                                      - id: expectRenderedToBe
+                                        dependsUpon:
+                                          - __dirname
+                                          - createElement
+                                          - createSvgElement
+                                          - expect
+                                          - path
+                                          - readTestCaseFile
+                                          - renderToStaticMarkup
+                                    - - id: createElement
+                                        type: variable
+                                        dependsUpon:
+                                          id: react
+                                          items: createElement
+                                      - id: renderToStaticMarkup
+                                        type: variable
+                                        dependsUpon:
+                                          id: react-dom
+                                          items:
+                                            id: server
+                                            items: renderToStaticMarkup
+                                      - id: height
+                                        type: variable
+                                      - id: spacing
+                                        type: variable
+                                      - id: width
+                                        type: variable
+                                    - - expect
+                                      - test
+                              - - id: createSvgElement
+                                  type: file
+                                  items:
+                                    id: createSvgElement
+                                    dependsUpon:
+                                      - height
+                                      - width
+                                - id: createSymbolAndUseElementsAndGetSize
+                                  type: file
+                                  items:
+                                    id: createSymbolAndUseElementsAndGetSize
+                                    dependsUpon: getArrowSymbols
+                                    items:
+                                      - - id: getArrowSymbols
+                                          dependsUpon:
+                                            - Object
+                                            - arrows
+                                        - id: aggregate
+                                          dependsUpon:
+                                            - calculateSize
+                                            - createUse
+                                          items:
+                                            - id: createUse
+                                              dependsUpon:
+                                                - createElement
+                                                - width
+                                            - id: calculateSize
+                                              dependsUpon: Math
+                                      - - id: arrows
+                                          type: parameter
+                                        - id: createElement
+                                          type: parameter
+                                        - id: width
+                                          type: parameter
                           - id: symbols/test
                             type: file
                             dependsUpon:
