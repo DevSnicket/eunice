@@ -40,8 +40,13 @@ module.exports =
 				targetLevelOrStack,
 			});
 
-		return getStackOrSingleLevelOrSingleItem(stackForTarget);
-
+		return (
+			stackForTarget.length
+			?
+			getStackOrSingleLevelOrSingleItem(stackForTarget)
+			:
+			null
+		);
 
 		function createExistingFactory() {
 			let hasExisting = false;

@@ -4,6 +4,18 @@ This library is free software, licensed under the terms of the GNU General Publi
 const createStackWhenIdentifierOrItemOrLevelOrAddWhenStack = require(".");
 
 test(
+	"Null and target of existing returns null.",
+	() =>
+		expect(
+			createStackWhenIdentifierOrItemOrLevelOrAddWhenStack({
+				identifierOrItemOrLevelOrStack: null,
+				targetLevelOrStack: [ "existing" ],
+			}),
+		)
+		.toBeNull(),
+);
+
+test(
 	"Identifier in target returns identifier.",
 	() =>
 		expect(
