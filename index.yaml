@@ -11,6 +11,16 @@
             id: createParameterFromCliArguments
             type: file
             items:
+              - - id: test
+                  type: file
+                  dependsUpon:
+                    - createParameterFromCliArguments
+                    - expect
+                    - test
+                    - undefined
+                  items:
+                    - expect
+                    - test
               - - id: createParameterFromCliArguments
                   dependsUpon:
                     - createOutputPath
@@ -82,7 +92,10 @@
                       dependsUpon:
                         - analyzeAndProcessSource
                         - createOrAddToStacks
+                        - whenSingleSource
                       items:
+                        - - id: whenSingleSource
+                            dependsUpon: analyzeAndProcessSource
                         - - id: analyzeAndProcessSource
                             dependsUpon:
                               - analyzer
@@ -115,13 +128,6 @@
                   - - id: analyzer
                       type: variable
                       dependsUpon: javascript-analyzer
-                    - id: createOrAddToStacksUsingFileSystem
-                      type: variable
-                      dependsUpon:
-                        id: processors
-                        items:
-                          id: stacking
-                          items: createOrAddToStacksUsingFileSystem
                     - id: processItems
                       type: file
                       items:
@@ -136,7 +142,8 @@
                               - - id: createProcessFunctions
                                   dependsUpon:
                                     - createIdentifierSeparatorSpecific
-                                    - createOrAddToStacks
+                                    - createOrAddToStacksUsingFileSystem
+                                    - createSubsetIdentifierHierarchy
                                     - ensureRootItemWithIdentifier
                                     - removePackagePrefixAndScopeInDependsUpon
                                     - replaceDependsUponWithHierarchyFromSeparator
@@ -179,6 +186,16 @@
                                 - id: createIdentifierSeparatorSpecific
                                   type: file
                                   items:
+                                    - - id: test
+                                        type: file
+                                        dependsUpon:
+                                          - createIdentifierSeparatorSpecific
+                                          - describe
+                                          - expect
+                                          - test
+                                        items:
+                                          - expect
+                                          - test
                                     - - id: createIdentifierSeparatorSpecific
                                         items:
                                           - - id: removeIndexFileSuffix
@@ -210,57 +227,77 @@
                                         dependsUpon:
                                           id: processors
                                           items: replaceIdentifiers
-                                - id: createOrAddToStacks
+                                - id: createSubsetIdentifierHierarchy
                                   type: file
                                   items:
-                                    - - id: createOrAddToStacks
+                                    - - id: test
+                                        type: file
                                         dependsUpon:
-                                          - createOrAddToStacksUsingFileSystem
                                           - createSubsetIdentifierHierarchy
+                                          - expect
+                                          - test
                                         items:
-                                          - - id: createSubsetIdentifierHierarchy
+                                          - expect
+                                          - test
+                                    - - id: createSubsetIdentifierHierarchy
+                                        dependsUpon:
+                                          - whenHasRootItem
+                                          - whenSingleAnonymous
+                                        items:
+                                          - - whenHasRootItem
+                                            - id: whenSingleAnonymous
                                               dependsUpon:
-                                                - whenHasRootItem
-                                                - whenSingleAnonymous
-                                              items:
-                                                - whenHasRootItem
-                                                - id: whenSingleAnonymous
-                                                  dependsUpon:
-                                                    - Array
-                                                    - items
+                                                - isSingleAnonymous
+                                                - items
                                           - - id: items
                                               type: parameter
-                                    - - id: createOrAddToStacksUsingFileSystem
-                                        type: variable
-                                        dependsUpon:
-                                          id: processors
-                                          items:
-                                            id: stacking
-                                            items: createOrAddToStacksUsingFileSystem
                                 - id: ensureRootItemWithIdentifier
                                   type: file
                                   items:
-                                    id: ensureRootItemWithIdentifier
-                                    dependsUpon: whenHasIdentifier
-                                    items:
-                                      - - id: whenHasIdentifier
-                                          dependsUpon: createItemWithIdentifier
-                                          items:
-                                            id: createItemWithIdentifier
-                                            dependsUpon:
-                                              - isSingleAnonymous
-                                              - replaceIdentifier
-                                            items:
-                                              - id: isSingleAnonymous
+                                    - - id: test
+                                        type: file
+                                        dependsUpon:
+                                          - ensureRootItemWithIdentifier
+                                          - expect
+                                          - items
+                                          - test
+                                        items:
+                                          - - id: items
+                                              type: variable
+                                          - - expect
+                                            - test
+                                    - - id: ensureRootItemWithIdentifier
+                                        dependsUpon: whenHasIdentifier
+                                        items:
+                                          - - id: whenHasIdentifier
+                                              dependsUpon: createItemWithIdentifier
+                                              items:
+                                                id: createItemWithIdentifier
                                                 dependsUpon:
-                                                  - Array
+                                                  - isSingleAnonymous
                                                   - items
-                                              - replaceIdentifier
-                                      - - id: items
-                                          type: parameter
+                                                  - replaceIdentifier
+                                                items: replaceIdentifier
+                                          - - id: items
+                                              type: parameter
                                 - id: removePackagePrefixAndScopeInDependsUpon
                                   type: file
                                   items:
+                                    - - id: test
+                                        type: file
+                                        dependsUpon:
+                                          - expect
+                                          - items
+                                          - removePackagePrefixAndScopeInDependsUpon
+                                          - scope
+                                          - test
+                                        items:
+                                          - - id: items
+                                              type: variable
+                                            - id: scope
+                                              type: variable
+                                          - - expect
+                                            - test
                                     - - id: removePackagePrefixAndScopeInDependsUpon
                                         dependsUpon:
                                           - whenHasPrefix
@@ -270,57 +307,40 @@
                                               dependsUpon:
                                                 - items
                                                 - prefix
-                                                - removePrefixAndScopeInDependsUpon
-                                                - replaceDependsUpon
-                                                - scope
-                                            - id: whenHasPrefix
-                                              dependsUpon:
-                                                - items
-                                                - prefix
                                                 - removePrefixInDependsUpon
                                                 - replaceDependsUpon
+                                                - replaceItemsOfDependsUponWithIdentifier
+                                            - id: whenHasPrefix
+                                              dependsUpon:
+                                                - getDependsUponReplacement
+                                                - items
+                                                - replaceDependsUpon
+                                              items:
+                                                id: getDependsUponReplacement
+                                                dependsUpon:
+                                                  - prefix
+                                                  - removePrefixInDependsUpon
                                           - - id: items
                                               type: parameter
                                             - id: prefix
-                                              type: parameter
-                                            - id: scope
                                               type: parameter
                                     - - id: replaceDependsUpon
                                         type: variable
                                         dependsUpon:
                                           id: processors
                                           items: replaceDependsUpon
-                                      - id: removePrefixAndScopeInDependsUpon
+                                      - id: removePrefixInDependsUpon
                                         type: file
                                         items:
-                                          - - id: removePrefixAndScopeInDependsUpon
-                                              dependsUpon: withPrefixAndSuffix
-                                          - - id: withPrefixAndSuffix
+                                          - - id: test
+                                              type: file
+                                              dependsUpon:
+                                                - expect
+                                                - removePrefixInDependsUpon
+                                                - test
                                               items:
-                                                - - id: removePrefixAndScopeInDependsUpon
-                                                    dependsUpon:
-                                                      - removePrefixAndScopeInDependUpon
-                                                      - whenArray
-                                                    items:
-                                                      - - id: whenArray
-                                                          dependsUpon:
-                                                            - Array
-                                                            - dependsUpon
-                                                            - removePrefixAndScopeInDependUpon
-                                                      - - id: dependsUpon
-                                                          type: parameter
-                                                - - id: removePrefixAndScopeInDependUpon
-                                                    dependsUpon: whenHasScope
-                                                    items:
-                                                      id: whenHasScope
-                                                      dependsUpon:
-                                                        - prefix
-                                                        - removePrefixInDependsUpon
-                                                - - id: prefix
-                                                    type: parameter
-                                    - - id: removePrefixInDependsUpon
-                                        type: file
-                                        items:
+                                                - expect
+                                                - test
                                           - - id: removePrefixInDependsUpon
                                               dependsUpon: withPrefix
                                           - - id: withPrefix
@@ -361,11 +381,150 @@
                                                           type: parameter
                                                 - - id: prefix
                                                     type: parameter
+                                      - id: replaceItemsOfDependsUponWithIdentifier
+                                        type: file
+                                        items:
+                                          - - id: test
+                                              type: file
+                                              dependsUpon:
+                                                - dependsUpon
+                                                - dependsUponItemsToReplace
+                                                - describe
+                                                - expect
+                                                - replaceItemsOfDependsUponWithIdentifier
+                                                - test
+                                              items:
+                                                - - id: dependsUpon
+                                                    type: variable
+                                                  - id: dependsUponItemsToReplace
+                                                    type: variable
+                                                - - expect
+                                                  - test
+                                          - - id: replaceItemsOfDependsUponWithIdentifier
+                                              dependsUpon:
+                                                - replaceDependUpon
+                                                - whenArray
+                                              items:
+                                                - - id: whenArray
+                                                    dependsUpon:
+                                                      - Array
+                                                      - dependsUpon
+                                                      - replaceDependUpon
+                                                - - id: replaceDependUpon
+                                                    dependsUpon: whenHasScope
+                                                    items:
+                                                      id: whenHasScope
+                                                      dependsUpon: replaceDependsUponItems
+                                                  - id: dependsUpon
+                                                    type: parameter
+                                                - - id: replaceDependsUponItems
+                                                    type: parameter
+                              - - id: isSingleAnonymous
+                                  type: file
+                                  items:
+                                    id: isSingleAnonymous
+                                    dependsUpon: Array
+                          - id: tests/test
+                            type: file
+                            dependsUpon:
+                              - __dirname
+                              - expect
+                              - path
+                              - processItems
+                              - test
+                    - id: tests
+                      items:
+                        - id: sources
+                          items:
+                            - id: first/fileInFirst
+                              type: file
+                            - id: second/fileInSecond
+                              type: file
+                        - id: test
+                          type: file
+                          dependsUpon:
+                            - analyzeAndProcess
+                            - directory
+                            - ensureDir
+                            - expect
+                            - getSourcePath
+                            - test
+                          items:
+                            - - id: getSourcePath
+                                dependsUpon:
+                                  - __dirname
+                                  - path
+                              - id: ensureDir
+                                type: variable
+                                dependsUpon:
+                                  id: fs-extra
+                                  items: ensureDir
+                              - id: directory
+                                type: variable
+                            - - expect
+                              - test
               - id: createSourcesFromPackages
                 type: file
                 items:
-                  id: createSourcesFromPackages
-                  dependsUpon: path
+                  - - id: test
+                      type: file
+                      dependsUpon:
+                        - createSourcesFromPackages
+                        - expect
+                        - path
+                        - test
+                      items:
+                        - expect
+                        - test
+                  - - id: createSourcesFromPackages
+                      dependsUpon: path
+              - id: tests
+                items:
+                  - id: singleSource/source/fileInSingleSource
+                    type: file
+                  - id: singleSourceWithOutputBaseFilename/source/fileInSingleSourceWithOutputBaseFilename
+                    type: file
+                  - id: test
+                    type: file
+                    dependsUpon:
+                      - __dirname
+                      - path
+                      - test
+                      - testDirectory
+                      - testInDirectory
+                      - id: util
+                        items: promisify
+                    items:
+                      - - id: testInDirectory
+                          dependsUpon:
+                            - analyzeAndProcessAndRender
+                            - deleteOutput
+                            - expect
+                            - fileExists
+                            - path
+                            - readYamlFile
+                          items:
+                            - - id: deleteOutput
+                                dependsUpon:
+                                  - Object
+                                  - Promise
+                                  - deleteFile
+                                  - fileExists
+                                  - outputPaths
+                              - id: readYamlFile
+                                dependsUpon: readFile
+                            - - id: outputPaths
+                                type: variable
+                      - - id: deleteFile
+                          type: variable
+                        - id: fileExists
+                          type: variable
+                        - id: readFile
+                          type: variable
+                        - id: testDirectory
+                          type: variable
+                      - - expect
+                        - test
 - - id: renderer-test-harness
     type: file
     items:
@@ -1023,7 +1182,6 @@
                                             type: parameter
                             - - id: removeWhitespaceFromTestExpected
                                 type: file
-                                items: []
                         - id: keysAndValues
                           type: file
                           items:
@@ -1085,7 +1243,6 @@
         - id: webpack.config
           type: file
           dependsUpon: createWebpackConfiguration
-          items: []
         - id: writeHarness
           type: file
           items:
@@ -1381,7 +1538,6 @@
                     items:
                       id: serviceWorkers
                       items: createWebpackEntryForLanguages
-              items: []
       - - id: getOrCreateItemsInDirectory
           type: file
           items:
@@ -1391,7 +1547,6 @@
                   - getOrCreateItemsInDirectory
                   - getYamlForItemOrItems
                   - call-with-process-standard-streams
-                items: []
               - id: test
                 type: file
                 dependsUpon:
@@ -1592,7 +1747,6 @@
                 dependsUpon:
                   - getYamlFromJavaScript
                   - call-with-process-standard-streams
-                items: []
               - id: test
                 type: file
                 dependsUpon:
@@ -1829,7 +1983,6 @@
                                     - - getOrCreateDependsUpon
                           - id: getNamesFromIdentifierExpressionWhenObjectPattern
                             type: file
-                            items: []
                     - id: createFileItemOrItems
                       type: file
                       items:
@@ -2151,7 +2304,6 @@
                 dependsUpon:
                   - callWithProcessStandardStreamsOfYamlOutput
                   - concatenateFromFileSystem
-                items: []
               - id: test
                 type: file
                 dependsUpon:
@@ -2188,7 +2340,6 @@
             - - id: bin
                 type: file
                 dependsUpon: callWithProcessStandardStreamsOfYaml
-                items: []
               - id: test
                 type: file
                 dependsUpon:
@@ -2433,7 +2584,6 @@
             - - id: bin
                 type: file
                 dependsUpon: callWithProcessStandardStreamsOfYaml
-                items: []
               - id: test
                 type: file
                 dependsUpon:
@@ -2528,7 +2678,6 @@
             - - id: bin
                 type: file
                 dependsUpon: callWithProcessStandardStreamsOfYaml
-                items: []
               - id: test
                 type: file
                 dependsUpon:
@@ -2640,7 +2789,6 @@
                       dependsUpon:
                         id: replaceDependsUpon
                         items: callWithProcessStandardStreamsOfYaml
-                      items: []
                     - id: test
                       type: file
                       dependsUpon:
@@ -2697,7 +2845,6 @@
                 dependsUpon:
                   - callWithProcessStandardStreamsOfYaml
                   - replaceIdentifiers
-                items: []
               - id: test
                 type: file
                 dependsUpon:
@@ -2754,7 +2901,6 @@
                 dependsUpon:
                   - callWithProcessStandardStreamsOfYaml
                   - setIdentifierOfAnonymousToParent
-                items: []
               - id: test
                 type: file
                 dependsUpon:
@@ -2818,7 +2964,6 @@
             - - id: bin
                 type: file
                 dependsUpon: callWithProcessStandardStreamsOfYaml
-                items: []
               - id: test
                 type: file
                 dependsUpon: assertSetTypeOfRootItems
@@ -2854,7 +2999,6 @@
                       dependsUpon:
                         - callWithProcessStandardStreamsOfYaml
                         - orderItemsByIdentifier
-                      items: []
                     - id: test
                       type: file
                       dependsUpon:
@@ -3078,7 +3222,6 @@
                         - callWithProcessStandardStreamsOfYaml
                         - createOrAddToStacksOfParentMatch
                         - parseCommaSeparated
-                      items: []
                     - id: test
                       type: file
                       dependsUpon:
@@ -3124,7 +3267,6 @@
                         - callWithProcessStandardStreamsOfYaml
                         - createOrAddToStacksUniformly
                         - parseCommaSeparated
-                      items: []
                     - id: test
                       type: file
                       dependsUpon:
@@ -3154,7 +3296,6 @@
                       dependsUpon:
                         - callWithProcessStandardStreamsOfYaml
                         - createOrAddToStacksUsingFileSystem
-                      items: []
                     - id: test
                       type: file
                       dependsUpon:
@@ -3574,7 +3715,6 @@
                           - joinIdentifiers
                   - - id: createTestItemWithIdentifier
                       type: file
-                      items: []
                     - id: getStackOrSingleLevelOrSingleItem
                       type: file
                       items:
@@ -3701,7 +3841,6 @@
                 dependsUpon:
                   - callWithProcessStandardStreamsOfYaml
                   - unstackIndependent
-                items: []
               - id: test
                 type: file
                 dependsUpon:
@@ -3883,7 +4022,6 @@
                 dependsUpon:
                   - getSvgForYaml
                   - call-with-process-standard-streams
-                items: []
             - - id: getSvgForYaml
                 dependsUpon:
                   - createElement
@@ -4356,7 +4494,6 @@
                               type: variable
                     - id: createDependenciesInlineGroupFactories
                       type: file
-                      items: []
                     - id: createItemGroupFactory
                       type: file
                       items:
@@ -4662,10 +4799,8 @@
                           - concatenateWhenEither
               - id: getIdentifierClassNameAndText
                 type: file
-                items: []
               - id: sumDependencyCount
                 type: file
-                items: []
               - id: withPrecision
                 type: file
                 items:
@@ -5137,7 +5272,6 @@
                                                 type: parameter
                                     - - id: findItemWithIdentifierInLastAncestor
                                         type: file
-                                        items: []
                         - - id: createFromIdentifiers
                             type: file
                             items:
@@ -5380,7 +5514,6 @@
                               - - iterateAncestorsAndAddOrGetWhenHasParent
                   - - id: getIdentifierPropertyOrValue
                       type: file
-                      items: []
         - id: findDirectionBetweenItemsInFirstMutualStack
           type: file
           items:
@@ -5861,13 +5994,10 @@
                   - - createDependencyTestCases
                   - - id: createFirstAndSecondLevel
                       type: file
-                      items: []
             - - id: createItemYaml
                 type: file
-                items: []
               - id: createParentChildLevels
                 type: file
-                items: []
               - id: createStackFromLevels
                 type: file
                 items:
@@ -5888,7 +6018,6 @@
                         - createStackFromLevels
               - id: createUpperAndLowerStack
                 type: file
-                items: []
               - id: formatStackForDescription
                 type: file
                 items:
@@ -5899,7 +6028,6 @@
                       dependsUpon: pretty-format
               - id: mapItemsToDependsUpon
                 type: file
-                items: []
   - id: run-tests-from-file-system
     type: file
     items:
@@ -6041,7 +6169,6 @@
                               items: workers.json
                 - - id: formatPackageUrl
                     type: file
-                    items: []
             - id: createEditorForLanguage
               type: file
               items:
@@ -6108,7 +6235,6 @@
                       items: createElement
         - id: callOrCreateElementOnError
           type: file
-          items: []
         - id: createFillWithTitleElement
           type: file
           items:
@@ -6172,7 +6298,6 @@
                   - path
             - - id: createModuleWithBabelPlugins
                 type: file
-                items: []
               - id: createTransformJavascriptToHtmlPlugin
                 type: file
                 dependsUpon:
@@ -6272,4 +6397,3 @@
   - id: test-harnesses-processor-plugins
     type: file
     dependsUpon: plugin-discovery-create-repository
-    items: []
