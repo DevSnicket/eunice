@@ -21,6 +21,7 @@ jobs:
         - npm install
       script:
         - npm run all
+        - npm install --no-save --prefix test-coverage coveralls@3.0.1 && cat test-coverage/lcov.info | test-coverage/node_modules/coveralls/bin/coveralls.js
     - stage: packageWithoutScope
       before_install:
         - cd packageWithoutScope
