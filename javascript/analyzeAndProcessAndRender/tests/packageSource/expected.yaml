@@ -2,4 +2,3 @@ id: package
 items:
   id: fileInPackage
   type: file
-  items: []

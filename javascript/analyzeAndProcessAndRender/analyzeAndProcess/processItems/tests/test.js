@@ -59,7 +59,6 @@ test(
 						[
 							{
 								id: "bin",
-								items: [],
 								type: "file",
 							},
 							{
@@ -75,12 +74,10 @@ test(
 							},
 							{
 								id: "alphabeticallyEarlierItem",
-								items: [],
 								type: "file",
 							},
 							{
 								id: "childWithIndexSuffix",
-								items: [],
 								type: "file",
 							},
 							{

@@ -50,12 +50,10 @@ test(
 			[
 				{
 					id: "fileInFirst",
-					items: [],
 					type: "file",
 				},
 				{
 					id: "fileInSecond",
-					items: [],
 					type: "file",
 				},
 			],
@@ -84,12 +82,10 @@ test(
 			[
 				[ {
 					id: "fileInSecond",
-					items: [],
 					type: "file",
 				} ],
 				[ {
 					id: "fileInFirst",
-					items: [],
 					type: "file",
 				} ],
 			],
