@@ -3,22 +3,28 @@ This library is free software, licensed under the terms of the GNU General Publi
 
 const
 	analyzeAndProcess = require(".."),
+	{ ensureDir } = require("fs-extra"),
 	path = require("path");
 
 test(
 	"Source of empty directory returns empty array.",
-	() =>
+	async() => {
+		const directory = getSourcePath("empty");
+
+		await ensureDir(directory);
+
 		expect(
 			analyzeAndProcess({
 				directoryToCreateOrAddToStacksFrom: null,
 				ignoreDirectoryNames: null,
 				packagePrefixAndScope: null,
-				sources: [ { directory: getSourcePath("empty") } ],
+				sources: [ { directory } ],
 			}),
 		)
 		.toEqual(
 			[],
-		),
+		);
+	},
 );
 
 
