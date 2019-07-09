@@ -7,7 +7,7 @@ DevSnicket Eunice is a toolkit based on the premise that unidirectional dependen
 [try out Eunice on some Javascript](https://devsnicket.github.io/eunice-javascript)
 
 [![NPM](https://img.shields.io/npm/v/@devsnicket/eunice.svg)](https://www.npmjs.com/package/@devsnicket/eunice
-) [![Build Status](https://travis-ci.org/DevSnicket/eunice-javascript-analyzer.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-javascript) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
+) [![Build Status](https://travis-ci.org/DevSnicket/eunice-javascript-analyzer.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-javascript) [![Coverage Status](https://coveralls.io/repos/github/DevSnicket/eunice-javascript/badge.svg?branch=master&c=1)](https://coveralls.io/github/DevSnicket/eunice-javascript?branch=master) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
 
 This package brings together JavaScript analysis, an example configuration to process that analysis and a render of the processed analysis. A description of how these stages work can be found [in the main Eunice repository](https://github.com/DevSnicket/Eunice#how-eunice-works).
 

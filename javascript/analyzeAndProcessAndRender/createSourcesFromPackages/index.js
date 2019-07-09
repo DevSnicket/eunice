@@ -5,8 +5,9 @@ const path = require("path");
 
 module.exports =
 	({
+		directory = null,
 		names,
-		prefix,
+		prefix = "",
 		scope,
 	}) =>
 		names.map(
@@ -14,6 +15,7 @@ module.exports =
 				{
 					directory:
 						path.join(
+							...directory ? [ directory ] : [],
 							"node_modules",
 							scope ? `@${scope}` : "",
 							`${prefix}${name}`,

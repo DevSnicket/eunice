@@ -3,7 +3,7 @@ This library is free software, licensed under the terms of the GNU General Publi
 
 const
 	createIdentifierSeparatorSpecific = require("./createIdentifierSeparatorSpecific"),
-	createOrAddToStacks = require("./createOrAddToStacks"),
+	createSubsetIdentifierHierarchy = require("./createSubsetIdentifierHierarchy"),
 	ensureRootItemWithIdentifier = require("./ensureRootItemWithIdentifier"),
 	removePackagePrefixAndScopeInDependsUpon = require("./removePackagePrefixAndScopeInDependsUpon"),
 	{
@@ -15,7 +15,10 @@ const
 				orderItemsByIndexOfType,
 			},
 		stacking:
-			{ createOrAddToStacksOfParentMatch },
+			{
+				createOrAddToStacksOfParentMatch,
+				createOrAddToStacksUsingFileSystem,
+			},
 		setIdentifierOfAnonymousToParent,
 		setTypeOfRootItems,
 		unstackIndependent,
@@ -58,11 +61,15 @@ module.exports =
 				stackBinAndTestAtTop,
 				unstackIndependent,
 				items =>
-					createOrAddToStacks({
+					createOrAddToStacksUsingFileSystem({
 						directory:
 							directoryToCreateOrAddToStacksFrom,
 						items,
-						rootItemIdentifier,
+						subsetIdentifierHierarchy:
+							createSubsetIdentifierHierarchy({
+								items,
+								rootItemIdentifier,
+							}),
 					}),
 				addJestMethodsToBottomOfTestFiles,
 				items =>

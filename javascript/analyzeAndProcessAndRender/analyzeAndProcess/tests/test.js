@@ -1,0 +1,97 @@
+/* Copyright (c) 2019 Graham Dyson. All Rights Reserved.
+This library is free software, licensed under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>. */
+
+const
+	analyzeAndProcess = require(".."),
+	path = require("path");
+
+test(
+	"Source of empty directory returns empty array.",
+	() =>
+		expect(
+			analyzeAndProcess({
+				directoryToCreateOrAddToStacksFrom: null,
+				ignoreDirectoryNames: null,
+				packagePrefixAndScope: null,
+				sources: [ { directory: getSourcePath("empty") } ],
+			}),
+		)
+		.toEqual(
+			[],
+		),
+);
+
+
+test(
+	"Two source directories with a single file each returns both source items.",
+	() =>
+		expect(
+			analyzeAndProcess({
+				directoryToCreateOrAddToStacksFrom:
+					null,
+				ignoreDirectoryNames:
+					null,
+				packagePrefixAndScope:
+					null,
+				sources:
+					[
+						{ directory: getSourcePath("first") },
+						{ directory: getSourcePath("second") },
+					],
+			}),
+		)
+		.toEqual(
+			[
+				{
+					id: "fileInFirst",
+					items: [],
+					type: "file",
+				},
+				{
+					id: "fileInSecond",
+					items: [],
+					type: "file",
+				},
+			],
+		),
+);
+
+test(
+	"Two source directories with a single file each and directory for stack returns stack of both source items.",
+	() =>
+		expect(
+			analyzeAndProcess({
+				directoryToCreateOrAddToStacksFrom:
+					getSourcePath("upperLowerStack"),
+				ignoreDirectoryNames:
+					null,
+				packagePrefixAndScope:
+					null,
+				sources:
+					[
+						{ directory: getSourcePath("first") },
+						{ directory: getSourcePath("second") },
+					],
+			}),
+		)
+		.toEqual(
+			[
+				[ {
+					id: "fileInSecond",
+					items: [],
+					type: "file",
+				} ],
+				[ {
+					id: "fileInFirst",
+					items: [],
+					type: "file",
+				} ],
+			],
+		),
+);
+
+function getSourcePath(
+	source,
+) {
+	return path.join(__dirname, "sources", source);
+}

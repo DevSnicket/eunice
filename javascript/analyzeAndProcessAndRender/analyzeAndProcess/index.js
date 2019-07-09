@@ -3,7 +3,7 @@ This library is free software, licensed under the terms of the GNU General Publi
 
 const
 	analyzer = require("@devsnicket/eunice-javascript-analyzer"),
-	{ createOrAddToStacksUsingFileSystem } = require("@devsnicket/eunice-processors").stacking,
+	{ stacking: { createOrAddToStacksUsingFileSystem } } = require("@devsnicket/eunice-processors"),
 	path = require("path"),
 	processItems = require("./processItems");
 
@@ -15,14 +15,20 @@ module.exports =
 		sources,
 	}) => {
 		return (
-			sources.length === 1
-			?
-			analyzeAndProcessSource(sources[0])
-			:
+			whenSingleSource()
+			||
 			createOrAddToStacks(
 				sources.map(analyzeAndProcessSource),
 			)
 		);
+
+		function whenSingleSource() {
+			return (
+				sources.length === 1
+				&&
+				analyzeAndProcessSource(sources[0])
+			);
+		}
 
 		function analyzeAndProcessSource({
 			directory,
