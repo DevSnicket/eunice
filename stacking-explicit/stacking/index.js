@@ -4,12 +4,10 @@ This library is free software, licensed under the terms of the GNU General Publi
 /* istanbul ignore file: test would be a mirror of implementation */
 const
 	createOrAddToStacksOfParentMatch = require("./createOrAddToStacksOfParentMatch"),
-	createOrAddToStacksUniformly = require("./createOrAddToStacksUniformly"),
 	createOrAddToStacksUsingFileSystem = require("./createOrAddToStacksUsingFileSystem");
 
 module.exports =
 	{
 		createOrAddToStacksOfParentMatch,
-		createOrAddToStacksUniformly,
 		createOrAddToStacksUsingFileSystem,
 	};

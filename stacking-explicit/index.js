@@ -3,7 +3,6 @@ This library is free software, licensed under the terms of the GNU General Publi
 
 /* istanbul ignore file: test would be a mirror of implementation */
 const
-	concatenateFromFileSystem = require("./concatenateFromFileSystem"),
 	groupItemsByIdentifierSeparator = require("./groupItemsByIdentifierSeparator"),
 	removeRedundantParentIdentifierPrefix = require("./removeRedundantParentIdentifierPrefix"),
 	removeSelfDependentItemsOfType = require("./removeSelfDependentItemsOfType"),
@@ -18,7 +17,6 @@ const
 
 module.exports =
 	{
-		concatenateFromFileSystem,
 		groupItemsByIdentifierSeparator,
 		removeRedundantParentIdentifierPrefix,
 		removeSelfDependentItemsOfType,
