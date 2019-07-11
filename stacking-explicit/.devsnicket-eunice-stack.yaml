@@ -1,2 +1,4 @@
 - - existing
-- - callWithProcessStandardStreamsOfYaml
+-
+  - callWithProcessStandardStreamsOfYaml
+  - replaceItemsAndInItems

@@ -4,7 +4,7 @@ This library is free software, licensed under the terms of the GNU General Publi
 const
 	createStackWhenIdentifierOrItemOrLevelOrAddWhenStack = require("../createStackWhenIdentifierOrItemOrLevelOrAddWhenStack"),
 	hasParentInAncestors = require("./hasParentInAncestors"),
-	replaceItemsAndInItems = require("../replaceItemsAndInItems");
+	replaceItemsAndInItems = require("../../replaceItemsAndInItems");
 
 module.exports =
 	({
