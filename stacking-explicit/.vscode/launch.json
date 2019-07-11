@@ -194,30 +194,6 @@
 				"args":
 					[
 						"--items=",
-						"--identifierSuffixesInOrder=",
-						"--identifierSuffixesInOrder=",
-					],
-				"name": "sorting orderItemsByIndexOfIdentifierSuffix",
-				"program": "${workspaceFolder}/sorting/orderItemsByIndexOfIdentifierSuffix/bin.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--runInBand",
-						"sorting/orderItemsByIndexOfIdentifierSuffix/test.js"
-					],
-				"disableOptimisticBPs": true,
-				"name": "sorting orderItemsByIndexOfIdentifierSuffix jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[
-						"--items=",
 						"--typesInOrder=",
 						"--typesInOrder=",
 					],
@@ -234,29 +210,6 @@
 					],
 				"disableOptimisticBPs": true,
 				"name": "sorting orderItemsByIndexOfType jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[
-						"--commaSeparatedLevels=",
-						"--items=",
-					],
-				"name": "stacking createOrAddToStacksUniformly",
-				"program": "${workspaceFolder}/stacking/createOrAddToStacksUniformly/bin.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--runInBand",
-						"stacking/createOrAddToStacksUniformly/test.js"
-					],
-				"disableOptimisticBPs": true,
-				"name": "stacking createOrAddToStacksUniformly jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node"
