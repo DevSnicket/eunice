@@ -3,6 +3,7 @@ This library is free software, licensed under the terms of the GNU General Publi
 
 const
 	{
+		createLinearHierarchyFromIdentifierSeparator,
 		groupItemsByIdentifierSeparator,
 		removeRedundantParentIdentifierPrefix,
 		replaceIdentifiers,
@@ -36,12 +37,16 @@ module.exports =
 			items,
 		) {
 			return (
-				removeRedundantParentIdentifierPrefix({
+				createLinearHierarchyFromIdentifierSeparator({
 					identifierSeparator,
 					items:
-						groupItemsByIdentifierSeparator({
+						removeRedundantParentIdentifierPrefix({
 							identifierSeparator,
-							items,
+							items:
+								groupItemsByIdentifierSeparator({
+									identifierSeparator,
+									items,
+								}),
 						}),
 				})
 			);
