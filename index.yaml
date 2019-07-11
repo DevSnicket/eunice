@@ -207,12 +207,18 @@
                                                 dependsUpon: identifierSeparator
                                             - id: groupItems
                                               dependsUpon:
+                                                - createLinearHierarchyFromIdentifierSeparator
                                                 - groupItemsByIdentifierSeparator
                                                 - identifierSeparator
                                                 - removeRedundantParentIdentifierPrefix
                                           - - id: identifierSeparator
                                               type: parameter
-                                    - - id: groupItemsByIdentifierSeparator
+                                    - - id: createLinearHierarchyFromIdentifierSeparator
+                                        type: variable
+                                        dependsUpon:
+                                          id: processors
+                                          items: createLinearHierarchyFromIdentifierSeparator
+                                      - id: groupItemsByIdentifierSeparator
                                         type: variable
                                         dependsUpon:
                                           id: processors
@@ -424,22 +430,31 @@
                                   items:
                                     id: isSingleAnonymous
                                     dependsUpon: Array
-                          - id: tests/test
-                            type: file
-                            dependsUpon:
-                              - __dirname
-                              - expect
-                              - path
-                              - processItems
-                              - test
+                          - id: tests
+                            items:
+                              id: test
+                              type: file
+                              dependsUpon:
+                                - __dirname
+                                - expect
+                                - path
+                                - processItems
+                                - test
+                              items:
+                                - expect
+                                - test
                     - id: tests
                       items:
                         - id: sources
                           items:
-                            - id: first/fileInFirst
-                              type: file
-                            - id: second/fileInSecond
-                              type: file
+                            - id: first
+                              items:
+                                id: fileInFirst
+                                type: file
+                            - id: second
+                              items:
+                                id: fileInSecond
+                                type: file
                         - id: test
                           type: file
                           dependsUpon:
@@ -480,10 +495,18 @@
                       dependsUpon: path
               - id: tests
                 items:
-                  - id: singleSource/source/fileInSingleSource
-                    type: file
-                  - id: singleSourceWithOutputBaseFilename/source/fileInSingleSourceWithOutputBaseFilename
-                    type: file
+                  - id: singleSource
+                    items:
+                      id: source
+                      items:
+                        id: fileInSingleSource
+                        type: file
+                  - id: singleSourceWithOutputBaseFilename
+                    items:
+                      id: source
+                      items:
+                        id: fileInSingleSourceWithOutputBaseFilename
+                        type: file
                   - id: test
                     type: file
                     dependsUpon:
@@ -2296,44 +2319,79 @@
   - id: processors
     type: file
     items:
-      - - id: concatenateFromFileSystem
+      - - id: createLinearHierarchyFromIdentifierSeparator
           type: file
           items:
             - - id: bin
                 type: file
-                dependsUpon:
-                  - callWithProcessStandardStreamsOfYamlOutput
-                  - concatenateFromFileSystem
+                dependsUpon: callWithProcessStandardStreamsOfYaml
               - id: test
                 type: file
                 dependsUpon:
-                  - JSON
-                  - __dirname
-                  - concatenateFromFileSystem
+                  - createLinearHierarchyFromIdentifierSeparator
+                  - describe
                   - expect
-                  - files
-                  - path
                   - test
                 items:
-                  - - id: files
-                      type: variable
-                  - - expect
-                    - test
-            - - id: concatenateFromFileSystem
+                  - expect
+                  - test
+            - - id: createLinearHierarchyFromIdentifierSeparator
                 dependsUpon:
-                  - ensureInLevel
-                  - readYamlFile
-            - - id: ensureInLevel
-                dependsUpon: Array
-              - id: readYamlFile
-                dependsUpon:
-                  - fs
-                  - parseYaml
-            - - id: parseYaml
-                type: variable
-                dependsUpon:
-                  id: js-yaml
-                  items: safeLoad
+                  - replaceItemsAndInItems
+                  - withIdentifierSeparator
+            - - id: withIdentifierSeparator
+                dependsUpon: replaceIdentifierOrItemOrLevelOrStack
+                items:
+                  - - id: replaceIdentifierOrItemOrLevelOrStack
+                      dependsUpon:
+                        - replaceIdentifierOrItem
+                        - whenLevelOrStack
+                      items:
+                        - - id: whenLevelOrStack
+                            dependsUpon:
+                              - Array
+                              - identifierOrItemOrLevelOrStack
+                              - replaceIdentifierOrItemOrLevel
+                        - - id: identifierOrItemOrLevelOrStack
+                            type: parameter
+                  - - id: replaceIdentifierOrItemOrLevel
+                      dependsUpon:
+                        - replaceIdentifierOrItem
+                        - whenLevel
+                      items:
+                        - - id: whenLevel
+                            dependsUpon:
+                              - Array
+                              - identifierOrItemOrLevel
+                              - replaceIdentifierOrItem
+                        - - id: identifierOrItemOrLevel
+                            type: parameter
+                  - - id: replaceIdentifierOrItem
+                      dependsUpon:
+                        - whenIdentifiableItem
+                        - whenIdentifier
+                      items:
+                        - - id: whenIdentifier
+                            dependsUpon:
+                              - identifierOrItem
+                              - replaceIdentifier
+                          - id: whenIdentifiableItem
+                            dependsUpon:
+                              - identifierOrItem
+                              - replaceIdentifiableItem
+                        - - id: identifierOrItem
+                            type: parameter
+                  - - id: replaceIdentifier
+                      dependsUpon:
+                        - identifierSeparator
+                        - replaceWhenIdentifierHasSegments
+                    - id: replaceIdentifiableItem
+                      dependsUpon:
+                        - identifierSeparator
+                        - replaceWhenIdentifierHasSegments
+                  - - id: identifierSeparator
+                      type: parameter
+            - - replaceWhenIdentifierHasSegments
         - id: groupItemsByIdentifierSeparator
           type: file
           items:
@@ -3112,61 +3170,7 @@
                               - - id: getItemIndex
                                   type: parameter
                         - - compare
-            - - id: orderItemsByIndexOfIdentifierSuffix
-                type: file
-                items:
-                  - - id: bin
-                      type: file
-                      dependsUpon:
-                        - callWithProcessStandardStreamsOfYaml
-                        - Array
-                        - orderItemsByIdentifierSuffix
-                      items:
-                        id: orderItemsByIdentifierSuffix
-                        type: variable
-                        dependsUpon: orderItemsByIndexOfIdentifierSuffix
-                    - id: test
-                      type: file
-                      dependsUpon:
-                        - JSON
-                        - expect
-                        - identifierSuffixesInOrder
-                        - items
-                        - orderItemsByIdentifierSuffix
-                        - test
-                      items:
-                        - - id: orderItemsByIdentifierSuffix
-                            type: variable
-                            dependsUpon: orderItemsByIndexOfIdentifierSuffix
-                          - id: identifierSuffixesInOrder
-                            type: variable
-                          - id: items
-                            type: variable
-                        - - expect
-                          - test
-                    - id: testHarnessPlugin
-                      type: file
-                      dependsUpon:
-                        - orderItemsByIndexOfIdentifierSuffix
-                        - test-harnesses-processor-plugins
-                      items:
-                        - expect
-                        - test
-                  - - id: orderItemsByIndexOfIdentifierSuffix
-                      dependsUpon:
-                        - getItemIndex
-                        - getWhenIndexOrDefault
-                        - orderItemsByIndexOf
-                      items:
-                        - - id: getItemIndex
-                            dependsUpon: identifierSuffixesInOrder
-                          - getWhenIndexOrDefault
-                        - - id: identifierSuffixesInOrder
-                            type: parameter
-                  - - id: orderItemsByIndexOf
-                      type: variable
-                      dependsUpon: orderItemsByIndex
-              - id: orderItemsByIndexOfType
+            - - id: orderItemsByIndexOfType
                 type: file
                 items:
                   - - id: bin
@@ -3258,36 +3262,7 @@
                           - id: allMatchParent
                             dependsUpon: isMatch
                         - - isMatch
-              - id: createOrAddToStacksUniformly
-                type: file
-                items:
-                  - - id: bin
-                      type: file
-                      dependsUpon:
-                        - callWithProcessStandardStreamsOfYaml
-                        - createOrAddToStacksUniformly
-                        - parseCommaSeparated
-                    - id: test
-                      type: file
-                      dependsUpon:
-                        - createOrAddToStacksUniformly
-                        - expect
-                        - test
-                      items:
-                        - expect
-                        - test
-                    - id: testHarnessPlugin
-                      type: file
-                      dependsUpon:
-                        - createOrAddToStacksUniformly
-                        - test-harnesses-processor-plugins
-                      items:
-                        - expect
-                        - test
-                  - - id: createOrAddToStacksUniformly
-                      dependsUpon:
-                        - createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
-                        - replaceItemsAndInItems
+              - createOrAddToStacksUniformly
               - id: createOrAddToStacksUsingFileSystem
                 type: file
                 items:
@@ -3758,81 +3733,6 @@
                         - - id: commaSeparated
                             type: parameter
                   - - split
-              - id: replaceItemsAndInItems
-                type: file
-                items:
-                  - - id: test
-                      type: file
-                      dependsUpon:
-                        - actual
-                        - expect
-                        - replaceDescendantItemsUsingAncestors
-                        - test
-                      items:
-                        - - id: replaceDescendantItemsUsingAncestors
-                            type: variable
-                            dependsUpon: replaceItemsAndInItems
-                          - id: actual
-                            type: variable
-                        - - expect
-                          - test
-                  - - id: replaceItemsAndInItems
-                      dependsUpon: withReplace
-                  - - id: withReplace
-                      items:
-                        - - id: withAncestors
-                            items:
-                              - - id: replaceAndReplaceIn
-                                  dependsUpon:
-                                    - ancestors
-                                    - replace
-                                    - replaceInWhenHasValue
-                              - - id: replaceInWhenHasValue
-                                  dependsUpon: getIdentifierOrReplaceInItemOrLevelorStack
-                              - - id: getIdentifierOrReplaceInItemOrLevelorStack
-                                  dependsUpon:
-                                    - getWhenIdentifierOrReplaceInItem
-                                    - whenLevelOrStack
-                                  items:
-                                    - - id: whenLevelOrStack
-                                        dependsUpon:
-                                          - Array
-                                          - identifierOrItemOrLevelOrStack
-                                          - replaceInLevelOrStack
-                                    - - id: identifierOrItemOrLevelOrStack
-                                        type: parameter
-                              - - id: replaceInLevelOrStack
-                                  dependsUpon:
-                                    - replaceInLevel
-                                    - whenStack
-                                  items:
-                                    - - id: whenStack
-                                        dependsUpon:
-                                          - Array
-                                          - levelOrStack
-                                          - replaceInStack
-                                    - - id: levelOrStack
-                                        type: parameter
-                              - - id: replaceInStack
-                                  dependsUpon: replaceInLevel
-                              - - id: replaceInLevel
-                                  dependsUpon: getWhenIdentifierOrReplaceInItem
-                              - - id: getWhenIdentifierOrReplaceInItem
-                                  dependsUpon:
-                                    - replaceInItem
-                                    - whenIdentifier
-                                  items: whenIdentifier
-                              - - id: replaceInItem
-                                  dependsUpon: getItemsProperty
-                                  items:
-                                    - - id: getItemsProperty
-                                        dependsUpon: getItems
-                                    - - id: getItems
-                                        dependsUpon: withAncestors
-                                - id: ancestors
-                                  type: parameter
-                        - - id: replace
-                            type: parameter
         - id: unstackIndependent
           type: file
           items:
@@ -3914,16 +3814,6 @@
           items:
             - - id: callWithProcessStandardStreamsOfYaml
                 dependsUpon:
-                  - callWithProcessStandardStreamsOfYamlOutput
-                  - yaml
-            - - id: yaml
-                type: variable
-                dependsUpon: js-yaml
-      - - id: callWithProcessStandardStreamsOfYamlOutput
-          type: file
-          items:
-            - - id: callWithProcessStandardStreamsOfYamlOutput
-                dependsUpon:
                   - callWithProcessStandardStreams
                   - yaml
             - - id: callWithProcessStandardStreams
@@ -3932,6 +3822,81 @@
               - id: yaml
                 type: variable
                 dependsUpon: js-yaml
+        - id: replaceItemsAndInItems
+          type: file
+          items:
+            - - id: test
+                type: file
+                dependsUpon:
+                  - actual
+                  - expect
+                  - replaceDescendantItemsUsingAncestors
+                  - test
+                items:
+                  - - id: replaceDescendantItemsUsingAncestors
+                      type: variable
+                      dependsUpon: replaceItemsAndInItems
+                    - id: actual
+                      type: variable
+                  - - expect
+                    - test
+            - - id: replaceItemsAndInItems
+                dependsUpon: withReplace
+            - - id: withReplace
+                items:
+                  - - id: withAncestors
+                      items:
+                        - - id: replaceAndReplaceIn
+                            dependsUpon:
+                              - ancestors
+                              - replace
+                              - replaceInWhenHasValue
+                        - - id: replaceInWhenHasValue
+                            dependsUpon: getIdentifierOrReplaceInItemOrLevelorStack
+                        - - id: getIdentifierOrReplaceInItemOrLevelorStack
+                            dependsUpon:
+                              - getWhenIdentifierOrReplaceInItem
+                              - whenLevelOrStack
+                            items:
+                              - - id: whenLevelOrStack
+                                  dependsUpon:
+                                    - Array
+                                    - identifierOrItemOrLevelOrStack
+                                    - replaceInLevelOrStack
+                              - - id: identifierOrItemOrLevelOrStack
+                                  type: parameter
+                        - - id: replaceInLevelOrStack
+                            dependsUpon:
+                              - replaceInLevel
+                              - whenStack
+                            items:
+                              - - id: whenStack
+                                  dependsUpon:
+                                    - Array
+                                    - levelOrStack
+                                    - replaceInStack
+                              - - id: levelOrStack
+                                  type: parameter
+                        - - id: replaceInStack
+                            dependsUpon: replaceInLevel
+                        - - id: replaceInLevel
+                            dependsUpon: getWhenIdentifierOrReplaceInItem
+                        - - id: getWhenIdentifierOrReplaceInItem
+                            dependsUpon:
+                              - replaceInItem
+                              - whenIdentifier
+                            items: whenIdentifier
+                        - - id: replaceInItem
+                            dependsUpon: getItemsProperty
+                            items:
+                              - - id: getItemsProperty
+                                  dependsUpon: getItems
+                              - - id: getItems
+                                  dependsUpon: withAncestors
+                          - id: ancestors
+                            type: parameter
+                  - - id: replace
+                      type: parameter
   - id: renderer
     type: file
     items:
@@ -3940,33 +3905,41 @@
           items:
             - - id: withElementContainer
                 items:
-                  - - id: forDependencyCount/test
-                      type: file
-                      dependsUpon:
-                        - __dirname
-                        - assertGetSvgForYaml
-                        - createElement
-                        - path
-                        - test
+                  - - id: forDependencyCount
                       items:
-                        id: createElement
-                        type: variable
+                        id: test
+                        type: file
                         dependsUpon:
-                          id: react
-                          items: createElement
-                    - id: forItems/test
-                      type: file
-                      dependsUpon:
-                        - __dirname
-                        - assertGetSvgForYaml
-                        - createElement
-                        - test
+                          - __dirname
+                          - assertGetSvgForYaml
+                          - createElement
+                          - path
+                          - test
+                        items:
+                          - - id: createElement
+                              type: variable
+                              dependsUpon:
+                                id: react
+                                items: createElement
+                          - - expect
+                            - test
+                    - id: forItems
                       items:
-                        id: createElement
-                        type: variable
+                        id: test
+                        type: file
                         dependsUpon:
-                          id: react
-                          items: createElement
+                          - __dirname
+                          - assertGetSvgForYaml
+                          - createElement
+                          - test
+                        items:
+                          - - id: createElement
+                              type: variable
+                              dependsUpon:
+                                id: react
+                                items: createElement
+                          - - expect
+                            - test
                   - - id: assertGetSvgForYaml
                       type: file
                       items:
@@ -4117,7 +4090,36 @@
                 items:
                   - - id: test
                       items:
-                        - - id: withUse
+                        - - id: symbols
+                            items:
+                              id: test
+                              type: file
+                              dependsUpon:
+                                - __dirname
+                                - createArrows
+                                - createElement
+                                - expect
+                                - path
+                                - readTestCaseFile
+                                - renderToStaticMarkup
+                                - test
+                                - withPrecision
+                              items:
+                                - - id: createElement
+                                    type: variable
+                                    dependsUpon:
+                                      id: react
+                                      items: createElement
+                                  - id: renderToStaticMarkup
+                                    type: variable
+                                    dependsUpon:
+                                      id: react-dom
+                                      items:
+                                        id: server
+                                        items: renderToStaticMarkup
+                                - - expect
+                                  - test
+                          - id: withUse
                             items:
                               - - id: test
                                   type: file
@@ -4212,31 +4214,6 @@
                                           type: parameter
                                         - id: width
                                           type: parameter
-                          - id: symbols/test
-                            type: file
-                            dependsUpon:
-                              - __dirname
-                              - createArrows
-                              - createElement
-                              - expect
-                              - path
-                              - readTestCaseFile
-                              - renderToStaticMarkup
-                              - test
-                              - withPrecision
-                            items:
-                              - id: createElement
-                                type: variable
-                                dependsUpon:
-                                  id: react
-                                  items: createElement
-                              - id: renderToStaticMarkup
-                                type: variable
-                                dependsUpon:
-                                  id: react-dom
-                                  items:
-                                    id: server
-                                    items: renderToStaticMarkup
                         - - id: readTestCaseFile
                             type: file
                             items:
