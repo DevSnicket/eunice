@@ -4,18 +4,21 @@ This library is free software, licensed under the terms of the GNU General Publi
 /* istanbul ignore file: only used when JavaScript file is process entry point */
 
 const
-	callWithProcessStandardStreamsOfYamlOutput = require("./callWithProcessStandardStreamsOfYamlOutput"),
+	callWithProcessStandardStreams = require("@devsnicket/eunice-call-with-process-standard-streams"),
 	yaml = require("js-yaml");
 
 module.exports =
 	action =>
-		callWithProcessStandardStreamsOfYamlOutput({
+		callWithProcessStandardStreams({
 			action:
 				processArguments =>
-					action({
-						...processArguments,
-						items: yaml.safeLoad(processArguments.items),
-					}),
+					yaml.safeDump(
+						action({
+							...processArguments,
+							items: yaml.safeLoad(processArguments.items),
+						}),
+						{ lineWidth: Number.MAX_SAFE_INTEGER },
+					),
 			standardInputParameter:
 				"items",
 		});
