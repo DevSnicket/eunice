@@ -1,12 +1,16 @@
 - - javascript
-- - renderer-test-harness
 -
   - javascript-analyzer
-  - processors
-  - renderer
+  - id: processors and renderer
+    items:
+      - - renderer-test-harness
+      -
+        - processors
+        - renderer
+      -
+        - dependency-and-structure
+        - test-harnesses-processor-plugins
 -
   - call-with-process-standard-streams
-  - dependency-and-structure
   - run-tests-from-file-system
   - test-harnesses
-  - test-harnesses-processor-plugins
