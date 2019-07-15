@@ -40,6 +40,20 @@ test(
 		.toBeNull(),
 );
 
+test(
+	"Target of two identifiers in level when getLevelOrStackForTargetIdentifierOrItem returns null, returns null.",
+	() =>
+		expect(
+			mapTargetLevelOrStack({
+				getLevelOrStackForTargetIdentifierOrItem:
+					() => null,
+				targetLevelOrStack:
+					[ "left", "right" ],
+			}),
+		)
+		.toBeNull(),
+);
+
 const
 	left = createTestItemWithIdentifier("left"),
 	right = createTestItemWithIdentifier("right");
@@ -175,6 +189,20 @@ test(
 			],
 		);
 	},
+);
+
+test(
+	"Target of two levels in stack, each level with one identifier, when getLevelOrStackForTargetIdentifierOrItem returns null, returns null.",
+	() =>
+		expect(
+			mapTargetLevelOrStack({
+				getLevelOrStackForTargetIdentifierOrItem:
+					() => null,
+				targetLevelOrStack:
+					[ [ "upper" ], [ "lower" ] ],
+			}),
+		)
+		.toBeNull(),
 );
 
 test(

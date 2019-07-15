@@ -63,7 +63,7 @@ function withGetLevelOrStackForTargetIdentifierOrItem(
 			function flattenMultiple() {
 				return (
 					targetLevelOrStack
-					.flatMap(getLevelOrStackForTargetIdentifierOrItem)
+					.flatMap(getEmptyLevelOrStackForTargetIdentifierOrItem)
 					.flat()
 				);
 			}
@@ -90,10 +90,22 @@ function withGetLevelOrStackForTargetIdentifierOrItem(
 				Array.isArray(targetIdentifierOrItemOrLevel)
 				&&
 				targetIdentifierOrItemOrLevel.flatMap(
-					getLevelOrStackForTargetIdentifierOrItem,
+					getEmptyLevelOrStackForTargetIdentifierOrItem,
 				)
 			);
 		}
+	}
+
+	function getEmptyLevelOrStackForTargetIdentifierOrItem(
+		targetIdentifierOrItem,
+	) {
+		return (
+			getLevelOrStackForTargetIdentifierOrItem(
+				targetIdentifierOrItem,
+			)
+			||
+			[]
+		);
 	}
 }
 
