@@ -39,6 +39,36 @@ describe(
 					[ [ "upperNewInTarget" ], [ "lowerNewInTarget" ] ],
 					"[ [ \"upperNewInTarget\" ], [ \"lowerNewInTarget\" ] ]",
 				],
+				[
+					[
+						[ "upperLeftNewInTarget", "upperRightNewInTarget" ],
+						[ "lowerLeftNewInTarget", "lowerRightNewInTarget" ],
+					],
+					"[ [ \"upperLeftNewInTarget\", \"upperRightNewInTarget\" ], [ \"lowerLeftNewInTarget\", \"lowerRightNewInTarget\" ] ]",
+				],
+				[
+					[ { id: "newInTarget" } ],
+					"[ { id: \"newInTarget\" } ]",
+				],
+				[
+					[ {
+						id: "newParentInTarget",
+						items: "newChildInTarget",
+					} ],
+					"[ { id: \"newParentInTarget\", items: \"newChildInTarget\" } ]",
+				],
+				[
+					[ {
+						id:
+							"newParentInTarget",
+						items:
+							[
+								[ "upperLeftNewInTarget", "upperRightNewInTarget" ],
+								[ "lowerLeftNewInTarget", "lowerRightNewInTarget" ],
+							],
+					} ],
+					"[ { id: \"newParentInTarget\", items: [ [ \"upperLeftNewInTarget\", \"upperRightNewInTarget\" ], [ \"lowerLeftNewInTarget\", \"lowerRightNewInTarget\" ] ] } ]",
+				],
 			],
 		)(
 			"Target of %j, throws error message of %s.",

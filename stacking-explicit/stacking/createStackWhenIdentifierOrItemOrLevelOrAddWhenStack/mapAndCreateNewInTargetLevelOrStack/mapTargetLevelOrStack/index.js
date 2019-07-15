@@ -7,27 +7,33 @@ require("array.prototype.flat")
 require("array.prototype.flatmap")
 .shim();
 
+const getStackOrSingleLevelOrSingleItem = require("../../getStackOrSingleLevelOrSingleItem");
+
 module.exports =
 	({
-		getLevelOrStackForTargetIdentifier,
+		getLevelOrStackForTargetIdentifierOrItem,
 		targetLevelOrStack,
 	}) =>
-		withGetItemsOrLevelsForTargetIdentifier(
-			getLevelOrStackForTargetIdentifier,
+		withGetLevelOrStackForTargetIdentifierOrItem(
+			getLevelOrStackForTargetIdentifierOrItem,
 		)
-		.getStackForTargetLevelOrStack(
+		.mapTargetLevelOrStack(
 			targetLevelOrStack,
 		);
 
-function withGetItemsOrLevelsForTargetIdentifier(
-	getLevelOrStackForTargetIdentifier,
+function withGetLevelOrStackForTargetIdentifierOrItem(
+	getLevelOrStackForTargetIdentifierOrItem,
 ) {
-	return { getStackForTargetLevelOrStack };
+	return { mapTargetLevelOrStack };
 
-	function getStackForTargetLevelOrStack(
+	function mapTargetLevelOrStack(
 		targetLevelOrStack,
 	) {
-		return whenTargetOfStack() || asTargetOfLevel();
+		return (
+			simplifyStructureWhenLevelOrStack(
+				whenTargetOfStack() || asTargetOfLevel(),
+			)
+		);
 
 		function whenTargetOfStack() {
 			return (
@@ -38,20 +44,26 @@ function withGetItemsOrLevelsForTargetIdentifier(
 		}
 
 		function asTargetOfLevel() {
-			return whenSingle() || flattenMultiple();
+			return (
+				targetLevelOrStack.length === 1
+				?
+				getSingle()
+				:
+				flattenMultiple()
+			);
 
-			function whenSingle() {
+			function getSingle() {
 				return (
-					targetLevelOrStack.length === 1
-					&&
-					getLevelOrStackForTargetIdentifier(targetLevelOrStack[0])
+					getLevelOrStackForTargetIdentifierOrItem(
+						targetLevelOrStack[0],
+					)
 				);
 			}
 
 			function flattenMultiple() {
 				return (
 					targetLevelOrStack
-					.flatMap(getLevelOrStackForTargetIdentifier)
+					.flatMap(getLevelOrStackForTargetIdentifierOrItem)
 					.flat()
 				);
 			}
@@ -59,15 +71,15 @@ function withGetItemsOrLevelsForTargetIdentifier(
 	}
 
 	function getStackForTargetIdentifierOrLevel(
-		targetIdentifierOrLevel,
+		targetIdentifierOrItemOrLevel,
 	) {
 		return (
 			ensureIsStack(
 				whenTargetOfLevel()
 				||
 				ensureIsLevel(
-					getLevelOrStackForTargetIdentifier(
-						targetIdentifierOrLevel,
+					getLevelOrStackForTargetIdentifierOrItem(
+						targetIdentifierOrItemOrLevel,
 					),
 				),
 			)
@@ -75,10 +87,10 @@ function withGetItemsOrLevelsForTargetIdentifier(
 
 		function whenTargetOfLevel() {
 			return (
-				Array.isArray(targetIdentifierOrLevel)
+				Array.isArray(targetIdentifierOrItemOrLevel)
 				&&
-				targetIdentifierOrLevel.flatMap(
-					getLevelOrStackForTargetIdentifier,
+				targetIdentifierOrItemOrLevel.flatMap(
+					getLevelOrStackForTargetIdentifierOrItem,
 				)
 			);
 		}
@@ -125,4 +137,26 @@ function isStack(
 	levelOrStack,
 ) {
 	return levelOrStack.some(Array.isArray);
+}
+
+function simplifyStructureWhenLevelOrStack(
+	identifierOrItemOrLevelOrStack,
+) {
+	return (
+		Array.isArray(identifierOrItemOrLevelOrStack)
+		?
+		whenLevelOrStack()
+		:
+		identifierOrItemOrLevelOrStack
+	);
+
+	function whenLevelOrStack() {
+		return (
+			identifierOrItemOrLevelOrStack.length
+			?
+			getStackOrSingleLevelOrSingleItem(identifierOrItemOrLevelOrStack)
+			:
+			null
+		);
+	}
 }

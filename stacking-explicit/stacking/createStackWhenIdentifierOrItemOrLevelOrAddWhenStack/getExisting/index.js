@@ -6,6 +6,7 @@ require("array.prototype.flat")
 
 const
 	filterIdentifierOrItemOrLevelOrStack = require("./filterIdentifierOrItemOrLevelOrStack"),
+	getIdentifiersInTargetLevelOrStack = require("./getIdentifiersInTargetLevelOrStack"),
 	getStackOrSingleLevelOrSingleItem = require("../getStackOrSingleLevelOrSingleItem");
 
 module.exports =
@@ -20,7 +21,11 @@ module.exports =
 				identifierOrItemOrLevelOrStack,
 				identifierOrItemPredicate:
 					withTargetIdentifiers(
-						new Set(targetLevelOrStack.flat(2)),
+						new Set(
+							getIdentifiersInTargetLevelOrStack(
+								targetLevelOrStack,
+							),
+						),
 					)
 					.isIdentifierOrItemIncluded,
 			}),

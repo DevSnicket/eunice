@@ -30,7 +30,7 @@ test(
 );
 
 test(
-	"Identifier not in target, with existing in target, returns identifier.",
+	"Identifier not in target and existing in target returns identifier.",
 	() =>
 		expect(
 			createStackWhenIdentifierOrItemOrLevelOrAddWhenStack({

@@ -7,49 +7,22 @@ module.exports =
 		targetLevelOrStack,
 	}) => {
 		if (identifiersNotUsed)
-			throw new Error(`Neither the following items were specified ${formatIdentifiers(identifiersNotUsed)}, nor was a single item level of "existing", in new the stack [${formatTargetLevelOrStack()}].`);
+			throw new Error(`Neither the following items were specified ${formatIdentifiersNotUsed()}, nor was a single item level of "existing", in new the stack ${formatTargetLevelOrStack()}.`);
+
+		function formatIdentifiersNotUsed() {
+			return (
+				identifiersNotUsed
+				.map(identifier => `"${identifier}"`)
+				.join(", ")
+			);
+		}
 
 		function formatTargetLevelOrStack() {
 			return (
-				targetLevelOrStack.length
-				?
-				` ${joinIdentifiers(targetLevelOrStack.map(formatIdentifierOrLevel))} `
-				:
-				""
+				JSON.stringify(targetLevelOrStack)
+				.replace(/\{|\[(?!\])|,/g, "$& ")
+				.replace(/\}|(?<!\[)\]/g, " $&")
+				.replace(/"([^"]*)":/g, "$1: ")
 			);
 		}
 	};
-
-function formatIdentifierOrLevel(
-	identifierOrLevel,
-) {
-	return (
-		Array.isArray(identifierOrLevel)
-		?
-		`[ ${formatIdentifiers(identifierOrLevel)} ]`
-		:
-		formatIdentifier(identifierOrLevel)
-	);
-}
-
-function formatIdentifiers(
-	identifiers,
-) {
-	return (
-		joinIdentifiers(
-			identifiers.map(formatIdentifier),
-		)
-	);
-}
-
-function formatIdentifier(
-	identifier,
-) {
-	return `"${identifier}"`;
-}
-
-function joinIdentifiers(
-	identifiers,
-) {
-	return identifiers.join(", ");
-}

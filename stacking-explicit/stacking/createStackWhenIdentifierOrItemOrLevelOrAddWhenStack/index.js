@@ -4,9 +4,7 @@ This library is free software, licensed under the terms of the GNU General Publi
 const
 	createItemLookup = require("./createItemLookup"),
 	getExisting = require("./getExisting"),
-	getLevelOrStackForTargetIdentifier = require("./getLevelOrStackForTargetIdentifier"),
-	getStackForTargetLevelOrStack = require("./getStackForTargetLevelOrStack"),
-	getStackOrSingleLevelOrSingleItem = require("./getStackOrSingleLevelOrSingleItem"),
+	mapAndCreateNewInTargetLevelOrStack = require("./mapAndCreateNewInTargetLevelOrStack"),
 	throwErrorWhenIdentifiersNotUsed = require("./throwErrorWhenIdentifiersNotUsed");
 
 module.exports =
@@ -19,18 +17,10 @@ module.exports =
 			existingFactory = createExistingFactory(),
 			itemLookup = createItemLookup(identifierOrItemOrLevelOrStack);
 
-		const stackForTarget =
-			getStackForTargetLevelOrStack({
-				getLevelOrStackForTargetIdentifier:
-					targetIdentifier =>
-						getLevelOrStackForTargetIdentifier({
-							addNewInTarget,
-							getExisting:
-								existingFactory.getExisting,
-							getItemWithIdentifier:
-								itemLookup.getItemWithIdentifier,
-							targetIdentifier,
-						}),
+		const itemOrLevelOrStackForTarget =
+			mapAndCreateNewInTargetLevelOrStack({
+				addNewInTarget,
+				getLevelOrStackForTargetIdentifierOrItem,
 				targetLevelOrStack,
 			});
 
@@ -40,25 +30,39 @@ module.exports =
 				targetLevelOrStack,
 			});
 
-		return (
-			stackForTarget.length
-			?
-			getStackOrSingleLevelOrSingleItem(stackForTarget)
-			:
-			null
-		);
+		return itemOrLevelOrStackForTarget;
+
+		function getLevelOrStackForTargetIdentifierOrItem(
+			targetIdentifierOrItem,
+		) {
+			return (
+				existingFactory.getWhenIsExisting(targetIdentifierOrItem)
+				||
+				itemLookup.getItemWithIdentifier(targetIdentifierOrItem)
+			);
+		}
 
 		function createExistingFactory() {
 			let hasExisting = false;
 
 			return (
 				{
-					getExisting: getExistingAndSetFlag,
+					getWhenIsExisting,
 					get hasExisting() {
 						return hasExisting;
 					},
 				}
 			);
+
+			function getWhenIsExisting(
+				targetIdentifierOrItem,
+			) {
+				return isExisting() && getExistingAndSetFlag();
+
+				function isExisting() {
+					return targetIdentifierOrItem === "existing";
+				}
+			}
 
 			function getExistingAndSetFlag() {
 				hasExisting = true;
@@ -68,6 +72,8 @@ module.exports =
 						identifierOrItemOrLevelOrStack,
 						targetLevelOrStack,
 					})
+					||
+					[]
 				);
 			}
 		}

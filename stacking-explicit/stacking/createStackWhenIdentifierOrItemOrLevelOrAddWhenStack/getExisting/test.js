@@ -6,14 +6,10 @@ const
 	getExisting = require(".");
 
 const
-	inTarget = createTestItemWithIdentifier("inTarget"),
 	leftInTarget = createTestItemWithIdentifier("leftInTarget"),
-	leftNotInTarget = createTestItemWithIdentifier("leftNotInTarget"),
 	lowerInTarget = createTestItemWithIdentifier("lowerInTarget"),
 	lowerNotInTarget = createTestItemWithIdentifier("lowerNotInTarget"),
-	notInTarget = createTestItemWithIdentifier("notInTarget"),
 	rightInTarget = createTestItemWithIdentifier("rightInTarget"),
-	rightNotInTarget = createTestItemWithIdentifier("rightNotInTarget"),
 	upperInTarget = createTestItemWithIdentifier("upperInTarget"),
 	upperNotInTarget = createTestItemWithIdentifier("upperNotInTarget");
 
@@ -28,43 +24,8 @@ test.each(
 		],
 		[
 			{
-				identifierOrItemOrLevelOrStack: null,
-				targetLevelOrStack: [ "newInTarget" ],
-			},
-			null,
-		],
-		[
-			{
-				identifierOrItemOrLevelOrStack: "inTarget",
-				targetLevelOrStack: [ "inTarget" ],
-			},
-			null,
-		],
-		[
-			{
 				identifierOrItemOrLevelOrStack: [ leftInTarget, rightInTarget ],
 				targetLevelOrStack: [ "leftInTarget", "rightInTarget" ],
-			},
-			null,
-		],
-		[
-			{
-				identifierOrItemOrLevelOrStack: [ [ upperInTarget ], [ lowerInTarget ] ],
-				targetLevelOrStack: [ "upperInTarget", "lowerInTarget" ],
-			},
-			null,
-		],
-		[
-			{
-				identifierOrItemOrLevelOrStack: "inTarget",
-				targetLevelOrStack: [ "newInTarget", "inTarget" ],
-			},
-			null,
-		],
-		[
-			{
-				identifierOrItemOrLevelOrStack: inTarget,
-				targetLevelOrStack: [ [ "inTarget" ] ],
 			},
 			null,
 		],
@@ -77,87 +38,10 @@ test.each(
 		],
 		[
 			{
-				identifierOrItemOrLevelOrStack: notInTarget,
-				targetLevelOrStack: [ ],
-			},
-			notInTarget,
-		],
-		[
-			{
-				identifierOrItemOrLevelOrStack: notInTarget,
-				targetLevelOrStack: [ "newInTarget" ],
-			},
-			notInTarget,
-		],
-		[
-			{
-				identifierOrItemOrLevelOrStack: notInTarget,
-				targetLevelOrStack: [ "leftNewInTarget", "rightNewInTarget" ],
-			},
-			notInTarget,
-		],
-		[
-			{
-				identifierOrItemOrLevelOrStack: [ leftInTarget, rightInTarget ],
-				targetLevelOrStack: [ "leftInTarget", "rightInTarget" ],
-			},
-			null,
-		],
-		[
-			{
-				identifierOrItemOrLevelOrStack: [ leftNotInTarget, rightNotInTarget ],
-				targetLevelOrStack: [ ],
-			},
-			[ leftNotInTarget, rightNotInTarget ],
-		],
-		[
-			{
-				identifierOrItemOrLevelOrStack: [ leftNotInTarget, inTarget ],
-				targetLevelOrStack: [ "inTarget" ],
-			},
-			leftNotInTarget,
-		],
-		[
-			{
-				identifierOrItemOrLevelOrStack: [ inTarget, rightNotInTarget ],
-				targetLevelOrStack: [ "inTarget" ],
-			},
-			rightNotInTarget,
-		],
-		[
-			{
-				identifierOrItemOrLevelOrStack: [ [ upperNotInTarget ], [ lowerNotInTarget ] ],
-				targetLevelOrStack: [ ],
-			},
-			[ [ upperNotInTarget ], [ lowerNotInTarget ] ],
-		],
-		[
-			{
 				identifierOrItemOrLevelOrStack: [ [ upperNotInTarget ], lowerNotInTarget ],
 				targetLevelOrStack: [ ],
 			},
 			[ [ upperNotInTarget ], [ lowerNotInTarget ] ],
-		],
-		[
-			{
-				identifierOrItemOrLevelOrStack: [ upperNotInTarget, [ lowerNotInTarget ] ],
-				targetLevelOrStack: [ ],
-			},
-			[ [ upperNotInTarget ], [ lowerNotInTarget ] ],
-		],
-		[
-			{
-				identifierOrItemOrLevelOrStack: [ [ upperInTarget ], [ lowerNotInTarget ] ],
-				targetLevelOrStack: [ "upperInTarget" ],
-			},
-			lowerNotInTarget,
-		],
-		[
-			{
-				identifierOrItemOrLevelOrStack: [ [ upperNotInTarget ], [ lowerInTarget ] ],
-				targetLevelOrStack: [ "lowerInTarget" ],
-			},
-			upperNotInTarget,
 		],
 		[
 			{

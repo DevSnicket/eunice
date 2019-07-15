@@ -289,10 +289,58 @@
 				"args":
 					[ 
 						"--runInBand",
-						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/getStackForTargetLevelOrStack/test.js",
+						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/getExisting/getIdentifiersInTargetLevelOrStack/test.js"
 					],
 				"disableOptimisticBPs": true,
-				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack getStackForTargetLevelOrStack jest",
+				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack getExisting getIdentifiersInTargetLevelOrStack jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
+						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/getStackOrSingleLevelOrSingleItem/test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack getStackOrSingleLevelOrSingleItem jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
+						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/mapAndCreateNewInTargetLevelOrStack/test.js",
+					],
+				"disableOptimisticBPs": true,
+				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack mapAndCreateNewInTargetLevelOrStack jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
+						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/mapAndCreateNewInTargetLevelOrStack/mapTargetLevelOrStack/test.js",
+					],
+				"disableOptimisticBPs": true,
+				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack mapAndCreateNewInTargetLevelOrStack mapTargetLevelOrStack jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
+						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/throwErrorWhenIdentifiersNotUsed/test.js",
+					],
+				"disableOptimisticBPs": true,
+				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack throwErrorWhenIdentifiersNotUsed jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node"
