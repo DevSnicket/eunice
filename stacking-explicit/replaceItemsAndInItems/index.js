@@ -45,11 +45,11 @@ function withReplace(
 			return (
 				identifierOrItemOrLevelOrStack
 				&&
-				getIdentifierOrReplaceInItemOrLevelorStack(identifierOrItemOrLevelOrStack)
+				getIdentifierOrReplaceInItemOrLevelOrStack(identifierOrItemOrLevelOrStack)
 			);
 		}
 
-		function getIdentifierOrReplaceInItemOrLevelorStack(
+		function getIdentifierOrReplaceInItemOrLevelOrStack(
 			identifierOrItemOrLevelOrStack,
 		) {
 			return (
