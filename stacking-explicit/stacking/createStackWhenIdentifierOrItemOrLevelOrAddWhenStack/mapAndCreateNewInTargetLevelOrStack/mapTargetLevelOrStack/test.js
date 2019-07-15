@@ -6,13 +6,13 @@ const
 	mapTargetLevelOrStack = require(".");
 
 test(
-	"Target of empty, does not call targetIdentifierOrItemSelectors and returns empty.",
+	"Target of empty, does not call getLevelOrStackForTargetIdentifierOrItem and returns null.",
 	() =>
 		expect(
 			mapTargetLevelOrStack({
 				getLevelOrStackForTargetIdentifierOrItem:
 					targetIdentifierOrItem => {
-						throw new Error(`targetIdentifierOrItemSelectors called with argument "${targetIdentifierOrItem}".`);
+						throw new Error(`getLevelOrStackForTargetIdentifierOrItem called with argument "${targetIdentifierOrItem}".`);
 					},
 				targetLevelOrStack:
 					[],
@@ -22,7 +22,7 @@ test(
 );
 
 test(
-	"Target of identifier in level, calls targetIdentifierOrItemSelectors for identifier returns null.",
+	"Target of identifier in level, calls getLevelOrStackForTargetIdentifierOrItem for identifier returns null.",
 	() =>
 		expect(
 			mapTargetLevelOrStack({
@@ -31,7 +31,7 @@ test(
 						if (targetIdentifierOrItem === "item")
 							return null;
 						else
-							throw new Error(`targetIdentifierOrItemSelectors called with argument "${targetIdentifierOrItem}".`);
+							throw new Error(`getLevelOrStackForTargetIdentifierOrItem called with argument "${targetIdentifierOrItem}".`);
 					},
 				targetLevelOrStack:
 					[ "item" ],
@@ -47,7 +47,7 @@ const
 const level = [ left, right ];
 
 describe(
-	"Target of identifier in level, calls targetIdentifierOrItemSelectors for identifier",
+	"Target of identifier in level, calls getLevelOrStackForTargetIdentifierOrItem for identifier",
 	() =>
 		test.each(
 			[
@@ -74,7 +74,7 @@ describe(
 								if (targetIdentifierOrItem === "itemOrLevelOrStack")
 									return itemOrLevelOrStack;
 								else
-									throw new Error(`targetIdentifierOrItemSelectors called with argument "${targetIdentifierOrItem}".`);
+									throw new Error(`getLevelOrStackForTargetIdentifierOrItem called with argument "${targetIdentifierOrItem}".`);
 							},
 						targetLevelOrStack:
 							[ "itemOrLevelOrStack" ],
@@ -87,7 +87,7 @@ describe(
 );
 
 test(
-	"Target of two identifiers in level, calls targetIdentifierOrItemSelectors for each identifier that return an item each, returns two items.",
+	"Target of two identifiers in level, calls getLevelOrStackForTargetIdentifierOrItem for each identifier that return an item each, returns two items.",
 	() =>
 		expect(
 			mapTargetLevelOrStack({
@@ -99,7 +99,7 @@ test(
 							case right.id:
 								return right;
 							default:
-								throw new Error(`targetIdentifierOrItemSelectors called with argument "${targetIdentifierOrItem}".`);
+								throw new Error(`getLevelOrStackForTargetIdentifierOrItem called with argument "${targetIdentifierOrItem}".`);
 						}
 					},
 				targetLevelOrStack:
@@ -112,7 +112,7 @@ test(
 );
 
 test(
-	"Target of two identifiers in level, calls targetIdentifierOrItemSelectors for each identifier that returns an item and a level of two items, returns three items.",
+	"Target of two identifiers in level, calls getLevelOrStackForTargetIdentifierOrItem for each identifier that returns an item and a level of two items, returns three items.",
 	() => {
 		const middle = createTestItemWithIdentifier("middle");
 
@@ -126,7 +126,7 @@ test(
 							case "rightLevel":
 								return [ middle, right ];
 							default:
-								throw new Error(`targetIdentifierOrItemSelectors called with argument "${targetIdentifierOrItem}".`);
+								throw new Error(`getLevelOrStackForTargetIdentifierOrItem called with argument "${targetIdentifierOrItem}".`);
 						}
 					},
 				targetLevelOrStack:
@@ -144,7 +144,7 @@ test(
 );
 
 test(
-	"Target of two identifiers in level, calls targetIdentifierOrItemSelectors for each identifier that returns an item and a stack of two items, returns three items.",
+	"Target of two identifiers in level, calls getLevelOrStackForTargetIdentifierOrItem for each identifier that returns an item and a stack of two items, returns three items.",
 	() => {
 		const
 			rightLower = createTestItemWithIdentifier("rightLower"),
@@ -160,7 +160,7 @@ test(
 							case "rightStack":
 								return [ [ rightUpper ], [ rightLower ] ];
 							default:
-								throw new Error(`targetIdentifierOrItemSelectors called with argument "${targetIdentifierOrItem}".`);
+								throw new Error(`getLevelOrStackForTargetIdentifierOrItem called with argument "${targetIdentifierOrItem}".`);
 						}
 					},
 				targetLevelOrStack:
@@ -178,7 +178,7 @@ test(
 );
 
 test(
-	"Target of identifier in stack, calls targetIdentifierOrItemSelectors for identifier that returns empty, returns empty.",
+	"Target of identifier in stack, calls getLevelOrStackForTargetIdentifierOrItem for identifier that returns empty, returns null.",
 	() =>
 		expect(
 			mapTargetLevelOrStack({
@@ -187,7 +187,7 @@ test(
 						if (targetIdentifierOrItem === "item")
 							return [];
 						else
-							throw new Error(`targetIdentifierOrItemSelectors called with argument "${targetIdentifierOrItem}".`);
+							throw new Error(`getLevelOrStackForTargetIdentifierOrItem called with argument "${targetIdentifierOrItem}".`);
 					},
 				targetLevelOrStack:
 					[ [ "item" ] ],
@@ -208,7 +208,7 @@ test.each(
 		],
 	],
 )(
-	"Target of %s, in stack, calls targetIdentifierOrItemSelectors for each identifier that returns an item and a level of two items, returns stack of two levels of one item and two items.",
+	"Target of %s, in stack, calls getLevelOrStackForTargetIdentifierOrItem for each identifier that returns an item and a level of two items, returns stack of two levels of one item and two items.",
 	(targetDescription, targetLevelOrStack) => {
 		const
 			lowerLevel =
@@ -229,7 +229,7 @@ test.each(
 							case upper.id:
 								return upper;
 							default:
-								throw new Error(`targetIdentifierOrItemSelectors called with argument "${targetIdentifierOrItem}".`);
+								throw new Error(`getLevelOrStackForTargetIdentifierOrItem called with argument "${targetIdentifierOrItem}".`);
 						}
 					},
 				targetLevelOrStack,
@@ -245,7 +245,7 @@ test.each(
 );
 
 test(
-	"Target of identifier in level and identifier, in stack, calls targetIdentifierOrItemSelectors for each identifier that returns a level of two items and an item, returns stack of two levels of one item and two items.",
+	"Target of identifier in level and identifier, in stack, calls getLevelOrStackForTargetIdentifierOrItem for each identifier that returns a level of two items and an item, returns stack of two levels of one item and two items.",
 	() => {
 		const
 			lower =
@@ -266,7 +266,7 @@ test(
 							case "upperLevel":
 								return upperLevel;
 							default:
-								throw new Error(`targetIdentifierOrItemSelectors called with argument "${targetIdentifierOrItem}".`);
+								throw new Error(`getLevelOrStackForTargetIdentifierOrItem called with argument "${targetIdentifierOrItem}".`);
 						}
 					},
 				targetLevelOrStack:
@@ -283,7 +283,7 @@ test(
 );
 
 test(
-	"Target of identifiers in two levels, in stack, calls targetIdentifierOrItemSelectors for each identifier that returns levels of two items, returns stack of two levels of two items each.",
+	"Target of identifiers in two levels, in stack, calls getLevelOrStackForTargetIdentifierOrItem for each identifier that returns levels of two items, returns stack of two levels of two items each.",
 	() => {
 		const
 			lowerLevel =
@@ -307,7 +307,7 @@ test(
 							case "upperLevel":
 								return upperLevel;
 							default:
-								throw new Error(`targetIdentifierOrItemSelectors called with argument "${targetIdentifierOrItem}".`);
+								throw new Error(`getLevelOrStackForTargetIdentifierOrItem called with argument "${targetIdentifierOrItem}".`);
 						}
 					},
 				targetLevelOrStack:
