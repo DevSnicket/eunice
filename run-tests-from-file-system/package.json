@@ -5,6 +5,7 @@
 	},
 	"description": "Runs tests by discovering test cases and expected behaviour from the file system. Tests are automatically named based on the directory hierarchy.",
 	"devDependencies": {
+		"@types/jest": "24.0.15",
 		"cspell": "4.0.21",
 		"eslint": "5.16.0",
 		"eslint-plugin-notice": "0.8.8"
