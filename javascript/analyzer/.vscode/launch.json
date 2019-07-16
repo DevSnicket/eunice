@@ -2,9 +2,7 @@
 	"configurations":
 		[
 			{
-				"localRoot": "${workspaceFolder}",
 				"name": "attach",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "attach",
 				"type": "node"
 			},
@@ -14,37 +12,25 @@
 						"--runInBand",
 						"getItemOrItemsFromJavaScript/createVisitors/throwErrorWhenAnyUnhandled/test.js"
 					],
-				"cwd": "${workspaceFolder}/",
 				"disableOptimisticBPs": true,
-				"localRoot": "${workspaceFolder}",
 				"name": "getItemOrItemsFromJavaScript createVisitors throwErrorWhenAnyUnhandled jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args": [ "--javaScript=" ],
-				"cwd": "${workspaceFolder}/",
-				"localRoot": "${workspaceFolder}",
 				"name": "getYamlFromJavaScript",
 				"program": "${workspaceFolder}/getYamlFromJavaScript/bin.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args": [ ],
-				"cwd": "${workspaceFolder}/",
-				"localRoot": "${workspaceFolder}",
 				"name": "getYamlFromJavaScript test",
 				"program": "${workspaceFolder}/getYamlFromJavaScript/test.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
@@ -52,46 +38,34 @@
 						"--runInBand",
 						"getYamlFromJavaScript/test.js"
 					],
-				"cwd": "${workspaceFolder}/",
 				"disableOptimisticBPs": true,
-				"localRoot": "${workspaceFolder}",
 				"name": "getYamlFromJavaScript jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
 				"args":
-				[
-					"--directory=getOrCreateItemsInDirectory/test-cases",
-					"--ignoreDirectoryNames=node_modules"
-				],
-				"cwd": "${workspaceFolder}",
-				"localRoot": "${workspaceFolder}",
+					[
+						"--directory=getOrCreateItemsInDirectory/test-cases",
+						"--ignoreDirectoryNames=node_modules"
+					],
 				"name": "getOrCreateItemsInDirectory",
 				"program": "${workspaceFolder}/getOrCreateItemsInDirectory/bin.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 			{
-				"args": 
-					[ 
+				"args":
+					[
 						"--runInBand",
 						"getOrCreateItemsInDirectory/test.js"
 					],
-				"cwd": "${workspaceFolder}/",
 				"disableOptimisticBPs": true,
-				"localRoot": "${workspaceFolder}",
 				"name": "getOrCreateItemsInDirectory jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 				"request": "launch",
-				"type": "node",
-				"useWSL": true
+				"type": "node"
 			},
 		],
 }
