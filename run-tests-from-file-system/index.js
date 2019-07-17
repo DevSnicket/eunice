@@ -1,12 +1,13 @@
 /* Copyright (c) 2018 Graham Dyson. All Rights Reserved.
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
-/* eslint-disable no-console */
-
-const fs = require("fs");
+const
+	fs = require("fs"),
+	testWithJest = require("./testWithJest");
 
 const
 	isJestProcessFromArguments = require("./isJestProcessFromArguments"),
+	path = require("path"),
 	readTextFile = require("./readTextFile");
 
 module.exports =
@@ -15,7 +16,11 @@ module.exports =
 		caseFileName,
 		directory: rootDirectory,
 		expectedFileName,
+		// console is only used as a parameter default
+		/* eslint-disable-next-line no-console */
+		log = console.log,
 		processArguments,
+		test = testWithJest,
 	}) => {
 		if (isJestProcessFromArguments(processArguments))
 			discoverAndDescribeTestCases();
@@ -23,7 +28,7 @@ module.exports =
 			if (processArguments[2] === "update-expected")
 				discoverAndUpdateExpectedFiles();
 			else
-				logOutputOfActualWhenFileOrTestCase(processArguments[2]);
+				logActualWhenFileOrTestCase(processArguments[2]);
 		else
 			discoverAndLogOutputOfActual();
 
@@ -34,19 +39,17 @@ module.exports =
 			function describeTestCase(
 				testCase,
 			) {
-				test(
-					testCase,
-					() =>
-						expect(
-							getActualForTestCase(testCase),
-						)
-						.toBe(
-							readTestCaseFile({
-								fileName: expectedFileName,
-								testCase,
-							}),
-						),
-				);
+				test({
+					actual:
+						getActualForTestCase(testCase),
+					expected:
+						readTestCaseFile({
+							fileName: expectedFileName,
+							testCase,
+						}),
+					name:
+						testCase,
+				});
 			}
 		}
 
@@ -63,7 +66,7 @@ module.exports =
 			}) {
 				return (
 					fs.writeFileSync(
-						`${rootDirectory}${testCase}/${expectedFileName}`,
+						path.join(rootDirectory, testCase, expectedFileName),
 						content,
 						"utf-8",
 					)
@@ -73,8 +76,8 @@ module.exports =
 
 		function discoverAndLogOutputOfActual() {
 			for (const testCase of discover()) {
-				console.log(testCase);
-				console.log(getActualForTestCase(testCase));
+				log(testCase);
+				log(getActualForTestCase(testCase));
 			}
 		}
 
@@ -82,66 +85,57 @@ module.exports =
 			return inSubdirectory("");
 
 			function inSubdirectory(
-				directory,
+				subdirectory,
 			) {
 				return (
-					fs.readdirSync(rootDirectory + directory)
-					.map(
-						subFileOrDirectory =>
-							directory + subFileOrDirectory,
-					)
-					.map(
-						subFileOrDirectory =>
-							[
-								fs.existsSync(`${rootDirectory}${subFileOrDirectory}/${caseFileName}`) && subFileOrDirectory,
-								...whenSubdirectory(subFileOrDirectory),
-							]
-							.filter(testCases => testCases),
-					)
+					fs.readdirSync(path.join(rootDirectory, subdirectory))
 					.reduce(
-						(aggregation, testCases) =>
-							[ ...aggregation, ...testCases ],
+						(testCases, fileOrSubdirectoryName) =>
+							appendFileOrSubdirectoryToTestCases({
+								fileOrSubdirectory:
+									path.join(subdirectory, fileOrSubdirectoryName),
+								testCases,
+							}),
+						[],
 					)
 				);
 			}
 
-			function whenSubdirectory(
-				subFileOrDirectory,
-			) {
-				return isDirectory() ? discoverTestCases() : [];
+			function appendFileOrSubdirectoryToTestCases({
+				fileOrSubdirectory,
+				testCases,
+			}) {
+				return (
+					isDirectory()
+					?
+					[
+						...testCases,
+						...getTestCasesWhenAny(),
+						...inSubdirectory(fileOrSubdirectory),
+					]
+					:
+					testCases
+				);
 
 				function isDirectory() {
 					return (
-						fs.lstatSync(rootDirectory + subFileOrDirectory)
+						fs.lstatSync(path.join(rootDirectory, fileOrSubdirectory))
 						.isDirectory()
 					);
 				}
 
-				function discoverTestCases() {
-					return inSubdirectory(`${subFileOrDirectory}/`);
+				function * getTestCasesWhenAny() {
+					if (fs.existsSync(path.join(rootDirectory, fileOrSubdirectory, caseFileName)))
+						yield fileOrSubdirectory;
 				}
 			}
 		}
 
-		function logOutputOfActualWhenFileOrTestCase(
+		function logActualWhenFileOrTestCase(
 			fileOrTestCase,
 		) {
 			if (fileOrTestCase)
-				console.log(
-					isArgumentPath()
-					?
-					action(readTextFile(fileOrTestCase))
-					:
-					getActualForTestCase(fileOrTestCase),
-				);
-
-			function isArgumentPath() {
-				return (
-					fileOrTestCase.length > 1
-					&&
-					(fileOrTestCase[0] === "." || fileOrTestCase[0] === "/")
-				);
-			}
+				log(getActualForTestCase(fileOrTestCase));
 		}
 
 		function getActualForTestCase(
@@ -161,6 +155,6 @@ module.exports =
 			fileName,
 			testCase,
 		}) {
-			return readTextFile(`${rootDirectory}${testCase}/${fileName}`);
+			return readTextFile(path.join(rootDirectory, testCase, fileName));
 		}
 	};

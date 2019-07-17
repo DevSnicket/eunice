@@ -1,3 +1,5 @@
 /devsnicket-eunice-run-tests-from-file-system-*.tgz
-**/node_modules/
 /eunice.*
+/node_modules/
+/test-cases/update
+/test-coverage

@@ -140,6 +140,8 @@ rules:
     - error
   no-catch-shadow:
     - error
+  no-console:
+    - error
   no-continue:
     - error
   no-empty-function:
