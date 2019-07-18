@@ -69,33 +69,6 @@ module.exports =
 			return itemOrItems;
 		}
 
-		function visitFunctionExpression(
-			functionExpression,
-			ancestors,
-		) {
-			addFunctionExpression({
-				addDeclarationIn:
-					declarations.addDeclarationIn,
-				ancestors,
-				createFunctionDeclarationWithIdentifier,
-				findParentFunctionFromAncestors:
-					parentFunctionsFromAncestors.findIdentifiableParent,
-				functionExpression,
-			});
-		}
-
-		function visitImportDeclaration(
-			importDeclaration,
-			ancestors,
-		) {
-			declarations.addDeclarationsIn({
-				declarations:
-					createDeclarationsFromModuleImport(importDeclaration),
-				parent:
-					parentFunctionsFromAncestors.findIdentifiableParent(ancestors),
-			});
-		}
-
 		function visitCallExpression(
 			callExpression,
 			ancestors,
@@ -139,6 +112,21 @@ module.exports =
 			});
 		}
 
+		function visitFunctionExpression(
+			functionExpression,
+			ancestors,
+		) {
+			addFunctionExpression({
+				addDeclarationIn:
+					declarations.addDeclarationIn,
+				ancestors,
+				createFunctionDeclarationWithIdentifier,
+				findParentFunctionFromAncestors:
+					parentFunctionsFromAncestors.findIdentifiableParent,
+				functionExpression,
+			});
+		}
+
 		function createFunctionDeclarationWithIdentifier({
 			functionDeclaration,
 			identifier,
@@ -158,6 +146,18 @@ module.exports =
 						),
 				})
 			);
+		}
+
+		function visitImportDeclaration(
+			importDeclaration,
+			ancestors,
+		) {
+			declarations.addDeclarationsIn({
+				declarations:
+					createDeclarationsFromModuleImport(importDeclaration),
+				parent:
+					parentFunctionsFromAncestors.findIdentifiableParent(ancestors),
+			});
 		}
 
 		function visitVariableDeclaration(
