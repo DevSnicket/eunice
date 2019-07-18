@@ -12,6 +12,7 @@ const
 	createFunctionDeclaration = require("./createFunctionDeclaration"),
 	createScopedVariables = require("./createScopedVariables"),
 	createUndeclaredReferences = require("./createUndeclaredReferences"),
+	getParentFromAncestors = require("./getParentFromAncestors"),
 	parentFunctionsFromAncestors = require("./parentFunctionsFromAncestors"),
 	stackItemsWhenMultiple = require("./stackItemsWhenMultiple"),
 	throwErrorWhenAnyUnhandled = require("./throwErrorWhenAnyUnhandled");
@@ -171,7 +172,7 @@ module.exports =
 				hasUndeclaredReferenceTo:
 					undeclaredReferences.hasReferenceTo,
 				parent:
-					ancestors[ancestors.length - 2],
+					getParentFromAncestors(ancestors),
 				parentFunction:
 					parentFunctionsFromAncestors.findIdentifiableParent(ancestors),
 				variableDeclaration,
