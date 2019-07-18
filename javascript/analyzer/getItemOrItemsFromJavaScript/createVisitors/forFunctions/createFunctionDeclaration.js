@@ -5,8 +5,8 @@ require("array.prototype.flatmap")
 .shim();
 
 const
-	getPropertyName = require("./getPropertyName"),
-	stackItemsWhenMultiple = require("./stackItemsWhenMultiple");
+	getPropertyName = require("../getPropertyName"),
+	stackItemsWhenMultiple = require("../stackItemsWhenMultiple");
 
 module.exports =
 	({

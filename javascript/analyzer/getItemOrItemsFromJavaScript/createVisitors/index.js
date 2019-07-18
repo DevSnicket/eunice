@@ -3,14 +3,13 @@ This library is free software, licensed under the terms of the GNU General Publi
 
 const
 	addFromCall = require("./addFromCall"),
-	addFunctionExpression = require("./addFunctionExpression"),
 	addVariables = require("./addVariables"),
 	createDeclarations = require("./createDeclarations"),
 	createDependsUponIdentifiers = require("./createDependsUponIdentifiers"),
 	createFileItemOrItems = require("./createFileItemOrItems"),
-	createFunctionDeclaration = require("./createFunctionDeclaration"),
 	createScopedVariables = require("./createScopedVariables"),
 	createUndeclaredReferences = require("./createUndeclaredReferences"),
+	forFunctions = require("./forFunctions"),
 	forModulesWithAddDeclarationsIn = require("./forModulesWithAddDeclarationsIn"),
 	getParentFromAncestors = require("./getParentFromAncestors"),
 	parentFunctionsFromAncestors = require("./parentFunctionsFromAncestors"),
@@ -27,19 +26,20 @@ module.exports =
 
 		return (
 			{
-				ArrowFunctionExpression:
-					visitFunctionExpression,
-				CallExpression:
-					visitCallExpression,
-				FunctionDeclaration:
-					visitFunctionDeclaration,
-				FunctionExpression:
-					visitFunctionExpression,
-				VariableDeclaration:
-					visitVariableDeclaration,
+				...forFunctions({
+					createDependsUponPropertyFor:
+						dependsUponIdentifiers.createPropertyFor,
+					declarations,
+					hasUndeclaredReferenceTo:
+						undeclaredReferences.hasReferenceTo,
+				}),
 				...forModulesWithAddDeclarationsIn(
 					declarations.addDeclarationsIn,
 				),
+				CallExpression:
+					visitCallExpression,
+				VariableDeclaration:
+					visitVariableDeclaration,
 				getItemOrItems,
 			}
 		);
@@ -96,61 +96,6 @@ module.exports =
 							variable,
 						}),
 			});
-		}
-
-		function visitFunctionDeclaration(
-			functionDeclaration,
-			ancestors,
-		) {
-			declarations.addDeclarationIn({
-				declaration:
-					createFunctionDeclarationWithIdentifier({
-						functionDeclaration,
-						identifier:
-							functionDeclaration.id
-							&&
-							functionDeclaration.id.name,
-					}),
-				parent:
-					parentFunctionsFromAncestors.findIdentifiableParent(ancestors),
-			});
-		}
-
-		function visitFunctionExpression(
-			functionExpression,
-			ancestors,
-		) {
-			addFunctionExpression({
-				addDeclarationIn:
-					declarations.addDeclarationIn,
-				ancestors,
-				createFunctionDeclarationWithIdentifier,
-				findParentFunctionFromAncestors:
-					parentFunctionsFromAncestors.findIdentifiableParent,
-				functionExpression,
-			});
-		}
-
-		function createFunctionDeclarationWithIdentifier({
-			functionDeclaration,
-			identifier,
-		}) {
-			return (
-				createFunctionDeclaration({
-					dependsUponProperty:
-						dependsUponIdentifiers.createPropertyFor(
-							functionDeclaration,
-						),
-					functionDeclaration,
-					hasUndeclaredReferenceTo:
-						undeclaredReferences.hasReferenceTo,
-					identifier,
-					items:
-						declarations.createItemsForAndRemoveDeclarationsIn(
-							functionDeclaration,
-						),
-				})
-			);
 		}
 
 		function visitVariableDeclaration(
