@@ -47,10 +47,10 @@
 			{
 				"args":
 					[
-						"--directory=getOrCreateItemsInDirectory/test-cases",
+						"--directory=getOrCreateItemsInDirectory/test-cases/valid",
 						"--ignoreDirectoryNames=node_modules"
 					],
-				"name": "getOrCreateItemsInDirectory",
+				"name": "getOrCreateItemsInDirectory test valid",
 				"program": "${workspaceFolder}/getOrCreateItemsInDirectory/bin.js",
 				"request": "launch",
 				"type": "node"
