@@ -15,14 +15,15 @@ runTestsFromFileSystem({
 	processArguments: process.argv,
 });
 
-test.each(
-	[
-		"",
-		" --parameter=argument",
-	],
-)(
-	"unix shebang for node with suffix \"%s\"",
-	suffix =>
-		expect(getYamlFromJavaScript(`#!/usr/bin/env node${suffix}\n`))
-		.toEqual(""),
-);
+if (typeof test !== "undefined")
+	test.each(
+		[
+			"",
+			" --parameter=argument",
+		],
+	)(
+		"unix shebang for node with suffix \"%s\"",
+		suffix =>
+			expect(getYamlFromJavaScript(`#!/usr/bin/env node${suffix}\n`))
+			.toEqual(""),
+	);
