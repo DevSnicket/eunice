@@ -109,6 +109,8 @@ function isIdentifiableType(
 	return (
 		type === "AssignmentExpression"
 		||
+		type === "ExportDefaultDeclaration"
+		||
 		type === "VariableDeclarator"
 	);
 }

@@ -17,6 +17,9 @@ module.exports =
 			case "AssignmentExpression":
 				addAssignment();
 				break;
+			case "ExportDefaultDeclaration":
+				addVariable(null);
+				break;
 			case "VariableDeclarator":
 				addVariable(parent.id.name);
 				break;
