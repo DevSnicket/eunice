@@ -7,15 +7,31 @@ module.exports =
 
 		return importDeclaration.specifiers.map(createFromSpecifier);
 
-		function createFromSpecifier(
-			specifier,
-		) {
+		function createFromSpecifier({
+			local,
+			imported,
+		}) {
 			return (
 				{
-					dependsUpon: from,
-					id: specifier.local.name,
+					dependsUpon: createDependsUpon(),
+					id: local.name,
 					type: "variable",
 				}
 			);
+
+			function createDependsUpon() {
+				return whenHasImported() || from;
+
+				function whenHasImported() {
+					return (
+						imported
+						&&
+						{
+							id: from,
+							items: imported.name,
+						}
+					);
+				}
+			}
 		}
 	};

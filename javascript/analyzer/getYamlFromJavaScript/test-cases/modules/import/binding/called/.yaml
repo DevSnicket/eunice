@@ -1,1 +1,3 @@
-dependsUpon: called
+dependsUpon:
+  id: called
+  items: variable
