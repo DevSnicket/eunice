@@ -1,0 +1,5 @@
+- - file
+- - dependsUpon:
+      - file
+      - nested
+    items: nested
