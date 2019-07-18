@@ -25,7 +25,18 @@ module.exports =
 			return (
 				callee.type === "MemberExpression"
 				&&
-				callee.object.name
+				getObjectName(callee.object)
 			);
 		}
 	};
+
+function getObjectName({
+	name,
+	object,
+}) {
+	return (
+		name
+		||
+		(object && getObjectName(object))
+	);
+}
