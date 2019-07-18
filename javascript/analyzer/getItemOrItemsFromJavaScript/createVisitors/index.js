@@ -6,12 +6,12 @@ const
 	addFunctionExpression = require("./addFunctionExpression"),
 	addVariables = require("./addVariables"),
 	createDeclarations = require("./createDeclarations"),
-	createDeclarationsFromModuleImport = require("./createDeclarationsFromModuleImport"),
 	createDependsUponIdentifiers = require("./createDependsUponIdentifiers"),
 	createFileItemOrItems = require("./createFileItemOrItems"),
 	createFunctionDeclaration = require("./createFunctionDeclaration"),
 	createScopedVariables = require("./createScopedVariables"),
 	createUndeclaredReferences = require("./createUndeclaredReferences"),
+	forModulesWithAddDeclarationsIn = require("./forModulesWithAddDeclarationsIn"),
 	getParentFromAncestors = require("./getParentFromAncestors"),
 	parentFunctionsFromAncestors = require("./parentFunctionsFromAncestors"),
 	stackItemsWhenMultiple = require("./stackItemsWhenMultiple"),
@@ -35,10 +35,11 @@ module.exports =
 					visitFunctionDeclaration,
 				FunctionExpression:
 					visitFunctionExpression,
-				ImportDeclaration:
-					visitImportDeclaration,
 				VariableDeclaration:
 					visitVariableDeclaration,
+				...forModulesWithAddDeclarationsIn(
+					declarations.addDeclarationsIn,
+				),
 				getItemOrItems,
 			}
 		);
@@ -141,7 +142,8 @@ module.exports =
 							functionDeclaration,
 						),
 					functionDeclaration,
-					hasUndeclaredReferenceTo: undeclaredReferences.hasReferenceTo,
+					hasUndeclaredReferenceTo:
+						undeclaredReferences.hasReferenceTo,
 					identifier,
 					items:
 						declarations.createItemsForAndRemoveDeclarationsIn(
@@ -149,18 +151,6 @@ module.exports =
 						),
 				})
 			);
-		}
-
-		function visitImportDeclaration(
-			importDeclaration,
-			ancestors,
-		) {
-			declarations.addDeclarationsIn({
-				declarations:
-					createDeclarationsFromModuleImport(importDeclaration),
-				parent:
-					parentFunctionsFromAncestors.findIdentifiableParent(ancestors),
-			});
 		}
 
 		function visitVariableDeclaration(

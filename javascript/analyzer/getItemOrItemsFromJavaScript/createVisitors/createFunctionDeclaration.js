@@ -33,7 +33,6 @@ module.exports =
 		return (
 			{
 				...identifier && { id: identifier },
-				isFunction: true,
 				...dependsUponProperty,
 				...itemOrItems && { items: itemOrItems },
 			}
