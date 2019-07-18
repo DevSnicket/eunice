@@ -105,7 +105,10 @@ module.exports =
 				declaration:
 					createFunctionDeclarationWithIdentifier({
 						functionDeclaration,
-						identifier: functionDeclaration.id.name,
+						identifier:
+							functionDeclaration.id
+							&&
+							functionDeclaration.id.name,
 					}),
 				parent:
 					parentFunctionsFromAncestors.findIdentifiableParent(ancestors),
