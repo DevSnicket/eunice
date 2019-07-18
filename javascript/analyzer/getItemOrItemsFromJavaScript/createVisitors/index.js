@@ -6,6 +6,7 @@ const
 	addFunctionExpression = require("./addFunctionExpression"),
 	addVariables = require("./addVariables"),
 	createDeclarations = require("./createDeclarations"),
+	createDeclarationsFromModuleImport = require("./createDeclarationsFromModuleImport"),
 	createDependsUponIdentifiers = require("./createDependsUponIdentifiers"),
 	createFileItemOrItems = require("./createFileItemOrItems"),
 	createFunctionDeclaration = require("./createFunctionDeclaration"),
@@ -33,6 +34,8 @@ module.exports =
 					visitFunctionDeclaration,
 				FunctionExpression:
 					visitFunctionExpression,
+				ImportDeclaration:
+					visitImportDeclaration,
 				VariableDeclaration:
 					visitVariableDeclaration,
 				getItemOrItems,
@@ -77,6 +80,18 @@ module.exports =
 				findParentFunctionFromAncestors:
 					parentFunctionsFromAncestors.findIdentifiableParent,
 				functionExpression,
+			});
+		}
+
+		function visitImportDeclaration(
+			importDeclaration,
+			ancestors,
+		) {
+			declarations.addDeclarationsIn({
+				declarations:
+					createDeclarationsFromModuleImport(importDeclaration),
+				parent:
+					parentFunctionsFromAncestors.findIdentifiableParent(ancestors),
 			});
 		}
 
