@@ -2,10 +2,13 @@
 This library is free software, licensed under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 const
+	flatMap = require("array.prototype.flatmap"),
 	fs = require("fs"),
 	getItemOrItemsFromJavaScript = require("../getItemOrItemsFromJavaScript"),
 	getOrCreateFileItem = require("./getOrCreateFileItem"),
 	path = require("path");
+
+flatMap.shim();
 
 module.exports =
 	({
@@ -27,19 +30,13 @@ function getOrCreateItemsInRootedDirectory({
 		path.join(rootDirectory, directory);
 
 	return (
-		fs.readdirSync(
-			subDirectoryFull,
-		)
-		.reduce(
-			(
-				items,
-				fileOrDirectory,
-			) =>
-				[
-					...items,
-					...createItemsFromFileOrSubdirectory(fileOrDirectory) || [],
-				],
-			[],
+		// flatMap isn't shimmed onto the return array of fs functions when running in Jest
+		flatMap(
+			fs.readdirSync(subDirectoryFull),
+			fileOrDirectory =>
+				createItemsFromFileOrSubdirectory(fileOrDirectory)
+				||
+				[],
 		)
 		.sort(compareItemIdentifiers)
 	);
