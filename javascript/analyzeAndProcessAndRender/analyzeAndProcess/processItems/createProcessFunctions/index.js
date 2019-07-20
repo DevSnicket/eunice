@@ -113,7 +113,7 @@ function orderItemsByType(
 			typesInOrder:
 				// the type property wont be defined
 				// eslint-disable-next-line no-undefined
-				[ undefined, "parameter", "variable", "file" ],
+				[ "export", undefined, "parameter", "variable", "import", "file" ],
 		})
 	);
 }

@@ -36,9 +36,11 @@ test(
 							id: "item\\orderedByType",
 							items:
 								[
-									[ { id: "item2", type: "file" } ],
-									[ { id: "item1", type: "variable" } ],
-									[ "item3" ],
+									[ { id: "item1", type: "file" } ],
+									{ id: "item2", type: "import" },
+									[ { id: "item3", type: "variable" } ],
+									[ "item4" ],
+									{ id: "item5", type: "export" },
 								],
 						},
 						{
@@ -93,9 +95,11 @@ test(
 								id: "orderedByType",
 								items:
 									[
-										"item3",
-										{ id: "item1", type: "variable" },
-										{ id: "item2", type: "file" },
+										{ id: "item5", type: "export" },
+										"item4",
+										{ id: "item3", type: "variable" },
+										{ id: "item2", type: "import" },
+										{ id: "item1", type: "file" },
 									],
 								type: "file",
 							},
