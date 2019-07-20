@@ -34,22 +34,20 @@ module.exports =
 							&&
 							functionDeclaration.id.name,
 						type:
-							getTypeWhenExport(),
+							isExport() && "export",
 					}),
 				parent:
 					findIdentifiableParent(ancestors),
 			});
 
-			function getTypeWhenExport() {
-				return (
-					getParentType() === "ExportDefaultDeclaration"
-					&&
-					"export"
-				);
+			function isExport() {
+				const parentType = getParentFromAncestors(ancestors).type;
 
-				function getParentType() {
-					return getParentFromAncestors(ancestors).type;
-				}
+				return (
+					parentType === "ExportDefaultDeclaration"
+					||
+					parentType === "ExportNamedDeclaration"
+				);
 			}
 		}
 
