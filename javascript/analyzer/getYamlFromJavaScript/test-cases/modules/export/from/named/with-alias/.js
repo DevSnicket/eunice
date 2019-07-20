@@ -1,0 +1,1 @@
+export { imported as exported } from "module";

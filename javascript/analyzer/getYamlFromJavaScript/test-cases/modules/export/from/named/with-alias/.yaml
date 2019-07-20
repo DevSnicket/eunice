@@ -1,0 +1,5 @@
+- id: exported
+  type: export
+  dependsUpon:
+    id: module
+    items: imported
