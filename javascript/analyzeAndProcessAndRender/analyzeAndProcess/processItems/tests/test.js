@@ -33,6 +33,15 @@ test(
 						"item\\alphabeticallyEarlierItem",
 						"item\\bin",
 						{
+							id: "item\\orderedByType",
+							items:
+								[
+									[ { id: "item2", type: "file" } ],
+									[ { id: "item1", type: "variable" } ],
+									[ "item3" ],
+								],
+						},
+						{
 							id: "item\\stacksFromFileSystem",
 							items: [ "item1", "item2" ],
 						},
@@ -78,6 +87,16 @@ test(
 							},
 							{
 								id: "childWithIndexSuffix",
+								type: "file",
+							},
+							{
+								id: "orderedByType",
+								items:
+									[
+										"item3",
+										{ id: "item1", type: "variable" },
+										{ id: "item2", type: "file" },
+									],
 								type: "file",
 							},
 							{
