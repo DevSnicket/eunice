@@ -1,5 +1,5 @@
 - - id: alias
-    type: variable
+    type: import
     dependsUpon:
       id: module
       items: imported

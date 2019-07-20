@@ -16,7 +16,7 @@ module.exports =
 				{
 					dependsUpon: createDependsUpon(),
 					id: local.name,
-					type: "variable",
+					type: "import",
 				}
 			);
 

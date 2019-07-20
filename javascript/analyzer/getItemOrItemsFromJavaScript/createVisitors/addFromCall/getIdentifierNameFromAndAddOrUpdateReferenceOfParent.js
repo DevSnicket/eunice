@@ -10,7 +10,7 @@ module.exports =
 	}) => {
 		const declarationAndParent =
 			findDeclarationAndParent(
-				isVariable,
+				isReferencedDeclaration,
 			);
 
 		if (declarationAndParent)
@@ -24,13 +24,14 @@ module.exports =
 			return reference;
 		}
 
-		function isVariable(
-			declaration,
-		) {
+		function isReferencedDeclaration({
+			id: identifier,
+			type,
+		}) {
 			return (
-				declaration.type === "variable"
+				(type === "import" || type === "variable")
 				&&
-				declaration.id === reference
+				identifier === reference
 			);
 		}
 
@@ -64,7 +65,7 @@ module.exports =
 			}
 
 			function getNameAndSetWhenUsedInNestedFunction() {
-				declarationAndParent.declaration.isUsedInNestedFunction = true;
+				declarationAndParent.declaration.isCalledFromNestedFunction = true;
 
 				return reference;
 			}

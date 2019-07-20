@@ -60,9 +60,9 @@ function isDeclarationRelevant({
 
 	function isUsedInNestedFunctionWhenRequired() {
 		return (
-			declaration.type !== "variable"
+			(declaration.type !== "import" && declaration.type !== "variable")
 			||
-			declaration.isUsedInNestedFunction
+			declaration.isCalledFromNestedFunction
 		);
 	}
 }

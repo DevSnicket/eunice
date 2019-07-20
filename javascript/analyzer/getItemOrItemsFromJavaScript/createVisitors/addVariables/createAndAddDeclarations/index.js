@@ -109,7 +109,7 @@ module.exports =
 							...isDestructured && { dependsUpon: name },
 							id:
 								name,
-							isUsedInNestedFunction:
+							isCalledFromNestedFunction:
 								hasUndeclaredReferenceTo({
 									parent: parentFunction,
 									reference: name,
