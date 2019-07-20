@@ -24,10 +24,7 @@ module.exports =
 				});
 				break;
 			case "VariableDeclarator":
-				addVariable({
-					identifier: parent.id.name,
-					type: null,
-				});
+				addVariableDeclarator();
 				break;
 			default:
 		}
@@ -57,6 +54,27 @@ module.exports =
 					parent:
 						null,
 				});
+			}
+		}
+
+		function addVariableDeclarator() {
+			addVariable({
+				identifier:
+					parent.id.name,
+				type:
+					getTypeWhenExport(),
+			});
+
+			function getTypeWhenExport() {
+				return (
+					getParentType() === "ExportNamedDeclaration"
+					&&
+					"export"
+				);
+
+				function getParentType() {
+					return ancestors[ancestors.length - 4].type;
+				}
 			}
 		}
 
