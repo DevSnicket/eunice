@@ -1,2 +1,3 @@
-- dependsUpon: nested
+- type: export
+  dependsUpon: nested
   items: nested

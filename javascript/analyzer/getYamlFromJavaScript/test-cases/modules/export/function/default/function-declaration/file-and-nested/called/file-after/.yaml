@@ -1,4 +1,5 @@
-- - dependsUpon:
+- - type: export
+    dependsUpon:
       - file
       - nested
     items: nested

@@ -1,2 +1,3 @@
-- - dependsUpon: called
+- - type: export
+    dependsUpon: called
 - - called

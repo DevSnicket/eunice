@@ -4,7 +4,8 @@ This library is free software, licensed under the terms of the GNU General Publi
 const
 	addFunctionExpression = require("./addFunctionExpression"),
 	createDeclarationForFunction = require("./createDeclarationForFunction"),
-	{ findIdentifiableParent } = require("../parentFunctionsFromAncestors");
+	{ findIdentifiableParent } = require("../parentFunctionsFromAncestors"),
+	getParentFromAncestors = require("../getParentFromAncestors");
 
 module.exports =
 	({
@@ -33,11 +34,23 @@ module.exports =
 							&&
 							functionDeclaration.id.name,
 						type:
-							null,
+							getTypeWhenExport(),
 					}),
 				parent:
 					findIdentifiableParent(ancestors),
 			});
+
+			function getTypeWhenExport() {
+				return (
+					getParentType() === "ExportDefaultDeclaration"
+					&&
+					"export"
+				);
+
+				function getParentType() {
+					return getParentFromAncestors(ancestors).type;
+				}
+			}
 		}
 
 		function visitFunctionExpression(
