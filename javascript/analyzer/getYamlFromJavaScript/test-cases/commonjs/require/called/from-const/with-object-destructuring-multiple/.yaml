@@ -1,0 +1,5 @@
+dependsUpon:
+  - id: called
+    items: variable1
+  - id: called
+    items: variable2
