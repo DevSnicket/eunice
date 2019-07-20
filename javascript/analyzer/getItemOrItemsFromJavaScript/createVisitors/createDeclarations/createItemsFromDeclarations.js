@@ -9,17 +9,24 @@ module.exports =
 		return (
 			declarations
 			&&
-			declarations
-			.flatMap(
-				declaration =>
-					createItemsFromDeclarationWhenRequired({
-						declaration,
-						hasPeerFunctionWithIdentifier,
-					}),
-			)
+			declarations.flatMap(createRelevantItemsFromDeclaration)
 		);
 
-		function hasPeerFunctionWithIdentifier(
+		function createRelevantItemsFromDeclaration(
+			declaration,
+		) {
+			return whenRelevant() || [];
+
+			function whenRelevant() {
+				return (
+					isDeclarationRelevant({ declaration, hasPeerFunction })
+					&&
+					createItemFromDeclaration(declaration)
+				);
+			}
+		}
+
+		function hasPeerFunction(
 			identifier,
 		) {
 			return (
@@ -33,79 +40,51 @@ module.exports =
 		}
 	};
 
-function createItemsFromDeclarationWhenRequired({
+function isDeclarationRelevant({
 	declaration,
-	hasPeerFunctionWithIdentifier,
+	hasPeerFunction,
 }) {
 	return (
-		createWhenExport()
-		||
-		createWhenVariable()
-		||
-		createAsFunction()
+		hasPeerFunctionWhenRequired()
+		&&
+		isUsedInNestedFunctionWhenRequired()
 	);
 
-	function createWhenExport() {
+	function hasPeerFunctionWhenRequired() {
 		return (
-			declaration.type === "export"
-			&&
-			(createWhenDependsUponFunction() || [])
+			!declaration.isPeerFunctionRequired
+			||
+			hasPeerFunction(declaration.dependsUpon)
 		);
-
-		function createWhenDependsUponFunction() {
-			return (
-				hasPeerFunctionWithIdentifier(declaration.dependsUpon)
-				&&
-				[ {
-					id: declaration.id,
-					type: declaration.type,
-					// match expected key order in YAML output
-					// eslint-disable-next-line sort-keys
-					dependsUpon: declaration.dependsUpon,
-				} ]
-			);
-		}
 	}
 
-	function createWhenVariable() {
+	function isUsedInNestedFunctionWhenRequired() {
 		return (
-			declaration.type === "variable"
-			&&
-			(createWhenUsedInNestedFunction() || [])
+			declaration.type !== "variable"
+			||
+			declaration.isUsedInNestedFunction
 		);
-
-		function createWhenUsedInNestedFunction() {
-			return (
-				declaration.isUsedInNestedFunction
-				&&
-				[ {
-					id: declaration.id,
-					type: declaration.type,
-					...declaration.dependsUpon && { dependsUpon: declaration.dependsUpon },
-				} ]
-			);
-		}
 	}
+}
 
-	function createAsFunction() {
-		return createWhenStructured() || declaration.id || {};
+function createItemFromDeclaration({
+	id,
+	dependsUpon,
+	items,
+	type,
+}) {
+	return whenStructured() || id || {};
 
-		function createWhenStructured() {
-			return (
-				(declaration.dependsUpon || declaration.items)
-				&&
-				{
-					...declaration.id && { id: declaration.id },
-					...getDependsUponProperty(declaration.dependsUpon),
-					...declaration.items && { items: declaration.items },
-				}
-			);
-
-			function getDependsUponProperty(
-				dependsUpon,
-			) {
-				return dependsUpon && { dependsUpon };
+	function whenStructured() {
+		return (
+			(dependsUpon || items || type)
+			&&
+			{
+				...id && { id },
+				...type && { type },
+				...dependsUpon && { dependsUpon },
+				...items && { items },
 			}
-		}
+		);
 	}
 }

@@ -10,12 +10,31 @@ module.exports =
 	addDeclarationsIn => {
 		return (
 			{
+				ExportAllDeclaration:
+					visitExportAllDeclaration,
 				ExportNamedDeclaration:
 					visitExportNamedDeclaration,
 				ImportDeclaration:
 					visitImportDeclaration,
 			}
 		);
+
+		function visitExportAllDeclaration(
+			{ source: { value } },
+			ancestors,
+		) {
+			addDeclarationsIn({
+				declarations:
+					[ {
+						dependsUpon: value,
+						type: "export",
+					} ],
+				parent:
+					findIdentifiableParent(
+						ancestors,
+					),
+			});
+		}
 
 		function visitExportNamedDeclaration(
 			{ specifiers },

@@ -16,6 +16,7 @@ module.exports =
 				[ {
 					dependsUpon: local.name,
 					id: exported.name,
+					isPeerFunctionRequired: true,
 					type: "export",
 				} ],
 		);
