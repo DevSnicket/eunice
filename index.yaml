@@ -7,6 +7,7 @@
             - analyzeAndProcessAndRender
             - createParameterFromCliArguments
             - minimist
+            - process
           items:
             id: createParameterFromCliArguments
             type: file
@@ -42,12 +43,15 @@
                       - getIterator
                       - getNext
                     items:
-                      - id: getIterator
-                        dependsUpon:
-                          - Array
-                          - yieldArgument
-                        items: yieldArgument
-                      - getNext
+                      - - id: getIterator
+                          dependsUpon:
+                            - Array
+                            - yieldArgument
+                          items: yieldArgument
+                        - id: getNext
+                          dependsUpon: iterators
+                      - - id: iterators
+                          type: variable
       - - id: analyzeAndProcessAndRender
           type: file
           dependsUpon:
@@ -642,6 +646,7 @@
                       items: createWebpackEntryForLanguages
       - - id: getOrCreateItemsInDirectory
           type: file
+          dependsUpon: array.prototype.flatmap
           items:
             - - id: bin
                 type: file
@@ -678,6 +683,7 @@
             - - id: getOrCreateItemsInRootedDirectory
                 dependsUpon:
                   - createItemsFromFileOrSubdirectory
+                  - flatMap
                   - fs
                   - path
                 items:
@@ -748,8 +754,13 @@
                   dependsUpon:
                     - String
                     - getPathSeparatorEscaped
-                  items: getPathSeparatorEscaped
-            - - id: getOrCreateFileItem
+                  items:
+                    id: getPathSeparatorEscaped
+                    dependsUpon: path
+            - - id: flatMap
+                type: variable
+                dependsUpon: array.prototype.flatmap
+              - id: getOrCreateFileItem
                 type: file
                 items:
                   - - id: getOrCreateFileItem
@@ -897,6 +908,8 @@
                         - createDependsUponIdentifiers
                         - createScopedVariables
                         - createUndeclaredReferences
+                        - forFunctions
+                        - forModulesWithAddDeclarationsIn
                       items:
                         - - id: getItemOrItems
                             dependsUpon:
@@ -905,29 +918,16 @@
                               - dependsUponIdentifiers
                               - stackItemsWhenMultiple
                               - throwErrorWhenAnyUnhandled
-                          - id: visitFunctionExpression
-                            dependsUpon:
-                              - addFunctionExpression
-                              - createFunctionDeclarationWithIdentifier
                           - id: visitCallExpression
                             dependsUpon:
                               - addFromCall
                               - parentFunctionsFromAncestors
                               - scopedVariables
                               - undeclaredReferences
-                          - id: visitFunctionDeclaration
-                            dependsUpon:
-                              - createFunctionDeclarationWithIdentifier
-                              - declarations
-                              - parentFunctionsFromAncestors
-                        - - id: createFunctionDeclarationWithIdentifier
-                            dependsUpon:
-                              - createFunctionDeclaration
-                              - declarations
-                              - dependsUponIdentifiers
                           - id: visitVariableDeclaration
                             dependsUpon:
                               - addVariables
+                              - getParentFromAncestors
                               - parentFunctionsFromAncestors
                         - - id: declarations
                             type: variable
@@ -937,46 +937,7 @@
                             type: variable
                           - id: undeclaredReferences
                             type: variable
-                  - - id: addFunctionExpression
-                      type: file
-                      items:
-                        - - id: addFunctionExpression
-                            dependsUpon:
-                              - addAssignment
-                              - addVariable
-                            items:
-                              - - id: addAssignment
-                                  dependsUpon:
-                                    - addModuleExport
-                                    - addVariable
-                                    - isModuleExportMemberExpression
-                                  items:
-                                    id: addModuleExport
-                                    dependsUpon:
-                                      - addDeclarationIn
-                                      - createDeclarationWithIdentifier
-                              - - id: addVariable
-                                  dependsUpon:
-                                    - addDeclarationIn
-                                    - ancestors
-                                    - createDeclarationWithIdentifier
-                                    - findParentFunctionFromAncestors
-                              - - id: createDeclarationWithIdentifier
-                                  dependsUpon:
-                                    - createFunctionDeclarationWithIdentifier
-                                    - functionExpression
-                                - id: addDeclarationIn
-                                  type: parameter
-                                - id: ancestors
-                                  type: parameter
-                              - - id: createFunctionDeclarationWithIdentifier
-                                  type: parameter
-                                - id: findParentFunctionFromAncestors
-                                  type: parameter
-                                - id: functionExpression
-                                  type: parameter
-                        - - isModuleExportMemberExpression
-                    - id: addVariables
+                  - - id: addVariables
                       type: file
                       items:
                         - - id: addVariables
@@ -992,9 +953,12 @@
                                     - addScopedVariables
                                     - getNamesFromIdentifierExpressionWhenObjectPattern
                                     - parent
+                                    - variableDeclaration
                               - - id: addScopedVariables
                                   type: parameter
                                 - id: parent
+                                  type: parameter
+                                - id: variableDeclaration
                                   type: parameter
                         - - id: createAndAddDeclarations
                             type: file
@@ -1005,7 +969,9 @@
                                     - createDeclarations
                                   items:
                                     - - id: createDeclarations
-                                        dependsUpon: createFromDeclarationIfInitialized
+                                        dependsUpon:
+                                          - createFromDeclarationIfInitialized
+                                          - variableDeclaration
                                     - - id: createFromDeclarationIfInitialized
                                         dependsUpon: createFromDeclaration
                                         items:
@@ -1046,6 +1012,8 @@
                                       - id: hasUndeclaredReferenceTo
                                         type: parameter
                                       - id: parentFunction
+                                        type: parameter
+                                      - id: variableDeclaration
                                         type: parameter
                               - - isFunctionType
                                 - id: createWhenRequire
@@ -1113,28 +1081,138 @@
                               dependsUpon: parentsOfParentByUndeclaredReferences
                           - - id: parentsOfParentByUndeclaredReferences
                               type: variable
-                    - id: parentFunctionsFromAncestors
+                    - id: forFunctions
                       type: file
                       items:
-                        - - id: findIdentifiableParent
-                            dependsUpon: getParents
-                          - id: findParents
-                            dependsUpon:
-                              - createParentFunctionsWithIdentifiable
-                              - getAnonymousPropertyWhenAny
-                              - getParents
+                        - - id: forFunctions
                             items:
-                              - - id: createParentFunctionsWithIdentifiable
-                                  dependsUpon: getAnonymousPropertyWhenAny
-                              - - getAnonymousPropertyWhenAny
-                        - - id: getParents
-                            dependsUpon: getParentFromCurrentAndPrevious
-                        - - id: getParentFromCurrentAndPrevious
-                            dependsUpon:
-                              - isFunctionExpressionType
-                              - isIdentifiableType
-                        - - isFunctionExpressionType
-                          - isIdentifiableType
+                              - - id: visitFunctionDeclaration
+                                  dependsUpon:
+                                    - createDeclarationForFunctionWithDependsUponAndItems
+                                    - declarations
+                                    - findIdentifiableParent
+                                    - isExport
+                                  items:
+                                    - - id: isExport
+                                        dependsUpon:
+                                          - ancestors
+                                          - getParentFromAncestors
+                                    - - id: ancestors
+                                        type: parameter
+                                - id: visitFunctionExpression
+                                  dependsUpon:
+                                    - addFunctionExpression
+                                    - createDeclarationForFunctionWithDependsUponAndItems
+                                    - findIdentifiableParent
+                              - - id: createDeclarationForFunctionWithDependsUponAndItems
+                                  dependsUpon:
+                                    - createDeclarationForFunction
+                                    - createDependsUponPropertyFor
+                                    - declarations
+                                    - hasUndeclaredReferenceTo
+                              - - id: createDependsUponPropertyFor
+                                  type: parameter
+                                - id: declarations
+                                  type: parameter
+                                - id: hasUndeclaredReferenceTo
+                                  type: parameter
+                        - - id: addFunctionExpression
+                            type: file
+                            items:
+                              - - id: addFunctionExpression
+                                  dependsUpon:
+                                    - addAssignment
+                                    - addVariable
+                                    - addVariableDeclarator
+                                    - getParentFromAncestors
+                                  items:
+                                    - - id: addAssignment
+                                        dependsUpon:
+                                          - addModuleExport
+                                          - addVariable
+                                          - isModuleExportMemberExpression
+                                        items:
+                                          id: addModuleExport
+                                          dependsUpon:
+                                            - addDeclarationIn
+                                            - createDeclarationForFunction
+                                            - functionExpression
+                                      - id: addVariableDeclarator
+                                        dependsUpon:
+                                          - addVariable
+                                          - getTypeWhenExport
+                                        items:
+                                          id: getTypeWhenExport
+                                          dependsUpon: getParentType
+                                          items: getParentType
+                                    - - id: addVariable
+                                        dependsUpon:
+                                          - addDeclarationIn
+                                          - ancestors
+                                          - createDeclarationForFunction
+                                          - findParentFunctionFromAncestors
+                                          - functionExpression
+                                    - - id: addDeclarationIn
+                                        type: parameter
+                                      - id: ancestors
+                                        type: parameter
+                                      - id: createDeclarationForFunction
+                                        type: parameter
+                                      - id: findParentFunctionFromAncestors
+                                        type: parameter
+                                      - id: functionExpression
+                                        type: parameter
+                              - - isModuleExportMemberExpression
+                          - id: createDeclarationForFunction
+                            type: file
+                            items:
+                              - - id: createDeclarationForFunction
+                                  dependsUpon:
+                                    - createParameterItemsForFunction
+                                    - stackItemsWhenMultiple
+                              - - id: createParameterItemsForFunction
+                                  dependsUpon: getPropertyName
+                    - id: forModulesWithAddDeclarationsIn
+                      type: file
+                      items:
+                        - - id: forModulesWithAddDeclarationsIn
+                            items:
+                              - - id: visitExportAllDeclaration
+                                  dependsUpon:
+                                    - addDeclarationsIn
+                                    - findIdentifiableParent
+                                - id: visitExportNamedDeclaration
+                                  dependsUpon:
+                                    - addDeclarationsIn
+                                    - createDeclarationsFromExport
+                                    - findIdentifiableParent
+                                - id: visitImportDeclaration
+                                  dependsUpon:
+                                    - addDeclarationsIn
+                                    - createDeclarationsFromImport
+                                    - findIdentifiableParent
+                              - - id: addDeclarationsIn
+                                  type: parameter
+                        - - id: createDeclarationsFromExport
+                            type: file
+                            items:
+                              - - id: createDeclarationsFromExport
+                                  dependsUpon: withSource
+                              - - id: withSource
+                                  items: createDeclarationFromSpecifier
+                                - createDeclarationFromSpecifierWhenFunction
+                          - id: createDeclarationsFromImport
+                            type: file
+                            items:
+                              id: createDeclarationsFromImport
+                              dependsUpon: createFromSpecifier
+                              items:
+                                id: createFromSpecifier
+                                dependsUpon: createDependsUpon
+                                items:
+                                  id: createDependsUpon
+                                  dependsUpon: whenHasImported
+                                  items: whenHasImported
                     - id: throwErrorWhenAnyUnhandled
                       type: file
                       items:
@@ -1234,10 +1312,13 @@
                                         items:
                                           - - id: ofIdentifiable
                                               dependsUpon: isParameterOfParentFunction
-                                            - ofAnonymous
+                                            - id: ofAnonymous
+                                              dependsUpon:
+                                                - isParameterOfParentFunction
+                                                - parentFunctions
                                           - - id: isParameterOfParentFunction
                                               dependsUpon: getPropertyName
-                                      - id: parentFunctions
+                                    - - id: parentFunctions
                                         type: parameter
                               - - id: addDependsUponIdentifierFrom
                                   type: parameter
@@ -1260,10 +1341,14 @@
                                     - getIdentifierFromArgumentWhenRelevant
                                   items:
                                     - - id: getArguments
-                                        dependsUpon: getPropertyValues
+                                        dependsUpon:
+                                          - callExpression
+                                          - getPropertyValues
                                       - id: getIdentifierFromArgumentWhenRelevant
                                         dependsUpon: getIdentifierNameFromAndAddOrUpdateReference
-                                    - - id: getIdentifierNameFromAndAddOrUpdateReference
+                                    - - id: callExpression
+                                        type: parameter
+                                      - id: getIdentifierNameFromAndAddOrUpdateReference
                                         type: parameter
                               - - getPropertyValues
                           - id: getIdentifierNameFromAndAddOrUpdateReferenceOfParent
@@ -1272,9 +1357,9 @@
                               id: getIdentifierNameFromAndAddOrUpdateReferenceOfParent
                               dependsUpon:
                                 - getNameFromDeclaration
-                                - isVariable
+                                - isReferencedDeclaration
                               items:
-                                - isVariable
+                                - isReferencedDeclaration
                                 - id: getNameFromDeclaration
                                   dependsUpon:
                                     - getNameAndSetWhenUsedInNestedFunction
@@ -1290,13 +1375,16 @@
                           - id: getNameFromCallee
                             type: file
                             items:
-                              id: getNameFromCallee
-                              dependsUpon:
-                                - getRequireWhenCalled
-                                - getWhenMember
-                              items:
-                                - getRequireWhenCalled
-                                - getWhenMember
+                              - - id: getNameFromCallee
+                                  dependsUpon:
+                                    - getRequireWhenCalled
+                                    - getWhenMember
+                                  items:
+                                    - getRequireWhenCalled
+                                    - id: getWhenMember
+                                      dependsUpon: getObjectName
+                              - - id: getObjectName
+                                  dependsUpon: getObjectName
                     - id: createDeclarations
                       type: file
                       items:
@@ -1324,19 +1412,47 @@
                             type: file
                             items:
                               - - id: createItemsFromDeclarations
-                                  dependsUpon: createItemFromDeclarationWhenRequired
-                              - - id: createItemFromDeclarationWhenRequired
-                                  dependsUpon:
-                                    - createWhenFunction
-                                    - createWhenVariableUsedInNestedFunction
+                                  dependsUpon: createRelevantItemsFromDeclaration
                                   items:
-                                    - id: createWhenFunction
-                                      dependsUpon: createWhenStructured
-                                      items:
-                                        - - id: createWhenStructured
-                                            dependsUpon: getDependsUponProperty
-                                        - - getDependsUponProperty
-                                    - createWhenVariableUsedInNestedFunction
+                                    - - id: createRelevantItemsFromDeclaration
+                                        dependsUpon: whenRelevant
+                                        items:
+                                          - - id: whenRelevant
+                                              dependsUpon:
+                                                - createItemFromDeclaration
+                                                - declaration
+                                                - getOrInferType
+                                                - hasPeerFunction
+                                                - isDeclarationRelevant
+                                              items:
+                                                id: getOrInferType
+                                                dependsUpon: inferType
+                                                items:
+                                                  id: inferType
+                                                  dependsUpon: hasPeerExport
+                                          - - id: declaration
+                                              type: parameter
+                                    - - id: hasPeerExport
+                                        dependsUpon: declarations
+                                      - id: hasPeerFunction
+                                        dependsUpon: declarations
+                                    - - id: declarations
+                                        type: parameter
+                              - - id: isDeclarationRelevant
+                                  dependsUpon:
+                                    - hasPeerFunctionWhenRequired
+                                    - isNotSelfDependentExport
+                                    - isUsedInNestedFunctionWhenRequired
+                                  items:
+                                    - - isNotSelfDependentExport
+                                      - id: hasPeerFunctionWhenRequired
+                                        dependsUpon: hasPeerFunction
+                                      - isUsedInNestedFunctionWhenRequired
+                                    - - id: hasPeerFunction
+                                        type: parameter
+                                - id: createItemFromDeclaration
+                                  dependsUpon: whenStructured
+                                  items: whenStructured
                     - id: createDependsUponIdentifiers
                       type: file
                       items:
@@ -1353,15 +1469,31 @@
                               dependsUpon: dependsUponIdentifiersByParent
                           - - id: dependsUponIdentifiersByParent
                               type: variable
-                    - id: createFunctionDeclaration
+                    - id: parentFunctionsFromAncestors
                       type: file
                       items:
-                        - - id: createFunctionDeclaration
+                        - - id: findIdentifiableParent
+                            dependsUpon: getParents
+                          - id: findParents
                             dependsUpon:
-                              - createParameterItemsForFunction
-                              - stackItemsWhenMultiple
-                        - - createParameterItemsForFunction
+                              - createParentFunctionsWithIdentifiable
+                              - getAnonymousPropertyWhenAny
+                              - getParents
+                            items:
+                              - - id: createParentFunctionsWithIdentifiable
+                                  dependsUpon: getAnonymousPropertyWhenAny
+                              - - getAnonymousPropertyWhenAny
+                        - - id: getParents
+                            dependsUpon: getParentFromCurrentAndPrevious
+                        - - id: getParentFromCurrentAndPrevious
+                            dependsUpon:
+                              - isFunctionExpressionType
+                              - isIdentifiableType
+                        - - isFunctionExpressionType
+                          - isIdentifiableType
                   - - getItemWhenSingleOrStackItemsWhenMultiple
+                    - id: getParentFromAncestors
+                      type: file
                     - id: getPropertyName
                       type: file
                       items:
@@ -1473,7 +1605,9 @@
                                             - - id: createMultiple
                                                 dependsUpon: createWithIndex
                                             - - id: createWithIndex
-                                                dependsUpon: createWithGetArgumentFromValue
+                                                dependsUpon:
+                                                  - createWithGetArgumentFromValue
+                                                  - processor
                                         - id: createWhenSingle
                                           dependsUpon: createWithGetArgumentFromValue
                                       - - id: createWithGetArgumentFromValue
@@ -1481,6 +1615,8 @@
                                             - createElement
                                             - setState
                                       - - id: createElement
+                                          type: parameter
+                                        - id: processor
                                           type: parameter
                                         - id: setState
                                           type: parameter
@@ -1948,12 +2084,15 @@
                                                     - createWhenRelevant
                                                     - getDependencies
                                                   items:
-                                                    - id: getDependencies
-                                                      dependsUpon:
-                                                        - getDependents
-                                                        - getDependsUponItems
-                                                    - createForChildItems
-                                                    - createWhenRelevant
+                                                    - - id: getDependencies
+                                                        dependsUpon:
+                                                          - getDependents
+                                                          - getDependsUponItems
+                                                      - id: createForChildItems
+                                                        dependsUpon: item
+                                                      - createWhenRelevant
+                                                    - - id: item
+                                                        type: parameter
                                               - - id: getDependents
                                                   dependsUpon: isDependencyRelevant
                                                 - id: getDependsUponItems
@@ -3897,11 +4036,16 @@
                               - fromDependsUpon
                               - fromItems
                             items:
-                              - id: fromDependents
-                                dependsUpon: anyInCurrentLevel
-                              - id: fromDependsUpon
-                                dependsUpon: anyInCurrentLevel
-                              - fromItems
+                              - - id: fromDependents
+                                  dependsUpon: anyInCurrentLevel
+                                - id: fromDependsUpon
+                                  dependsUpon: anyInCurrentLevel
+                                - id: fromItems
+                                  dependsUpon:
+                                    - anyDependenciesWithCurrentLevel
+                                    - item
+                              - - id: item
+                                  type: parameter
                         - - id: anyInCurrentLevel
                             dependsUpon: hasLevelOfOrInCurrentLevel
                         - - id: hasLevelOfOrInCurrentLevel
@@ -4564,6 +4708,7 @@
                                 - - id: countDependenciesOfItems
                                     dependsUpon:
                                       - countDependenciesOfChildItemRecursive
+                                      - item
                                       - itemCount
                                       - sumCountsOfItems
                                 - - id: countDependenciesOfChildItemRecursive
@@ -4578,6 +4723,8 @@
                                       - sumDependencyCount
                                 - - id: sumCountWithScope
                                     dependsUpon: sumDependencyCount
+                                  - id: item
+                                    type: parameter
                                   - id: parentStack
                                     type: parameter
                                   - id: itemCount
@@ -5237,7 +5384,9 @@
                               - updateItemWhenRequired
                             items:
                               id: updateItemWhenRequired
-                              dependsUpon: updateItem
+                              dependsUpon:
+                                - findItemAndCreateDependsUpon
+                                - updateItem
                               items:
                                 id: findItemAndCreateDependsUpon
                                 dependsUpon:
@@ -5333,11 +5482,16 @@
                                                         - createDependsUponFromChildItem
                                                         - whenArray
                                                       items:
-                                                        - id: whenArray
-                                                          dependsUpon: Array
-                                                        - id: createDependsUponFromChildItem
-                                                          dependsUpon: findInAncestors
-                                                  - - id: findInAncestors
+                                                        - - id: whenArray
+                                                            dependsUpon:
+                                                              - Array
+                                                              - createDependsUponFromChildItem
+                                                              - dependUponItem
+                                                        - - id: createDependsUponFromChildItem
+                                                            dependsUpon: findInAncestors
+                                                  - - id: dependUponItem
+                                                      type: parameter
+                                                    - id: findInAncestors
                                                       type: parameter
                                           - - id: findItemWithIdentifierInLastAncestor
                                               type: file
@@ -6108,6 +6262,7 @@
         - call
         - callWithProcessArgumentsAndStandardInputStream
         - minimist
+        - process
       items:
         - - id: callWithProcessArgumentsAndStandardInputStream
             dependsUpon:
@@ -6125,14 +6280,87 @@
     type: file
     items:
       - - expect
-        - test
+        - id: test
+          type: file
+          dependsUpon:
+            - copy
+            - describe
+            - directory
+            - emptyDir
+            - expect
+            - getTestCasesPathOfSubdirectory
+            - jest
+            - logActualOfSpecifiedTestCase
+            - logged
+            - path
+            - readExpectedInSubdirectories
+            - runTestsAsInJestProcess
+            - runTestsWithFileNames
+            - sourceDirectory
+            - test
+            - testCaseFileContents
+            - undefined
+          items:
+            - - id: runTestsAsInJestProcess
+                dependsUpon:
+                  - getTestCasesPathOfSubdirectory
+                  - runTestsWithFileNames
+              - id: logActualOfSpecifiedTestCase
+                dependsUpon:
+                  - getTestCasesPathOfSubdirectory
+                  - path
+                  - runTestsWithFileNames
+              - id: readExpectedInSubdirectories
+                dependsUpon:
+                  - directory
+                  - expectedFileName
+                  - path
+                  - readFile
+            - - id: runTestsWithFileNames
+                dependsUpon:
+                  - expectedFileName
+                  - runTestsFromFileSystem
+              - id: getTestCasesPathOfSubdirectory
+                dependsUpon:
+                  - __dirname
+                  - path
+              - id: copy
+                type: variable
+                dependsUpon:
+                  id: fs-extra
+                  items: copy
+              - id: emptyDir
+                type: variable
+                dependsUpon:
+                  id: fs-extra
+                  items: emptyDir
+              - id: readFile
+                type: variable
+                dependsUpon:
+                  id: fs-extra
+                  items: readFile
+            - - id: runTestsFromFileSystem
+                type: variable
+                dependsUpon: .
+              - id: expectedFileName
+                type: variable
+              - id: testCaseFileContents
+                type: variable
+              - id: logged
+                type: variable
+              - id: directory
+                type: variable
+              - id: sourceDirectory
+                type: variable
+            - - expect
+              - test
       - - id: run-tests-from-file-system
           dependsUpon:
             - discoverAndDescribeTestCases
             - discoverAndLogOutputOfActual
             - discoverAndUpdateExpectedFiles
             - isJestProcessFromArguments
-            - logOutputOfActualWhenFileOrTestCase
+            - logActualWhenFileOrTestCase
           items:
             - - id: discoverAndDescribeTestCases
                 dependsUpon:
@@ -6141,7 +6369,6 @@
                 items:
                   id: describeTestCase
                   dependsUpon:
-                    - expect
                     - expectedFileName
                     - getActualForTestCase
                     - readTestCaseFile
@@ -6153,48 +6380,71 @@
                   - updateExpectedFile
                 items:
                   id: updateExpectedFile
-                  dependsUpon: fs
+                  dependsUpon:
+                    - expectedFileName
+                    - fs
+                    - path
+                    - rootDirectory
               - id: discoverAndLogOutputOfActual
                 dependsUpon:
-                  - console
                   - discover
                   - getActualForTestCase
+                  - log
             - - id: discover
                 dependsUpon: inSubdirectory
                 items:
                   - - id: inSubdirectory
                       dependsUpon:
+                        - appendFileOrSubdirectoryToTestCases
                         - fs
-                        - whenSubdirectory
-                  - - id: whenSubdirectory
+                        - path
+                        - rootDirectory
+                  - - id: appendFileOrSubdirectoryToTestCases
                       dependsUpon:
-                        - discoverTestCases
+                        - getTestCasesWhenAny
+                        - inSubdirectory
                         - isDirectory
                       items:
-                        - id: isDirectory
-                          dependsUpon: fs
-                        - id: discoverTestCases
-                          dependsUpon: inSubdirectory
-              - id: logOutputOfActualWhenFileOrTestCase
+                        - - id: isDirectory
+                            dependsUpon:
+                              - fileOrSubdirectory
+                              - fs
+                              - path
+                              - rootDirectory
+                          - id: getTestCasesWhenAny
+                            dependsUpon:
+                              - caseFileName
+                              - fileOrSubdirectory
+                              - fs
+                              - path
+                              - rootDirectory
+                        - - id: fileOrSubdirectory
+                            type: parameter
+              - id: logActualWhenFileOrTestCase
                 dependsUpon:
-                  - action
-                  - console
                   - getActualForTestCase
-                  - isArgumentPath
-                  - readTextFile
-                items: isArgumentPath
+                  - log
             - - id: getActualForTestCase
                 dependsUpon:
                   - action
                   - caseFileName
                   - readTestCaseFile
             - - id: readTestCaseFile
-                dependsUpon: readTextFile
+                dependsUpon:
+                  - path
+                  - readTextFile
+                  - rootDirectory
               - id: action
                 type: parameter
               - id: caseFileName
                 type: parameter
+            - - id: rootDirectory
+                type: parameter
               - id: expectedFileName
+                type: parameter
+              - id: log
+                type: parameter
+              - id: test
                 type: parameter
       - - id: isJestProcessFromArguments
           type: file
@@ -6202,6 +6452,15 @@
             - - id: isJestProcessFromArguments
                 dependsUpon: isSecondArgumentJest
             - - isSecondArgumentJest
+        - id: testWithJest
+          type: file
+          items:
+            - - id: testWithJest
+                dependsUpon:
+                  - expect
+                  - test
+            - - expect
+              - test
       - - id: readTextFile
           type: file
           items:
@@ -6399,8 +6658,9 @@
                 items:
                   - - id: createTransformJavascriptToHtmlPlugin
                       items:
-                        - - apply
-                          - id: transform
+                        - - id: apply
+                            dependsUpon: transform
+                        - - id: transform
                             dependsUpon:
                               - deleteFile
                               - directory
