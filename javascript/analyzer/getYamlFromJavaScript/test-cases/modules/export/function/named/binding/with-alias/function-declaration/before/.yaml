@@ -1,4 +1,4 @@
 - - id: exported
     type: export
-    dependsUpon: single
-- - single
+    dependsUpon: local
+- - local

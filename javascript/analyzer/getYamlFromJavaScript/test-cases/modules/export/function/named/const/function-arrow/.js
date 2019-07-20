@@ -1,1 +1,1 @@
-export const single = () => {}
+export const exported = () => {}

@@ -1,3 +1,3 @@
 export default function() { }
 
-function called() { }
+function notCalled() { }

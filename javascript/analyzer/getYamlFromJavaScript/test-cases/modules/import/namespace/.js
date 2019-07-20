@@ -1,1 +1,1 @@
-import * as variable from "called";
+import * as alias from "module";

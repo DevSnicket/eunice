@@ -1,7 +1,7 @@
-- - id: variable
+- - id: alias
     type: variable
     dependsUpon:
-      id: called
+      id: module
       items: imported
 - - id: caller
-    dependsUpon: variable
+    dependsUpon: alias

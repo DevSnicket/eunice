@@ -1,3 +1,3 @@
-export { single as exported }
+export { local as exported }
 
-function single() {}
+function local() {}

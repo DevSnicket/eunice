@@ -1,1 +1,1 @@
-import { variable } from "called";
+import { imported } from "module";

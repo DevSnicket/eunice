@@ -1,1 +1,1 @@
-export function single() {}
+export function exported() {}

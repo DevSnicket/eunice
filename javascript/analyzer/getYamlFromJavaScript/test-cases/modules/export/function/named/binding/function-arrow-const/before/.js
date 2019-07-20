@@ -1,3 +1,3 @@
-export { single }
+export { exported }
 
-const single = () => {}
+const exported = () => {}

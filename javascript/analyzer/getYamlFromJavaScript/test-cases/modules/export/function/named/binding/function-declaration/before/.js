@@ -1,3 +1,3 @@
-export { single }
+export { exported }
 
-function single() {}
+function exported() {}

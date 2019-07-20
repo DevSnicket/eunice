@@ -1,5 +1,5 @@
-import { imported as variable } from "called";
+import { imported as alias } from "module";
 
 function caller() {
-	variable();
+	alias();
 }
