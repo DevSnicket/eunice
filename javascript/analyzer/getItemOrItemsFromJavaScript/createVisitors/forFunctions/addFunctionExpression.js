@@ -7,7 +7,7 @@ module.exports =
 	({
 		addDeclarationIn,
 		ancestors,
-		createFunctionDeclarationWithIdentifier,
+		createDeclarationForFunction,
 		findParentFunctionFromAncestors,
 		functionExpression,
 	}) => {
@@ -18,10 +18,16 @@ module.exports =
 				addAssignment();
 				break;
 			case "ExportDefaultDeclaration":
-				addVariable(null);
+				addVariable({
+					identifier: null,
+					type: "export",
+				});
 				break;
 			case "VariableDeclarator":
-				addVariable(parent.id.name);
+				addVariable({
+					identifier: parent.id.name,
+					type: null,
+				});
 				break;
 			default:
 		}
@@ -30,46 +36,47 @@ module.exports =
 			if (isModuleExportMemberExpression(parent.left))
 				addModuleExport();
 			else
-				addVariable(parent.left.name);
+				addVariable({
+					identifier: parent.left.name,
+					type: null,
+				});
 
 			function addModuleExport() {
 				addDeclarationIn({
 					declaration:
-						createDeclarationWithIdentifier(
-							functionExpression.id
-							&&
-							functionExpression.id.name,
-						),
+						createDeclarationForFunction({
+							functionDeclarationOrExpression:
+								functionExpression,
+							identifier:
+								functionExpression.id
+								&&
+								functionExpression.id.name,
+							type:
+								null,
+						}),
 					parent:
 						null,
 				});
 			}
 		}
 
-		function addVariable(
+		function addVariable({
 			identifier,
-		) {
+			type,
+		}) {
 			addDeclarationIn({
 				declaration:
-					createDeclarationWithIdentifier(
+					createDeclarationForFunction({
+						functionDeclarationOrExpression:
+							functionExpression,
 						identifier,
-					),
+						type,
+					}),
 				parent:
 					findParentFunctionFromAncestors(
 						ancestors,
 					),
 			});
-		}
-
-		function createDeclarationWithIdentifier(
-			identifier,
-		) {
-			return (
-				createFunctionDeclarationWithIdentifier({
-					functionDeclaration: functionExpression,
-					identifier,
-				})
-			);
 		}
 	};
 

@@ -11,17 +11,18 @@ const
 module.exports =
 	({
 		dependsUponProperty,
-		functionDeclaration,
+		functionDeclarationOrExpression,
 		hasUndeclaredReferenceTo,
 		identifier,
 		items,
+		type,
 	}) => {
 		const itemOrItems =
 			stackItemsWhenMultiple({
 				items:
 					[
 						...createParameterItemsForFunction({
-							functionDeclaration,
+							functionDeclarationOrExpression,
 							hasUndeclaredReferenceTo,
 						}),
 						...items || [],
@@ -33,6 +34,7 @@ module.exports =
 		return (
 			{
 				...identifier && { id: identifier },
+				...type && { type },
 				...dependsUponProperty,
 				...itemOrItems && { items: itemOrItems },
 			}
@@ -40,11 +42,11 @@ module.exports =
 	};
 
 function createParameterItemsForFunction({
-	functionDeclaration,
+	functionDeclarationOrExpression,
 	hasUndeclaredReferenceTo,
 }) {
 	return (
-		functionDeclaration.params
+		functionDeclarationOrExpression.params
 		.flatMap(
 			parameter =>
 				parameter.type === "ObjectPattern"
@@ -56,7 +58,7 @@ function createParameterItemsForFunction({
 		.filter(
 			parameter =>
 				hasUndeclaredReferenceTo({
-					parent: functionDeclaration,
+					parent: functionDeclarationOrExpression,
 					reference: parameter,
 				}),
 		)

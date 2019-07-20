@@ -3,7 +3,7 @@ This library is free software, licensed under the terms of the GNU General Publi
 
 const
 	addFunctionExpression = require("./addFunctionExpression"),
-	createFunctionDeclaration = require("./createFunctionDeclaration"),
+	createDeclarationForFunction = require("./createDeclarationForFunction"),
 	{ findIdentifiableParent } = require("../parentFunctionsFromAncestors");
 
 module.exports =
@@ -25,12 +25,15 @@ module.exports =
 		) {
 			declarations.addDeclarationIn({
 				declaration:
-					createFunctionDeclarationWithIdentifier({
-						functionDeclaration,
+					createDeclarationForFunctionWithDependsUponAndItems({
+						functionDeclarationOrExpression:
+							functionDeclaration,
 						identifier:
 							functionDeclaration.id
 							&&
 							functionDeclaration.id.name,
+						type:
+							null,
 					}),
 				parent:
 					findIdentifiableParent(ancestors),
@@ -45,30 +48,33 @@ module.exports =
 				addDeclarationIn:
 					declarations.addDeclarationIn,
 				ancestors,
-				createFunctionDeclarationWithIdentifier,
+				createDeclarationForFunction:
+					createDeclarationForFunctionWithDependsUponAndItems,
 				findParentFunctionFromAncestors:
 					findIdentifiableParent,
 				functionExpression,
 			});
 		}
 
-		function createFunctionDeclarationWithIdentifier({
-			functionDeclaration,
+		function createDeclarationForFunctionWithDependsUponAndItems({
+			functionDeclarationOrExpression,
 			identifier,
+			type,
 		}) {
 			return (
-				createFunctionDeclaration({
+				createDeclarationForFunction({
 					dependsUponProperty:
 						createDependsUponPropertyFor(
-							functionDeclaration,
+							functionDeclarationOrExpression,
 						),
-					functionDeclaration,
+					functionDeclarationOrExpression,
 					hasUndeclaredReferenceTo,
 					identifier,
 					items:
 						declarations.createItemsForAndRemoveDeclarationsIn(
-							functionDeclaration,
+							functionDeclarationOrExpression,
 						),
+					type,
 				})
 			);
 		}
