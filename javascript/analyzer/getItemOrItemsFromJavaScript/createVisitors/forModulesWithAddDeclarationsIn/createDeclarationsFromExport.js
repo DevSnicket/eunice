@@ -15,7 +15,7 @@ module.exports =
 			?
 			withSource(source.value).createDeclarationFromSpecifier
 			:
-			createAliasedDeclarationsFromSpecifier,
+			createDeclarationFromSpecifierWhenFunction,
 		);
 
 function withSource(
@@ -43,26 +43,20 @@ function withSource(
 	}
 }
 
-function createAliasedDeclarationsFromSpecifier({
+function createDeclarationFromSpecifierWhenFunction({
 	exported,
 	local,
 }) {
-	return whenHasAlias() || [];
-
-	function whenHasAlias() {
-		return (
-			exported.name !== local.name
-			&&
-			{
-				dependsUpon:
-					local.name,
-				id:
-					exported.name,
-				isPeerFunctionRequired:
-					true,
-				type:
-					"export",
-			}
-		);
-	}
+	return (
+		{
+			dependsUpon:
+				local.name,
+			id:
+				exported.name,
+			isPeerFunctionRequired:
+				true,
+			type:
+				"export",
+		}
+	);
 }

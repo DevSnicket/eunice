@@ -21,9 +21,37 @@ module.exports =
 				return (
 					isDeclarationRelevant({ declaration, hasPeerFunction })
 					&&
-					createItemFromDeclaration(declaration)
+					createItemFromDeclaration({
+						...declaration,
+						type: getOrInferType(),
+					})
 				);
+
+				function getOrInferType() {
+					return declaration.type || inferType();
+
+					function inferType() {
+						return (
+							hasPeerExport(declaration.id)
+							&&
+							"export"
+						);
+					}
+				}
 			}
+		}
+
+		function hasPeerExport(
+			identifier,
+		) {
+			return (
+				declarations.some(
+					declaration =>
+						declaration.type === "export"
+						&&
+						declaration.id === identifier,
+				)
+			);
 		}
 
 		function hasPeerFunction(
@@ -45,10 +73,22 @@ function isDeclarationRelevant({
 	hasPeerFunction,
 }) {
 	return (
+		isNotSelfDependentExport()
+		&&
 		hasPeerFunctionWhenRequired()
 		&&
 		isUsedInNestedFunctionWhenRequired()
 	);
+
+	function isNotSelfDependentExport() {
+		return (
+			declaration.type !== "export"
+			||
+			!declaration.id
+			||
+			declaration.id !== declaration.dependsUpon
+		);
+	}
 
 	function hasPeerFunctionWhenRequired() {
 		return (
