@@ -4,7 +4,7 @@ This library is free software, licensed under the terms of the GNU General Publi
 module.exports =
 	({
 		assignmentExpressionLeft,
-		functionExpressionIdentifier,
+		defaultIdentifier,
 	}) => {
 		return (
 			assignmentExpressionLeft.type === "MemberExpression"
@@ -30,9 +30,9 @@ module.exports =
 					return (
 						isModuleExport(assignmentExpressionLeft)
 						&&
-						functionExpressionIdentifier
+						defaultIdentifier
 						&&
-						functionExpressionIdentifier.name
+						defaultIdentifier.name
 					);
 				}
 			}

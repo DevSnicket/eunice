@@ -4,6 +4,7 @@ This library is free software, licensed under the terms of the GNU General Publi
 const
 	addFromCall = require("./addFromCall"),
 	addVariables = require("./addVariables"),
+	addWhenCommonjsExportAlias = require("./commonjs/addWhenExportAlias"),
 	createDeclarations = require("./createDeclarations"),
 	createDependsUponIdentifiers = require("./createDependsUponIdentifiers"),
 	createFileItemOrItems = require("./createFileItemOrItems"),
@@ -36,6 +37,8 @@ module.exports =
 				...forModulesWithAddDeclarationsIn(
 					declarations.addDeclarationsIn,
 				),
+				AssignmentExpression:
+					visitAssignmentExpression,
 				CallExpression:
 					visitCallExpression,
 				VariableDeclaration:
@@ -68,6 +71,18 @@ module.exports =
 			});
 
 			return itemOrItems;
+		}
+
+		function visitAssignmentExpression(
+			assignmentExpression,
+			ancestors,
+		) {
+			addWhenCommonjsExportAlias({
+				addDeclarationIn:
+					declarations.addDeclarationIn,
+				ancestors,
+				assignmentExpression,
+			});
 		}
 
 		function visitCallExpression(
