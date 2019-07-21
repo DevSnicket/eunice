@@ -9,29 +9,37 @@ module.exports =
 		return (
 			assignmentExpressionLeft.type === "MemberExpression"
 			&&
-			whenModuleExport()
+			whenCommonjsExport()
 		);
 
-		function whenModuleExport() {
+		function whenCommonjsExport() {
 			return (
-				fromFunction()
+				whenModuleExport()
 				||
-				fromProperty(assignmentExpressionLeft)
+				whenExportProperty(assignmentExpressionLeft)
 			);
 
-			function fromFunction() {
+			function whenModuleExport() {
 				return (
-					isModuleExport(assignmentExpressionLeft)
-					&&
-					functionExpressionIdentifier
-					&&
-					functionExpressionIdentifier.name
+					whenDirect()
+					||
+					whenModuleExportProperty(assignmentExpressionLeft)
 				);
+
+				function whenDirect() {
+					return (
+						isModuleExport(assignmentExpressionLeft)
+						&&
+						functionExpressionIdentifier
+						&&
+						functionExpressionIdentifier.name
+					);
+				}
 			}
 		}
 	};
 
-function fromProperty({
+function whenModuleExportProperty({
 	object,
 	property,
 }) {
@@ -52,5 +60,16 @@ function isModuleExport({
 		object.name === "module"
 		&&
 		property.name === "exports"
+	);
+}
+
+function whenExportProperty({
+	object,
+	property,
+}) {
+	return (
+		object.name === "exports"
+		&&
+		property.name
 	);
 }
