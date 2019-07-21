@@ -1,7 +1,9 @@
 /* Copyright (c) 2018 Graham Dyson. All Rights Reserved.
 This library is free software, licensed under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-const getParentFromAncestors = require("../getParentFromAncestors");
+const
+	getIdentifierWhenModuleExport = require("./getIdentifierWhenModuleExport"),
+	getParentFromAncestors = require("../../getParentFromAncestors");
 
 module.exports =
 	({
@@ -30,30 +32,29 @@ module.exports =
 		}
 
 		function addAssignment() {
-			if (isModuleExportMemberExpression(parent.left))
-				addModuleExport();
-			else
-				addVariable({
-					identifier: parent.left.name,
-					type: null,
-				});
+			addDeclarationIn({
+				declaration:
+					createDeclarationForFunction({
+						functionDeclarationOrExpression:
+							functionExpression,
+						identifier:
+							getIdentifier(),
+						type:
+							null,
+					}),
+				parent:
+					null,
+			});
 
-			function addModuleExport() {
-				addDeclarationIn({
-					declaration:
-						createDeclarationForFunction({
-							functionDeclarationOrExpression:
-								functionExpression,
-							identifier:
-								functionExpression.id
-								&&
-								functionExpression.id.name,
-							type:
-								null,
-						}),
-					parent:
-						null,
-				});
+			function getIdentifier() {
+				return (
+					getIdentifierWhenModuleExport({
+						assignmentExpressionLeft: parent.left,
+						functionExpressionIdentifier: functionExpression.id,
+					})
+					||
+					parent.left.name
+				);
 			}
 		}
 
@@ -97,15 +98,3 @@ module.exports =
 			});
 		}
 	};
-
-function isModuleExportMemberExpression(
-	node,
-) {
-	return (
-		node.type === "MemberExpression"
-		&&
-		node.object.name === "module"
-		&&
-		node.property.name === "exports"
-	);
-}
