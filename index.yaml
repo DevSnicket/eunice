@@ -918,6 +918,8 @@
                               - dependsUponIdentifiers
                               - stackItemsWhenMultiple
                               - throwErrorWhenAnyUnhandled
+                          - id: visitAssignmentExpression
+                            dependsUpon: addWhenCommonjsExportAlias
                           - id: visitCallExpression
                             dependsUpon:
                               - addFromCall
@@ -937,6 +939,9 @@
                             type: variable
                           - id: undeclaredReferences
                             type: variable
+                  - - id: addWhenCommonjsExportAlias
+                      type: variable
+                      dependsUpon: addWhenExportAlias
                   - - id: addVariables
                       type: file
                       items:
@@ -1128,15 +1133,13 @@
                                   items:
                                     - - id: addAssignment
                                         dependsUpon:
-                                          - addModuleExport
-                                          - addVariable
-                                          - isModuleExportMemberExpression
+                                          - addDeclarationIn
+                                          - createDeclarationForFunction
+                                          - functionExpression
+                                          - getIdentifier
                                         items:
-                                          id: addModuleExport
-                                          dependsUpon:
-                                            - addDeclarationIn
-                                            - createDeclarationForFunction
-                                            - functionExpression
+                                          id: getIdentifier
+                                          dependsUpon: getIdentifierWhenCommonjsExport
                                       - id: addVariableDeclarator
                                         dependsUpon:
                                           - addVariable
@@ -1162,7 +1165,9 @@
                                         type: parameter
                                       - id: functionExpression
                                         type: parameter
-                              - - isModuleExportMemberExpression
+                              - - id: getIdentifierWhenCommonjsExport
+                                  type: variable
+                                  dependsUpon: getIdentifierWhenExport
                           - id: createDeclarationForFunction
                             type: file
                             items:
@@ -1385,6 +1390,60 @@
                                       dependsUpon: getObjectName
                               - - id: getObjectName
                                   dependsUpon: getObjectName
+                    - id: commonjs
+                      items:
+                        - - id: addWhenExportAlias
+                            type: file
+                            items:
+                              - - id: addWhenExportAlias
+                                  dependsUpon:
+                                    - addDeclarationWhenFile
+                                    - createDeclarationWhenAssignmentExpressionOfExport
+                                  items:
+                                    - - id: addDeclarationWhenFile
+                                        dependsUpon:
+                                          - addDeclarationIn
+                                          - ancestors
+                                          - findIdentifiableParent
+                                    - - id: addDeclarationIn
+                                        type: parameter
+                                      - id: ancestors
+                                        type: parameter
+                              - - id: createDeclarationWhenAssignmentExpressionOfExport
+                                  dependsUpon:
+                                    - createDeclarationWhenAlias
+                                    - getIdentifierWhenExport
+                                    - getNameWhenIdentifier
+                              - - getNameWhenIdentifier
+                                - createDeclarationWhenAlias
+                        - - id: getIdentifierWhenExport
+                            type: file
+                            items:
+                              - - id: getIdentifierWhenExport
+                                  dependsUpon: whenCommonjsExport
+                                  items:
+                                    - - id: whenCommonjsExport
+                                        dependsUpon:
+                                          - assignmentExpressionLeft
+                                          - whenExportProperty
+                                          - whenModuleExport
+                                        items:
+                                          id: whenModuleExport
+                                          dependsUpon:
+                                            - assignmentExpressionLeft
+                                            - whenDirect
+                                            - whenModuleExportProperty
+                                          items:
+                                            id: whenDirect
+                                            dependsUpon:
+                                              - assignmentExpressionLeft
+                                              - isModuleExport
+                                    - - id: assignmentExpressionLeft
+                                        type: parameter
+                              - - id: whenModuleExportProperty
+                                  dependsUpon: isModuleExport
+                              - - isModuleExport
+                                - whenExportProperty
                     - id: createDeclarations
                       type: file
                       items:
@@ -1469,6 +1528,15 @@
                               dependsUpon: dependsUponIdentifiersByParent
                           - - id: dependsUponIdentifiersByParent
                               type: variable
+                  - - getItemWhenSingleOrStackItemsWhenMultiple
+                    - id: getParentFromAncestors
+                      type: file
+                    - id: getPropertyName
+                      type: file
+                      items:
+                        - - id: getPropertyName
+                            dependsUpon: getNameFromValue
+                        - - getNameFromValue
                     - id: parentFunctionsFromAncestors
                       type: file
                       items:
@@ -1491,15 +1559,6 @@
                               - isIdentifiableType
                         - - isFunctionExpressionType
                           - isIdentifiableType
-                  - - getItemWhenSingleOrStackItemsWhenMultiple
-                    - id: getParentFromAncestors
-                      type: file
-                    - id: getPropertyName
-                      type: file
-                      items:
-                        - - id: getPropertyName
-                            dependsUpon: getNameFromValue
-                        - - getNameFromValue
                     - id: stackItemsWhenMultiple
                       type: file
                       items:
