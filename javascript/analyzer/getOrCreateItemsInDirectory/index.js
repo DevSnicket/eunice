@@ -14,16 +14,19 @@ module.exports =
 	({
 		directory,
 		ignoreDirectoryNames = null,
+		isReactJsxEnabled = false,
 	}) =>
 		getOrCreateItemsInRootedDirectory({
 			directory: "",
 			ignoreDirectoryNames,
+			isReactJsxEnabled,
 			rootDirectory: directory,
 		});
 
 function getOrCreateItemsInRootedDirectory({
 	directory,
 	ignoreDirectoryNames,
+	isReactJsxEnabled,
 	rootDirectory,
 }) {
 	const subDirectoryFull =
@@ -78,7 +81,12 @@ function getOrCreateItemsInRootedDirectory({
 				javaScript,
 			) {
 				try {
-					return getItemOrItemsFromJavaScript(javaScript);
+					return (
+						getItemOrItemsFromJavaScript({
+							isReactJsxEnabled,
+							javaScript,
+						})
+					);
 				} catch (error) {
 					throw new Error(`Analysis of file "${path.join(directory, fileOrSubdirectory)}" raised the following error.\n\n${error.message}`);
 				}
@@ -103,6 +111,7 @@ function getOrCreateItemsInRootedDirectory({
 				getOrCreateItemsInRootedDirectory({
 					directory: path.join(directory, fileOrSubdirectory),
 					ignoreDirectoryNames,
+					isReactJsxEnabled,
 					rootDirectory,
 				})
 			);

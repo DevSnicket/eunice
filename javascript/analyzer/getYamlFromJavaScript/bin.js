@@ -7,6 +7,6 @@ const
 	getYamlFromJavaScript = require(".");
 
 callWithProcessStandardStreams({
-	action: parameters => getYamlFromJavaScript(parameters.javaScript),
+	action: parameters => getYamlFromJavaScript(parameters),
 	standardInputParameter: "javaScript",
 });

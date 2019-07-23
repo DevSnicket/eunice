@@ -2,22 +2,26 @@
 This library is free software, licensed under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 const
-	{ parse } = require("acorn"),
+	createAcornParserAndWalkBaseVisitor = require("./createAcornParserAndWalkBaseVisitor"),
+	createVisitors = require("./createVisitors"),
 	walk = require("acorn-walk");
 
-const
-	createVisitors = require("./createVisitors");
-
 module.exports =
-	javaScript => {
-		const visitors = createVisitors();
+	({
+		isReactJsxEnabled,
+		javaScript,
+	}) => {
+		const
+			{ Parser, walkBaseVisitor } = createAcornParserAndWalkBaseVisitor({ isReactJsxEnabled }),
+			visitors = createVisitors();
 
 		walk.ancestor(
-			parse(
+			Parser.parse(
 				removeUnixShebangForNode(javaScript),
 				{ ecmaVersion: 9, sourceType: "module" },
 			),
 			visitors,
+			walkBaseVisitor,
 		);
 
 		return visitors.getItemOrItems();

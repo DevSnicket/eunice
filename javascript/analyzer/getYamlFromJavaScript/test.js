@@ -8,22 +8,31 @@ const
 	runTestsFromFileSystem = require("@devsnicket/eunice-run-tests-from-file-system");
 
 runTestsFromFileSystem({
-	action: getYamlFromJavaScript,
-	caseFileName: ".js",
-	directory: path.join(__dirname, "test-cases/"),
-	expectedFileName: ".yaml",
-	processArguments: process.argv,
+	action:
+		javaScript => getYamlFromJavaScript({ javaScript }),
+	caseFileName:
+		".js",
+	directory:
+		path.join(__dirname, "test-cases"),
+	expectedFileName:
+		".yaml",
+	processArguments:
+		process.argv,
 });
 
 if (typeof test !== "undefined")
-	test.each(
-		[
-			"",
-			" --parameter=argument",
-		],
-	)(
-		"unix shebang for node with suffix \"%s\"",
-		suffix =>
-			expect(getYamlFromJavaScript(`#!/usr/bin/env node${suffix}\n`))
-			.toEqual(""),
+	test(
+		"React JSX enabled and function call in content of element returns depends upon function.",
+		() =>
+			expect(
+				getYamlFromJavaScript(
+					{
+						isReactJsxEnabled: true,
+						javaScript: "<element>{called()}</element>",
+					},
+				),
+			)
+			.toEqual(
+				"dependsUpon: called",
+			),
 	);

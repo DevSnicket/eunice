@@ -6,9 +6,13 @@ const
 	getYamlForItemOrItems = require("../getYamlForItemOrItems");
 
 module.exports =
-	javaScript =>
+	({
+		isReactJsxEnabled = false,
+		javaScript,
+	}) =>
 		getYamlForItemOrItems(
-			getItemOrItemsFromJavaScript(
+			getItemOrItemsFromJavaScript({
+				isReactJsxEnabled,
 				javaScript,
-			),
+			}),
 		);
