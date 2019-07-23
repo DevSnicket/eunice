@@ -1,8 +1,8 @@
-function caller() {
+function caller1() {
 	called(variable);
 }
 
-function caller() {
+function caller2() {
 	called(variable);
 }
 

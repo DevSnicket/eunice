@@ -1,8 +1,8 @@
-- - id: caller
+- - id: caller1
     dependsUpon:
       - called
       - variable
-- - id: caller
+- - id: caller2
     dependsUpon:
       - called
       - variable

@@ -3,7 +3,7 @@ This library is free software, licensed under the terms of the GNU General Publi
 
 const
 	{ parse } = require("acorn"),
-	walk = require("acorn/dist/walk");
+	walk = require("acorn-walk");
 
 const
 	createVisitors = require("./createVisitors");
