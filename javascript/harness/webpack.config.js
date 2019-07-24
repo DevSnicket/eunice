@@ -6,14 +6,16 @@ const
 	path = require("path");
 
 module.exports =
-	createWebpackConfiguration({
-		codeEditorLanguages:
-			[ "javascript" ],
-		directory:
-			path.join(__dirname, "output"),
-		javascriptSubstitution:
-			{
-				pattern: "javascriptFromWebpack",
-				replacementFilePath: `${__dirname}/example.js`,
-			},
-	});
+	(environment, { mode }) =>
+		createWebpackConfiguration({
+			codeEditorLanguages:
+				[ "javascript" ],
+			directory:
+				path.join(__dirname, "output"),
+			javascriptSubstitution:
+				{
+					escape: mode !== "production",
+					pattern: "javascriptFromWebpack",
+					replacementFilePath: `${__dirname}/example.js`,
+				},
+		});
