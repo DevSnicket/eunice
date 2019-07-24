@@ -15,7 +15,7 @@ const
 	} = require("@devsnicket/eunice-test-harnesses"),
 	createYamlInputElement = require("@devsnicket/eunice-renderer-test-harness/createYamlInputElement"),
 	createYamlOutputElement = require("@devsnicket/eunice-renderer-test-harness/createYamlOutputElement"),
-	{ getYamlFromJavaScript } = require("@devsnicket/eunice-javascript-analyzer"),
+	{ getYamlFromJavascript } = require("@devsnicket/eunice-javascript-analyzer"),
 	initializeCodeEditorGlobal = require("@devsnicket/eunice-test-harnesses/codeEditor/serviceWorkers/initializeGlobal"),
 	{
 		ReflexContainer,
@@ -81,7 +81,11 @@ function createInitialStateFromJavascript(
 	return (
 		{
 			javascript,
-			yaml: getYamlFromJavaScript(javascript),
+			yaml:
+				getYamlFromJavascript({
+					isReactJsxEnabled: true,
+					javascript,
+				}),
 		}
 	);
 }
@@ -93,7 +97,11 @@ function createYamlStateFromJavascript(
 		{
 			yaml:
 				callOrGetMessageOnError(
-					() => getYamlFromJavaScript(javascript),
+					() =>
+						getYamlFromJavascript({
+							isReactJsxEnabled: true,
+							javascript,
+						}),
 				),
 		}
 	);

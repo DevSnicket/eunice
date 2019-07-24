@@ -11,6 +11,7 @@ module.exports =
 	({
 		directoryToCreateOrAddToStacksFrom,
 		ignoreDirectoryNames,
+		isReactJsxEnabled,
 		packagePrefixAndScope,
 		sources,
 	}) => {
@@ -38,6 +39,7 @@ module.exports =
 				analyzer.getOrCreateItemsInDirectory({
 					directory,
 					ignoreDirectoryNames,
+					isReactJsxEnabled,
 				});
 
 			return processWhenAnyItems() || [];

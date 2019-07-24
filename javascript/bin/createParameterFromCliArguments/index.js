@@ -10,6 +10,7 @@ module.exports =
 		directories = ".",
 		ignoreDirectoryNames,
 		isHtmlSingleFile,
+		isReactJsxEnabled,
 		outputBaseFileName,
 		outputDirectoryPath,
 		packageNames,
@@ -24,6 +25,7 @@ module.exports =
 				ensureArray(ignoreDirectoryNames),
 			isHtmlSingleFile:
 				isHtmlSingleFile && isHtmlSingleFile === "true",
+			isReactJsxEnabled,
 			outputPath:
 				createOutputPath({
 					outputBaseFileName,

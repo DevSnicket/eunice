@@ -31,6 +31,7 @@ module.exports =
 		directoryToCreateOrAddToStacksFrom = null,
 		ignoreDirectoryNames = ignoreDirectoryNamesDefault,
 		isHtmlSingleFile = true,
+		isReactJsxEnabled = true,
 		outputPath,
 		packages = null,
 		sources,
@@ -43,6 +44,7 @@ module.exports =
 					analyzeAndProcess({
 						directoryToCreateOrAddToStacksFrom,
 						ignoreDirectoryNames,
+						isReactJsxEnabled,
 						packagePrefixAndScope:
 							packages,
 						sources:
