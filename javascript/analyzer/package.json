@@ -21,7 +21,7 @@
 		"@babel/polyfill": "7.4.4",
 		"@babel/preset-env": "7.4.4",
 		"@devsnicket/eunice-run-tests-from-file-system": "1.5.1",
-		"@devsnicket/eunice-test-harnesses": "7.2.0",
+		"@devsnicket/eunice-test-harnesses": "7.5.0",
 		"@types/jest": "24.0.13",
 		"@types/node": "10.14.7",
 		"acorn-jsx": "5.0.1",
