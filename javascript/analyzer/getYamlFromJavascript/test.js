@@ -4,12 +4,12 @@ This library is free software, licensed under the terms of the GNU General Publi
 const path = require("path");
 
 const
-	getYamlFromJavaScript = require("."),
+	getYamlFromJavascript = require("."),
 	runTestsFromFileSystem = require("@devsnicket/eunice-run-tests-from-file-system");
 
 runTestsFromFileSystem({
 	action:
-		javaScript => getYamlFromJavaScript({ javaScript }),
+		javascript => getYamlFromJavascript({ javascript }),
 	caseFileName:
 		".js",
 	directory:
@@ -25,10 +25,10 @@ if (typeof test !== "undefined")
 		"React JSX enabled and function call in content of element returns depends upon function.",
 		() =>
 			expect(
-				getYamlFromJavaScript(
+				getYamlFromJavascript(
 					{
 						isReactJsxEnabled: true,
-						javaScript: "<element>{called()}</element>",
+						javascript: "<element>{called()}</element>",
 					},
 				),
 			)

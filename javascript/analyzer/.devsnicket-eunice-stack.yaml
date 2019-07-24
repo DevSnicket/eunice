@@ -1,3 +1,3 @@
 - harness
-- [ getOrCreateItemsInDirectory, getYamlFromJavaScript ]
-- [ getItemOrItemsFromJavaScript, getYamlForItemOrItems ]
+- [ getOrCreateItemsInDirectory, getYamlFromJavascript ]
+- [ getItemOrItemsFromJavascript, getYamlForItemOrItems ]

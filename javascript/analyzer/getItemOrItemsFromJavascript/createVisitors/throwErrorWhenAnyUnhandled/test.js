@@ -12,13 +12,13 @@ test(
 	() => {
 		const identifier = "variable";
 
-		const javaScript = `const ${identifier} = null;`;
+		const javascript = `const ${identifier} = null;`;
 
 		expect(
 			() => {
 				const
 					declarations = createDeclarations(),
-					parent = parse(javaScript);
+					parent = parse(javascript);
 
 				declarations.addDeclarationsIn({
 					declarations: parent.body[0].declarations,
@@ -33,7 +33,7 @@ test(
 				});
 			},
 		)
-		.toThrowError(`Unhandled declarations:\nExpression from character 0 to ${javaScript.length} contains unhandled identifiers of "${identifier}"`);
+		.toThrowError(`Unhandled declarations:\nExpression from character 0 to ${javascript.length} contains unhandled identifiers of "${identifier}"`);
 	},
 );
 
@@ -42,13 +42,13 @@ test(
 	() => {
 		const identifier = "called";
 
-		const javaScript = `${identifier}();`;
+		const javascript = `${identifier}();`;
 
 		expect(
 			() => {
 				const
 					dependsUponIdentifiers = createDependsUponIdentifiers(),
-					parent = parse(javaScript);
+					parent = parse(javascript);
 
 				dependsUponIdentifiers.addIdentifierFrom({
 					identifier,
@@ -63,7 +63,7 @@ test(
 				});
 			},
 		)
-		.toThrowError(`Unhandled dependencies:\nExpression from character 0 to ${javaScript.length} contains unhandled identifiers of "${identifier}"`);
+		.toThrowError(`Unhandled dependencies:\nExpression from character 0 to ${javascript.length} contains unhandled identifiers of "${identifier}"`);
 	},
 );
 
@@ -74,13 +74,13 @@ test(
 			identifier = "called",
 			parentIdentifier = "caller";
 
-		const javaScript = `function ${parentIdentifier}() { ${identifier}(); }`;
+		const javascript = `function ${parentIdentifier}() { ${identifier}(); }`;
 
 		expect(
 			() => {
 				const
 					dependsUponIdentifiers = createDependsUponIdentifiers(),
-					parent = parse(javaScript);
+					parent = parse(javascript);
 
 				dependsUponIdentifiers.addIdentifierFrom({
 					identifier,
@@ -96,6 +96,6 @@ test(
 				});
 			},
 		)
-		.toThrowError(`Unhandled dependencies:\nExpression from character 0 to ${javaScript.length} with identifier "${parentIdentifier}" contains unhandled identifiers of "${identifier}"`);
+		.toThrowError(`Unhandled dependencies:\nExpression from character 0 to ${javascript.length} with identifier "${parentIdentifier}" contains unhandled identifiers of "${identifier}"`);
 	},
 );

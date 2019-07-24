@@ -4,7 +4,7 @@ This library is free software, licensed under the terms of the GNU General Publi
 const
 	flatMap = require("array.prototype.flatmap"),
 	fs = require("fs"),
-	getItemOrItemsFromJavaScript = require("../getItemOrItemsFromJavaScript"),
+	getItemOrItemsFromJavascript = require("../getItemOrItemsFromJavascript"),
 	getOrCreateFileItem = require("./getOrCreateFileItem"),
 	path = require("path");
 
@@ -50,15 +50,15 @@ function getOrCreateItemsInRootedDirectory({
 		return (
 			createItemsWhenSubdirectory()
 			||
-			getOrCreateItemsWhenJavaScriptFile()
+			getOrCreateItemsWhenJavascriptFile()
 		);
 
-		function getOrCreateItemsWhenJavaScriptFile() {
+		function getOrCreateItemsWhenJavascriptFile() {
 			const fileOrSubdirectoryPath =
 				path.parse(fileOrSubdirectory);
 
 			return (
-				isJavaScript()
+				isJavascript()
 				&&
 				[
 					getOrCreateFileItem({
@@ -66,25 +66,25 @@ function getOrCreateItemsInRootedDirectory({
 						filePath:
 							fileOrSubdirectoryPath,
 						itemOrItems:
-							getItemOrItemsFromJavaScriptOrRethrowErrorWithPath(
+							getItemOrItemsFromJavascriptOrRethrowErrorWithPath(
 								readFile(),
 							),
 					}),
 				]
 			);
 
-			function isJavaScript() {
+			function isJavascript() {
 				return fileOrSubdirectoryPath.ext === ".js";
 			}
 
-			function getItemOrItemsFromJavaScriptOrRethrowErrorWithPath(
-				javaScript,
+			function getItemOrItemsFromJavascriptOrRethrowErrorWithPath(
+				javascript,
 			) {
 				try {
 					return (
-						getItemOrItemsFromJavaScript({
+						getItemOrItemsFromJavascript({
 							isReactJsxEnabled,
-							javaScript,
+							javascript,
 						})
 					);
 				} catch (error) {

@@ -4,10 +4,10 @@ This library is free software, licensed under the terms of the GNU General Publi
 const
 	{ callOrCreateElementOnError, createFillWithTitleElement } = require("@devsnicket/eunice-test-harnesses"),
 	{ createElement } = require("react"),
-	getYamlFromJavaScript = require("../getYamlFromJavaScript");
+	getYamlFromJavascript = require("../getYamlFromJavascript");
 
 module.exports =
-	javaScript =>
+	javascript =>
 		createFillWithTitleElement({
 			content:
 				callOrCreateElementOnError({
@@ -25,7 +25,10 @@ module.exports =
 								createElement(
 									"code",
 									{ id: "yaml" },
-									getYamlFromJavaScript({ javaScript }),
+									getYamlFromJavascript({
+										isReactJsxEnabled: true,
+										javascript,
+									}),
 								),
 							),
 					createElement,

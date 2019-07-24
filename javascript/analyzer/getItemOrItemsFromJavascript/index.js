@@ -9,7 +9,7 @@ const
 module.exports =
 	({
 		isReactJsxEnabled,
-		javaScript,
+		javascript,
 	}) => {
 		const
 			{ Parser, walkBaseVisitor } = createAcornParserAndWalkBaseVisitor({ isReactJsxEnabled }),
@@ -17,7 +17,7 @@ module.exports =
 
 		walk.ancestor(
 			Parser.parse(
-				removeUnixShebangForNode(javaScript),
+				removeUnixShebangForNode(javascript),
 				{ ecmaVersion: 9, sourceType: "module" },
 			),
 			visitors,

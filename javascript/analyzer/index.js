@@ -4,10 +4,10 @@ This library is free software, licensed under the terms of the GNU General Publi
 /* istanbul ignore file: test would be a mirror of implementation */
 const
 	getOrCreateItemsInDirectory = require("./getOrCreateItemsInDirectory"),
-	getYamlFromJavaScript = require("./getYamlFromJavaScript");
+	getYamlFromJavascript = require("./getYamlFromJavascript");
 
 module.exports =
 	{
 		getOrCreateItemsInDirectory,
-		getYamlFromJavaScript,
+		getYamlFromJavascript,
 	};

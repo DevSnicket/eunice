@@ -23,5 +23,5 @@ yarn add --dev @devsnicket/eunice-javascript-analyzer
 ```
 
 Examples of analyzer behavior can be found in the following test cases:
-* [single file](getYamlFromJavaScript/test-cases)
+* [single file](getYamlFromJavascript/test-cases)
 * [multiple files and directories](getOrCreateItemsInDirectory/test-cases)

@@ -4,9 +4,9 @@ This library is free software, licensed under the terms of the GNU General Publi
 
 const
 	callWithProcessStandardStreams = require("@devsnicket/eunice-call-with-process-standard-streams"),
-	getYamlFromJavaScript = require(".");
+	getYamlFromJavascript = require(".");
 
 callWithProcessStandardStreams({
-	action: parameters => getYamlFromJavaScript(parameters),
-	standardInputParameter: "javaScript",
+	action: parameters => getYamlFromJavascript(parameters),
+	standardInputParameter: "javascript",
 });
