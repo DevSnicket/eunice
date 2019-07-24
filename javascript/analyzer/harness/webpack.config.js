@@ -6,18 +6,20 @@ const
 	createWebpackConfiguration = require("@devsnicket/eunice-test-harnesses/createWebpackConfiguration");
 
 module.exports =
-	createWebpackConfiguration({
-		directory:
-			`${__dirname}/output/`,
-		entry:
-			createCodeEditorWebpackEntryForLanguages(
-				[ "javascript" ],
-			),
-		indexFile:
-			"./harness/index.js",
-		javascriptSubstitution:
-			{
-				pattern: "javascriptFromWebpack",
-				replacementFilePath: `${__dirname}/example.js`,
-			},
-	});
+	(environment, { mode }) =>
+		createWebpackConfiguration({
+			directory:
+				`${__dirname}/output/`,
+			entry:
+				createCodeEditorWebpackEntryForLanguages(
+					[ "javascript" ],
+				),
+			indexFile:
+				"./harness/index.js",
+			javascriptSubstitution:
+				{
+					escape: mode !== "production",
+					pattern: new RegExp("(?<=javascript:|javascript: )javascriptFromWebpack"),
+					replacementFilePath: `${__dirname}/example.js`,
+				},
+		});
