@@ -104,6 +104,7 @@
                             dependsUpon:
                               - analyzer
                               - ignoreDirectoryNames
+                              - isReactJsxEnabled
                               - processWhenAnyItems
                             items:
                               - - id: processWhenAnyItems
@@ -126,6 +127,8 @@
                         - - id: directoryToCreateOrAddToStacksFrom
                             type: parameter
                           - id: ignoreDirectoryNames
+                            type: parameter
+                          - id: isReactJsxEnabled
                             type: parameter
                           - id: packagePrefixAndScope
                             type: parameter
@@ -608,7 +611,7 @@
                       - callOrCreateElementOnError
                       - createElement
                       - createFillWithTitleElement
-                      - getYamlFromJavaScript
+                      - getYamlFromJavascript
                 - - id: callOrCreateElementOnError
                     type: variable
                     dependsUpon:
@@ -690,24 +693,25 @@
                   - - id: createItemsFromFileOrSubdirectory
                       dependsUpon:
                         - createItemsWhenSubdirectory
-                        - getOrCreateItemsWhenJavaScriptFile
+                        - getOrCreateItemsWhenJavascriptFile
                       items:
-                        - - id: getOrCreateItemsWhenJavaScriptFile
+                        - - id: getOrCreateItemsWhenJavascriptFile
                             dependsUpon:
                               - directory
                               - fileOrSubdirectory
-                              - getItemOrItemsFromJavaScriptOrRethrowErrorWithPath
+                              - getItemOrItemsFromJavascriptOrRethrowErrorWithPath
                               - getOrCreateFileItem
-                              - isJavaScript
+                              - isJavascript
                               - path
                               - readFile
                             items:
-                              - isJavaScript
-                              - id: getItemOrItemsFromJavaScriptOrRethrowErrorWithPath
+                              - isJavascript
+                              - id: getItemOrItemsFromJavascriptOrRethrowErrorWithPath
                                 dependsUpon:
                                   - directory
                                   - fileOrSubdirectory
-                                  - getItemOrItemsFromJavaScript
+                                  - getItemOrItemsFromJavascript
+                                  - isReactJsxEnabled
                                   - path
                               - id: readFile
                                 dependsUpon:
@@ -721,6 +725,7 @@
                               - ignoreDirectoryNames
                               - isDirectory
                               - isIgnored
+                              - isReactJsxEnabled
                               - path
                               - rootDirectory
                             items:
@@ -742,6 +747,8 @@
                   - - id: directory
                       type: parameter
                     - id: ignoreDirectoryNames
+                      type: parameter
+                    - id: isReactJsxEnabled
                       type: parameter
                     - id: rootDirectory
                       type: parameter
@@ -852,53 +859,67 @@
                                     type: parameter
                           - - id: directory
                               type: parameter
-        - id: getYamlFromJavaScript
+        - id: getYamlFromJavascript
           type: file
           items:
             - - id: bin
                 type: file
                 dependsUpon:
-                  - getYamlFromJavaScript
+                  - getYamlFromJavascript
                   - call-with-process-standard-streams
               - id: test
                 type: file
                 dependsUpon:
-                  - getYamlFromJavaScript
                   - __dirname
                   - expect
+                  - getYamlFromJavascript
                   - path
                   - test
                   - run-tests-from-file-system
                 items:
                   - expect
                   - test
-            - - id: getYamlFromJavaScript
+            - - id: getYamlFromJavascript
                 dependsUpon:
-                  - getItemOrItemsFromJavaScript
+                  - getItemOrItemsFromJavascript
                   - getYamlForItemOrItems
-      - - id: getItemOrItemsFromJavaScript
+      - - id: getItemOrItemsFromJavascript
           type: file
           items:
-            - - id: getItemOrItemsFromJavaScript
+            - - id: getItemOrItemsFromJavascript
                 dependsUpon:
+                  - Parser
+                  - createAcornParserAndWalkBaseVisitor
                   - createVisitors
-                  - parse
                   - removeUnixShebangForNode
                   - walk
+                  - walkBaseVisitor
             - - id: removeUnixShebangForNode
                 dependsUpon: Math
-              - id: parse
-                type: variable
-                dependsUpon:
-                  id: acorn
-                  items: parse
               - id: walk
                 type: variable
-                dependsUpon:
-                  id: acorn
-                  items:
-                    id: dist
-                    items: walk
+                dependsUpon: acorn-walk
+              - id: createAcornParserAndWalkBaseVisitor
+                type: file
+                items:
+                  - - id: createAcornParserAndWalkBaseVisitor
+                      dependsUpon: extendWhenReactJsxEnabled
+                      items:
+                        id: extendWhenReactJsxEnabled
+                        dependsUpon:
+                          - extendParser
+                          - extendWalkBaseVisitor
+                        items:
+                          - id: extendParser
+                            dependsUpon:
+                              - Parser
+                              - acorn-jsx
+                          - extendWalkBaseVisitor
+                  - - id: Parser
+                      type: variable
+                      dependsUpon:
+                        id: acorn
+                        items: Parser
               - id: createVisitors
                 type: file
                 items:
@@ -1230,7 +1251,7 @@
                               - dependsUponIdentifiers
                               - expect
                               - identifier
-                              - javaScript
+                              - javascript
                               - parent
                               - parse
                               - test
@@ -1243,7 +1264,7 @@
                                     items: parse
                                 - id: identifier
                                   type: variable
-                                - id: javaScript
+                                - id: javascript
                                   type: variable
                                 - id: declarations
                                   type: variable
