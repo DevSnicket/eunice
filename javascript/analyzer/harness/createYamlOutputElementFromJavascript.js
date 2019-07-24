@@ -7,7 +7,7 @@ const
 	getYamlFromJavaScript = require("../getYamlFromJavaScript");
 
 module.exports =
-	yaml =>
+	javaScript =>
 		createFillWithTitleElement({
 			content:
 				callOrCreateElementOnError({
@@ -25,7 +25,7 @@ module.exports =
 								createElement(
 									"code",
 									{ id: "yaml" },
-									getYamlFromJavaScript(yaml),
+									getYamlFromJavaScript({ javaScript }),
 								),
 							),
 					createElement,
