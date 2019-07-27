@@ -41,6 +41,8 @@ module.exports =
 					visitAssignmentExpression,
 				CallExpression:
 					visitCallExpression,
+				Class:
+					visitClass,
 				VariableDeclaration:
 					visitVariableDeclaration,
 				getItemOrItems,
@@ -111,6 +113,19 @@ module.exports =
 							variable,
 						}),
 			});
+		}
+
+		function visitClass(
+			{ id },
+			ancestors,
+		) {
+			if (id)
+				declarations.addDeclarationIn({
+					declaration:
+						{ id: id.name },
+					parent:
+						parentFunctionsFromAncestors.findIdentifiableParent(ancestors),
+				});
 		}
 
 		function visitVariableDeclaration(
