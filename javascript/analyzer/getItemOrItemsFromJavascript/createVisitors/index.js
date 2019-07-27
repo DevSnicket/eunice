@@ -2,6 +2,7 @@
 This library is free software, licensed under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 const
+	addClass = require("./addClass"),
 	addFromCall = require("./addFromCall"),
 	addVariables = require("./addVariables"),
 	addWhenCommonjsExportAlias = require("./commonjs/addWhenExportAlias"),
@@ -116,16 +117,15 @@ module.exports =
 		}
 
 		function visitClass(
-			{ id },
+			classDeclarationOrExpression,
 			ancestors,
 		) {
-			if (id)
-				declarations.addDeclarationIn({
-					declaration:
-						{ id: id.name },
-					parent:
-						parentFunctionsFromAncestors.findIdentifiableParent(ancestors),
-				});
+			addClass({
+				addDeclarationIn:
+					declarations.addDeclarationIn,
+				ancestors,
+				classDeclarationOrExpression,
+			});
 		}
 
 		function visitVariableDeclaration(
