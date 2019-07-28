@@ -121,10 +121,9 @@ module.exports =
 			ancestors,
 		) {
 			addClass({
-				addDeclarationIn:
-					declarations.addDeclarationIn,
 				ancestors,
 				classDeclarationOrExpression,
+				declarations,
 			});
 		}
 

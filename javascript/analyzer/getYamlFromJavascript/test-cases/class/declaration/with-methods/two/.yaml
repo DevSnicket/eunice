@@ -1,0 +1,6 @@
+- id: Class
+  items:
+    - - id: method1
+        type: method
+    - - id: method2
+        type: method

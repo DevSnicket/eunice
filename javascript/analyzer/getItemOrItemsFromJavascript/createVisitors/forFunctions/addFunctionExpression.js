@@ -20,10 +20,13 @@ module.exports =
 				addAssignment();
 				break;
 			case "ExportDefaultDeclaration":
-				addVariable({
+				findParentAndAdd({
 					identifier: null,
 					type: "export",
 				});
+				break;
+			case "MethodDefinition":
+				addMethod();
 				break;
 			case "VariableDeclarator":
 				addVariableDeclarator();
@@ -59,7 +62,7 @@ module.exports =
 		}
 
 		function addVariableDeclarator() {
-			addVariable({
+			findParentAndAdd({
 				identifier:
 					parent.id.name,
 				type:
@@ -79,7 +82,7 @@ module.exports =
 			}
 		}
 
-		function addVariable({
+		function findParentAndAdd({
 			identifier,
 			type,
 		}) {
@@ -96,5 +99,26 @@ module.exports =
 						ancestors,
 					),
 			});
+		}
+
+		function addMethod() {
+			if (parent.kind !== "constructor")
+				addDeclarationIn({
+					declaration:
+						createDeclarationForFunction({
+							functionDeclarationOrExpression:
+								functionExpression,
+							identifier:
+								parent.key.name,
+							type:
+								"method",
+						}),
+					parent:
+						getClass(),
+				});
+
+			function getClass() {
+				return ancestors[ancestors.length - 4];
+			}
 		}
 	};
