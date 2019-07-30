@@ -111,6 +111,8 @@ function isIdentifiableType(
 		||
 		type === "ExportDefaultDeclaration"
 		||
+		type === "MethodDefinition"
+		||
 		type === "VariableDeclarator"
 	);
 }
