@@ -11,35 +11,35 @@ module.exports =
 		classDeclarationOrExpression,
 		declarations,
 	}) => {
-		if (classDeclarationOrExpression.id || classDeclarationOrExpression.superClass)
+		const properties =
+			[
+				...createDependsUponProperty(),
+				...createIdProperty(),
+				...createItemsProperty(),
+			];
+
+		if (properties.length)
 			declarations.addDeclarationIn({
 				declaration:
-					{
-						...createDependsUponProperty(),
-						...createIdProperty(),
-						...createItemsProperty(),
-					},
+					Object.assign(
+						{},
+						...properties,
+					),
 				parent:
 					findIdentifiableParent(ancestors),
 			});
 
-		function createDependsUponProperty() {
-			return (
-				classDeclarationOrExpression.superClass
-				&&
-				{ dependsUpon: classDeclarationOrExpression.superClass.name }
-			);
+		function * createDependsUponProperty() {
+			if (classDeclarationOrExpression.superClass)
+				yield { dependsUpon: classDeclarationOrExpression.superClass.name };
 		}
 
-		function createIdProperty() {
-			return (
-				classDeclarationOrExpression.id
-				&&
-				{ id: classDeclarationOrExpression.id.name }
-			);
+		function * createIdProperty() {
+			if (classDeclarationOrExpression.id)
+				yield { id: classDeclarationOrExpression.id.name };
 		}
 
-		function createItemsProperty() {
+		function * createItemsProperty() {
 			const items =
 				stackItemsWhenMultiple({
 					items:
@@ -50,6 +50,7 @@ module.exports =
 						false,
 				});
 
-			return items && { items };
+			if (items)
+				yield { items };
 		}
 	};
