@@ -3,6 +3,7 @@ This library is free software, licensed under the terms of the GNU General Publi
 
 const
 	{ findIdentifiableParent } = require("./parentFunctionsFromAncestors"),
+	getParentFromAncestors = require("./getParentFromAncestors"),
 	stackItemsWhenMultiple = require("./stackItemsWhenMultiple");
 
 module.exports =
@@ -37,6 +38,12 @@ module.exports =
 		function * createIdProperty() {
 			if (classDeclarationOrExpression.id)
 				yield { id: classDeclarationOrExpression.id.name };
+			else {
+				const parent = getParentFromAncestors(ancestors);
+
+				if (parent.type === "VariableDeclarator")
+					yield { id: parent.id.name };
+			}
 		}
 
 		function * createItemsProperty() {
