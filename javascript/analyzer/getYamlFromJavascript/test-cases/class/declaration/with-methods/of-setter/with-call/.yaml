@@ -1,0 +1,5 @@
+- id: Class
+  items:
+    id: setter
+    type: method
+    dependsUpon: called
