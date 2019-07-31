@@ -29,8 +29,8 @@ module.exports =
 		return (
 			{
 				...forFunctions({
-					createDependsUponPropertyFor:
-						dependsUponIdentifiers.createPropertyFor,
+					createDependsUponPropertyForParent:
+						dependsUponIdentifiers.createPropertyForParent,
 					declarations,
 					hasUndeclaredReferenceTo:
 						undeclaredReferences.hasReferenceTo,
@@ -52,7 +52,9 @@ module.exports =
 
 		function getItemOrItems() {
 			const dependsUponProperty =
-				dependsUponIdentifiers.createPropertyFor(null);
+				dependsUponIdentifiers.createPropertyForParent(
+					{ parent: null },
+				);
 
 			const itemOrItems =
 				createFileItemOrItems({
@@ -93,8 +95,8 @@ module.exports =
 			ancestors,
 		) {
 			addFromCall({
-				addDependsUponIdentifierFrom:
-					dependsUponIdentifiers.addIdentifierFrom,
+				addDependsUponIdentifierToParent:
+					dependsUponIdentifiers.addIdentifierToParent,
 				addUndeclaredReference:
 					({ parent, reference }) =>
 						undeclaredReferences.addAncestorsAndParentOfReference({
@@ -123,6 +125,8 @@ module.exports =
 			addClass({
 				ancestors,
 				classDeclarationOrExpression,
+				createDependsUponPropertyForParent:
+					dependsUponIdentifiers.createPropertyForParent,
 				declarations,
 			});
 		}

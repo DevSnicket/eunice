@@ -9,7 +9,7 @@ const
 
 module.exports =
 	({
-		addDependsUponIdentifierFrom,
+		addDependsUponIdentifierToParent,
 		addUndeclaredReference,
 		callExpression,
 		findDeclarationAndParent,
@@ -55,9 +55,9 @@ module.exports =
 				identifier,
 			) {
 				if (isIdentifierRelevant())
-					addDependsUponIdentifierFrom({
+					addDependsUponIdentifierToParent({
 						identifier,
-						parent: parentFunctions && (parentFunctions.identifiable || null),
+						parent: getParent(),
 					});
 
 				function isIdentifierRelevant() {
@@ -68,6 +68,18 @@ module.exports =
 						&&
 						!isParameterOfAnyParentFunction(identifier)
 					);
+				}
+
+				function getParent() {
+					return whenIdentifiable() || null;
+
+					function whenIdentifiable() {
+						return (
+							parentFunctions
+							&&
+							parentFunctions.identifiable
+						);
+					}
 				}
 			}
 

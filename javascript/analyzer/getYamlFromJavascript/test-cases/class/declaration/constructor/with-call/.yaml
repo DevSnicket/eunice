@@ -1,0 +1,2 @@
+- id: Class
+  dependsUpon: called

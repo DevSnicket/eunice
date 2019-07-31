@@ -7,13 +7,13 @@ module.exports =
 
 		return (
 			{
-				addIdentifierFrom,
-				createPropertyFor,
+				addIdentifierToParent,
+				createPropertyForParent,
 				getGroupedByParent,
 			}
 		);
 
-		function addIdentifierFrom({
+		function addIdentifierToParent({
 			identifier,
 			parent,
 		}) {
@@ -25,22 +25,27 @@ module.exports =
 				dependsUponIdentifiersByParent.set(parent, new Set([ identifier ]));
 		}
 
-		function createPropertyFor(
+		function createPropertyForParent({
+			identifiers = [],
 			parent,
-		) {
-			const dependsUponIdentifiers = dependsUponIdentifiersByParent.get(parent);
+		}) {
+			const dependsUponIdentifiers =
+				[
+					...identifiers,
+					...dependsUponIdentifiersByParent.get(parent) || [],
+				];
 
 			dependsUponIdentifiersByParent.delete(parent);
 
 			return (
-				dependsUponIdentifiers
+				dependsUponIdentifiers.length
 				&&
 				{ dependsUpon: getFirstOrSort() }
 			);
 
 			function getFirstOrSort() {
 				return (
-					dependsUponIdentifiers.size === 1
+					dependsUponIdentifiers.length === 1
 					?
 					[ ...dependsUponIdentifiers ][0]
 					:

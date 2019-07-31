@@ -9,7 +9,7 @@ const
 
 module.exports =
 	({
-		createDependsUponPropertyFor,
+		createDependsUponPropertyForParent,
 		declarations,
 		hasUndeclaredReferenceTo,
 	}) => {
@@ -75,8 +75,8 @@ module.exports =
 			return (
 				createDeclarationForFunction({
 					dependsUponProperty:
-						createDependsUponPropertyFor(
-							functionDeclarationOrExpression,
+						createDependsUponPropertyForParent(
+							{ parent: functionDeclarationOrExpression },
 						),
 					functionDeclarationOrExpression,
 					hasUndeclaredReferenceTo,

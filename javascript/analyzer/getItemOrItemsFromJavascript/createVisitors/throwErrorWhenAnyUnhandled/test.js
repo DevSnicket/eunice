@@ -50,7 +50,7 @@ test(
 					dependsUponIdentifiers = createDependsUponIdentifiers(),
 					parent = parse(javascript);
 
-				dependsUponIdentifiers.addIdentifierFrom({
+				dependsUponIdentifiers.addIdentifierToParent({
 					identifier,
 					parent,
 				});
@@ -82,7 +82,7 @@ test(
 					dependsUponIdentifiers = createDependsUponIdentifiers(),
 					parent = parse(javascript);
 
-				dependsUponIdentifiers.addIdentifierFrom({
+				dependsUponIdentifiers.addIdentifierToParent({
 					identifier,
 					parent:
 						parent.body[0],
