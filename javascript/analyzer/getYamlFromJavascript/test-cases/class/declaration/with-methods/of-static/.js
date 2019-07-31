@@ -1,0 +1,3 @@
+class Class { 
+	static method() { }
+}
