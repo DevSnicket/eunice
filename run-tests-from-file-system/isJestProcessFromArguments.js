@@ -3,6 +3,8 @@ Licensed under the MIT license. See LICENSE file in the repository root for full
 
 /* istanbul ignore file: test would be a mirror of implementation */
 
+const path = require("path");
+
 module.exports =
 	argumentsOfProcess => isSecondArgumentJest(argumentsOfProcess[1]);
 
@@ -14,6 +16,6 @@ function isSecondArgumentJest(
 		||
 		argument.endsWith("jest.js")
 		||
-		argument.endsWith("jest-worker/build/child.js")
+		argument.endsWith(path.join("jest-worker", "build", "child.js"))
 	);
 }
