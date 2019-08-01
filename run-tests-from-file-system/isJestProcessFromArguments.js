@@ -17,5 +17,7 @@ function isSecondArgumentJest(
 		argument.endsWith("jest.js")
 		||
 		argument.endsWith(path.join("jest-worker", "build", "child.js"))
+		||
+		argument.endsWith(path.join("jest-worker", "build", "workers", "processChild.js"))
 	);
 }
