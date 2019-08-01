@@ -44,6 +44,8 @@ module.exports =
 					visitCallExpression,
 				Class:
 					visitClass,
+				NewExpression:
+					visitCallExpression,
 				VariableDeclaration:
 					visitVariableDeclaration,
 				getItemOrItems,
