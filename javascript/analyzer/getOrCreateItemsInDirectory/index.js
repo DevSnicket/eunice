@@ -14,133 +14,141 @@ module.exports =
 	({
 		directory,
 		ignoreDirectoryNames = null,
+		isClassFieldEnabled = false,
 		isReactJsxEnabled = false,
 	}) =>
-		getOrCreateItemsInRootedDirectory({
-			directory: "",
+		withOptionsAndRootDirectory({
 			ignoreDirectoryNames,
+			isClassFieldEnabled,
 			isReactJsxEnabled,
 			rootDirectory: directory,
-		});
+		})
+		.getOrCreateItemsInDirectory(
+			"",
+		);
 
-function getOrCreateItemsInRootedDirectory({
-	directory,
+function withOptionsAndRootDirectory({
 	ignoreDirectoryNames,
+	isClassFieldEnabled,
 	isReactJsxEnabled,
 	rootDirectory,
 }) {
-	const subDirectoryFull =
-		path.join(rootDirectory, directory);
+	return { getOrCreateItemsInDirectory };
 
-	return (
-		// flatMap isn't shimmed onto the return array of fs functions when running in Jest
-		flatMap(
-			fs.readdirSync(subDirectoryFull),
-			fileOrDirectory =>
-				createItemsFromFileOrSubdirectory(fileOrDirectory)
-				||
-				[],
-		)
-		.sort(compareItemIdentifiers)
-	);
-
-	function createItemsFromFileOrSubdirectory(
-		fileOrSubdirectory,
+	function getOrCreateItemsInDirectory(
+		directory,
 	) {
+		const subDirectoryFull =
+			path.join(rootDirectory, directory);
+
 		return (
-			createItemsWhenSubdirectory()
-			||
-			getOrCreateItemsWhenJavascriptFile()
+			// flatMap isn't shimmed onto the return array of fs functions when running in Jest
+			flatMap(
+				fs.readdirSync(subDirectoryFull),
+				fileOrDirectory =>
+					createItemsFromFileOrSubdirectory(fileOrDirectory)
+					||
+					[],
+			)
+			.sort(compareItemIdentifiers)
 		);
 
-		function getOrCreateItemsWhenJavascriptFile() {
-			const fileOrSubdirectoryPath =
-				path.parse(fileOrSubdirectory);
-
+		function createItemsFromFileOrSubdirectory(
+			fileOrSubdirectory,
+		) {
 			return (
-				isJavascript()
-				&&
-				[
-					getOrCreateFileItem({
-						directory,
-						filePath:
-							fileOrSubdirectoryPath,
-						itemOrItems:
-							getItemOrItemsFromJavascriptOrRethrowErrorWithPath(
-								readFile(),
-							),
-					}),
-				]
+				createItemsWhenSubdirectory()
+				||
+				getOrCreateItemsWhenJavascriptFile()
 			);
 
-			function isJavascript() {
-				return fileOrSubdirectoryPath.ext === ".js";
-			}
+			function getOrCreateItemsWhenJavascriptFile() {
+				const fileOrSubdirectoryPath =
+					path.parse(fileOrSubdirectory);
 
-			function getItemOrItemsFromJavascriptOrRethrowErrorWithPath(
-				javascript,
-			) {
-				try {
+				return (
+					isJavascript()
+					&&
+					[
+						getOrCreateFileItem({
+							directory,
+							filePath:
+								fileOrSubdirectoryPath,
+							itemOrItems:
+								getItemOrItemsFromJavascriptOrRethrowErrorWithPath(
+									readFile(),
+								),
+						}),
+					]
+				);
+
+				function isJavascript() {
+					return fileOrSubdirectoryPath.ext === ".js";
+				}
+
+				function getItemOrItemsFromJavascriptOrRethrowErrorWithPath(
+					javascript,
+				) {
+					try {
+						return (
+							getItemOrItemsFromJavascript({
+								isClassFieldEnabled,
+								isReactJsxEnabled,
+								javascript,
+							})
+						);
+					} catch (error) {
+						throw new Error(`Analysis of file "${path.join(directory, fileOrSubdirectory)}" raised the following error.\n\n${error.message}`);
+					}
+				}
+
+				function readFile() {
 					return (
-						getItemOrItemsFromJavascript({
-							isReactJsxEnabled,
-							javascript,
-						})
+						fs.readFileSync(
+							getFileOrSubdirectoryFull(),
+							"utf-8",
+						)
 					);
-				} catch (error) {
-					throw new Error(`Analysis of file "${path.join(directory, fileOrSubdirectory)}" raised the following error.\n\n${error.message}`);
 				}
 			}
 
-			function readFile() {
+			function createItemsWhenSubdirectory() {
 				return (
-					fs.readFileSync(
-						getFileOrSubdirectoryFull(),
-						"utf-8",
-					)
-				);
-			}
-		}
-
-		function createItemsWhenSubdirectory() {
-			return (
-				isDirectory()
-				&&
-				!isIgnored()
-				&&
-				getOrCreateItemsInRootedDirectory({
-					directory: path.join(directory, fileOrSubdirectory),
-					ignoreDirectoryNames,
-					isReactJsxEnabled,
-					rootDirectory,
-				})
-			);
-
-			function isIgnored() {
-				return (
-					ignoreDirectoryNames
+					isDirectory()
 					&&
-					ignoreDirectoryNames.includes(fileOrSubdirectory)
-				);
-			}
-
-			function isDirectory() {
-				return (
-					fs.lstatSync(
-						getFileOrSubdirectoryFull(),
+					!isIgnored()
+					&&
+					getOrCreateItemsInDirectory(
+						path.join(directory, fileOrSubdirectory),
 					)
-					.isDirectory()
+				);
+
+				function isIgnored() {
+					return (
+						ignoreDirectoryNames
+						&&
+						ignoreDirectoryNames.includes(fileOrSubdirectory)
+					);
+				}
+
+				function isDirectory() {
+					return (
+						fs.lstatSync(
+							getFileOrSubdirectoryFull(),
+						)
+						.isDirectory()
+					);
+				}
+			}
+
+			function getFileOrSubdirectoryFull() {
+				return (
+					path.join(
+						subDirectoryFull,
+						fileOrSubdirectory,
+					)
 				);
 			}
-		}
-
-		function getFileOrSubdirectoryFull() {
-			return (
-				path.join(
-					subDirectoryFull,
-					fileOrSubdirectory,
-				)
-			);
 		}
 	}
 }
