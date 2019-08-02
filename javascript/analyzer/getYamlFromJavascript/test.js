@@ -20,19 +20,47 @@ runTestsFromFileSystem({
 		process.argv,
 });
 
-if (typeof test !== "undefined")
+if (typeof test !== "undefined") {
+	test(
+		"Class field enabled and class with field value of literal returns class.",
+		() =>
+			expect(
+				getYamlFromJavascript({
+					isClassFieldEnabled: true,
+					javascript: "class Class { field = false; }",
+				}),
+			)
+			.toEqual(
+				"- Class",
+			),
+	);
+
 	test(
 		"React JSX enabled and function call in content of element returns depends upon function.",
 		() =>
 			expect(
-				getYamlFromJavascript(
-					{
-						isReactJsxEnabled: true,
-						javascript: "<element>{called()}</element>",
-					},
-				),
+				getYamlFromJavascript({
+					isReactJsxEnabled: true,
+					javascript: "<element>{called()}</element>",
+				}),
 			)
 			.toEqual(
 				"dependsUpon: called",
 			),
 	);
+
+	test(
+		"Class field and React JSX enabled, and class with field value of literal in element returns class.",
+		() =>
+			expect(
+				getYamlFromJavascript({
+					isClassFieldEnabled: true,
+					isReactJsxEnabled: true,
+					javascript: "<element>{class Class { field = false; }}</element>",
+				}),
+			)
+			.toEqual(
+				"- Class",
+			),
+	);
+}

@@ -8,12 +8,18 @@ const
 
 module.exports =
 	({
+		isClassFieldEnabled,
 		isReactJsxEnabled,
 		javascript,
 	}) => {
 		const
-			{ Parser, walkBaseVisitor } = createAcornParserAndWalkBaseVisitor({ isReactJsxEnabled }),
-			visitors = createVisitors();
+			{ Parser, walkBaseVisitor } =
+				createAcornParserAndWalkBaseVisitor({
+					isClassFieldEnabled,
+					isReactJsxEnabled,
+				}),
+			visitors =
+				createVisitors();
 
 		walk.ancestor(
 			Parser.parse(

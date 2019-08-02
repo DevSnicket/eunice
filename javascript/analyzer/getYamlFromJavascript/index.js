@@ -7,11 +7,13 @@ const
 
 module.exports =
 	({
+		isClassFieldEnabled = false,
 		isReactJsxEnabled = false,
 		javascript,
 	}) =>
 		getYamlForItemOrItems(
 			getItemOrItemsFromJavascript({
+				isClassFieldEnabled,
 				isReactJsxEnabled,
 				javascript,
 			}),
