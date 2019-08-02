@@ -40,13 +40,18 @@ module.exports =
 				testCase,
 			) {
 				test({
-					actual:
-						getActualForTestCase(testCase),
-					expected:
-						readTestCaseFile({
-							fileName: expectedFileName,
-							testCase,
-						}),
+					getActualAndExpected:
+						() => (
+							{
+								actual:
+									getActualForTestCase(testCase),
+								expected:
+									readTestCaseFile({
+										fileName: expectedFileName,
+										testCase,
+									}),
+							}
+						),
 					name:
 						testCase,
 				});

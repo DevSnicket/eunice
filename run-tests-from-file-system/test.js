@@ -20,7 +20,23 @@ describe(
 		});
 
 		test(
-			"Calls action with test case file content.",
+			"Action not called when get actual and expected is not called by test.",
+			() => {
+				const action = jest.fn();
+
+				runTestsAsInJestProcess({
+					action,
+					subdirectory: "multiple",
+					test: () => null,
+				});
+
+				expect(action)
+				.toBeCalledTimes(0);
+			},
+		);
+
+		test(
+			"Action called with test case file content when get actual and expected called by test.",
 			() => {
 				const testCaseFileContents = [];
 
@@ -31,7 +47,7 @@ describe(
 					subdirectory:
 						"multiple",
 					test:
-						() => null,
+						({ getActualAndExpected }) => getActualAndExpected(),
 				});
 
 				expect(

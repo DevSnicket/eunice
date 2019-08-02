@@ -3,13 +3,15 @@ Licensed under the MIT license. See LICENSE file in the repository root for full
 
 module.exports =
 	({
-		actual,
-		expected,
+		getActualAndExpected,
 		name,
 	}) =>
 		test(
 			name,
-			() =>
+			() => {
+				const { actual, expected } = getActualAndExpected();
+
 				expect(actual)
-				.toBe(expected),
+				.toBe(expected);
+			},
 		);
