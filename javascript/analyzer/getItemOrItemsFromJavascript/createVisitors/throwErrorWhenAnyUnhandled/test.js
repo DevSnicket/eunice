@@ -10,18 +10,17 @@ const
 test(
 	"Unhandled declaration throws error.",
 	() => {
-		const identifier = "variable";
-
-		const javascript = `const ${identifier} = null;`;
+		const
+			identifier = "variable",
+			parent = { end: 2, start: 1 };
 
 		expect(
 			() => {
 				const
-					declarations = createDeclarations(),
-					parent = parse(javascript);
+					declarations = createDeclarations();
 
 				declarations.addDeclarationsIn({
-					declarations: parent.body[0].declarations,
+					declarations: [ { id: identifier } ],
 					parent,
 				});
 
@@ -33,7 +32,7 @@ test(
 				});
 			},
 		)
-		.toThrowError(`Unhandled declarations:\nExpression from character 0 to ${javascript.length} contains unhandled identifiers of "${identifier}"`);
+		.toThrowError(`Unhandled declarations:\nExpression from character ${parent.start} to ${parent.end} contains unhandled identifiers of "${identifier}"`);
 	},
 );
 

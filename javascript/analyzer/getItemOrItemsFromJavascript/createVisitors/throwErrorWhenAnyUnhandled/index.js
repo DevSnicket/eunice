@@ -30,7 +30,7 @@ function formatMessageForDeclarations(
 	return (
 		formatMessageForTypeWhenAny({
 			itemIdentifierSelector:
-				declaration => declaration.id.name,
+				declaration => declaration.id,
 			itemsSelector:
 				hasItems => hasItems.declarations,
 			parentsWithItems:
