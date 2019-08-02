@@ -3,61 +3,87 @@ This library is free software, licensed under the terms of the GNU General Publi
 
 const
 	createDependsUponPropertyFromBaseAndConstructor = require("./createDependsUponPropertyFromBaseAndConstructor"),
+	createItemsProperty = require("./createItemsProperty"),
 	{ findIdentifiableParent } = require("../parentFunctionsFromAncestors"),
-	getParentFromAncestors = require("../getParentFromAncestors"),
-	stackItemsWhenMultiple = require("../stackItemsWhenMultiple");
+	getParentFromAncestors = require("../getParentFromAncestors");
 
 module.exports =
 	({
 		ancestors,
 		classDeclarationOrExpression,
 		createDependsUponPropertyForParent,
-		declarations,
+		declarations:
+			{
+				addDeclarationIn,
+				createItemsForAndRemoveDeclarationsIn,
+			},
 	}) => {
-		const properties =
-			[
-				...createDependsUponPropertyFromBaseAndConstructor({
-					classDeclarationOrExpression,
-					createDependsUponPropertyForParent,
-				}),
-				...createIdProperty(),
-				...createItemsProperty(),
-			];
+		const constructor =
+			findConstructorInClass(
+				classDeclarationOrExpression,
+			);
 
-		if (properties.length)
-			declarations.addDeclarationIn({
-				declaration:
-					Object.assign(
-						{},
-						...properties,
-					),
-				parent:
-					findIdentifiableParent(ancestors),
-			});
-
-		function * createIdProperty() {
-			if (classDeclarationOrExpression.id)
-				yield { id: classDeclarationOrExpression.id.name };
-			else {
-				const parent = getParentFromAncestors(ancestors);
-
-				if (parent.type === "VariableDeclarator")
-					yield { id: parent.id.name };
-			}
-		}
-
-		function * createItemsProperty() {
-			const items =
-				stackItemsWhenMultiple({
-					items:
-						declarations.createItemsForAndRemoveDeclarationsIn(
-							classDeclarationOrExpression,
-						),
-					withSingleInArray:
-						false,
-				});
-
-			if (items)
-				yield { items };
-		}
+		addWhenAnyProperties({
+			addDeclarationIn,
+			ancestors,
+			properties:
+				[
+					...createIdentifierProperty({
+						ancestors,
+						identifier:
+							classDeclarationOrExpression.id,
+					}),
+					...createDependsUponPropertyFromBaseAndConstructor({
+						constructor,
+						createDependsUponPropertyForParent,
+						superClass:
+							classDeclarationOrExpression.superClass,
+					}),
+					...createItemsProperty({
+						classDeclarationOrExpression,
+						constructor,
+						createItemsForAndRemoveDeclarationsIn,
+					}),
+				],
+		});
 	};
+
+function findConstructorInClass(
+	{ body },
+) {
+	return (
+		body.body
+		.find(({ kind }) => kind === "constructor")
+	);
+}
+
+function * createIdentifierProperty({
+	ancestors,
+	identifier,
+}) {
+	if (identifier)
+		yield { id: identifier.name };
+	else {
+		const parent = getParentFromAncestors(ancestors);
+
+		if (parent.type === "VariableDeclarator")
+			yield { id: parent.id.name };
+	}
+}
+
+function addWhenAnyProperties({
+	addDeclarationIn,
+	ancestors,
+	properties,
+}) {
+	if (properties.length)
+		addDeclarationIn({
+			declaration:
+				Object.assign(
+					{},
+					...properties,
+				),
+			parent:
+				findIdentifiableParent(ancestors),
+		});
+}

@@ -3,14 +3,13 @@ This library is free software, licensed under the terms of the GNU General Publi
 
 module.exports =
 	({
-		classDeclarationOrExpression,
+		constructor,
 		createDependsUponPropertyForParent,
+		superClass,
 	}) => {
 		return whenHasConstructor() || whenHasBase();
 
 		function whenHasConstructor() {
-			const constructor = findConstructor();
-
 			return (
 				constructor
 				&&
@@ -41,13 +40,6 @@ module.exports =
 						yield base;
 				}
 			}
-
-			function findConstructor() {
-				return (
-					classDeclarationOrExpression.body.body
-					.find(({ kind }) => kind === "constructor")
-				);
-			}
 		}
 
 		function * whenHasBase() {
@@ -59,9 +51,9 @@ module.exports =
 
 		function getBase() {
 			return (
-				classDeclarationOrExpression.superClass
+				superClass
 				&&
-				classDeclarationOrExpression.superClass.name
+				superClass.name
 			);
 		}
 	};
