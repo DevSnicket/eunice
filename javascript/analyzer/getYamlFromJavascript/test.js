@@ -21,18 +21,37 @@ runTestsFromFileSystem({
 });
 
 if (typeof test !== "undefined") {
-	test(
-		"Class field enabled and class with field value of literal returns class.",
-		() =>
-			expect(
-				getYamlFromJavascript({
-					isClassFieldEnabled: true,
-					javascript: "class Class { field = false; }",
-				}),
-			)
-			.toEqual(
-				"- Class",
-			),
+	describe(
+		"Proposals in stage 3 enabled",
+		() => {
+			test(
+				"Class with field value of literal returns class.",
+				() =>
+					expect(
+						getYamlFromJavascript({
+							isProposalsInStage3Enabled: true,
+							javascript: "class Class { field = false; }",
+						}),
+					)
+					.toEqual(
+						"- Class",
+					),
+			);
+
+			test(
+				"Class with static field value of literal returns class.",
+				() =>
+					expect(
+						getYamlFromJavascript({
+							isProposalsInStage3Enabled: true,
+							javascript: "class Class { static field = false; }",
+						}),
+					)
+					.toEqual(
+						"- Class",
+					),
+			);
+		},
 	);
 
 	test(
@@ -50,11 +69,11 @@ if (typeof test !== "undefined") {
 	);
 
 	test(
-		"Class field and React JSX enabled, and class with field value of literal in element returns class.",
+		"Proposals in stage 3 and React JSX enabled, and class with field value of literal in element returns class.",
 		() =>
 			expect(
 				getYamlFromJavascript({
-					isClassFieldEnabled: true,
+					isProposalsInStage3Enabled: true,
 					isReactJsxEnabled: true,
 					javascript: "<element>{class Class { field = false; }}</element>",
 				}),

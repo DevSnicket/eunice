@@ -4,7 +4,7 @@ This library is free software, licensed under the terms of the GNU General Publi
 module.exports =
 	({
 		Parser,
-		isClassFieldEnabled,
+		isProposalsInStage3Enabled,
 		walkBaseVisitor,
 	}) => {
 		return (
@@ -18,7 +18,7 @@ module.exports =
 
 		function whenEnabled() {
 			return (
-				isClassFieldEnabled
+				isProposalsInStage3Enabled
 				&&
 				{
 					Parser: extendParser(),
@@ -30,9 +30,9 @@ module.exports =
 		function extendParser() {
 			return (
 				Parser.extend(
-					// Acorn JSX is a peer dependency and this require is conditional
+					// Acorn Stage 3 is a peer dependency and this require is conditional
 					// eslint-disable-next-line global-require
-					require("acorn-class-fields"),
+					require("acorn-stage3"),
 				)
 			);
 		}

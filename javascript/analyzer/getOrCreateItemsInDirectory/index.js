@@ -14,12 +14,12 @@ module.exports =
 	({
 		directory,
 		ignoreDirectoryNames = null,
-		isClassFieldEnabled = false,
+		isProposalsInStage3Enabled = false,
 		isReactJsxEnabled = false,
 	}) =>
 		withOptionsAndRootDirectory({
 			ignoreDirectoryNames,
-			isClassFieldEnabled,
+			isProposalsInStage3Enabled,
 			isReactJsxEnabled,
 			rootDirectory: directory,
 		})
@@ -29,7 +29,7 @@ module.exports =
 
 function withOptionsAndRootDirectory({
 	ignoreDirectoryNames,
-	isClassFieldEnabled,
+	isProposalsInStage3Enabled,
 	isReactJsxEnabled,
 	rootDirectory,
 }) {
@@ -92,7 +92,7 @@ function withOptionsAndRootDirectory({
 					try {
 						return (
 							getItemOrItemsFromJavascript({
-								isClassFieldEnabled,
+								isProposalsInStage3Enabled,
 								isReactJsxEnabled,
 								javascript,
 							})

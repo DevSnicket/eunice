@@ -24,9 +24,9 @@
 		"@devsnicket/eunice-test-harnesses": "7.6.0",
 		"@types/jest": "24.0.13",
 		"@types/node": "10.14.7",
-		"acorn-class-fields": "0.3.1",
 		"acorn-jsx": "5.0.1",
 		"acorn-jsx-walk": "2.0.0",
+		"acorn-stage3": "2.0.0",
 		"babel-loader": "8.0.6",
 		"cspell": "4.0.21",
 		"eslint": "5.16.0",
@@ -77,9 +77,9 @@
 	"main": "dist/index.js",
 	"name": "@devsnicket/eunice-javascript-analyzer",
 	"peerDependencies": {
-		"acorn-class-fields": "^0.3.1",
 		"acorn-jsx": "^5.0.1",
-		"acorn-jsx-walk": "^2.0.0"
+		"acorn-jsx-walk": "^2.0.0",
+		"acorn-stage3": "^2.0.0"
 	},
 	"publishConfig": {
 		"access": "public"
@@ -97,5 +97,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./dist/**/*\" ! -path \"./harness/output/*\" ! -path \"./node_modules/**/*\" ! -path \"**/test-cases/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest --runInBand"
 	},
-	"version": "5.8.0"
+	"version": "6.0.0"
 }

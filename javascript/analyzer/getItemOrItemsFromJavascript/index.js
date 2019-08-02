@@ -8,14 +8,14 @@ const
 
 module.exports =
 	({
-		isClassFieldEnabled,
+		isProposalsInStage3Enabled,
 		isReactJsxEnabled,
 		javascript,
 	}) => {
 		const
 			{ Parser, walkBaseVisitor } =
 				createAcornParserAndWalkBaseVisitor({
-					isClassFieldEnabled,
+					isProposalsInStage3Enabled,
 					isReactJsxEnabled,
 				}),
 			visitors =

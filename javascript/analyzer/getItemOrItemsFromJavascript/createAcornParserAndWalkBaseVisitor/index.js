@@ -4,19 +4,19 @@ This library is free software, licensed under the terms of the GNU General Publi
 const
 	{ Parser } = require("acorn"),
 	{ base: walkBaseVisitor } = require("acorn-walk"),
-	extendWithClassFields = require("./extendWithClassFields"),
+	extendWithProposalsInStageThree = require("./extendWithProposalsInStageThree"),
 	extendWithReactJsx = require("./extendWithReactJsx");
 
 module.exports =
 	({
-		isClassFieldEnabled,
+		isProposalsInStage3Enabled,
 		isReactJsxEnabled,
 	}) =>
-		extendWithClassFields({
-			isClassFieldEnabled,
-			...extendWithReactJsx({
+		extendWithReactJsx({
+			isReactJsxEnabled,
+			...extendWithProposalsInStageThree({
 				Parser,
-				isReactJsxEnabled,
+				isProposalsInStage3Enabled,
 				walkBaseVisitor,
 			}),
 		});
