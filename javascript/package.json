@@ -8,13 +8,13 @@
 	},
 	"description": "Analyzes JavaScript on the file system, processes the analysis and renders the processed analysis to an SVG.",
 	"dependencies": {
-		"@devsnicket/eunice-javascript-analyzer": "^5.8.0",
+		"@devsnicket/eunice-javascript-analyzer": "^6.0.0",
 		"@devsnicket/eunice-processors": "^8.5.1",
 		"@devsnicket/eunice-renderer": "^5.3.0",
 		"@devsnicket/eunice-renderer-test-harness": ">=2.1.0",
-		"acorn-class-fields": "0.3.1",
 		"acorn-jsx": "5.0.1",
 		"acorn-jsx-walk": "2.0.0",
+		"acorn-stage3": "2.0.0",
 		"array.prototype.flatmap": "1.2.1",
 		"js-yaml": "3.13.1",
 		"minimist": "1.2.0"

@@ -110,7 +110,7 @@ function getYamlFromJavascriptWithOptionalEnabled(
 ) {
 	return (
 		getYamlFromJavascript({
-			isClassFieldEnabled: true,
+			isProposalsInStage3Enabled: true,
 			isReactJsxEnabled: true,
 			javascript,
 		})

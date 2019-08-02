@@ -11,7 +11,7 @@ module.exports =
 	({
 		directoryToCreateOrAddToStacksFrom,
 		ignoreDirectoryNames,
-		isClassFieldEnabled,
+		isProposalsInStage3Enabled,
 		isReactJsxEnabled,
 		packagePrefixAndScope,
 		sources,
@@ -40,7 +40,7 @@ module.exports =
 				analyzer.getOrCreateItemsInDirectory({
 					directory,
 					ignoreDirectoryNames,
-					isClassFieldEnabled,
+					isProposalsInStage3Enabled,
 					isReactJsxEnabled,
 				});
 
