@@ -82,10 +82,9 @@ function createInitialStateFromJavascript(
 		{
 			javascript,
 			yaml:
-				getYamlFromJavascript({
-					isReactJsxEnabled: true,
+				getYamlFromJavascriptWithOptionalEnabled(
 					javascript,
-				}),
+				),
 		}
 	);
 }
@@ -98,12 +97,23 @@ function createYamlStateFromJavascript(
 			yaml:
 				callOrGetMessageOnError(
 					() =>
-						getYamlFromJavascript({
-							isReactJsxEnabled: true,
+						getYamlFromJavascriptWithOptionalEnabled(
 							javascript,
-						}),
+						),
 				),
 		}
+	);
+}
+
+function getYamlFromJavascriptWithOptionalEnabled(
+	javascript,
+) {
+	return (
+		getYamlFromJavascript({
+			isClassFieldEnabled: true,
+			isReactJsxEnabled: true,
+			javascript,
+		})
 	);
 }
 

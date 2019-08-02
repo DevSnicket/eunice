@@ -9,6 +9,7 @@ module.exports =
 	({
 		directories = ".",
 		ignoreDirectoryNames,
+		isClassFieldEnabled,
 		isHtmlSingleFile,
 		isReactJsxEnabled,
 		outputBaseFileName,
@@ -23,6 +24,7 @@ module.exports =
 			...restOfOptions,
 			ignoreDirectoryNames:
 				ensureArray(ignoreDirectoryNames),
+			isClassFieldEnabled,
 			isHtmlSingleFile:
 				isHtmlSingleFile && isHtmlSingleFile === "true",
 			isReactJsxEnabled,
