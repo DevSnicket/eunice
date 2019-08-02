@@ -24,7 +24,7 @@
 		"@babel/preset-env": "7.4.5",
 		"@devsnicket/eunice-call-with-process-standard-streams": "*",
 		"@devsnicket/eunice-dependency-and-structure": ">=2.11.0",
-		"@devsnicket/eunice-run-tests-from-file-system": "*",
+		"@devsnicket/eunice-run-tests-from-file-system": "1.7.0",
 		"@devsnicket/eunice-test-harnesses": ">=7.6.0",
 		"@devsnicket/eunice-test-harnesses-processor-plugins": "*",
 		"@devsnicket/plugin-discovery-commonjs-babel-plugin": "1.11.1",
