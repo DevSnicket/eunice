@@ -28,11 +28,10 @@ const
 
 module.exports =
 	({
+		babelParserPlugins,
 		directoryToCreateOrAddToStacksFrom = null,
 		ignoreDirectoryNames = ignoreDirectoryNamesDefault,
 		isHtmlSingleFile = true,
-		isProposalsInStage3Enabled = true,
-		isReactJsxEnabled = true,
 		outputPath,
 		packages = null,
 		sources,
@@ -43,10 +42,9 @@ module.exports =
 			yaml:
 				formatYaml(
 					analyzeAndProcess({
+						babelParserPlugins,
 						directoryToCreateOrAddToStacksFrom,
 						ignoreDirectoryNames,
-						isProposalsInStage3Enabled,
-						isReactJsxEnabled,
 						packagePrefixAndScope:
 							packages,
 						sources:

@@ -105,9 +105,9 @@ To name the output files differently or in a different directory:
 npx @devsnicket/eunice --outputBaseFileName=eunice-file --outputDirectoryPath=eunice-directory
 ```
 
-[React JSX](https://reactjs.org/docs/introducing-jsx.html) syntax is supported by default, by using [acorn-jsx](https://github.com/RReverser/acorn-jsx) and [acorn-jsx-walk](https://github.com/sderosiaux/acorn-jsx-walk), but can be disabled:
+The [Babel parser plugins](https://babeljs.io/docs/en/babel-parser#plugins) enabled by default are listed [here](babelParserPluginsDefault.js). To override:
 ```bash
-npx @devsnicket/eunice --isReactJsxEnabled=false
+npx @devsnicket/eunice --babelParserPlugins=flow --babelParserPlugins=jsx
 ```
 
 ## Dogfooding

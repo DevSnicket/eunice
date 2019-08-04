@@ -7,11 +7,10 @@ const
 
 module.exports =
 	({
+		babelParserPlugins,
 		directories = ".",
 		ignoreDirectoryNames,
 		isHtmlSingleFile,
-		isProposalsInStage3Enabled,
-		isReactJsxEnabled,
 		outputBaseFileName,
 		outputDirectoryPath,
 		packageNames,
@@ -22,12 +21,12 @@ module.exports =
 	}) => (
 		{
 			...restOfOptions,
+			babelParserPlugins:
+				ensureArray(babelParserPlugins),
 			ignoreDirectoryNames:
 				ensureArray(ignoreDirectoryNames),
 			isHtmlSingleFile:
 				isHtmlSingleFile && isHtmlSingleFile === "true",
-			isProposalsInStage3Enabled,
-			isReactJsxEnabled,
 			outputPath:
 				createOutputPath({
 					outputBaseFileName,

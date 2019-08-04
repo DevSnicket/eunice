@@ -3,16 +3,16 @@ This library is free software, licensed under the terms of the GNU General Publi
 
 const
 	analyzer = require("@devsnicket/eunice-javascript-analyzer"),
+	babelParserPluginsDefault = require("../../babelParserPluginsDefault"),
 	{ stacking: { createOrAddToStacksUsingFileSystem } } = require("@devsnicket/eunice-processors"),
 	path = require("path"),
 	processItems = require("./processItems");
 
 module.exports =
 	({
+		babelParserPlugins = babelParserPluginsDefault,
 		directoryToCreateOrAddToStacksFrom,
 		ignoreDirectoryNames,
-		isProposalsInStage3Enabled,
-		isReactJsxEnabled,
 		packagePrefixAndScope,
 		sources,
 	}) => {
@@ -38,10 +38,9 @@ module.exports =
 		}) {
 			const items =
 				analyzer.getOrCreateItemsInDirectory({
+					babelParserPlugins,
 					directory,
 					ignoreDirectoryNames,
-					isProposalsInStage3Enabled,
-					isReactJsxEnabled,
 				});
 
 			return processWhenAnyItems() || [];
