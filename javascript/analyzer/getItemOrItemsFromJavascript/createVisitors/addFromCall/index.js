@@ -112,15 +112,36 @@ module.exports =
 					parentFunction,
 				) {
 					return (
-						parentFunction.params.some(
-							parameter =>
-								parameter.type === "ObjectPattern"
-								?
-								parameter.properties.some(property => getPropertyName(property) === name)
-								:
-								parameter.name === name,
-						)
+						parentFunction.params.some(isParameter)
 					);
+				}
+
+				function isParameter(
+					parameter,
+				) {
+					return (
+						whenObject()
+						||
+						whenRest()
+						||
+						parameter.name === name
+					);
+
+					function whenObject() {
+						return (
+							parameter.type === "ObjectPattern"
+							&&
+							parameter.properties.some(property => getPropertyName(property) === name)
+						);
+					}
+
+					function whenRest() {
+						return (
+							parameter.type === "RestElement"
+							&&
+							parameter.argument.name === name
+						);
+					}
 				}
 			}
 		}
