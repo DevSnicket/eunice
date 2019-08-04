@@ -42,7 +42,9 @@ module.exports =
 					visitAssignmentExpression,
 				CallExpression:
 					visitCallExpression,
-				Class:
+				ClassDeclaration:
+					visitClass,
+				ClassExpression:
 					visitClass,
 				NewExpression:
 					visitCallExpression,

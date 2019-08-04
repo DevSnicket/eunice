@@ -4,8 +4,8 @@ This library is free software, licensed under the terms of the GNU General Publi
 const
 	createDeclarations = require("../createDeclarations"),
 	createDependsUponIdentifiers = require("../createDependsUponIdentifiers"),
-	{ parse } = require("acorn"),
-	throwErrorWhenAnyUnhandled = require(".");
+	{ parse } = require("@babel/parser"),
+	throwErrorWhenAnyUnhandled = require("../throwErrorWhenAnyUnhandled");
 
 test(
 	"Unhandled declaration throws error.",
@@ -84,7 +84,7 @@ test(
 				dependsUponIdentifiers.addIdentifierToParent({
 					identifier,
 					parent:
-						parent.body[0],
+						parent.program.body[0],
 				});
 
 				throwErrorWhenAnyUnhandled({
