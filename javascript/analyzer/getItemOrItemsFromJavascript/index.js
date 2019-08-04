@@ -2,15 +2,13 @@
 This library is free software, licensed under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 const
-	createPlugins = require("./createPlugins"),
 	createVisitors = require("./createVisitors"),
 	parser = require("@babel/parser"),
 	walk = require("./walk");
 
 module.exports =
-	({
-		isProposalsInStage3Enabled,
-		isReactJsxEnabled,
+	(/** @type {import("./Parameter.d")} */{
+		babelParserPlugins,
 		javascript,
 	}) => {
 		const visitors = createVisitors();
@@ -20,11 +18,12 @@ module.exports =
 				removeUnixShebangForNode(javascript),
 				{
 					plugins:
-						createPlugins({
-							isProposalsInStage3Enabled,
-							isReactJsxEnabled,
-						}),
-					sourceType: "module",
+						[
+							"estree",
+							...babelParserPlugins || [],
+						],
+					sourceType:
+						"module",
 				},
 			),
 			visitors,

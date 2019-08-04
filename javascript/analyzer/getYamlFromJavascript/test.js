@@ -22,14 +22,14 @@ runTestsFromFileSystem({
 
 if (typeof test !== "undefined") {
 	describe(
-		"Proposals in stage 3 enabled",
+		"Class properties proposal enabled",
 		() => {
 			test(
 				"Class with field value of literal returns class.",
 				() =>
 					expect(
 						getYamlFromJavascript({
-							isProposalsInStage3Enabled: true,
+							babelParserPlugins: [ "classProperties" ],
 							javascript: "class Class { field = false; }",
 						}),
 					)
@@ -43,7 +43,7 @@ if (typeof test !== "undefined") {
 				() =>
 					expect(
 						getYamlFromJavascript({
-							isProposalsInStage3Enabled: true,
+							babelParserPlugins: [ "classProperties" ],
 							javascript: "class Class { static field = false; }",
 						}),
 					)
@@ -59,27 +59,12 @@ if (typeof test !== "undefined") {
 		() =>
 			expect(
 				getYamlFromJavascript({
-					isReactJsxEnabled: true,
+					babelParserPlugins: [ "jsx" ],
 					javascript: "<element>{called()}</element>",
 				}),
 			)
 			.toEqual(
 				"dependsUpon: called",
-			),
-	);
-
-	test(
-		"Proposals in stage 3 and React JSX enabled, and class with field value of literal in element returns class.",
-		() =>
-			expect(
-				getYamlFromJavascript({
-					isProposalsInStage3Enabled: true,
-					isReactJsxEnabled: true,
-					javascript: "<element>{class Class { field = false; }}</element>",
-				}),
-			)
-			.toEqual(
-				"- Class",
 			),
 	);
 }

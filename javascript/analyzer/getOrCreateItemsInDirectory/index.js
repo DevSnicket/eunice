@@ -11,16 +11,14 @@ const
 flatMap.shim();
 
 module.exports =
-	({
+	(/** @type {import("./Parameter.d")} */{
+		babelParserPlugins = null,
 		directory,
 		ignoreDirectoryNames = null,
-		isProposalsInStage3Enabled = false,
-		isReactJsxEnabled = false,
 	}) =>
 		withOptionsAndRootDirectory({
+			babelParserPlugins,
 			ignoreDirectoryNames,
-			isProposalsInStage3Enabled,
-			isReactJsxEnabled,
 			rootDirectory: directory,
 		})
 		.getOrCreateItemsInDirectory(
@@ -28,9 +26,8 @@ module.exports =
 		);
 
 function withOptionsAndRootDirectory({
+	babelParserPlugins,
 	ignoreDirectoryNames,
-	isProposalsInStage3Enabled,
-	isReactJsxEnabled,
 	rootDirectory,
 }) {
 	return { getOrCreateItemsInDirectory };
@@ -92,8 +89,7 @@ function withOptionsAndRootDirectory({
 					try {
 						return (
 							getItemOrItemsFromJavascript({
-								isProposalsInStage3Enabled,
-								isReactJsxEnabled,
+								babelParserPlugins,
 								javascript,
 							})
 						);

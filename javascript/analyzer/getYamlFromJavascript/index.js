@@ -6,15 +6,8 @@ const
 	getYamlForItemOrItems = require("../getYamlForItemOrItems");
 
 module.exports =
-	({
-		isProposalsInStage3Enabled = false,
-		isReactJsxEnabled = false,
-		javascript,
-	}) =>
+	/** @param {import("../getItemOrItemsFromJavascript/Parameter.d")} parameter */
+	parameter =>
 		getYamlForItemOrItems(
-			getItemOrItemsFromJavascript({
-				isProposalsInStage3Enabled,
-				isReactJsxEnabled,
-				javascript,
-			}),
+			getItemOrItemsFromJavascript(parameter),
 		);
