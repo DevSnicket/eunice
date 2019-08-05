@@ -41,10 +41,11 @@ function withVisitors(
 			nodeValue,
 		) {
 			if (nodeValue)
-				if (Array.isArray(nodeValue))
+				if (Array.isArray(nodeValue)) {
 					for (const childNode of nodeValue)
-						visit(childNode);
-				else
+						if (childNode)
+							visit(childNode);
+				} else
 					visit(nodeValue);
 		}
 
