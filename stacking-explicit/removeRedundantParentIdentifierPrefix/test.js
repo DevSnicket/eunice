@@ -29,7 +29,8 @@ test.each(
 		[
 			{
 				id: "grandparent",
-				items: { id: "grandparent/parent", items: "grandparent/parent/child" } },
+				items: { id: "grandparent/parent", items: "grandparent/parent/child" },
+			},
 			{
 				id: "grandparent",
 				items: { id: "parent", items: "child" },
