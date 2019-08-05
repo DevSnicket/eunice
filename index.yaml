@@ -103,8 +103,8 @@
                         - - id: analyzeAndProcessSource
                             dependsUpon:
                               - analyzer
+                              - babelParserPlugins
                               - ignoreDirectoryNames
-                              - isReactJsxEnabled
                               - processWhenAnyItems
                             items:
                               - - id: processWhenAnyItems
@@ -124,11 +124,11 @@
                             dependsUpon:
                               - createOrAddToStacksUsingFileSystem
                               - directoryToCreateOrAddToStacksFrom
-                        - - id: directoryToCreateOrAddToStacksFrom
+                        - - id: babelParserPlugins
+                            type: parameter
+                          - id: directoryToCreateOrAddToStacksFrom
                             type: parameter
                           - id: ignoreDirectoryNames
-                            type: parameter
-                          - id: isReactJsxEnabled
                             type: parameter
                           - id: packagePrefixAndScope
                             type: parameter
@@ -207,6 +207,7 @@
                                         items:
                                           - - id: removeIndexFileSuffix
                                               dependsUpon:
+                                                - RegExp
                                                 - getIdentifierSeparatorEscaped
                                                 - replaceIdentifiers
                                               items:
@@ -555,6 +556,8 @@
                           type: variable
                       - - expect
                         - test
+        - id: babelParserPluginsDefault
+          type: file
 - - id: javascript-analyzer
     type: file
     items:
@@ -639,14 +642,26 @@
                     items: nestedInCallee
             - id: webpack.config
               type: file
-              dependsUpon:
-                id: test-harnesses
-                items:
-                  - createWebpackConfiguration
-                  - id: codeEditor
-                    items:
-                      id: serviceWorkers
-                      items: createWebpackEntryForLanguages
+              items:
+                - - id: webpack.config
+                    dependsUpon:
+                      - RegExp
+                      - createCodeEditorWebpackEntryForLanguages
+                      - createWebpackConfiguration
+                - - id: createCodeEditorWebpackEntryForLanguages
+                    type: variable
+                    dependsUpon:
+                      id: test-harnesses
+                      items:
+                        id: codeEditor
+                        items:
+                          id: serviceWorkers
+                          items: createWebpackEntryForLanguages
+                  - id: createWebpackConfiguration
+                    type: variable
+                    dependsUpon:
+                      id: test-harnesses
+                      items: createWebpackConfiguration
       - - id: getOrCreateItemsInDirectory
           type: file
           dependsUpon: array.prototype.flatmap
@@ -682,83 +697,85 @@
                   - - expect
                     - test
             - - id: getOrCreateItemsInDirectory
-                dependsUpon: getOrCreateItemsInRootedDirectory
-            - - id: getOrCreateItemsInRootedDirectory
-                dependsUpon:
-                  - createItemsFromFileOrSubdirectory
-                  - flatMap
-                  - fs
-                  - path
+                dependsUpon: withOptionsAndRootDirectory
+            - - id: withOptionsAndRootDirectory
                 items:
-                  - - id: createItemsFromFileOrSubdirectory
+                  - - id: getOrCreateItemsInDirectory
                       dependsUpon:
-                        - createItemsWhenSubdirectory
-                        - getOrCreateItemsWhenJavascriptFile
+                        - createItemsFromFileOrSubdirectory
+                        - flatMap
+                        - fs
+                        - path
+                        - rootDirectory
                       items:
-                        - - id: getOrCreateItemsWhenJavascriptFile
+                        - - id: createItemsFromFileOrSubdirectory
                             dependsUpon:
-                              - directory
-                              - fileOrSubdirectory
-                              - getItemOrItemsFromJavascriptOrRethrowErrorWithPath
-                              - getOrCreateFileItem
-                              - isJavascript
-                              - path
-                              - readFile
+                              - createItemsWhenSubdirectory
+                              - getOrCreateItemsWhenJavascriptFile
                             items:
-                              - isJavascript
-                              - id: getItemOrItemsFromJavascriptOrRethrowErrorWithPath
-                                dependsUpon:
-                                  - directory
-                                  - fileOrSubdirectory
-                                  - getItemOrItemsFromJavascript
-                                  - isReactJsxEnabled
-                                  - path
-                              - id: readFile
-                                dependsUpon:
-                                  - fs
-                                  - getFileOrSubdirectoryFull
-                          - id: createItemsWhenSubdirectory
-                            dependsUpon:
-                              - directory
-                              - fileOrSubdirectory
-                              - getOrCreateItemsInRootedDirectory
-                              - ignoreDirectoryNames
-                              - isDirectory
-                              - isIgnored
-                              - isReactJsxEnabled
-                              - path
-                              - rootDirectory
-                            items:
-                              - id: isIgnored
-                                dependsUpon:
-                                  - fileOrSubdirectory
-                                  - ignoreDirectoryNames
-                              - id: isDirectory
-                                dependsUpon:
-                                  - fs
-                                  - getFileOrSubdirectoryFull
-                        - - id: getFileOrSubdirectoryFull
-                            dependsUpon:
-                              - fileOrSubdirectory
-                              - path
-                              - subDirectoryFull
-                        - - id: fileOrSubdirectory
+                              - - id: getOrCreateItemsWhenJavascriptFile
+                                  dependsUpon:
+                                    - directory
+                                    - fileOrSubdirectory
+                                    - getItemOrItemsFromJavascriptOrRethrowErrorWithPath
+                                    - getOrCreateFileItem
+                                    - isJavascript
+                                    - path
+                                    - readFile
+                                  items:
+                                    - isJavascript
+                                    - id: getItemOrItemsFromJavascriptOrRethrowErrorWithPath
+                                      dependsUpon:
+                                        - Error
+                                        - babelParserPlugins
+                                        - directory
+                                        - fileOrSubdirectory
+                                        - getItemOrItemsFromJavascript
+                                        - path
+                                    - id: readFile
+                                      dependsUpon:
+                                        - fs
+                                        - getFileOrSubdirectoryFull
+                                - id: createItemsWhenSubdirectory
+                                  dependsUpon:
+                                    - directory
+                                    - fileOrSubdirectory
+                                    - getOrCreateItemsInDirectory
+                                    - isDirectory
+                                    - isIgnored
+                                    - path
+                                  items:
+                                    - id: isIgnored
+                                      dependsUpon:
+                                        - fileOrSubdirectory
+                                        - ignoreDirectoryNames
+                                    - id: isDirectory
+                                      dependsUpon:
+                                        - fs
+                                        - getFileOrSubdirectoryFull
+                              - - id: getFileOrSubdirectoryFull
+                                  dependsUpon:
+                                    - fileOrSubdirectory
+                                    - path
+                                    - subDirectoryFull
+                              - - id: fileOrSubdirectory
+                                  type: parameter
+                        - - id: directory
                             type: parameter
-                  - - id: directory
+                          - id: subDirectoryFull
+                            type: variable
+                  - - id: babelParserPlugins
                       type: parameter
                     - id: ignoreDirectoryNames
                       type: parameter
-                    - id: isReactJsxEnabled
-                      type: parameter
                     - id: rootDirectory
                       type: parameter
-                    - id: subDirectoryFull
-                      type: variable
               - id: compareItemIdentifiers
                 dependsUpon: getIdentifier
                 items:
                   id: getIdentifier
                   dependsUpon:
+                    - RegExp
                     - String
                     - getPathSeparatorEscaped
                   items:
@@ -871,6 +888,7 @@
                 type: file
                 dependsUpon:
                   - __dirname
+                  - describe
                   - expect
                   - getYamlFromJavascript
                   - path
@@ -888,38 +906,17 @@
           items:
             - - id: getItemOrItemsFromJavascript
                 dependsUpon:
-                  - Parser
-                  - createAcornParserAndWalkBaseVisitor
                   - createVisitors
+                  - parser
                   - removeUnixShebangForNode
                   - walk
-                  - walkBaseVisitor
             - - id: removeUnixShebangForNode
                 dependsUpon: Math
-              - id: walk
+              - id: parser
                 type: variable
-                dependsUpon: acorn-walk
-              - id: createAcornParserAndWalkBaseVisitor
-                type: file
-                items:
-                  - - id: createAcornParserAndWalkBaseVisitor
-                      dependsUpon: extendWhenReactJsxEnabled
-                      items:
-                        id: extendWhenReactJsxEnabled
-                        dependsUpon:
-                          - extendParser
-                          - extendWalkBaseVisitor
-                        items:
-                          - id: extendParser
-                            dependsUpon:
-                              - Parser
-                              - acorn-jsx
-                          - extendWalkBaseVisitor
-                  - - id: Parser
-                      type: variable
-                      dependsUpon:
-                        id: acorn
-                        items: Parser
+                dependsUpon:
+                  id: '@babel'
+                  items: parser
               - id: createVisitors
                 type: file
                 items:
@@ -947,6 +944,10 @@
                               - parentFunctionsFromAncestors
                               - scopedVariables
                               - undeclaredReferences
+                          - id: visitClass
+                            dependsUpon:
+                              - addClass
+                              - declarations
                           - id: visitVariableDeclaration
                             dependsUpon:
                               - addVariables
@@ -963,7 +964,70 @@
                   - - id: addWhenCommonjsExportAlias
                       type: variable
                       dependsUpon: addWhenExportAlias
-                  - - id: addVariables
+                  - - id: addClass
+                      type: file
+                      items:
+                        - - id: addClass
+                            dependsUpon:
+                              - addDeclarationIn
+                              - addWhenAnyProperties
+                              - createDependsUponPropertyFromBaseAndConstructor
+                              - createIdentifierProperty
+                              - createItemsForAndRemoveDeclarationsIn
+                              - createItemsProperty
+                              - findConstructorInClass
+                        - - findConstructorInClass
+                          - id: createIdentifierProperty
+                            dependsUpon: getParentFromAncestors
+                          - id: addWhenAnyProperties
+                            dependsUpon:
+                              - Object
+                              - findIdentifiableParent
+                          - id: createDependsUponPropertyFromBaseAndConstructor
+                            type: file
+                            items:
+                              id: createDependsUponPropertyFromBaseAndConstructor
+                              dependsUpon:
+                                - whenHasBase
+                                - whenHasConstructor
+                              items:
+                                - - id: whenHasConstructor
+                                    dependsUpon: whenHasDependsUpon
+                                    items:
+                                      id: whenHasDependsUpon
+                                      dependsUpon: createProperty
+                                      items:
+                                        - - id: createProperty
+                                            dependsUpon:
+                                              - createDependsUponPropertyForParent
+                                              - getBaseIdentifiers
+                                        - - id: getBaseIdentifiers
+                                            dependsUpon: getBase
+                                  - id: whenHasBase
+                                    dependsUpon: getBase
+                                - - getBase
+                                  - id: createDependsUponPropertyForParent
+                                    type: parameter
+                          - id: createItemsProperty
+                            type: file
+                            items:
+                              id: createItemsProperty
+                              dependsUpon:
+                                - getItemsFromClass
+                                - getItemsFromConstructor
+                                - stackItemsWhenMultiple
+                              items:
+                                - - id: getItemsFromClass
+                                    dependsUpon:
+                                      - classDeclarationOrExpression
+                                      - createItemsForAndRemoveDeclarationsIn
+                                  - id: getItemsFromConstructor
+                                    dependsUpon: createItemsForAndRemoveDeclarationsIn
+                                - - id: classDeclarationOrExpression
+                                    type: parameter
+                                  - id: createItemsForAndRemoveDeclarationsIn
+                                    type: parameter
+                    - id: addVariables
                       type: file
                       items:
                         - - id: addVariables
@@ -1079,6 +1143,12 @@
                                     - - getOrCreateDependsUpon
                           - id: getNamesFromIdentifierExpressionWhenObjectPattern
                             type: file
+                            items:
+                              - - id: getNamesFromIdentifierExpressionWhenObjectPattern
+                                  dependsUpon: getNamesFromProperty
+                              - - id: getNamesFromProperty
+                                  dependsUpon: whenHasValue
+                                  items: whenHasValue
                     - id: createFileItemOrItems
                       type: file
                       items:
@@ -1089,6 +1159,7 @@
                       type: file
                       items:
                         id: createScopedVariables
+                        dependsUpon: Map
                         items:
                           - - id: add
                               dependsUpon: scopesAndVariables
@@ -1100,6 +1171,7 @@
                       type: file
                       items:
                         id: createUndeclaredReferences
+                        dependsUpon: Map
                         items:
                           - - id: addAncestorsAndParentOfReference
                               dependsUpon: parentsOfParentByUndeclaredReferences
@@ -1133,10 +1205,10 @@
                               - - id: createDeclarationForFunctionWithDependsUponAndItems
                                   dependsUpon:
                                     - createDeclarationForFunction
-                                    - createDependsUponPropertyFor
+                                    - createDependsUponPropertyForParent
                                     - declarations
                                     - hasUndeclaredReferenceTo
-                              - - id: createDependsUponPropertyFor
+                              - - id: createDependsUponPropertyForParent
                                   type: parameter
                                 - id: declarations
                                   type: parameter
@@ -1148,8 +1220,9 @@
                               - - id: addFunctionExpression
                                   dependsUpon:
                                     - addAssignment
-                                    - addVariable
+                                    - addMethod
                                     - addVariableDeclarator
+                                    - findParentAndAdd
                                     - getParentFromAncestors
                                   items:
                                     - - id: addAssignment
@@ -1163,19 +1236,26 @@
                                           dependsUpon: getIdentifierWhenCommonjsExport
                                       - id: addVariableDeclarator
                                         dependsUpon:
-                                          - addVariable
+                                          - findParentAndAdd
                                           - getTypeWhenExport
                                         items:
                                           id: getTypeWhenExport
                                           dependsUpon: getParentType
                                           items: getParentType
-                                    - - id: addVariable
+                                    - - id: findParentAndAdd
                                         dependsUpon:
                                           - addDeclarationIn
                                           - ancestors
                                           - createDeclarationForFunction
                                           - findParentFunctionFromAncestors
                                           - functionExpression
+                                      - id: addMethod
+                                        dependsUpon:
+                                          - addDeclarationIn
+                                          - createDeclarationForFunction
+                                          - functionExpression
+                                          - getClass
+                                        items: getClass
                                     - - id: addDeclarationIn
                                         type: parameter
                                       - id: ancestors
@@ -1260,15 +1340,17 @@
                               - - id: parse
                                   type: variable
                                   dependsUpon:
-                                    id: acorn
-                                    items: parse
+                                    id: '@babel'
+                                    items:
+                                      id: parser
+                                      items: parse
                                 - id: identifier
                                   type: variable
-                                - id: javascript
+                                - id: parent
                                   type: variable
                                 - id: declarations
                                   type: variable
-                                - id: parent
+                                - id: javascript
                                   type: variable
                                 - id: dependsUponIdentifiers
                                   type: variable
@@ -1276,6 +1358,7 @@
                                 - test
                         - - id: throwErrorWhenAnyUnhandled
                             dependsUpon:
+                              - Error
                               - formatMessageForDeclarations
                               - formatMessageForDependsUponIdentifiers
                         - - id: formatMessageForDeclarations
@@ -1321,7 +1404,8 @@
                                           - parentFunctions
                                       - id: addDependsUponIdentifier
                                         dependsUpon:
-                                          - addDependsUponIdentifierFrom
+                                          - addDependsUponIdentifierToParent
+                                          - getParent
                                           - isIdentifierRelevant
                                         items:
                                           - - id: isIdentifierRelevant
@@ -1329,6 +1413,9 @@
                                                 - identifier
                                                 - isParameterOfAnyParentFunction
                                                 - isVariableInBlockScoped
+                                            - id: getParent
+                                              dependsUpon: whenIdentifiable
+                                              items: whenIdentifiable
                                           - - id: identifier
                                               type: parameter
                                     - - id: isParameterOfAnyParentFunction
@@ -1343,10 +1430,22 @@
                                                 - isParameterOfParentFunction
                                                 - parentFunctions
                                           - - id: isParameterOfParentFunction
-                                              dependsUpon: getPropertyName
+                                              dependsUpon: isParameter
+                                          - - id: isParameter
+                                              dependsUpon:
+                                                - whenObject
+                                                - whenRest
+                                              items:
+                                                - - id: whenObject
+                                                    dependsUpon:
+                                                      - getPropertyName
+                                                      - parameter
+                                                  - whenRest
+                                                - - id: parameter
+                                                    type: parameter
                                     - - id: parentFunctions
                                         type: parameter
-                              - - id: addDependsUponIdentifierFrom
+                              - - id: addDependsUponIdentifierToParent
                                   type: parameter
                                 - id: addUndeclaredReference
                                   type: parameter
@@ -1469,6 +1568,7 @@
                       type: file
                       items:
                         - - id: createDeclarations
+                            dependsUpon: Map
                             items:
                               - - id: addDeclarationIn
                                   dependsUpon: addDeclarationsIn
@@ -1537,10 +1637,13 @@
                       type: file
                       items:
                         id: createDependsUponIdentifiers
+                        dependsUpon: Map
                         items:
-                          - - id: addIdentifierFrom
-                              dependsUpon: dependsUponIdentifiersByParent
-                            - id: createPropertyFor
+                          - - id: addIdentifierToParent
+                              dependsUpon:
+                                - Set
+                                - dependsUponIdentifiersByParent
+                            - id: createPropertyForParent
                               dependsUpon:
                                 - dependsUponIdentifiersByParent
                                 - getFirstOrSort
@@ -1597,6 +1700,40 @@
                               dependsUpon: items
                           - - id: items
                               type: parameter
+              - id: walk
+                type: file
+                dependsUpon: createVisitorKeys
+                items:
+                  - - id: walk
+                      dependsUpon: withVisitors
+                  - - id: withVisitors
+                      items:
+                        - - id: visit
+                            dependsUpon:
+                              - ancestors
+                              - callVisitor
+                              - visitNodeValues
+                            items:
+                              - - id: visitNodeValues
+                                  dependsUpon: visitNodeValue
+                              - - id: visitNodeValue
+                                  dependsUpon:
+                                    - Array
+                                    - visit
+                                - id: callVisitor
+                                  dependsUpon:
+                                    - ancestors
+                                    - node
+                              - - id: node
+                                  type: parameter
+                        - - id: ancestors
+                            type: variable
+                    - id: createVisitorKeys
+                      type: file
+                      items:
+                        - - id: createVisitorKeys
+                            dependsUpon: createForEstree
+                        - - createForEstree
         - id: getYamlForItemOrItems
           type: file
           items:
@@ -2166,6 +2303,7 @@
                                                   items:
                                                     - - id: getDependencies
                                                         dependsUpon:
+                                                          - Error
                                                           - getDependents
                                                           - getDependsUponItems
                                                       - id: createForChildItems
@@ -2302,14 +2440,22 @@
                                   type: file
                                   items:
                                     - - id: createUrlSearchParamsFromLocationHash
-                                        dependsUpon: createUrlSearchParamsWhenLocationHashHasValues
+                                        dependsUpon:
+                                          - UrlSearchParams
+                                          - createUrlSearchParamsWhenLocationHashHasValues
                                     - - id: createUrlSearchParamsWhenLocationHashHasValues
                                         dependsUpon:
                                           - createUrlSearchParams
                                           - removeHashPrefix
                                     - - id: removeHashPrefix
                                         dependsUpon: Error
-                                      - createUrlSearchParams
+                                      - id: createUrlSearchParams
+                                        dependsUpon: UrlSearchParams
+                                    - - id: UrlSearchParams
+                                        type: variable
+                                        dependsUpon:
+                                          id: '@ungap'
+                                          items: url-search-params
                     - id: getProcessedYamlFromState
                       type: file
                       items:
@@ -2924,7 +3070,26 @@
                             dependsUpon:
                               - removeFromDependUponItem
                               - whenString
-                            items: whenString
+                            items:
+                              - - id: whenString
+                                  dependsUpon: whenHasAncestors
+                                  items:
+                                    id: whenHasAncestors
+                                    dependsUpon:
+                                      - dependUpon
+                                      - removeFromBaseAncestor
+                                    items:
+                                      id: removeFromBaseAncestor
+                                      dependsUpon: whenItem
+                                      items:
+                                        - - id: whenItem
+                                            dependsUpon:
+                                              - baseAncestor
+                                              - removeFromDependUponItem
+                                        - - id: baseAncestor
+                                            type: variable
+                              - - id: dependUpon
+                                  type: parameter
                         - - id: removeFromDependUponItem
                             dependsUpon:
                               - getIdentifierProperty
@@ -3065,9 +3230,7 @@
                       items:
                         - - id: bin
                             type: file
-                            dependsUpon:
-                              id: replaceDependsUpon
-                              items: callWithProcessStandardStreamsOfYaml
+                            dependsUpon: callWithProcessStandardStreamsOfYaml
                           - id: test
                             type: file
                             dependsUpon:
@@ -3123,6 +3286,7 @@
                       type: file
                       dependsUpon:
                         - callWithProcessStandardStreamsOfYaml
+                        - RegExp
                         - replaceIdentifiers
                     - id: test
                       type: file
@@ -3445,6 +3609,7 @@
                             type: file
                             dependsUpon:
                               - callWithProcessStandardStreamsOfYaml
+                              - RegExp
                               - createOrAddToStacksOfParentMatch
                               - parseCommaSeparated
                           - id: test
@@ -3668,7 +3833,9 @@
                                   type: file
                                   items:
                                     - - id: createForLevelOrStack
-                                        dependsUpon: generateKeyValuePairs
+                                        dependsUpon:
+                                          - Map
+                                          - generateKeyValuePairs
                                         items:
                                           - - id: generateKeyValuePairs
                                               dependsUpon:
@@ -3713,6 +3880,7 @@
                                     - test
                               - - id: getExisting
                                   dependsUpon:
+                                    - Set
                                     - filterIdentifierOrItemOrLevelOrStack
                                     - getIdentifiersInTargetLevelOrStack
                                     - getStackOrSingleLevelOrSingleItem
@@ -3891,6 +4059,7 @@
                                         type: file
                                         dependsUpon:
                                           - createTestItemWithIdentifier
+                                          - Error
                                           - describe
                                           - expect
                                           - mapTargetLevelOrStack
@@ -3992,6 +4161,7 @@
                                     - test
                               - - id: throwErrorWhenIdentifiersNotUsed
                                   dependsUpon:
+                                    - Error
                                     - formatIdentifiersNotUsed
                                     - formatTargetLevelOrStack
                                   items:
@@ -4669,7 +4839,9 @@
                                 - id: stack
                                   type: parameter
                           - id: findStackOfSubsetIdentifierHierarchyOrThrowError
-                            dependsUpon: findItemInStackWithIdentifierHierarchy
+                            dependsUpon:
+                              - Error
+                              - findItemInStackWithIdentifierHierarchy
                         - - id: findItemInStackWithIdentifierHierarchy
                             type: variable
                             dependsUpon:
@@ -5778,6 +5950,9 @@
                                   type: file
                                   items:
                                     - - id: createParent
+                                        dependsUpon:
+                                          - Map
+                                          - Set
                                         items:
                                           - - id: add
                                               dependsUpon: identifiers
@@ -5913,7 +6088,8 @@
                                   type: parameter
                                 - id: to
                                   type: parameter
-                        - - getDirectionFromVector
+                        - - id: getDirectionFromVector
+                            dependsUpon: Error
               - id: findItemInStackWithIdentifierHierarchy
                 type: file
                 items:
@@ -5941,9 +6117,13 @@
                         - findItemWithIdentifierOrThrowError
                         - getItemsOfOrThrowError
                   - - id: getItemsOfOrThrowError
-                      dependsUpon: formatAncestorIdentifiersOfStackForError
+                      dependsUpon:
+                        - Error
+                        - formatAncestorIdentifiersOfStackForError
                     - id: findItemWithIdentifierOrThrowError
-                      dependsUpon: formatAncestorIdentifiersOfStackForError
+                      dependsUpon:
+                        - Error
+                        - formatAncestorIdentifiersOfStackForError
                   - - id: formatAncestorIdentifiersOfStackForError
                       type: file
                       items:
@@ -6363,6 +6543,7 @@
         - id: test
           type: file
           dependsUpon:
+            - action
             - copy
             - describe
             - directory
@@ -6423,6 +6604,8 @@
                 type: variable
                 dependsUpon: .
               - id: expectedFileName
+                type: variable
+              - id: action
                 type: variable
               - id: testCaseFileContents
                 type: variable
@@ -6531,7 +6714,8 @@
           items:
             - - id: isJestProcessFromArguments
                 dependsUpon: isSecondArgumentJest
-            - - isSecondArgumentJest
+            - - id: isSecondArgumentJest
+                dependsUpon: path
         - id: testWithJest
           type: file
           items:
@@ -6728,6 +6912,7 @@
                   - createModuleWithBabelPlugins
                   - createTransformJavascriptToHtmlPlugin
                   - path
+                  - webpack
             - - id: createModuleWithBabelPlugins
                 type: file
               - id: createTransformJavascriptToHtmlPlugin
