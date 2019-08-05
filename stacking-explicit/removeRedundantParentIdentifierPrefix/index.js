@@ -101,8 +101,41 @@ function withGetIdentifierWithoutParentWhenPrefixed(
 			return (
 				typeof dependUpon.item === "string"
 				&&
-				dependUpon
+				(whenHasAncestors() || dependUpon)
 			);
+
+			function whenHasAncestors() {
+				return (
+					dependUpon.ancestors
+					&&
+					{
+						ancestors:
+							[
+								...dependUpon.ancestors.slice(0, -1),
+								removeFromBaseAncestor(),
+							],
+						item:
+							dependUpon.item,
+					}
+				);
+
+				function removeFromBaseAncestor() {
+					const baseAncestor =
+						dependUpon.ancestors[dependUpon.ancestors.length - 1];
+
+					return whenItem() || baseAncestor;
+
+					function whenItem() {
+						return (
+							baseAncestor
+							&&
+							typeof baseAncestor !== "string"
+							&&
+							removeFromDependUponItem(baseAncestor)
+						);
+					}
+				}
+			}
 		}
 	}
 

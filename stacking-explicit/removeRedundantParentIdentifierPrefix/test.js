@@ -41,6 +41,10 @@ test.each(
 			{ dependsUpon: "missing" },
 		],
 		[
+			{ dependsUpon: { id: "missing", items: "missing" } },
+			{ dependsUpon: { id: "missing", items: "missing" } },
+		],
+		[
 			{ dependsUpon: "parent/child", id: "parent", items: "parent/child" },
 			{ dependsUpon: "child", id: "parent", items: "child" },
 		],
@@ -52,6 +56,60 @@ test.each(
 			{
 				id: "grandparent",
 				items: { id: "parent", items: { dependsUpon: "parent" } },
+			},
+		],
+		[
+			{
+				id:
+					"grandparent",
+				items:
+					{
+						id: "grandparent/parent",
+						items: { dependsUpon: { id: "grandparent/parent", items: "missing" } },
+					},
+			},
+			{
+				id:
+					"grandparent",
+				items:
+					{
+						id: "parent",
+						items: { dependsUpon: { id: "parent", items: "missing" } },
+					},
+			},
+		],
+		[
+			{
+				id:
+					"grandparent",
+				items:
+					{
+						id: "grandparent/parent",
+						items:
+							{
+								dependsUpon:
+									{
+										id: "grandparent/parent",
+										items: { id: "missing", items: "childOfMissing" },
+									},
+							},
+					},
+			},
+			{
+				id:
+					"grandparent",
+				items:
+					{
+						id: "parent",
+						items:
+							{
+								dependsUpon:
+									{
+										id: "parent",
+										items: { id: "missing", items: "childOfMissing" },
+									},
+							},
+					},
 			},
 		],
 		[
