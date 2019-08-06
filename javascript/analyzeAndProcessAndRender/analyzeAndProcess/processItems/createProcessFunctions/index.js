@@ -47,7 +47,7 @@ module.exports =
 				groupItems,
 				items =>
 					replaceDependsUponWithHierarchyFromSeparator({
-						identifierSeparator: "/",
+						identifierSeparator: /\/|\\/,
 						items,
 					}),
 				items =>
