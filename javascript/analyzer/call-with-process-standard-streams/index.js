@@ -41,11 +41,12 @@ module.exports =
 		function call(
 			processArgumentsAndOrStandardInput,
 		) {
-			// eslint-disable-next-line no-console
-			console.log(
-				action(
-					processArgumentsAndOrStandardInput,
-				),
+			Promise.resolve(
+				action(processArgumentsAndOrStandardInput),
+			)
+			.then(
+				// eslint-disable-next-line no-console
+				console.log,
 			);
 		}
 	};
