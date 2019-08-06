@@ -94,6 +94,7 @@
                 items:
                   - - id: analyzeAndProcess
                       dependsUpon:
+                        - Promise
                         - analyzeAndProcessSource
                         - createOrAddToStacks
                         - whenSingleSource
@@ -556,7 +557,7 @@
                           type: variable
                       - - expect
                         - test
-        - id: babelParserPluginsDefault
+      - - id: babelParserPluginsDefault
           type: file
 - - id: javascript-analyzer
     type: file
@@ -664,7 +665,10 @@
                       items: createWebpackConfiguration
       - - id: getOrCreateItemsInDirectory
           type: file
-          dependsUpon: array.prototype.flatmap
+          dependsUpon:
+            - array.prototype.flatmap
+            - id: util
+              items: promisify
           items:
             - - id: bin
                 type: file
@@ -684,15 +688,21 @@
                   - supportedTestCasesDirectory
                   - test
                   - testCasesDirectory
+                  - id: util
+                    items: promisify
                 items:
                   - - id: readExpectedFile
                       dependsUpon:
-                        - fs
+                        - getWithPathSeparator
                         - path
+                        - readFile
                         - supportedTestCasesDirectory
+                      items: getWithPathSeparator
+                  - - id: readFile
+                      type: variable
                     - id: testCasesDirectory
                       type: variable
-                  - - id: supportedTestCasesDirectory
+                    - id: supportedTestCasesDirectory
                       type: variable
                   - - expect
                     - test
@@ -702,10 +712,9 @@
                 items:
                   - - id: getOrCreateItemsInDirectory
                       dependsUpon:
-                        - createItemsFromFileOrSubdirectory
-                        - flatMap
-                        - fs
+                        - Promise
                         - path
+                        - readDirectory
                         - rootDirectory
                       items:
                         - - id: createItemsFromFileOrSubdirectory
@@ -717,6 +726,7 @@
                                   dependsUpon:
                                     - directory
                                     - fileOrSubdirectory
+                                    - getFileOrSubdirectoryFull
                                     - getItemOrItemsFromJavascriptOrRethrowErrorWithPath
                                     - getOrCreateFileItem
                                     - isJavascript
@@ -732,10 +742,6 @@
                                         - fileOrSubdirectory
                                         - getItemOrItemsFromJavascript
                                         - path
-                                    - id: readFile
-                                      dependsUpon:
-                                        - fs
-                                        - getFileOrSubdirectoryFull
                                 - id: createItemsWhenSubdirectory
                                   dependsUpon:
                                     - directory
@@ -751,8 +757,8 @@
                                         - ignoreDirectoryNames
                                     - id: isDirectory
                                       dependsUpon:
-                                        - fs
                                         - getFileOrSubdirectoryFull
+                                        - getFileStatus
                               - - id: getFileOrSubdirectoryFull
                                   dependsUpon:
                                     - fileOrSubdirectory
@@ -770,20 +776,25 @@
                       type: parameter
                     - id: rootDirectory
                       type: parameter
-              - id: compareItemIdentifiers
-                dependsUpon: getIdentifier
-                items:
-                  id: getIdentifier
-                  dependsUpon:
-                    - RegExp
-                    - String
-                    - getPathSeparatorEscaped
-                  items:
-                    id: getPathSeparatorEscaped
-                    dependsUpon: path
-            - - id: flatMap
+            - - id: getFileStatus
                 type: variable
-                dependsUpon: array.prototype.flatmap
+              - id: readDirectory
+                type: variable
+              - id: readFile
+                type: variable
+              - id: compareIdentifierOrItemIdentifier
+                type: file
+                items:
+                  - - id: compareIdentifierOrItemIdentifier
+                      dependsUpon: getIdentifier
+                  - - id: getIdentifier
+                      dependsUpon:
+                        - RegExp
+                        - String
+                        - getPathSeparatorEscaped
+                      items:
+                        id: getPathSeparatorEscaped
+                        dependsUpon: path
               - id: getOrCreateFileItem
                 type: file
                 items:
@@ -1131,7 +1142,9 @@
                                                       - getArgument
                                                       - getOrCreateDependsUpon
                                                       - getOrCreateDependsUponForVariable
-                                                    items: getArgument
+                                                    items:
+                                                      id: getArgument
+                                                      dependsUpon: removeJsFilePathExtension
                                                 - - id: getOrCreateDependsUponForVariable
                                                     dependsUpon:
                                                       - dependsUponItemIdentifier
@@ -1287,6 +1300,8 @@
                                   dependsUpon:
                                     - addDeclarationsIn
                                     - findIdentifiableParent
+                                    - removeJsFilePathExtension
+                                    - value
                                 - id: visitExportNamedDeclaration
                                   dependsUpon:
                                     - addDeclarationsIn
@@ -1297,13 +1312,18 @@
                                     - addDeclarationsIn
                                     - createDeclarationsFromImport
                                     - findIdentifiableParent
+                                    - removeJsFilePathExtension
                               - - id: addDeclarationsIn
                                   type: parameter
                         - - id: createDeclarationsFromExport
                             type: file
                             items:
                               - - id: createDeclarationsFromExport
-                                  dependsUpon: withSource
+                                  dependsUpon: createSelectorWhenHasSource
+                              - - id: createSelectorWhenHasSource
+                                  dependsUpon:
+                                    - removeJsFilePathExtension
+                                    - withSource
                               - - id: withSource
                                   items: createDeclarationFromSpecifier
                                 - createDeclarationFromSpecifierWhenFunction
@@ -1505,7 +1525,8 @@
                                     - getRequireWhenCalled
                                     - getWhenMember
                                   items:
-                                    - getRequireWhenCalled
+                                    - id: getRequireWhenCalled
+                                      dependsUpon: removeJsFilePathExtension
                                     - id: getWhenMember
                                       dependsUpon: getObjectName
                               - - id: getObjectName
@@ -1683,6 +1704,21 @@
                               - isIdentifiableType
                         - - isFunctionExpressionType
                           - isIdentifiableType
+                    - id: removeJsFilePathExtension
+                      type: file
+                      items:
+                        id: removeJsFilePathExtension
+                        dependsUpon: whenHasExtension
+                        items:
+                          - - id: whenHasExtension
+                              dependsUpon:
+                                - removeExtension
+                                - value
+                              items:
+                                id: removeExtension
+                                dependsUpon: value
+                          - - id: value
+                              type: parameter
                     - id: stackItemsWhenMultiple
                       type: file
                       items:
@@ -6530,8 +6566,8 @@
               - processArguments
         - - id: call
             dependsUpon:
+              - Promise
               - action
-              - console
         - - id: action
             type: parameter
           - id: processArguments
