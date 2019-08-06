@@ -27,7 +27,7 @@ const
 		promisify(fs.writeFile);
 
 module.exports =
-	({
+	async({
 		babelParserPlugins,
 		directoryToCreateOrAddToStacksFrom = null,
 		ignoreDirectoryNames = ignoreDirectoryNamesDefault,
@@ -41,7 +41,7 @@ module.exports =
 			...outputPath,
 			yaml:
 				formatYaml(
-					analyzeAndProcess({
+					await analyzeAndProcess({
 						babelParserPlugins,
 						directoryToCreateOrAddToStacksFrom,
 						ignoreDirectoryNames,

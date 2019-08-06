@@ -14,7 +14,7 @@ test(
 		await ensureDir(directory);
 
 		expect(
-			analyzeAndProcess({
+			await analyzeAndProcess({
 				directoryToCreateOrAddToStacksFrom: null,
 				ignoreDirectoryNames: null,
 				packagePrefixAndScope: null,
@@ -30,9 +30,9 @@ test(
 
 test(
 	"Two source directories with a single file each returns both source items.",
-	() =>
+	async() =>
 		expect(
-			analyzeAndProcess({
+			await analyzeAndProcess({
 				directoryToCreateOrAddToStacksFrom:
 					null,
 				ignoreDirectoryNames:
@@ -62,9 +62,9 @@ test(
 
 test(
 	"Two source directories with a single file each and directory for stack returns stack of both source items.",
-	() =>
+	async() =>
 		expect(
-			analyzeAndProcess({
+			await analyzeAndProcess({
 				directoryToCreateOrAddToStacksFrom:
 					getSourcePath("upperLowerStack"),
 				ignoreDirectoryNames:

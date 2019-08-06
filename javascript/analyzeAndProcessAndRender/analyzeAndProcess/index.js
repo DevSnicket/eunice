@@ -9,7 +9,7 @@ const
 	processItems = require("./processItems");
 
 module.exports =
-	({
+	async({
 		babelParserPlugins = babelParserPluginsDefault,
 		directoryToCreateOrAddToStacksFrom,
 		ignoreDirectoryNames,
@@ -17,10 +17,12 @@ module.exports =
 		sources,
 	}) => {
 		return (
-			whenSingleSource()
+			await whenSingleSource()
 			||
 			createOrAddToStacks(
-				sources.map(analyzeAndProcessSource),
+				await Promise.all(
+					sources.map(analyzeAndProcessSource),
+				),
 			)
 		);
 
@@ -32,12 +34,12 @@ module.exports =
 			);
 		}
 
-		function analyzeAndProcessSource({
+		async function analyzeAndProcessSource({
 			directory,
 			rootItemIdentifier,
 		}) {
 			const items =
-				analyzer.getOrCreateItemsInDirectory({
+				await analyzer.getOrCreateItemsInDirectory({
 					babelParserPlugins,
 					directory,
 					ignoreDirectoryNames,
