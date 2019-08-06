@@ -87,7 +87,7 @@
 		"url": "https://github.com/DevSnicket/eunice-renderer-test-harness.git"
 	},
 	"scripts": {
-		"all": "npm run spellcheck && npm run lint && npm run harness && npm run test",
+		"all": "npm run spellcheck && npm run lint && npm run test && npm run harness && npm run harness-dogfooding-production",
 		"harness": "rm -rf dist/harness && npx webpack --config webpack.config.js -p",
 		"harness-dogfooding-development": "npx webpack --config tests/dogfoodingFromEuniceRepositoryRelativeDirectory/webpack.config.js -d",
 		"harness-dogfooding-production": "npx webpack --config tests/dogfoodingFromEuniceRepositoryRelativeDirectory/webpack.config.js -p",
