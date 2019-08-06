@@ -1,0 +1,10 @@
+-
+  - upper first
+  - id: upper second
+    dependsUpon: lower
+-
+  - id: lower
+    dependsUpon:
+      - upper first
+      - child of lower
+    items: child of lower
