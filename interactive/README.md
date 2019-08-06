@@ -9,6 +9,8 @@ DevSnicket Eunice is a toolkit based on the premise that unidirectional dependen
 
 This package creates a HTML page where structure and dependencies can be entered as [YAML](https://yaml.org/) and viewed as rendered SVG. The render is interactive, its possible to look inside the structure and also list the dependencies counted. More information can be found [in the main Eunice repository](https://github.com/DevSnicket/Eunice#readme).
 
+>[try out Eunice on some YAML](https://devsnicket.github.io/eunice-renderer-test-harness/index.html)
+
 Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-renderer-test-harness):
 
 ```bash
