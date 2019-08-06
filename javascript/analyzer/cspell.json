@@ -13,6 +13,7 @@
 		"dogfooding",
 		"estree",
 		"gitter",
+		"promisify",
 		"stateful",
 		"snicket"
 	]

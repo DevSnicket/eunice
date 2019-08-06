@@ -3,7 +3,11 @@ This library is free software, licensed under the terms of the GNU General Publi
 
 const
 	fs = require("fs"),
-	path = require("path");
+	path = require("path"),
+	{ promisify } = require("util");
+
+const readFile =
+	promisify(fs.readFile);
 
 const
 	getOrCreateItemsInDirectory = require("."),
@@ -13,7 +17,7 @@ const testCasesDirectory = path.join(__dirname, "test-cases");
 
 test(
 	"Valid JavaScript files return expected YAML",
-	() => {
+	async() => {
 		const supportedTestCasesDirectory =
 			path.join(
 				testCasesDirectory,
@@ -28,16 +32,25 @@ test(
 				}),
 			),
 		)
-		.toBe(readExpectedFile());
+		.toBe(
+			await readExpectedFile(),
+		);
 
-		function readExpectedFile() {
+		async function readExpectedFile() {
 			return (
-				fs.readFileSync(
-					path.join(supportedTestCasesDirectory, "expected.yaml"),
-					"utf-8",
+				getWithPathSeparator(
+					await readFile(
+						path.join(supportedTestCasesDirectory, "expected.yaml"),
+						"utf-8",
+					),
 				)
-				.replace(/\//g, path.sep)
 			);
+
+			function getWithPathSeparator(
+				expected,
+			) {
+				return expected.replace(/\//g, path.sep);
+			}
 		}
 	},
 );
