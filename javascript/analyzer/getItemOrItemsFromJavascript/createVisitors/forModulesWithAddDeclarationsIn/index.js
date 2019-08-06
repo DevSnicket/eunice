@@ -4,7 +4,8 @@ This library is free software, licensed under the terms of the GNU General Publi
 const
 	createDeclarationsFromExport = require("./createDeclarationsFromExport"),
 	createDeclarationsFromImport = require("./createDeclarationsFromImport"),
-	{ findIdentifiableParent } = require("../parentFunctionsFromAncestors");
+	{ findIdentifiableParent } = require("../parentFunctionsFromAncestors"),
+	removeJsFilePathExtension = require("../removeJsFilePathExtension");
 
 module.exports =
 	addDeclarationsIn => {
@@ -26,13 +27,13 @@ module.exports =
 			addDeclarationsIn({
 				declarations:
 					[ {
-						dependsUpon: value,
-						type: "export",
+						dependsUpon:
+							removeJsFilePathExtension(value),
+						type:
+							"export",
 					} ],
 				parent:
-					findIdentifiableParent(
-						ancestors,
-					),
+					findIdentifiableParent(ancestors),
 			});
 		}
 
@@ -60,7 +61,10 @@ module.exports =
 			addDeclarationsIn({
 				declarations:
 					createDeclarationsFromImport({
-						from: source.value,
+						from:
+							removeJsFilePathExtension(
+								source.value,
+							),
 						specifiers,
 					}),
 				parent:
