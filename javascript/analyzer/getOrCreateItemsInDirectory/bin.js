@@ -9,9 +9,9 @@ const
 
 callWithProcessStandardStreams({
 	action:
-		processArguments =>
+		async processArguments =>
 			getYamlForItemOrItems(
-				getOrCreateItemsInDirectory(
+				await getOrCreateItemsInDirectory(
 					processArguments,
 				),
 			),

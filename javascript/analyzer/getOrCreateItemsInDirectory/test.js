@@ -6,8 +6,7 @@ const
 	path = require("path"),
 	{ promisify } = require("util");
 
-const readFile =
-	promisify(fs.readFile);
+const readFile = promisify(fs.readFile);
 
 const
 	getOrCreateItemsInDirectory = require("."),
@@ -26,7 +25,7 @@ test(
 
 		expect(
 			getYamlForItemOrItems(
-				getOrCreateItemsInDirectory({
+				await getOrCreateItemsInDirectory({
 					directory: supportedTestCasesDirectory,
 					ignoreDirectoryNames: [ "node_modules" ],
 				}),
@@ -57,13 +56,15 @@ test(
 
 test(
 	"File with not supported declaration throws error with file path",
-	() =>
-		expect(
-			() =>
+	async() =>
+		(
+			await expect(
 				getOrCreateItemsInDirectory(
 					{ directory: path.join(testCasesDirectory, "invalid") },
 				),
+			)
 		)
+		.rejects
 		.toThrowError(
 			"Analysis of file \"index.js\" raised the following error.\n\nUnexpected token (1:1)",
 		),

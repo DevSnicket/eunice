@@ -2,13 +2,20 @@
 This library is free software, licensed under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 const
+	compareIdentifierOrItemIdentifier = require("./compareIdentifierOrItemIdentifier"),
 	flatMap = require("array.prototype.flatmap"),
 	fs = require("fs"),
 	getItemOrItemsFromJavascript = require("../getItemOrItemsFromJavascript"),
 	getOrCreateFileItem = require("./getOrCreateFileItem"),
-	path = require("path");
+	path = require("path"),
+	{ promisify } = require("util");
 
 flatMap.shim();
+
+const
+	getFileStatus = promisify(fs.lstat),
+	readDirectory = promisify(fs.readdir),
+	readFile = promisify(fs.readFile);
 
 module.exports =
 	(/** @type {import("./Parameter.d")} */{
@@ -32,34 +39,33 @@ function withOptionsAndRootDirectory({
 }) {
 	return { getOrCreateItemsInDirectory };
 
-	function getOrCreateItemsInDirectory(
+	async function getOrCreateItemsInDirectory(
 		directory,
 	) {
 		const subDirectoryFull =
 			path.join(rootDirectory, directory);
 
 		return (
-			// flatMap isn't shimmed onto the return array of fs functions when running in Jest
-			flatMap(
-				fs.readdirSync(subDirectoryFull),
-				fileOrDirectory =>
-					createItemsFromFileOrSubdirectory(fileOrDirectory)
-					||
-					[],
+			(
+				await Promise.all(
+					(await readDirectory(subDirectoryFull))
+					.map(createItemsFromFileOrSubdirectory),
+				)
 			)
-			.sort(compareItemIdentifiers)
+			.flatMap(items => items || [])
+			.sort(compareIdentifierOrItemIdentifier)
 		);
 
-		function createItemsFromFileOrSubdirectory(
+		async function createItemsFromFileOrSubdirectory(
 			fileOrSubdirectory,
 		) {
 			return (
-				createItemsWhenSubdirectory()
+				await createItemsWhenSubdirectory()
 				||
 				getOrCreateItemsWhenJavascriptFile()
 			);
 
-			function getOrCreateItemsWhenJavascriptFile() {
+			async function getOrCreateItemsWhenJavascriptFile() {
 				const fileOrSubdirectoryPath =
 					path.parse(fileOrSubdirectory);
 
@@ -73,7 +79,10 @@ function withOptionsAndRootDirectory({
 								fileOrSubdirectoryPath,
 							itemOrItems:
 								getItemOrItemsFromJavascriptOrRethrowErrorWithPath(
-									readFile(),
+									await readFile(
+										getFileOrSubdirectoryFull(),
+										"utf-8",
+									),
 								),
 						}),
 					]
@@ -97,22 +106,13 @@ function withOptionsAndRootDirectory({
 						throw new Error(`Analysis of file "${path.join(directory, fileOrSubdirectory)}" raised the following error.\n\n${error.message}`);
 					}
 				}
-
-				function readFile() {
-					return (
-						fs.readFileSync(
-							getFileOrSubdirectoryFull(),
-							"utf-8",
-						)
-					);
-				}
 			}
 
-			function createItemsWhenSubdirectory() {
+			async function createItemsWhenSubdirectory() {
 				return (
-					isDirectory()
-					&&
 					!isIgnored()
+					&&
+					await isDirectory()
 					&&
 					getOrCreateItemsInDirectory(
 						path.join(directory, fileOrSubdirectory),
@@ -127,11 +127,9 @@ function withOptionsAndRootDirectory({
 					);
 				}
 
-				function isDirectory() {
+				async function isDirectory() {
 					return (
-						fs.lstatSync(
-							getFileOrSubdirectoryFull(),
-						)
+						(await getFileStatus(getFileOrSubdirectoryFull()))
 						.isDirectory()
 					);
 				}
@@ -145,37 +143,6 @@ function withOptionsAndRootDirectory({
 					)
 				);
 			}
-		}
-	}
-}
-
-function compareItemIdentifiers(
-	left,
-	right,
-) {
-	const
-		leftIdentifier = getIdentifier(left),
-		rightIdentifier = getIdentifier(right);
-
-	return (
-		leftIdentifier !== rightIdentifier
-		&&
-		(leftIdentifier < rightIdentifier ? -1 : 1)
-	);
-
-	function getIdentifier(
-		item,
-	) {
-		return (
-			(item.id || item)
-			.replace(
-				new RegExp(getPathSeparatorEscaped(), "g"),
-				String.fromCharCode(0),
-			)
-		);
-
-		function getPathSeparatorEscaped() {
-			return path.sep.replace("\\", "\\\\");
 		}
 	}
 }
