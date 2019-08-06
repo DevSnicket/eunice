@@ -16,7 +16,7 @@ const
 	} = require("@devsnicket/eunice-test-harnesses"),
 	createYamlInputElement = require("@devsnicket/eunice-renderer-test-harness/createYamlInputElement"),
 	createYamlOutputElement = require("@devsnicket/eunice-renderer-test-harness/createYamlOutputElement"),
-	{ getYamlFromJavascript } = require("@devsnicket/eunice-javascript-analyzer"),
+	getYamlFromJavascript = require("@devsnicket/eunice-javascript-analyzer/getYamlFromJavascript"),
 	initializeCodeEditorGlobal = require("@devsnicket/eunice-test-harnesses/codeEditor/serviceWorkers/initializeGlobal"),
 	{
 		ReflexContainer,
