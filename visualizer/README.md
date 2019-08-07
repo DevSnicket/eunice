@@ -20,6 +20,8 @@ Or with [`yarn`](https://yarnpkg.com/en/package/@devsnicket/eunice-renderer):
 yarn add --dev @devsnicket/eunice-renderer
 ```
 
+## Arrows and Counts
+
 Instead of rendering dependencies as lines between items each dependency is counted into the following categories:
 
 ![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgElementForStack/createArrows/test/withUse/testCases/with-descriptions.svg?sanitize=true)
