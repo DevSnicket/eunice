@@ -64,6 +64,8 @@ module.exports =
 					return (
 						identifier
 						&&
+						identifier !== "arguments"
+						&&
 						!isVariableInBlockScoped(identifier)
 						&&
 						!isParameterOfAnyParentFunction(identifier)

@@ -1,0 +1,3 @@
+function caller() {
+	called(arguments);
+}
