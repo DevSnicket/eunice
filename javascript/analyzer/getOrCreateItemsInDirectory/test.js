@@ -38,10 +38,12 @@ test(
 		);
 
 		async function readExpectedFile() {
+			const fileName = "expected.yaml";
+
 			return (
 				getWithPathSeparator(
 					await readFile(
-						path.join(supportedTestCasesDirectory, "expected.yaml"),
+						path.join(supportedTestCasesDirectory, fileName),
 						"utf-8",
 					),
 				)
@@ -50,7 +52,10 @@ test(
 			function getWithPathSeparator(
 				expected,
 			) {
-				return expected.replace(/\//g, path.sep);
+				if (expected.includes("\\"))
+					throw new Error(`${fileName} must contain forward not back slashes.`);
+				else
+					return expected.replace(/\//g, path.sep);
 			}
 		}
 	},
