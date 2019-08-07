@@ -29,8 +29,14 @@ module.exports =
 			});
 
 		function isScoped() {
+			const forInOrOfStatementTypes =
+				[
+					"ForInStatement",
+					"ForOfStatement",
+				];
+
 			return (
-				parent.type === "ForOfStatement"
+				forInOrOfStatementTypes.includes(parent.type)
 				||
 				inBlockOfFunction()
 			);
