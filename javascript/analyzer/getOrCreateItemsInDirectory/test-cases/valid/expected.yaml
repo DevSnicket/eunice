@@ -36,6 +36,7 @@
     - - items:
           id: nestedFunction
           dependsUpon: moduleExportsOfFunctionArrow1
+- notIgnored\ignored
 - id: requireFunctionArrowWithFileFunctionInSameDirectoryAndDestructureThatIsAssignedToConstAndCalled
   dependsUpon:
     id: moduleExportsOfFunctionArrowWithFileFunction

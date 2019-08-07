@@ -26,8 +26,10 @@ test(
 		expect(
 			getYamlForItemOrItems(
 				await getOrCreateItemsInDirectory({
-					directory: supportedTestCasesDirectory,
-					ignoreDirectoryNames: [ "node_modules" ],
+					directory:
+						supportedTestCasesDirectory,
+					ignorePathPattern:
+						new RegExp(`^(node_modules|ignoredSubdirectory\\${path.sep}ignoredSubdirectoryOfSubdirectory|ignored\\.js)`),
 				}),
 			),
 		)

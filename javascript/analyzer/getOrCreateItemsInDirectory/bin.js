@@ -5,14 +5,37 @@ This library is free software, licensed under the terms of the GNU General Publi
 const
 	callWithProcessStandardStreams = require("@devsnicket/eunice-call-with-process-standard-streams"),
 	getOrCreateItemsInDirectory = require("."),
-	getYamlForItemOrItems = require("../getYamlForItemOrItems");
+	getYamlForItemOrItems = require("../getYamlForItemOrItems"),
+	path = require("path");
 
 callWithProcessStandardStreams({
 	action:
-		async processArguments =>
+		async({
+			ignorePathPattern,
+			...restOfProcessArguments
+		}) =>
 			getYamlForItemOrItems(
-				await getOrCreateItemsInDirectory(
-					processArguments,
-				),
+				await getOrCreateItemsInDirectory({
+					ignorePathPattern:
+						createRegularExpressionFromPathPattern(
+							ignorePathPattern,
+						),
+					...restOfProcessArguments,
+				}),
 			),
 });
+
+function createRegularExpressionFromPathPattern(
+	pattern,
+) {
+	return (
+		pattern
+		&&
+		new RegExp(
+			pattern.replace(
+				/\//g,
+				path.sep.replace("\\", "\\\\"),
+			),
+		)
+	);
+}

@@ -49,8 +49,19 @@
 			{
 				"args":
 					[
+						"--directory=.",
+						"--ignorePathPattern=(^(.git|dist|node_modules|harness/output|test-coverage))|/test-cases"
+					],
+				"name": "getOrCreateItemsInDirectory test dogfooding",
+				"program": "${workspaceFolder}/getOrCreateItemsInDirectory/bin.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[
 						"--directory=getOrCreateItemsInDirectory/test-cases/valid",
-						"--ignoreDirectoryNames=node_modules"
+						"--ignorePathPattern=^(node_modules|ignoredSubdirectory/ignoredSubdirectoryOfSubdirectory|ignored\\.js)"
 					],
 				"name": "getOrCreateItemsInDirectory test valid",
 				"program": "${workspaceFolder}/getOrCreateItemsInDirectory/bin.js",

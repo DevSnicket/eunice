@@ -83,11 +83,11 @@
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run build && npm run test && npm run harness && npm run dogfooding",
 		"build": "rm -rf dist && babel -d dist --ignore dist/*,dist/**/*,harness/output/**,node_modules/**/*,**/test/**,**/test-cases/**,test-coverage/**,**/test.js --plugins @babel/plugin-proposal-object-rest-spread -s true . && find -type f -name \"*.d.ts\" ! -path \"./dist/*\" ! -path \"./dist/**/*\" ! -path \"./node_modules/**/*\" -exec cp --parent {} dist \";\"",
-		"dogfooding": "node getOrCreateItemsInDirectory/bin.js --directory=. --ignoreDirectoryNames=dist --ignoreDirectoryNames=node_modules --ignoreDirectoryNames=output --ignoreDirectoryNames=test-cases --ignoreDirectoryNames=test-coverage",
+		"dogfooding": "node getOrCreateItemsInDirectory/bin.js --directory=. --ignorePathPattern=\"(^(.git|dist|node_modules|harness/output|test-coverage))|/test-cases\"",
 		"harness": "rm -rf harness/output && npx webpack -p --config harness/webpack.config.js",
 		"lint": "eslint .",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./dist/**/*\" ! -path \"./harness/output/*\" ! -path \"./node_modules/**/*\" ! -path \"**/test-cases/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest --runInBand"
 	},
-	"version": "8.0.1"
+	"version": "8.1.0"
 }

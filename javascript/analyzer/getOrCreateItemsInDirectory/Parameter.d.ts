@@ -5,5 +5,5 @@ export = Parameter
 interface Parameter extends Options {
 	babelParserPlugins?: ParserPlugin[],
 	directory: string
-	ignoreDirectoryNames?: string[],
+	ignorePathPattern?: RegExp,
 }

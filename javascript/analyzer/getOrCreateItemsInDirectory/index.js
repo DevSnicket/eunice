@@ -21,11 +21,11 @@ module.exports =
 	(/** @type {import("./Parameter.d")} */{
 		babelParserPlugins = null,
 		directory,
-		ignoreDirectoryNames = null,
+		ignorePathPattern = null,
 	}) =>
 		withOptionsAndRootDirectory({
 			babelParserPlugins,
-			ignoreDirectoryNames,
+			ignorePathPattern,
 			rootDirectory: directory,
 		})
 		.getOrCreateItemsInDirectory(
@@ -34,7 +34,7 @@ module.exports =
 
 function withOptionsAndRootDirectory({
 	babelParserPlugins,
-	ignoreDirectoryNames,
+	ignorePathPattern,
 	rootDirectory,
 }) {
 	return { getOrCreateItemsInDirectory };
@@ -60,10 +60,24 @@ function withOptionsAndRootDirectory({
 			fileOrSubdirectory,
 		) {
 			return (
-				await createItemsWhenSubdirectory()
-				||
-				getOrCreateItemsWhenJavascriptFile()
+				!isIgnored()
+				&&
+				(
+					await createItemsWhenSubdirectory()
+					||
+					getOrCreateItemsWhenJavascriptFile()
+				)
 			);
+
+			function isIgnored() {
+				return (
+					ignorePathPattern
+					&&
+					ignorePathPattern.test(
+						path.join(directory, fileOrSubdirectory),
+					)
+				);
+			}
 
 			async function getOrCreateItemsWhenJavascriptFile() {
 				const fileOrSubdirectoryPath =
@@ -110,22 +124,12 @@ function withOptionsAndRootDirectory({
 
 			async function createItemsWhenSubdirectory() {
 				return (
-					!isIgnored()
-					&&
 					await isDirectory()
 					&&
 					getOrCreateItemsInDirectory(
 						path.join(directory, fileOrSubdirectory),
 					)
 				);
-
-				function isIgnored() {
-					return (
-						ignoreDirectoryNames
-						&&
-						ignoreDirectoryNames.includes(fileOrSubdirectory)
-					);
-				}
 
 				async function isDirectory() {
 					return (
