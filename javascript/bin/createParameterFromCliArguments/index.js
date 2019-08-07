@@ -9,7 +9,7 @@ module.exports =
 	({
 		babelParserPlugins,
 		directories = ".",
-		ignoreDirectoryNames,
+		ignorePathPattern,
 		isHtmlSingleFile,
 		outputBaseFileName,
 		outputDirectoryPath,
@@ -23,8 +23,10 @@ module.exports =
 			...restOfOptions,
 			babelParserPlugins:
 				ensureArray(babelParserPlugins),
-			ignoreDirectoryNames:
-				ensureArray(ignoreDirectoryNames),
+			ignorePathPattern:
+				ignorePathPattern
+				&&
+				new RegExp(ignorePathPattern),
 			isHtmlSingleFile:
 				isHtmlSingleFile && isHtmlSingleFile === "true",
 			outputPath:

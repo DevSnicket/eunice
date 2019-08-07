@@ -80,9 +80,9 @@ The following sub-directories are ignored by default:
 * test-cases
 * test-coverage
 
-A new list of sub-directories to be ignored can be specified:
+A regular expression of file and directory paths to be ignored can be specified:
 ```bash
-npx @devsnicket/eunice --ignoreDirectoryNames=ignoreDirectory1 --ignoreDirectoryNames=ignoreDirectory2
+npx @devsnicket/eunice --ignorePathPattern=(ignoreDirectory1|ignoreDirectory2)
 ```
 
 Packages installed in the node_modules directory are not analysed by default. They can included using the "directories" option above or with:

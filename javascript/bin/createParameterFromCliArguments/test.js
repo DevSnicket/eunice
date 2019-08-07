@@ -11,7 +11,8 @@ test(
 	() =>
 		expect(
 			createParameterFromCliArguments({
-				ignoreDirectoryNames: undefined,
+				babelParserPlugins: undefined,
+				ignorePathPattern: undefined,
 				isHtmlSingleFile: undefined,
 				outputBaseFileName: undefined,
 				outputDirectoryPath: undefined,
@@ -35,11 +36,37 @@ test(
 );
 
 test(
+	"\"babelParserPlugins\" of string returns array.",
+	() => {
+		const babelParserPlugins = "plugin";
+
+		expect(
+			createParameterFromCliArguments({
+				babelParserPlugins,
+				ignorePathPattern: undefined,
+				isHtmlSingleFile: undefined,
+				outputBaseFileName: undefined,
+				outputDirectoryPath: undefined,
+				packageNames: undefined,
+				packagePrefix: undefined,
+				packageScope: undefined,
+				rootItemIdentifiers: undefined,
+			})
+			.babelParserPlugins,
+		)
+		.toEqual(
+			[ babelParserPlugins ],
+		);
+	},
+);
+
+test(
 	"\"isHtmlSingleFile\" of string \"true\" returns boolean true.",
 	() =>
 		expect(
 			createParameterFromCliArguments({
-				ignoreDirectoryNames: undefined,
+				babelParserPlugins: undefined,
+				ignorePathPattern: undefined,
 				isHtmlSingleFile: "true",
 				outputBaseFileName: undefined,
 				outputDirectoryPath: undefined,
@@ -56,11 +83,14 @@ test(
 );
 
 test(
-	"\"ignoreDirectoryNames\" of string returns array.",
-	() =>
+	"\"ignorePathPattern\" of string returns regular expression.",
+	() => {
+		const ignorePathPattern = "ignore";
+
 		expect(
 			createParameterFromCliArguments({
-				ignoreDirectoryNames: "ignore",
+				babelParserPlugins: undefined,
+				ignorePathPattern,
 				isHtmlSingleFile: undefined,
 				outputBaseFileName: undefined,
 				outputDirectoryPath: undefined,
@@ -69,11 +99,12 @@ test(
 				packageScope: undefined,
 				rootItemIdentifiers: undefined,
 			})
-			.ignoreDirectoryNames,
+			.ignorePathPattern,
 		)
 		.toEqual(
-			[ "ignore" ],
-		),
+			new RegExp(ignorePathPattern),
+		);
+	},
 );
 
 test(
@@ -81,7 +112,8 @@ test(
 	() =>
 		expect(
 			createParameterFromCliArguments({
-				ignoreDirectoryNames: undefined,
+				babelParserPlugins: undefined,
+				ignorePathPattern: undefined,
 				isHtmlSingleFile: undefined,
 				outputBaseFileName: undefined,
 				outputDirectoryPath: undefined,
@@ -106,7 +138,8 @@ test(
 	() =>
 		expect(
 			createParameterFromCliArguments({
-				ignoreDirectoryNames: undefined,
+				babelParserPlugins: undefined,
+				ignorePathPattern: undefined,
 				isHtmlSingleFile: undefined,
 				outputBaseFileName: "outputBaseFileName",
 				outputDirectoryPath: "outputDirectoryPath",
@@ -130,8 +163,9 @@ test(
 	() =>
 		expect(
 			createParameterFromCliArguments({
+				babelParserPlugins: undefined,
 				directories: [ "directory1", "directory2" ],
-				ignoreDirectoryNames: undefined,
+				ignorePathPattern: undefined,
 				isHtmlSingleFile: undefined,
 				outputBaseFileName: undefined,
 				outputDirectoryPath: undefined,

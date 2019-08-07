@@ -16,7 +16,7 @@ test(
 		expect(
 			await analyzeAndProcess({
 				directoryToCreateOrAddToStacksFrom: null,
-				ignoreDirectoryNames: null,
+				ignorePathPattern: null,
 				packagePrefixAndScope: null,
 				sources: [ { directory } ],
 			}),
@@ -35,7 +35,7 @@ test(
 			await analyzeAndProcess({
 				directoryToCreateOrAddToStacksFrom:
 					null,
-				ignoreDirectoryNames:
+				ignorePathPattern:
 					null,
 				packagePrefixAndScope:
 					null,
@@ -67,7 +67,7 @@ test(
 			await analyzeAndProcess({
 				directoryToCreateOrAddToStacksFrom:
 					getSourcePath("upperLowerStack"),
-				ignoreDirectoryNames:
+				ignorePathPattern:
 					null,
 				packagePrefixAndScope:
 					null,

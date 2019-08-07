@@ -31,6 +31,7 @@ module.exports =
 		babelParserPlugins,
 		directoryToCreateOrAddToStacksFrom = null,
 		ignoreDirectoryNames = ignoreDirectoryNamesDefault,
+		ignorePathPattern = createIgnorePathPatternFromDirectoryNames(ignoreDirectoryNames),
 		isHtmlSingleFile = true,
 		outputPath,
 		packages = null,
@@ -44,7 +45,7 @@ module.exports =
 					await analyzeAndProcess({
 						babelParserPlugins,
 						directoryToCreateOrAddToStacksFrom,
-						ignoreDirectoryNames,
+						ignorePathPattern,
 						packagePrefixAndScope:
 							packages,
 						sources:
@@ -56,6 +57,12 @@ module.exports =
 					{ lineWidth: Number.MAX_SAFE_INTEGER },
 				),
 		});
+
+function createIgnorePathPatternFromDirectoryNames(
+	directoryNames,
+) {
+	return new RegExp(`(^|\\${path.sep})(${directoryNames.join("|")})$`);
+}
 
 function createSourcesWithPackages({
 	packages,

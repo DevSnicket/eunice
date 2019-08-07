@@ -12,7 +12,7 @@ module.exports =
 	async({
 		babelParserPlugins = babelParserPluginsDefault,
 		directoryToCreateOrAddToStacksFrom,
-		ignoreDirectoryNames,
+		ignorePathPattern,
 		packagePrefixAndScope,
 		sources,
 	}) => {
@@ -42,7 +42,7 @@ module.exports =
 				await analyzer.getOrCreateItemsInDirectory({
 					babelParserPlugins,
 					directory,
-					ignoreDirectoryNames,
+					ignorePathPattern,
 				});
 
 			return processWhenAnyItems() || [];
