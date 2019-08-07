@@ -12,6 +12,6 @@ runTestsFromFileSystem({
 	action: yaml => getSvgForYaml({ yaml }),
 	caseFileName: ".yaml",
 	directory: path.join(__dirname, "testCases/"),
-	expectedFileName: ".svg",
+	expectedFileName: "expected.svg",
 	processArguments: process.argv,
 });
