@@ -1,9 +1,8 @@
-import { ParserPlugin } from "@babel/parser"
+import Options from "../getItemOrItemsFromJavascript/Options"
 
 export = Parameter
 
 interface Parameter extends Options {
-	babelParserPlugins?: ParserPlugin[],
 	directory: string
-	ignorePathPattern?: RegExp,
+	ignorePathPattern?: RegExp
 }

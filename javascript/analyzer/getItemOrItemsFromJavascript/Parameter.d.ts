@@ -1,8 +1,7 @@
-import { ParserPlugin } from "@babel/parser"
+import Options from "./Options"
 
 export = Parameter
 
 interface Parameter extends Options {
-	babelParserPlugins?: Iterable<ParserPlugin>,
 	javascript: string
 }

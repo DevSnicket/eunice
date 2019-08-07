@@ -7,6 +7,33 @@ const
 	getNameFromCallee = require("./getNameFromCallee"),
 	getPropertyName = require("../getPropertyName");
 
+const ignoreStaticMethodsOfDefault =
+	[
+		"Array",
+		"ArrayBuffer",
+		"BigInt64Array",
+		"BigUint64Array",
+		"Date",
+		"Float32Array",
+		"Float64Array",
+		"Function",
+		"Int16Array",
+		"Int32Array",
+		"Int8Array",
+		"JSON",
+		"Math",
+		"Number",
+		"Object",
+		"Promise",
+		"Reflect",
+		"String",
+		"Symbol",
+		"Uint16Array",
+		"Uint32Array",
+		"Uint8Array",
+		"Uint8ClampedArray",
+	];
+
 module.exports =
 	({
 		addDependsUponIdentifierToParent,
@@ -14,14 +41,31 @@ module.exports =
 		callExpression,
 		findDeclarationAndParent,
 		findParentFunctions,
+		ignoreStaticMethodsOf = ignoreStaticMethodsOfDefault,
 		isVariableInBlockScoped,
 	}) => {
 		const calleeName = getNameFromCallee(callExpression.callee);
 
-		if (calleeName && calleeName !== "require")
+		if (calleeName && !isIgnored())
 			addFromParentFunctions(
 				findParentFunctions(),
 			);
+
+		function isIgnored() {
+			return (
+				calleeName === "require"
+				||
+				whenIgnoreStaticMethodOf()
+			);
+
+			function whenIgnoreStaticMethodOf() {
+				return (
+					ignoreStaticMethodsOf
+					&&
+					ignoreStaticMethodsOf.includes(calleeName)
+				);
+			}
+		}
 
 		function addFromParentFunctions(
 			parentFunctions,
