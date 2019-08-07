@@ -8,13 +8,14 @@
 			},
 			{
 				"args":
-					[ 
+					[
+						"--collect-coverage=false",
 						"--runInBand",
 						"getItemOrItemsFromJavascript/createVisitors/throwErrorWhenAnyUnhandled/test.js"
 					],
 				"disableOptimisticBPs": true,
-				"name": "getItemOrItemsFromJavascript createVisitors throwErrorWhenAnyUnhandled jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"name": "getItemOrItemsFromJavascript createVisitors throwErrorWhenAnyUnhandled Jest",
+				"program": "${workspaceFolder}/node_modules/jest/node_modules/jest-cli/bin/jest.js",
 				"request": "launch",
 				"type": "node"
 			},
@@ -35,12 +36,13 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
 						"getYamlFromJavascript/test.js"
 					],
 				"disableOptimisticBPs": true,
-				"name": "getYamlFromJavascript jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"name": "getYamlFromJavascript Jest",
+				"program": "${workspaceFolder}/node_modules/jest/node_modules/jest-cli/bin/jest.js",
 				"request": "launch",
 				"type": "node"
 			},
@@ -58,12 +60,13 @@
 			{
 				"args":
 					[
+						"--collect-coverage=false",
 						"--runInBand",
-						"getOrCreateItemsInDirectory/test.js"
+						"getOrCreateItemsInDirectory/test.js",
 					],
 				"disableOptimisticBPs": true,
-				"name": "getOrCreateItemsInDirectory jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"name": "getOrCreateItemsInDirectory Jest",
+				"program": "${workspaceFolder}/node_modules/jest/node_modules/jest-cli/bin/jest.js",
 				"request": "launch",
 				"type": "node"
 			},
