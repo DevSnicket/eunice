@@ -30,10 +30,18 @@ module.exports =
 
 		function isScoped() {
 			return (
-				parentFunction
-				&&
-				parentFunction.body !== parent
+				parent.type === "ForOfStatement"
+				||
+				inBlockOfFunction()
 			);
+
+			function inBlockOfFunction() {
+				return (
+					parentFunction
+					&&
+					parentFunction.body !== parent
+				);
+			}
 		}
 
 		function getAndAddScopedVariables() {
