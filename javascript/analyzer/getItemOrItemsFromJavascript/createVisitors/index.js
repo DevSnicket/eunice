@@ -19,7 +19,7 @@ const
 	throwErrorWhenAnyUnhandled = require("./throwErrorWhenAnyUnhandled");
 
 module.exports =
-	({ ignoreStaticMethodsOf }) => {
+	({ isCalleeIgnored }) => {
 		const
 			declarations = createDeclarations(),
 			dependsUponIdentifiers = createDependsUponIdentifiers(),
@@ -113,7 +113,7 @@ module.exports =
 					declarations.findDeclarationAndParent,
 				findParentFunctions:
 					() => parentFunctionsFromAncestors.findParents(ancestors),
-				ignoreStaticMethodsOf,
+				isCalleeIgnored,
 				isVariableInBlockScoped:
 					variable =>
 						scopedVariables.isIn({

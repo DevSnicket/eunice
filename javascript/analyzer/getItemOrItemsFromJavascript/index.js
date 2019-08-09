@@ -9,10 +9,10 @@ const
 module.exports =
 	(/** @type {import("./Parameter.d")} */{
 		babelParserPlugins,
-		ignoreStaticMethodsOf,
+		isCalleeIgnored,
 		javascript,
 	}) => {
-		const visitors = createVisitors({ ignoreStaticMethodsOf });
+		const visitors = createVisitors({ isCalleeIgnored });
 
 		walk(
 			parser.parse(

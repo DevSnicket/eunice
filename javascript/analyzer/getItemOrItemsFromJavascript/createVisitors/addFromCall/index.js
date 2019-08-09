@@ -5,34 +5,8 @@ const
 	addArgumentsToNestedCallMap = require("./addArgumentsToNestedCallMap"),
 	getIdentifierNameFromAndAddOrUpdateReferenceOfParent = require("./getIdentifierNameFromAndAddOrUpdateReferenceOfParent"),
 	getNameFromCallee = require("./getNameFromCallee"),
-	getPropertyName = require("../getPropertyName");
-
-const ignoreStaticMethodsOfDefault =
-	[
-		"Array",
-		"ArrayBuffer",
-		"BigInt64Array",
-		"BigUint64Array",
-		"Date",
-		"Float32Array",
-		"Float64Array",
-		"Function",
-		"Int16Array",
-		"Int32Array",
-		"Int8Array",
-		"JSON",
-		"Math",
-		"Number",
-		"Object",
-		"Promise",
-		"Reflect",
-		"String",
-		"Symbol",
-		"Uint16Array",
-		"Uint32Array",
-		"Uint8Array",
-		"Uint8ClampedArray",
-	];
+	getPropertyName = require("../getPropertyName"),
+	isCalleeIgnoredDefault = require("./isCalleeIgnoredDefault");
 
 module.exports =
 	({
@@ -41,7 +15,7 @@ module.exports =
 		callExpression,
 		findDeclarationAndParent,
 		findParentFunctions,
-		ignoreStaticMethodsOf = ignoreStaticMethodsOfDefault,
+		isCalleeIgnored = isCalleeIgnoredDefault,
 		isVariableInBlockScoped,
 	}) => {
 		const calleeName = getNameFromCallee(callExpression.callee);
@@ -55,16 +29,8 @@ module.exports =
 			return (
 				calleeName === "require"
 				||
-				whenIgnoreStaticMethodOf()
+				isCalleeIgnored(calleeName)
 			);
-
-			function whenIgnoreStaticMethodOf() {
-				return (
-					ignoreStaticMethodsOf
-					&&
-					ignoreStaticMethodsOf.includes(calleeName)
-				);
-			}
 		}
 
 		function addFromParentFunctions(

@@ -9,5 +9,7 @@ module.exports =
 	/** @param {import("../getItemOrItemsFromJavascript/Parameter.d")} parameter */
 	parameter =>
 		getYamlForItemOrItems(
-			getItemOrItemsFromJavascript(parameter),
+			getItemOrItemsFromJavascript(
+				parameter,
+			),
 		);

@@ -21,13 +21,13 @@ module.exports =
 	(/** @type {import("./Parameter.d")} */{
 		babelParserPlugins,
 		directory,
+		isCalleeIgnored,
 		ignorePathPattern,
-		ignoreStaticMethodsOf,
 	}) =>
 		withOptionsAndRootDirectory({
 			babelParserPlugins,
 			ignorePathPattern,
-			ignoreStaticMethodsOf,
+			isCalleeIgnored,
 			rootDirectory: directory,
 		})
 		.getOrCreateItemsInDirectory(
@@ -37,7 +37,7 @@ module.exports =
 function withOptionsAndRootDirectory({
 	babelParserPlugins,
 	ignorePathPattern,
-	ignoreStaticMethodsOf,
+	isCalleeIgnored,
 	rootDirectory,
 }) {
 	return { getOrCreateItemsInDirectory };
@@ -116,7 +116,7 @@ function withOptionsAndRootDirectory({
 						return (
 							getItemOrItemsFromJavascript({
 								babelParserPlugins,
-								ignoreStaticMethodsOf,
+								isCalleeIgnored,
 								javascript,
 							})
 						);
