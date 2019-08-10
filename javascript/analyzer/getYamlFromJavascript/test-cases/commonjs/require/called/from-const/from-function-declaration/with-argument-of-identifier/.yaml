@@ -1,4 +1,6 @@
-- - id: variable
-    type: variable
-- - id: caller
-    dependsUpon: variable
+dependsUpon: identifier
+items:
+  - - id: variable
+      type: variable
+  - - id: caller
+      dependsUpon: variable

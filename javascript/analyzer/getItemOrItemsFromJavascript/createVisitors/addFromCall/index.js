@@ -20,18 +20,10 @@ module.exports =
 	}) => {
 		const calleeName = getNameFromCallee(callExpression.callee);
 
-		if (calleeName && !isIgnored())
+		if (calleeName)
 			addFromParentFunctions(
 				findParentFunctions(),
 			);
-
-		function isIgnored() {
-			return (
-				calleeName === "require"
-				||
-				isCalleeIgnored(calleeName)
-			);
-		}
 
 		function addFromParentFunctions(
 			parentFunctions,
@@ -52,6 +44,8 @@ module.exports =
 				reference,
 			) {
 				return (
+					!isCalleeIgnored(reference)
+					&&
 					getIdentifierNameFromAndAddOrUpdateReferenceOfParent({
 						addUndeclaredReference,
 						findDeclarationAndParent,
