@@ -64,6 +64,7 @@ const
 		],
 	standard =
 		[
+			"arguments",
 			"Array",
 			"ArrayBuffer",
 			"AsyncFunction",
