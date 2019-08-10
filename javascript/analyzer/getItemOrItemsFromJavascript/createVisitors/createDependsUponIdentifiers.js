@@ -29,28 +29,40 @@ module.exports =
 			identifiers = [],
 			parent,
 		}) {
-			const dependsUponIdentifiers =
-				[
-					...identifiers,
-					...dependsUponIdentifiersByParent.get(parent) || [],
-				];
+			const identifiersOfParent =
+				dependsUponIdentifiersByParent.get(parent);
 
 			dependsUponIdentifiersByParent.delete(parent);
 
 			return (
-				dependsUponIdentifiers.length
+				createPropertyForIdentifiers(
+					[
+						...identifiers,
+						...identifiersOfParent || [],
+					],
+				)
+			);
+		}
+
+		function createPropertyForIdentifiers(
+			identifiers,
+		) {
+			return (
+				identifiers.length
 				&&
-				{ dependsUpon: getFirstOrSort() }
+				{ dependsUpon: getValue() }
 			);
 
-			function getFirstOrSort() {
-				return (
-					dependsUponIdentifiers.length === 1
-					?
-					[ ...dependsUponIdentifiers ][0]
-					:
-					[ ...dependsUponIdentifiers ].sort()
-				);
+			function getValue() {
+				return whenSingle() || identifiers.sort();
+
+				function whenSingle() {
+					return (
+						identifiers.length === 1
+						&&
+						identifiers[0]
+					);
+				}
 			}
 		}
 
