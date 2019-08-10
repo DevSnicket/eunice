@@ -4,5 +4,5 @@ export = Options
 
 interface Options {
 	readonly babelParserPlugins?: Iterable<ParserPlugin>
-	isCalleeIgnored(string): boolean
+	readonly isCalleeIgnored?(string): boolean
 }
