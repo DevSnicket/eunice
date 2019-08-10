@@ -25,7 +25,6 @@ const
 			"DOMRect",
 			"Event",
 			"EventTarget",
-			"globalThis",
 			"MutationObserver",
 			"queueMicrotask",
 			"Range",
