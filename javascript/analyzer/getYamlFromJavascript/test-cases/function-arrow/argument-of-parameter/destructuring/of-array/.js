@@ -1,0 +1,1 @@
+called(([ parameter ]) => calledByCalled(parameter));

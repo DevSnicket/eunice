@@ -124,12 +124,22 @@ module.exports =
 					parameter,
 				) {
 					return (
+						whenArray()
+						||
 						whenObject()
 						||
 						whenRest()
 						||
 						parameter.name === name
 					);
+
+					function whenArray() {
+						return (
+							parameter.type === "ArrayPattern"
+							&&
+							parameter.elements.some(element => element.name === name)
+						);
+					}
 
 					function whenObject() {
 						return (
