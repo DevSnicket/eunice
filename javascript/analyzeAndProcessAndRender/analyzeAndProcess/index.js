@@ -17,9 +17,9 @@ module.exports =
 		sources,
 	}) => {
 		return (
-			await whenSingleSource()
-			||
 			createOrAddToStacks(
+				await whenSingleSource()
+				||
 				await Promise.all(
 					sources.map(analyzeAndProcessSource),
 				),
