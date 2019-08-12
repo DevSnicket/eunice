@@ -126,6 +126,8 @@ module.exports =
 					return (
 						whenArray()
 						||
+						whenAssignment()
+						||
 						whenObject()
 						||
 						whenRest()
@@ -138,6 +140,14 @@ module.exports =
 							parameter.type === "ArrayPattern"
 							&&
 							parameter.elements.some(element => element.name === name)
+						);
+					}
+
+					function whenAssignment() {
+						return (
+							parameter.type === "AssignmentPattern"
+							&&
+							isParameter(parameter.left)
 						);
 					}
 
