@@ -5,21 +5,27 @@ require("array.prototype.flatmap")
 .shim();
 
 module.exports =
-	identifierExpression =>
-		identifierExpression.type === "ObjectPattern"
-		&&
-		identifierExpression.properties.flatMap(getNamesFromProperty);
+	identifierExpression => {
+		return whenArray() || whenObject();
 
-function getNamesFromProperty(
-	{ value },
-) {
-	return whenHasValue() || [];
+		function whenArray() {
+			return (
+				identifierExpression.type === "ArrayPattern"
+				&&
+				identifierExpression.elements.map(element => element.name)
+			);
+		}
 
-	function whenHasValue() {
-		return (
-			value
-			&&
-			[ value.name ]
-		);
-	}
-}
+		function whenObject() {
+			return (
+				identifierExpression.type === "ObjectPattern"
+				&&
+				identifierExpression.properties.flatMap(
+					({ value }) =>
+						(value && value.name)
+						||
+						[],
+				)
+			);
+		}
+	};

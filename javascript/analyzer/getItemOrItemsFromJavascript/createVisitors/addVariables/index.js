@@ -6,7 +6,7 @@ require("array.prototype.flatmap")
 
 const
 	createAndAddDeclarations = require("./createAndAddDeclarations"),
-	getNamesFromIdentifierExpressionWhenObjectPattern = require("./getNamesFromIdentifierExpressionWhenObjectPattern");
+	getNamesFromIdentifierExpressionWhenDestructure = require("./getNamesFromIdentifierExpressionWhenDestructure");
 
 module.exports =
 	({
@@ -22,7 +22,6 @@ module.exports =
 		else
 			createAndAddDeclarations({
 				addDeclarationsIn,
-				getNamesFromIdentifierExpressionWhenObjectPattern,
 				hasUndeclaredReferenceTo,
 				parentFunction,
 				variableDeclaration,
@@ -57,7 +56,7 @@ module.exports =
 				variables:
 					variableDeclaration.declarations.flatMap(
 						declaration =>
-							getNamesFromIdentifierExpressionWhenObjectPattern(declaration.id)
+							getNamesFromIdentifierExpressionWhenDestructure(declaration.id)
 							||
 							[ declaration.id.name ],
 					),

@@ -4,12 +4,13 @@ This library is free software, licensed under the terms of the GNU General Publi
 require("array.prototype.flatmap")
 .shim();
 
-const createWhenRequire = require("./createWhenRequire");
+const
+	createWhenRequire = require("./createWhenRequire"),
+	getNamesFromIdentifierExpressionWhenDestructure = require("../getNamesFromIdentifierExpressionWhenDestructure");
 
 module.exports =
 	({
 		addDeclarationsIn,
-		getNamesFromIdentifierExpressionWhenObjectPattern,
 		hasUndeclaredReferenceTo,
 		parentFunction,
 		variableDeclaration,
@@ -84,7 +85,7 @@ module.exports =
 			);
 
 			function getWhenObjectPattern() {
-				const names = getNamesFromIdentifierExpressionWhenObjectPattern(identifier);
+				const names = getNamesFromIdentifierExpressionWhenDestructure(identifier);
 
 				return (
 					names
