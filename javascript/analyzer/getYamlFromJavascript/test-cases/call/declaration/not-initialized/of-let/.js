@@ -1,0 +1,3 @@
+let variable;
+
+called(variable);

@@ -24,41 +24,49 @@ module.exports =
 				variableDeclaration.declarations
 				.flatMap(
 					declaration =>
-						createFromDeclarationIfInitialized(declaration)
+						createFromDeclaration(declaration)
 						||
 						[],
 				)
 			);
 		}
 
-		function createFromDeclarationIfInitialized(
+		function createFromDeclaration(
 			declaration,
 		) {
 			return (
-				declaration.init
-				&&
-				createFromDeclaration()
+				whenInitializedByRequire()
+				||
+				whenNotInitializedByFunction()
 			);
 
-			function createFromDeclaration() {
+			function whenInitializedByRequire() {
 				return (
+					declaration.init
+					&&
 					createWhenRequire({
 						createVariablesFromIdentifier,
 						initialization: declaration.init,
 					})
-					||
-					createWhenNotFunction()
 				);
 			}
 
-			function createWhenNotFunction() {
+			function whenNotInitializedByFunction() {
 				return (
-					!isFunctionType(
-						declaration.init.type,
-					)
+					!isInitializedWithFunction()
 					&&
 					createVariablesFromIdentifier()
 				);
+
+				function isInitializedWithFunction() {
+					return (
+						declaration.init
+						&&
+						isFunctionType(
+							declaration.init.type,
+						)
+					);
+				}
 			}
 
 			function createVariablesFromIdentifier() {
