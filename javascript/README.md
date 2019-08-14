@@ -61,6 +61,11 @@ From the processors available in [eunice-processors](https://github.com/DevSnick
 13. If there is a single root item, that is anonymous and has only items and type, its items are flattened out into the root
 
 ## Options
+JavaScript files are expected to be ordered so that a function is after calls of it, this can be reversed with:
+```bash
+npx @devsnicket/eunice --isFileContentReversed=true
+```
+
 Only the current directory is included in analysis by default. Multiple sources of analysis can be specified:
 ```bash
 npx @devsnicket/eunice --directories=directory1 --directories=directory2
