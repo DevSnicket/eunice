@@ -32,6 +32,7 @@ module.exports =
 		directoryToCreateOrAddToStacksFrom = null,
 		ignoreDirectoryNames = ignoreDirectoryNamesDefault,
 		ignorePathPattern = createIgnorePathPatternFromDirectoryNames(ignoreDirectoryNames),
+		isFileContentReversed = false,
 		isHtmlSingleFile = true,
 		outputPath,
 		packages = null,
@@ -46,6 +47,7 @@ module.exports =
 						babelParserPlugins,
 						directoryToCreateOrAddToStacksFrom,
 						ignorePathPattern,
+						isFileContentReversed,
 						packagePrefixAndScope:
 							packages,
 						sources:

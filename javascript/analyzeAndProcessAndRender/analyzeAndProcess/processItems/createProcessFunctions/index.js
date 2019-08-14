@@ -28,6 +28,7 @@ module.exports =
 	({
 		directoryToCreateOrAddToStacksFrom,
 		identifierSeparator,
+		isFileContentReversed,
 		packagePrefixAndScope,
 		rootItemIdentifier,
 	}) => {
@@ -41,6 +42,12 @@ module.exports =
 
 		return (
 			[
+				items =>
+					isFileContentReversed
+					?
+					items.map(reverseChildItems)
+					:
+					items,
 				removeIndexFileSuffix,
 				setTypeOfRootToFile,
 				orderItemsByIdentifier,
@@ -81,6 +88,30 @@ module.exports =
 			]
 		);
 	};
+
+function reverseChildItems(
+	item,
+) {
+	return (
+		whenHasMultipleItems(item)
+		||
+		item
+	);
+
+	function whenHasMultipleItems({
+		items,
+		...restOfItem
+	}) {
+		return (
+			Array.isArray(items)
+			&&
+			{
+				items: items.reverse(),
+				...restOfItem,
+			}
+		);
+	}
+}
 
 function setTypeOfRootToFile(
 	items,

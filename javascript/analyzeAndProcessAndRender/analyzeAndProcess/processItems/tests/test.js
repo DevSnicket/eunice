@@ -14,6 +14,8 @@ test(
 					path.join(__dirname, "stacks"),
 				identifierSeparator:
 					"\\",
+				isFileContentReversed:
+					false,
 				items:
 					[
 						{
@@ -124,6 +126,8 @@ test(
 					"stacks",
 				identifierSeparator:
 					"\\",
+				isFileContentReversed:
+					false,
 				items:
 					{ items: "child" },
 				packagePrefixAndScope:
@@ -134,5 +138,62 @@ test(
 		)
 		.toEqual(
 			"child",
+		),
+);
+
+test(
+	"isFileContentReversed true reverses child items.",
+	() =>
+		expect(
+			processItems({
+				directoryToCreateOrAddToStacksFrom:
+					"no-stacks",
+				identifierSeparator:
+					"\\",
+				isFileContentReversed:
+					true,
+				items:
+					[
+						{
+							id:
+								"item1",
+							items:
+								[
+									[ "child1OfItem1" ],
+									[ { dependsUpon: "child1OfItem1", id: "child2OfItem1" } ],
+								],
+						},
+						"item2",
+						{ id: "item3", items: "childOfItem3" },
+					],
+				packagePrefixAndScope:
+					null,
+				rootItemIdentifier:
+					null,
+			}),
+		)
+		.toEqual(
+			[
+				{
+					id:
+						"item1",
+					items:
+						[
+							[ { dependsUpon: "child1OfItem1", id: "child2OfItem1" } ],
+							[ "child1OfItem1" ],
+						],
+					type:
+						"file",
+				},
+				{
+					id: "item2",
+					type: "file",
+				},
+				{
+					id: "item3",
+					items: "childOfItem3",
+					type: "file",
+				},
+			],
 		),
 );

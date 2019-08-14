@@ -13,6 +13,7 @@ module.exports =
 		babelParserPlugins = babelParserPluginsDefault,
 		directoryToCreateOrAddToStacksFrom,
 		ignorePathPattern,
+		isFileContentReversed,
 		packagePrefixAndScope,
 		sources,
 	}) => {
@@ -56,6 +57,7 @@ module.exports =
 							directory,
 						identifierSeparator:
 							path.sep,
+						isFileContentReversed,
 						items,
 						packagePrefixAndScope,
 						rootItemIdentifier,

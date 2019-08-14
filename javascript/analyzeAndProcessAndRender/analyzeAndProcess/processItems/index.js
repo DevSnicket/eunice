@@ -7,6 +7,7 @@ module.exports =
 	({
 		directoryToCreateOrAddToStacksFrom,
 		identifierSeparator,
+		isFileContentReversed,
 		items,
 		packagePrefixAndScope,
 		rootItemIdentifier,
@@ -17,6 +18,7 @@ module.exports =
 				createProcessFunctions({
 					directoryToCreateOrAddToStacksFrom,
 					identifierSeparator,
+					isFileContentReversed,
 					packagePrefixAndScope,
 					rootItemIdentifier,
 				}),

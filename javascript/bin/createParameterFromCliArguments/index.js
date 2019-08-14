@@ -10,6 +10,7 @@ module.exports =
 		babelParserPlugins,
 		directories = ".",
 		ignorePathPattern,
+		isFileContentReversed,
 		isHtmlSingleFile,
 		outputBaseFileName,
 		outputDirectoryPath,
@@ -27,8 +28,10 @@ module.exports =
 				ignorePathPattern
 				&&
 				new RegExp(ignorePathPattern),
+			isFileContentReversed:
+				parseBoolean(isFileContentReversed),
 			isHtmlSingleFile:
-				isHtmlSingleFile && isHtmlSingleFile === "true",
+				parseBoolean(isHtmlSingleFile),
 			outputPath:
 				createOutputPath({
 					outputBaseFileName,
@@ -64,4 +67,10 @@ function ensureArray(
 		:
 		[ argument ]
 	);
+}
+
+function parseBoolean(
+	value,
+) {
+	return value && value === "true";
 }
