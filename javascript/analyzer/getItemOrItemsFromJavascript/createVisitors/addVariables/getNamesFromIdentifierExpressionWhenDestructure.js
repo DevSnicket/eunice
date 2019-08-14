@@ -12,7 +12,7 @@ module.exports =
 			return (
 				identifierExpression.type === "ArrayPattern"
 				&&
-				identifierExpression.elements.map(element => element.name)
+				identifierExpression.elements.map(element => element && element.name)
 			);
 		}
 
