@@ -4,3 +4,4 @@
 /analyzeAndProcessAndRender/tests/singleSourceWithOutputBaseFilename/source/
 /harness/example.js
 /harness/output/
+/test-coverage
