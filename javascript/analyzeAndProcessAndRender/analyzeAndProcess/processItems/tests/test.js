@@ -142,7 +142,7 @@ test(
 );
 
 test(
-	"isFileContentReversed true reverses child items.",
+	"isFileContentReversed true reverses descendant items.",
 	() =>
 		expect(
 			processItems({
@@ -159,8 +159,18 @@ test(
 								"item1",
 							items:
 								[
-									[ "child1OfItem1" ],
-									[ { dependsUpon: "child1OfItem1", id: "child2OfItem1" } ],
+									[
+										{
+											id:
+												"child1OfItem1",
+											items:
+												[
+													[ "grandchild1OfItem1" ],
+													[ "grandchild2OfItem1" ],
+												],
+										},
+									],
+									[ "child2OfItem1" ],
 								],
 						},
 						"item2",
@@ -179,8 +189,13 @@ test(
 						"item1",
 					items:
 						[
-							[ { dependsUpon: "child1OfItem1", id: "child2OfItem1" } ],
-							[ "child1OfItem1" ],
+							"child2OfItem1",
+							{
+								id:
+									"child1OfItem1",
+								items:
+									[ "grandchild2OfItem1", "grandchild1OfItem1" ],
+							},
 						],
 					type:
 						"file",

@@ -22,7 +22,8 @@ const
 		setIdentifierOfAnonymousToParent,
 		setTypeOfRootItems,
 		unstackIndependent,
-	} = require("@devsnicket/eunice-processors");
+	} = require("@devsnicket/eunice-processors"),
+	reverseDescendantsOfItems = require("./reverseDescendantsOfItems");
 
 module.exports =
 	({
@@ -45,7 +46,7 @@ module.exports =
 				items =>
 					isFileContentReversed
 					?
-					items.map(reverseChildItems)
+					reverseDescendantsOfItems(items)
 					:
 					items,
 				removeIndexFileSuffix,
@@ -88,30 +89,6 @@ module.exports =
 			]
 		);
 	};
-
-function reverseChildItems(
-	item,
-) {
-	return (
-		whenHasMultipleItems(item)
-		||
-		item
-	);
-
-	function whenHasMultipleItems({
-		items,
-		...restOfItem
-	}) {
-		return (
-			Array.isArray(items)
-			&&
-			{
-				items: items.reverse(),
-				...restOfItem,
-			}
-		);
-	}
-}
 
 function setTypeOfRootToFile(
 	items,
