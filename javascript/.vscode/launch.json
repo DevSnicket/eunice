@@ -6,6 +6,19 @@
 			"type": "node"
 		},
 		{
+			"args":
+				[
+					"--collect-coverage=false",
+					"--runInBand",
+					"analyzeAndProcessAndRender/analyzeAndProcess/processItems/tests/test.js",
+				],
+			"disableOptimisticBPs": true,
+			"name": "analyzeAndProcessAndRender analyzeAndProcess processItems Jest",
+			"program": "${workspaceFolder}/node_modules/jest/node_modules/jest-cli/bin/jest.js",
+			"request": "launch",
+			"type": "node"
+		},
+		{
 			"name": "bin no arguments",
 			"program": "${workspaceFolder}/bin/index.js",
 			"request": "launch",
