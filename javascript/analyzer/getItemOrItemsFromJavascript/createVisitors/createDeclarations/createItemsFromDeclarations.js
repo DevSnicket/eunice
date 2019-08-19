@@ -113,7 +113,7 @@ function createItemFromDeclaration({
 	items,
 	type,
 }) {
-	return whenStructured() || id || {};
+	return whenStructured() || id;
 
 	function whenStructured() {
 		return (
