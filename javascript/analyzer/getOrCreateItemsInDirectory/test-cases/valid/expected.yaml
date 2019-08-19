@@ -17,14 +17,10 @@
         dependsUpon: moduleExportsOfFunctionArrow1
     - - id: differentName
         dependsUpon: moduleExportsOfFunctionArrow1
-- id: moduleExportsOfFunctionArrow1
-  items: {}
-- id: moduleExportsOfFunctionArrow2
-  items: {}
+- moduleExportsOfFunctionArrow1
+- moduleExportsOfFunctionArrow2
 - id: moduleExportsOfFunctionArrowWithFileFunction
-  items:
-    - - {}
-    - - fileFunction
+  items: fileFunction
 - id: moduleExportsOfFunctionArrowWithNestedFunction
   items:
     items: nestedFunction
@@ -54,8 +50,7 @@
     - moduleExportsOfFunctionArrow1
     - moduleExportsOfFunctionArrow2
 - subdirectory/emptyInSubdirectory
-- id: subdirectory/moduleExportsOfFunctionArrowInSubdirectory
-  items: {}
+- subdirectory/moduleExportsOfFunctionArrowInSubdirectory
 - id: subdirectory/requireCurrentDirectoryThatIsCalled
   dependsUpon: subdirectory
 - id: subdirectory/requireCurrentDirectoryWithTrailingSlashThatIsCalled
