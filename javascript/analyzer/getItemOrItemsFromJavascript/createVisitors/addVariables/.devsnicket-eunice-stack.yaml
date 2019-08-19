@@ -1,0 +1,3 @@
+- - addVariables
+- - createAndAddDeclarations
+- - getNamesFromIdentifierExpressionWhenDestructure
