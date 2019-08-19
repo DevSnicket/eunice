@@ -45,8 +45,9 @@ module.exports =
 					declaration.init
 					&&
 					createWhenRequire({
-						createVariablesFromIdentifier,
-						initialization: declaration.init,
+						getIsDestructuredAndVariables,
+						initialization:
+							declaration.init,
 					})
 				);
 			}
@@ -55,7 +56,8 @@ module.exports =
 				return (
 					!isInitializedWithFunction()
 					&&
-					createVariablesFromIdentifier()
+					getIsDestructuredAndVariables()
+					.variables
 				);
 
 				function isInitializedWithFunction() {
@@ -69,30 +71,28 @@ module.exports =
 				}
 			}
 
-			function createVariablesFromIdentifier() {
+			function getIsDestructuredAndVariables() {
 				return (
-					createVariablesFromIsDestructuredAndNames(
-						getIsDestructuredAndNamesOfIdentifier(
-							declaration.id,
-						),
+					getIsDestructuredAndVariablesFromIdentifier(
+						declaration.id,
 					)
 				);
 			}
 		}
 
-		function getIsDestructuredAndNamesOfIdentifier(
+		function getIsDestructuredAndVariablesFromIdentifier(
 			identifier,
 		) {
 			return (
-				getWhenObjectPattern()
+				whenDestructured()
 				||
 				{
 					isDestructured: false,
-					names: [ identifier.name ],
+					variables: [ createVariableFromName(identifier.name) ],
 				}
 			);
 
-			function getWhenObjectPattern() {
+			function whenDestructured() {
 				const names = getNamesFromIdentifierExpressionWhenDestructure(identifier);
 
 				return (
@@ -100,34 +100,27 @@ module.exports =
 					&&
 					{
 						isDestructured: true,
-						names,
+						variables: names.map(createVariableFromName),
 					}
 				);
 			}
 		}
 
-		function createVariablesFromIsDestructuredAndNames({
-			isDestructured,
-			names,
-		}) {
+		function createVariableFromName(
+			name,
+		) {
 			return (
-				names
-				.map(
-					name => (
-						{
-							...isDestructured && { dependsUpon: name },
-							id:
-								name,
-							isCalledFromNestedFunction:
-								hasUndeclaredReferenceTo({
-									parent: parentFunction,
-									reference: name,
-								}),
-							type:
-								"variable",
-						}
-					),
-				)
+				{
+					id:
+						name,
+					isCalledFromNestedFunction:
+						hasUndeclaredReferenceTo({
+							parent: parentFunction,
+							reference: name,
+						}),
+					type:
+						"variable",
+				}
 			);
 		}
 

@@ -5,13 +5,15 @@ const removeJsFilePathExtension = require("../../removeJsFilePathExtension");
 
 module.exports =
 	({
-		createVariablesFromIdentifier,
+		getIsDestructuredAndVariables,
 		initialization,
 	}) => {
 		return (
 			createFromWhenRequire({
-				dependsUponItemIdentifier: null,
-				expression: initialization,
+				expression:
+					initialization,
+				getOrCreateDependsUponForVariableName:
+					name => name,
 			})
 			||
 			createWhenMember()
@@ -22,30 +24,47 @@ module.exports =
 				initialization.type === "MemberExpression"
 				&&
 				createFromWhenRequire({
-					dependsUponItemIdentifier: getProperty(),
-					expression: initialization.object,
+					expression:
+						initialization.object,
+					getOrCreateDependsUponForVariableName,
 				})
 			);
 
-			function getProperty() {
+			function getOrCreateDependsUponForVariableName(
+				name,
+			) {
 				return (
-					initialization.computed
-					?
-					initialization.property.value
-					:
-					initialization.property.name
+					getOrCreateDependsUpon({
+						identifier: getProperty(),
+						items: name,
+					})
 				);
+
+				function getProperty() {
+					return (
+						initialization.computed
+						?
+						initialization.property.value
+						:
+						initialization.property.name
+					);
+				}
 			}
 		}
 
 		function createFromWhenRequire({
-			dependsUponItemIdentifier,
 			expression,
+			getOrCreateDependsUponForVariableName,
 		}) {
 			return (
 				isRequire()
 				&&
-				create()
+				create({
+					getOrCreateDependsUponForVariableName,
+					path:
+						getPath(),
+					...getIsDestructuredAndVariables(),
+				})
 			);
 
 			function isRequire() {
@@ -56,52 +75,44 @@ module.exports =
 				);
 			}
 
-			function create() {
-				const
-					argument = getArgument(),
-					variables = createVariablesFromIdentifier();
-
+			function getPath() {
 				return (
-					variables
-					.map(
-						variable => (
-							{
-								...variable,
-								dependsUpon:
-									getOrCreateDependsUpon({
-										identifier: argument,
-										items: getOrCreateDependsUponForVariable(variable),
-									}),
-							}
-						),
+					removeJsFilePathExtension(
+						expression.arguments[0].value,
 					)
-				);
-
-				function getArgument() {
-					return (
-						removeJsFilePathExtension(
-							expression.arguments[0].value,
-						)
-					);
-				}
-			}
-
-			function getOrCreateDependsUponForVariable(
-				variable,
-			) {
-				return (
-					dependsUponItemIdentifier
-					?
-					getOrCreateDependsUpon({
-						identifier: dependsUponItemIdentifier,
-						items: variable.dependsUpon,
-					})
-					:
-					variable.dependsUpon
 				);
 			}
 		}
 	};
+
+function create({
+	getOrCreateDependsUponForVariableName,
+	isDestructured,
+	path,
+	variables,
+}) {
+	return (
+		variables
+		.map(
+			variable => (
+				{
+					...variable,
+					dependsUpon:
+						getOrCreateDependsUpon({
+							identifier:
+								path,
+							items:
+								getOrCreateDependsUponForVariableName(
+									isDestructured
+									&&
+									variable.id,
+								),
+						}),
+				}
+			),
+		)
+	);
+}
 
 function getOrCreateDependsUpon({
 	identifier,
