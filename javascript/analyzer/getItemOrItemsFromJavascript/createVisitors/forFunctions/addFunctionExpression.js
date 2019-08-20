@@ -19,6 +19,9 @@ module.exports =
 			case "AssignmentExpression":
 				addAssignment();
 				break;
+			case "CallExpression":
+				addCallWhenBlock();
+				break;
 			case "ExportDefaultDeclaration":
 				findParentAndAdd({
 					identifier: null,
@@ -59,6 +62,18 @@ module.exports =
 					parent.left.name
 				);
 			}
+		}
+
+		function addCallWhenBlock() {
+			if (functionExpression.body.type === "BlockStatement")
+				findParentAndAdd({
+					identifier:
+						functionExpression.id
+						&&
+						functionExpression.id.name,
+					type:
+						null,
+				});
 		}
 
 		function addVariableDeclarator() {

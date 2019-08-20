@@ -30,7 +30,7 @@ function findParents(
 
 	for (const parent of getParents(ancestors)) {
 		if (parent.functionExpression)
-			if (parent.isIdentifiable)
+			if (parent.isIdentifiable || parent.functionExpression.body.type === "BlockStatement")
 				return createParentFunctionsWithIdentifiable(parent.functionExpression);
 			else
 				anonymous.push(parent.functionExpression);
