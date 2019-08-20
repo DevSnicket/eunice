@@ -13,6 +13,7 @@ test(
 			createParameterFromCliArguments({
 				babelParserPlugins: undefined,
 				ignorePathPattern: undefined,
+				isFileContentReversed: undefined,
 				isHtmlSingleFile: undefined,
 				outputBaseFileName: undefined,
 				outputDirectoryPath: undefined,
@@ -44,6 +45,7 @@ test(
 			createParameterFromCliArguments({
 				babelParserPlugins,
 				ignorePathPattern: undefined,
+				isFileContentReversed: undefined,
 				isHtmlSingleFile: undefined,
 				outputBaseFileName: undefined,
 				outputDirectoryPath: undefined,
@@ -67,6 +69,7 @@ test(
 			createParameterFromCliArguments({
 				babelParserPlugins: undefined,
 				ignorePathPattern: undefined,
+				isFileContentReversed: undefined,
 				isHtmlSingleFile: "true",
 				outputBaseFileName: undefined,
 				outputDirectoryPath: undefined,
@@ -91,6 +94,7 @@ test(
 			createParameterFromCliArguments({
 				babelParserPlugins: undefined,
 				ignorePathPattern,
+				isFileContentReversed: undefined,
 				isHtmlSingleFile: undefined,
 				outputBaseFileName: undefined,
 				outputDirectoryPath: undefined,
@@ -114,6 +118,7 @@ test(
 			createParameterFromCliArguments({
 				babelParserPlugins: undefined,
 				ignorePathPattern: undefined,
+				isFileContentReversed: undefined,
 				isHtmlSingleFile: undefined,
 				outputBaseFileName: undefined,
 				outputDirectoryPath: undefined,
@@ -140,6 +145,7 @@ test(
 			createParameterFromCliArguments({
 				babelParserPlugins: undefined,
 				ignorePathPattern: undefined,
+				isFileContentReversed: undefined,
 				isHtmlSingleFile: undefined,
 				outputBaseFileName: "outputBaseFileName",
 				outputDirectoryPath: "outputDirectoryPath",
