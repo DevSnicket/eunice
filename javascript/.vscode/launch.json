@@ -50,6 +50,18 @@
 			"type": "node"
 		},
 		{
+			"args":
+				[
+					"--collect-coverage=false",
+					"--runInBand"
+				],
+			"disableOptimisticBPs": true,
+			"name": "Jest",
+			"program": "${workspaceFolder}/node_modules/jest/node_modules/jest-cli/bin/jest.js",
+			"request": "launch",
+			"type": "node"
+		},
+		{
 			"cwd": "${workspaceFolder}/packageWithoutScope",
 			"name": "packageWithoutScope createPackageJson",
 			"program": "${workspaceFolder}/packageWithoutScope/createPackageJson.js",
