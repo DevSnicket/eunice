@@ -150,7 +150,7 @@ module.exports =
 				parent:
 					getParentFromAncestors(ancestors),
 				parentFunction:
-					parentFunctionsFromAncestors.findIdentifiableParent(ancestors),
+					parentFunctionsFromAncestors.findBlockOrIdentifiableParent(ancestors),
 				variableDeclaration,
 			});
 		}

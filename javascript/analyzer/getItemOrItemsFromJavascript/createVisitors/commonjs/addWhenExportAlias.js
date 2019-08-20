@@ -3,7 +3,7 @@ This library is free software, licensed under the terms of the GNU General Publi
 
 const
 	getIdentifierWhenExport = require("./getIdentifierWhenExport"),
-	{ findIdentifiableParent } = require("../parentFunctionsFromAncestors");
+	{ findBlockOrIdentifiableParent } = require("../parentFunctionsFromAncestors");
 
 module.exports =
 	({
@@ -20,7 +20,7 @@ module.exports =
 		function addDeclarationWhenFile(
 			declaration,
 		) {
-			if (declaration && !findIdentifiableParent(ancestors))
+			if (declaration && !findBlockOrIdentifiableParent(ancestors))
 				addDeclarationIn({
 					declaration,
 					parent: null,

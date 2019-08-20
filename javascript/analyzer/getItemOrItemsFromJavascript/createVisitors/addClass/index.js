@@ -4,7 +4,7 @@ This library is free software, licensed under the terms of the GNU General Publi
 const
 	createDependsUponPropertyFromBaseAndConstructor = require("./createDependsUponPropertyFromBaseAndConstructor"),
 	createItemsProperty = require("./createItemsProperty"),
-	{ findIdentifiableParent } = require("../parentFunctionsFromAncestors"),
+	{ findBlockOrIdentifiableParent } = require("../parentFunctionsFromAncestors"),
 	getParentFromAncestors = require("../getParentFromAncestors");
 
 module.exports =
@@ -84,6 +84,6 @@ function addWhenAnyProperties({
 					...properties,
 				),
 			parent:
-				findIdentifiableParent(ancestors),
+				findBlockOrIdentifiableParent(ancestors),
 		});
 }

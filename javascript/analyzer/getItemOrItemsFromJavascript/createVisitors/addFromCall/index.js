@@ -75,13 +75,13 @@ module.exports =
 				}
 
 				function getParent() {
-					return whenIdentifiable() || null;
+					return whenBlockOrIdentifiable() || null;
 
-					function whenIdentifiable() {
+					function whenBlockOrIdentifiable() {
 						return (
 							parentFunctions
 							&&
-							parentFunctions.identifiable
+							parentFunctions.blockOrIdentifiable
 						);
 					}
 				}
@@ -93,14 +93,14 @@ module.exports =
 				return (
 					parentFunctions
 					&&
-					(ofIdentifiable() || ofAnonymous())
+					(ofBlockOrIdentifiable() || ofAnonymous())
 				);
 
-				function ofIdentifiable() {
+				function ofBlockOrIdentifiable() {
 					return (
-						parentFunctions.identifiable
+						parentFunctions.blockOrIdentifiable
 						&&
-						isParameterOfParentFunction(parentFunctions.identifiable)
+						isParameterOfParentFunction(parentFunctions.blockOrIdentifiable)
 					);
 				}
 

@@ -4,7 +4,7 @@ This library is free software, licensed under the terms of the GNU General Publi
 const
 	createDeclarationsFromExport = require("./createDeclarationsFromExport"),
 	createDeclarationsFromImport = require("./createDeclarationsFromImport"),
-	{ findIdentifiableParent } = require("../parentFunctionsFromAncestors"),
+	{ findBlockOrIdentifiableParent } = require("../parentFunctionsFromAncestors"),
 	removeJsFilePathExtension = require("../removeJsFilePathExtension");
 
 module.exports =
@@ -33,7 +33,7 @@ module.exports =
 							"export",
 					} ],
 				parent:
-					findIdentifiableParent(ancestors),
+					findBlockOrIdentifiableParent(ancestors),
 			});
 		}
 
@@ -48,7 +48,7 @@ module.exports =
 						specifiers,
 					}),
 				parent:
-					findIdentifiableParent(
+					findBlockOrIdentifiableParent(
 						ancestors,
 					),
 			});
@@ -68,7 +68,7 @@ module.exports =
 						specifiers,
 					}),
 				parent:
-					findIdentifiableParent(
+					findBlockOrIdentifiableParent(
 						ancestors,
 					),
 			});

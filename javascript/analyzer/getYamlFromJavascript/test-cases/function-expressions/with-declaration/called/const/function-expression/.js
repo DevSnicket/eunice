@@ -1,0 +1,1 @@
+(function() { const called = function() {}; called() })

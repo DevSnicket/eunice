@@ -17,7 +17,7 @@ module.exports =
 			return getNameFromDeclaration();
 		else {
 			addUndeclaredReference({
-				parent: parentFunctions && parentFunctions.identifiable,
+				parent: parentFunctions && parentFunctions.blockOrIdentifiable,
 				reference,
 			});
 
@@ -58,7 +58,7 @@ module.exports =
 				return (
 					parentFunctions
 					?
-					declarationAndParent.parent === parentFunctions.identifiable
+					declarationAndParent.parent === parentFunctions.blockOrIdentifiable
 					:
 					!declarationAndParent.parent
 				);

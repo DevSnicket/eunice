@@ -4,7 +4,7 @@ This library is free software, licensed under the terms of the GNU General Publi
 const
 	addFunctionExpression = require("./addFunctionExpression"),
 	createDeclarationForFunction = require("./createDeclarationForFunction"),
-	{ findIdentifiableParent } = require("../parentFunctionsFromAncestors"),
+	{ findBlockOrIdentifiableParent } = require("../parentFunctionsFromAncestors"),
 	getParentFromAncestors = require("../getParentFromAncestors");
 
 module.exports =
@@ -37,7 +37,7 @@ module.exports =
 							isExport() && "export",
 					}),
 				parent:
-					findIdentifiableParent(ancestors),
+				findBlockOrIdentifiableParent(ancestors),
 			});
 
 			function isExport() {
@@ -62,7 +62,7 @@ module.exports =
 				createDeclarationForFunction:
 					createDeclarationForFunctionWithDependsUponAndItems,
 				findParentFunctionFromAncestors:
-					findIdentifiableParent,
+					findBlockOrIdentifiableParent,
 				functionExpression,
 			});
 		}
