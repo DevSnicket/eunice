@@ -6,7 +6,7 @@ require("array.prototype.flatmap")
 
 const
 	createWhenRequire = require("./createWhenRequire"),
-	getNamesFromIdentifierExpressionWhenDestructure = require("../getNamesFromIdentifierExpressionWhenDestructure");
+	getNamesFromDestructureOrIdentifier = require("../../getNamesFromDestructureOrIdentifier");
 
 module.exports =
 	({
@@ -50,14 +50,29 @@ module.exports =
 							declaration.init,
 					})
 				);
+
+				function getIsDestructuredAndVariables() {
+					return (
+						{
+							isDestructured: isDestructured(),
+							variables: getVariables(),
+						}
+					);
+
+					function isDestructured() {
+						return (
+							[ "ArrayPattern", "ObjectPattern" ]
+							.includes(declaration.id.type)
+						);
+					}
+				}
 			}
 
 			function whenNotInitializedByFunction() {
 				return (
 					!isInitializedWithFunction()
 					&&
-					getIsDestructuredAndVariables()
-					.variables
+					getVariables()
 				);
 
 				function isInitializedWithFunction() {
@@ -71,37 +86,10 @@ module.exports =
 				}
 			}
 
-			function getIsDestructuredAndVariables() {
+			function getVariables() {
 				return (
-					getIsDestructuredAndVariablesFromIdentifier(
-						declaration.id,
-					)
-				);
-			}
-		}
-
-		function getIsDestructuredAndVariablesFromIdentifier(
-			identifier,
-		) {
-			return (
-				whenDestructured()
-				||
-				{
-					isDestructured: false,
-					variables: [ createVariableFromName(identifier.name) ],
-				}
-			);
-
-			function whenDestructured() {
-				const names = getNamesFromIdentifierExpressionWhenDestructure(identifier);
-
-				return (
-					names
-					&&
-					{
-						isDestructured: true,
-						variables: names.map(createVariableFromName),
-					}
+					getNamesFromDestructureOrIdentifier(declaration.id)
+					.map(createVariableFromName)
 				);
 			}
 		}

@@ -1,11 +1,14 @@
 /* Copyright (c) 2018 Graham Dyson. All Rights Reserved.
 This library is free software, licensed under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+require("array.prototype.flatmap")
+.shim();
+
 const
 	addArgumentsToNestedCallMap = require("./addArgumentsToNestedCallMap"),
 	getIdentifierNameFromAndAddOrUpdateReferenceOfParent = require("./getIdentifierNameFromAndAddOrUpdateReferenceOfParent"),
 	getNameFromCallee = require("./getNameFromCallee"),
-	getPropertyName = require("../getPropertyName"),
+	getNamesFromDestructureOrIdentifier = require("../getNamesFromDestructureOrIdentifier"),
 	isCalleeIgnoredDefault = require("./isCalleeIgnoredDefault");
 
 module.exports =
@@ -116,56 +119,10 @@ module.exports =
 					parentFunction,
 				) {
 					return (
-						parentFunction.params.some(isParameter)
+						parentFunction.params
+						.flatMap(getNamesFromDestructureOrIdentifier)
+						.includes(name)
 					);
-				}
-
-				function isParameter(
-					parameter,
-				) {
-					return (
-						whenArray()
-						||
-						whenAssignment()
-						||
-						whenObject()
-						||
-						whenRest()
-						||
-						parameter.name === name
-					);
-
-					function whenArray() {
-						return (
-							parameter.type === "ArrayPattern"
-							&&
-							parameter.elements.some(element => element.name === name)
-						);
-					}
-
-					function whenAssignment() {
-						return (
-							parameter.type === "AssignmentPattern"
-							&&
-							isParameter(parameter.left)
-						);
-					}
-
-					function whenObject() {
-						return (
-							parameter.type === "ObjectPattern"
-							&&
-							parameter.properties.some(property => getPropertyName(property) === name)
-						);
-					}
-
-					function whenRest() {
-						return (
-							parameter.type === "RestElement"
-							&&
-							parameter.argument.name === name
-						);
-					}
 				}
 			}
 		}

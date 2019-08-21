@@ -20,6 +20,7 @@ module.exports =
 				FunctionExpression: visitFunctionExpression,
 			}
 		);
+
 		function visitFunctionDeclaration(
 			functionDeclaration,
 			ancestors,
@@ -37,7 +38,7 @@ module.exports =
 							isExport() && "export",
 					}),
 				parent:
-				findBlockOrIdentifiableParent(ancestors),
+					findBlockOrIdentifiableParent(ancestors),
 			});
 
 			function isExport() {

@@ -5,7 +5,7 @@ require("array.prototype.flatmap")
 .shim();
 
 const
-	getPropertyName = require("../getPropertyName"),
+	getNamesFromDestructureOrIdentifier = require("../getNamesFromDestructureOrIdentifier"),
 	stackItemsWhenMultiple = require("../stackItemsWhenMultiple");
 
 module.exports =
@@ -48,12 +48,7 @@ function createParameterItemsForFunction({
 	return (
 		functionDeclarationOrExpression.params
 		.flatMap(
-			parameter =>
-				parameter.type === "ObjectPattern"
-				?
-				parameter.properties.map(getPropertyName)
-				:
-				[ parameter.name ],
+			getNamesFromDestructureOrIdentifier,
 		)
 		.filter(
 			parameter =>
