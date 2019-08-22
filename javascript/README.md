@@ -4,7 +4,7 @@ DevSnicket Eunice is a toolkit based on the premise that unidirectional dependen
 
 [try out Eunice on Eunice 🐶🥫](https://devsnicket.github.io/Eunice)
 
-[try out Eunice on some Javascript](https://devsnicket.github.io/eunice-javascript)
+[try out Eunice on some Javascript](https://devsnicket.github.io/Eunice/javascript)
 
 [![NPM](https://img.shields.io/npm/v/@devsnicket/eunice.svg)](https://www.npmjs.com/package/@devsnicket/eunice
 ) [![Build Status](https://dev.azure.com/grahamdyson/Eunice/_apis/build/status/grahamdyson.eunice-javascript?branchName=master)](https://dev.azure.com/grahamdyson/Eunice/_build/latest?definitionId=1&branchName=master) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
