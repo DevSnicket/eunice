@@ -30,7 +30,9 @@ steps:
   - task: CopyFiles@2
     displayName: packageWithoutScope copy readme
     inputs:
-      Contents: 'README.md'
+      Contents: |
+        LICENCE
+        README.md
       TargetFolder: 'packageWithoutScope'
   - script: (cd packageWithoutScope && node createPackageJson.js)
     displayName: packageWithoutScope create package JSON
