@@ -36,7 +36,7 @@
 		"jest": "24.8.0",
 		"webpack-cli": "3.3.6"
 	},
-	"homepage": "https://github.com/DevSnicket/eunice-javascript#readme",
+	"homepage": "https://github.com/DevSnicket/eunice#readme",
 	"jest": {
 		"collectCoverage": true,
 		"collectCoverageFrom": [
@@ -84,7 +84,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/DevSnicket/eunice-javascript.git"
+		"url": "https://github.com/grahamdyson/eunice-javascript.git"
 	},
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run test && npm run dogfooding && npm run harness",
