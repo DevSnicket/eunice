@@ -1,21 +1,14 @@
-cache:
-  directories:
-    - node_modules
+cache: { directories: [ node_modules ] }
 deploy:
   api_key: $NPM_TOKEN
   email: grahamdyson@hotmail.com
   provider: npm
   skip_cleanup: true
-install: 
-  - npm install
+install: npm install
 language: node_js
-node_js:
-  - "8.11.2"
+node_js: "8.16.0"
 notifications:
   email:
     on_success: never
     on_failure: always
-script:
-  - npm run lint
-  - npm run spellcheck
-  - npm run build
+script: npm run all

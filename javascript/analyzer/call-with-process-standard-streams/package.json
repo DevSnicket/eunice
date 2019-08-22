@@ -8,10 +8,6 @@
 		"minimist": "1.2.0"
 	},
 	"devDependencies": {
-		"@babel/cli": "7.4.4",
-		"@babel/core": "7.4.5",
-		"@babel/plugin-proposal-object-rest-spread": "7.4.4",
-		"@babel/preset-env": "7.4.5",
 		"@types/node": "10.12.1",
 		"cspell": "4.0.21",
 		"eslint": "5.15.0",
@@ -29,7 +25,7 @@
 		"unice"
 	],
 	"license": "MIT",
-	"main": "dist/index.js",
+	"main": "index.js",
 	"name": "@devsnicket/eunice-call-with-process-standard-streams",
 	"publishConfig": {
 		"access": "public"
@@ -39,10 +35,9 @@
 		"url": "https://github.com/DevSnicket/eunice-call-with-process-standard-streams.git"
 	},
 	"scripts": {
-		"all": "npm run spellcheck && npm run lint && npm run build",
-		"build": "rm -rf dist && npx babel -d dist --ignore dist/*,dist/**/*,node_modules/**/* --plugins @babel/plugin-proposal-object-rest-spread -s true .",
+		"all": "npm run spellcheck && npm run lint",
 		"lint": "npx eslint .",
-		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./dist/**/*\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +"
+		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +"
 	},
-	"version": "1.1.0"
+	"version": "1.2.0"
 }
