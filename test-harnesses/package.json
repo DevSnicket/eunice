@@ -21,7 +21,7 @@
 		"@types/react": "16.3.14",
 		"@types/react-dom": "16.0.5",
 		"cspell": "4.0.21",
-		"eslint": "6.1.0",
+		"eslint": "6.2.1",
 		"eslint-plugin-notice": "0.8.8"
 	},
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
