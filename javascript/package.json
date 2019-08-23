@@ -88,7 +88,7 @@
 	},
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run test && npm run dogfooding && npm run harness",
-		"dogfooding": "node bin --directoryToCreateOrAddToStacksFrom=dogfooding --outputBaseFileName= --outputDirectoryPath=dogfooding --packageNames=call-with-process-standard-streams --packageNames=dependency-and-structure --packageNames=javascript-analyzer --packageNames=processors --packageNames=renderer --packageNames=renderer-test-harness --packageNames=run-tests-from-file-system --packageNames=test-harnesses --packageNames=test-harnesses-processor-plugins --packagePrefix=eunice- --packageScope=devsnicket --directories=. --rootItemIdentifiers=javascript",
+		"dogfooding": "(cd dogfooding && rm -rf output && mkdir output && cd .. && node bin --directoryToCreateOrAddToStacksFrom=dogfooding --outputBaseFileName=index --outputDirectoryPath=dogfooding/output --packageNames=call-with-process-standard-streams --packageNames=dependency-and-structure --packageNames=javascript-analyzer --packageNames=processors --packageNames=renderer --packageNames=renderer-test-harness --packageNames=run-tests-from-file-system --packageNames=test-harnesses --packageNames=test-harnesses-processor-plugins --packagePrefix=eunice- --packageScope=devsnicket --directories=. --rootItemIdentifiers=javascript)",
 		"lint": "npx eslint .",
 		"harness": "(cd harness && rm -rf output && mkdir output && npx webpack -p --config webpack.config.js)",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./packageWithoutScope/node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
