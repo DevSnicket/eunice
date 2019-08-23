@@ -9,18 +9,20 @@ steps:
   - script: npm run all
     displayName: NPM run all
   - script: >-
-      cd harness &&
       rm -rf gh-pages &&
       git submodule add --force -b gh-pages https://$(github_access_token)@github.com/DevSnicket/Eunice.git gh-pages &&
-      cd gh-pages && rm -rf javascript && cp -r ../output javascript &&
+      cd gh-pages &&
+      rm -r * && 
+      cp -r ../dogfooding/output/* . &&
+      cp -r ../harness/output javascript &&
       git add javascript/ &&
       git config --add user.email grahamdyson@hotmail.com &&
       git config --add user.name "JavaScript harness GitHub pages publish" &&
       if [[ `git status --porcelain` ]]; then
-        git commit -m "JavaScript harness";
+        git commit -m "dogfooding and JavaScript harness";
         git push;
       fi
-    displayName: NPM run harness publish
+    displayName: dogfooding and JavaScript harness publish
   - task: Npm@1
     continueOnError: true
     displayName: NPM publish
