@@ -8,7 +8,7 @@
 		"@types/jest": "24.0.15",
 		"cspell": "4.0.21",
 		"eslint": "6.2.1",
-		"eslint-plugin-notice": "0.8.8",
+		"eslint-plugin-notice": "0.8.9",
 		"fs-extra": "8.1.0",
 		"jest": "24.8.0"
 	},
