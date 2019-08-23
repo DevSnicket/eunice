@@ -1,0 +1,22 @@
+{
+	"configurations":
+		[
+			{
+				"name": "attach",
+				"request": "attach",
+				"type": "node"
+			},
+			{
+				"args":
+					[
+						"--runInBand",
+						"test.js",
+					],
+				"disableOptimisticBPs": true,
+				"name": "Jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+		],
+}
