@@ -5,7 +5,6 @@
 	},
 	"description": "Shared implementation for analyzer and renderer test harnesses, using JavaScript, HTML, React and Webpack.",
 	"dependencies": {
-		"@babel/plugin-proposal-object-rest-spread": "7.4.4",
 		"@devsnicket/plugin-discovery-create-repository": "1.4.0",
 		"copy-webpack-plugin": "4.6.0",
 		"css-loader": "2.1.1",
@@ -47,5 +46,5 @@
 		"lint": "npx eslint .",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" -exec npx cspell {} +"
 	},
-	"version": "7.6.0"
+	"version": "7.7.0"
 }
