@@ -28,9 +28,6 @@
 		"js-yaml": "3.13.1"
 	},
 	"devDependencies": {
-		"@babel/cli": "7.4.4",
-		"@babel/plugin-proposal-object-rest-spread": "7.4.4",
-		"@babel/preset-env": "7.4.5",
 		"@devsnicket/plugin-discovery-commonjs-babel-plugin": "1.11.0",
 		"@types/jest": "24.0.13",
 		"@types/node": "10.12.12",
@@ -87,5 +84,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "npx jest --runInBand"
 	},
-	"version": "8.6.0"
+	"version": "8.7.0"
 }
