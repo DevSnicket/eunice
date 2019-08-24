@@ -50,7 +50,7 @@
 				"args":
 					[
 						"--directory=.",
-						"--ignorePathPattern=(^(.git|dist|node_modules|harness/output|test-coverage))|/test-cases"
+						"--ignorePathPattern=(^(.git|node_modules|harness/output|test-coverage))|/test-cases"
 					],
 				"name": "getOrCreateItemsInDirectory test dogfooding",
 				"program": "${workspaceFolder}/getOrCreateItemsInDirectory/bin.js",
