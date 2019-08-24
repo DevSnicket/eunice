@@ -112,6 +112,30 @@
                     dependsUpon:
                       id: renderer-test-harness
                       items: createWebpackConfiguration
+        - id: packageWithoutScope
+          items:
+            - id: bin
+              type: file
+            - id: createPackageJson
+              type: file
+              dependsUpon: writePackageJson
+              items:
+                - - id: writePackageJson
+                    dependsUpon:
+                      - createFromScopedPackageJson
+                      - formatAsJson
+                      - promisify
+                      - readScopedPackageJson
+                    items:
+                      - id: readScopedPackageJson
+                        dependsUpon: promisify
+                      - createFromScopedPackageJson
+                      - formatAsJson
+                - - id: promisify
+                    type: variable
+                    dependsUpon:
+                      id: util
+                      items: promisify
         - id: analyzeAndProcessAndRender
           type: file
           dependsUpon:
@@ -664,31 +688,6 @@
                         dependsUpon: iterators
                     - - id: iterators
                         type: variable
-        - id: packageWithoutScope
-          type: file
-          items:
-            - id: bin
-              type: file
-            - id: createPackageJson
-              type: file
-              dependsUpon: writePackageJson
-              items:
-                - - id: writePackageJson
-                    dependsUpon:
-                      - createFromScopedPackageJson
-                      - formatAsJson
-                      - promisify
-                      - readScopedPackageJson
-                    items:
-                      - id: readScopedPackageJson
-                        dependsUpon: promisify
-                      - createFromScopedPackageJson
-                      - formatAsJson
-                - - id: promisify
-                    type: variable
-                    dependsUpon:
-                      id: util
-                      items: promisify
       - - id: babelParserPluginsDefault
           type: file
 - - id: javascript-analyzer
