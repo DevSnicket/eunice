@@ -94,7 +94,7 @@
 		"harness-example-development": "npx webpack --config tests/example/webpack.config.js -d",
 		"harness-example-production": "npx webpack --config tests/example/webpack.config.js -p",
 		"lint": "npx eslint .",
-		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./node_modules/*\" ! -path \"./tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output/*\" ! -path \"./test-coverage/*\" ! -path \"./writeHarness/test/output/*\" -exec npx cspell {} +",
+		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./node_modules/*\" ! -path \"./tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output/*\" ! -path \"./tests/example/output/*\" ! -path \"./test-coverage/*\" ! -path \"./writeHarness/test/output/*\" -exec npx cspell {} +",
 		"test": "npx jest",
 		"watch": "npx webpack --config webpack.config.js -d --watch"
 	},
