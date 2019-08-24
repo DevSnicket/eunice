@@ -24,10 +24,5 @@ notifications:
     on_success: never
     on_failure: always
 script:
-  - npm run lint
-  - npm run spellcheck
-  - npm run test
+  - npm run all
   - mkdir -p test-coverage && npm install --no-save --prefix test-coverage coveralls@3.0.1 && cat test-coverage/lcov.info | test-coverage/node_modules/coveralls/bin/coveralls.js
-  - npm run dogfooding
-  - npm run build
-  - npm run harness

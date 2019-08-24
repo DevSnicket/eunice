@@ -1,5 +1,4 @@
 test-cases/
-/dist/
 /harness/example.js
 /harness/output/
 /test-coverage/
