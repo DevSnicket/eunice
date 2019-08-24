@@ -12,8 +12,11 @@ module.exports =
 				path.join(__dirname, "output"),
 			javascriptSubstitution:
 				{
-					escape: mode !== "production",
-					pattern: new RegExp("(?<=yaml:|yaml: )yamlFromWebpack"),
-					replacementFilePath: `${__dirname}/.yaml`,
+					escape:
+						mode !== "production",
+					pattern:
+						new RegExp("(?<=yaml:|yaml: )yamlFromWebpack"),
+					replacementFilePath:
+						path.join(__dirname, ".yaml"),
 				},
 		});
