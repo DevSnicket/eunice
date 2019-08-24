@@ -75,5 +75,9 @@ function ensureArray(
 function parseBoolean(
 	value,
 ) {
-	return value && value === "true";
+	return (
+		(typeof value === "string" && value === "true")
+		||
+		value
+	);
 }
