@@ -15,6 +15,7 @@ steps:
       rm -r * && 
       cp -r ../dogfooding/output/* . &&
       cp -r ../harness/output javascript &&
+      rm javascript/harness.js.map &&
       git add javascript/ &&
       git config --add user.email grahamdyson@hotmail.com &&
       git config --add user.name "JavaScript harness GitHub pages publish" &&
