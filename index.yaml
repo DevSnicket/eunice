@@ -7,7 +7,6 @@
             - analyzeAndProcessAndRender
             - createParameterFromCliArguments
             - minimist
-            - process
           items:
             id: createParameterFromCliArguments
             type: file
@@ -15,20 +14,27 @@
               - - id: test
                   type: file
                   dependsUpon:
+                    - babelParserPlugins
                     - createParameterFromCliArguments
                     - expect
+                    - ignorePathPattern
                     - test
                     - undefined
                   items:
-                    - expect
-                    - test
+                    - - id: babelParserPlugins
+                        type: variable
+                      - id: ignorePathPattern
+                        type: variable
+                    - - expect
+                      - test
               - - id: createParameterFromCliArguments
                   dependsUpon:
                     - createOutputPath
                     - createSources
                     - ensureArray
-              - - id: ensureArray
-                  dependsUpon: Array
+                    - parseBoolean
+              - - ensureArray
+                - parseBoolean
                 - id: createOutputPath
                   type: file
                   items:
@@ -44,15 +50,118 @@
                       - getNext
                     items:
                       - - id: getIterator
-                          dependsUpon:
-                            - Array
-                            - yieldArgument
+                          dependsUpon: yieldArgument
                           items: yieldArgument
                         - id: getNext
                           dependsUpon: iterators
                       - - id: iterators
                           type: variable
-      - - id: analyzeAndProcessAndRender
+      - - id: harness
+          items:
+            - id: example
+              type: file
+              items:
+                - - called
+                  - notCalled
+                - - id: Callee
+                    dependsUpon:
+                      - called
+                      - nestedInCallee
+                    items: nestedInCallee
+            - id: harness
+              type: file
+              dependsUpon:
+                - callOrCreateElementOnError
+                - createElement
+                - createFillWithTitleElement
+                - createInitialStateFromJavascript
+                - createJavascriptEditorElement
+                - createReflexContainerForColumnElements
+                - createYamlEditorElement
+                - createYamlInputElement
+                - createYamlOutputElement
+                - createYamlStateFromJavascript
+                - javascriptFromWebpack
+                - location
+                - id: javascript-analyzer
+                  items:
+                    id: harness
+                    items: createJavascriptEditor
+                - id: test-harnesses
+                  items:
+                    - renderIntoContainerElement
+                    - id: codeEditor
+                      items:
+                        - createEditorForLanguage
+                        - id: serviceWorkers
+                          items: initializeGlobal
+              items:
+                - - id: createInitialStateFromJavascript
+                    dependsUpon: getYamlFromJavascriptWithOptionalEnabled
+                  - id: createYamlStateFromJavascript
+                    dependsUpon:
+                      - callOrGetMessageOnError
+                      - getYamlFromJavascriptWithOptionalEnabled
+                - - id: getYamlFromJavascriptWithOptionalEnabled
+                    dependsUpon:
+                      - babelParserPlugins
+                      - getYamlFromJavascript
+                  - callOrGetMessageOnError
+                - - id: babelParserPlugins
+                    type: variable
+                    dependsUpon: babelParserPluginsDefault
+                  - id: createElement
+                    type: variable
+                    dependsUpon:
+                      id: react
+                      items: createElement
+                  - id: callOrCreateElementOnError
+                    type: variable
+                    dependsUpon:
+                      id: test-harnesses
+                      items: callOrCreateElementOnError
+                  - id: createFillWithTitleElement
+                    type: variable
+                    dependsUpon:
+                      id: test-harnesses
+                      items: createFillWithTitleElement
+                  - id: createReflexContainerForColumnElements
+                    type: variable
+                    dependsUpon:
+                      id: test-harnesses
+                      items: createReflexContainerForColumnElements
+                  - id: createYamlInputElement
+                    type: variable
+                    dependsUpon:
+                      id: renderer-test-harness
+                      items: createYamlInputElement
+                  - id: createYamlOutputElement
+                    type: variable
+                    dependsUpon:
+                      id: renderer-test-harness
+                      items: createYamlOutputElement
+                  - id: getYamlFromJavascript
+                    type: variable
+                    dependsUpon:
+                      id: javascript-analyzer
+                      items: getYamlFromJavascript
+                  - id: createYamlEditorElement
+                    type: variable
+                  - id: createJavascriptEditorElement
+                    type: variable
+            - id: webpack.config
+              type: file
+              items:
+                - - id: webpack.config
+                    dependsUpon:
+                      - createWebpackConfiguration
+                      - path
+                - - id: createWebpackConfiguration
+                    type: variable
+                    dependsUpon:
+                      id: renderer-test-harness
+                      items: createWebpackConfiguration
+        - id: analyzeAndProcessAndRender
           type: file
           dependsUpon:
             id: util
@@ -61,10 +170,12 @@
             - - id: analyzeAndProcessAndRender
                 dependsUpon:
                   - analyzeAndProcess
+                  - createIgnorePathPatternFromDirectoryNames
                   - createSourcesWithPackages
                   - formatYaml
                   - writeOutput
-            - - id: createSourcesWithPackages
+            - - createIgnorePathPatternFromDirectoryNames
+              - id: createSourcesWithPackages
                 dependsUpon: createSourcesFromPackages
               - id: writeOutput
                 dependsUpon:
@@ -94,7 +205,6 @@
                 items:
                   - - id: analyzeAndProcess
                       dependsUpon:
-                        - Promise
                         - analyzeAndProcessSource
                         - createOrAddToStacks
                         - whenSingleSource
@@ -105,12 +215,13 @@
                             dependsUpon:
                               - analyzer
                               - babelParserPlugins
-                              - ignoreDirectoryNames
+                              - ignorePathPattern
                               - processWhenAnyItems
                             items:
                               - - id: processWhenAnyItems
                                   dependsUpon:
                                     - directory
+                                    - isFileContentReversed
                                     - items
                                     - packagePrefixAndScope
                                     - processItems
@@ -129,7 +240,9 @@
                             type: parameter
                           - id: directoryToCreateOrAddToStacksFrom
                             type: parameter
-                          - id: ignoreDirectoryNames
+                          - id: ignorePathPattern
+                            type: parameter
+                          - id: isFileContentReversed
                             type: parameter
                           - id: packagePrefixAndScope
                             type: parameter
@@ -155,6 +268,7 @@
                                     - ensureRootItemWithIdentifier
                                     - removePackagePrefixAndScopeInDependsUpon
                                     - replaceDependsUponWithHierarchyFromSeparator
+                                    - reverseDescendantsOfItems
                                 - id: setTypeOfRootToFile
                                   dependsUpon: setTypeOfRootItems
                                 - id: removeSelfDependentVariables
@@ -166,14 +280,10 @@
                                 - id: addJestMethodsToBottomOfTestFiles
                                   dependsUpon: createOrAddToStacksOfParentMatch
                                 - id: flattenSingleRootItemWhenHasOnlyItemsAndType
-                                  dependsUpon:
-                                    - Array
-                                    - hasOtherProperties
+                                  dependsUpon: hasOtherProperties
                                   items:
                                     - - id: hasOtherProperties
-                                        dependsUpon:
-                                          - Object
-                                          - items
+                                        dependsUpon: items
                                     - - id: items
                                         type: parameter
                               - - id: removeSelfDependentItemsOfType
@@ -208,7 +318,6 @@
                                         items:
                                           - - id: removeIndexFileSuffix
                                               dependsUpon:
-                                                - RegExp
                                                 - getIdentifierSeparatorEscaped
                                                 - replaceIdentifiers
                                               items:
@@ -367,7 +476,6 @@
                                                     items:
                                                       - - id: whenArray
                                                           dependsUpon:
-                                                            - Array
                                                             - dependsUpon
                                                             - removePrefixInDependUpon
                                                       - - id: dependsUpon
@@ -422,7 +530,6 @@
                                               items:
                                                 - - id: whenArray
                                                     dependsUpon:
-                                                      - Array
                                                       - dependsUpon
                                                       - replaceDependUpon
                                                 - - id: replaceDependUpon
@@ -434,17 +541,23 @@
                                                     type: parameter
                                                 - - id: replaceDependsUponItems
                                                     type: parameter
-                              - - id: isSingleAnonymous
+                                - id: reverseDescendantsOfItems
                                   type: file
                                   items:
-                                    id: isSingleAnonymous
-                                    dependsUpon: Array
+                                    - - id: reverseDescendantsOfItems
+                                        dependsUpon: reverseDescendantsOfItem
+                                    - - id: reverseDescendantsOfItem
+                                        dependsUpon: whenHasMultipleItems
+                                        items:
+                                          id: whenHasMultipleItems
+                                          dependsUpon: reverseDescendantsOfItems
+                              - - id: isSingleAnonymous
+                                  type: file
                           - id: tests
                             items:
                               id: test
                               type: file
                               dependsUpon:
-                                - __dirname
                                 - expect
                                 - path
                                 - processItems
@@ -475,9 +588,7 @@
                             - test
                           items:
                             - - id: getSourcePath
-                                dependsUpon:
-                                  - __dirname
-                                  - path
+                                dependsUpon: path
                               - id: ensureDir
                                 type: variable
                                 dependsUpon:
@@ -519,7 +630,6 @@
                   - id: test
                     type: file
                     dependsUpon:
-                      - __dirname
                       - path
                       - test
                       - testDirectory
@@ -538,8 +648,6 @@
                           items:
                             - - id: deleteOutput
                                 dependsUpon:
-                                  - Object
-                                  - Promise
                                   - deleteFile
                                   - fileExists
                                   - outputPaths
@@ -557,6 +665,31 @@
                           type: variable
                       - - expect
                         - test
+        - id: packageWithoutScope
+          type: file
+          items:
+            - id: bin
+              type: file
+            - id: createPackageJson
+              type: file
+              dependsUpon: writePackageJson
+              items:
+                - - id: writePackageJson
+                    dependsUpon:
+                      - createFromScopedPackageJson
+                      - formatAsJson
+                      - promisify
+                      - readScopedPackageJson
+                    items:
+                      - id: readScopedPackageJson
+                        dependsUpon: promisify
+                      - createFromScopedPackageJson
+                      - formatAsJson
+                - - id: promisify
+                    type: variable
+                    dependsUpon:
+                      id: util
+                      items: promisify
       - - id: babelParserPluginsDefault
           type: file
 - - id: javascript-analyzer
@@ -646,7 +779,6 @@
               items:
                 - - id: webpack.config
                     dependsUpon:
-                      - RegExp
                       - createCodeEditorWebpackEntryForLanguages
                       - createWebpackConfiguration
                 - - id: createCodeEditorWebpackEntryForLanguages
@@ -673,13 +805,16 @@
             - - id: bin
                 type: file
                 dependsUpon:
+                  - createRegularExpressionFromPathPattern
                   - getOrCreateItemsInDirectory
                   - getYamlForItemOrItems
                   - call-with-process-standard-streams
+                items:
+                  id: createRegularExpressionFromPathPattern
+                  dependsUpon: path
               - id: test
                 type: file
                 dependsUpon:
-                  - __dirname
                   - expect
                   - getOrCreateItemsInDirectory
                   - getYamlForItemOrItems
@@ -712,7 +847,6 @@
                 items:
                   - - id: getOrCreateItemsInDirectory
                       dependsUpon:
-                        - Promise
                         - path
                         - readDirectory
                         - rootDirectory
@@ -721,8 +855,15 @@
                             dependsUpon:
                               - createItemsWhenSubdirectory
                               - getOrCreateItemsWhenJavascriptFile
+                              - isIgnored
                             items:
-                              - - id: getOrCreateItemsWhenJavascriptFile
+                              - - id: isIgnored
+                                  dependsUpon:
+                                    - directory
+                                    - fileOrSubdirectory
+                                    - ignorePathPattern
+                                    - path
+                                - id: getOrCreateItemsWhenJavascriptFile
                                   dependsUpon:
                                     - directory
                                     - fileOrSubdirectory
@@ -736,11 +877,11 @@
                                     - isJavascript
                                     - id: getItemOrItemsFromJavascriptOrRethrowErrorWithPath
                                       dependsUpon:
-                                        - Error
                                         - babelParserPlugins
                                         - directory
                                         - fileOrSubdirectory
                                         - getItemOrItemsFromJavascript
+                                        - isCalleeIgnored
                                         - path
                                 - id: createItemsWhenSubdirectory
                                   dependsUpon:
@@ -748,17 +889,12 @@
                                     - fileOrSubdirectory
                                     - getOrCreateItemsInDirectory
                                     - isDirectory
-                                    - isIgnored
                                     - path
                                   items:
-                                    - id: isIgnored
-                                      dependsUpon:
-                                        - fileOrSubdirectory
-                                        - ignoreDirectoryNames
-                                    - id: isDirectory
-                                      dependsUpon:
-                                        - getFileOrSubdirectoryFull
-                                        - getFileStatus
+                                    id: isDirectory
+                                    dependsUpon:
+                                      - getFileOrSubdirectoryFull
+                                      - getFileStatus
                               - - id: getFileOrSubdirectoryFull
                                   dependsUpon:
                                     - fileOrSubdirectory
@@ -772,7 +908,9 @@
                             type: variable
                   - - id: babelParserPlugins
                       type: parameter
-                    - id: ignoreDirectoryNames
+                    - id: ignorePathPattern
+                      type: parameter
+                    - id: isCalleeIgnored
                       type: parameter
                     - id: rootDirectory
                       type: parameter
@@ -788,10 +926,7 @@
                   - - id: compareIdentifierOrItemIdentifier
                       dependsUpon: getIdentifier
                   - - id: getIdentifier
-                      dependsUpon:
-                        - RegExp
-                        - String
-                        - getPathSeparatorEscaped
+                      dependsUpon: getPathSeparatorEscaped
                       items:
                         id: getPathSeparatorEscaped
                         dependsUpon: path
@@ -807,7 +942,6 @@
                       items:
                         - - id: whenArray
                             dependsUpon:
-                              - Array
                               - createWithItems
                               - getOrCreateWhenItem
                               - itemOrItems
@@ -853,7 +987,6 @@
                                   dependsUpon: resolveInItemOrLevelOrStack
                           - - id: resolveInItemOrLevelOrStack
                               dependsUpon:
-                                - Array
                                 - resolveInItem
                                 - resolveInItemOrLevelOrStack
                             - id: resolveDependsUpon
@@ -868,7 +1001,6 @@
                                       - resolveIdentifierWhenPath
                                   - id: resolveWhenArray
                                     dependsUpon:
-                                      - Array
                                       - dependsUpon
                                       - resolveDependsUpon
                                   - id: resolveObject
@@ -898,7 +1030,6 @@
               - id: test
                 type: file
                 dependsUpon:
-                  - __dirname
                   - describe
                   - expect
                   - getYamlFromJavascript
@@ -921,8 +1052,7 @@
                   - parser
                   - removeUnixShebangForNode
                   - walk
-            - - id: removeUnixShebangForNode
-                dependsUpon: Math
+            - - removeUnixShebangForNode
               - id: parser
                 type: variable
                 dependsUpon:
@@ -952,6 +1082,7 @@
                           - id: visitCallExpression
                             dependsUpon:
                               - addFromCall
+                              - isCalleeIgnored
                               - parentFunctionsFromAncestors
                               - scopedVariables
                               - undeclaredReferences
@@ -964,7 +1095,9 @@
                               - addVariables
                               - getParentFromAncestors
                               - parentFunctionsFromAncestors
-                        - - id: declarations
+                        - - id: isCalleeIgnored
+                            type: parameter
+                          - id: declarations
                             type: variable
                           - id: dependsUponIdentifiers
                             type: variable
@@ -991,9 +1124,7 @@
                           - id: createIdentifierProperty
                             dependsUpon: getParentFromAncestors
                           - id: addWhenAnyProperties
-                            dependsUpon:
-                              - Object
-                              - findIdentifiableParent
+                            dependsUpon: findIdentifiableParent
                           - id: createDependsUponPropertyFromBaseAndConstructor
                             type: file
                             items:
@@ -1048,7 +1179,9 @@
                               - getNamesFromIdentifierExpressionWhenObjectPattern
                               - isScoped
                             items:
-                              - - isScoped
+                              - - id: isScoped
+                                  dependsUpon: inBlockOfFunction
+                                  items: inBlockOfFunction
                                 - id: getAndAddScopedVariables
                                   dependsUpon:
                                     - addScopedVariables
@@ -1172,7 +1305,6 @@
                       type: file
                       items:
                         id: createScopedVariables
-                        dependsUpon: Map
                         items:
                           - - id: add
                               dependsUpon: scopesAndVariables
@@ -1184,7 +1316,6 @@
                       type: file
                       items:
                         id: createUndeclaredReferences
-                        dependsUpon: Map
                         items:
                           - - id: addAncestorsAndParentOfReference
                               dependsUpon: parentsOfParentByUndeclaredReferences
@@ -1378,7 +1509,6 @@
                                 - test
                         - - id: throwErrorWhenAnyUnhandled
                             dependsUpon:
-                              - Error
                               - formatMessageForDeclarations
                               - formatMessageForDependsUponIdentifiers
                         - - id: formatMessageForDeclarations
@@ -1421,6 +1551,7 @@
                                           - addUndeclaredReference
                                           - findDeclarationAndParent
                                           - getIdentifierNameFromAndAddOrUpdateReferenceOfParent
+                                          - isCalleeIgnored
                                           - parentFunctions
                                       - id: addDependsUponIdentifier
                                         dependsUpon:
@@ -1472,6 +1603,8 @@
                                 - id: callExpression
                                   type: parameter
                                 - id: findDeclarationAndParent
+                                  type: parameter
+                                - id: isCalleeIgnored
                                   type: parameter
                                 - id: isVariableInBlockScoped
                                   type: parameter
@@ -1531,6 +1664,8 @@
                                       dependsUpon: getObjectName
                               - - id: getObjectName
                                   dependsUpon: getObjectName
+                          - id: isCalleeIgnoredDefault
+                            type: file
                     - id: commonjs
                       items:
                         - - id: addWhenExportAlias
@@ -1589,7 +1724,6 @@
                       type: file
                       items:
                         - - id: createDeclarations
-                            dependsUpon: Map
                             items:
                               - - id: addDeclarationIn
                                   dependsUpon: addDeclarationsIn
@@ -1658,17 +1792,23 @@
                       type: file
                       items:
                         id: createDependsUponIdentifiers
-                        dependsUpon: Map
                         items:
                           - - id: addIdentifierToParent
-                              dependsUpon:
-                                - Set
-                                - dependsUponIdentifiersByParent
+                              dependsUpon: dependsUponIdentifiersByParent
                             - id: createPropertyForParent
                               dependsUpon:
+                                - createPropertyForIdentifiers
                                 - dependsUponIdentifiersByParent
-                                - getFirstOrSort
-                              items: getFirstOrSort
+                          - - id: createPropertyForIdentifiers
+                              dependsUpon: getValue
+                              items:
+                                - - id: getValue
+                                    dependsUpon:
+                                      - identifiers
+                                      - whenSingle
+                                    items: whenSingle
+                                - - id: identifiers
+                                    type: parameter
                             - id: getGroupedByParent
                               dependsUpon: dependsUponIdentifiersByParent
                           - - id: dependsUponIdentifiersByParent
@@ -1753,9 +1893,7 @@
                               - - id: visitNodeValues
                                   dependsUpon: visitNodeValue
                               - - id: visitNodeValue
-                                  dependsUpon:
-                                    - Array
-                                    - visit
+                                  dependsUpon: visit
                                 - id: callVisitor
                                   dependsUpon:
                                     - ancestors
@@ -1899,7 +2037,6 @@
                             items:
                               - - id: testTestCase
                                   dependsUpon:
-                                    - __dirname
                                     - createElement
                                     - createElementsFromYaml
                                     - expect
@@ -2090,7 +2227,6 @@
                                   - - id: test
                                       type: file
                                       dependsUpon:
-                                        - __dirname
                                         - childIdentifier
                                         - createElement
                                         - createStackFromYaml
@@ -2193,7 +2329,6 @@
                                         - - id: test
                                             type: file
                                             dependsUpon:
-                                              - __dirname
                                               - createElement
                                               - createItem
                                               - createListElement
@@ -2339,7 +2474,6 @@
                                                   items:
                                                     - - id: getDependencies
                                                         dependsUpon:
-                                                          - Error
                                                           - getDependents
                                                           - getDependsUponItems
                                                       - id: createForChildItems
@@ -2359,7 +2493,6 @@
                                         - - id: test
                                             type: file
                                             dependsUpon:
-                                              - __dirname
                                               - createElement
                                               - createVerticalResize
                                               - expect
@@ -2424,8 +2557,7 @@
                                               - isLevelInDirection
                                               - isOuter
                                             items:
-                                              - - id: hasLevel
-                                                  dependsUpon: Boolean
+                                              - - hasLevel
                                                 - isChild
                                                 - id: isOuter
                                                   dependsUpon: isInnerStack
@@ -2453,9 +2585,7 @@
                                   - - id: clearFromKeysAndValues
                                       dependsUpon: getKeysAndNoValues
                                   - - id: getKeysAndNoValues
-                                      dependsUpon:
-                                        - Object
-                                        - keys
+                                      dependsUpon: keys
                                     - getObjectFromGetValueOfKey
                                     - getKeysAndValuesFromObject
                                   - - id: keys
@@ -2483,8 +2613,7 @@
                                         dependsUpon:
                                           - createUrlSearchParams
                                           - removeHashPrefix
-                                    - - id: removeHashPrefix
-                                        dependsUpon: Error
+                                    - - removeHashPrefix
                                       - id: createUrlSearchParams
                                         dependsUpon: UrlSearchParams
                                     - - id: UrlSearchParams
@@ -2529,7 +2658,6 @@
                             items:
                               - - id: testInOutputDirectory
                                   dependsUpon:
-                                    - __dirname
                                     - emptyDir
                                     - expect
                                     - htmlFileName
@@ -2541,7 +2669,6 @@
                                   items:
                                     - - id: throwErrorWhenSourceDoesNotExist
                                         dependsUpon:
-                                          - Error
                                           - getSourcePath
                                           - pathExists
                                       - id: readHtmlFileContainsYamlFileContent
@@ -2570,9 +2697,7 @@
                             type: file
                             items:
                               - - id: readDirectoryPathRecursive
-                                  dependsUpon:
-                                    - Promise
-                                    - readdir
+                                  dependsUpon: readdir
                                   items:
                                     - - id: getFileNameOrReadDirectoryRecursive
                                         dependsUpon:
@@ -2682,9 +2807,7 @@
                       type: file
                       items:
                         id: getSourcePath
-                        dependsUpon:
-                          - __dirname
-                          - path
+                        dependsUpon: path
             - - id: createWebpackConfiguration
                 type: file
                 items:
@@ -2752,7 +2875,6 @@
                             items:
                               - - id: whenLevelOrStack
                                   dependsUpon:
-                                    - Array
                                     - identifierOrItemOrLevelOrStack
                                     - replaceIdentifierOrItemOrLevel
                               - - id: identifierOrItemOrLevelOrStack
@@ -2764,7 +2886,6 @@
                             items:
                               - - id: whenLevel
                                   dependsUpon:
-                                    - Array
                                     - identifierOrItemOrLevel
                                     - replaceIdentifierOrItem
                               - - id: identifierOrItemOrLevel
@@ -2826,9 +2947,7 @@
                       dependsUpon: getItemOrGroupItemsInParentIdentifier
                       items:
                         - - id: getItemOrGroupItemsInParentIdentifier
-                            dependsUpon:
-                              - Array
-                              - groupItems
+                            dependsUpon: groupItems
                             items:
                               - - id: groupItems
                                   dependsUpon:
@@ -2861,8 +2980,7 @@
                             items:
                               id: createItemsPropertyWhenAny
                               dependsUpon: getItemOrGroupItemsInParentIdentifier
-                          - id: throwErrorOnUnordered
-                            dependsUpon: Error
+                          - throwErrorOnUnordered
                         - - id: getItemOrGroupItemsInParentIdentifier
                             type: parameter
                           - id: identifierSeparator
@@ -3032,12 +3150,8 @@
                                   dependsUpon: whenLevelOrStack
                                   items:
                                     id: whenLevelOrStack
-                                    dependsUpon:
-                                      - Array
-                                      - whenStack
-                                    items:
-                                      id: whenStack
-                                      dependsUpon: Array
+                                    dependsUpon: whenStack
+                                    items: whenStack
                                 - getItemOrItemsOfGroup
               - id: removeRedundantParentIdentifierPrefix
                 type: file
@@ -3180,16 +3294,12 @@
                         - isSelfDependent
                         - whenItemMatch
                   - - id: isSelfDependent
-                      dependsUpon:
-                        - Error
-                        - Object
-                        - isOnlyDependsUpon
+                      dependsUpon: isOnlyDependsUpon
                       items: isOnlyDependsUpon
                     - id: whenItemMatch
                       items:
                         - - id: getIdentifierOrItemMatchOrFilterItemsInLevelOrStack
                             dependsUpon:
-                              - Array
                               - filterLevelOrStack
                               - getIdentifierOrItemMatch
                         - - id: filterLevelOrStack
@@ -3198,7 +3308,6 @@
                               - mapWhenNotEmptyOfTruthy
                         - - id: getIdentifierOrItemMatchOrFilterLevel
                             dependsUpon:
-                              - Array
                               - getIdentifierOrItemMatch
                               - mapWhenNotEmptyOfTruthy
                         - - id: getIdentifierOrItemMatch
@@ -3229,7 +3338,6 @@
                             items:
                               - - id: whenLevelOrStack
                                   dependsUpon:
-                                    - Array
                                     - getIdentifierOrReplaceInItemOrLevel
                                     - identifierOrItemOrLevelOrStack
                               - - id: identifierOrItemOrLevelOrStack
@@ -3241,7 +3349,6 @@
                             items:
                               - - id: whenLevel
                                   dependsUpon:
-                                    - Array
                                     - getIdentifierOrReplaceInItem
                                     - levelOrItemOrIdentifier
                               - - id: levelOrItemOrIdentifier
@@ -3302,7 +3409,6 @@
                                                 - splitIdentifierIntoHierarchy
                                             - id: whenArray
                                               dependsUpon:
-                                                - Array
                                                 - dependsUpon
                                                 - replaceDependsUpon
                                             - id: whenHasIdentifier
@@ -3322,7 +3428,6 @@
                       type: file
                       dependsUpon:
                         - callWithProcessStandardStreamsOfYaml
-                        - RegExp
                         - replaceIdentifiers
                     - id: test
                       type: file
@@ -3402,7 +3507,6 @@
                               - - getWhenIdentifier
                                 - id: setInWhenLevelOrStack
                                   dependsUpon:
-                                    - Array
                                     - identifierOrItemOrLevelOrStack
                                     - setInItemOrLevel
                               - - id: identifierOrItemOrLevelOrStack
@@ -3412,9 +3516,7 @@
                               - getIdentifierOrSetInItem
                               - setInWhenLevel
                         - - id: setInWhenLevel
-                            dependsUpon:
-                              - Array
-                              - getIdentifierOrSetInItem
+                            dependsUpon: getIdentifierOrSetInItem
                         - - id: getIdentifierOrSetInItem
                             dependsUpon:
                               - getWhenIdentifier
@@ -3463,9 +3565,7 @@
                         - expect
                         - test
                   - - id: setTypeOfRootItems
-                      dependsUpon:
-                        - Array
-                        - createItem
+                      dependsUpon: createItem
                       items: createItem
               - id: sorting
                 type: file
@@ -3500,7 +3600,6 @@
                             items:
                               - - id: whenArray
                                   dependsUpon:
-                                    - Array
                                     - compareIdentifiers
                                     - getItemIdentifier
                                     - items
@@ -3540,9 +3639,7 @@
                                     - createItemWithOrderedItemsWhenAny
                                     - orderWhenItemsOrLevels
                               - - id: orderWhenItemsOrLevels
-                                  dependsUpon:
-                                    - Array
-                                    - orderItemsOrLevels
+                                  dependsUpon: orderItemsOrLevels
                                   items:
                                     - - id: orderItemsOrLevels
                                         dependsUpon:
@@ -3552,7 +3649,6 @@
                                         type: parameter
                               - - id: getOrCreateItemOrLevel
                                   dependsUpon:
-                                    - Array
                                     - createLevelWithOrderedItems
                                     - getItemOrCreateItemWithOrderedItemsWhenAny
                               - - id: createLevelWithOrderedItems
@@ -3583,7 +3679,6 @@
                                               type: variable
                                     - - id: getIndexOfItemOrLevel
                                         dependsUpon:
-                                          - Array
                                           - getIndexOfLevel
                                           - getItemIndex
                                     - - id: getIndexOfLevel
@@ -3606,7 +3701,6 @@
                           - id: test
                             type: file
                             dependsUpon:
-                              - JSON
                               - expect
                               - items
                               - orderItemsByType
@@ -3645,7 +3739,6 @@
                             type: file
                             dependsUpon:
                               - callWithProcessStandardStreamsOfYaml
-                              - RegExp
                               - createOrAddToStacksOfParentMatch
                               - parseCommaSeparated
                           - id: test
@@ -3677,7 +3770,6 @@
                                     - test
                               - - id: hasParentInAncestors
                                   dependsUpon:
-                                    - Boolean
                                     - allMatchParent
                                     - getParentFromAncestors
                               - - getParentFromAncestors
@@ -3696,7 +3788,6 @@
                           - id: test
                             type: file
                             dependsUpon:
-                              - __dirname
                               - createOrAddToStacksUsingFileSystem
                               - expect
                               - path
@@ -3715,7 +3806,6 @@
                               - - id: test
                                   type: file
                                   dependsUpon:
-                                    - __dirname
                                     - expect
                                     - getTargetLevelOrStackForAncestorsAndDirectory
                                     - path
@@ -3856,7 +3946,6 @@
                                     - - whenNoValue
                                       - id: whenLevelOrStack
                                         dependsUpon:
-                                          - Array
                                           - createForLevelOrStack
                                           - identifierOrItemOrLevelOrStack
                                       - id: whenItem
@@ -3869,14 +3958,10 @@
                                   type: file
                                   items:
                                     - - id: createForLevelOrStack
-                                        dependsUpon:
-                                          - Map
-                                          - generateKeyValuePairs
+                                        dependsUpon: generateKeyValuePairs
                                         items:
                                           - - id: generateKeyValuePairs
-                                              dependsUpon:
-                                                - Array
-                                                - getKeyValuePairForIdentifierOrItem
+                                              dependsUpon: getKeyValuePairForIdentifierOrItem
                                             - id: getIdentifiersNotUsed
                                               dependsUpon:
                                                 - generate
@@ -3916,7 +4001,6 @@
                                     - test
                               - - id: getExisting
                                   dependsUpon:
-                                    - Set
                                     - filterIdentifierOrItemOrLevelOrStack
                                     - getIdentifiersInTargetLevelOrStack
                                     - getStackOrSingleLevelOrSingleItem
@@ -3938,7 +4022,6 @@
                                         items:
                                           - - id: filterIdentifierOrItemOrLevelOrStack
                                               dependsUpon:
-                                                - Array
                                                 - asIdentifierOrItem
                                                 - filterLevelOrStack
                                               items:
@@ -3966,7 +4049,6 @@
                                               items:
                                                 - - id: whenLevel
                                                     dependsUpon:
-                                                      - Array
                                                       - filterLevelInStack
                                                       - identifierOrItemOrLevel
                                                   - id: asIdentifierOrItem
@@ -4002,7 +4084,6 @@
                                         items:
                                           - - id: whenLevel
                                               dependsUpon:
-                                                - Array
                                                 - getIdentifierOrIdentifiersInItem
                                                 - identifierOrItemOrLevel
                                             - id: asIdentifierOrItem
@@ -4038,7 +4119,6 @@
                                         items:
                                           - - id: whenLevelOrStack
                                               dependsUpon:
-                                                - Array
                                                 - getIdentifiersInTargetLevelOrStack
                                                 - items
                                             - id: asIdentifierOrItem
@@ -4083,7 +4163,6 @@
                                             items:
                                               id: mapAndCreateItems
                                               dependsUpon:
-                                                - Array
                                                 - getOrCreateNewLevelOrStackForTargetIdentifierOrItem
                                                 - mapAndCreateNewInTargetLevelOrStack
                                     - - id: getLevelOrStackForTargetIdentifierOrItem
@@ -4095,7 +4174,6 @@
                                         type: file
                                         dependsUpon:
                                           - createTestItemWithIdentifier
-                                          - Error
                                           - describe
                                           - expect
                                           - mapTargetLevelOrStack
@@ -4140,7 +4218,6 @@
                                               items:
                                                 - - id: whenTargetOfLevel
                                                     dependsUpon:
-                                                      - Array
                                                       - getEmptyLevelOrStackForTargetIdentifierOrItem
                                                       - targetIdentifierOrItemOrLevel
                                                 - - id: targetIdentifierOrItemOrLevel
@@ -4165,16 +4242,12 @@
                                         dependsUpon: whenLevel
                                         items:
                                           - - id: whenLevel
-                                              dependsUpon:
-                                                - Array
-                                                - itemOrLevel
+                                              dependsUpon: itemOrLevel
                                           - - id: itemOrLevel
                                               type: parameter
                                     - - isStack
                                       - id: simplifyStructureWhenLevelOrStack
-                                        dependsUpon:
-                                          - Array
-                                          - whenLevelOrStack
+                                        dependsUpon: whenLevelOrStack
                                         items:
                                           - - id: whenLevelOrStack
                                               dependsUpon:
@@ -4197,16 +4270,13 @@
                                     - test
                               - - id: throwErrorWhenIdentifiersNotUsed
                                   dependsUpon:
-                                    - Error
                                     - formatIdentifiersNotUsed
                                     - formatTargetLevelOrStack
                                   items:
                                     - - id: formatIdentifiersNotUsed
                                         dependsUpon: identifiersNotUsed
                                       - id: formatTargetLevelOrStack
-                                        dependsUpon:
-                                          - JSON
-                                          - targetLevelOrStack
+                                        dependsUpon: targetLevelOrStack
                                     - - id: identifiersNotUsed
                                         type: parameter
                                       - id: targetLevelOrStack
@@ -4240,8 +4310,7 @@
                                           - stack
                                     - - id: stack
                                         type: parameter
-                              - - id: getWhenSingle
-                                  dependsUpon: Array
+                              - - getWhenSingle
                     - id: parseCommaSeparated
                       type: file
                       items:
@@ -4261,7 +4330,6 @@
                             items:
                               - - id: splitItemsWhenArray
                                   dependsUpon:
-                                    - Array
                                     - commaSeparated
                                     - split
                                 - id: splitWhenString
@@ -4403,7 +4471,6 @@
                                   items:
                                     - - id: whenLevelOrStack
                                         dependsUpon:
-                                          - Array
                                           - identifierOrItemOrLevelOrStack
                                           - replaceInLevelOrStack
                                     - - id: identifierOrItemOrLevelOrStack
@@ -4415,7 +4482,6 @@
                                   items:
                                     - - id: whenStack
                                         dependsUpon:
-                                          - Array
                                           - levelOrStack
                                           - replaceInStack
                                     - - id: levelOrStack
@@ -4453,7 +4519,6 @@
                               id: test
                               type: file
                               dependsUpon:
-                                - __dirname
                                 - assertGetSvgForYaml
                                 - createElement
                                 - path
@@ -4471,7 +4536,6 @@
                               id: test
                               type: file
                               dependsUpon:
-                                - __dirname
                                 - assertGetSvgForYaml
                                 - createElement
                                 - test
@@ -4488,7 +4552,6 @@
                             items:
                               id: assertGetSvgForYaml
                               dependsUpon:
-                                - __dirname
                                 - expect
                                 - getSvgForYaml
                                 - path
@@ -4515,9 +4578,7 @@
                               - getPathOfFilename
                               - readTestFile
                         - - id: getPathOfFilename
-                            dependsUpon:
-                              - __dirname
-                              - path
+                            dependsUpon: path
                           - id: writeFileSync
                             type: variable
                             dependsUpon:
@@ -4526,7 +4587,6 @@
                   - - id: test
                       type: file
                       dependsUpon:
-                        - __dirname
                         - getSvgForYaml
                         - path
                         - run-tests-from-file-system
@@ -4586,7 +4646,6 @@
                 items:
                   - - id: getSvgElementForStack
                       dependsUpon:
-                        - Object
                         - createArrows
                         - createFont
                         - createSvgElement
@@ -4638,7 +4697,6 @@
                                     id: test
                                     type: file
                                     dependsUpon:
-                                      - __dirname
                                       - createArrows
                                       - createElement
                                       - expect
@@ -4696,7 +4754,6 @@
                                                     type: variable
                                             - id: expectRenderedToBe
                                               dependsUpon:
-                                                - __dirname
                                                 - createElement
                                                 - createSvgElement
                                                 - expect
@@ -4737,9 +4794,7 @@
                                           dependsUpon: getArrowSymbols
                                           items:
                                             - - id: getArrowSymbols
-                                                dependsUpon:
-                                                  - Object
-                                                  - arrows
+                                                dependsUpon: arrows
                                               - id: aggregate
                                                 dependsUpon:
                                                   - calculateSize
@@ -4749,8 +4804,7 @@
                                                     dependsUpon:
                                                       - createElement
                                                       - width
-                                                  - id: calculateSize
-                                                    dependsUpon: Math
+                                                  - calculateSize
                                             - - id: arrows
                                                 type: parameter
                                               - id: createElement
@@ -4875,9 +4929,7 @@
                                 - id: stack
                                   type: parameter
                           - id: findStackOfSubsetIdentifierHierarchyOrThrowError
-                            dependsUpon:
-                              - Error
-                              - findItemInStackWithIdentifierHierarchy
+                            dependsUpon: findItemInStackWithIdentifierHierarchy
                         - - id: findItemInStackWithIdentifierHierarchy
                             type: variable
                             dependsUpon:
@@ -4888,7 +4940,6 @@
                             items:
                               id: createParentGroupFactory
                               dependsUpon:
-                                - Math
                                 - getIdentifierClassNameAndText
                                 - text
                               items:
@@ -5033,13 +5084,10 @@
                                 - text
                               items:
                                 - - id: calculateDependencySize
-                                    dependsUpon:
-                                      - Math
-                                      - dependencyGroupFactories
+                                    dependsUpon: dependencyGroupFactories
                                   - calculateHeight
                                   - id: calculateWidth
                                     dependsUpon:
-                                      - Math
                                       - font
                                       - text
                                   - id: createDependencyGroupsWhenRequired
@@ -5097,9 +5145,7 @@
                       items:
                         id: aggregateGroupFactories
                         dependsUpon: aggregate
-                        items:
-                          id: aggregate
-                          dependsUpon: Math
+                        items: aggregate
                     - id: createDependencyGroupFactoryWhenRequired
                       type: file
                       items:
@@ -5274,8 +5320,7 @@
                                   type: parameter
                                 - id: sumDirectionInStack
                                   type: parameter
-                          - id: getCountFromDirection
-                            dependsUpon: Number
+                          - getCountFromDirection
                           - createWhenDependentsOrDependsUpon
                         - - id: findDirectionBetweenItemsInFirstMutualStack
                             type: variable
@@ -5328,9 +5373,6 @@
                       type: file
                     - id: withPrecision
                       type: file
-                      items:
-                        id: withPrecision
-                        dependsUpon: Math
       - - id: dependency-and-structure
           type: file
           items:
@@ -5614,8 +5656,7 @@
                                     - expect
                                     - formatTestName
                                     - test
-                              - - id: formatTestName
-                                  dependsUpon: JSON
+                              - - formatTestName
                               - - expect
                                 - test
                         - - formatTestName
@@ -5628,7 +5669,6 @@
                       items:
                         - - id: createStackFromParsedYaml
                             dependsUpon:
-                              - Array
                               - createFromArray
                               - createLevelFromIdentifierOrItem
                             items:
@@ -5640,7 +5680,6 @@
                                   type: parameter
                         - - id: createLevelFromIdentifierOrItemOrLevel
                             dependsUpon:
-                              - Array
                               - createLevelFromIdentifierOrItem
                               - createLevelFromItems
                         - - id: createLevelFromItems
@@ -5661,8 +5700,7 @@
                             dependsUpon:
                               - createStackFromParsedYaml
                               - ensureIsArray
-                        - - id: ensureIsArray
-                            dependsUpon: Array
+                        - - ensureIsArray
                     - id: initializeDependenciesInStack
                       type: file
                       items:
@@ -5716,7 +5754,6 @@
                                           - - createWhenNone
                                             - id: findWhenArray
                                               dependsUpon:
-                                                - Array
                                                 - dependUponItems
                                                 - findItem
                                           - - id: findItem
@@ -5772,7 +5809,6 @@
                                                       items:
                                                         - - id: whenArray
                                                             dependsUpon:
-                                                              - Array
                                                               - createDependsUponFromChildItem
                                                               - dependUponItem
                                                         - - id: createDependsUponFromChildItem
@@ -5797,7 +5833,6 @@
                                           items:
                                             - - id: whenArray
                                                 dependsUpon:
-                                                  - Array
                                                   - createFromItem
                                                   - items
                                             - - id: createFromItem
@@ -5866,7 +5901,6 @@
                   - - id: test
                       type: file
                       dependsUpon:
-                        - JSON
                         - callTestForSymmetrical
                         - createYamlFromStack
                         - describe
@@ -5882,7 +5916,6 @@
                         dependsUpon: createFromItem
                   - - id: createFromItem
                       dependsUpon:
-                        - Object
                         - createDependsUponProperty
                         - createItemsProperty
                   - - id: createDependsUponProperty
@@ -5986,9 +6019,6 @@
                                   type: file
                                   items:
                                     - - id: createParent
-                                        dependsUpon:
-                                          - Map
-                                          - Set
                                         items:
                                           - - id: add
                                               dependsUpon: identifiers
@@ -6075,9 +6105,7 @@
                         - getDirectionBetweenFirstAncestorOrThrowError
                         - getDirectionBetweenItemsWhenMutualStack
                   - - id: getDirectionBetweenFirstAncestorOrThrowError
-                      dependsUpon:
-                        - Error
-                        - getDirectionBetweenItemsWhenMutualStack
+                      dependsUpon: getDirectionBetweenItemsWhenMutualStack
                   - - id: generateAncestors
                       type: file
                       items:
@@ -6124,8 +6152,7 @@
                                   type: parameter
                                 - id: to
                                   type: parameter
-                        - - id: getDirectionFromVector
-                            dependsUpon: Error
+                        - - getDirectionFromVector
               - id: findItemInStackWithIdentifierHierarchy
                 type: file
                 items:
@@ -6153,13 +6180,9 @@
                         - findItemWithIdentifierOrThrowError
                         - getItemsOfOrThrowError
                   - - id: getItemsOfOrThrowError
-                      dependsUpon:
-                        - Error
-                        - formatAncestorIdentifiersOfStackForError
+                      dependsUpon: formatAncestorIdentifiersOfStackForError
                     - id: findItemWithIdentifierOrThrowError
-                      dependsUpon:
-                        - Error
-                        - formatAncestorIdentifiersOfStackForError
+                      dependsUpon: formatAncestorIdentifiersOfStackForError
                   - - id: formatAncestorIdentifiersOfStackForError
                       type: file
                       items:
@@ -6212,9 +6235,7 @@
                   - - id: withSource
                       items:
                         - - id: isInner
-                            dependsUpon:
-                              - Boolean
-                              - hasAncestorOfSource
+                            dependsUpon: hasAncestorOfSource
                         - - id: hasAncestorOfSource
                             dependsUpon: isSourceOrHasAncestorOfSource
                         - - id: isSourceOrHasAncestorOfSource
@@ -6526,15 +6547,11 @@
                               - mapWithNewArray
                         - - id: createLevel
                             dependsUpon:
-                              - Object
                               - createItem
                               - mapWithNewArray
-                        - - id: mapWithNewArray
-                            dependsUpon: Array
+                        - - mapWithNewArray
                           - id: createItem
-                            dependsUpon:
-                              - Object
-                              - createStackFromLevels
+                            dependsUpon: createStackFromLevels
                     - id: createUpperAndLowerStack
                       type: file
                     - id: formatStackForDescription
@@ -6558,16 +6575,13 @@
         - call
         - callWithProcessArgumentsAndStandardInputStream
         - minimist
-        - process
       items:
         - - id: callWithProcessArgumentsAndStandardInputStream
             dependsUpon:
               - call
               - processArguments
         - - id: call
-            dependsUpon:
-              - Promise
-              - action
+            dependsUpon: action
         - - id: action
             type: parameter
           - id: processArguments
@@ -6618,9 +6632,7 @@
                   - expectedFileName
                   - runTestsFromFileSystem
               - id: getTestCasesPathOfSubdirectory
-                dependsUpon:
-                  - __dirname
-                  - path
+                dependsUpon: path
               - id: copy
                 type: variable
                 dependsUpon:
@@ -6782,9 +6794,7 @@
                     type: file
                     items:
                       - - id: createWebpackEntryForLanguages
-                          dependsUpon:
-                            - Object
-                            - createEntries
+                          dependsUpon: createEntries
                           items:
                             - - id: createEntries
                                 dependsUpon:
@@ -6807,7 +6817,6 @@
                           items:
                             - - id: getWorkerUrl
                                 dependsUpon:
-                                  - Error
                                   - findWorkerWithLabel
                                   - formatPackageUrl
                             - - id: findWorkerWithLabel
@@ -7028,7 +7037,6 @@
                   - createElement
                   - document
                   - render
-                  - window
             - - id: createElement
                 type: variable
                 dependsUpon:
