@@ -13,8 +13,9 @@ test(
 			createParameterFromCliArguments({
 				babelParserPlugins: undefined,
 				ignorePathPattern: undefined,
+				includeServiceWorkers: undefined,
+				includeSourceMap: undefined,
 				isFileContentReversed: undefined,
-				isHtmlSingleFile: undefined,
 				outputBaseFileName: undefined,
 				outputDirectoryPath: undefined,
 				packageNames: undefined,
@@ -45,8 +46,9 @@ test(
 			createParameterFromCliArguments({
 				babelParserPlugins,
 				ignorePathPattern: undefined,
+				includeServiceWorkers: undefined,
+				includeSourceMap: undefined,
 				isFileContentReversed: undefined,
-				isHtmlSingleFile: undefined,
 				outputBaseFileName: undefined,
 				outputDirectoryPath: undefined,
 				packageNames: undefined,
@@ -63,14 +65,15 @@ test(
 );
 
 test(
-	"\"isHtmlSingleFile\" of string \"true\" returns boolean true.",
+	"\"includeServiceWorkers\" of string \"true\" returns boolean true.",
 	() =>
 		expect(
 			createParameterFromCliArguments({
 				babelParserPlugins: undefined,
 				ignorePathPattern: undefined,
+				includeServiceWorkers: "true",
+				includeSourceMap: undefined,
 				isFileContentReversed: undefined,
-				isHtmlSingleFile: "true",
 				outputBaseFileName: undefined,
 				outputDirectoryPath: undefined,
 				packageNames: undefined,
@@ -78,7 +81,7 @@ test(
 				packageScope: undefined,
 				rootItemIdentifiers: undefined,
 			})
-			.isHtmlSingleFile,
+			.includeServiceWorkers,
 		)
 		.toEqual(
 			true,
@@ -94,8 +97,9 @@ test(
 			createParameterFromCliArguments({
 				babelParserPlugins: undefined,
 				ignorePathPattern,
+				includeServiceWorkers: undefined,
+				includeSourceMap: undefined,
 				isFileContentReversed: undefined,
-				isHtmlSingleFile: undefined,
 				outputBaseFileName: undefined,
 				outputDirectoryPath: undefined,
 				packageNames: undefined,
@@ -118,8 +122,9 @@ test(
 			createParameterFromCliArguments({
 				babelParserPlugins: undefined,
 				ignorePathPattern: undefined,
+				includeServiceWorkers: undefined,
+				includeSourceMap: undefined,
 				isFileContentReversed: undefined,
-				isHtmlSingleFile: undefined,
 				outputBaseFileName: undefined,
 				outputDirectoryPath: undefined,
 				packageNames: [ "package1", "package2" ],
@@ -145,8 +150,9 @@ test(
 			createParameterFromCliArguments({
 				babelParserPlugins: undefined,
 				ignorePathPattern: undefined,
+				includeServiceWorkers: undefined,
+				includeSourceMap: undefined,
 				isFileContentReversed: undefined,
-				isHtmlSingleFile: undefined,
 				outputBaseFileName: "outputBaseFileName",
 				outputDirectoryPath: "outputDirectoryPath",
 				packageNames: undefined,
@@ -172,7 +178,8 @@ test(
 				babelParserPlugins: undefined,
 				directories: [ "directory1", "directory2" ],
 				ignorePathPattern: undefined,
-				isHtmlSingleFile: undefined,
+				includeServiceWorkers: undefined,
+				includeSourceMap: undefined,
 				outputBaseFileName: undefined,
 				outputDirectoryPath: undefined,
 				packageNames: undefined,

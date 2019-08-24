@@ -10,8 +10,9 @@ module.exports =
 		babelParserPlugins,
 		directories = ".",
 		ignorePathPattern,
+		includeServiceWorkers,
+		includeSourceMap,
 		isFileContentReversed,
-		isHtmlSingleFile,
 		outputBaseFileName,
 		outputDirectoryPath,
 		packageNames,
@@ -28,10 +29,12 @@ module.exports =
 				ignorePathPattern
 				&&
 				new RegExp(ignorePathPattern),
+			includeServiceWorkers:
+				parseBoolean(includeServiceWorkers),
+			includeSourceMap:
+				parseBoolean(includeSourceMap),
 			isFileContentReversed:
 				parseBoolean(isFileContentReversed),
-			isHtmlSingleFile:
-				parseBoolean(isHtmlSingleFile),
 			outputPath:
 				createOutputPath({
 					outputBaseFileName,

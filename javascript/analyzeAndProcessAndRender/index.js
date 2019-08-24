@@ -32,14 +32,16 @@ module.exports =
 		directoryToCreateOrAddToStacksFrom = null,
 		ignoreDirectoryNames = ignoreDirectoryNamesDefault,
 		ignorePathPattern = createIgnorePathPatternFromDirectoryNames(ignoreDirectoryNames),
+		includeServiceWorkers = false,
+		includeSourceMap = false,
 		isFileContentReversed = false,
-		isHtmlSingleFile = true,
 		outputPath,
 		packages = null,
 		sources,
 	}) =>
 		writeOutput({
-			isHtmlSingleFile,
+			includeServiceWorkers,
+			includeSourceMap,
 			...outputPath,
 			yaml:
 				formatYaml(
@@ -85,7 +87,8 @@ function createSourcesWithPackages({
 async function writeOutput({
 	baseFileName,
 	directoryPath,
-	isHtmlSingleFile,
+	includeServiceWorkers,
+	includeSourceMap,
 	yaml,
 }) {
 	const baseFilePath =
@@ -110,8 +113,8 @@ async function writeOutput({
 	await writeHarness({
 		directoryPath,
 		htmlFileName: `${baseFileName || ""}.html`,
-		includeServiceWorkers: !isHtmlSingleFile,
-		includeSourceMap: !isHtmlSingleFile,
+		includeServiceWorkers,
+		includeSourceMap,
 		yamlFilePath,
 	});
 }
