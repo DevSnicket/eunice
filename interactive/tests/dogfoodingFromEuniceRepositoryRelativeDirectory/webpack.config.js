@@ -14,6 +14,6 @@ module.exports =
 				{
 					escape: mode !== "production",
 					pattern: new RegExp("(?<=yaml:|yaml: )yamlFromWebpack"),
-					replacementFilePath: "../eunice/dogfooding/output/index.yaml",
+					replacementFilePath: "../eunice-javascript/dogfooding/output/index.yaml",
 				},
 		});
