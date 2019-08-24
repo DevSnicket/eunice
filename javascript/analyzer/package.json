@@ -16,8 +16,6 @@
 		"js-yaml": "3.13.1"
 	},
 	"devDependencies": {
-		"@babel/cli": "7.4.4",
-		"@babel/core": "7.4.4",
 		"@babel/polyfill": "7.4.4",
 		"@babel/preset-env": "7.4.4",
 		"@devsnicket/eunice-run-tests-from-file-system": "1.7.0",
@@ -88,5 +86,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./harness/output/*\" ! -path \"./node_modules/**/*\" ! -path \"**/test-cases/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest --runInBand"
 	},
-	"version": "10.12.0"
+	"version": "10.13.0"
 }
