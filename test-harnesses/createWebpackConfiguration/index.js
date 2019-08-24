@@ -18,8 +18,6 @@ module.exports =
 		javascriptSubstitution = null,
 	}) => (
 		{
-			devtool:
-				"source-map",
 			entry:
 				{
 					...entry,
