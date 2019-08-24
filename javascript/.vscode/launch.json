@@ -20,7 +20,7 @@
 		},
 		{
 			"name": "bin no arguments",
-			"program": "${workspaceFolder}/bin/index.js",
+			"program": "${workspaceFolder}/bin.js",
 			"request": "launch",
 			"type": "node"
 		},
@@ -45,7 +45,7 @@
 					"--rootItemIdentifiers=javascript"
 				],
 			"name": "bin dogfooding",
-			"program": "${workspaceFolder}/bin/index.js",
+			"program": "${workspaceFolder}/bin.js",
 			"request": "launch",
 			"type": "node"
 		},
