@@ -2,6 +2,7 @@
 /analyzeAndProcessAndRender/tests/packageSource/node_modules/
 /analyzeAndProcessAndRender/tests/singleSource/source/
 /analyzeAndProcessAndRender/tests/singleSourceWithOutputBaseFilename/source/
+/gh-pages
 /harness/example.js
 /harness/output/
 /test-coverage
