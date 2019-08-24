@@ -1,62 +1,13 @@
 - - id: javascript
     type: file
+    dependsUpon:
+      - analyzeAndProcessAndRender
+      - createParameterFromCliArguments
+      - minimist
     items:
       - - id: bin
           type: file
-          dependsUpon:
-            - analyzeAndProcessAndRender
-            - createParameterFromCliArguments
-            - minimist
-          items:
-            id: createParameterFromCliArguments
-            type: file
-            items:
-              - - id: test
-                  type: file
-                  dependsUpon:
-                    - babelParserPlugins
-                    - createParameterFromCliArguments
-                    - expect
-                    - ignorePathPattern
-                    - test
-                    - undefined
-                  items:
-                    - - id: babelParserPlugins
-                        type: variable
-                      - id: ignorePathPattern
-                        type: variable
-                    - - expect
-                      - test
-              - - id: createParameterFromCliArguments
-                  dependsUpon:
-                    - createOutputPath
-                    - createSources
-                    - ensureArray
-                    - parseBoolean
-              - - ensureArray
-                - parseBoolean
-                - id: createOutputPath
-                  type: file
-                  items:
-                    - - id: createOutputPath
-                        dependsUpon: getWhenDefinedOrDefault
-                    - - getWhenDefinedOrDefault
-                - id: createSources
-                  type: file
-                  items:
-                    id: createSources
-                    dependsUpon:
-                      - getIterator
-                      - getNext
-                    items:
-                      - - id: getIterator
-                          dependsUpon: yieldArgument
-                          items: yieldArgument
-                        - id: getNext
-                          dependsUpon: iterators
-                      - - id: iterators
-                          type: variable
-      - - id: harness
+        - id: harness
           items:
             - id: example
               type: file
@@ -665,6 +616,54 @@
                           type: variable
                       - - expect
                         - test
+        - id: createParameterFromCliArguments
+          type: file
+          items:
+            - - id: test
+                type: file
+                dependsUpon:
+                  - babelParserPlugins
+                  - createParameterFromCliArguments
+                  - expect
+                  - ignorePathPattern
+                  - test
+                  - undefined
+                items:
+                  - - id: babelParserPlugins
+                      type: variable
+                    - id: ignorePathPattern
+                      type: variable
+                  - - expect
+                    - test
+            - - id: createParameterFromCliArguments
+                dependsUpon:
+                  - createOutputPath
+                  - createSources
+                  - ensureArray
+                  - parseBoolean
+            - - ensureArray
+              - parseBoolean
+              - id: createOutputPath
+                type: file
+                items:
+                  - - id: createOutputPath
+                      dependsUpon: getWhenDefinedOrDefault
+                  - - getWhenDefinedOrDefault
+              - id: createSources
+                type: file
+                items:
+                  id: createSources
+                  dependsUpon:
+                    - getIterator
+                    - getNext
+                  items:
+                    - - id: getIterator
+                        dependsUpon: yieldArgument
+                        items: yieldArgument
+                      - id: getNext
+                        dependsUpon: iterators
+                    - - id: iterators
+                        type: variable
         - id: packageWithoutScope
           type: file
           items:
