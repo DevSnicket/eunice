@@ -1,41 +1,43 @@
 {
 	"author": "Graham Dyson",
 	"bin": {
-		"eunice": "bin.js"
+		"eunice": "dist/bin.js"
 	},
 	"bugs": {
 		"url": "https://github.com/DevSnicket/eunice/issues"
 	},
 	"description": "Analyzes JavaScript on the file system, processes the analysis and renders the processed analysis to an SVG.",
-	"dependencies": {
+	"devDependencies": {
+		"@babel/core": "7.4.4",
+		"@babel/polyfill": "7.4.4",
+		"@babel/preset-env": "7.4.4",
+		"@devsnicket/eunice-call-with-process-standard-streams": "*",
+		"@devsnicket/eunice-dependency-and-structure": ">=2.11.0",
 		"@devsnicket/eunice-javascript-analyzer": "^10.2.2",
 		"@devsnicket/eunice-processors": "^8.5.1",
 		"@devsnicket/eunice-renderer": "^5.3.0",
 		"@devsnicket/eunice-renderer-test-harness": "^2.1.0",
-		"array.prototype.flatmap": "1.2.1",
-		"js-yaml": "3.13.1",
-		"minimist": "1.2.0"
-	},
-	"devDependencies": {
-		"@babel/core": "7.4.5",
-		"@babel/polyfill": "7.4.4",
-		"@babel/preset-env": "7.4.5",
-		"@devsnicket/eunice-call-with-process-standard-streams": "*",
-		"@devsnicket/eunice-dependency-and-structure": ">=2.11.0",
 		"@devsnicket/eunice-run-tests-from-file-system": "1.7.0",
 		"@devsnicket/eunice-test-harnesses": ">=7.6.0",
 		"@devsnicket/eunice-test-harnesses-processor-plugins": "*",
 		"@devsnicket/plugin-discovery-commonjs-babel-plugin": "1.11.1",
 		"@types/jest": "24.0.15",
 		"@types/node": "12.0.2",
+		"array.prototype.flatmap": "1.2.1",
 		"babel-loader": "8.0.6",
 		"cspell": "4.0.7",
 		"eslint": "6.2.1",
 		"eslint-plugin-notice": "0.8.9",
 		"fs-extra": "8.1.0",
 		"jest": "24.8.0",
+		"js-yaml": "3.13.1",
+		"minimist": "1.2.0",
+		"terser": "4.2.1",
 		"webpack-cli": "3.3.6"
 	},
+	"files": [
+		"dist/**/*"
+	],
 	"homepage": "https://github.com/DevSnicket/eunice#readme",
 	"jest": {
 		"collectCoverage": true,
@@ -45,13 +47,15 @@
 			"!analyzeAndProcessAndRender/tests/packageSources/node_modules/**",
 			"!analyzeAndProcessAndRender/tests/singleSource/source/**",
 			"!analyzeAndProcessAndRender/tests/singleSourceWithOutputBaseFilename/source/**",
+			"!dist/**",
 			"!dogfooding/output/**",
 			"!gh-pages/**",
 			"!harness/**",
 			"!node_modules/**",
 			"!harness/output/**",
 			"!packageWithoutScope/**",
-			"!test-coverage/**"
+			"!test-coverage/**",
+			"!webpack.config.js"
 		],
 		"coverageDirectory": "test-coverage",
 		"coverageThreshold": {
@@ -88,12 +92,15 @@
 		"url": "https://github.com/grahamdyson/eunice-javascript.git"
 	},
 	"scripts": {
-		"all": "npm run spellcheck && npm run lint && npm run test && npm run dogfooding && npm run harness",
+		"all": "npm run spellcheck && npm run lint && npm run test && npm run build && npm run dogfooding && npm run harness",
+		"build": "npm run build-prepare && npx webpack -p --config webpack.config.js && rm dist/bin.js.map",
+		"build-development": "npm run build-prepare && npx webpack -d --config webpack.config.js",
+		"build-prepare": "rm -rf dist && mkdir dist && cp -r node_modules/@devsnicket/eunice-renderer-test-harness/dist/harness dist && rm dist/harness/harness.js.map",
 		"dogfooding": "(cd dogfooding && rm -rf output && mkdir output && cd .. && node bin --directoryToCreateOrAddToStacksFrom=dogfooding --includeServiceWorkers=true --includeSourceMap=true --ignoreDirectoryNames=.devsnicket-plugin-discovery --ignoreDirectoryNames=.git --ignoreDirectoryNames=.vscode --ignoreDirectoryNames=dist --ignoreDirectoryNames=gh-pages --ignoreDirectoryNames=node_modules --ignoreDirectoryNames=output --ignoreDirectoryNames=test-cases --ignoreDirectoryNames=test-coverage --outputBaseFileName=index --outputDirectoryPath=dogfooding/output --packageNames=call-with-process-standard-streams --packageNames=dependency-and-structure --packageNames=javascript-analyzer --packageNames=processors --packageNames=renderer --packageNames=renderer-test-harness --packageNames=run-tests-from-file-system --packageNames=test-harnesses --packageNames=test-harnesses-processor-plugins --packagePrefix=eunice- --packageScope=devsnicket --directories=. --rootItemIdentifiers=javascript)",
 		"lint": "npx eslint .",
 		"harness": "(cd harness && rm -rf output && mkdir output && npx webpack -p --config webpack.config.js)",
-		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dogfooding/output/**\" ! -path \"./gh-pages/**\" ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./packageWithoutScope/node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
+		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dogfooding/output/**\" ! -path \"./dist/*\" ! -path \"./gh-pages/**\" ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./packageWithoutScope/node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest --runInBand"
 	},
-	"version": "5.25.0"
+	"version": "5.26.0"
 }
