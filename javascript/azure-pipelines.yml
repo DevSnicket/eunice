@@ -12,7 +12,7 @@ steps:
       rm -rf gh-pages &&
       git submodule add --force -b gh-pages https://$(github_access_token)@github.com/DevSnicket/Eunice.git gh-pages &&
       cd gh-pages &&
-      rm -r * && 
+      rm -f -r * && 
       cp -r ../dogfooding/output/* . &&
       rm harness.js.map &&
       cp -r ../harness/output javascript &&
