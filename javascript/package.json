@@ -83,6 +83,7 @@
 		"yaml"
 	],
 	"license": "GPL-3.0-or-later",
+	"main": "dist/bin.js",
 	"name": "@devsnicket/eunice",
 	"publishConfig": {
 		"access": "public"
@@ -102,5 +103,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dogfooding/output/**\" ! -path \"./dist/*\" ! -path \"./gh-pages/**\" ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./packageWithoutScope/node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest --runInBand"
 	},
-	"version": "5.26.0"
+	"version": "5.26.1"
 }
