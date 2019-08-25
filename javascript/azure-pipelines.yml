@@ -14,7 +14,6 @@ steps:
       cd gh-pages &&
       rm -f -r * && 
       cp -r ../dogfooding/output/* . &&
-      rm harness.js.map &&
       cp -r ../harness/output javascript &&
       rm javascript/harness.js.map &&
       git add . &&
