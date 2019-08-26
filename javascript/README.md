@@ -4,7 +4,7 @@ Eunice is based on the premise that unidirectional dependencies can be beneficia
 
 With Eunice you can define an intended structure/architecture, it can then show you dependencies that don't match, and then you can further refine the definition or update your code to match it.
 
-try it out in a directory of JavaScript (Flow and TypeScript also supported)
+try it out in a directory of JavaScript (Flow, JSX and TypeScript also supported)
 ```bash
 npx eunice
 ```
