@@ -11,11 +11,12 @@ steps:
   - script: >-
       rm -rf gh-pages &&
       git submodule add --force -b gh-pages https://$(github_access_token)@github.com/DevSnicket/Eunice.git gh-pages &&
+      rm -rf gh-pages/dogfooding &&
+      cp -r dogfooding/output gh-pages/dogfooding &&
+      rm -rf gh-pages/javascript &&
+      cp -r harness/output gh-pages/javascript &&
+      rm gh-pages/javascript/harness.js.map &&
       cd gh-pages &&
-      rm -f -r * && 
-      cp -r ../dogfooding/output/* . &&
-      cp -r ../harness/output javascript &&
-      rm javascript/harness.js.map &&
       git add . &&
       git config --add user.email grahamdyson@hotmail.com &&
       git config --add user.name "JavaScript harness GitHub pages publish" &&
@@ -23,7 +24,7 @@ steps:
         git commit -m "dogfooding and JavaScript harness";
         git push;
       fi
-    displayName: dogfooding and JavaScript harness publish
+    displayName: GitHub pages publish
   - task: Npm@1
     continueOnError: true
     displayName: NPM publish
