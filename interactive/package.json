@@ -76,12 +76,9 @@
 		"unice",
 		"yaml"
 	],
-	"license": "GPL-3.0-or-later",
+	"license": "SEE LICENSE IN LICENSE",
 	"main": "index.js",
 	"name": "@devsnicket/eunice-renderer-test-harness",
-	"publishConfig": {
-		"access": "public"
-	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/DevSnicket/eunice-renderer-test-harness.git"
@@ -98,5 +95,5 @@
 		"test": "npx jest",
 		"watch": "npx webpack --config webpack.config.js -d --watch"
 	},
-	"version": "2.2.1"
+	"version": "3.0.0"
 }
