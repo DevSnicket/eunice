@@ -62,12 +62,9 @@
 		"yaml"
 	],
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
-	"license": "GPL-3.0-or-later",
+	"license": "SEE LICENSE IN LICENSE",
 	"main": "index.js",
 	"name": "@devsnicket/eunice-renderer",
-	"publishConfig": {
-		"access": "public"
-	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/DevSnicket/eunice-renderer.git"
@@ -79,5 +76,5 @@
 		"test": "npx jest --runInBand",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "5.5.0"
+	"version": "6.0.0"
 }
