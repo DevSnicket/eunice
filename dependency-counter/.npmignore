@@ -2,12 +2,12 @@
 *testCases
 /.eslintrc.yml
 /.eslintignore
-.gitattributes
-/.travis.yml
+/.gitattributes
+/.gitmodules
 /.vscode
 /cspell.json
+/azure-pipelines.yml
 /devsnicket-eunice-renderer-*.tgz
-/eunice.*
-/harness
-/test-coverage
+/eunice.*/
 /jsconfig.json
+/test-coverage
