@@ -67,12 +67,9 @@
 		"unice",
 		"yaml"
 	],
-	"license": "GPL-3.0-or-later",
+	"license": "SEE LICENSE IN LICENSE",
 	"main": "index.js",
 	"name": "@devsnicket/eunice-javascript-analyzer",
-	"publishConfig": {
-		"access": "public"
-	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/DevSnicket/eunice-javascript-analyzer.git"
@@ -86,5 +83,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./harness/output/*\" ! -path \"./node_modules/**/*\" ! -path \"**/test-cases/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest --runInBand"
 	},
-	"version": "10.13.0"
+	"version": "11.0.0"
 }
