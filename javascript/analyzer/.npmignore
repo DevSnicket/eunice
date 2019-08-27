@@ -1,9 +1,13 @@
-/devsnicket-eunice-javascript-analyzer-*.tgz
 /.eslintrc.yml
 /.eslintignore
+/.gitattributes
+/.gitmodules
 /.travis.yml
 /.vscode
+/azure-pipelines.yml
+/devsnicket-eunice-javascript-analyzer-*.tgz
 /cspell.json
+/gh-pages/
 /harness/output
 /test-coverage
 /jsconfig.json
