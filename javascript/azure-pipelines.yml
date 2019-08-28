@@ -22,7 +22,7 @@ steps:
       rm gh-pages/eunice/javascript/harness.js.map &&
       rm -rf gh-pages/eunice/licensing &&
       mkdir gh-pages/eunice/licensing &&
-      cp license gh-pages/eunice/licensing/community-trial.txt &&
+      cp LICENSE gh-pages/eunice/licensing/community-trial.txt &&
       cp third-party-notices.txt gh-pages/eunice/licensing &&
       cd gh-pages &&
       git add . &&
