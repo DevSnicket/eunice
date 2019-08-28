@@ -1,7 +1,16 @@
 #!/usr/bin/env node
-/* Copyright (c) 2019 Graham Dyson. All Rights Reserved.
-This library is free software, licensed under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>. */
+// Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 /* istanbul ignore file: test would be a mirror of implementation */
+
+const path = require("path");
+
+console.log("Eunice Community/Trial Edition");
+console.log();
+console.log("By using this program you are agreeing to its license:");
+console.log(`\t${path.join(__dirname, "LICENSE")}`);
+console.log("\thttp://www.devsnicket.com/eunice/licensing/community-trial.txt");
+console.log();
+console.log("Analyzing...");
 
 require(".");

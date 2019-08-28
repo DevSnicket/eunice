@@ -36,7 +36,8 @@
 		"webpack-cli": "3.3.6"
 	},
 	"files": [
-		"dist/**/*"
+		"dist/**/*",
+		"third-party-notices.txt"
 	],
 	"homepage": "https://github.com/DevSnicket/eunice#readme",
 	"jest": {
@@ -81,7 +82,7 @@
 		"unice",
 		"yaml"
 	],
-	"license": "GPL-3.0-or-later",
+	"license": "SEE LICENSE IN LICENSE",
 	"main": "dist/bin.js",
 	"name": "eunice",
 	"publishConfig": {
@@ -102,5 +103,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dogfooding/output/**\" ! -path \"./dist/*\" ! -path \"./gh-pages/**\" ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest --runInBand"
 	},
-	"version": "5.26.1"
+	"version": "6.0.0"
 }
