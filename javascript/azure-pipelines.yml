@@ -35,20 +35,4 @@ steps:
     inputs:
       command: 'publish'
       publishEndpoint: 'npm.org registry'
-  - task: CopyFiles@2
-    displayName: packageWithoutScope copy readme
-    inputs:
-      Contents: |
-        LICENCE
-        README.md
-      TargetFolder: 'packageWithoutScope'
-  - script: (cd packageWithoutScope && node createPackageJson.js)
-    displayName: packageWithoutScope create package JSON
-  - task: Npm@1
-    continueOnError: true
-    displayName: packageWithoutScope NPM publish
-    inputs:
-      command: 'publish'
-      workingDir: 'packageWithoutScope'
-      publishEndpoint: 'npm.org registry'
 trigger: [ master ]
