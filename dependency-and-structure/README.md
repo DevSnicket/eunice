@@ -1,18 +1,16 @@
-# Eunice ![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgElementForStack/createArrows/test/withUse/testCases/default-height.svg?sanitize=true) Dependency and structure
-
-DevSnicket Eunice is a toolkit based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. Eunice's approach isn't limited to direct dependencies, but includes indirect dependencies as well.
-
-[try out Eunice on Eunice 🐶🥫](https://devsnicket.github.io/Eunice)
+# Eunice ![](https://raw.githubusercontent.com/DevSnicket/eunice/gh-pages/arrows/default-height.svg?sanitize=true) Dependency and structure
 
 This package takes YAML that contains dependencies and structure, represented as objects and does the following:
 * Standardizes structure (to support varying YAML verbosity)
 * Replaces the identifiers of whats depended upon with object references
 * Adds dependent object references (so dependencies are available in both directions)
 
-It is used by the renderer and some of the processors of Eunice. More information can be found [in the main Eunice repository](https://github.com/DevSnicket/Eunice#readme).
+It is used by the renderer and some of the processors of Eunice.
+
+More information can be found in the [Eunice repository](https://github.com/DevSnicket/Eunice#readme) on GitHub.
 
 [![NPM](https://img.shields.io/npm/v/@devsnicket/eunice-dependency-and-structure.svg)](https://www.npmjs.com/package/@devsnicket/eunice-dependency-and-structure
-) [![Build Status](https://travis-ci.org/DevSnicket/eunice-dependency-and-structure.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-dependency-and-structure) [![Coverage Status](https://coveralls.io/repos/github/DevSnicket/eunice-dependency-and-structure/badge.svg?branch=master&c=1)](https://coveralls.io/github/DevSnicket/eunice-dependency-and-structure?branch=master) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
+) [![Build Status](https://travis-ci.org/DevSnicket/eunice-dependency-and-structure.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-dependency-and-structure) [![Coverage Status](https://coveralls.io/repos/github/DevSnicket/eunice-dependency-and-structure/badge.svg?branch=master&c=1)](https://coveralls.io/github/DevSnicket/eunice-dependency-and-structure?branch=master) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
 
 Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-dependency-and-structure):
 
