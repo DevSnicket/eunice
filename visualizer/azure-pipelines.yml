@@ -14,25 +14,25 @@ steps:
     displayName: NPM run all
   - script: >-
       rm -rf gh-pages &&
-      git submodule add --force -b gh-pages https://$(github_access_token)@github.com/DevSnicket/Eunice.git gh-pages &&
-      rm -f -rf gh-pages/arrows &&
-      mkdir gh-pages/arrows &&
-      cp getSvgElementForStack/createArrows/test/withUse/testCases/default-height.svg gh-pages/arrows &&
-      cp getSvgElementForStack/createArrows/test/withUse/testCases/with-descriptions.svg gh-pages/arrows &&
-      rm -f -rf gh-pages/examples &&
-      mkdir gh-pages/examples &&
-      mkdir gh-pages/examples/independency &&
-      cp getSvgForYaml/testCases/independency/first-depends-upon-second/expected.svg gh-pages/examples/independency/first-depends-upon-second.svg &&
-      cp getSvgForYaml/testCases/independency/first-item-depends-upon-second-item/expected.svg gh-pages/examples/independency/first-item-depends-upon-second-item.svg &&
-      cp getSvgForYaml/testCases/independency/two-interdependent/expected.svg gh-pages/examples/independency/two-interdependent.svg &&
-      cp getSvgForYaml/testCases/item-depends-upon-parent/expected.svg gh-pages/examples/item-depends-upon-parent.svg &&
-      cp getSvgForYaml/testCases/parent-depends-upon-item/expected.svg gh-pages/examples/parent-depends-upon-item.svg &&
-      mkdir gh-pages/examples/stack &&
-      cp getSvgForYaml/testCases/stack/lower-depends-upon-upper/expected.svg gh-pages/examples/stack/lower-depends-upon-upper.svg &&
-      cp getSvgForYaml/testCases/stack/two-interdependent/expected.svg gh-pages/examples/stack/two-interdependent.svg &&
-      cp getSvgForYaml/testCases/stack/upper-depends-upon-lower/expected.svg gh-pages/examples/stack/upper-depends-upon-lower.svg &&
-      cp getSvgForYaml/testCases/two/expected.svg gh-pages/examples/two.svg &&
-      cp getSvgForYaml/withSubset.testCases/upper-item-depends-upon-lower-item-with-parent.svg gh-pages/examples &&
+      git submodule add --force https://$(github_access_token)@github.com/DevSnicket/devsnicket.github.io.git gh-pages &&
+      rm -f -rf gh-pages/eunice/arrows &&
+      mkdir gh-pages/eunice/arrows &&
+      cp getSvgElementForStack/createArrows/test/withUse/testCases/default-height.svg gh-pages/eunice/arrows &&
+      cp getSvgElementForStack/createArrows/test/withUse/testCases/with-descriptions.svg gh-pages/eunice/arrows &&
+      rm -f -rf gh-pages/eunice/examples &&
+      mkdir gh-pages/eunice/examples &&
+      mkdir gh-pages/eunice/examples/independency &&
+      cp getSvgForYaml/testCases/independency/first-depends-upon-second/expected.svg gh-pages/eunice/examples/independency/first-depends-upon-second.svg &&
+      cp getSvgForYaml/testCases/independency/first-item-depends-upon-second-item/expected.svg gh-pages/eunice/examples/independency/first-item-depends-upon-second-item.svg &&
+      cp getSvgForYaml/testCases/independency/two-interdependent/expected.svg gh-pages/eunice/examples/independency/two-interdependent.svg &&
+      cp getSvgForYaml/testCases/item-depends-upon-parent/expected.svg gh-pages/eunice/examples/item-depends-upon-parent.svg &&
+      cp getSvgForYaml/testCases/parent-depends-upon-item/expected.svg gh-pages/eunice/examples/parent-depends-upon-item.svg &&
+      mkdir gh-pages/eunice/examples/stack &&
+      cp getSvgForYaml/testCases/stack/lower-depends-upon-upper/expected.svg gh-pages/eunice/examples/stack/lower-depends-upon-upper.svg &&
+      cp getSvgForYaml/testCases/stack/two-interdependent/expected.svg gh-pages/eunice/examples/stack/two-interdependent.svg &&
+      cp getSvgForYaml/testCases/stack/upper-depends-upon-lower/expected.svg gh-pages/eunice/examples/stack/upper-depends-upon-lower.svg &&
+      cp getSvgForYaml/testCases/two/expected.svg gh-pages/eunice/examples/two.svg &&
+      cp getSvgForYaml/withSubset.testCases/upper-item-depends-upon-lower-item-with-parent.svg gh-pages/eunice/examples &&
       cd gh-pages &&
       git add . &&
       git config --add user.email grahamdyson@hotmail.com &&
