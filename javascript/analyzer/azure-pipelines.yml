@@ -14,10 +14,10 @@ steps:
     displayName: NPM run all
   - script: >-
       rm -rf gh-pages &&
-      git submodule add --force -b gh-pages https://$(github_access_token)@github.com/DevSnicket/Eunice.git gh-pages &&
-      rm -f -rf gh-pages/javascript-analyzer &&
-      cp -r harness/output gh-pages/javascript-analyzer &&
-      rm gh-pages/javascript-analyzer/harness.js.map &&
+      git submodule add --force https://$(github_access_token)@github.com/DevSnicket/devsnicket.github.io.git gh-pages &&
+      rm -f -rf gh-pages/eunice/javascript-analyzer &&
+      cp -r harness/output gh-pages/eunice/javascript-analyzer &&
+      rm gh-pages/eunice/javascript-analyzer/harness.js.map &&
       cd gh-pages &&
       git add . &&
       git config --add user.email grahamdyson@hotmail.com &&
