@@ -90,7 +90,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/grahamdyson/eunice.git"
+		"url": "https://github.com/devsnicket/eunice.git"
 	},
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run test && npm run build && npm run dogfooding && npm run harness",
@@ -103,5 +103,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dogfooding/output/**\" ! -path \"./dist/*\" ! -path \"./gh-pages/**\" ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest --runInBand"
 	},
-	"version": "6.0.0"
+	"version": "6.1.0"
 }
