@@ -1,13 +1,11 @@
-# Eunice ![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgElementForStack/createArrows/test/withUse/testCases/default-height.svg?sanitize=true) Test harnesses
+# Eunice ![](https://raw.githubusercontent.com/DevSnicket/eunice/gh-pages/arrows/default-height.svg?sanitize=true) Test harnesses
 
-DevSnicket Eunice is a toolkit based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. Eunice's approach isn't limited to direct dependencies, but includes indirect dependencies as well.
+This package contains implementation shared between both the [JavaScript analyzer test harnesses](https://github.com/DevSnicket/eunice-javascript-analyzer/tree/master/harness) and [renderer test harnesses](https://github.com/DevSnicket/eunice-renderer-test-harness) of Eunice. The test harnesses use JavaScript, CSS, HTML, [React](https://reactjs.org/), [Webpack](https://webpack.js.org/), [VS Code's Monaco editor](https://github.com/microsoft/monaco-editor) and the [React Re-F|ex](https://github.com/leefsmp/Re-Flex) component.
 
-[try out Eunice on Eunice 🐶🥫](https://devsnicket.github.io/Eunice)
+More information can be found in the [Eunice repository](https://github.com/DevSnicket/Eunice#readme) on GitHub.
 
 [![NPM](https://img.shields.io/npm/v/@devsnicket/eunice-test-harnesses.svg)](https://www.npmjs.com/package/@devsnicket/eunice-test-harnesses
-) [![Build Status](https://travis-ci.org/DevSnicket/eunice-test-harnesses.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-test-harnesses) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
-
-This package contains implementation shared between both the [JavaScript analyzer test harnesses](https://github.com/DevSnicket/eunice-javascript-analyzer/tree/master/harness) and [renderer test harnesses](https://github.com/DevSnicket/eunice-renderer-test-harness) of Eunice. The test harnesses use JavaScript, CSS, HTML, [React](https://reactjs.org/), [Webpack](https://webpack.js.org/), [VS Code's Monaco editor](https://github.com/microsoft/monaco-editor) and the [React Re-F|ex](https://github.com/leefsmp/Re-Flex) component. More information can be found [in the main Eunice repository](https://github.com/DevSnicket/Eunice#readme).
+) [![Build Status](https://travis-ci.org/DevSnicket/eunice-test-harnesses.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-test-harnesses) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
 
 Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-test-harnesses):
 
