@@ -40,3 +40,4 @@ steps:
       command: 'publish'
       publishEndpoint: 'npm.org registry'
 trigger: [ master ]
+workspace: { clean: all }
