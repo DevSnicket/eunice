@@ -34,3 +34,4 @@ steps:
       command: 'publish'
       publishEndpoint: 'Azure private NPM'
 trigger: [ master ]
+workspace: { clean: all }
