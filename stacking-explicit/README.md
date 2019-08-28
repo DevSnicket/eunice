@@ -10,12 +10,12 @@ For more information see the [Eunice repository](https://github.com/DevSnicket/E
 Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-processors):
 
 ```bash
-npm install --save-dev @devsnicket/eunice-processors
+npm install @devsnicket/eunice-processors
 ```
 Or with [`yarn`](https://yarnpkg.com/en/package/@devsnicket/eunice-processors):
 
 ```bash
-yarn add --dev @devsnicket/eunice-processors
+yarn add @devsnicket/eunice-processors
 ```
 
 Currently there are processors written in JavaScript to:
