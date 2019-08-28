@@ -14,7 +14,7 @@ steps:
     displayName: NPM run all
   - script: >-
       rm -rf gh-pages &&
-      git submodule add --force -b gh-pages https://$(github_access_token)@github.com/DevSnicket/devsnicket.github.io.git master &&
+      git submodule add --force https://$(github_access_token)@github.com/DevSnicket/devsnicket.github.io.git gh-pages &&
       rm -rf gh-pages/eunice/dogfooding &&
       cp -r dogfooding/output gh-pages/eunice/dogfooding &&
       rm -rf gh-pages/eunice/javascript &&
