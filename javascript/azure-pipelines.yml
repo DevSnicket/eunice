@@ -14,16 +14,16 @@ steps:
     displayName: NPM run all
   - script: >-
       rm -rf gh-pages &&
-      git submodule add --force https://$(github_access_token)@github.com/DevSnicket/devsnicket.github.io.git gh-pages &&
-      rm -rf gh-pages/eunice/dogfooding &&
-      cp -r dogfooding/output gh-pages/eunice/dogfooding &&
-      rm -rf gh-pages/eunice/javascript &&
-      cp -r harness/output gh-pages/eunice/javascript &&
-      rm gh-pages/eunice/javascript/harness.js.map &&
-      rm -rf gh-pages/eunice/licensing &&
-      mkdir gh-pages/eunice/licensing &&
-      cp LICENSE gh-pages/eunice/licensing/community-trial.txt &&
-      cp third-party-notices.txt gh-pages/eunice/licensing &&
+      git submodule add --force -b gh-pages https://$(github_access_token)@github.com/DevSnicket/Eunice.git gh-pages &&
+      rm -rf gh-pages/dogfooding &&
+      cp -r dogfooding/output gh-pages/dogfooding &&
+      rm -rf gh-pages/javascript &&
+      cp -r harness/output gh-pages/javascript &&
+      rm gh-pages/javascript/harness.js.map &&
+      rm -rf gh-pages/licensing &&
+      mkdir gh-pages/licensing &&
+      cp LICENSE gh-pages/licensing/community-trial.txt &&
+      cp third-party-notices.txt gh-pages/licensing &&
       cd gh-pages &&
       git add . &&
       git config --add user.email grahamdyson@hotmail.com &&
