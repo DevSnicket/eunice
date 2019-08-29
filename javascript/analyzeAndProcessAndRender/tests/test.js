@@ -75,6 +75,10 @@ async function testInDirectory({
 	await deleteOutput();
 
 	await analyzeAndProcessAndRender({
+		babelParserPlugins:
+			null,
+		date:
+			new Date(0),
 		outputPath:
 			{
 				baseFileName,
@@ -82,6 +86,8 @@ async function testInDirectory({
 			},
 		packages,
 		sources,
+		version:
+			"0.0.0",
 	});
 
 	expect(

@@ -18,10 +18,12 @@ console.log("\thttp://www.devsnicket.com/eunice/licensing/community-trial.txt");
 console.log();
 console.log("Analyzing...");
 
-analyzeAndProcessAndRender(
-	createParameterFromCliArguments(
+analyzeAndProcessAndRender({
+	...createParameterFromCliArguments(
 		minimist(
 			process.argv.slice(2),
 		),
 	),
-);
+	date: Date.now(),
+	version,
+});

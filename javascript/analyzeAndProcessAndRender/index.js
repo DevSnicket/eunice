@@ -28,6 +28,7 @@ const
 module.exports =
 	async({
 		babelParserPlugins,
+		date,
 		directoryToCreateOrAddToStacksFrom = null,
 		ignoreDirectoryNames = ignoreDirectoryNamesDefault,
 		ignorePathPattern = createIgnorePathPatternFromDirectoryNames(ignoreDirectoryNames),
@@ -37,8 +38,14 @@ module.exports =
 		outputPath,
 		packages = null,
 		sources,
+		version,
 	}) =>
 		writeOutput({
+			header:
+				formatHeader({
+					date,
+					version,
+				}),
 			includeServiceWorkers,
 			includeSourceMap,
 			...outputPath,
@@ -60,6 +67,20 @@ module.exports =
 					{ lineWidth: Number.MAX_SAFE_INTEGER },
 				),
 		});
+
+function formatHeader({
+	date,
+	version,
+}) {
+	return `created by Eunice (http://www.devsnicket.com/eunice) version ${version} on ${formatDate()}`;
+
+	function formatDate() {
+		return (
+			new Date(date)
+			.toISOString()
+		);
+	}
+}
 
 function createIgnorePathPatternFromDirectoryNames(
 	directoryNames,
@@ -86,6 +107,7 @@ function createSourcesWithPackages({
 async function writeOutput({
 	baseFileName,
 	directoryPath,
+	header,
 	includeServiceWorkers,
 	includeSourceMap,
 	yaml,
@@ -101,12 +123,12 @@ async function writeOutput({
 
 	await writeFile(
 		yamlFilePath,
-		yaml,
+		`# ${header}\n${yaml}`,
 	);
 
 	await writeFile(
 		`${baseFilePath}.svg`,
-		getSvgForYaml({ yaml }),
+		`<!-- ${header}-->\n${getSvgForYaml({ yaml })}`,
 	);
 
 	await writeHarness({
