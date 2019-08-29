@@ -3,9 +3,12 @@
 
 /* istanbul ignore file: test would be a mirror of implementation */
 
-const path = require("path");
+const
+	path = require("path"),
+	{ version } = require("./package.json");
 
-console.log("Eunice Community/Trial Edition");
+console.log();
+console.log(`\x1b[1mEunice Community/Trial Edition (${version})\x1b[0m`);
 console.log();
 console.log("By using this program you are agreeing to its license:");
 console.log(`\t${path.join(__dirname, "LICENSE")}`);
