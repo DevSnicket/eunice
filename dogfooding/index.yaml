@@ -1,3 +1,4 @@
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.2.0 on 2019-08-29T08:09:37.962Z
 - - id: javascript
     type: file
     dependsUpon:
@@ -5,6 +6,8 @@
       - createParameterFromCliArguments
       - minimist
       - path
+      - id: package.json
+        items: version
     items:
       - - id: bin
           type: file
@@ -124,9 +127,17 @@
                   - analyzeAndProcess
                   - createIgnorePathPatternFromDirectoryNames
                   - createSourcesWithPackages
+                  - formatHeader
                   - formatYaml
                   - writeOutput
-            - - createIgnorePathPatternFromDirectoryNames
+            - - id: formatHeader
+                dependsUpon: formatDate
+                items:
+                  - - id: formatDate
+                      dependsUpon: date
+                  - - id: date
+                      type: parameter
+              - createIgnorePathPatternFromDirectoryNames
               - id: createSourcesWithPackages
                 dependsUpon: createSourcesFromPackages
               - id: writeOutput
