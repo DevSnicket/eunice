@@ -4,10 +4,10 @@
       - analyzeAndProcessAndRender
       - createParameterFromCliArguments
       - minimist
+      - path
     items:
       - - id: bin
           type: file
-          dependsUpon: path
         - id: harness
           items:
             - id: example
