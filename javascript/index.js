@@ -13,7 +13,7 @@ console.log();
 console.log(`\x1b[1mEunice Community/Trial Edition (${version})\x1b[0m`);
 console.log();
 console.log("By using this program you are agreeing to its license:");
-console.log(`\t${path.join(__dirname, "LICENSE")}`);
+console.log(`\t${path.join(__dirname, "..", "LICENSE")}`);
 console.log("\thttp://www.devsnicket.com/eunice/licensing/community-trial.txt");
 console.log();
 console.log("Analyzing...");
