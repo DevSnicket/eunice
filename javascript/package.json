@@ -32,6 +32,7 @@
 		"jest": "24.8.0",
 		"js-yaml": "3.13.1",
 		"minimist": "1.2.0",
+		"supports-color": "7.0.0",
 		"terser": "4.2.1",
 		"webpack-cli": "3.3.6"
 	},
@@ -102,5 +103,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dogfooding/output/**\" ! -path \"./dist/*\" ! -path \"./gh-pages/**\" ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest --runInBand"
 	},
-	"version": "6.2.1"
+	"version": "6.2.2"
 }
