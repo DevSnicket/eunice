@@ -5,6 +5,18 @@ jobs:
       script: npm run all
     - stage: processor plugins
       before_install: cd processor-plugins
+    - stage: GitHub pages publish
+      script: >-
+      rm -rf gh-pages &&
+      git submodule add --force -b gh-pages https://$(github_access_token)@github.com/DevSnicket/Eunice.git gh-pages &&
+      cp -r favicon.ico gh-pages &&
+      git add . &&
+      git config --add user.email grahamdyson@hotmail.com &&
+      git config --add user.name "GitHub pages publish" &&
+      if [[ `git status --porcelain` ]]; then
+        git commit -m "dogfooding and JavaScript harness";
+        git push;
+      fi
 deploy:
   api_key: $NPM_TOKEN
   email: grahamdyson@hotmail.com
