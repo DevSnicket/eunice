@@ -8,7 +8,7 @@ jobs:
     - stage: GitHub pages publish
       script: >-
         rm -rf gh-pages &&
-        git submodule add --force -b gh-pages https://$(github_access_token)@github.com/DevSnicket/Eunice.git gh-pages &&
+        git submodule add --force -b gh-pages https://$github_access_token@github.com/DevSnicket/Eunice.git gh-pages &&
         cp -r favicon.ico gh-pages &&
         git add . &&
         git config --add user.email grahamdyson@hotmail.com &&
