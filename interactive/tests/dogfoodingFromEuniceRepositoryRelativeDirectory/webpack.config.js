@@ -18,4 +18,6 @@ module.exports =
 					replacementFilePath:
 						path.join("..", "eunice-javascript", "dogfooding", "output", "index.yaml"),
 				},
+			title:
+				"Renderer of dogfooding from eunice-javascript repository",
 		});

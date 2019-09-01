@@ -18,4 +18,6 @@ module.exports =
 					replacementFilePath:
 						path.join(__dirname, ".yaml"),
 				},
+			title:
+				"Renderer of example YAML",
 		});
