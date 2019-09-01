@@ -16,6 +16,7 @@ module.exports =
 		entry = null,
 		indexFile,
 		javascriptSubstitution = null,
+		title = "Test Harness",
 	}) => (
 		{
 			devtool:
@@ -41,6 +42,7 @@ module.exports =
 					createTransformJavascriptToHtmlPlugin({
 						directory,
 						javascriptSubstitution,
+						title,
 					}),
 					new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
 				],

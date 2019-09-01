@@ -18,6 +18,7 @@ module.exports =
 	({
 		directory,
 		javascriptSubstitution,
+		title,
 	}) => {
 		return { apply };
 
@@ -112,7 +113,7 @@ module.exports =
 	<head>
 		<link href="data:image/x-icon;base64,${favicon}" rel="icon" type="image/x-icon" />
 		<meta charset="UTF-8">
-		<title>DevSnicket Eunice Test Harness</title>
+		<title>Eunice ${title}</title>
 	</head>
 	<body>
 		<div id="container"></div>
