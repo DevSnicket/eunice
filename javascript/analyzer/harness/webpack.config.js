@@ -21,4 +21,6 @@ module.exports =
 					pattern: new RegExp("(?<=javascript:|javascript: )javascriptFromWebpack"),
 					replacementFilePath: `${__dirname}/example.js`,
 				},
+			title:
+				"JavaScript Analyzer",
 		});
