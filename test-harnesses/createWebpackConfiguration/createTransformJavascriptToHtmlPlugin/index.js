@@ -37,16 +37,28 @@ module.exports =
 
 			if (await fileExists(javascriptPath)) {
 				await writeHtml(
-					getHtmlWithJavascript(
-						await getJavascriptSubstituted(
-							await readJavascript(),
-						),
-					),
+					formatHtml({
+						favicon:
+							await readFavicon(),
+						javascript:
+							await getJavascriptSubstituted(
+								await readJavascript(),
+							),
+					}),
 				);
 
 				await deleteFile(javascriptPath);
 			} else
 				errors.push(`JavaScript file "${javascriptPath}" not found to transform into a HTML file.`);
+
+			function readFavicon() {
+				return (
+					readFile(
+						path.join(__dirname, "..", "..", "favicon.ico"),
+						"base64",
+					)
+				);
+			}
 
 			function readJavascript() {
 				return readTextFile(javascriptPath);
@@ -91,12 +103,17 @@ module.exports =
 				}
 			}
 
-			function getHtmlWithJavascript(
+			function formatHtml({
+				favicon,
 				javascript,
-			) {
+			}) {
 				return `<!DOCTYPE html>
 <html>
-	<head><meta charset="UTF-8"><title>DevSnicket Eunice Test Harness</title></head>
+	<head>
+		<link href="data:image/x-icon;base64,${favicon}" rel="icon" type="image/x-icon" />
+		<meta charset="UTF-8">
+		<title>DevSnicket Eunice Test Harness</title>
+	</head>
 	<body>
 		<div id="container"></div>
 		<script type="text/javascript">${javascript}</script>
