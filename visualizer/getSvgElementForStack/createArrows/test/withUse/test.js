@@ -11,7 +11,7 @@ const
 	withPrecision = require("../../../withPrecision");
 
 test(
-	"with default height and width of 18",
+	"with default height and width of 24",
 	() =>
 		expectRenderedToBe({
 			...createSymbolAndUseElementsAndGetSize({
@@ -22,7 +22,7 @@ test(
 					}),
 				createElement,
 				spacing:
-					2,
+					4,
 				width:
 					24,
 			}),
