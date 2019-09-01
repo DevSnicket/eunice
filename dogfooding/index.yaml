@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.2.2 on 2019-08-30T10:17:17.422Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.3.0 on 2019-09-01T06:54:52.116Z
 - - id: javascript
     type: file
     dependsUpon:
@@ -7070,13 +7070,18 @@
                               - deleteFile
                               - directory
                               - fileExists
-                              - getHtmlWithJavascript
+                              - formatHtml
                               - getJavascriptSubstituted
                               - path
+                              - readFavicon
                               - readJavascript
                               - writeHtml
                             items:
-                              - - id: readJavascript
+                              - - id: readFavicon
+                                  dependsUpon:
+                                    - path
+                                    - readFile
+                                - id: readJavascript
                                   dependsUpon:
                                     - javascriptPath
                                     - readTextFile
@@ -7090,7 +7095,7 @@
                                           - readTextFile
                                     - - id: escapeStringLiteralWhenSpecified
                                         dependsUpon: escapeStringLiteral
-                                - getHtmlWithJavascript
+                                - formatHtml
                               - - id: readTextFile
                                   dependsUpon: readFile
                                 - id: writeHtml
