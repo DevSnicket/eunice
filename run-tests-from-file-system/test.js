@@ -73,123 +73,12 @@ describe(
 				action,
 				directory:
 					getTestCasesPathOfSubdirectory(subdirectory),
-				log:
-					null,
 				processArguments:
 					[ null, "jest" ],
 				test,
 			});
 		}
 	},
-);
-
-test(
-	"Log actual of all test cases.",
-	() => {
-		const logged = [];
-
-		runTestsWithFileNames({
-			action:
-				testCaseFileContent => `Actual for ${testCaseFileContent}`,
-			directory:
-				getTestCasesPathOfSubdirectory("multiple"),
-			log:
-				log => logged.push(log),
-			processArguments:
-				[ null, "" ],
-			test:
-				null,
-		});
-
-		expect(
-			logged,
-		)
-		.toEqual(
-			[
-				path.join("directoryWithNoTestCase", "testCaseInDirectoryWithNoTestCase"),
-				"Actual for source of test case in directory with no test case",
-				"directoryWithTestCase",
-				"Actual for source of directory with test case",
-				path.join("directoryWithTestCase", "testCaseInDirectoryWithTestCase"),
-				"Actual for source of test case in directory with test case",
-				"testCaseInRoot",
-				"Actual for source of test case in root",
-			],
-		);
-	},
-);
-
-describe(
-	"Log actual of specified test case.",
-	() => {
-		const expected = "Actual for source of test case in directory with test case";
-
-		test(
-			"Default logs to console.",
-			() => {
-				const originalConsole = global.console;
-
-				global.console = { log: jest.fn() };
-
-				logActualOfSpecifiedTestCase(
-					// undefined used to get parameter default of console.log
-					// eslint-disable-next-line no-undefined
-					undefined,
-				);
-
-				expect(global.console.log)
-				.toHaveBeenCalledWith(expected);
-
-				global.console = originalConsole;
-			},
-		);
-
-		test(
-			"When log specified.",
-			() => {
-				const logged = [];
-
-				logActualOfSpecifiedTestCase(
-					log => logged.push(log),
-				);
-
-				expect(logged)
-				.toEqual([ expected ]);
-			},
-		);
-
-		function logActualOfSpecifiedTestCase(
-			log,
-		) {
-			runTestsWithFileNames({
-				action:
-					testCaseFileContent => `Actual for ${testCaseFileContent}`,
-				directory:
-					getTestCasesPathOfSubdirectory("multiple"),
-				log,
-				processArguments:
-					[
-						null,
-						"",
-						path.join("directoryWithTestCase", "testCaseInDirectoryWithTestCase"),
-					],
-				test:
-					null,
-			});
-		}
-	},
-);
-
-test(
-	"Three process parameters does nothing.",
-	() =>
-		runTestsWithFileNames({
-			action: null,
-			directory: null,
-			log: null,
-			processArguments: [ null, "", null ],
-			test: null,
-		}),
 );
 
 test(
@@ -208,8 +97,6 @@ test(
 				testCaseFileContent =>
 					`Updated ${testCaseFileContent}`,
 			directory,
-			log:
-				null,
 			processArguments:
 				[ null, "", "update-expected" ],
 			test:
@@ -263,7 +150,6 @@ test(
 function runTestsWithFileNames({
 	action,
 	directory,
-	log,
 	processArguments,
 	test,
 }) {
@@ -272,7 +158,6 @@ function runTestsWithFileNames({
 		caseFileName: "source.txt",
 		directory,
 		expectedFileName,
-		log,
 		processArguments,
 		test,
 	});
