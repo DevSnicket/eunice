@@ -1,0 +1,112 @@
+body {
+    background-color: #F7F7F7;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+}
+    
+a:link {
+    color: darkred;
+}
+
+a:visited {
+    color: darkred;
+}
+
+a:focus {
+    outline-color: red;
+}
+
+a:hover {
+    color: red;
+}
+
+a:active {
+    background-color: red;
+}
+
+body,
+a:active {
+    color: #070707;
+}
+
+h1 {
+    color: darkgreen;
+    font-size: 2em;
+    font-weight: normal;
+    margin: 0 auto;
+}
+
+.content {
+    max-width: 1000px;
+}
+
+body > .content {
+    margin: 1em auto;
+    padding: 0 1em;
+}
+
+body > .footer {
+    font-size: 0.8em;
+    text-align: center;
+}
+
+body > .header,
+.box {
+    background-color: white;
+}
+
+body > .header {
+    margin-top: 0.5em;
+    padding: 0.5em 1em;
+}
+
+body > .header > .content {
+    align-items: center; 
+    display: flex;
+    margin: 0 auto 0 auto;
+}
+
+body > .header a {
+    color: inherit;
+    text-decoration: none;
+}
+
+body > .header h1 .arrows {
+    height: 0.8em;
+    margin-left: 0.25em;
+    vertical-align: middle;
+    width: 2.8em;
+}
+
+body > .header h1 .e, body > .header h1 .ce { color: darkred }
+
+body > .header .menu {
+    flex-grow: 1;
+    text-align: right;
+}
+
+body > .header .menu a {
+    padding: 0.25em 0.5em;
+}
+
+body > .header .menu a.current {
+    background-color: darkgreen;
+    color: white;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #303030;
+    }
+
+    body,
+    body > .header .menu a.current {
+        color: #D0D0D0;
+    }
+
+    body > .header, 
+    .box {
+        background-color: #D0D0D0;
+        color: black;
+    }
+}
