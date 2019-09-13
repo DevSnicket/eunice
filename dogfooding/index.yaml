@@ -1,121 +1,29 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.3.1 on 2019-09-01T07:53:32.384Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.4.0 on 2019-09-13T06:06:29.219Z
 - - id: javascript
     type: file
-    dependsUpon:
-      - analyzeAndProcessAndRender
-      - createParameterFromCliArguments
-      - showCliHeader
-      - minimist
-      - id: package.json
-        items: version
+    dependsUpon: minimist
     items:
       - - id: bin
           type: file
-        - id: harness
-          items:
-            - id: example
-              type: file
-              items:
-                - - called
-                  - notCalled
-                - - id: Callee
-                    dependsUpon:
-                      - called
-                      - nestedInCallee
-                    items: nestedInCallee
-            - id: harness
-              type: file
-              dependsUpon:
-                - callOrCreateElementOnError
-                - createElement
-                - createFillWithTitleElement
-                - createInitialStateFromJavascript
-                - createJavascriptEditorElement
-                - createReflexContainerForColumnElements
-                - createYamlEditorElement
-                - createYamlInputElement
-                - createYamlOutputElement
-                - createYamlStateFromJavascript
-                - javascriptFromWebpack
-                - location
-                - id: javascript-analyzer
-                  items:
-                    id: harness
-                    items: createJavascriptEditor
-                - id: test-harnesses
-                  items:
-                    - renderIntoContainerElement
-                    - id: codeEditor
-                      items:
-                        - createEditorForLanguage
-                        - id: serviceWorkers
-                          items: initializeGlobal
-              items:
-                - - id: createInitialStateFromJavascript
-                    dependsUpon: getYamlFromJavascriptWithOptionalEnabled
-                  - id: createYamlStateFromJavascript
-                    dependsUpon:
-                      - callOrGetMessageOnError
-                      - getYamlFromJavascriptWithOptionalEnabled
-                - - id: getYamlFromJavascriptWithOptionalEnabled
-                    dependsUpon:
-                      - babelParserPlugins
-                      - getYamlFromJavascript
-                  - callOrGetMessageOnError
-                - - id: babelParserPlugins
-                    type: variable
-                    dependsUpon: babelParserPluginsDefault
-                  - id: createElement
-                    type: variable
-                    dependsUpon:
-                      id: react
-                      items: createElement
-                  - id: callOrCreateElementOnError
-                    type: variable
-                    dependsUpon:
-                      id: test-harnesses
-                      items: callOrCreateElementOnError
-                  - id: createFillWithTitleElement
-                    type: variable
-                    dependsUpon:
-                      id: test-harnesses
-                      items: createFillWithTitleElement
-                  - id: createReflexContainerForColumnElements
-                    type: variable
-                    dependsUpon:
-                      id: test-harnesses
-                      items: createReflexContainerForColumnElements
-                  - id: createYamlInputElement
-                    type: variable
-                    dependsUpon:
-                      id: renderer-test-harness
-                      items: createYamlInputElement
-                  - id: createYamlOutputElement
-                    type: variable
-                    dependsUpon:
-                      id: renderer-test-harness
-                      items: createYamlOutputElement
-                  - id: getYamlFromJavascript
-                    type: variable
-                    dependsUpon:
-                      id: javascript-analyzer
-                      items: getYamlFromJavascript
-                  - id: createYamlEditorElement
-                    type: variable
-                  - id: createJavascriptEditorElement
-                    type: variable
-            - id: webpack.config
-              type: file
-              items:
-                - - id: webpack.config
-                    dependsUpon:
-                      - createWebpackConfiguration
-                      - path
-                - - id: createWebpackConfiguration
-                    type: variable
-                    dependsUpon:
-                      id: renderer-test-harness
-                      items: createWebpackConfiguration
+        - id: javascript
+          dependsUpon:
+            - analyzeAndProcessAndRender
+            - createParameterFromCliArguments
+            - isLicenseAccepted
+            - processArguments
+            - version
+      - - id: isLicenseAccepted
+          dependsUpon:
+            - getOrPromptForLicenseAcceptance
+            - processArguments
+            - version
+      - - id: version
+          type: variable
+          dependsUpon:
+            id: package.json
+            items: version
+        - id: processArguments
+          type: variable
         - id: analyzeAndProcessAndRender
           type: file
           dependsUpon:
@@ -687,27 +595,199 @@
                         dependsUpon: iterators
                     - - id: iterators
                         type: variable
-        - id: showCliHeader
+        - id: getOrPromptForLicenseAcceptance
           type: file
           items:
             - - id: test
                 type: file
-                dependsUpon: test
-                items:
-                  - expect
-                  - id: test
-                    dependsUpon:
-                      - expect
-                      - jest
-                      - showCliHeader
-            - - id: showCliHeader
                 dependsUpon:
-                  - formatBright
                   - path
+                  - test
                 items:
-                  id: formatBright
-                  dependsUpon: whenTextTerminal
-                  items: whenTextTerminal
+                  - - id: distSubdirectoryPath
+                      type: variable
+                    - id: version
+                      type: variable
+                  - - expect
+                    - id: test
+                      dependsUpon:
+                        - distSubdirectoryPath
+                        - expect
+                        - getOrPromptForLicenseAcceptance
+                        - jest
+                        - onCallback
+                        - version
+                      items: onCallback
+            - - id: getOrPromptForLicenseAcceptance
+                dependsUpon:
+                  - createAnsiEscapeCodeFormatter
+                  - instructOrPrompt
+                  - whenAcceptedInProcessArguments
+                items:
+                  - - id: whenAcceptedInProcessArguments
+                      dependsUpon:
+                        - getLicenseFilePaths
+                        - log
+                        - logCommercialUse
+                    - id: instructOrPrompt
+                      dependsUpon:
+                        - getLicenseFilePaths
+                        - log
+                        - logCommercialUse
+                        - prompt
+                  - - id: getLicenseFilePaths
+                      dependsUpon:
+                        - distSubdirectoryPath
+                        - path
+                    - id: logCommercialUse
+                      dependsUpon: log
+                    - id: prompt
+                      dependsUpon:
+                        - callWithIsAcceptOnKeyPress
+                        - formatBold
+                        - log
+                        - readline
+                        - standardInputStream
+                      items:
+                        - - id: callWithIsAcceptOnKeyPress
+                            dependsUpon:
+                              - isAcceptKey
+                              - standardInputStream
+                        - - isAcceptKey
+                  - - id: distSubdirectoryPath
+                      type: parameter
+                    - id: log
+                      type: parameter
+                    - id: standardInputStream
+                      type: parameter
+                    - id: formatBold
+                      type: variable
+            - - id: createAnsiEscapeCodeFormatter
+                type: file
+                items:
+                  - - id: createAnsiEscapeCodeFormatter
+                      dependsUpon:
+                        - whenSupported
+                        - withNoFormatting
+                      items:
+                        - whenSupported
+                        - withNoFormatting
+                    - id: formatBold
+                      dependsUpon: formatWithCodes
+                    - id: formatGreen
+                      dependsUpon: formatColor
+                    - id: formatRed
+                      dependsUpon: formatColor
+                  - - id: formatColor
+                      dependsUpon: formatWithCodes
+                  - - id: formatWithCodes
+                      dependsUpon: formatAnsiEscapeCode
+                  - - formatAnsiEscapeCode
+        - id: harness
+          items:
+            - id: example
+              type: file
+              items:
+                - - called
+                  - notCalled
+                - - id: Callee
+                    dependsUpon:
+                      - called
+                      - nestedInCallee
+                    items: nestedInCallee
+            - id: harness
+              type: file
+              dependsUpon:
+                - callOrCreateElementOnError
+                - createElement
+                - createFillWithTitleElement
+                - createInitialStateFromJavascript
+                - createJavascriptEditorElement
+                - createReflexContainerForColumnElements
+                - createYamlEditorElement
+                - createYamlInputElement
+                - createYamlOutputElement
+                - createYamlStateFromJavascript
+                - javascriptFromWebpack
+                - location
+                - id: javascript-analyzer
+                  items:
+                    id: harness
+                    items: createJavascriptEditor
+                - id: test-harnesses
+                  items:
+                    - renderIntoContainerElement
+                    - id: codeEditor
+                      items:
+                        - createEditorForLanguage
+                        - id: serviceWorkers
+                          items: initializeGlobal
+              items:
+                - - id: createInitialStateFromJavascript
+                    dependsUpon: getYamlFromJavascriptWithOptionalEnabled
+                  - id: createYamlStateFromJavascript
+                    dependsUpon:
+                      - callOrGetMessageOnError
+                      - getYamlFromJavascriptWithOptionalEnabled
+                - - id: getYamlFromJavascriptWithOptionalEnabled
+                    dependsUpon:
+                      - babelParserPlugins
+                      - getYamlFromJavascript
+                  - callOrGetMessageOnError
+                - - id: babelParserPlugins
+                    type: variable
+                    dependsUpon: babelParserPluginsDefault
+                  - id: createElement
+                    type: variable
+                    dependsUpon:
+                      id: react
+                      items: createElement
+                  - id: callOrCreateElementOnError
+                    type: variable
+                    dependsUpon:
+                      id: test-harnesses
+                      items: callOrCreateElementOnError
+                  - id: createFillWithTitleElement
+                    type: variable
+                    dependsUpon:
+                      id: test-harnesses
+                      items: createFillWithTitleElement
+                  - id: createReflexContainerForColumnElements
+                    type: variable
+                    dependsUpon:
+                      id: test-harnesses
+                      items: createReflexContainerForColumnElements
+                  - id: createYamlInputElement
+                    type: variable
+                    dependsUpon:
+                      id: renderer-test-harness
+                      items: createYamlInputElement
+                  - id: createYamlOutputElement
+                    type: variable
+                    dependsUpon:
+                      id: renderer-test-harness
+                      items: createYamlOutputElement
+                  - id: getYamlFromJavascript
+                    type: variable
+                    dependsUpon:
+                      id: javascript-analyzer
+                      items: getYamlFromJavascript
+                  - id: createYamlEditorElement
+                    type: variable
+                  - id: createJavascriptEditorElement
+                    type: variable
+            - id: webpack.config
+              type: file
+              items:
+                - - id: webpack.config
+                    dependsUpon:
+                      - createWebpackConfiguration
+                      - path
+                - - id: createWebpackConfiguration
+                    type: variable
+                    dependsUpon:
+                      id: renderer-test-harness
+                      items: createWebpackConfiguration
         - id: webpack.config
           type: file
           dependsUpon:
