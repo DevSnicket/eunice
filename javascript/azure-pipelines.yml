@@ -20,10 +20,6 @@ steps:
       rm -rf gh-pages/javascript &&
       cp -r harness/output gh-pages/javascript &&
       rm gh-pages/javascript/harness.js.map &&
-      rm -rf gh-pages/licensing &&
-      mkdir gh-pages/licensing &&
-      cp LICENSE gh-pages/licensing/community-trial.txt &&
-      cp third-party-notices.txt gh-pages/licensing &&
       cd gh-pages &&
       git add . &&
       git config --add user.email grahamdyson@hotmail.com &&

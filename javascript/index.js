@@ -5,27 +5,42 @@
 const
 	analyzeAndProcessAndRender = require("./analyzeAndProcessAndRender"),
 	createParameterFromCliArguments = require("./createParameterFromCliArguments"),
+	getOrPromptForLicenseAcceptance = require("./getOrPromptForLicenseAcceptance"),
 	minimist = require("minimist"),
-	showCliHeader = require("./showCliHeader"),
 	supportsColor = require("supports-color"),
 	{ version } = require("./package.json");
 
-showCliHeader({
-	distSubdirectoryPath: __dirname,
-	isBrightSupported: supportsColor.stdout,
-	log: console.log,
-	version,
-});
+const processArguments =
+	minimist(
+		process.argv.slice(2),
+	);
 
-console.log();
-console.log("Analyzing...");
+(async() => {
+	if (await isLicenseAccepted()) {
+		console.log();
+		console.log("Analyzing...");
 
-analyzeAndProcessAndRender({
-	...createParameterFromCliArguments(
-		minimist(
-			process.argv.slice(2),
-		),
-	),
-	date: Date.now(),
-	version,
-});
+		await analyzeAndProcessAndRender({
+			...createParameterFromCliArguments(processArguments),
+			date: Date.now(),
+			version,
+		});
+	}
+
+	// Process exit required because license acceptance puts standard input into raw mode.
+	// eslint-disable-next-line no-process-exit
+	process.exit();
+})();
+
+function isLicenseAccepted() {
+	return (
+		getOrPromptForLicenseAcceptance({
+			distSubdirectoryPath: __dirname,
+			isColorSupported: supportsColor.stdout,
+			log: console.log,
+			processArguments,
+			standardInputStream: process.stdin,
+			version,
+		})
+	);
+}
