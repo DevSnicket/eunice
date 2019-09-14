@@ -19,6 +19,7 @@ steps:
       mkdir gh-pages/arrows &&
       cp getSvgElementForStack/createArrows/test/withUse/testCases/default-height.svg gh-pages/arrows &&
       cp getSvgElementForStack/createArrows/test/withUse/testCases/with-descriptions.svg gh-pages/arrows &&
+      cp getSvgElementForStack/createArrows/test/symbols/testCases/*.svg gh-pages/arrows &&
       rm -f -rf gh-pages/examples &&
       mkdir gh-pages/examples &&
       mkdir gh-pages/examples/independency &&
