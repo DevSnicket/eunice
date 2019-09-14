@@ -15,7 +15,7 @@ module.exports =
 		version,
 	}) => {
 		const
-			acceptLicenseParameter = "acceptLicense",
+			acceptLicenseParameter = "accept-license",
 			{
 				formatBold,
 				formatGreen,

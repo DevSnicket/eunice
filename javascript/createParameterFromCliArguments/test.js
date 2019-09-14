@@ -9,19 +9,7 @@ test(
 	"All undefined returns default output base file name, and output and source directory of current.",
 	() =>
 		expect(
-			createParameterFromCliArguments({
-				babelParserPlugins: undefined,
-				ignorePathPattern: undefined,
-				includeServiceWorkers: undefined,
-				includeSourceMap: undefined,
-				isFileContentReversed: undefined,
-				outputBaseFileName: undefined,
-				outputDirectoryPath: undefined,
-				packageNames: undefined,
-				packagePrefix: undefined,
-				packageScope: undefined,
-				rootItemIdentifiers: undefined,
-			}),
+			createParameterFromCliArguments({}),
 		)
 		.toEqual(
 			{
@@ -37,24 +25,14 @@ test(
 );
 
 test(
-	"\"babelParserPlugins\" of string returns array.",
+	"\"babel-parser-plugins\" of string returns array.",
 	() => {
 		const babelParserPlugins = "plugin";
 
 		expect(
-			createParameterFromCliArguments({
-				babelParserPlugins,
-				ignorePathPattern: undefined,
-				includeServiceWorkers: undefined,
-				includeSourceMap: undefined,
-				isFileContentReversed: undefined,
-				outputBaseFileName: undefined,
-				outputDirectoryPath: undefined,
-				packageNames: undefined,
-				packagePrefix: undefined,
-				packageScope: undefined,
-				rootItemIdentifiers: undefined,
-			})
+			createParameterFromCliArguments(
+				{ "babel-parser-plugins": babelParserPlugins },
+			)
 			.babelParserPlugins,
 		)
 		.toEqual(
@@ -64,22 +42,12 @@ test(
 );
 
 test(
-	"\"includeServiceWorkers\" of string \"true\" returns boolean true.",
+	"\"include-service-workers\" of string \"true\" returns boolean true.",
 	() =>
 		expect(
-			createParameterFromCliArguments({
-				babelParserPlugins: undefined,
-				ignorePathPattern: undefined,
-				includeServiceWorkers: "true",
-				includeSourceMap: undefined,
-				isFileContentReversed: undefined,
-				outputBaseFileName: undefined,
-				outputDirectoryPath: undefined,
-				packageNames: undefined,
-				packagePrefix: undefined,
-				packageScope: undefined,
-				rootItemIdentifiers: undefined,
-			})
+			createParameterFromCliArguments(
+				{ "include-service-workers": "true" },
+			)
 			.includeServiceWorkers,
 		)
 		.toEqual(
@@ -88,24 +56,14 @@ test(
 );
 
 test(
-	"\"ignorePathPattern\" of string returns regular expression.",
+	"\"ignore-path-pattern\" of string returns regular expression.",
 	() => {
 		const ignorePathPattern = "ignore";
 
 		expect(
-			createParameterFromCliArguments({
-				babelParserPlugins: undefined,
-				ignorePathPattern,
-				includeServiceWorkers: undefined,
-				includeSourceMap: undefined,
-				isFileContentReversed: undefined,
-				outputBaseFileName: undefined,
-				outputDirectoryPath: undefined,
-				packageNames: undefined,
-				packagePrefix: undefined,
-				packageScope: undefined,
-				rootItemIdentifiers: undefined,
-			})
+			createParameterFromCliArguments(
+				{ "ignore-path-pattern": ignorePathPattern },
+			)
 			.ignorePathPattern,
 		)
 		.toEqual(
@@ -119,17 +77,9 @@ test(
 	() =>
 		expect(
 			createParameterFromCliArguments({
-				babelParserPlugins: undefined,
-				ignorePathPattern: undefined,
-				includeServiceWorkers: undefined,
-				includeSourceMap: undefined,
-				isFileContentReversed: undefined,
-				outputBaseFileName: undefined,
-				outputDirectoryPath: undefined,
-				packageNames: [ "package1", "package2" ],
-				packagePrefix: "packagePrefix",
-				packageScope: "packageScope",
-				rootItemIdentifiers: undefined,
+				"package-names": [ "package1", "package2" ],
+				"package-prefix": "packagePrefix",
+				"package-scope": "packageScope",
 			})
 			.packages,
 		)
@@ -147,17 +97,8 @@ test(
 	() =>
 		expect(
 			createParameterFromCliArguments({
-				babelParserPlugins: undefined,
-				ignorePathPattern: undefined,
-				includeServiceWorkers: undefined,
-				includeSourceMap: undefined,
-				isFileContentReversed: undefined,
-				outputBaseFileName: "outputBaseFileName",
-				outputDirectoryPath: "outputDirectoryPath",
-				packageNames: undefined,
-				packagePrefix: undefined,
-				packageScope: undefined,
-				rootItemIdentifiers: undefined,
+				"output-base-file-name": "outputBaseFileName",
+				"output-directory-path": "outputDirectoryPath",
 			})
 			.outputPath,
 		)
@@ -174,17 +115,8 @@ test(
 	() =>
 		expect(
 			createParameterFromCliArguments({
-				babelParserPlugins: undefined,
 				directories: [ "directory1", "directory2" ],
-				ignorePathPattern: undefined,
-				includeServiceWorkers: undefined,
-				includeSourceMap: undefined,
-				outputBaseFileName: undefined,
-				outputDirectoryPath: undefined,
-				packageNames: undefined,
-				packagePrefix: undefined,
-				packageScope: undefined,
-				rootItemIdentifiers: [ "rootItemIdentifier1", "rootItemIdentifier2" ],
+				"root-item-identifiers": [ "rootItemIdentifier1", "rootItemIdentifier2" ],
 			})
 			.sources,
 		)

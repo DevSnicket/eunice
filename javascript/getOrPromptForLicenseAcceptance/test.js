@@ -47,7 +47,7 @@ test(
 				distSubdirectoryPath,
 				isColorSupported: false,
 				log,
-				processArguments: { acceptLicense: true },
+				processArguments: { "accept-license": true },
 				standardInputStream: {},
 				version,
 			});
@@ -64,7 +64,7 @@ test(
 					[],
 					[ "eunice version" ],
 					[],
-					[ `By specifying the --acceptLicense argument you have accepted ${licenseText}` ],
+					[ `By specifying the --accept-license argument you have accepted ${licenseText}` ],
 					[ commercialUseText ],
 				],
 		});
@@ -101,7 +101,7 @@ test(
 					[ `To use this program you must accept ${licenseText}` ],
 					[ commercialUseText ],
 					[],
-					[ "To accept run again with the --acceptLicense argument." ],
+					[ "To accept run again with the --accept-license argument." ],
 				],
 		});
 	},
@@ -145,7 +145,7 @@ test(
 					[ `To use this program you must accept ${licenseText}` ],
 					[ commercialUseText ],
 					[],
-					[ "To accept, press the A key or run again with the --acceptLicense argument. Any other key will exit without accepting the license." ],
+					[ "To accept, press the A key or run again with the --accept-license argument. Any other key will exit without accepting the license." ],
 				],
 			setRawModeCallCount:
 				1,
