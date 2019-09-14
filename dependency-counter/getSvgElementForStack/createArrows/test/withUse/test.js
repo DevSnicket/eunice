@@ -3,7 +3,7 @@
 const
 	createArrows = require("../.."),
 	{ createElement } = require("react"),
-	createSvgElement = require("./createSvgElement"),
+	createSvgElement = require("../createSvgElement"),
 	createSymbolAndUseElementsAndGetSize = require("./createSymbolAndUseElementsAndGetSize"),
 	path = require("path"),
 	readTestCaseFile = require("../readTestCaseFile"),

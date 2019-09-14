@@ -3,10 +3,13 @@
 const
 	createArrows = require("../.."),
 	{ createElement } = require("react"),
+	createSvgElement = require("../createSvgElement"),
 	path = require("path"),
 	readTestCaseFile = require("../readTestCaseFile"),
 	{ renderToStaticMarkup } = require("react-dom/server"),
 	withPrecision = require("../../../withPrecision");
+
+const size = { height: 14, width: 14 };
 
 test.each(
 	[ "down", "right", "up" ],
@@ -15,11 +18,26 @@ test.each(
 	async direction =>
 		expect(
 			renderToStaticMarkup(
-				createArrows({
+				createSvgElement({
 					createElement,
-					withPrecision,
-				})[direction]
-				.symbol,
+					elements:
+						[
+							createArrows({
+								createElement,
+								withPrecision,
+							})[direction]
+							.symbol,
+							createElement(
+								"use",
+								{
+									height: size.height,
+									href: `#${direction}-arrow`,
+									width: size.width,
+								},
+							),
+						],
+					size,
+				}),
 			),
 		)
 		.toBe(
