@@ -1,137 +1,104 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
+const
+	createDownSymbol = require("./createDownSymbol"),
+	createRightSymbol = require("./createRightSymbol"),
+	createUpSymbol = require("./createUpSymbol");
+
+const
+	height =
+		24,
+	marginAndPaddingForVertical =
+		{
+			horizontalMargin: 10,
+			paddingRight: 0,
+		};
+
 module.exports =
 	({
 		createElement,
 		withPrecision,
-	}) => {
-		return (
+	}) =>
+		(
 			{
 				down:
-					createArrowVertical({
-						/* cspell:disable-next-line */
-						fill: "darkgreen",
-						idPrefix: "down",
-						preserveAspectRatio: "xMidYMax slice",
-						transform: point => point,
+					createDown({
+						createElement,
+						id: formatId("down"),
 					}),
 				right:
-					createArrow({
-						/* cspell:disable-next-line */
-						fill: "darkred",
-						horizontalMargin: 9,
-						idPrefix: "right",
-						paddingRight: 3,
-						preserveAspectRatio: "xMaxYMid slice",
-						transform: swapAxis,
+					createRight({
+						createElement,
+						id: formatId("right"),
 					}),
 				up:
-					createArrowVertical({
-						/* cspell:disable-next-line */
-						fill: "darkred",
-						idPrefix: "up",
-						preserveAspectRatio: "xMidYMin slice",
-						transform: flipFirstAxis,
+					createUp({
+						createElement,
+						id: formatId("up"),
+						withPrecision,
 					}),
-			});
-
-		function createArrowVertical({
-			fill,
-			idPrefix,
-			preserveAspectRatio,
-			transform,
-		}) {
-			return (
-				createArrow({
-					fill,
-					horizontalMargin: 10,
-					idPrefix,
-					paddingRight: 0,
-					preserveAspectRatio,
-					transform,
-				})
-			);
-		}
-
-		function createArrow({
-			fill,
-			horizontalMargin,
-			idPrefix,
-			paddingRight,
-			preserveAspectRatio,
-			transform,
-		}) {
-			const id = `${idPrefix}-arrow`;
-
-			return (
-				{
-					height: 24,
-					horizontalMargin,
-					id,
-					paddingRight,
-					symbol: createSymbolWithPolygon(createPolygon()),
-				});
-
-			function createSymbolWithPolygon(
-				polygon,
-			) {
-				return (
-					createElement(
-						"symbol",
-						{
-							id,
-							key: id,
-							preserveAspectRatio,
-							viewBox: "0,0,1,1",
-						},
-						polygon,
-					)
-				);
 			}
+		);
 
-			function createPolygon() {
-				return (
-					createElement(
-						"polygon",
-						{
-							fill,
-							key: "polygon",
-							points:
-								[
-									[ 0, 0.85 ],
-									[ 0, 0 ],
-									[ 1, 0 ],
-									[ 1, 0.85 ],
-									[ 0.5, 1 ],
-								]
-								.map(point => scaleAndFormatPoint(transform(point)))
-								.join(" "),
-						},
-					)
-				);
-
-				function scaleAndFormatPoint(
-					point,
-				) {
-					return `${point[0]},${point[1]}`;
-				}
-			}
-		}
-
-		function flipFirstAxis(
-			point,
-		) {
-			return (
-				[
-					point[0],
-					withPrecision(1 - point[1]),
-				]
-			);
-		}
-	};
-
-function swapAxis(
-	point,
+function formatId(
+	id,
 ) {
-	return [ point[1], point[0] ];
+	return `${id}-arrow`;
+}
+
+function createDown({
+	createElement,
+	id,
+}) {
+	return (
+		{
+			...marginAndPaddingForVertical,
+			height,
+			id,
+			symbol:
+				createDownSymbol({
+					createElement,
+					id,
+				}),
+		}
+	);
+}
+
+function createRight({
+	createElement,
+	id,
+}) {
+	return (
+		{
+			height,
+			horizontalMargin: 9,
+			id,
+			paddingRight: 3,
+			symbol:
+				createRightSymbol({
+					createElement,
+					id,
+				}),
+		}
+	);
+}
+
+function createUp({
+	createElement,
+	id,
+	withPrecision,
+}) {
+	return (
+		{
+			...marginAndPaddingForVertical,
+			height,
+			id,
+			symbol:
+				createUpSymbol({
+					createElement,
+					id,
+					withPrecision,
+				}),
+		}
+	);
 }
