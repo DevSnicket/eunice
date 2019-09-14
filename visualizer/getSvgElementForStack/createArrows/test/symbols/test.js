@@ -1,52 +1,109 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 const
-	createArrows = require("../.."),
+	createDownSymbol = require("../../createDownSymbol"),
 	{ createElement } = require("react"),
+	createRightSymbol = require("../../createRightSymbol"),
 	createSvgElement = require("../createSvgElement"),
+	createUpSymbol = require("../../createUpSymbol"),
 	path = require("path"),
 	readTestCaseFile = require("../readTestCaseFile"),
 	{ renderToStaticMarkup } = require("react-dom/server"),
 	withPrecision = require("../../../withPrecision");
 
-const size = { height: 14, width: 14 };
+test(
+	"down renders SVG",
+	() =>
+		assertExpectedFile({
+			element:
+				createDownSymbol({
+					createElement,
+					id: "down-arrow",
+				}),
+			testCase:
+				"down",
+		}),
+);
 
-test.each(
-	[ "down", "right", "up" ],
-)(
-	"%s renders SVG",
-	async direction =>
-		expect(
-			renderToStaticMarkup(
+test(
+	"down used in SVG as a bullet point.",
+	() => {
+		const
+			id = "bullet-point",
+			size = { height: 10, width: 10 };
+
+		assertExpectedFile({
+			element:
 				createSvgElement({
 					createElement,
 					elements:
 						[
-							createArrows({
+							createDownSymbol({
 								createElement,
-								withPrecision,
-							})[direction]
-							.symbol,
+								fill: "black",
+								id,
+							}),
 							createElement(
 								"use",
 								{
 									height: size.height,
-									href: `#${direction}-arrow`,
+									href: `#${id}`,
+									key: "use",
 									width: size.width,
 								},
 							),
 						],
 					size,
 				}),
-			),
-		)
-		.toBe(
-			await readTestCaseFile(
-				path.join(
-					__dirname,
-					"testCases",
-					`${direction}.svg`,
-				),
+			testCase:
+				"bullet-point",
+		});
+	},
+);
+
+test(
+	"right renders SVG",
+	() =>
+		assertExpectedFile({
+			element:
+				createRightSymbol({
+					createElement,
+					id: "right-arrow",
+				}),
+			testCase:
+				"right",
+		}),
+);
+
+test(
+	"up renders SVG",
+	() =>
+		assertExpectedFile({
+			element:
+				createUpSymbol({
+					createElement,
+					id: "up-arrow",
+					withPrecision,
+				}),
+			testCase:
+				"up",
+		}),
+);
+
+async function assertExpectedFile({
+	element,
+	testCase,
+}) {
+	expect(
+		renderToStaticMarkup(element),
+	)
+	.toBe(
+		await readTestCaseFile(
+			path.join(
+				__dirname,
+				"testCases",
+				`${testCase}.svg`,
 			),
 		),
-);
+	);
+}
