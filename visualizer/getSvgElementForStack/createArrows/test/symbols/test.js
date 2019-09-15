@@ -26,7 +26,7 @@ test(
 );
 
 test.each(
-	[ "07", "d0", "f7" ],
+	[ "07", "d0", "ff" ],
 )(
 	"down in SVG 10x10 with luminescence %s",
 	luminescence => {
