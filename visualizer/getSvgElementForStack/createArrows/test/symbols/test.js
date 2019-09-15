@@ -25,9 +25,11 @@ test(
 		}),
 );
 
-test(
-	"down used in SVG as a bullet point.",
-	() => {
+test.each(
+	[ "07", "d0", "f7" ],
+)(
+	"down in SVG 10x10 with luminescence %s",
+	luminescence => {
 		const
 			id = "bullet-point",
 			size = { height: 10, width: 10 };
@@ -40,7 +42,7 @@ test(
 						[
 							createDownSymbol({
 								createElement,
-								fill: "black",
+								fill: `#${luminescence}${luminescence}${luminescence}`,
 								id,
 							}),
 							createElement(
@@ -56,7 +58,7 @@ test(
 					size,
 				}),
 			testCase:
-				"bullet-point",
+				`down-10x10-${luminescence}l`,
 		});
 	},
 );
