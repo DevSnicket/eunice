@@ -3,30 +3,37 @@
     <link href="../favicon.ico" rel="icon" type="image/x-icon" />
     <link href="../index.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <title>Licensing | Eunice</title>
+    <meta charset="utf-8"/>
     <style>
         div.usage {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
         }
-        div.usage h2 {
-            color: darkgreen;
-            margin: 0 0 0.5em 0;
-        }
         div.usage .box {
-            margin: 0.5em;
             padding: 1em;
+        }
+        div.usage h2 {
+            margin: 0 0 0.5em 0;
             text-align: center;
         }
+        .block-center {
+            display: block; 
+            margin-left: auto;
+            margin-right: auto;
+        }
     </style>
+    <title>Licensing | Eunice</title>
 </head>
 <body>
     <div class="header">
         <div class="content">
-            <h1><a href="/eunice"><span class="e">e</span>uni<span class="ce">ce</span><img class="arrows" src="../arrows/default-height.svg" /></a></h1>
-            <span class="menu"><a class="current" href="/eunice/licensing">licensing</a></span>
-        </div>
+            <h1><a href=".."><span class="e">e</span>uni<span class="ce">ce</span><img class="arrows" src="../arrows/default-height.svg" /></a></h1>
+            <span class="menu">
+                    <a class="current" href="..">introduction</a>
+                    <a class="current" href=".">licensing</a>
+                </span>
+            </div>
     </div>
     <div class="content">
         <div class="usage">
@@ -48,7 +55,7 @@
             </div>
             <div class="box">
                 <h2>monthly subscription</h2>
-                <img alt="PayPal" src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-150px.png">
+                <img alt="PayPal" class="block-center" src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-150px.png">
                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
                     <input name="cmd" type="hidden" value="_s-xclick">
                     <input name="on0" type="hidden" value="name of recipient">
@@ -62,14 +69,14 @@
                             <label>name of recipient</label>
                             <input maxlength="200" name="os0" type="text">
                     </p>
-                    <input alt="Subscribe" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribeCC_LG.gif" type="image">
+                    <input alt="Subscribe" class="block-center" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribeCC_LG.gif" type="image">
                 </form>
                 <hr/>
                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
                     <input name="cmd" type="hidden" value="_s-xclick">
                     <input name="on0" type="hidden" value="name of recipients">
                     <p>
-                        5 pack (50% off):
+                        5 pack:
                         <input name="hosted_button_id" id="usd5" required type="radio" value="WLRY9UU8VNTE4"><label for="usd5">5 x $6</label>
                         <input name="hosted_button_id" id="eur5" required type="radio" value="VJ5NTF9FNENF2"><label for="eur5">5 x €5.5</label>
                         <input name="hosted_button_id" id="gbp5" required type="radio" value="HANKHZ4UPEM7Y"><label for="gbp5">5 x £5</label>
@@ -78,7 +85,7 @@
                             <label>name of recipients</label>
                             <textarea maxlength="200" name="os0" rows="5" style="vertical-align: middle"></textarea>
                     </p>
-                    <input alt="Subscribe" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribeCC_LG.gif" type="image">
+                    <input alt="Subscribe" class="block-center" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribeCC_LG.gif" type="image">
                 </form>
             </div>
         </div>

@@ -29,11 +29,41 @@ a:active {
     color: #070707;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+
 h1 {
     color: darkgreen;
     font-size: 2em;
-    font-weight: normal;
     margin: 0 auto;
+}
+
+h2 {
+    color: darkgreen;
+    font-size: 1.5em;
+}
+
+h3 {
+    font-size: 1.17em;
+}
+
+h1 .e, h1 .ce {
+    color: darkred;
+}
+
+ul li {
+    list-style-image: url(./arrows/down-10x10-07l.svg);
+}
+
+.box {
+    border-radius: 0.25rem;
+    margin: 0.5rem;
+    padding: 0;
+}
+
+.box > * {
+    margin: 1rem;
 }
 
 .content {
@@ -50,8 +80,8 @@ body > .footer {
     text-align: center;
 }
 
-body > .header,
-.box {
+.box,
+body > .header {
     background-color: white;
 }
 
@@ -78,8 +108,6 @@ body > .header h1 .arrows {
     width: 2.8em;
 }
 
-body > .header h1 .e, body > .header h1 .ce { color: darkred }
-
 body > .header .menu {
     flex-grow: 1;
     text-align: right;
@@ -91,12 +119,17 @@ body > .header .menu a {
 
 body > .header .menu a.current {
     background-color: darkgreen;
+    border-radius: 0.25em;
     color: white;
 }
 
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #303030;
+    }
+
+    ul li {
+        list-style-image: url(./arrows/down-10x10-d0l.svg);
     }
 
     body,
@@ -108,5 +141,9 @@ body > .header .menu a.current {
     .box {
         background-color: #D0D0D0;
         color: black;
+    }
+
+    .box ul li {
+        list-style-image: url(./arrows/down-10x10-00l.svg);
     }
 }
