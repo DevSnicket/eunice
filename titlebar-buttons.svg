@@ -1,0 +1,14 @@
+<svg height="12" width="84" xmlns="http://www.w3.org/2000/svg">
+	<defs><style type="text/css">
+		polygon, rect {
+			stroke: #D0D0D0;
+			stroke-width: 1.5;
+		}
+	</style></defs>
+	<polygon points="0,6 12,6" />
+	<rect class="toolbar" fill="transparent" height="12" width="12" x="28" />
+	<g transform="translate(56,0)">
+		<polygon points="0,0 12,12" />
+		<polygon points="0,12 12,0" />
+	</g>
+</svg>

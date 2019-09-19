@@ -26,26 +26,7 @@ a:active {
 
 body,
 a:active {
-    color: #070707;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-weight: normal;
-}
-
-h1 {
-    color: darkgreen;
-    font-size: 2em;
-    margin: 0 auto;
-}
-
-h2 {
-    color: darkgreen;
-    font-size: 1.5em;
-}
-
-h3 {
-    font-size: 1.17em;
+    color: black;
 }
 
 h1 .e, h1 .ce {
@@ -57,7 +38,7 @@ ul li {
 }
 
 .box {
-    border-radius: 0.25rem;
+    color: #070707;
     margin: 0.5rem;
     padding: 0;
 }
@@ -101,6 +82,10 @@ body > .header a {
     text-decoration: none;
 }
 
+body > .header h1 {
+    margin: 0;
+}
+
 body > .header h1 .arrows {
     height: 0.8em;
     margin-left: 0.25em;
@@ -110,22 +95,28 @@ body > .header h1 .arrows {
 
 body > .header .menu {
     flex-grow: 1;
+    margin: 0.8em;
     text-align: right;
 }
 
 body > .header .menu a {
-    padding: 0.25em 0.5em;
+    margin-left: 0.5em;
+    padding: 0.3em 0.6em;
+}
+
+.box,
+body > .header .menu a.current {
+    border-radius: 0.2em;
 }
 
 body > .header .menu a.current {
     background-color: darkgreen;
-    border-radius: 0.25em;
     color: white;
 }
 
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: #303030;
+        background-color: #808080;
     }
 
     ul li {
@@ -134,16 +125,34 @@ body > .header .menu a.current {
 
     body,
     body > .header .menu a.current {
-        color: #D0D0D0;
+        color: #E0E0E0;
     }
 
     body > .header, 
     .box {
-        background-color: #D0D0D0;
+        background-color: #B0B0B0;
         color: black;
     }
 
     .box ul li {
         list-style-image: url(./arrows/down-10x10-00l.svg);
     }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+
+h1 {
+    color: darkgreen;
+    font-size: 2em;
+}
+
+h2 {
+    color: darkgreen;
+    font-size: 1.5em;
+}
+
+h3 {
+    font-size: 1.17em;
 }
