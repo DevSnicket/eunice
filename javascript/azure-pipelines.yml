@@ -17,9 +17,10 @@ steps:
       git submodule add --force -b gh-pages https://$(github_access_token)@github.com/DevSnicket/Eunice.git gh-pages &&
       rm -rf gh-pages/dogfooding &&
       cp -r dogfooding/output gh-pages/dogfooding &&
-      rm -rf gh-pages/javascript &&
-      cp -r harness/output gh-pages/javascript &&
-      rm gh-pages/javascript/harness.js.map &&
+      mkdir -p gh-pages/javascript &&
+      rm -rf gh-pages/javascript/harness &&
+      cp -r harness/output gh-pages/javascript/harness &&
+      rm gh-pages/javascript/harness/harness.js.map &&
       cd gh-pages &&
       git add . &&
       git config --add user.email grahamdyson@hotmail.com &&
