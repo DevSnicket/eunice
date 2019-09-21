@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="../favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="../index.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <meta charset="utf-8"/>
+    <title>Structure | Eunice</title>
+</head>
+<body>
+    <div class="header">
+        <div class="content">
+            <h1><a href=".."><span class="e">e</span>uni<span class="ce">ce</span><img class="arrows" src="../arrows/default-height.svg" /></a></h1>
+            <span class="menu"><a href="..">introduction</a><a class="current" href="../structure">structure</a><a href="../dependencies">dependencies</a><a href="../licensing">licensing</a></span>
+        </div>
+    </div>
+    <div class="content">
+        <h2>stacks</h2>
+        <p>Fundamental to using Eunice is the defining of stacks. When it's intended that an item is to be dependent upon another, the first item is placed above the second item in a stack. When items are intended to be independent of each other, they can be placed at the same level in a stack.</p>
+        <p>In some programming languages there are implied stacks, such as the order of functions in a file, or the order of files in a project.</p>
+        <h2>scopes / groups</h2>
+        <p>Stacks can be defined in Eunice with different sized scopes and across boundaries, from individual functions, classes and files; to multiple, large codebases in different languages, frameworks and runtimes.</p>
+        <p>Eunice supports nested groups of items, each group can have its own stack. When Eunice measures whether dependencies match the intended structure, the results for nested groups are summarized (see <a href="../dependencies">dependencies</a>).</p>
+        <p>Programming languages usually include ways of grouping code, such as the directories in a file system, namespaces, classes or nested functions. Groups such as these can be inferred and automatically represented in Eunice. Multiple repositories and packages can also be represented as groups and analyzed as a whole.</p>
+    </div>
+    <div class="footer">Copyright © 2019 Graham Dyson</div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="../favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="../index.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <meta charset="utf-8"/>
+    <style>
+        .box > * {
+            margin: 0.5rem;
+        }
+        .box {
+            height: fit-content;
+            padding: 0.5rem;
+        }
+        .example {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .example > div {
+            align-items: center;
+            display: flex;
+            width: fit-content;
+        }
+        .example.tall > div > div {
+            width: min-content;
+        }
+    </style>
+    <title>Dependencies | Eunice</title>
+</head>
+<body>
+    <div class="header">
+        <div class="content">
+            <h1><a href=".."><span class="e">e</span>uni<span class="ce">ce</span><img class="arrows" src="../arrows/default-height.svg" /></a></h1>
+            <span class="menu"><a href="..">introduction</a><a href="../structure">structure</a><a class="current" href="../dependencies">dependencies</a><a href="../licensing">licensing</a></span>
+        </div>
+    </div>
+    <div class="content">
+        <h2>arrows</h2>
+        <p>Instead of rendering dependencies as lines between items each dependency is counted into the following categories:</p>
+        <div class="box horizontal-container" style="align-items: center; width: fit-content">
+            <img src="../arrows/with-descriptions.svg"/>
+            <div>
+                <div>matches stack<div class="detail" style="color: darkgreen">green down arrow</div></div>
+                <div>does not match stack<div class="detail" style="color: darkred">red up arrow</div></div>
+                <div>is not independent<div class="detail" style="color: darkred">red horizontal arrow</div></div>
+            </div>
+        </div>
+        <h2>counts</h2>
+        <p>Dependency counts appear for both sides of the dependency, the dependent item and the item depended upon. When there are multiple counts a summary of all counts is rendered at the bottom.</p>
+        <div class="example tall">
+            <div class="box">
+                <div>upper depends upon lower</div>
+                <img src="../examples/stack/upper-depends-upon-lower.svg"/>
+            </div>
+            <div class="box">
+                <div>lower depends upon upper</div>
+                <img src="../examples/stack/lower-depends-upon-upper.svg"/>
+            </div>
+            <div class="box">
+                <div>interdependent (stacked)</div>
+                <img src="../examples/stack/two-interdependent.svg"/>
+            </div>
+        </div>
+        <div class="example">
+            <div class="box">
+                <div>independent</div>
+                <img src="../examples/two.svg"/>
+            </div>
+            <div class="box">
+                <div><div>first depends</div><div>upon second</div></div>
+                <img src="../examples/independency/first-depends-upon-second.svg"/>
+            </div>
+            <div class="box">
+                <div><div>interdependent</div><div>(not stacked)</div></div>
+                <img src="../examples/independency/two-interdependent.svg"/>
+            </div>
+        </div>
+        <p>Dependencies within an item are also summarized and rendered inside the item box, below the identifer text.</p>
+        <div class="example">
+            <div class="box">
+                <div><div>parent</div><div>depends upon</div><div>item</div></div>
+                <img src="../examples/parent-depends-upon-item.svg"/>
+            </div>
+            <div class="box">
+                <div><div>item</div><div>depends upon</div><div>parent</div></div>
+                <img src="../examples/item-depends-upon-parent.svg"/>
+            </div>
+            <div class="box">
+                <div><div>first item</div><div>depends upon</div><div>second item</div><div>(not stacked)</div></div>
+                <img src="../examples/independency/first-item-depends-upon-second-item.svg"/>
+            </div>
+        </div>
+        <p>Items and sub-item can also be opened. Opening an item will show its contents and breadcrumb links for where it is in the hierarchy.</p>
+        <div class="box" style="width: fit-content">
+            <div style="font-family: Arial">root > grandparent</div>
+            <img src="../examples/upper-item-depends-upon-lower-item-with-parent.svg"/>
+        </div>
+    </div>
+    <div class="footer">Copyright © 2019 Graham Dyson</div>
+</body>
+</html>

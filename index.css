@@ -56,6 +56,10 @@ body > .content {
     padding: 0 1em;
 }
 
+.detail {
+    font-size: 0.7em;
+}
+
 .emoji {
     font-family: apple color emoji, segoe ui emoji, noto color emoji, android emoji, emojisymbols, emojione mozilla, twemoji mozilla, segoe ui symbol;
 }
@@ -121,6 +125,12 @@ body > .header .menu a {
 body > .header .menu a.current {
     background-color: #F7F7F7;
     color: unset;
+}
+
+.horizontal-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 @media (prefers-color-scheme: dark) {
