@@ -102,13 +102,15 @@ body > .header h1 .arrows {
 }
 
 body > .header .menu {
+    display: flex;
     flex-grow: 1;
-    margin: 0.8em;
-    text-align: right;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin: 0.3em;
 }
 
 body > .header .menu a {
-    margin-left: 0.5em;
+    margin: 0.5em 0.5em 0.5em;
     padding: 0.3em 0.6em;
 }
 
