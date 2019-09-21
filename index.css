@@ -56,6 +56,10 @@ body > .content {
     padding: 0 1em;
 }
 
+.emoji {
+    font-family: apple color emoji, segoe ui emoji, noto color emoji, android emoji, emojisymbols, emojione mozilla, twemoji mozilla, segoe ui symbol;
+}
+
 body > .footer {
     font-size: 0.8em;
     text-align: center;
@@ -105,27 +109,34 @@ body > .header .menu a {
 }
 
 .box,
-body > .header .menu a.current {
+body > .header .menu a {
     border-radius: 0.2em;
 }
 
-body > .header .menu a.current {
+body > .header .menu a {
     background-color: darkgreen;
     color: white;
 }
 
+body > .header .menu a.current {
+    background-color: #F7F7F7;
+    color: unset;
+}
+
 @media (prefers-color-scheme: dark) {
-    body {
+    body,
+    body > .header .menu a.current {
         background-color: #808080;
+    }
+
+    body,
+    body > .header .menu a,
+    body > .header .menu a.current {
+        color: #E0E0E0;
     }
 
     ul li {
         list-style-image: url(./arrows/down-10x10-d0l.svg);
-    }
-
-    body,
-    body > .header .menu a.current {
-        color: #E0E0E0;
     }
 
     body > .header, 

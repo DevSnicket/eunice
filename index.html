@@ -36,10 +36,22 @@
             text-align: center;
         }
 
+        .headlines .emoji {
+            font-size: 1.25em;
+        }
+
         .horizontal-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-evenly;
+        }
+
+        .horizontal-container > * {
+            margin: 0 0.5em;
+        }
+
+        .box > * {
+            margin: 0.5em;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -58,7 +70,7 @@
 <body style="display: flex; flex-direction: column">
     <div class="header">
         <div class="content">
-            <span class="menu"><a class="current" href=".">introduction</a><a class="current" href="licensing">licensing</a></span>
+            <span class="menu"><a class="current" href=".">introduction</a><a href="./licensing">licensing</a></span>
         </div>
     </div>
     <div class="content">
@@ -67,25 +79,45 @@
                 <h1 style="font-size: 4em; line-height: 0.8em; margin: 0 0 0.5rem"><span class="e">e</span>uni<span class="ce">ce</span></h1>
                 <img class="arrows" src="arrows/default-height.svg" style="height: 3em;" />
             </div>
-            <h2>architecture<br/>structure<br/>dependencies</h2>
+            <h2><div>architecture</div><div>structure</div><div>dependencies</div></h2>
         </div>
         <div class="headlines">
             <div class="box">
-                <div class="horizontal-container"><span>analyse as-is</span><span>model to-be</span></div>
-                <div style="white-space: nowrap">measure how close the two are</div>
-            </div>
-            <div class="box">
-                <div>works across...</div>
-                <div style="display: flex; justify-content: space-evenly">
-                    <span><div>small</div><div class="detail">functions<br/>classes</div></span>
-                    <span><div>large</div><div class="detail">services<br/>systems</div></span>
+                <div class="horizontal-container">
+                    <div><div class="emoji">🔬🔭</div><div>analyse as-is</div></div>
+                    <div><div class="emoji">📏✏</div><div>model to-be</div></div>
                 </div>
-                <div>different<br/>languages frameworks</div>
+                <div style="white-space: nowrap">
+                    <div class="emoji">📊</div>
+                    <div>measure how close the two are</div>
+                </div>
             </div>
             <div class="box">
-	            <div>collaborative <div class="detail">coordinated architecture</div></div>
-                <div>dynamic<div class="detail">change architecture</div></div>
-                <div>adaptable<div class="detail">non-prescriptive architecture</div></div>
+                <div>works across:</div>
+                <div class="horizontal-container">
+                    <div>
+                        <div class="emoji">🐁</div>
+                        <div>small</div>
+                        <div class="detail"><div>functions</div><div>classes</div></div>
+                    </div>
+                    <div>
+                        <div class="emoji">🐈🐘</div>
+                        <div>larger</div>
+                        <div class="detail"><div>services</div><div>systems</div></div>
+                    </div>
+                </div>
+                <div>
+                    <div>different:</div>
+                    <div class="horizontal-container">
+                        <div><div class="emoji">🗨</div><div>languages</div></div>
+                        <div><div class="emoji">🏗</div><div>frameworks</div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+	            <div><div>collaborative</div><div class="detail">collectively define. share progress</div></div>
+                <div><div>non-prescriptive</div><div class="detail">applied architecture</div></div>
+                <div><div>dynamic</div><div class="detail">handle and bring about change</div></div>
             </div>
         </div>
         <h3>Eunice is based on the premise that unidirectional dependencies are beneficial for structure and modularity in software. Eunice's approach isn't limited to direct dependencies, but includes indirect dependencies as well.</h3>
@@ -96,7 +128,7 @@
                     <p>try it out</p>
                     <p>Eunice on Eunice</p>
                 </a>
-                <div style="font-size: 4rem; text-decoration: none">🐶🥫</div>
+                <div class="emoji" style="font-size: 4rem; text-decoration: none">🐶🥫</div>
                 <a class="detail" href="https://en.wikipedia.org/wiki/Eating_your_own_dog_food">dogfooding</a>
             </div>
             <a href="dogfooding" style="background: white; flex-grow: 1; padding: 1em;" target="_blank">
@@ -104,12 +136,12 @@
             </a>
         </div>
         <div class="box" style="display:flex; flex-wrap: wrap; text-align: center; width: auto">
-            <span>
+            <div>
                 <h2 style="margin-top: 0"><img src="./javascript.svg" style="height:4em; margin-right: 1em; vertical-align: middle" />JavaScript</h2>
                 <div class="javascript-related-logos">
                     <img alt="Node.js" src="./nodejs.svg" /><img alt="TypeScript" src="./typescript.svg" /><img alt="React" src="./react.svg" /><img alt="Flow" src="./flow.svg" />
                 </div>
-            </span>
+            </div>
             <div style="display: flex; flex-grow: 1; flex-direction: column">
                 <div style="margin: 0.5em">try on your JavaScript source code<br/>with NPX/NPM</div>
                 <div style="background-color: #202020; flex-grow: 1; margin: 0.5em; min-width: 14em; text-align: left">
@@ -117,9 +149,9 @@
                     <div style="color: #D0D0D0; font-family: consolas, monospace; margin-bottom: 1em; padding: 0.5em">~/my-source-code<br/>$ npx eunice<span class="blinking">&#9608;</span></div>
                 </div>
             </div>
-            <span style="flex-grow: 1; margin: auto 0.5em; width: min-content">
+            <div style="flex-grow: 1; margin: auto 0.5em; width: min-content">
                 <a href="./javascript" target="_blank">try on a JavaScript fragment in your browser</a>
-            </span>
+            </div>
         </div>
     </div>
     <div class="footer">Copyright © 2019 Graham Dyson</div>
