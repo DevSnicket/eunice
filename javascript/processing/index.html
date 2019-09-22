@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="../../favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="../../index.css" rel="stylesheet" type="text/css" />
+    <link href="../index.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <meta charset="utf-8"/>
+    <title>JavaScript | Eunice</title>
+</head>
+<body>
+    <div class="header">
+        <div class="content">
+            <h1><a href="../.."><span class="e">e</span>uni<span class="ce">ce</span><img class="arrows" src="../../arrows/default-height.svg" /></a></h1>
+            <span class="menu"><a href="..">introduction</a><a href="../../structure">structure</a><a href="../../dependencies">dependencies</a><a class="current" href="../">JavaScript</a><a href="../../licensing">licensing</a></span>
+        </div>
+    </div>
+    <div class="content">
+        <h2><a href="../">NPX/NPM</a><a href="../options">options</a><span>processing</span></h2>
+        <div>
+            <p>From the processors available in <a href="https://github.com/DevSnicket/eunice-processors" target="_blank">eunice-processors</a>, the JavaScript NPM package runs the following automatically:</p>
+            <ol>
+                <li>The filename "index" is removed from identifiers.</li>
+                <li>Optionally ensure there is a single root item with an identifier (e.g. the package's name).</li>
+                <li>Items that are files have "type: file" added to them.</li>
+                <li>Items are ordered by their identifiers.</li>
+                <li>Items are grouped by their identifiers (this is requires the previous ordering step).</li>
+                <li>Anonymous items (i.e. those without an identifier) are given the identifier of their parent.</li>
+                <li>Variables that depend upon one item of the same name are removed (e.g. some CommonJS requires or ES6 imports).</li>
+                <li>Items are ordered so parameters, variables and files are last.</li>
+                <li>Any items with identifiers of "bin" and "test" are stacked in a level together above other items.</li>
+                <li>Items that have identifiers starting with "test" have child items for the Jest methods "expect" and "test" added together in a level below the other items.</li>
+                <li>Independent items (i.e. those that don't depend on each other) are unstacked into the same level.</li>
+                <li>The source directory is scanned for any files named .devsnicket-eunice-stack.yaml. Any structure defined inside these files is applied to any files also in the directory.</li>
+                <li>If there is a single root item, that is anonymous and has only items and type, its items are flattened out into the root</li>
+            </ol>
+        </div>
+    </div>
+    <div class="footer">Copyright © 2019 Graham Dyson</div>
+</body>
+</html>

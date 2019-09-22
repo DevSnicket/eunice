@@ -33,18 +33,14 @@ h1 .e, h1 .ce {
     color: darkred;
 }
 
-ul li {
-    list-style-image: url(./arrows/down-10x10-07l.svg);
-}
-
 .box {
     color: #070707;
     margin: 0.5rem;
-    padding: 0;
+    padding: 0.5rem;
 }
 
 .box > * {
-    margin: 1rem;
+    margin: 0.5rem;
 }
 
 .content {
@@ -58,6 +54,11 @@ body > .content {
 
 .detail {
     font-size: 0.7em;
+}
+
+code {
+    display: block;
+    white-space: pre;
 }
 
 .emoji {
@@ -133,6 +134,15 @@ body > .header .menu a.current {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+}
+
+p {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+}
+
+ul li {
+    list-style-image: url(./arrows/down-10x10-07l.svg);
 }
 
 @media (prefers-color-scheme: dark) {

@@ -1,0 +1,19 @@
+body > .content {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0 0.5rem;
+}
+
+body > .content > div {
+	flex: 1;
+	padding: 0.5rem 0.5rem;
+}
+
+body > .content > h2 {
+	margin: 0;
+}
+
+body > .content > h2 > * {
+	display: block;
+	padding: 0.5rem;
+}

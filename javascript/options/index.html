@@ -1,0 +1,116 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="../../favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="../../index.css" rel="stylesheet" type="text/css" />
+    <link href="../../terminal/index.css" rel="stylesheet" type="text/css" />
+    <link href="../index.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <meta charset="utf-8"/>
+    <style>
+        .options-menu {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .options-menu > * {
+            padding: 0 0.5rem 0.5rem;
+        }
+    </style>
+    <title>JavaScript | Eunice</title>
+</head>
+<body>
+    <div class="header">
+        <div class="content">
+            <h1><a href="../.."><span class="e">e</span>uni<span class="ce">ce</span><img class="arrows" src="../../arrows/default-height.svg" /></a></h1>
+            <span class="menu"><a href="..">introduction</a><a href="../../structure">structure</a><a href="../../dependencies">dependencies</a><a class="current" href="../">JavaScript</a><a href="../../licensing">licensing</a></span>
+        </div>
+    </div>
+    <div class="content">
+        <h2><a href="../">NPX/NPM</a><span>options</span><a href="../processing">processing</a></h2>
+        <div>
+            <div class="options-menu">
+                <a href="#reverse-files">reverse files</a>
+                <a href="#source-directories">source directories</a>
+                <a href="#root-item">root item</a>
+                <a href="#ignore-paths">ignore paths</a>
+                <a href="#npm-packages">NPM packages</a>
+                <a href="#stack-from-directory">stack from directory</a>
+                <a href="#output-file-names">output file names</a>
+                <a href="#babel-parser-plugins">Babel parser plugins</a>
+            </div>
+            <div class="box">
+                <h3 id="reverse-files">reverse files</h3>
+                <p>JavaScript files are expected to be ordered so that a function is after calls of it, this can be reversed with:</p>
+                <code>npx eunice --is-file-content-reversed=true</code>
+            </div>
+            <div class="box">
+                <h3 id="source-directories">source directories</h3>
+                <p>Only the current directory is included in analysis by default. Multiple sources of analysis can be specified:</p>
+                <code>npx eunice
+  --directories=directory1
+  --directories=directory2</code>
+            </div>
+            <div class="box">
+                <h3 id="root-item">root item</h3>
+                <p>An identifier for a root item can also be specified for each source directory to be used in <a href="../processing">processing</a> step 2:</p>
+                <code>npx eunice
+  --directories=directory1
+  --root-item-identifiers=prefixForDirectory1
+  --directories=directory2
+  --root-item-identifiers=prefixForDirectory2</code>
+            </div>
+            <div class="box">
+                <h3 id="ignore-paths">ignore paths</h3>
+                <p>The following sub-directories are ignored by default:<br/>
+                <div style="margin-left: 2em">
+                    <div>.devsnicket-plugin-discovery</div>
+                    <div>.git</div>
+                    <div>.vscode</div>
+                    <div>dist</div>
+                    <div>node_modules</div>
+                    <div>output</div>
+                    <div>test-cases</div>
+                    <div>test-coverage</div>
+                </div>
+                <p>A regular expression of file and directory paths to be ignored can be specified:</p>
+                <code>npx eunice --ignore-path-pattern=(ignoreDirectory1|ignoreDirectory2)</code>
+            </div>
+            <div class="box">
+                <h3 id="npm-packages">NPM packages</h3>
+                <p>Packages installed in the node_modules directory are not analysed by default. They can included using the "directories" option above or with:</p>
+                <code>npx eunice
+  --package-names=package1
+  --package-names=package2</code>
+                <p>To aid readability a package prefix and scope can also be specified that will not be visible in the rendered output:</p>
+                <code>// e.g. @scope/prefix-package
+npx eunice
+  --package-names=package
+  --package-prefix=prefix-
+  --package-scope=scope</code>
+            </div>
+            <div class="box">
+                <h3 id="stack-from-directory">stack from directory</h3>
+                <p>When multiple sources of analysis are specified, <a href="../processing">processing</a> step 12 can also be applied to the combined sources:</p>
+                <code>npx eunice
+  --directories=directory1
+  --directories=directory2
+  --directory-to-create-or-add-to-stacks-from=stacks-directory</code>
+            </div>
+            <div class="box">
+                <h3 id="output-file-names">output file names</h3>
+                <p>To name the output files differently or in a different directory:</p>
+                <code>npx eunice
+  --output-base-file-name=eunice-file
+  --output-directory-path=eunice-directory</code>
+            </div>
+            <div class="box">
+                <h3 id="babel-parser-plugins">Babel parser plugins</h3>
+                <p>The Babel parser plugins enabled by default are listed Flow, JSX and TypeScript. To override:</p>
+                <code>npx eunice
+  --babel-parser-plugins=flow
+  --babel-parser-plugins=jsx</code>
+            </div>
+        </div>
+    </div>
+    <div class="footer">Copyright © 2019 Graham Dyson</div>
+</body>
+</html>

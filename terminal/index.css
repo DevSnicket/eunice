@@ -1,0 +1,39 @@
+code,
+.terminal {
+	background-color: #262626;
+	flex-grow: 1;
+	margin: 0.5em;
+	min-width: 14em;
+	text-align: left;
+}
+
+.terminal .title-bar {
+	background-color: #404040;
+	background-image: url(./title-bar-buttons.svg);
+	background-position: right center;
+	background-repeat: no-repeat;
+	color: #D0D0D0;
+	font-family: system-ui, sans-serif;
+	padding: 0.25em 1em
+}
+
+code,
+.terminal .text {
+	color: #D0D0D0;
+	font-family: consolas, monospace;
+	padding: 0.5em 0.5em 0.5em 0.5em;
+}
+
+.terminal .text {
+	padding-bottom: 1.5em;
+}
+
+.terminal .caret {
+	animation: blinking-animation 0.8s infinite;
+}
+
+@keyframes blinking-animation {
+	0% { color: transparent }
+	49% { color: transparent }
+	50% { color: unset }
+}

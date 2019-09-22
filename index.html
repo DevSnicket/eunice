@@ -2,6 +2,7 @@
 <head>
     <link href="favicon.ico" rel="icon" type="image/x-icon" />
     <link href="index.css" rel="stylesheet" type = "text/css" />
+    <link href="terminal/index.css" rel="stylesheet" type = "text/css" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <meta charset="utf-8"/>
     <style>
@@ -9,18 +10,11 @@
             color: unset;
         }
 
-        .blinking {
-            animation: blinking-animation 0.8s infinite;
-        }
-
-        @keyframes blinking-animation {
-            0% { color: transparent }
-            49% { color: transparent }
-            50% { color: unset }
-        }
-
         .box {
             height: min-content;
+        }
+
+        .headlines .box {
             width: fit-content;
         }
 
@@ -36,12 +30,8 @@
             font-size: 1.25em;
         }
 
-        .horizontal-container > * {
+        .box .horizontal-container > * {
             margin: 0 0.5em;
-        }
-
-        .box > * {
-            margin: 0.5em;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -60,11 +50,11 @@
 <body style="display: flex; flex-direction: column">
     <div class="header">
         <div class="content">
-            <span class="menu"><a class="current" href=".">introduction</a><a href="./structure">structure</a><a href="./dependencies">dependencies</a><a href="./licensing">licensing</a></span>
+            <span class="menu"><a class="current" href=".">introduction</a><a href="./structure">structure</a><a href="./dependencies">dependencies</a><a href="./javascript">JavaScript</a><a href="./licensing">licensing</a></span>
         </div>
     </div>
     <div class="content">
-        <div class="box horizontal-center horizontal-container" style="align-items: center; margin-left: auto; margin-right: auto; text-align: center">
+        <div class="box horizontal-center horizontal-container" style="align-items: center; margin-left: auto; margin-right: auto; text-align: center; width: fit-content">
             <div>
                 <h1 style="font-size: 4em; line-height: 0.8em; margin: 0 0 0.5rem"><span class="e">e</span>uni<span class="ce">ce</span></h1>
                 <img class="arrows" src="arrows/default-height.svg" style="height: 3em;" />
@@ -112,20 +102,20 @@
         </div>
         <h3>Eunice is based on the premise that unidirectional dependencies are beneficial for structure and modularity in software. Eunice's approach isn't limited to direct dependencies, but includes indirect dependencies as well.</h3>
         <h3>With Eunice you define an intended structure/architecture, it can then show you dependencies that don't match, and then you can further refine the definition or update your code to match.</h3>
-        <div class="box horizontal-container" style="text-align: center; width: 100%">
+        <div class="box horizontal-container" style="text-align: center">
             <div>
                 <a href="dogfooding" style="font-size: 1.17em" target="_blank">
-                    <p>try it out</p>
+                    <p>try</p>
                     <p>Eunice on Eunice</p>
                 </a>
                 <div class="emoji" style="font-size: 4rem; text-decoration: none">🐶🥫</div>
                 <a class="detail" href="https://en.wikipedia.org/wiki/Eating_your_own_dog_food">dogfooding</a>
             </div>
-            <a href="dogfooding" style="background: white; flex-grow: 1; padding: 1em;" target="_blank">
+            <a href="dogfooding" style="background: white; flex-grow: 1; padding: 0.5em;" target="_blank">
                 <img src="./dogfooding/index.svg" style="width: 100%" />
             </a>
         </div>
-        <div class="box" style="display:flex; flex-wrap: wrap; text-align: center; width: auto">
+        <div class="box" style="display:flex; flex-wrap: wrap; text-align: center;">
             <div>
                 <h2 style="margin-top: 0"><img src="./javascript.svg" style="height:4em; margin-right: 1em; vertical-align: middle" />JavaScript</h2>
                 <div class="javascript-related-logos">
@@ -133,10 +123,10 @@
                 </div>
             </div>
             <div style="display: flex; flex-grow: 1; flex-direction: column">
-                <div style="margin: 0.5em">try on your JavaScript source code<br/>with NPX/NPM</div>
-                <div style="background-color: #202020; flex-grow: 1; margin: 0.5em; min-width: 14em; text-align: left">
-                    <div style="background-color: #404040; background-image: url(./titlebar-buttons.svg); background-position: right center; background-repeat: no-repeat; color: #D0D0D0; font-family: system-ui, sans-serif; padding: 0.25em 1em">terminal</div>
-                    <div style="color: #D0D0D0; font-family: consolas, monospace; margin-bottom: 1em; padding: 0.5em">~/my-source-code<br/>$ npx eunice<span class="blinking">&#9608;</span></div>
+                <div style="margin: 0.5em"><div>create a eunice.html file</div><div>from your JavaScript source code</div><div>with NPX/NPM (<a href="./javascript">more info</a>)</div></div>
+                <div class="terminal">
+                    <div class="title-bar">terminal</div>
+                    <div class="text">~/my-source-code<br/>$ npx eunice<span class="caret">&#9608;</span></div>
                 </div>
             </div>
             <div style="flex-grow: 1; margin: auto 0.5em; width: min-content">
