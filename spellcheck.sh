@@ -1,0 +1,1 @@
+find . -type f -name "*.html" ! -path /node_modules/** ! -path ./dogfooding/index.html ! -path ./javascript/harness/index.html ! -path ./javascript-analyzer/index.html ! -path ./renderer-test-harness/index.html -exec npx cspell@4.0.30 {} +
