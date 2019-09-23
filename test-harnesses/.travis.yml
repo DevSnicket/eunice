@@ -8,7 +8,7 @@ jobs:
     - stage: GitHub pages publish
       script: >-
         rm -rf gh-pages &&
-        git submodule add --force -b gh-pages https://$github_access_token@github.com/DevSnicket/Eunice.git gh-pages &&
+        git submodule add --force https://$github_access_token@github.com/DevSnicket/Eunice.git gh-pages &&
         cp -r favicon.ico gh-pages &&
         cd gh-pages &&
         git add . &&
