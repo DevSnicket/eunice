@@ -107,11 +107,11 @@ body > .header .menu {
     flex-grow: 1;
     flex-wrap: wrap;
     justify-content: flex-end;
-    margin: 0.3em;
+    margin: 0.25em;
 }
 
 body > .header .menu a {
-    margin: 0.5em 0.5em 0.5em;
+    margin: 0.25em 0.25em 0.25em;
     padding: 0.3em 0.6em;
 }
 
