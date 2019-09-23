@@ -1,4 +1,4 @@
-# Eunice ![](https://raw.githubusercontent.com/DevSnicket/eunice/gh-pages/arrows/default-height.svg?sanitize=true) Dependency and structure
+# Eunice ![](https://raw.githubusercontent.com/DevSnicket/eunice/master/arrows/default-height.svg?sanitize=true) Dependency and structure
 
 This package takes YAML that contains dependencies and structure, represented as objects and does the following:
 * Standardizes structure (to support varying YAML verbosity)
