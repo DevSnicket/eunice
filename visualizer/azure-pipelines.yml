@@ -14,7 +14,7 @@ steps:
     displayName: NPM run all
   - script: >-
       rm -rf gh-pages &&
-      git submodule add --force -b gh-pages https://$(github_access_token)@github.com/DevSnicket/Eunice.git gh-pages &&
+      git submodule add --force https://$(github_access_token)@github.com/DevSnicket/Eunice.git gh-pages &&
       rm -f -rf gh-pages/arrows &&
       mkdir gh-pages/arrows &&
       cp getSvgElementForStack/createArrows/test/withUse/testCases/default-height.svg gh-pages/arrows &&
