@@ -1,4 +1,4 @@
-# Eunice ![](https://raw.githubusercontent.com/DevSnicket/eunice/gh-pages/arrows/default-height.svg?sanitize=true) Run tests from file system
+# Eunice ![](https://raw.githubusercontent.com/DevSnicket/eunice/master/arrows/default-height.svg?sanitize=true) Run tests from file system
 
 This package runs tests by reading test cases and expected behavior from the file system. Tests are automatically named based on the directory hierarchy.
 
