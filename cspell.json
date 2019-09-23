@@ -1,10 +1,12 @@
 {
-	"language": "en",
-	"words": [
-		"codebases",
-		"decompile",
-		"devsnicket",
-		"dogfooding",
-		"runtimes"
-	]
+    "version": "0.1",
+    "language": "en",
+    "words": [
+        "codebases",
+        "composability",
+        "decompile",
+        "devsnicket",
+        "dogfooding",
+        "runtimes"
+    ]
 }

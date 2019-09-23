@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="../../favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="../../index.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <meta charset="utf-8"/>
+    <title>YAML | Advanced | Eunice</title>
+</head>
+<body>
+    <div class="header">
+        <div class="content">
+            <h1><a href="../.."><span class="e">e</span>uni<span class="ce">ce</span><img class="arrows" src="../../arrows/default-height.svg" /></a></h1>
+            <span class="menu"><a href="../..">introduction</a><a href="../../structure">structure</a><a href="../../dependencies">dependencies</a><a href="../../javascript">JavaScript</a><a href="../../licensing">licensing</a><a class="current" href="../../advanced">advanced</a></span>
+        </div>
+    </div>
+    <div class="content">
+        <p>The following specifies what is supported in Eunice YAML, but other mapping keys not specified can be included and should be preserved.</p>
+        
+        <h2 id="identifiers">identifiers</h2>
+        <p>An item identifier is specified with a <a href="https://yaml.org/spec/1.2/spec.html#id2760844" target="_blank">scalar</a> or the value of <a href="https://yaml.org/spec/1.2/spec.html#id2759963" target="_blank">mapping</a> key "id".</p>
+        <code>item 1</code>
+        <code>id: item 1</code>
+        <p>Identifiers need to be unique within at least the scope of a <a href="https://yaml.org/spec/1.2/spec.html#id2759963" target="_blank">sequence</a> (<a href="#independent-items">independent</a>) or sequence of sequences (<a href="#stacked-items">stack</a>) so dependencies can be resolved unambiguously.</p>
+
+        <h2 id="dependencies">dependencies</h2>
+        <p>Dependencies are specified in the value of <a href="https://yaml.org/spec/1.2/spec.html#id2759963" target="_blank">mapping</a> key "dependsUpon".</p>
+        <code>id: item 1
+dependsUpon: item 2</code>
+        <p>The value of "dependsUpon" can be a <a href="https://yaml.org/spec/1.2/spec.html#id2759963" target="_blank">sequence</a> of multiple item identifiers.</p>
+        <code>id: item 1
+dependsUpon: [item 2, item 3]</code>
+        <p>The value or <a href="https://yaml.org/spec/1.2/spec.html#id2759963" target="_blank">sequence</a> of "dependsUpon" can also contain a <a href="https://yaml.org/spec/1.2/spec.html#id2759963" target="_blank">mapping</a> with keys of id and items. This specifies a dependency on a [nested / child item](#nested-child-items).</p>
+        <code>id: item 1
+dependsUpon:
+  id: item 2
+  items: child of item 2</code>
+
+        <h2 id="independent-items">independent items</h2>
+        <p>A <a href="https://yaml.org/spec/1.2/spec.html#id2759963" target="_blank">sequence</a> specifies items intended to be independent of each other.</p>
+        <code>[left item, right item]</code>
+
+        <h2 id="stacked-items">stacked items</h2>
+        <p>A <a href="https://yaml.org/spec/1.2/spec.html#id2759963" target="_blank">sequence</a> of item sequences specifies a stack of items.</p>
+        <code>- [upper left item, upper right item]
+- [lower left item, lower right item]</code>
+
+        <h2 id="nested-child-items">nested / child items</h2>
+        <p>The value of <a href="https://yaml.org/spec/1.2/spec.html#id2759963" target="_blank">mapping</a> key "items" is used to nest child items within an item.</p>
+        <code>id: parent item
+items: child item</code>
+        <p>The value can be a <a href="https://yaml.org/spec/1.2/spec.html#id2760844" target="_blank">scalar</a> identifier, a <a href="https://yaml.org/spec/1.2/spec.html#id2759963" target="_blank">mapping</a> of key "id", a <a href="https://yaml.org/spec/1.2/spec.html#id2759963" target="_blank">sequence</a> of independent items or a sequence of item sequences in a stack (the latter is shown below).</p>
+        <code>id: parent item
+items:
+  - [upper left child item, upper child right item]
+  - [lower left child item, lower child right item]</code>
+    </div>
+    <div class="footer">Copyright © 2019 Graham Dyson</div>
+</body>
+</html>
