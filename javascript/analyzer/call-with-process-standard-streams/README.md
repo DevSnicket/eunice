@@ -1,4 +1,4 @@
-# Eunice ![](https://raw.githubusercontent.com/DevSnicket/eunice/gh-pages/arrows/default-height.svg?sanitize=true) Call with process standard streams
+# Eunice ![](https://raw.githubusercontent.com/DevSnicket/eunice/master/arrows/default-height.svg?sanitize=true) Call with process standard streams
 
 [![NPM](https://img.shields.io/npm/v/@devsnicket/eunice-call-with-process-standard-streams.svg)](https://www.npmjs.com/package/@devsnicket/eunice-call-with-process-standard-streams
 ) [![Build Status](https://travis-ci.org/DevSnicket/eunice-call-with-process-standard-streams.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-call-with-process-standard-streams) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
