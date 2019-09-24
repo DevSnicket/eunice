@@ -5,11 +5,18 @@ body > .content {
 }
 
 body > .content > div {
-	flex: 1;
+	flex-basis: 0;
+	flex-grow: 10;
 	padding: 0.5rem 0.5rem;
+	min-width: 18em;
 }
 
 body > .content > h2 {
+	align-content: start;
+	display: flex;
+	flex-basis: 0;
+	flex-grow: 1;
+	flex-wrap: wrap;
 	margin: 0;
 }
 

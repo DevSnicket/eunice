@@ -3,7 +3,12 @@ body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
 }
-    
+
+body img {
+    max-width: 90vw;
+    max-width: calc(100vw - 2em);
+}
+
 a:link {
     color: darkred;
 }
@@ -43,6 +48,11 @@ h1 .e, h1 .ce {
     margin: 0.5rem;
 }
 
+.box img {
+    max-width: 80vw;
+    max-width: calc(100vw - 4em);
+}
+
 .content {
     max-width: 60em;
 }
@@ -58,7 +68,7 @@ body > .content {
 
 code {
     display: block;
-    white-space: pre;
+    white-space: pre-wrap;
 }
 
 .emoji {
@@ -81,7 +91,7 @@ body > .header {
 }
 
 body > .header > .content {
-    align-items: center; 
+    align-items: center;
     display: flex;
     margin: 0 auto 0 auto;
 }
