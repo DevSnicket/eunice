@@ -15,6 +15,11 @@
             flex-wrap: wrap;
         }
 
+        .example img {
+            background: white;
+            padding: 0.5em;
+        }
+
         .example > div {
             align-items: center;
             display: flex;
@@ -30,13 +35,13 @@
 <body>
     <div class="header">
         <div class="content">
-            <h1><a href=".."><span class="e">e</span>uni<span class="ce">ce</span><img class="arrows" src="../arrows/default-height.svg" /></a></h1>
+            <h1><a href=".."><span><span class="e">e</span>uni<span class="ce">ce</span></span><img class="arrows" src="../arrows/default-height.svg" /></a></h1>
             <span class="menu"><a href="..">introduction</a><a href="../structure">structure</a><a class="current" href="../dependencies">dependencies</a><a href="../javascript">JavaScript</a><a href="../licensing">licensing</a><a href="../advanced">advanced</a></span>
         </div>
     </div>
     <div class="content">
         <h2>arrows</h2>
-        <p>Instead of rendering dependencies as lines between items each dependency is counted into the following categories:</p>
+        <p>Instead of showing dependencies as lines between items each dependency is counted into the following categories:</p>
         <div class="box horizontal-container" style="align-items: center; width: fit-content">
             <img src="../arrows/with-descriptions.svg"/>
             <div>
@@ -46,7 +51,7 @@
             </div>
         </div>
         <h2>counts</h2>
-        <p>Dependency counts appear for both sides of the dependency, the dependent item and the item depended upon. When there are multiple counts a summary of all counts is rendered at the bottom.</p>
+        <p>Dependency counts appear for both sides of the dependency, the dependent item and the item depended upon. When there are multiple counts a summary of all the counts is shown at the bottom.</p>
         <div class="example tall">
             <div class="box">
                 <div>upper depends upon lower</div>
@@ -75,7 +80,7 @@
                 <img src="../examples/independency/two-interdependent.svg"/>
             </div>
         </div>
-        <p>Dependencies within an item are also summarized and rendered inside the item box, below the identifer text.</p>
+        <p>Dependencies within an item are also summarized and shown inside the item box, below the identifer text.</p>
         <div class="example">
             <div class="box">
                 <div><div>parent</div><div>depends upon</div><div>item</div></div>
@@ -92,8 +97,10 @@
         </div>
         <p>Items and sub-item can also be opened. Opening an item will show its contents and breadcrumb links for where it is in the hierarchy.</p>
         <div class="box" style="width: fit-content">
-            <div style="font-family: Arial">root > grandparent</div>
-            <img src="../examples/upper-item-depends-upon-lower-item-with-parent.svg"/>
+            <div style="background-color: white;">
+                <div style="font-family: Arial; padding: 0.5em">root > <span style="color: blue; text-decoration: underline">grandparent</span></div>
+                <img src="../examples/upper-item-depends-upon-lower-item-with-parent.svg" style="padding: 0.5em" />
+            </div>
         </div>
     </div>
     <div class="footer">Copyright © 2019 Graham Dyson</div>
