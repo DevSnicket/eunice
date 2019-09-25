@@ -26,7 +26,7 @@
                 <li>Items are ordered by their identifiers.</li>
                 <li>Items are grouped by their identifiers (this is requires the previous ordering step).</li>
                 <li>Anonymous items (i.e. those without an identifier) are given the identifier of their parent.</li>
-                <li>Variables that depend upon one item of the same name are removed (e.g. some CommonJS requires or ES6 imports).</li>
+                <li>Variables that depend on a single item of the same name are removed (e.g. some CommonJS requires or ES6 imports).</li>
                 <li>Items are ordered so parameters, variables and files are last.</li>
                 <li>Any items with identifiers of "bin" and "test" are stacked in a level together above other items.</li>
                 <li>Items that have identifiers starting with "test" have child items for the Jest methods "expect" and "test" added together in a level below the other items.</li>
