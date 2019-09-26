@@ -1,41 +1,84 @@
-<svg height="73" width="555" xmlns="http://www.w3.org/2000/svg">
-	<defs><style type="text/css">polyline{fill:none;stroke:black}rect{fill:lightgray}text{font-family:arial}text.transition{font-size:10px}text.stage{font-size:16px}</style></defs>
+<svg height="210.5" width="375.5" xmlns="http://www.w3.org/2000/svg">
+	<defs><style>
+		polyline,
+		rect {
+			fill: none;
+			stroke: black;
+		}
+
+		text {
+			font-family: arial, sans-serif;
+			font-size: 16px;
+			text-anchor: middle;
+		}
+
+		.key text {
+			text-anchor: start;
+		}
+	</style></defs>
 	<symbol id="arrow-head">
-		<polygon points="0,0 0,20 10,10"/>
+		<polygon points="0,0 15,0 7.5,7.5"/>
 	</symbol>
-	<symbol id="analyze">
-		<rect width="75" height="32"/>
-		<text class="stage" x="10" y="22">analyze</text>
+	<symbol id="down-arrow">
+		<polyline points="7.5,0 7.5,12.5"/>
+		<use href="#arrow-head" y="12.5"/>
 	</symbol>
-	<symbol id="yaml-arrow">
-		<polyline points="0,16 45,16"/>
-		<text class="transition" x="5" y="10">YAML</text>
-		<use href="#arrow-head" x="35" y="6"/>
+	<symbol id="stack">
+		<g transform="translate(0.5,0.5)">
+			<rect height="25" width="50"/>
+			<g transform="translate(0,25)">
+				<use href="#down-arrow" x="17.5"/>
+				<rect height="25" width="50" y="20"/>
+			</g>
+		</g>
 	</symbol>
-	<symbol id="process">
-		<rect width="75" height="32"/>
-		<text class="stage" x="10" y="22">process</text>    
+	<symbol id="grouped-stack">
+		<g transform="translate(0.5,0.5)">
+			<rect height="90" width="70"/>
+			<use href="#stack" transform="translate(9.5,9.5)"/>
+		</g>
 	</symbol>
-	<use href="#analyze"/> 
-	<polyline points="75,16 230,16 230,26 250,26"/>
-	<text class="transition" x="80" y="10">YAML</text>
-	<use href="#arrow-head" x="240" y="16"/>  
-	<use href="#analyze" y="42"/>
-	<use href="#yaml-arrow" x="75" y="42"/> 
-	<use href="#process" x="120" y="42"/>
-	<polyline points="195,58 230,58 230,48, 250,48"/>
-	<text class="transition" x="200" y="52">YAML</text>
-	<use href="#arrow-head" x="240" y="38"/>
-	<use href="#process" x="250" y="21"/>
-	<use href="#yaml-arrow" x="325" y="21"/>
-	<rect x="370" y="21" width="67" height="32"/>
-	<text class="stage" x="380" y="43">render</text>    
-	<polyline points="437,37 478,37"/>
-	<text class="transition" x="442" y="31">SVG</text>
-	<use href="#arrow-head" x="468" y="27"/>
-	<rect x="478" y="21" width="77" height="32"/>
-	<text class="stage" x="488" y="43">browser</text>    
-	<polyline points="516.5,53 516.5,73 400.5,73 400,53"/>
-	<text class="transition" x="464" y="67">interaction</text>
-	<polygon points="410,63 390,63 400,53"/>
+	<g transform="translate(0.5,0)">
+		<text x="35" y="16">stack</text>
+		<g transform="translate(0,25)">
+			<polyline points="32.5,90 0,90 0,0 70,0 70,90 37.5,90"/>
+			<g transform="translate(10,10)">
+				<use href="#stack" x="-0.5" y="-0.5"/>
+				<g transform="translate(17.5,70)">
+					<polyline points="7.5,0 7.5,17.5"/>
+					<use href="#arrow-head" y="17.5"/>
+				</g>
+			</g>
+			<rect height="25" width="50" x="10" y="105"/>
+		</g>
+	</g>
+	<g transform="translate(105,0)">
+		<text x="75" y="16">independent</text>
+		<g transform="translate(-0.5,-0.5)">
+			<use href="#grouped-stack" transform="translate(0,25)"/>
+			<use href="#grouped-stack" transform="translate(80,25)"/>
+		</g>
+	</g>
+	<g transform="translate(285,0)">
+		<text x="45" y="16">nested</text>
+		<g transform="translate(0,25)">
+			<rect height="25" width="90"/>
+			<g transform="translate(37.5,25)">
+				<polyline points="7.5,0 7.5,17.5"/>
+				<use href="#arrow-head" y="17.5"/>
+			</g>
+			<g transform="translate(0,35)">
+				<polyline points="47.5,0 90,0 90,150 0,150 0,0 42.5,0" />
+				<rect height="25" width="70" x="10" y="15"/>
+				<g transform="translate(37.5,40)">
+					<polyline points="7.5,0 7.5,17.5"/>
+					<use href="#arrow-head" y="17.5"/>
+				</g>
+				<g transform="translate(10,50)">
+					<polyline points="37.5,0 70,0 70,90 0,90 0,0 32.5,0" />
+					<use href="#stack" transform="translate(9.5,14.5)"/>
+				</g>
+			</g>
+		</g>
+	</g>
 </svg>

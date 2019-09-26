@@ -1,26 +1,19 @@
-<svg height="152" width="325" xmlns="http://www.w3.org/2000/svg">
-	<defs><style type="text/css">
-		polyline {
+<svg height="155" width="325" xmlns="http://www.w3.org/2000/svg">
+	<defs><style>
+		polyline,
+		rect {
 			fill: none;
 			stroke: black;
-		}
-		
-		rect {
-			fill: lightgray;
 		}
 
 		text {
 			font-family: arial, sans-serif;
 			font-size: 16px;
+			text-anchor: middle;
 		}
 
-		.diagram text,
 		.key text {
-		 	alignment-baseline: middle;
-		}
-		
-		.diagram text {
-			text-anchor: middle;
+			text-anchor: start;
 		}
 
 		.indirect polyline {
@@ -36,62 +29,54 @@
 		<polygon points="0,0 15,0 7.5,7.5"/>
 	</symbol>
 	<symbol id="down-arrow">
-		<polyline points="7.5,0 7.5,12"/>
-		<use href="#arrow-head" x="0" y="12"/>
+		<polyline points="7.5,0 7.5,12.5"/>
+		<use href="#arrow-head" x="0" y="12.5"/>
 	</symbol>
-	<text x="95" y="16" text-anchor="middle">uni-directional</text>
-	<text x="25" y="32" text-anchor="middle">stack</text>
-	<g class="diagram" transform="translate(0,40)">
-		<rect height="24" width="50"/>
-		<text x="25" y="14">a</text>
-		<use href="#down-arrow" x="17.5" y="24"/>
-		<rect height="24" width="50" y="44"/>
-		<text x="25" y="58">b</text>
+	<text x="97.5" y="16">uni-directional</text>
+	<g transform="translate(0.5,30)">
+		<text x="25">stack</text>
+		<g transform="translate(0,10)">
+			<rect height="25" width="50"/>
+			<use href="#down-arrow" x="17.5" y="25"/>
+			<rect height="25" width="50" y="45"/>
+		</g>
 	</g>
-	<g transform="translate(90, 16)">
-		<text x="52.5" y="16" text-anchor="middle">independent</text>
-		<g class="diagram" transform="translate(0,24)">
-			<rect height="24" width="50"/>
-			<text x="25" y="14">a</text>
-			<polyline points="40,24 40,36"/>
-			<use href="#arrow-head" x="32.5" y="36"/>
-			<rect height="24" width="50" x="55"/>
-			<text x="80" y="14">b</text>
-			<polyline points="65,24 65,36"/>
-			<use href="#arrow-head" x="57.5" y="36"/>
-			<rect height="24" width="50" x="27.5" y="44"/>
-			<text x="52.5" y="58">c</text>
+	<g transform="translate(90, 30)">
+		<text x="55">independent</text>
+		<g transform="translate(0,10)">
+			<rect height="25" width="50"/>
+			<use href="#down-arrow" x="32.5" y="25"/>
+			<rect height="25" width="50" x="60"/>
+			<use href="#down-arrow" x="62.5" y="25"/>
+			<rect height="25" width="50" x="30" y="45"/>
 		</g>
 	</g>
 	<g transform="translate(230,0)">
 		<g transform="translate(50,0)">
-			<text y="16" text-anchor="middle">bi-directional</text>
-			<text y="32" text-anchor="middle">indirect</text>
+			<text y="16">bi-directional</text>
+			<text y="32">indirect</text>
 		</g>
-		<g class="diagram" transform="translate(10,40)">
-			<rect height="24" width="50" x="30"/>
-			<text x="55" y="14">a</text>
-			<use href="#down-arrow" x="32.5" y="24"/>
-			<rect height="24" width="50" y="44"/>
-			<text x="25" y="58">b</text>
-			<use href="#down-arrow" x="32.5" y="68"/>
+		<g transform="translate(10,40)">
+			<rect height="25" width="50" x="30"/>
+			<use href="#down-arrow" x="32.5" y="25"/>
+			<rect height="25" width="50" y="45"/>
+			<use href="#down-arrow" x="32.5" y="70"/>
 			<g class="indirect" transform="translate(50,0)">
-				<polyline points="7.5,24 7.5,80"/>
-				<use href="#arrow-head" x="0" y="80"/>
+				<polyline points="7.5,25 7.5,82.5"/>
+				<use href="#arrow-head" x="0" y="82.5"/>
 			</g>
-			<rect height="24" width="50" x="30" y="88"/>
-			<text x="55" y="102">c</text>
-			<polyline points="70,30.5 70,88"/>
-			<use href="#arrow-head" transform="translate(62.5, 24) rotate(180 7.5 3.75)"/>
+			<rect height="24" width="50" x="30" y="90"/>
+			<polyline points="70,30.5 70,90"/>
+			<use href="#arrow-head" transform="translate(62.5, 25) rotate(180 7.5 3.75)"/>
 		</g>
 	</g>
-	<g class="key" transform="translate(40,130)">
+	<g class="key" transform="translate(45,130)">
 		<use href="#down-arrow" x="0" y="0"/>
-		<text x="20" y="9.75">direct</text>
-		<g class="indirect" transform="translate(75,0)">
+		<text x="20" y="15">direct</text>
+		<g class="indirect" transform="translate(80,0)">
 			<polyline points="7.5,0 7.5,12"/>
 			<use href="#arrow-head" x="0" y="12"/>
-			<text x="20" y="9.75">indirect</text>
+			<text x="20" y="15">indirect</text>
 		</g>
 	</g>
 </svg>

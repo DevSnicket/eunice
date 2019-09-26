@@ -9,8 +9,8 @@
         .stacks-introduction > .diagram {
             background-color: white;
             margin: 0 auto 1em;
-            max-width: 22em;
             padding: 1em;
+            width: fit-content;
         }
 
         .stacks-introduction > .diagram > img {
@@ -50,16 +50,21 @@
         <div class="stacks-introduction">
             <div class="diagram-text">
                 <p>In Eunice, when it's intended that an item be dependent on another, the first item is placed above the second in a stack. When items are intended to be independent of each other, they can be placed at the same level in a stack.</p>
-                <p>The terminology "stack" is used as dependencies can only be uni-directional (in one direction). This includes recognizing when there is a indirect bi-directional dependency.</p>
+                <p>The terminology "stack" is used as dependencies can only be uni-directional (in one direction). Eunice also identifies when there is a indirect bi-directional dependency.</p>
             </div>
-            <div class="box diagram"><img src="./stacks.svg" /></div>
+            <div class="box diagram"><img src="./stacks.svg" style="max-width: 325px" /></div>
         </div>
-        <p style="margin-top: 0">Eunice is designed to be non-prescriptive so problem specific stacks can develop collaboratively and organically. Stacks can also be used to represent more general architectures (e.g. as layers). Learning about such architectures can also be beneficial when defining problem specific Eunice stacks.</p>
+        <p style="margin-top: 0">Eunice is designed to be non-prescriptive so problem specific stacks can develop naturally and collaboratively. Stacks can also be used to represent more general architectures (e.g. as layers). Learning about such architectures can also be beneficial when defining problem specific Eunice stacks.</p>
         <p>In some programming languages there are implied stacks, such as the order of functions in a file, or the order of files in a project.</p>
-        <h2>scopes / groups</h2>
-        <p>Stacks are defined in Eunice with different sized scopes and across boundaries, from individual functions, classes and files; to multiple, large codebases in different languages, frameworks and runtimes.</p>
-        <p>Eunice supports nested groups of items, each group can have its own stack. When Eunice measures whether dependencies match the intended structure, the results for nested groups are summarized (see <a href="../dependencies">dependencies</a>).</p>
-        <p>Programming languages usually include ways of grouping code, such as the directories in a file system, namespaces, classes or nested functions. Groups such as these can be inferred and automatically represented in Eunice. Multiple repositories, packages, services and systems can also be represented as groups and analyzed as a together.</p>
+        <h2 style="margin-bottom: 0">scopes / groups</h2>
+        <div class="stacks-introduction">
+            <div class="diagram-text">
+                <p>Stacks are defined in Eunice with different sized scopes and across boundaries, from individual functions, classes and files; to multiple, large codebases in different languages, frameworks and runtimes.</p>
+                <p>Eunice supports nested groups of items, each group can have its own stack. When Eunice measures whether dependencies match the intended structure, the results for nested groups are summarized (see <a href="../dependencies">dependencies</a>).</p>
+            </div>
+            <div class="box diagram"><img src="./groups.svg" style="max-width: 375.5px" /></div>
+        </div>
+        <p style="margin-top: 0">Programming languages usually include ways of grouping code, such as the directories in a file system, namespaces, classes or nested functions. Groups such as these can be inferred and automatically represented in Eunice. Multiple repositories, packages, services and systems can also be represented as groups and analyzed as a together.</p>
     </div>
     <div class="footer">Copyright © 2019 Graham Dyson</div>
 </body>
