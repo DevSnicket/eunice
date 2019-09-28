@@ -61,8 +61,10 @@ async function testInOutputDirectory({
 		htmlFileName,
 		includeServiceWorkers,
 		includeSourceMap,
-		yamlFilePath:
-			path.join(__dirname, ".yaml"),
+		yaml:
+			await readTextFile(
+				path.join(__dirname, ".yaml"),
+			),
 	});
 
 	expect({

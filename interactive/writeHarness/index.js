@@ -11,12 +11,12 @@ module.exports =
 		htmlFileName,
 		includeServiceWorkers,
 		includeSourceMap,
-		yamlFilePath,
+		yaml,
 	}) => {
 		await writeHtml({
 			directoryPath,
 			htmlFileName,
-			yamlFilePath,
+			yaml,
 		});
 
 		if (includeServiceWorkers)

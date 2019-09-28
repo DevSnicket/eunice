@@ -11,7 +11,7 @@ module.exports =
 	async({
 		directoryPath,
 		htmlFileName,
-		yamlFilePath,
+		yaml,
 	}) => {
 		await writeFile(
 			getOutputPath(),
@@ -26,21 +26,13 @@ module.exports =
 			return readTextFile(getSourcePath("index.html"));
 		}
 
-		async function substituteInHtml(
+		function substituteInHtml(
 			html,
 		) {
 			return (
 				html.replace(
 					"yamlFromWebpack",
-					await readReplacement(),
-				)
-			);
-		}
-
-		async function readReplacement() {
-			return (
-				getStringLiteral(
-					await readTextFile(yamlFilePath),
+					getStringLiteral(yaml),
 				)
 			);
 		}
