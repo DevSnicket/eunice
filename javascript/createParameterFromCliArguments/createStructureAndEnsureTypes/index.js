@@ -12,6 +12,7 @@ module.exports =
 		includeServiceWorkers,
 		includeSourceMap,
 		isFileContentReversed,
+		modifyFileStacksFile,
 		outputBaseFileName,
 		outputDirectoryPath,
 		outputHtml = true,
@@ -37,6 +38,8 @@ module.exports =
 				parseBoolean(includeSourceMap),
 			isFileContentReversed:
 				parseBoolean(isFileContentReversed),
+			modifyFileStacksFilePath:
+				modifyFileStacksFile,
 			output:
 				{
 					enabled:

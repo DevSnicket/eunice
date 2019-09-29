@@ -35,6 +35,7 @@ module.exports =
 		includeServiceWorkers = false,
 		includeSourceMap = false,
 		isFileContentReversed = false,
+		modifyFileStacksFilePath,
 		output,
 		packages = null,
 		sources,
@@ -58,6 +59,7 @@ module.exports =
 						directoryToCreateOrAddToStacksFrom,
 						ignorePathPattern,
 						isFileContentReversed,
+						modifyFileStacksFilePath,
 						packagePrefixAndScope:
 							packages,
 						sources:

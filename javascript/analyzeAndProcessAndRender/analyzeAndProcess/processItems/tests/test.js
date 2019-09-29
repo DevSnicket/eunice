@@ -45,6 +45,8 @@ test(
 							items: [ "item1", "item2" ],
 						},
 					],
+				modifyFileStacksFilePath:
+					path.join(__dirname, "modify-file-stacks.yaml"),
 				packagePrefixAndScope:
 					{
 						prefix: "prefix-",
@@ -114,6 +116,8 @@ test(
 					false,
 				items:
 					{ items: "child" },
+				modifyFileStacksFilePath:
+					null,
 				packagePrefixAndScope:
 					null,
 				rootItemIdentifier:
@@ -160,6 +164,8 @@ test(
 						"item2",
 						{ id: "item3", items: "childOfItem3" },
 					],
+				modifyFileStacksFilePath:
+					null,
 				packagePrefixAndScope:
 					null,
 				rootItemIdentifier:

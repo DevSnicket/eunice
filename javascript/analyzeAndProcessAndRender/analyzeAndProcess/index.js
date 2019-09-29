@@ -13,6 +13,7 @@ module.exports =
 		directoryToCreateOrAddToStacksFrom,
 		ignorePathPattern,
 		isFileContentReversed,
+		modifyFileStacksFilePath,
 		packagePrefixAndScope,
 		sources,
 	}) => {
@@ -58,6 +59,7 @@ module.exports =
 							path.sep,
 						isFileContentReversed,
 						items,
+						modifyFileStacksFilePath,
 						packagePrefixAndScope,
 						rootItemIdentifier,
 					})

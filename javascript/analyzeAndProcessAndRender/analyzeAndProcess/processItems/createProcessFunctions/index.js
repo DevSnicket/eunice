@@ -4,6 +4,8 @@ const
 	createIdentifierSeparatorSpecific = require("./createIdentifierSeparatorSpecific"),
 	createSubsetIdentifierHierarchy = require("./createSubsetIdentifierHierarchy"),
 	ensureRootItemWithIdentifier = require("./ensureRootItemWithIdentifier"),
+	parseYaml = require("js-yaml").safeLoad,
+	{ readFileSync } = require("fs"),
 	removePackagePrefixAndScopeInDependsUpon = require("./removePackagePrefixAndScopeInDependsUpon"),
 	{
 		removeSelfDependentItemsOfType,
@@ -29,6 +31,7 @@ module.exports =
 		directoryToCreateOrAddToStacksFrom,
 		identifierSeparator,
 		isFileContentReversed,
+		modifyFileStacksFilePath,
 		packagePrefixAndScope,
 		rootItemIdentifier,
 	}) => {
@@ -65,7 +68,11 @@ module.exports =
 				setIdentifierOfAnonymousToParent,
 				removeSelfDependentVariables,
 				orderItemsByType,
-				stackBinAndTestAtTop,
+				items =>
+					modifyFileStacks({
+						items,
+						stacksFilePath: modifyFileStacksFilePath,
+					}),
 				unstackIndependent,
 				items =>
 					createOrAddToStacksUsingFileSystem({
@@ -124,26 +131,41 @@ function orderItemsByType(
 	);
 }
 
-function stackBinAndTestAtTop(
+function modifyFileStacks({
 	items,
-) {
-	return (
-		createOrAddToStacksOfParentMatch({
-			addNewInTarget:
-				false,
-			items,
-			keysAndPatterns:
-				[ {
-					key: "type",
-					pattern: /^file$/,
-				} ],
-			targetLevelOrStack:
-				[
-					[ "bin", "test" ],
-					"existing",
-				],
-		})
-	);
+	stacksFilePath,
+}) {
+	return whenSpecified() || items;
+
+	function whenSpecified() {
+		return (
+			stacksFilePath
+			&&
+			createOrAddToStacksOfParentMatch({
+				addNewInTarget:
+					false,
+				items,
+				keysAndPatterns:
+					[ {
+						key: "type",
+						pattern: /^file$/,
+					} ],
+				targetLevelOrStack:
+					readStack(),
+			})
+		);
+
+		function readStack() {
+			return (
+				parseYaml(
+					readFileSync(
+						stacksFilePath,
+						"utf-8",
+					),
+				)
+			);
+		}
+	}
 }
 
 function flattenSingleRootItemWhenHasOnlyItemsAndType(
