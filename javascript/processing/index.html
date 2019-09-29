@@ -29,7 +29,6 @@
                 <li>Variables that depend on a single item of the same name are removed (e.g. some CommonJS requires or ES6 imports).</li>
                 <li>Items are ordered so parameters, variables and files are last.</li>
                 <li>Any items with identifiers of "bin" and "test" are stacked in a level together above other items.</li>
-                <li>Items that have identifiers starting with "test" have child items for the Jest methods "expect" and "test" added together in a level below the other items.</li>
                 <li>Independent items (i.e. those that don't depend on each other) are unstacked into the same level.</li>
                 <li>The source directory is scanned for any files named .devsnicket-eunice-stack.yaml. Any structure defined inside these files is applied to any files also in the directory.</li>
                 <li>If there is a single root item, that is anonymous and has only items and type, its items are flattened out into the root</li>
