@@ -87,8 +87,16 @@ function parseBoolean(
 	value,
 ) {
 	return (
-		value === true
-		||
-		value === "true"
+		value
+		&&
+		(value === true || whenString())
 	);
+
+	function whenString() {
+		return (
+			typeof value === "string"
+			&&
+			value.toLowerCase() === "true"
+		);
+	}
 }

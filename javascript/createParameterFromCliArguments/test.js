@@ -13,10 +13,15 @@ test(
 		)
 		.toEqual(
 			{
-				outputPath:
+				output:
 					{
-						baseFileName: "eunice",
-						directoryPath: ".",
+						enabled:
+							{ html: true },
+						path:
+							{
+								baseFileName: "eunice",
+								directoryPath: ".",
+							},
 					},
 				sources:
 					[ { directory: "." } ],
@@ -93,14 +98,14 @@ test(
 );
 
 test(
-	"\"outputBaseFileName\" and \"outputDirectoryPath\" are returned in outputPath.",
+	"\"outputBaseFileName\" and \"outputDirectoryPath\" are returned in output.path.",
 	() =>
 		expect(
 			createParameterFromCliArguments({
 				"output-base-file-name": "outputBaseFileName",
 				"output-directory-path": "outputDirectoryPath",
 			})
-			.outputPath,
+			.output.path,
 		)
 		.toEqual(
 			{

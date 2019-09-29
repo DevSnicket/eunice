@@ -2,21 +2,57 @@
 
 const
 	analyzeAndProcessAndRender = require(".."),
-	fs = require("fs"),
-	path = require("path"),
-	{ promisify } = require("util");
-
-const
-	deleteFile = promisify(fs.unlink),
-	fileExists = promisify(fs.exists),
-	readFile = promisify(fs.readFile);
+	fs = require("fs-extra"),
+	path = require("path");
 
 test(
-	"Single source writes output files and expected YAML content.",
+	"Output enabled for HTML and SVG writes files.",
+	async() => {
+		const testDirectory = path.join(__dirname, "outputEnabledForHtmlAndSvg");
+
+		const outputDirectory = path.join(testDirectory, "output");
+
+		await fs.emptyDir(outputDirectory);
+
+		await analyzeAndProcessAndRender({
+			babelParserPlugins:
+				null,
+			date:
+				new Date(0),
+			output:
+				{
+					enabled:
+						{
+							html: true,
+							svg: true,
+						},
+					path:
+						{
+							baseFileName: "",
+							directoryPath: outputDirectory,
+						},
+				},
+			sources:
+				[ { directory: path.join(testDirectory, "source") } ],
+			version:
+				"0.0.0",
+		});
+
+		expect(
+			await fs.readdir(outputDirectory),
+		)
+		.toEqual(
+			[ ".html", ".svg" ],
+		);
+	},
+);
+
+test(
+	"Single source writes expected YAML.",
 	async() => {
 		const testDirectory = path.join(__dirname, "singleSource");
 
-		await testInDirectory({
+		await testYamlInDirectory({
 			sources:
 				[ { directory: path.join(testDirectory, "source") } ],
 			testDirectory,
@@ -25,11 +61,11 @@ test(
 );
 
 test(
-	"Single source with output base file name writes output files and expected YAML content.",
+	"Single source with output base file name writes expected YAML.",
 	async() => {
 		const testDirectory = path.join(__dirname, "singleSourceWithOutputBaseFilename");
 
-		await testInDirectory({
+		await testYamlInDirectory({
 			baseFileName:
 				"base",
 			sources:
@@ -40,11 +76,11 @@ test(
 );
 
 test(
-	"Package source writes output files and expected YAML content.",
+	"Package source writes expected YAML.",
 	async() => {
 		const testDirectory = path.join(__dirname, "packageSource");
 
-		await testInDirectory({
+		await testYamlInDirectory({
 			packages:
 				{
 					directory: testDirectory,
@@ -55,7 +91,7 @@ test(
 	},
 );
 
-async function testInDirectory({
+async function testYamlInDirectory({
 	baseFileName = "",
 	// undefined used to test default argument
 	// eslint-disable-next-line no-undefined
@@ -65,24 +101,22 @@ async function testInDirectory({
 }) {
 	const outputDirectory = path.join(testDirectory, "output");
 
-	const outputPaths =
-		{
-			html: path.join(outputDirectory, `${baseFileName}.html`),
-			svg: path.join(outputDirectory, `${baseFileName}.svg`),
-			yaml: path.join(outputDirectory, `${baseFileName}.yaml`),
-		};
-
-	await deleteOutput();
+	await fs.emptyDir(outputDirectory);
 
 	await analyzeAndProcessAndRender({
 		babelParserPlugins:
 			null,
 		date:
 			new Date(0),
-		outputPath:
+		output:
 			{
-				baseFileName,
-				directoryPath: outputDirectory,
+				enabled:
+					{ yaml: true },
+				path:
+					{
+						baseFileName,
+						directoryPath: outputDirectory,
+					},
 			},
 		packages,
 		sources,
@@ -91,35 +125,17 @@ async function testInDirectory({
 	});
 
 	expect(
-		{
-			htmlExists: await fileExists(outputPaths.html),
-			svgExists: await fileExists(outputPaths.svg),
-			yaml: await readYamlFile(outputPaths.yaml),
-		},
+		await readYamlFile(
+			path.join(outputDirectory, `${baseFileName}.yaml`),
+		),
 	)
 	.toEqual(
-		{
-			htmlExists: true,
-			svgExists: true,
-			yaml: await readYamlFile(path.join(testDirectory, "expected.yaml")),
-		},
+		await readYamlFile(path.join(testDirectory, "expected.yaml")),
 	);
-
-	async function deleteOutput() {
-		await Promise.all(
-			Object.values(outputPaths)
-			.map(
-				async outputPath =>
-					await fileExists(outputPath)
-					&&
-					deleteFile(outputPath),
-			),
-		);
-	}
 
 	function readYamlFile(
 		file,
 	) {
-		return readFile(file, "utf-8");
+		return fs.readFile(file, "utf-8");
 	}
 }
