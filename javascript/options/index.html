@@ -34,6 +34,7 @@
                 <a href="#babel-parser-plugins">Babel parser plugins</a>
                 <a href="#source-directories">source directories</a>
                 <a href="#stack-from-directory">stack from directory</a>
+                <a href="#modify-file-stacks">modify file stacks</a>
                 <a href="#root-item">root item</a>
                 <a href="#output-files">output files</a>
                 <a href="#npm-packages">NPM packages</a>
@@ -81,9 +82,15 @@
   --directories=directory2
   --directory-to-create-or-add-to-stacks-from=stacks-directory</code>
             </div>
+            <div class="box" id="modify-file-stacks">
+                <h3>modify file stacks</h3>
+                <p>A file can be specified that specifies a stack to modify the structure of all files. It does not add new items and is not applied to the sub-stacks within files.</p>
+                <code>npx eunice
+  --modify-file-stacks-file=stacks.yaml</code>
+            </div>
             <div class="box" id="root-item">
                 <h3>root item</h3>
-                <p>A identifiers for a parent root items can also be specified for each source directory (see <a href="source-directories">source directories</a>):</p>
+                <p>Identifiers for a parent root items can also be specified for each source directory (see <a href="source-directories">source directories</a>):</p>
                 <code>npx eunice
   --directories=directory1
   --root-item-identifiers=prefixForDirectory1
