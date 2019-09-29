@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.7.0 on 2019-09-29T13:33:06.813Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.7.0 on 2019-09-29T15:11:10.537Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -6565,12 +6565,10 @@
   - id: run-tests-from-file-system
     type: file
     items:
-      - - expect
-        - id: test
+      - - id: test
           type: file
           dependsUpon:
             - describe
-            - runTestsWithFileNames
             - test
           items:
             - - id: test
@@ -6616,76 +6614,24 @@
                 dependsUpon: .
               - id: expectedFileName
                 type: variable
-      - - id: run-tests-from-file-system
+        - id: run-tests-from-file-system
           dependsUpon:
-            - discoverAndDescribeTestCases
-            - discoverAndLogOutputOfActual
-            - discoverAndUpdateExpectedFiles
-            - isJestProcessFromArguments
-            - logActualWhenFileOrTestCase
+            - createActualAndExpected
+            - discoverTestCases
+            - updateExpectedFileOfTestCase
           items:
-            - - id: discoverAndDescribeTestCases
+            - - id: updateExpectedFileOfTestCase
                 dependsUpon:
-                  - describeTestCase
-                  - discover
-                items:
-                  id: describeTestCase
-                  dependsUpon:
-                    - expectedFileName
-                    - getActualForTestCase
-                    - readTestCaseFile
-                    - test
-              - id: discoverAndUpdateExpectedFiles
-                dependsUpon:
-                  - discover
+                  - directory
+                  - expectedFileName
+                  - fs
                   - getActualForTestCase
-                  - updateExpectedFile
-                items:
-                  id: updateExpectedFile
-                  dependsUpon:
-                    - expectedFileName
-                    - fs
-                    - path
-                    - rootDirectory
-              - id: discoverAndLogOutputOfActual
+                  - path
+              - id: createActualAndExpected
                 dependsUpon:
-                  - discover
+                  - expectedFileName
                   - getActualForTestCase
-                  - log
-            - - id: discover
-                dependsUpon: inSubdirectory
-                items:
-                  - - id: inSubdirectory
-                      dependsUpon:
-                        - appendFileOrSubdirectoryToTestCases
-                        - fs
-                        - path
-                        - rootDirectory
-                  - - id: appendFileOrSubdirectoryToTestCases
-                      dependsUpon:
-                        - getTestCasesWhenAny
-                        - inSubdirectory
-                        - isDirectory
-                      items:
-                        - - id: isDirectory
-                            dependsUpon:
-                              - fileOrSubdirectory
-                              - fs
-                              - path
-                              - rootDirectory
-                          - id: getTestCasesWhenAny
-                            dependsUpon:
-                              - caseFileName
-                              - fileOrSubdirectory
-                              - fs
-                              - path
-                              - rootDirectory
-                        - - id: fileOrSubdirectory
-                            type: parameter
-              - id: logActualWhenFileOrTestCase
-                dependsUpon:
-                  - getActualForTestCase
-                  - log
+                  - readTestCaseFile
             - - id: getActualForTestCase
                 dependsUpon:
                   - action
@@ -6693,39 +6639,65 @@
                   - readTestCaseFile
             - - id: readTestCaseFile
                 dependsUpon:
+                  - directory
                   - path
                   - readTextFile
-                  - rootDirectory
               - id: action
                 type: parameter
               - id: caseFileName
                 type: parameter
-            - - id: rootDirectory
+            - - id: directory
                 type: parameter
               - id: expectedFileName
                 type: parameter
-              - id: log
-                type: parameter
-              - id: test
-                type: parameter
-      - - id: isJestProcessFromArguments
+      - - id: addTestCaseToJest
           type: file
           items:
-            - - id: isJestProcessFromArguments
-                dependsUpon: isSecondArgumentJest
-            - - id: isSecondArgumentJest
-                dependsUpon: path
-        - id: testWithJest
-          type: file
-          items:
-            id: testWithJest
+            id: addTestCaseToJest
             dependsUpon: test
             items:
-              - - id: testWithJest
+              - - id: addTestCaseToJest
                   dependsUpon:
                     - expect
                     - getActualAndExpected
               - - id: getActualAndExpected
+                  type: parameter
+        - id: discoverTestCases
+          type: file
+          items:
+            id: discoverTestCases
+            dependsUpon: inSubdirectory
+            items:
+              - - id: inSubdirectory
+                  dependsUpon:
+                    - appendFileOrSubdirectoryToTestCases
+                    - directory
+                    - fs
+                    - path
+              - - id: appendFileOrSubdirectoryToTestCases
+                  dependsUpon:
+                    - getTestCasesWhenAny
+                    - inSubdirectory
+                    - isDirectory
+                  items:
+                    - - id: isDirectory
+                        dependsUpon:
+                          - directory
+                          - fileOrSubdirectory
+                          - fs
+                          - path
+                      - id: getTestCasesWhenAny
+                        dependsUpon:
+                          - caseFileName
+                          - directory
+                          - fileOrSubdirectory
+                          - fs
+                          - path
+                    - - id: fileOrSubdirectory
+                        type: parameter
+              - - id: caseFileName
+                  type: parameter
+                - id: directory
                   type: parameter
       - - id: readTextFile
           type: file
