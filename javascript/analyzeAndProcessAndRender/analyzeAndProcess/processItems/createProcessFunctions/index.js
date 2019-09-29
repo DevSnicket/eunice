@@ -78,7 +78,6 @@ module.exports =
 								rootItemIdentifier,
 							}),
 					}),
-				addJestMethodsToBottomOfTestFiles,
 				items =>
 					removePackagePrefixAndScopeInDependsUpon({
 						items,
@@ -142,32 +141,6 @@ function stackBinAndTestAtTop(
 				[
 					[ "bin", "test" ],
 					"existing",
-				],
-		})
-	);
-}
-
-function addJestMethodsToBottomOfTestFiles(
-	items,
-) {
-	return (
-		createOrAddToStacksOfParentMatch({
-			items,
-			keysAndPatterns:
-				[
-					{
-						key: "id",
-						pattern: /^test$|test[A-Z]/,
-					},
-					{
-						key: "type",
-						pattern: /^file$/,
-					},
-				],
-			targetLevelOrStack:
-				[
-					[ "existing" ],
-					[ "expect", "test" ],
 				],
 		})
 	);

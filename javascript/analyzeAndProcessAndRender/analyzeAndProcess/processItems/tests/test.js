@@ -26,10 +26,6 @@ test(
 							id:
 								"item",
 						},
-						{
-							id: "item\\test",
-							items: "childOfTest",
-						},
 						"item\\childWithIndexSuffix\\index",
 						"item\\alphabeticallyEarlierItem",
 						"item\\bin",
@@ -72,17 +68,6 @@ test(
 							{
 								id: "bin",
 								type: "file",
-							},
-							{
-								id:
-									"test",
-								items:
-									[
-										[ "childOfTest" ],
-										[ "expect", "test" ],
-									],
-								type:
-									"file",
 							},
 							{
 								id: "alphabeticallyEarlierItem",
