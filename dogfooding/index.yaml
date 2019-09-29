@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.5.0 on 2019-09-23T21:34:53.992Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.6.0 on 2019-09-29T11:16:18.331Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -37,7 +37,7 @@
                   - createSourcesWithPackages
                   - formatHeader
                   - formatYaml
-                  - writeOutput
+                  - renderAndWriteOutput
             - - id: formatHeader
                 dependsUpon: formatDate
                 items:
@@ -48,7 +48,7 @@
               - createIgnorePathPatternFromDirectoryNames
               - id: createSourcesWithPackages
                 dependsUpon: createSourcesFromPackages
-              - id: writeOutput
+              - id: renderAndWriteOutput
                 dependsUpon:
                   - getSvgForYaml
                   - path
@@ -501,6 +501,12 @@
                       dependsUpon: path
               - id: tests
                 items:
+                  - id: outputEnabledForHtmlAndSvg
+                    items:
+                      id: source
+                      items:
+                        id: fileInOutputEnabledForHtmlAndSvg
+                        type: file
                   - id: singleSource
                     items:
                       id: source
@@ -515,40 +521,26 @@
                         type: file
                   - id: test
                     type: file
-                    dependsUpon:
-                      - test
-                      - id: util
-                        items: promisify
+                    dependsUpon: test
                     items:
-                      - - id: testInDirectory
+                      - - id: testYamlInDirectory
                           dependsUpon:
                             - analyzeAndProcessAndRender
-                            - deleteOutput
                             - expect
-                            - fileExists
+                            - fs
                             - path
                             - readYamlFile
                           items:
-                            - - id: deleteOutput
-                                dependsUpon:
-                                  - deleteFile
-                                  - fileExists
-                                  - outputPaths
-                              - id: readYamlFile
-                                dependsUpon: readFile
-                            - - id: outputPaths
-                                type: variable
-                      - - id: deleteFile
+                            id: readYamlFile
+                            dependsUpon: fs
+                      - - id: fs
                           type: variable
-                        - id: fileExists
-                          type: variable
-                        - id: readFile
-                          type: variable
+                          dependsUpon: fs-extra
                       - - expect
                         - id: test
                           dependsUpon:
                             - path
-                            - testInDirectory
+                            - testYamlInDirectory
         - id: createParameterFromCliArguments
           type: file
           items:
@@ -584,7 +576,13 @@
                         - ensureArray
                         - parseBoolean
                   - - ensureArray
-                    - parseBoolean
+                    - id: parseBoolean
+                      dependsUpon: whenString
+                      items:
+                        - - id: whenString
+                            dependsUpon: value
+                        - - id: value
+                            type: parameter
                     - id: createOutputPath
                       type: file
                       items:
@@ -2824,6 +2822,7 @@
                                     - path
                                     - readDirectoryPathRecursive
                                     - readHtmlFileContainsYamlFileContent
+                                    - readTextFile
                                     - throwErrorWhenSourceDoesNotExist
                                     - writeHarness
                                   items:
@@ -2941,17 +2940,14 @@
                                     - getSourcePath
                                     - readTextFile
                                 - id: substituteInHtml
-                                  dependsUpon: readReplacement
-                              - - id: readReplacement
                                   dependsUpon:
                                     - getStringLiteral
-                                    - readTextFile
-                                    - yamlFilePath
-                                - id: directoryPath
+                                    - yaml
+                              - - id: directoryPath
                                   type: parameter
                                 - id: htmlFileName
                                   type: parameter
-                              - - id: yamlFilePath
+                                - id: yaml
                                   type: parameter
                         - - id: writeFile
                             type: variable
