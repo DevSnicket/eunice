@@ -30,37 +30,21 @@
         <div>
             <div class="options-menu">
                 <a href="#reverse-files">reverse files</a>
-                <a href="#source-directories">source directories</a>
-                <a href="#root-item">root item</a>
                 <a href="#ignore-paths">ignore paths</a>
-                <a href="#npm-packages">NPM packages</a>
-                <a href="#stack-from-directory">stack from directory</a>
-                <a href="#output-file-names">output file names</a>
                 <a href="#babel-parser-plugins">Babel parser plugins</a>
+                <a href="#source-directories">source directories</a>
+                <a href="#stack-from-directory">stack from directory</a>
+                <a href="#root-item">root item</a>
+                <a href="#output-files">output files</a>
+                <a href="#npm-packages">NPM packages</a>
             </div>
-            <div class="box">
-                <h3 id="reverse-files">reverse files</h3>
+            <div class="box" id="reverse-files">
+                <h3>reverse files</h3>
                 <p>JavaScript files are expected to be ordered so that a function is after calls of it, this can be reversed with:</p>
                 <code>npx eunice --is-file-content-reversed=true</code>
             </div>
-            <div class="box">
-                <h3 id="source-directories">source directories</h3>
-                <p>Only the current directory is included in analysis by default. Multiple sources of analysis can be specified:</p>
-                <code>npx eunice
-  --directories=directory1
-  --directories=directory2</code>
-            </div>
-            <div class="box">
-                <h3 id="root-item">root item</h3>
-                <p>An identifier for a root item can also be specified for each source directory to be used in <a href="../processing">processing</a> step 2:</p>
-                <code>npx eunice
-  --directories=directory1
-  --root-item-identifiers=prefixForDirectory1
-  --directories=directory2
-  --root-item-identifiers=prefixForDirectory2</code>
-            </div>
-            <div class="box">
-                <h3 id="ignore-paths">ignore paths</h3>
+            <div class="box" id="ignore-paths">
+                <h3>ignore paths</h3>
                 <p>The following sub-directories are ignored by default:<br/>
                 <div style="margin-left: 2em">
                     <div>.devsnicket-plugin-discovery</div>
@@ -75,9 +59,54 @@
                 <p>A regular expression of file and directory paths to be ignored can be specified:</p>
                 <code>npx eunice --ignore-path-pattern=(ignoreDirectory1|ignoreDirectory2)</code>
             </div>
-            <div class="box">
-                <h3 id="npm-packages">NPM packages</h3>
-                <p>Packages installed in the node_modules directory are not analysed by default. They can included using the "directories" option above or with:</p>
+            <div class="box" id="babel-parser-plugins">
+                <h3>Babel parser plugins</h3>
+                <p>The Babel parser plugins enabled by default are listed Flow, JSX and TypeScript. To override:</p>
+                <code>npx eunice
+  --babel-parser-plugins=flow
+  --babel-parser-plugins=jsx</code>
+            </div>
+            <div class="box" id="source-directories">
+                <h3>source directories</h3>
+                <p>Only the current directory is included in analysis by default. Multiple sources of analysis can be specified:</p>
+                <code>npx eunice
+  --directories=directory1
+  --directories=directory2</code>
+            </div>
+            <div class="box" id="stack-from-directory">
+                <h3>stack from directory</h3>
+                <p>When multiple sources of analysis are specified (see <a href="source-directories">source directories</a>), a directory of stack files (.devsnicket-eunice-stack.yaml) can be applied to the combined sources:</p>
+                <code>npx eunice
+  --directories=directory1
+  --directories=directory2
+  --directory-to-create-or-add-to-stacks-from=stacks-directory</code>
+            </div>
+            <div class="box" id="root-item">
+                <h3>root item</h3>
+                <p>A identifiers for a parent root items can also be specified for each source directory (see <a href="source-directories">source directories</a>):</p>
+                <code>npx eunice
+  --directories=directory1
+  --root-item-identifiers=prefixForDirectory1
+  --directories=directory2
+  --root-item-identifiers=prefixForDirectory2</code>
+            </div>
+            <div class="box" id="output-files">
+                <h3>output files</h3>
+                <p>For additional output files of SVG or YAML:</p>
+                <code>npx eunice
+  --output-svg
+  --output-yaml</code>
+                <p>To name the output files differently or in a different directory:</p>
+                <code>npx eunice
+  --output-base-file-name=eunice-file
+  --output-directory-path=eunice-directory</code>
+                <p>To disable the default output file of HTML:</p>
+                <code>npx eunice
+  --output-html=false</code>
+            </div>
+            <div class="box" id="npm-packages">
+                <h3>NPM packages</h3>
+                <p>Packages installed in the node_modules directory are not analysed by default (see <a href="#ignore-paths">ignore paths</a>). They can included using the "directories" option above or with:</p>
                 <code>npx eunice
   --package-names=package1
   --package-names=package2</code>
@@ -87,28 +116,6 @@ npx eunice
   --package-names=package
   --package-prefix=prefix-
   --package-scope=scope</code>
-            </div>
-            <div class="box">
-                <h3 id="stack-from-directory">stack from directory</h3>
-                <p>When multiple sources of analysis are specified, <a href="../processing">processing</a> step 12 can also be applied to the combined sources:</p>
-                <code>npx eunice
-  --directories=directory1
-  --directories=directory2
-  --directory-to-create-or-add-to-stacks-from=stacks-directory</code>
-            </div>
-            <div class="box">
-                <h3 id="output-file-names">output file names</h3>
-                <p>To name the output files differently or in a different directory:</p>
-                <code>npx eunice
-  --output-base-file-name=eunice-file
-  --output-directory-path=eunice-directory</code>
-            </div>
-            <div class="box">
-                <h3 id="babel-parser-plugins">Babel parser plugins</h3>
-                <p>The Babel parser plugins enabled by default are listed Flow, JSX and TypeScript. To override:</p>
-                <code>npx eunice
-  --babel-parser-plugins=flow
-  --babel-parser-plugins=jsx</code>
             </div>
         </div>
     </div>
