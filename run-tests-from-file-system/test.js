@@ -13,10 +13,10 @@ describe(
 	() => {
 		runTestsAsInJestProcess({
 			action: () => "expected of Jest test case",
-			subdirectory: "jest",
 			// undefined used to get parameter default of Jest implementation
 			// eslint-disable-next-line no-undefined
-			test: undefined,
+			addTestCase: undefined,
+			subdirectory: "jest",
 		});
 
 		test(
@@ -26,8 +26,8 @@ describe(
 
 				runTestsAsInJestProcess({
 					action,
+					addTestCase: () => null,
 					subdirectory: "multiple",
-					test: () => null,
 				});
 
 				expect(action)
@@ -44,10 +44,10 @@ describe(
 					action:
 						testCaseFileContent =>
 							testCaseFileContents.push(testCaseFileContent),
+					addTestCase:
+						({ getActualAndExpected }) => getActualAndExpected(),
 					subdirectory:
 						"multiple",
-					test:
-						({ getActualAndExpected }) => getActualAndExpected(),
 				});
 
 				expect(
@@ -66,16 +66,16 @@ describe(
 
 		function runTestsAsInJestProcess({
 			action,
+			addTestCase,
 			subdirectory,
-			test,
 		}) {
 			runTestsWithFileNames({
 				action,
+				addTestCase,
 				directory:
 					getTestCasesPathOfSubdirectory(subdirectory),
 				processArguments:
 					[ null, "jest" ],
-				test,
 			});
 		}
 	},
@@ -96,11 +96,11 @@ test(
 			action:
 				testCaseFileContent =>
 					`Updated ${testCaseFileContent}`,
+			addTestCase:
+				null,
 			directory,
 			processArguments:
 				[ null, "", "update-expected" ],
-			test:
-				null,
 		});
 
 		expect({
@@ -149,17 +149,17 @@ test(
 
 function runTestsWithFileNames({
 	action,
+	addTestCase,
 	directory,
 	processArguments,
-	test,
 }) {
 	runTestsFromFileSystem({
 		action,
+		addTestCase,
 		caseFileName: "source.txt",
 		directory,
 		expectedFileName,
 		processArguments,
-		test,
 	});
 }
 

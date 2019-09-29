@@ -2,20 +2,20 @@
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
 const
+	addTestCaseToJest = require("./addTestCaseToJest"),
 	discoverTestCases = require("./discoverTestCases"),
 	fs = require("fs"),
 	path = require("path"),
-	readTextFile = require("./readTextFile"),
-	testWithJest = require("./testWithJest");
+	readTextFile = require("./readTextFile");
 
 module.exports =
 	({
 		action,
+		addTestCase = addTestCaseToJest,
 		caseFileName,
 		directory,
 		expectedFileName,
 		processArguments,
-		test = testWithJest,
 	}) => {
 		const testCases = discoverTestCases({ caseFileName, directory });
 
@@ -23,8 +23,13 @@ module.exports =
 			for (const testCase of testCases)
 				updateExpectedFileOfTestCase(testCase);
 		else
-			for (const testCaseDirectoryPath of testCases)
-				testTestCase(testCaseDirectoryPath);
+			for (const testCase of testCases)
+				addTestCase({
+					getActualAndExpected:
+						() => createActualAndExpected(testCase),
+					name:
+						testCase,
+				});
 
 		function updateExpectedFileOfTestCase(
 			testCase,
@@ -38,25 +43,20 @@ module.exports =
 			);
 		}
 
-		function testTestCase(
+		function createActualAndExpected(
 			testCase,
 		) {
-			test({
-				getActualAndExpected:
-					() => (
-						{
-							actual:
-								getActualForTestCase(testCase),
-							expected:
-								readTestCaseFile({
-									fileName: expectedFileName,
-									testCase,
-								}),
-						}
-					),
-				name:
-					testCase,
-			});
+			return (
+				{
+					actual:
+						getActualForTestCase(testCase),
+					expected:
+						readTestCaseFile({
+							fileName: expectedFileName,
+							testCase,
+						}),
+				}
+			);
 		}
 
 		function getActualForTestCase(
