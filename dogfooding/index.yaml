@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.7.0 on 2019-09-29T15:11:10.537Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.8.0 on 2019-09-29T19:34:32.482Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -30,6 +30,47 @@
             id: util
             items: promisify
           items:
+            - - id: tests
+                items:
+                  - id: outputEnabledForHtmlAndSvg
+                    items:
+                      id: source
+                      items:
+                        id: fileInOutputEnabledForHtmlAndSvg
+                        type: file
+                  - id: singleSource
+                    items:
+                      id: source
+                      items:
+                        id: fileInSingleSource
+                        type: file
+                  - id: singleSourceWithOutputBaseFilename
+                    items:
+                      id: source
+                      items:
+                        id: fileInSingleSourceWithOutputBaseFilename
+                        type: file
+                  - id: test
+                    type: file
+                    dependsUpon: test
+                    items:
+                      - - id: test
+                          dependsUpon:
+                            - path
+                            - testYamlInDirectory
+                      - - id: testYamlInDirectory
+                          dependsUpon:
+                            - analyzeAndProcessAndRender
+                            - expect
+                            - fs
+                            - path
+                            - readYamlFile
+                          items:
+                            id: readYamlFile
+                            dependsUpon: fs
+                      - - id: fs
+                          type: variable
+                          dependsUpon: fs-extra
             - - id: analyzeAndProcessAndRender
                 dependsUpon:
                   - analyzeAndProcess
@@ -74,6 +115,39 @@
               - id: analyzeAndProcess
                 type: file
                 items:
+                  - - id: tests
+                      items:
+                        - id: sources
+                          items:
+                            - id: first
+                              items:
+                                id: fileInFirst
+                                type: file
+                            - id: second
+                              items:
+                                id: fileInSecond
+                                type: file
+                        - id: test
+                          type: file
+                          dependsUpon:
+                            - analyzeAndProcess
+                            - expect
+                            - getSourcePath
+                            - test
+                          items:
+                            - - id: test
+                                dependsUpon:
+                                  - analyzeAndProcess
+                                  - ensureDir
+                                  - expect
+                                  - getSourcePath
+                            - - id: getSourcePath
+                                dependsUpon: path
+                              - id: ensureDir
+                                type: variable
+                                dependsUpon:
+                                  id: fs-extra
+                                  items: ensureDir
                   - - id: analyzeAndProcess
                       dependsUpon:
                         - analyzeAndProcessSource
@@ -94,6 +168,7 @@
                                     - directory
                                     - isFileContentReversed
                                     - items
+                                    - modifyFileStacksFilePath
                                     - packagePrefixAndScope
                                     - processItems
                                     - rootItemIdentifier
@@ -115,6 +190,8 @@
                             type: parameter
                           - id: isFileContentReversed
                             type: parameter
+                          - id: modifyFileStacksFilePath
+                            type: parameter
                           - id: packagePrefixAndScope
                             type: parameter
                   - - id: analyzer
@@ -128,6 +205,15 @@
                     - id: processItems
                       type: file
                       items:
+                        - - id: tests
+                            items:
+                              id: test
+                              type: file
+                              dependsUpon:
+                                - expect
+                                - path
+                                - processItems
+                                - test
                         - - id: processItems
                             dependsUpon:
                               - createProcessFunctions
@@ -142,6 +228,7 @@
                                     - createOrAddToStacksUsingFileSystem
                                     - createSubsetIdentifierHierarchy
                                     - ensureRootItemWithIdentifier
+                                    - modifyFileStacks
                                     - removePackagePrefixAndScopeInDependsUpon
                                     - replaceDependsUponWithHierarchyFromSeparator
                                     - reverseDescendantsOfItems
@@ -151,8 +238,24 @@
                                   dependsUpon: removeSelfDependentItemsOfType
                                 - id: orderItemsByType
                                   dependsUpon: orderItemsByIndexOfType
-                                - id: stackBinAndTestAtTop
-                                  dependsUpon: createOrAddToStacksOfParentMatch
+                              - - id: modifyFileStacks
+                                  dependsUpon: whenSpecified
+                                  items:
+                                    - - id: whenSpecified
+                                        dependsUpon:
+                                          - createOrAddToStacksOfParentMatch
+                                          - items
+                                          - readStack
+                                        items:
+                                          id: readStack
+                                          dependsUpon:
+                                            - parseYaml
+                                            - readFileSync
+                                            - stacksFilePath
+                                    - - id: items
+                                        type: parameter
+                                      - id: stacksFilePath
+                                        type: parameter
                                 - id: flattenSingleRootItemWhenHasOnlyItemsAndType
                                   dependsUpon: hasOtherProperties
                                   items:
@@ -160,7 +263,17 @@
                                         dependsUpon: items
                                     - - id: items
                                         type: parameter
-                              - - id: removeSelfDependentItemsOfType
+                              - - id: parseYaml
+                                  type: variable
+                                  dependsUpon:
+                                    id: js-yaml
+                                    items: safeLoad
+                                - id: readFileSync
+                                  type: variable
+                                  dependsUpon:
+                                    id: fs
+                                    items: readFileSync
+                                - id: removeSelfDependentItemsOfType
                                   type: variable
                                   dependsUpon:
                                     id: processors
@@ -424,48 +537,6 @@
                                           dependsUpon: reverseDescendantsOfItems
                               - - id: isSingleAnonymous
                                   type: file
-                          - id: tests
-                            items:
-                              id: test
-                              type: file
-                              dependsUpon:
-                                - expect
-                                - path
-                                - processItems
-                                - test
-                    - id: tests
-                      items:
-                        - id: sources
-                          items:
-                            - id: first
-                              items:
-                                id: fileInFirst
-                                type: file
-                            - id: second
-                              items:
-                                id: fileInSecond
-                                type: file
-                        - id: test
-                          type: file
-                          dependsUpon:
-                            - analyzeAndProcess
-                            - expect
-                            - getSourcePath
-                            - test
-                          items:
-                            - - id: test
-                                dependsUpon:
-                                  - analyzeAndProcess
-                                  - ensureDir
-                                  - expect
-                                  - getSourcePath
-                            - - id: getSourcePath
-                                dependsUpon: path
-                              - id: ensureDir
-                                type: variable
-                                dependsUpon:
-                                  id: fs-extra
-                                  items: ensureDir
               - id: createSourcesFromPackages
                 type: file
                 items:
@@ -478,47 +549,6 @@
                         - test
                   - - id: createSourcesFromPackages
                       dependsUpon: path
-              - id: tests
-                items:
-                  - id: outputEnabledForHtmlAndSvg
-                    items:
-                      id: source
-                      items:
-                        id: fileInOutputEnabledForHtmlAndSvg
-                        type: file
-                  - id: singleSource
-                    items:
-                      id: source
-                      items:
-                        id: fileInSingleSource
-                        type: file
-                  - id: singleSourceWithOutputBaseFilename
-                    items:
-                      id: source
-                      items:
-                        id: fileInSingleSourceWithOutputBaseFilename
-                        type: file
-                  - id: test
-                    type: file
-                    dependsUpon: test
-                    items:
-                      - - id: test
-                          dependsUpon:
-                            - path
-                            - testYamlInDirectory
-                      - - id: testYamlInDirectory
-                          dependsUpon:
-                            - analyzeAndProcessAndRender
-                            - expect
-                            - fs
-                            - path
-                            - readYamlFile
-                          items:
-                            id: readYamlFile
-                            dependsUpon: fs
-                      - - id: fs
-                          type: variable
-                          dependsUpon: fs-extra
         - id: createParameterFromCliArguments
           type: file
           items:
