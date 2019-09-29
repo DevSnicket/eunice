@@ -14,6 +14,9 @@ module.exports =
 		isFileContentReversed,
 		outputBaseFileName,
 		outputDirectoryPath,
+		outputHtml = true,
+		outputSvg,
+		outputYaml,
 		packageNames,
 		packagePrefix,
 		packageScope,
@@ -34,11 +37,20 @@ module.exports =
 				parseBoolean(includeSourceMap),
 			isFileContentReversed:
 				parseBoolean(isFileContentReversed),
-			outputPath:
-				createOutputPath({
-					outputBaseFileName,
-					outputDirectoryPath,
-				}),
+			output:
+				{
+					enabled:
+						{
+							html: parseBoolean(outputHtml),
+							svg: parseBoolean(outputSvg),
+							yaml: parseBoolean(outputYaml),
+						},
+					path:
+						createOutputPath({
+							outputBaseFileName,
+							outputDirectoryPath,
+						}),
+				},
 			packages:
 				(packageNames || packagePrefix || packageScope)
 				&&
@@ -75,8 +87,8 @@ function parseBoolean(
 	value,
 ) {
 	return (
-		(typeof value === "string" && value === "true")
+		value === true
 		||
-		value
+		value === "true"
 	);
 }

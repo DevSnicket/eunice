@@ -19,15 +19,23 @@
 			"type": "node"
 		},
 		{
-			"args": [ "--accept-license" ],
-			"name": "bin no arguments",
+			"args": [
+				"--accept-license",
+				"--output-svg",
+				"--output-yaml",
+			],
+			"name": "bin defaults",
 			"program": "${workspaceFolder}/bin.js",
 			"request": "launch",
 			"type": "node",
 		},
 		{
-			"args": [ "--accept-license" ],
-			"name": "bin no arguments dist",
+			"args": [
+				"--accept-license",
+				"--output-svg",
+				"--output-yaml",
+			],
+			"name": "bin defaults dist",
 			"program": "${workspaceFolder}/dist/bin.js",
 			"request": "launch",
 			"type": "node"

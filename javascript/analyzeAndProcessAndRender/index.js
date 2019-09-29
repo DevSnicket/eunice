@@ -35,12 +35,14 @@ module.exports =
 		includeServiceWorkers = false,
 		includeSourceMap = false,
 		isFileContentReversed = false,
-		outputPath,
+		output,
 		packages = null,
 		sources,
 		version,
 	}) =>
-		writeOutput({
+		renderAndWriteOutput({
+			enabled:
+				output.enabled,
 			header:
 				formatHeader({
 					date,
@@ -48,7 +50,7 @@ module.exports =
 				}),
 			includeServiceWorkers,
 			includeSourceMap,
-			...outputPath,
+			...output.path,
 			yaml:
 				formatYaml(
 					await analyzeAndProcess({
@@ -104,38 +106,43 @@ function createSourcesWithPackages({
 	);
 }
 
-async function writeOutput({
+async function renderAndWriteOutput({
 	baseFileName,
 	directoryPath,
+	enabled,
 	header,
 	includeServiceWorkers,
 	includeSourceMap,
 	yaml,
 }) {
-	const baseFilePath =
-		baseFileName
-		?
-		path.join(directoryPath, baseFileName)
-		:
-		`${directoryPath}${path.sep}`;
+	const
+		baseFilePath =
+			baseFileName
+			?
+			path.join(directoryPath, baseFileName)
+			:
+			`${directoryPath}${path.sep}`,
+		yamlWithHeader =
+			`# ${header}\n${yaml}`;
 
-	const yamlFilePath = `${baseFilePath}.yaml`;
+	if (enabled.yaml)
+		await writeFile(
+			`${baseFilePath}.yaml`,
+			yamlWithHeader,
+		);
 
-	await writeFile(
-		yamlFilePath,
-		`# ${header}\n${yaml}`,
-	);
+	if (enabled.svg)
+		await writeFile(
+			`${baseFilePath}.svg`,
+			`<!-- ${header}-->\n${getSvgForYaml({ yaml })}`,
+		);
 
-	await writeFile(
-		`${baseFilePath}.svg`,
-		`<!-- ${header}-->\n${getSvgForYaml({ yaml })}`,
-	);
-
-	await writeHarness({
-		directoryPath,
-		htmlFileName: `${baseFileName || ""}.html`,
-		includeServiceWorkers,
-		includeSourceMap,
-		yamlFilePath,
-	});
+	if (enabled.html)
+		await writeHarness({
+			directoryPath,
+			htmlFileName: `${baseFileName || ""}.html`,
+			includeServiceWorkers,
+			includeSourceMap,
+			yaml: yamlWithHeader,
+		});
 }
