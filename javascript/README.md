@@ -1,4 +1,4 @@
-# Eunice ![](https://raw.githubusercontent.com/DevSnicket/eunice-renderer/master/getSvgElementForStack/createArrows/test/withUse/testCases/default-height.svg?sanitize=true) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
+# Eunice ![](https://raw.githubusercontent.com/DevSnicket/eunice/master/arrows/default-height.svg?sanitize=true) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
 
 Eunice is based on the premise that unidirectional dependencies can be beneficial to structure and modularity in software. Eunice's approach isn't limited to direct dependencies, but includes indirect dependencies as well.
 
@@ -9,4 +9,4 @@ try it out in a directory of JavaScript (Flow, JSX and TypeScript also supported
 npx eunice
 ```
 
-For more information see [GitHub](https://github.com/DevSnicket/Eunice#readme).
+For more information see [https://devsnicket.com/eunice](https://devsnicket.com/eunice).
