@@ -5,9 +5,13 @@ const
 	createStructureAndEnsureTypes = require("./createStructureAndEnsureTypes");
 
 module.exports =
-	cliArguments =>
-		createStructureAndEnsureTypes(
-			convertKebabToCamelCase(
+	({
+		cliArguments,
+		pathSeparator,
+	}) =>
+		createStructureAndEnsureTypes({
+			...convertKebabToCamelCase(
 				cliArguments,
 			),
-		);
+			pathSeparator,
+		});

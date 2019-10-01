@@ -17,7 +17,7 @@ module.exports =
 		babelParserPlugins,
 		date,
 		directoryToCreateOrAddToStacksFrom = null,
-		ignorePathPattern = /(^|\\)(\..*|node_modules)$/,
+		ignorePathPattern,
 		includeServiceWorkers = false,
 		includeSourceMap = false,
 		isFileContentReversed = false,

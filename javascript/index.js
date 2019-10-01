@@ -7,10 +7,11 @@ const
 	createParameterFromCliArguments = require("./createParameterFromCliArguments"),
 	getOrPromptForLicenseAcceptance = require("./getOrPromptForLicenseAcceptance"),
 	minimist = require("minimist"),
+	path = require("path"),
 	supportsColor = require("supports-color"),
 	{ version } = require("./package.json");
 
-const processArguments =
+const cliArguments =
 	minimist(
 		process.argv.slice(2),
 	);
@@ -21,7 +22,10 @@ const processArguments =
 		console.log("Analyzing...");
 
 		await analyzeAndProcessAndRender({
-			...createParameterFromCliArguments(processArguments),
+			...createParameterFromCliArguments({
+				cliArguments,
+				pathSeparator: path.sep,
+			}),
 			date: Date.now(),
 			version,
 		});
@@ -38,7 +42,7 @@ function isLicenseAccepted() {
 			distSubdirectoryPath: __dirname,
 			isColorSupported: supportsColor.stdout,
 			log: console.log,
-			processArguments,
+			processArguments: cliArguments,
 			standardInputStream: process.stdin,
 			version,
 		})

@@ -8,7 +8,7 @@ module.exports =
 	({
 		babelParserPlugins,
 		directories = ".",
-		ignorePathPattern,
+		ignorePathPattern = "(^|/)(\\..*|node_modules)$",
 		includeServiceWorkers,
 		includeSourceMap,
 		isFileContentReversed,
@@ -21,6 +21,7 @@ module.exports =
 		packageNames,
 		packagePrefix,
 		packageScope,
+		pathSeparator,
 		rootItemIdentifiers,
 		...restOfOptions
 	}) => (
@@ -31,7 +32,10 @@ module.exports =
 			ignorePathPattern:
 				ignorePathPattern
 				&&
-				new RegExp(ignorePathPattern),
+				createPathRegularExpression({
+					pattern: ignorePathPattern,
+					separator: pathSeparator,
+				}),
 			includeServiceWorkers:
 				parseBoolean(includeServiceWorkers),
 			includeSourceMap:
@@ -83,6 +87,22 @@ function ensureArray(
 		argument
 		:
 		[ argument ]
+	);
+}
+
+function createPathRegularExpression({
+	pattern,
+	separator,
+}) {
+	return (
+		pattern
+		&&
+		new RegExp(
+			pattern.replace(
+				/\//g,
+				separator.replace("\\", "\\\\"),
+			),
+		)
 	);
 }
 

@@ -5,14 +5,21 @@
 
 const createParameterFromCliArguments = require(".");
 
+const pathSeparator = "/";
+
 test(
-	"All undefined returns default output base file name, and output and source directory of current.",
+	"All undefined and forward slash path separator, returns default ignore path pattern, output enabled and base file name; and output and source directory of current.",
 	() =>
 		expect(
-			createParameterFromCliArguments({}),
+			createParameterFromCliArguments({
+				cliArguments: {},
+				pathSeparator,
+			}),
 		)
 		.toEqual(
 			{
+				ignorePathPattern:
+					/(^|\/)(\..*|node_modules)$/,
 				output:
 					{
 						enabled:
@@ -35,9 +42,11 @@ test(
 		const babelParserPlugins = "plugin";
 
 		expect(
-			createParameterFromCliArguments(
-				{ "babel-parser-plugins": babelParserPlugins },
-			)
+			createParameterFromCliArguments({
+				cliArguments:
+					{ "babel-parser-plugins": babelParserPlugins },
+				pathSeparator,
+			})
 			.babelParserPlugins,
 		)
 		.toEqual(
@@ -50,9 +59,11 @@ test(
 	"\"include-service-workers\" of string \"true\" returns boolean true.",
 	() =>
 		expect(
-			createParameterFromCliArguments(
-				{ "include-service-workers": "true" },
-			)
+			createParameterFromCliArguments({
+				cliArguments:
+					{ "include-service-workers": "true" },
+				pathSeparator,
+			})
 			.includeServiceWorkers,
 		)
 		.toEqual(
@@ -66,9 +77,11 @@ test(
 		const ignorePathPattern = "ignore";
 
 		expect(
-			createParameterFromCliArguments(
-				{ "ignore-path-pattern": ignorePathPattern },
-			)
+			createParameterFromCliArguments({
+				cliArguments:
+					{ "ignore-path-pattern": ignorePathPattern },
+				pathSeparator,
+			})
 			.ignorePathPattern,
 		)
 		.toEqual(
@@ -82,9 +95,13 @@ test(
 	() =>
 		expect(
 			createParameterFromCliArguments({
-				"package-names": [ "package1", "package2" ],
-				"package-prefix": "packagePrefix",
-				"package-scope": "packageScope",
+				cliArguments:
+					{
+						"package-names": [ "package1", "package2" ],
+						"package-prefix": "packagePrefix",
+						"package-scope": "packageScope",
+					},
+				pathSeparator,
 			})
 			.packages,
 		)
@@ -102,8 +119,12 @@ test(
 	() =>
 		expect(
 			createParameterFromCliArguments({
-				"output-base-file-name": "outputBaseFileName",
-				"output-directory-path": "outputDirectoryPath",
+				cliArguments:
+					{
+						"output-base-file-name": "outputBaseFileName",
+						"output-directory-path": "outputDirectoryPath",
+					},
+				pathSeparator,
 			})
 			.output.path,
 		)
@@ -120,8 +141,12 @@ test(
 	() =>
 		expect(
 			createParameterFromCliArguments({
-				directories: [ "directory1", "directory2" ],
-				"root-item-identifiers": [ "rootItemIdentifier1", "rootItemIdentifier2" ],
+				cliArguments:
+					{
+						directories: [ "directory1", "directory2" ],
+						"root-item-identifiers": [ "rootItemIdentifier1", "rootItemIdentifier2" ],
+					},
+				pathSeparator,
 			})
 			.sources,
 		)

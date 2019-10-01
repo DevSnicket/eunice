@@ -19,23 +19,15 @@
 			"type": "node"
 		},
 		{
-			"args": [
-				"--accept-license",
-				"--output-svg",
-				"--output-yaml",
-			],
-			"name": "bin defaults",
+			"args": [ "--accept-license" ],
+			"name": "bin accept license and defaults",
 			"program": "${workspaceFolder}/bin.js",
 			"request": "launch",
 			"type": "node",
 		},
 		{
-			"args": [
-				"--accept-license",
-				"--output-svg",
-				"--output-yaml",
-			],
-			"name": "bin defaults dist",
+			"args": [ "--accept-license" ],
+			"name": "bin accept license and defaults dist",
 			"program": "${workspaceFolder}/dist/bin.js",
 			"request": "launch",
 			"type": "node"
@@ -47,7 +39,7 @@
 					"--directory-to-create-or-add-to-stacks-from=dogfooding",
 					"--include-service-workers=true",
 					"--include-source-map=true",
-					"--ignore-path-pattern=(^|\\\\)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$",
+					"--ignore-path-pattern=(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$",
 					"--modify-file-stacks-file=dogfooding/modify-file-stacks.yaml",
 					"--output-base-file-name=index",
 					"--output-directory-path=dogfooding/output",
@@ -78,7 +70,7 @@
 					"--accept-license",
 					"--directory-to-create-or-add-to-stacks-from=dogfooding",
 					"--include-service-workers=true",
-					"--ignore-path-pattern=(^|\\\\)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$",
+					"--ignore-path-pattern=(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$",
 					"--modify-file-stacks-file=dogfooding/modify-file-stacks.yaml",
 					"--output-base-file-name=index",
 					"--output-directory-path=dogfooding/output",

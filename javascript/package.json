@@ -98,11 +98,11 @@
 		"build": "npm run build-prepare && npx webpack -p --config webpack.config.js && rm dist/bin.js.map",
 		"build-development": "npm run build-prepare && npx webpack -d --config webpack.config.js",
 		"build-prepare": "rm -rf dist && mkdir dist && cp -r node_modules/@devsnicket/eunice-renderer-test-harness/dist/harness dist && rm dist/harness/harness.js.map",
-		"dogfooding": "(cd dogfooding && rm -rf output && mkdir output && cd .. && node bin --accept-license --directory-to-create-or-add-to-stacks-from=dogfooding --include-service-workers=true --include-source-map=true --ignore-path-pattern=\"(^|\\\\)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$\" --modify-file-stacks-file=dogfooding/modify-file-stacks.yaml --output-base-file-name=index --output-directory-path=dogfooding/output --output-svg --output-yaml --package-names=call-with-process-standard-streams --package-names=dependency-and-structure --package-names=javascript-analyzer --package-names=processors --package-names=renderer --package-names=renderer-test-harness --package-names=run-tests-from-file-system --package-names=test-harnesses --package-names=test-harnesses-processor-plugins --package-prefix=eunice- --package-scope=devsnicket --directories=. --root-item-identifiers=javascript)",
+		"dogfooding": "(cd dogfooding && rm -rf output && mkdir output && cd .. && node bin --accept-license --directory-to-create-or-add-to-stacks-from=dogfooding --include-service-workers=true --include-source-map=true --ignore-path-pattern=\"(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$\" --modify-file-stacks-file=dogfooding/modify-file-stacks.yaml --output-base-file-name=index --output-directory-path=dogfooding/output --output-svg --output-yaml --package-names=call-with-process-standard-streams --package-names=dependency-and-structure --package-names=javascript-analyzer --package-names=processors --package-names=renderer --package-names=renderer-test-harness --package-names=run-tests-from-file-system --package-names=test-harnesses --package-names=test-harnesses-processor-plugins --package-prefix=eunice- --package-scope=devsnicket --directories=. --root-item-identifiers=javascript)",
 		"lint": "npx eslint .",
 		"harness": "(cd harness && rm -rf output && mkdir output && npx webpack -p --config webpack.config.js)",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dogfooding/output/**\" ! -path \"./dist/*\" ! -path \"./gh-pages/**\" ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest --runInBand"
 	},
-	"version": "6.9.0"
+	"version": "6.9.1"
 }
