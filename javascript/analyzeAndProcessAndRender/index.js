@@ -10,28 +10,14 @@ const
 	{ promisify } = require("util"),
 	writeHarness = require("@devsnicket/eunice-renderer-test-harness/writeHarness");
 
-const
-	ignoreDirectoryNamesDefault =
-		[
-			".devsnicket-plugin-discovery",
-			".git",
-			".vscode",
-			"dist",
-			"node_modules",
-			"output",
-			"test-cases",
-			"test-coverage",
-		],
-	writeFile =
-		promisify(fs.writeFile);
+const writeFile = promisify(fs.writeFile);
 
 module.exports =
 	async({
 		babelParserPlugins,
 		date,
 		directoryToCreateOrAddToStacksFrom = null,
-		ignoreDirectoryNames = ignoreDirectoryNamesDefault,
-		ignorePathPattern = createIgnorePathPatternFromDirectoryNames(ignoreDirectoryNames),
+		ignorePathPattern = /(^|\\)(\..*|node_modules)$/,
 		includeServiceWorkers = false,
 		includeSourceMap = false,
 		isFileContentReversed = false,
@@ -84,12 +70,6 @@ function formatHeader({
 			.toISOString()
 		);
 	}
-}
-
-function createIgnorePathPatternFromDirectoryNames(
-	directoryNames,
-) {
-	return new RegExp(`(^|\\${path.sep})(${directoryNames.join("|")})$`);
 }
 
 function createSourcesWithPackages({
