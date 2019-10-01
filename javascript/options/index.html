@@ -46,19 +46,10 @@
             </div>
             <div class="box" id="ignore-paths">
                 <h3>ignore paths</h3>
-                <p>The following sub-directories are ignored by default:<br/>
-                <div style="margin-left: 2em">
-                    <div>.devsnicket-plugin-discovery</div>
-                    <div>.git</div>
-                    <div>.vscode</div>
-                    <div>dist</div>
-                    <div>node_modules</div>
-                    <div>output</div>
-                    <div>test-cases</div>
-                    <div>test-coverage</div>
-                </div>
-                <p>A regular expression of file and directory paths to be ignored can be specified:</p>
-                <code>npx eunice --ignore-path-pattern=(ignoreDirectory1|ignoreDirectory2)</code>
+                <p>Files and sub-directories with names that start with a "." or are named node_modules are ignored by default.</p>
+                <p>A regular expression can be specified to override the default:</p>
+                <code>npx eunice --ignore-path-pattern="(^|/)(\..*|node_modules)$"</code>
+                <p>The forward slash character is converted to an escaped backslash when backslash is the path segment separator.</p>
             </div>
             <div class="box" id="babel-parser-plugins">
                 <h3>Babel parser plugins</h3>
