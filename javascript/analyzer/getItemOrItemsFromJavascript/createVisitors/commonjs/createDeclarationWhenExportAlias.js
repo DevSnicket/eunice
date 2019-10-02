@@ -1,30 +1,26 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 const
-	getIdentifierWhenExport = require("./getIdentifierWhenExport"),
+	getIdentifierAndTypeWhenExport = require("./getIdentifierAndTypeWhenExport"),
 	{ findBlockOrIdentifiableParent } = require("../parentFunctionsFromAncestors");
 
 module.exports =
 	({
-		addDeclarationIn,
 		ancestors,
 		assignmentExpression,
 	}) => {
-		addDeclarationWhenFile(
+		const declaration =
 			createDeclarationWhenAssignmentExpressionOfExport(
 				assignmentExpression,
-			),
-		);
+			);
 
-		function addDeclarationWhenFile(
-			declaration,
-		) {
-			if (declaration && !findBlockOrIdentifiableParent(ancestors))
-				addDeclarationIn({
-					declaration,
-					parent: null,
-				});
-		}
+		return (
+			declaration
+			&&
+			!findBlockOrIdentifiableParent(ancestors)
+			&&
+			declaration
+		);
 	};
 
 function createDeclarationWhenAssignmentExpressionOfExport({
@@ -36,13 +32,12 @@ function createDeclarationWhenAssignmentExpressionOfExport({
 	return (
 		alias
 		&&
-		createDeclarationWhenAlias({
+		createDeclaration({
 			alias,
-			identifier:
-				getIdentifierWhenExport({
-					assignmentExpressionLeft: left,
-					defaultIdentifier: null,
-				}),
+			...getIdentifierAndTypeWhenExport({
+				assignmentExpressionLeft: left,
+				defaultIdentifier: alias,
+			}),
 		})
 	);
 }
@@ -57,19 +52,19 @@ function getNameWhenIdentifier(
 	);
 }
 
-function createDeclarationWhenAlias({
+function createDeclaration({
 	alias,
 	identifier,
+	type,
 }) {
 	return (
 		identifier
-		&&
-		alias !== identifier
 		&&
 		{
 			dependsUpon: alias,
 			id: identifier,
 			isPeerFunctionRequired: true,
+			type,
 		}
 	);
 }

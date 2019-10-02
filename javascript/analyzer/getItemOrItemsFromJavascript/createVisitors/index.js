@@ -4,7 +4,7 @@ const
 	addClass = require("./addClass"),
 	addFromCall = require("./addFromCall"),
 	addVariables = require("./addVariables"),
-	addWhenCommonjsExportAlias = require("./commonjs/addWhenExportAlias"),
+	createDeclarationWhenCommonjsExportAlias = require("./commonjs/createDeclarationWhenExportAlias"),
 	createDeclarations = require("./createDeclarations"),
 	createDependsUponIdentifiers = require("./createDependsUponIdentifiers"),
 	createFileItemOrItems = require("./createFileItemOrItems"),
@@ -85,12 +85,17 @@ module.exports =
 			assignmentExpression,
 			ancestors,
 		) {
-			addWhenCommonjsExportAlias({
-				addDeclarationIn:
-					declarations.addDeclarationIn,
-				ancestors,
-				assignmentExpression,
-			});
+			const declaration =
+				createDeclarationWhenCommonjsExportAlias({
+					ancestors,
+					assignmentExpression,
+				});
+
+			if (declaration)
+				declarations.addDeclarationIn({
+					declaration,
+					parent: null,
+				});
 		}
 
 		function visitCallExpression(

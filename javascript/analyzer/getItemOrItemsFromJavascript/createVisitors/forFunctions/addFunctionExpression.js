@@ -1,7 +1,7 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 const
-	getIdentifierWhenCommonjsExport = require("../commonjs/getIdentifierWhenExport"),
+	getIdentifierAndTypeWhenCommonjsExport = require("../commonjs/getIdentifierAndTypeWhenExport"),
 	getParentFromAncestors = require("../getParentFromAncestors");
 
 module.exports =
@@ -40,23 +40,20 @@ module.exports =
 					createDeclarationForFunction({
 						functionDeclarationOrExpression:
 							functionExpression,
-						identifier:
-							getIdentifier(),
-						type:
-							null,
+						...getIdentifierAndType(),
 					}),
 				parent:
 					null,
 			});
 
-			function getIdentifier() {
+			function getIdentifierAndType() {
 				return (
-					getIdentifierWhenCommonjsExport({
+					getIdentifierAndTypeWhenCommonjsExport({
 						assignmentExpressionLeft: parent.left,
 						defaultIdentifier: functionExpression.id,
 					})
 					||
-					parent.left.name
+					{ identifier: parent.left.name }
 				);
 			}
 		}

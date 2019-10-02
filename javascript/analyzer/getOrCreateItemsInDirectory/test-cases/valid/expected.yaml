@@ -16,6 +16,7 @@
         type: variable
         dependsUpon: moduleExportsOfFunctionArrow1
     - - id: differentName
+        type: export
         dependsUpon: moduleExportsOfFunctionArrow1
 - moduleExportsOfFunctionArrow1
 - moduleExportsOfFunctionArrow2
