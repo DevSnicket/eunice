@@ -29,7 +29,6 @@ Currently there are processors written in JavaScript to:
 - [remove redundant prefix of parent identifier and separator](removeRedundantParentIdentifierPrefix)
 - [remove self dependent items of a type](removeSelfDependentItemsOfType)
 - [replace identifiers using a regular expression](replaceIdentifiers)
-- [sets the identifier of anonymous items to the parent identifier](setIdentifierOfAnonymousToParent)
 - [sets the type of root items](setTypeOfRootItems)
 - [unstack independent items](unstackIndependent)
 

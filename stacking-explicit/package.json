@@ -11,7 +11,6 @@
 		"eunice-processors-removeSelfDependentItemsOfType": "removeSelfDependentItemsOfType/bin.js",
 		"eunice-processors-replaceDependsUponWithHierarchyFromSeparator": "replaceDependsUpon/withHierarchyFromSeparator/bin.js",
 		"eunice-processors-replaceIdentifiers": "replaceIdentifiers/bin.js",
-		"eunice-processors-setIdentifierOfAnonymousToParent": "setIdentifierOfAnonymousToParent/bin.js",
 		"eunice-processors-setTypeOfRootItems": "setTypeOfRootItems/bin.js",
 		"eunice-processors-unstackIndependent": "unstackIndependent/bin.js"
 	},
@@ -84,5 +83,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "npx jest --runInBand"
 	},
-	"version": "8.8.0"
+	"version": "9.0.0"
 }

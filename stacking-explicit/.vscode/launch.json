@@ -150,28 +150,6 @@
 			{
 				"args":
 					[
-						"--items=[item1,item2]",
-					],
-				"name": "setIdentifierOfAnonymousToParent",
-				"program": "${workspaceFolder}/setIdentifierOfAnonymousToParent/bin.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--runInBand",
-						"setIdentifierOfAnonymousToParent/test.js",
-					],
-				"disableOptimisticBPs": true,
-				"name": "setIdentifierOfAnonymousToParent jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[
 						"--items=",
 						"--type=",
 					],
