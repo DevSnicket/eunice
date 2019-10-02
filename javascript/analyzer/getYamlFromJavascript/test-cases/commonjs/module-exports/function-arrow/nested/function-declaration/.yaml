@@ -1,1 +1,2 @@
-- items: nested
+- type: export
+  items: nested

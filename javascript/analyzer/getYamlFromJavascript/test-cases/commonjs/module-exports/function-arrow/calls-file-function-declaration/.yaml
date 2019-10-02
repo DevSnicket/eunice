@@ -1,2 +1,3 @@
-- - dependsUpon: file
+- - type: export
+    dependsUpon: file
 - - file

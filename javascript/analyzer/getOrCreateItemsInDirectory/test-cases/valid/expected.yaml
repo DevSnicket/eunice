@@ -18,19 +18,27 @@
     - - id: differentName
         type: export
         dependsUpon: moduleExportsOfFunctionArrow1
-- moduleExportsOfFunctionArrow1
-- moduleExportsOfFunctionArrow2
+- id: moduleExportsOfFunctionArrow1
+  items:
+    type: export
+- id: moduleExportsOfFunctionArrow2
+  items:
+    type: export
 - id: moduleExportsOfFunctionArrowWithFileFunction
-  items: fileFunction
+  items:
+    - - type: export
+    - - fileFunction
 - id: moduleExportsOfFunctionArrowWithNestedFunction
   items:
+    type: export
     items: nestedFunction
 - id: moduleExportsOfFunctionArrowWithNestedFunctionDeclarationThatRequiresAndCallsFunctionInSameDirectory
   items:
     - - id: moduleExportsOfFunctionArrow1
         type: variable
         dependsUpon: moduleExportsOfFunctionArrow1
-    - - items:
+    - - type: export
+        items:
           id: nestedFunction
           dependsUpon: moduleExportsOfFunctionArrow1
 - notIgnored/ignored
@@ -51,7 +59,9 @@
     - moduleExportsOfFunctionArrow1
     - moduleExportsOfFunctionArrow2
 - subdirectory/emptyInSubdirectory
-- subdirectory/moduleExportsOfFunctionArrowInSubdirectory
+- id: subdirectory/moduleExportsOfFunctionArrowInSubdirectory
+  items:
+    type: export
 - id: subdirectory/requireCurrentDirectoryThatIsCalled
   dependsUpon: subdirectory
 - id: subdirectory/requireCurrentDirectoryWithTrailingSlashThatIsCalled

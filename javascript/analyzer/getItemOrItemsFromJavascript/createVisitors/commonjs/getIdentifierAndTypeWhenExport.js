@@ -5,18 +5,10 @@ module.exports =
 		assignmentExpressionLeft,
 		defaultIdentifier,
 	}) => {
-		const identifier =
+		return (
 			getWhenIdentifier()
 			||
-			getIdentifierWhenMember();
-
-		return (
-			identifier
-			&&
-			{
-				identifier,
-				type: "export",
-			}
+			getIdentifierWhenMember()
 		);
 
 		function getWhenIdentifier() {
@@ -25,7 +17,7 @@ module.exports =
 				&&
 				assignmentExpressionLeft.name === "exports"
 				&&
-				assignmentExpressionLeft.name
+				getIdentifierWithType(assignmentExpressionLeft.name)
 			);
 		}
 
@@ -54,15 +46,28 @@ module.exports =
 						return (
 							isModuleExport(assignmentExpressionLeft)
 							&&
-							defaultIdentifier
-							&&
-							(defaultIdentifier.name || defaultIdentifier)
+							getIdentifierWithType(
+								defaultIdentifier
+								&&
+								(defaultIdentifier.name || defaultIdentifier),
+							)
 						);
 					}
 				}
 			}
 		}
 	};
+
+function whenExportProperty({
+	object,
+	property,
+}) {
+	return (
+		object.name === "exports"
+		&&
+		getIdentifierWithType(property.name)
+	);
+}
 
 function whenModuleExportProperty({
 	object,
@@ -73,7 +78,7 @@ function whenModuleExportProperty({
 		&&
 		isModuleExport(object)
 		&&
-		property.name
+		getIdentifierWithType(property.name)
 	);
 }
 
@@ -88,13 +93,13 @@ function isModuleExport({
 	);
 }
 
-function whenExportProperty({
-	object,
-	property,
-}) {
+function getIdentifierWithType(
+	identifier,
+) {
 	return (
-		object.name === "exports"
-		&&
-		property.name
+		{
+			identifier,
+			type: "export",
+		}
 	);
 }
