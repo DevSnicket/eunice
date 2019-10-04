@@ -20,11 +20,11 @@ const
 				createOrAddToStacksOfParentMatch,
 				createOrAddToStacksUsingFileSystem,
 			},
-		setIdentifierOfAnonymousToParent,
 		setTypeOfRootItems,
 		unstackIndependent,
 	} = require("@devsnicket/eunice-processors"),
-	reverseDescendantsOfItems = require("./reverseDescendantsOfItems");
+	reverseDescendantsOfItems = require("./reverseDescendantsOfItems"),
+	setIdentifierOfAnonymousExportToParent = require("./setIdentifierOfAnonymousExportToParent");
 
 module.exports =
 	({
@@ -65,7 +65,7 @@ module.exports =
 						identifier: rootItemIdentifier,
 						items,
 					}),
-				setIdentifierOfAnonymousToParent,
+				setIdentifierOfAnonymousExportToParent,
 				removeSelfDependentVariables,
 				orderItemsByType,
 				items =>
