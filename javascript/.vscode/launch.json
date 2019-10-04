@@ -6,28 +6,25 @@
 			"type": "node"
 		},
 		{
-			"args":
-				[
-					"--collect-coverage=false",
-					"--runInBand",
-					"analyzeAndProcessAndRender/analyzeAndProcess/processItems/tests/test.js",
-				],
-			"disableOptimisticBPs": true,
-			"name": "analyzeAndProcessAndRender analyzeAndProcess processItems Jest",
-			"program": "${workspaceFolder}/node_modules/jest/node_modules/jest-cli/bin/jest.js",
-			"request": "launch",
-			"type": "node"
-		},
-		{
-			"args": [ "--accept-license" ],
-			"name": "bin accept license and defaults",
+			"args": [
+				"--accept-license",
+				"--ignore-path-pattern=(^|/)(\\..*|dist|gh-pages|node_modules|output|test-coverage)$",
+				"--output-svg",
+				"--output-yaml"
+			],
+			"name": "bin this package only",
 			"program": "${workspaceFolder}/bin.js",
 			"request": "launch",
 			"type": "node",
 		},
 		{
-			"args": [ "--accept-license" ],
-			"name": "bin accept license and defaults dist",
+			"args": [
+				"--accept-license",
+				"--ignore-path-pattern=(^|/)(\\..*|dist|gh-pages|node_modules|output|test-coverage)$",
+				"--output-svg",
+				"--output-yaml"
+			],
+			"name": "bin (dist) this package only",
 			"program": "${workspaceFolder}/dist/bin.js",
 			"request": "launch",
 			"type": "node"
@@ -59,7 +56,7 @@
 					"--directories=.",
 					"--root-item-identifiers=javascript"
 				],
-			"name": "bin dogfooding",
+			"name": "bin all packages",
 			"program": "${workspaceFolder}/bin.js",
 			"request": "launch",
 			"type": "node"
@@ -90,7 +87,7 @@
 					"--directories=.",
 					"--root-item-identifiers=javascript"
 				],
-			"name": "bin dogfooding dist",
+			"name": "bin (dist) all packages",
 			"program": "${workspaceFolder}/dist/bin.js",
 			"request": "launch",
 			"type": "node"
@@ -100,7 +97,7 @@
 				[
 					"--collect-coverage=false",
 					"--runInBand",
-					"createParameterFromCliArguments/test.js"
+					"analyzeAndProcessAndRender/analyzeAndProcess/processItems/createProcessFunctions/setIdentifierOfAnonymousExportToParent/test.js"
 				],
 			"disableOptimisticBPs": true,
 			"name": "Jest",
