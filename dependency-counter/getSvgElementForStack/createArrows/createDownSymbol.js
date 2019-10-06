@@ -7,8 +7,7 @@ const
 module.exports =
 	({
 		createElement,
-		/* cspell:disable-next-line */
-		fill = "darkgreen",
+		fill,
 		id,
 	}) =>
 		createSymbol({

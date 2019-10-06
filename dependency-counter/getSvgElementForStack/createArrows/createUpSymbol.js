@@ -7,6 +7,7 @@ const
 module.exports =
 	({
 		createElement,
+		fill,
 		id,
 		withPrecision,
 	}) => {
@@ -17,8 +18,7 @@ module.exports =
 				polygon:
 					createPolygon({
 						createElement,
-						/* cspell:disable-next-line */
-						fill: "darkred",
+						fill,
 						transform: flipFirstAxis,
 					}),
 				preserveAspectRatio:

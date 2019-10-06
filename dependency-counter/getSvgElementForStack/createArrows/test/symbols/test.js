@@ -18,6 +18,7 @@ test(
 			element:
 				createDownSymbol({
 					createElement,
+					fill: "fuchsia",
 					id: "down-arrow",
 				}),
 			testCase:
@@ -70,6 +71,7 @@ test(
 			element:
 				createRightSymbol({
 					createElement,
+					fill: "fuchsia",
 					id: "right-arrow",
 				}),
 			testCase:
@@ -84,6 +86,7 @@ test(
 			element:
 				createUpSymbol({
 					createElement,
+					fill: "fuchsia",
 					id: "up-arrow",
 					withPrecision,
 				}),

@@ -7,6 +7,7 @@ const
 module.exports =
 	({
 		createElement,
+		fill,
 		id,
 	}) =>
 		createSymbol({
@@ -15,8 +16,7 @@ module.exports =
 			polygon:
 				createPolygon({
 					createElement,
-					/* cspell:disable-next-line */
-					fill: "darkred",
+					fill,
 					transform: swapAxis,
 				}),
 			preserveAspectRatio:
