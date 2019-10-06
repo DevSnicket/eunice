@@ -1,18 +1,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <link href="favicon.ico" rel="icon" type="image/x-icon" />
-    <link href="index.css" rel="stylesheet" type = "text/css" />
-    <link href="terminal/index.css" rel="stylesheet" type = "text/css" />
+    <link href="index.css" rel="stylesheet" />
+    <link href="terminal/index.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        h2 {
-            color: unset;
-        }
-
         .box {
             height: min-content;
+        }
+
+        .box .horizontal-container>* {
+            margin: 0 0.5em;
         }
 
         .headlines .box {
@@ -28,16 +28,31 @@
         }
 
         .headlines .emoji {
-            font-size: 1.25em;
+            font-size: 1.5em;
         }
 
-        .box .horizontal-container > * {
-            margin: 0 0.5em;
+        .logo {
+            align-items: center;
+            margin: 0 auto;
+            text-align: center;
+            width: fit-content;
+        }
+
+        .logo .arrows {
+            background-image: url(./arrows/default-height.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            height: 4.5em;
         }
 
         @media (prefers-color-scheme: dark) {
             .javascript-related-logos {
                 background-color: white;
+            }
+
+            .logo .arrows {
+                background-image: url(./arrows/dark/default-height.svg);
             }
         }
 
@@ -55,12 +70,12 @@
         </div>
     </div>
     <div class="content">
-        <div class="box horizontal-center horizontal-container" style="align-items: center; margin-left: auto; margin-right: auto; text-align: center; width: fit-content">
+        <div class="logo horizontal-center horizontal-container">
             <div>
-                <h1 style="font-size: 5em; line-height: 0.8em; margin: 0 0 0.5rem"><span class="e">e</span>uni<span class="ce">ce</span></h1>
-                <img class="arrows" src="arrows/default-height.svg" style="height: 3em;" />
+                <h1 style="font-size: 6em; line-height: 0.8em; margin: 0 0 0.5rem"><span class="red">e</span>uni<span class="red">ce</span></h1>
+                <div class="arrows"></div>
             </div>
-            <h2><div>architecture</div><div>structure</div><div>dependencies</div></h2>
+            <h2 style="font-size: 2.5em"><div>architecture</div><div>structure</div><div>dependencies</div></h2>
         </div>
         <div class="headlines">
             <div class="box">

@@ -1,11 +1,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <link href="../favicon.ico" rel="icon" type="image/x-icon" />
-    <link href="../index.css" rel="stylesheet" type="text/css" />
+    <link href="../index.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        .arrows-with-descriptions {
+            background-image: url(../arrows/with-descriptions.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            height: 120px;
+            max-width: 85vw;
+            max-width: calc(100vw - 5em);
+            width: 390px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .arrows-with-descriptions {
+                background-image: url(../arrows/dark/with-descriptions.svg);
+            }
+        }
+
         .box {
             height: fit-content;
         }
@@ -35,7 +52,7 @@
 <body>
     <div class="header">
         <div class="content">
-            <h1><a href=".."><span><span class="e">e</span>uni<span class="ce">ce</span></span><img class="arrows" src="../arrows/default-height.svg" /></a></h1>
+            <h1><a href=".."><span><span class="red">e</span>uni<span class="red">ce</span></span><div class="arrows"></div></a></h1>
             <span class="menu"><a href="..">introduction</a><a href="../structure">structure</a><a class="current" href="../dependencies">dependencies</a><a href="../javascript">JavaScript</a><a href="../licensing">licensing</a><a href="../advanced">advanced</a></span>
         </div>
     </div>
@@ -43,11 +60,11 @@
         <h2>arrows</h2>
         <p>Instead of showing dependencies as lines between items each dependency is counted into the following categories:</p>
         <div class="box horizontal-container" style="align-items: center; width: fit-content">
-            <img src="../arrows/with-descriptions.svg"/>
+            <div class="arrows-with-descriptions"></div>
             <div>
-                <div>matches stack<div class="detail" style="color: darkgreen">green down arrow</div></div>
-                <div>does not match stack<div class="detail" style="color: darkred">red up arrow</div></div>
-                <div>is not independent<div class="detail" style="color: darkred">red horizontal arrow</div></div>
+                <div>matches stack<div class="detail green">green down arrow</div></div>
+                <div>does not match stack<div class="detail red">red up arrow</div></div>
+                <div>is not independent<div class="detail red">red horizontal arrow</div></div>
             </div>
         </div>
         <h2>counts</h2>
