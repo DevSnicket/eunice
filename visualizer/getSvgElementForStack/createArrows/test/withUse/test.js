@@ -63,7 +63,7 @@ test(
 						createElement(
 							"style",
 							{ type: "text/css" },
-							"text{fill:white;font-family:arial;font-size:18px;text-anchor:middle}",
+							"text{fill:white;font-family:arial;font-size:16px;text-anchor:middle}",
 						),
 					),
 					...elements,
