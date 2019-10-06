@@ -2,6 +2,7 @@
 
 const
 	createAnsiEscapeCodeFormatter = require("./createAnsiEscapeCodeFormatter"),
+	{ readFileSync } = require("fs"),
 	path = require("path"),
 	readline = require("readline");
 
@@ -14,6 +15,8 @@ module.exports =
 		standardInputStream,
 		version,
 	}) => {
+		const licenseText = "the license http://www.devsnicket.com/eunice/licensing";
+
 		const
 			acceptLicenseParameter = "accept-license",
 			{
@@ -42,7 +45,7 @@ module.exports =
 
 		function whenAcceptedInProcessArguments() {
 			if (processArguments[acceptLicenseParameter]) {
-				log(`By specifying the --${acceptLicenseParameter} argument you have accepted ${getLicenseFilePaths()}.`);
+				log(`By specifying --${acceptLicenseParameter} you have accepted ${licenseText}.`);
 				logCommercialUse();
 
 				return true;
@@ -51,7 +54,7 @@ module.exports =
 		}
 
 		function instructOrPrompt() {
-			log(`To use this program you must accept ${getLicenseFilePaths()}.`);
+			log(`To use this program you must accept ${licenseText}.`);
 			logCommercialUse();
 			log();
 
@@ -64,16 +67,12 @@ module.exports =
 			}
 		}
 
-		function getLicenseFilePaths() {
-			return `the license from http://www.devsnicket.com/eunice/licensing or ${path.join(distSubdirectoryPath, "..", "LICENSE")}`;
-		}
-
 		function logCommercialUse() {
 			log("For commercial use beyond the evaluation period (as defined in the license) visit the web page above.");
 		}
 
 		function prompt() {
-			log(`To accept, press the ${formatBold("A key")} or run again with the ${formatBold(`--${acceptLicenseParameter}`)} argument. Any other key will exit without accepting the license.`);
+			logPrompt();
 
 			readline.emitKeypressEvents(standardInputStream);
 			standardInputStream.setRawMode(true);
@@ -85,16 +84,57 @@ module.exports =
 			) {
 				standardInputStream.on(
 					"keypress",
-					(character, key) => action(isAcceptKey(key)),
+					onKeyPress,
 				);
+
+				function onKeyPress(
+					character,
+					key,
+				) {
+					const keyName = getKeyName(key);
+
+					if (keyName === "v")
+						view();
+					else
+						action(keyName === "a");
+				}
 			}
 
-			function isAcceptKey({
+			function getKeyName({
 				ctrl,
 				meta,
 				name,
 			}) {
-				return !ctrl && !meta && name === "a";
+				return !ctrl && !meta && name;
+			}
+
+			function view() {
+				logTextFile({
+					distSubdirectoryPath,
+					log,
+				});
+
+				log();
+
+				logPrompt();
+			}
+
+			function logPrompt() {
+				log(`To accept, press the ${formatBold("A key")} or run again with the ${formatBold(`--${acceptLicenseParameter}`)} argument.`);
+				log(`Press the ${formatBold("V key")} to view the license.`);
+				log("Any other key will exit without accepting the license.");
 			}
 		}
 	};
+
+function logTextFile({
+	distSubdirectoryPath,
+	log,
+}) {
+	log(
+		readFileSync(
+			path.join(distSubdirectoryPath, "..", "LICENSE"),
+			"utf-8",
+		),
+	);
+}

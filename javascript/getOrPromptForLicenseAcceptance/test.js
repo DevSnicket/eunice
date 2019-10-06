@@ -2,13 +2,13 @@
 
 const
 	getOrPromptForLicenseAcceptance = require("."),
-	path = require("path");
-
+	path = require("path"),
+	{ readFile } = require("fs-extra");
 
 const
 	commercialUseText = "For commercial use beyond the evaluation period (as defined in the license) visit the web page above.",
-	distSubdirectoryPath = path.join("packagePath", "dist"),
-	licenseText = `the license from http://www.devsnicket.com/eunice/licensing or ${path.join("packagePath", "LICENSE")}.`,
+	distSubdirectoryPath = __dirname,
+	licenseText = "the license http://www.devsnicket.com/eunice/licensing.",
 	version = "version";
 
 test(
@@ -64,7 +64,7 @@ test(
 					[],
 					[ "eunice version" ],
 					[],
-					[ `By specifying the --accept-license argument you have accepted ${licenseText}` ],
+					[ `By specifying --accept-license you have accepted ${licenseText}` ],
 					[ commercialUseText ],
 				],
 		});
@@ -107,37 +107,19 @@ test(
 	},
 );
 
-test(
-	"Standard input stream, of text terminal, calls setRawMode once, logs prompt and with keypress name of A returns true.",
-	async() => {
+describe(
+	"Standard input stream of text terminal.",
+	() => {
 		const
-			log = jest.fn(),
-			on = jest.fn(onCallback),
-			setRawMode = jest.fn();
-
-		await getOrPromptForLicenseAcceptance({
-			distSubdirectoryPath,
-			isColorSupported: false,
-			log,
-			processArguments: {},
-			standardInputStream:
-				{
-					isTTY: true,
-					listenerCount: () => 0,
-					on,
-					setRawMode,
-				},
-			version,
-		});
-
-		expect({
-			logCallsArguments:
-				log.mock.calls,
-			setRawModeCallCount:
-				setRawMode.mock.calls.length,
-		})
-		.toEqual({
-			logCallsArguments:
+			isColorSupported =
+				false,
+			// casing must match node
+			// eslint-disable-next-line id-match
+			isTTY =
+				true,
+			processArguments =
+				{},
+			promptLogCalls =
 				[
 					[],
 					[ "eunice version" ],
@@ -145,20 +127,133 @@ test(
 					[ `To use this program you must accept ${licenseText}` ],
 					[ commercialUseText ],
 					[],
-					[ "To accept, press the A key or run again with the --accept-license argument. Any other key will exit without accepting the license." ],
-				],
-			setRawModeCallCount:
-				1,
-		});
+					[ "To accept, press the A key or run again with the --accept-license argument." ],
+					[ "Press the V key to view the license." ],
+					[ "Any other key will exit without accepting the license." ],
+				];
 
-		function onCallback(
-			event,
-			callback,
+		test(
+			"Calls setRawMode once.",
+			async() => {
+				const setRawMode = jest.fn();
+
+				await getOrPromptForLicenseAcceptance({
+					distSubdirectoryPath,
+					isColorSupported,
+					log: () => null,
+					processArguments,
+					standardInputStream:
+						{
+							isTTY,
+							listenerCount,
+							on: getOnCallbackPressKeyNames(null),
+							setRawMode,
+						},
+					version,
+				});
+
+				expect(setRawMode.mock.calls.length)
+				.toEqual(1);
+			},
+		);
+
+		test(
+			"Logs prompt.",
+			async() => {
+				const log = jest.fn();
+
+				await getOrPromptForLicenseAcceptance({
+					distSubdirectoryPath,
+					isColorSupported,
+					log,
+					processArguments,
+					standardInputStream:
+						{
+							isTTY,
+							listenerCount,
+							on: getOnCallbackPressKeyNames(null),
+							setRawMode: () => null,
+						},
+					version,
+				});
+
+				expect(log.mock.calls)
+				.toEqual(promptLogCalls);
+			},
+		);
+
+		test(
+			"With key press of \"a\" returns true.",
+			async() => {
+				expect(
+					await getOrPromptForLicenseAcceptance({
+						distSubdirectoryPath,
+						isColorSupported,
+						log: () => null,
+						processArguments,
+						standardInputStream:
+							{
+								isTTY,
+								listenerCount,
+								on: getOnCallbackPressKeyNames("a"),
+								setRawMode: () => null,
+							},
+						version,
+					}),
+				)
+				.toEqual(
+					true,
+				);
+			},
+		);
+
+		test(
+			"With key press of \"v\" logs license after prompt.",
+			async() => {
+				const log = jest.fn();
+
+				await getOrPromptForLicenseAcceptance({
+					distSubdirectoryPath,
+					isColorSupported,
+					log,
+					processArguments,
+					standardInputStream:
+						{
+							isTTY,
+							listenerCount,
+							on: getOnCallbackPressKeyNames("v", null),
+							setRawMode: () => null,
+						},
+					version,
+				});
+
+				expect(
+					log.mock.calls[promptLogCalls.length][0],
+				)
+				.toEqual(
+					await readFile(
+						path.join(__dirname, "..", "LICENSE"),
+						"utf-8",
+					),
+				);
+			},
+		);
+
+		function listenerCount() {
+			return 0;
+		}
+
+		function getOnCallbackPressKeyNames(
+			...names
 		) {
 			return (
-				event === "keypress"
-				&&
-				callback(null, { name: "a" })
+				(
+					event,
+					callback,
+				) =>
+					event === "keypress"
+					&&
+					names.map(name => callback(null, { name }))
 			);
 		}
 	},
