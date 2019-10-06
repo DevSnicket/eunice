@@ -6,6 +6,13 @@ const
 	createUpSymbol = require("./createUpSymbol");
 
 const
+	colorsDefault =
+		{
+			/* cspell:disable-next-line */
+			green: "darkgreen",
+			/* cspell:disable-next-line */
+			red: "darkred",
+		},
 	height =
 		24,
 	marginAndPaddingForVertical =
@@ -17,6 +24,7 @@ const
 module.exports =
 	({
 		createElement,
+		colors: { red, green } = colorsDefault,
 		withPrecision,
 	}) =>
 		(
@@ -24,16 +32,19 @@ module.exports =
 				down:
 					createDown({
 						createElement,
+						fill: green,
 						id: formatId("down"),
 					}),
 				right:
 					createRight({
 						createElement,
+						fill: red,
 						id: formatId("right"),
 					}),
 				up:
 					createUp({
 						createElement,
+						fill: red,
 						id: formatId("up"),
 						withPrecision,
 					}),
@@ -48,6 +59,7 @@ function formatId(
 
 function createDown({
 	createElement,
+	fill,
 	id,
 }) {
 	return (
@@ -58,6 +70,7 @@ function createDown({
 			symbol:
 				createDownSymbol({
 					createElement,
+					fill,
 					id,
 				}),
 		}
@@ -66,6 +79,7 @@ function createDown({
 
 function createRight({
 	createElement,
+	fill,
 	id,
 }) {
 	return (
@@ -77,6 +91,7 @@ function createRight({
 			symbol:
 				createRightSymbol({
 					createElement,
+					fill,
 					id,
 				}),
 		}
@@ -85,6 +100,7 @@ function createRight({
 
 function createUp({
 	createElement,
+	fill,
 	id,
 	withPrecision,
 }) {
@@ -96,6 +112,7 @@ function createUp({
 			symbol:
 				createUpSymbol({
 					createElement,
+					fill,
 					id,
 					withPrecision,
 				}),

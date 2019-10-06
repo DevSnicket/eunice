@@ -10,13 +10,28 @@ const
 	{ renderToStaticMarkup } = require("react-dom/server"),
 	withPrecision = require("../../../withPrecision");
 
-test(
-	"with default height and width of 24",
-	() =>
+/** @type {[ { green: string, red: string }, string ][]} */
+const testCases =
+	[
+		// eslint-disable-next-line no-undefined
+		[ undefined, undefined ],
+		[
+			{
+				green: "#00A000",
+				red: "#C00000",
+			},
+			"dark",
+		],
+	];
+
+test.each(testCases)(
+	"colors %j, default height and width of 24",
+	(colors, testCaseDirectory) =>
 		expectRenderedToBe({
 			...createSymbolAndUseElementsAndGetSize({
 				arrows:
 					createArrows({
+						colors,
 						createElement,
 						withPrecision,
 					}),
@@ -27,13 +42,16 @@ test(
 					24,
 			}),
 			testCase:
-				"default-height",
+				{
+					directory: testCaseDirectory,
+					file: "default-height",
+				},
 		}),
 );
 
-test(
-	"with descriptions",
-	() => {
+test.each(testCases)(
+	"colors %j with descriptions",
+	async(colors, testCaseDirectory) => {
 		const
 			height = 120,
 			spacing = 10,
@@ -45,6 +63,7 @@ test(
 			createSymbolAndUseElementsAndGetSize({
 				arrows:
 					createArrows({
+						colors,
 						createElement,
 						withPrecision,
 					}),
@@ -54,7 +73,7 @@ test(
 				width,
 			});
 
-		expectRenderedToBe({
+		await expectRenderedToBe({
 			elements:
 				[
 					createElement(
@@ -71,7 +90,10 @@ test(
 				],
 			size,
 			testCase:
-				"with-descriptions",
+				{
+					directory: testCaseDirectory,
+					file: "with-descriptions",
+				},
 		});
 
 		// dy, x and y are attribute names in SVG
@@ -169,9 +191,12 @@ async function expectRenderedToBe({
 		.toBe(
 			await readTestCaseFile(
 				path.join(
-					__dirname,
-					"testCases",
-					`${testCase}.svg`,
+					...[
+						__dirname,
+						"testCases",
+						...testCase.directory ? [ testCase.directory ] : [],
+						`${testCase.file}.svg`,
+					],
 				),
 			),
 		)
