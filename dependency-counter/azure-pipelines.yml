@@ -16,9 +16,7 @@ steps:
       rm -rf gh-pages &&
       git submodule add --force https://$(github_access_token)@github.com/DevSnicket/Eunice.git gh-pages &&
       rm -f -rf gh-pages/arrows &&
-      mkdir gh-pages/arrows &&
-      cp getSvgElementForStack/createArrows/test/withUse/testCases/default-height.svg gh-pages/arrows &&
-      cp getSvgElementForStack/createArrows/test/withUse/testCases/with-descriptions.svg gh-pages/arrows &&
+      cp -r getSvgElementForStack/createArrows/test/withUse/testCases gh-pages/arrows &&
       cp getSvgElementForStack/createArrows/test/symbols/testCases/down-10x10-*.svg gh-pages/arrows &&
       rm -f -rf gh-pages/examples &&
       mkdir gh-pages/examples &&
