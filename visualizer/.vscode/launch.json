@@ -30,13 +30,6 @@
 				"type": "node"
 			},
 			{
-				"args": [ ],
-				"name": "getSvgForYaml test",
-				"program": "${workspaceFolder}/getSvgForYaml/test.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
 				"args":
 					[ 
 						"--runInBand",
