@@ -168,6 +168,16 @@ body > .header .menu a.current {
     justify-content: space-evenly;
 }
 
+.horizontal-menu {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.horizontal-menu > * {
+    margin-bottom: 0.5rem;
+    padding: 0 0.5rem;
+}
+
 h1,
 h2,
 .green {
