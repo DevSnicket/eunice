@@ -40,7 +40,7 @@
 		"dist/**/*",
 		"third-party-notices.txt"
 	],
-	"homepage": "https://github.com/DevSnicket/eunice#readme",
+	"homepage": "https://devsnicket.com/eunice",
 	"jest": {
 		"collectCoverage": true,
 		"collectCoverageFrom": [
