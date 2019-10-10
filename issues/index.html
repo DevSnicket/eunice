@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="../favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="../index.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issues | Eunice</title>
+</head>
+<body>
+    <div class="header">
+        <div class="content">
+            <h1><a href=".."><span><span class="red">e</span>uni<span class="red">ce</span></span><div class="arrows"></div></a></h1>
+            <span class="menu"><a href="..">introduction</a><a href="../structure">structure</a><a href="../dependencies">dependencies</a><a href="../javascript">JavaScript</a><a class="current" href="../issues">issues</a><a href="../licensing">licensing</a><a href="../advanced">advanced</a></span>
+        </div>
+    </div>
+    <div class="content">
+        <div>Eunice has the following open issues (enhancements/bugs) in its backlog.</div>
+        <div>The issues are ordered highest priority first.</div>
+        <p id="issues-list">loading issues from GitHub...</p>
+        <script>
+            fetch("https://api.github.com/repos/devsnicket/eunice/issues")
+            .then(response => response.json())
+            .then(issues => setIssueListHtml(getListHtmlForIssues(orderIssues(issues))));
+
+            function orderIssues(
+                issues,
+            ) {
+                const issuesByNumber = new Map(issues.map(issue => [ issue.number, issue ]));
+
+                return (
+                    [
+                        ...getOrdered(),
+                        ...issuesByNumber.values(),
+                    ]
+                );
+
+                function getOrdered() {
+                    return [ 53, 55, 43, 51, 52, 50, 45, 38, 37, 47, 16, 48, 49, 44, 46, 56, 42, 12, 14 ].flatMap(popWithNumber);
+
+                    function popWithNumber(
+                        number,
+                    ) {
+                        const issue = issuesByNumber.get(number);
+
+                        issuesByNumber.delete(number);
+
+                        return issue || [];
+                    }
+                }
+            }
+
+            function getListHtmlForIssues(
+                issues,
+            ) {
+                return (
+                    issues
+                    .map(issue => `<div><a href="${issue.html_url}" target="_blank">${issue.title}</a></div>`)
+                    .join("")
+                );
+            }
+
+            function setIssueListHtml(
+                html,
+            ) {
+                document.getElementById("issues-list").innerHTML = html;
+            }
+        </script>
+    </div>
+    <div class="footer">Copyright © 2019 Graham Dyson</div>
+</body>
+</html>
