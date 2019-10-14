@@ -13,12 +13,12 @@ module.exports =
 			stack:
 				createStackAndAddDependencies(),
 			stackDescription:
-				"first depends upon child of second",
+				"first depends upon same identifier as child of second",
 			yaml:
 				[
 					[
 						createItemYaml({
-							dependsUpon: { id: "child" },
+							dependsUpon: "child",
 							id: "first",
 						}),
 						createItemYaml({
@@ -43,12 +43,7 @@ function createStackAndAddDependencies() {
 			],
 		);
 
-	const items = stack[0];
-
-	const child = items[1].items[0][0];
-
-	items[0].dependsUpon = mapItemsToDependsUpon([ child ]);
-	child.dependents = [ items[0] ];
+	stack[0][0].dependsUpon = mapItemsToDependsUpon([ "child" ]);
 
 	return stack;
 }

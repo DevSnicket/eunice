@@ -6,8 +6,8 @@ const
 	testDependsUponMapping = require("./testDependsUponMapping"),
 	testFirstAndSecondDependsUponThird = require("./testFirstAndSecondDependsUponThird"),
 	testFirstChildDependsUponParentAndSecondChildWithGrandchildWithParentIdentifier = require("./testFirstChildDependsUponParentAndSecondChildWithGrandchildWithParentIdentifier"),
-	testFirstDependsUponChildOfSecond = require("./testFirstDependsUponChildOfSecond"),
-	testFirstDependsUponGrandchildOfSecond = require("./testFirstDependsUponGrandchildOfSecond"),
+	testFirstDependsUponSameIdentifierAsChildOfSecond = require("./testFirstDependsUponSameIdentifierAsChildOfSecond"),
+	testFirstDependsUponSameIdentifierAsGrandchildOfSecond = require("./testFirstDependsUponSameIdentifierAsGrandchildOfSecond"),
 	testParentAndChild = require("./testParentAndChild"),
 	testSelfDependent = require("./testSelfDependent"),
 	testSelfDependentParentAndChild = require("./testSelfDependentParentAndChild"),
@@ -22,8 +22,8 @@ module.exports =
 				testDependsUponMapping();
 				testFirstAndSecondDependsUponThird();
 				testFirstChildDependsUponParentAndSecondChildWithGrandchildWithParentIdentifier();
-				testFirstDependsUponChildOfSecond();
-				testFirstDependsUponGrandchildOfSecond();
+				testFirstDependsUponSameIdentifierAsChildOfSecond();
+				testFirstDependsUponSameIdentifierAsGrandchildOfSecond();
 				testParentAndChild();
 				testSelfDependentParentAndChild();
 				testSelfDependent();

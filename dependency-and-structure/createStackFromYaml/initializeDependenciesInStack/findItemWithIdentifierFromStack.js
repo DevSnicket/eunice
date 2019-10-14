@@ -4,97 +4,56 @@ Licensed under the MIT license. See LICENSE file in the repository root for full
 require("array.prototype.flatmap")
 .shim();
 
-module.exports = findItemWithIdentifierFromStack;
+module.exports =
+	({
+		identifier,
+		stack,
+	}) =>
+		withIdentifier(identifier)
+		.findItemInStack(stack);
 
-function findItemWithIdentifierFromStack({
+function withIdentifier(
 	identifier,
-	stack,
-}) {
-	const items = stack.flat(2);
+) {
+	return { findItemInStack };
 
-	return (
-		findItemWithIdentifier({
-			identifier,
-			items,
-		})
-		||
-		findWhenIsOrInParent({
-			identifier,
-			parent: stack.parent,
-		})
-		||
-		findInDescendants({
-			identifier,
-			items,
-		})
-	);
-}
+	function findItemInStack(
+		stack,
+	) {
+		const items = stack.flat(2);
 
-function findWhenIsOrInParent({
-	identifier,
-	parent,
-}) {
-	return (
-		parent
-		&&
-		(getWhenParent() || findInParent())
-	);
-
-	function getWhenParent() {
 		return (
-			parent.id === identifier
-			&&
+			findInItems(items)
+			||
+			findWhenIsOrInParent(stack.parent)
+		);
+	}
+
+	function findWhenIsOrInParent(
+		parent,
+	) {
+		return (
 			parent
+			&&
+			(getWhenParent() || findInParent())
 		);
+
+		function getWhenParent() {
+			return (
+				parent.id === identifier
+				&&
+				parent
+			);
+		}
+
+		function findInParent() {
+			return findItemInStack(parent.level.stack);
+		}
 	}
 
-	function findInParent() {
-		return (
-			findItemWithIdentifierFromStack({
-				identifier,
-				stack: parent.level.stack,
-			})
-		);
+	function findInItems(
+		items,
+	) {
+		return items.find(item => item.id === identifier);
 	}
-}
-
-function findInDescendants({
-	identifier,
-	items,
-}) {
-	const itemsOfItems =
-		items
-		.flatMap(item => item.items || [])
-		.flat(3);
-
-	return (
-		itemsOfItems.length
-		&&
-		(inItemsOfItems() || inDescendantsOfItems())
-	);
-
-	function inItemsOfItems() {
-		return (
-			findItemWithIdentifier({
-				identifier,
-				items: itemsOfItems,
-			})
-		);
-	}
-
-	function inDescendantsOfItems() {
-		return (
-			findInDescendants({
-				identifier,
-				items: itemsOfItems,
-			})
-		);
-	}
-}
-
-function findItemWithIdentifier({
-	identifier,
-	items,
-}) {
-	return items.find(item => item.id === identifier);
 }
