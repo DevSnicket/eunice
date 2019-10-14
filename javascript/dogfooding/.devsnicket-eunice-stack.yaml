@@ -14,8 +14,7 @@
   - call-with-process-standard-streams
   - run-tests-from-file-system
   - test-harnesses
-- id: NPM
-  items:
-    - fs
-    - id: jest
-      items: [ describe, expect, test ]
+-
+  - describe
+  - expect
+  - jest
