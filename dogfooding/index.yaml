@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.11.0 on 2019-10-09T12:21:21.650Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.12.0 on 2019-10-14T20:05:10.097Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -1432,8 +1432,14 @@
                             type: variable
                   - - id: createDeclarationWhenCommonjsExportAlias
                       type: variable
-                      dependsUpon: createDeclarationWhenExportAlias
-                  - - id: addClass
+                      dependsUpon:
+                        id: getItemOrItemsFromJavascript
+                        items:
+                          id: createVisitors
+                          items:
+                            id: commonjs
+                            items: createDeclarationWhenExportAlias
+                    - id: addClass
                       type: file
                       items:
                         - - id: addClass
@@ -1738,7 +1744,13 @@
                                         type: parameter
                               - - id: getIdentifierAndTypeWhenCommonjsExport
                                   type: variable
-                                  dependsUpon: getIdentifierAndTypeWhenExport
+                                  dependsUpon:
+                                    id: getItemOrItemsFromJavascript
+                                    items:
+                                      id: createVisitors
+                                      items:
+                                        id: commonjs
+                                        items: getIdentifierAndTypeWhenExport
                           - id: createDeclarationForFunction
                             type: file
                             items:
@@ -5805,6 +5817,21 @@
                                     - createStackFromLevels
                                     - formatStackForDescription
                                     - testCreateStackFromYaml
+                                - id: callTestForSymmetrical
+                                  type: variable
+                                  dependsUpon:
+                                    id: tests
+                                    items: callTestForSymmetrical
+                              - - id: createStackFromLevels
+                                  type: variable
+                                  dependsUpon:
+                                    id: tests
+                                    items: createStackFromLevels
+                                - id: formatStackForDescription
+                                  type: variable
+                                  dependsUpon:
+                                    id: tests
+                                    items: formatStackForDescription
                         - - id: testDependencies
                             type: file
                             items:
@@ -5817,8 +5844,8 @@
                                       - testDependsUponMapping
                                       - testFirstAndSecondDependsUponThird
                                       - testFirstChildDependsUponParentAndSecondChildWithGrandchildWithParentIdentifier
-                                      - testFirstDependsUponChildOfSecond
-                                      - testFirstDependsUponGrandchildOfSecond
+                                      - testFirstDependsUponSameIdentifierAsChildOfSecond
+                                      - testFirstDependsUponSameIdentifierAsGrandchildOfSecond
                                       - testParentAndChild
                                       - testSelfDependent
                                       - testSelfDependentParentAndChild
@@ -5826,17 +5853,32 @@
                               - - id: testChildOfFirstDependsUponSecond
                                   type: file
                                   items:
-                                    id: testChildOfFirstDependsUponSecond
-                                    type: export
-                                    dependsUpon:
-                                      - createItemYaml
-                                      - createStackWithDependencies
-                                      - testCreateStackFromYaml
-                                    items:
-                                      id: createStackWithDependencies
-                                      dependsUpon:
-                                        - createStackFromLevels
-                                        - mapItemsToDependsUpon
+                                    - - id: testChildOfFirstDependsUponSecond
+                                        type: export
+                                        dependsUpon:
+                                          - createItemYaml
+                                          - createStackWithDependencies
+                                          - testCreateStackFromYaml
+                                        items:
+                                          id: createStackWithDependencies
+                                          dependsUpon:
+                                            - createStackFromLevels
+                                            - mapItemsToDependsUpon
+                                    - - id: createItemYaml
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: createItemYaml
+                                      - id: createStackFromLevels
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: createStackFromLevels
+                                      - id: mapItemsToDependsUpon
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: mapItemsToDependsUpon
                                 - id: testDependsUponMapping
                                   type: file
                                   items:
@@ -5850,36 +5892,81 @@
                                     - - id: testDependsUponMissing
                                         type: file
                                         items:
-                                          id: testDependsUponMissing
-                                          type: export
-                                          dependsUpon:
-                                            - createItemYaml
-                                            - createStackFromLevels
-                                            - mapItemsToDependsUpon
-                                            - testCreateStackFromYaml
+                                          - - id: testDependsUponMissing
+                                              type: export
+                                              dependsUpon:
+                                                - createItemYaml
+                                                - createStackFromLevels
+                                                - mapItemsToDependsUpon
+                                                - testCreateStackFromYaml
+                                          - - id: createItemYaml
+                                              type: variable
+                                              dependsUpon:
+                                                id: tests
+                                                items: createItemYaml
+                                            - id: createStackFromLevels
+                                              type: variable
+                                              dependsUpon:
+                                                id: tests
+                                                items: createStackFromLevels
+                                            - id: mapItemsToDependsUpon
+                                              type: variable
+                                              dependsUpon:
+                                                id: tests
+                                                items: mapItemsToDependsUpon
                                       - id: testFirstDependsUponSecond
                                         type: file
                                         items:
-                                          id: testFirstDependsUponSecond
-                                          type: export
-                                          dependsUpon:
-                                            - createItemYaml
-                                            - createStackFromLevels
-                                            - mapItemsToDependsUpon
-                                            - testCreateStackFromYaml
+                                          - - id: testFirstDependsUponSecond
+                                              type: export
+                                              dependsUpon:
+                                                - createItemYaml
+                                                - createStackFromLevels
+                                                - mapItemsToDependsUpon
+                                                - testCreateStackFromYaml
+                                          - - id: createItemYaml
+                                              type: variable
+                                              dependsUpon:
+                                                id: tests
+                                                items: createItemYaml
+                                            - id: createStackFromLevels
+                                              type: variable
+                                              dependsUpon:
+                                                id: tests
+                                                items: createStackFromLevels
+                                            - id: mapItemsToDependsUpon
+                                              type: variable
+                                              dependsUpon:
+                                                id: tests
+                                                items: mapItemsToDependsUpon
                                 - id: testFirstAndSecondDependsUponThird
                                   type: file
                                   items:
-                                    id: testFirstAndSecondDependsUponThird
-                                    type: export
-                                    dependsUpon:
-                                      - addDependencies
-                                      - createItemYaml
-                                      - createStackFromLevels
-                                      - testCreateStackFromYaml
-                                    items:
-                                      id: addDependencies
-                                      dependsUpon: mapItemsToDependsUpon
+                                    - - id: testFirstAndSecondDependsUponThird
+                                        type: export
+                                        dependsUpon:
+                                          - addDependencies
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                          - testCreateStackFromYaml
+                                        items:
+                                          id: addDependencies
+                                          dependsUpon: mapItemsToDependsUpon
+                                    - - id: createItemYaml
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: createItemYaml
+                                      - id: createStackFromLevels
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: createStackFromLevels
+                                      - id: mapItemsToDependsUpon
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: mapItemsToDependsUpon
                                 - id: testFirstChildDependsUponParentAndSecondChildWithGrandchildWithParentIdentifier
                                   type: file
                                   items:
@@ -5900,12 +5987,27 @@
                                         dependsUpon:
                                           - createItemYaml
                                           - parentIdentifier
-                                    - - id: parentIdentifier
+                                    - - id: createItemYaml
                                         type: variable
-                                - id: testFirstDependsUponChildOfSecond
+                                        dependsUpon:
+                                          id: tests
+                                          items: createItemYaml
+                                      - id: createStackFromLevels
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: createStackFromLevels
+                                      - id: mapItemsToDependsUpon
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: mapItemsToDependsUpon
+                                      - id: parentIdentifier
+                                        type: variable
+                                - id: testFirstDependsUponSameIdentifierAsChildOfSecond
                                   type: file
                                   items:
-                                    - - id: testFirstDependsUponChildOfSecond
+                                    - - id: testFirstDependsUponSameIdentifierAsChildOfSecond
                                         type: export
                                         dependsUpon:
                                           - createItemYaml
@@ -5915,10 +6017,25 @@
                                         dependsUpon:
                                           - createStackFromLevels
                                           - mapItemsToDependsUpon
-                                - id: testFirstDependsUponGrandchildOfSecond
+                                      - id: createItemYaml
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: createItemYaml
+                                    - - id: createStackFromLevels
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: createStackFromLevels
+                                      - id: mapItemsToDependsUpon
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: mapItemsToDependsUpon
+                                - id: testFirstDependsUponSameIdentifierAsGrandchildOfSecond
                                   type: file
                                   items:
-                                    - - id: testFirstDependsUponGrandchildOfSecond
+                                    - - id: testFirstDependsUponSameIdentifierAsGrandchildOfSecond
                                         type: export
                                         dependsUpon:
                                           - createItemYaml
@@ -5928,6 +6045,21 @@
                                         dependsUpon:
                                           - createStackFromLevels
                                           - mapItemsToDependsUpon
+                                      - id: createItemYaml
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: createItemYaml
+                                    - - id: createStackFromLevels
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: createStackFromLevels
+                                      - id: mapItemsToDependsUpon
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: mapItemsToDependsUpon
                                 - id: testParentAndChild
                                   type: file
                                   items:
@@ -5960,19 +6092,54 @@
                                         dependsUpon:
                                           - createParentChildLevels
                                           - createStackFromLevels
+                                      - id: createItemYaml
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: createItemYaml
+                                    - - id: createParentChildLevels
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: createParentChildLevels
+                                      - id: createStackFromLevels
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: createStackFromLevels
+                                      - id: mapItemsToDependsUpon
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: mapItemsToDependsUpon
                                 - id: testSelfDependent
                                   type: file
                                   items:
-                                    id: testSelfDependent
-                                    type: export
-                                    dependsUpon:
-                                      - addDependencies
-                                      - createItemYaml
-                                      - createStackFromLevels
-                                      - testCreateStackFromYaml
-                                    items:
-                                      id: addDependencies
-                                      dependsUpon: mapItemsToDependsUpon
+                                    - - id: testSelfDependent
+                                        type: export
+                                        dependsUpon:
+                                          - addDependencies
+                                          - createItemYaml
+                                          - createStackFromLevels
+                                          - testCreateStackFromYaml
+                                        items:
+                                          id: addDependencies
+                                          dependsUpon: mapItemsToDependsUpon
+                                    - - id: createItemYaml
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: createItemYaml
+                                      - id: createStackFromLevels
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: createStackFromLevels
+                                      - id: mapItemsToDependsUpon
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: mapItemsToDependsUpon
                                 - id: testSelfDependentParentAndChild
                                   type: file
                                   items:
@@ -6010,6 +6177,21 @@
                                               - sameIdentifier
                                     - - id: createStackAndGetParent
                                         dependsUpon: createStackFromLevels
+                                      - id: createItemYaml
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: createItemYaml
+                                    - - id: createStackFromLevels
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: createStackFromLevels
+                                      - id: mapItemsToDependsUpon
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: mapItemsToDependsUpon
                                       - id: sameIdentifier
                                         type: variable
                                 - id: testUpperAndLower
@@ -6044,6 +6226,26 @@
                                         dependsUpon:
                                           - createStackFromLevels
                                           - createUpperAndLowerStack
+                                      - id: createItemYaml
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: createItemYaml
+                                    - - id: createStackFromLevels
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: createStackFromLevels
+                                      - id: createUpperAndLowerStack
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: createUpperAndLowerStack
+                                      - id: mapItemsToDependsUpon
+                                        type: variable
+                                        dependsUpon:
+                                          id: tests
+                                          items: mapItemsToDependsUpon
                         - - id: testCreateStackFromYaml
                             type: file
                             items:
@@ -6262,42 +6464,22 @@
                             items:
                               - - id: findItemWithIdentifierFromStack
                                   type: export
-                                  dependsUpon:
-                                    - findInDescendants
-                                    - findItemWithIdentifier
-                                    - findWhenIsOrInParent
-                              - - id: findWhenIsOrInParent
-                                  dependsUpon:
-                                    - findInParent
-                                    - getWhenParent
+                                  dependsUpon: withIdentifier
+                              - - id: withIdentifier
                                   items:
-                                    - - getWhenParent
-                                      - id: findInParent
+                                    - - id: findItemInStack
                                         dependsUpon:
-                                          - findItemWithIdentifierFromStack
-                                          - identifier
-                                    - - id: identifier
-                                        type: parameter
-                                - id: findInDescendants
-                                  dependsUpon:
-                                    - inDescendantsOfItems
-                                    - inItemsOfItems
-                                  items:
-                                    - - id: inItemsOfItems
+                                          - findInItems
+                                          - findWhenIsOrInParent
+                                    - - id: findWhenIsOrInParent
                                         dependsUpon:
-                                          - findItemWithIdentifier
-                                          - identifier
-                                          - itemsOfItems
-                                      - id: inDescendantsOfItems
-                                        dependsUpon:
-                                          - findInDescendants
-                                          - identifier
-                                          - itemsOfItems
-                                    - - id: identifier
-                                        type: parameter
-                                      - id: itemsOfItems
-                                        type: variable
-                              - - findItemWithIdentifier
+                                          - findInParent
+                                          - getWhenParent
+                                        items:
+                                          - getWhenParent
+                                          - id: findInParent
+                                            dependsUpon: findItemInStack
+                                      - findInItems
                           - id: updateItem
                             type: file
                             items:
@@ -6316,6 +6498,12 @@
                         - describe
                         - expect
                         - test
+                      items:
+                        id: callTestForSymmetrical
+                        type: variable
+                        dependsUpon:
+                          id: tests
+                          items: callTestForSymmetrical
                   - - id: createYamlFromStack
                       type: export
                       dependsUpon: createFromLevel
@@ -7495,11 +7683,6 @@
                   - getQuoted
             - - getQuoted
               - getEscaped
-- - id: NPM
-    items:
-      - fs
-      - id: jest
-        items:
-          - describe
-          - expect
-          - test
+- - describe
+  - expect
+  - jest
