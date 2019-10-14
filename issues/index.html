@@ -18,54 +18,7 @@
         <div>Eunice has the following open issues (enhancements/bugs) in its backlog.</div>
         <div>The issues are ordered highest priority first.</div>
         <p id="issues-list">loading issues from GitHub...</p>
-        <script>
-            fetch("https://api.github.com/repos/devsnicket/eunice/issues")
-            .then(response => response.json())
-            .then(issues => setIssueListHtml(getListHtmlForIssues(orderIssues(issues))));
-
-            function orderIssues(
-                issues,
-            ) {
-                const issuesByNumber = new Map(issues.map(issue => [ issue.number, issue ]));
-
-                return (
-                    [
-                        ...getOrdered(),
-                        ...issuesByNumber.values(),
-                    ]
-                );
-
-                function getOrdered() {
-                    return [ 53, 55, 43, 51, 52, 50, 45, 38, 37, 47, 16, 48, 49, 44, 46, 56, 42, 12, 14 ].flatMap(popWithNumber);
-
-                    function popWithNumber(
-                        number,
-                    ) {
-                        const issue = issuesByNumber.get(number);
-
-                        issuesByNumber.delete(number);
-
-                        return issue || [];
-                    }
-                }
-            }
-
-            function getListHtmlForIssues(
-                issues,
-            ) {
-                return (
-                    issues
-                    .map(issue => `<div><a href="${issue.html_url}" target="_blank">${issue.title}</a></div>`)
-                    .join("")
-                );
-            }
-
-            function setIssueListHtml(
-                html,
-            ) {
-                document.getElementById("issues-list").innerHTML = html;
-            }
-        </script>
+        <script src="setIssueListHtml.js" type="module"></script>
     </div>
     <div class="footer">Copyright © 2019 Graham Dyson</div>
 </body>

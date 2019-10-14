@@ -1,0 +1,9 @@
+{
+	"compilerOptions": {
+		"alwaysStrict": true,
+		"checkJs": true,
+		"lib": [ "dom", "es2017", "esnext.array" ],
+		"noEmit": true,
+		"target": "es2017"
+	}
+}
