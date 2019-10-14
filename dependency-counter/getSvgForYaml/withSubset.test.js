@@ -121,7 +121,7 @@ getSvgForYamlTestOrUpdateExpected({
 	expectedFilename: "item-with-parent-that-is-dependent-of-same",
 	scenario: "subset of parent item with child item that is dependent of item independent of grandparent",
 	subsetIdentifierHierarchy: [ "grandparentSecond", "parent" ],
-	yaml: "[{id: grandparentFirst, dependsUpon: parent}, {id: grandparentSecond, items: {id: parent, items: item}}]",
+	yaml: "[{id: grandparentFirst, dependsUpon: {id: grandparentSecond, items: parent}}, {id: grandparentSecond, items: {id: parent, items: item}}]",
 });
 
 getSvgForYamlTestOrUpdateExpected({
