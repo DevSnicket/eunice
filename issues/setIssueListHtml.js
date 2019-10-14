@@ -36,7 +36,7 @@ function orderIssuesByNumber(
 
 	function getOrdered() {
 		return (
-			[ 53, 55, 43, 51, 52, 50, 45, 38, 37, 47, 16, 48, 49, 44, 46, 56, 42, 12, 14 ]
+			[ 68, 53, 55, 43, 51, 52, 50, 45, 38, 37, 47, 69, 16, 48, 49, 44, 46, 56, 42, 12, 14 ]
 			.flatMap(popWithNumber)
 		);
 
