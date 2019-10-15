@@ -55,13 +55,13 @@ function orderIssuesByNumber(
 function getHtmlForIssues(
 	issues,
 ) {
-	return issues.map(getHtmlForIssue).join("");
+	return `<ol>${issues.map(getHtmlForIssue).join("")}</ol>`;
 }
 
 function getHtmlForIssue(
 	issue,
 ) {
-	return `<div><a href="${issue.html_url}" target="_blank">${issue.title}</a></div>`;
+	return `<li><a href="${issue.html_url}" target="_blank">${issue.title}</a></li>`;
 }
 
 function setIssueListHtml(
