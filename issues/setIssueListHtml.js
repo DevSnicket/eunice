@@ -29,18 +29,18 @@ function orderIssuesByNumber(
 ) {
 	return (
 		[
-			...getOrdered(),
+			...getAndDeleteWherePrioritySpecified(),
 			...issuesByNumber.values(),
 		]
 	);
 
-	function getOrdered() {
+	function getAndDeleteWherePrioritySpecified() {
 		return (
-			[ 68, 53, 55, 43, 51, 52, 50, 45, 38, 37, 47, 69, 16, 48, 49, 44, 46, 56, 42, 12, 14 ]
-			.flatMap(popWithNumber)
+			[ 71, 70, 68, 53, 55, 43, 51, 52, 50, 45, 38, 37, 47, 69, 16, 48, 49, 44, 46, 56, 42, 12, 14 ]
+			.flatMap(getAndDeleteWithNumber)
 		);
 
-		function popWithNumber(
+		function getAndDeleteWithNumber(
 			number,
 		) {
 			const issue = issuesByNumber.get(number);
