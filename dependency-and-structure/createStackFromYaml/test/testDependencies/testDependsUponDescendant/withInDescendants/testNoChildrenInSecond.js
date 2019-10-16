@@ -2,14 +2,16 @@
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
 const
-	createItemYaml = require("../../../tests/createItemYaml"),
-	createStackFromLevels = require("../../../tests/createStackFromLevels"),
-	mapItemsToDependsUpon = require("../../../tests/mapItemsToDependsUpon"),
-	testCreateStackFromYaml = require("../testCreateStackFromYaml");
+	createItemYaml = require("../../../../../tests/createItemYaml"),
+	createStackFromLevels = require("../../../../../tests/createStackFromLevels"),
+	mapItemsToDependsUpon = require("../../../../../tests/mapItemsToDependsUpon"),
+	testCreateStackFromYaml = require("../../../testCreateStackFromYaml");
 
 module.exports =
 	() =>
 		testCreateStackFromYaml({
+			dependenciesInDescendantsOfItemPredicate:
+				({ id }) => id === "second",
 			stack:
 				createStackAndAddDependencies(),
 			stackDescription:
@@ -21,10 +23,9 @@ module.exports =
 							dependsUpon: "child",
 							id: "first",
 						}),
-						createItemYaml({
-							id: "second",
-							items: { id: "child" },
-						}),
+						createItemYaml(
+							{ id: "second" },
+						),
 					],
 				],
 		});
@@ -34,16 +35,14 @@ function createStackAndAddDependencies() {
 		createStackFromLevels(
 			[
 				[
-					{ id: "first" },
 					{
-						id: "second",
-						items: [ [ { id: "child" } ] ],
+						dependsUpon: mapItemsToDependsUpon([ "child" ]),
+						id: "first",
 					},
+					{ id: "second" },
 				],
 			],
 		);
-
-	stack[0][0].dependsUpon = mapItemsToDependsUpon([ "child" ]);
 
 	return stack;
 }

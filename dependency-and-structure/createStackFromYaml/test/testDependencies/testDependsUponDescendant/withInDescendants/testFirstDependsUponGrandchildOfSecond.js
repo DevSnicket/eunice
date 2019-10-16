@@ -2,18 +2,20 @@
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
 const
-	createItemYaml = require("../../../tests/createItemYaml"),
-	createStackFromLevels = require("../../../tests/createStackFromLevels"),
-	mapItemsToDependsUpon = require("../../../tests/mapItemsToDependsUpon"),
-	testCreateStackFromYaml = require("../testCreateStackFromYaml");
+	createItemYaml = require("../../../../../tests/createItemYaml"),
+	createStackFromLevels = require("../../../../../tests/createStackFromLevels"),
+	mapItemsToDependsUpon = require("../../../../../tests/mapItemsToDependsUpon"),
+	testCreateStackFromYaml = require("../../../testCreateStackFromYaml");
 
 module.exports =
 	() =>
 		testCreateStackFromYaml({
+			dependenciesInDescendantsOfItemPredicate:
+				({ id }) => [ "child", "second" ].includes(id),
 			stack:
 				createStackAndAddDependencies(),
 			stackDescription:
-				"first depends upon same identifier as grandchild of second",
+				"first depends upon grandchild of second",
 			yaml:
 				[
 					[
@@ -56,7 +58,12 @@ function createStackAndAddDependencies() {
 			],
 		);
 
-	stack[0][0].dependsUpon = mapItemsToDependsUpon([ "grandchild" ]);
+	const items = stack[0];
+
+	const grandchild = items[1].items[0][0].items[0][0];
+
+	items[0].dependsUpon = mapItemsToDependsUpon([ grandchild ]);
+	grandchild.dependents = [ items[0] ];
 
 	return stack;
 }

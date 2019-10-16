@@ -3,11 +3,10 @@ Licensed under the MIT license. See LICENSE file in the repository root for full
 
 const
 	testChildOfFirstDependsUponSecond = require("./testChildOfFirstDependsUponSecond"),
+	testDependsUponDescendant = require("./testDependsUponDescendant"),
 	testDependsUponMapping = require("./testDependsUponMapping"),
 	testFirstAndSecondDependsUponThird = require("./testFirstAndSecondDependsUponThird"),
 	testFirstChildDependsUponParentAndSecondChildWithGrandchildWithParentIdentifier = require("./testFirstChildDependsUponParentAndSecondChildWithGrandchildWithParentIdentifier"),
-	testFirstDependsUponSameIdentifierAsChildOfSecond = require("./testFirstDependsUponSameIdentifierAsChildOfSecond"),
-	testFirstDependsUponSameIdentifierAsGrandchildOfSecond = require("./testFirstDependsUponSameIdentifierAsGrandchildOfSecond"),
 	testParentAndChild = require("./testParentAndChild"),
 	testSelfDependent = require("./testSelfDependent"),
 	testSelfDependentParentAndChild = require("./testSelfDependentParentAndChild"),
@@ -19,11 +18,10 @@ module.exports =
 			"dependencies",
 			() => {
 				testChildOfFirstDependsUponSecond();
+				testDependsUponDescendant();
 				testDependsUponMapping();
 				testFirstAndSecondDependsUponThird();
 				testFirstChildDependsUponParentAndSecondChildWithGrandchildWithParentIdentifier();
-				testFirstDependsUponSameIdentifierAsChildOfSecond();
-				testFirstDependsUponSameIdentifierAsGrandchildOfSecond();
 				testParentAndChild();
 				testSelfDependentParentAndChild();
 				testSelfDependent();

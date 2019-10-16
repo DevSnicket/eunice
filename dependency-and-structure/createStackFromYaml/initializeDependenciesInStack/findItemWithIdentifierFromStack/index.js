@@ -4,17 +4,24 @@ Licensed under the MIT license. See LICENSE file in the repository root for full
 require("array.prototype.flatmap")
 .shim();
 
+const findInDescendantsOfItems = require("./findInDescendantsOfItems");
+
 module.exports =
 	({
+		inDescendantsOfItemPredicate,
 		identifier,
 		stack,
 	}) =>
-		withIdentifier(identifier)
+		withCriteria({
+			identifier,
+			inDescendantsOfItemPredicate,
+		})
 		.findItemInStack(stack);
 
-function withIdentifier(
+function withCriteria({
 	identifier,
-) {
+	inDescendantsOfItemPredicate,
+}) {
 	return { findItemInStack };
 
 	function findItemInStack(
@@ -23,9 +30,15 @@ function withIdentifier(
 		const items = stack.flat(2);
 
 		return (
-			findInItems(items)
+			findItems(items)
 			||
 			findWhenIsOrInParent(stack.parent)
+			||
+			findInDescendantsOfItems({
+				findItems,
+				itemPredicate: inDescendantsOfItemPredicate,
+				items,
+			})
 		);
 	}
 
@@ -51,7 +64,7 @@ function withIdentifier(
 		}
 	}
 
-	function findInItems(
+	function findItems(
 		items,
 	) {
 		return items.find(item => item.id === identifier);
