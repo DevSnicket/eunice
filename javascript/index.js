@@ -17,21 +17,25 @@ const cliArguments =
 	);
 
 (async() => {
-	if (await isLicenseAccepted()) {
-		console.log();
-		console.log("Analyzing...");
+	try {
+		if (await isLicenseAccepted()) {
+			console.log();
+			console.log("Analyzing...");
 
-		await analyzeAndProcessAndRender({
-			...createParameterFromCliArguments({
-				cliArguments,
-				pathSeparator: path.sep,
-			}),
-			date: Date.now(),
-			version,
-		});
+			await analyzeAndProcessAndRender({
+				...createParameterFromCliArguments({
+					cliArguments,
+					pathSeparator: path.sep,
+				}),
+				date: Date.now(),
+				version,
+			});
+		}
+	} catch (error) {
+		console.log(error);
 	}
 
-	// Process exit required because license acceptance puts standard input into raw mode.
+	// Process exit required as this is a top-level promise
 	// eslint-disable-next-line no-process-exit
 	process.exit();
 })();

@@ -133,7 +133,7 @@ describe(
 				];
 
 		test(
-			"Calls setRawMode once.",
+			"Set setRawMode on and off.",
 			async() => {
 				const setRawMode = jest.fn();
 
@@ -152,8 +152,8 @@ describe(
 					version,
 				});
 
-				expect(setRawMode.mock.calls.length)
-				.toEqual(1);
+				expect(setRawMode.mock.calls)
+				.toEqual([ [ true ], [ false ] ]);
 			},
 		);
 

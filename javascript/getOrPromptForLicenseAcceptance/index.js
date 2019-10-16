@@ -95,8 +95,11 @@ module.exports =
 
 					if (keyName === "v")
 						view();
-					else
+					else {
+						standardInputStream.setRawMode(false);
+
 						action(keyName === "a");
+					}
 				}
 			}
 
