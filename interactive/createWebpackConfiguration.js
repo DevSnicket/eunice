@@ -11,6 +11,7 @@ module.exports =
 		codeEditorLanguages = [],
 		directory,
 		javascriptSubstitution = null,
+		title = null,
 	}) => (
 		{
 			...createWebpackConfiguration({
@@ -27,6 +28,7 @@ module.exports =
 				indexFile:
 					"./harness.js",
 				javascriptSubstitution,
+				title,
 			}),
 			// Workaround for renderer harness that requires @ungap/url-search-params using ES (which needs to specify default) instead of CommonJS (which does not and is used by tests).
 			resolve:
