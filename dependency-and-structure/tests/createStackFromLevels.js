@@ -59,6 +59,7 @@ function createItem({
 	level,
 	...restOfItem
 }) {
+	/** @type {import("../index").Item} */
 	const item =
 		{
 			...id && { id },
