@@ -5,7 +5,7 @@
 	},
 	"description": "HTML page that renders Eunice YAML as SVG, so the structure and dependencies can be investigated.",
 	"dependencies": {
-		"@devsnicket/eunice-dependency-and-structure": "^2.14.0",
+		"@devsnicket/eunice-dependency-and-structure": "^2.15.0",
 		"@devsnicket/eunice-processors": "^9.1.0",
 		"@devsnicket/eunice-renderer": "^6.2.0",
 		"@devsnicket/eunice-test-harnesses": "^7.10.0",
@@ -95,5 +95,5 @@
 		"test": "npx jest",
 		"watch": "npx webpack --config webpack.config.js -d --watch"
 	},
-	"version": "4.3.0"
+	"version": "4.4.0"
 }
