@@ -8,18 +8,14 @@ const
 	initializeDependenciesInStack = require("./initializeDependenciesInStack");
 
 module.exports =
-	/** @return {import("../index").Stack} */
-	(/** @type {import("./Parameter.d")} */{
-		dependenciesInDescendantsOfItemPredicate = null,
-		yaml,
-	}) => {
+	/**
+	 * @param {import("../index").Yaml} yaml
+	 * @return {import("../index").Stack}
+	 */
+	yaml => {
 		const stack = createStackStructureFromYaml(yaml);
 
-		initializeDependenciesInStack({
-			inDescendantsOfItemPredicate:
-				dependenciesInDescendantsOfItemPredicate,
-			stack,
-		});
+		initializeDependenciesInStack(stack);
 
 		return stack;
 	};

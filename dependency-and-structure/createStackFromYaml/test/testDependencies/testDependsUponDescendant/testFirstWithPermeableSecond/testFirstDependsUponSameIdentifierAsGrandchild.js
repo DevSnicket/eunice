@@ -10,12 +10,34 @@ const
 module.exports =
 	() =>
 		testCreateStackFromYaml({
-			dependenciesInDescendantsOfItemPredicate:
-				({ id }) => [ "child", "second" ].includes(id),
 			stack:
-				createStackAndAddDependencies(),
+				createStackFromLevels(
+					[
+						[
+							{
+								dependsUpon: mapItemsToDependsUpon([ "grandchild" ]),
+								id: "first",
+							},
+							{
+								dependencyPermeable:
+									true,
+								id:
+									"second",
+								items:
+									[
+										[
+											{
+												id: "child",
+												items: [ [ { id: "grandchild" } ] ],
+											},
+										],
+									],
+							},
+						],
+					],
+				),
 			stackDescription:
-				"first depends upon grandchild of second",
+				"first depends upon same identifier as grandchild",
 			yaml:
 				[
 					[
@@ -24,6 +46,8 @@ module.exports =
 							id: "first",
 						}),
 						createItemYaml({
+							dependencyPermeable:
+								true,
 							id:
 								"second",
 							items:
@@ -35,35 +59,3 @@ module.exports =
 					],
 				],
 		});
-
-function createStackAndAddDependencies() {
-	const stack =
-		createStackFromLevels(
-			[
-				[
-					{ id: "first" },
-					{
-						id: "second",
-						items:
-							[
-								[
-									{
-										id: "child",
-										items: [ [ { id: "grandchild" } ] ],
-									},
-								],
-							],
-					},
-				],
-			],
-		);
-
-	const items = stack[0];
-
-	const grandchild = items[1].items[0][0].items[0][0];
-
-	items[0].dependsUpon = mapItemsToDependsUpon([ grandchild ]);
-	grandchild.dependents = [ items[0] ];
-
-	return stack;
-}

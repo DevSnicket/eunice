@@ -4,23 +4,14 @@ Licensed under the MIT license. See LICENSE file in the repository root for full
 module.exports =
 	({
 		findItems,
-		itemPredicate,
 		items,
 	}) =>
-		itemPredicate
-		&&
-		withFindItemsAndPredicate({
-			findItems,
-			itemPredicate,
-		})
-		.findInDescendantsOfItems(
-			items,
-		);
+		withFindItems(findItems)
+		.findInDescendantsOfItems(items);
 
-function withFindItemsAndPredicate({
+function withFindItems(
 	findItems,
-	itemPredicate,
-}) {
+) {
 	return { findInDescendantsOfItems };
 
 	function findInDescendantsOfItems(
@@ -28,19 +19,24 @@ function withFindItemsAndPredicate({
 	) {
 		return (
 			findInChildren(
-				getChildrenOfItems(
-					items.filter(itemPredicate),
+				getChildrenOfPermeableItems(
+					items,
 				),
 			)
 		);
 	}
 
-	function getChildrenOfItems(
+	function getChildrenOfPermeableItems(
 		items,
 	) {
 		return (
 			items
-			.flatMap(item => item.items || [])
+			.flatMap(
+				item =>
+					(item.dependencyPermeable && item.items)
+					||
+					[],
+			)
 			.flat(3)
 		);
 	}

@@ -8,20 +8,15 @@ const findInDescendantsOfItems = require("./findInDescendantsOfItems");
 
 module.exports =
 	({
-		inDescendantsOfItemPredicate,
 		identifier,
 		stack,
 	}) =>
-		withCriteria({
-			identifier,
-			inDescendantsOfItemPredicate,
-		})
+		withIdentifier(identifier)
 		.findItemInStack(stack);
 
-function withCriteria({
+function withIdentifier(
 	identifier,
-	inDescendantsOfItemPredicate,
-}) {
+) {
 	return { findItemInStack };
 
 	function findItemInStack(
@@ -36,7 +31,6 @@ function withCriteria({
 			||
 			findInDescendantsOfItems({
 				findItems,
-				itemPredicate: inDescendantsOfItemPredicate,
 				items,
 			})
 		);

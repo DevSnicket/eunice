@@ -12,89 +12,72 @@ const
 	findItemWithIdentifierFromStack = require("./findItemWithIdentifierFromStack"),
 	updateItem = require("./updateItem");
 
-module.exports =
-	({
-		inDescendantsOfItemPredicate,
-		stack,
-	}) =>
-		withInDescendantsOfItemPredicate(
-			inDescendantsOfItemPredicate,
-		)
-		.initializeDependenciesInStack(
-			stack,
-		);
+module.exports = initializeDependenciesInStack;
 
-function withInDescendantsOfItemPredicate(
-	inDescendantsOfItemPredicate,
+function initializeDependenciesInStack(
+	stack,
 ) {
-	return { initializeDependenciesInStack };
+	for (const level of stack)
+		for (const item of level) {
+			updateItemWhenRequired(item);
 
-	function initializeDependenciesInStack(
-		stack,
+			if (item.items)
+				initializeDependenciesInStack(item.items);
+		}
+
+	function updateItemWhenRequired(
+		item,
 	) {
-		for (const level of stack)
-			for (const item of level) {
-				updateItemWhenRequired(item);
+		if (item.dependsUpon)
+			updateItem({
+				dependsUpon:
+					item.dependsUpon.flatMap(findItemAndCreateDependsUpon),
+				item,
+			});
 
-				if (item.items)
-					initializeDependenciesInStack(item.items);
+		function findItemAndCreateDependsUpon(
+			dependUpon,
+		) {
+			return (
+				whenString()
+				||
+				createDependsUpon({
+					ancestor:
+						findItemWithIdentifier(
+							dependUpon.id,
+						),
+					dependUpon,
+				})
+			);
+
+			function whenString() {
+				return (
+					typeof dependUpon === "string"
+					&&
+					{
+						item:
+							findItemWithIdentifier(
+								dependUpon,
+							)
+							||
+							dependUpon,
+					}
+				);
 			}
 
-		function updateItemWhenRequired(
-			item,
-		) {
-			if (item.dependsUpon)
-				updateItem({
-					dependsUpon:
-						item.dependsUpon.flatMap(findItemAndCreateDependsUpon),
-					item,
-				});
-
-			function findItemAndCreateDependsUpon(
-				dependUpon,
+			function findItemWithIdentifier(
+				identifier,
 			) {
 				return (
-					whenString()
-					||
-					createDependsUpon({
-						ancestor:
-							findItemWithIdentifier(
-								dependUpon.id,
-							),
-						dependUpon,
+					item.id === identifier
+					?
+					item
+					:
+					findItemWithIdentifierFromStack({
+						identifier,
+						stack: item.items || stack,
 					})
 				);
-
-				function whenString() {
-					return (
-						typeof dependUpon === "string"
-						&&
-						{
-							item:
-								findItemWithIdentifier(
-									dependUpon,
-								)
-								||
-								dependUpon,
-						}
-					);
-				}
-
-				function findItemWithIdentifier(
-					identifier,
-				) {
-					return (
-						item.id === identifier
-						?
-						item
-						:
-						findItemWithIdentifierFromStack({
-							identifier,
-							inDescendantsOfItemPredicate,
-							stack: item.items || stack,
-						})
-					);
-				}
 			}
 		}
 	}

@@ -10,8 +10,6 @@ const
 module.exports =
 	() =>
 		testCreateStackFromYaml({
-			dependenciesInDescendantsOfItemPredicate:
-				({ id }) => id === "second",
 			stack:
 				createStackAndAddDependencies(),
 			stackDescription:
@@ -24,6 +22,7 @@ module.exports =
 							id: "first",
 						}),
 						createItemYaml({
+							dependencyPermeable: true,
 							id: "second",
 							items: { id: "child" },
 						}),
@@ -38,6 +37,7 @@ function createStackAndAddDependencies() {
 				[
 					{ id: "first" },
 					{
+						dependencyPermeable: true,
 						id: "second",
 						items: [ [ { id: "child" } ] ],
 					},

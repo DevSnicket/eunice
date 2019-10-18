@@ -5,7 +5,6 @@ const createStackFromYaml = require("..");
 
 module.exports =
 	({
-		dependenciesInDescendantsOfItemPredicate = null,
 		stack,
 		stackDescription,
 		yaml,
@@ -16,12 +15,7 @@ module.exports =
 				yaml,
 			}),
 			() =>
-				expect(
-					createStackFromYaml({
-						dependenciesInDescendantsOfItemPredicate,
-						yaml,
-					}),
-				)
+				expect(createStackFromYaml(yaml))
 				.toEqual(stack),
 		);
 

@@ -3,7 +3,7 @@ Licensed under the MIT license. See LICENSE file in the repository root for full
 
 const
 	testFirstDependsUponSameIdentifierAsChildOfSecond = require("./testFirstDependsUponSameIdentifierAsChildOfSecond"),
-	withInDescendants = require("./withInDescendants");
+	testFirstWithPermeableSecond = require("./testFirstWithPermeableSecond");
 
 module.exports =
 	() =>
@@ -11,6 +11,6 @@ module.exports =
 			"depends upon descendant",
 			() => {
 				testFirstDependsUponSameIdentifierAsChildOfSecond();
-				withInDescendants();
+				testFirstWithPermeableSecond();
 			},
 		);

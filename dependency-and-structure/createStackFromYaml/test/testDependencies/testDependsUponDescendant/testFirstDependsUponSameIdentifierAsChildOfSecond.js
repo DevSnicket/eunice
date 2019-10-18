@@ -11,7 +11,20 @@ module.exports =
 	() =>
 		testCreateStackFromYaml({
 			stack:
-				createStackAndAddDependencies(),
+				createStackFromLevels(
+					[
+						[
+							{
+								dependsUpon: mapItemsToDependsUpon([ "child" ]),
+								id: "first",
+							},
+							{
+								id: "second",
+								items: [ [ { id: "child" } ] ],
+							},
+						],
+					],
+				),
 			stackDescription:
 				"first depends upon same identifier as child of second",
 			yaml:
@@ -28,23 +41,3 @@ module.exports =
 					],
 				],
 		});
-
-function createStackAndAddDependencies() {
-	const stack =
-		createStackFromLevels(
-			[
-				[
-					{
-						dependsUpon: mapItemsToDependsUpon([ "child" ]),
-						id: "first",
-					},
-					{
-						id: "second",
-						items: [ [ { id: "child" } ] ],
-					},
-				],
-			],
-		);
-
-	return stack;
-}
