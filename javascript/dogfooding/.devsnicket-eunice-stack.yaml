@@ -15,6 +15,6 @@
   - run-tests-from-file-system
   - test-harnesses
 -
-  - describe
-  - expect
-  - jest
+  - id: jest
+    dependencyPermeable: true
+    items: [ describe, expect ]
