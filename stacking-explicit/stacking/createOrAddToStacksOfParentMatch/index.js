@@ -3,7 +3,7 @@
 const
 	createStackWhenIdentifierOrItemOrLevelOrAddWhenStack = require("../createStackWhenIdentifierOrItemOrLevelOrAddWhenStack"),
 	hasParentInAncestors = require("./hasParentInAncestors"),
-	replaceItemsAndInItems = require("../../replaceItemsAndInItems");
+	replaceIdentifiersAndItemsAndLevelsAndStacks = require("../../replacement/replaceIdentifiersAndItemsAndLevelsAndStacks");
 
 module.exports =
 	({
@@ -12,7 +12,7 @@ module.exports =
 		keysAndPatterns,
 		targetLevelOrStack,
 	}) =>
-		replaceItemsAndInItems({
+		replaceIdentifiersAndItemsAndLevelsAndStacks({
 			identifierOrItemOrLevelOrStack:
 				items,
 			replace:

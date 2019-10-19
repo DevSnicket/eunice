@@ -3,7 +3,7 @@
 const
 	createStackWhenIdentifierOrItemOrLevelOrAddWhenStack = require("../createStackWhenIdentifierOrItemOrLevelOrAddWhenStack"),
 	getTargetLevelOrStackForAncestorsAndDirectory = require("./getTargetLevelOrStackForAncestorsAndDirectory"),
-	replaceItemsAndInItems = require("../../replaceItemsAndInItems");
+	replaceIdentifiersAndItemsAndLevelsAndStacks = require("../../replacement/replaceIdentifiersAndItemsAndLevelsAndStacks");
 
 module.exports =
 	({
@@ -12,7 +12,7 @@ module.exports =
 		items,
 		subsetIdentifierHierarchy,
 	}) =>
-		replaceItemsAndInItems({
+		replaceIdentifiersAndItemsAndLevelsAndStacks({
 			identifierOrItemOrLevelOrStack:
 				items,
 			replace:

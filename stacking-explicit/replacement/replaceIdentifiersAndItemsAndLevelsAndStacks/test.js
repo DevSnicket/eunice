@@ -1,34 +1,42 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Licensed under the MIT license. See LICENSE file in the repository root for full license information.
 
-const replaceDescendantItemsUsingAncestors = require(".");
+const replaceIdentifiersAndItemsAndLevelsAndStacks = require(".");
 
 test.each(
 	[
 		[
 			{
-				identifierOrItemOrLevelOrStack: null,
-				replace: ({ identifierOrItemOrLevelOrStack }) => identifierOrItemOrLevelOrStack,
+				identifierOrItemOrLevelOrStack:
+					null,
+				replace:
+					({ identifierOrItemOrLevelOrStack }) => identifierOrItemOrLevelOrStack,
 			},
 			null,
 		],
 		[
 			{
-				identifierOrItemOrLevelOrStack: "item",
-				replace: () => "replacement",
+				identifierOrItemOrLevelOrStack:
+					"item",
+				replace:
+					() => "replacement",
 			},
 			"replacement",
 		],
 		[
 			{
-				identifierOrItemOrLevelOrStack: { id: "item" },
-				replace: ({ identifierOrItemOrLevelOrStack }) => identifierOrItemOrLevelOrStack,
+				identifierOrItemOrLevelOrStack:
+					{ id: "item" },
+				replace:
+					({ identifierOrItemOrLevelOrStack }) => identifierOrItemOrLevelOrStack,
 			},
 			{ id: "item" },
 		],
 		[
 			{
-				identifierOrItemOrLevelOrStack: { id: "parent", items: "child" },
-				replace: ({ identifierOrItemOrLevelOrStack }) => identifierOrItemOrLevelOrStack,
+				identifierOrItemOrLevelOrStack:
+					{ id: "parent", items: "child" },
+				replace:
+					({ identifierOrItemOrLevelOrStack }) => identifierOrItemOrLevelOrStack,
 			},
 			{ id: "parent", items: "child" },
 		],
@@ -37,7 +45,7 @@ test.each(
 	"%j with replacement %j returns %j",
 	(argument, expected) =>
 		expect(
-			replaceDescendantItemsUsingAncestors(
+			replaceIdentifiersAndItemsAndLevelsAndStacks(
 				argument,
 			),
 		)
@@ -112,7 +120,7 @@ test.each(
 	(identifierOrItemOrLevelOrStack, expected) => {
 		const actual = [];
 
-		replaceDescendantItemsUsingAncestors({
+		replaceIdentifiersAndItemsAndLevelsAndStacks({
 			identifierOrItemOrLevelOrStack,
 			replace:
 				argument => {

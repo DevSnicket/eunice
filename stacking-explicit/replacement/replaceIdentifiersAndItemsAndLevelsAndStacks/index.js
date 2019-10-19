@@ -5,7 +5,7 @@ module.exports =
 		identifierOrItemOrLevelOrStack,
 		replace,
 	}) =>
-		withReplace(
+		withReplaceIdentifierOrItemOrLevelOrStack(
 			replace,
 		)
 		.withAncestors(
@@ -15,8 +15,8 @@ module.exports =
 			identifierOrItemOrLevelOrStack,
 		);
 
-function withReplace(
-	replace,
+function withReplaceIdentifierOrItemOrLevelOrStack(
+	replaceIdentifierOrItemOrLevelOrStack,
 ) {
 	return { withAncestors };
 
@@ -30,7 +30,7 @@ function withReplace(
 		) {
 			return (
 				replaceInWhenHasValue(
-					replace({
+					replaceIdentifierOrItemOrLevelOrStack({
 						ancestors,
 						identifierOrItemOrLevelOrStack,
 					}),
