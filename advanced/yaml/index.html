@@ -31,12 +31,17 @@ dependsUpon: item 2</code>
         <p>The value of "dependsUpon" can be a <a href="https://yaml.org/spec/1.2/spec.html#id2759963" target="_blank">sequence</a> of multiple item identifiers.</p>
         <code>id: item 1
 dependsUpon: [item 2, item 3]</code>
-        <p>The value or <a href="https://yaml.org/spec/1.2/spec.html#id2759963" target="_blank">sequence</a> of "dependsUpon" can also contain a <a href="https://yaml.org/spec/1.2/spec.html#id2759963" target="_blank">mapping</a> with keys of id and items. This specifies a dependency on a [nested / child item](#nested-child-items).</p>
+        <p>The value or <a href="https://yaml.org/spec/1.2/spec.html#id2759963" target="_blank">sequence</a> of "dependsUpon" can also contain a <a href="https://yaml.org/spec/1.2/spec.html#id2759963" target="_blank">mapping</a> with keys of id and items. This specifies a dependency on a <a href="#nested-child-items">nested / child item</a>.</p>
         <code>id: item 1
 dependsUpon:
   id: item 2
   items: child of item 2</code>
-
+        <p>The default behavior of dependency resolution is to ignore child items of an item that isn't specified in the dependency. To resolve dependencies inside an item regardless of its identifier specify true for the mapping key "dependencyPermeable".</p>
+        <code>id: item 1
+dependsUpon: child of item 2
+id: item 2
+dependencyPermeable: true
+items: child of item 2</code>
         <h2 id="independent-items">independent items</h2>
         <p>A <a href="https://yaml.org/spec/1.2/spec.html#id2759963" target="_blank">sequence</a> specifies items intended to be independent of each other.</p>
         <code>[left item, right item]</code>
