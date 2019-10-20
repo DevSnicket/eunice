@@ -25,10 +25,12 @@ const
 		unstackIndependent,
 	} = require("@devsnicket/eunice-processors"),
 	reverseDescendantsOfItems = require("./reverseDescendantsOfItems"),
+	setDependencyPermeable = require("./setDependencyPermeable"),
 	setIdentifierOfAnonymousExportToParent = require("./setIdentifierOfAnonymousExportToParent");
 
 module.exports =
 	({
+		dependencyPermeableIdentifiers,
 		directoryToCreateOrAddToStacksFrom,
 		identifierSeparator,
 		isFileContentReversed,
@@ -90,6 +92,11 @@ module.exports =
 					removePackagePrefixAndScopeInDependsUpon({
 						items,
 						...packagePrefixAndScope,
+					}),
+				items =>
+					setDependencyPermeable({
+						dependencyPermeableIdentifiers,
+						items,
 					}),
 				flattenSingleRootItemWhenHasOnlyItemsAndType,
 			]

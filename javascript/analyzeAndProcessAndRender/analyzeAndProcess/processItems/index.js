@@ -4,6 +4,7 @@ const createProcessFunctions = require("./createProcessFunctions");
 
 module.exports =
 	({
+		dependencyPermeableIdentifiers,
 		directoryToCreateOrAddToStacksFrom,
 		identifierSeparator,
 		isFileContentReversed,
@@ -16,6 +17,7 @@ module.exports =
 			items,
 			processFunctions:
 				createProcessFunctions({
+					dependencyPermeableIdentifiers,
 					directoryToCreateOrAddToStacksFrom,
 					identifierSeparator,
 					isFileContentReversed,

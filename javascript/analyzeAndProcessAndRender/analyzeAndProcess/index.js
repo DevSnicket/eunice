@@ -10,6 +10,7 @@ const
 module.exports =
 	async({
 		babelParserPlugins = babelParserPluginsDefault,
+		dependencyPermeableIdentifiers,
 		directoryToCreateOrAddToStacksFrom,
 		ignorePathPattern,
 		isFileContentReversed,
@@ -53,6 +54,7 @@ module.exports =
 					items.length
 					&&
 					processItems({
+						dependencyPermeableIdentifiers,
 						directoryToCreateOrAddToStacksFrom:
 							directory,
 						identifierSeparator:

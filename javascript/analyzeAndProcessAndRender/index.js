@@ -16,6 +16,7 @@ module.exports =
 	async({
 		babelParserPlugins,
 		date,
+		dependencyPermeableIdentifiers,
 		directoryToCreateOrAddToStacksFrom = null,
 		ignorePathPattern,
 		includeServiceWorkers = false,
@@ -42,6 +43,7 @@ module.exports =
 				formatYaml(
 					await analyzeAndProcess({
 						babelParserPlugins,
+						dependencyPermeableIdentifiers,
 						directoryToCreateOrAddToStacksFrom,
 						ignorePathPattern,
 						isFileContentReversed,

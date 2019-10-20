@@ -9,6 +9,8 @@ test(
 	() =>
 		expect(
 			processItems({
+				dependencyPermeableIdentifiers:
+					null,
 				directoryToCreateOrAddToStacksFrom:
 					path.join(__dirname, "stacks"),
 				identifierSeparator:
@@ -108,6 +110,8 @@ test(
 	() =>
 		expect(
 			processItems({
+				dependencyPermeableIdentifiers:
+					null,
 				directoryToCreateOrAddToStacksFrom:
 					"stacks",
 				identifierSeparator:
@@ -134,6 +138,8 @@ test(
 	() =>
 		expect(
 			processItems({
+				dependencyPermeableIdentifiers:
+					null,
 				directoryToCreateOrAddToStacksFrom:
 					"no-stacks",
 				identifierSeparator:

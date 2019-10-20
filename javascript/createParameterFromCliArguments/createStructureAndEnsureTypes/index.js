@@ -7,6 +7,7 @@ const
 module.exports =
 	({
 		babelParserPlugins,
+		dependencyPermeableIdentifiers,
 		directories = ".",
 		ignorePathPattern = "(^|/)(\\..*|node_modules)$",
 		includeServiceWorkers,
@@ -29,6 +30,8 @@ module.exports =
 			...restOfOptions,
 			babelParserPlugins:
 				ensureArray(babelParserPlugins),
+			dependencyPermeableIdentifiers:
+				ensureArray(dependencyPermeableIdentifiers),
 			ignorePathPattern:
 				ignorePathPattern
 				&&
