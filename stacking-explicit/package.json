@@ -31,8 +31,8 @@
 		"@types/jest": "24.0.19",
 		"@types/node": "10.12.12",
 		"cspell": "4.0.21",
-		"eslint": "5.16.0",
-		"eslint-plugin-notice": "0.8.8",
+		"eslint": "6.5.1",
+		"eslint-plugin-notice": "0.8.9",
 		"jest": "24.9.0"
 	},
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
