@@ -9,7 +9,8 @@ const
 	removePackagePrefixAndScopeInDependsUpon = require("./removePackagePrefixAndScopeInDependsUpon"),
 	{
 		removeSelfDependentItemsOfType,
-		replaceDependsUponWithHierarchyFromSeparator,
+		replacement:
+			{ replaceDependsUponWithHierarchyFromSeparator },
 		sorting:
 			{
 				orderItemsByIdentifier,

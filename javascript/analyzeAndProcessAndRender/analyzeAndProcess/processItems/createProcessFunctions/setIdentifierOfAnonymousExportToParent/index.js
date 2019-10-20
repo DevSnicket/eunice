@@ -1,83 +1,33 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const { replaceItemsAndInItems } = require("@devsnicket/eunice-processors");
+const { replacement: { replaceIdentifiersAndItems } } = require("@devsnicket/eunice-processors");
 
 module.exports =
-	items =>
-		replaceItemsAndInItems({
-			identifierOrItemOrLevelOrStack:
-				items,
+	identifierOrItemOrLevelOrStack =>
+		replaceIdentifiersAndItems({
+			identifierOrItemOrLevelOrStack,
 			replace,
 		});
 
 function replace({
 	ancestors,
-	identifierOrItemOrLevelOrStack,
+	identifierOrItem,
 }) {
 	return (
-		identifierOrItemOrLevelOrStack
+		identifierOrItem
 		&&
-		withAncestors(ancestors)
-		.replaceIdentifierOrItemOrLevelOrStack(identifierOrItemOrLevelOrStack)
+		(whenAnonymousExport() || identifierOrItem)
 	);
-}
 
-function withAncestors(
-	ancestors,
-) {
-	return { replaceIdentifierOrItemOrLevelOrStack };
-
-	function replaceIdentifierOrItemOrLevelOrStack(
-		identifierOrItemOrLevelOrStack,
-	) {
+	function whenAnonymousExport() {
 		return (
-			whenLevelOrStack()
-			||
-			replaceIdentifierOrItem(identifierOrItemOrLevelOrStack)
+			identifierOrItem.type === "export"
+			&&
+			{
+				id: getParentIdentifier(),
+				...identifierOrItem,
+			}
 		);
-
-		function whenLevelOrStack() {
-			return (
-				Array.isArray(identifierOrItemOrLevelOrStack)
-				&&
-				identifierOrItemOrLevelOrStack.map(replaceIdentifierOrItemOrLevel)
-			);
-		}
-	}
-
-	function replaceIdentifierOrItemOrLevel(
-		identifierOrItemOrLevel,
-	) {
-		return (
-			whenLevel()
-			||
-			replaceIdentifierOrItem(identifierOrItemOrLevel)
-		);
-
-		function whenLevel() {
-			return (
-				Array.isArray(identifierOrItemOrLevel)
-				&&
-				identifierOrItemOrLevel.map(replaceIdentifierOrItem)
-			);
-		}
-	}
-
-	function replaceIdentifierOrItem(
-		identifierOrItem,
-	) {
-		return whenAnonymousExport() || identifierOrItem;
-
-		function whenAnonymousExport() {
-			return (
-				identifierOrItem.type === "export"
-				&&
-				{
-					id: getParentIdentifier(),
-					...identifierOrItem,
-				}
-			);
-		}
 	}
 
 	function getParentIdentifier() {

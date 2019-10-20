@@ -2,7 +2,7 @@
 
 const
 	removePrefixInDependsUpon = require("./removePrefixInDependsUpon"),
-	{ replaceDependsUpon } = require("@devsnicket/eunice-processors"),
+	{ replacement: { replaceDependsUpon } } = require("@devsnicket/eunice-processors"),
 	replaceItemsOfDependsUponWithIdentifier = require("./replaceItemsOfDependsUponWithIdentifier");
 
 module.exports =

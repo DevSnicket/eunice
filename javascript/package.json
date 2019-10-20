@@ -14,7 +14,7 @@
 		"@devsnicket/eunice-call-with-process-standard-streams": "1.3.0",
 		"@devsnicket/eunice-dependency-and-structure": "2.15.0",
 		"@devsnicket/eunice-javascript-analyzer": "11.4.1",
-		"@devsnicket/eunice-processors": "9.1.0",
+		"@devsnicket/eunice-processors": "10.0.1",
 		"@devsnicket/eunice-renderer": "6.2.0",
 		"@devsnicket/eunice-renderer-test-harness": "4.4.0",
 		"@devsnicket/eunice-run-tests-from-file-system": "2.1.0",

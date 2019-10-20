@@ -5,7 +5,7 @@ const
 		createLinearHierarchyFromIdentifierSeparator,
 		groupItemsByIdentifierSeparator,
 		removeRedundantParentIdentifierPrefix,
-		replaceIdentifiers,
+		replacement: { replaceIdentifiers },
 	} = require("@devsnicket/eunice-processors");
 
 module.exports =
