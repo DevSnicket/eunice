@@ -111,26 +111,6 @@ test.each(
 					},
 			},
 		],
-		[
-			[
-				{ dependsUpon: "parent/child" },
-				{ id: "parent", items: "parent/child" },
-			],
-			[
-				{ dependsUpon: "child" },
-				{ id: "parent", items: "child" },
-			],
-		],
-		[
-			[
-				{ id: "parent", items: "parent/child" },
-				{ dependsUpon: "parent/child" },
-			],
-			[
-				{ id: "parent", items: "child" },
-				{ dependsUpon: "child" },
-			],
-		],
 	],
 )(
 	"%j items returns %j",

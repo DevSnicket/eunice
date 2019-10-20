@@ -77,20 +77,6 @@ test.each(
 		],
 		[
 			[
-				[ { dependsUpon: "childItem", id: "item1" } ],
-				[ { id: "item2", items: "childItem" } ],
-				[ "item3" ],
-			],
-			[
-				[ { dependsUpon: "childItem", id: "item1" } ],
-				[
-					{ id: "item2", items: "childItem" },
-					"item3",
-				],
-			],
-		],
-		[
-			[
 				[ { dependsUpon: [ "item2", "item3" ], id: "item1" } ],
 				[ "item2" ],
 				[ "item3" ],
