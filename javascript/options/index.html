@@ -26,6 +26,7 @@
                 <a href="#source-directories">source directories</a>
                 <a href="#stack-from-directory">stack from directory</a>
                 <a href="#modify-file-stacks">modify file stacks</a>
+                <a href="#dependency-permeable">dependency permeable</a>
                 <a href="#root-item">root item</a>
                 <a href="#output-files">output files</a>
                 <a href="#npm-packages">NPM packages</a>
@@ -69,6 +70,12 @@
                 <p>A file can be specified that specifies a stack to modify the structure of all files. It does not add new items and is not applied to the sub-stacks within files.</p>
                 <code>npx eunice
   --modify-file-stacks-file=stacks.yaml</code>
+            </div>
+            <div class="box" id="dependency-permeable">
+                <h3>dependency permeable</h3>
+                <p>Item identifiers can be specified so dependencies resolve to their children even though the items weren't specified in the dependency. For example, sub-directories such as, node_modules or src in a mono-repository.</p>
+                <code>npx eunice
+  --dependency-permeable-identifiers=node_modules</code>
             </div>
             <div class="box" id="root-item">
                 <h3>root item</h3>
