@@ -27,7 +27,7 @@
 		"js-yaml": "3.13.1"
 	},
 	"devDependencies": {
-		"@devsnicket/plugin-discovery-commonjs-babel-plugin": "1.11.0",
+		"@devsnicket/plugin-discovery-commonjs-babel-plugin": "1.11.1",
 		"@types/jest": "24.0.13",
 		"@types/node": "10.12.12",
 		"cspell": "4.0.21",
