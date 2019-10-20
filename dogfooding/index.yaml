@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.13.0 on 2019-10-18T11:05:35.376Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.14.0 on 2019-10-20T21:06:42.833Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -174,6 +174,7 @@
                             items:
                               - - id: processWhenAnyItems
                                   dependsUpon:
+                                    - dependencyPermeableIdentifiers
                                     - directory
                                     - isFileContentReversed
                                     - items
@@ -192,6 +193,8 @@
                               - createOrAddToStacksUsingFileSystem
                               - directoryToCreateOrAddToStacksFrom
                         - - id: babelParserPlugins
+                            type: parameter
+                          - id: dependencyPermeableIdentifiers
                             type: parameter
                           - id: directoryToCreateOrAddToStacksFrom
                             type: parameter
@@ -243,6 +246,7 @@
                                     - removePackagePrefixAndScopeInDependsUpon
                                     - replaceDependsUponWithHierarchyFromSeparator
                                     - reverseDescendantsOfItems
+                                    - setDependencyPermeable
                                 - id: setTypeOfRootToFile
                                   dependsUpon: setTypeOfRootItems
                                 - id: removeSelfDependentVariables
@@ -570,6 +574,53 @@
                                         items:
                                           id: whenHasMultipleItems
                                           dependsUpon: reverseDescendantsOfItems
+                                - id: setDependencyPermeable
+                                  type: file
+                                  items:
+                                    - - id: test
+                                        type: file
+                                        dependsUpon:
+                                          - expect
+                                          - setDependencyPermeable
+                                          - test
+                                    - - id: setDependencyPermeable
+                                        type: export
+                                        dependsUpon: whenHasIdentifiers
+                                        items:
+                                          - - id: whenHasIdentifiers
+                                              dependsUpon:
+                                                - dependencyPermeableIdentifiers
+                                                - withDependencyPermeableIdentifiers
+                                          - - id: dependencyPermeableIdentifiers
+                                              type: parameter
+                                    - - id: withDependencyPermeableIdentifiers
+                                        items:
+                                          - - id: setDependencyPermeable
+                                              dependsUpon:
+                                                - replace
+                                                - replaceIdentifiersAndItems
+                                          - - id: replace
+                                              dependsUpon:
+                                                - whenIdentifier
+                                                - whenItem
+                                              items:
+                                                - - id: whenIdentifier
+                                                    dependsUpon:
+                                                      - identifierOrItem
+                                                      - isDependencyPermeableIdentifier
+                                                  - id: whenItem
+                                                    dependsUpon: isDependencyPermeableIdentifier
+                                                - - id: identifierOrItem
+                                                    type: parameter
+                                          - - id: isDependencyPermeableIdentifier
+                                              dependsUpon: dependencyPermeableIdentifiers
+                                          - - id: dependencyPermeableIdentifiers
+                                              type: parameter
+                                    - - id: replaceIdentifiersAndItems
+                                        type: variable
+                                        dependsUpon:
+                                          id: processors
+                                          items: replaceIdentifiersAndItems
                                 - id: setIdentifierOfAnonymousExportToParent
                                   type: file
                                   items:
@@ -587,44 +638,18 @@
                                         type: export
                                         dependsUpon:
                                           - replace
-                                          - replaceItemsAndInItems
+                                          - replaceIdentifiersAndItems
                                     - - id: replace
-                                        dependsUpon: withAncestors
-                                    - - id: withAncestors
+                                        dependsUpon: whenAnonymousExport
                                         items:
-                                          - - id: replaceIdentifierOrItemOrLevelOrStack
-                                              dependsUpon:
-                                                - replaceIdentifierOrItem
-                                                - whenLevelOrStack
-                                              items:
-                                                - - id: whenLevelOrStack
-                                                    dependsUpon:
-                                                      - identifierOrItemOrLevelOrStack
-                                                      - replaceIdentifierOrItemOrLevel
-                                                - - id: identifierOrItemOrLevelOrStack
-                                                    type: parameter
-                                          - - id: replaceIdentifierOrItemOrLevel
-                                              dependsUpon:
-                                                - replaceIdentifierOrItem
-                                                - whenLevel
-                                              items:
-                                                - - id: whenLevel
-                                                    dependsUpon:
-                                                      - identifierOrItemOrLevel
-                                                      - replaceIdentifierOrItem
-                                                - - id: identifierOrItemOrLevel
-                                                    type: parameter
-                                          - - id: replaceIdentifierOrItem
-                                              dependsUpon: whenAnonymousExport
-                                              items:
-                                                id: whenAnonymousExport
-                                                dependsUpon: getParentIdentifier
+                                          - - id: whenAnonymousExport
+                                              dependsUpon: getParentIdentifier
                                           - - getParentIdentifier
-                                      - id: replaceItemsAndInItems
+                                      - id: replaceIdentifiersAndItems
                                         type: variable
                                         dependsUpon:
                                           id: processors
-                                          items: replaceItemsAndInItems
+                                          items: replaceIdentifiersAndItems
                               - - id: isSingleAnonymous
                                   type: file
                                   items:
@@ -3315,33 +3340,10 @@
                   - - id: createLinearHierarchyFromIdentifierSeparator
                       type: export
                       dependsUpon:
-                        - replaceItemsAndInItems
+                        - replaceIdentifiersAndItems
                         - withIdentifierSeparator
                   - - id: withIdentifierSeparator
-                      dependsUpon: replaceIdentifierOrItemOrLevelOrStack
                       items:
-                        - - id: replaceIdentifierOrItemOrLevelOrStack
-                            dependsUpon:
-                              - replaceIdentifierOrItem
-                              - whenLevelOrStack
-                            items:
-                              - - id: whenLevelOrStack
-                                  dependsUpon:
-                                    - identifierOrItemOrLevelOrStack
-                                    - replaceIdentifierOrItemOrLevel
-                              - - id: identifierOrItemOrLevelOrStack
-                                  type: parameter
-                        - - id: replaceIdentifierOrItemOrLevel
-                            dependsUpon:
-                              - replaceIdentifierOrItem
-                              - whenLevel
-                            items:
-                              - - id: whenLevel
-                                  dependsUpon:
-                                    - identifierOrItemOrLevel
-                                    - replaceIdentifierOrItem
-                              - - id: identifierOrItemOrLevel
-                                  type: parameter
                         - - id: replaceIdentifierOrItem
                             dependsUpon:
                               - whenIdentifiableItem
@@ -3368,6 +3370,11 @@
                         - - id: identifierSeparator
                             type: parameter
                   - - replaceWhenIdentifierHasSegments
+                    - id: replaceIdentifiersAndItems
+                      type: variable
+                      dependsUpon:
+                        id: replacement
+                        items: replaceIdentifiersAndItems
               - id: groupItemsByIdentifierSeparator
                 type: file
                 items:
@@ -3773,155 +3780,6 @@
                         - - dependsUpon: selector
                         - - id: selector
                             type: parameter
-              - id: replaceDependsUpon
-                type: file
-                items:
-                  - - id: replaceDependsUpon
-                      type: export
-                      dependsUpon: withGetDependsUponReplacement
-                  - - id: withGetDependsUponReplacement
-                      items:
-                        - - id: getIdentifierOrReplaceItemOrItemsInLevelOrStack
-                            dependsUpon:
-                              - getIdentifierOrReplaceInItem
-                              - whenLevelOrStack
-                            items:
-                              - - id: whenLevelOrStack
-                                  dependsUpon:
-                                    - getIdentifierOrReplaceInItemOrLevel
-                                    - identifierOrItemOrLevelOrStack
-                              - - id: identifierOrItemOrLevelOrStack
-                                  type: parameter
-                        - - id: getIdentifierOrReplaceInItemOrLevel
-                            dependsUpon:
-                              - getIdentifierOrReplaceInItem
-                              - whenLevel
-                            items:
-                              - - id: whenLevel
-                                  dependsUpon:
-                                    - getIdentifierOrReplaceInItem
-                                    - levelOrItemOrIdentifier
-                              - - id: levelOrItemOrIdentifier
-                                  type: parameter
-                        - - id: getIdentifierOrReplaceInItem
-                            dependsUpon:
-                              - replaceItemAndInItems
-                              - whenIdentifier
-                            items: whenIdentifier
-                        - - id: replaceItemAndInItems
-                            dependsUpon:
-                              - createPropertyFromDependsUpon
-                              - createPropertyFromItems
-                        - - id: createPropertyFromDependsUpon
-                            dependsUpon: getDependsUponReplacement
-                          - id: createPropertyFromItems
-                            dependsUpon: getIdentifierOrReplaceItemOrItemsInLevelOrStack
-                        - - id: getDependsUponReplacement
-                            type: parameter
-                    - id: withHierarchyFromSeparator
-                      type: file
-                      items:
-                        - - id: bin
-                            type: file
-                            dependsUpon: callWithProcessStandardStreamsOfYaml
-                          - id: test
-                            type: file
-                            dependsUpon:
-                              - expect
-                              - replaceDependsUponWithHierarchiesOfIdentifierSeparator
-                              - test
-                            items:
-                              id: replaceDependsUponWithHierarchiesOfIdentifierSeparator
-                              type: variable
-                              dependsUpon: withHierarchyFromSeparator
-                        - - id: withHierarchyFromSeparator
-                            type: export
-                            dependsUpon:
-                              - createDependsUponHierarchy
-                              - replaceDependsUpon
-                        - - id: createDependsUponHierarchy
-                            type: file
-                            items:
-                              - - id: createDependsUponHierarchy
-                                  type: export
-                                  dependsUpon: withIdentifierSeparator
-                              - - id: withIdentifierSeparator
-                                  items:
-                                    - - id: replaceDependsUpon
-                                        dependsUpon:
-                                          - whenArray
-                                          - whenHasIdentifier
-                                          - whenString
-                                        items:
-                                          - - id: whenString
-                                              dependsUpon:
-                                                - dependsUpon
-                                                - splitIdentifierIntoHierarchy
-                                            - id: whenArray
-                                              dependsUpon:
-                                                - dependsUpon
-                                                - replaceDependsUpon
-                                            - id: whenHasIdentifier
-                                              dependsUpon:
-                                                - replaceDependsUpon
-                                                - splitIdentifierIntoHierarchy
-                                          - - id: dependsUpon
-                                              type: parameter
-                                    - - id: splitIdentifierIntoHierarchy
-                                        dependsUpon: identifierSeparator
-                                    - - id: identifierSeparator
-                                        type: parameter
-              - id: replaceIdentifiers
-                type: file
-                items:
-                  - - id: bin
-                      type: file
-                      dependsUpon:
-                        - callWithProcessStandardStreamsOfYaml
-                        - replaceIdentifiers
-                    - id: test
-                      type: file
-                      dependsUpon:
-                        - expect
-                        - replaceIdentifiers
-                        - test
-                    - id: testHarnessPlugin
-                      type: file
-                      dependsUpon:
-                        - replaceIdentifiers
-                        - test-harnesses-processor-plugins
-                  - - id: replaceIdentifiers
-                      type: export
-                      dependsUpon:
-                        - replaceInItem
-                        - updateItems
-                  - - id: updateItems
-                      dependsUpon:
-                        - createStackFromYaml
-                        - createYamlFromStack
-                        - getItemsOfStack
-                        - withUpdateItem
-                  - - id: withUpdateItem
-                      items:
-                        - - id: updateInStack
-                            dependsUpon:
-                              - getItemsOfStack
-                              - updateInStack
-                              - updateItem
-                        - - id: updateItem
-                            type: parameter
-                  - - getItemsOfStack
-                    - replaceInItem
-                    - id: createStackFromYaml
-                      type: variable
-                      dependsUpon:
-                        id: dependency-and-structure
-                        items: createStackFromYaml
-                    - id: createYamlFromStack
-                      type: variable
-                      dependsUpon:
-                        id: dependency-and-structure
-                        items: createYamlFromStack
               - id: setTypeOfRootItems
                 type: file
                 items:
@@ -4122,8 +3980,13 @@
                             dependsUpon:
                               - createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
                               - hasParentInAncestors
-                              - replaceItemsAndInItems
-                        - - id: hasParentInAncestors
+                              - replaceIdentifiersAndItemsAndLevelsAndStacks
+                        - - id: replaceIdentifiersAndItemsAndLevelsAndStacks
+                            type: variable
+                            dependsUpon:
+                              id: replacement
+                              items: replaceIdentifiersAndItemsAndLevelsAndStacks
+                          - id: hasParentInAncestors
                             type: file
                             items:
                               - - id: test
@@ -4160,7 +4023,7 @@
                               - test
                         - - id: createOrAddToStacksUsingFileSystem
                             type: export
-                            dependsUpon: replaceItemsAndInItems
+                            dependsUpon: replaceIdentifiersAndItemsAndLevelsAndStacks
                             items:
                               - - dependsUpon:
                                     - addNewInTarget
@@ -4174,7 +4037,12 @@
                                   type: parameter
                                 - id: subsetIdentifierHierarchy
                                   type: parameter
-                        - - id: getTargetLevelOrStackForAncestorsAndDirectory
+                        - - id: replaceIdentifiersAndItemsAndLevelsAndStacks
+                            type: variable
+                            dependsUpon:
+                              id: replacement
+                              items: replaceIdentifiersAndItemsAndLevelsAndStacks
+                          - id: getTargetLevelOrStackForAncestorsAndDirectory
                             type: file
                             items:
                               - - id: test
@@ -4833,82 +4701,296 @@
                     - id: yaml
                       type: variable
                       dependsUpon: js-yaml
-              - id: replaceItemsAndInItems
+              - id: replacement
                 type: file
                 items:
-                  - - id: test
+                  - - id: replaceDependsUpon
                       type: file
-                      dependsUpon:
-                        - expect
-                        - replaceDescendantItemsUsingAncestors
-                        - test
                       items:
-                        - - dependsUpon:
-                              - expect
-                              - replaceDescendantItemsUsingAncestors
+                        - - id: replaceDependsUpon
+                            type: export
+                            dependsUpon: withGetDependsUponReplacement
+                        - - id: withGetDependsUponReplacement
                             items:
-                              - - dependsUpon: actual
-                              - - id: actual
-                                  type: variable
-                        - - id: replaceDescendantItemsUsingAncestors
-                            type: variable
-                            dependsUpon: replaceItemsAndInItems
-                  - - id: replaceItemsAndInItems
-                      type: export
-                      dependsUpon: withReplace
-                  - - id: withReplace
-                      items:
-                        - - id: withAncestors
-                            items:
-                              - - id: replaceAndReplaceIn
+                              - - id: getIdentifierOrReplaceItemOrItemsInLevelOrStack
                                   dependsUpon:
-                                    - ancestors
-                                    - replace
-                                    - replaceInWhenHasValue
-                              - - id: replaceInWhenHasValue
-                                  dependsUpon: getIdentifierOrReplaceInItemOrLevelOrStack
-                              - - id: getIdentifierOrReplaceInItemOrLevelOrStack
-                                  dependsUpon:
-                                    - getWhenIdentifierOrReplaceInItem
+                                    - getIdentifierOrReplaceInItem
                                     - whenLevelOrStack
                                   items:
                                     - - id: whenLevelOrStack
                                         dependsUpon:
+                                          - getIdentifierOrReplaceInItemOrLevel
                                           - identifierOrItemOrLevelOrStack
-                                          - replaceInLevelOrStack
                                     - - id: identifierOrItemOrLevelOrStack
                                         type: parameter
-                              - - id: replaceInLevelOrStack
+                              - - id: getIdentifierOrReplaceInItemOrLevel
                                   dependsUpon:
-                                    - replaceInLevel
-                                    - whenStack
+                                    - getIdentifierOrReplaceInItem
+                                    - whenLevel
                                   items:
-                                    - - id: whenStack
+                                    - - id: whenLevel
                                         dependsUpon:
-                                          - levelOrStack
-                                          - replaceInStack
-                                    - - id: levelOrStack
+                                          - getIdentifierOrReplaceInItem
+                                          - levelOrItemOrIdentifier
+                                    - - id: levelOrItemOrIdentifier
                                         type: parameter
-                              - - id: replaceInStack
-                                  dependsUpon: replaceInLevel
-                              - - id: replaceInLevel
-                                  dependsUpon: getWhenIdentifierOrReplaceInItem
-                              - - id: getWhenIdentifierOrReplaceInItem
+                              - - id: getIdentifierOrReplaceInItem
                                   dependsUpon:
-                                    - replaceInItem
+                                    - replaceItemAndInItems
                                     - whenIdentifier
                                   items: whenIdentifier
-                              - - id: replaceInItem
-                                  dependsUpon: getItemsProperty
-                                  items:
-                                    - - id: getItemsProperty
-                                        dependsUpon: getItems
-                                    - - id: getItems
-                                        dependsUpon: withAncestors
-                                - id: ancestors
+                              - - id: replaceItemAndInItems
+                                  dependsUpon:
+                                    - createPropertyFromDependsUpon
+                                    - createPropertyFromItems
+                              - - id: createPropertyFromDependsUpon
+                                  dependsUpon: getDependsUponReplacement
+                                - id: createPropertyFromItems
+                                  dependsUpon: getIdentifierOrReplaceItemOrItemsInLevelOrStack
+                              - - id: getDependsUponReplacement
                                   type: parameter
-                        - - id: replace
-                            type: parameter
+                          - id: withHierarchyFromSeparator
+                            type: file
+                            items:
+                              - - id: bin
+                                  type: file
+                                  dependsUpon:
+                                    id: replacement
+                                    items: callWithProcessStandardStreamsOfYaml
+                                - id: test
+                                  type: file
+                                  dependsUpon:
+                                    - expect
+                                    - replaceDependsUponWithHierarchiesOfIdentifierSeparator
+                                    - test
+                                  items:
+                                    id: replaceDependsUponWithHierarchiesOfIdentifierSeparator
+                                    type: variable
+                                    dependsUpon: withHierarchyFromSeparator
+                              - - id: withHierarchyFromSeparator
+                                  type: export
+                                  dependsUpon:
+                                    - createDependsUponHierarchy
+                                    - replaceDependsUpon
+                              - - id: createDependsUponHierarchy
+                                  type: file
+                                  items:
+                                    - - id: createDependsUponHierarchy
+                                        type: export
+                                        dependsUpon: withIdentifierSeparator
+                                    - - id: withIdentifierSeparator
+                                        items:
+                                          - - id: replaceDependsUpon
+                                              dependsUpon:
+                                                - whenArray
+                                                - whenHasIdentifier
+                                                - whenString
+                                              items:
+                                                - - id: whenString
+                                                    dependsUpon:
+                                                      - dependsUpon
+                                                      - splitIdentifierIntoHierarchy
+                                                  - id: whenArray
+                                                    dependsUpon:
+                                                      - dependsUpon
+                                                      - replaceDependsUpon
+                                                  - id: whenHasIdentifier
+                                                    dependsUpon:
+                                                      - replaceDependsUpon
+                                                      - splitIdentifierIntoHierarchy
+                                                - - id: dependsUpon
+                                                    type: parameter
+                                          - - id: splitIdentifierIntoHierarchy
+                                              dependsUpon: identifierSeparator
+                                          - - id: identifierSeparator
+                                              type: parameter
+                    - id: replaceIdentifiers
+                      type: file
+                      items:
+                        - - id: bin
+                            type: file
+                            dependsUpon:
+                              - replaceIdentifiers
+                              - id: replacement
+                                items: callWithProcessStandardStreamsOfYaml
+                          - id: test
+                            type: file
+                            dependsUpon:
+                              - expect
+                              - replaceIdentifiers
+                              - test
+                          - id: testHarnessPlugin
+                            type: file
+                            dependsUpon:
+                              - replaceIdentifiers
+                              - test-harnesses-processor-plugins
+                        - - id: replaceIdentifiers
+                            type: export
+                            dependsUpon:
+                              - replaceInItem
+                              - updateItems
+                        - - id: updateItems
+                            dependsUpon:
+                              - createStackFromYaml
+                              - createYamlFromStack
+                              - getItemsOfStack
+                              - withUpdateItem
+                        - - id: withUpdateItem
+                            items:
+                              - - id: updateInStack
+                                  dependsUpon:
+                                    - getItemsOfStack
+                                    - updateInStack
+                                    - updateItem
+                              - - id: updateItem
+                                  type: parameter
+                        - - getItemsOfStack
+                          - replaceInItem
+                          - id: createStackFromYaml
+                            type: variable
+                            dependsUpon:
+                              id: dependency-and-structure
+                              items: createStackFromYaml
+                          - id: createYamlFromStack
+                            type: variable
+                            dependsUpon:
+                              id: dependency-and-structure
+                              items: createYamlFromStack
+                    - id: replaceIdentifiersAndItems
+                      type: file
+                      items:
+                        - - id: test
+                            type: file
+                            dependsUpon:
+                              - describe
+                              - expect
+                              - replaceIdentifiersAndItems
+                              - test
+                            items:
+                              dependsUpon:
+                                - expect
+                                - jest
+                                - replaceIdentifiersAndItems
+                        - - id: replaceIdentifiersAndItems
+                            type: export
+                            dependsUpon:
+                              - replaceIdentifiersAndItemsAndLevelsAndStacks
+                              - withReplaceIdentifierOrItem
+                        - - id: withReplaceIdentifierOrItem
+                            items:
+                              - - id: replaceIdentifierOrItemOrLevelOrStack
+                                  dependsUpon: replaceValue
+                                  items:
+                                    - - id: replaceValue
+                                        dependsUpon:
+                                          - ancestors
+                                          - identifierOrItemOrLevelOrStack
+                                          - replaceIdentifierOrItem
+                                          - whenLevelOrStack
+                                    - - id: whenLevelOrStack
+                                        dependsUpon:
+                                          - ancestors
+                                          - identifierOrItemOrLevelOrStack
+                                          - withAncestors
+                                    - - id: ancestors
+                                        type: parameter
+                                      - id: identifierOrItemOrLevelOrStack
+                                        type: parameter
+                              - - id: withAncestors
+                                  items:
+                                    - - id: replaceIdentifierOrItemOrLevel
+                                        dependsUpon:
+                                          - ancestors
+                                          - replaceIdentifierOrItem
+                                          - whenLevel
+                                        items:
+                                          - - id: whenLevel
+                                              dependsUpon:
+                                                - identifierOrItemOrLevel
+                                                - replaceLevel
+                                          - - id: identifierOrItemOrLevel
+                                              type: parameter
+                                    - - id: replaceLevel
+                                        dependsUpon:
+                                          - ancestors
+                                          - replaceIdentifierOrItem
+                                    - - id: ancestors
+                                        type: parameter
+                              - - id: replaceIdentifierOrItem
+                                  type: parameter
+                  - - id: replaceIdentifiersAndItemsAndLevelsAndStacks
+                      type: file
+                      items:
+                        - - id: test
+                            type: file
+                            dependsUpon:
+                              - expect
+                              - replaceIdentifiersAndItemsAndLevelsAndStacks
+                              - test
+                            items:
+                              dependsUpon:
+                                - expect
+                                - replaceIdentifiersAndItemsAndLevelsAndStacks
+                              items:
+                                - - dependsUpon: actual
+                                - - id: actual
+                                    type: variable
+                        - - id: replaceIdentifiersAndItemsAndLevelsAndStacks
+                            type: export
+                            dependsUpon: withReplaceIdentifierOrItemOrLevelOrStack
+                        - - id: withReplaceIdentifierOrItemOrLevelOrStack
+                            items:
+                              - - id: withAncestors
+                                  items:
+                                    - - id: replaceAndReplaceIn
+                                        dependsUpon:
+                                          - ancestors
+                                          - replaceIdentifierOrItemOrLevelOrStack
+                                          - replaceInWhenHasValue
+                                    - - id: replaceInWhenHasValue
+                                        dependsUpon: getIdentifierOrReplaceInItemOrLevelOrStack
+                                    - - id: getIdentifierOrReplaceInItemOrLevelOrStack
+                                        dependsUpon:
+                                          - getWhenIdentifierOrReplaceInItem
+                                          - whenLevelOrStack
+                                        items:
+                                          - - id: whenLevelOrStack
+                                              dependsUpon:
+                                                - identifierOrItemOrLevelOrStack
+                                                - replaceInLevelOrStack
+                                          - - id: identifierOrItemOrLevelOrStack
+                                              type: parameter
+                                    - - id: replaceInLevelOrStack
+                                        dependsUpon:
+                                          - replaceInLevel
+                                          - whenStack
+                                        items:
+                                          - - id: whenStack
+                                              dependsUpon:
+                                                - levelOrStack
+                                                - replaceInStack
+                                          - - id: levelOrStack
+                                              type: parameter
+                                    - - id: replaceInStack
+                                        dependsUpon: replaceInLevel
+                                    - - id: replaceInLevel
+                                        dependsUpon: getWhenIdentifierOrReplaceInItem
+                                    - - id: getWhenIdentifierOrReplaceInItem
+                                        dependsUpon:
+                                          - replaceInItem
+                                          - whenIdentifier
+                                        items: whenIdentifier
+                                    - - id: replaceInItem
+                                        dependsUpon: getItemsProperty
+                                        items:
+                                          - - id: getItemsProperty
+                                              dependsUpon: getItems
+                                          - - id: getItems
+                                              dependsUpon: withAncestors
+                                      - id: ancestors
+                                        type: parameter
+                              - - id: replaceIdentifierOrItemOrLevelOrStack
+                                  type: parameter
         - id: renderer
           type: file
           items:
