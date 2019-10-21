@@ -57,18 +57,18 @@ function runJavascriptAndYamlTestsFromFileSystem({
 	parameters,
 }) {
 	runTestsFromFileSystem({
-		action:
+		caseFileName:
+			".js",
+		directoryAbsolutePath:
+			path.join(__dirname, "test-cases", directoryName),
+		expectedFileName:
+			".yaml",
+		getActualForTestCase:
 			javascript =>
 				getYamlFromJavascript({
 					...parameters,
 					javascript,
 				}),
-		caseFileName:
-			".js",
-		directory:
-			path.join(__dirname, "test-cases", directoryName),
-		expectedFileName:
-			".yaml",
 		processArguments:
 			process.argv,
 	});
