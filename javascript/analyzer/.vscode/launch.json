@@ -38,7 +38,7 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"getYamlFromJavascript/test.js"
+						"getYamlFromJavascript/tests/test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "getYamlFromJavascript Jest",

@@ -77,7 +77,7 @@
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run test && npm run harness-production && npm run dogfooding",
 		"dogfooding": "node getOrCreateItemsInDirectory/bin.js --directory=. --ignorePathPattern=\"(^(.git|node_modules|harness/output|test-coverage))|/test-cases\"",
-		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|gh-pages|node_modules|output|test-cases|test-coverage)$\"",
+		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$\" --modify-file-stacks-file=modify-file-stacks.yaml --output-svg --output-yaml",
 		"harness-production": "rm -rf harness/output && npx webpack -p --config harness/webpack.config.js",
 		"harness-development": "rm -rf harness/output && npx webpack -d --config harness/webpack.config.js",
 		"lint": "eslint .",
