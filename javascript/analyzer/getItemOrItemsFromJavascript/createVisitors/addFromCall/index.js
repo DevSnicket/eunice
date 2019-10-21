@@ -19,8 +19,13 @@ module.exports =
 		findParentFunctions,
 		isCalleeIgnored = isCalleeIgnoredDefault,
 		isVariableInBlockScoped,
+		removeExtensionFromFilePath,
 	}) => {
-		const calleeName = getNameFromCallee(callExpression.callee);
+		const calleeName =
+			getNameFromCallee({
+				callee: callExpression.callee,
+				removeExtensionFromFilePath,
+			});
 
 		if (calleeName)
 			addFromParentFunctions(

@@ -3,11 +3,13 @@
 const
 	createDeclarationsFromExport = require("./createDeclarationsFromExport"),
 	createDeclarationsFromImport = require("./createDeclarationsFromImport"),
-	{ findBlockOrIdentifiableParent } = require("../parentFunctionsFromAncestors"),
-	removeJsFilePathExtension = require("../removeJsFilePathExtension");
+	{ findBlockOrIdentifiableParent } = require("../parentFunctionsFromAncestors");
 
 module.exports =
-	addDeclarationsIn => {
+	({
+		addDeclarationsIn,
+		removeExtensionFromFilePath,
+	}) => {
 		return (
 			{
 				ExportAllDeclaration:
@@ -27,7 +29,7 @@ module.exports =
 				declarations:
 					[ {
 						dependsUpon:
-							removeJsFilePathExtension(value),
+							removeExtensionFromFilePath(value),
 						type:
 							"export",
 					} ],
@@ -43,6 +45,7 @@ module.exports =
 			addDeclarationsIn({
 				declarations:
 					createDeclarationsFromExport({
+						removeExtensionFromFilePath,
 						source,
 						specifiers,
 					}),
@@ -61,7 +64,7 @@ module.exports =
 				declarations:
 					createDeclarationsFromImport({
 						from:
-							removeJsFilePathExtension(
+							removeExtensionFromFilePath(
 								source.value,
 							),
 						specifiers,

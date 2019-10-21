@@ -8,20 +8,25 @@ const
 	createDeclarations = require("./createDeclarations"),
 	createDependsUponIdentifiers = require("./createDependsUponIdentifiers"),
 	createFileItemOrItems = require("./createFileItemOrItems"),
+	createRemoveExtensionFromFilePath = require("./createRemoveExtensionFromFilePath"),
 	createScopedVariables = require("./createScopedVariables"),
 	createUndeclaredReferences = require("./createUndeclaredReferences"),
 	forFunctions = require("./forFunctions"),
-	forModulesWithAddDeclarationsIn = require("./forModulesWithAddDeclarationsIn"),
+	forModules = require("./forModules"),
 	getParentFromAncestors = require("./getParentFromAncestors"),
 	parentFunctionsFromAncestors = require("./parentFunctionsFromAncestors"),
 	stackItemsWhenMultiple = require("./stackItemsWhenMultiple"),
 	throwErrorWhenAnyUnhandled = require("./throwErrorWhenAnyUnhandled");
 
 module.exports =
-	({ isCalleeIgnored }) => {
+	({
+		fileExtensions,
+		isCalleeIgnored,
+	}) => {
 		const
 			declarations = createDeclarations(),
 			dependsUponIdentifiers = createDependsUponIdentifiers(),
+			removeExtensionFromFilePath = createRemoveExtensionFromFilePath(fileExtensions),
 			scopedVariables = createScopedVariables(),
 			undeclaredReferences = createUndeclaredReferences();
 
@@ -34,9 +39,11 @@ module.exports =
 					hasUndeclaredReferenceTo:
 						undeclaredReferences.hasReferenceTo,
 				}),
-				...forModulesWithAddDeclarationsIn(
-					declarations.addDeclarationsIn,
-				),
+				...forModules({
+					addDeclarationsIn:
+						declarations.addDeclarationsIn,
+					removeExtensionFromFilePath,
+				}),
 				AssignmentExpression:
 					visitAssignmentExpression,
 				CallExpression:
@@ -124,6 +131,7 @@ module.exports =
 							ancestors,
 							variable,
 						}),
+				removeExtensionFromFilePath,
 			});
 		}
 
@@ -155,6 +163,7 @@ module.exports =
 					getParentFromAncestors(ancestors),
 				parentFunction:
 					parentFunctionsFromAncestors.findBlockOrIdentifiableParent(ancestors),
+				removeExtensionFromFilePath,
 				variableDeclaration,
 			});
 		}

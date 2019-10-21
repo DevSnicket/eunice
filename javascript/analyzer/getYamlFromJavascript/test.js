@@ -8,7 +8,11 @@ const
 
 runTestsFromFileSystem({
 	action:
-		javascript => getYamlFromJavascript({ javascript }),
+		javascript =>
+			getYamlFromJavascript({
+				fileExtensions: [ ".js" ],
+				javascript,
+			}),
 	caseFileName:
 		".js",
 	directory:
@@ -20,6 +24,13 @@ runTestsFromFileSystem({
 });
 
 if (typeof test !== "undefined") {
+	test(
+		"No file extensions does not remove extension from module import file path.",
+		() =>
+			expect(getYamlFromJavascript({ javascript: "import imported from \"module.js\"; imported();" }))
+			.toEqual("dependsUpon: module.js"),
+	);
+
 	describe(
 		"Class properties proposal enabled",
 		() => {

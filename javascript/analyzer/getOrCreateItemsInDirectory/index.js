@@ -20,11 +20,13 @@ module.exports =
 	(/** @type {import("./Parameter.d")} */{
 		babelParserPlugins,
 		directory,
+		fileExtensions = [ ".js" ],
 		isCalleeIgnored,
 		ignorePathPattern,
 	}) =>
 		withOptionsAndRootDirectory({
 			babelParserPlugins,
+			fileExtensions,
 			ignorePathPattern,
 			isCalleeIgnored,
 			rootDirectory: directory,
@@ -37,6 +39,7 @@ function withOptionsAndRootDirectory({
 	babelParserPlugins,
 	ignorePathPattern,
 	isCalleeIgnored,
+	fileExtensions,
 	rootDirectory,
 }) {
 	return { getOrCreateItemsInDirectory };
@@ -105,7 +108,7 @@ function withOptionsAndRootDirectory({
 				);
 
 				function isJavascript() {
-					return fileOrSubdirectoryPath.ext === ".js";
+					return fileExtensions.includes(fileOrSubdirectoryPath.ext);
 				}
 
 				function getItemOrItemsFromJavascriptOrRethrowErrorWithPath(
@@ -115,6 +118,7 @@ function withOptionsAndRootDirectory({
 						return (
 							getItemOrItemsFromJavascript({
 								babelParserPlugins,
+								fileExtensions,
 								isCalleeIgnored,
 								javascript,
 							})

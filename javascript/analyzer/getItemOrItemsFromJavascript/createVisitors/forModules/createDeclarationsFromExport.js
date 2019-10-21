@@ -1,30 +1,33 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const removeJsFilePathExtension = require("../removeJsFilePathExtension");
-
 require("array.prototype.flatmap")
 .shim();
 
 module.exports =
 	({
+		removeExtensionFromFilePath,
 		source,
 		specifiers,
 	}) =>
 		specifiers
 		.flatMap(
-			createSelectorWhenHasSource(source)
+			createSelectorWhenHasSource({
+				removeExtensionFromFilePath,
+				source,
+			})
 			||
 			createDeclarationFromSpecifierWhenFunction,
 		);
 
-function createSelectorWhenHasSource(
+function createSelectorWhenHasSource({
+	removeExtensionFromFilePath,
 	source,
-) {
+}) {
 	return (
 		source
 		&&
 		withSource(
-			removeJsFilePathExtension(
+			removeExtensionFromFilePath(
 				source.value,
 			),
 		)

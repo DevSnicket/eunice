@@ -12,6 +12,7 @@ module.exports =
 		addDeclarationsIn,
 		hasUndeclaredReferenceTo,
 		parentFunction,
+		removeExtensionFromFilePath,
 		variableDeclaration,
 	}) => {
 		addDeclarationsWhenAny(
@@ -47,6 +48,7 @@ module.exports =
 						getIsDestructuredAndVariables,
 						initialization:
 							declaration.init,
+						removeExtensionFromFilePath,
 					})
 				);
 

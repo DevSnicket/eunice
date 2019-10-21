@@ -1,9 +1,10 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const removeJsFilePathExtension = require("../removeJsFilePathExtension");
-
 module.exports =
-	callee => {
+	({
+		callee,
+		removeExtensionFromFilePath,
+	}) => {
 		return (
 			getRequireWhenCalled()
 			||
@@ -18,7 +19,7 @@ module.exports =
 				&&
 				callee.callee.name === "require"
 				&&
-				removeJsFilePathExtension(callee.arguments[0].value)
+				removeExtensionFromFilePath(callee.arguments[0].value)
 			);
 		}
 

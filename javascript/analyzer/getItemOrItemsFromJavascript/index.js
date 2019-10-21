@@ -8,10 +8,15 @@ const
 module.exports =
 	(/** @type {import("./Parameter.d")} */{
 		babelParserPlugins,
+		fileExtensions,
 		isCalleeIgnored,
 		javascript,
 	}) => {
-		const visitors = createVisitors({ isCalleeIgnored });
+		const visitors =
+			createVisitors({
+				fileExtensions,
+				isCalleeIgnored,
+			});
 
 		walk(
 			parser.parse(

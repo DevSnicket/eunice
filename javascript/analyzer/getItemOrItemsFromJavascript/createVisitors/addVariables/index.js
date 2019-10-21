@@ -14,6 +14,7 @@ module.exports =
 		hasUndeclaredReferenceTo,
 		parent,
 		parentFunction,
+		removeExtensionFromFilePath,
 		variableDeclaration,
 	}) => {
 		if (isScoped())
@@ -23,6 +24,7 @@ module.exports =
 				addDeclarationsIn,
 				hasUndeclaredReferenceTo,
 				parentFunction,
+				removeExtensionFromFilePath,
 				variableDeclaration,
 			});
 
