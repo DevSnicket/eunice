@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.14.0 on 2019-10-20T21:06:42.833Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.15.0 on 2019-10-21T08:36:56.154Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -169,6 +169,7 @@
                             dependsUpon:
                               - analyzer
                               - babelParserPlugins
+                              - fileExtensions
                               - ignorePathPattern
                               - processWhenAnyItems
                             items:
@@ -197,6 +198,8 @@
                           - id: dependencyPermeableIdentifiers
                             type: parameter
                           - id: directoryToCreateOrAddToStacksFrom
+                            type: parameter
+                          - id: fileExtensions
                             type: parameter
                           - id: ignorePathPattern
                             type: parameter
@@ -1216,11 +1219,13 @@
                                     - path
                                     - readFile
                                   items:
-                                    - isJavascript
+                                    - id: isJavascript
+                                      dependsUpon: fileExtensions
                                     - id: getItemOrItemsFromJavascriptOrRethrowErrorWithPath
                                       dependsUpon:
                                         - babelParserPlugins
                                         - directory
+                                        - fileExtensions
                                         - fileOrSubdirectory
                                         - getItemOrItemsFromJavascript
                                         - isCalleeIgnored
@@ -1253,6 +1258,8 @@
                     - id: ignorePathPattern
                       type: parameter
                     - id: isCalleeIgnored
+                      type: parameter
+                    - id: fileExtensions
                       type: parameter
                     - id: rootDirectory
                       type: parameter
@@ -1415,10 +1422,11 @@
                       dependsUpon:
                         - createDeclarations
                         - createDependsUponIdentifiers
+                        - createRemoveExtensionFromFilePath
                         - createScopedVariables
                         - createUndeclaredReferences
                         - forFunctions
-                        - forModulesWithAddDeclarationsIn
+                        - forModules
                       items:
                         - - id: getItemOrItems
                             dependsUpon:
@@ -1436,6 +1444,7 @@
                               - addFromCall
                               - isCalleeIgnored
                               - parentFunctionsFromAncestors
+                              - removeExtensionFromFilePath
                               - scopedVariables
                               - undeclaredReferences
                           - id: visitClass
@@ -1447,11 +1456,14 @@
                               - addVariables
                               - getParentFromAncestors
                               - parentFunctionsFromAncestors
+                              - removeExtensionFromFilePath
                         - - id: isCalleeIgnored
                             type: parameter
                           - id: declarations
                             type: variable
                           - id: dependsUponIdentifiers
+                            type: variable
+                          - id: removeExtensionFromFilePath
                             type: variable
                           - id: scopedVariables
                             type: variable
@@ -1575,6 +1587,7 @@
                                               dependsUpon:
                                                 - createWhenRequire
                                                 - getIsDestructuredAndVariables
+                                                - removeExtensionFromFilePath
                                               items:
                                                 id: getIsDestructuredAndVariables
                                                 dependsUpon:
@@ -1603,6 +1616,8 @@
                                       - id: hasUndeclaredReferenceTo
                                         type: parameter
                                       - id: parentFunction
+                                        type: parameter
+                                      - id: removeExtensionFromFilePath
                                         type: parameter
                                       - id: variableDeclaration
                                         type: parameter
@@ -1635,8 +1650,10 @@
                                               items:
                                                 - isRequire
                                                 - id: getPath
-                                                  dependsUpon: removeJsFilePathExtension
+                                                  dependsUpon: removeExtensionFromFilePath
                                           - - id: getIsDestructuredAndVariables
+                                              type: parameter
+                                            - id: removeExtensionFromFilePath
                                               type: parameter
                                     - - id: create
                                         dependsUpon: getOrCreateDependsUpon
@@ -1648,6 +1665,30 @@
                         type: export
                         dependsUpon: createItemWhenAnyDependsUpon
                         items: createItemWhenAnyDependsUpon
+                    - id: createRemoveExtensionFromFilePath
+                      type: file
+                      items:
+                        - - id: createRemoveExtensionFromFilePath
+                            type: export
+                            dependsUpon: whenHasExtensions
+                            items:
+                              - - id: whenHasExtensions
+                                  items:
+                                    id: getExtensionAndRemoveFromFilePath
+                                    dependsUpon:
+                                      - extensions
+                                      - getExtension
+                                      - removeExtension
+                              - - id: extensions
+                                  type: parameter
+                        - - getExtension
+                          - id: removeExtension
+                            dependsUpon: whenHasExtension
+                            items:
+                              - - id: whenHasExtension
+                                  dependsUpon: filePath
+                              - - id: filePath
+                                  type: parameter
                     - id: createScopedVariables
                       type: file
                       items:
@@ -1788,29 +1829,32 @@
                                     - stackItemsWhenMultiple
                               - - id: createParameterItemsForFunction
                                   dependsUpon: getNamesFromDestructureOrIdentifier
-                    - id: forModulesWithAddDeclarationsIn
+                    - id: forModules
                       type: file
                       items:
-                        - - id: forModulesWithAddDeclarationsIn
+                        - - id: forModules
                             type: export
                             items:
                               - - id: visitExportAllDeclaration
                                   dependsUpon:
                                     - addDeclarationsIn
                                     - findBlockOrIdentifiableParent
-                                    - removeJsFilePathExtension
+                                    - removeExtensionFromFilePath
                                 - id: visitExportNamedDeclaration
                                   dependsUpon:
                                     - addDeclarationsIn
                                     - createDeclarationsFromExport
                                     - findBlockOrIdentifiableParent
+                                    - removeExtensionFromFilePath
                                 - id: visitImportDeclaration
                                   dependsUpon:
                                     - addDeclarationsIn
                                     - createDeclarationsFromImport
                                     - findBlockOrIdentifiableParent
-                                    - removeJsFilePathExtension
+                                    - removeExtensionFromFilePath
                               - - id: addDeclarationsIn
+                                  type: parameter
+                                - id: removeExtensionFromFilePath
                                   type: parameter
                         - - id: createDeclarationsFromExport
                             type: file
@@ -1819,9 +1863,7 @@
                                   type: export
                                   dependsUpon: createSelectorWhenHasSource
                               - - id: createSelectorWhenHasSource
-                                  dependsUpon:
-                                    - removeJsFilePathExtension
-                                    - withSource
+                                  dependsUpon: withSource
                               - - id: withSource
                                   items: createDeclarationFromSpecifier
                                 - createDeclarationFromSpecifierWhenFunction
@@ -2029,10 +2071,12 @@
                                     - getRequireWhenCalled
                                     - getWhenMember
                                   items:
-                                    - id: getRequireWhenCalled
-                                      dependsUpon: removeJsFilePathExtension
-                                    - id: getWhenMember
-                                      dependsUpon: getObjectName
+                                    - - id: getRequireWhenCalled
+                                        dependsUpon: removeExtensionFromFilePath
+                                      - id: getWhenMember
+                                        dependsUpon: getObjectName
+                                    - - id: removeExtensionFromFilePath
+                                        type: parameter
                               - - id: getObjectName
                                   dependsUpon: getObjectName
                           - id: isCalleeIgnoredDefault
@@ -2265,22 +2309,6 @@
                                     dependsUpon: isFunctionExpressionType
                               - - isFunctionExpressionType
                                 - isIdentifiableType
-                    - id: removeJsFilePathExtension
-                      type: file
-                      items:
-                        id: removeJsFilePathExtension
-                        type: export
-                        dependsUpon: whenHasExtension
-                        items:
-                          - - id: whenHasExtension
-                              dependsUpon:
-                                - removeExtension
-                                - value
-                              items:
-                                id: removeExtension
-                                dependsUpon: value
-                          - - id: value
-                              type: parameter
                     - id: stackItemsWhenMultiple
                       type: file
                       items:
