@@ -9,6 +9,7 @@ module.exports =
 		babelParserPlugins,
 		dependencyPermeableIdentifiers,
 		directories = ".",
+		fileExtensions,
 		ignorePathPattern = "(^|/)(\\..*|node_modules)$",
 		includeServiceWorkers,
 		includeSourceMap,
@@ -32,6 +33,8 @@ module.exports =
 				ensureArray(babelParserPlugins),
 			dependencyPermeableIdentifiers:
 				ensureArray(dependencyPermeableIdentifiers),
+			fileExtensions:
+				ensureArray(fileExtensions),
 			ignorePathPattern:
 				ignorePathPattern
 				&&

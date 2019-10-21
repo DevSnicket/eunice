@@ -12,6 +12,7 @@ module.exports =
 		babelParserPlugins = babelParserPluginsDefault,
 		dependencyPermeableIdentifiers,
 		directoryToCreateOrAddToStacksFrom,
+		fileExtensions,
 		ignorePathPattern,
 		isFileContentReversed,
 		modifyFileStacksFilePath,
@@ -44,6 +45,7 @@ module.exports =
 				await analyzer.getOrCreateItemsInDirectory({
 					babelParserPlugins,
 					directory,
+					fileExtensions,
 					ignorePathPattern,
 				});
 
