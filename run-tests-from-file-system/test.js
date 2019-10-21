@@ -40,6 +40,10 @@ describe(
 				.toEqual(
 					[
 						{
+							actual: "actual for source of test case with no expected in directory with expected",
+							expected: "expected of test case in directory with no test case and sub-directory with test case",
+						},
+						{
 							actual: "actual for source of test case in directory with no test case",
 							expected: "expected of test case in directory with no test case",
 						},
@@ -100,6 +104,10 @@ test(
 		});
 
 		expect({
+			directoryWithExpectedAndNoTestCase:
+				await readExpectedInSubdirectories(
+					"directoryWithExpectedAndNoTestCase",
+				),
 			"directoryWithNoTestCase/testCaseInDirectoryWithNoTestCase":
 				await readExpectedInSubdirectories(
 					"directoryWithNoTestCase",
@@ -120,6 +128,8 @@ test(
 				),
 		})
 		.toEqual({
+			directoryWithExpectedAndNoTestCase:
+				"Updated source of test case with no expected in directory with expected",
 			"directoryWithNoTestCase/testCaseInDirectoryWithNoTestCase":
 				"Updated source of test case in directory with no test case",
 			directoryWithTestCase:

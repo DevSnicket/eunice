@@ -11,76 +11,135 @@ const
 module.exports =
 	({
 		caseFileName,
-		directoryAbsolutePath: rootDirectory,
+		directoryAbsolutePath: rootDirectoryAbsolutePath,
 		expectedFileName,
 	}) => {
-		return inDirectory("");
+		return (
+			withExpectedFilePathOfAncestor(null)
+			.inRelativeDirectoryPath("")
+		);
 
-		function inDirectory(
-			directory,
+		function withExpectedFilePathOfAncestor(
+			expectedFilePathOfAncestor,
 		) {
-			return (
-				getFilesAndSubdirectoryNames()
-				.flatMap(inFileOrSubdirectoryName)
-			);
+			return { inRelativeDirectoryPath };
 
-			function getFilesAndSubdirectoryNames() {
-				return (
-					[
-						...readdirSync(
-							path.join(rootDirectory, directory),
-						),
-					]
-				);
-			}
-
-			function inFileOrSubdirectoryName(
-				fileOrSubdirectoryName,
+			function inRelativeDirectoryPath(
+				relativeDirectoryPath,
 			) {
 				return (
-					whenSubdirectory(
-						path.join(directory, fileOrSubdirectoryName),
-					)
-					||
-					[]
+					getFilesAndSubdirectoryNames()
+					.flatMap(inFileOrSubdirectoryName)
 				);
-			}
-		}
 
-		function whenSubdirectory(
-			fileOrSubdirectory,
-		) {
-			const testCaseDirectoryPath = path.join(rootDirectory, fileOrSubdirectory);
-
-			return (
-				isDirectory()
-				&&
-				[
-					...getTestCaseExists(),
-					...inDirectory(fileOrSubdirectory),
-				]
-			);
-
-			function isDirectory() {
-				return (
-					lstatSync(testCaseDirectoryPath)
-					.isDirectory()
-				);
-			}
-
-			function * getTestCaseExists() {
-				const caseFilePath = path.join(testCaseDirectoryPath, caseFileName);
-
-				if (existsSync(caseFilePath))
-					yield (
-						{
-							caseFilePath,
-							expectedFilePath:
-								path.join(testCaseDirectoryPath, expectedFileName),
-							name:
-								fileOrSubdirectory,
-						}
+				function getFilesAndSubdirectoryNames() {
+					return (
+						[
+							...readdirSync(
+								getAbsoluteForRelativePath(relativeDirectoryPath),
+							),
+						]
 					);
+				}
+
+				function inFileOrSubdirectoryName(
+					fileOrSubdirectoryName,
+				) {
+					return (
+						whenRelativePathIsSubdirectory(
+							path.join(relativeDirectoryPath, fileOrSubdirectoryName),
+						)
+						||
+						[]
+					);
+				}
+			}
+
+			function whenRelativePathIsSubdirectory(
+				relativePath,
+			) {
+				return (
+					whenSubdirectory({
+						absolutePath:
+							getAbsoluteForRelativePath(relativePath),
+						relativePath,
+					})
+				);
+			}
+
+			function getAbsoluteForRelativePath(
+				relativePath,
+			) {
+				return path.join(rootDirectoryAbsolutePath, relativePath);
+			}
+
+			function whenSubdirectory({
+				absolutePath,
+				relativePath,
+			}) {
+				return (
+					isDirectory()
+					&&
+					inSubdirectory({
+						caseFilePath:
+							getAbsolutePathForFileNameWhenExists(caseFileName),
+						expectedFilePath:
+							getAbsolutePathForFileNameWhenExists(expectedFileName)
+							||
+							expectedFilePathOfAncestor,
+						relativePath,
+					})
+				);
+
+				function isDirectory() {
+					return (
+						lstatSync(absolutePath)
+						.isDirectory()
+					);
+				}
+
+				function getAbsolutePathForFileNameWhenExists(
+					fileName,
+				) {
+					const filePath = path.join(absolutePath, fileName);
+
+					return existsSync(filePath) && filePath;
+				}
+			}
+
+			function inSubdirectory({
+				caseFilePath,
+				expectedFilePath,
+				relativePath,
+			}) {
+				return (
+					[
+						...createTestCaseWhenFilesExist(),
+						...inSubdirectoriesOfSubdirectory(),
+					]
+				);
+
+				function * createTestCaseWhenFilesExist() {
+					if (caseFilePath && expectedFilePath)
+						yield (
+							{
+								caseFilePath,
+								expectedFilePath,
+								name: relativePath,
+							}
+						);
+				}
+
+				function inSubdirectoriesOfSubdirectory() {
+					return (
+						withExpectedFilePathOfAncestor(
+							expectedFilePath,
+						)
+						.inRelativeDirectoryPath(
+							relativePath,
+						)
+					);
+				}
 			}
 		}
 	};
