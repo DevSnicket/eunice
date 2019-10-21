@@ -59,6 +59,10 @@ describe(
 							actual: "actual for source of test case in root",
 							expected: "expected of test case in root",
 						},
+						{
+							actual: "actual for source of test case in directory with no expected in root directory with expected",
+							expected: "expected of test case in root directory with no test case and sub-directory with test case",
+						},
 					],
 				);
 			},

@@ -15,9 +15,18 @@ module.exports =
 		expectedFileName,
 	}) => {
 		return (
-			withExpectedFilePathOfAncestor(null)
+			withExpectedFilePathOfAncestor(
+				getExpectedFilePathInRootWhenExists(),
+			)
 			.inRelativeDirectoryPath("")
 		);
+
+		function getExpectedFilePathInRootWhenExists() {
+			const expectedFilePath =
+				path.join(rootDirectoryAbsolutePath, expectedFileName);
+
+			return existsSync(expectedFilePath) && expectedFilePath;
+		}
 
 		function withExpectedFilePathOfAncestor(
 			expectedFilePathOfAncestor,
