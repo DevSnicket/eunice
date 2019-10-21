@@ -9,8 +9,9 @@
 			{
 				"args":
 					[
+						"--collect-coverage=false",
 						"--runInBand",
-						"test.js",
+						"test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "Jest",

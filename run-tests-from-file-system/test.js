@@ -12,68 +12,64 @@ describe(
 	"Jest process",
 	() => {
 		runTestsAsInJestProcess({
-			action: () => "expected of Jest test case",
 			// undefined used to get parameter default of Jest implementation
 			// eslint-disable-next-line no-undefined
 			addTestCase: undefined,
+			getActualForTestCase: () => "expected of Jest test case",
 			subdirectory: "jest",
 		});
 
 		test(
-			"Action not called when get actual and expected is not called by test.",
-			() => {
-				const action = jest.fn();
+			"Test cases are discovered and read, and getActualForTestCase is called for each.",
+			async() => {
+				const getActualAndExpectedPromises = [];
 
 				runTestsAsInJestProcess({
-					action,
-					addTestCase: () => null,
-					subdirectory: "multiple",
-				});
-
-				expect(action)
-				.toBeCalledTimes(0);
-			},
-		);
-
-		test(
-			"Action called with test case file content when get actual and expected called by test.",
-			() => {
-				const testCaseFileContents = [];
-
-				runTestsAsInJestProcess({
-					action:
-						testCaseFileContent =>
-							testCaseFileContents.push(testCaseFileContent),
 					addTestCase:
-						({ getActualAndExpected }) => getActualAndExpected(),
+						({ getActualAndExpected }) =>
+							getActualAndExpectedPromises.push(getActualAndExpected()),
+					getActualForTestCase:
+						testCase => `actual for ${testCase}`,
 					subdirectory:
 						"multiple",
 				});
 
 				expect(
-					testCaseFileContents,
+					await Promise.all(getActualAndExpectedPromises),
 				)
 				.toEqual(
 					[
-						"source of test case in directory with no test case",
-						"source of directory with test case",
-						"source of test case in directory with test case",
-						"source of test case in root",
+						{
+							actual: "actual for source of test case in directory with no test case",
+							expected: "expected of test case in directory with no test case",
+						},
+						{
+							actual: "actual for source of directory with test case",
+							expected: "expected of directory with test case",
+						},
+						{
+							actual: "actual for source of test case in directory with test case",
+							expected: "expected of test case in directory with test case",
+						},
+						{
+							actual: "actual for source of test case in root",
+							expected: "expected of test case in root",
+						},
 					],
 				);
 			},
 		);
 
 		function runTestsAsInJestProcess({
-			action,
 			addTestCase,
+			getActualForTestCase,
 			subdirectory,
 		}) {
 			runTestsWithFileNames({
-				action,
 				addTestCase,
 				directory:
 					getTestCasesPathOfSubdirectory(subdirectory),
+				getActualForTestCase,
 				processArguments:
 					[ null, "jest" ],
 			});
@@ -92,15 +88,15 @@ test(
 
 		await copy(sourceDirectory, directory);
 
-		runTestsWithFileNames({
-			action:
-				testCaseFileContent =>
-					`Updated ${testCaseFileContent}`,
+		await runTestsWithFileNames({
 			addTestCase:
 				null,
 			directory,
+			getActualForTestCase:
+				testCaseFileContent =>
+					`Updated ${testCaseFileContent}`,
 			processArguments:
-				[ null, "", "update-expected" ],
+				[ null, "", "update-expected-files" ],
 		});
 
 		expect({
@@ -147,18 +143,18 @@ test(
 	},
 );
 
-function runTestsWithFileNames({
-	action,
+async function runTestsWithFileNames({
 	addTestCase,
 	directory,
+	getActualForTestCase,
 	processArguments,
 }) {
-	runTestsFromFileSystem({
-		action,
+	await runTestsFromFileSystem({
 		addTestCase,
 		caseFileName: "source.txt",
 		directory,
 		expectedFileName,
+		getActualForTestCase,
 		processArguments,
 	});
 }

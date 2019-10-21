@@ -1,60 +1,86 @@
 /* Copyright (c) 2019 Graham Dyson. All Rights Reserved.
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
+require("array.prototype.flatMap")
+.shim();
+
 const
-	fs = require("fs"),
+	{ existsSync, lstatSync, readdirSync } = require("fs"),
 	path = require("path");
 
 module.exports =
 	({
 		caseFileName,
-		directory,
+		directory: rootDirectory,
+		expectedFileName,
 	}) => {
-		return inSubdirectory("");
+		return inDirectory("");
 
-		function inSubdirectory(
-			subdirectory,
+		function inDirectory(
+			directory,
 		) {
 			return (
-				fs.readdirSync(path.join(directory, subdirectory))
-				.reduce(
-					(testCases, fileOrSubdirectoryName) =>
-						appendFileOrSubdirectoryToTestCases({
-							fileOrSubdirectory:
-								path.join(subdirectory, fileOrSubdirectoryName),
-							testCases,
-						}),
-					[],
-				)
+				getFilesAndSubdirectoryNames()
+				.flatMap(inFileOrSubdirectoryName)
 			);
+
+			function getFilesAndSubdirectoryNames() {
+				return (
+					[
+						...readdirSync(
+							path.join(rootDirectory, directory),
+						),
+					]
+				);
+			}
+
+			function inFileOrSubdirectoryName(
+				fileOrSubdirectoryName,
+			) {
+				return (
+					whenSubdirectory(
+						path.join(directory, fileOrSubdirectoryName),
+					)
+					||
+					[]
+				);
+			}
 		}
 
-		function appendFileOrSubdirectoryToTestCases({
+		function whenSubdirectory(
 			fileOrSubdirectory,
-			testCases,
-		}) {
+		) {
+			const testCaseDirectoryPath = path.join(rootDirectory, fileOrSubdirectory);
+
 			return (
 				isDirectory()
-				?
+				&&
 				[
-					...testCases,
-					...getTestCasesWhenAny(),
-					...inSubdirectory(fileOrSubdirectory),
+					...getTestCaseExists(),
+					...inDirectory(fileOrSubdirectory),
 				]
-				:
-				testCases
 			);
 
 			function isDirectory() {
 				return (
-					fs.lstatSync(path.join(directory, fileOrSubdirectory))
+					lstatSync(testCaseDirectoryPath)
 					.isDirectory()
 				);
 			}
 
-			function * getTestCasesWhenAny() {
-				if (fs.existsSync(path.join(directory, fileOrSubdirectory, caseFileName)))
-					yield fileOrSubdirectory;
+			function * getTestCaseExists() {
+				const caseFilePath = path.join(testCaseDirectoryPath, caseFileName);
+
+				if (existsSync(caseFilePath))
+					yield (
+						{
+							caseFilePath,
+							expectedFilePath:
+								path.join(testCaseDirectoryPath, expectedFileName),
+							name:
+								fileOrSubdirectory,
+						}
+					);
 			}
 		}
 	};

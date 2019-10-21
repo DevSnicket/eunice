@@ -4,78 +4,77 @@ Licensed under the MIT license. See LICENSE file in the repository root for full
 const
 	addTestCaseToJest = require("./addTestCaseToJest"),
 	discoverTestCases = require("./discoverTestCases"),
-	fs = require("fs"),
-	path = require("path"),
+	{ writeFile } = require("fs-extra"),
 	readTextFile = require("./readTextFile");
 
 module.exports =
 	({
-		action,
 		addTestCase = addTestCaseToJest,
 		caseFileName,
 		directory,
 		expectedFileName,
+		getActualForTestCase,
 		processArguments,
-	}) => {
-		const testCases = discoverTestCases({ caseFileName, directory });
+	}) =>
+		updateExpectedOfOrCallAddForTestCases({
+			addTestCase,
+			getActualForTestCase,
+			isUpdateExpectedFiles:
+				processArguments.includes("update-expected-files"),
+			testCases:
+				discoverTestCases({
+					caseFileName,
+					directory,
+					expectedFileName,
+				}),
+		});
 
-		if (processArguments.includes("update-expected"))
-			for (const testCase of testCases)
-				updateExpectedFileOfTestCase(testCase);
-		else
-			for (const testCase of testCases)
-				addTestCase({
-					getActualAndExpected:
-						() => createActualAndExpected(testCase),
-					name:
-						testCase,
-				});
+async function updateExpectedOfOrCallAddForTestCases({
+	addTestCase,
+	getActualForTestCase,
+	isUpdateExpectedFiles,
+	testCases,
+}) {
+	if (isUpdateExpectedFiles)
+		await Promise.all(
+			testCases.map(updateExpectedOfTestCase),
+		);
+	else
+		for (const testCase of testCases)
+			callAddForTestCase(testCase);
 
-		function updateExpectedFileOfTestCase(
-			testCase,
-		) {
-			return (
-				fs.writeFileSync(
-					path.join(directory, testCase, expectedFileName),
-					getActualForTestCase(testCase),
-					"utf-8",
-				)
-			);
-		}
+	async function updateExpectedOfTestCase({
+		caseFilePath,
+		expectedFilePath,
+	}) {
+		await writeFile(
+			expectedFilePath,
+			getActualForTestCase(await readTextFile(caseFilePath)),
+			"utf-8",
+		);
+	}
 
-		function createActualAndExpected(
-			testCase,
-		) {
+	function callAddForTestCase({
+		caseFilePath,
+		expectedFilePath,
+		name,
+	}) {
+		addTestCase({
+			getActualAndExpected,
+			name,
+		});
+
+		async function getActualAndExpected() {
 			return (
 				{
 					actual:
-						getActualForTestCase(testCase),
+						getActualForTestCase(
+							await readTextFile(caseFilePath),
+						),
 					expected:
-						readTestCaseFile({
-							fileName: expectedFileName,
-							testCase,
-						}),
+						await readTextFile(expectedFilePath),
 				}
 			);
 		}
-
-		function getActualForTestCase(
-			testCase,
-		) {
-			return (
-				action(
-					readTestCaseFile({
-						fileName: caseFileName,
-						testCase,
-					}),
-				)
-			);
-		}
-
-		function readTestCaseFile({
-			fileName,
-			testCase,
-		}) {
-			return readTextFile(path.join(directory, testCase, fileName));
-		}
-	};
+	}
+}

@@ -3,13 +3,16 @@
 	"bugs": {
 		"url": "https://github.com/DevSnicket/eunice/issues"
 	},
-	"description": "Runs tests by discovering test cases and expected behaviour from the file system. Tests are automatically named based on the directory hierarchy.",
+	"dependencies": {
+		"array.prototype.flatmap": "1.2.2",
+		"fs-extra": "8.1.0"
+	},
+	"description": "Runs tests by discovering test cases and expected behavior from the file system. Tests are automatically named based on the directory hierarchy.",
 	"devDependencies": {
 		"@types/jest": "24.0.15",
 		"cspell": "4.0.21",
 		"eslint": "6.2.1",
 		"eslint-plugin-notice": "0.8.9",
-		"fs-extra": "8.1.0",
 		"jest": "24.8.0"
 	},
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",

@@ -8,8 +8,8 @@ module.exports =
 	}) =>
 		test(
 			name,
-			() => {
-				const { actual, expected } = getActualAndExpected();
+			async() => {
+				const { actual, expected } = await getActualAndExpected();
 
 				expect(actual)
 				.toBe(expected);

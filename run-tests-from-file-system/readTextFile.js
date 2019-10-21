@@ -1,15 +1,25 @@
-/* Copyright (c) 2018 Graham Dyson. All Rights Reserved.
+/* Copyright (c) 2019 Graham Dyson. All Rights Reserved.
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
-const { readFileSync } = require("fs");
+const { readFile } = require("fs-extra");
 
 module.exports =
-	filePath =>
-		readFileSync(
-			filePath,
-			"utf-8",
-		)
-		.replace(
-			/^\uFEFF/, // BOM
-			"",
+	async filePath =>
+		removeByteOrderMark(
+			await readFile(
+				filePath,
+				"utf-8",
+			),
 		);
+
+function removeByteOrderMark(
+	file,
+) {
+	return (
+		file
+		.replace(
+			/^\uFEFF/,
+			"",
+		)
+	);
+}
