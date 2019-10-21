@@ -67,7 +67,7 @@ describe(
 		}) {
 			runTestsWithFileNames({
 				addTestCase,
-				directory:
+				directoryAbsolutePath:
 					getTestCasesPathOfSubdirectory(subdirectory),
 				getActualForTestCase,
 				processArguments:
@@ -81,17 +81,17 @@ test(
 	"Update expected",
 	async() => {
 		const
-			directory = getTestCasesPathOfSubdirectory("update"),
+			directoryAbsolutePath = getTestCasesPathOfSubdirectory("update"),
 			sourceDirectory = getTestCasesPathOfSubdirectory("multiple");
 
-		await emptyDir(directory);
+		await emptyDir(directoryAbsolutePath);
 
-		await copy(sourceDirectory, directory);
+		await copy(sourceDirectory, directoryAbsolutePath);
 
 		await runTestsWithFileNames({
 			addTestCase:
 				null,
-			directory,
+			directoryAbsolutePath,
 			getActualForTestCase:
 				testCaseFileContent =>
 					`Updated ${testCaseFileContent}`,
@@ -135,7 +135,7 @@ test(
 		) {
 			return (
 				readFile(
-					path.join(directory, ...subdirectories, expectedFileName),
+					path.join(directoryAbsolutePath, ...subdirectories, expectedFileName),
 					"utf-8",
 				)
 			);
@@ -145,14 +145,14 @@ test(
 
 async function runTestsWithFileNames({
 	addTestCase,
-	directory,
+	directoryAbsolutePath,
 	getActualForTestCase,
 	processArguments,
 }) {
 	await runTestsFromFileSystem({
 		addTestCase,
 		caseFileName: "source.txt",
-		directory,
+		directoryAbsolutePath,
 		expectedFileName,
 		getActualForTestCase,
 		processArguments,

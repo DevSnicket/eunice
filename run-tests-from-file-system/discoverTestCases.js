@@ -11,7 +11,7 @@ const
 module.exports =
 	({
 		caseFileName,
-		directory: rootDirectory,
+		directoryAbsolutePath: rootDirectory,
 		expectedFileName,
 	}) => {
 		return inDirectory("");

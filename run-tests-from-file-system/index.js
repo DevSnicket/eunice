@@ -11,7 +11,7 @@ module.exports =
 	({
 		addTestCase = addTestCaseToJest,
 		caseFileName,
-		directory,
+		directoryAbsolutePath,
 		expectedFileName,
 		getActualForTestCase,
 		processArguments,
@@ -24,7 +24,7 @@ module.exports =
 			testCases:
 				discoverTestCases({
 					caseFileName,
-					directory,
+					directoryAbsolutePath,
 					expectedFileName,
 				}),
 		});
