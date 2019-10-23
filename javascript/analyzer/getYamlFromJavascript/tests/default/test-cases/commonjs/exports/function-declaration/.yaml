@@ -1,0 +1,4 @@
+- - id: exports
+    type: export
+    dependsUpon: local
+- - local

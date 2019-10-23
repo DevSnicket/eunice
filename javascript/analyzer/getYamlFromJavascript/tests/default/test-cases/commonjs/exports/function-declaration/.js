@@ -1,0 +1,3 @@
+exports = local;
+
+function local() {}
