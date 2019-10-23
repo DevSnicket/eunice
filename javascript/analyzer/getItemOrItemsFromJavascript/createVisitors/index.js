@@ -20,6 +20,7 @@ const
 
 module.exports =
 	({
+		exportsOnly,
 		fileExtensions,
 		isCalleeIgnored,
 	}) => {
@@ -44,48 +45,25 @@ module.exports =
 						declarations.addDeclarationsIn,
 					removeExtensionFromFilePath,
 				}),
-				AssignmentExpression:
-					visitAssignmentExpression,
-				CallExpression:
-					visitCallExpression,
-				ClassDeclaration:
-					visitClass,
-				ClassExpression:
-					visitClass,
-				NewExpression:
-					visitCallExpression,
+				...createExceptExport(),
 				VariableDeclaration:
 					visitVariableDeclaration,
 				getItemOrItems,
 			}
 		);
 
-		function getItemOrItems() {
-			const dependsUponProperty =
-				dependsUponIdentifiers.createPropertyForParent(
-					{ parent: null },
-				);
-
-			const itemOrItems =
-				createFileItemOrItems({
-					dependsUponProperty,
-					items:
-						stackItemsWhenMultiple({
-							items:
-								declarations.createItemsForAndRemoveDeclarationsIn(null),
-							withSingleInArray:
-								!dependsUponProperty,
-						}),
-				});
-
-			throwErrorWhenAnyUnhandled({
-				declarations:
-					[ ...declarations.getGroupedByParent() ],
-				dependsUponIdentifiers:
-					[ ...dependsUponIdentifiers.getGroupedByParent() ],
-			});
-
-			return itemOrItems;
+		function createExceptExport() {
+			return (
+				!exportsOnly
+				&&
+				{
+					AssignmentExpression: visitAssignmentExpression,
+					CallExpression: visitCallExpression,
+					ClassDeclaration: visitClass,
+					ClassExpression: visitClass,
+					NewExpression: visitCallExpression,
+				}
+			);
 		}
 
 		function visitAssignmentExpression(
@@ -166,5 +144,33 @@ module.exports =
 				removeExtensionFromFilePath,
 				variableDeclaration,
 			});
+		}
+
+		function getItemOrItems() {
+			const dependsUponProperty =
+				dependsUponIdentifiers.createPropertyForParent(
+					{ parent: null },
+				);
+
+			const itemOrItems =
+				createFileItemOrItems({
+					dependsUponProperty,
+					items:
+						stackItemsWhenMultiple({
+							items:
+								declarations.createItemsForAndRemoveDeclarationsIn(null),
+							withSingleInArray:
+								!dependsUponProperty,
+						}),
+				});
+
+			throwErrorWhenAnyUnhandled({
+				declarations:
+					[ ...declarations.getGroupedByParent() ],
+				dependsUponIdentifiers:
+					[ ...dependsUponIdentifiers.getGroupedByParent() ],
+			});
+
+			return itemOrItems;
 		}
 	};
