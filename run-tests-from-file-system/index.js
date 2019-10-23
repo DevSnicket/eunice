@@ -49,7 +49,7 @@ async function updateExpectedOfOrCallAddForTestCases({
 	}) {
 		await writeFile(
 			expectedFilePath,
-			getActualForTestCase(await readTextFile(caseFilePath)),
+			await getActualForTestCase(await readTextFile(caseFilePath)),
 			"utf-8",
 		);
 	}
@@ -68,7 +68,7 @@ async function updateExpectedOfOrCallAddForTestCases({
 			return (
 				{
 					actual:
-						getActualForTestCase(
+						await getActualForTestCase(
 							await readTextFile(caseFilePath),
 						),
 					expected:
