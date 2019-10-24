@@ -2,9 +2,9 @@
 
 const
 	addClass = require("./addClass"),
+	addFromAssignmentOfCommonjsExport = require("./commonjs/addFromAssignmentOfExport"),
 	addFromCall = require("./addFromCall"),
 	addVariables = require("./addVariables"),
-	createDeclarationWhenAssignmentOfCommonjsExport = require("./commonjs/createDeclarationWhenAssignmentOfExport"),
 	createDeclarations = require("./createDeclarations"),
 	createDependsUponIdentifiers = require("./createDependsUponIdentifiers"),
 	createFileItemOrItems = require("./createFileItemOrItems"),
@@ -69,16 +69,12 @@ module.exports =
 		function visitAssignmentExpression(
 			assignmentExpression,
 		) {
-			const declaration =
-				createDeclarationWhenAssignmentOfCommonjsExport(
-					assignmentExpression,
-				);
-
-			if (declaration)
-				declarations.addDeclarationIn({
-					declaration,
-					parent: null,
-				});
+			addFromAssignmentOfCommonjsExport({
+				addDeclarationsIn:
+					declarations.addDeclarationsIn,
+				assignmentExpression,
+				removeExtensionFromFilePath,
+			});
 		}
 
 		function visitCallExpression(

@@ -2,14 +2,14 @@
 
 module.exports =
 	({
+		callOrMemberOfCallExpression,
 		getIsDestructuredAndVariables,
-		initialization,
 		removeExtensionFromFilePath,
 	}) => {
 		return (
 			createFromWhenRequire({
 				expression:
-					initialization,
+					callOrMemberOfCallExpression,
 				getOrCreateDependsUponForVariableName:
 					name => name,
 			})
@@ -19,11 +19,11 @@ module.exports =
 
 		function createWhenMember() {
 			return (
-				initialization.type === "MemberExpression"
+				callOrMemberOfCallExpression.type === "MemberExpression"
 				&&
 				createFromWhenRequire({
 					expression:
-						initialization.object,
+						callOrMemberOfCallExpression.object,
 					getOrCreateDependsUponForVariableName,
 				})
 			);
@@ -40,11 +40,11 @@ module.exports =
 
 				function getProperty() {
 					return (
-						initialization.computed
+						callOrMemberOfCallExpression.computed
 						?
-						initialization.property.value
+						callOrMemberOfCallExpression.property.value
 						:
-						initialization.property.name
+						callOrMemberOfCallExpression.property.name
 					);
 				}
 			}
