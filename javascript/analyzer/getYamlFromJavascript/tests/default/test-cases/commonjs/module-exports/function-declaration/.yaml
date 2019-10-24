@@ -1,2 +1,3 @@
-- id: local
-  type: export
+- - type: export
+    dependsUpon: local
+- - local

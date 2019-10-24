@@ -15,8 +15,7 @@
     - - id: moduleExportsOfFunctionArrow1
         type: variable
         dependsUpon: moduleExportsOfFunctionArrow1
-    - - id: differentName
-        type: export
+    - - type: export
         dependsUpon: moduleExportsOfFunctionArrow1
 - id: moduleExportsOfFunctionArrow1
   items:

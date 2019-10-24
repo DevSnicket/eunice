@@ -18,11 +18,16 @@ module.exports =
 
 			function whenRelevant() {
 				return (
-					isDeclarationRelevant({ declaration, hasPeerFunction })
+					isDeclarationRelevant(declaration)
 					&&
 					createItemFromDeclaration({
 						...declaration,
-						type: getOrInferType(),
+						dependsUpon:
+							hasPeerFunctionWhenRequired()
+							&&
+							declaration.dependsUpon,
+						type:
+							getOrInferType(),
 					})
 				);
 
@@ -36,6 +41,14 @@ module.exports =
 							"export"
 						);
 					}
+				}
+
+				function hasPeerFunctionWhenRequired() {
+					return (
+						!declaration.isPeerFunctionRequired
+						||
+						hasPeerFunction(declaration.dependsUpon)
+					);
 				}
 			}
 		}
@@ -67,14 +80,11 @@ module.exports =
 		}
 	};
 
-function isDeclarationRelevant({
+function isDeclarationRelevant(
 	declaration,
-	hasPeerFunction,
-}) {
+) {
 	return (
 		isNotSelfDependentExport()
-		&&
-		hasPeerFunctionWhenRequired()
 		&&
 		isUsedInNestedFunctionWhenRequired()
 	);
@@ -86,14 +96,6 @@ function isDeclarationRelevant({
 			!declaration.id
 			||
 			declaration.id !== declaration.dependsUpon
-		);
-	}
-
-	function hasPeerFunctionWhenRequired() {
-		return (
-			!declaration.isPeerFunctionRequired
-			||
-			hasPeerFunction(declaration.dependsUpon)
 		);
 	}
 

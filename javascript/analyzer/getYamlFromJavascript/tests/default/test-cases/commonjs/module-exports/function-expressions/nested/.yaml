@@ -1,3 +1,2 @@
-- id: parent
-  type: export
+- type: export
   items: nested

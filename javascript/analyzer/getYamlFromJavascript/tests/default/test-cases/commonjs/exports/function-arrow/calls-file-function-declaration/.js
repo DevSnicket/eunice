@@ -1,0 +1,3 @@
+exports = () => file();
+
+function file() { }

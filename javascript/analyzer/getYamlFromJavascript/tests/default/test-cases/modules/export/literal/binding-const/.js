@@ -1,3 +1,3 @@
-export { variable }
+export { exported }
 
-const variable = 0;
+const exported = 0;

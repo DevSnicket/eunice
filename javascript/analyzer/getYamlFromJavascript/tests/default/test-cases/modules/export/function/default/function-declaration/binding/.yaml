@@ -1,1 +1,3 @@
-- local
+- - type: export
+    dependsUpon: local
+- - local

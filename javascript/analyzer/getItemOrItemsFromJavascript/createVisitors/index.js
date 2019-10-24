@@ -4,7 +4,7 @@ const
 	addClass = require("./addClass"),
 	addFromCall = require("./addFromCall"),
 	addVariables = require("./addVariables"),
-	createDeclarationWhenCommonjsExportAlias = require("./commonjs/createDeclarationWhenExportAlias"),
+	createDeclarationWhenCommonjsExportAssignment = require("./commonjs/createDeclarationWhenExportAssignment"),
 	createDeclarations = require("./createDeclarations"),
 	createDependsUponIdentifiers = require("./createDependsUponIdentifiers"),
 	createFileItemOrItems = require("./createFileItemOrItems"),
@@ -71,7 +71,7 @@ module.exports =
 			ancestors,
 		) {
 			const declaration =
-				createDeclarationWhenCommonjsExportAlias({
+				createDeclarationWhenCommonjsExportAssignment({
 					ancestors,
 					assignmentExpression,
 				});

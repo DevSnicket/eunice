@@ -1,3 +1,3 @@
-import imported from "subdirectory/module.js";
+import imported from "module.js";
 
 imported();

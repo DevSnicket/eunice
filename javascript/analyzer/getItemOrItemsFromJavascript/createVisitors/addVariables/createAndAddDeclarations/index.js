@@ -5,7 +5,8 @@ require("array.prototype.flatmap")
 
 const
 	createWhenRequire = require("./createWhenRequire"),
-	getNamesFromDestructureOrIdentifier = require("../../getNamesFromDestructureOrIdentifier");
+	getNamesFromDestructureOrIdentifier = require("../../getNamesFromDestructureOrIdentifier"),
+	hasTypeOfFunction = require("../../hasTypeOfFunction");
 
 module.exports =
 	({
@@ -80,9 +81,7 @@ module.exports =
 					return (
 						declaration.init
 						&&
-						isFunctionType(
-							declaration.init.type,
-						)
+						hasTypeOfFunction(declaration.init)
 					);
 				}
 			}
@@ -124,15 +123,3 @@ module.exports =
 				});
 		}
 	};
-
-function isFunctionType(
-	type,
-) {
-	return (
-		type === "ArrowFunctionExpression"
-		||
-		type === "FunctionDeclaration"
-		||
-		type === "FunctionExpression"
-	);
-}

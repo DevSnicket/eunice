@@ -1,2 +1,2 @@
 - - existing
-- - getIdentifierAndTypeWhenExport
+- - getIdentifierAndTypeFromAssignmentLeftWhenExport
