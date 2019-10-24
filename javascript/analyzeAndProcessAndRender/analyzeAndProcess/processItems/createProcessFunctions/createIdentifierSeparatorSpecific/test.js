@@ -9,7 +9,7 @@ describe(
 			[
 				[ "directory-index", "directory-index" ],
 				[ "directory/index", "directory" ],
-				[ "index", "" ],
+				[ "index", {} ],
 				[ "subindex", "subindex" ],
 			],
 		)(

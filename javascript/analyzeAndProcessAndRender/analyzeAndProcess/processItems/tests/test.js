@@ -43,8 +43,13 @@ test(
 								],
 						},
 						{
-							id: "item\\stacksFromFileSystem",
-							items: [ "item1", "item2" ],
+							id:
+								"item\\stacksFromFileSystem",
+							items:
+								[
+									{ dependsUpon: "item2", id: "item1" },
+									"item2",
+								],
 						},
 					],
 				modifyFileStacksFilePath:
@@ -94,9 +99,15 @@ test(
 								type: "file",
 							},
 							{
-								id: "stacksFromFileSystem",
-								items: [ [ "item1" ], [ "item2" ] ],
-								type: "file",
+								id:
+									"stacksFromFileSystem",
+								items:
+									[
+										[ { dependsUpon: "item2", id: "item1" } ],
+										[ "item2" ],
+									],
+								type:
+									"file",
 							},
 						],
 					type:

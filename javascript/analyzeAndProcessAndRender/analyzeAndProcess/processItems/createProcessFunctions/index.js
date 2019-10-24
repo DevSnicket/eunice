@@ -68,7 +68,6 @@ module.exports =
 						identifier: rootItemIdentifier,
 						items,
 					}),
-				setIdentifierOfAnonymousExportToParent,
 				removeSelfDependentVariables,
 				orderItemsByType,
 				items =>
@@ -76,7 +75,6 @@ module.exports =
 						items,
 						stacksFilePath: modifyFileStacksFilePath,
 					}),
-				unstackIndependent,
 				items =>
 					createOrAddToStacksUsingFileSystem({
 						directory:
@@ -88,6 +86,8 @@ module.exports =
 								rootItemIdentifier,
 							}),
 					}),
+				setIdentifierOfAnonymousExportToParent,
+				unstackIndependent,
 				items =>
 					removePackagePrefixAndScopeInDependsUpon({
 						items,

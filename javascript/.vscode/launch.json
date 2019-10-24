@@ -8,7 +8,7 @@
 		{
 			"args": [
 				"--accept-license",
-				"--ignore-path-pattern=(^|/)(\\..*|dist|gh-pages|node_modules|output|test-coverage)$",
+				"--ignore-path-pattern=(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$",
 				"--output-svg",
 				"--output-yaml"
 			],
