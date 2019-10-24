@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.15.0 on 2019-10-21T08:36:56.154Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.15.0 on 2019-10-24T06:50:02.878Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -7429,10 +7429,6 @@
                 items:
                   - - dependsUpon:
                         - expect
-                        - jest
-                        - runTestsAsInJestProcess
-                    - dependsUpon:
-                        - expect
                         - runTestsAsInJestProcess
                   - - id: runTestsAsInJestProcess
                       dependsUpon:
@@ -7448,11 +7444,11 @@
                 items:
                   - - id: readExpectedInSubdirectories
                       dependsUpon:
-                        - directory
+                        - directoryAbsolutePath
                         - expectedFileName
                         - path
                         - readFile
-                  - - id: directory
+                  - - id: directoryAbsolutePath
                       type: variable
             - - id: runTestsWithFileNames
                 dependsUpon:
@@ -7483,41 +7479,43 @@
         - id: run-tests-from-file-system
           type: export
           dependsUpon:
-            - createActualAndExpected
             - discoverTestCases
-            - updateExpectedFileOfTestCase
+            - updateExpectedOfOrCallAddForTestCases
+      - - id: updateExpectedOfOrCallAddForTestCases
+          dependsUpon:
+            - callAddForTestCase
+            - updateExpectedOfTestCase
           items:
-            - - id: updateExpectedFileOfTestCase
+            - - id: updateExpectedOfTestCase
                 dependsUpon:
-                  - directory
-                  - expectedFileName
-                  - fs
                   - getActualForTestCase
-                  - path
-              - id: createActualAndExpected
-                dependsUpon:
-                  - expectedFileName
-                  - getActualForTestCase
-                  - readTestCaseFile
-            - - id: getActualForTestCase
-                dependsUpon:
-                  - action
-                  - caseFileName
-                  - readTestCaseFile
-            - - id: readTestCaseFile
-                dependsUpon:
-                  - directory
-                  - path
                   - readTextFile
-              - id: action
+                  - writeFile
+              - id: callAddForTestCase
+                dependsUpon:
+                  - addTestCase
+                  - getActualAndExpected
+                items:
+                  - - id: getActualAndExpected
+                      dependsUpon:
+                        - caseFilePath
+                        - expectedFilePath
+                        - getActualForTestCase
+                        - readTextFile
+                  - - id: caseFilePath
+                      type: parameter
+                    - id: expectedFilePath
+                      type: parameter
+            - - id: addTestCase
                 type: parameter
-              - id: caseFileName
+              - id: getActualForTestCase
                 type: parameter
-            - - id: directory
-                type: parameter
-              - id: expectedFileName
-                type: parameter
-      - - id: addTestCaseToJest
+      - - id: writeFile
+          type: variable
+          dependsUpon:
+            id: fs-extra
+            items: writeFile
+        - id: addTestCaseToJest
           type: file
           items:
             id: addTestCaseToJest
@@ -7532,52 +7530,109 @@
         - id: discoverTestCases
           type: file
           items:
-            id: discoverTestCases
-            type: export
-            dependsUpon: inSubdirectory
-            items:
-              - - id: inSubdirectory
-                  dependsUpon:
-                    - appendFileOrSubdirectoryToTestCases
-                    - directory
-                    - fs
-                    - path
-              - - id: appendFileOrSubdirectoryToTestCases
-                  dependsUpon:
-                    - getTestCasesWhenAny
-                    - inSubdirectory
-                    - isDirectory
-                  items:
-                    - - id: isDirectory
-                        dependsUpon:
-                          - directory
-                          - fileOrSubdirectory
-                          - fs
-                          - path
-                      - id: getTestCasesWhenAny
-                        dependsUpon:
-                          - caseFileName
-                          - directory
-                          - fileOrSubdirectory
-                          - fs
-                          - path
-                    - - id: fileOrSubdirectory
-                        type: parameter
-              - - id: caseFileName
-                  type: parameter
-                - id: directory
-                  type: parameter
+            - - id: discoverTestCases
+                type: export
+                dependsUpon:
+                  - getExpectedFilePathInRootWhenExists
+                  - withExpectedFilePathOfAncestor
+                items:
+                  - - id: getExpectedFilePathInRootWhenExists
+                      dependsUpon:
+                        - existsSync
+                        - expectedFileName
+                        - path
+                        - rootDirectoryAbsolutePath
+                    - id: withExpectedFilePathOfAncestor
+                      items:
+                        - - id: inRelativeDirectoryPath
+                            dependsUpon: getFilesAndSubdirectoryNames
+                            items:
+                              - - id: getFilesAndSubdirectoryNames
+                                  dependsUpon:
+                                    - getAbsoluteForRelativePath
+                                    - readdirSync
+                                    - relativeDirectoryPath
+                                - id: inFileOrSubdirectoryName
+                                  dependsUpon:
+                                    - path
+                                    - relativeDirectoryPath
+                                    - whenRelativePathIsSubdirectory
+                              - - id: relativeDirectoryPath
+                                  type: parameter
+                        - - id: whenRelativePathIsSubdirectory
+                            dependsUpon:
+                              - getAbsoluteForRelativePath
+                              - whenSubdirectory
+                        - - id: getAbsoluteForRelativePath
+                            dependsUpon:
+                              - path
+                              - rootDirectoryAbsolutePath
+                          - id: whenSubdirectory
+                            dependsUpon:
+                              - caseFileName
+                              - expectedFileName
+                              - getAbsolutePathForFileNameWhenExists
+                              - inSubdirectory
+                              - isDirectory
+                            items:
+                              - - id: isDirectory
+                                  dependsUpon:
+                                    - absolutePath
+                                    - lstatSync
+                                - id: getAbsolutePathForFileNameWhenExists
+                                  dependsUpon:
+                                    - absolutePath
+                                    - existsSync
+                                    - path
+                              - - id: absolutePath
+                                  type: parameter
+                        - - id: inSubdirectory
+                            dependsUpon:
+                              - createTestCaseWhenFilesExist
+                              - inSubdirectoriesOfSubdirectory
+                            items:
+                              - - createTestCaseWhenFilesExist
+                                - id: inSubdirectoriesOfSubdirectory
+                                  dependsUpon:
+                                    - expectedFilePath
+                                    - withExpectedFilePathOfAncestor
+                              - - id: expectedFilePath
+                                  type: parameter
+                  - - id: caseFileName
+                      type: parameter
+                    - id: rootDirectoryAbsolutePath
+                      type: parameter
+                    - id: expectedFileName
+                      type: parameter
+            - - id: existsSync
+                type: variable
+                dependsUpon:
+                  id: fs
+                  items: existsSync
+              - id: lstatSync
+                type: variable
+                dependsUpon:
+                  id: fs
+                  items: lstatSync
+              - id: readdirSync
+                type: variable
+                dependsUpon:
+                  id: fs
+                  items: readdirSync
       - - id: readTextFile
           type: file
           items:
             - - id: readTextFile
                 type: export
-                dependsUpon: readFileSync
-            - - id: readFileSync
+                dependsUpon:
+                  - readFile
+                  - removeByteOrderMark
+            - - removeByteOrderMark
+              - id: readFile
                 type: variable
                 dependsUpon:
-                  id: fs
-                  items: readFileSync
+                  id: fs-extra
+                  items: readFile
   - id: test-harnesses
     type: file
     items:
