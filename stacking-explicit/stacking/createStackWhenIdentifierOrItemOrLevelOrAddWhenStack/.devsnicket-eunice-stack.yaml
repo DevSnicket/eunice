@@ -1,2 +1,2 @@
 - - existing
-- [ createTestItemWithIdentifier, getStackOrSingleLevelOrSingleItem ]
+- [ createTestItemWithIdentifier, getIdentifierOrIdentifierOfItem, getStackOrSingleLevelOrSingleItem ]

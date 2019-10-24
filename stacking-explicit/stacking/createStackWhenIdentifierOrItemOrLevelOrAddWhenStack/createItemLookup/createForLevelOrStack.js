@@ -3,6 +3,8 @@
 require("array.prototype.flatmap")
 .shim();
 
+const getIdentifierOrIdentifierOfItem = require("../getIdentifierOrIdentifierOfItem");
+
 module.exports =
 	levelOrStack => {
 		const itemsByIdentifier = new Map(generateKeyValuePairs());
@@ -10,7 +12,7 @@ module.exports =
 		return (
 			{
 				getIdentifiersNotUsed,
-				getItemWithIdentifier,
+				useItem,
 			}
 		);
 
@@ -33,7 +35,7 @@ module.exports =
 			function * generate() {
 				for (const { isUsed, item } of itemsByIdentifier.values())
 					if (!isUsed)
-						yield getIdentifier(item);
+						yield getIdentifierOrIdentifierOfItem(item);
 			}
 
 			function getIterableAsArrayWhenHasItems(
@@ -45,10 +47,13 @@ module.exports =
 			}
 		}
 
-		function getItemWithIdentifier(
-			identifier,
+		function useItem(
+			identifierOrItem,
 		) {
-			const itemAndIsUsed = itemsByIdentifier.get(identifier);
+			const itemAndIsUsed =
+				itemsByIdentifier.get(
+					getIdentifierOrIdentifierOfItem(identifierOrItem),
+				);
 
 			if (itemAndIsUsed) {
 				itemAndIsUsed.isUsed = true;
@@ -64,14 +69,8 @@ function getKeyValuePairForIdentifierOrItem(
 ) {
 	return (
 		[
-			getIdentifier(identifierOrItem),
+			getIdentifierOrIdentifierOfItem(identifierOrItem),
 			{ item: identifierOrItem },
 		]
 	);
-}
-
-function getIdentifier(
-	identifierOrItem,
-) {
-	return identifierOrItem.id || identifierOrItem;
 }

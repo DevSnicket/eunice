@@ -22,7 +22,41 @@ describe(
 	"With add new in target true",
 	() => {
 		test(
-			"New in target with no items returns new in target.",
+			"Null in target level returns null.",
+			() => {
+				expect(
+					mapAndCreateNewInTargetLevelOrStack({
+						addNewInTarget:
+							true,
+						getLevelOrStackForTargetIdentifierOrItem:
+							() => null,
+						targetLevelOrStack:
+							[ null ],
+					}),
+				)
+				.toBeNull();
+			},
+		);
+
+		test(
+			"Null in target stack returns null.",
+			() => {
+				expect(
+					mapAndCreateNewInTargetLevelOrStack({
+						addNewInTarget:
+							true,
+						getLevelOrStackForTargetIdentifierOrItem:
+							() => null,
+						targetLevelOrStack:
+							[ [ null ] ],
+					}),
+				)
+				.toBeNull();
+			},
+		);
+
+		test(
+			"New empty object in target level returns empty object.",
 			() => {
 				const newInTarget = {};
 
@@ -43,7 +77,49 @@ describe(
 		);
 
 		test(
-			"New in target with child item returns new in target with child item.",
+			"Null and new empty object in target level returns empty object.",
+			() => {
+				const newInTarget = {};
+
+				expect(
+					mapAndCreateNewInTargetLevelOrStack({
+						addNewInTarget:
+							true,
+						getLevelOrStackForTargetIdentifierOrItem:
+							() => null,
+						targetLevelOrStack:
+							[ null, newInTarget ],
+					}),
+				)
+				.toBe(
+					newInTarget,
+				);
+			},
+		);
+
+		test(
+			"New object with property in target level returns object with property.",
+			() => {
+				const newInTarget = { property: "value" };
+
+				expect(
+					mapAndCreateNewInTargetLevelOrStack({
+						addNewInTarget:
+							true,
+						getLevelOrStackForTargetIdentifierOrItem:
+							() => null,
+						targetLevelOrStack:
+							[ newInTarget ],
+					}),
+				)
+				.toBe(
+					newInTarget,
+				);
+			},
+		);
+
+		test(
+			"New in target level with identifier and child item returns new in target with child item.",
 			() =>
 				expect(
 					mapAndCreateNewInTargetLevelOrStack({
@@ -66,7 +142,7 @@ describe(
 		);
 
 		test(
-			"New in target with child items returns new in target with child items.",
+			"New in target level with identifier and child items returns new in target with child items.",
 			() =>
 				expect(
 					mapAndCreateNewInTargetLevelOrStack({
@@ -89,7 +165,7 @@ describe(
 		);
 
 		test(
-			"New in target with grandchild items returns new in target with grandchild items.",
+			"New in target level with identifier and grandchild items returns new in target with grandchild items.",
 			() =>
 				expect(
 					mapAndCreateNewInTargetLevelOrStack({

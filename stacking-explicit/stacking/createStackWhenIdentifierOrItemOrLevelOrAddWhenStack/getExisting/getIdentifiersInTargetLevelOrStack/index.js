@@ -35,7 +35,13 @@ function getIdentifierOrIdentifiersInItemOrLevel(
 function getIdentifierOrIdentifiersInItem(
 	identifierOrItem,
 ) {
-	return whenIdentifier() || asItem();
+	return (
+		whenIdentifier()
+		||
+		asItem()
+		||
+		[ null ]
+	);
 
 	function whenIdentifier() {
 		return (
@@ -54,16 +60,13 @@ function getIdentifiersInItem(
 	item,
 ) {
 	return (
+		item
+		&&
 		[
-			...getFromIdentifier(),
+			item.id || null,
 			...getWhenHasItems() || [],
 		]
 	);
-
-	function * getFromIdentifier() {
-		if (item.id)
-			yield item.id;
-	}
 
 	function getWhenHasItems() {
 		return (

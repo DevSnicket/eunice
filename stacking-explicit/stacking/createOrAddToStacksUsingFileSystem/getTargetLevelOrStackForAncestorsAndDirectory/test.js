@@ -29,7 +29,7 @@ test.each(
 		[
 			[ { id: "directoryWithStack" } ],
 			null,
-			[ [ "upperItem2" ], [ "lowerItem2" ] ],
+			[ [ "directoryWithStackUpper" ], [ "directoryWithStackLower" ] ],
 		],
 		[
 			[
@@ -37,7 +37,7 @@ test.each(
 				{ id: "directoryWithStack" },
 			],
 			[ "parent" ],
-			[ [ "upperItem2" ], [ "lowerItem2" ] ],
+			[ [ "directoryWithStackUpper" ], [ "directoryWithStackLower" ] ],
 		],
 		[
 			[
@@ -45,7 +45,31 @@ test.each(
 				{ id: "directoryWithStack" },
 			],
 			[ null ],
-			[ [ "upperItem2" ], [ "lowerItem2" ] ],
+			[ [ "directoryWithStackUpper" ], [ "directoryWithStackLower" ] ],
+		],
+		[
+			[
+				{ },
+				{ id: "directoryWithStackOfLowerAnonymous" },
+			],
+			[ null ],
+			[ [ "directoryWithStackOfLowerAnonymousUpper" ], [ {} ] ],
+		],
+		[
+			[
+				{ },
+				{ id: "directoryWithStackOfLowerAnonymousWithProperty" },
+			],
+			[ null ],
+			[ [ "directoryWithStackOfLowerAnonymousWithPropertyUpper" ], [ { property: "value" } ] ],
+		],
+		[
+			[
+				{ },
+				{ id: "directoryWithStackOfLowerNull" },
+			],
+			[ null ],
+			[ [ "directoryWithStackOfLowerNullUpper" ], [ null ] ],
 		],
 		[
 			[
@@ -53,7 +77,7 @@ test.each(
 				{ id: "subdirectoryWithStack" },
 			],
 			null,
-			[ [ "upperItem3" ], [ "lowerItem3" ] ],
+			[ [ "directoryWithSubdirectoryWithStackUpper" ], [ "directoryWithSubdirectoryWithStackLower" ] ],
 		],
 	],
 )(

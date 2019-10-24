@@ -37,7 +37,7 @@ module.exports =
 			return (
 				existingFactory.getWhenIsExisting(targetIdentifierOrItem)
 				||
-				itemLookup.getItemWithIdentifier(targetIdentifierOrItem)
+				itemLookup.useItem(targetIdentifierOrItem)
 			);
 		}
 

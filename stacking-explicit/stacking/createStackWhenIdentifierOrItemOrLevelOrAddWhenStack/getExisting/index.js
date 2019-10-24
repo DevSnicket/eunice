@@ -5,6 +5,7 @@ require("array.prototype.flat")
 
 const
 	filterIdentifierOrItemOrLevelOrStack = require("./filterIdentifierOrItemOrLevelOrStack"),
+	getIdentifierOrIdentifierOfItem = require("../getIdentifierOrIdentifierOfItem"),
 	getIdentifiersInTargetLevelOrStack = require("./getIdentifiersInTargetLevelOrStack"),
 	getStackOrSingleLevelOrSingleItem = require("../getStackOrSingleLevelOrSingleItem");
 
@@ -40,9 +41,9 @@ function withTargetIdentifiers(
 	) {
 		return (
 			isIdentifierNotInTarget(
-				identifierOrItem.id
-				||
-				identifierOrItem,
+				getIdentifierOrIdentifierOfItem(
+					identifierOrItem,
+				),
 			)
 		);
 	}

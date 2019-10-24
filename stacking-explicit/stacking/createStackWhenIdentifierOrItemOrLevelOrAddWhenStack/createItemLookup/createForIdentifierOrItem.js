@@ -1,16 +1,17 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Licensed under the MIT license. See LICENSE file in the repository root for full license information.
 
+const getIdentifierOrIdentifierOfItem = require("../getIdentifierOrIdentifierOfItem");
+
 module.exports =
-	({
-		identifier,
-		item,
-	}) => {
+	identifierOrItem => {
+		const identifier = getIdentifierOrIdentifierOfItem(identifierOrItem);
+
 		let used = false;
 
 		return (
 			{
 				getIdentifiersNotUsed,
-				getItemWithIdentifier,
+				useItem,
 			}
 		);
 
@@ -18,13 +19,13 @@ module.exports =
 			return used ? null : [ identifier ];
 		}
 
-		function getItemWithIdentifier(
-			targetIdentifier,
+		function useItem(
+			targetIdentifierOrItem,
 		) {
-			if (identifier === targetIdentifier) {
+			if (identifier === getIdentifierOrIdentifierOfItem(targetIdentifierOrItem)) {
 				used = true;
 
-				return item;
+				return identifierOrItem;
 			} else
 				return null;
 		}

@@ -1,78 +1,98 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Licensed under the MIT license. See LICENSE file in the repository root for full license information.
 
-const
-	createItemLookup = require("."),
-	createTestItemWithIdentifier = require("../createTestItemWithIdentifier");
+const createItemLookup = require(".");
 
 const
-	item = createTestItemWithIdentifier("item"),
-	otherItem = createTestItemWithIdentifier("otherItem");
+	anonymousItem = { property: "value" },
+	item = { id: "item" },
+	otherItem = { id: "otherItem" };
 
 describe(
-	"getItemWithIdentifier",
+	"useItem",
 	() =>
 		test.each(
 			[
 				[
 					{
-						identifier: null,
 						identifierOrItemOrLevelOrStack: null,
+						targetIdentifierOrItem: null,
 					},
 					null,
 				],
 				[
 					{
-						identifier: "newItem",
 						identifierOrItemOrLevelOrStack: "item",
+						targetIdentifierOrItem: "newItem",
 					},
 					null,
 				],
 				[
 					{
-						identifier: "item",
 						identifierOrItemOrLevelOrStack: "item",
+						targetIdentifierOrItem: "item",
 					},
 					"item",
 				],
 				[
 					{
-						identifier: "item",
 						identifierOrItemOrLevelOrStack: item,
+						targetIdentifierOrItem: "item",
 					},
 					item,
 				],
 				[
 					{
-						identifier: "item",
+						identifierOrItemOrLevelOrStack: item,
+						targetIdentifierOrItem: item,
+					},
+					item,
+				],
+				[
+					{
+						identifierOrItemOrLevelOrStack: anonymousItem,
+						targetIdentifierOrItem: null,
+					},
+					anonymousItem,
+				],
+				[
+					{
 						identifierOrItemOrLevelOrStack: [ "item", "otherItem" ],
+						targetIdentifierOrItem: "item",
 					},
 					"item",
 				],
 				[
 					{
-						identifier: "newItem",
 						identifierOrItemOrLevelOrStack: [ "item" ],
+						targetIdentifierOrItem: "newItem",
 					},
 					null,
 				],
 				[
 					{
-						identifier: "item",
 						identifierOrItemOrLevelOrStack: [ item, otherItem ],
+						targetIdentifierOrItem: "item",
 					},
 					item,
 				],
 				[
 					{
-						identifier: "item",
+						identifierOrItemOrLevelOrStack: [ item, otherItem ],
+						targetIdentifierOrItem: item,
+					},
+					item,
+				],
+				[
+					{
 						identifierOrItemOrLevelOrStack: [ otherItem, item ],
+						targetIdentifierOrItem: "item",
 					},
 					item,
 				],
 				[
 					{
-						identifier: "item",
 						identifierOrItemOrLevelOrStack: [ [ item ], [ otherItem ] ],
+						targetIdentifierOrItem: "item",
 					},
 					item,
 				],
@@ -80,14 +100,14 @@ describe(
 		)(
 			"%j returns %j",
 			(
-				{ identifier, identifierOrItemOrLevelOrStack },
+				{ identifierOrItemOrLevelOrStack, targetIdentifierOrItem },
 				existing,
 			) =>
 				expect(
 					createItemLookup(identifierOrItemOrLevelOrStack)
-					.getItemWithIdentifier(identifier),
+					.useItem(targetIdentifierOrItem),
 				)
-				.toEqual(existing),
+				.toBe(existing),
 		),
 );
 
@@ -149,11 +169,11 @@ test.each(
 		[ [ "inTarget" ] ],
 	],
 )(
-	"%j, after getItemWithIdentifier \"inTarget\", getIdentifiersNotUsed returns null.",
+	"%j, after useItem \"inTarget\", getIdentifiersNotUsed returns null.",
 	identifierOrItemOrLevelOrStack => {
 		const itemLookup = createItemLookup(identifierOrItemOrLevelOrStack);
 
-		itemLookup.getItemWithIdentifier("inTarget");
+		itemLookup.useItem("inTarget");
 
 		expect(
 			itemLookup.getIdentifiersNotUsed(),

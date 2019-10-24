@@ -49,10 +49,14 @@ function withGetItemOrLevelOrStackForTargetLevelOrStack(
 				whenHasItems()
 				||
 				targetIdentifierOrItem
+				||
+				[]
 			);
 
 			function whenHasItems() {
 				return (
+					targetIdentifierOrItem
+					&&
 					targetIdentifierOrItem.items
 					&&
 					{

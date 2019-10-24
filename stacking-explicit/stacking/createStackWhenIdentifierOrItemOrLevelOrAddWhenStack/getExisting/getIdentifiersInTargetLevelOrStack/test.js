@@ -4,6 +4,8 @@ const getIdentifiersInTargetLevelOrStack = require(".");
 
 test.each(
 	[
+		[ [], [] ],
+		[ [ null ], [ null ] ],
 		[
 			[ "left", "right" ],
 			[ "left", "right" ],
@@ -25,7 +27,7 @@ test.each(
 		],
 		[
 			[ { items: "child" } ],
-			[ "child" ],
+			[ null, "child" ],
 		],
 		[
 			[ {

@@ -255,6 +255,18 @@
 				"args":
 					[ 
 						"--runInBand",
+						"stacking/createOrAddToStacksUsingFileSystem/getTargetLevelOrStackForAncestorsAndDirectory/test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "stacking createOrAddToStacksUsingFileSystem getTargetLevelOrStackForAncestorsAndDirectory jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
 						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/createItemLookup/test.js"
 					],
 				"disableOptimisticBPs": true,

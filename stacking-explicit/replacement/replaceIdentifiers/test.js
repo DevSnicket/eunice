@@ -26,7 +26,7 @@ test.each(
 				pattern: /.*/,
 				replacement: "",
 			},
-			"",
+			{},
 		],
 		[
 			{

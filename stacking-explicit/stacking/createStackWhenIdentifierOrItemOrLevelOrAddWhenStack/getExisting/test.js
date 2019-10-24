@@ -23,6 +23,13 @@ test.each(
 		],
 		[
 			{
+				identifierOrItemOrLevelOrStack: null,
+				targetLevelOrStack: [ null ],
+			},
+			null,
+		],
+		[
+			{
 				identifierOrItemOrLevelOrStack: [ leftInTarget, rightInTarget ],
 				targetLevelOrStack: [ "leftInTarget", "rightInTarget" ],
 			},
