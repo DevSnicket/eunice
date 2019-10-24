@@ -1,0 +1,3 @@
+function exporter() {
+	exports = false;
+}

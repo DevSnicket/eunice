@@ -2,41 +2,19 @@
 
 const
 	getIdentifierAndTypeFromAssignmentLeftWhenExport = require("./getIdentifierAndTypeFromAssignmentLeftWhenExport"),
-	hasTypeOfFunction = require("../hasTypeOfFunction"),
-	{ findBlockOrIdentifiableParent } = require("../parentFunctionsFromAncestors");
+	hasTypeOfFunction = require("../hasTypeOfFunction");
 
 module.exports =
 	({
-		ancestors,
-		assignmentExpression,
-	}) => {
-		const declaration =
-			createDeclarationWhenExport(
-				assignmentExpression,
-			);
-
-		return (
-			declaration
-			&&
-			!findBlockOrIdentifiableParent(ancestors)
-			&&
-			declaration
-		);
-	};
-
-function createDeclarationWhenExport({
-	left,
-	right,
-}) {
-	return (
+		left,
+		right,
+	}) =>
 		!hasTypeOfFunction(right)
 		&&
 		createDeclaration({
 			alias: getNameWhenIdentifier(right),
 			...getIdentifierAndTypeFromAssignmentLeftWhenExport(left),
-		})
-	);
-}
+		});
 
 function getNameWhenIdentifier(
 	node,
