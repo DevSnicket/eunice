@@ -41,6 +41,10 @@ function createTestCasesWithSimpleLevels() {
 	return (
 		[
 			{
+				levels: [ [ {} ] ],
+				yaml: {},
+			},
+			{
 				levels:
 					[ [ { id: "item" } ] ],
 				yaml:

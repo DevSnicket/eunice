@@ -56,17 +56,25 @@ function createFromItem({
 			);
 
 	return (
-		dependsUponProperty || itemsProperty || Object.keys(restOfItem).length
-		?
-		{
-			...identifier && { id: identifier },
-			...restOfItem,
-			...dependsUponProperty,
-			...itemsProperty,
-		}
-		:
+		whenStructured()
+		||
 		identifier
+		||
+		{}
 	);
+
+	function whenStructured() {
+		return (
+			(dependsUponProperty || itemsProperty || Object.keys(restOfItem).length)
+			&&
+			{
+				...identifier && { id: identifier },
+				...restOfItem,
+				...dependsUponProperty,
+				...itemsProperty,
+			}
+		);
+	}
 }
 
 function createDependsUponProperty(
