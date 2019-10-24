@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.15.0 on 2019-10-24T06:50:02.878Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.16.0 on 2019-10-24T19:46:51.334Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -2378,7 +2378,7 @@
           type: file
           items:
             - - harness
-            - - id: createHorizontalResize
+              - id: createHorizontalResize
                 type: file
                 items:
                   id: createHorizontalResize
@@ -2677,7 +2677,7 @@
                                   items:
                                     id: separator
                                     type: variable
-                              - - id: key
+                                - id: key
                                   type: variable
                           - id: dependencyListElementFactory
                             type: file
@@ -4192,7 +4192,6 @@
                               - - id: test
                                   type: file
                                   dependsUpon:
-                                    - createTestItemWithIdentifier
                                     - createItemLookup
                                     - describe
                                     - expect
@@ -4204,8 +4203,7 @@
                               - - id: createItemLookup
                                   type: export
                                   dependsUpon:
-                                    - createForSingle
-                                    - whenItem
+                                    - createForIdentifierOrItem
                                     - whenLevelOrStack
                                     - whenNoValue
                                   items:
@@ -4214,13 +4212,19 @@
                                         dependsUpon:
                                           - createForLevelOrStack
                                           - identifierOrItemOrLevelOrStack
-                                      - id: whenItem
-                                        dependsUpon:
-                                          - createForSingle
-                                          - identifierOrItemOrLevelOrStack
                                     - - id: identifierOrItemOrLevelOrStack
                                         type: parameter
-                              - - id: createForLevelOrStack
+                              - - id: createForIdentifierOrItem
+                                  type: file
+                                  items:
+                                    id: createForIdentifierOrItem
+                                    type: export
+                                    dependsUpon: getIdentifierOrIdentifierOfItem
+                                    items:
+                                      - getIdentifiersNotUsed
+                                      - id: useItem
+                                        dependsUpon: getIdentifierOrIdentifierOfItem
+                                - id: createForLevelOrStack
                                   type: file
                                   items:
                                     - - id: createForLevelOrStack
@@ -4236,24 +4240,17 @@
                                               items:
                                                 - id: generate
                                                   dependsUpon:
-                                                    - getIdentifier
+                                                    - getIdentifierOrIdentifierOfItem
                                                     - itemsByIdentifier
                                                 - getIterableAsArrayWhenHasItems
-                                            - id: getItemWithIdentifier
-                                              dependsUpon: itemsByIdentifier
+                                            - id: useItem
+                                              dependsUpon:
+                                                - getIdentifierOrIdentifierOfItem
+                                                - itemsByIdentifier
                                           - - id: itemsByIdentifier
                                               type: variable
                                     - - id: getKeyValuePairForIdentifierOrItem
-                                        dependsUpon: getIdentifier
-                                    - - getIdentifier
-                                - id: createForSingle
-                                  type: file
-                                  items:
-                                    id: createForSingle
-                                    type: export
-                                    items:
-                                      - getIdentifiersNotUsed
-                                      - getItemWithIdentifier
+                                        dependsUpon: getIdentifierOrIdentifierOfItem
                           - id: getExisting
                             type: file
                             items:
@@ -4274,7 +4271,9 @@
                               - - id: withTargetIdentifiers
                                   items:
                                     - - id: isIdentifierOrItemIncluded
-                                        dependsUpon: isIdentifierNotInTarget
+                                        dependsUpon:
+                                          - getIdentifierOrIdentifierOfItem
+                                          - isIdentifierNotInTarget
                                     - - id: isIdentifierNotInTarget
                                         dependsUpon: targetIdentifiers
                                     - - id: targetIdentifiers
@@ -4370,13 +4369,10 @@
                                           - - id: identifierOrItem
                                               type: parameter
                                     - - id: getIdentifiersInItem
-                                        dependsUpon:
-                                          - getFromIdentifier
-                                          - getWhenHasItems
+                                        dependsUpon: getWhenHasItems
                                         items:
-                                          - getFromIdentifier
-                                          - id: getWhenHasItems
-                                            dependsUpon: getIdentifiersInItems
+                                          id: getWhenHasItems
+                                          dependsUpon: getIdentifiersInItems
                                     - - id: getIdentifiersInItems
                                         dependsUpon:
                                           - asIdentifierOrItem
@@ -4408,9 +4404,21 @@
                                       - mapAndCreateNewInTargetLevelOrStack
                                       - test
                                     items:
-                                      dependsUpon:
-                                        - expect
-                                        - mapAndCreateNewInTargetLevelOrStack
+                                      - dependsUpon:
+                                          - expect
+                                          - mapAndCreateNewInTargetLevelOrStack
+                                      - dependsUpon:
+                                          - expect
+                                          - mapAndCreateNewInTargetLevelOrStack
+                                      - dependsUpon:
+                                          - expect
+                                          - mapAndCreateNewInTargetLevelOrStack
+                                      - dependsUpon:
+                                          - expect
+                                          - mapAndCreateNewInTargetLevelOrStack
+                                      - dependsUpon:
+                                          - expect
+                                          - mapAndCreateNewInTargetLevelOrStack
                               - - id: mapAndCreateNewInTargetLevelOrStack
                                   type: export
                                   dependsUpon:
@@ -4580,6 +4588,17 @@
                             items:
                               id: createTestItemWithIdentifier
                               type: export
+                          - id: getIdentifierOrIdentifierOfItem
+                            type: file
+                            items:
+                              id: getIdentifierOrIdentifierOfItem
+                              type: export
+                              dependsUpon:
+                                - whenHasIdentifier
+                                - whenString
+                              items:
+                                - whenString
+                                - whenHasIdentifier
                           - id: getStackOrSingleLevelOrSingleItem
                             type: file
                             items:
@@ -5100,7 +5119,7 @@
                         - getSvgForYaml
                         - path
                         - run-tests-from-file-system
-                  - - id: bin
+                    - id: bin
                       type: file
                       dependsUpon:
                         - getSvgForYaml
@@ -5139,7 +5158,7 @@
                         items:
                           id: server
                           items: renderToStaticMarkup
-                  - - id: readTestFile
+                    - id: readTestFile
                       type: file
                       items:
                         - - id: readTestFile
@@ -5197,7 +5216,7 @@
                             type: variable
                   - - id: createFont
                       dependsUpon: withPrecision
-                  - - id: createArrows
+                    - id: createArrows
                       type: file
                       items:
                         - - id: test
@@ -5392,7 +5411,7 @@
                         - - getSvgStyleForFont
                           - createStyleElementInDefsElement
                           - createFromAttributesAndChildren
-                  - - id: createParentGroupFactoryFromSubsetIdentifierHierarchy
+                    - id: createParentGroupFactoryFromSubsetIdentifierHierarchy
                       type: file
                       items:
                         - - id: createParentGroupFactoryFromSubsetIdentifierHierarchy
@@ -6439,7 +6458,7 @@
                                     - formatTestName
                                     - test
                               - - formatTestName
-                        - - formatTestName
+                          - formatTestName
                   - - id: createStackFromYaml
                       type: export
                       dependsUpon:
@@ -6716,6 +6735,12 @@
                       dependsUpon:
                         - createDependsUponProperty
                         - createItemsProperty
+                        - whenStructured
+                      items:
+                        - - id: whenStructured
+                            dependsUpon: restOfItem
+                        - - id: restOfItem
+                            type: parameter
                   - - id: createDependsUponProperty
                       dependsUpon: createDependsUponIdentifierHierarchy
                     - id: createItemsProperty
@@ -7090,7 +7115,7 @@
                               - createParentChildLevels
                               - createUpperAndLowerStack
                               - mapItemsToDependsUpon
-                        - - id: testDependencies
+                          - id: testDependencies
                             type: file
                             items:
                               - - id: testDependencies
@@ -7340,7 +7365,7 @@
                                           dependsUpon: mapItemsToDependsUpon
                                       - id: createYaml
                                         dependsUpon: createItemYaml
-                        - - createDependencyTestCases
+                          - createDependencyTestCases
                         - - id: createFirstAndSecondLevel
                             type: file
                             items:
@@ -7619,7 +7644,7 @@
                 dependsUpon:
                   id: fs
                   items: readdirSync
-      - - id: readTextFile
+        - id: readTextFile
           type: file
           items:
             - - id: readTextFile
