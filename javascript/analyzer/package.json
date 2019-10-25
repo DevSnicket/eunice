@@ -70,6 +70,7 @@
 	"license": "SEE LICENSE IN LICENSE",
 	"main": "index.js",
 	"name": "@devsnicket/eunice-javascript-analyzer",
+	"publishConfig": { "repository": "https://pkgs.dev.azure.com/grahamdyson/_packaging/Eunice/npm/registry/" },
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/DevSnicket/eunice-javascript-analyzer.git"
