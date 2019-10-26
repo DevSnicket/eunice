@@ -18,21 +18,22 @@ module.exports =
 				isCalleeIgnored,
 			});
 
-		walk(
-			parser.parse(
-				removeUnixShebangForNode(javascript),
-				{
-					plugins:
-						[
-							"estree",
-							...babelParserPlugins || [],
-						],
-					sourceType:
-						"module",
-				},
-			),
+		walk({
+			node:
+				parser.parse(
+					removeUnixShebangForNode(javascript),
+					{
+						plugins:
+							[
+								"estree",
+								...babelParserPlugins || [],
+							],
+						sourceType:
+							"module",
+					},
+				),
 			visitors,
-		);
+		});
 
 		return visitors.getItemOrItems();
 	};
