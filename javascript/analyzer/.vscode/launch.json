@@ -27,13 +27,6 @@
 				"type": "node"
 			},
 			{
-				"args": [ ],
-				"name": "getYamlFromJavascript test",
-				"program": "${workspaceFolder}/getYamlFromJavascript/test.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
 				"args":
 					[ 
 						"--collect-coverage=false",
