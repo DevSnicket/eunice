@@ -1,3 +1,49 @@
+- id: commonjsModuleExportsOfFunctionArrow1
+  items:
+    type: export
+- id: commonjsModuleExportsOfFunctionArrow2
+  items:
+    type: export
+- id: commonjsModuleExportsOfFunctionArrowWithFileFunction
+  items:
+    - - type: export
+    - - fileFunction
+- id: commonjsModuleExportsOfFunctionArrowWithNestedFunction
+  items:
+    type: export
+    items: nestedFunction
+- id: commonjsModuleExportsOfFunctionArrowWithNestedFunctionDeclarationThatRequiresAndCallsFunctionInSameDirectory
+  items:
+    - - id: commonjsModuleExportsOfFunctionArrow1
+        type: variable
+        dependsUpon: commonjsModuleExportsOfFunctionArrow1
+    - - type: export
+        items:
+          id: nestedFunction
+          dependsUpon: commonjsModuleExportsOfFunctionArrow1
+- id: commonjsModuleExportsOfFunctionExpressionWithDifferentNameToFileThatRequiresAndCallsFunctionInSameDirectory
+  items:
+    - - id: commonjsModuleExportsOfFunctionArrow1
+        type: variable
+        dependsUpon: commonjsModuleExportsOfFunctionArrow1
+    - - type: export
+        dependsUpon: commonjsModuleExportsOfFunctionArrow1
+- id: commonjsRequireFunctionArrowWithFileFunctionInSameDirectoryAndDestructureThatIsAssignedToConstAndCalled
+  dependsUpon:
+    id: commonjsModuleExportsOfFunctionArrowWithFileFunction
+    items: fileFunction
+- id: commonjsRequireFunctionInSameDirectoryThatIsCalled
+  dependsUpon: commonjsModuleExportsOfFunctionArrow1
+- id: commonjsRequireFunctionInSubdirectoryThatIsCalled
+  dependsUpon: subdirectory/commonjsModuleExportsOfFunctionArrowInSubdirectory
+- id: commonjsRequireMissingPackageAndDestructureThatIsAssignedToConstAndCalled
+  dependsUpon:
+    id: missingPackage
+    items: missingFunction
+- id: commonjsRequireTwoFunctionsInSameDirectoryThatAreAssignedToConstsAndCalled
+  dependsUpon:
+    - commonjsModuleExportsOfFunctionArrow1
+    - commonjsModuleExportsOfFunctionArrow2
 - empty
 - id: functionDeclarationThatsCalled
   dependsUpon: fileFunction
@@ -10,68 +56,22 @@
   items:
     id: functionDeclarationWithSameNameAsFileAndNestedFunction
     items: nestedFunction
-- id: moduleExportsOFunctionExpressionWithDifferentNameToFileThatRequiresAndCallsFunctionInSameDirectory
-  items:
-    - - id: moduleExportsOfFunctionArrow1
-        type: variable
-        dependsUpon: moduleExportsOfFunctionArrow1
-    - - type: export
-        dependsUpon: moduleExportsOfFunctionArrow1
-- id: moduleExportsOfFunctionArrow1
-  items:
-    type: export
-- id: moduleExportsOfFunctionArrow2
-  items:
-    type: export
-- id: moduleExportsOfFunctionArrowWithFileFunction
-  items:
-    - - type: export
-    - - fileFunction
-- id: moduleExportsOfFunctionArrowWithNestedFunction
-  items:
-    type: export
-    items: nestedFunction
-- id: moduleExportsOfFunctionArrowWithNestedFunctionDeclarationThatRequiresAndCallsFunctionInSameDirectory
-  items:
-    - - id: moduleExportsOfFunctionArrow1
-        type: variable
-        dependsUpon: moduleExportsOfFunctionArrow1
-    - - type: export
-        items:
-          id: nestedFunction
-          dependsUpon: moduleExportsOfFunctionArrow1
 - notIgnored/ignored
-- id: requireFunctionArrowWithFileFunctionInSameDirectoryAndDestructureThatIsAssignedToConstAndCalled
-  dependsUpon:
-    id: moduleExportsOfFunctionArrowWithFileFunction
-    items: fileFunction
-- id: requireFunctionInSameDirectoryThatIsCalled
-  dependsUpon: moduleExportsOfFunctionArrow1
-- id: requireFunctionInSubdirectoryThatIsCalled
-  dependsUpon: subdirectory/moduleExportsOfFunctionArrowInSubdirectory
-- id: requireMissingPackageAndDestructureThatIsAssignedToConstAndCalled
-  dependsUpon:
-    id: missingPackage
-    items: missingFunction
-- id: requireTwoFunctionsInSameDirectoryThatAreAssignedToConstsAndCalled
-  dependsUpon:
-    - moduleExportsOfFunctionArrow1
-    - moduleExportsOfFunctionArrow2
-- subdirectory/emptyInSubdirectory
-- id: subdirectory/moduleExportsOfFunctionArrowInSubdirectory
+- id: subdirectory/commonjsModuleExportsOfFunctionArrowInSubdirectory
   items:
     type: export
-- id: subdirectory/requireCurrentDirectoryThatIsCalled
+- id: subdirectory/commonjsRequireCurrentDirectoryThatIsCalled
   dependsUpon: subdirectory
-- id: subdirectory/requireCurrentDirectoryWithTrailingSlashThatIsCalled
+- id: subdirectory/commonjsRequireCurrentDirectoryWithTrailingSlashThatIsCalled
   dependsUpon: subdirectory
-- id: subdirectory/requireFunctionInParentDirectoryThatIsCalled
-  dependsUpon: moduleExportsOfFunctionArrow1
+- id: subdirectory/commonjsRequireFunctionInParentDirectoryThatIsCalled
+  dependsUpon: commonjsModuleExportsOfFunctionArrow1
+- subdirectory/emptyInSubdirectory
 - subdirectory/subdirectoryOfsubdirectoryWithSameNameAsFile/emptyInSubdirectoryOfsubdirectory
 - subdirectory/subdirectoryOfsubdirectoryWithSameNameAsFile.withdot
-- id: subdirectory/subsubdirectory/requireParentDirectoryThatIsCalled
+- id: subdirectory/subsubdirectory/commonjsRequireParentDirectoryThatIsCalled
   dependsUpon: subdirectory
-- id: subdirectory/subsubdirectory/requireParentDirectoryWithTrailingSlashThatIsCalled
+- id: subdirectory/subsubdirectory/commonjsRequireParentDirectoryWithTrailingSlashThatIsCalled
   dependsUpon: subdirectory
 - subdirectoryWithSameNameAsFile
 - subdirectoryWithSameNameAsFile/emptyInsubdirectoryWithSameNameAsFile
