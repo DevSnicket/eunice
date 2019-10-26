@@ -20,7 +20,6 @@ const
 
 module.exports =
 	({
-		exportsOnly,
 		fileExtensions,
 		isCalleeIgnored,
 	}) => {
@@ -45,26 +44,21 @@ module.exports =
 						declarations.addDeclarationsIn,
 					removeExtensionFromFilePath,
 				}),
-				...createExceptExport(),
+				AssignmentExpression:
+					visitAssignmentExpression,
+				CallExpression:
+					visitCallExpression,
+				ClassDeclaration:
+					visitClass,
+				ClassExpression:
+					visitClass,
+				NewExpression:
+					visitCallExpression,
 				VariableDeclaration:
 					visitVariableDeclaration,
 				getItemOrItems,
 			}
 		);
-
-		function createExceptExport() {
-			return (
-				!exportsOnly
-				&&
-				{
-					AssignmentExpression: visitAssignmentExpression,
-					CallExpression: visitCallExpression,
-					ClassDeclaration: visitClass,
-					ClassExpression: visitClass,
-					NewExpression: visitCallExpression,
-				}
-			);
-		}
 
 		function visitAssignmentExpression(
 			assignmentExpression,

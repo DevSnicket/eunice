@@ -1,10 +1,13 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 const
-	addFunctionExpression = require("./addFunctionExpression"),
 	createDeclarationForFunction = require("./createDeclarationForFunction"),
 	{ findBlockOrIdentifiableParent } = require("../parentFunctionsFromAncestors"),
-	getParentFromAncestors = require("../getParentFromAncestors");
+	getIdentifierAndParentAndTypeForFunctionExpression = require("./getIdentifierAndParentAndTypeForFunctionExpression"),
+	getIdentifierAndParentAndTypeForFunctionExpressionParentWhenCommonjsExport = require("../commonjs/getIdentifierAndParentAndTypeForFunctionExpressionParentWhenExport"),
+	getIdentifierAndParentAndTypeForFunctionExpressionWhenModuleExport = require("../forModules/getIdentifierAndParentAndTypeForFunctionExpressionWhenExport"),
+	getParentFromAncestors = require("../getParentFromAncestors"),
+	getTypeWhenModuleExportDeclarationType = require("../forModules/getTypeWhenExportDeclarationType");
 
 module.exports =
 	({
@@ -34,37 +37,65 @@ module.exports =
 							&&
 							functionDeclaration.id.name,
 						type:
-							isExport() && "export",
+							getTypeWhenModuleExportDeclarationType(
+								getParentFromAncestors(
+									ancestors,
+								).type,
+							),
 					}),
 				parent:
 					findBlockOrIdentifiableParent(ancestors),
 			});
-
-			function isExport() {
-				const parentType = getParentFromAncestors(ancestors).type;
-
-				return (
-					parentType === "ExportDefaultDeclaration"
-					||
-					parentType === "ExportNamedDeclaration"
-				);
-			}
 		}
 
 		function visitFunctionExpression(
 			functionExpression,
 			ancestors,
 		) {
-			addFunctionExpression({
-				addDeclarationIn:
-					declarations.addDeclarationIn,
-				ancestors,
-				createDeclarationForFunction:
-					createDeclarationForFunctionWithDependsUponAndItems,
-				findParentFunctionFromAncestors:
-					findBlockOrIdentifiableParent,
-				functionExpression,
-			});
+			addIdentifierAndParentAndType(
+				getIdentifierAndParentAndType(),
+			);
+
+			function getIdentifierAndParentAndType() {
+				// Most getIdentifierAndParentAndTypeForFunctionExpression functions need the parent.
+				const parent = getParentFromAncestors(ancestors);
+
+				return (
+					getIdentifierAndParentAndTypeForFunctionExpressionParentWhenCommonjsExport(
+						parent,
+					)
+					||
+					getIdentifierAndParentAndTypeForFunctionExpressionWhenModuleExport({
+						ancestors,
+						parent,
+					})
+					||
+					getIdentifierAndParentAndTypeForFunctionExpression({
+						ancestors,
+						functionExpression,
+						parent,
+					})
+				);
+			}
+
+			function addIdentifierAndParentAndType(
+				identifierAndParentAndType,
+			) {
+				if (identifierAndParentAndType)
+					declarations.addDeclarationIn({
+						declaration:
+							createDeclarationForFunctionWithDependsUponAndItems({
+								functionDeclarationOrExpression:
+									functionExpression,
+								identifier:
+									identifierAndParentAndType.identifier,
+								type:
+									identifierAndParentAndType.type,
+							}),
+						parent:
+							identifierAndParentAndType.parent || null,
+					});
+			}
 		}
 
 		function createDeclarationForFunctionWithDependsUponAndItems({
