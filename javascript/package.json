@@ -86,9 +86,7 @@
 	],
 	"license": "SEE LICENSE IN LICENSE",
 	"name": "eunice",
-	"publishConfig": {
-		"access": "public"
-	},
+	"publishConfig": { "repository": "https://pkgs.dev.azure.com/grahamdyson/_packaging/Eunice/npm/registry/" },
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/devsnicket/eunice.git"
