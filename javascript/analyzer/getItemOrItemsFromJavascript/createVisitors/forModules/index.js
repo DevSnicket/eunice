@@ -3,8 +3,7 @@
 const
 	createDeclarationsFromExport = require("./createDeclarationsFromExport"),
 	createDeclarationsFromImport = require("./createDeclarationsFromImport"),
-	hasTypeOfFunction = require("../hasTypeOfFunction"),
-	{ findBlockOrIdentifiableParent } = require("../parentFunctionsFromAncestors");
+	hasTypeOfFunction = require("../hasTypeOfFunction");
 
 module.exports =
 	({
@@ -26,7 +25,6 @@ module.exports =
 
 		function visitExportAllDeclaration(
 			{ source: { value } },
-			ancestors,
 		) {
 			addDeclarationsIn({
 				declarations:
@@ -37,7 +35,7 @@ module.exports =
 							"export",
 					} ],
 				parent:
-					findBlockOrIdentifiableParent(ancestors),
+					null,
 			});
 		}
 
@@ -73,10 +71,10 @@ module.exports =
 			}
 		}
 
-		function visitExportNamedDeclaration(
-			{ source, specifiers },
-			ancestors,
-		) {
+		function visitExportNamedDeclaration({
+			source,
+			specifiers,
+		}) {
 			addDeclarationsIn({
 				declarations:
 					createDeclarationsFromExport({
@@ -85,16 +83,14 @@ module.exports =
 						specifiers,
 					}),
 				parent:
-					findBlockOrIdentifiableParent(
-						ancestors,
-					),
+					null,
 			});
 		}
 
-		function visitImportDeclaration(
-			{ source, specifiers },
-			ancestors,
-		) {
+		function visitImportDeclaration({
+			source,
+			specifiers,
+		}) {
 			addDeclarationsIn({
 				declarations:
 					createDeclarationsFromImport({
@@ -105,9 +101,7 @@ module.exports =
 						specifiers,
 					}),
 				parent:
-					findBlockOrIdentifiableParent(
-						ancestors,
-					),
+					null,
 			});
 		}
 	};
