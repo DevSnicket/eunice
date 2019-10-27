@@ -49,7 +49,7 @@ async function updateExpectedOfOrCallAddForTestCases({
 	}) {
 		await writeFile(
 			expectedFilePath,
-			await getActualForTestCase(await readTextFile(caseFilePath)),
+			await readTestCaseAndGetActual(caseFilePath),
 			"utf-8",
 		);
 	}
@@ -67,14 +67,21 @@ async function updateExpectedOfOrCallAddForTestCases({
 		async function getActualAndExpected() {
 			return (
 				{
-					actual:
-						await getActualForTestCase(
-							await readTextFile(caseFilePath),
-						),
-					expected:
-						await readTextFile(expectedFilePath),
+					actual: await readTestCaseAndGetActual(caseFilePath),
+					expected: await readTextFile(expectedFilePath),
 				}
 			);
 		}
+	}
+
+	async function readTestCaseAndGetActual(
+		caseFilePath,
+	) {
+		return (
+			getActualForTestCase({
+				content: await readTextFile(caseFilePath),
+				fileAbsolutePath: caseFilePath,
+			})
+		);
 	}
 }

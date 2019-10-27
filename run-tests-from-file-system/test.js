@@ -29,7 +29,7 @@ describe(
 						({ getActualAndExpected }) =>
 							getActualAndExpectedPromises.push(getActualAndExpected()),
 					getActualForTestCase:
-						testCase => `actual for ${testCase}`,
+						({ content }) => `actual for ${content}`,
 					subdirectory:
 						"multiple",
 				});
@@ -101,8 +101,8 @@ test(
 				null,
 			directoryAbsolutePath,
 			getActualForTestCase:
-				testCaseFileContent =>
-					`Updated ${testCaseFileContent}`,
+				({ content }) =>
+					`Updated ${content}`,
 			processArguments:
 				[ null, "", "update-expected-files" ],
 		});
