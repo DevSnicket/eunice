@@ -1,0 +1,1 @@
+export const exported1 = null, exported2 = null;

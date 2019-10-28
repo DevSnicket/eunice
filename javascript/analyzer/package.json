@@ -18,7 +18,7 @@
 	"devDependencies": {
 		"@babel/polyfill": "7.4.4",
 		"@babel/preset-env": "7.4.4",
-		"@devsnicket/eunice-run-tests-from-file-system": "3.2.0",
+		"@devsnicket/eunice-run-tests-from-file-system": "4.0.0",
 		"@devsnicket/eunice-test-harnesses": "7.10.0",
 		"@types/jest": "24.0.19",
 		"@types/node": "10.14.7",
@@ -70,7 +70,9 @@
 	"license": "SEE LICENSE IN LICENSE",
 	"main": "index.js",
 	"name": "@devsnicket/eunice-javascript-analyzer",
-	"publishConfig": { "repository": "https://pkgs.dev.azure.com/grahamdyson/_packaging/Eunice/npm/registry/" },
+	"publishConfig": {
+		"repository": "https://pkgs.dev.azure.com/grahamdyson/_packaging/Eunice/npm/registry/"
+	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/DevSnicket/eunice-javascript-analyzer.git"
@@ -85,5 +87,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./harness/output/*\" ! -path \"./node_modules/**/*\" ! -path \"**/test-cases/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest --runInBand"
 	},
-	"version": "11.9.0"
+	"version": "11.10.0"
 }

@@ -1,6 +1,7 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 const
+	addExportAll = require("./addExportAll"),
 	createDeclarationsFromExport = require("./createDeclarationsFromExport"),
 	createDeclarationsFromImport = require("./createDeclarationsFromImport"),
 	hasTypeOfFunction = require("../hasTypeOfFunction");
@@ -8,6 +9,9 @@ const
 module.exports =
 	({
 		addDeclarationsIn,
+		directoryAbsolutePath,
+		getRelativeWhenFileExists,
+		parseJavascript,
 		removeExtensionFromFilePath,
 	}) => {
 		return (
@@ -26,16 +30,12 @@ module.exports =
 		function visitExportAllDeclaration(
 			{ source: { value } },
 		) {
-			addDeclarationsIn({
-				declarations:
-					[ {
-						dependsUpon:
-							removeExtensionFromFilePath(value),
-						type:
-							"export",
-					} ],
-				parent:
-					null,
+			addExportAll({
+				addDeclarationsIn,
+				directoryAbsolutePath,
+				getRelativeWhenFileExists,
+				modulePath: value,
+				parseJavascript,
 			});
 		}
 

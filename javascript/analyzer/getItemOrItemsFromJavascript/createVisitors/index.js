@@ -7,8 +7,8 @@ const
 	addVariables = require("./addVariables"),
 	createDeclarations = require("./createDeclarations"),
 	createDependsUponIdentifiers = require("./createDependsUponIdentifiers"),
+	createFileExtensionTransformer = require("./createFileExtensionTransformer"),
 	createFileItemOrItems = require("./createFileItemOrItems"),
-	createRemoveExtensionFromFilePath = require("./createRemoveExtensionFromFilePath"),
 	createScopedVariables = require("./createScopedVariables"),
 	createUndeclaredReferences = require("./createUndeclaredReferences"),
 	forFunctions = require("./forFunctions"),
@@ -20,13 +20,18 @@ const
 
 module.exports =
 	({
+		directoryAbsolutePath,
 		fileExtensions,
 		isCalleeIgnored,
+		parseJavascript,
 	}) => {
 		const
 			declarations = createDeclarations(),
 			dependsUponIdentifiers = createDependsUponIdentifiers(),
-			removeExtensionFromFilePath = createRemoveExtensionFromFilePath(fileExtensions),
+			{
+				getRelativeWhenFileExists,
+				removeExtensionFromFilePath,
+			} = createFileExtensionTransformer(fileExtensions),
 			scopedVariables = createScopedVariables(),
 			undeclaredReferences = createUndeclaredReferences();
 
@@ -42,6 +47,9 @@ module.exports =
 				...forModules({
 					addDeclarationsIn:
 						declarations.addDeclarationsIn,
+					directoryAbsolutePath,
+					getRelativeWhenFileExists,
+					parseJavascript,
 					removeExtensionFromFilePath,
 				}),
 				AssignmentExpression:

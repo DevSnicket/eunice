@@ -13,10 +13,10 @@ runTestsFromFileSystem({
 	expectedFileName:
 		".yaml",
 	getActualForTestCase:
-		javascript =>
+		({ content }) =>
 			getYamlFromJavascript({
 				fileExtensions: [ ".js" ],
-				javascript,
+				javascript: content,
 			}),
 	processArguments:
 		process.argv,

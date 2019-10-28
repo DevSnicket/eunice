@@ -2,57 +2,63 @@
 
 const
 	createVisitors = require("./createVisitors"),
-	parser = require("@babel/parser"),
+	parseJavascriptWithBabelParserPlugins = require("./parseJavascriptWithBabelParserPlugins"),
 	walk = require("./walk");
 
 module.exports =
 	(/** @type {import("./Parameter.d")} */{
 		babelParserPlugins,
+		directoryAbsolutePath,
 		fileExtensions,
 		isCalleeIgnored,
 		javascript,
-	}) => {
-		const visitors =
-			createVisitors({
-				fileExtensions,
-				isCalleeIgnored,
-			});
-
-		walk({
-			node:
-				parser.parse(
-					removeUnixShebangForNode(javascript),
-					{
-						plugins:
-							[
-								"estree",
-								...babelParserPlugins || [],
-							],
-						sourceType:
-							"module",
-					},
-				),
-			visitors,
+	}) =>
+		getItemOrItems({
+			directoryAbsolutePath,
+			fileExtensions,
+			isCalleeIgnored,
+			javascript,
+			parseJavascript:
+				withBabelParserPlugins(babelParserPlugins)
+				.parseJavascript,
 		});
 
-		return visitors.getItemOrItems();
-	};
-
-function removeUnixShebangForNode(
-	javascript,
+function withBabelParserPlugins(
+	babelParserPlugins,
 ) {
-	const shebang = "#!/usr/bin/env node";
+	return { parseJavascript };
 
-	return (
-		javascript.startsWith(shebang)
-		?
-		javascript.substring(
-			Math.max(
-				shebang.length,
-				javascript.indexOf("\n"),
-			),
-		)
-		:
-		javascript
-	);
+	function parseJavascript(
+		javascript,
+	) {
+		return (
+			parseJavascriptWithBabelParserPlugins({
+				babelParserPlugins,
+				javascript,
+			})
+		);
+	}
+}
+
+function getItemOrItems({
+	directoryAbsolutePath,
+	fileExtensions,
+	isCalleeIgnored,
+	javascript,
+	parseJavascript,
+}) {
+	const visitors =
+		createVisitors({
+			directoryAbsolutePath,
+			fileExtensions,
+			isCalleeIgnored,
+			parseJavascript,
+		});
+
+	walk({
+		node: parseJavascript(javascript),
+		visitors,
+	});
+
+	return visitors.getItemOrItems();
 }

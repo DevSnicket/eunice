@@ -13,10 +13,10 @@ runTestsFromFileSystem({
 	expectedFileName:
 		".yaml",
 	getActualForTestCase:
-		javascript =>
+		({ content }) =>
 			getYamlFromJavascript({
 				babelParserPlugins: [ "classProperties" ],
-				javascript,
+				javascript: content,
 			}),
 	processArguments:
 		process.argv,

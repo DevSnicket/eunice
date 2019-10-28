@@ -6,16 +6,16 @@ const
 
 module.exports =
 	({
-		directory,
+		directoryPath,
 		filePath,
 		itemOrItems,
 	}) => {
 		const identifier =
-			path.join(directory, filePath.dir, filePath.name);
+			path.join(directoryPath, filePath.dir, filePath.name);
 
 		const dependsUponFileResolver =
 			createDependsUponFileResolverForDirectory(
-				directory,
+				directoryPath,
 			);
 
 		return (

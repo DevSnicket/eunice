@@ -45,15 +45,15 @@ function withOptionsAndRootDirectory({
 	return { getOrCreateItemsInDirectory };
 
 	async function getOrCreateItemsInDirectory(
-		directory,
+		directoryPath,
 	) {
-		const subDirectoryFull =
-			path.join(rootDirectory, directory);
+		const directoryAbsolutePath =
+			path.join(rootDirectory, directoryPath);
 
 		return (
 			(
 				await Promise.all(
-					(await readDirectory(subDirectoryFull))
+					(await readDirectory(directoryAbsolutePath))
 					.map(createItemsFromFileOrSubdirectory),
 				)
 			)
@@ -79,7 +79,7 @@ function withOptionsAndRootDirectory({
 					ignorePathPattern
 					&&
 					ignorePathPattern.test(
-						path.join(directory, fileOrSubdirectory),
+						path.join(directoryPath, fileOrSubdirectory),
 					)
 				);
 			}
@@ -93,7 +93,7 @@ function withOptionsAndRootDirectory({
 					&&
 					[
 						getOrCreateFileItem({
-							directory,
+							directoryPath,
 							filePath:
 								fileOrSubdirectoryPath,
 							itemOrItems:
@@ -118,13 +118,14 @@ function withOptionsAndRootDirectory({
 						return (
 							getItemOrItemsFromJavascript({
 								babelParserPlugins,
+								directoryAbsolutePath,
 								fileExtensions,
 								isCalleeIgnored,
 								javascript,
 							})
 						);
 					} catch (error) {
-						throw new Error(`Analysis of file "${path.join(directory, fileOrSubdirectory)}" raised the following error.\n\n${error.message}`);
+						throw new Error(`Analysis of file "${path.join(directoryPath, fileOrSubdirectory)}" raised the following error.\n\n${error.message}`);
 					}
 				}
 			}
@@ -134,7 +135,7 @@ function withOptionsAndRootDirectory({
 					await isDirectory()
 					&&
 					getOrCreateItemsInDirectory(
-						path.join(directory, fileOrSubdirectory),
+						path.join(directoryPath, fileOrSubdirectory),
 					)
 				);
 
@@ -149,7 +150,7 @@ function withOptionsAndRootDirectory({
 			function getFileOrSubdirectoryFull() {
 				return (
 					path.join(
-						subDirectoryFull,
+						directoryAbsolutePath,
 						fileOrSubdirectory,
 					)
 				);

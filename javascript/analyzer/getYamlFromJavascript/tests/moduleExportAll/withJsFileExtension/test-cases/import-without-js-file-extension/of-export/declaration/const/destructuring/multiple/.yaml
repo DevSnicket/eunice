@@ -1,0 +1,6 @@
+- type: export
+  dependsUpon:
+    id: module
+    items:
+      - exported1
+      - exported2
