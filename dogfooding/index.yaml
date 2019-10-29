@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.17.0 on 2019-10-29T08:57:51.691Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.18.0 on 2019-10-29T09:08:31.853Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -1214,13 +1214,13 @@
                             items:
                               - - id: isIgnored
                                   dependsUpon:
-                                    - directory
+                                    - directoryPath
                                     - fileOrSubdirectory
                                     - ignorePathPattern
                                     - path
                                 - id: getOrCreateItemsWhenJavascriptFile
                                   dependsUpon:
-                                    - directory
+                                    - directoryPath
                                     - fileOrSubdirectory
                                     - getFileOrSubdirectoryFull
                                     - getItemOrItemsFromJavascriptOrRethrowErrorWithPath
@@ -1234,7 +1234,8 @@
                                     - id: getItemOrItemsFromJavascriptOrRethrowErrorWithPath
                                       dependsUpon:
                                         - babelParserPlugins
-                                        - directory
+                                        - directoryAbsolutePath
+                                        - directoryPath
                                         - fileExtensions
                                         - fileOrSubdirectory
                                         - getItemOrItemsFromJavascript
@@ -1242,7 +1243,7 @@
                                         - path
                                 - id: createItemsWhenSubdirectory
                                   dependsUpon:
-                                    - directory
+                                    - directoryPath
                                     - fileOrSubdirectory
                                     - getOrCreateItemsInDirectory
                                     - isDirectory
@@ -1254,14 +1255,14 @@
                                       - getFileStatus
                               - - id: getFileOrSubdirectoryFull
                                   dependsUpon:
+                                    - directoryAbsolutePath
                                     - fileOrSubdirectory
                                     - path
-                                    - subDirectoryFull
                               - - id: fileOrSubdirectory
                                   type: parameter
-                        - - id: directory
+                        - - id: directoryPath
                             type: parameter
-                          - id: subDirectoryFull
+                          - id: directoryAbsolutePath
                             type: variable
                   - - id: babelParserPlugins
                       type: parameter
@@ -1436,6 +1437,24 @@
                                       - readTextFile
                                 - - id: directoryPath
                                     type: parameter
+                    - id: moduleExportAll
+                      items:
+                        - id: withJsFileExtension
+                          items:
+                            id: test
+                            type: file
+                            dependsUpon:
+                              - getYamlFromJavascript
+                              - path
+                              - run-tests-from-file-system
+                        - id: withoutJsFileExtension
+                          items:
+                            id: test
+                            type: file
+                            dependsUpon:
+                              - getYamlFromJavascript
+                              - path
+                              - run-tests-from-file-system
                   - - id: readTextFile
                       type: file
                       dependsUpon:
@@ -1461,17 +1480,21 @@
             - - id: getItemOrItemsFromJavascript
                 type: export
                 dependsUpon:
-                  - createVisitors
-                  - parser
-                  - removeUnixShebangForNode
-                  - walk
-            - - removeUnixShebangForNode
-              - id: parser
-                type: variable
+                  - getItemOrItems
+                  - withBabelParserPlugins
+            - - id: withBabelParserPlugins
+                items:
+                  - - id: parseJavascript
+                      dependsUpon:
+                        - babelParserPlugins
+                        - parseJavascriptWithBabelParserPlugins
+                  - - id: babelParserPlugins
+                      type: parameter
+              - id: getItemOrItems
                 dependsUpon:
-                  id: '@babel'
-                  items: parser
-              - id: createVisitors
+                  - createVisitors
+                  - walk
+            - - id: createVisitors
                 type: file
                 items:
                   - - id: createVisitors
@@ -1479,15 +1502,13 @@
                       dependsUpon:
                         - createDeclarations
                         - createDependsUponIdentifiers
-                        - createExceptExport
-                        - createRemoveExtensionFromFilePath
+                        - createFileExtensionTransformer
                         - createScopedVariables
                         - createUndeclaredReferences
                         - forFunctions
                         - forModules
                       items:
-                        - - createExceptExport
-                          - id: visitAssignmentExpression
+                        - - id: visitAssignmentExpression
                             dependsUpon:
                               - addFromAssignmentOfCommonjsExport
                               - removeExtensionFromFilePath
@@ -1689,6 +1710,63 @@
                                       items:
                                         id: commonjs
                                         items: createDeclarationsWhenCallOfRequire
+                    - id: createFileExtensionTransformer
+                      type: file
+                      items:
+                        - - id: createFileExtensionTransformer
+                            type: export
+                            dependsUpon:
+                              - whenHasExtensions
+                              - withNoExtensions
+                            items:
+                              - - id: whenHasExtensions
+                                  items:
+                                    - - id: getRelativeWhenFileExists
+                                        dependsUpon:
+                                          - existsWithExtensionAdded
+                                          - existsWithoutAddingExtension
+                                        items:
+                                          - - id: existsWithoutAddingExtension
+                                              dependsUpon:
+                                                - absolute
+                                                - filePathExists
+                                                - relative
+                                                - removeExtensionFromFilePath
+                                            - id: existsWithExtensionAdded
+                                              dependsUpon:
+                                                - absolute
+                                                - extensions
+                                                - filePathExists
+                                          - - id: absolute
+                                              type: parameter
+                                            - id: relative
+                                              type: parameter
+                                    - - id: removeExtensionFromFilePath
+                                        dependsUpon:
+                                          - getExtension
+                                          - removeExtension
+                                        items:
+                                          - - id: getExtension
+                                              dependsUpon:
+                                                - extensions
+                                                - filePath
+                                            - id: removeExtension
+                                              dependsUpon: filePath
+                                          - - id: filePath
+                                              type: parameter
+                                - id: withNoExtensions
+                                  items:
+                                    id: getRelativeWhenFileExists
+                                    dependsUpon: filePathExists
+                              - - id: filePathExists
+                                  dependsUpon:
+                                    - fileSystem
+                                    - path
+                                - id: extensions
+                                  type: parameter
+                        - - id: fileSystem
+                            type: variable
+                            dependsUpon: fs
                     - id: createFileItemOrItems
                       type: file
                       items:
@@ -1696,30 +1774,6 @@
                         type: export
                         dependsUpon: createItemWhenAnyDependsUpon
                         items: createItemWhenAnyDependsUpon
-                    - id: createRemoveExtensionFromFilePath
-                      type: file
-                      items:
-                        - - id: createRemoveExtensionFromFilePath
-                            type: export
-                            dependsUpon: whenHasExtensions
-                            items:
-                              - - id: whenHasExtensions
-                                  items:
-                                    id: getExtensionAndRemoveFromFilePath
-                                    dependsUpon:
-                                      - extensions
-                                      - getExtension
-                                      - removeExtension
-                              - - id: extensions
-                                  type: parameter
-                        - - getExtension
-                          - id: removeExtension
-                            dependsUpon: whenHasExtension
-                            items:
-                              - - id: whenHasExtension
-                                  dependsUpon: filePath
-                              - - id: filePath
-                                  type: parameter
                     - id: createScopedVariables
                       type: file
                       items:
@@ -1760,19 +1814,30 @@
                                     - createDeclarationForFunctionWithDependsUponAndItems
                                     - declarations
                                     - findBlockOrIdentifiableParent
-                                    - isExport
-                                  items:
-                                    - - id: isExport
-                                        dependsUpon:
-                                          - ancestors
-                                          - getParentFromAncestors
-                                    - - id: ancestors
-                                        type: parameter
+                                    - getParentFromAncestors
+                                    - getTypeWhenModuleExportDeclarationType
                                 - id: visitFunctionExpression
                                   dependsUpon:
-                                    - addFunctionExpression
-                                    - createDeclarationForFunctionWithDependsUponAndItems
-                                    - findBlockOrIdentifiableParent
+                                    - addIdentifierAndParentAndType
+                                    - getIdentifierAndParentAndType
+                                  items:
+                                    - - id: getIdentifierAndParentAndType
+                                        dependsUpon:
+                                          - ancestors
+                                          - functionExpression
+                                          - getIdentifierAndParentAndTypeForFunctionExpression
+                                          - getIdentifierAndParentAndTypeForFunctionExpressionParentWhenCommonjsExport
+                                          - getIdentifierAndParentAndTypeForFunctionExpressionWhenModuleExport
+                                          - getParentFromAncestors
+                                      - id: addIdentifierAndParentAndType
+                                        dependsUpon:
+                                          - createDeclarationForFunctionWithDependsUponAndItems
+                                          - declarations
+                                          - functionExpression
+                                    - - id: functionExpression
+                                        type: parameter
+                                      - id: ancestors
+                                        type: parameter
                               - - id: createDeclarationForFunctionWithDependsUponAndItems
                                   dependsUpon:
                                     - createDeclarationForFunction
@@ -1785,71 +1850,33 @@
                                   type: parameter
                                 - id: hasUndeclaredReferenceTo
                                   type: parameter
-                        - - id: addFunctionExpression
-                            type: file
-                            items:
-                              - - id: addFunctionExpression
-                                  type: export
-                                  dependsUpon:
-                                    - addAssignment
-                                    - addMethod
-                                    - addVariableDeclarator
-                                    - addWhenBlock
-                                    - findParentAndAdd
-                                    - getParentFromAncestors
-                                  items:
-                                    - - id: addAssignment
-                                        dependsUpon:
-                                          - addDeclarationIn
-                                          - createDeclarationForFunction
-                                          - functionExpression
-                                          - getIdentifierAndType
-                                        items:
-                                          id: getIdentifierAndType
-                                          dependsUpon: getIdentifierAndTypeFromAssignmentLeftWhenExport
-                                      - id: addWhenBlock
-                                        dependsUpon: findParentAndAdd
-                                      - id: addVariableDeclarator
-                                        dependsUpon:
-                                          - findParentAndAdd
-                                          - getTypeWhenExport
-                                        items:
-                                          id: getTypeWhenExport
-                                          dependsUpon: getParentType
-                                          items: getParentType
-                                    - - id: findParentAndAdd
-                                        dependsUpon:
-                                          - addDeclarationIn
-                                          - ancestors
-                                          - createDeclarationForFunction
-                                          - findParentFunctionFromAncestors
-                                          - functionExpression
-                                      - id: addMethod
-                                        dependsUpon:
-                                          - addDeclarationIn
-                                          - createDeclarationForFunction
-                                          - functionExpression
-                                          - getClass
-                                        items: getClass
-                                    - - id: addDeclarationIn
-                                        type: parameter
-                                      - id: ancestors
-                                        type: parameter
-                                      - id: createDeclarationForFunction
-                                        type: parameter
-                                      - id: findParentFunctionFromAncestors
-                                        type: parameter
-                                      - id: functionExpression
-                                        type: parameter
-                              - - id: getIdentifierAndTypeFromAssignmentLeftWhenExport
-                                  type: variable
-                                  dependsUpon:
-                                    id: getItemOrItemsFromJavascript
-                                    items:
-                                      id: createVisitors
-                                      items:
-                                        id: commonjs
-                                        items: getIdentifierAndTypeFromAssignmentLeftWhenExport
+                        - - id: getIdentifierAndParentAndTypeForFunctionExpressionParentWhenCommonjsExport
+                            type: variable
+                            dependsUpon:
+                              id: getItemOrItemsFromJavascript
+                              items:
+                                id: createVisitors
+                                items:
+                                  id: commonjs
+                                  items: getIdentifierAndParentAndTypeForFunctionExpressionParentWhenExport
+                          - id: getIdentifierAndParentAndTypeForFunctionExpressionWhenModuleExport
+                            type: variable
+                            dependsUpon:
+                              id: getItemOrItemsFromJavascript
+                              items:
+                                id: createVisitors
+                                items:
+                                  id: forModules
+                                  items: getIdentifierAndParentAndTypeForFunctionExpressionWhenExport
+                          - id: getTypeWhenModuleExportDeclarationType
+                            type: variable
+                            dependsUpon:
+                              id: getItemOrItemsFromJavascript
+                              items:
+                                id: createVisitors
+                                items:
+                                  id: forModules
+                                  items: getTypeWhenExportDeclarationType
                           - id: createDeclarationForFunction
                             type: file
                             items:
@@ -1860,6 +1887,43 @@
                                     - stackItemsWhenMultiple
                               - - id: createParameterItemsForFunction
                                   dependsUpon: getNamesFromDestructureOrIdentifier
+                          - id: getIdentifierAndParentAndTypeForFunctionExpression
+                            type: file
+                            items:
+                              - - id: getIdentifierAndParentAndTypeForFunctionExpression
+                                  type: export
+                                  dependsUpon:
+                                    - whenAssignment
+                                    - whenBlock
+                                    - whenMethod
+                                    - whenVariableDeclarator
+                              - - id: whenAssignment
+                                  type: file
+                                  items:
+                                    id: whenAssignment
+                                    type: export
+                                - id: whenBlock
+                                  type: file
+                                  items:
+                                    - - id: whenBlock
+                                        type: export
+                                        dependsUpon:
+                                          - findBlockOrIdentifiableParent
+                                          - getIdentifierFromFunctionExpression
+                                    - - getIdentifierFromFunctionExpression
+                                - id: whenMethod
+                                  type: file
+                                  items:
+                                    - - id: whenMethod
+                                        type: export
+                                        dependsUpon: getClassInAncestors
+                                    - - getClassInAncestors
+                                - id: whenVariableDeclarator
+                                  type: file
+                                  items:
+                                    id: whenVariableDeclarator
+                                    type: export
+                                    dependsUpon: findBlockOrIdentifiableParent
                     - id: forModules
                       type: file
                       items:
@@ -1869,8 +1933,10 @@
                               - - id: visitExportAllDeclaration
                                   dependsUpon:
                                     - addDeclarationsIn
-                                    - findBlockOrIdentifiableParent
-                                    - removeExtensionFromFilePath
+                                    - addExportAll
+                                    - directoryAbsolutePath
+                                    - getRelativeWhenFileExists
+                                    - parseJavascript
                                 - id: visitExportDefaultDeclaration
                                   dependsUpon:
                                     - addDeclarationsIn
@@ -1884,19 +1950,95 @@
                                   dependsUpon:
                                     - addDeclarationsIn
                                     - createDeclarationsFromExport
-                                    - findBlockOrIdentifiableParent
                                     - removeExtensionFromFilePath
                                 - id: visitImportDeclaration
                                   dependsUpon:
                                     - addDeclarationsIn
                                     - createDeclarationsFromImport
-                                    - findBlockOrIdentifiableParent
                                     - removeExtensionFromFilePath
                               - - id: addDeclarationsIn
                                   type: parameter
+                                - id: directoryAbsolutePath
+                                  type: parameter
+                                - id: getRelativeWhenFileExists
+                                  type: parameter
+                                - id: parseJavascript
+                                  type: parameter
                                 - id: removeExtensionFromFilePath
                                   type: parameter
-                        - - id: createDeclarationsFromExport
+                        - - id: addExportAll
+                            type: file
+                            items:
+                              - - id: addExportAll
+                                  type: export
+                                  dependsUpon: addWhenHasNamedExports
+                              - - id: addWhenHasNamedExports
+                                  dependsUpon:
+                                    - addWhenAnyNamedExports
+                                    - findNamedExports
+                                    - readModuleFile
+                                  items:
+                                    - - id: readModuleFile
+                                        dependsUpon:
+                                          - directoryAbsolutePath
+                                          - fileSystem
+                                          - path
+                                      - id: addWhenAnyNamedExports
+                                        dependsUpon:
+                                          - addDeclarationsIn
+                                          - createDeclarationFromNamedExport
+                                        items:
+                                          id: createDeclarationFromNamedExport
+                                          dependsUpon: createDependsUpon
+                                          items: createDependsUpon
+                                    - - id: addDeclarationsIn
+                                        type: parameter
+                                      - id: directoryAbsolutePath
+                                        type: parameter
+                              - - id: fileSystem
+                                  type: variable
+                                  dependsUpon: fs
+                                - id: findNamedExports
+                                  type: file
+                                  items:
+                                    - - id: findNamedExports
+                                        type: export
+                                        dependsUpon: getNamesWhenExport
+                                    - - id: getNamesWhenExport
+                                        dependsUpon:
+                                          - whenHasDeclaration
+                                          - whenHasSpecifiers
+                                        items:
+                                          - - id: whenHasDeclaration
+                                              dependsUpon:
+                                                - declaration
+                                                - getNamesFromDeclaration
+                                            - id: whenHasSpecifiers
+                                              dependsUpon: specifiers
+                                          - - id: declaration
+                                              type: parameter
+                                            - id: specifiers
+                                              type: parameter
+                                    - - id: getNamesFromDeclaration
+                                        dependsUpon:
+                                          - whenHasIdentifier
+                                          - whenVariable
+                                        items:
+                                          - - id: whenVariable
+                                              dependsUpon:
+                                                - declarations
+                                                - getNamesFromVariableDeclaration
+                                            - whenHasIdentifier
+                                          - - id: declarations
+                                              type: parameter
+                                    - - id: getNamesFromVariableDeclaration
+                                        dependsUpon: whenHasProperties
+                                        items:
+                                          - - id: whenHasProperties
+                                              dependsUpon: properties
+                                          - - id: properties
+                                              type: parameter
+                          - id: createDeclarationsFromExport
                             type: file
                             items:
                               - - id: createDeclarationsFromExport
@@ -1920,6 +2062,33 @@
                                   id: createDependsUpon
                                   dependsUpon: whenHasImported
                                   items: whenHasImported
+                          - id: getIdentifierAndParentAndTypeForFunctionExpressionWhenExport
+                            type: file
+                            items:
+                              - - id: getIdentifierAndParentAndTypeForFunctionExpressionWhenExport
+                                  type: export
+                                  dependsUpon:
+                                    - whenDefault
+                                    - whenVariableDeclarator
+                              - - id: whenDefault
+                                  type: file
+                                  items:
+                                    id: whenDefault
+                                    type: export
+                                - id: whenVariableDeclarator
+                                  type: file
+                                  items:
+                                    - - id: whenVariableDeclarator
+                                        type: export
+                                        dependsUpon: getVariableDeclaratorParentType
+                                    - - getVariableDeclaratorParentType
+                          - id: getTypeWhenExportDeclarationType
+                            type: file
+                            items:
+                              id: getTypeWhenExportDeclarationType
+                              type: export
+                              dependsUpon: isExport
+                              items: isExport
                     - id: throwErrorWhenAnyUnhandled
                       type: file
                       items:
@@ -2157,6 +2326,12 @@
                                         type: parameter
                               - - getNameWhenIdentifier
                                 - createDeclaration
+                          - id: getIdentifierAndParentAndTypeForFunctionExpressionParentWhenExport
+                            type: file
+                            items:
+                              id: getIdentifierAndParentAndTypeForFunctionExpressionParentWhenExport
+                              type: export
+                              dependsUpon: getIdentifierAndTypeFromAssignmentLeftWhenExport
                         - - id: createDeclarationsWhenCallOfRequire
                             type: file
                             items:
@@ -2425,32 +2600,47 @@
                               dependsUpon: items
                           - - id: items
                               type: parameter
+              - id: parseJavascriptWithBabelParserPlugins
+                type: file
+                items:
+                  - - id: parseJavascriptWithBabelParserPlugins
+                      type: export
+                      dependsUpon:
+                        - parser
+                        - removeUnixShebangForNode
+                  - - removeUnixShebangForNode
+                    - id: parser
+                      type: variable
+                      dependsUpon:
+                        id: '@babel'
+                        items: parser
               - id: walk
                 type: file
-                dependsUpon: createVisitorKeys
                 items:
                   - - id: walk
                       type: export
-                      dependsUpon: withVisitors
-                  - - id: withVisitors
+                      dependsUpon:
+                        - createVisitorKeys
+                        - withVisitorKeysAndVisitors
+                  - - id: withVisitorKeysAndVisitors
                       items:
                         - - id: visit
                             dependsUpon:
                               - ancestors
                               - callVisitor
-                              - visitNodeValues
+                              - visitNodeValuesWithVisitorKeys
                             items:
-                              - - id: visitNodeValues
+                              - - id: visitNodeValuesWithVisitorKeys
                                   dependsUpon: visitNodeValue
-                              - - id: visitNodeValue
-                                  dependsUpon: visit
                                 - id: callVisitor
                                   dependsUpon:
                                     - ancestors
                                     - node
                               - - id: node
                                   type: parameter
-                        - - id: ancestors
+                        - - id: visitNodeValue
+                            dependsUpon: visit
+                          - id: ancestors
                             type: variable
                     - id: createVisitorKeys
                       type: file
