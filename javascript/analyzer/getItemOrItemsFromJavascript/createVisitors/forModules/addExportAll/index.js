@@ -38,7 +38,7 @@ function addWhenHasNamedExports({
 	parseJavascript,
 }) {
 	if (modulePath)
-		addWhenAnyDependsUponItems(
+		addWhenAnyNamedExports(
 			findNamedExports(
 				parseJavascript(
 					readModuleFile(),
@@ -56,27 +56,34 @@ function addWhenHasNamedExports({
 		);
 	}
 
-	function addWhenAnyDependsUponItems(
-		items,
+	function addWhenAnyNamedExports(
+		namedExports,
 	) {
-		if (items.length)
+		if (namedExports.length)
 			addDeclarationsIn({
-				declarations:
-					[ {
-						dependsUpon:
-							{
-								id: modulePath.withoutExtension,
-								items: getItemWhenSingular() || items,
-							},
-						type:
-							"export",
-					} ],
-				parent:
-					null,
+				declarations: namedExports.map(createDeclarationFromNamedExport),
+				parent: null,
 			});
 
-		function getItemWhenSingular() {
-			return items.length === 1 && items[0];
+		function createDeclarationFromNamedExport(
+			namedExport,
+		) {
+			return (
+				{
+					dependsUpon: createDependsUpon(),
+					id: namedExport,
+					type: "export",
+				}
+			);
+
+			function createDependsUpon() {
+				return (
+					{
+						id: modulePath.withoutExtension,
+						items: namedExport,
+					}
+				);
+			}
 		}
 	}
 }

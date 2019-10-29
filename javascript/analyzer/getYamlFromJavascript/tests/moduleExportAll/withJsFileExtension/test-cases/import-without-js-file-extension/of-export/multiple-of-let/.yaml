@@ -1,8 +1,10 @@
-- - type: export
+- - id: exported1
+    type: export
     dependsUpon:
       id: module1
       items: exported1
-- - type: export
+- - id: exported2
+    type: export
     dependsUpon:
       id: module2
       items: exported2

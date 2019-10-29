@@ -1,6 +1,10 @@
-- type: export
-  dependsUpon:
-    id: module
-    items:
-      - exported1
-      - exported2
+- - id: exported1
+    type: export
+    dependsUpon:
+      id: module
+      items: exported1
+- - id: exported2
+    type: export
+    dependsUpon:
+      id: module
+      items: exported2
