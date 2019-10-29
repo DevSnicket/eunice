@@ -15,7 +15,7 @@
 		"string-pixel-width": "1.7.0"
 	},
 	"devDependencies": {
-		"@devsnicket/eunice-run-tests-from-file-system": "2.1.0",
+		"@devsnicket/eunice-run-tests-from-file-system": "4.0.0",
 		"@types/jest": "24.0.18",
 		"@types/js-yaml": "3.12.1",
 		"@types/lodash.deburr": "4.1.6",
@@ -63,7 +63,9 @@
 	"license": "SEE LICENSE IN LICENSE",
 	"main": "index.js",
 	"name": "@devsnicket/eunice-renderer",
-	"publishConfig": { "repository": "https://pkgs.dev.azure.com/grahamdyson/_packaging/Eunice/npm/registry/" },
+	"publishConfig": {
+		"repository": "https://pkgs.dev.azure.com/grahamdyson/_packaging/Eunice/npm/registry/"
+	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/DevSnicket/eunice-renderer.git"
