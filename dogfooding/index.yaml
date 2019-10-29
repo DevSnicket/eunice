@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.17.0 on 2019-10-26T05:28:15.617Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.17.0 on 2019-10-29T08:57:51.691Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -7701,8 +7701,7 @@
           items:
             - - id: updateExpectedOfTestCase
                 dependsUpon:
-                  - getActualForTestCase
-                  - readTextFile
+                  - readTestCaseAndGetActual
                   - writeFile
               - id: callAddForTestCase
                 dependsUpon:
@@ -7713,15 +7712,19 @@
                       dependsUpon:
                         - caseFilePath
                         - expectedFilePath
-                        - getActualForTestCase
+                        - readTestCaseAndGetActual
                         - readTextFile
                   - - id: caseFilePath
                       type: parameter
                     - id: expectedFilePath
                       type: parameter
-            - - id: addTestCase
+            - - id: readTestCaseAndGetActual
+                dependsUpon:
+                  - getActualForTestCase
+                  - readTextFile
+              - id: addTestCase
                 type: parameter
-              - id: getActualForTestCase
+            - - id: getActualForTestCase
                 type: parameter
       - - id: writeFile
           type: variable
