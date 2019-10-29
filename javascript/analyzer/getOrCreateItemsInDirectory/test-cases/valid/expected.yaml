@@ -56,6 +56,14 @@
   items:
     id: functionDeclarationWithSameNameAsFileAndNestedFunction
     items: nestedFunction
+- id: moduleExportAll
+  items:
+    id: exported
+    type: export
+    dependsUpon:
+      id: moduleExportAllFrom
+      items: exported
+- moduleExportAllFrom
 - notIgnored/ignored
 - id: subdirectory/commonjsModuleExportsOfFunctionArrowInSubdirectory
   items:
