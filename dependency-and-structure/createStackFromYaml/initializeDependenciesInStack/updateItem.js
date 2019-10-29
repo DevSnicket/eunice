@@ -1,6 +1,9 @@
 /* Copyright (c) 2018 Graham Dyson. All Rights Reserved.
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
+require("array.prototype.flatmap")
+.shim();
+
 module.exports =
 	({
 		dependsUpon,
@@ -8,20 +11,41 @@ module.exports =
 	}) => {
 		item.dependsUpon = dependsUpon;
 
-		for (const { item: dependUponItem } of dependsUpon)
-			if (typeof dependUponItem === "object")
-				addDependent({
-					dependent: item,
-					item: dependUponItem,
-				});
+		addDependent({
+			dependsUponItems:
+				dependsUpon.flatMap(getItemsFromDependsUpon),
+			item,
+		});
 	};
 
 function addDependent({
+	dependsUponItems,
 	item,
-	dependent,
 }) {
-	if (item.dependents)
-		item.dependents.push(dependent);
-	else
-		item.dependents = [ dependent ];
+	for (const dependsUponItem of dependsUponItems)
+		if (dependsUponItem.dependents) {
+			if (!dependsUponItem.dependents.includes(item))
+				dependsUponItem.dependents.push(item);
+		} else
+			dependsUponItem.dependents = [ item ];
+}
+
+function getItemsFromDependsUpon({
+	ancestors,
+	item,
+}) {
+	return findObject() || [];
+
+	function findObject() {
+		return (
+			[
+				item,
+				...ancestors || [],
+			]
+			.find(
+				itemOrAncestor =>
+					typeof itemOrAncestor === "object",
+			)
+		);
+	}
 }

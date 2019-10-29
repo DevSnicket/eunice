@@ -35,7 +35,9 @@ module.exports =
 					item: "missingChild",
 				},
 			];
+
 		child.dependents = [ level[0] ];
+		level[1].dependents = [ level[0] ];
 
 		test({
 			stack,

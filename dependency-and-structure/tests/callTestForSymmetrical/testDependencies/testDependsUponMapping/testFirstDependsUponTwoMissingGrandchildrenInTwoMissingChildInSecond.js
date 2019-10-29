@@ -31,6 +31,8 @@ module.exports =
 				},
 			];
 
+		level[1].dependents = [ level[0] ];
+
 		test({
 			stack,
 			stackDescription:

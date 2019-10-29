@@ -25,6 +25,8 @@ module.exports =
 				item: "missingGreatGrandchild",
 			} ];
 
+		level[1].dependents = [ level[0] ];
+
 		test({
 			stack,
 			stackDescription:

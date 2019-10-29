@@ -22,11 +22,15 @@ module.exports =
 
 		const level = stack[0];
 
+		const child = level[1].items[0][0];
+
 		level[0].dependsUpon =
 			[ {
-				ancestors: [ level[1].items[0][0], level[1] ],
+				ancestors: [ child, level[1] ],
 				item: "missingGrandchild",
 			} ];
+
+		child.dependents = [ level[0] ];
 
 		test({
 			stack,
