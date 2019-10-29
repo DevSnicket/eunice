@@ -107,19 +107,16 @@ function getItemFromDependsUpon({
 	ancestors,
 	item,
 }) {
-	return whenHasItem() || whenHasAncestor();
-
-	function whenHasItem() {
-		return (
-			typeof item === "object"
-			&&
-			item
-		);
-	}
-
-	function whenHasAncestor() {
-		return ancestors && ancestors[0];
-	}
+	return (
+		[
+			item,
+			...ancestors || [],
+		]
+		.find(
+			itemOrAncestor =>
+				typeof itemOrAncestor === "object",
+		)
+	);
 }
 
 function countDependencies({

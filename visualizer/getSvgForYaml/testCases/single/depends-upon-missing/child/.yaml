@@ -1,0 +1,4 @@
+﻿- id: single
+  dependsUpon:
+    id: missing
+    item: child of missing
