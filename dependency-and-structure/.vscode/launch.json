@@ -13,8 +13,6 @@
 					[
 						"--runInBand",
 						"--collectCoverage=false",
-						//"-t",
-						//"",
 						"createStackFromYaml/test/test.js"
 					],
 				"disableOptimisticBPs": true,
@@ -28,8 +26,6 @@
 					[
 						"--runInBand",
 						"--collectCoverage=false",
-						//"-t",
-						//"",
 						"createYamlFromStack/test.js"
 					],
 				"disableOptimisticBPs": true,
