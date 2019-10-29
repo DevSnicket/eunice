@@ -71,8 +71,9 @@
 		"url": "https://github.com/DevSnicket/eunice-renderer.git"
 	},
 	"scripts": {
-		"all": "npm run spellcheck && npm run lint && npm run typescript && npm run test",
+		"all": "npm run spellcheck && npm run lint && npm run typescript && npm run test && npm run github-pages-copy",
 		"lint": "npx eslint .",
+		"github-pages-copy": "rm -f -rf gh-pages && mkdir gh-pages && bash github-pages-copy.sh",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "npx jest --runInBand",
 		"typescript": "npx tsc -p jsconfig.json"
