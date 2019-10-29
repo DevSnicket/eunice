@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.18.0 on 2019-10-29T09:08:31.853Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.19.0 on 2019-10-29T15:32:27.553Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -6168,6 +6168,7 @@
                             dependsUpon:
                               - countDependencies
                               - createWhenDependentsOrDependsUpon
+                              - getItemFromDependsUpon
                               - sumDirectionInStackWhenOuter
                               - sumDirectionInStackWithScope
                             items:
@@ -6207,14 +6208,24 @@
                                   type: parameter
                                 - id: sumCount
                                   type: parameter
-                        - - id: countDependencies
+                        - - getItemFromDependsUpon
+                          - id: countDependencies
                             dependsUpon: sumDependency
                             items:
                               - - id: sumDependency
-                                  dependsUpon:
-                                    - findDirectionBetweenItemsInFirstMutualStack
-                                    - from
-                                    - sumDirectionInStack
+                                  dependsUpon: whenHasTo
+                                  items:
+                                    - - id: whenHasTo
+                                        dependsUpon:
+                                          - aggregation
+                                          - findDirectionBetweenItemsInFirstMutualStack
+                                          - from
+                                          - sumDirectionInStack
+                                          - to
+                                    - - id: aggregation
+                                        type: parameter
+                                      - id: to
+                                        type: parameter
                               - - id: from
                                   type: parameter
                                 - id: sumDirectionInStack
@@ -7073,8 +7084,13 @@
                             items:
                               - - id: updateItem
                                   type: export
-                                  dependsUpon: addDependent
+                                  dependsUpon:
+                                    - addDependent
+                                    - getItemsFromDependsUpon
                               - - addDependent
+                                - id: getItemsFromDependsUpon
+                                  dependsUpon: findObject
+                                  items: findObject
               - id: createYamlFromStack
                 type: file
                 items:
