@@ -24,7 +24,7 @@ steps:
       cp getSvgForYaml/testCases/independency/first-depends-upon-second/.svg gh-pages/examples/independency/first-depends-upon-second.svg &&
       cp getSvgForYaml/testCases/independency/first-item-depends-upon-second-item/.svg gh-pages/examples/independency/first-item-depends-upon-second-item.svg &&
       cp getSvgForYaml/testCases/independency/two-interdependent/.svg gh-pages/examples/independency/two-interdependent.svg &&
-      cp getSvgForYaml/testCases/item-depends-upon-parent/.svg gh-pages/examples/item-depends-upon-parent.svg &&
+      cp getSvgForYaml/testCases/depends-upon-parent/.svg gh-pages/examples/item-depends-upon-parent.svg &&
       cp getSvgForYaml/testCases/parent-depends-upon-item/.svg gh-pages/examples/parent-depends-upon-item.svg &&
       mkdir gh-pages/examples/stack &&
       cp getSvgForYaml/testCases/stack/lower-depends-upon-upper/.svg gh-pages/examples/stack/lower-depends-upon-upper.svg &&
