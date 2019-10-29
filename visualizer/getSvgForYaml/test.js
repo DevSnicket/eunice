@@ -13,7 +13,7 @@ runTestsFromFileSystem({
 	directoryAbsolutePath:
 		path.join(__dirname, "testCases/"),
 	expectedFileName:
-		"expected.svg",
+		".svg",
 	getActualForTestCase:
 		({ content }) => getSvgForYaml({ yaml: content }),
 	processArguments:

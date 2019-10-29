@@ -24,7 +24,7 @@ module.exports =
 			readTestFile(
 				path.join(
 					expectedSvgDirectoryPath,
-					"expected.svg",
+					".svg",
 				),
 			),
 		);

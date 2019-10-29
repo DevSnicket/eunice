@@ -21,16 +21,16 @@ steps:
       rm -f -rf gh-pages/examples &&
       mkdir gh-pages/examples &&
       mkdir gh-pages/examples/independency &&
-      cp getSvgForYaml/testCases/independency/first-depends-upon-second/expected.svg gh-pages/examples/independency/first-depends-upon-second.svg &&
-      cp getSvgForYaml/testCases/independency/first-item-depends-upon-second-item/expected.svg gh-pages/examples/independency/first-item-depends-upon-second-item.svg &&
-      cp getSvgForYaml/testCases/independency/two-interdependent/expected.svg gh-pages/examples/independency/two-interdependent.svg &&
-      cp getSvgForYaml/testCases/item-depends-upon-parent/expected.svg gh-pages/examples/item-depends-upon-parent.svg &&
-      cp getSvgForYaml/testCases/parent-depends-upon-item/expected.svg gh-pages/examples/parent-depends-upon-item.svg &&
+      cp getSvgForYaml/testCases/independency/first-depends-upon-second/.svg gh-pages/examples/independency/first-depends-upon-second.svg &&
+      cp getSvgForYaml/testCases/independency/first-item-depends-upon-second-item/.svg gh-pages/examples/independency/first-item-depends-upon-second-item.svg &&
+      cp getSvgForYaml/testCases/independency/two-interdependent/.svg gh-pages/examples/independency/two-interdependent.svg &&
+      cp getSvgForYaml/testCases/item-depends-upon-parent/.svg gh-pages/examples/item-depends-upon-parent.svg &&
+      cp getSvgForYaml/testCases/parent-depends-upon-item/.svg gh-pages/examples/parent-depends-upon-item.svg &&
       mkdir gh-pages/examples/stack &&
-      cp getSvgForYaml/testCases/stack/lower-depends-upon-upper/expected.svg gh-pages/examples/stack/lower-depends-upon-upper.svg &&
-      cp getSvgForYaml/testCases/stack/two-interdependent/expected.svg gh-pages/examples/stack/two-interdependent.svg &&
-      cp getSvgForYaml/testCases/stack/upper-depends-upon-lower/expected.svg gh-pages/examples/stack/upper-depends-upon-lower.svg &&
-      cp getSvgForYaml/testCases/two/expected.svg gh-pages/examples/two.svg &&
+      cp getSvgForYaml/testCases/stack/lower-depends-upon-upper/.svg gh-pages/examples/stack/lower-depends-upon-upper.svg &&
+      cp getSvgForYaml/testCases/stack/two-interdependent/.svg gh-pages/examples/stack/two-interdependent.svg &&
+      cp getSvgForYaml/testCases/stack/upper-depends-upon-lower/.svg gh-pages/examples/stack/upper-depends-upon-lower.svg &&
+      cp getSvgForYaml/testCases/two/.svg gh-pages/examples/two.svg &&
       cp getSvgForYaml/withSubset.testCases/upper-item-depends-upon-lower-item-with-parent.svg gh-pages/examples &&
       cd gh-pages &&
       git add . &&
