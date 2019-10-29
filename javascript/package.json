@@ -17,7 +17,7 @@
 		"@devsnicket/eunice-processors": "10.2.0",
 		"@devsnicket/eunice-renderer": "6.4.0",
 		"@devsnicket/eunice-renderer-test-harness": "4.5.0",
-		"@devsnicket/eunice-run-tests-from-file-system": "3.3.0",
+		"@devsnicket/eunice-run-tests-from-file-system": "4.0.0",
 		"@devsnicket/eunice-test-harnesses": "7.10.0",
 		"@devsnicket/eunice-test-harnesses-processor-plugins": "1.0.0",
 		"@devsnicket/plugin-discovery-commonjs-babel-plugin": "1.11.1",
@@ -86,7 +86,9 @@
 	],
 	"license": "SEE LICENSE IN LICENSE",
 	"name": "eunice",
-	"publishConfig": { "repository": "https://pkgs.dev.azure.com/grahamdyson/_packaging/Eunice/npm/registry/" },
+	"publishConfig": {
+		"repository": "https://pkgs.dev.azure.com/grahamdyson/_packaging/Eunice/npm/registry/"
+	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/devsnicket/eunice.git"
