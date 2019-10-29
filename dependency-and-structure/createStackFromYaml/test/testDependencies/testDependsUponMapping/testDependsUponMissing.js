@@ -8,13 +8,15 @@ const
 	testCreateStackFromYaml = require("../../testCreateStackFromYaml");
 
 module.exports =
-	() => {
-		const stack = createStackFromLevels([ [ { id: "item" } ] ]);
-
-		stack[0][0].dependsUpon = mapItemsToDependsUpon([ "missing" ]);
-
+	() =>
 		testCreateStackFromYaml({
-			stack,
+			stack:
+				createStackFromLevels(
+					[ [ {
+						dependsUpon: mapItemsToDependsUpon([ "missing" ]),
+						id: "item",
+					} ] ],
+				),
 			stackDescription:
 				"depends upon missing",
 			yaml:
@@ -27,4 +29,3 @@ module.exports =
 					],
 				],
 		});
-	};
