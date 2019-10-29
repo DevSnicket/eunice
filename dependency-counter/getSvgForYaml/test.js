@@ -8,9 +8,14 @@ const
 	runTestsFromFileSystem = require("@devsnicket/eunice-run-tests-from-file-system");
 
 runTestsFromFileSystem({
-	action: yaml => getSvgForYaml({ yaml }),
-	caseFileName: ".yaml",
-	directory: path.join(__dirname, "testCases/"),
-	expectedFileName: "expected.svg",
-	processArguments: process.argv,
+	caseFileName:
+		".yaml",
+	directoryAbsolutePath:
+		path.join(__dirname, "testCases/"),
+	expectedFileName:
+		"expected.svg",
+	getActualForTestCase:
+		({ content }) => getSvgForYaml({ yaml: content }),
+	processArguments:
+		process.argv,
 });
