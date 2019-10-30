@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.19.0 on 2019-10-29T15:32:27.553Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.19.0 on 2019-10-30T09:31:34.080Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -179,7 +179,7 @@
                                     - directory
                                     - isFileContentReversed
                                     - items
-                                    - modifyFileStacksFilePath
+                                    - modifyStacksFile
                                     - packagePrefixAndScope
                                     - processItems
                                     - rootItemIdentifier
@@ -205,7 +205,7 @@
                             type: parameter
                           - id: isFileContentReversed
                             type: parameter
-                          - id: modifyFileStacksFilePath
+                          - id: modifyStacksFile
                             type: parameter
                           - id: packagePrefixAndScope
                             type: parameter
@@ -245,7 +245,7 @@
                                     - createOrAddToStacksUsingFileSystem
                                     - createSubsetIdentifierHierarchy
                                     - ensureRootItemWithIdentifier
-                                    - modifyFileStacks
+                                    - modifyStacksWithFile
                                     - removePackagePrefixAndScopeInDependsUpon
                                     - replaceDependsUponWithHierarchyFromSeparator
                                     - reverseDescendantsOfItems
@@ -256,24 +256,6 @@
                                   dependsUpon: removeSelfDependentItemsOfType
                                 - id: orderItemsByType
                                   dependsUpon: orderItemsByIndexOfType
-                              - - id: modifyFileStacks
-                                  dependsUpon: whenSpecified
-                                  items:
-                                    - - id: whenSpecified
-                                        dependsUpon:
-                                          - createOrAddToStacksOfParentMatch
-                                          - items
-                                          - readStack
-                                        items:
-                                          id: readStack
-                                          dependsUpon:
-                                            - parseYaml
-                                            - readFileSync
-                                            - stacksFilePath
-                                    - - id: items
-                                        type: parameter
-                                      - id: stacksFilePath
-                                        type: parameter
                                 - id: flattenSingleRootItemWhenHasOnlyItemsAndType
                                   dependsUpon: hasOtherProperties
                                   items:
@@ -281,17 +263,7 @@
                                         dependsUpon: items
                                     - - id: items
                                         type: parameter
-                              - - id: parseYaml
-                                  type: variable
-                                  dependsUpon:
-                                    id: js-yaml
-                                    items: safeLoad
-                                - id: readFileSync
-                                  type: variable
-                                  dependsUpon:
-                                    id: fs
-                                    items: readFileSync
-                                - id: removeSelfDependentItemsOfType
+                              - - id: removeSelfDependentItemsOfType
                                   type: variable
                                   dependsUpon:
                                     id: processors
@@ -306,11 +278,6 @@
                                   dependsUpon:
                                     id: processors
                                     items: orderItemsByIndexOfType
-                                - id: createOrAddToStacksOfParentMatch
-                                  type: variable
-                                  dependsUpon:
-                                    id: processors
-                                    items: createOrAddToStacksOfParentMatch
                                 - id: createOrAddToStacksUsingFileSystem
                                   type: variable
                                   dependsUpon:
@@ -419,6 +386,71 @@
                                                 items: replaceIdentifier
                                           - - id: items
                                               type: parameter
+                                - id: modifyStacksWithFile
+                                  type: file
+                                  items:
+                                    - - id: modifyStacksWithFile
+                                        type: export
+                                        dependsUpon: whenSpecified
+                                        items:
+                                          - - id: whenSpecified
+                                              dependsUpon:
+                                                - filePath
+                                                - parseYaml
+                                                - readFileSync
+                                                - withTarget
+                                              items:
+                                                id: withTarget
+                                                dependsUpon:
+                                                  - uniformly
+                                                  - whenHasKeyAndPattern
+                                                items:
+                                                  - - id: whenHasKeyAndPattern
+                                                      dependsUpon:
+                                                        - addNewInTarget
+                                                        - createOrAddToStacksOfParentMatch
+                                                        - items
+                                                        - targetLevelOrStack
+                                                    - id: uniformly
+                                                      dependsUpon:
+                                                        - addNewInTarget
+                                                        - createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
+                                                        - items
+                                                        - replaceIdentifiersAndItemsAndLevelsAndStacks
+                                                        - targetLevelOrStack
+                                                  - - id: targetLevelOrStack
+                                                      type: parameter
+                                                    - id: addNewInTarget
+                                                      type: variable
+                                          - - id: filePath
+                                              type: parameter
+                                            - id: items
+                                              type: parameter
+                                    - - id: parseYaml
+                                        type: variable
+                                        dependsUpon:
+                                          id: js-yaml
+                                          items: safeLoad
+                                      - id: readFileSync
+                                        type: variable
+                                        dependsUpon:
+                                          id: fs
+                                          items: readFileSync
+                                      - id: replaceIdentifiersAndItemsAndLevelsAndStacks
+                                        type: variable
+                                        dependsUpon:
+                                          id: processors
+                                          items: replaceIdentifiersAndItemsAndLevelsAndStacks
+                                      - id: createOrAddToStacksOfParentMatch
+                                        type: variable
+                                        dependsUpon:
+                                          id: processors
+                                          items: createOrAddToStacksOfParentMatch
+                                      - id: createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
+                                        type: variable
+                                        dependsUpon:
+                                          id: processors
+                                          items: createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
                                 - id: removePackagePrefixAndScopeInDependsUpon
                                   type: file
                                   items:
@@ -685,6 +717,10 @@
                   - test
                 items:
                   - - dependsUpon:
+                        - createParameterFromCliArguments
+                        - expect
+                        - pathSeparator
+                    - dependsUpon:
                         - createParameterFromCliArguments
                         - expect
                         - pathSeparator
