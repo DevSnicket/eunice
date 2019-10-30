@@ -9,7 +9,7 @@ module.exports =
 		identifierSeparator,
 		isFileContentReversed,
 		items,
-		modifyFileStacksFilePath,
+		modifyStacksFile,
 		packagePrefixAndScope,
 		rootItemIdentifier,
 	}) =>
@@ -21,7 +21,7 @@ module.exports =
 					directoryToCreateOrAddToStacksFrom,
 					identifierSeparator,
 					isFileContentReversed,
-					modifyFileStacksFilePath,
+					modifyStacksFile,
 					packagePrefixAndScope,
 					rootItemIdentifier,
 				}),

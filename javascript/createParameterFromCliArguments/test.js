@@ -91,6 +91,36 @@ test(
 );
 
 test(
+	"\"modify-stacks-file\", \"modify-stacks-pattern\" and \"modify-stacks-key\" returns string, regular expression and string.",
+	() => {
+		const
+			modifyStacksFile = "modifyStacksFile",
+			modifyStacksKey = "modifyStacksKey",
+			modifyStacksPattern = "modifyStacksPattern";
+
+		expect(
+			createParameterFromCliArguments({
+				cliArguments:
+					{
+						modifyStacksFile,
+						modifyStacksKey,
+						modifyStacksPattern,
+					},
+				pathSeparator,
+			})
+			.modifyStacksFile,
+		)
+		.toEqual(
+			{
+				filePath: modifyStacksFile,
+				key: modifyStacksKey,
+				pattern: new RegExp(modifyStacksPattern),
+			},
+		);
+	},
+);
+
+test(
 	"\"packageNames\", \"packagePrefix\" and \"packageScope\" are returned in packages.",
 	() =>
 		expect(

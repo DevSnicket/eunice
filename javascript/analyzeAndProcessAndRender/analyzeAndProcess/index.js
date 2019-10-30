@@ -15,7 +15,7 @@ module.exports =
 		fileExtensions,
 		ignorePathPattern,
 		isFileContentReversed,
-		modifyFileStacksFilePath,
+		modifyStacksFile,
 		packagePrefixAndScope,
 		sources,
 	}) => {
@@ -63,7 +63,7 @@ module.exports =
 							path.sep,
 						isFileContentReversed,
 						items,
-						modifyFileStacksFilePath,
+						modifyStacksFile,
 						packagePrefixAndScope,
 						rootItemIdentifier,
 					})

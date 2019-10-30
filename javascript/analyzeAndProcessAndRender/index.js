@@ -23,7 +23,7 @@ module.exports =
 		includeServiceWorkers = false,
 		includeSourceMap = false,
 		isFileContentReversed = false,
-		modifyFileStacksFilePath,
+		modifyStacksFile,
 		output,
 		packages = null,
 		sources,
@@ -49,7 +49,7 @@ module.exports =
 						fileExtensions,
 						ignorePathPattern,
 						isFileContentReversed,
-						modifyFileStacksFilePath,
+						modifyStacksFile,
 						packagePrefixAndScope:
 							packages,
 						sources:

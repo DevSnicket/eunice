@@ -32,6 +32,15 @@ test(
 						"item\\alphabeticallyEarlierItem",
 						"item\\bin",
 						{
+							id:
+								"item\\notModifyStackMatch",
+							items:
+								{
+									id: "notInRootToNotGetTypeSetToFile",
+									items: [ "aardvark", "bin" ],
+								},
+						},
+						{
 							id: "item\\orderedByType",
 							items:
 								[
@@ -52,8 +61,12 @@ test(
 								],
 						},
 					],
-				modifyFileStacksFilePath:
-					path.join(__dirname, "modify-file-stacks.yaml"),
+				modifyStacksFile:
+					{
+						filePath: path.join(__dirname, "modify-file-stacks.yaml"),
+						key: "type",
+						pattern: "^file$",
+					},
 				packagePrefixAndScope:
 					{
 						prefix: "prefix-",
@@ -85,6 +98,17 @@ test(
 							{
 								id: "childWithIndexSuffix",
 								type: "file",
+							},
+							{
+								id:
+									"notModifyStackMatch",
+								items:
+									{
+										id: "notInRootToNotGetTypeSetToFile",
+										items: [ "aardvark", "bin" ],
+									},
+								type:
+									"file",
 							},
 							{
 								id: "orderedByType",
@@ -131,7 +155,7 @@ test(
 					false,
 				items:
 					{ items: "child" },
-				modifyFileStacksFilePath:
+				modifyStacksFile:
 					null,
 				packagePrefixAndScope:
 					null,
@@ -181,7 +205,7 @@ test(
 						"item2",
 						{ id: "item3", items: "childOfItem3" },
 					],
-				modifyFileStacksFilePath:
+				modifyStacksFile:
 					null,
 				packagePrefixAndScope:
 					null,
@@ -216,6 +240,37 @@ test(
 					items: "childOfItem3",
 					type: "file",
 				},
+			],
+		),
+);
+
+test(
+	"Modify stacks without key and pattern.",
+	() =>
+		expect(
+			processItems({
+				dependencyPermeableIdentifiers:
+					null,
+				directoryToCreateOrAddToStacksFrom:
+					"no-stacks",
+				identifierSeparator:
+					"\\",
+				isFileContentReversed:
+					false,
+				items:
+					[ "aardvark", "bin" ],
+				modifyStacksFile:
+					{ filePath: path.join(__dirname, "modify-file-stacks.yaml") },
+				packagePrefixAndScope:
+					null,
+				rootItemIdentifier:
+					null,
+			}),
+		)
+		.toEqual(
+			[
+				{ id: "bin", type: "file" },
+				{ id: "aardvark", type: "file" },
 			],
 		),
 );

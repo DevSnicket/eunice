@@ -4,8 +4,7 @@ const
 	createIdentifierSeparatorSpecific = require("./createIdentifierSeparatorSpecific"),
 	createSubsetIdentifierHierarchy = require("./createSubsetIdentifierHierarchy"),
 	ensureRootItemWithIdentifier = require("./ensureRootItemWithIdentifier"),
-	parseYaml = require("js-yaml").safeLoad,
-	{ readFileSync } = require("fs"),
+	modifyStacksWithFile = require("./modifyStacksWithFile"),
 	removePackagePrefixAndScopeInDependsUpon = require("./removePackagePrefixAndScopeInDependsUpon"),
 	{
 		removeSelfDependentItemsOfType,
@@ -17,10 +16,7 @@ const
 				orderItemsByIndexOfType,
 			},
 		stacking:
-			{
-				createOrAddToStacksOfParentMatch,
-				createOrAddToStacksUsingFileSystem,
-			},
+			{ createOrAddToStacksUsingFileSystem },
 		setTypeOfRootItems,
 		unstackIndependent,
 	} = require("@devsnicket/eunice-processors"),
@@ -34,7 +30,7 @@ module.exports =
 		directoryToCreateOrAddToStacksFrom,
 		identifierSeparator,
 		isFileContentReversed,
-		modifyFileStacksFilePath,
+		modifyStacksFile,
 		packagePrefixAndScope,
 		rootItemIdentifier,
 	}) => {
@@ -71,9 +67,9 @@ module.exports =
 				removeSelfDependentVariables,
 				orderItemsByType,
 				items =>
-					modifyFileStacks({
+					modifyStacksWithFile({
+						...modifyStacksFile,
 						items,
-						stacksFilePath: modifyFileStacksFilePath,
 					}),
 				items =>
 					createOrAddToStacksUsingFileSystem({
@@ -137,43 +133,6 @@ function orderItemsByType(
 				[ "export", undefined, "parameter", "variable", "import", "file" ],
 		})
 	);
-}
-
-function modifyFileStacks({
-	items,
-	stacksFilePath,
-}) {
-	return whenSpecified() || items;
-
-	function whenSpecified() {
-		return (
-			stacksFilePath
-			&&
-			createOrAddToStacksOfParentMatch({
-				addNewInTarget:
-					false,
-				items,
-				keysAndPatterns:
-					[ {
-						key: "type",
-						pattern: /^file$/,
-					} ],
-				targetLevelOrStack:
-					readStack(),
-			})
-		);
-
-		function readStack() {
-			return (
-				parseYaml(
-					readFileSync(
-						stacksFilePath,
-						"utf-8",
-					),
-				)
-			);
-		}
-	}
 }
 
 function flattenSingleRootItemWhenHasOnlyItemsAndType(

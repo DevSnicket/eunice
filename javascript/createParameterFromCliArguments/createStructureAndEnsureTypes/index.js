@@ -14,7 +14,9 @@ module.exports =
 		includeServiceWorkers,
 		includeSourceMap,
 		isFileContentReversed,
-		modifyFileStacksFile,
+		modifyStacksFile,
+		modifyStacksKey,
+		modifyStacksPattern,
 		outputBaseFileName,
 		outputDirectoryPath,
 		outputHtml = true,
@@ -48,8 +50,19 @@ module.exports =
 				parseBoolean(includeSourceMap),
 			isFileContentReversed:
 				parseBoolean(isFileContentReversed),
-			modifyFileStacksFilePath:
-				modifyFileStacksFile,
+			modifyStacksFile:
+				modifyStacksFile
+				&&
+				{
+					filePath:
+						modifyStacksFile,
+					key:
+						modifyStacksKey,
+					pattern:
+						modifyStacksPattern
+						&&
+						new RegExp(modifyStacksPattern),
+				},
 			output:
 				{
 					enabled:

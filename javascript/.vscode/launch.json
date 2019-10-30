@@ -37,7 +37,9 @@
 					"--include-service-workers=true",
 					"--include-source-map=true",
 					"--ignore-path-pattern=(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$",
-					"--modify-file-stacks-file=dogfooding/modify-file-stacks.yaml",
+					"--modify-stacks-file=dogfooding/modify-file-stacks.yaml",
+					"--modify-stacks-key=type",
+					"--modify-stacks-pattern=^file$",
 					"--output-base-file-name=index",
 					"--output-directory-path=dogfooding/output",
 					"--output-svg",
@@ -68,7 +70,9 @@
 					"--directory-to-create-or-add-to-stacks-from=dogfooding",
 					"--include-service-workers=true",
 					"--ignore-path-pattern=(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$",
-					"--modify-file-stacks-file=dogfooding/modify-file-stacks.yaml",
+					"--modify-stacks-file=dogfooding/modify-file-stacks.yaml",
+					"--modify-stacks-key=type",
+					"--modify-stacks-pattern=^file$",
 					"--output-base-file-name=index",
 					"--output-directory-path=dogfooding/output",
 					"--output-svg",
@@ -96,8 +100,7 @@
 			"args":
 				[
 					"--collect-coverage=false",
-					"--runInBand",
-					"analyzeAndProcessAndRender/analyzeAndProcess/processItems/createProcessFunctions/setIdentifierOfAnonymousExportToParent/test.js"
+					"--runInBand"
 				],
 			"disableOptimisticBPs": true,
 			"name": "Jest",
