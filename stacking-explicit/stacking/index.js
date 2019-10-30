@@ -3,10 +3,12 @@
 /* istanbul ignore file: test would be a mirror of implementation */
 const
 	createOrAddToStacksOfParentMatch = require("./createOrAddToStacksOfParentMatch"),
-	createOrAddToStacksUsingFileSystem = require("./createOrAddToStacksUsingFileSystem");
+	createOrAddToStacksUsingFileSystem = require("./createOrAddToStacksUsingFileSystem"),
+	createStackWhenIdentifierOrItemOrLevelOrAddWhenStack = require("./createStackWhenIdentifierOrItemOrLevelOrAddWhenStack");
 
 module.exports =
 	{
 		createOrAddToStacksOfParentMatch,
 		createOrAddToStacksUsingFileSystem,
+		createStackWhenIdentifierOrItemOrLevelOrAddWhenStack,
 	};
