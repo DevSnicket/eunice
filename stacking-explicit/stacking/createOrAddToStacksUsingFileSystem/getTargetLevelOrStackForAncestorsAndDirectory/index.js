@@ -10,6 +10,7 @@ module.exports =
 	({
 		ancestors,
 		directory,
+		stackFileName = ".eunice-stack.yaml",
 		subsetIdentifierHierarchy,
 	}) => {
 		const ancestorIdentifiers =
@@ -31,7 +32,7 @@ module.exports =
 				path.join(
 					directory,
 					...ancestorIdentifiers,
-					".devsnicket-eunice-stack.yaml",
+					stackFileName,
 				)
 			);
 		}

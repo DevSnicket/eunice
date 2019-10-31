@@ -86,7 +86,8 @@ test.each(
 		expect(
 			getTargetLevelOrStackForAncestorsAndDirectory({
 				ancestors,
-				directory: path.join(__dirname, "testCases"),
+				directory:
+					path.join(__dirname, "testCases"),
 				subsetIdentifierHierarchy,
 			}),
 		)

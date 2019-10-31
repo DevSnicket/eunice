@@ -10,6 +10,7 @@ module.exports =
 		addNewInTarget = true,
 		directory,
 		items,
+		stackFileName,
 		subsetIdentifierHierarchy,
 	}) =>
 		replaceIdentifiersAndItemsAndLevelsAndStacks({
@@ -24,6 +25,7 @@ module.exports =
 						getTargetLevelOrStackForAncestorsAndDirectory({
 							ancestors,
 							directory,
+							stackFileName,
 							subsetIdentifierHierarchy,
 						});
 
