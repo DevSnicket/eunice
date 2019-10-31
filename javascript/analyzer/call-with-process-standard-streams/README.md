@@ -9,7 +9,7 @@ It depends upon [minimist](https://github.com/substack/minimist) to parse the ar
 
 Its used by Eunice JavaScript analyzer, processors and renderer so they can be run from CLI and scripts, and have large amounts of YAML passed into and out of them.
 
-More information can be found in the [Eunice repository](https://github.com/DevSnicket/Eunice#readme) on GitHub.
+For more information [https://devsnicket.com/eunice](https://devsnicket.com/eunice).
 
 Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-call-with-process-standard-streams):
 
