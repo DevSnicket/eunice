@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.23.0 on 2019-10-31T11:41:33.755Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.23.0 on 2019-10-31T13:02:04.172Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -5112,9 +5112,7 @@
               - id: replacement
                 type: file
                 items:
-                  - - id: replacement
-                      type: export
-                    - id: replaceDependsUpon
+                  - - id: replaceDependsUpon
                       type: file
                       items:
                         - - id: replaceDependsUpon
@@ -5328,7 +5326,9 @@
                                         type: parameter
                               - - id: replaceIdentifierOrItem
                                   type: parameter
-                  - - id: replaceIdentifiersAndItemsAndLevelsAndStacks
+                  - - id: replacement
+                      type: export
+                    - id: replaceIdentifiersAndItemsAndLevelsAndStacks
                       type: file
                       items:
                         - - id: test
