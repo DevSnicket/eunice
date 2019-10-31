@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.22.0 on 2019-10-31T09:02:57.823Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.23.0 on 2019-10-31T11:41:33.755Z
 - - id: javascript
     type: file
     dependsUpon: minimist
