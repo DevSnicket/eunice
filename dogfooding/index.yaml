@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.20.0 on 2019-10-30T09:35:51.714Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.22.0 on 2019-10-31T09:02:57.823Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -4411,10 +4411,13 @@
                                     - createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
                                     - directory
                                     - getTargetLevelOrStackForAncestorsAndDirectory
+                                    - stackFileName
                                     - subsetIdentifierHierarchy
                               - - id: addNewInTarget
                                   type: parameter
                                 - id: directory
+                                  type: parameter
+                                - id: stackFileName
                                   type: parameter
                                 - id: subsetIdentifierHierarchy
                                   type: parameter
@@ -4444,7 +4447,10 @@
                                         dependsUpon:
                                           - directory
                                           - path
+                                          - stackFileName
                                     - - id: directory
+                                        type: parameter
+                                      - id: stackFileName
                                         type: parameter
                               - - id: getIdentifiersInNewStackFromPath
                                   dependsUpon:
