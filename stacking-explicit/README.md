@@ -5,7 +5,7 @@
 
 This package contains multiple processors that input and output dependencies defined in YAML. The input can be created by an analyzer or the output from another processor. After final processing the output can be rendered and interacted with. A JavaScript analyzer and SVG/web renderer are included elsewhere in [Eunice](https://www.github.com/DevSnicket/Eunice).
 
-For more information see the [Eunice website](https://devsnicket/eunice).
+For more information [https://devsnicket.com/eunice](https://devsnicket.com/eunice).
 
 Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-processors):
 
