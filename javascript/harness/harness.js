@@ -6,11 +6,12 @@ const
 	{
 		callOrCreateElementOnError,
 		createFillWithTitleElement,
+		createHashFromLocation,
 	} = require("@devsnicket/eunice-test-harnesses"),
 	createCodeEditorForLanguage = require("@devsnicket/eunice-test-harnesses/codeEditor/createEditorForLanguage"),
 	createJavascriptEditor = require("@devsnicket/eunice-javascript-analyzer/harness/createJavascriptEditor"),
 	{
-		createReflexContainerForColumnElements,
+		createResizableContainer,
 		renderIntoContainerElement,
 	} = require("@devsnicket/eunice-test-harnesses"),
 	createYamlInputElement = require("@devsnicket/eunice-renderer-test-harness/createYamlInputElement"),
@@ -40,39 +41,52 @@ renderIntoContainerElement({
 		createInitialStateFromJavascript(javascriptFromWebpack),
 	renderStateful:
 		stateful =>
-			createReflexContainerForColumnElements(
-				[
-					createFillWithTitleElement({
-						content:
-							createJavascriptEditorElement({
-								createStateFromValue:
-									createYamlStateFromJavascript,
-								stateful,
-							}),
-						title:
-							"JavaScript",
-					}),
-					createYamlInputElement({
-						createElement,
-						createFillWithTitleElement,
-						createYamlEditorElement,
-						stateful,
-					}),
-					createYamlOutputElement({
-						callOrCreateElementOnError,
-						createElement,
-						location,
-						resizableElementTypes:
-							{
-								container: ReflexContainer,
-								element: ReflexElement,
-								splitter: ReflexSplitter,
-							},
-						state:
-							stateful.state,
-					}),
-				],
-			),
+			createResizableContainer({
+				createElement,
+				flexKeysAndValues:
+					createHashFromLocation(location),
+				items:
+					[
+						createFillWithTitleElement({
+							content:
+								createJavascriptEditorElement({
+									createStateFromValue:
+										createYamlStateFromJavascript,
+									stateful,
+								}),
+							title:
+								"JavaScript",
+						}),
+						createYamlInputElement({
+							createElement,
+							createFillWithTitleElement,
+							createYamlEditorElement,
+							stateful,
+						}),
+						createYamlOutputElement({
+							callOrCreateElementOnError,
+							createElement,
+							location,
+							resizableElementTypes:
+								{
+									container: ReflexContainer,
+									element: ReflexElement,
+									splitter: ReflexSplitter,
+								},
+							state:
+								stateful.state,
+						}),
+					]
+					.map(element => ({ element })),
+				orientation:
+					"vertical",
+				resizableElementTypes:
+					{
+						container: ReflexContainer,
+						item: ReflexElement,
+						splitter: ReflexSplitter,
+					},
+			}),
 });
 
 function createInitialStateFromJavascript(
