@@ -31,6 +31,8 @@ test(
 						itemIdentifier,
 					level:
 						{},
+					locationHash:
+						{},
 					relationship:
 						"dependsUpon",
 					resizableElementTypes:
@@ -66,13 +68,15 @@ test(
 						childIdentifier,
 					level:
 						"same",
+					locationHash:
+						{ getValueOfKey: () => null },
 					relationship:
 						"dependsUpon",
 					resizableElementTypes:
 						{
 							/* cSpell:disable */
 							container: "resizablecontainer",
-							element: "resizableelement",
+							item: "resizableitem",
 							splitter: "resizablesplitter",
 							/* cSpell:enable */
 						},

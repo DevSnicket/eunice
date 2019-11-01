@@ -55,8 +55,7 @@ module.exports =
 					createIdentifierHierarchyAnchor:
 						subsetSelection.createIdentifierHierarchyAnchor,
 					element,
-					getValuesOfKeys:
-						locationHash.getValuesOfKeys,
+					locationHash,
 					resizableElementTypes,
 					stack,
 					subsetIdentifierHierarchy:

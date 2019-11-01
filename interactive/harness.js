@@ -4,7 +4,7 @@ const
 	{
 		callOrCreateElementOnError,
 		createFillWithTitleElement,
-		createResizableColumnContainer,
+		createResizableContainer,
 		renderIntoContainerElement,
 	} = require("@devsnicket/eunice-test-harnesses"),
 	createCodeEditorForLanguage = require("@devsnicket/eunice-test-harnesses/codeEditor/createEditorForLanguage"),
@@ -22,7 +22,7 @@ const
 const resizableElementTypes =
 	{
 		container: ReflexContainer,
-		element: ReflexElement,
+		item: ReflexElement,
 		splitter: ReflexSplitter,
 	};
 
@@ -39,8 +39,11 @@ renderIntoContainerElement({
 		{ yaml: yamlFromWebpack },
 	renderStateful:
 		stateful =>
-			createResizableColumnContainer({
-				columns:
+			createResizableContainer({
+				createElement,
+				flexKeysAndValues:
+					createHashFromLocation(location),
+				items:
 					[
 						{
 							element:
@@ -65,7 +68,8 @@ renderIntoContainerElement({
 								{ default: 0.75, key: "output-width" },
 						},
 					],
-				flexKeysAndValues:
-					createHashFromLocation(location),
+				orientation:
+					"vertical",
+				resizableElementTypes,
 			}),
 });

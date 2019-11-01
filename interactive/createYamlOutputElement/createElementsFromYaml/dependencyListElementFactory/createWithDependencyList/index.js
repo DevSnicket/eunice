@@ -3,7 +3,7 @@
 const
 	createListElement = require("./createListElement"),
 	createSubsetOfItem = require("./createSubsetOfItem"),
-	createVerticalResize = require("./createVerticalResize"),
+	{ createResizableContainer } = require("@devsnicket/eunice-test-harnesses"),
 	{
 		findDirectionBetweenItemsInFirstMutualStack,
 		findItemInStackWithIdentifierHierarchy,
@@ -19,6 +19,7 @@ module.exports =
 		element,
 		identifier,
 		level,
+		locationHash,
 		resizableElementTypes,
 		relationship,
 		stack,
@@ -90,13 +91,20 @@ module.exports =
 			return (
 				lowerElement
 				&&
-				createVerticalResize({
+				createResizableContainer({
 					createElement,
-					elements:
-						{
-							lower: lowerElement,
-							upper: element,
-						},
+					flexKeysAndValues:
+						locationHash,
+					items:
+						[
+							{ element },
+							{
+								element: lowerElement,
+								flex: { key: "dependency-list-height" },
+							},
+						],
+					orientation:
+						"horizontal",
 					resizableElementTypes,
 				})
 			);
