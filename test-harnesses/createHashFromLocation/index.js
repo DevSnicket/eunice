@@ -28,6 +28,10 @@ module.exports =
 					keysAndValues =>
 						createWithFactory()
 						.getWithKeysAndValues(keysAndValues),
+				getWithoutKeys:
+					keys =>
+						createWithFactory()
+						.getWithoutKeys(keys),
 				setKeyAndValue:
 					keyAndValue =>
 						setHash(

@@ -43,7 +43,6 @@
 			"!callOrCreateElementOnError.js",
 			"!codeEditor/**",
 			"!createFillWithTitleElement/**",
-			"!createHashFromLocation/**",
 			"!createTextareaElement.js",
 			"!createWebpackConfiguration/**",
 			"!getStringLiteral.js",
@@ -91,5 +90,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "npx jest"
 	},
-	"version": "8.4.0"
+	"version": "8.5.0"
 }

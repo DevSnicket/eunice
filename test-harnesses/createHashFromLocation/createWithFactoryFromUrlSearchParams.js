@@ -7,6 +7,7 @@ module.exports =
 			{
 				getWithKeyAndValue,
 				getWithKeysAndValues,
+				getWithoutKeys,
 			}
 		);
 
@@ -48,6 +49,15 @@ module.exports =
 				urlSearchParams.delete(
 					key,
 				);
+		}
+
+		function getWithoutKeys(
+			keys,
+		) {
+			for (const key of Object.values(keys))
+				urlSearchParams.delete(key);
+
+			return getHash();
 		}
 
 		function getHash() {
