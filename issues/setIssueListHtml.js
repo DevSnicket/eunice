@@ -1,4 +1,4 @@
-import "https://unpkg.com/array-flat-polyfill";
+import "../array-flat-polyfill.js";
 
 fetch("https://api.github.com/repos/devsnicket/eunice/issues")
 .then(response => response.json())

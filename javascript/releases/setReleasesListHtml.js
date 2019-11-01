@@ -1,4 +1,4 @@
-import "https://unpkg.com/array-flat-polyfill";
+import "../../array-flat-polyfill.js";
 
 fetchJson("https://api.github.com/search/issues?q=released%20in%20javascript+repo:devsnicket/eunice+in:comments")
 .then(setHtmlFromSearchResults);
