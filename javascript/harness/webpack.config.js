@@ -17,4 +17,6 @@ module.exports =
 					pattern: "javascriptFromWebpack",
 					replacementFilePath: `${__dirname}/example.js`,
 				},
+			title:
+				"JavaScript & YAML",
 		});
