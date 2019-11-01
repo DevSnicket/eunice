@@ -8,6 +8,7 @@ require("./index.css");
 
 module.exports =
 	({
+		closeHref,
 		createAncestorSeparatorElement,
 		createElement,
 		createIdentifierHierarchyAnchor,
@@ -20,7 +21,22 @@ module.exports =
 			createElement(
 				"div",
 				{ className: `dependency-list ${relationship}` },
-				createChildElements(),
+				[
+					createElement(
+						"a",
+						{
+							href: closeHref,
+							id: "close",
+							key: "close",
+						},
+						"\u00D7",
+					),
+					createElement(
+						"div",
+						{ key: "body" },
+						createChildElements(),
+					),
+				],
 			)
 		);
 

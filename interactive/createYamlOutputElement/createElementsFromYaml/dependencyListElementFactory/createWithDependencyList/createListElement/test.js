@@ -14,6 +14,8 @@ test(
 		expect(
 			renderToStaticMarkup(
 				createListElement({
+					closeHref:
+						"close-href",
 					createAncestorSeparatorElement:
 						() => "-",
 					createElement,

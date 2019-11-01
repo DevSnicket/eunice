@@ -50,6 +50,8 @@ module.exports =
 			}) =>
 				createWithDependencyList({
 					...locationHash.getValuesOfKeys(keys),
+					closeHref:
+						locationHash.getWithoutKeys(keys),
 					createAncestorSeparatorElement,
 					createElement,
 					createIdentifierHierarchyAnchor,

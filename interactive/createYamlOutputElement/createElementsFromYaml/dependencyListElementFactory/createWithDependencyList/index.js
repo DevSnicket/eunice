@@ -13,6 +13,7 @@ const
 
 module.exports =
 	({
+		closeHref,
 		createAncestorSeparatorElement,
 		createElement,
 		createIdentifierHierarchyAnchor,
@@ -37,11 +38,13 @@ module.exports =
 				&&
 				createVerticalResizeWithLowerElement(
 					createListElement({
+						closeHref,
 						createAncestorSeparatorElement,
 						createElement,
 						createIdentifierHierarchyAnchor,
 						relationship,
-						subset: createSubset(),
+						subset:
+							createSubset(),
 					}),
 				)
 			);

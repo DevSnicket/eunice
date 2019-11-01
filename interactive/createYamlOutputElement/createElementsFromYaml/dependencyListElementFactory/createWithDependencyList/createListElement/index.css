@@ -1,5 +1,14 @@
-.dependency-list {
-	margin: 0.5em;
+.dependency-list a#close {
+	color: black;
+	float: right;
+	font-size: 1.5em;
+	font-weight: 900;
+	padding: 0.2em 0.4em;
+	text-decoration: none;
+}
+
+.dependency-list > div {
+	padding: 0.5em;
 }
 
 .dependency-list ul {
