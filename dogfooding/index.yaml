@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.23.0 on 2019-10-31T13:02:04.172Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.24.0 on 2019-11-01T09:33:57.218Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -2704,11 +2704,6 @@
             - - harness
               - id: renderer-test-harness
                 type: export
-              - id: createHorizontalResize
-                type: file
-                items:
-                  id: createHorizontalResize
-                  type: export
               - id: createYamlInputElement
                 type: file
                 items:
@@ -2801,8 +2796,14 @@
                       dependsUpon:
                         - callOrInProductionCreateElementOnError
                         - createElementsFromYaml
+                        - createHashFromLocation
                         - getProcessedYamlFromState
                   - - callOrInProductionCreateElementOnError
+                    - id: createHashFromLocation
+                      type: variable
+                      dependsUpon:
+                        id: test-harnesses
+                        items: createHashFromLocation
                     - id: createElementsFromYaml
                       type: file
                       items:
@@ -2817,6 +2818,7 @@
                               - - dependsUpon:
                                     - createElement
                                     - createElementsFromYaml
+                                    - createHashFromLocation
                                     - expect
                                     - path
                                     - renderToStaticMarkup
@@ -2826,6 +2828,7 @@
                                   dependsUpon:
                                     - createElement
                                     - createElementsFromYaml
+                                    - createHashFromLocation
                                     - expect
                                     - path
                                     - readTextFile
@@ -2837,6 +2840,11 @@
                                   dependsUpon:
                                     id: react
                                     items: createElement
+                                - id: createHashFromLocation
+                                  type: variable
+                                  dependsUpon:
+                                    id: test-harnesses
+                                    items: createHashFromLocation
                                 - id: renderToStaticMarkup
                                   type: variable
                                   dependsUpon:
@@ -2851,22 +2859,14 @@
                               - createStackFromYaml
                               - createSubsetSelection
                               - createWithDependencyList
-                              - dependencyListElementFactory
-                              - getHrefKeysAndValues
-                              - getValueOfKey
                               - parseYaml
                             items:
                               - - id: createWithDependencyList
                                   dependsUpon:
                                     - createElement
                                     - dependencyListElementFactory
-                                    - getValueOfKey
                                     - resizableElementTypes
                                     - stack
-                              - - id: getValueOfKey
-                                  dependsUpon:
-                                    - locationHash
-                                    - locationHashOfKeyValue
                                 - id: createBreadcrumbAndSvgElement
                                   dependsUpon:
                                     - createElement
@@ -2881,16 +2881,9 @@
                                       dependsUpon:
                                         - createElement
                                         - dependencyListElementFactory
-                                        - getHrefKeysAndValues
                                     - id: createElementContainerForItem
                                       dependsUpon: subsetSelection
-                              - - id: getHrefKeysAndValues
-                                  dependsUpon:
-                                    - locationHash
-                                    - locationHashOfKeyValue
-                                - id: createElement
-                                  type: parameter
-                              - - id: locationHash
+                              - - id: createElement
                                   type: parameter
                                 - id: resizableElementTypes
                                   type: parameter
@@ -2939,11 +2932,12 @@
                                           - getHrefWithIdentifierHierarchy
                                     - - id: getHrefWithIdentifierHierarchy
                                         dependsUpon:
-                                          - getHrefWithKeysAndValues
+                                          - getHrefWithKeyAndValue
                                           - identifierHierarchyArgument
+                                          - key
                                       - id: createElement
                                         type: parameter
-                                    - - id: getHrefWithKeysAndValues
+                                    - - id: getHrefWithKeyAndValue
                                         type: parameter
                               - - id: splitIdentifierHierarchy
                                   dependsUpon: identifierHierarchyArgument
@@ -3011,10 +3005,12 @@
                             type: file
                             dependsUpon:
                               - createWithDependencyList
-                              - keysAndValues
+                              - keys
                             items:
                               - id: dependencyListElementFactory
                                 type: export
+                              - id: keys
+                                type: variable
                               - id: createWithDependencyList
                                 type: file
                                 items:
@@ -3412,53 +3408,6 @@
                                       items:
                                         id: removeWhitespaceFromTestExpected
                                         type: export
-                              - id: keysAndValues
-                                type: file
-                                items:
-                                  - - id: keysAndValues
-                                      type: export
-                                    - id: clearFromKeysAndValues
-                                      dependsUpon: getKeysAndNoValues
-                                  - - id: getKeysAndNoValues
-                                      dependsUpon: keys
-                                    - getObjectFromGetValueOfKey
-                                    - getKeysAndValuesFromObject
-                                  - - id: keys
-                                      type: variable
-                          - id: locationHashOfKeyValue
-                            type: file
-                            dependsUpon:
-                              - createUrlSearchParamsFromLocationHash
-                              - getWithKeysAndValues
-                            items:
-                              - - id: locationHashOfKeyValue
-                                  type: export
-                                - id: getWithKeysAndValues
-                                  dependsUpon:
-                                    - addHashPrefix
-                                    - setWhenHasValueOrDelete
-                              - - setWhenHasValueOrDelete
-                                - addHashPrefix
-                                - id: createUrlSearchParamsFromLocationHash
-                                  type: file
-                                  items:
-                                    - - id: createUrlSearchParamsFromLocationHash
-                                        type: export
-                                        dependsUpon:
-                                          - UrlSearchParams
-                                          - createUrlSearchParamsWhenLocationHashHasValues
-                                    - - id: createUrlSearchParamsWhenLocationHashHasValues
-                                        dependsUpon:
-                                          - createUrlSearchParams
-                                          - removeHashPrefix
-                                    - - removeHashPrefix
-                                      - id: createUrlSearchParams
-                                        dependsUpon: UrlSearchParams
-                                    - - id: UrlSearchParams
-                                        type: variable
-                                        dependsUpon:
-                                          id: '@ungap'
-                                          items: url-search-params
                     - id: getProcessedYamlFromState
                       type: file
                       items:
@@ -8100,6 +8049,90 @@
   - id: test-harnesses
     type: file
     items:
+      - - id: createResizableColumnContainer
+          type: file
+          items:
+            - - id: createResizableColumnContainer
+                type: export
+                dependsUpon:
+                  - ReflexContainer
+                  - createElement
+                  - createElements
+            - - id: createElements
+                dependsUpon: withFlexKeysAndValues
+            - - id: withFlexKeysAndValues
+                items:
+                  - - id: createSplitterAndElementForColumnAndIndex
+                      dependsUpon:
+                        - createReflexElement
+                        - createReflexSplitterWithIndexWhenSubsequent
+                      items:
+                        - - id: createReflexElement
+                            dependsUpon:
+                              - ReflexElement
+                              - createElement
+                              - createFlexProperty
+                              - element
+                              - setFlex
+                        - - id: createFlexProperty
+                            dependsUpon:
+                              - createPropertyWhenHasValue
+                              - getValueOfKey
+                            items: createPropertyWhenHasValue
+                          - id: setFlex
+                            dependsUpon: setKeyAndValue
+                          - id: element
+                            type: parameter
+                  - - id: getValueOfKey
+                      type: parameter
+                    - id: setKeyAndValue
+                      type: parameter
+            - - id: createReflexSplitterWithIndexWhenSubsequent
+                dependsUpon:
+                  - ReflexSplitter
+                  - createElement
+            - - id: createElement
+                type: variable
+                dependsUpon:
+                  id: react
+                  items: createElement
+              - id: ReflexContainer
+                type: variable
+                dependsUpon:
+                  id: react-reflex
+                  items: ReflexContainer
+              - id: ReflexElement
+                type: variable
+                dependsUpon:
+                  id: react-reflex
+                  items: ReflexElement
+              - id: ReflexSplitter
+                type: variable
+                dependsUpon:
+                  id: react-reflex
+                  items: ReflexSplitter
+              - id: test-harness
+                type: file
+                dependsUpon:
+                  - renderIntoContainerElement
+                  - createElement
+                  - createHashFromLocation
+                  - createResizableColumnContainer
+                  - location
+                items:
+                  - id: createElement
+                    type: variable
+                    dependsUpon:
+                      id: react
+                      items: createElement
+                  - id: webpack.config
+                    type: file
+                    dependsUpon:
+                      - createWebpackConfiguration
+                      - path
+                    items:
+                      id: webpack.config
+                      type: export
       - - id: test-harnesses
           type: export
         - id: codeEditor
@@ -8237,40 +8270,84 @@
                 dependsUpon:
                   id: react
                   items: createElement
-        - id: createReflexContainerForColumnElements
+        - id: createHashFromLocation
           type: file
           items:
-            - - id: createReflexContainerForColumnElements
+            - - id: createHashFromLocation
                 type: export
                 dependsUpon:
-                  - ReflexContainer
-                  - ReflexElement
-                  - createElement
-                  - createSplitterWithIndex
-            - - id: createSplitterWithIndex
-                dependsUpon:
-                  - ReflexSplitter
-                  - createElement
-            - - id: createElement
-                type: variable
-                dependsUpon:
-                  id: react
-                  items: createElement
-              - id: ReflexContainer
-                type: variable
-                dependsUpon:
-                  id: react-reflex
-                  items: ReflexContainer
-              - id: ReflexElement
-                type: variable
-                dependsUpon:
-                  id: react-reflex
-                  items: ReflexElement
-              - id: ReflexSplitter
-                type: variable
-                dependsUpon:
-                  id: react-reflex
-                  items: ReflexSplitter
+                  - createUrlSearchParams
+                  - createWithFactory
+                  - getValuesOfKeys
+                  - setHash
+                items:
+                  - - id: getValuesOfKeys
+                      dependsUpon: createValueObject
+                    - id: createWithFactory
+                      dependsUpon:
+                        - createUrlSearchParams
+                        - createWithFactoryFromUrlSearchParams
+                  - - id: createUrlSearchParams
+                      dependsUpon: createUrlSearchParamsFromLocationHash
+                    - setHash
+            - - id: createUrlSearchParamsFromLocationHash
+                type: file
+                items:
+                  - - id: createUrlSearchParamsFromLocationHash
+                      type: export
+                      dependsUpon:
+                        - UrlSearchParams
+                        - whenHasValue
+                  - - id: whenHasValue
+                      dependsUpon:
+                        - createUrlSearchParams
+                        - removeHashPrefix
+                  - - removeHashPrefix
+                    - id: createUrlSearchParams
+                      dependsUpon: UrlSearchParams
+                  - - id: UrlSearchParams
+                      type: variable
+                      dependsUpon:
+                        id: '@ungap'
+                        items: url-search-params
+              - id: createValueObject
+                type: file
+                items:
+                  - - id: createValueObject
+                      type: export
+                      dependsUpon:
+                        - aggregateObjects
+                        - withGetValueForKey
+                  - - id: withGetValueForKey
+                      items:
+                        - - id: createObjectForPropertyAndKey
+                            dependsUpon: getValueForKey
+                        - - id: getValueForKey
+                            type: parameter
+                    - aggregateObjects
+              - id: createWithFactoryFromUrlSearchParams
+                type: file
+                items:
+                  - - id: createWithFactoryFromUrlSearchParams
+                      type: export
+                      items:
+                        - - id: getWithKeysAndValues
+                            dependsUpon:
+                              - getHash
+                              - setWhenHasValueOrDelete
+                          - id: getWithKeyAndValue
+                            dependsUpon:
+                              - getHash
+                              - setWhenHasValueOrDelete
+                        - - id: setWhenHasValueOrDelete
+                            dependsUpon: urlSearchParams
+                          - id: getHash
+                            dependsUpon:
+                              - addHashPrefix
+                              - urlSearchParams
+                        - - id: urlSearchParams
+                            type: parameter
+                  - - addHashPrefix
         - id: createTextareaElement
           type: file
           items:
