@@ -12,8 +12,8 @@ require("./index.css");
 module.exports =
 	({
 		createElement,
-		items,
 		flexKeysAndValues,
+		items,
 		orientation,
 		resizableElementTypes,
 	}) =>
