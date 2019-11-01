@@ -6,6 +6,8 @@
 	"description": "Shared implementation for analyzer and renderer test harnesses, using JavaScript, HTML, React and Webpack.",
 	"dependencies": {
 		"@devsnicket/plugin-discovery-create-repository": "1.4.0",
+		"@ungap/url-search-params": "0.1.2",
+		"array.prototype.flatmap": "1.2.2",
 		"copy-webpack-plugin": "4.6.0",
 		"css-loader": "2.1.1",
 		"monaco-editor": "0.17.0",
@@ -16,12 +18,18 @@
 		"webpack": "4.37.0"
 	},
 	"devDependencies": {
+		"@babel/core": "7.6.4",
+		"@babel/plugin-proposal-object-rest-spread": "7.6.2",
+		"@babel/polyfill": "7.6.0",
+		"@babel/preset-env": "7.6.3",
 		"@types/node": "12.0.2",
 		"@types/react": "16.3.14",
 		"@types/react-dom": "16.0.5",
+		"babel-loader": "8.0.6",
 		"cspell": "4.0.21",
 		"eslint": "6.2.1",
-		"eslint-plugin-notice": "0.8.9"
+		"eslint-plugin-notice": "0.8.9",
+		"webpack-cli": "3.3.2"
 	},
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
 	"keywords": [
@@ -44,7 +52,9 @@
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint",
 		"lint": "npx eslint .",
+		"resizable-columns-test-harness-production": "rm -rf createResizableColumnContainer/test-harness/output && npx webpack -p --config createResizableColumnContainer/test-harness/webpack.config.js",
+		"resizable-columns-test-harness-development": "rm -rf createResizableColumnContainer/test-harness/output && npx webpack -d --config createResizableColumnContainer/test-harness/webpack.config.js",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" -exec npx cspell {} +"
 	},
-	"version": "7.11.0"
+	"version": "8.0.0"
 }

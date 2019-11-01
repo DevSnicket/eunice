@@ -4,7 +4,8 @@ Licensed under the MIT license. See LICENSE file in the repository root for full
 const
 	callOrCreateElementOnError = require("./callOrCreateElementOnError"),
 	createFillWithTitleElement = require("./createFillWithTitleElement"),
-	createReflexContainerForColumnElements = require("./createReflexContainerForColumnElements"),
+	createHashFromLocation = require("./createHashFromLocation"),
+	createResizableColumnContainer = require("./createResizableColumnContainer"),
 	createTextareaElement = require("./createTextareaElement"),
 	createWebpackConfiguration = require("./createWebpackConfiguration"),
 	getStringLiteral = require("./getStringLiteral"),
@@ -14,7 +15,8 @@ module.exports =
 	{
 		callOrCreateElementOnError,
 		createFillWithTitleElement,
-		createReflexContainerForColumnElements,
+		createHashFromLocation,
+		createResizableColumnContainer,
 		createTextareaElement,
 		createWebpackConfiguration,
 		getStringLiteral,
