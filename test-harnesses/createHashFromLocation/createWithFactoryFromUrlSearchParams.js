@@ -51,20 +51,6 @@ module.exports =
 		}
 
 		function getHash() {
-			return (
-				addHashPrefix(
-					urlSearchParams.toString(),
-				)
-			);
+			return `#${urlSearchParams.toString()}`;
 		}
 	};
-
-function addHashPrefix(
-	value,
-) {
-	return (
-		value
-		&&
-		`#${value}`
-	);
-}
