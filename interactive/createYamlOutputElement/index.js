@@ -2,6 +2,7 @@
 
 const
 	createElementsFromYaml = require("./createElementsFromYaml"),
+	{ createHashFromLocation } = require("@devsnicket/eunice-test-harnesses"),
 	getProcessedYamlFromState = require("./getProcessedYamlFromState");
 
 module.exports =
@@ -17,7 +18,7 @@ module.exports =
 				() =>
 					createElementsFromYaml({
 						createElement,
-						locationHash: location.hash,
+						locationHash: createHashFromLocation(location),
 						resizableElementTypes,
 						yaml: getProcessedYamlFromState(state),
 					}),

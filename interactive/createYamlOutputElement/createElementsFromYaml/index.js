@@ -6,7 +6,6 @@ const
 	dependencyListElementFactory = require("./dependencyListElementFactory"),
 	{ getSvgElementForStack } = require("@devsnicket/eunice-renderer"),
 	getTextWidth = require("string-pixel-width"),
-	locationHashOfKeyValue = require("./locationHashOfKeyValue"),
 	parseYaml = require("js-yaml").safeLoad;
 
 module.exports =
@@ -24,14 +23,19 @@ module.exports =
 			subsetSelection =
 				createSubsetSelection({
 					createElement,
-					getHrefWithKeysAndValues:
-						keysAndValues =>
-							getHrefKeysAndValues(
-								dependencyListElementFactory.clearFromKeysAndValues(
-									keysAndValues,
-								),
-							),
-					getValueOfKey,
+					getHrefWithKeyAndValue:
+						({ key, value }) =>
+							locationHash.getWithKeysAndValues({
+								keys:
+									{
+										[key]: key,
+										...dependencyListElementFactory.keys,
+									},
+								values:
+									{ [key]: value },
+							}),
+					getValueOfKey:
+						locationHash.getValueOfKey,
 				});
 
 		return (
@@ -51,24 +55,14 @@ module.exports =
 					createIdentifierHierarchyAnchor:
 						subsetSelection.createIdentifierHierarchyAnchor,
 					element,
-					getValueOfKey,
+					getValuesOfKeys:
+						locationHash.getValuesOfKeys,
 					resizableElementTypes,
 					stack,
 					subsetIdentifierHierarchy:
 						subsetSelection.identifierHierarchy,
 				})
 
-			);
-		}
-
-		function getValueOfKey(
-			key,
-		) {
-			return (
-				locationHashOfKeyValue.getValue({
-					key,
-					locationHash,
-				})
 			);
 		}
 
@@ -113,7 +107,8 @@ module.exports =
 					dependencyListElementFactory.createForDependencyCount({
 						createElement,
 						element,
-						getHrefKeysAndValues,
+						getHrefWithKeysAndValues:
+							locationHash.getWithKeysAndValues,
 						identifier: item.id,
 						level,
 						relationship,
@@ -132,16 +127,5 @@ module.exports =
 					})
 				);
 			}
-		}
-
-		function getHrefKeysAndValues(
-			keysAndValues,
-		) {
-			return (
-				locationHashOfKeyValue.getWithKeysAndValues({
-					keysAndValues,
-					locationHash,
-				})
-			);
 		}
 	};

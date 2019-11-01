@@ -4,11 +4,12 @@ const
 	{
 		callOrCreateElementOnError,
 		createFillWithTitleElement,
+		createResizableColumnContainer,
 		renderIntoContainerElement,
 	} = require("@devsnicket/eunice-test-harnesses"),
 	createCodeEditorForLanguage = require("@devsnicket/eunice-test-harnesses/codeEditor/createEditorForLanguage"),
 	{ createElement } = require("react"),
-	createHorizontalResize = require("./createHorizontalResize"),
+	{ createHashFromLocation } = require("@devsnicket/eunice-test-harnesses"),
 	createYamlInputElement = require("./createYamlInputElement"),
 	createYamlOutputElement = require("./createYamlOutputElement"),
 	initializeCodeEditorGlobal = require("@devsnicket/eunice-test-harnesses/codeEditor/serviceWorkers/initializeGlobal"),
@@ -38,27 +39,33 @@ renderIntoContainerElement({
 		{ yaml: yamlFromWebpack },
 	renderStateful:
 		stateful =>
-			createHorizontalResize({
-				createElement,
-				elements:
-					{
-						left:
-							createYamlInputElement({
-								createElement,
-								createFillWithTitleElement,
-								createYamlEditorElement,
-								stateful,
-							}),
-						right:
-							createYamlOutputElement({
-								callOrCreateElementOnError,
-								createElement,
-								location,
-								resizableElementTypes,
-								state:
-									stateful.state,
-							}),
-					},
-				resizableElementTypes,
+			createResizableColumnContainer({
+				columns:
+					[
+						{
+							element:
+								createYamlInputElement({
+									createElement,
+									createFillWithTitleElement,
+									createYamlEditorElement,
+									stateful,
+								}),
+						},
+						{
+							element:
+								createYamlOutputElement({
+									callOrCreateElementOnError,
+									createElement,
+									location,
+									resizableElementTypes,
+									state:
+										stateful.state,
+								}),
+							flex:
+								{ default: 0.75, key: "output-width" },
+						},
+					],
+				flexKeysAndValues:
+					createHashFromLocation(location),
 			}),
 });

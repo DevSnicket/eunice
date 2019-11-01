@@ -1,18 +1,22 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createWithDependencyList = require("./createWithDependencyList"),
-	keysAndValues = require("./keysAndValues");
+const createWithDependencyList = require("./createWithDependencyList");
+
+
+const keys =
+	{
+		identifier: "dependency-list-identifier",
+		level: "dependency-list-level",
+		relationship: "dependency-list-relationship",
+	};
 
 module.exports =
 	{
-		clearFromKeysAndValues:
-			keysAndValues.clearFromKeysAndValues,
 		createForDependencyCount:
 			({
 				createElement,
 				element,
-				getHrefKeysAndValues,
+				getHrefWithKeysAndValues,
 				identifier,
 				level,
 				relationship,
@@ -21,13 +25,15 @@ module.exports =
 					"a",
 					{
 						xlinkHref:
-							getHrefKeysAndValues(
-								keysAndValues.getKeysAndValuesFromObject({
-									identifier,
-									level,
-									relationship,
-								}),
-							),
+							getHrefWithKeysAndValues({
+								keys,
+								values:
+									{
+										identifier,
+										level,
+										relationship,
+									},
+							}),
 					},
 					element,
 				),
@@ -37,13 +43,13 @@ module.exports =
 				createElement,
 				createIdentifierHierarchyAnchor,
 				element,
-				getValueOfKey,
+				getValuesOfKeys,
 				resizableElementTypes,
 				stack,
 				subsetIdentifierHierarchy,
 			}) =>
 				createWithDependencyList({
-					...keysAndValues.getObjectFromGetValueOfKey(getValueOfKey),
+					...getValuesOfKeys(keys),
 					createAncestorSeparatorElement,
 					createElement,
 					createIdentifierHierarchyAnchor,
@@ -52,4 +58,5 @@ module.exports =
 					stack,
 					subsetIdentifierHierarchy,
 				}),
+		keys,
 	};

@@ -3,6 +3,7 @@
 const
 	{ createElement } = require("react"),
 	createElementsFromYaml = require("."),
+	{ createHashFromLocation } = require("@devsnicket/eunice-test-harnesses"),
 	path = require("path"),
 	readTextFile = require("../../readTextFile"),
 	{ renderToStaticMarkup } = require("react-dom/server");
@@ -123,7 +124,7 @@ describe(
 							createElementsFromYaml({
 								createElement,
 								locationHash:
-									"no hash prefix",
+									createHashFromLocation({ hash: "no hash prefix" }),
 								resizableElementTypes:
 									null,
 								yaml:
@@ -207,8 +208,10 @@ async function testTestCase({
 		renderToStaticMarkup(
 			createElementsFromYaml({
 				createElement,
-				locationHash,
-				resizableElementTypes: null,
+				locationHash:
+					createHashFromLocation({ hash: locationHash }),
+				resizableElementTypes:
+					null,
 				yaml,
 			}),
 		),

@@ -30,8 +30,5 @@ module.exports =
 				javascriptSubstitution,
 				title,
 			}),
-			// Workaround for renderer harness that requires @ungap/url-search-params using ES (which needs to specify default) instead of CommonJS (which does not and is used by tests).
-			resolve:
-				{ mainFields: [ "main", "module" ] },
 		}
 	);

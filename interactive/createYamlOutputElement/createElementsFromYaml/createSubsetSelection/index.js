@@ -11,7 +11,7 @@ require("./index.css");
 module.exports =
 	({
 		createElement,
-		getHrefWithKeysAndValues,
+		getHrefWithKeyAndValue,
 		getValueOfKey,
 	}) => {
 		const subsetIdentifierHierarchy =
@@ -76,17 +76,13 @@ module.exports =
 			identifierHierarchy,
 		) {
 			return (
-				getHrefWithKeysAndValues(
-					[
-						{
-							key,
-							value:
-								identifierHierarchyArgument.format(
-									identifierHierarchy,
-								),
-						},
-					],
-				)
+				getHrefWithKeyAndValue({
+					key,
+					value:
+						identifierHierarchyArgument.format(
+							identifierHierarchy,
+						),
+				})
 			);
 		}
 	};
