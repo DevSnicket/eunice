@@ -47,11 +47,7 @@ module.exports =
 				{
 					elements:
 						[
-							createElement(
-								"a",
-								{ href: "#" },
-								"root",
-							),
+							createIdentifierHierarchyAnchor([]),
 						],
 					identifierHierarchy:
 						[],

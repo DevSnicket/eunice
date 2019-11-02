@@ -67,9 +67,25 @@ module.exports =
 					href:
 						getHrefWithIdentifierHierarchy(identifierHierarchy),
 					identifier:
-						identifierHierarchy[identifierHierarchy.length - 1],
+						getIdentifier(),
 				})
 			);
+
+			function getIdentifier() {
+				return (
+					whenRoot()
+					||
+					identifierHierarchy[identifierHierarchy.length - 1]
+				);
+
+				function whenRoot() {
+					return (
+						!identifierHierarchy.length
+						&&
+						"root"
+					);
+				}
+			}
 		}
 
 		function getHrefWithIdentifierHierarchy(
