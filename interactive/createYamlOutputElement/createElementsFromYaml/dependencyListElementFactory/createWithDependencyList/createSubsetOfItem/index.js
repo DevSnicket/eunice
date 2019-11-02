@@ -3,6 +3,9 @@
 require("array.prototype.flat")
 .shim();
 
+require("array.prototype.flatmap")
+.shim();
+
 module.exports =
 	({
 		isDependencyRelevant,
@@ -93,16 +96,23 @@ function withSubsetCriteriaOf({
 		return (
 			dependsUpon
 			&&
-			dependsUpon
-			.reduce(
-				(matchingItems, { itemOrFirstAncestorItem }) =>
-					isDependencyRelevant(itemOrFirstAncestorItem)
-					?
-					[ ...matchingItems, itemOrFirstAncestorItem ]
-					:
-					matchingItems,
-				[],
-			)
+			dependsUpon.flatMap(getDependUponItems)
 		);
+	}
+
+	function getDependUponItems(
+		{ itemOrFirstAncestorItem },
+	) {
+		return whenHasValue() || [];
+
+		function whenHasValue() {
+			return (
+				itemOrFirstAncestorItem
+				&&
+				isDependencyRelevant(itemOrFirstAncestorItem)
+				&&
+				itemOrFirstAncestorItem
+			);
+		}
 	}
 }
