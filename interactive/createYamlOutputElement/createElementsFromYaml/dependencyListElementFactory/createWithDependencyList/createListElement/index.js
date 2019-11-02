@@ -126,13 +126,6 @@ function withElementFactory({
 		);
 	}
 
-	function compareItemIdentifiers(
-		left,
-		right,
-	) {
-		return left.item.id.localeCompare(right.item.id);
-	}
-
 	function createChildItemElement(
 		childItem,
 	) {
@@ -144,4 +137,22 @@ function withElementFactory({
 			)
 		);
 	}
+}
+
+function compareItemIdentifiers(
+	left,
+	right,
+) {
+	return (
+		getItemIdentifierForCompare(left)
+		.localeCompare(
+			getItemIdentifierForCompare(right),
+		)
+	);
+}
+
+function getItemIdentifierForCompare(
+	{ item: { id } },
+) {
+	return id || "";
 }

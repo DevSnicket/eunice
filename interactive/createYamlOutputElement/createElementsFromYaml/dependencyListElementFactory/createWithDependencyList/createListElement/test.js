@@ -70,6 +70,12 @@ test(
 										items:
 											[ createSubset({ identifier: "grandchild" }) ],
 									}),
+									createSubset({
+										identifier:
+											"child 5",
+										items:
+											[ createSubset(), createSubset() ],
+									}),
 								],
 						}),
 				}),
@@ -86,9 +92,9 @@ test(
 
 function createSubset({
 	dependencies = null,
-	identifier,
+	identifier = null,
 	items = null,
-}) {
+} = {}) {
 	return (
 		{
 			dependencies,
