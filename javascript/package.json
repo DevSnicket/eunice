@@ -12,13 +12,13 @@
 		"@babel/polyfill": "7.4.4",
 		"@babel/preset-env": "7.4.4",
 		"@devsnicket/eunice-call-with-process-standard-streams": "1.3.0",
-		"@devsnicket/eunice-dependency-and-structure": "2.17.0",
+		"@devsnicket/eunice-dependency-and-structure": "2.18.0",
 		"@devsnicket/eunice-javascript-analyzer": "11.11.0",
 		"@devsnicket/eunice-processors": "10.5.0",
-		"@devsnicket/eunice-renderer": "6.6.0",
-		"@devsnicket/eunice-renderer-test-harness": "4.10.1",
+		"@devsnicket/eunice-renderer": "6.7.0",
+		"@devsnicket/eunice-renderer-test-harness": "4.10.4",
 		"@devsnicket/eunice-run-tests-from-file-system": "4.1.0",
-		"@devsnicket/eunice-test-harnesses": "8.3.0",
+		"@devsnicket/eunice-test-harnesses": "8.5.0",
 		"@devsnicket/eunice-test-harnesses-processor-plugins": "1.0.0",
 		"@devsnicket/plugin-discovery-commonjs-babel-plugin": "1.11.1",
 		"@types/jest": "24.0.9",
@@ -104,5 +104,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dogfooding/output/**\" ! -path \"./dist/*\" ! -path \"./gh-pages/**\" ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest --runInBand"
 	},
-	"version": "6.26.1"
+	"version": "6.26.2"
 }
