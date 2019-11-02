@@ -12,13 +12,10 @@
 					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/createListElement/test.js"
 				],
 			"disableOptimisticBPs": true,
-			"localRoot": "${workspaceFolder}",
 			"name": "createYamlOutputElement createListElement jest",
 			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-			"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 			"request": "launch",
-			"type": "node",
-			"useWSL": true
+			"type": "node"
 		},
 		{
 			"args":
@@ -27,13 +24,10 @@
 					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/createSubsetOfItem/test.js"
 				],
 			"disableOptimisticBPs": true,
-			"localRoot": "${workspaceFolder}",
 			"name": "createYamlOutputElement createSubsetOfItem jest",
 			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-			"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 			"request": "launch",
-			"type": "node",
-			"useWSL": true
+			"type": "node"
 		},
 		{
 			"args":
@@ -42,13 +36,10 @@
 					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/createVerticalResize/test.js"
 				],
 			"disableOptimisticBPs": true,
-			"localRoot": "${workspaceFolder}",
 			"name": "createYamlOutputElement createVerticalResize jest",
 			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-			"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 			"request": "launch",
-			"type": "node",
-			"useWSL": true
+			"type": "node"
 		},
 		{
 			"args":
@@ -57,13 +48,10 @@
 					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/isDependencyRelevant/test.js"
 				],
 			"disableOptimisticBPs": true,
-			"localRoot": "${workspaceFolder}",
 			"name": "createYamlOutputElement isDependencyRelevant jest",
 			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-			"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 			"request": "launch",
-			"type": "node",
-			"useWSL": true
+			"type": "node"
 		},
 		{
 			"args":
@@ -72,13 +60,10 @@
 					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/test.js"
 				],
 			"disableOptimisticBPs": true,
-			"localRoot": "${workspaceFolder}",
 			"name": "createYamlOutputElement createWithDependencyList jest",
 			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-			"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 			"request": "launch",
-			"type": "node",
-			"useWSL": true
+			"type": "node"
 		},
 		{
 			"args":
@@ -87,13 +72,10 @@
 					"createYamlOutputElement/createElementsFromYaml/test/test.js"
 				],
 			"disableOptimisticBPs": true,
-			"localRoot": "${workspaceFolder}",
 			"name": "createYamlOutputElement jest",
 			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-			"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
 			"request": "launch",
-			"type": "node",
-			"useWSL": true
+			"type": "node"
 		},
 		{
 			"args":
@@ -113,7 +95,7 @@
 			"request": "launch",
 			"sourceMaps": true,
 			"type": "chrome",
-			"url": "file:///${workspaceFolder}/harnesses/output/renderer/index.html",
+			"url": "file:///${workspaceFolder}/tests/example/output/index.html",
 			"webRoot": "${workspaceFolder}"
 		}
 	]
