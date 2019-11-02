@@ -4,8 +4,7 @@ Licensed under the MIT license. See LICENSE file in the repository root for full
 const
 	createFirstAndSecondLevel = require("../createFirstAndSecondLevel"),
 	createItemYaml = require("../../createItemYaml"),
-	createStackFromLevels = require("../../createStackFromLevels"),
-	mapItemsToDependsUpon = require("../../mapItemsToDependsUpon");
+	createStackFromLevels = require("../../createStackFromLevels");
 
 module.exports =
 	test =>
@@ -66,7 +65,7 @@ function createSecondDependsUponFirstTestCase() {
 	function createStack() {
 		const { first, second, stack } = createStackAndGetFirstAndSecond();
 
-		second.dependsUpon = mapItemsToDependsUpon([ first ]);
+		second.dependsUpon = [ { item: first } ];
 		first.dependents = [ second ];
 
 		return stack;

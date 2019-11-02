@@ -4,7 +4,6 @@ Licensed under the MIT license. See LICENSE file in the repository root for full
 const
 	createItemYaml = require("../../../tests/createItemYaml"),
 	createStackFromLevels = require("../../../tests/createStackFromLevels"),
-	mapItemsToDependsUpon = require("../../../tests/mapItemsToDependsUpon"),
 	testCreateStackFromYaml = require("../testCreateStackFromYaml");
 
 const parentIdentifier = "parent";
@@ -51,7 +50,7 @@ function createStackWithDependencies() {
 
 		const firstChild = parent.items[0][0];
 
-		firstChild.dependsUpon = mapItemsToDependsUpon([ parent ]);
+		firstChild.dependsUpon = [ { item: parent } ];
 		parent.dependents = [ firstChild ];
 	}
 }

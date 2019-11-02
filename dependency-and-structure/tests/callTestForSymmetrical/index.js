@@ -8,7 +8,6 @@ const
 	createStackFromLevels = require("../createStackFromLevels"),
 	createUpperAndLowerStack = require("../createUpperAndLowerStack"),
 	formatStackForDescription = require("../formatStackForDescription"),
-	mapItemsToDependsUpon = require("../mapItemsToDependsUpon"),
 	testDependencies = require("./testDependencies");
 
 module.exports =
@@ -102,7 +101,7 @@ function createTestCasesWithSimpleLevels() {
 					[
 						[
 							{
-								dependsUpon: mapItemsToDependsUpon([ "missing" ]),
+								dependsUpon: [ { item: "missing" } ],
 								id: "item1",
 							},
 						],
@@ -118,8 +117,13 @@ function createTestCasesWithSimpleLevels() {
 					[
 						[
 							{
-								dependsUpon: mapItemsToDependsUpon([ "missing1", "missing2" ]),
-								id: "item1",
+								dependsUpon:
+									[
+										{ item: "missing1" },
+										{ item: "missing2" },
+									],
+								id:
+									"item1",
 							},
 						],
 					],

@@ -4,7 +4,6 @@ Licensed under the MIT license. See LICENSE file in the repository root for full
 const
 	createItemYaml = require("../../../tests/createItemYaml"),
 	createStackFromLevels = require("../../../tests/createStackFromLevels"),
-	mapItemsToDependsUpon = require("../../../tests/mapItemsToDependsUpon"),
 	testCreateStackFromYaml = require("../testCreateStackFromYaml");
 
 module.exports =
@@ -29,7 +28,7 @@ module.exports =
 		function addDependencies() {
 			const item = stack[0][0];
 
-			item.dependsUpon = mapItemsToDependsUpon([ item ]);
+			item.dependsUpon = [ { item } ];
 			item.dependents = [ item ];
 		}
 	};
