@@ -48,7 +48,12 @@ function createStackAndAddDependencies() {
 
 	const child = items[1].items[0][0];
 
-	items[0].dependsUpon = [ { item: child } ];
+	items[0].dependsUpon =
+		[ {
+			item: child,
+			itemOrFirstAncestorItem: child,
+		} ];
+
 	child.dependents = [ items[0] ];
 
 	return stack;

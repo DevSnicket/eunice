@@ -20,7 +20,12 @@ module.exports =
 
 		const level = stack[0];
 
-		level[0].dependsUpon = [ { item: level[1] } ];
+		level[0].dependsUpon =
+			[ {
+				item: level[1],
+				itemOrFirstAncestorItem: level[1],
+			} ];
+
 		level[1].dependents = [ level[0] ];
 
 		testCreateStackFromYaml({

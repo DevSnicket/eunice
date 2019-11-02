@@ -25,8 +25,11 @@ module.exports =
 				item
 				&&
 				{
-					ancestor: ancestors[ancestors.length - 1],
+					ancestor:
+						ancestors[ancestors.length - 1],
 					item,
+					itemOrFirstAncestorItem:
+						item,
 				}
 			);
 		}
@@ -35,7 +38,10 @@ module.exports =
 			return (
 				{
 					ancestors,
-					item: dependUponItem,
+					item:
+						dependUponItem,
+					itemOrFirstAncestorItem:
+						ancestors[0],
 				}
 			);
 		}

@@ -28,7 +28,12 @@ module.exports =
 		function addDependencies() {
 			const item = stack[0][0];
 
-			item.dependsUpon = [ { item } ];
+			item.dependsUpon =
+				[ {
+					item,
+					itemOrFirstAncestorItem: item,
+				} ];
+
 			item.dependents = [ item ];
 		}
 	};

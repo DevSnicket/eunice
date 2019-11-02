@@ -34,7 +34,12 @@ function testUpperDependsUponLower() {
 	function createStackWithDependencies() {
 		const { lower, stack, upper } = createStackAndGetUpperAndLower();
 
-		upper.dependsUpon = [ { item: lower } ];
+		upper.dependsUpon =
+			[ {
+				item: lower,
+				itemOrFirstAncestorItem: lower,
+			} ];
+
 		lower.dependents = [ upper ];
 
 		return stack;
@@ -62,7 +67,12 @@ function testLowerDependsUponUpper() {
 	function createStackWithDependencies() {
 		const { lower, stack, upper } = createStackAndGetUpperAndLower();
 
-		lower.dependsUpon = [ { item: upper } ];
+		lower.dependsUpon =
+			[ {
+				item: upper,
+				itemOrFirstAncestorItem: upper,
+			} ];
+
 		upper.dependents = [ lower ];
 
 		return stack;

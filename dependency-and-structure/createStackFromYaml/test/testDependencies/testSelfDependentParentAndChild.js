@@ -29,7 +29,12 @@ function testSelfDependentChildWithParent() {
 
 		const child = parent.items[0][0];
 
-		child.dependsUpon = [ { item: child } ];
+		child.dependsUpon =
+			[ {
+				item: child,
+				itemOrFirstAncestorItem: child,
+			} ];
+
 		child.dependents = [ child ];
 
 		return stack;
@@ -67,7 +72,12 @@ function testSelfDependentParentWithChild() {
 	function createStackWithDependencies() {
 		const { parent, stack } = createStackAndGetParent();
 
-		parent.dependsUpon = [ { item: parent } ];
+		parent.dependsUpon =
+			[ {
+				item: parent,
+				itemOrFirstAncestorItem: parent,
+			} ];
+
 		parent.dependents = [ parent ];
 
 		return stack;

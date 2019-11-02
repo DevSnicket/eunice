@@ -54,15 +54,30 @@ function initializeDependenciesInStack(
 				return (
 					typeof dependUpon === "string"
 					&&
-					{
-						item:
-							findItemWithIdentifier(
-								dependUpon,
-							)
-							||
+					createWithItem(
+						findItemWithIdentifier(
 							dependUpon,
-					}
+						),
+					)
 				);
+
+				function createWithItem(
+					dependUponItem,
+				) {
+					return {
+						item:
+							dependUponItem || dependUpon,
+						...createItemOrFirstAncestorItemProperty(),
+					};
+
+					function createItemOrFirstAncestorItemProperty() {
+						return (
+							dependUponItem
+							&&
+							{ itemOrFirstAncestorItem: dependUponItem }
+						);
+					}
+				}
 			}
 
 			function findItemWithIdentifier(

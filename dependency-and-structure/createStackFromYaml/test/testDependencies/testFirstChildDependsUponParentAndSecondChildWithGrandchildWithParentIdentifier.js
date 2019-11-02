@@ -50,7 +50,12 @@ function createStackWithDependencies() {
 
 		const firstChild = parent.items[0][0];
 
-		firstChild.dependsUpon = [ { item: parent } ];
+		firstChild.dependsUpon =
+			[ {
+				item: parent,
+				itemOrFirstAncestorItem: parent,
+			} ];
+
 		parent.dependents = [ firstChild ];
 	}
 }

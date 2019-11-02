@@ -28,6 +28,7 @@ module.exports =
 			[ {
 				ancestors: [ child, level[1] ],
 				item: "missingGrandchild",
+				itemOrFirstAncestorItem: child,
 			} ];
 
 		child.dependents = [ level[0] ];

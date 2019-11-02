@@ -64,7 +64,12 @@ function createStackAndAddDependencies() {
 
 	const grandchild = items[1].items[0][0].items[0][0];
 
-	items[0].dependsUpon = [ { item: grandchild } ];
+	items[0].dependsUpon =
+		[ {
+			item: grandchild,
+			itemOrFirstAncestorItem: grandchild,
+		} ];
+
 	grandchild.dependents = [ items[0] ];
 
 	return stack;

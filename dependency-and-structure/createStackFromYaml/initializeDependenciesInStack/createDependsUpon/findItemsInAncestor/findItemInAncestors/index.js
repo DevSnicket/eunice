@@ -30,22 +30,25 @@ function findInAncestors({
 			findInAncestors,
 		})
 		||
-		fromIdentifiers()
+		createFromIdentifiers(dependUponItem)
+		.map(createWithAncestors)
 	);
 
-	function fromIdentifiers() {
+	function createWithAncestors({
+		ancestors: ancestorIdentifiers,
+		item,
+	}) {
 		return (
-			createFromIdentifiers(dependUponItem)
-			.map(
-				dependUpon => (
-					{
-						ancestors:
-							[ ...dependUpon.ancestors, ...ancestors ],
-						item:
-							dependUpon.item,
-					}
-				),
-			)
+			{
+				ancestors:
+					[
+						...ancestorIdentifiers,
+						...ancestors,
+					],
+				item,
+				itemOrFirstAncestorItem:
+					ancestors[0],
+			}
 		);
 	}
 }

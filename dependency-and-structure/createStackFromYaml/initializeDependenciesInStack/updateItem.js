@@ -13,7 +13,12 @@ module.exports =
 
 		addDependent({
 			dependsUponItems:
-				dependsUpon.flatMap(getItemsFromDependsUpon),
+				dependsUpon.flatMap(
+					({ itemOrFirstAncestorItem }) =>
+						itemOrFirstAncestorItem
+						||
+						[],
+				),
 			item,
 		});
 	};
@@ -28,24 +33,4 @@ function addDependent({
 				dependsUponItem.dependents.push(item);
 		} else
 			dependsUponItem.dependents = [ item ];
-}
-
-function getItemsFromDependsUpon({
-	ancestors,
-	item,
-}) {
-	return findObject() || [];
-
-	function findObject() {
-		return (
-			[
-				item,
-				...ancestors || [],
-			]
-			.find(
-				itemOrAncestor =>
-					typeof itemOrAncestor === "object",
-			)
-		);
-	}
 }

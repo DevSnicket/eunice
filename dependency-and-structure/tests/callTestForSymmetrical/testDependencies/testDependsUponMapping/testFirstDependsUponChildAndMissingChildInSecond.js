@@ -29,10 +29,12 @@ module.exports =
 				{
 					ancestor: level[1],
 					item: child,
+					itemOrFirstAncestorItem: child,
 				},
 				{
 					ancestors: [ level[1] ],
 					item: "missingChild",
+					itemOrFirstAncestorItem: level[1],
 				},
 			];
 

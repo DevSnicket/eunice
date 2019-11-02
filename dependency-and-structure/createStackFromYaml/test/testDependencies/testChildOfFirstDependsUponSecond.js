@@ -45,7 +45,12 @@ module.exports =
 
 			const child = level[0].items[0][0];
 
-			child.dependsUpon = [ { item: level[1] } ];
+			child.dependsUpon =
+				[ {
+					item: level[1],
+					itemOrFirstAncestorItem: level[1],
+				} ];
+
 			level[1].dependents = [ child ];
 
 			return stack;

@@ -23,7 +23,10 @@ module.exports =
 			return (
 				!dependUponItems
 				&&
-				{ item: ancestor }
+				{
+					item: ancestor,
+					itemOrFirstAncestorItem: ancestor,
+				}
 			);
 		}
 

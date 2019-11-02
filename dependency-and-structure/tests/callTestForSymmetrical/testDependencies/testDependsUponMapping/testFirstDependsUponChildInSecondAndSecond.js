@@ -26,8 +26,15 @@ module.exports =
 
 		level[0].dependsUpon =
 			[
-				{ item: level[1] },
-				{ ancestor: level[1], item: child },
+				{
+					item: level[1],
+					itemOrFirstAncestorItem: level[1],
+				},
+				{
+					ancestor: level[1],
+					item: child,
+					itemOrFirstAncestorItem: child,
+				},
 			];
 
 		level[1].dependents = [ level[0] ];

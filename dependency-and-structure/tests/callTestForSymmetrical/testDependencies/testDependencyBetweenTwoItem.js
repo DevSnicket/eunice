@@ -37,8 +37,13 @@ function createFirstDependsUponSecondTestCase() {
 	function createStack() {
 		const { first, second, stack } = createStackAndGetFirstAndSecond();
 
-		first.dependsUpon = [ { item: second } ];
-		second.dependents = [ first ];
+		first.dependsUpon =
+			[ {
+				item: second,
+				itemOrFirstAncestorItem: second,
+			} ];
+		second.dependents =
+			[ first ];
 
 		return stack;
 	}
@@ -65,8 +70,13 @@ function createSecondDependsUponFirstTestCase() {
 	function createStack() {
 		const { first, second, stack } = createStackAndGetFirstAndSecond();
 
-		second.dependsUpon = [ { item: first } ];
-		first.dependents = [ second ];
+		second.dependsUpon =
+			[ {
+				item: first,
+				itemOrFirstAncestorItem: first,
+			} ];
+		first.dependents =
+			[ second ];
 
 		return stack;
 	}
