@@ -95,10 +95,10 @@ function withSubsetCriteriaOf({
 			&&
 			dependsUpon
 			.reduce(
-				(matchingItems, { item }) =>
-					isDependencyRelevant(item)
+				(matchingItems, { itemOrFirstAncestorItem }) =>
+					isDependencyRelevant(itemOrFirstAncestorItem)
 					?
-					[ ...matchingItems, item ]
+					[ ...matchingItems, itemOrFirstAncestorItem ]
 					:
 					matchingItems,
 				[],

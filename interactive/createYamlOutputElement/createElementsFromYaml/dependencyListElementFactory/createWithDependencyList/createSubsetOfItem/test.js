@@ -36,7 +36,12 @@ describe(
 	() =>
 		testRelationship({
 			createPropertyForDependency:
-				dependency => ({ dependsUpon: [ { item: dependency } ] }),
+				dependency => (
+					{
+						dependsUpon:
+							[ { itemOrFirstAncestorItem: dependency } ],
+					}
+				),
 			otherRelationship:
 				"dependents",
 			relationship:
