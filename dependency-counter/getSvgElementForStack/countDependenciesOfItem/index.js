@@ -20,7 +20,7 @@ module.exports =
 					countDependencies({
 						dependencies: item.dependsUpon,
 						from: item,
-						itemSelector: getItemFromDependsUpon,
+						itemSelector: dependUpon => dependUpon.itemOrFirstAncestorItem,
 						sumDirectionInStack: sumDirectionInStackWithScope,
 					}),
 			})
@@ -102,22 +102,6 @@ module.exports =
 			}
 		}
 	};
-
-function getItemFromDependsUpon({
-	ancestors,
-	item,
-}) {
-	return (
-		[
-			item,
-			...ancestors || [],
-		]
-		.find(
-			itemOrAncestor =>
-				typeof itemOrAncestor === "object",
-		)
-	);
-}
 
 function countDependencies({
 	dependencies,
