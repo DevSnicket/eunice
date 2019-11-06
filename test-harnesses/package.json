@@ -5,7 +5,6 @@
 	},
 	"description": "Shared implementation for analyzer and renderer test harnesses, using JavaScript, HTML, React and Webpack.",
 	"dependencies": {
-		"@devsnicket/plugin-discovery-create-repository": "1.4.0",
 		"@ungap/url-search-params": "0.1.2",
 		"array.prototype.flatmap": "1.2.2",
 		"copy-webpack-plugin": "4.6.0",
@@ -48,7 +47,6 @@
 			"!getStringLiteral.js",
 			"!index.js",
 			"!node_modules/**",
-			"!processor-plugins/**",
 			"!renderIntoContainerElement/**",
 			"!test-coverage/**"
 		],

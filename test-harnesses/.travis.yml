@@ -1,31 +1,25 @@
-jobs:
-  include:
-    - stage: repository root
-      install: npm install
-      script: npm run all
-    - stage: processor plugins
-      before_install: cd processor-plugins
-    - stage: GitHub pages publish
-      script: >-
-        rm -rf gh-pages &&
-        git submodule add --force https://$github_access_token@github.com/DevSnicket/Eunice.git gh-pages &&
-        cp -r favicon.ico gh-pages &&
-        cd gh-pages &&
-        git add . &&
-        git config --add user.email grahamdyson@hotmail.com &&
-        git config --add user.name "GitHub pages publish" &&
-        if [[ `git status --porcelain` ]]; then
-          git commit -m "dogfooding and JavaScript harness";
-          git push;
-        fi
 deploy:
   api_key: $NPM_TOKEN
   email: grahamdyson@hotmail.com
   provider: npm
   skip_cleanup: true
+install: npm install
 language: node_js
 node_js: "8.11.2"
 notifications:
   email:
     on_success: never
     on_failure: always
+script: >-
+  npm run all &&
+  rm -rf gh-pages &&
+  git submodule add --force https://$github_access_token@github.com/DevSnicket/Eunice.git gh-pages &&
+  cp -r favicon.ico gh-pages &&
+  cd gh-pages &&
+  git add . &&
+  git config --add user.email grahamdyson@hotmail.com &&
+  git config --add user.name "GitHub pages publish" &&
+  if [[ `git status --porcelain` ]]; then
+    git commit -m "dogfooding and JavaScript harness";
+    git push;
+  fi

@@ -17,10 +17,3 @@ Or with [`yarn`](https://yarnpkg.com/en/package/@devsnicket/eunice-test-harnesse
 ```bash
 yarn add --dev @devsnicket/eunice-test-harnesses
 ```
-
-## Processor plug-ins
-
-[![NPM](https://img.shields.io/npm/v/@devsnicket/eunice-test-harnesses-processor-plugins.svg)](https://www.npmjs.com/package/@devsnicket/eunice-test-harnesses-processor-plugins
-)
-
-This repository also contains a processor plug-ins package that allows processors to be used from the analyzer test harness without depending upon it. The plug-in relationship across packages is implemented using [plugin-discovery](https://github.com/DevSnicket/plugin-discovery) packages.
