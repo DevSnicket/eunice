@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.26.2 on 2019-11-25T16:18:50.887Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.26.3 on 2019-11-25T16:38:05.110Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -2618,12 +2618,14 @@
                               - - id: getParentFromCurrentAndPrevious
                                   dependsUpon:
                                     - getFunctionExpressionAndIsBlock
-                                    - isIdentifiableType
+                                    - identifiableTypes
                                   items:
                                     id: getFunctionExpressionAndIsBlock
-                                    dependsUpon: isFunctionExpressionType
-                              - - isFunctionExpressionType
-                                - isIdentifiableType
+                                    dependsUpon: functionExpressionTypes
+                              - - id: functionExpressionTypes
+                                  type: variable
+                                - id: identifiableTypes
+                                  type: variable
                     - id: stackItemsWhenMultiple
                       type: file
                       items:
