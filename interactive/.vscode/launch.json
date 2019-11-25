@@ -78,6 +78,24 @@
 			"type": "node"
 		},
 		{
+			"name": "harness dogfooding in Chrome",
+			"port": 9222,
+			"request": "launch",
+			"sourceMaps": true,
+			"type": "chrome",
+			"url": "file:///${workspaceFolder}/tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output/index.html",
+			"webRoot": "${workspaceFolder}"
+		},
+		{
+			"name": "harness example in Chrome",
+			"port": 9222,
+			"request": "launch",
+			"sourceMaps": true,
+			"type": "chrome",
+			"url": "file:///${workspaceFolder}/tests/example/output/index.html",
+			"webRoot": "${workspaceFolder}"
+		},
+		{
 			"args":
 				[ 
 					"--runInBand",
@@ -88,15 +106,6 @@
 			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 			"request": "launch",
 			"type": "node"
-		},
-		{
-			"name": "launch Chrome",
-			"port": 9222,
-			"request": "launch",
-			"sourceMaps": true,
-			"type": "chrome",
-			"url": "file:///${workspaceFolder}/tests/example/output/index.html",
-			"webRoot": "${workspaceFolder}"
 		}
 	]
 }

@@ -2,8 +2,7 @@
 
 const
 	createCodeEditorWebpackEntryForLanguages = require("@devsnicket/eunice-test-harnesses/codeEditor/serviceWorkers/createWebpackEntryForLanguages"),
-	createWebpackConfiguration = require("@devsnicket/eunice-test-harnesses/createWebpackConfiguration"),
-	pluginDiscoveryCommonjsBabelPlugin = require("@devsnicket/plugin-discovery-commonjs-babel-plugin");
+	createWebpackConfiguration = require("@devsnicket/eunice-test-harnesses/createWebpackConfiguration");
 
 module.exports =
 	({
@@ -15,13 +14,7 @@ module.exports =
 	}) => (
 		{
 			...createWebpackConfiguration({
-				babelPlugins:
-					[
-						[
-							pluginDiscoveryCommonjsBabelPlugin,
-							...babelPlugins,
-						],
-					],
+				babelPlugins,
 				directory,
 				entry:
 					createCodeEditorWebpackEntryForLanguages(codeEditorLanguages),
