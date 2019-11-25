@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.24.0 on 2019-11-01T09:33:57.218Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.26.2 on 2019-11-25T16:18:50.887Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -972,9 +972,10 @@
                 - callOrCreateElementOnError
                 - createElement
                 - createFillWithTitleElement
+                - createHashFromLocation
                 - createInitialStateFromJavascript
                 - createJavascriptEditorElement
-                - createReflexContainerForColumnElements
+                - createResizableContainer
                 - createYamlEditorElement
                 - createYamlInputElement
                 - createYamlOutputElement
@@ -1023,11 +1024,16 @@
                     dependsUpon:
                       id: test-harnesses
                       items: createFillWithTitleElement
-                  - id: createReflexContainerForColumnElements
+                  - id: createHashFromLocation
                     type: variable
                     dependsUpon:
                       id: test-harnesses
-                      items: createReflexContainerForColumnElements
+                      items: createHashFromLocation
+                  - id: createResizableContainer
+                    type: variable
+                    dependsUpon:
+                      id: test-harnesses
+                      items: createResizableContainer
                   - id: createYamlInputElement
                     type: variable
                     dependsUpon:
@@ -2707,87 +2713,83 @@
               - id: createYamlInputElement
                 type: file
                 items:
-                  - - id: createYamlInputElement
-                      type: export
-                      dependsUpon:
-                        - createProcessorsMenuElements
-                        - createTitleElement
-                  - - createTitleElement
-                    - id: createProcessorsMenuElements
-                      type: file
-                      items:
-                        - - id: createProcessorsMenuElements
-                            type: export
-                            dependsUpon:
-                              - createMenuElements
-                              - createMenuItemElements
-                            items:
-                              - - id: createMenuItemElements
-                                  dependsUpon:
-                                    - createElement
-                                    - createItemElement
-                                    - getAndCreateProcessorsWithState
-                                    - processors
-                                    - setProcessors
-                              - - id: createElement
-                                  type: parameter
-                                - id: processors
-                                  type: parameter
-                                - id: setProcessors
-                                  type: parameter
-                        - - getAndCreateProcessorsWithState
-                          - createMenuElements
-                          - id: createItemElement
-                            type: file
-                            items:
-                              - - id: createItemElement
+                  - id: createYamlInputElement
+                    type: export
+                  - id: createProcessorsMenuElements
+                    type: file
+                    items:
+                      - - id: createProcessorsMenuElements
+                          type: export
+                          dependsUpon:
+                            - createMenuElements
+                            - createMenuItemElements
+                          items:
+                            - - id: createMenuItemElements
+                                dependsUpon:
+                                  - createElement
+                                  - createItemElement
+                                  - getAndCreateProcessorsWithState
+                                  - processors
+                                  - setProcessors
+                            - - id: createElement
+                                type: parameter
+                              - id: processors
+                                type: parameter
+                              - id: setProcessors
+                                type: parameter
+                      - - getAndCreateProcessorsWithState
+                        - createMenuElements
+                        - id: createItemElement
+                          type: file
+                          items:
+                            - - id: createItemElement
+                                type: export
+                                dependsUpon:
+                                  - createCheckbox
+                                  - createParameterTextareas
+                                items:
+                                  - - id: createCheckbox
+                                      dependsUpon:
+                                        - createElement
+                                        - setState
+                                  - - id: createElement
+                                      type: parameter
+                                    - id: setState
+                                      type: parameter
+                            - - id: createParameterTextareas
+                                type: file
+                                items:
+                                  id: createParameterTextareas
                                   type: export
                                   dependsUpon:
-                                    - createCheckbox
-                                    - createParameterTextareas
+                                    - createWhenMultiple
+                                    - createWhenNone
+                                    - createWhenSingle
                                   items:
-                                    - - id: createCheckbox
+                                    - - createWhenNone
+                                      - id: createWhenMultiple
+                                        dependsUpon:
+                                          - createMultiple
+                                          - createWithIndex
+                                        items:
+                                          - - id: createMultiple
+                                              dependsUpon: createWithIndex
+                                          - - id: createWithIndex
+                                              dependsUpon:
+                                                - createWithGetArgumentFromValue
+                                                - processor
+                                      - id: createWhenSingle
+                                        dependsUpon: createWithGetArgumentFromValue
+                                    - - id: createWithGetArgumentFromValue
                                         dependsUpon:
                                           - createElement
                                           - setState
                                     - - id: createElement
                                         type: parameter
+                                      - id: processor
+                                        type: parameter
                                       - id: setState
                                         type: parameter
-                              - - id: createParameterTextareas
-                                  type: file
-                                  items:
-                                    id: createParameterTextareas
-                                    type: export
-                                    dependsUpon:
-                                      - createWhenMultiple
-                                      - createWhenNone
-                                      - createWhenSingle
-                                    items:
-                                      - - createWhenNone
-                                        - id: createWhenMultiple
-                                          dependsUpon:
-                                            - createMultiple
-                                            - createWithIndex
-                                          items:
-                                            - - id: createMultiple
-                                                dependsUpon: createWithIndex
-                                            - - id: createWithIndex
-                                                dependsUpon:
-                                                  - createWithGetArgumentFromValue
-                                                  - processor
-                                        - id: createWhenSingle
-                                          dependsUpon: createWithGetArgumentFromValue
-                                      - - id: createWithGetArgumentFromValue
-                                          dependsUpon:
-                                            - createElement
-                                            - setState
-                                      - - id: createElement
-                                          type: parameter
-                                        - id: processor
-                                          type: parameter
-                                        - id: setState
-                                          type: parameter
               - id: createYamlOutputElement
                 type: file
                 items:
@@ -2865,6 +2867,7 @@
                                   dependsUpon:
                                     - createElement
                                     - dependencyListElementFactory
+                                    - locationHash
                                     - resizableElementTypes
                                     - stack
                                 - id: createBreadcrumbAndSvgElement
@@ -2884,6 +2887,8 @@
                                     - id: createElementContainerForItem
                                       dependsUpon: subsetSelection
                               - - id: createElement
+                                  type: parameter
+                                - id: locationHash
                                   type: parameter
                                 - id: resizableElementTypes
                                   type: parameter
@@ -2930,6 +2935,11 @@
                                           - createElement
                                           - createIdentifierAnchor
                                           - getHrefWithIdentifierHierarchy
+                                          - getIdentifier
+                                        items:
+                                          id: getIdentifier
+                                          dependsUpon: whenRoot
+                                          items: whenRoot
                                     - - id: getHrefWithIdentifierHierarchy
                                         dependsUpon:
                                           - getHrefWithKeyAndValue
@@ -2956,14 +2966,12 @@
                                             - subsetIdentifierHierarchy
                                       - - isIndexOfLast
                                         - id: createInitialRootAggregation
-                                          dependsUpon: createElement
+                                          dependsUpon: createIdentifierHierarchyAnchor
                                         - id: aggregate
                                           dependsUpon:
                                             - createAncestorSeparatorElement
                                             - createIdentifierHierarchyAnchor
                                       - - id: createAncestorSeparatorElement
-                                          type: parameter
-                                        - id: createElement
                                           type: parameter
                                         - id: createIdentifierHierarchyAnchor
                                           type: parameter
@@ -3060,6 +3068,7 @@
                                         - - id: createListInContainerWhenAny
                                             dependsUpon:
                                               - allParametersSpecified
+                                              - closeHref
                                               - createAncestorSeparatorElement
                                               - createElement
                                               - createIdentifierHierarchyAnchor
@@ -3081,8 +3090,11 @@
                                           - id: createVerticalResizeWithLowerElement
                                             dependsUpon:
                                               - createElement
-                                              - createVerticalResize
+                                              - createResizableContainer
+                                              - locationHash
                                               - resizableElementTypes
+                                          - id: closeHref
+                                            type: parameter
                                           - id: createAncestorSeparatorElement
                                             type: parameter
                                         - - id: createElement
@@ -3091,13 +3103,20 @@
                                             type: parameter
                                           - id: level
                                             type: parameter
+                                          - id: locationHash
+                                            type: parameter
                                           - id: resizableElementTypes
                                             type: parameter
                                           - id: relationship
                                             type: parameter
                                           - id: stack
                                             type: parameter
-                                  - - id: findDirectionBetweenItemsInFirstMutualStack
+                                  - - id: createResizableContainer
+                                      type: variable
+                                      dependsUpon:
+                                        id: test-harnesses
+                                        items: createResizableContainer
+                                    - id: findDirectionBetweenItemsInFirstMutualStack
                                       type: variable
                                       dependsUpon:
                                         id: dependency-and-structure
@@ -3177,18 +3196,20 @@
                                                   dependsUpon:
                                                     - compareItemIdentifiers
                                                     - createElement
-                                              - - compareItemIdentifiers
                                                 - id: createChildItemElement
                                                   dependsUpon:
                                                     - createElement
                                                     - createElementsForSubset
-                                                - id: createDependencyElements
+                                              - - id: createDependencyElements
                                                   type: parameter
-                                              - - id: createElement
+                                                - id: createElement
                                                   type: parameter
                                                 - id: createIdentifierHierarchyAnchor
                                                   type: parameter
-                                        - - id: createDependencyElementFactory
+                                        - - id: compareItemIdentifiers
+                                            dependsUpon: getItemIdentifierForCompare
+                                        - - getItemIdentifierForCompare
+                                          - id: createDependencyElementFactory
                                             type: file
                                             items:
                                               id: createDependencyElementFactory
@@ -3303,50 +3324,18 @@
                                               - - id: getDependents
                                                   dependsUpon: isDependencyRelevant
                                                 - id: getDependsUponItems
-                                                  dependsUpon: isDependencyRelevant
+                                                  dependsUpon: getDependUponItems
+                                              - - id: getDependUponItems
+                                                  dependsUpon: whenHasValue
+                                                  items:
+                                                    - - id: whenHasValue
+                                                        dependsUpon:
+                                                          - isDependencyRelevant
+                                                          - itemOrFirstAncestorItem
+                                                    - - id: itemOrFirstAncestorItem
+                                                        type: parameter
                                               - - id: isDependencyRelevant
                                                   type: parameter
-                                    - id: createVerticalResize
-                                      type: file
-                                      items:
-                                        - - id: test
-                                            type: file
-                                            dependsUpon:
-                                              - createElement
-                                              - createVerticalResize
-                                              - expect
-                                              - path
-                                              - readTextFile
-                                              - removeWhitespaceFromTestExpected
-                                              - renderToStaticMarkup
-                                              - test
-                                            items:
-                                              - id: createElement
-                                                type: variable
-                                                dependsUpon:
-                                                  id: react
-                                                  items: createElement
-                                              - id: renderToStaticMarkup
-                                                type: variable
-                                                dependsUpon:
-                                                  id: react-dom
-                                                  items:
-                                                    id: server
-                                                    items: renderToStaticMarkup
-                                        - - id: createVerticalResize
-                                            type: export
-                                            dependsUpon: createSplitterContentWithCreateElement
-                                        - - id: createSplitterContentWithCreateElement
-                                            type: file
-                                            items:
-                                              id: createSplitterContentWithCreateElement
-                                              type: export
-                                              dependsUpon: createIcon
-                                              items:
-                                                - - id: createIcon
-                                                    dependsUpon: createElement
-                                                - - id: createElement
-                                                    type: parameter
                                     - id: isDependencyRelevant
                                       type: file
                                       items:
@@ -3710,11 +3699,7 @@
                       items:
                         id: groupItems
                         dependsUpon: groupItemsByIdentifierSeparator
-                    - id: testHarnessPlugin
-                      type: file
-                      dependsUpon:
-                        - groupItemsByIdentifierSeparator
-                        - test-harnesses-processor-plugins
+                    - testHarnessPlugin
                   - - id: groupItemsByIdentifierSeparator
                       type: export
                       dependsUpon: createGroupItemsForIdentifierSeparator
@@ -3949,11 +3934,7 @@
                         - expect
                         - removeRedundantParentIdentifierPrefix
                         - test
-                    - id: testHarnessPlugin
-                      type: file
-                      dependsUpon:
-                        - removeRedundantParentIdentifierPrefix
-                        - test-harnesses-processor-plugins
+                    - testHarnessPlugin
                   - - id: removeRedundantParentIdentifierPrefix
                       type: export
                       dependsUpon:
@@ -4057,11 +4038,7 @@
                         - expect
                         - removeSelfDependentItemsOfType
                         - test
-                    - id: testHarnessPlugin
-                      type: file
-                      dependsUpon:
-                        - removeSelfDependentItemsOfType
-                        - test-harnesses-processor-plugins
+                    - testHarnessPlugin
                   - - id: removeSelfDependentItemsOfType
                       type: export
                       dependsUpon:
@@ -4117,11 +4094,7 @@
                           - expect
                           - setTypeOfRootItems
                           - test
-                    - id: testHarnessPlugin
-                      type: file
-                      dependsUpon:
-                        - setTypeOfRootItems
-                        - test-harnesses-processor-plugins
+                    - testHarnessPlugin
                   - - id: setTypeOfRootItems
                       type: export
                       dependsUpon: createItem
@@ -4147,11 +4120,7 @@
                               - expect
                               - orderItemsByIdentifier
                               - test
-                          - id: testHarnessPlugin
-                            type: file
-                            dependsUpon:
-                              - orderItemsByIdentifier
-                              - test-harnesses-processor-plugins
+                          - testHarnessPlugin
                         - - id: orderItemsByIdentifier
                             type: export
                             dependsUpon: whenArray
@@ -4272,11 +4241,7 @@
                                 type: variable
                               - id: typesInOrder
                                 type: variable
-                          - id: testHarnessPlugin
-                            type: file
-                            dependsUpon:
-                              - orderItemsByIndexOfType
-                              - test-harnesses-processor-plugins
+                          - testHarnessPlugin
                         - - id: orderItemsByIndexOfType
                             type: export
                             dependsUpon: orderItemsByIndexOf
@@ -4982,11 +4947,7 @@
                         - expect
                         - test
                         - unstackIndependent
-                    - id: testHarnessPlugin
-                      type: file
-                      dependsUpon:
-                        - unstackIndependent
-                        - test-harnesses-processor-plugins
+                    - testHarnessPlugin
                   - - id: unstackIndependent
                       type: export
                       dependsUpon:
@@ -5176,11 +5137,7 @@
                               - expect
                               - replaceIdentifiers
                               - test
-                          - id: testHarnessPlugin
-                            type: file
-                            dependsUpon:
-                              - replaceIdentifiers
-                              - test-harnesses-processor-plugins
+                          - testHarnessPlugin
                         - - id: replaceIdentifiers
                             type: export
                             dependsUpon:
@@ -6159,7 +6116,6 @@
                             dependsUpon:
                               - countDependencies
                               - createWhenDependentsOrDependsUpon
-                              - getItemFromDependsUpon
                               - sumDirectionInStackWhenOuter
                               - sumDirectionInStackWithScope
                             items:
@@ -6199,8 +6155,7 @@
                                   type: parameter
                                 - id: sumCount
                                   type: parameter
-                        - - getItemFromDependsUpon
-                          - id: countDependencies
+                        - - id: countDependencies
                             dependsUpon: sumDependency
                             items:
                               - - id: sumDependency
@@ -6352,9 +6307,7 @@
                                           - testCreateStackFromYaml
                                         items:
                                           id: createStackWithDependencies
-                                          dependsUpon:
-                                            - createStackFromLevels
-                                            - mapItemsToDependsUpon
+                                          dependsUpon: createStackFromLevels
                                     - - id: createItemYaml
                                         type: variable
                                         dependsUpon:
@@ -6365,11 +6318,6 @@
                                         dependsUpon:
                                           id: tests
                                           items: createStackFromLevels
-                                      - id: mapItemsToDependsUpon
-                                        type: variable
-                                        dependsUpon:
-                                          id: tests
-                                          items: mapItemsToDependsUpon
                                 - id: testDependsUponDescendant
                                   type: file
                                   items:
@@ -6388,7 +6336,6 @@
                                               dependsUpon:
                                                 - createItemYaml
                                                 - createStackFromLevels
-                                                - mapItemsToDependsUpon
                                                 - testCreateStackFromYaml
                                           - - id: createItemYaml
                                               type: variable
@@ -6400,11 +6347,6 @@
                                               dependsUpon:
                                                 id: tests
                                                 items: createStackFromLevels
-                                            - id: mapItemsToDependsUpon
-                                              type: variable
-                                              dependsUpon:
-                                                id: tests
-                                                items: mapItemsToDependsUpon
                                       - id: testFirstWithPermeableSecond
                                         type: file
                                         items:
@@ -6426,9 +6368,7 @@
                                                       - createStackAndAddDependencies
                                                       - testCreateStackFromYaml
                                                 - - id: createStackAndAddDependencies
-                                                    dependsUpon:
-                                                      - createStackFromLevels
-                                                      - mapItemsToDependsUpon
+                                                    dependsUpon: createStackFromLevels
                                                   - id: createItemYaml
                                                     type: variable
                                                     dependsUpon:
@@ -6439,11 +6379,6 @@
                                                     dependsUpon:
                                                       id: tests
                                                       items: createStackFromLevels
-                                                  - id: mapItemsToDependsUpon
-                                                    type: variable
-                                                    dependsUpon:
-                                                      id: tests
-                                                      items: mapItemsToDependsUpon
                                             - id: testFirstDependsUponGrandchildOfSecondWithPermeableChild
                                               type: file
                                               items:
@@ -6454,9 +6389,7 @@
                                                       - createStackAndAddDependencies
                                                       - testCreateStackFromYaml
                                                 - - id: createStackAndAddDependencies
-                                                    dependsUpon:
-                                                      - createStackFromLevels
-                                                      - mapItemsToDependsUpon
+                                                    dependsUpon: createStackFromLevels
                                                   - id: createItemYaml
                                                     type: variable
                                                     dependsUpon:
@@ -6467,11 +6400,6 @@
                                                     dependsUpon:
                                                       id: tests
                                                       items: createStackFromLevels
-                                                  - id: mapItemsToDependsUpon
-                                                    type: variable
-                                                    dependsUpon:
-                                                      id: tests
-                                                      items: mapItemsToDependsUpon
                                             - id: testFirstDependsUponSameIdentifierAsGrandchild
                                               type: file
                                               items:
@@ -6480,7 +6408,6 @@
                                                     dependsUpon:
                                                       - createItemYaml
                                                       - createStackFromLevels
-                                                      - mapItemsToDependsUpon
                                                       - testCreateStackFromYaml
                                                 - - id: createItemYaml
                                                     type: variable
@@ -6492,11 +6419,6 @@
                                                     dependsUpon:
                                                       id: tests
                                                       items: createStackFromLevels
-                                                  - id: mapItemsToDependsUpon
-                                                    type: variable
-                                                    dependsUpon:
-                                                      id: tests
-                                                      items: mapItemsToDependsUpon
                                 - id: testDependsUponMapping
                                   type: file
                                   items:
@@ -6515,7 +6437,6 @@
                                               dependsUpon:
                                                 - createItemYaml
                                                 - createStackFromLevels
-                                                - mapItemsToDependsUpon
                                                 - testCreateStackFromYaml
                                           - - id: createItemYaml
                                               type: variable
@@ -6527,11 +6448,6 @@
                                               dependsUpon:
                                                 id: tests
                                                 items: createStackFromLevels
-                                            - id: mapItemsToDependsUpon
-                                              type: variable
-                                              dependsUpon:
-                                                id: tests
-                                                items: mapItemsToDependsUpon
                                       - id: testFirstDependsUponSecond
                                         type: file
                                         items:
@@ -6540,7 +6456,6 @@
                                               dependsUpon:
                                                 - createItemYaml
                                                 - createStackFromLevels
-                                                - mapItemsToDependsUpon
                                                 - testCreateStackFromYaml
                                           - - id: createItemYaml
                                               type: variable
@@ -6552,11 +6467,6 @@
                                               dependsUpon:
                                                 id: tests
                                                 items: createStackFromLevels
-                                            - id: mapItemsToDependsUpon
-                                              type: variable
-                                              dependsUpon:
-                                                id: tests
-                                                items: mapItemsToDependsUpon
                                 - id: testFirstAndSecondDependsUponThird
                                   type: file
                                   items:
@@ -6567,9 +6477,7 @@
                                           - createItemYaml
                                           - createStackFromLevels
                                           - testCreateStackFromYaml
-                                        items:
-                                          id: addDependencies
-                                          dependsUpon: mapItemsToDependsUpon
+                                        items: addDependencies
                                     - - id: createItemYaml
                                         type: variable
                                         dependsUpon:
@@ -6580,11 +6488,6 @@
                                         dependsUpon:
                                           id: tests
                                           items: createStackFromLevels
-                                      - id: mapItemsToDependsUpon
-                                        type: variable
-                                        dependsUpon:
-                                          id: tests
-                                          items: mapItemsToDependsUpon
                                 - id: testFirstChildDependsUponParentAndSecondChildWithGrandchildWithParentIdentifier
                                   type: file
                                   items:
@@ -6598,9 +6501,7 @@
                                         dependsUpon:
                                           - addDependencies
                                           - createStackFromLevels
-                                        items:
-                                          id: addDependencies
-                                          dependsUpon: mapItemsToDependsUpon
+                                        items: addDependencies
                                       - id: createYaml
                                         dependsUpon:
                                           - createItemYaml
@@ -6615,11 +6516,6 @@
                                         dependsUpon:
                                           id: tests
                                           items: createStackFromLevels
-                                      - id: mapItemsToDependsUpon
-                                        type: variable
-                                        dependsUpon:
-                                          id: tests
-                                          items: mapItemsToDependsUpon
                                       - id: parentIdentifier
                                         type: variable
                                 - id: testParentAndChild
@@ -6637,9 +6533,7 @@
                                           - testCreateStackFromYaml
                                         items:
                                           id: createStackWithDependencies
-                                          dependsUpon:
-                                            - createStackAndGetParentAndChild
-                                            - mapItemsToDependsUpon
+                                          dependsUpon: createStackAndGetParentAndChild
                                       - id: testChildDependsUponParent
                                         dependsUpon:
                                           - createItemYaml
@@ -6647,9 +6541,7 @@
                                           - testCreateStackFromYaml
                                         items:
                                           id: createStackWithDependencies
-                                          dependsUpon:
-                                            - createStackAndGetParentAndChild
-                                            - mapItemsToDependsUpon
+                                          dependsUpon: createStackAndGetParentAndChild
                                     - - id: createStackAndGetParentAndChild
                                         dependsUpon:
                                           - createParentChildLevels
@@ -6669,11 +6561,6 @@
                                         dependsUpon:
                                           id: tests
                                           items: createStackFromLevels
-                                      - id: mapItemsToDependsUpon
-                                        type: variable
-                                        dependsUpon:
-                                          id: tests
-                                          items: mapItemsToDependsUpon
                                 - id: testSelfDependent
                                   type: file
                                   items:
@@ -6684,9 +6571,7 @@
                                           - createItemYaml
                                           - createStackFromLevels
                                           - testCreateStackFromYaml
-                                        items:
-                                          id: addDependencies
-                                          dependsUpon: mapItemsToDependsUpon
+                                        items: addDependencies
                                     - - id: createItemYaml
                                         type: variable
                                         dependsUpon:
@@ -6697,11 +6582,6 @@
                                         dependsUpon:
                                           id: tests
                                           items: createStackFromLevels
-                                      - id: mapItemsToDependsUpon
-                                        type: variable
-                                        dependsUpon:
-                                          id: tests
-                                          items: mapItemsToDependsUpon
                                 - id: testSelfDependentParentAndChild
                                   type: file
                                   items:
@@ -6717,9 +6597,7 @@
                                           - testCreateStackFromYaml
                                         items:
                                           - id: createStackWithDependencies
-                                            dependsUpon:
-                                              - createStackAndGetParent
-                                              - mapItemsToDependsUpon
+                                            dependsUpon: createStackAndGetParent
                                           - id: createYaml
                                             dependsUpon:
                                               - createItemYaml
@@ -6730,9 +6608,7 @@
                                           - createYaml
                                         items:
                                           - id: createStackWithDependencies
-                                            dependsUpon:
-                                              - createStackAndGetParent
-                                              - mapItemsToDependsUpon
+                                            dependsUpon: createStackAndGetParent
                                           - id: createYaml
                                             dependsUpon:
                                               - createItemYaml
@@ -6749,11 +6625,6 @@
                                         dependsUpon:
                                           id: tests
                                           items: createStackFromLevels
-                                      - id: mapItemsToDependsUpon
-                                        type: variable
-                                        dependsUpon:
-                                          id: tests
-                                          items: mapItemsToDependsUpon
                                       - id: sameIdentifier
                                         type: variable
                                 - id: testUpperAndLower
@@ -6771,9 +6642,7 @@
                                           - testCreateStackFromYaml
                                         items:
                                           id: createStackWithDependencies
-                                          dependsUpon:
-                                            - createStackAndGetUpperAndLower
-                                            - mapItemsToDependsUpon
+                                          dependsUpon: createStackAndGetUpperAndLower
                                       - id: testLowerDependsUponUpper
                                         dependsUpon:
                                           - createItemYaml
@@ -6781,9 +6650,7 @@
                                           - testCreateStackFromYaml
                                         items:
                                           id: createStackWithDependencies
-                                          dependsUpon:
-                                            - createStackAndGetUpperAndLower
-                                            - mapItemsToDependsUpon
+                                          dependsUpon: createStackAndGetUpperAndLower
                                     - - id: createStackAndGetUpperAndLower
                                         dependsUpon:
                                           - createStackFromLevels
@@ -6803,11 +6670,6 @@
                                         dependsUpon:
                                           id: tests
                                           items: createUpperAndLowerStack
-                                      - id: mapItemsToDependsUpon
-                                        type: variable
-                                        dependsUpon:
-                                          id: tests
-                                          items: mapItemsToDependsUpon
                         - - id: testCreateStackFromYaml
                             type: file
                             items:
@@ -6889,8 +6751,13 @@
                                 items:
                                   - - id: whenString
                                       dependsUpon:
+                                        - createWithItem
                                         - dependUpon
                                         - findItemWithIdentifier
+                                      items:
+                                        id: createWithItem
+                                        dependsUpon: createItemOrFirstAncestorItemProperty
+                                        items: createItemOrFirstAncestorItemProperty
                                   - - id: findItemWithIdentifier
                                       dependsUpon: findItemWithIdentifierFromStack
                                     - id: dependUpon
@@ -6937,17 +6804,11 @@
                                               dependsUpon: findInAncestors
                                           - - id: findInAncestors
                                               dependsUpon:
+                                                - createFromIdentifiers
                                                 - findInAncestors
-                                                - fromIdentifiers
                                                 - whenIdentifier
                                                 - whenItemFound
-                                              items:
-                                                - - id: fromIdentifiers
-                                                    dependsUpon:
-                                                      - createFromIdentifiers
-                                                      - dependUponItem
-                                                - - id: dependUponItem
-                                                    type: parameter
+                                              items: createWithAncestors
                                           - - id: whenIdentifier
                                               type: file
                                               items:
@@ -7075,13 +6936,8 @@
                             items:
                               - - id: updateItem
                                   type: export
-                                  dependsUpon:
-                                    - addDependent
-                                    - getItemsFromDependsUpon
+                                  dependsUpon: addDependent
                               - - addDependent
-                                - id: getItemsFromDependsUpon
-                                  dependsUpon: findObject
-                                  items: findObject
               - id: createYamlFromStack
                 type: file
                 items:
@@ -7494,7 +7350,6 @@
                               - createItemYaml
                               - createParentChildLevels
                               - createUpperAndLowerStack
-                              - mapItemsToDependsUpon
                           - id: testDependencies
                             type: file
                             items:
@@ -7530,9 +7385,7 @@
                                           - createStack
                                         items:
                                           id: createStack
-                                          dependsUpon:
-                                            - createStackAndGetFirstAndSecond
-                                            - mapItemsToDependsUpon
+                                          dependsUpon: createStackAndGetFirstAndSecond
                                     - - id: createStackAndGetFirstAndSecond
                                         dependsUpon:
                                           - createFirstAndSecondLevel
@@ -7740,9 +7593,7 @@
                                         dependsUpon:
                                           - addDependencies
                                           - createStackFromLevels
-                                        items:
-                                          id: addDependencies
-                                          dependsUpon: mapItemsToDependsUpon
+                                        items: addDependencies
                                       - id: createYaml
                                         dependsUpon: createItemYaml
                           - createDependencyTestCases
@@ -7792,11 +7643,6 @@
                         - - id: prettyFormat
                             type: variable
                             dependsUpon: pretty-format
-                    - id: mapItemsToDependsUpon
-                      type: file
-                      items:
-                        id: mapItemsToDependsUpon
-                        type: export
         - id: test-harnesses-processor-plugins
           type: file
           dependsUpon: plugin-discovery-create-repository
@@ -8049,91 +7895,185 @@
   - id: test-harnesses
     type: file
     items:
-      - - id: createResizableColumnContainer
+      - - id: createResizableContainer
           type: file
           items:
-            - - id: createResizableColumnContainer
+            - - id: test
+                type: file
+                dependsUpon:
+                  - createElement
+                  - createResizableContainer
+                  - describe
+                  - expect
+                  - readExpectedWithFileName
+                  - renderToStaticMarkup
+                  - resizableElementTypes
+                  - test
+                items:
+                  - - dependsUpon:
+                        - createElement
+                        - createResizableContainer
+                        - describe
+                        - expect
+                        - path
+                        - readExpectedWithFileName
+                        - renderToStaticMarkup
+                        - resizableElementTypes
+                        - test
+                      items:
+                        dependsUpon:
+                          - createElement
+                          - createResizableContainer
+                          - expect
+                          - path
+                          - readExpectedWithFileName
+                          - renderToStaticMarkup
+                          - resizableElementTypes
+                          - test
+                        items:
+                          dependsUpon:
+                            - createElement
+                            - createResizableContainer
+                            - expect
+                            - jest
+                            - resizableElementTypes
+                  - - id: readExpectedWithFileName
+                      dependsUpon:
+                        - path
+                        - readTextFile
+                        - removeWhitespaceFromTestExpected
+                    - id: createElement
+                      type: variable
+                      dependsUpon:
+                        id: react
+                        items: createElement
+                    - id: renderToStaticMarkup
+                      type: variable
+                      dependsUpon:
+                        id: react-dom
+                        items:
+                          id: server
+                          items: renderToStaticMarkup
+                  - - id: readTextFile
+                      type: variable
+                      dependsUpon:
+                        id: tests
+                        items: readTextFile
+                    - id: removeWhitespaceFromTestExpected
+                      type: variable
+                      dependsUpon:
+                        id: tests
+                        items: removeWhitespaceFromTestExpected
+                    - id: resizableElementTypes
+                      type: variable
+            - - id: createResizableContainer
                 type: export
                 dependsUpon:
-                  - ReflexContainer
-                  - createElement
-                  - createElements
-            - - id: createElements
-                dependsUpon: withFlexKeysAndValues
-            - - id: withFlexKeysAndValues
+                  - createContainerChildElements
+                  - createSplitterIcon
+            - - id: createContainerChildElements
+                dependsUpon:
+                  - createSplitterWhenSubsequent
+                  - withContext
+            - - id: withContext
                 items:
-                  - - id: createSplitterAndElementForColumnAndIndex
+                  - - id: createSplitterAndElementForItemAndIndex
                       dependsUpon:
-                        - createReflexElement
-                        - createReflexSplitterWithIndexWhenSubsequent
+                        - createItemElement
+                        - createReflexSplitterForIndex
                       items:
-                        - - id: createReflexElement
+                        - - id: createItemElement
                             dependsUpon:
-                              - ReflexElement
                               - createElement
                               - createFlexProperty
+                              - createOnStopResize
                               - element
-                              - setFlex
+                              - itemElementType
                         - - id: createFlexProperty
                             dependsUpon:
                               - createPropertyWhenHasValue
                               - getValueOfKey
                             items: createPropertyWhenHasValue
-                          - id: setFlex
-                            dependsUpon: setKeyAndValue
+                          - id: createOnStopResize
+                            items:
+                              id: onStopResize
+                              dependsUpon: setKeyAndValue
                           - id: element
                             type: parameter
-                  - - id: getValueOfKey
+                  - - id: createElement
+                      type: parameter
+                    - id: createReflexSplitterForIndex
+                      type: parameter
+                    - id: getValueOfKey
                       type: parameter
                     - id: setKeyAndValue
                       type: parameter
-            - - id: createReflexSplitterWithIndexWhenSubsequent
-                dependsUpon:
-                  - ReflexSplitter
-                  - createElement
-            - - id: createElement
-                type: variable
-                dependsUpon:
-                  id: react
-                  items: createElement
-              - id: ReflexContainer
-                type: variable
-                dependsUpon:
-                  id: react-reflex
-                  items: ReflexContainer
-              - id: ReflexElement
-                type: variable
-                dependsUpon:
-                  id: react-reflex
-                  items: ReflexElement
-              - id: ReflexSplitter
-                type: variable
-                dependsUpon:
-                  id: react-reflex
-                  items: ReflexSplitter
+                    - id: itemElementType
+                      type: parameter
+              - createSplitterWhenSubsequent
+              - id: createSplitterIcon
+                type: file
+                items:
+                  id: createSplitterIcon
+                  type: export
+                  dependsUpon:
+                    - whenHorizontal
+                    - whenVertical
+                  items:
+                    - - id: whenHorizontal
+                        dependsUpon: ofCharacter
+                        items:
+                          id: ofCharacter
+                          dependsUpon: createElement
+                      - whenVertical
+                    - - id: createElement
+                        type: parameter
               - id: test-harness
                 type: file
-                dependsUpon:
-                  - renderIntoContainerElement
-                  - createElement
-                  - createHashFromLocation
-                  - createResizableColumnContainer
-                  - location
+                dependsUpon: renderIntoContainerElement
                 items:
-                  - id: createElement
+                  - - dependsUpon:
+                        - createElement
+                        - createHashFromLocation
+                        - createResizableContainer
+                        - location
+                  - - id: createElement
+                      type: variable
+                      dependsUpon:
+                        id: react
+                        items: createElement
+                    - id: webpack.config
+                      type: file
+                      dependsUpon:
+                        - createWebpackConfiguration
+                        - path
+                      items:
+                        id: webpack.config
+                        type: export
+      - - id: tests
+          items:
+            - id: readTextFile
+              type: file
+              items:
+                - - id: readTextFile
+                    type: export
+                    dependsUpon:
+                      - readFile
+                      - removeBom
+                - - removeBom
+                  - id: readFile
                     type: variable
                     dependsUpon:
-                      id: react
-                      items: createElement
-                  - id: webpack.config
-                    type: file
-                    dependsUpon:
-                      - createWebpackConfiguration
-                      - path
-                    items:
-                      id: webpack.config
-                      type: export
-      - - id: test-harnesses
+                      id: fs-extra
+                      items: readFile
+            - id: removeWhitespaceFromTestExpected
+              type: file
+              items:
+                id: removeWhitespaceFromTestExpected
+                type: export
+            - id: styleMock
+              type: file
+        - id: test-harnesses
           type: export
         - id: codeEditor
           items:
@@ -8273,6 +8213,46 @@
         - id: createHashFromLocation
           type: file
           items:
+            - - id: test
+                type: file
+                dependsUpon:
+                  - createHashFromLocation
+                  - describe
+                  - expect
+                  - test
+                items:
+                  - dependsUpon:
+                      - createHashFromLocation
+                      - expect
+                      - test
+                  - dependsUpon:
+                      - createHashFromLocation
+                      - expect
+                      - test
+                  - dependsUpon:
+                      - createHashFromLocation
+                      - expect
+                      - test
+                  - dependsUpon:
+                      - createHashFromLocation
+                      - expect
+                      - test
+                  - dependsUpon:
+                      - createHashFromLocation
+                      - expect
+                      - jest
+                    items:
+                      - - dependsUpon: hashSetter
+                      - - id: hashSetter
+                          type: variable
+                  - dependsUpon:
+                      - createHashFromLocation
+                      - expect
+                      - jest
+                    items:
+                      - - dependsUpon: hashSetter
+                      - - id: hashSetter
+                          type: variable
             - - id: createHashFromLocation
                 type: export
                 dependsUpon:
@@ -8328,26 +8308,27 @@
               - id: createWithFactoryFromUrlSearchParams
                 type: file
                 items:
-                  - - id: createWithFactoryFromUrlSearchParams
-                      type: export
-                      items:
-                        - - id: getWithKeysAndValues
-                            dependsUpon:
-                              - getHash
-                              - setWhenHasValueOrDelete
-                          - id: getWithKeyAndValue
-                            dependsUpon:
-                              - getHash
-                              - setWhenHasValueOrDelete
-                        - - id: setWhenHasValueOrDelete
-                            dependsUpon: urlSearchParams
-                          - id: getHash
-                            dependsUpon:
-                              - addHashPrefix
-                              - urlSearchParams
-                        - - id: urlSearchParams
-                            type: parameter
-                  - - addHashPrefix
+                  id: createWithFactoryFromUrlSearchParams
+                  type: export
+                  items:
+                    - - id: getWithKeysAndValues
+                        dependsUpon:
+                          - getHash
+                          - setWhenHasValueOrDelete
+                      - id: getWithKeyAndValue
+                        dependsUpon:
+                          - getHash
+                          - setWhenHasValueOrDelete
+                    - - id: setWhenHasValueOrDelete
+                        dependsUpon: urlSearchParams
+                      - id: getWithoutKeys
+                        dependsUpon:
+                          - getHash
+                          - urlSearchParams
+                    - - id: getHash
+                        dependsUpon: urlSearchParams
+                    - - id: urlSearchParams
+                        type: parameter
         - id: createTextareaElement
           type: file
           items:
