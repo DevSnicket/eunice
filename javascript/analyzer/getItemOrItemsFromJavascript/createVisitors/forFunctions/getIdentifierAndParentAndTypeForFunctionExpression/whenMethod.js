@@ -3,15 +3,15 @@
 module.exports =
 	({
 		ancestors,
-		parent,
+		parent: { key, kind, type },
 	}) =>
-		parent.kind !== "constructor"
+		kind !== "constructor"
 		&&
-		parent.type === "MethodDefinition"
+		[ "ClassProperty", "MethodDefinition" ].includes(type)
 		&&
 		{
 			identifier:
-				parent.key.name,
+				key.name,
 			parent:
 				getClassInAncestors(ancestors),
 			type:

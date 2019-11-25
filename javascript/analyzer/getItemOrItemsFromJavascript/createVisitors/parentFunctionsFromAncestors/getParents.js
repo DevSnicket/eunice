@@ -27,7 +27,7 @@ function getParentFromCurrentAndPrevious({
 				current,
 			...getFunctionExpressionAndIsBlock(),
 			isIdentifiable:
-				isIdentifiableType(current.type),
+				identifiableTypes.includes(current.type),
 		}
 	);
 
@@ -35,7 +35,7 @@ function getParentFromCurrentAndPrevious({
 		return (
 			previous
 			&&
-			isFunctionExpressionType(previous.type)
+			functionExpressionTypes.includes(previous.type)
 			&&
 			{
 				functionExpression:
@@ -47,26 +47,17 @@ function getParentFromCurrentAndPrevious({
 	}
 }
 
-function isFunctionExpressionType(
-	type,
-) {
-	return (
-		type === "ArrowFunctionExpression"
-		||
-		type === "FunctionExpression"
-	);
-}
-
-function isIdentifiableType(
-	type,
-) {
-	return (
-		type === "AssignmentExpression"
-		||
-		type === "ExportDefaultDeclaration"
-		||
-		type === "MethodDefinition"
-		||
-		type === "VariableDeclarator"
-	);
-}
+const
+	functionExpressionTypes =
+		[
+			"ArrowFunctionExpression",
+			"FunctionExpression",
+		],
+	identifiableTypes =
+		[
+			"AssignmentExpression",
+			"ClassProperty",
+			"ExportDefaultDeclaration",
+			"MethodDefinition",
+			"VariableDeclarator",
+		];
