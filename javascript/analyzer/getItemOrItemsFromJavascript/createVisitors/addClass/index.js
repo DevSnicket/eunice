@@ -1,7 +1,7 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 const
-	createDependsUponPropertyFromBaseAndConstructor = require("./createDependsUponPropertyFromBaseAndConstructor"),
+	createDependsUponProperty = require("./createDependsUponProperty"),
 	createItemsProperty = require("./createItemsProperty"),
 	{ findBlockOrIdentifiableParent } = require("../parentFunctionsFromAncestors"),
 	getParentFromAncestors = require("../getParentFromAncestors");
@@ -16,12 +16,7 @@ module.exports =
 				addDeclarationIn,
 				createItemsForAndRemoveDeclarationsIn,
 			},
-	}) => {
-		const constructor =
-			findConstructorInClass(
-				classDeclarationOrExpression,
-			);
-
+	}) =>
 		addWhenAnyProperties({
 			addDeclarationIn,
 			ancestors,
@@ -32,29 +27,16 @@ module.exports =
 						identifier:
 							classDeclarationOrExpression.id,
 					}),
-					...createDependsUponPropertyFromBaseAndConstructor({
-						constructor,
+					...createDependsUponProperty({
+						classDeclarationOrExpression,
 						createDependsUponPropertyForParent,
-						superClass:
-							classDeclarationOrExpression.superClass,
 					}),
 					...createItemsProperty({
 						classDeclarationOrExpression,
-						constructor,
 						createItemsForAndRemoveDeclarationsIn,
 					}),
 				],
 		});
-	};
-
-function findConstructorInClass(
-	{ body },
-) {
-	return (
-		body.body
-		.find(({ kind }) => kind === "constructor")
-	);
-}
 
 function * createIdentifierProperty({
 	ancestors,

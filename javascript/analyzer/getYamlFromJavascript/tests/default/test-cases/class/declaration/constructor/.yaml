@@ -1,1 +1,4 @@
-- Class
+- id: Class
+  items:
+    id: constructor
+    type: method

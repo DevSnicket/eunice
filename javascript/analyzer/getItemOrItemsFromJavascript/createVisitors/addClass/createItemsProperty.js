@@ -5,38 +5,18 @@ const stackItemsWhenMultiple = require("../stackItemsWhenMultiple");
 module.exports =
 	function * createItemsProperty({
 		classDeclarationOrExpression,
-		constructor,
 		createItemsForAndRemoveDeclarationsIn,
 	}) {
 		const items =
 			stackItemsWhenMultiple({
 				items:
-					[
-						...getItemsFromClass() || [],
-						...getItemsFromConstructor() || [],
-					],
+					createItemsForAndRemoveDeclarationsIn(
+						classDeclarationOrExpression,
+					),
 				withSingleInArray:
 					false,
 			});
 
 		if (items)
 			yield { items };
-
-		function getItemsFromClass() {
-			return (
-				createItemsForAndRemoveDeclarationsIn(
-					classDeclarationOrExpression,
-				)
-			);
-		}
-
-		function getItemsFromConstructor() {
-			return (
-				constructor
-				&&
-				createItemsForAndRemoveDeclarationsIn(
-					constructor.value,
-				)
-			);
-		}
 	};

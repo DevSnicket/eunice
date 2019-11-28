@@ -1,2 +1,5 @@
 - id: Class
-  items: functionDeclaration
+  items:
+    id: constructor
+    type: method
+    items: functionDeclaration

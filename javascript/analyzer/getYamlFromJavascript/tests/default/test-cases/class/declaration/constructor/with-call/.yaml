@@ -1,2 +1,5 @@
 - id: Class
-  dependsUpon: called
+  items:
+    id: constructor
+    type: method
+    dependsUpon: called
