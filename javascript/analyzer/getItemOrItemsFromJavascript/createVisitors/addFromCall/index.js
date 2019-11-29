@@ -5,18 +5,19 @@ require("array.prototype.flatmap")
 
 const
 	addArgumentsToNestedCallMap = require("./addArgumentsToNestedCallMap"),
+	findBlockOrIdentifiableParentInAncestors = require("../findBlockOrIdentifiableParentInAncestors"),
 	getIdentifierNameFromAndAddOrUpdateReferenceOfParent = require("./getIdentifierNameFromAndAddOrUpdateReferenceOfParent"),
 	getNameFromCallee = require("./getNameFromCallee"),
-	getNamesFromDestructureOrIdentifier = require("../getNamesFromDestructureOrIdentifier"),
-	isCalleeIgnoredDefault = require("./isCalleeIgnoredDefault");
+	isCalleeIgnoredDefault = require("./isCalleeIgnoredDefault"),
+	isParameterOfParent = require("./isParameterOfParent");
 
 module.exports =
 	({
 		addDependsUponIdentifierToParent,
 		addUndeclaredReference,
+		ancestors,
 		callExpression,
 		findDeclarationAndParent,
-		findParentFunctions,
 		isCalleeIgnored = isCalleeIgnoredDefault,
 		isVariableInBlockScoped,
 		removeExtensionFromFilePath,
@@ -28,12 +29,12 @@ module.exports =
 			});
 
 		if (calleeName)
-			addFromParentFunctions(
-				findParentFunctions(),
+			addToParent(
+				findBlockOrIdentifiableParentInAncestors(ancestors),
 			);
 
-		function addFromParentFunctions(
-			parentFunctions,
+		function addToParent(
+			parent,
 		) {
 			addDependsUponIdentifier(
 				getIdentifierNameFromAndAddOrUpdateReference(
@@ -56,7 +57,7 @@ module.exports =
 					getIdentifierNameFromAndAddOrUpdateReferenceOfParent({
 						addUndeclaredReference,
 						findDeclarationAndParent,
-						parentFunctions,
+						parent,
 						reference,
 					})
 				);
@@ -68,7 +69,7 @@ module.exports =
 				if (isIdentifierRelevant())
 					addDependsUponIdentifierToParent({
 						identifier,
-						parent: getParent(),
+						parent,
 					});
 
 				function isIdentifierRelevant() {
@@ -77,55 +78,10 @@ module.exports =
 						&&
 						!isVariableInBlockScoped(identifier)
 						&&
-						!isParameterOfAnyParentFunction(identifier)
-					);
-				}
-
-				function getParent() {
-					return whenBlockOrIdentifiable() || null;
-
-					function whenBlockOrIdentifiable() {
-						return (
-							parentFunctions
-							&&
-							parentFunctions.blockOrIdentifiable
-						);
-					}
-				}
-			}
-
-			function isParameterOfAnyParentFunction(
-				name,
-			) {
-				return (
-					parentFunctions
-					&&
-					(ofBlockOrIdentifiable() || ofAnonymous())
-				);
-
-				function ofBlockOrIdentifiable() {
-					return (
-						parentFunctions.blockOrIdentifiable
-						&&
-						isParameterOfParentFunction(parentFunctions.blockOrIdentifiable)
-					);
-				}
-
-				function ofAnonymous() {
-					return (
-						parentFunctions.anonymous
-						&&
-						parentFunctions.anonymous.some(isParameterOfParentFunction)
-					);
-				}
-
-				function isParameterOfParentFunction(
-					parentFunction,
-				) {
-					return (
-						parentFunction.params
-						.flatMap(getNamesFromDestructureOrIdentifier)
-						.includes(name)
+						!isParameterOfParent({
+							ancestors,
+							name: identifier,
+						})
 					);
 				}
 			}

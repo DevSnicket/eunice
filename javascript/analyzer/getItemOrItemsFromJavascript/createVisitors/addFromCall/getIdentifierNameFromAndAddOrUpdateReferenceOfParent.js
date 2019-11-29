@@ -4,7 +4,7 @@ module.exports =
 	({
 		addUndeclaredReference,
 		findDeclarationAndParent,
-		parentFunctions,
+		parent,
 		reference,
 	}) => {
 		const declarationAndParent =
@@ -16,7 +16,7 @@ module.exports =
 			return getNameFromDeclaration();
 		else {
 			addUndeclaredReference({
-				parent: parentFunctions && parentFunctions.blockOrIdentifiable,
+				parent,
 				reference,
 			});
 
@@ -55,9 +55,9 @@ module.exports =
 
 			function isParent() {
 				return (
-					parentFunctions
+					parent
 					?
-					declarationAndParent.parent === parentFunctions.blockOrIdentifiable
+					declarationAndParent.parent === parent
 					:
 					!declarationAndParent.parent
 				);

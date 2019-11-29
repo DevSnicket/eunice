@@ -2,7 +2,7 @@
 
 const
 	createDeclarationForFunction = require("./createDeclarationForFunction"),
-	{ findBlockOrIdentifiableParent } = require("../parentFunctionsFromAncestors"),
+	findBlockOrIdentifiableParentInAncestors = require("../findBlockOrIdentifiableParentInAncestors"),
 	getIdentifierAndParentAndTypeForFunctionExpression = require("./getIdentifierAndParentAndTypeForFunctionExpression"),
 	getIdentifierAndParentAndTypeForFunctionExpressionParentWhenCommonjsExport = require("../commonjs/getIdentifierAndParentAndTypeForFunctionExpressionParentWhenExport"),
 	getIdentifierAndParentAndTypeForFunctionExpressionWhenModuleExport = require("../forModules/getIdentifierAndParentAndTypeForFunctionExpressionWhenExport"),
@@ -11,7 +11,7 @@ const
 
 module.exports =
 	({
-		createDependsUponPropertyForParent,
+		createDependsUponProperty,
 		declarations,
 		hasUndeclaredReferenceTo,
 	}) => {
@@ -44,7 +44,7 @@ module.exports =
 							),
 					}),
 				parent:
-					findBlockOrIdentifiableParent(ancestors),
+					findBlockOrIdentifiableParentInAncestors(ancestors),
 			});
 		}
 
@@ -106,7 +106,7 @@ module.exports =
 			return (
 				createDeclarationForFunction({
 					dependsUponProperty:
-						createDependsUponPropertyForParent(
+						createDependsUponProperty(
 							{ parent: functionDeclarationOrExpression },
 						),
 					functionDeclarationOrExpression,

@@ -2,6 +2,7 @@
 
 const
 	addClass = require("./addClass"),
+	addClassProperty = require("./addClassProperty"),
 	addFromAssignmentOfCommonjsExport = require("./commonjs/addFromAssignmentOfExport"),
 	addFromCall = require("./addFromCall"),
 	addVariables = require("./addVariables"),
@@ -11,10 +12,10 @@ const
 	createFileItemOrItems = require("./createFileItemOrItems"),
 	createScopedVariables = require("./createScopedVariables"),
 	createUndeclaredReferences = require("./createUndeclaredReferences"),
+	findBlockOrIdentifiableParentInAncestors = require("./findBlockOrIdentifiableParentInAncestors"),
 	forFunctions = require("./forFunctions"),
 	forModules = require("./forModules"),
 	getParentFromAncestors = require("./getParentFromAncestors"),
-	parentFunctionsFromAncestors = require("./parentFunctionsFromAncestors"),
 	stackItemsWhenMultiple = require("./stackItemsWhenMultiple"),
 	throwErrorWhenAnyUnhandled = require("./throwErrorWhenAnyUnhandled");
 
@@ -38,8 +39,8 @@ module.exports =
 		return (
 			{
 				...forFunctions({
-					createDependsUponPropertyForParent:
-						dependsUponIdentifiers.createPropertyForParent,
+					createDependsUponProperty:
+						dependsUponIdentifiers.createPropertyAndRemoveIdentifiers,
 					declarations,
 					hasUndeclaredReferenceTo:
 						undeclaredReferences.hasReferenceTo,
@@ -60,6 +61,8 @@ module.exports =
 					visitClass,
 				ClassExpression:
 					visitClass,
+				ClassProperty:
+					visitClassProperty,
 				NewExpression:
 					visitCallExpression,
 				VariableDeclaration:
@@ -93,11 +96,10 @@ module.exports =
 							parent,
 							reference,
 						}),
+				ancestors,
 				callExpression,
 				findDeclarationAndParent:
 					declarations.findDeclarationAndParent,
-				findParentFunctions:
-					() => parentFunctionsFromAncestors.findParents(ancestors),
 				isCalleeIgnored,
 				isVariableInBlockScoped:
 					variable =>
@@ -116,9 +118,23 @@ module.exports =
 			addClass({
 				ancestors,
 				classDeclarationOrExpression,
-				createDependsUponPropertyForParent:
-					dependsUponIdentifiers.createPropertyForParent,
+				createDependsUponProperty:
+					dependsUponIdentifiers.createPropertyAndRemoveIdentifiers,
 				declarations,
+			});
+		}
+
+		function visitClassProperty(
+			classProperty,
+			ancestors,
+		) {
+			addClassProperty({
+				addDeclarationIn:
+					declarations.addDeclarationIn,
+				ancestors,
+				classProperty,
+				createDependsUponProperty:
+					dependsUponIdentifiers.createPropertyAndRemoveIdentifiers,
 			});
 		}
 
@@ -136,7 +152,7 @@ module.exports =
 				parent:
 					getParentFromAncestors(ancestors),
 				parentFunction:
-					parentFunctionsFromAncestors.findBlockOrIdentifiableParent(ancestors),
+					findBlockOrIdentifiableParentInAncestors(ancestors),
 				removeExtensionFromFilePath,
 				variableDeclaration,
 			});
@@ -144,7 +160,7 @@ module.exports =
 
 		function getItemOrItems() {
 			const dependsUponProperty =
-				dependsUponIdentifiers.createPropertyForParent(
+				dependsUponIdentifiers.createPropertyAndRemoveIdentifiers(
 					{ parent: null },
 				);
 

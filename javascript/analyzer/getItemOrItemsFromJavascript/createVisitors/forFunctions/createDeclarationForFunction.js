@@ -4,8 +4,8 @@ require("array.prototype.flatmap")
 .shim();
 
 const
-	getNamesFromDestructureOrIdentifier = require("../getNamesFromDestructureOrIdentifier"),
-	stackItemsWhenMultiple = require("../stackItemsWhenMultiple");
+	createItemsProperty = require("../createItemsProperty"),
+	getNamesFromDestructureOrIdentifier = require("../getNamesFromDestructureOrIdentifier");
 
 module.exports =
 	({
@@ -15,30 +15,22 @@ module.exports =
 		identifier,
 		items,
 		type,
-	}) => {
-		const itemOrItems =
-			stackItemsWhenMultiple({
-				items:
-					[
-						...createParameterItemsForFunction({
-							functionDeclarationOrExpression,
-							hasUndeclaredReferenceTo,
-						}),
-						...items || [],
-					],
-				withSingleInArray:
-					false,
-			});
-
-		return (
-			{
-				...identifier && { id: identifier },
-				...type && { type },
-				...dependsUponProperty,
-				...itemOrItems && { items: itemOrItems },
-			}
-		);
-	};
+	}) => (
+		{
+			...identifier && { id: identifier },
+			...type && { type },
+			...dependsUponProperty,
+			...createItemsProperty(
+				[
+					...createParameterItemsForFunction({
+						functionDeclarationOrExpression,
+						hasUndeclaredReferenceTo,
+					}),
+					...items || [],
+				],
+			),
+		}
+	);
 
 function createParameterItemsForFunction({
 	functionDeclarationOrExpression,

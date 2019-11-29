@@ -7,7 +7,7 @@ module.exports =
 		return (
 			{
 				addIdentifierToParent,
-				createPropertyForParent,
+				createPropertyAndRemoveIdentifiers,
 				getGroupedByParent,
 			}
 		);
@@ -24,7 +24,7 @@ module.exports =
 				dependsUponIdentifiersByParent.set(parent, new Set([ identifier ]));
 		}
 
-		function createPropertyForParent({
+		function createPropertyAndRemoveIdentifiers({
 			identifiers = [],
 			parent,
 		}) {

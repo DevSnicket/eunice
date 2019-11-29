@@ -31,10 +31,10 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"getYamlFromJavascript/tests/classProperties"
+						"getYamlFromJavascript/tests/classFields"
 					],
 				"disableOptimisticBPs": true,
-				"name": "getYamlFromJavascript classProperties Jest",
+				"name": "getYamlFromJavascript classFields Jest",
 				"program": "${workspaceFolder}/node_modules/jest/node_modules/jest-cli/bin/jest.js",
 				"request": "launch",
 				"type": "node"
