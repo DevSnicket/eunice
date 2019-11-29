@@ -7,18 +7,11 @@ module.exports =
 		classProperty,
 		createDependsUponProperty,
 	}) => {
-		if (!isFunction())
+		if (!isFunction(classProperty))
 			addDeclarationIn({
 				declaration: createDeclaration(),
 				parent: getParentClass(),
 			});
-
-		function isFunction() {
-			return (
-				[ "ArrowFunctionExpression", "FunctionExpression" ]
-				.includes(classProperty.value.type)
-			);
-		}
 
 		function createDeclaration() {
 			return (
@@ -35,3 +28,14 @@ module.exports =
 			return ancestors[ancestors.length - 3];
 		}
 	};
+
+function isFunction(
+	{ value },
+) {
+	return (
+		value
+		&&
+		[ "ArrowFunctionExpression", "FunctionExpression" ]
+		.includes(value.type)
+	);
+}
