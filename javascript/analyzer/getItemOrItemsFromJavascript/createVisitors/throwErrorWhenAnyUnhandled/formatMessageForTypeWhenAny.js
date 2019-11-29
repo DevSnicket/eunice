@@ -41,9 +41,10 @@ function formatItems({
 function formatParent({
 	end,
 	id,
+	key,
 	start,
 }) {
-	return `Expression from character ${start} to ${end}${formatParentIdentifier(id)}`;
+	return `Expression from character ${start} to ${end}${formatParentIdentifier(id || key)}`;
 }
 
 function formatParentIdentifier(

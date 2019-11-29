@@ -6,12 +6,21 @@ const
 	{ parse } = require("@babel/parser"),
 	throwErrorWhenAnyUnhandled = require("../throwErrorWhenAnyUnhandled");
 
-test(
-	"Unhandled declaration throws error.",
-	() => {
+test.each([ "id", "key" ])(
+	"Unhandled declaration with parent identifier in \"%s\" throws error.",
+	parentIdentifierPropertyName => {
 		const
-			identifier = "variable",
-			parent = { end: 2, start: 1 };
+			identifier =
+				"variable",
+			parent =
+				{
+					end:
+						2,
+					[parentIdentifierPropertyName]:
+						{ name: "parent" },
+					start:
+						1,
+				};
 
 		expect(
 			() => {
@@ -31,7 +40,7 @@ test(
 				});
 			},
 		)
-		.toThrowError(`Unhandled declarations:\nExpression from character ${parent.start} to ${parent.end} contains unhandled identifiers of "${identifier}"`);
+		.toThrowError(`Unhandled declarations:\nExpression from character ${parent.start} to ${parent.end} with identifier "parent" contains unhandled identifiers of "${identifier}"`);
 	},
 );
 
