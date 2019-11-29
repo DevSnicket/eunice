@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.27.0 on 2019-11-29T07:51:26.783Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.27.1 on 2019-11-29T10:20:07.284Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -1562,23 +1562,23 @@
                     - id: addClassProperty
                       type: file
                       items:
-                        id: addClassProperty
-                        type: export
-                        dependsUpon:
-                          - createDeclaration
-                          - getParentClass
-                          - isFunction
-                        items:
-                          - - isFunction
-                            - id: createDeclaration
-                              dependsUpon:
-                                - classProperty
-                                - createDependsUponProperty
-                            - getParentClass
-                          - - id: classProperty
-                              type: parameter
-                            - id: createDependsUponProperty
-                              type: parameter
+                        - - id: addClassProperty
+                            type: export
+                            dependsUpon:
+                              - createDeclaration
+                              - getParentClass
+                              - isFunction
+                            items:
+                              - - id: createDeclaration
+                                  dependsUpon:
+                                    - classProperty
+                                    - createDependsUponProperty
+                                - getParentClass
+                              - - id: classProperty
+                                  type: parameter
+                                - id: createDependsUponProperty
+                                  type: parameter
+                        - - isFunction
                     - id: addVariables
                       type: file
                       items:
