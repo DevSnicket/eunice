@@ -1,11 +1,17 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
+const createItemsProperty = require("./createItemsProperty");
+
 module.exports =
 	({
 		ancestors,
-		addDeclarationIn,
 		classProperty,
 		createDependsUponProperty,
+		declarations:
+			{
+				addDeclarationIn,
+				createItemsForAndRemoveDeclarationsIn,
+			},
 	}) => {
 		if (!isFunction(classProperty))
 			addDeclarationIn({
@@ -19,6 +25,11 @@ module.exports =
 					id: classProperty.key.name,
 					...createDependsUponProperty(
 						{ parent: classProperty },
+					),
+					...createItemsProperty(
+						createItemsForAndRemoveDeclarationsIn(
+							classProperty,
+						),
 					),
 				}
 			);

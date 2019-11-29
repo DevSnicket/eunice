@@ -129,12 +129,11 @@ module.exports =
 			ancestors,
 		) {
 			addClassProperty({
-				addDeclarationIn:
-					declarations.addDeclarationIn,
 				ancestors,
 				classProperty,
 				createDependsUponProperty:
 					dependsUponIdentifiers.createPropertyAndRemoveIdentifiers,
+				declarations,
 			});
 		}
 
