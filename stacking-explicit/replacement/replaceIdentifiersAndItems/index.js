@@ -27,23 +27,19 @@ function withReplaceIdentifierOrItem(
 
 		function replaceValue() {
 			return (
-				whenLevelOrStack()
-				||
+				Array.isArray(identifierOrItemOrLevelOrStack)
+				?
+				getLevelOrStackOrSingleItem(
+					mapFilter(
+						identifierOrItemOrLevelOrStack,
+						withAncestors(ancestors).replaceIdentifierOrItemOrLevel,
+					),
+				)
+				:
 				replaceIdentifierOrItem({
 					ancestors,
 					identifierOrItem: identifierOrItemOrLevelOrStack,
 				})
-			);
-		}
-
-		function whenLevelOrStack() {
-			return (
-				Array.isArray(identifierOrItemOrLevelOrStack)
-				&&
-				identifierOrItemOrLevelOrStack.map(
-					withAncestors(ancestors)
-					.replaceIdentifierOrItemOrLevel,
-				)
 			);
 		}
 	}
@@ -57,29 +53,24 @@ function withReplaceIdentifierOrItem(
 			identifierOrItemOrLevel,
 		) {
 			return (
-				whenLevel()
-				||
+				Array.isArray(identifierOrItemOrLevel)
+				?
+				replaceLevel(identifierOrItemOrLevel)
+				:
 				replaceIdentifierOrItem({
 					ancestors,
 					identifierOrItem:
 						identifierOrItemOrLevel,
 				})
 			);
-
-			function whenLevel() {
-				return (
-					Array.isArray(identifierOrItemOrLevel)
-					&&
-					replaceLevel(identifierOrItemOrLevel)
-				);
-			}
 		}
 
 		function replaceLevel(
 			level,
 		) {
 			return (
-				level.map(
+				mapFilter(
+					level,
 					identifierOrItem =>
 						replaceIdentifierOrItem({
 							ancestors,
@@ -88,5 +79,44 @@ function withReplaceIdentifierOrItem(
 				)
 			);
 		}
+	}
+}
+
+function mapFilter(
+	array,
+	selector,
+) {
+	return (
+		getWhenNotEmpty(
+			array
+			.map(selector)
+			.filter(item => item),
+		)
+	);
+}
+
+function getWhenNotEmpty(
+	array,
+) {
+	return whenEmpty() || null;
+
+	function whenEmpty() {
+		return array.length && array;
+	}
+}
+
+function getLevelOrStackOrSingleItem(
+	array,
+) {
+	return whenSingle() || array;
+
+	function whenSingle() {
+		return (
+			array
+			&&
+			array.length === 1
+			&&
+			getLevelOrStackOrSingleItem(array[0])
+		);
 	}
 }

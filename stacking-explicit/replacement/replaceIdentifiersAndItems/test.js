@@ -2,25 +2,35 @@
 
 const replaceIdentifiersAndItems = require(".");
 
-test(
-	"When identifier and replace returns null, null is returned.",
+describe(
+	"When replace returns null then null is returned",
 	() =>
-		expect(
-			replaceIdentifiersAndItems({
-				identifierOrItemOrLevelOrStack: "identifier",
-				replace: () => null,
-			}),
-		)
-		.toBeNull(),
+		test.each(
+			[
+				"identifier",
+				[ "identifier" ],
+				[ [ "identifier" ] ],
+			],
+		)(
+			"When %j",
+			identifierOrItemOrLevelOrStack =>
+				expect(
+					replaceIdentifiersAndItems({
+						identifierOrItemOrLevelOrStack,
+						replace: () => null,
+					}),
+				)
+				.toBeNull(),
+		),
 );
 
 describe(
-	"Replace returns identifier or item.",
+	"When replace returns identifier or item then identifier or item is returned.",
 	() =>
 		test.each(
 			[
 				[
-					"When identifier, replace is called with no ancestors and identifier, and identifier is returned.",
+					"When identifier then replace is called with no ancestors and identifier, and identifier is returned.",
 					"identifier",
 					[ [ {
 						ancestors: [],
@@ -28,7 +38,7 @@ describe(
 					} ] ],
 				],
 				[
-					"When item, replace is called with no ancestors and item, and item is returned.",
+					"When item then replace is called with no ancestors and item, and item is returned.",
 					{ id: "item" },
 					[ [ {
 						ancestors: [],
@@ -36,7 +46,7 @@ describe(
 					} ] ],
 				],
 				[
-					"When level of two items, replace is called with no ancestors and first item, then with no ancestors and second item, and level is returned.",
+					"When level of two items then replace is called with no ancestors and first item, then with no ancestors and second item, and level is returned.",
 					[
 						{ id: "item1" },
 						{ id: "item2" },
@@ -53,7 +63,7 @@ describe(
 					],
 				],
 				[
-					"When stack of two items, replace is called with no ancestors and first item, then with no ancestors and second item, and stack is returned.",
+					"When stack of two items then replace is called with no ancestors and first item, then with no ancestors and second item, and stack is returned.",
 					[
 						[ { id: "item1" } ],
 						[ { id: "item2" } ],
@@ -91,4 +101,24 @@ describe(
 				});
 			},
 		),
+);
+
+test(
+	"When replace returns \"identifierToKeep\" or null when \"identifierToRemove\" and stack then \"identifierToKeep\" is returned",
+	() =>
+		expect(
+			replaceIdentifiersAndItems({
+				identifierOrItemOrLevelOrStack:
+					[
+						[ "identifierToKeep" ],
+						[ "identifierToRemove" ],
+					],
+				replace:
+					({ identifierOrItem }) =>
+						identifierOrItem !== "identifierToRemove"
+						&&
+						identifierOrItem,
+			}),
+		)
+		.toEqual("identifierToKeep"),
 );
