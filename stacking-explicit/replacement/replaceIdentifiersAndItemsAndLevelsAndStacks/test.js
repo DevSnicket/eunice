@@ -40,6 +40,18 @@ test.each(
 			},
 			{ id: "parent", items: "child" },
 		],
+		[
+			{
+				identifierOrItemOrLevelOrStack:
+					{ id: "parent", items: "child" },
+				replace:
+					({ identifierOrItemOrLevelOrStack }) =>
+						identifierOrItemOrLevelOrStack !== "child"
+						&&
+						identifierOrItemOrLevelOrStack,
+			},
+			{ id: "parent" },
+		],
 	],
 )(
 	"%j with replacement %j returns %j",
@@ -98,6 +110,24 @@ test.each(
 				{
 					ancestors: [],
 					identifierOrItemOrLevelOrStack: [ [ "first" ], [ "second" ] ],
+				},
+			],
+		],
+		[
+			[ [ "first" ], "second" ],
+			[
+				{
+					ancestors: [],
+					identifierOrItemOrLevelOrStack: [ [ "first" ], "second" ],
+				},
+			],
+		],
+		[
+			[ "first", [ "second" ] ],
+			[
+				{
+					ancestors: [],
+					identifierOrItemOrLevelOrStack: [ "first", [ "second" ] ],
 				},
 			],
 		],

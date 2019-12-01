@@ -73,7 +73,7 @@ function withReplaceIdentifierOrItemOrLevelOrStack(
 
 			function whenStack() {
 				return (
-					Array.isArray(levelOrStack[0])
+					levelOrStack.some(Array.isArray)
 					&&
 					replaceInStack(levelOrStack)
 				);
@@ -83,7 +83,25 @@ function withReplaceIdentifierOrItemOrLevelOrStack(
 		function replaceInStack(
 			stack,
 		) {
-			return stack.map(replaceInLevel);
+			return stack.map(getWhenIdentifierOrReplaceInItemOrLevel);
+		}
+
+		function getWhenIdentifierOrReplaceInItemOrLevel(
+			level,
+		) {
+			return (
+				whenLevel()
+				||
+				getWhenIdentifierOrReplaceInItem(level)
+			);
+
+			function whenLevel() {
+				return (
+					Array.isArray(level)
+					&&
+					replaceInLevel(level)
+				);
+			}
 		}
 
 		function replaceInLevel(
@@ -114,32 +132,34 @@ function withReplaceIdentifierOrItemOrLevelOrStack(
 			item,
 		) {
 			return (
-				{
-					...item,
-					...getItemsProperty(),
-				}
+				replaceItemsOfItem({
+					item,
+					items:
+						withAncestors(
+							[ ...ancestors, item ],
+						)
+						.replaceAndReplaceIn(
+							item.items,
+						),
+				})
 			);
-
-			function getItemsProperty() {
-				const items = getItems();
-
-				return (
-					items
-					&&
-					{ items }
-				);
-			}
-
-			function getItems() {
-				return (
-					withAncestors(
-						[ ...ancestors, item ],
-					)
-					.replaceAndReplaceIn(
-						item.items,
-					)
-				);
-			}
 		}
 	}
+}
+
+function replaceItemsOfItem({
+	item: {
+		// remove old items property
+		// eslint-disable-next-line no-unused-vars
+		items: oldItems,
+		...restOfItem
+	},
+	items,
+}) {
+	return (
+		{
+			...restOfItem,
+			...items && { items },
+		}
+	);
 }
