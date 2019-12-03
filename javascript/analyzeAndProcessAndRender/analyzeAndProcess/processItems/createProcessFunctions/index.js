@@ -5,9 +5,9 @@ const
 	createSubsetIdentifierHierarchy = require("./createSubsetIdentifierHierarchy"),
 	ensureRootItemWithIdentifier = require("./ensureRootItemWithIdentifier"),
 	modifyStacksWithFile = require("./modifyStacksWithFile"),
+	removeEmptySelfDependentOfType = require("./removeEmptySelfDependentOfType"),
 	removePackagePrefixAndScopeInDependsUpon = require("./removePackagePrefixAndScopeInDependsUpon"),
 	{
-		removeSelfDependentItemsOfType,
 		replacement:
 			{ replaceDependsUponWithHierarchyFromSeparator },
 		sorting:
@@ -64,7 +64,11 @@ module.exports =
 						identifier: rootItemIdentifier,
 						items,
 					}),
-				removeSelfDependentVariables,
+				items =>
+					removeEmptySelfDependentOfType({
+						items,
+						type: "variable",
+					}),
 				orderItemsByType,
 				items =>
 					modifyStacksWithFile({
@@ -83,6 +87,11 @@ module.exports =
 							}),
 					}),
 				setIdentifierOfAnonymousExportToParent,
+				items =>
+					removeEmptySelfDependentOfType({
+						items,
+						type: "export",
+					}),
 				unstackIndependent,
 				items =>
 					removePackagePrefixAndScopeInDependsUpon({
@@ -106,17 +115,6 @@ function setTypeOfRootToFile(
 		setTypeOfRootItems({
 			items,
 			type: "file",
-		})
-	);
-}
-
-function removeSelfDependentVariables(
-	items,
-) {
-	return (
-		removeSelfDependentItemsOfType({
-			items,
-			type: "variable",
 		})
 	);
 }
