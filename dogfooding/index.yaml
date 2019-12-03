@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.28.0 on 2019-12-03T08:55:40.005Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.28.1 on 2019-12-03T22:53:41.124Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -1437,6 +1437,14 @@
                           - path
                           - run-tests-from-file-system
                     - id: default
+                      items:
+                        id: test
+                        type: file
+                        dependsUpon:
+                          - getYamlFromJavascript
+                          - path
+                          - run-tests-from-file-system
+                    - id: flow
                       items:
                         id: test
                         type: file
