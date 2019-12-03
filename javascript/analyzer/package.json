@@ -87,5 +87,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./harness/output/*\" ! -path \"./node_modules/**/*\" ! -path \"**/test-cases/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest --runInBand"
 	},
-	"version": "11.13.3"
+	"version": "11.13.4"
 }

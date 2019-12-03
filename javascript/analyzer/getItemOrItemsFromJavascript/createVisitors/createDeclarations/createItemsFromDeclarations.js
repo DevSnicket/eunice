@@ -57,6 +57,8 @@ module.exports =
 			identifier,
 		) {
 			return (
+				identifier
+				&&
 				declarations.some(
 					declaration =>
 						declaration.type === "export"
