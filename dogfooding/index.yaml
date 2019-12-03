@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.27.3 on 2019-11-29T20:50:11.620Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.28.0 on 2019-12-03T08:55:40.005Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -246,14 +246,13 @@
                                     - createSubsetIdentifierHierarchy
                                     - ensureRootItemWithIdentifier
                                     - modifyStacksWithFile
+                                    - removeEmptySelfDependentOfType
                                     - removePackagePrefixAndScopeInDependsUpon
                                     - replaceDependsUponWithHierarchyFromSeparator
                                     - reverseDescendantsOfItems
                                     - setDependencyPermeable
                                 - id: setTypeOfRootToFile
                                   dependsUpon: setTypeOfRootItems
-                                - id: removeSelfDependentVariables
-                                  dependsUpon: removeSelfDependentItemsOfType
                                 - id: orderItemsByType
                                   dependsUpon: orderItemsByIndexOfType
                                 - id: flattenSingleRootItemWhenHasOnlyItemsAndType
@@ -263,12 +262,7 @@
                                         dependsUpon: items
                                     - - id: items
                                         type: parameter
-                              - - id: removeSelfDependentItemsOfType
-                                  type: variable
-                                  dependsUpon:
-                                    id: processors
-                                    items: removeSelfDependentItemsOfType
-                                - id: replaceDependsUponWithHierarchyFromSeparator
+                              - - id: replaceDependsUponWithHierarchyFromSeparator
                                   type: variable
                                   dependsUpon:
                                     id: processors
@@ -451,6 +445,66 @@
                                         dependsUpon:
                                           id: processors
                                           items: createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
+                                - id: removeEmptySelfDependentOfType
+                                  type: file
+                                  items:
+                                    - - id: test
+                                        type: file
+                                        dependsUpon:
+                                          - removeEmptySelfDependentOfType
+                                          - expect
+                                          - test
+                                    - - id: removeEmptySelfDependentOfType
+                                        type: export
+                                        dependsUpon:
+                                          - removeSelfDependentOfTypes
+                                          - replaceIdentifiersAndItems
+                                    - - id: removeSelfDependentOfTypes
+                                        dependsUpon: isOfTypeAndSelfDependent
+                                        items:
+                                          - - id: isOfTypeAndSelfDependent
+                                              dependsUpon:
+                                                - identifierOrItem
+                                                - isEmptyAndSelfDependent
+                                          - - id: identifierOrItem
+                                              type: parameter
+                                    - - id: isEmptyAndSelfDependent
+                                        dependsUpon:
+                                          - isEmpty
+                                          - isSelfDependent
+                                        items:
+                                          - - id: isEmpty
+                                              dependsUpon: restOfItem
+                                            - id: isSelfDependent
+                                              dependsUpon:
+                                                - dependsUpon
+                                                - getSingleDependsUpon
+                                                - identifier
+                                                - withLowerCaseFirstCharacter
+                                          - - id: identifier
+                                              type: parameter
+                                            - id: dependsUpon
+                                              type: parameter
+                                            - id: restOfItem
+                                              type: parameter
+                                    - - id: getSingleDependsUpon
+                                        dependsUpon:
+                                          - whenSingleItemArray
+                                          - whenString
+                                        items:
+                                          - - whenString
+                                            - id: whenSingleItemArray
+                                              dependsUpon: dependsUpon
+                                          - - id: dependsUpon
+                                              type: parameter
+                                      - withLowerCaseFirstCharacter
+                                      - id: replaceIdentifiersAndItems
+                                        type: variable
+                                        dependsUpon:
+                                          id: processors
+                                          items:
+                                            id: ''
+                                            items: replaceIdentifiersAndItems
                                 - id: removePackagePrefixAndScopeInDependsUpon
                                   type: file
                                   items:
@@ -602,9 +656,6 @@
                                   type: file
                                   items:
                                     - - id: reverseDescendantsOfItems
-                                        type: export
-                                        dependsUpon: reverseDescendantsOfItems
-                                      - id: reverseDescendantsOfItems
                                         dependsUpon: reverseDescendantsOfItem
                                     - - id: reverseDescendantsOfItem
                                         dependsUpon: whenHasMultipleItems
@@ -2492,9 +2543,6 @@
                       type: file
                       items:
                         - - id: getNamesFromDestructureOrIdentifier
-                            type: export
-                            dependsUpon: getNamesFromDestructureOrIdentifier
-                          - id: getNamesFromDestructureOrIdentifier
                             dependsUpon:
                               - getNamesWhenRest
                               - whenArray
@@ -3142,18 +3190,15 @@
                                           - id: getItemIdentifierHierarchy
                                             type: file
                                             items:
-                                              - id: getItemIdentifierHierarchy
-                                                type: export
-                                                dependsUpon: getItemIdentifierHierarchy
-                                              - id: getItemIdentifierHierarchy
-                                                dependsUpon: getAncestorsWhenHasParent
-                                                items:
-                                                  - - id: getAncestorsWhenHasParent
-                                                      dependsUpon:
-                                                        - getItemIdentifierHierarchy
-                                                        - parent
-                                                  - - id: parent
-                                                      type: parameter
+                                              id: getItemIdentifierHierarchy
+                                              dependsUpon: getAncestorsWhenHasParent
+                                              items:
+                                                - - id: getAncestorsWhenHasParent
+                                                    dependsUpon:
+                                                      - getItemIdentifierHierarchy
+                                                      - parent
+                                                - - id: parent
+                                                    type: parameter
                                     - id: createSubsetOfItem
                                       type: file
                                       items:
@@ -3372,9 +3417,6 @@
                             type: file
                             items:
                               - - id: readDirectoryPathRecursive
-                                  type: export
-                                  dependsUpon: readDirectoryPathRecursive
-                                - id: readDirectoryPathRecursive
                                   dependsUpon: readdir
                                   items:
                                     - - id: getFileNameOrReadDirectoryRecursive
@@ -3791,13 +3833,10 @@
                   - - id: getItemOrCreateItemForGroupAndParents
                       type: file
                       items:
-                        - id: getItemOrCreateItemForGroupAndParents
-                          type: export
-                          dependsUpon: getItemOrCreateItemForGroupAndParents
-                        - id: getItemOrCreateItemForGroupAndParents
-                          dependsUpon:
-                            - getItemOrCreateItemForGroup
-                            - getItemOrCreateItemForGroupAndParents
+                        id: getItemOrCreateItemForGroupAndParents
+                        dependsUpon:
+                          - getItemOrCreateItemForGroup
+                          - getItemOrCreateItemForGroupAndParents
                   - - id: getItemOrCreateItemForGroup
                       type: file
                       items:
@@ -3922,59 +3961,6 @@
                       dependsUpon:
                         id: dependency-and-structure
                         items: createYamlFromStack
-              - id: removeSelfDependentItemsOfType
-                type: file
-                items:
-                  - - id: bin
-                      type: file
-                      dependsUpon: callWithProcessStandardStreamsOfYaml
-                    - id: test
-                      type: file
-                      dependsUpon:
-                        - removeSelfDependentItemsOfType
-                        - expect
-                        - test
-                    - testHarnessPlugin
-                  - - id: removeSelfDependentItemsOfType
-                      type: export
-                      dependsUpon:
-                        - isSelfDependent
-                        - whenItemMatch
-                  - - id: isSelfDependent
-                      dependsUpon: isOnlyDependsUpon
-                      items: isOnlyDependsUpon
-                    - id: whenItemMatch
-                      items:
-                        - - id: getIdentifierOrItemMatchOrFilterItemsInLevelOrStack
-                            dependsUpon:
-                              - filterLevelOrStack
-                              - getIdentifierOrItemMatch
-                        - - id: filterLevelOrStack
-                            dependsUpon:
-                              - getIdentifierOrItemMatchOrFilterLevel
-                              - mapWhenNotEmptyOfTruthy
-                        - - id: getIdentifierOrItemMatchOrFilterLevel
-                            dependsUpon:
-                              - getIdentifierOrItemMatch
-                              - mapWhenNotEmptyOfTruthy
-                        - - id: getIdentifierOrItemMatch
-                            dependsUpon:
-                              - getWhenIdentifier
-                              - isItemMatchAndFilterItems
-                            items: getWhenIdentifier
-                        - - id: isItemMatchAndFilterItems
-                            dependsUpon:
-                              - createItemWithFilteredItems
-                              - itemPredicate
-                        - - id: createItemWithFilteredItems
-                            dependsUpon: getIdentifierOrItemMatchOrFilterItemsInLevelOrStack
-                          - id: itemPredicate
-                            type: parameter
-                  - - id: mapWhenNotEmptyOfTruthy
-                      items:
-                        - - dependsUpon: selector
-                        - - id: selector
-                            type: parameter
               - id: setTypeOfRootItems
                 type: file
                 items:
@@ -4490,9 +4476,6 @@
                                           - expect
                                           - test
                                     - - id: getIdentifiersInTargetLevelOrStack
-                                        type: export
-                                        dependsUpon: getIdentifiersInTargetLevelOrStack
-                                      - id: getIdentifiersInTargetLevelOrStack
                                         dependsUpon: getIdentifierOrIdentifiersInItemOrLevel
                                     - - id: getIdentifierOrIdentifiersInItemOrLevel
                                         dependsUpon:
@@ -5072,13 +5055,10 @@
                                     - - id: replaceValue
                                         dependsUpon:
                                           - ancestors
+                                          - getLevelOrStackOrSingleItem
                                           - identifierOrItemOrLevelOrStack
+                                          - mapFilter
                                           - replaceIdentifierOrItem
-                                          - whenLevelOrStack
-                                    - - id: whenLevelOrStack
-                                        dependsUpon:
-                                          - ancestors
-                                          - identifierOrItemOrLevelOrStack
                                           - withAncestors
                                     - - id: ancestors
                                         type: parameter
@@ -5090,22 +5070,26 @@
                                         dependsUpon:
                                           - ancestors
                                           - replaceIdentifierOrItem
-                                          - whenLevel
-                                        items:
-                                          - - id: whenLevel
-                                              dependsUpon:
-                                                - identifierOrItemOrLevel
-                                                - replaceLevel
-                                          - - id: identifierOrItemOrLevel
-                                              type: parameter
+                                          - replaceLevel
                                     - - id: replaceLevel
                                         dependsUpon:
                                           - ancestors
+                                          - mapFilter
                                           - replaceIdentifierOrItem
                                     - - id: ancestors
                                         type: parameter
                               - - id: replaceIdentifierOrItem
                                   type: parameter
+                        - - id: mapFilter
+                            dependsUpon: getWhenNotEmpty
+                        - - id: getWhenNotEmpty
+                            dependsUpon: whenEmpty
+                            items: whenEmpty
+                          - id: getLevelOrStackOrSingleItem
+                            dependsUpon: whenSingle
+                            items:
+                              id: whenSingle
+                              dependsUpon: getLevelOrStackOrSingleItem
                   - - id: replacement
                       type: export
                     - id: replaceIdentifiersAndItemsAndLevelsAndStacks
@@ -5162,7 +5146,18 @@
                                           - - id: levelOrStack
                                               type: parameter
                                     - - id: replaceInStack
-                                        dependsUpon: replaceInLevel
+                                        dependsUpon: getWhenIdentifierOrReplaceInItemOrLevel
+                                    - - id: getWhenIdentifierOrReplaceInItemOrLevel
+                                        dependsUpon:
+                                          - getWhenIdentifierOrReplaceInItem
+                                          - whenLevel
+                                        items:
+                                          - - id: whenLevel
+                                              dependsUpon:
+                                                - level
+                                                - replaceInLevel
+                                          - - id: level
+                                              type: parameter
                                     - - id: replaceInLevel
                                         dependsUpon: getWhenIdentifierOrReplaceInItem
                                     - - id: getWhenIdentifierOrReplaceInItem
@@ -5171,16 +5166,14 @@
                                           - whenIdentifier
                                         items: whenIdentifier
                                     - - id: replaceInItem
-                                        dependsUpon: getItemsProperty
-                                        items:
-                                          - - id: getItemsProperty
-                                              dependsUpon: getItems
-                                          - - id: getItems
-                                              dependsUpon: withAncestors
+                                        dependsUpon:
+                                          - replaceItemsOfItem
+                                          - withAncestors
                                       - id: ancestors
                                         type: parameter
                               - - id: replaceIdentifierOrItemOrLevelOrStack
                                   type: parameter
+                        - - replaceItemsOfItem
         - id: renderer
           type: file
           items:
@@ -5734,39 +5727,36 @@
                         - - id: countDependenciesOfItemAndDescendants
                             type: file
                             items:
-                              - id: countDependenciesOfItemAndDescendants
-                                type: export
-                                dependsUpon: countDependenciesOfItemAndDescendants
-                              - id: countDependenciesOfItemAndDescendants
-                                dependsUpon:
-                                  - countDependenciesOfItem
-                                  - countDependenciesOfItems
-                                  - sumDependencyCount
-                                items:
-                                  - - id: countDependenciesOfItems
-                                      dependsUpon:
-                                        - countDependenciesOfChildItemRecursive
-                                        - item
-                                        - itemCount
-                                        - sumCountsOfItems
-                                  - - id: countDependenciesOfChildItemRecursive
-                                      dependsUpon:
-                                        - countDependenciesOfItemAndDescendants
-                                        - parentStack
-                                    - id: sumCountsOfItems
-                                      dependsUpon: sumCountOfItem
-                                  - - id: sumCountOfItem
-                                      dependsUpon:
-                                        - sumCountWithScope
-                                        - sumDependencyCount
-                                  - - id: sumCountWithScope
-                                      dependsUpon: sumDependencyCount
-                                    - id: item
-                                      type: parameter
-                                    - id: parentStack
-                                      type: parameter
-                                    - id: itemCount
-                                      type: variable
+                              id: countDependenciesOfItemAndDescendants
+                              dependsUpon:
+                                - countDependenciesOfItem
+                                - countDependenciesOfItems
+                                - sumDependencyCount
+                              items:
+                                - - id: countDependenciesOfItems
+                                    dependsUpon:
+                                      - countDependenciesOfChildItemRecursive
+                                      - item
+                                      - itemCount
+                                      - sumCountsOfItems
+                                - - id: countDependenciesOfChildItemRecursive
+                                    dependsUpon:
+                                      - countDependenciesOfItemAndDescendants
+                                      - parentStack
+                                  - id: sumCountsOfItems
+                                    dependsUpon: sumCountOfItem
+                                - - id: sumCountOfItem
+                                    dependsUpon:
+                                      - sumCountWithScope
+                                      - sumDependencyCount
+                                - - id: sumCountWithScope
+                                    dependsUpon: sumDependencyCount
+                                  - id: item
+                                    type: parameter
+                                  - id: parentStack
+                                    type: parameter
+                                  - id: itemCount
+                                    type: variable
                           - id: createDependenciesInlineGroupFactories
                             type: file
                             items:
@@ -6597,9 +6587,6 @@
                       type: file
                       items:
                         - - id: initializeDependenciesInStack
-                            type: export
-                            dependsUpon: initializeDependenciesInStack
-                          - id: initializeDependenciesInStack
                             dependsUpon:
                               - initializeDependenciesInStack
                               - updateItemWhenRequired
@@ -6726,36 +6713,33 @@
                               - - id: createFromIdentifiers
                                   type: file
                                   items:
-                                    - id: createFromIdentifiers
-                                      type: export
-                                      dependsUpon: createFromIdentifiers
-                                    - id: createFromIdentifiers
-                                      dependsUpon: createWhenItems
-                                      items:
-                                        - - id: createWhenItems
-                                            dependsUpon:
-                                              - createFromItem
-                                              - items
-                                              - whenArray
-                                            items:
-                                              - - id: whenArray
-                                                  dependsUpon:
-                                                    - createFromItem
-                                                    - items
-                                              - - id: createFromItem
-                                                  dependsUpon:
-                                                    - whenString
-                                                    - withSubItems
-                                                  items:
-                                                    - - whenString
-                                                      - id: withSubItems
-                                                        dependsUpon:
-                                                          - createFromIdentifiers
-                                                          - item
-                                                    - - id: item
-                                                        type: parameter
-                                        - - id: items
-                                            type: parameter
+                                    id: createFromIdentifiers
+                                    dependsUpon: createWhenItems
+                                    items:
+                                      - - id: createWhenItems
+                                          dependsUpon:
+                                            - createFromItem
+                                            - items
+                                            - whenArray
+                                          items:
+                                            - - id: whenArray
+                                                dependsUpon:
+                                                  - createFromItem
+                                                  - items
+                                            - - id: createFromItem
+                                                dependsUpon:
+                                                  - whenString
+                                                  - withSubItems
+                                                items:
+                                                  - - whenString
+                                                    - id: withSubItems
+                                                      dependsUpon:
+                                                        - createFromIdentifiers
+                                                        - item
+                                                  - - id: item
+                                                      type: parameter
+                                      - - id: items
+                                          type: parameter
                           - id: findItemWithIdentifierFromStack
                             type: file
                             items:
@@ -6817,9 +6801,6 @@
                         - id: tests
                           items: callTestForSymmetrical
                   - - id: createYamlFromStack
-                      type: export
-                      dependsUpon: createYamlFromStack
-                    - id: createYamlFromStack
                       dependsUpon: createFromLevel
                       items:
                         id: createFromLevel
@@ -6941,9 +6922,6 @@
                                   type: file
                                   items:
                                     - - id: createParent
-                                        type: export
-                                        dependsUpon: createParent
-                                      - id: createParent
                                         items:
                                           - - id: add
                                               dependsUpon: identifiers
@@ -7057,9 +7035,6 @@
                       type: file
                       items:
                         - - id: generateAncestors
-                            type: export
-                            dependsUpon: generateAncestors
-                          - id: generateAncestors
                             dependsUpon:
                               - generateAncestors
                               - getParents
@@ -7474,9 +7449,6 @@
                       type: file
                       items:
                         - - id: createStackFromLevels
-                            type: export
-                            dependsUpon: createStackFromLevels
-                          - id: createStackFromLevels
                             dependsUpon:
                               - createLevel
                               - mapWithNewArray
