@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.28.1 on 2019-12-03T22:53:41.124Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.28.2 on 2019-12-04T14:37:05.297Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -1924,8 +1924,12 @@
                               - - id: whenAssignment
                                   type: file
                                   items:
-                                    id: whenAssignment
-                                    type: export
+                                    - - id: whenAssignment
+                                        type: export
+                                        dependsUpon:
+                                          - createFromIdentifier
+                                          - getIdentifierFromAssignmentExpressionLeft
+                                    - - createFromIdentifier
                                 - id: whenBlock
                                   type: file
                                   items:
@@ -2427,9 +2431,19 @@
                                 - id: whenModuleExportProperty
                                   dependsUpon:
                                     - getIdentifierWithType
-                                    - isModuleExport
-                              - - isModuleExport
-                                - getIdentifierWithType
+                                    - isModuleExportProperty
+                              - - getIdentifierWithType
+                        - - id: isModuleExportProperty
+                            type: file
+                            items:
+                              id: isModuleExportProperty
+                              type: export
+                              dependsUpon: isModuleExport
+                        - - id: isModuleExport
+                            type: file
+                            items:
+                              id: isModuleExport
+                              type: export
                     - id: createDeclarations
                       type: file
                       items:
@@ -2540,12 +2554,32 @@
                         - - id: isChildIdentifiableByParent
                             dependsUpon:
                               - functionExpressionTypes
-                              - identifiableParentTypes
+                              - isIdentifiableParent
+                        - - id: isIdentifiableParent
+                            dependsUpon: whenIdentifiableAssignment
+                            items:
+                              - - id: whenIdentifiableAssignment
+                                  dependsUpon: isLeftIdentifiable
+                                  items:
+                                    id: isLeftIdentifiable
+                                    dependsUpon:
+                                      - getIdentifierFromAssignmentExpressionLeft
+                                      - isCommonjsModuleExportProperty
+                                      - left
+                              - - id: left
+                                  type: parameter
+                        - - id: isCommonjsModuleExportProperty
+                            type: variable
+                            dependsUpon:
+                              id: getItemOrItemsFromJavascript
+                              items:
+                                id: createVisitors
+                                items:
+                                  id: commonjs
+                                  items: isModuleExportProperty
                           - id: selfIdentifiableTypes
                             type: variable
-                        - - id: functionExpressionTypes
-                            type: variable
-                          - id: identifiableParentTypes
+                          - id: functionExpressionTypes
                             type: variable
                     - id: getNamesFromDestructureOrIdentifier
                       type: file
@@ -2606,6 +2640,11 @@
                               dependsUpon: items
                           - - id: items
                               type: parameter
+                  - - id: getIdentifierFromAssignmentExpressionLeft
+                      type: file
+                      items:
+                        id: getIdentifierFromAssignmentExpressionLeft
+                        type: export
               - id: parseJavascriptWithBabelParserPlugins
                 type: file
                 items:
