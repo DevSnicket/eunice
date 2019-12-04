@@ -1,3 +1,4 @@
 - existing
 - [ addFromCall, commonjs, createDeclarations, createDependsUponIdentifiers, createItemsProperty, ]
 - [ findBlockOrIdentifiableParentInAncestors, getNamesFromDestructureOrIdentifier, getParentFromAncestors, hasTypeOfFunction, stackItemsWhenMultiple ]
+- getIdentifierFromAssignmentExpressionLeft

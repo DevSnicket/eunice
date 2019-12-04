@@ -1,3 +1,5 @@
 - - existing
 - - createDeclarationsWhenCallOfRequire
 - - getIdentifierAndTypeFromAssignmentLeftWhenExport
+- - isModuleExportProperty
+- - isModuleExport
