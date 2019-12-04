@@ -6,9 +6,9 @@ const
 	{ readFile } = require("fs-extra");
 
 const
-	commercialUseText = "For commercial use beyond the evaluation period (as defined in the license) visit the web page above.",
+	commercialUseText = "Commercial use requires a subscription, visit the page above for more information.",
 	distSubdirectoryPath = __dirname,
-	licenseText = "the license http://www.devsnicket.com/eunice/licensing.",
+	licenseText = "the license http://www.devsnicket.com/eunice/licensing",
 	version = "version";
 
 test(

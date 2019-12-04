@@ -45,7 +45,7 @@ module.exports =
 
 		function whenAcceptedInProcessArguments() {
 			if (processArguments[acceptLicenseParameter]) {
-				log(`By specifying --${acceptLicenseParameter} you have accepted ${licenseText}.`);
+				log(`By specifying --${acceptLicenseParameter} you have accepted ${licenseText}`);
 				logCommercialUse();
 
 				return true;
@@ -54,7 +54,7 @@ module.exports =
 		}
 
 		function instructOrPrompt() {
-			log(`To use this program you must accept ${licenseText}.`);
+			log(`To use this program you must accept ${licenseText}`);
 			logCommercialUse();
 			log();
 
@@ -68,7 +68,7 @@ module.exports =
 		}
 
 		function logCommercialUse() {
-			log("For commercial use beyond the evaluation period (as defined in the license) visit the web page above.");
+			log("Commercial use requires a subscription, visit the page above for more information.");
 		}
 
 		function prompt() {
