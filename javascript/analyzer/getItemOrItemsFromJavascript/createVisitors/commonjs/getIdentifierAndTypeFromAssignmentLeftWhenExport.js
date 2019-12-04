@@ -1,5 +1,9 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
+const
+	isModuleExport = require("./isModuleExport"),
+	isModuleExportProperty = require("./isModuleExportProperty");
+
 module.exports =
 	assignmentExpressionLeft => {
 		return (
@@ -67,22 +71,9 @@ function whenModuleExportProperty({
 	property,
 }) {
 	return (
-		object.type === "MemberExpression"
-		&&
-		isModuleExport(object)
+		isModuleExportProperty(object)
 		&&
 		getIdentifierWithType(property.name)
-	);
-}
-
-function isModuleExport({
-	object,
-	property,
-}) {
-	return (
-		object.name === "module"
-		&&
-		property.name === "exports"
 	);
 }
 

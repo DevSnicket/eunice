@@ -1,5 +1,9 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
+const
+	getIdentifierFromAssignmentExpressionLeft = require("./getIdentifierFromAssignmentExpressionLeft"),
+	isCommonjsModuleExportProperty = require("./commonjs/isModuleExportProperty");
+
 module.exports =
 	ancestors => {
 		let child = null;
@@ -29,7 +33,7 @@ function isChildIdentifiableByParent({
 		&&
 		functionExpressionTypes.includes(child.type)
 		&&
-		(child.body.type === "BlockStatement" || identifiableParentTypes.includes(parent.type))
+		(child.body.type === "BlockStatement" || isIdentifiableParent(parent))
 	);
 }
 
@@ -38,12 +42,37 @@ const
 		[
 			"ArrowFunctionExpression",
 			"FunctionExpression",
-		],
-	identifiableParentTypes =
+		];
+
+function isIdentifiableParent({
+	left,
+	type,
+}) {
+	return (
 		[
-			"AssignmentExpression",
 			"ClassProperty",
 			"ExportDefaultDeclaration",
 			"MethodDefinition",
 			"VariableDeclarator",
-		];
+		]
+		.includes(type)
+		||
+		whenIdentifiableAssignment()
+	);
+
+	function whenIdentifiableAssignment() {
+		return (
+			type === "AssignmentExpression"
+			&&
+			isLeftIdentifiable()
+		);
+
+		function isLeftIdentifiable() {
+			return (
+				getIdentifierFromAssignmentExpressionLeft(left)
+				||
+				isCommonjsModuleExportProperty(left)
+			);
+		}
+	}
+}
