@@ -31,6 +31,7 @@
                 <li>Modify the stacks of all files, but not the sub-stacks within those files. Requires option <a href="../options#modify-stacks">modify-stacks</a>.</li>
                 <li>The source directory is scanned for any files named .eunice-stack.yaml. Any structure defined inside these files is applied to any files also in the directory.</li>
                 <li>Anonymous items (i.e. those without an identifier) with "type: export" (e.g. module export default) are given the identifier of their parent.</li>
+                <li>Exports (CommonJS and ES6) that depend on a single item of the same name are removed.</li>
                 <li>Independent items (i.e. those that don't depend on each other) are unstacked into the same level.</li>
                 <li>If there is a single root item, that is anonymous and has only items and a type, its items are flattened out into the root</li>
             </ol>
