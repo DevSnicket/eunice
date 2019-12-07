@@ -73,7 +73,7 @@ function aggregate(
 		function fromDependsUpon() {
 			return (
 				anyInCurrentLevel({
-					itemSelector: dependUpon => dependUpon.item,
+					itemSelector: dependUpon => dependUpon.itemOrFirstAncestorItem,
 					items: item.dependsUpon,
 				})
 			);
@@ -95,20 +95,30 @@ function aggregate(
 		return (
 			items
 			&&
-			items.some(item => hasLevelOfOrInCurrentLevel(itemSelector(item).level))
+			items.some(item => hasLevelOfCurrent(itemSelector(item)))
 		);
 	}
 
-	function hasLevelOfOrInCurrentLevel(
+	function hasLevelOfCurrent(
+		item,
+	) {
+		return item && isOrIsInCurrentLevel(item.level);
+	}
+
+	function isOrIsInCurrentLevel(
 		level,
 	) {
-		return level && isOrIsInCurrentLevel();
+		return (
+			level
+			&&
+			(level === currentLevel || isInCurrentLevel())
+		);
 
-		function isOrIsInCurrentLevel() {
+		function isInCurrentLevel() {
 			return (
-				level === currentLevel
-				||
-				(level.stack.parent && hasLevelOfOrInCurrentLevel(level.stack.parent.level))
+				level.stack.parent
+				&&
+				isOrIsInCurrentLevel(level.stack.parent.level)
 			);
 		}
 	}

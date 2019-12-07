@@ -41,6 +41,22 @@ test.each(
 		],
 		[
 			[
+				[ {
+					dependsUpon: { id: "item2", items: "missing" },
+					id: "item1",
+				} ],
+				[ "item2" ],
+			],
+			[
+				[ {
+					dependsUpon: { id: "item2", items: "missing" },
+					id: "item1",
+				} ],
+				[ "item2" ],
+			],
+		],
+		[
+			[
 				[ { dependsUpon: "item2", id: "item1" } ],
 				[ "item2" ],
 				[ "item3" ],
