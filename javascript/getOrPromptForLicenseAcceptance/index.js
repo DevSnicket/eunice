@@ -68,7 +68,7 @@ module.exports =
 		}
 
 		function logCommercialUse() {
-			log("Commercial use requires a subscription, visit the page above for more information.");
+			log("Commercial use (after the evaluation period) requires a subscription, visit the page above for more information.");
 		}
 
 		function prompt() {
