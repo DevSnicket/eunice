@@ -15,16 +15,18 @@
   - call-with-process-standard-streams
   - run-tests-from-file-system
   - test-harnesses
--
-  - fs-extra
-  - id: jest
+- - id: 3rd party packages
     dependencyPermeable: true
-    items: [ describe, expect ]
-  - js-yaml
-  - minimist
-  - monaco-editor
-  - pretty-format
-  - react
-  - react-dom
-  - string-pixel-width
-  - webpack
+    items:
+      - fs-extra
+      - id: jest
+        dependencyPermeable: true
+        items: [ describe, expect ]
+      - js-yaml
+      - minimist
+      - monaco-editor
+      - pretty-format
+      - react
+      - react-dom
+      - string-pixel-width
+      - webpack
