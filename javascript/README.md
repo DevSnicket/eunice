@@ -1,6 +1,6 @@
 # Eunice ![](https://raw.githubusercontent.com/DevSnicket/eunice/master/arrows/default-height.svg?sanitize=true) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
 
-Eunice helps improve software architecture, by analyzing, measuring, exploring and defining; structure and dependencies.
+Eunice helps improve software architecture by analyzing, measuring, exploring and defining; structure and dependencies.
 
 Eunice is based on the premise that software structure and modularity improve when dependencies are unidirectional. Eunice's approach isn't limited to direct dependencies, but includes indirect dependencies as well.
 
