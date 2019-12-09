@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.32.0 on 2019-12-09T07:38:07.063Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.32.0 on 2019-12-09T07:52:33.410Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -8347,17 +8347,20 @@
                   - getQuoted
             - - getQuoted
               - getEscaped
-- - fs-extra
-  - id: jest
+- - id: 3rd party packages
     dependencyPermeable: true
     items:
-      - describe
-      - expect
-  - js-yaml
-  - minimist
-  - monaco-editor
-  - pretty-format
-  - react
-  - react-dom
-  - string-pixel-width
-  - webpack
+      - fs-extra
+      - id: jest
+        dependencyPermeable: true
+        items:
+          - describe
+          - expect
+      - js-yaml
+      - minimist
+      - monaco-editor
+      - pretty-format
+      - react
+      - react-dom
+      - string-pixel-width
+      - webpack
