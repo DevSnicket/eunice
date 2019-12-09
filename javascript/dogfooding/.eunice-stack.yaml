@@ -2,6 +2,7 @@
 -
   - javascript-analyzer
   - id: processors and renderer
+    dependencyPermeable: true
     items:
       - - renderer-test-harness
       -
@@ -15,6 +16,15 @@
   - run-tests-from-file-system
   - test-harnesses
 -
+  - fs-extra
   - id: jest
     dependencyPermeable: true
     items: [ describe, expect ]
+  - js-yaml
+  - minimist
+  - monaco-editor
+  - pretty-format
+  - react
+  - react-dom
+  - string-pixel-width
+  - webpack
