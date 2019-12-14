@@ -34,7 +34,7 @@ const cliArguments =
 			});
 		}
 	} catch (error) {
-		console.log(error);
+		console.log(error.message);
 	}
 
 	// Process exit required as this is a top-level promise
