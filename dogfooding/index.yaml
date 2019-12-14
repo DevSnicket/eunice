@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.33.0 on 2019-12-09T08:00:11.303Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.34.0 on 2019-12-14T14:16:23.980Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -9,7 +9,6 @@
             - analyzeAndProcessAndRender
             - cliArguments
             - createParameterFromCliArguments
-            - error
             - isLicenseAccepted
             - version
       - - id: isLicenseAccepted
