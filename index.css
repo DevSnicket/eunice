@@ -5,8 +5,8 @@ body {
 }
 
 body img {
-    max-width: 85vw;
-    max-width: calc(100vw - 4em);
+    max-width: 85%;
+    max-width: calc(100% - 4em);
 }
 
 a:link,
@@ -47,8 +47,8 @@ a:active {
 }
 
 .box img {
-    max-width: 75vw;
-    max-width: calc(100vw - 6em);
+    max-width: 75%;
+    max-width: calc(100% - 6em);
 }
 
 .content {
@@ -160,6 +160,10 @@ body > .header .menu a.current {
     background-color: white;
     border-color: #F7F7F7;
     color: unset;
+}
+
+code {
+    margin-left: 2em;
 }
 
 .horizontal-container {

@@ -1,0 +1,170 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="../favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="../index.css" rel="stylesheet" />
+    <link href="../terminal/index.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .arrows-with-descriptions {
+            background-image: url(../arrows/with-descriptions.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            height: 10em;
+        }
+
+        .content > img,
+        .image-right > img {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .terminal {
+            width: fit-content;
+        }
+
+        .terminal > .text {
+            white-space: pre-wrap;
+        }
+
+        .terminal > .text .new {
+            font-weight: bold;
+        }
+
+        .terminal > .text .parameter {
+            white-space: nowrap;
+        }
+
+        @media (min-width: 52em) {
+            .image-right {
+                align-items: flex-start;
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .image-right > :first-child {
+                flex-basis: 0;
+                flex-grow: 1;
+                margin-right: 0.5em;
+            }
+
+            .image-right > img {
+                margin-left: 0.5em;
+            }
+        }
+        
+
+        @media (prefers-color-scheme: dark) {
+            .arrows-with-descriptions {
+                background-image: url(../arrows/dark/with-descriptions.svg);
+            }
+        }
+    </style>
+    <title>Case Studies | Eunice</title>
+</head>
+<body>
+    <div class="header">
+        <div class="content">
+            <h1><a href=".."><span><span class="red">e</span>uni<span class="red">ce</span></span><div class="arrows"></div></a></h1>
+            <span class="menu"><a href="..">introduction</a><a href="../structure">structure</a><a href="../dependencies">dependencies</a><a class="current" href="../case-studies">case studies</a><a href="../javascript">JavaScript<a href="../issues">issues</a><a href="../licensing">licensing</a><a href="../advanced">advanced</a></span>
+        </div>
+    </div>
+    <div class="content">
+        <h2 style="margin-bottom: 0">React case study</h2>
+        <div class="image-right">
+            <div>
+                <p>This case study investigates and demonstrates the capabilities of Eunice, by using Eunice on the JavaScript library <a href="https://reactjs.org/" target="_blank">React</a>.</p>
+                <p>The case study isn't intended as a commentary or critique of React. Decisions made during it are constrained by the authors understanding of React. With more insight into React, different choices might be made if Eunice was used by its contributors.</p>
+                <p style="margin-bottom: 0">Suggestions to improve the case study are welcome. Hopefully it's helpful to React contributors or to those who have an interest in React.</p>
+            </div>
+            <img alt="React logo" src="../react.svg" style="width:8em" />
+        </div>
+        <p>I've based the case study on the <a href="https://github.com/DevSnicket/react/commit/0f3838a01b0fda0ac5fd054c6be13166697a113c" target="_blank">0f3838a</a> commit in the React repository. I've created a fork to make it easier if you want to follow along:</p>
+        <div class="terminal">
+            <div class="title-bar">terminal</div>
+            <div class="text">git clone https://github.com/DevSnicket/react.git react-eunice
+cd react-eunice</div>
+        </div>
+        <p>Eunice can be downloaded from NPM and run without installing using NPX:</p>
+        <div class="terminal">
+            <div class="title-bar">terminal</div>
+            <div class="text">npx eunice</div>
+        </div>
+        <p>You will be prompted to accept a EULA. Eunice is free to use on open source projects, and its free to use for education and training. Therefore contributions to React and following along with this case study both qualify. There is also an evaluation period to try Eunice out on closed source commercial software.</p>
+        <h3>configuration</h3>
+        <p>Running Eunice on React without any parameters will raise the following error:</p>
+        <div class="terminal">
+            <div class="title-bar">terminal</div>
+            <div class="text">Error: Analysis of file "packages\create-subscription\index.js" raised the following error.
+
+Unexpected token, expected ";" (14:5)</div>
+        </div>
+        <p>This error is raised because React uses <a href="https://flow.org/" target="_blank">Flow</a> syntax in its JavaScript. Eunice uses <a hre="https://babeljs.io/" target="_blank"> Babel</a> to parse JavaScript and a Flow plug-in can be enabled with the option <a href="../javascript/options/#babel-parser-plugins">babel-parser-plugins</a>. Some of the Babel parser plug-ins are enabled by default and so will also need to be specified so they aren't disabled when enabling Flow:</p>
+        <div class="terminal">
+            <div class="title-bar">terminal</div>
+            <div class="text">npx eunice <span class="new"><span class="parameter">--babel-parser-plugins=classPrivateProperties</span> <span class="parameter">--babel-parser-plugins=classProperties</span> <span class="parameter">--babel-parser-plugins=dynamicImport</span> <span class="parameter">--babel-parser-plugins=flow</span> <span class="parameter">--babel-parser-plugins=jsx</span></span></div>
+        </div>
+        <p>Running Eunice with the Babel plug-ins specified above will raise a further error:</p>
+        <div class="terminal">
+            <div class="title-bar">terminal</div>
+            <div class="text">Error: Analysis of file "scripts\prettier\index.js" raised the following error.
+
+'return' outside of function (32:2)</div>
+        </div>
+        <p>Eunice parses with a <a href="https://babeljs.io/docs/en/options#sourcetype" target="_blank">Babel source type</a> of module, but the file specified in the error is a script. The option <a href="../javascript/options/#ignore-paths">ignore-path-pattern</a> can be used to ignore the "script" directory. I've also included the default ignores and one for babel.config.js. The option is specified with double quotes as the pipe character is used in the regular expression.</p>
+        <div class="terminal">
+            <div class="title-bar">terminal</div>
+            <div class="text">npx eunice <span class="parameter">--babel-parser-plugins=classPrivateProperties</span> <span class="parameter">--babel-parser-plugins=classProperties</span> <span class="parameter">--babel-parser-plugins=dynamicImport</span> <span class="parameter">--babel-parser-plugins=flow</span> <span class="parameter">--babel-parser-plugins=jsx</span> <span class="new parameter">--ignore-path-pattern="(^(\.|babel.config.js|scripts)|node_modules)"</span></div>
+        </div>
+        <p>Analysis with the options above should complete successfully and output a eunice.html file. Opening the file in a browser should show the following:</p>
+        <img src="./1 initial root.png" />
+        <p>On the left a text editor is displaying 78,696 lines of <a href="../advanced/yaml">YAML</a> produced by Eunice's analysis and <a href="../javascript/processing">processing</a> of React.</p>
+        <p>On the right is a graphical representation of all the <a href="../dependencies">dependencies</a> and the root directories (fixtures and packages) in React. The green and red count arrows represent the dependencies, categorized as follows:</p>
+        <div class="arrows-with-descriptions"></div>
+        <h3>structure</h3>
+        <p>So far, no <a href="../structure">structure</a> has been defined in any stacks, so we see items listed horizontally. Eunice also infers stacks, in JavaScript this includes the order within a file. In the browser, if for example, dangerfile is selected, the contents of the file dangerfile.js are displayed:</p>
+        <img src="./2 file sorting default dangerfile.png" />
+        <p>The items in the lowest level are all the CommonJS require calls that Eunice automatically moves below the file content. The other two levels have dependencies that don’t match and so have counts shown in red up arrows. By default Eunice expects code within a file to be ordered high level first with more detail as you move down. There is an option to reverse this:</p>
+        <div class="terminal">
+            <div class="title-bar">terminal</div>
+            <div class="text">npx eunice <span class="parameter">--babel-parser-plugins=classPrivateProperties</span> <span class="parameter">--babel-parser-plugins=classProperties</span> <span class="parameter">--babel-parser-plugins=dynamicImport</span> <span class="parameter">--babel-parser-plugins=flow</span> <span class="parameter">--babel-parser-plugins=jsx</span> <span class="parameter">--ignore-path-pattern="(^(\.|babel.config.js|scripts)|node_modules)"</span> <span class="new parameter">--is-file-content-reversed=true</span></div>
+        </div>
+        <p>The file will then show with all matching green dependency counts (after reloading the browser):</p>
+        <img src="./3 file sorting reversed dangerfile.png" />
+        <p>Looking at the root directory, a lot more of Reacts dependencies are now shown as matching in green:</p>
+        <img src="./4 file sorting reversed root.png" />
+        <p>There are still 1,592 dependencies, shown in a red horizontal arrow, that are between items that don’t have a structure defined yet.</p>
+        <p>There are often conventions in codebases and in React there are many instances of directories that are always either above or below all the other directories. One example is that the __tests__ directory depends on what it tests. Another example is that the rest of the code depends on the shared directory. This is represented below in YAML, with "existing" being used as placeholder for items not specified:</p>
+        <code>- [ forks, __tests__ ]
+- - existing
+- - src
+- - shared</code>
+        <p>The YAML above can be saved into a file (.eunice-stack-modify.yaml) and that file can be specified so that Eunice modifies all stacks with the following option:</p>
+        <div class="terminal">
+            <div class="title-bar">terminal</div>
+            <div class="text">npx eunice <span class="parameter">--babel-parser-plugins=classPrivateProperties</span> <span class="parameter">--babel-parser-plugins=classProperties</span> <span class="parameter">--babel-parser-plugins=dynamicImport</span> <span class="parameter">--babel-parser-plugins=flow</span> <span class="parameter">--babel-parser-plugins=jsx</span> <span class="parameter">--ignore-path-pattern="(^(\.|babel.config.js|scripts)|node_modules)"</span> <span class="parameter">--is-file-content-reversed=true</span> <span class="new parameter">--modify-stacks-file=.eunice-stack-modify.yaml</span></div>
+        </div>
+        <p>You can see examples of what effect this has in React by looking inside packages/react-interactions/events and its sub-directory src/dom:</p>
+        <img src="./5 modify file stacks interactions.png" />
+        <br />
+        <img src="./6 modify file stacks interactions events.png" />
+        <p>This reduces the count of mismatching dependencies in the red horizontal arrow by over a third, from 1,592 to 903:</p>
+        <img src="./7 modify file stacks root.png" />
+        <p>YAML stack files of structure like the one above can also be created for individual directories. Eunice automatically does this when files named .eunice-stack.yaml are saved with the code. I've worked through React and created 36 stack files. If you want to view the files I've created a branch called with-stacks was created and the stack files added in commit <a href="https://github.com/DevSnicket/react/commit/4dffcae81fdcfa8d288bd350d74517bd6d7d4a26" target="_blank">4dffcae</a>.</p>
+        <p>The stacks have removed all the remaining 903 unstructured dependencies; however, I wasn't able to define structures that would make all dependencies go in the same direction. These mismatching dependencies are shown in the red up arrow count of 815 below:</p>
+        <img src="./8 individual file stacks root.png"/>
+        <p>You can see more specific dependency count arrows and the structure I chose, by looking inside the packages sub-directory:</p>
+        <img src="./9 individual file stack packages.png" />
+        <p>You can interact with the result of this case study <a href="eunice.html" target="_blank">here</a>.</p>
+        <p>Ideally all dependencies should be matching, shown as counts only in the green down arrows and no red arrows. This would be a demonstration (as far as Eunice JavaScript analysis is currently capable) that dependencies were all unidirectional, including indirect dependencies.</p>
+        <p>An example of software that’s close to having only unidirectional dependencies is Eunice itself, you can see this by looking at its <a href="https://en.wikipedia.org/wiki/Eating_your_own_dog_food" target="_blank">dogfooding</a>:</p>
+        <img src="../dogfooding/index.svg" style="background: white; padding: 0.5em;" />
+        <p>You can interact with Eunice's dogfooding <a href="../dogfooding" target="_blank">here</a>.</p>
+        <p>The structures I've chosen for React are what I think are best fit for the current dependencies. This structure might not be ideal for React and its future development. It might be beneficial to structure differently, which would have higher counts of current mismatching dependencies, but would encourage contributors to change the code and its dependencies to better match that intended structure.</p>
+        <p>I defined these structures for React as an individual; however, by committing stack files to source control and running Eunice (e.g. in continuous integration), teams could collaborate and collectively define and improve the structure.</p>
+    </div>
+    <div class="footer">Copyright © 2019 Graham Dyson</div>
+</body>
+</html>
