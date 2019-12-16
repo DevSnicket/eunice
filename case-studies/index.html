@@ -126,7 +126,7 @@ Unexpected token, expected ";" (14:5)</div>
         <h3>structure</h3>
         <p>So far, no <a href="../structure">structure</a> has been defined in any stacks, so we see items listed horizontally. Eunice also infers stacks, in JavaScript this includes the order within a file. In the browser, if for example, dangerfile is selected, the contents of the file dangerfile.js are displayed:</p>
         <img src="./2 file sorting default dangerfile.png" />
-        <p>The items in the lowest level are all the CommonJS require calls that Eunice automatically moves below the file content. The other two levels have dependencies that don’t match and so have counts shown in red up arrows. By default Eunice expects code within a file to be ordered high level first with more detail as you move down. There is an option to reverse this:</p>
+        <p>The items in the lowest level are all the module import and CommonJS require calls that Eunice automatically moves below the file content. The other two levels have dependencies that don’t match and so have counts shown in red up arrows. By default Eunice expects code within a file to be ordered high level first with more detail as you move down. The option <a href="../javascript/options/#reverse-file">is-file-content-reversed</a> can reverse this:</p>
         <div class="terminal">
             <div class="title-bar">terminal</div>
             <div class="text">npx eunice <span class="parameter">--babel-parser-plugins=classPrivateProperties</span> <span class="parameter">--babel-parser-plugins=classProperties</span> <span class="parameter">--babel-parser-plugins=dynamicImport</span> <span class="parameter">--babel-parser-plugins=flow</span> <span class="parameter">--babel-parser-plugins=jsx</span> <span class="parameter">--ignore-path-pattern="(^(\.|babel.config.js|scripts)|node_modules)"</span> <span class="new parameter">--is-file-content-reversed=true</span></div>
@@ -141,7 +141,8 @@ Unexpected token, expected ";" (14:5)</div>
 - - existing
 - - src
 - - shared</code>
-        <p>The YAML above can be saved into a file (.eunice-stack-modify.yaml) and that file can be specified so that Eunice modifies all stacks with the following option:</p>
+        <p>The YAML above can be saved into a file (.eunice-stack-modify.yaml) and that file can be specified with the <a href="../javascript/options/#modify-stacks">modify-stacks-file</a> option so that Eunice modifies all stacks with the following option:</p>
+
         <div class="terminal">
             <div class="title-bar">terminal</div>
             <div class="text">npx eunice <span class="parameter">--babel-parser-plugins=classPrivateProperties</span> <span class="parameter">--babel-parser-plugins=classProperties</span> <span class="parameter">--babel-parser-plugins=dynamicImport</span> <span class="parameter">--babel-parser-plugins=flow</span> <span class="parameter">--babel-parser-plugins=jsx</span> <span class="parameter">--ignore-path-pattern="(^(\.|babel.config.js|scripts)|node_modules)"</span> <span class="parameter">--is-file-content-reversed=true</span> <span class="new parameter">--modify-stacks-file=.eunice-stack-modify.yaml</span></div>
