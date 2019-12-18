@@ -60,17 +60,18 @@ function getVersionFromComments(
 function getVersionFromCommentWhenRelease({
 	body,
 }) {
-	const match = body.match(/^released in \[JavaScript (?<text>(?<major>[0-9]*)\.(?<minor>[0-9]*)\.(?<patch>[0-9]*))/);
+	const match = body.match(/^released in \[JavaScript (([0-9]*)\.([0-9]*)\.([0-9]*))/);
 
-	return match && createVersionFromMatchGroups(match.groups);
+	return match && createVersionFromMatchGroups(match);
 }
 
-function createVersionFromMatchGroups({
+function createVersionFromMatchGroups([
+	,
+	text,
 	major,
 	minor,
 	patch,
-	text,
-}) {
+]) {
 	return (
 		{
 			major: Number(major),
