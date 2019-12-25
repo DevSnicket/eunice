@@ -9,6 +9,7 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
 						"createLinearHierarchyFromIdentifierSeparator/test.js"
 					],
@@ -32,6 +33,7 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
 						"groupItemsByIdentifierSeparator/test.js"
 					],
@@ -44,6 +46,7 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
 						"replacement/replaceIdentifiersAndItems/test.js"
 					],
@@ -56,6 +59,7 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
 						"replacement/replaceIdentifiersAndItemsAndLevelsAndStacks/test.js"
 					],
@@ -79,6 +83,7 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
 						"removeRedundantParentIdentifierPrefix/test.js"
 					],
@@ -102,6 +107,7 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
 						"replaceDependsUponWithHierarchiesOfIdentifierSeparator/test.js",
 					],
@@ -127,6 +133,7 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
 						"replaceIdentifiers/test.js",
 					],
@@ -160,6 +167,7 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
 						"sorting/orderItemsByIdentifier/test.js"
 					],
@@ -171,7 +179,8 @@
 			},
 			{
 				"args":
-					[ 
+					[
+						"--collect-coverage=false",
 						"--runInBand",
 						"sorting/orderItemsByIndex/test.js"
 					],
@@ -196,6 +205,7 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
 						"sorting/orderItemsByIndexOfType/test.js"
 					],
@@ -219,6 +229,7 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
 						"stacking/createOrAddToStacksUsingFileSystem/test.js"
 					],
@@ -231,6 +242,7 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
 						"stacking/createOrAddToStacksUsingFileSystem/getTargetLevelOrStackForAncestorsAndDirectory/test.js"
 					],
@@ -243,6 +255,7 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
 						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/createItemLookup/test.js"
 					],
@@ -255,6 +268,7 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
 						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/getExisting/test.js"
 					],
@@ -267,6 +281,7 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
 						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/getExisting/getIdentifiersInTargetLevelOrStack/test.js"
 					],
@@ -279,6 +294,7 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
 						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/getStackOrSingleLevelOrSingleItem/test.js"
 					],
@@ -291,6 +307,7 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
 						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/mapAndCreateNewInTargetLevelOrStack/test.js",
 					],
@@ -303,6 +320,7 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
 						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/mapAndCreateNewInTargetLevelOrStack/mapTargetLevelOrStack/test.js",
 					],
@@ -315,6 +333,7 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
 						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/throwErrorWhenIdentifiersNotUsed/test.js",
 					],
@@ -334,6 +353,7 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
 						"unstackIndependent/test.js",
 					],
