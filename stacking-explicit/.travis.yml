@@ -7,7 +7,7 @@ deploy:
     skip_cleanup: true
 install: [ npm install ]
 language: node_js
-node_js: [ "8.16.0" ]
+node_js: [ 8.17.0, 9.11.2, 10.18.0, 11.15.0, 12.14.0 ]
 notifications:
   email:
     on_success: never

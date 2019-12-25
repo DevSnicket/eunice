@@ -55,8 +55,8 @@ module.exports =
 	};
 
 function compare(
-	left,
-	right,
+	left = 0,
+	right = 0,
 ) {
 	return (
 		left !== right
