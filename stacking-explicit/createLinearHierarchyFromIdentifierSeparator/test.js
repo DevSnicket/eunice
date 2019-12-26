@@ -13,6 +13,11 @@ describe(
 					"identifier",
 				],
 				[
+					"Empty returns empty.",
+					{},
+					{},
+				],
+				[
 					"With single separator returns new item with child identifier.",
 					"parent/child",
 					{

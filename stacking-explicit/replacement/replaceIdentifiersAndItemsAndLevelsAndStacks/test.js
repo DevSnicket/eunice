@@ -135,12 +135,12 @@ test.each(
 			{ id: "parent", items: "child" },
 			[
 				{
-					ancestors: [],
-					identifierOrItemOrLevelOrStack: { id: "parent", items: "child" },
-				},
-				{
 					ancestors: [ { id: "parent", items: "child" } ],
 					identifierOrItemOrLevelOrStack: "child",
+				},
+				{
+					ancestors: [],
+					identifierOrItemOrLevelOrStack: { id: "parent", items: "child" },
 				},
 			],
 		],

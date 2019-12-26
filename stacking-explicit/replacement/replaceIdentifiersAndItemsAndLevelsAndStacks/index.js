@@ -29,12 +29,13 @@ function withReplaceIdentifierOrItemOrLevelOrStack(
 			identifierOrItemOrLevelOrStack,
 		) {
 			return (
-				replaceInWhenHasValue(
-					replaceIdentifierOrItemOrLevelOrStack({
-						ancestors,
-						identifierOrItemOrLevelOrStack,
-					}),
-				)
+				replaceIdentifierOrItemOrLevelOrStack({
+					ancestors,
+					identifierOrItemOrLevelOrStack:
+						replaceInWhenHasValue(
+							identifierOrItemOrLevelOrStack,
+						),
+				})
 			);
 		}
 

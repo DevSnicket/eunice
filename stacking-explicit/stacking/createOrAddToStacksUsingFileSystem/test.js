@@ -4,16 +4,21 @@ const
 	createOrAddToStacksUsingFileSystem = require("."),
 	path = require("path");
 
+const testCasesDirectory =
+	path.join(
+		__dirname,
+		"test-cases",
+	);
+
 test(
-	"stack child items",
+	"stack child items of subset",
 	() =>
 		expect(
 			createOrAddToStacksUsingFileSystem({
 				directory:
 					path.join(
-						__dirname,
-						"getTargetLevelOrStackForAncestorsAndDirectory",
-						"testCases",
+						testCasesDirectory,
+						"directoryWithStack",
 					),
 				items:
 					[
@@ -33,4 +38,44 @@ test(
 				{ id: "directoryWithStack" },
 			],
 		),
+);
+
+test(
+	"stack in subdirectory moved into child items of parent stack item",
+	() =>
+		expect(
+			createOrAddToStacksUsingFileSystem({
+				directory:
+					path.join(
+						testCasesDirectory,
+						"directoryWithStackOfSubdirectoryWithStackMovedIntoChildren",
+					),
+				items:
+					{
+						id:
+							"subdirectoryWithStack",
+						items:
+							[
+								"subdirectoryWithStackLower",
+								"subdirectoryWithStackUpper",
+							],
+					},
+				subsetIdentifierHierarchy:
+					null,
+			}),
+		)
+		.toEqual({
+			id:
+				"new item",
+			items:
+				{
+					id:
+						"subdirectoryWithStack",
+					items:
+						[
+							[ "subdirectoryWithStackUpper" ],
+							[ "subdirectoryWithStackLower" ],
+						],
+				},
+		}),
 );
