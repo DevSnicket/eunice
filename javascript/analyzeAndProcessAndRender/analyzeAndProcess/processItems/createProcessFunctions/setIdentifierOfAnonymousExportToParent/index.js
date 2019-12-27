@@ -1,6 +1,8 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const { replacement: { replaceIdentifiersAndItems } } = require("@devsnicket/eunice-processors");
+const
+	findLast = require("lodash/findLast"),
+	{ replacement: { replaceIdentifiersAndItems } } = require("@devsnicket/eunice-processors");
 
 module.exports =
 	identifierOrItemOrLevelOrStack =>
@@ -32,9 +34,11 @@ function replace({
 
 	function getParentIdentifier() {
 		return (
-			ancestors.length
-			&&
-			ancestors[ancestors.length - 1].id
+			findLast(
+				ancestors,
+				({ id }) => id,
+			)
+			.id
 		);
 	}
 }
