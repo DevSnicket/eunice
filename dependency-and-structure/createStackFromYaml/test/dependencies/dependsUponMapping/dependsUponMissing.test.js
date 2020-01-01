@@ -6,25 +6,21 @@ const
 	createStackFromLevels = require("../../../../tests/createStackFromLevels"),
 	testCreateStackFromYaml = require("../../testCreateStackFromYaml");
 
-module.exports =
-	() =>
-		testCreateStackFromYaml({
-			stack:
-				createStackFromLevels(
-					[ [ {
-						dependsUpon: [ { item: "missing" } ],
-						id: "item",
-					} ] ],
-				),
-			stackDescription:
-				"depends upon missing",
-			yaml:
-				[
-					[
-						createItemYaml({
-							dependsUpon: { id: "missing" },
-							id: "item",
-						}),
-					],
-				],
-		});
+testCreateStackFromYaml({
+	stack:
+		createStackFromLevels(
+			[ [ {
+				dependsUpon: [ { item: "missing" } ],
+				id: "item",
+			} ] ],
+		),
+	yaml:
+		[
+			[
+				createItemYaml({
+					dependsUpon: { id: "missing" },
+					id: "item",
+				}),
+			],
+		],
+});

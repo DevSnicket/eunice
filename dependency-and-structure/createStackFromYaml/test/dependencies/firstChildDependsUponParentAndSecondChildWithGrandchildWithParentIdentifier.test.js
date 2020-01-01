@@ -8,18 +8,28 @@ const
 
 const parentIdentifier = "parent";
 
-module.exports =
-	() =>
-		testCreateStackFromYaml({
-			stack:
-				createStackWithDependencies(),
-			stackDescription:
-				"first child depends upon parent and second child with grandchild with parent identifier",
-			yaml:
-				createYaml(),
-		});
+testCreateStackFromYaml({
+	stack:
+		createStack(),
+	yaml:
+		{
+			id:
+				parentIdentifier,
+			items:
+				[
+					createItemYaml({
+						dependsUpon: parentIdentifier,
+						id: "child1",
+					}),
+					createItemYaml({
+						id: "child2",
+						items: parentIdentifier,
+					}),
+				],
+		},
+});
 
-function createStackWithDependencies() {
+function createStack() {
 	const stack =
 		createStackFromLevels(
 			[
@@ -58,24 +68,4 @@ function createStackWithDependencies() {
 
 		parent.dependents = [ firstChild ];
 	}
-}
-
-function createYaml() {
-	return (
-		{
-			id:
-				parentIdentifier,
-			items:
-				[
-					createItemYaml({
-						dependsUpon: parentIdentifier,
-						id: "child1",
-					}),
-					createItemYaml({
-						id: "child2",
-						items: parentIdentifier,
-					}),
-				],
-		}
-	);
 }
