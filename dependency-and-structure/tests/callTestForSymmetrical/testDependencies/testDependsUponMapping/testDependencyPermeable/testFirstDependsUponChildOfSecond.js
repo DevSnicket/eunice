@@ -2,28 +2,29 @@
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
 const
-	createItemYaml = require("../../../../../tests/createItemYaml"),
-	createStackFromLevels = require("../../../../../tests/createStackFromLevels"),
-	testCreateStackFromYaml = require("../../../testCreateStackFromYaml");
+	createItemYaml = require("../../../../createItemYaml"),
+	createStackFromLevels = require("../../../../createStackFromLevels");
 
-testCreateStackFromYaml({
-	stack:
-		createStack(),
-	yaml:
-		[
-			[
-				createItemYaml({
-					dependsUpon: "child",
-					id: "first",
-				}),
-				createItemYaml({
-					dependencyPermeable: true,
-					id: "second",
-					items: { id: "child" },
-				}),
-			],
-		],
-});
+module.exports =
+	test =>
+		test({
+			stack:
+				createStack(),
+			stackDescription:
+				"first depends upon child of second",
+			yaml:
+				[
+					createItemYaml({
+						dependsUpon: "child",
+						id: "first",
+					}),
+					createItemYaml({
+						dependencyPermeable: true,
+						id: "second",
+						items: "child",
+					}),
+				],
+		});
 
 function createStack() {
 	const stack =

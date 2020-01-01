@@ -2,6 +2,7 @@
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
 const
+	testDependencyPermeable = require("./testDependencyPermeable"),
 	testDependsUponMissingChildInMissingParent = require("./testDependsUponMissingChildInMissingParent"),
 	testDependsUponMissingGrandchildInMissingChildInMissingParent = require("./testDependsUponMissingGrandchildInMissingChildInMissingParent"),
 	testDependsUponMissingGreatGrandchildInMssingGrandchildInMissingChildInMissingParent = require("./testDependsUponMissingGreatGrandchildInMssingGrandchildInMissingChildInMissingParent"),
@@ -26,8 +27,9 @@ const
 module.exports =
 	test =>
 		describe(
-			"mapping",
+			"depends upon mapping",
 			() => {
+				testDependencyPermeable(test);
 				testDependsUponMissingChildInMissingParent(test);
 				testDependsUponMissingGrandchildInMissingChildInMissingParent(test);
 				testDependsUponMissingGreatGrandchildInMssingGrandchildInMissingChildInMissingParent(test);
