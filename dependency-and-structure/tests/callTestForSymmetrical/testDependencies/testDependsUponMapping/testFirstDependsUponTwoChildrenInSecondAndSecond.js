@@ -6,26 +6,58 @@ const
 	createStackFromLevels = require("../../../createStackFromLevels");
 
 module.exports =
-	test => {
-		const stack =
-			createStackFromLevels(
+	test =>
+		test({
+			stack:
+				createStack(),
+			stackDescription:
+				"first depends upon two children in second and second",
+			yaml:
 				[
-					[
-						{ id: "item1" },
-						{
-							id: "item2",
-							items:
-								[
-									[
-										{ id: "child1" },
-										{ id: "child2" },
-									],
-								],
-						},
-					],
+					createItemYaml({
+						dependsUpon:
+							[
+								"item2",
+								{
+									id: "item2",
+									items: [ "child1", "child2" ],
+								},
+							],
+						id:
+							"item1",
+					}),
+					createItemYaml({
+						id: "item2",
+						items: [ "child1", "child2" ],
+					}),
 				],
-			);
+		});
 
+function createStack() {
+	const stack =
+		createStackFromLevels(
+			[
+				[
+					{ id: "item1" },
+					{
+						id: "item2",
+						items:
+							[
+								[
+									{ id: "child1" },
+									{ id: "child2" },
+								],
+							],
+					},
+				],
+			],
+		);
+
+	addDependencies();
+
+	return stack;
+
+	function addDependencies() {
 		const level = stack[0];
 
 		const children = level[1].items[0];
@@ -51,29 +83,5 @@ module.exports =
 		level[1].dependents = [ level[0] ];
 		children[0].dependents = [ level[0] ];
 		children[1].dependents = [ level[0] ];
-
-		test({
-			stack,
-			stackDescription:
-				"first depends upon two children in second and second",
-			yaml:
-				[
-					createItemYaml({
-						dependsUpon:
-							[
-								"item2",
-								{
-									id: "item2",
-									items: [ "child1", "child2" ],
-								},
-							],
-						id:
-							"item1",
-					}),
-					createItemYaml({
-						id: "item2",
-						items: [ "child1", "child2" ],
-					}),
-				],
-		});
-	};
+	}
+}

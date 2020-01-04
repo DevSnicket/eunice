@@ -2,7 +2,7 @@
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
 const
-	testDependencyBetweenTwoItem = require("./testDependencyBetweenTwoItem"),
+	testDependencyBetweenTwoItemsInSameLevel = require("./testDependencyBetweenTwoItemsInSameLevel"),
 	testDependsUponMapping = require("./testDependsUponMapping"),
 	testFirstDependsUponSecondAndThird = require("./testFirstDependsUponSecondAndThird");
 
@@ -11,7 +11,7 @@ module.exports =
 		describe(
 			"dependencies",
 			() => {
-				testDependencyBetweenTwoItem(test);
+				testDependencyBetweenTwoItemsInSameLevel(test);
 				testFirstDependsUponSecondAndThird(test);
 				testDependsUponMapping(test);
 			},

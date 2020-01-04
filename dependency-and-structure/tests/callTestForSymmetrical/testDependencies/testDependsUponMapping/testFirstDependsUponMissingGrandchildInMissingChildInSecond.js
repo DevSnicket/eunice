@@ -6,30 +6,10 @@ const
 	createStackFromLevels = require("../../../createStackFromLevels");
 
 module.exports =
-	test => {
-		const stack =
-			createStackFromLevels(
-				[
-					[
-						{ id: "item1" },
-						{ id: "item2" },
-					],
-				],
-			);
-
-		const level = stack[0];
-
-		level[0].dependsUpon =
-			[ {
-				ancestors: [ "missingChild", level[1] ],
-				item: "missingGrandchild",
-				itemOrFirstAncestorItem: level[1],
-			} ];
-
-		level[1].dependents = [ level[0] ];
-
+	test =>
 		test({
-			stack,
+			stack:
+				createStack(),
 			stackDescription:
 				"first depends upon missing grandchild in missing child in second",
 			yaml:
@@ -51,4 +31,32 @@ module.exports =
 					"item2",
 				],
 		});
-	};
+
+function createStack() {
+	const stack =
+		createStackFromLevels(
+			[
+				[
+					{ id: "item1" },
+					{ id: "item2" },
+				],
+			],
+		);
+
+	addDependencies();
+
+	return stack;
+
+	function addDependencies() {
+		const level = stack[0];
+
+		level[0].dependsUpon =
+			[ {
+				ancestors: [ "missingChild", level[1] ],
+				item: "missingGrandchild",
+				itemOrFirstAncestorItem: level[1],
+			} ];
+
+		level[1].dependents = [ level[0] ];
+	}
+}

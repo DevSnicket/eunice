@@ -6,48 +6,10 @@ const
 	createStackFromLevels = require("../../../createStackFromLevels");
 
 module.exports =
-	test => {
-		const stack =
-			createStackFromLevels(
-				[
-					[
-						{ id: "item1" },
-						{
-							id: "item2",
-							items:
-								[
-									[
-										{ id: "child1" },
-										{ id: "child2" },
-									],
-								],
-						},
-					],
-				],
-			);
-
-		const level = stack[0];
-
-		const children = level[1].items[0];
-
-		level[0].dependsUpon =
-			[
-				{
-					ancestor: level[1],
-					item: children[0],
-					itemOrFirstAncestorItem: children[0],
-				},
-				{
-					ancestor: level[1],
-					item: children[1],
-					itemOrFirstAncestorItem: children[1],
-				},
-			];
-		children[0].dependents = [ level[0] ];
-		children[1].dependents = [ level[0] ];
-
+	test =>
 		test({
-			stack,
+			stack:
+				createStack(),
 			stackDescription:
 				"first depends upon two children in second",
 			yaml:
@@ -67,4 +29,50 @@ module.exports =
 					}),
 				],
 		});
-	};
+
+function createStack() {
+	const stack =
+		createStackFromLevels(
+			[
+				[
+					{ id: "item1" },
+					{
+						id: "item2",
+						items:
+							[
+								[
+									{ id: "child1" },
+									{ id: "child2" },
+								],
+							],
+					},
+				],
+			],
+		);
+
+	addDependencies();
+
+	return stack;
+
+	function addDependencies() {
+		const level = stack[0];
+
+		const children = level[1].items[0];
+
+		level[0].dependsUpon =
+			[
+				{
+					ancestor: level[1],
+					item: children[0],
+					itemOrFirstAncestorItem: children[0],
+				},
+				{
+					ancestor: level[1],
+					item: children[1],
+					itemOrFirstAncestorItem: children[1],
+				},
+			];
+		children[0].dependents = [ level[0] ];
+		children[1].dependents = [ level[0] ];
+	}
+}
