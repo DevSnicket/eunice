@@ -12,7 +12,7 @@
 		"@babel/polyfill": "7.4.4",
 		"@babel/preset-env": "7.4.4",
 		"@devsnicket/eunice-call-with-process-standard-streams": "1.3.0",
-		"@devsnicket/eunice-dependency-and-structure": "2.18.0",
+		"@devsnicket/eunice-dependency-and-structure": "2.19.0",
 		"@devsnicket/eunice-javascript-analyzer": "11.13.6",
 		"@devsnicket/eunice-processors": "11.4.0",
 		"@devsnicket/eunice-renderer": "6.7.0",
@@ -105,5 +105,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dogfooding/output/**\" ! -path \"./dist/*\" ! -path \"./gh-pages/**\" ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest --runInBand"
 	},
-	"version": "6.35.1"
+	"version": "6.36.0"
 }
