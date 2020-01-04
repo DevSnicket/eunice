@@ -1,4 +1,2 @@
-- - test
-- - testDependencies
+- - existing
 - - testCreateStackFromYaml
-- - formatTestName
