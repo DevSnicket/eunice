@@ -71,22 +71,24 @@ function createStack() {
 	function addDependencies() {
 		const level = stack[0];
 
+		const child = level[1].items[0][0];
+
 		const
 			grandchildren =
 				[
-					level[1].items[0][0].items[0][0],
-					level[1].items[0][0].items[0][1],
+					child.items[0][0],
+					child.items[0][1],
 				];
 
 		level[0].dependsUpon =
 			[
 				{
-					ancestor: level[1],
+					ancestors: [ child, level[1] ],
 					item: grandchildren[0],
 					itemOrFirstAncestorItem: grandchildren[0],
 				},
 				{
-					ancestor: level[1],
+					ancestors: [ child, level[1] ],
 					item: grandchildren[1],
 					itemOrFirstAncestorItem: grandchildren[1],
 				},

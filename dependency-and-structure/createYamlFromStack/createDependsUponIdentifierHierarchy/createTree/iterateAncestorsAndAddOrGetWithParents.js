@@ -20,7 +20,7 @@ function * iterateAncestorsAndAddOrGetWhenHasParent({
 	identifiers,
 	parent,
 }) {
-	const ancestor = identifiers.ancestorIterator.next().value;
+	const ancestor = identifiers.ancestorsIterator.next().value;
 
 	if (ancestor)
 		yield (

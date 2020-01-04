@@ -64,7 +64,7 @@ function createStack() {
 					itemOrFirstAncestorItem: level[1],
 				},
 				{
-					ancestor: level[1],
+					ancestors: [ level[1] ],
 					item: child,
 					itemOrFirstAncestorItem: child,
 				},

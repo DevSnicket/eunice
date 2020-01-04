@@ -75,12 +75,12 @@ function createStack() {
 		level[0].dependsUpon =
 			[
 				{
-					ancestor: level[1],
+					ancestors: [ level[1] ],
 					item: child,
 					itemOrFirstAncestorItem: child,
 				},
 				{
-					ancestor: level[1],
+					ancestors: [ child, level[1] ],
 					item: grandchild,
 					itemOrFirstAncestorItem: grandchild,
 				},

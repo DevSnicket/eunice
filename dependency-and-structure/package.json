@@ -63,5 +63,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec cspell {} +",
 		"test": "npx jest --runInBand"
 	},
-	"version": "2.18.0"
+	"version": "2.19.0"
 }

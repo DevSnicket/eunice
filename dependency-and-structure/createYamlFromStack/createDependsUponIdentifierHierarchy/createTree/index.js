@@ -2,7 +2,7 @@
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
 const
-	createAncestorIterator = require("./createAncestorIterator"),
+	createAncestorsIterator = require("./createAncestorsIterator"),
 	createParent = require("./createParent"),
 	getIdentifierPropertyOrValue = require("../getIdentifierPropertyOrValue"),
 	iterateAncestorsAndAddOrGetWithParents = require("./iterateAncestorsAndAddOrGetWithParents");
@@ -35,8 +35,8 @@ function createDependsUponWithAncestorIterator({
 				({
 					identifiers:
 						{
-							ancestorIterator:
-								createAncestorIterator(dependUpon),
+							ancestorsIterator:
+								createAncestorsIterator(dependUpon.ancestors),
 							item:
 								getIdentifierPropertyOrValue(dependUpon.item),
 						},

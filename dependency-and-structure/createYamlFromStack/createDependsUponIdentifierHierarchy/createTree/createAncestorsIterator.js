@@ -1,16 +1,10 @@
 /* Copyright (c) 2018 Graham Dyson. All Rights Reserved.
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
-const
-	getIdentifierPropertyOrValue = require("../../getIdentifierPropertyOrValue"),
-	getIdentifiersBetweenParentAndAncestor = require("./getIdentifiersBetweenParentAndAncestor");
+const getIdentifierPropertyOrValue = require("../getIdentifierPropertyOrValue");
 
 module.exports =
-	({
-		ancestor,
-		ancestors,
-		item,
-	}) => {
+	ancestors => {
 		return (
 			createWhenAny()
 			||
@@ -18,7 +12,7 @@ module.exports =
 		);
 
 		function createWhenAny() {
-			const identifiers = whenHasAncestors() || whenHasAncestor();
+			const identifiers = whenHasAncestors();
 
 			return (
 				identifiers
@@ -32,19 +26,6 @@ module.exports =
 				ancestors
 				&&
 				ancestors.map(getIdentifierPropertyOrValue)
-			);
-		}
-
-		function whenHasAncestor() {
-			return (
-				ancestor
-				&&
-				[
-					...getIdentifiersBetweenParentAndAncestor({
-						ancestor,
-						item,
-					}),
-				]
 			);
 		}
 	};

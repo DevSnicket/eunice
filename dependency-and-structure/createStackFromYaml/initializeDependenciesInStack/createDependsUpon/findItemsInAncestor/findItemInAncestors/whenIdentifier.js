@@ -25,8 +25,7 @@ module.exports =
 				item
 				&&
 				{
-					ancestor:
-						ancestors[ancestors.length - 1],
+					ancestors,
 					item,
 					itemOrFirstAncestorItem:
 						item,
