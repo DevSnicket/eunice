@@ -58,6 +58,7 @@
 	},
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run test",
+		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|node_modules|output|test-coverage)$\" --modify-stacks-file=modify-file-stacks.yaml --modify-stacks-key=type --modify-stacks-pattern=^file$ --output-yaml",
 		"lint": "npx eslint .",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec cspell {} +",
 		"test": "npx jest --runInBand"
