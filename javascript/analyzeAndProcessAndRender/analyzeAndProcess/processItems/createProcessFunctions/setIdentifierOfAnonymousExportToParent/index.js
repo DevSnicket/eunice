@@ -33,12 +33,16 @@ function replace({
 	}
 
 	function getParentIdentifier() {
-		return (
+		const parent =
 			findLast(
 				ancestors,
 				({ id }) => id,
-			)
-			.id
+			);
+
+		return (
+			parent
+			&&
+			parent.id
 		);
 	}
 }

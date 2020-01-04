@@ -15,6 +15,14 @@ test.each(
 			},
 		],
 		[
+			{ type: "export" },
+			{ type: "export" },
+		],
+		[
+			{ items: { type: "export" } },
+			{ items: { type: "export" } },
+		],
+		[
 			{
 				id: "parent",
 				items: { type: "export" },
