@@ -9,10 +9,10 @@ testCreateStackFromYaml({
 	stack:
 		createStackFromLevels(
 			[
-				[ { id: "item1" } ],
-				[ { id: "item2" } ],
+				[ { id: "upper" } ],
+				[ { id: "lower" } ],
 			],
 		),
 	yaml:
-		[ [ "item1" ], "item2" ],
+		[ [ "upper" ], "lower" ],
 });

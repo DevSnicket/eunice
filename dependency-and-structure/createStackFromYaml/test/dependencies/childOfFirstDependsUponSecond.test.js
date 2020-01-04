@@ -42,16 +42,16 @@ function createStack() {
 	return stack;
 
 	function addDependencies() {
-		const level = stack[0];
+		const [ first, second ] = stack[0];
 
-		const child = level[0].items[0][0];
+		const child = first.items[0][0];
 
 		child.dependsUpon =
 			[ {
-				item: level[1],
-				itemOrFirstAncestorItem: level[1],
+				item: second,
+				itemOrFirstAncestorItem: second,
 			} ];
 
-		level[1].dependents = [ child ];
+		second.dependents = [ child ];
 	}
 }

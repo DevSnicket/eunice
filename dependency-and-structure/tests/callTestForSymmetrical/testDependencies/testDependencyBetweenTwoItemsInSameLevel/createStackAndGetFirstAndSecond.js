@@ -9,12 +9,12 @@ module.exports =
 	() => {
 		const stack = createStackFromLevels([ createFirstAndSecondLevel() ]);
 
-		const level = stack[0];
+		const [ first, second ] = stack[0];
 
 		return (
 			{
-				first: level[0],
-				second: level[1],
+				first,
+				second,
 				stack,
 			}
 		);

@@ -18,34 +18,34 @@ module.exports =
 						dependsUpon:
 							{
 								id:
-									"item2",
+									"second",
 								items:
 									[
 										{
-											id: "child1",
-											items: "grandchild1",
+											id: "firstChildOfSecond",
+											items: "firstGrandchildOfSecond",
 										},
 										{
-											id: "child2",
-											items: "grandchild2",
+											id: "secondChildOfSecond",
+											items: "secondGrandchildOfSecond",
 										},
 									],
 							},
 						id:
-							"item1",
+							"first",
 					}),
 					createItemYaml({
 						id:
-							"item2",
+							"second",
 						items:
 							[
 								createItemYaml({
-									id: "child1",
-									items: "grandchild1",
+									id: "firstChildOfSecond",
+									items: "firstGrandchildOfSecond",
 								}),
 								createItemYaml({
-									id: "child2",
-									items: "grandchild2",
+									id: "secondChildOfSecond",
+									items: "secondGrandchildOfSecond",
 								}),
 							],
 					}),
@@ -57,18 +57,18 @@ function createStack() {
 		createStackFromLevels(
 			[
 				[
-					{ id: "item1" },
+					{ id: "first" },
 					{
-						id: "item2",
+						id: "second",
 						items:
 							[ [
 								{
-									id: "child1",
-									items: [ [ { id: "grandchild1" } ] ],
+									id: "firstChildOfSecond",
+									items: [ [ { id: "firstGrandchildOfSecond" } ] ],
 								},
 								{
-									id: "child2",
-									items: [ [ { id: "grandchild2" } ] ],
+									id: "secondChildOfSecond",
+									items: [ [ { id: "secondGrandchildOfSecond" } ] ],
 								},
 							] ],
 					},
@@ -81,31 +81,41 @@ function createStack() {
 	return stack;
 
 	function addDependencies() {
-		const level = stack[0];
-
-		const children = level[1].items[0];
+		const [ first, second ] = stack[0];
 
 		const
-			grandchildren =
-				[
-					children[0].items[0][0],
-					children[1].items[0][0],
-				];
+			[
+				firstChildOfSecond,
+				secondChildOfSecond,
+			]
+			=
+			second.items[0];
 
-		level[0].dependsUpon =
+		const
+			[
+				firstGrandchildOfSecond,
+				secondGrandchildOfSecond,
+			]
+			=
+			[
+				firstChildOfSecond.items[0][0],
+				secondChildOfSecond.items[0][0],
+			];
+
+		first.dependsUpon =
 			[
 				{
-					ancestors: [ children[0], level[1] ],
-					item: grandchildren[0],
-					itemOrFirstAncestorItem: grandchildren[0],
+					ancestors: [ firstChildOfSecond, second ],
+					item: firstGrandchildOfSecond,
+					itemOrFirstAncestorItem: firstGrandchildOfSecond,
 				},
 				{
-					ancestors: [ children[1], level[1] ],
-					item: grandchildren[1],
-					itemOrFirstAncestorItem: grandchildren[1],
+					ancestors: [ secondChildOfSecond, second ],
+					item: secondGrandchildOfSecond,
+					itemOrFirstAncestorItem: secondGrandchildOfSecond,
 				},
 			];
-		grandchildren[0].dependents = [ level[0] ];
-		grandchildren[1].dependents = [ level[0] ];
+		firstGrandchildOfSecond.dependents = [ first ];
+		secondGrandchildOfSecond.dependents = [ first ];
 	}
 }

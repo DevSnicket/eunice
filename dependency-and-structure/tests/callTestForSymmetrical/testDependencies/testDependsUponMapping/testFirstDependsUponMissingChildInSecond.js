@@ -17,13 +17,13 @@ module.exports =
 					createItemYaml({
 						dependsUpon:
 							{
-								id: "item2",
+								id: "second",
 								items: "missing",
 							},
 						id:
-							"item1",
+							"first",
 					}),
-					"item2",
+					"second",
 				],
 		});
 
@@ -32,8 +32,8 @@ function createStack() {
 		createStackFromLevels(
 			[
 				[
-					{ id: "item1" },
-					{ id: "item2" },
+					{ id: "first" },
+					{ id: "second" },
 				],
 			],
 		);
@@ -43,15 +43,15 @@ function createStack() {
 	return stack;
 
 	function addDependencies() {
-		const level = stack[0];
+		const [ first, second ] = stack[0];
 
-		level[0].dependsUpon =
+		first.dependsUpon =
 			[ {
-				ancestors: [ level[1] ],
+				ancestors: [ second ],
 				item: "missing",
-				itemOrFirstAncestorItem: level[1],
+				itemOrFirstAncestorItem: second,
 			} ];
 
-		level[1].dependents = [ level[0] ];
+		second.dependents = [ first ];
 	}
 }

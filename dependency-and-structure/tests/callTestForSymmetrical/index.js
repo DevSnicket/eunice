@@ -102,14 +102,14 @@ function createTestCasesWithSimpleLevels() {
 						[
 							{
 								dependsUpon: [ { item: "missing" } ],
-								id: "item1",
+								id: "item",
 							},
 						],
 					],
 				yaml:
 					createItemYaml({
 						dependsUpon: "missing",
-						id: "item1",
+						id: "item",
 					}),
 			},
 			{
@@ -123,14 +123,14 @@ function createTestCasesWithSimpleLevels() {
 										{ item: "missing2" },
 									],
 								id:
-									"item1",
+									"item",
 							},
 						],
 					],
 				yaml:
 					createItemYaml({
 						dependsUpon: [ "missing1", "missing2" ],
-						id: "item1",
+						id: "item",
 					}),
 			},
 		]

@@ -26,7 +26,7 @@ module.exports =
 										items:
 											{
 												id: "second",
-												items: "grandchild",
+												items: "grandchildOfSecond",
 											},
 									},
 								id:
@@ -38,8 +38,8 @@ module.exports =
 								items:
 									{
 										dependencyPermeable: true,
-										id: "child",
-										items: "grandchild",
+										id: "childOfSecond",
+										items: "grandchildOfSecond",
 									},
 							}),
 						],
@@ -61,8 +61,8 @@ function createStack() {
 							items:
 								[ [ {
 									dependencyPermeable: true,
-									id: "child",
-									items: [ [ { id: "grandchild" } ] ],
+									id: "childOfSecond",
+									items: [ [ { id: "grandchildOfSecond" } ] ],
 								} ] ],
 						},
 					] ],
@@ -76,22 +76,20 @@ function createStack() {
 	function addDependencies() {
 		const parent = stack[0][0];
 
-		const items = parent.items[0];
-
-		const second = items[1];
+		const [ first, second ] = parent.items[0];
 
 		const child = second.items[0][0];
 
 		const grandchild = child.items[0][0];
 
-		items[0].dependsUpon =
+		first.dependsUpon =
 			[ {
 				ancestors: [ second, parent ],
 				item: grandchild,
 				itemOrFirstAncestorItem: grandchild,
 			} ];
 
-		grandchild.dependents = [ items[0] ];
+		grandchild.dependents = [ first ];
 
 		return stack;
 	}

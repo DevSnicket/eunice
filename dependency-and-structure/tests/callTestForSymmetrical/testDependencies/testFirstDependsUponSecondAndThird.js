@@ -13,7 +13,19 @@ module.exports =
 			stackDescription:
 				"first depends upon second and third",
 			yaml:
-				createYaml(),
+				[
+					createItemYaml({
+						dependsUpon:
+							[
+								"second",
+								"third",
+							],
+						id:
+							"first",
+					}),
+					"second",
+					"third",
+				],
 		});
 
 function createStack() {
@@ -21,9 +33,9 @@ function createStack() {
 		createStackFromLevels(
 			[
 				[
-					{ id: "item1" },
-					{ id: "item2" },
-					{ id: "item3" },
+					{ id: "first" },
+					{ id: "second" },
+					{ id: "third" },
 				],
 			],
 		);
@@ -33,43 +45,21 @@ function createStack() {
 	return stack;
 
 	function addDependencies() {
-		const level = stack[0];
+		const [ first, second, third ] = stack[0];
 
-		const dependentItems = [ level[1], level[2] ];
-
-		level[0].dependsUpon =
+		first.dependsUpon =
 			[
 				{
-					item: dependentItems[0],
-					itemOrFirstAncestorItem: dependentItems[0],
+					item: second,
+					itemOrFirstAncestorItem: second,
 				},
 				{
-					item: dependentItems[1],
-					itemOrFirstAncestorItem: dependentItems[1],
+					item: third,
+					itemOrFirstAncestorItem: third,
 				},
 			];
 
-		dependentItems[0].dependents =
-			[ level[0] ];
-		dependentItems[1].dependents =
-			[ level[0] ];
+		second.dependents = [ first ];
+		third.dependents = [ first ];
 	}
-}
-
-function createYaml() {
-	return (
-		[
-			createItemYaml({
-				dependsUpon:
-					[
-						"item2",
-						"item3",
-					],
-				id:
-					"item1",
-			}),
-			"item2",
-			"item3",
-		]
-	);
 }

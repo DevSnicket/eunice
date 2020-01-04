@@ -17,15 +17,15 @@ module.exports =
 					createItemYaml({
 						dependsUpon:
 							{
-								id: "item2",
-								items: [ "child1", "child2" ],
+								id: "second",
+								items: [ "firstChildOfSecond", "secondChildOfSecond" ],
 							},
 						id:
-							"item1",
+							"first",
 					}),
 					createItemYaml({
-						id: "item2",
-						items: [ "child1", "child2" ],
+						id: "second",
+						items: [ "firstChildOfSecond", "secondChildOfSecond" ],
 					}),
 				],
 		});
@@ -35,14 +35,14 @@ function createStack() {
 		createStackFromLevels(
 			[
 				[
-					{ id: "item1" },
+					{ id: "first" },
 					{
-						id: "item2",
+						id: "second",
 						items:
 							[
 								[
-									{ id: "child1" },
-									{ id: "child2" },
+									{ id: "firstChildOfSecond" },
+									{ id: "secondChildOfSecond" },
 								],
 							],
 					},
@@ -55,24 +55,30 @@ function createStack() {
 	return stack;
 
 	function addDependencies() {
-		const level = stack[0];
+		const [ first, second ] = stack[0];
 
-		const children = level[1].items[0];
+		const
+			[
+				firstChildOfSecond,
+				secondChildOfSecond,
+			]
+			=
+			second.items[0];
 
-		level[0].dependsUpon =
+		first.dependsUpon =
 			[
 				{
-					ancestors: [ level[1] ],
-					item: children[0],
-					itemOrFirstAncestorItem: children[0],
+					ancestors: [ second ],
+					item: firstChildOfSecond,
+					itemOrFirstAncestorItem: firstChildOfSecond,
 				},
 				{
-					ancestors: [ level[1] ],
-					item: children[1],
-					itemOrFirstAncestorItem: children[1],
+					ancestors: [ second ],
+					item: secondChildOfSecond,
+					itemOrFirstAncestorItem: secondChildOfSecond,
 				},
 			];
-		children[0].dependents = [ level[0] ];
-		children[1].dependents = [ level[0] ];
+		firstChildOfSecond.dependents = [ first ];
+		secondChildOfSecond.dependents = [ first ];
 	}
 }

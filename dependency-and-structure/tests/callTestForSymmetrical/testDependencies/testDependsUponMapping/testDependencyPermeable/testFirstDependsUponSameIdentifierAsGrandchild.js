@@ -13,7 +13,7 @@ module.exports =
 					[
 						[
 							{
-								dependsUpon: [ { item: "grandchild" } ],
+								dependsUpon: [ { item: "grandchildOfSecond" } ],
 								id: "first",
 							},
 							{
@@ -25,8 +25,8 @@ module.exports =
 									[
 										[
 											{
-												id: "child",
-												items: [ [ { id: "grandchild" } ] ],
+												id: "childOfSecond",
+												items: [ [ { id: "grandchildOfSecond" } ] ],
 											},
 										],
 									],
@@ -39,7 +39,7 @@ module.exports =
 			yaml:
 				[
 					createItemYaml({
-						dependsUpon: "grandchild",
+						dependsUpon: "grandchildOfSecond",
 						id: "first",
 					}),
 					createItemYaml({
@@ -49,8 +49,8 @@ module.exports =
 							"second",
 						items:
 							createItemYaml({
-								id: "child",
-								items: "grandchild",
+								id: "childOfSecond",
+								items: "grandchildOfSecond",
 							}),
 					}),
 				],

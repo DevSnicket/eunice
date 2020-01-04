@@ -18,7 +18,7 @@ module.exports =
 						dependsUpon:
 							{
 								id:
-									"item2",
+									"second",
 								items:
 									[
 										{
@@ -32,9 +32,9 @@ module.exports =
 									],
 							},
 						id:
-							"item1",
+							"first",
 					}),
-					"item2",
+					"second",
 				],
 		});
 
@@ -43,8 +43,8 @@ function createStack() {
 		createStackFromLevels(
 			[
 				[
-					{ id: "item1" },
-					{ id: "item2" },
+					{ id: "first" },
+					{ id: "second" },
 				],
 			],
 		);
@@ -54,22 +54,22 @@ function createStack() {
 	return stack;
 
 	function addDependencies() {
-		const level = stack[0];
+		const [ first, second ] = stack[0];
 
-		level[0].dependsUpon =
+		first.dependsUpon =
 			[
 				{
-					ancestors: [ "missingChild1", level[1] ],
+					ancestors: [ "missingChild1", second ],
 					item: "missingGrandchild1",
-					itemOrFirstAncestorItem: level[1],
+					itemOrFirstAncestorItem: second,
 				},
 				{
-					ancestors: [ "missingChild2", level[1] ],
+					ancestors: [ "missingChild2", second ],
 					item: "missingGrandchild2",
-					itemOrFirstAncestorItem: level[1],
+					itemOrFirstAncestorItem: second,
 				},
 			];
 
-		level[1].dependents = [ level[0] ];
+		second.dependents = [ first ];
 	}
 }

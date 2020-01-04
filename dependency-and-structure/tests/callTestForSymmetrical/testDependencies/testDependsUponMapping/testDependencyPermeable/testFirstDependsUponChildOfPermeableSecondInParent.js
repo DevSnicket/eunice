@@ -22,7 +22,7 @@ module.exports =
 								dependsUpon:
 									{
 										id: "parent",
-										items: "child",
+										items: "childOfSecond",
 									},
 								id:
 									"first",
@@ -30,7 +30,7 @@ module.exports =
 							createItemYaml({
 								dependencyPermeable: true,
 								id: "second",
-								items: "child",
+								items: "childOfSecond",
 							}),
 						],
 				}),
@@ -48,7 +48,7 @@ function createStack() {
 						{
 							dependencyPermeable: true,
 							id: "second",
-							items: [ [ { id: "child" } ] ],
+							items: [ [ { id: "childOfSecond" } ] ],
 						},
 					] ],
 			} ] ],
@@ -61,18 +61,18 @@ function createStack() {
 	function addDependencies() {
 		const parent = stack[0][0];
 
-		const items = parent.items[0];
+		const [ first, second ] = parent.items[0];
 
-		const child = items[1].items[0][0];
+		const child = second.items[0][0];
 
-		items[0].dependsUpon =
+		first.dependsUpon =
 			[ {
 				ancestors: [ parent ],
 				item: child,
 				itemOrFirstAncestorItem: child,
 			} ];
 
-		child.dependents = [ items[0] ];
+		child.dependents = [ first ];
 
 		return stack;
 	}

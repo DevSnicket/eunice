@@ -18,25 +18,25 @@ module.exports =
 						dependsUpon:
 							{
 								id:
-									"item2",
+									"second",
 								items:
 									[
 										{
-											id: "child1",
+											id: "firstChildOfSecond",
 											items: "missingGrandchild1",
 										},
 										{
-											id: "child2",
+											id: "secondChildOfSecond",
 											items: "missingGrandchild2",
 										},
 									],
 							},
 						id:
-							"item1",
+							"first",
 					}),
 					createItemYaml({
-						id: "item2",
-						items: [ "child1", "child2" ],
+						id: "second",
+						items: [ "firstChildOfSecond", "secondChildOfSecond" ],
 					}),
 				],
 		});
@@ -46,13 +46,13 @@ function createStack() {
 		createStackFromLevels(
 			[
 				[
-					{ id: "item1" },
+					{ id: "first" },
 					{
-						id: "item2",
+						id: "second",
 						items:
 							[ [
-								{ id: "child1" },
-								{ id: "child2" },
+								{ id: "firstChildOfSecond" },
+								{ id: "secondChildOfSecond" },
 							] ],
 					},
 				],
@@ -64,25 +64,31 @@ function createStack() {
 	return stack;
 
 	function addDependencies() {
-		const level = stack[0];
+		const [ first, second ] = stack[0];
 
-		const child = level[1].items[0];
+		const
+			[
+				firstChildOfSecond,
+				secondChildOfSecond,
+			]
+			=
+			second.items[0];
 
-		level[0].dependsUpon =
+		first.dependsUpon =
 			[
 				{
-					ancestors: [ child[0], level[1] ],
+					ancestors: [ firstChildOfSecond, second ],
 					item: "missingGrandchild1",
-					itemOrFirstAncestorItem: child[0],
+					itemOrFirstAncestorItem: firstChildOfSecond,
 				},
 				{
-					ancestors: [ child[1], level[1] ],
+					ancestors: [ secondChildOfSecond, second ],
 					item: "missingGrandchild2",
-					itemOrFirstAncestorItem: child[1],
+					itemOrFirstAncestorItem: secondChildOfSecond,
 				},
 			];
 
-		child[0].dependents = [ level[0] ];
-		child[1].dependents = [ level[0] ];
+		firstChildOfSecond.dependents = [ first ];
+		secondChildOfSecond.dependents = [ first ];
 	}
 }

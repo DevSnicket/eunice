@@ -15,7 +15,7 @@ module.exports =
 			yaml:
 				[
 					createItemYaml({
-						dependsUpon: "grandchild",
+						dependsUpon: "grandchildOfSecond",
 						id: "first",
 					}),
 					createItemYaml({
@@ -26,8 +26,8 @@ module.exports =
 						items:
 							createItemYaml({
 								dependencyPermeable: true,
-								id: "child",
-								items: "grandchild",
+								id: "childOfSecond",
+								items: "grandchildOfSecond",
 							}),
 					}),
 				],
@@ -47,8 +47,8 @@ function createStack() {
 								[
 									{
 										dependencyPermeable: true,
-										id: "child",
-										items: [ [ { id: "grandchild" } ] ],
+										id: "childOfSecond",
+										items: [ [ { id: "grandchildOfSecond" } ] ],
 									},
 								],
 							],
@@ -62,16 +62,16 @@ function createStack() {
 	return stack;
 
 	function addDependencies() {
-		const items = stack[0];
+		const [ first, second ] = stack[0];
 
-		const grandchild = items[1].items[0][0].items[0][0];
+		const grandchild = second.items[0][0].items[0][0];
 
-		items[0].dependsUpon =
+		first.dependsUpon =
 			[ {
 				item: grandchild,
 				itemOrFirstAncestorItem: grandchild,
 			} ];
 
-		grandchild.dependents = [ items[0] ];
+		grandchild.dependents = [ first ];
 	}
 }

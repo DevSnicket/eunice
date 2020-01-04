@@ -12,14 +12,14 @@ testCreateStackFromYaml({
 	yaml:
 		[
 			createItemYaml({
-				dependsUpon: "item3",
-				id: "item1",
+				dependsUpon: "third",
+				id: "first",
 			}),
 			createItemYaml({
-				dependsUpon: "item3",
-				id: "item2",
+				dependsUpon: "third",
+				id: "second",
 			}),
-			"item3",
+			"third",
 		],
 });
 
@@ -28,9 +28,9 @@ function createStack() {
 		createStackFromLevels(
 			[
 				[
-					{ id: "item1" },
-					{ id: "item2" },
-					{ id: "item3" },
+					{ id: "first" },
+					{ id: "second" },
+					{ id: "third" },
 				],
 			],
 		);
@@ -40,19 +40,19 @@ function createStack() {
 	return stack;
 
 	function addDependencies() {
-		const level = stack[0];
+		const [ first, second, third ] = stack[0];
 
-		level[0].dependsUpon =
+		first.dependsUpon =
 			[ {
-				item: level[2],
-				itemOrFirstAncestorItem: level[2],
+				item: third,
+				itemOrFirstAncestorItem: third,
 			} ];
-		level[1].dependsUpon =
+		second.dependsUpon =
 			[ {
-				item: level[2],
-				itemOrFirstAncestorItem: level[2],
+				item: third,
+				itemOrFirstAncestorItem: third,
 			} ];
 
-		level[2].dependents = [ level[0], level[1] ];
+		third.dependents = [ first, second ];
 	}
 }

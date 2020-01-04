@@ -5,7 +5,7 @@ const
 	testDependencyPermeable = require("./testDependencyPermeable"),
 	testDependsUponMissingChildInMissingParent = require("./testDependsUponMissingChildInMissingParent"),
 	testDependsUponMissingGrandchildInMissingChildInMissingParent = require("./testDependsUponMissingGrandchildInMissingChildInMissingParent"),
-	testDependsUponMissingGreatGrandchildInMssingGrandchildInMissingChildInMissingParent = require("./testDependsUponMissingGreatGrandchildInMssingGrandchildInMissingChildInMissingParent"),
+	testDependsUponMissingGreatGrandchildInMssingGrandchildInMissingChildInMissingParent = require("./testDependsUponMissingGreatGrandchildInMissingGrandchildInMissingChildInMissingParent"),
 	testDependsUponTwoMissingChildrenInMissingParent = require("./testDependsUponTwoMissingChildrenInMissingParent"),
 	testFirstDependsUponChildAndMissingChildInSecond = require("./testFirstDependsUponChildAndMissingChildInSecond"),
 	testFirstDependsUponChildInSecond = require("./testFirstDependsUponChildInSecond"),

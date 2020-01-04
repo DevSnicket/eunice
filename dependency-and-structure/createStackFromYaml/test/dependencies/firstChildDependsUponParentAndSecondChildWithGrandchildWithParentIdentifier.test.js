@@ -19,10 +19,10 @@ testCreateStackFromYaml({
 				[
 					createItemYaml({
 						dependsUpon: parentIdentifier,
-						id: "child1",
+						id: "firstChild",
 					}),
 					createItemYaml({
-						id: "child2",
+						id: "secondChild",
 						items: parentIdentifier,
 					}),
 				],
@@ -39,9 +39,9 @@ function createStack() {
 						items:
 							[
 								[
-									{ id: "child1" },
+									{ id: "firstChild" },
 									{
-										id: "child2",
+										id: "secondChild",
 										items: [ [ { id: parentIdentifier } ] ],
 									},
 								],
