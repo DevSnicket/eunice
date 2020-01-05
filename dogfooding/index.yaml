@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.36.0 on 2020-01-04T23:07:07.856Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.36.1 on 2020-01-05T12:32:20.393Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -1083,6 +1083,14 @@
                     dependsUpon:
                       id: renderer-test-harness
                       items: createWebpackConfiguration
+        - id: interactive.webpack.config
+          type: file
+          dependsUpon:
+            id: renderer-test-harness
+            items: createWebpackConfiguration
+          items:
+            id: interactive.webpack.config
+            type: export
         - id: webpack.config
           type: file
           dependsUpon:
@@ -2720,8 +2728,27 @@
       - - id: renderer-test-harness
           type: file
           items:
-            - - harness
-              - id: renderer-test-harness
+            - - id: harness
+                type: file
+                dependsUpon:
+                  - createYamlInputElement
+                  - createYamlOutputElement
+                  - location
+                  - id: test-harnesses
+                    items:
+                      - renderIntoContainerElement
+                      - createHashFromLocation
+                      - createFillWithTitleElement
+                      - createResizableContainer
+                      - callOrCreateElementOnError
+                      - id: codeEditor
+                        items:
+                          - createEditorForLanguage
+                          - id: serviceWorkers
+                            items: initializeGlobal
+                  - id: react
+                    items: createElement
+            - - id: renderer-test-harness
                 type: export
               - id: createYamlInputElement
                 type: file
@@ -3430,27 +3457,20 @@
                       items:
                         - - id: test
                             type: file
-                            dependsUpon:
-                              - test
-                              - testInOutputDirectory
+                            dependsUpon: test
                             items:
-                              - - id: testInOutputDirectory
-                                  dependsUpon:
+                              - - dependsUpon:
                                     - emptyDir
                                     - expect
                                     - htmlFileName
                                     - path
+                                    - pathExists
                                     - readDirectoryPathRecursive
                                     - readHtmlFileContainsYamlFileContent
                                     - readTextFile
-                                    - throwErrorWhenSourceDoesNotExist
                                     - writeHarness
                                   items:
-                                    - - id: throwErrorWhenSourceDoesNotExist
-                                        dependsUpon:
-                                          - getSourcePath
-                                          - pathExists
-                                      - id: readHtmlFileContainsYamlFileContent
+                                    - - id: readHtmlFileContainsYamlFileContent
                                         dependsUpon:
                                           - directoryPath
                                           - htmlFileName
@@ -3501,50 +3521,12 @@
                                   dependsUpon:
                                     id: fs-extra
                                     items: readdir
-                  - - id: writeHarness
-                      type: export
-                      dependsUpon:
-                        - copyServiceWorkersIntoDirectoryPath
-                        - copySourceMapIntoDirectoryPath
-                        - writeHtml
-                  - - id: copyServiceWorkersIntoDirectoryPath
+                    - copyServiceWorkersIntoDirectoryPath
+                    - copySourceMapIntoDirectoryPath
+                    - id: writeHtmlWithYaml
                       type: file
                       items:
-                        - - id: copyServiceWorkersIntoDirectoryPath
-                            type: export
-                            dependsUpon:
-                              - copy
-                              - directoryName
-                              - getSourcePath
-                              - path
-                        - - id: copy
-                            type: variable
-                            dependsUpon:
-                              id: fs-extra
-                              items: copy
-                          - id: directoryName
-                            type: variable
-                    - id: copySourceMapIntoDirectoryPath
-                      type: file
-                      items:
-                        - - id: copySourceMapIntoDirectoryPath
-                            type: export
-                            dependsUpon:
-                              - copyFile
-                              - fileName
-                              - getSourcePath
-                              - path
-                        - - id: copyFile
-                            type: variable
-                            dependsUpon:
-                              id: fs-extra
-                              items: copyFile
-                          - id: fileName
-                            type: variable
-                    - id: writeHtml
-                      type: file
-                      items:
-                        - - id: writeHtml
+                        - - id: writeHtmlWithYaml
                             type: export
                             dependsUpon:
                               - getOutputPath
@@ -3559,15 +3541,18 @@
                                     - path
                                 - id: readSourceHtml
                                   dependsUpon:
-                                    - getSourcePath
+                                    - path
                                     - readTextFile
+                                    - templateHtmlDirectoryPath
                                 - id: substituteInHtml
                                   dependsUpon:
                                     - getStringLiteral
                                     - yaml
-                              - - id: directoryPath
+                              - - id: htmlFileName
                                   type: parameter
-                                - id: htmlFileName
+                                - id: directoryPath
+                                  type: parameter
+                                - id: templateHtmlDirectoryPath
                                   type: parameter
                                 - id: yaml
                                   type: parameter
@@ -3581,12 +3566,27 @@
                             dependsUpon:
                               id: test-harnesses
                               items: getStringLiteral
-                  - - id: getSourcePath
+                  - - id: writeHarness
+                      type: export
+                      dependsUpon:
+                        - copyServiceWorkerDirectory
+                        - writeHtmlWithYaml
+                  - - id: copyServiceWorkerDirectory
                       type: file
                       items:
-                        id: getSourcePath
-                        type: export
-                        dependsUpon: path
+                        - - id: copyServiceWorkerDirectory
+                            type: export
+                            dependsUpon:
+                              - copy
+                              - directoryName
+                              - path
+                        - - id: copy
+                            type: variable
+                            dependsUpon:
+                              id: fs-extra
+                              items: copy
+                          - id: directoryName
+                            type: variable
             - - id: createWebpackConfiguration
                 type: file
                 items:
@@ -3595,6 +3595,7 @@
                       dependsUpon:
                         - createCodeEditorWebpackEntryForLanguages
                         - createWebpackConfiguration
+                        - path
                   - - id: createCodeEditorWebpackEntryForLanguages
                       type: variable
                       dependsUpon:
