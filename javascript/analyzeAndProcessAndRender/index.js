@@ -21,7 +21,6 @@ module.exports =
 		fileExtensions,
 		ignorePathPattern,
 		includeServiceWorkers = false,
-		includeSourceMap = false,
 		isFileContentReversed = false,
 		modifyStacksFile,
 		output,
@@ -38,7 +37,6 @@ module.exports =
 					version,
 				}),
 			includeServiceWorkers,
-			includeSourceMap,
 			...output.path,
 			yaml:
 				formatYaml(
@@ -98,7 +96,6 @@ async function renderAndWriteOutput({
 	enabled,
 	header,
 	includeServiceWorkers,
-	includeSourceMap,
 	yaml,
 }) {
 	const
@@ -126,9 +123,12 @@ async function renderAndWriteOutput({
 	if (enabled.html)
 		await writeHarness({
 			directoryPath,
-			htmlFileName: `${baseFileName || ""}.html`,
+			htmlFileName:
+				`${baseFileName || ""}.html`,
 			includeServiceWorkers,
-			includeSourceMap,
-			yaml: yamlWithHeader,
+			sourceDirectoryPath:
+				path.join(__dirname, "..", "dist", "interactive"),
+			yaml:
+				yamlWithHeader,
 		});
 }

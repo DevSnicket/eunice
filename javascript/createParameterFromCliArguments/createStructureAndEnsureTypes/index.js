@@ -12,7 +12,6 @@ module.exports =
 		fileExtensions,
 		ignorePathPattern = "(^|/)(\\..*|node_modules)$",
 		includeServiceWorkers,
-		includeSourceMap,
 		isFileContentReversed,
 		modifyStacksFile,
 		modifyStacksKey,
@@ -46,8 +45,6 @@ module.exports =
 				}),
 			includeServiceWorkers:
 				parseBoolean(includeServiceWorkers),
-			includeSourceMap:
-				parseBoolean(includeSourceMap),
 			isFileContentReversed:
 				parseBoolean(isFileContentReversed),
 			modifyStacksFile:

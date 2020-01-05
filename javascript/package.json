@@ -16,7 +16,7 @@
 		"@devsnicket/eunice-javascript-analyzer": "11.13.6",
 		"@devsnicket/eunice-processors": "11.4.0",
 		"@devsnicket/eunice-renderer": "6.7.0",
-		"@devsnicket/eunice-renderer-test-harness": "4.11.0",
+		"@devsnicket/eunice-renderer-test-harness": "4.12.0",
 		"@devsnicket/eunice-run-tests-from-file-system": "4.1.0",
 		"@devsnicket/eunice-test-harnesses": "8.5.0",
 		"@devsnicket/eunice-test-harnesses-processor-plugins": "1.0.0",
@@ -51,14 +51,15 @@
 			"!analyzeAndProcessAndRender/tests/packageSources/node_modules/**",
 			"!analyzeAndProcessAndRender/tests/singleSource/source/**",
 			"!analyzeAndProcessAndRender/tests/singleSourceWithOutputBaseFilename/source/**",
+			"!webpack.config.js",
 			"!dist/**",
 			"!dogfooding/output/**",
 			"!gh-pages/**",
 			"!harness/**",
 			"!node_modules/**",
 			"!harness/output/**",
-			"!test-coverage/**",
-			"!webpack.config.js"
+			"!interactive.webpack.config.js",
+			"!test-coverage/**"
 		],
 		"coverageDirectory": "test-coverage",
 		"coverageThreshold": {
@@ -95,15 +96,18 @@
 		"url": "https://github.com/devsnicket/eunice.git"
 	},
 	"scripts": {
-		"all": "npm run spellcheck && npm run lint && npm run test && npm run build && npm run dogfooding && npm run harness",
-		"build": "npm run build-prepare && npx webpack -p --config webpack.config.js && rm dist/bin.js.map",
-		"build-development": "npm run build-prepare && npx webpack -d --config webpack.config.js",
-		"build-prepare": "rm -rf dist && mkdir dist && cp -r node_modules/@devsnicket/eunice-renderer-test-harness/dist/harness dist && rm dist/harness/harness.js.map",
-		"dogfooding": "(cd dogfooding && rm -rf output && mkdir output && cd .. && node bin --accept-license --directory-to-create-or-add-to-stacks-from=dogfooding --include-service-workers=true --include-source-map=true --ignore-path-pattern=\"(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$\" --modify-stacks-file=dogfooding/modify-file-stacks.yaml --modify-stacks-key=type --modify-stacks-pattern=^file$ --output-base-file-name=index --output-directory-path=dogfooding/output --output-svg --output-yaml --package-names=call-with-process-standard-streams --package-names=dependency-and-structure --package-names=javascript-analyzer --package-names=processors --package-names=renderer --package-names=renderer-test-harness --package-names=run-tests-from-file-system --package-names=test-harnesses --package-names=test-harnesses-processor-plugins --package-prefix=eunice- --package-scope=devsnicket --directories=. --root-item-identifiers=javascript)",
+		"all": "npm run spellcheck && npm run lint && npm run build-prepare && npm run build-interactive && npm run test && npm run build && npm run build-remove-maps && npm run harness && npm run dogfooding",
+		"build": "npx webpack -p --config webpack.config.js",
+		"build-remove-maps": "rm dist/bin.js.map && rm dist/interactive/harness.js.map",
+		"build-development": "npx webpack -d --config webpack.config.js",
+		"build-interactive": "npx webpack -p --config interactive.webpack.config.js",
+		"build-interactive-development": "npx webpack -d --config interactive.webpack.config.js",
+		"build-prepare": "rm -rf dist && mkdir dist",
+		"dogfooding": "(cd dogfooding && rm -rf output && mkdir output && cd .. && node dist/bin.js --accept-license --directory-to-create-or-add-to-stacks-from=dogfooding --include-service-workers=true --ignore-path-pattern=\"(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$\" --modify-stacks-file=dogfooding/modify-file-stacks.yaml --modify-stacks-key=type --modify-stacks-pattern=^file$ --output-base-file-name=index --output-directory-path=dogfooding/output --output-svg --output-yaml --package-names=call-with-process-standard-streams --package-names=dependency-and-structure --package-names=javascript-analyzer --package-names=processors --package-names=renderer --package-names=renderer-test-harness --package-names=run-tests-from-file-system --package-names=test-harnesses --package-names=test-harnesses-processor-plugins --package-prefix=eunice- --package-scope=devsnicket --directories=. --root-item-identifiers=javascript)",
 		"lint": "npx eslint .",
 		"harness": "(cd harness && rm -rf output && mkdir output && npx webpack -p --config webpack.config.js)",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dogfooding/output/**\" ! -path \"./dist/*\" ! -path \"./gh-pages/**\" ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest --runInBand"
 	},
-	"version": "6.36.0"
+	"version": "6.36.1"
 }
