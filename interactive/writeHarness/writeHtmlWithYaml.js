@@ -2,15 +2,15 @@
 
 const
 	{ writeFile } = require("fs-extra"),
-	getSourcePath = require("./getSourcePath"),
 	getStringLiteral = require("@devsnicket/eunice-test-harnesses/getStringLiteral"),
 	path = require("path"),
 	readTextFile = require("../readTextFile");
 
 module.exports =
 	async({
-		directoryPath,
 		htmlFileName,
+		directoryPath,
+		templateHtmlDirectoryPath,
 		yaml,
 	}) => {
 		await writeFile(
@@ -23,7 +23,11 @@ module.exports =
 		}
 
 		function readSourceHtml() {
-			return readTextFile(getSourcePath("index.html"));
+			return (
+				readTextFile(
+					path.join(templateHtmlDirectoryPath, "index.html"),
+				)
+			);
 		}
 
 		function substituteInHtml(

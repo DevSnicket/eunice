@@ -1,4 +1,3 @@
-- test
--
-- [ copyServiceWorkersIntoDirectoryPath, copySourceMapIntoDirectoryPath, writeHtml ]
-- existing
+- - test
+- [ copyServiceWorkersIntoDirectoryPath, copySourceMapIntoDirectoryPath, writeHtmlWithYaml ]
+- - existing

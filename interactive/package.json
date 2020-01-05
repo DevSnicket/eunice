@@ -83,7 +83,7 @@
 	},
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run build && npm run test && npm run harness-example-production",
-		"build": "rm -rf dist/harness && npx webpack --config webpack.config.js -p",
+		"build": "rm -rf dist && npx webpack --config webpack.config.js -p",
 		"harness-dogfooding-development": "rm -rf tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output && npx webpack --config tests/dogfoodingFromEuniceRepositoryRelativeDirectory/webpack.config.js -d",
 		"harness-dogfooding-production": "rm -rf tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output && npx webpack --config tests/dogfoodingFromEuniceRepositoryRelativeDirectory/webpack.config.js -p",
 		"harness-example-development": "rm -rf tests/example/output && npx webpack --config tests/example/webpack.config.js -d",
@@ -93,5 +93,5 @@
 		"test": "npx jest",
 		"watch": "npx webpack --config webpack.config.js -d --watch"
 	},
-	"version": "4.11.0"
+	"version": "4.12.0"
 }

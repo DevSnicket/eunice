@@ -2,7 +2,8 @@
 
 const
 	createCodeEditorWebpackEntryForLanguages = require("@devsnicket/eunice-test-harnesses/codeEditor/serviceWorkers/createWebpackEntryForLanguages"),
-	createWebpackConfiguration = require("@devsnicket/eunice-test-harnesses/createWebpackConfiguration");
+	createWebpackConfiguration = require("@devsnicket/eunice-test-harnesses/createWebpackConfiguration"),
+	path = require("path");
 
 module.exports =
 	({
@@ -19,7 +20,7 @@ module.exports =
 				entry:
 					createCodeEditorWebpackEntryForLanguages(codeEditorLanguages),
 				indexFile:
-					"./harness.js",
+					path.join(__dirname, "harness.js"),
 				javascriptSubstitution,
 				title,
 			}),

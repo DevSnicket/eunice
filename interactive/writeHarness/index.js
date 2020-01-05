@@ -1,27 +1,28 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 const
-	copyServiceWorkersIntoDirectoryPath = require("./copyServiceWorkersIntoDirectoryPath"),
-	copySourceMapIntoDirectoryPath = require("./copySourceMapIntoDirectoryPath"),
-	writeHtml = require("./writeHtml");
+	copyServiceWorkerDirectory = require("./copyServiceWorkerDirectory"),
+	writeHtmlWithYaml = require("./writeHtmlWithYaml");
 
 module.exports =
 	async({
 		directoryPath,
 		htmlFileName,
 		includeServiceWorkers,
-		includeSourceMap,
+		sourceDirectoryPath,
 		yaml,
 	}) => {
-		await writeHtml({
+		await writeHtmlWithYaml({
 			directoryPath,
 			htmlFileName,
+			templateHtmlDirectoryPath:
+				sourceDirectoryPath,
 			yaml,
 		});
 
 		if (includeServiceWorkers)
-			await copyServiceWorkersIntoDirectoryPath(directoryPath);
-
-		if (includeSourceMap)
-			await copySourceMapIntoDirectoryPath(directoryPath);
+			await copyServiceWorkerDirectory({
+				from: sourceDirectoryPath,
+				to: directoryPath,
+			});
 	};
