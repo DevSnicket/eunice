@@ -10,6 +10,7 @@ module.exports =
 		babelPlugins = [],
 		codeEditorLanguages = [],
 		directory,
+		indexFilePath = path.join(__dirname, "harness.js"),
 		javascriptSubstitution = null,
 		title = null,
 	}) => (
@@ -20,7 +21,7 @@ module.exports =
 				entry:
 					createCodeEditorWebpackEntryForLanguages(codeEditorLanguages),
 				indexFile:
-					path.join(__dirname, "harness.js"),
+					indexFilePath,
 				javascriptSubstitution,
 				title,
 			}),
