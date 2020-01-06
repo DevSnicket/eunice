@@ -11,6 +11,8 @@ module.exports =
 				[ "javascript" ],
 			directory:
 				path.join(__dirname, "output"),
+			indexFilePath:
+				"./harness.js",
 			javascriptSubstitution:
 				{
 					escape: mode !== "production",
