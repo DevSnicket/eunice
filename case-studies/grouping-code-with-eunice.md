@@ -1,6 +1,6 @@
 As software gets more complicated we need ways to structure code to make it easier to understand. For example, functions, classes, closures, files, directories, repositories, namespaces, packages and services. However, how code is grouped in these structures doesn't always fit well with how the pieces work together.
 
-[Eunice](https://devsnicket.com/eunice) is designed to help explore and define structure with awareness of the actual dependencies.
+[Eunice](https://devsnicket.com/eunice) is designed to help explore and define the structure of code with an awareness of its dependencies.
 
 ![](../arrows/default-height.svg)
 
