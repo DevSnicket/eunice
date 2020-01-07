@@ -65,7 +65,10 @@ body > .content {
 }
 
 code {
+    background-color: #262626;
     display: block;
+    font-size: 1.2em;
+    padding: 1em;
     white-space: pre-wrap;
 }
 
