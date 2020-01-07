@@ -47,7 +47,7 @@ Selecting the new react-devtools-group shows its stack:
 
 ![](./14-devtools-group-contents.png)
 
-To make this grouping more permanent and implicit the Eunice stack above could be replaced with a new sub-directory in the code.
+To make this grouping more permanent and obvious, the Eunice stack above could be replaced with a new sub-directory in the code.
 
 The example above was an obvious group to create, with the shared concept (devtools) already defined, high cohesion within its items and a simple relationship with the rest of the system. To get the same effect elsewhere, more detailed work might be required, directly in the code, moving small pieces around from across many parts of a system. Hopefully Eunice would still be useful even when whats required is more laborious.
 
