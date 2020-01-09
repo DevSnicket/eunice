@@ -1,4 +1,8 @@
-There are often debates on the best way to describe what constitutes a "unit" when unit testing. Considering the scope of tests is an important part of code structure and complementary to how the implementation is grouped. Structure is one aspect of software, there must also be dependencies. Dependencies still exist even when clarified with contracts (e.g. APIs, interface types) or are inverted (e.g. plug-ins, dependency injection). However, implementation practices such as these can be helpful to improve test scope and isolation. Specifically when testing, issues with scope and isolation can lead to tests with lots of setup (e.g. mocking) and discrepancies between where implementation was changed and what tests were affected by those changes.
+There are often debates on the best way to describe what constitutes a "unit" when unit testing. Considering the scope of tests is an important part of code structure and complementary to how the implementation is grouped.
+
+Structure is one aspect of software, there must also be dependencies. Dependencies still exist even when clarified with contracts (e.g. APIs, interface types) or are inverted (e.g. plug-ins, dependency injection). However, implementation practices such as these can be helpful to improve test scope and isolation.
+
+Specifically when testing, issues with scope and isolation can lead to tests with lots of setup (e.g. mocking) and discrepancies between where implementation was changed and what tests were affected by those changes.
 
 [Eunice](https://devsnicket.com/eunice) is designed to bring together the concepts of scope and isolation, through the wider concepts of structure and dependency. It does this by encouraging uni-directional dependencies instead of bi-directional; this includes indirect dependencies.
 
