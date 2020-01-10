@@ -66,6 +66,7 @@ body > .content {
 
 code {
     background-color: #262626;
+    color: white;
     display: block;
     font-size: 1.2em;
     padding: 1em;
