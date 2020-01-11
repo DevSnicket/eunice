@@ -16,7 +16,7 @@
 		"@devsnicket/eunice-javascript-analyzer": "11.13.6",
 		"@devsnicket/eunice-processors": "11.4.0",
 		"@devsnicket/eunice-renderer": "6.7.0",
-		"@devsnicket/eunice-renderer-test-harness": "4.13.0",
+		"@devsnicket/eunice-renderer-test-harness": "4.13.1",
 		"@devsnicket/eunice-run-tests-from-file-system": "4.1.0",
 		"@devsnicket/eunice-test-harnesses": "8.5.0",
 		"@devsnicket/eunice-test-harnesses-processor-plugins": "1.0.0",
@@ -109,5 +109,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dogfooding/output/**\" ! -path \"./dist/*\" ! -path \"./gh-pages/**\" ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest --runInBand"
 	},
-	"version": "6.36.1"
+	"version": "6.36.2"
 }
