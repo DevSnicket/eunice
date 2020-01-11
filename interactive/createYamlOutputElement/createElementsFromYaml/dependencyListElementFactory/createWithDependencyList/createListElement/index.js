@@ -99,7 +99,7 @@ function withElementFactory({
 					dependency =>
 						createElement(
 							"li",
-							{ key: dependency.id },
+							getKeyPropertyForItem(dependency),
 							...createDependencyElements(dependency),
 						),
 				),
@@ -132,10 +132,23 @@ function withElementFactory({
 		return (
 			createElement(
 				"li",
-				{ key: childItem.item.id },
+				getKeyPropertyForItem(childItem.item),
 				createElementsForSubset(childItem),
 			)
 		);
+	}
+
+	function getKeyPropertyForItem(
+		item,
+	) {
+		return { key: getKey() };
+
+		function getKey() {
+			return (
+				getItemIdentifierHierarchy(item)
+				.join("/")
+			);
+		}
 	}
 }
 
