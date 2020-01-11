@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.36.1 on 2020-01-06T09:33:23.521Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.36.2 on 2020-01-11T22:04:21.828Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -3220,6 +3220,7 @@
                                                   dependsUpon:
                                                     - createDependencyElements
                                                     - createElement
+                                                    - getKeyPropertyForItem
                                                 - id: createChildItemsElement
                                                   dependsUpon:
                                                     - compareItemIdentifiers
@@ -3228,7 +3229,17 @@
                                                   dependsUpon:
                                                     - createElement
                                                     - createElementsForSubset
-                                              - - id: createDependencyElements
+                                                    - getKeyPropertyForItem
+                                              - - id: getKeyPropertyForItem
+                                                  dependsUpon: getKey
+                                                  items:
+                                                    - - id: getKey
+                                                        dependsUpon:
+                                                          - getItemIdentifierHierarchy
+                                                          - item
+                                                    - - id: item
+                                                        type: parameter
+                                                - id: createDependencyElements
                                                   type: parameter
                                                 - id: createElement
                                                   type: parameter
