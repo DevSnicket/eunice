@@ -35,7 +35,6 @@
 					"--accept-license",
 					"--directory-to-create-or-add-to-stacks-from=dogfooding",
 					"--include-service-workers=true",
-					"--include-source-map=true",
 					"--ignore-path-pattern=(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$",
 					"--modify-stacks-file=dogfooding/modify-file-stacks.yaml",
 					"--modify-stacks-key=type",
@@ -100,7 +99,8 @@
 			"args":
 				[
 					"--collect-coverage=false",
-					"--runInBand"
+					"--runInBand",
+					"-t=All processors except flatten single root item when has only items and type"
 				],
 			"disableOptimisticBPs": true,
 			"name": "Jest",
