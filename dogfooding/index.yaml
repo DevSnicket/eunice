@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 7.0.1 on 2020-01-13T15:16:44.183Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 7.0.1 on 2020-01-13T19:31:10.571Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -7669,12 +7669,6 @@
                         - - id: prettyFormat
                             type: variable
                             dependsUpon: pretty-format
-        - id: test-harnesses-processor-plugins
-          type: file
-          dependsUpon: plugin-discovery-create-repository
-          items:
-            id: test-harnesses-processor-plugins
-            type: export
 - - id: call-with-process-standard-streams
     type: file
     items:
