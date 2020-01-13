@@ -2,7 +2,7 @@
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
 const
-	createWebpackConfiguration = require("../../createWebpackConfiguration"),
+	createWebpackConfiguration = require("../../../createWebpackConfiguration"),
 	path = require("path");
 
 module.exports =

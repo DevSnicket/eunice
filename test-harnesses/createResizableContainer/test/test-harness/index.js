@@ -3,14 +3,14 @@ Licensed under the MIT license. See LICENSE file in the repository root for full
 
 const
 	{ createElement } = require("react"),
-	createHashFromLocation = require("../../createHashFromLocation"),
-	createResizableContainer = require(".."),
+	createHashFromLocation = require("../../../createHashFromLocation"),
+	createResizableContainer = require("../.."),
 	{
 		ReflexContainer,
 		ReflexElement,
 		ReflexSplitter,
 	} = require("react-reflex"),
-	renderIntoContainerElement = require("../../renderIntoContainerElement");
+	renderIntoContainerElement = require("../../../renderIntoContainerElement");
 
 renderIntoContainerElement({
 	initialState:

@@ -2,12 +2,12 @@
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
 const
-	createResizableContainer = require("."),
+	createResizableContainer = require(".."),
 	{ createElement } = require("react"),
 	{ renderToStaticMarkup } = require("react-dom/server"),
 	path = require("path"),
-	readTextFile = require("../tests/readTextFile"),
-	removeWhitespaceFromTestExpected = require("../tests/removeWhitespaceFromTestExpected");
+	readTextFile = require("./readTextFile"),
+	removeWhitespaceFromTestExpected = require("./removeWhitespaceFromTestExpected");
 
 const resizableElementTypes =
 	{
