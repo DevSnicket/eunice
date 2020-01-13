@@ -5,12 +5,8 @@
     dependencyPermeable: true
     items:
       - - renderer-test-harness
-      -
-        - processors
-        - renderer
-      -
-        - dependency-and-structure
-        - test-harnesses-processor-plugins
+      - [ processors, renderer ]
+      - - dependency-and-structure
 -
   - call-with-process-standard-streams
   - run-tests-from-file-system
