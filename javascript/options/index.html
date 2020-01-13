@@ -25,6 +25,7 @@
                 <a href="#babel-parser-plugins">Babel parser plugins</a>
                 <a href="#source-directories">source directories</a>
                 <a href="#file-extensions">file extensions</a>
+                <a href="#infer-stacks">infer stacks</a>
                 <a href="#stack-from-directory">stack from directory</a>
                 <a href="#modify-stacks">modify stacks</a>
                 <a href="#dependency-permeable">dependency permeable</a>
@@ -63,6 +64,12 @@
                 <p>By default files with the .js extension are analysed. The default can be replaced or amended (extensions must be prefixed with .):</p>
                 <code>npx eunice
   --file-extensions=.ts</code>
+            </div>
+            <div class="box" id="infer-stacks">
+                <h3>infer stacks</h3>
+                <p>Eunice can infer stacks when none are implied or defined. By default this is disabled, but can be enabled with:</p>
+                <code>npx eunice
+  --infer-stacks</code>
             </div>
             <div class="box" id="stack-from-directory">
                 <h3>stack from directory</h3>
