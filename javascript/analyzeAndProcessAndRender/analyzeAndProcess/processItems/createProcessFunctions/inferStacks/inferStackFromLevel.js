@@ -43,16 +43,30 @@ function getLowerAndUpperFromLevel(
 
 		function canBeLowerLevel() {
 			return (
-				hasNoDependsUponInSameLevel(item.dependsUpon)
+				allDependsUponAndDescendantsWithDependsUponInDifferentLevel({
+					dependsUpon: item.dependsUpon,
+					items: item.items,
+				})
 				&&
-				hasDependentsInSameLevel({
+				anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel({
 					dependents: item.dependents,
 					items: item.items,
 				})
 			);
 		}
 
-		function hasNoDependsUponInSameLevel(
+		function allDependsUponAndDescendantsWithDependsUponInDifferentLevel({
+			dependsUpon,
+			items,
+		}) {
+			return (
+				allDependsUponInDifferentLevel(dependsUpon)
+				&&
+				allDescendantsWithDependsUponInDifferentLevel(items)
+			);
+		}
+
+		function allDependsUponInDifferentLevel(
 			dependsUpon,
 		) {
 			return (
@@ -62,65 +76,75 @@ function getLowerAndUpperFromLevel(
 					({ itemOrFirstAncestorItem }) =>
 						!itemOrFirstAncestorItem
 						||
-						!isDependencyInSameLevel(itemOrFirstAncestorItem),
+						!isDependencyOfDifferentItemInSameLevel(itemOrFirstAncestorItem),
 				)
 			);
 		}
 
-		function hasDependentsInSameLevel({
+		function allDescendantsWithDependsUponInDifferentLevel(
+			stackOfDescendant,
+		) {
+			return (
+				!stackOfDescendant
+				||
+				stackOfDescendant.every(levelOfDescendant => levelOfDescendant.every(allDependsUponAndDescendantsWithDependsUponInDifferentLevel))
+			);
+		}
+
+		function anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel({
 			dependents,
 			items,
 		}) {
 			return (
-				anyDependentsInSameLevel(dependents)
+				anyDependentsOfDifferentItemInSameLevel(dependents)
 				||
-				anyDescendantsWithDependentsInSameLevel(items)
+				anyDescendantsInStackWithDependentsOfDifferentItemInSameLevel(items)
 			);
 		}
 
-		function anyDependentsInSameLevel(
+		function anyDependentsOfDifferentItemInSameLevel(
 			dependents,
 		) {
 			return (
 				dependents
 				&&
-				dependents.some(isDependencyInSameLevel)
+				dependents.some(isDependencyOfDifferentItemInSameLevel)
 			);
 		}
 
-		function isDependencyInSameLevel(
+		function isDependencyOfDifferentItemInSameLevel(
 			dependency,
 		) {
 			return (
 				dependency !== item
 				&&
-				isOrHasAncestorInSameLevel()
+				isOrHasAncestor()
 			);
 
-			function isOrHasAncestorInSameLevel() {
+			function isOrHasAncestor() {
 				return (
 					dependency.level === level
 					||
-					isAncestorInSameLevel()
+					hasAncestor()
 				);
 			}
 
-			function isAncestorInSameLevel() {
+			function hasAncestor() {
 				return (
 					dependency.level.stack.parent
 					&&
-					isDependencyInSameLevel(dependency.level.stack.parent)
+					isDependencyOfDifferentItemInSameLevel(dependency.level.stack.parent)
 				);
 			}
 		}
 
-		function anyDescendantsWithDependentsInSameLevel(
-			items,
+		function anyDescendantsInStackWithDependentsOfDifferentItemInSameLevel(
+			stackOfDescendant,
 		) {
 			return (
-				items
+				stackOfDescendant
 				&&
-				items.some(levelOfDescendant => levelOfDescendant.some(hasDependentsInSameLevel))
+				stackOfDescendant.some(levelOfDescendant => levelOfDescendant.some(anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel))
 			);
 		}
 	}
