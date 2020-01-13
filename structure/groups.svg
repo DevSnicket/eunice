@@ -1,4 +1,4 @@
-<svg height="210.5" width="375.5" xmlns="http://www.w3.org/2000/svg">
+<svg height="215.5" width="510.5" xmlns="http://www.w3.org/2000/svg">
 	<defs><style>
 		polyline,
 		rect {
@@ -11,74 +11,127 @@
 			font-size: 16px;
 			text-anchor: middle;
 		}
+		
+		.indirect polyline {
+			stroke-dasharray: 2;
+		}
+
+		.indirect use {
+			fill: transparent;
+			stroke: black;
+		}
 
 		.key text {
 			text-anchor: start;
 		}
 	</style></defs>
-	<symbol id="arrow-head">
+	<symbol id="arrow-head-down">
 		<polygon points="0,0 15,0 7.5,7.5"/>
+	</symbol>
+	<symbol id="arrow-head-up">
+		<use href="#arrow-head-down" transform="rotate(180 7.5 3.75)"/>
 	</symbol>
 	<symbol id="down-arrow">
 		<polyline points="7.5,0 7.5,12.5"/>
-		<use href="#arrow-head" y="12.5"/>
+		<use href="#arrow-head-down" y="12.5"/>
+	</symbol>
+	<symbol id="item">
+		<rect height="25" width="40"/>
 	</symbol>
 	<symbol id="stack">
 		<g transform="translate(0.5,0.5)">
-			<rect height="25" width="50"/>
+			<use href="#item"/>
 			<g transform="translate(0,25)">
-				<use href="#down-arrow" x="17.5"/>
-				<rect height="25" width="50" y="20"/>
+				<use href="#down-arrow" x="12.5"/>
+				<use href="#item" y="20"/>
 			</g>
 		</g>
 	</symbol>
 	<symbol id="grouped-stack">
 		<g transform="translate(0.5,0.5)">
-			<rect height="90" width="70"/>
+			<rect height="90" width="60"/>
 			<use href="#stack" transform="translate(9.5,9.5)"/>
 		</g>
 	</symbol>
 	<g transform="translate(0.5,0)">
 		<text x="35" y="16">stack</text>
 		<g transform="translate(0,25)">
-			<polyline points="32.5,90 0,90 0,0 70,0 70,90 37.5,90"/>
+			<rect height="90" width="60"/>
 			<g transform="translate(10,10)">
 				<use href="#stack" x="-0.5" y="-0.5"/>
-				<g transform="translate(17.5,70)">
+				<g transform="translate(12.5,70)">
 					<polyline points="7.5,0 7.5,17.5"/>
-					<use href="#arrow-head" y="17.5"/>
+					<use href="#arrow-head-down" y="17.5"/>
 				</g>
 			</g>
-			<rect height="25" width="50" x="10" y="105"/>
+			<use href="#item" x="10" y="105"/>
 		</g>
 	</g>
-	<g transform="translate(105,0)">
-		<text x="75" y="16">independent</text>
+	<g transform="translate(90,0)">
+		<text x="65" y="16">independent</text>
 		<g transform="translate(-0.5,-0.5)">
 			<use href="#grouped-stack" transform="translate(0,25)"/>
-			<use href="#grouped-stack" transform="translate(80,25)"/>
+			<use href="#grouped-stack" transform="translate(70,25)"/>
 		</g>
 	</g>
-	<g transform="translate(285,0)">
-		<text x="45" y="16">nested</text>
+	<g transform="translate(250,0)">
+		<text x="40" y="16">nested</text>
 		<g transform="translate(0,25)">
-			<rect height="25" width="90"/>
-			<g transform="translate(37.5,25)">
+			<rect height="25" width="80"/>
+			<g transform="translate(32.5,25)">
 				<polyline points="7.5,0 7.5,17.5"/>
-				<use href="#arrow-head" y="17.5"/>
+				<use href="#arrow-head-down" y="17.5"/>
 			</g>
 			<g transform="translate(0,35)">
-				<polyline points="47.5,0 90,0 90,150 0,150 0,0 42.5,0" />
-				<rect height="25" width="70" x="10" y="15"/>
-				<g transform="translate(37.5,40)">
+				<rect width="80" height="155"/>
+				<rect height="25" width="60" x="10" y="15"/>
+				<g transform="translate(32.5,40)">
 					<polyline points="7.5,0 7.5,17.5"/>
-					<use href="#arrow-head" y="17.5"/>
+					<use href="#arrow-head-down" y="17.5"/>
 				</g>
 				<g transform="translate(10,50)">
-					<polyline points="37.5,0 70,0 70,90 0,90 0,0 32.5,0" />
+					<rect height="95" width="60"/>
 					<use href="#stack" transform="translate(9.5,14.5)"/>
 				</g>
 			</g>
+		</g>
+	</g>
+	<g transform="translate(360,0)">
+		<text x="75" y="16">bi-directional</text>
+		<g transform="translate(0,25)">
+			<rect height="50" width="150"/>
+			<use href="#item" x="10" y="10"/>
+			<g transform="translate(22.5,35)">
+				<polyline points="7.5,0 7.5,52.5"/>
+				<use href="#arrow-head-down" y="52.5"/>
+			</g>
+			<use href="#item" x="60" y="10"/>
+			<g transform="translate(72.5,35)">
+				<polyline points="7.5,7.5 7.5,60"/>
+				<use href="#arrow-head-up" y="0"/>
+			</g>
+			<g class="indirect" transform="translate(105,50)">
+				<polyline points="7.5,0 7.5,22.5"/>
+				<use href="#arrow-head-down" x="0" y="22.5"/>
+				<g transform="translate(25,0)">
+					<use href="#arrow-head-up" x="0" y="0"/>
+					<polyline points="7.5,7.5 7.5,30"/>
+				</g>
+			</g>
+			<g transform="translate(0,80)">
+				<rect height="50" width="150"/>
+				<use href="#item" x="10" y="15"/>
+				<use href="#item" x="60" y="15"/>
+			</g>
+		</g>
+	</g>
+	<g class="key" transform="translate(55,175)">
+		<use href="#down-arrow" x="0" y="0"/>
+		<text x="20" y="15">direct</text>
+		<g class="indirect" transform="translate(80,0)">
+			<polyline points="7.5,0 7.5,12"/>
+			<use href="#arrow-head-down" x="0" y="12"/>
+			<text x="20" y="15">indirect</text>
 		</g>
 	</g>
 </svg>
