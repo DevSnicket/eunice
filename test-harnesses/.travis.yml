@@ -23,4 +23,5 @@ script: >-
   if [[ `git status --porcelain` ]]; then
     git commit -m "dogfooding and JavaScript harness";
     git push;
-  fi
+  fi &&
+  cd ..
