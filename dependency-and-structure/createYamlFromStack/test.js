@@ -2,7 +2,7 @@
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
 const
-	callTestForSymmetrical = require("../tests/callTestForSymmetrical"),
+	callTestForSymmetrical = require("../stackAndYamlTesting/callTestForSymmetrical"),
 	createYamlFromStack = require(".");
 
 describe(

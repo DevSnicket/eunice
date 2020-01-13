@@ -2,8 +2,8 @@
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
 const
-	createParentChildLevels = require("../../../../tests/createParentChildLevels"),
-	createStackFromLevels = require("../../../../tests/createStackFromLevels");
+	createParentChildLevels = require("../../../../stackAndYamlTesting/createParentChildLevels"),
+	createStackFromLevels = require("../../../../stackAndYamlTesting/createStackFromLevels");
 
 module.exports =
 	() => {

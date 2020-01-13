@@ -2,8 +2,8 @@
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
 const
-	createStackFromLevels = require("../../../../tests/createStackFromLevels"),
-	createUpperAndLowerStack = require("../../../../tests/createUpperAndLowerStack");
+	createStackFromLevels = require("../../../../stackAndYamlTesting/createStackFromLevels"),
+	createUpperAndLowerStack = require("../../../../stackAndYamlTesting/createUpperAndLowerStack");
 
 module.exports =
 	() => {

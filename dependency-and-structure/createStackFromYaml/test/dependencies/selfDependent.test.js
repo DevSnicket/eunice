@@ -2,8 +2,8 @@
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
 const
-	createItemYaml = require("../../../tests/createItemYaml"),
-	createStackFromLevels = require("../../../tests/createStackFromLevels"),
+	createItemYaml = require("../../../stackAndYamlTesting/createItemYaml"),
+	createStackFromLevels = require("../../../stackAndYamlTesting/createStackFromLevels"),
 	testCreateStackFromYaml = require("../testCreateStackFromYaml");
 
 const identifier = "item";

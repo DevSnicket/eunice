@@ -2,7 +2,7 @@
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
 const
-	createStackFromLevels = require("../../tests/createStackFromLevels"),
+	createStackFromLevels = require("../../stackAndYamlTesting/createStackFromLevels"),
 	testCreateStackFromYaml = require("./testCreateStackFromYaml");
 
 testCreateStackFromYaml({
