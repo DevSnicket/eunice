@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 6.36.2 on 2020-01-12T10:19:12.144Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 6.37.0 on 2020-01-13T11:08:12.860Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -177,6 +177,7 @@
                                     - dependencyPermeableIdentifiers
                                     - directory
                                     - isFileContentReversed
+                                    - isInferStacksEnabled
                                     - items
                                     - modifyStacksFile
                                     - packagePrefixAndScope
@@ -203,6 +204,8 @@
                           - id: ignorePathPattern
                             type: parameter
                           - id: isFileContentReversed
+                            type: parameter
+                          - id: isInferStacksEnabled
                             type: parameter
                           - id: modifyStacksFile
                             type: parameter
@@ -244,6 +247,7 @@
                                     - createOrAddToStacksUsingFileSystem
                                     - createSubsetIdentifierHierarchy
                                     - ensureRootItemWithIdentifier
+                                    - inferStacks
                                     - modifyStacksWithFile
                                     - removeEmptySelfDependentOfType
                                     - removePackagePrefixAndScopeInDependsUpon
@@ -379,6 +383,129 @@
                                                 items: replaceIdentifier
                                           - - id: items
                                               type: parameter
+                                - id: inferStacks
+                                  type: file
+                                  items:
+                                    - - id: test
+                                        type: file
+                                        dependsUpon:
+                                          - inferStacks
+                                          - path
+                                          - run-tests-from-file-system
+                                          - id: js-yaml
+                                            items:
+                                              - parseYaml
+                                              - formatYaml
+                                    - - id: inferStacks
+                                        type: export
+                                        dependsUpon:
+                                          - replaceIdentifiersAndItemsAndLevelsAndStacks
+                                          - splitWhenLevelOrGetIdentifierOrItemOrStack
+                                    - - id: splitWhenLevelOrGetIdentifierOrItemOrStack
+                                        dependsUpon: whenLevelOrStack
+                                        items:
+                                          - - id: whenLevelOrStack
+                                              dependsUpon:
+                                                - identifierOrItemOrLevelOrStack
+                                                - splitLevelOrStack
+                                          - - id: identifierOrItemOrLevelOrStack
+                                              type: parameter
+                                    - - id: splitLevelOrStack
+                                        dependsUpon:
+                                          - createYamlFromStack
+                                          - inferStackFromLevel
+                                          - whenStack
+                                        items:
+                                          - - id: whenStack
+                                              dependsUpon:
+                                                - isStack
+                                                - levelOrStack
+                                                - splitStack
+                                              items:
+                                                id: isStack
+                                                dependsUpon: levelOrStack
+                                          - - id: levelOrStack
+                                              type: parameter
+                                    - - id: splitStack
+                                        dependsUpon:
+                                          - createStackFromYaml
+                                          - inferStackFromLevel
+                                    - - id: createStackFromYaml
+                                        type: variable
+                                        dependsUpon:
+                                          id: dependency-and-structure
+                                          items: createStackFromYaml
+                                      - id: createYamlFromStack
+                                        type: variable
+                                        dependsUpon:
+                                          id: dependency-and-structure
+                                          items: createYamlFromStack
+                                      - id: replaceIdentifiersAndItemsAndLevelsAndStacks
+                                        type: variable
+                                        dependsUpon:
+                                          id: processors
+                                          items:
+                                            id: replacement
+                                            items: replaceIdentifiersAndItemsAndLevelsAndStacks
+                                      - id: inferStackFromLevel
+                                        type: file
+                                        items:
+                                          - - id: inferStackFromLevel
+                                              dependsUpon:
+                                                - createStackFromLowerAndUpper
+                                                - createStackFromYaml
+                                                - getLowerAndUpperFromLevel
+                                          - - id: getLowerAndUpperFromLevel
+                                              dependsUpon:
+                                                - getIsItemLowerOrUpper
+                                                - groupBy
+                                              items:
+                                                id: getIsItemLowerOrUpper
+                                                dependsUpon: canBeLowerLevel
+                                                items:
+                                                  - - id: canBeLowerLevel
+                                                      dependsUpon:
+                                                        - hasDependentsInSameLevel
+                                                        - hasNoDependsUponInSameLevel
+                                                  - - id: hasNoDependsUponInSameLevel
+                                                      dependsUpon: isDependencyInSameLevel
+                                                    - id: hasDependentsInSameLevel
+                                                      dependsUpon:
+                                                        - anyDependentsInSameLevel
+                                                        - anyDescendantsWithDependentsInSameLevel
+                                                  - - id: anyDependentsInSameLevel
+                                                      dependsUpon: isDependencyInSameLevel
+                                                  - - id: isDependencyInSameLevel
+                                                      dependsUpon: isOrHasAncestorInSameLevel
+                                                      items:
+                                                        - - id: isOrHasAncestorInSameLevel
+                                                            dependsUpon: isAncestorInSameLevel
+                                                        - - id: isAncestorInSameLevel
+                                                            dependsUpon: isDependencyInSameLevel
+                                                    - id: anyDescendantsWithDependentsInSameLevel
+                                                      dependsUpon: hasDependentsInSameLevel
+                                            - id: createStackFromLowerAndUpper
+                                              dependsUpon: whenHasLower
+                                              items:
+                                                id: whenHasLower
+                                                dependsUpon:
+                                                  - createYamlFromStack
+                                                  - inferStackFromLevel
+                                            - id: createStackFromYaml
+                                              type: variable
+                                              dependsUpon:
+                                                id: dependency-and-structure
+                                                items: createStackFromYaml
+                                          - - id: createYamlFromStack
+                                              type: variable
+                                              dependsUpon:
+                                                id: dependency-and-structure
+                                                items: createYamlFromStack
+                                            - id: groupBy
+                                              type: variable
+                                              dependsUpon:
+                                                id: lodash
+                                                items: groupBy
                                 - id: modifyStacksWithFile
                                   type: file
                                   items:
