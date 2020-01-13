@@ -84,6 +84,7 @@
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run build && npm run test && npm run harness-example-production",
 		"build": "rm -rf dist && npx webpack --config webpack.config.js -p",
+		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$\" --infer-stacks --modify-stacks-file=modify-file-stacks.yaml --modify-stacks-key=type --modify-stacks-pattern=^file$ --output-yaml --reverse-file-content=false",
 		"harness-dogfooding-development": "rm -rf tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output && npx webpack --config tests/dogfoodingFromEuniceRepositoryRelativeDirectory/webpack.config.js -d",
 		"harness-dogfooding-production": "rm -rf tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output && npx webpack --config tests/dogfoodingFromEuniceRepositoryRelativeDirectory/webpack.config.js -p",
 		"harness-example-development": "rm -rf tests/example/output && npx webpack --config tests/example/webpack.config.js -d",
@@ -93,5 +94,5 @@
 		"test": "npx jest",
 		"watch": "npx webpack --config webpack.config.js -d --watch"
 	},
-	"version": "4.13.1"
+	"version": "4.14.0"
 }
