@@ -63,6 +63,7 @@
 	},
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run test",
+		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|node_modules|test-coverage)$\" --infer-stacks=true --output-yaml --reverse-file-content=false",
 		"lint": "npx eslint .",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./dist/**/*\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "npx jest --runInBand"
