@@ -192,7 +192,7 @@ Unexpected token, expected ";" (14:5)</code>
         <p>To make this grouping more permanent and implicit the Eunice stack above could be replaced with a new sub-directory in the code.</p>
         <p>The example above was an obvious group to create, with the shared concept (devtools) already defined, high cohesion within its items and a simple relationship with the rest of the system. To get the same effect elsewhere, more detailed work might be required, directly in the code, moving small pieces around from across many parts of a system.</p>
         <h3 id="tests">tests</h3>
-        <p>While looking through React's code I noticed some of the package scoped bi-directional dependencies were only in its tests. This can be investigated by modifying the ignore path pattern to exclude test related directories:</p>
+        <p>While looking through the React code base I noticed some of the package scoped bi-directional dependencies were only in its tests. This can be investigated by modifying the ignore path pattern to exclude test related directories:</p>
         <code>npx eunice \
 --ignore-path-pattern="(^(\.|babel.config.js|scripts<span class="new">|fixtures</span>)|node_modules<span class="new">|__tests__</span>)" \
 --modify-stacks-file=.eunice-stack-modify.yaml \
