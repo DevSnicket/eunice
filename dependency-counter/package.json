@@ -79,5 +79,5 @@
 		"test": "npx jest --runInBand",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "6.7.0"
+	"version": "6.8.0"
 }

@@ -1,3 +1,0 @@
-- - existing
-- [ createParentGroupFactoryFromSubsetIdentifierHierarchy, createStackWithSummaryGroupFactory ]
-- [ aggregateGroupFactoriesWithOrientation, createDependencyGroupFactoryWhenRequired, createOuterDependencyGroupFactory, createTextGroup, countDependenciesOfItem, getDependencyCountInBothDirections, getIdentifierClassNameAndText, sumDependencyCount, withPrecision ]
