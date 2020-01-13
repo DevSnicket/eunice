@@ -20,7 +20,7 @@
         <h2><a href="../">JavaScript</a><span>options</span><a href="../releases">releases</a><a href="../processing">processing</a></h2>
         <div>
             <div class="horizontal-menu">
-                <a href="#reverse-files">reverse files</a>
+                <a href="#reverse-file-content">reverse files content</a>
                 <a href="#ignore-paths">ignore paths</a>
                 <a href="#babel-parser-plugins">Babel parser plugins</a>
                 <a href="#source-directories">source directories</a>
@@ -33,10 +33,10 @@
                 <a href="#output-files">output files</a>
                 <a href="#npm-packages">NPM packages</a>
             </div>
-            <div class="box" id="reverse-files">
+            <div class="box" id="reverse-file-content">
                 <h3>reverse file content</h3>
-                <p>JavaScript files are expected to be ordered so that a function is after calls of it, this can be reversed with:</p>
-                <code>npx eunice --is-file-content-reversed=true</code>
+                <p>JavaScript files are expected to be ordered so that calls of a function are after the definition of that function. This is the reverse direction of how Eunice works, but seems to be most popular approach for JavaScript developers. This reversing of file content can be disabled:</p>
+                <code>npx eunice --reverseFileContent=false</code>
             </div>
             <div class="box" id="ignore-paths">
                 <h3>ignore paths</h3>
