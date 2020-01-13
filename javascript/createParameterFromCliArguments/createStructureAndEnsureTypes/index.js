@@ -13,7 +13,6 @@ module.exports =
 		ignorePathPattern = "(^|/)(\\..*|node_modules)$",
 		includeServiceWorkers,
 		inferStacks,
-		isFileContentReversed,
 		modifyStacksFile,
 		modifyStacksKey,
 		modifyStacksPattern,
@@ -26,6 +25,7 @@ module.exports =
 		packagePrefix,
 		packageScope,
 		pathSeparator,
+		reverseFileContent,
 		rootItemIdentifiers,
 		...restOfOptions
 	}) => (
@@ -47,7 +47,7 @@ module.exports =
 			includeServiceWorkers:
 				parseBoolean(includeServiceWorkers),
 			isFileContentReversed:
-				parseBoolean(isFileContentReversed),
+				parseBoolean(reverseFileContent),
 			isInferStacksEnabled:
 				parseBoolean(inferStacks),
 			modifyStacksFile:

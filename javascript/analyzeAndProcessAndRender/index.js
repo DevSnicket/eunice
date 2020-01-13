@@ -21,7 +21,7 @@ module.exports =
 		fileExtensions,
 		ignorePathPattern,
 		includeServiceWorkers = false,
-		isFileContentReversed = false,
+		isFileContentReversed = true,
 		isInferStacksEnabled = false,
 		modifyStacksFile,
 		output,

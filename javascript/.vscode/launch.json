@@ -10,7 +10,8 @@
 				"--accept-license",
 				"--ignore-path-pattern=(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$",
 				"--output-svg",
-				"--output-yaml"
+				"--output-yaml",
+				"--reverseFileContent=false"
 			],
 			"name": "bin this package only",
 			"program": "${workspaceFolder}/bin.js",
@@ -22,7 +23,8 @@
 				"--accept-license",
 				"--ignore-path-pattern=(^|/)(\\..*|dist|gh-pages|node_modules|output|test-coverage)$",
 				"--output-svg",
-				"--output-yaml"
+				"--output-yaml",
+				"--reverseFileContent=false"
 			],
 			"name": "bin (dist) this package only",
 			"program": "${workspaceFolder}/dist/bin.js",
@@ -55,6 +57,7 @@
 					"--package-prefix=eunice-",
 					"--package-scope=devsnicket",
 					"--directories=.",
+					"--reverseFileContent=false",
 					"--root-item-identifiers=javascript"
 				],
 			"name": "bin all packages",
@@ -88,6 +91,7 @@
 					"--package-prefix=eunice-",
 					"--package-scope=devsnicket",
 					"--directories=.",
+					"--reverseFileContent=false",
 					"--root-item-identifiers=javascript"
 				],
 			"name": "bin (dist) all packages",
