@@ -193,7 +193,7 @@ async function expectRenderedToBe({
 				path.join(
 					...[
 						__dirname,
-						"testCases",
+						"test-cases",
 						...testCase.directory ? [ testCase.directory ] : [],
 						`${testCase.file}.svg`,
 					],

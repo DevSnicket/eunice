@@ -4,14 +4,14 @@ const
 	path = require("path");
 
 const
-	getSvgForYaml = require("."),
+	getSvgForYaml = require(".."),
 	runTestsFromFileSystem = require("@devsnicket/eunice-run-tests-from-file-system");
 
 runTestsFromFileSystem({
 	caseFileName:
 		".yaml",
 	directoryAbsolutePath:
-		path.join(__dirname, "testCases/"),
+		path.join(__dirname, "test-cases/"),
 	expectedFileName:
 		".svg",
 	getActualForTestCase:

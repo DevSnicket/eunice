@@ -106,7 +106,7 @@ async function assertExpectedFile({
 		await readTestCaseFile(
 			path.join(
 				__dirname,
-				"testCases",
+				"test-cases",
 				`${testCase}.svg`,
 			),
 		),
