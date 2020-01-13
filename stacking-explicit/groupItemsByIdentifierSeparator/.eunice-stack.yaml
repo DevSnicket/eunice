@@ -1,8 +1,0 @@
--
-  - bin
-  - test
-  - testHarnessPlugin
-- - existing
-- - getItemsFromAggregation
-- - getItemOrCreateItemForGroupAndParents
-- - getItemOrCreateItemForGroup
