@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 7.0.0 on 2020-01-13T11:37:09.839Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 7.0.1 on 2020-01-13T15:03:29.214Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -465,25 +465,31 @@
                                                 items:
                                                   - - id: canBeLowerLevel
                                                       dependsUpon:
-                                                        - hasDependentsInSameLevel
-                                                        - hasNoDependsUponInSameLevel
-                                                  - - id: hasNoDependsUponInSameLevel
-                                                      dependsUpon: isDependencyInSameLevel
-                                                    - id: hasDependentsInSameLevel
+                                                        - allDependsUponAndDescendantsWithDependsUponInDifferentLevel
+                                                        - anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel
+                                                  - - id: allDependsUponAndDescendantsWithDependsUponInDifferentLevel
                                                       dependsUpon:
-                                                        - anyDependentsInSameLevel
-                                                        - anyDescendantsWithDependentsInSameLevel
-                                                  - - id: anyDependentsInSameLevel
-                                                      dependsUpon: isDependencyInSameLevel
-                                                  - - id: isDependencyInSameLevel
-                                                      dependsUpon: isOrHasAncestorInSameLevel
+                                                        - allDependsUponInDifferentLevel
+                                                        - allDescendantsWithDependsUponInDifferentLevel
+                                                  - - id: allDependsUponInDifferentLevel
+                                                      dependsUpon: isDependencyOfDifferentItemInSameLevel
+                                                    - id: allDescendantsWithDependsUponInDifferentLevel
+                                                      dependsUpon: allDependsUponAndDescendantsWithDependsUponInDifferentLevel
+                                                    - id: anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel
+                                                      dependsUpon:
+                                                        - anyDependentsOfDifferentItemInSameLevel
+                                                        - anyDescendantsInStackWithDependentsOfDifferentItemInSameLevel
+                                                  - - id: anyDependentsOfDifferentItemInSameLevel
+                                                      dependsUpon: isDependencyOfDifferentItemInSameLevel
+                                                  - - id: isDependencyOfDifferentItemInSameLevel
+                                                      dependsUpon: isOrHasAncestor
                                                       items:
-                                                        - - id: isOrHasAncestorInSameLevel
-                                                            dependsUpon: isAncestorInSameLevel
-                                                        - - id: isAncestorInSameLevel
-                                                            dependsUpon: isDependencyInSameLevel
-                                                    - id: anyDescendantsWithDependentsInSameLevel
-                                                      dependsUpon: hasDependentsInSameLevel
+                                                        - - id: isOrHasAncestor
+                                                            dependsUpon: hasAncestor
+                                                        - - id: hasAncestor
+                                                            dependsUpon: isDependencyOfDifferentItemInSameLevel
+                                                    - id: anyDescendantsInStackWithDependentsOfDifferentItemInSameLevel
+                                                      dependsUpon: anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel
                                             - id: createStackFromLowerAndUpper
                                               dependsUpon: whenHasLower
                                               items:
