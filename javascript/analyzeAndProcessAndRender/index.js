@@ -22,6 +22,7 @@ module.exports =
 		ignorePathPattern,
 		includeServiceWorkers = false,
 		isFileContentReversed = false,
+		isInferStacksEnabled = false,
 		modifyStacksFile,
 		output,
 		packages = null,
@@ -47,6 +48,7 @@ module.exports =
 						fileExtensions,
 						ignorePathPattern,
 						isFileContentReversed,
+						isInferStacksEnabled,
 						modifyStacksFile,
 						packagePrefixAndScope:
 							packages,

@@ -15,6 +15,7 @@ module.exports =
 		fileExtensions,
 		ignorePathPattern,
 		isFileContentReversed,
+		isInferStacksEnabled,
 		modifyStacksFile,
 		packagePrefixAndScope,
 		sources,
@@ -62,6 +63,7 @@ module.exports =
 						identifierSeparator:
 							path.sep,
 						isFileContentReversed,
+						isInferStacksEnabled,
 						items,
 						modifyStacksFile,
 						packagePrefixAndScope,

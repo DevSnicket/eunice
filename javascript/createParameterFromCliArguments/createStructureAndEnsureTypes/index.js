@@ -12,6 +12,7 @@ module.exports =
 		fileExtensions,
 		ignorePathPattern = "(^|/)(\\..*|node_modules)$",
 		includeServiceWorkers,
+		inferStacks,
 		isFileContentReversed,
 		modifyStacksFile,
 		modifyStacksKey,
@@ -47,6 +48,8 @@ module.exports =
 				parseBoolean(includeServiceWorkers),
 			isFileContentReversed:
 				parseBoolean(isFileContentReversed),
+			isInferStacksEnabled:
+				parseBoolean(inferStacks),
 			modifyStacksFile:
 				modifyStacksFile
 				&&

@@ -4,6 +4,7 @@ const
 	createIdentifierSeparatorSpecific = require("./createIdentifierSeparatorSpecific"),
 	createSubsetIdentifierHierarchy = require("./createSubsetIdentifierHierarchy"),
 	ensureRootItemWithIdentifier = require("./ensureRootItemWithIdentifier"),
+	inferStacks = require("./inferStacks"),
 	modifyStacksWithFile = require("./modifyStacksWithFile"),
 	removeEmptySelfDependentOfType = require("./removeEmptySelfDependentOfType"),
 	removePackagePrefixAndScopeInDependsUpon = require("./removePackagePrefixAndScopeInDependsUpon"),
@@ -30,6 +31,7 @@ module.exports =
 		directoryToCreateOrAddToStacksFrom,
 		identifierSeparator,
 		isFileContentReversed,
+		isInferStacksEnabled,
 		modifyStacksFile,
 		packagePrefixAndScope,
 		rootItemIdentifier,
@@ -103,6 +105,12 @@ module.exports =
 						dependencyPermeableIdentifiers,
 						items,
 					}),
+				items =>
+					isInferStacksEnabled
+					?
+					inferStacks(items)
+					:
+					items,
 				flattenSingleRootItemWhenHasOnlyItemsAndType,
 			]
 		);

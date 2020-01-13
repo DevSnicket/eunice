@@ -17,6 +17,8 @@ test(
 					"\\",
 				isFileContentReversed:
 					false,
+				isInferStacksEnabled:
+					false,
 				items:
 					[
 						{
@@ -153,6 +155,8 @@ test(
 					"\\",
 				isFileContentReversed:
 					false,
+				isInferStacksEnabled:
+					false,
 				items:
 					{ items: "child" },
 				modifyStacksFile:
@@ -181,6 +185,8 @@ test(
 					"\\",
 				isFileContentReversed:
 					true,
+				isInferStacksEnabled:
+					false,
 				items:
 					[
 						{
@@ -245,6 +251,53 @@ test(
 );
 
 test(
+	"isInferStacksEnabled true splits first depends upon second into two levels",
+	() =>
+		expect(
+			processItems({
+				dependencyPermeableIdentifiers:
+					null,
+				directoryToCreateOrAddToStacksFrom:
+					"no-stacks",
+				identifierSeparator:
+					"\\",
+				isFileContentReversed:
+					false,
+				isInferStacksEnabled:
+					true,
+				items:
+					[
+						{
+							dependsUpon: "second",
+							id: "first",
+						},
+						"second",
+					],
+				modifyStacksFile:
+					null,
+				packagePrefixAndScope:
+					null,
+				rootItemIdentifier:
+					null,
+			}),
+		)
+		.toEqual(
+			[
+				[ {
+					dependsUpon: "second",
+					id: "first",
+					type: "file",
+				} ],
+				[ {
+					id: "second",
+					type: "file",
+				} ],
+			],
+		),
+);
+
+
+test(
 	"Modify stacks without key and pattern.",
 	() =>
 		expect(
@@ -256,6 +309,8 @@ test(
 				identifierSeparator:
 					"\\",
 				isFileContentReversed:
+					false,
+				isInferStacksEnabled:
 					false,
 				items:
 					[ "aardvark", "bin" ],
