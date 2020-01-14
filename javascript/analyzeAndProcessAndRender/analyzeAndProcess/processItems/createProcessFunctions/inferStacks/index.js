@@ -1,66 +1,44 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 const
-	{ createStackFromYaml, createYamlFromStack } = require("@devsnicket/eunice-dependency-and-structure"),
+	createStackFromYamlWithAncestors = require("./createStackFromYamlWithAncestors"),
 	inferStackFromLevel = require("./inferStackFromLevel"),
-	{ replaceIdentifiersAndItemsAndLevelsAndStacks } = require("@devsnicket/eunice-processors").replacement;
+	{ replaceIdentifiersAndItemsAndLevelsAndStacks } = require("@devsnicket/eunice-processors").replacement,
+	replaceLevelOrLowestLevelOfStack = require("./replaceLevelOrLowestLevelOfStack");
 
 module.exports =
 	identifierOrItemOrLevelOrStack =>
 		replaceIdentifiersAndItemsAndLevelsAndStacks({
 			identifierOrItemOrLevelOrStack,
-			replace: splitWhenLevelOrGetIdentifierOrItemOrStack,
+			replace:
+				replaceIdentifierOrItemOrLevelOrStack,
 		});
 
-function splitWhenLevelOrGetIdentifierOrItemOrStack(
-	{ identifierOrItemOrLevelOrStack },
-) {
+function replaceIdentifierOrItemOrLevelOrStack({
+	ancestors,
+	identifierOrItemOrLevelOrStack,
+}) {
 	return whenLevelOrStack() || identifierOrItemOrLevelOrStack;
 
 	function whenLevelOrStack() {
 		return (
 			Array.isArray(identifierOrItemOrLevelOrStack)
 			&&
-			splitLevelOrStack(identifierOrItemOrLevelOrStack)
+			replaceLevelOrLowestLevelOfStack({
+				levelOrStack:
+					identifierOrItemOrLevelOrStack,
+				replaceLevelWithStack:
+					level =>
+						inferStackFromLevel({
+							createStackFromYaml:
+								yaml =>
+									createStackFromYamlWithAncestors({
+										ancestors,
+										yaml,
+									}),
+							level,
+						}),
+			})
 		);
 	}
-}
-
-function splitLevelOrStack(
-	levelOrStack,
-) {
-	return (
-		createYamlFromStack(
-			whenStack()
-			||
-			inferStackFromLevel(
-				levelOrStack,
-			),
-		)
-	);
-
-	function whenStack() {
-		return (
-			isStack()
-			&&
-			splitStack(levelOrStack)
-		);
-
-		function isStack() {
-			return levelOrStack.some(Array.isArray);
-		}
-	}
-}
-
-function splitStack(
-	stack,
-) {
-	const lowestLevel = stack.pop();
-
-	return (
-		[
-			...createStackFromYaml(stack),
-			...inferStackFromLevel(lowestLevel),
-		]
-	);
 }
