@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 7.0.1 on 2020-01-13T21:14:26.783Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 7.0.2 on 2020-01-14T18:11:17.537Z
 - - id: javascript
     type: file
     dependsUpon: minimist
@@ -399,47 +399,22 @@
                                     - - id: inferStacks
                                         type: export
                                         dependsUpon:
+                                          - replaceIdentifierOrItemOrLevelOrStack
                                           - replaceIdentifiersAndItemsAndLevelsAndStacks
-                                          - splitWhenLevelOrGetIdentifierOrItemOrStack
-                                    - - id: splitWhenLevelOrGetIdentifierOrItemOrStack
+                                    - - id: replaceIdentifierOrItemOrLevelOrStack
                                         dependsUpon: whenLevelOrStack
                                         items:
                                           - - id: whenLevelOrStack
                                               dependsUpon:
+                                                - ancestors
+                                                - createStackFromYamlWithAncestors
                                                 - identifierOrItemOrLevelOrStack
-                                                - splitLevelOrStack
-                                          - - id: identifierOrItemOrLevelOrStack
+                                                - inferStackFromLevel
+                                                - replaceLevelOrLowestLevelOfStack
+                                          - - id: ancestors
                                               type: parameter
-                                    - - id: splitLevelOrStack
-                                        dependsUpon:
-                                          - createYamlFromStack
-                                          - inferStackFromLevel
-                                          - whenStack
-                                        items:
-                                          - - id: whenStack
-                                              dependsUpon:
-                                                - isStack
-                                                - levelOrStack
-                                                - splitStack
-                                              items:
-                                                id: isStack
-                                                dependsUpon: levelOrStack
-                                          - - id: levelOrStack
+                                            - id: identifierOrItemOrLevelOrStack
                                               type: parameter
-                                    - - id: splitStack
-                                        dependsUpon:
-                                          - createStackFromYaml
-                                          - inferStackFromLevel
-                                    - - id: createStackFromYaml
-                                        type: variable
-                                        dependsUpon:
-                                          id: dependency-and-structure
-                                          items: createStackFromYaml
-                                      - id: createYamlFromStack
-                                        type: variable
-                                        dependsUpon:
-                                          id: dependency-and-structure
-                                          items: createYamlFromStack
                                       - id: replaceIdentifiersAndItemsAndLevelsAndStacks
                                         type: variable
                                         dependsUpon:
@@ -447,61 +422,91 @@
                                           items:
                                             id: replacement
                                             items: replaceIdentifiersAndItemsAndLevelsAndStacks
-                                      - id: inferStackFromLevel
+                                    - - id: createStackFromYamlWithAncestors
                                         type: file
                                         items:
-                                          - - id: inferStackFromLevel
+                                          - - id: createStackFromYamlWithAncestors
+                                              type: export
                                               dependsUpon:
-                                                - createStackFromLowerAndUpper
                                                 - createStackFromYaml
-                                                - getLowerAndUpperFromLevel
-                                          - - id: getLowerAndUpperFromLevel
-                                              dependsUpon:
-                                                - getIsItemLowerOrUpper
-                                                - groupBy
+                                                - getDescendantInSingleItemStackHierarchy
+                                                - getYamlWithAncestors
                                               items:
-                                                id: getIsItemLowerOrUpper
-                                                dependsUpon: canBeLowerLevel
-                                                items:
-                                                  - - id: canBeLowerLevel
-                                                      dependsUpon:
-                                                        - allDependsUponAndDescendantsWithDependsUponInDifferentLevel
-                                                        - anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel
-                                                  - - id: allDependsUponAndDescendantsWithDependsUponInDifferentLevel
-                                                      dependsUpon:
-                                                        - allDependsUponInDifferentLevel
-                                                        - allDescendantsWithDependsUponInDifferentLevel
-                                                  - - id: allDependsUponInDifferentLevel
-                                                      dependsUpon: isDependencyOfDifferentItemInSameLevel
-                                                    - id: allDescendantsWithDependsUponInDifferentLevel
-                                                      dependsUpon: allDependsUponAndDescendantsWithDependsUponInDifferentLevel
-                                                    - id: anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel
-                                                      dependsUpon:
-                                                        - anyDependentsOfDifferentItemInSameLevel
-                                                        - anyDescendantsInStackWithDependentsOfDifferentItemInSameLevel
-                                                  - - id: anyDependentsOfDifferentItemInSameLevel
-                                                      dependsUpon: isDependencyOfDifferentItemInSameLevel
-                                                  - - id: isDependencyOfDifferentItemInSameLevel
-                                                      dependsUpon: isOrHasAncestor
-                                                      items:
-                                                        - - id: isOrHasAncestor
-                                                            dependsUpon: hasAncestor
-                                                        - - id: hasAncestor
-                                                            dependsUpon: isDependencyOfDifferentItemInSameLevel
-                                                    - id: anyDescendantsInStackWithDependentsOfDifferentItemInSameLevel
-                                                      dependsUpon: anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel
-                                            - id: createStackFromLowerAndUpper
-                                              dependsUpon: whenHasLower
+                                                - - id: getYamlWithAncestors
+                                                    dependsUpon:
+                                                      - ancestors
+                                                      - yaml
+                                                - - id: ancestors
+                                                    type: parameter
+                                                  - id: yaml
+                                                    type: parameter
+                                          - - id: getDescendantInSingleItemStackHierarchy
+                                              dependsUpon: whenDeeper
                                               items:
-                                                id: whenHasLower
-                                                dependsUpon:
-                                                  - createYamlFromStack
-                                                  - inferStackFromLevel
+                                                id: whenDeeper
+                                                dependsUpon: getDescendantInSingleItemStackHierarchy
                                             - id: createStackFromYaml
                                               type: variable
                                               dependsUpon:
                                                 id: dependency-and-structure
                                                 items: createStackFromYaml
+                                      - id: inferStackFromLevel
+                                        type: file
+                                        items:
+                                          - - id: inferStackFromLevel
+                                              type: export
+                                              dependsUpon: withCreateStackFromYaml
+                                          - - id: withCreateStackFromYaml
+                                              items:
+                                                - - id: inferStackFromLevel
+                                                    dependsUpon:
+                                                      - createStackFromLowerAndUpper
+                                                      - createStackFromYaml
+                                                      - getLowerAndUpperFromLevel
+                                                - - id: getLowerAndUpperFromLevel
+                                                    dependsUpon:
+                                                      - getIsItemLowerOrUpper
+                                                      - groupBy
+                                                    items:
+                                                      id: getIsItemLowerOrUpper
+                                                      dependsUpon: canBeLowerLevel
+                                                      items:
+                                                        - - id: canBeLowerLevel
+                                                            dependsUpon:
+                                                              - allDependsUponAndDescendantsWithDependsUponInDifferentLevel
+                                                              - anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel
+                                                        - - id: allDependsUponAndDescendantsWithDependsUponInDifferentLevel
+                                                            dependsUpon:
+                                                              - allDependsUponInDifferentLevel
+                                                              - allDescendantsWithDependsUponInDifferentLevel
+                                                        - - id: allDependsUponInDifferentLevel
+                                                            dependsUpon: isDependencyOfDifferentItemInSameLevel
+                                                          - id: allDescendantsWithDependsUponInDifferentLevel
+                                                            dependsUpon: allDependsUponAndDescendantsWithDependsUponInDifferentLevel
+                                                          - id: anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel
+                                                            dependsUpon:
+                                                              - anyDependentsOfDifferentItemInSameLevel
+                                                              - anyDescendantsInStackWithDependentsOfDifferentItemInSameLevel
+                                                        - - id: anyDependentsOfDifferentItemInSameLevel
+                                                            dependsUpon: isDependencyOfDifferentItemInSameLevel
+                                                        - - id: isDependencyOfDifferentItemInSameLevel
+                                                            dependsUpon: isOrHasAncestor
+                                                            items:
+                                                              - - id: isOrHasAncestor
+                                                                  dependsUpon: hasAncestor
+                                                              - - id: hasAncestor
+                                                                  dependsUpon: isDependencyOfDifferentItemInSameLevel
+                                                          - id: anyDescendantsInStackWithDependentsOfDifferentItemInSameLevel
+                                                            dependsUpon: anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel
+                                                  - id: createStackFromLowerAndUpper
+                                                    dependsUpon: whenHasLower
+                                                    items:
+                                                      id: whenHasLower
+                                                      dependsUpon:
+                                                        - createYamlFromStack
+                                                        - inferStackFromLevel
+                                                  - id: createStackFromYaml
+                                                    type: parameter
                                           - - id: createYamlFromStack
                                               type: variable
                                               dependsUpon:
@@ -512,6 +517,41 @@
                                               dependsUpon:
                                                 id: lodash
                                                 items: groupBy
+                                      - id: replaceLevelOrLowestLevelOfStack
+                                        type: file
+                                        items:
+                                          - - id: replaceLevelOrLowestLevelOfStack
+                                              type: export
+                                              dependsUpon:
+                                                - createYamlFromStack
+                                                - whenStack
+                                              items:
+                                                - - id: whenStack
+                                                    dependsUpon:
+                                                      - isStack
+                                                      - splitStack
+                                                    items:
+                                                      - id: isStack
+                                                        dependsUpon: levelOrStack
+                                                      - id: splitStack
+                                                        dependsUpon:
+                                                          - createStackFromYaml
+                                                          - levelOrStack
+                                                          - replaceLevelWithStack
+                                                - - id: levelOrStack
+                                                    type: parameter
+                                                  - id: replaceLevelWithStack
+                                                    type: parameter
+                                          - - id: createStackFromYaml
+                                              type: variable
+                                              dependsUpon:
+                                                id: dependency-and-structure
+                                                items: createStackFromYaml
+                                            - id: createYamlFromStack
+                                              type: variable
+                                              dependsUpon:
+                                                id: dependency-and-structure
+                                                items: createYamlFromStack
                                 - id: modifyStacksWithFile
                                   type: file
                                   items:
@@ -2014,132 +2054,6 @@
                                       items:
                                         id: commonjs
                                         items: createDeclarationsWhenCallOfRequire
-                    - id: commonjs
-                      items:
-                        - - id: addFromAssignmentOfExport
-                            type: file
-                            items:
-                              - - id: addFromAssignmentOfExport
-                                  type: export
-                                  dependsUpon:
-                                    - createDeclarationsWithExportIdentifierAndType
-                                    - getIdentifierAndTypeFromAssignmentLeftWhenExport
-                                    - hasTypeOfFunction
-                              - - id: createDeclarationsWithExportIdentifierAndType
-                                  dependsUpon:
-                                    - createDeclaration
-                                    - getNameWhenIdentifier
-                                    - whenCallOfRequire
-                                  items:
-                                    - - id: whenCallOfRequire
-                                        dependsUpon:
-                                          - createDeclarationsWhenCallOfRequire
-                                          - getIsDestructuredAndVariables
-                                          - removeExtensionFromFilePath
-                                          - right
-                                        items:
-                                          id: getIsDestructuredAndVariables
-                                          dependsUpon: createVariable
-                                          items: createVariable
-                                    - - id: removeExtensionFromFilePath
-                                        type: parameter
-                                      - id: right
-                                        type: parameter
-                              - - getNameWhenIdentifier
-                                - createDeclaration
-                          - id: getIdentifierAndParentAndTypeForFunctionExpressionParentWhenExport
-                            type: file
-                            items:
-                              id: getIdentifierAndParentAndTypeForFunctionExpressionParentWhenExport
-                              type: export
-                              dependsUpon: getIdentifierAndTypeFromAssignmentLeftWhenExport
-                        - - id: getIdentifierAndTypeFromAssignmentLeftWhenExport
-                            type: file
-                            items:
-                              - - id: getIdentifierAndTypeFromAssignmentLeftWhenExport
-                                  type: export
-                                  dependsUpon:
-                                    - getIdentifierWhenMember
-                                    - getWhenIdentifier
-                                  items:
-                                    - - id: getWhenIdentifier
-                                        dependsUpon: getIdentifierWithType
-                                      - id: getIdentifierWhenMember
-                                        dependsUpon: getWhenExport
-                                        items:
-                                          id: getWhenExport
-                                          dependsUpon:
-                                            - assignmentExpressionLeft
-                                            - whenExportProperty
-                                            - whenModuleExport
-                                          items:
-                                            id: whenModuleExport
-                                            dependsUpon:
-                                              - assignmentExpressionLeft
-                                              - whenDirect
-                                              - whenModuleExportProperty
-                                            items:
-                                              id: whenDirect
-                                              dependsUpon:
-                                                - assignmentExpressionLeft
-                                                - getIdentifierWithType
-                                                - isModuleExport
-                                    - - id: assignmentExpressionLeft
-                                        type: parameter
-                              - - id: whenExportProperty
-                                  dependsUpon: getIdentifierWithType
-                                - id: whenModuleExportProperty
-                                  dependsUpon:
-                                    - getIdentifierWithType
-                                    - isModuleExportProperty
-                              - - getIdentifierWithType
-                        - - id: isModuleExportProperty
-                            type: file
-                            items:
-                              id: isModuleExportProperty
-                              type: export
-                              dependsUpon: isModuleExport
-                        - - id: createDeclarationsWhenCallOfRequire
-                            type: file
-                            items:
-                              - - id: createDeclarationsWhenCallOfRequire
-                                  type: export
-                                  dependsUpon:
-                                    - createFromWhenRequire
-                                    - createWhenMember
-                                  items:
-                                    - - id: createWhenMember
-                                        dependsUpon:
-                                          - createFromWhenRequire
-                                          - getOrCreateDependsUponForVariableName
-                                        items:
-                                          id: getOrCreateDependsUponForVariableName
-                                          dependsUpon:
-                                            - getOrCreateDependsUpon
-                                            - getProperty
-                                          items: getProperty
-                                    - - id: createFromWhenRequire
-                                        dependsUpon:
-                                          - create
-                                          - getIsDestructuredAndVariables
-                                          - getPath
-                                          - isRequire
-                                        items:
-                                          - isRequire
-                                          - id: getPath
-                                            dependsUpon: removeExtensionFromFilePath
-                                    - - id: getIsDestructuredAndVariables
-                                        type: parameter
-                                      - id: removeExtensionFromFilePath
-                                        type: parameter
-                              - - id: create
-                                  dependsUpon: getOrCreateDependsUpon
-                              - - getOrCreateDependsUpon
-                          - id: isModuleExport
-                            type: file
-                            items:
-                              id: isModuleExport
-                              type: export
                     - id: createFileExtensionTransformer
                       type: file
                       items:
@@ -2358,6 +2272,247 @@
                                     id: whenVariableDeclarator
                                     type: export
                                     dependsUpon: findBlockOrIdentifiableParentInAncestors
+                    - id: throwErrorWhenAnyUnhandled
+                      type: file
+                      items:
+                        - - id: test
+                            type: file
+                            dependsUpon: test
+                            items:
+                              - - dependsUpon: expect
+                                  items:
+                                    - - dependsUpon:
+                                          - createDeclarations
+                                          - parent
+                                          - throwErrorWhenAnyUnhandled
+                                    - - id: parent
+                                        type: variable
+                                - dependsUpon: expect
+                                  items:
+                                    - - dependsUpon:
+                                          - createDependsUponIdentifiers
+                                          - identifier
+                                          - javascript
+                                          - parse
+                                          - throwErrorWhenAnyUnhandled
+                                    - - id: identifier
+                                        type: variable
+                                      - id: javascript
+                                        type: variable
+                                - dependsUpon: expect
+                                  items:
+                                    - - dependsUpon:
+                                          - createDependsUponIdentifiers
+                                          - identifier
+                                          - javascript
+                                          - parse
+                                          - throwErrorWhenAnyUnhandled
+                                    - - id: identifier
+                                        type: variable
+                                      - id: javascript
+                                        type: variable
+                              - - id: parse
+                                  type: variable
+                                  dependsUpon:
+                                    id: '@babel'
+                                    items:
+                                      id: parser
+                                      items: parse
+                        - - id: throwErrorWhenAnyUnhandled
+                            type: export
+                            dependsUpon:
+                              - formatMessageForDeclarations
+                              - formatMessageForDependsUponIdentifiers
+                        - - id: formatMessageForDeclarations
+                            dependsUpon: formatMessageForTypeWhenAny
+                          - id: formatMessageForDependsUponIdentifiers
+                            dependsUpon: formatMessageForTypeWhenAny
+                        - - id: formatMessageForTypeWhenAny
+                            type: file
+                            items:
+                              - - id: formatMessageForTypeWhenAny
+                                  type: export
+                                  dependsUpon:
+                                    - combineParentAndItemsFormatted
+                                    - formatItems
+                                    - formatMessage
+                                    - formatParent
+                              - - formatItems
+                                - id: formatParent
+                                  dependsUpon: formatParentIdentifier
+                              - - formatParentIdentifier
+                                - combineParentAndItemsFormatted
+                                - formatMessage
+                  - - id: findBlockOrIdentifiableParentInAncestors
+                      type: file
+                      items:
+                        - - id: findBlockOrIdentifiableParentInAncestors
+                            type: export
+                            dependsUpon:
+                              - isChildIdentifiableByParent
+                              - selfIdentifiableTypes
+                        - - id: isChildIdentifiableByParent
+                            dependsUpon:
+                              - functionExpressionTypes
+                              - isIdentifiableParent
+                        - - id: isIdentifiableParent
+                            dependsUpon: whenIdentifiableAssignment
+                            items:
+                              - - id: whenIdentifiableAssignment
+                                  dependsUpon: isLeftIdentifiable
+                                  items:
+                                    id: isLeftIdentifiable
+                                    dependsUpon:
+                                      - getIdentifierFromAssignmentExpressionLeft
+                                      - isCommonjsModuleExportProperty
+                                      - left
+                              - - id: left
+                                  type: parameter
+                        - - id: isCommonjsModuleExportProperty
+                            type: variable
+                            dependsUpon:
+                              id: getItemOrItemsFromJavascript
+                              items:
+                                id: createVisitors
+                                items:
+                                  id: commonjs
+                                  items: isModuleExportProperty
+                          - id: selfIdentifiableTypes
+                            type: variable
+                          - id: functionExpressionTypes
+                            type: variable
+                  - - id: commonjs
+                      items:
+                        - - id: addFromAssignmentOfExport
+                            type: file
+                            items:
+                              - - id: addFromAssignmentOfExport
+                                  type: export
+                                  dependsUpon:
+                                    - createDeclarationsWithExportIdentifierAndType
+                                    - getIdentifierAndTypeFromAssignmentLeftWhenExport
+                                    - hasTypeOfFunction
+                              - - id: createDeclarationsWithExportIdentifierAndType
+                                  dependsUpon:
+                                    - createDeclaration
+                                    - getNameWhenIdentifier
+                                    - whenCallOfRequire
+                                  items:
+                                    - - id: whenCallOfRequire
+                                        dependsUpon:
+                                          - createDeclarationsWhenCallOfRequire
+                                          - getIsDestructuredAndVariables
+                                          - removeExtensionFromFilePath
+                                          - right
+                                        items:
+                                          id: getIsDestructuredAndVariables
+                                          dependsUpon: createVariable
+                                          items: createVariable
+                                    - - id: removeExtensionFromFilePath
+                                        type: parameter
+                                      - id: right
+                                        type: parameter
+                              - - getNameWhenIdentifier
+                                - createDeclaration
+                          - id: getIdentifierAndParentAndTypeForFunctionExpressionParentWhenExport
+                            type: file
+                            items:
+                              id: getIdentifierAndParentAndTypeForFunctionExpressionParentWhenExport
+                              type: export
+                              dependsUpon: getIdentifierAndTypeFromAssignmentLeftWhenExport
+                        - - id: getIdentifierAndTypeFromAssignmentLeftWhenExport
+                            type: file
+                            items:
+                              - - id: getIdentifierAndTypeFromAssignmentLeftWhenExport
+                                  type: export
+                                  dependsUpon:
+                                    - getIdentifierWhenMember
+                                    - getWhenIdentifier
+                                  items:
+                                    - - id: getWhenIdentifier
+                                        dependsUpon: getIdentifierWithType
+                                      - id: getIdentifierWhenMember
+                                        dependsUpon: getWhenExport
+                                        items:
+                                          id: getWhenExport
+                                          dependsUpon:
+                                            - assignmentExpressionLeft
+                                            - whenExportProperty
+                                            - whenModuleExport
+                                          items:
+                                            id: whenModuleExport
+                                            dependsUpon:
+                                              - assignmentExpressionLeft
+                                              - whenDirect
+                                              - whenModuleExportProperty
+                                            items:
+                                              id: whenDirect
+                                              dependsUpon:
+                                                - assignmentExpressionLeft
+                                                - getIdentifierWithType
+                                                - isModuleExport
+                                    - - id: assignmentExpressionLeft
+                                        type: parameter
+                              - - id: whenExportProperty
+                                  dependsUpon: getIdentifierWithType
+                                - id: whenModuleExportProperty
+                                  dependsUpon:
+                                    - getIdentifierWithType
+                                    - isModuleExportProperty
+                              - - getIdentifierWithType
+                        - - id: isModuleExportProperty
+                            type: file
+                            items:
+                              id: isModuleExportProperty
+                              type: export
+                              dependsUpon: isModuleExport
+                        - - id: createDeclarationsWhenCallOfRequire
+                            type: file
+                            items:
+                              - - id: createDeclarationsWhenCallOfRequire
+                                  type: export
+                                  dependsUpon:
+                                    - createFromWhenRequire
+                                    - createWhenMember
+                                  items:
+                                    - - id: createWhenMember
+                                        dependsUpon:
+                                          - createFromWhenRequire
+                                          - getOrCreateDependsUponForVariableName
+                                        items:
+                                          id: getOrCreateDependsUponForVariableName
+                                          dependsUpon:
+                                            - getOrCreateDependsUpon
+                                            - getProperty
+                                          items: getProperty
+                                    - - id: createFromWhenRequire
+                                        dependsUpon:
+                                          - create
+                                          - getIsDestructuredAndVariables
+                                          - getPath
+                                          - isRequire
+                                        items:
+                                          - isRequire
+                                          - id: getPath
+                                            dependsUpon: removeExtensionFromFilePath
+                                    - - id: getIsDestructuredAndVariables
+                                        type: parameter
+                                      - id: removeExtensionFromFilePath
+                                        type: parameter
+                              - - id: create
+                                  dependsUpon: getOrCreateDependsUpon
+                              - - getOrCreateDependsUpon
+                          - id: isModuleExport
+                            type: file
+                            items:
+                              id: isModuleExport
+                              type: export
+                    - id: createItemsProperty
+                      type: file
+                      items:
+                        id: createItemsProperty
+                        type: export
+                        dependsUpon: stackItemsWhenMultiple
                     - id: forModules
                       type: file
                       items:
@@ -2523,121 +2678,6 @@
                               type: export
                               dependsUpon: isExport
                               items: isExport
-                    - id: throwErrorWhenAnyUnhandled
-                      type: file
-                      items:
-                        - - id: test
-                            type: file
-                            dependsUpon: test
-                            items:
-                              - - dependsUpon: expect
-                                  items:
-                                    - - dependsUpon:
-                                          - createDeclarations
-                                          - parent
-                                          - throwErrorWhenAnyUnhandled
-                                    - - id: parent
-                                        type: variable
-                                - dependsUpon: expect
-                                  items:
-                                    - - dependsUpon:
-                                          - createDependsUponIdentifiers
-                                          - identifier
-                                          - javascript
-                                          - parse
-                                          - throwErrorWhenAnyUnhandled
-                                    - - id: identifier
-                                        type: variable
-                                      - id: javascript
-                                        type: variable
-                                - dependsUpon: expect
-                                  items:
-                                    - - dependsUpon:
-                                          - createDependsUponIdentifiers
-                                          - identifier
-                                          - javascript
-                                          - parse
-                                          - throwErrorWhenAnyUnhandled
-                                    - - id: identifier
-                                        type: variable
-                                      - id: javascript
-                                        type: variable
-                              - - id: parse
-                                  type: variable
-                                  dependsUpon:
-                                    id: '@babel'
-                                    items:
-                                      id: parser
-                                      items: parse
-                        - - id: throwErrorWhenAnyUnhandled
-                            type: export
-                            dependsUpon:
-                              - formatMessageForDeclarations
-                              - formatMessageForDependsUponIdentifiers
-                        - - id: formatMessageForDeclarations
-                            dependsUpon: formatMessageForTypeWhenAny
-                          - id: formatMessageForDependsUponIdentifiers
-                            dependsUpon: formatMessageForTypeWhenAny
-                        - - id: formatMessageForTypeWhenAny
-                            type: file
-                            items:
-                              - - id: formatMessageForTypeWhenAny
-                                  type: export
-                                  dependsUpon:
-                                    - combineParentAndItemsFormatted
-                                    - formatItems
-                                    - formatMessage
-                                    - formatParent
-                              - - formatItems
-                                - id: formatParent
-                                  dependsUpon: formatParentIdentifier
-                              - - formatParentIdentifier
-                                - combineParentAndItemsFormatted
-                                - formatMessage
-                  - - id: createItemsProperty
-                      type: file
-                      items:
-                        id: createItemsProperty
-                        type: export
-                        dependsUpon: stackItemsWhenMultiple
-                    - id: findBlockOrIdentifiableParentInAncestors
-                      type: file
-                      items:
-                        - - id: findBlockOrIdentifiableParentInAncestors
-                            type: export
-                            dependsUpon:
-                              - isChildIdentifiableByParent
-                              - selfIdentifiableTypes
-                        - - id: isChildIdentifiableByParent
-                            dependsUpon:
-                              - functionExpressionTypes
-                              - isIdentifiableParent
-                        - - id: isIdentifiableParent
-                            dependsUpon: whenIdentifiableAssignment
-                            items:
-                              - - id: whenIdentifiableAssignment
-                                  dependsUpon: isLeftIdentifiable
-                                  items:
-                                    id: isLeftIdentifiable
-                                    dependsUpon:
-                                      - getIdentifierFromAssignmentExpressionLeft
-                                      - isCommonjsModuleExportProperty
-                                      - left
-                              - - id: left
-                                  type: parameter
-                        - - id: isCommonjsModuleExportProperty
-                            type: variable
-                            dependsUpon:
-                              id: getItemOrItemsFromJavascript
-                              items:
-                                id: createVisitors
-                                items:
-                                  id: commonjs
-                                  items: isModuleExportProperty
-                          - id: selfIdentifiableTypes
-                            type: variable
-                          - id: functionExpressionTypes
-                            type: variable
                   - - id: createDeclarations
                       type: file
                       items:
