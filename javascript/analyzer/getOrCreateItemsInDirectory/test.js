@@ -33,30 +33,11 @@ test(
 			),
 		)
 		.toBe(
-			await readExpectedFile(),
+			await readFile(
+				path.join(supportedTestCasesDirectory, "expected.yaml"),
+				"utf-8",
+			),
 		);
-
-		async function readExpectedFile() {
-			const fileName = "expected.yaml";
-
-			return (
-				getWithPathSeparator(
-					await readFile(
-						path.join(supportedTestCasesDirectory, fileName),
-						"utf-8",
-					),
-				)
-			);
-
-			function getWithPathSeparator(
-				expected,
-			) {
-				if (expected.includes("\\"))
-					throw new Error(`${fileName} must contain forward not back slashes.`);
-				else
-					return expected.replace(/\//g, path.sep);
-			}
-		}
 	},
 );
 
