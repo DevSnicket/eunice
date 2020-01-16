@@ -3,12 +3,10 @@
 require("array.prototype.flat")
 .shim();
 
-require("array.prototype.flatmap")
-.shim();
-
 const
 	combineFileAndDirectoryItems = require("./combineFileAndDirectoryItems"),
 	createItem = require("./createItem"),
+	flatMap = require("array.prototype.flatmap"),
 	fs = require("fs"),
 	getOrCreateItemWhenJavascriptFile = require("./getOrCreateItemWhenJavascriptFile"),
 	path = require("path"),
@@ -63,9 +61,9 @@ function withOptionsAndRootDirectory({
 			combineFileAndDirectoryItems(
 				(
 					await Promise.all(
-						(await readDirectory(directoryAbsolutePath))
-						.sort()
-						.flatMap(
+						flatMap(
+							(await readDirectory(directoryAbsolutePath))
+							.sort(),
 							async fileOrSubdirectoryName =>
 								await createItemFromFileOrSubdirectory(
 									fileOrSubdirectoryName,
