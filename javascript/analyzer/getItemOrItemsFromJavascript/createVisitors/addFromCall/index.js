@@ -20,13 +20,8 @@ module.exports =
 		findDeclarationAndParent,
 		isCalleeIgnored = isCalleeIgnoredDefault,
 		isVariableInBlockScoped,
-		removeExtensionFromFilePath,
 	}) => {
-		const calleeName =
-			getNameFromCallee({
-				callee: callExpression.callee,
-				removeExtensionFromFilePath,
-			});
+		const calleeName = getNameFromCallee(callExpression.callee);
 
 		if (calleeName)
 			addToParent(

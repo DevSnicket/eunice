@@ -20,3 +20,17 @@ runTestsFromFileSystem({
 	processArguments:
 		process.argv,
 });
+
+test(
+	"Child directory after parent in path throws exception",
+	() =>
+		expect(
+			() =>
+				getYamlFromJavascript(
+					{ javascript: "import imported from \"child-after-parent/../module\"; imported();" },
+				),
+		)
+		.toThrowError(
+			"Paths where a child \"child-after-parent\" is specified before a parent \"..\" are not supported.",
+		),
+);

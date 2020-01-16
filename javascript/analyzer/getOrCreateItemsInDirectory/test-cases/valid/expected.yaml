@@ -35,7 +35,9 @@
 - id: commonjsRequireFunctionInSameDirectoryThatIsCalled
   dependsUpon: commonjsModuleExportsOfFunctionArrow1
 - id: commonjsRequireFunctionInSubdirectoryThatIsCalled
-  dependsUpon: subdirectory/commonjsModuleExportsOfFunctionArrowInSubdirectory
+  dependsUpon:
+    id: subdirectory
+    items: commonjsModuleExportsOfFunctionArrowInSubdirectory
 - id: commonjsRequireMissingPackageAndDestructureThatIsAssignedToConstAndCalled
   dependsUpon:
     id: missingPackage
@@ -77,6 +79,10 @@
 - subdirectory/emptyInSubdirectory
 - subdirectory/subdirectoryOfsubdirectoryWithSameNameAsFile/emptyInSubdirectoryOfsubdirectory
 - subdirectory/subdirectoryOfsubdirectoryWithSameNameAsFile.withdot
+- id: subdirectory/subsubdirectory/commonjsRequireFunctionInParentDirectoryThatIsCalled
+  dependsUpon:
+    id: subdirectory
+    items: commonjsModuleExportsOfFunctionArrowInSubdirectory
 - id: subdirectory/subsubdirectory/commonjsRequireParentDirectoryThatIsCalled
   dependsUpon: subdirectory
 - id: subdirectory/subsubdirectory/commonjsRequireParentDirectoryWithTrailingSlashThatIsCalled

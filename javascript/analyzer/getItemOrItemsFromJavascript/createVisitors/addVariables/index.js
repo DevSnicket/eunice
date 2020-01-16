@@ -11,10 +11,10 @@ module.exports =
 	({
 		addDeclarationsIn,
 		addScopedVariables,
+		createWhenCommonjsRequire,
 		hasUndeclaredReferenceTo,
 		parent,
 		parentFunction,
-		removeExtensionFromFilePath,
 		variableDeclaration,
 	}) => {
 		if (isScoped())
@@ -22,9 +22,9 @@ module.exports =
 		else
 			createAndAddDeclarations({
 				addDeclarationsIn,
+				createWhenCommonjsRequire,
 				hasUndeclaredReferenceTo,
 				parentFunction,
-				removeExtensionFromFilePath,
 				variableDeclaration,
 			});
 

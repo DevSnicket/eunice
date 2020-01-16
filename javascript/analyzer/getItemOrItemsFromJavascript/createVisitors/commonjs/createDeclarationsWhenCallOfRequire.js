@@ -5,6 +5,7 @@ module.exports =
 		callOrMemberOfCallExpression,
 		getIsDestructuredAndVariables,
 		removeExtensionFromFilePath,
+		splitDependsUponIntoPathHierarchy,
 	}) => {
 		return (
 			createFromWhenRequire({
@@ -61,6 +62,7 @@ module.exports =
 					getOrCreateDependsUponForVariableName,
 					path:
 						getPath(),
+					splitDependsUponIntoPathHierarchy,
 					...getIsDestructuredAndVariables(),
 				})
 			);
@@ -87,6 +89,7 @@ function create({
 	getOrCreateDependsUponForVariableName,
 	isDestructured,
 	path,
+	splitDependsUponIntoPathHierarchy,
 	variables,
 }) {
 	return (
@@ -96,16 +99,18 @@ function create({
 				{
 					...variable,
 					dependsUpon:
-						getOrCreateDependsUpon({
-							identifier:
-								path,
-							items:
-								getOrCreateDependsUponForVariableName(
-									isDestructured
-									&&
-									variable.id,
-								),
-						}),
+						splitDependsUponIntoPathHierarchy(
+							getOrCreateDependsUpon({
+								identifier:
+									path,
+								items:
+									getOrCreateDependsUponForVariableName(
+										isDestructured
+										&&
+										variable.id,
+									),
+							}),
+						),
 				}
 			),
 		)

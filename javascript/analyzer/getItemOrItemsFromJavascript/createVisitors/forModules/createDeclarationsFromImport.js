@@ -4,6 +4,7 @@ module.exports =
 	({
 		from,
 		specifiers,
+		splitDependsUponIntoPathHierarchy,
 	}) => {
 		return specifiers.map(createFromSpecifier);
 
@@ -20,7 +21,13 @@ module.exports =
 			);
 
 			function createDependsUpon() {
-				return whenHasImported() || from;
+				return (
+					splitDependsUponIntoPathHierarchy(
+						whenHasImported()
+						||
+						from,
+					)
+				);
 
 				function whenHasImported() {
 					return (

@@ -5,8 +5,10 @@ const
 	addClassProperty = require("./addClassProperty"),
 	addFromAssignmentOfCommonjsExport = require("./commonjs/addFromAssignmentOfExport"),
 	addFromCall = require("./addFromCall"),
+	addFromCommonjsRequireCallee = require("./commonjs/addFromRequireCallee"),
 	addVariables = require("./addVariables"),
 	createDeclarations = require("./createDeclarations"),
+	createDeclarationsWhenCallOfCommonjsRequire = require("./commonjs/createDeclarationsWhenCallOfRequire"),
 	createDependsUponIdentifiers = require("./createDependsUponIdentifiers"),
 	createFileExtensionTransformer = require("./createFileExtensionTransformer"),
 	createFileItemOrItems = require("./createFileItemOrItems"),
@@ -16,12 +18,13 @@ const
 	forFunctions = require("./forFunctions"),
 	forModules = require("./forModules"),
 	getParentFromAncestors = require("./getParentFromAncestors"),
+	splitDependsUponIntoPathHierarchyWithAncestors = require("./splitDependsUponIntoPathHierarchyWithAncestors"),
 	stackItemsWhenMultiple = require("./stackItemsWhenMultiple"),
 	throwErrorWhenAnyUnhandled = require("./throwErrorWhenAnyUnhandled");
 
 module.exports =
 	({
-		directoryAbsolutePath,
+		directoryPath,
 		fileExtensions,
 		isCalleeIgnored,
 		parseJavascript,
@@ -48,10 +51,14 @@ module.exports =
 				...forModules({
 					addDeclarationsIn:
 						declarations.addDeclarationsIn,
-					directoryAbsolutePath,
+					directoryAbsolutePath:
+						directoryPath
+						&&
+						directoryPath.absolute,
 					getRelativeWhenFileExists,
 					parseJavascript,
 					removeExtensionFromFilePath,
+					splitDependsUponIntoPathHierarchy,
 				}),
 				AssignmentExpression:
 					visitAssignmentExpression,
@@ -79,6 +86,7 @@ module.exports =
 					declarations.addDeclarationsIn,
 				assignmentExpression,
 				removeExtensionFromFilePath,
+				splitDependsUponIntoPathHierarchy,
 			});
 		}
 
@@ -107,7 +115,16 @@ module.exports =
 							ancestors,
 							variable,
 						}),
+			});
+
+			addFromCommonjsRequireCallee({
+				addDependsUponIdentifierToParent:
+					dependsUponIdentifiers.addIdentifierToParent,
+				ancestors,
+				callee:
+					callExpression.callee,
 				removeExtensionFromFilePath,
+				splitDependsUponIntoPathHierarchy,
 			});
 		}
 
@@ -146,15 +163,39 @@ module.exports =
 					declarations.addDeclarationsIn,
 				addScopedVariables:
 					scopedVariables.add,
+				createWhenCommonjsRequire:
+					({
+						callOrMemberOfCallExpression,
+						getIsDestructuredAndVariables,
+					}) =>
+						createDeclarationsWhenCallOfCommonjsRequire({
+							callOrMemberOfCallExpression,
+							getIsDestructuredAndVariables,
+							removeExtensionFromFilePath,
+							splitDependsUponIntoPathHierarchy,
+						}),
 				hasUndeclaredReferenceTo:
 					undeclaredReferences.hasReferenceTo,
 				parent:
 					getParentFromAncestors(ancestors),
 				parentFunction:
 					findBlockOrIdentifiableParentInAncestors(ancestors),
-				removeExtensionFromFilePath,
 				variableDeclaration,
 			});
+		}
+
+		function splitDependsUponIntoPathHierarchy(
+			dependsUpon,
+		) {
+			return (
+				splitDependsUponIntoPathHierarchyWithAncestors({
+					dependsUpon,
+					directoryPathRelative:
+						directoryPath
+						&&
+						directoryPath.relative,
+				})
+			);
 		}
 
 		function getItemOrItems() {

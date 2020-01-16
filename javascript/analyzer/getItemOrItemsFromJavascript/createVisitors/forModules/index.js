@@ -13,6 +13,7 @@ module.exports =
 		getRelativeWhenFileExists,
 		parseJavascript,
 		removeExtensionFromFilePath,
+		splitDependsUponIntoPathHierarchy,
 	}) => {
 		return (
 			{
@@ -36,6 +37,7 @@ module.exports =
 				getRelativeWhenFileExists,
 				modulePath: value,
 				parseJavascript,
+				splitDependsUponIntoPathHierarchy,
 			});
 		}
 
@@ -81,6 +83,7 @@ module.exports =
 						removeExtensionFromFilePath,
 						source,
 						specifiers,
+						splitDependsUponIntoPathHierarchy,
 					}),
 				parent:
 					null,
@@ -99,6 +102,7 @@ module.exports =
 								source.value,
 							),
 						specifiers,
+						splitDependsUponIntoPathHierarchy,
 					}),
 				parent:
 					null,

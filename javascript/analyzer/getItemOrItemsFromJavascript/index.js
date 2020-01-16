@@ -8,13 +8,13 @@ const
 module.exports =
 	(/** @type {import("./Parameter.d")} */{
 		babelParserPlugins,
-		directoryAbsolutePath,
+		directoryPath,
 		fileExtensions,
 		isCalleeIgnored,
 		javascript,
 	}) =>
 		getItemOrItems({
-			directoryAbsolutePath,
+			directoryPath,
 			fileExtensions,
 			isCalleeIgnored,
 			javascript,
@@ -41,7 +41,7 @@ function withBabelParserPlugins(
 }
 
 function getItemOrItems({
-	directoryAbsolutePath,
+	directoryPath,
 	fileExtensions,
 	isCalleeIgnored,
 	javascript,
@@ -49,7 +49,7 @@ function getItemOrItems({
 }) {
 	const visitors =
 		createVisitors({
-			directoryAbsolutePath,
+			directoryPath,
 			fileExtensions,
 			isCalleeIgnored,
 			parseJavascript,

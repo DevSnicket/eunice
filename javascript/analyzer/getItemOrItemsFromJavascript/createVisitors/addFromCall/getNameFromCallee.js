@@ -2,32 +2,21 @@
 
 module.exports =
 	({
-		callee,
-		removeExtensionFromFilePath,
+		name,
+		object,
+		type,
 	}) => {
 		return (
-			getRequireWhenCalled()
-			||
 			getWhenMember()
 			||
-			callee.name
+			name
 		);
-
-		function getRequireWhenCalled() {
-			return (
-				callee.callee
-				&&
-				callee.callee.name === "require"
-				&&
-				removeExtensionFromFilePath(callee.arguments[0].value)
-			);
-		}
 
 		function getWhenMember() {
 			return (
-				callee.type === "MemberExpression"
+				type === "MemberExpression"
 				&&
-				getObjectName(callee.object)
+				getObjectName(object)
 			);
 		}
 	};

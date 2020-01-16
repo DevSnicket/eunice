@@ -8,10 +8,14 @@ module.exports =
 		removeExtensionFromFilePath,
 		source,
 		specifiers,
+		splitDependsUponIntoPathHierarchy,
 	}) =>
 		specifiers
 		.flatMap(
-			createSelectorWhenHasSource({
+			withSplitDependsUponIntoPathHierarchy(
+				splitDependsUponIntoPathHierarchy,
+			)
+			.createSelectorWhenHasSource({
 				removeExtensionFromFilePath,
 				source,
 			})
@@ -19,44 +23,50 @@ module.exports =
 			createDeclarationFromSpecifierWhenFunction,
 		);
 
-function createSelectorWhenHasSource({
-	removeExtensionFromFilePath,
-	source,
-}) {
-	return (
-		source
-		&&
-		withSource(
-			removeExtensionFromFilePath(
-				source.value,
-			),
-		)
-		.createDeclarationFromSpecifier
-	);
-}
-
-function withSource(
-	source,
+function withSplitDependsUponIntoPathHierarchy(
+	splitDependsUponIntoPathHierarchy,
 ) {
-	return { createDeclarationFromSpecifier };
+	return { createSelectorWhenHasSource };
 
-	function createDeclarationFromSpecifier({
-		exported,
-		local,
+	function createSelectorWhenHasSource({
+		removeExtensionFromFilePath,
+		source,
 	}) {
 		return (
-			{
-				dependsUpon:
-					{
-						id: source,
-						items: local.name,
-					},
-				id:
-					exported.name,
-				type:
-					"export",
-			}
+			source
+			&&
+			withSource(
+				removeExtensionFromFilePath(
+					source.value,
+				),
+			)
+			.createDeclarationFromSpecifier
 		);
+	}
+
+	function withSource(
+		source,
+	) {
+		return { createDeclarationFromSpecifier };
+
+		function createDeclarationFromSpecifier({
+			exported,
+			local,
+		}) {
+			return (
+				{
+					dependsUpon:
+						splitDependsUponIntoPathHierarchy({
+							id: source,
+							items: local.name,
+						}),
+					id:
+						exported.name,
+					type:
+						"export",
+				}
+			);
+		}
 	}
 }
 

@@ -118,7 +118,11 @@ function withOptionsAndRootDirectory({
 						return (
 							getItemOrItemsFromJavascript({
 								babelParserPlugins,
-								directoryAbsolutePath,
+								directoryPath:
+									{
+										absolute: directoryAbsolutePath,
+										relative: directoryPath,
+									},
 								fileExtensions,
 								isCalleeIgnored,
 								javascript,

@@ -4,7 +4,12 @@ export = Options
 
 interface Options {
 	readonly babelParserPlugins?: Iterable<ParserPlugin>
-	readonly directoryAbsolutePath?: string
+	readonly directoryPath?: DirectoryPath
 	readonly fileExtensions?: string[]
 	readonly isCalleeIgnored?(string): boolean
+}
+
+interface DirectoryPath {
+	readonly absolute: string
+	readonly relative: string
 }

@@ -15,6 +15,7 @@ module.exports =
 		getRelativeWhenFileExists,
 		modulePath,
 		parseJavascript,
+		splitDependsUponIntoPathHierarchy,
 	}) =>
 		directoryAbsolutePath
 		&&
@@ -29,6 +30,7 @@ module.exports =
 						modulePath,
 				}),
 			parseJavascript,
+			splitDependsUponIntoPathHierarchy,
 		});
 
 function addWhenHasNamedExports({
@@ -36,6 +38,7 @@ function addWhenHasNamedExports({
 	directoryAbsolutePath,
 	modulePath,
 	parseJavascript,
+	splitDependsUponIntoPathHierarchy,
 }) {
 	if (modulePath)
 		addWhenAnyNamedExports(
@@ -78,10 +81,10 @@ function addWhenHasNamedExports({
 
 			function createDependsUpon() {
 				return (
-					{
+					splitDependsUponIntoPathHierarchy({
 						id: modulePath.withoutExtension,
 						items: namedExport,
-					}
+					})
 				);
 			}
 		}

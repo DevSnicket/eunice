@@ -4,16 +4,15 @@ require("array.prototype.flatmap")
 .shim();
 
 const
-	createWhenCommonjsRequire = require("../commonjs/createDeclarationsWhenCallOfRequire"),
 	getNamesFromDestructureOrIdentifier = require("../getNamesFromDestructureOrIdentifier"),
 	hasTypeOfFunction = require("../hasTypeOfFunction");
 
 module.exports =
 	({
 		addDeclarationsIn,
+		createWhenCommonjsRequire,
 		hasUndeclaredReferenceTo,
 		parentFunction,
-		removeExtensionFromFilePath,
 		variableDeclaration,
 	}) => {
 		addDeclarationsWhenAny(
@@ -49,7 +48,6 @@ module.exports =
 						callOrMemberOfCallExpression:
 							declaration.init,
 						getIsDestructuredAndVariables,
-						removeExtensionFromFilePath,
 					})
 				);
 

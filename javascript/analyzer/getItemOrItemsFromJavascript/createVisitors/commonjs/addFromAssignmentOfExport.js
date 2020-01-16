@@ -10,6 +10,7 @@ module.exports =
 		addDeclarationsIn,
 		assignmentExpression: { left, right },
 		removeExtensionFromFilePath,
+		splitDependsUponIntoPathHierarchy,
 	}) =>
 		!hasTypeOfFunction(right)
 		&&
@@ -20,6 +21,7 @@ module.exports =
 						getIdentifierAndTypeFromAssignmentLeftWhenExport(left),
 					removeExtensionFromFilePath,
 					right,
+					splitDependsUponIntoPathHierarchy,
 				}),
 			parent:
 				null,
@@ -29,6 +31,7 @@ function createDeclarationsWithExportIdentifierAndType({
 	identifierAndType,
 	removeExtensionFromFilePath,
 	right,
+	splitDependsUponIntoPathHierarchy,
 }) {
 	return (
 		(!identifierAndType && [])
@@ -50,6 +53,7 @@ function createDeclarationsWithExportIdentifierAndType({
 					right,
 				getIsDestructuredAndVariables,
 				removeExtensionFromFilePath,
+				splitDependsUponIntoPathHierarchy,
 			})
 		);
 

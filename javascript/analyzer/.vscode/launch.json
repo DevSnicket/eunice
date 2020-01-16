@@ -31,62 +31,10 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"getYamlFromJavascript/tests/classFields"
+						"getYamlFromJavascript/tests"
 					],
 				"disableOptimisticBPs": true,
-				"name": "getYamlFromJavascript classFields Jest",
-				"program": "${workspaceFolder}/node_modules/jest/node_modules/jest-cli/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
-						"getYamlFromJavascript/tests/default"
-					],
-				"disableOptimisticBPs": true,
-				"name": "getYamlFromJavascript default Jest",
-				"program": "${workspaceFolder}/node_modules/jest/node_modules/jest-cli/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
-						"getYamlFromJavascript/tests/jsFileExtension"
-					],
-				"disableOptimisticBPs": true,
-				"name": "getYamlFromJavascript jsFileExtension Jest",
-				"program": "${workspaceFolder}/node_modules/jest/node_modules/jest-cli/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
-						"getYamlFromJavascript/tests/moduleExportAll/withJsFileExtension"
-					],
-				"disableOptimisticBPs": true,
-				"name": "getYamlFromJavascript moduleExportAll withJsFileExtension Jest",
-				"program": "${workspaceFolder}/node_modules/jest/node_modules/jest-cli/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
-						"getYamlFromJavascript/tests/moduleExportAll/withoutJsFileExtension"
-					],
-				"disableOptimisticBPs": true,
-				"name": "getYamlFromJavascript moduleExportAll withoutJsFileExtension Jest",
+				"name": "getYamlFromJavascript Jest",
 				"program": "${workspaceFolder}/node_modules/jest/node_modules/jest-cli/bin/jest.js",
 				"request": "launch",
 				"type": "node"

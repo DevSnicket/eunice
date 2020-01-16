@@ -1,5 +1,7 @@
 - id: exported
   type: export
   dependsUpon:
-    id: subdirectory/module
-    items: imported
+    id: subdirectory
+    items:
+      id: module
+      items: imported
