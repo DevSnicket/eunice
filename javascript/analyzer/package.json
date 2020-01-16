@@ -12,6 +12,7 @@
 		"@babel/parser": "7.5.5",
 		"@babel/types": "7.5.5",
 		"@devsnicket/eunice-call-with-process-standard-streams": "^1.1.0",
+		"array.prototype.flat": "1.2.3",
 		"array.prototype.flatmap": "1.2.1",
 		"js-yaml": "3.13.1"
 	},
@@ -87,5 +88,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./harness/output/*\" ! -path \"./node_modules/**/*\" ! -path \"**/test-cases/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest --runInBand"
 	},
-	"version": "11.15.0"
+	"version": "11.16.0"
 }

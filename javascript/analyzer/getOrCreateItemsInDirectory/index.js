@@ -1,20 +1,22 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
+require("array.prototype.flat")
+.shim();
+
+require("array.prototype.flatmap")
+.shim();
+
 const
-	compareIdentifierOrItemIdentifier = require("./compareIdentifierOrItemIdentifier"),
-	flatMap = require("array.prototype.flatmap"),
+	combineFileAndDirectoryItems = require("./combineFileAndDirectoryItems"),
+	createItem = require("./createItem"),
 	fs = require("fs"),
-	getItemOrItemsFromJavascript = require("../getItemOrItemsFromJavascript"),
-	getOrCreateFileItem = require("./getOrCreateFileItem"),
+	getOrCreateItemWhenJavascriptFile = require("./getOrCreateItemWhenJavascriptFile"),
 	path = require("path"),
 	{ promisify } = require("util");
 
-flatMap.shim();
-
 const
 	getFileStatus = promisify(fs.lstat),
-	readDirectory = promisify(fs.readdir),
-	readFile = promisify(fs.readFile);
+	readDirectory = promisify(fs.readdir);
 
 module.exports =
 	(/** @type {import("./Parameter.d")} */{
@@ -25,10 +27,19 @@ module.exports =
 		ignorePathPattern,
 	}) =>
 		withOptionsAndRootDirectory({
-			babelParserPlugins,
-			fileExtensions,
+			getOrCreateItemWhenFile:
+				({
+					directoryPath,
+					fileOrSubdirectoryPath,
+				}) =>
+					getOrCreateItemWhenJavascriptFile({
+						babelParserPlugins,
+						directoryPath,
+						fileExtensions,
+						fileOrSubdirectoryPath,
+						isCalleeIgnored,
+					}),
 			ignorePathPattern,
-			isCalleeIgnored,
 			rootDirectory: directory,
 		})
 		.getOrCreateItemsInDirectory(
@@ -36,10 +47,8 @@ module.exports =
 		);
 
 function withOptionsAndRootDirectory({
-	babelParserPlugins,
+	getOrCreateItemWhenFile,
 	ignorePathPattern,
-	isCalleeIgnored,
-	fileExtensions,
 	rootDirectory,
 }) {
 	return { getOrCreateItemsInDirectory };
@@ -51,26 +60,52 @@ function withOptionsAndRootDirectory({
 			path.join(rootDirectory, directoryPath);
 
 		return (
-			(
-				await Promise.all(
-					(await readDirectory(directoryAbsolutePath))
-					.map(createItemsFromFileOrSubdirectory),
+			combineFileAndDirectoryItems(
+				(
+					await Promise.all(
+						(await readDirectory(directoryAbsolutePath))
+						.sort()
+						.flatMap(
+							async fileOrSubdirectoryName =>
+								await createItemFromFileOrSubdirectory(
+									fileOrSubdirectoryName,
+								)
+								||
+								[],
+						),
+					)
 				)
+				.flat(),
 			)
-			.flatMap(items => items || [])
-			.sort(compareIdentifierOrItemIdentifier)
 		);
 
-		async function createItemsFromFileOrSubdirectory(
-			fileOrSubdirectory,
+		async function createItemFromFileOrSubdirectory(
+			fileOrSubdirectoryName,
 		) {
+			const fileOrSubdirectoryAbsolutePath =
+				path.join(
+					directoryAbsolutePath,
+					fileOrSubdirectoryName,
+				);
+
 			return (
 				!isIgnored()
 				&&
 				(
-					await createItemsWhenSubdirectory()
+					await createItemWhenSubdirectory()
 					||
-					getOrCreateItemsWhenJavascriptFile()
+					getOrCreateItemWhenFile({
+						directoryPath:
+							{
+								absolute: directoryAbsolutePath,
+								relative: directoryPath,
+							},
+						fileOrSubdirectoryPath:
+							{
+								absolute: fileOrSubdirectoryAbsolutePath,
+								name: fileOrSubdirectoryName,
+							},
+					})
 				)
 			);
 
@@ -79,85 +114,50 @@ function withOptionsAndRootDirectory({
 					ignorePathPattern
 					&&
 					ignorePathPattern.test(
-						path.join(directoryPath, fileOrSubdirectory),
+						path.join(directoryPath, fileOrSubdirectoryName),
 					)
 				);
 			}
 
-			async function getOrCreateItemsWhenJavascriptFile() {
-				const fileOrSubdirectoryPath =
-					path.parse(fileOrSubdirectory);
-
-				return (
-					isJavascript()
-					&&
-					[
-						getOrCreateFileItem({
-							directoryPath,
-							filePath:
-								fileOrSubdirectoryPath,
-							itemOrItems:
-								getItemOrItemsFromJavascriptOrRethrowErrorWithPath(
-									await readFile(
-										getFileOrSubdirectoryFull(),
-										"utf-8",
-									),
-								),
-						}),
-					]
-				);
-
-				function isJavascript() {
-					return fileExtensions.includes(fileOrSubdirectoryPath.ext);
-				}
-
-				function getItemOrItemsFromJavascriptOrRethrowErrorWithPath(
-					javascript,
-				) {
-					try {
-						return (
-							getItemOrItemsFromJavascript({
-								babelParserPlugins,
-								directoryPath:
-									{
-										absolute: directoryAbsolutePath,
-										relative: directoryPath,
-									},
-								fileExtensions,
-								isCalleeIgnored,
-								javascript,
-							})
-						);
-					} catch (error) {
-						throw new Error(`Analysis of file "${path.join(directoryPath, fileOrSubdirectory)}" raised the following error.\n\n${error.message}`);
-					}
-				}
-			}
-
-			async function createItemsWhenSubdirectory() {
+			async function createItemWhenSubdirectory() {
 				return (
 					await isDirectory()
 					&&
-					getOrCreateItemsInDirectory(
-						path.join(directoryPath, fileOrSubdirectory),
+					createWhenAnyItems(
+						await getOrCreateItemsInDirectory(
+							path.join(directoryPath, fileOrSubdirectoryName),
+						),
 					)
 				);
 
 				async function isDirectory() {
 					return (
-						(await getFileStatus(getFileOrSubdirectoryFull()))
+						(await getFileStatus(fileOrSubdirectoryAbsolutePath))
 						.isDirectory()
 					);
 				}
-			}
 
-			function getFileOrSubdirectoryFull() {
-				return (
-					path.join(
-						directoryAbsolutePath,
-						fileOrSubdirectory,
-					)
-				);
+				function createWhenAnyItems(
+					items,
+				) {
+					return (
+						items.length
+						&&
+						createItem({
+							identifier: fileOrSubdirectoryName,
+							items: getItemWhenSingle() || items,
+							type: "directory",
+						})
+					);
+
+					function getItemWhenSingle() {
+						return (
+							items.length === 1
+							&&
+							items[0]
+						);
+					}
+				}
 			}
 		}
 	}
