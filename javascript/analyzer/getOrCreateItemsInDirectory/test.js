@@ -25,7 +25,7 @@ test(
 		)
 		.rejects
 		.toThrowError(
-			"Analysis of file \"invalid\\index.js\" raised the following error.\n\nUnexpected token (1:1)",
+			`Analysis of file "${path.join("invalid", "index.js")}" raised the following error.\n\nUnexpected token (1:1)`,
 		),
 );
 
