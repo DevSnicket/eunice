@@ -27,7 +27,6 @@ module.exports =
 		)
 		.items;
 
-
 function getAncestorNamesFromDirectoryPath(
 	directoryPath,
 ) {
@@ -87,11 +86,21 @@ function getOrCreateAbsoluteOrParentRelativeDependsUpon(
 						ancestorDirectoryNames:
 							initial(ancestorDirectoryNames),
 						items:
-							createDependsUponWithIdentifier(
-								last(ancestorDirectoryNames),
-							),
+							getDependsUponWhenBaseAncestor()
+							||
+							items,
 					}
 				);
+
+				function getDependsUponWhenBaseAncestor() {
+					return (
+						identifierIndex === 0
+						&&
+						createDependsUponWithIdentifier(
+							last(ancestorDirectoryNames),
+						)
+					);
+				}
 			}
 		}
 	}
