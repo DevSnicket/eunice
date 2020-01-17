@@ -1,187 +1,202 @@
-- id: commonjsModuleExportsOfFunctionArrow1
-  type: file
-  items:
-    type: export
-- id: commonjsModuleExportsOfFunctionArrow2
-  type: file
-  items:
-    type: export
-- id: commonjsModuleExportsOfFunctionArrowWithFileFunction
-  type: file
-  items:
-    - - type: export
-    - - fileFunction
-- id: commonjsModuleExportsOfFunctionArrowWithNestedFunction
-  type: file
-  items:
-    type: export
-    items: nestedFunction
-- id: commonjsModuleExportsOfFunctionArrowWithNestedFunctionDeclarationThatRequiresAndCallsFunctionInSameDirectory
-  type: file
-  items:
-    - - id: commonjsModuleExportsOfFunctionArrow1
-        type: variable
-        dependsUpon: commonjsModuleExportsOfFunctionArrow1
-    - - type: export
-        items:
-          id: nestedFunction
+id: valid
+type: directory
+items:
+  - id: commonjsModuleExportsOfFunctionArrow1
+    type: file
+    items:
+      type: export
+  - id: commonjsModuleExportsOfFunctionArrow2
+    type: file
+    items:
+      type: export
+  - id: commonjsModuleExportsOfFunctionArrowWithFileFunction
+    type: file
+    items:
+      - - type: export
+      - - fileFunction
+  - id: commonjsModuleExportsOfFunctionArrowWithNestedFunction
+    type: file
+    items:
+      type: export
+      items: nestedFunction
+  - id: commonjsModuleExportsOfFunctionArrowWithNestedFunctionDeclarationThatRequiresAndCallsFunctionInSameDirectory
+    type: file
+    items:
+      - - id: commonjsModuleExportsOfFunctionArrow1
+          type: variable
           dependsUpon: commonjsModuleExportsOfFunctionArrow1
-- id: commonjsModuleExportsOfFunctionExpressionWithDifferentNameToFileThatRequiresAndCallsFunctionInSameDirectory
-  type: file
-  items:
-    - - id: commonjsModuleExportsOfFunctionArrow1
-        type: variable
-        dependsUpon: commonjsModuleExportsOfFunctionArrow1
-    - - type: export
-        dependsUpon: commonjsModuleExportsOfFunctionArrow1
-- id: commonjsRequireFunctionArrowWithFileFunctionInSameDirectoryAndDestructureThatIsAssignedToConstAndCalled
-  type: file
-  dependsUpon:
-    id: commonjsModuleExportsOfFunctionArrowWithFileFunction
-    items: fileFunction
-- id: commonjsRequireFunctionInSameDirectoryThatIsCalled
-  type: file
-  dependsUpon: commonjsModuleExportsOfFunctionArrow1
-- id: commonjsRequireFunctionInSubdirectoryThatIsCalled
-  type: file
-  dependsUpon:
-    id: subdirectory
-    items: commonjsModuleExportsOfFunctionArrowInSubdirectory
-- id: commonjsRequireMissingPackageAndDestructureThatIsAssignedToConstAndCalled
-  type: file
-  dependsUpon:
-    id: missingPackage
-    items: missingFunction
-- id: commonjsRequireTwoFunctionsInSameDirectoryThatAreAssignedToConstsAndCalled
-  type: file
-  dependsUpon:
-    - commonjsModuleExportsOfFunctionArrow1
-    - commonjsModuleExportsOfFunctionArrow2
-- id: empty
-  type: file
-- id: functionDeclarationThatsCalled
-  type: file
-  dependsUpon: fileFunction
-  items: fileFunction
-- id: functionDeclarationWithDifferentNameToFile
-  type: file
-  items: differentName
-- id: functionDeclarationWithSameNameAsFile
-  type: file
-  items: functionDeclarationWithSameNameAsFile
-- id: functionDeclarationWithSameNameAsFileAndNestedFunction
-  type: file
-  items:
-    id: functionDeclarationWithSameNameAsFileAndNestedFunction
-    items: nestedFunction
-- id: moduleExportAll
-  type: file
-  items:
-    id: exported
-    type: export
+      - - type: export
+          items:
+            id: nestedFunction
+            dependsUpon: commonjsModuleExportsOfFunctionArrow1
+  - id: commonjsModuleExportsOfFunctionExpressionWithDifferentNameToFileThatRequiresAndCallsFunctionInSameDirectory
+    type: file
+    items:
+      - - id: commonjsModuleExportsOfFunctionArrow1
+          type: variable
+          dependsUpon: commonjsModuleExportsOfFunctionArrow1
+      - - type: export
+          dependsUpon: commonjsModuleExportsOfFunctionArrow1
+  - id: commonjsRequireFunctionArrowWithFileFunctionInSameDirectoryAndDestructureThatIsAssignedToConstAndCalled
+    type: file
     dependsUpon:
-      id: moduleExportAllFrom
-      items: exported
-- id: moduleExportAllFrom
-  type: file
-- id: notIgnoredDirectory
-  type: directory
-  items:
-    id: ignored
+      id: commonjsModuleExportsOfFunctionArrowWithFileFunction
+      items: fileFunction
+  - id: commonjsRequireFunctionInSameDirectoryThatIsCalled
     type: file
-- id: subdirectory
-  type: directory
-  items:
-    - id: commonjsModuleExportsOfFunctionArrowInSubdirectory
-      type: file
-      items:
-        type: export
-    - id: commonjsRequireCurrentDirectoryThatIsCalled
-      type: file
-      dependsUpon: subdirectory
-    - id: commonjsRequireCurrentDirectoryWithTrailingSlashThatIsCalled
-      type: file
-      dependsUpon: subdirectory
-    - id: commonjsRequireFunctionInParentDirectoryThatIsCalled
-      type: file
-      dependsUpon: commonjsModuleExportsOfFunctionArrow1
-    - id: emptyInSubdirectory
-      type: file
-    - id: subdirectoryOfsubdirectoryWithSameNameAsFile
-      type: file
-      items:
-        - functionDeclarationInSubdirectoryOfsubdirectoryWithSameNameAsFile
-        - id: emptyInSubdirectoryOfsubdirectory
-          type: file
-    - id: subdirectoryOfsubdirectoryWithSameNameAsFile.withdot
-      type: file
-    - id: subsubdirectory
-      type: directory
-      items:
-        - id: commonjsRequireFunctionInParentDirectoryThatIsCalled
-          type: file
-          dependsUpon:
-            id: subdirectory
-            items: commonjsModuleExportsOfFunctionArrowInSubdirectory
-        - id: commonjsRequireParentDirectoryThatIsCalled
-          type: file
-          dependsUpon: subdirectory
-        - id: commonjsRequireParentDirectoryWithTrailingSlashThatIsCalled
-          type: file
-          dependsUpon: subdirectory
-- id: subdirectoryWithIndexFile
-  type: directory
-  items:
-    id: index
+    dependsUpon: commonjsModuleExportsOfFunctionArrow1
+  - id: commonjsRequireFunctionInSubdirectoryThatIsCalled
     type: file
-    items: functionDeclarationInSubdirectoryWithIndexFile
-- id: subdirectoryWithIndexFileAndFileWithSameName
-  type: file
-  items:
-    - functionDeclarationInSubdirectoryWithIndexFileAndFileWithSameName
-    - id: index
+    dependsUpon:
+      id: subdirectory
+      items: commonjsModuleExportsOfFunctionArrowInSubdirectory
+  - id: commonjsRequireMissingPackageAndDestructureThatIsAssignedToConstAndCalled
+    type: file
+    dependsUpon:
+      id: missingPackage
+      items: missingFunction
+  - id: commonjsRequireTwoFunctionsInSameDirectoryThatAreAssignedToConstsAndCalled
+    type: file
+    dependsUpon:
+      - commonjsModuleExportsOfFunctionArrow1
+      - commonjsModuleExportsOfFunctionArrow2
+  - id: empty
+    type: file
+  - id: functionDeclarationThatsCalled
+    type: file
+    dependsUpon: fileFunction
+    items: fileFunction
+  - id: functionDeclarationWithDifferentNameToFile
+    type: file
+    items: differentName
+  - id: functionDeclarationWithSameNameAsFile
+    type: file
+    items: functionDeclarationWithSameNameAsFile
+  - id: functionDeclarationWithSameNameAsFileAndNestedFunction
+    type: file
+    items:
+      id: functionDeclarationWithSameNameAsFileAndNestedFunction
+      items: nestedFunction
+  - id: moduleExportAll
+    type: file
+    items:
+      id: exported
+      type: export
+      dependsUpon:
+        id: moduleExportAllFrom
+        items: exported
+  - id: moduleExportAllFrom
+    type: file
+  - id: notIgnoredDirectory
+    type: directory
+    items:
+      id: ignored
       type: file
-      items: functionDeclarationInSubdirectoryWithIndexFileAndFileWithSameNameIndex
-- id: subdirectoryWithSameNameAsFile
-  type: file
-  items:
-    - - functionDeclarationInSubdirectoryWithSameNameAsFile1
-    - - functionDeclarationInSubdirectoryWithSameNameAsFile2
-    - - id: emptyInSubdirectoryWithSameNameAsFile
+  - id: parentOfRootDirectoryThatIsCalled
+    type: file
+    dependsUpon:
+      id: ..
+      items: ..
+  - id: subdirectory
+    type: directory
+    items:
+      - id: commonjsModuleExportsOfFunctionArrowInSubdirectory
         type: file
-      - id: subdirectoryInSubdirectoryWithSameNameAsFile
+        items:
+          type: export
+      - id: commonjsRequireCurrentDirectoryThatIsCalled
+        type: file
+        dependsUpon: subdirectory
+      - id: commonjsRequireCurrentDirectoryWithTrailingSlashThatIsCalled
+        type: file
+        dependsUpon: subdirectory
+      - id: commonjsRequireFunctionInRootDirectoryThatIsCalled
+        type: file
+        dependsUpon:
+          id: valid
+          items: commonjsModuleExportsOfFunctionArrow1
+      - id: emptyInSubdirectory
+        type: file
+      - id: subdirectoryOfsubdirectoryWithSameNameAsFile
+        type: file
+        items:
+          - functionDeclarationInSubdirectoryOfsubdirectoryWithSameNameAsFile
+          - id: emptyInSubdirectoryOfsubdirectory
+            type: file
+      - id: subdirectoryOfsubdirectoryWithSameNameAsFile.withdot
+        type: file
+      - id: subsubdirectory
         type: directory
         items:
-          id: emptyInSubdirectoryInSubdirectoryWithSameNameAsFile
-          type: file
-      - id: zEmptyWithNameAfterSubdirectoryInSubdirectoryWithSameNameAsFile
+          - id: commonjsRequireFunctionInParentDirectoryThatIsCalled
+            type: file
+            dependsUpon:
+              id: subdirectory
+              items: commonjsModuleExportsOfFunctionArrowInSubdirectory
+          - id: commonjsRequireFunctionInRootDirectoryThatIsCalled
+            type: file
+            dependsUpon:
+              id: valid
+              items: commonjsModuleExportsOfFunctionArrow1
+          - id: commonjsRequireParentDirectoryThatIsCalled
+            type: file
+            dependsUpon: subdirectory
+          - id: commonjsRequireParentDirectoryWithTrailingSlashThatIsCalled
+            type: file
+            dependsUpon: subdirectory
+  - id: subdirectoryWithIndexFile
+    type: directory
+    items:
+      id: index
+      type: file
+      items: functionDeclarationInSubdirectoryWithIndexFile
+  - id: subdirectoryWithIndexFileAndFileWithSameName
+    type: file
+    items:
+      - functionDeclarationInSubdirectoryWithIndexFileAndFileWithSameName
+      - id: index
         type: file
-- id: subdirectoryWithSameNameAsFile.withdot
-  type: file
-- id: subdirectoryWithSameNameAsFileWithMultipleDependsUpon
-  type: file
-  dependsUpon:
-    - subdirectoryWithSameNameAsFileWithMultipleDependsUponCall1
-    - subdirectoryWithSameNameAsFileWithMultipleDependsUponCall2
-  items:
-    id: emptyInSubdirectoryWithSameNameAsFileWithMultipleDependsUpon
+        items: functionDeclarationInSubdirectoryWithIndexFileAndFileWithSameNameIndex
+  - id: subdirectoryWithSameNameAsFile
     type: file
-- id: subdirectoryWithSameNameAsFileWithSingleDependsUpon
-  type: file
-  dependsUpon: subdirectoryWithSameNameAsFileWithSingleDependsUponCall
-  items:
-    id: emptyInSubdirectoryWithSameNameAsFileWithSingleDependsUpon
+    items:
+      - - functionDeclarationInSubdirectoryWithSameNameAsFile1
+      - - functionDeclarationInSubdirectoryWithSameNameAsFile2
+      - - id: emptyInSubdirectoryWithSameNameAsFile
+          type: file
+        - id: subdirectoryInSubdirectoryWithSameNameAsFile
+          type: directory
+          items:
+            id: emptyInSubdirectoryInSubdirectoryWithSameNameAsFile
+            type: file
+        - id: zEmptyWithNameAfterSubdirectoryInSubdirectoryWithSameNameAsFile
+          type: file
+  - id: subdirectoryWithSameNameAsFile.withdot
     type: file
-- id: twoFunctionDeclarations
-  type: file
-  items:
-    - - twoFunctionsFirst
-    - - twoFunctionsSecond
-- id: twoFunctionDeclarationsThatsCalled
-  type: file
-  dependsUpon:
-    - twoFunctionsFirst
-    - twoFunctionsSecond
-  items:
-    - - twoFunctionsFirst
-    - - twoFunctionsSecond
+  - id: subdirectoryWithSameNameAsFileWithMultipleDependsUpon
+    type: file
+    dependsUpon:
+      - subdirectoryWithSameNameAsFileWithMultipleDependsUponCall1
+      - subdirectoryWithSameNameAsFileWithMultipleDependsUponCall2
+    items:
+      id: emptyInSubdirectoryWithSameNameAsFileWithMultipleDependsUpon
+      type: file
+  - id: subdirectoryWithSameNameAsFileWithSingleDependsUpon
+    type: file
+    dependsUpon: subdirectoryWithSameNameAsFileWithSingleDependsUponCall
+    items:
+      id: emptyInSubdirectoryWithSameNameAsFileWithSingleDependsUpon
+      type: file
+  - id: twoFunctionDeclarations
+    type: file
+    items:
+      - - twoFunctionsFirst
+      - - twoFunctionsSecond
+  - id: twoFunctionDeclarationsThatsCalled
+    type: file
+    dependsUpon:
+      - twoFunctionsFirst
+      - twoFunctionsSecond
+    items:
+      - - twoFunctionsFirst
+      - - twoFunctionsSecond

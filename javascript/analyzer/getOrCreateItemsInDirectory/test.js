@@ -14,35 +14,7 @@ const
 const testCasesDirectory = path.join(__dirname, "test-cases");
 
 test(
-	"Valid JavaScript files return expected YAML",
-	async() => {
-		const supportedTestCasesDirectory =
-			path.join(
-				testCasesDirectory,
-				"valid",
-			);
-
-		expect(
-			getYamlForItemOrItems(
-				await getOrCreateItemsInDirectory({
-					directory:
-						supportedTestCasesDirectory,
-					ignorePathPattern:
-						new RegExp(`^(node_modules|ignoredSubdirectory\\${path.sep}ignoredSubdirectoryOfSubdirectory|ignored\\.js)`),
-				}),
-			),
-		)
-		.toBe(
-			await readFile(
-				path.join(supportedTestCasesDirectory, "expected.yaml"),
-				"utf-8",
-			),
-		);
-	},
-);
-
-test(
-	"File with not supported declaration throws error with file path",
+	"Invalid syntax throws error with file path",
 	async() =>
 		(
 			await expect(
@@ -53,6 +25,85 @@ test(
 		)
 		.rejects
 		.toThrowError(
-			"Analysis of file \"index.js\" raised the following error.\n\nUnexpected token (1:1)",
+			"Analysis of file \"invalid\\index.js\" raised the following error.\n\nUnexpected token (1:1)",
 		),
 );
+
+test(
+	"Valid syntax returns expected YAML",
+	async() => {
+		const validTestCasesDirectory =
+			path.join(
+				testCasesDirectory,
+				"valid",
+			);
+
+		expect(
+			getYamlForItemOrItems(
+				await getOrCreateItemsInDirectory({
+					directory:
+						validTestCasesDirectory,
+					ignorePathPattern:
+						new RegExp(`^(node_modules|ignoredSubdirectory\\${path.sep}ignoredSubdirectoryOfSubdirectory|ignored\\.js)`),
+				}),
+			),
+		)
+		.toBe(
+			await readYamlFile({
+				directoryPath: validTestCasesDirectory,
+				fileName: "expected.yaml",
+			}),
+		);
+	},
+);
+
+describe(
+	"Root item identifier",
+	() => {
+		const directory =
+			path.join(
+				testCasesDirectory,
+				"root-item-identifier",
+			);
+
+		test.each(
+			[
+				[ "null-expected.yaml", null ],
+				[ "specified-expected.yaml", "root-item-specified" ],
+			],
+		)(
+			"%s",
+			async(
+				fileName,
+				rootItemIdentifier,
+			) => {
+				expect(
+					getYamlForItemOrItems(
+						await getOrCreateItemsInDirectory({
+							directory,
+							rootItemIdentifier,
+						}),
+					),
+				)
+				.toBe(
+					await readYamlFile({
+						directoryPath: directory,
+						fileName,
+					}),
+				);
+			},
+		);
+	},
+);
+
+function readYamlFile({
+	directoryPath,
+	fileName,
+}) {
+	return (
+		readFile(
+			path.join(directoryPath, fileName),
+			"utf-8",
+		)
+	);
+}

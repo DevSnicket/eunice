@@ -1,1 +1,3 @@
-dependsUpon: module
+dependsUpon:
+  id: ..
+  items: module

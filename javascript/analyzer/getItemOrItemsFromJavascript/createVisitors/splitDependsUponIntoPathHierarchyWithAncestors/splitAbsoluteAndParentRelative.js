@@ -60,46 +60,54 @@ function getOrCreateAbsoluteOrParentRelativeDependsUpon(
 			identifierSegment === parentSegment
 			&&
 			{
-				...whenNamedParent() || { items },
+				...createAncestorDirectoryNamesAndItems(),
 				isInParentDirectory: true,
 			}
 		);
 
-		function whenNamedParent() {
+		function createAncestorDirectoryNamesAndItems() {
 			return (
-				hasNamesForAncestors()
-				&&
-				asNamedParent()
+				whenNamedParent()
+				||
+				{ items: createDependsUponWithIdentifier(identifierSegment) }
 			);
 
-			function hasNamesForAncestors() {
+			function whenNamedParent() {
 				return (
-					ancestorDirectoryNames
+					hasNamesForAncestors()
 					&&
-					identifierIndex < ancestorDirectoryNames.length
-				);
-			}
-
-			function asNamedParent() {
-				return (
-					{
-						ancestorDirectoryNames:
-							initial(ancestorDirectoryNames),
-						items:
-							getDependsUponWhenBaseAncestor()
-							||
-							items,
-					}
+					asNamedParent()
 				);
 
-				function getDependsUponWhenBaseAncestor() {
+				function hasNamesForAncestors() {
 					return (
-						identifierIndex === 0
+						ancestorDirectoryNames
 						&&
-						createDependsUponWithIdentifier(
-							last(ancestorDirectoryNames),
-						)
+						identifierIndex < ancestorDirectoryNames.length
 					);
+				}
+
+				function asNamedParent() {
+					return (
+						{
+							ancestorDirectoryNames:
+								initial(ancestorDirectoryNames),
+							items:
+								getDependsUponWhenBaseAncestor()
+								||
+								items,
+						}
+					);
+
+					function getDependsUponWhenBaseAncestor() {
+						return (
+							identifierIndex === 0
+							&&
+							createDependsUponWithIdentifier(
+								last(ancestorDirectoryNames),
+							)
+						);
+					}
 				}
 			}
 		}

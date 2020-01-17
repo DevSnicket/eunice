@@ -5,7 +5,7 @@ require("array.prototype.flatmap")
 
 const
 	combineItemsByType = require("./combineItemsByType"),
-	getWhenSingle = require("./getWhenSingle"),
+	getWhenSingle = require("../getWhenSingle"),
 	{ groupBy } = require("lodash");
 
 module.exports =

@@ -1,7 +1,5 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const createItem = require("../createItem");
-
 module.exports =
 	({
 		identifier,
@@ -61,3 +59,19 @@ module.exports =
 			);
 		}
 	};
+
+function createItem({
+	dependsUpon = null,
+	identifier,
+	items = null,
+	...restOfItem
+}) {
+	return (
+		{
+			id: identifier,
+			...restOfItem,
+			...dependsUpon && { dependsUpon },
+			...items && { items },
+		}
+	);
+}

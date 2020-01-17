@@ -1,0 +1,5 @@
+id: root-item-specified
+type: directory
+items:
+  id: empty
+  type: file

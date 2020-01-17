@@ -1,3 +1,5 @@
 dependsUpon:
-  id: sibling
-  items: subdirectory
+  id: ..
+  items:
+    id: sibling
+    items: subdirectory

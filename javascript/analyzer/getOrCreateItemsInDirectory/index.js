@@ -5,10 +5,10 @@ require("array.prototype.flat")
 
 const
 	combineFileAndDirectoryItems = require("./combineFileAndDirectoryItems"),
-	createItem = require("./createItem"),
 	flatMap = require("array.prototype.flatmap"),
 	fs = require("fs"),
 	getOrCreateItemWhenJavascriptFile = require("./getOrCreateItemWhenJavascriptFile"),
+	getWhenSingle = require("./getWhenSingle"),
 	path = require("path"),
 	{ promisify } = require("util");
 
@@ -17,32 +17,53 @@ const
 	readDirectory = promisify(fs.readdir);
 
 module.exports =
-	(/** @type {import("./Parameter.d")} */{
+	async(/** @type {import("./Parameter.d")} */{
 		babelParserPlugins,
 		directory,
 		fileExtensions = [ ".js" ],
 		isCalleeIgnored,
 		ignorePathPattern,
-	}) =>
-		withOptionsAndRootDirectory({
-			getOrCreateItemWhenFile:
-				({
-					directoryPath,
-					fileOrSubdirectoryPath,
-				}) =>
+		rootItemIdentifier = path.basename(directory),
+	}) => {
+		return (
+			createRootItemWhenHasIdentifier({
+				identifier: rootItemIdentifier,
+				items: await getOrCreateItemsInRoot(),
+			})
+		);
+
+		function getOrCreateItemsInRoot() {
+			return (
+				withOptionsAndRootDirectory({
+					getOrCreateItemWhenFile,
+					ignorePathPattern,
+					rootDirectory:
+						{
+							name: rootItemIdentifier,
+							path: directory,
+						},
+				})
+				.getOrCreateItemsInDirectory(
+					"",
+				)
+			);
+
+			function getOrCreateItemWhenFile({
+				directoryPath,
+				fileOrSubdirectoryPath,
+			}) {
+				return (
 					getOrCreateItemWhenJavascriptFile({
 						babelParserPlugins,
 						directoryPath,
 						fileExtensions,
 						fileOrSubdirectoryPath,
 						isCalleeIgnored,
-					}),
-			ignorePathPattern,
-			rootDirectory: directory,
-		})
-		.getOrCreateItemsInDirectory(
-			"",
-		);
+					})
+				);
+			}
+		}
+	};
 
 function withOptionsAndRootDirectory({
 	getOrCreateItemWhenFile,
@@ -52,10 +73,14 @@ function withOptionsAndRootDirectory({
 	return { getOrCreateItemsInDirectory };
 
 	async function getOrCreateItemsInDirectory(
-		directoryPath,
+		directoryRelativePath,
 	) {
-		const directoryAbsolutePath =
-			path.join(rootDirectory, directoryPath);
+		const
+			directoryAbsolutePath =
+				path.join(
+					rootDirectory.path,
+					directoryRelativePath,
+				);
 
 		return (
 			combineFileAndDirectoryItems(
@@ -96,7 +121,7 @@ function withOptionsAndRootDirectory({
 						directoryPath:
 							{
 								absolute: directoryAbsolutePath,
-								relative: directoryPath,
+								relative: getDirectoryRelativePathForFile(),
 							},
 						fileOrSubdirectoryPath:
 							{
@@ -112,7 +137,7 @@ function withOptionsAndRootDirectory({
 					ignorePathPattern
 					&&
 					ignorePathPattern.test(
-						path.join(directoryPath, fileOrSubdirectoryName),
+						path.join(directoryRelativePath, fileOrSubdirectoryName),
 					)
 				);
 			}
@@ -123,7 +148,7 @@ function withOptionsAndRootDirectory({
 					&&
 					createWhenAnyItems(
 						await getOrCreateItemsInDirectory(
-							path.join(directoryPath, fileOrSubdirectoryName),
+							path.join(directoryRelativePath, fileOrSubdirectoryName),
 						),
 					)
 				);
@@ -141,22 +166,66 @@ function withOptionsAndRootDirectory({
 					return (
 						items.length
 						&&
-						createItem({
+						createDirectoryItem({
 							identifier: fileOrSubdirectoryName,
-							items: getItemWhenSingle() || items,
-							type: "directory",
+							items,
 						})
 					);
+				}
+			}
 
-					function getItemWhenSingle() {
-						return (
-							items.length === 1
-							&&
-							items[0]
-						);
-					}
+			function getDirectoryRelativePathForFile() {
+				return (
+					whenHasRootDirectoryName()
+					||
+					directoryRelativePath
+				);
+
+				function whenHasRootDirectoryName() {
+					return (
+						rootDirectory.name
+						&&
+						path.join(rootDirectory.name, directoryRelativePath)
+					);
 				}
 			}
 		}
 	}
+}
+
+function createRootItemWhenHasIdentifier({
+	identifier,
+	items,
+}) {
+	return (
+		whenHasIdentifier()
+		||
+		getWhenSingle(items)
+	);
+
+	function whenHasIdentifier() {
+		return (
+			identifier
+			&&
+			createDirectoryItem({
+				identifier,
+				items,
+			})
+		);
+	}
+}
+
+function createDirectoryItem({
+	identifier,
+	items,
+}) {
+	return (
+		{
+			id: identifier,
+			type: "directory",
+			// needs to match expected key order in YAML.
+			// eslint-disable-next-line sort-keys
+			items: getWhenSingle(items) || items,
+		}
+	);
 }

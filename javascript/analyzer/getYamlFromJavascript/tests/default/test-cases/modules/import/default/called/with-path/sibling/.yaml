@@ -1,1 +1,3 @@
-dependsUpon: sibling
+dependsUpon:
+  id: ..
+  items: sibling

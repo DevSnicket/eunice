@@ -1,11 +1,8 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 const
-	{ trimEnd } = require("lodash"),
 	splitAbsoluteAndParentRelative = require("./splitAbsoluteAndParentRelative"),
 	splitWhenRelative = require("./splitWhenRelative");
-
-const pathSeparator = "/";
 
 module.exports =
 	({
@@ -33,8 +30,6 @@ module.exports =
 						identifier: dependsUpon,
 						items: null,
 					})
-					||
-					trimEnd(dependsUpon, pathSeparator)
 				);
 			}
 		}
@@ -56,6 +51,8 @@ module.exports =
 			identifier,
 			items,
 		}) {
+			const pathSeparator = "/";
+
 			return (
 				splitWhenRelative({
 					directoryPathRelative,
