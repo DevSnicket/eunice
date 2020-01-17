@@ -117,15 +117,7 @@ items:
           items: commonjsModuleExportsOfFunctionArrow1
       - id: emptyInSubdirectory
         type: file
-      - id: subdirectoryOfsubdirectoryWithSameNameAsFile
-        type: file
-        items:
-          - functionDeclarationInSubdirectoryOfsubdirectoryWithSameNameAsFile
-          - id: emptyInSubdirectoryOfsubdirectory
-            type: file
-      - id: subdirectoryOfsubdirectoryWithSameNameAsFile.withdot
-        type: file
-      - id: subsubdirectory
+      - id: subdirectoryOfSubdirectory
         type: directory
         items:
           - id: commonjsRequireFunctionInParentDirectoryThatIsCalled
@@ -144,6 +136,14 @@ items:
           - id: commonjsRequireParentDirectoryWithTrailingSlashThatIsCalled
             type: file
             dependsUpon: subdirectory
+      - id: subdirectoryOfSubdirectoryWithSameNameAsFile
+        type: file
+        items:
+          - functionDeclarationInSubdirectoryOfSubdirectoryWithSameNameAsFile
+          - id: emptyInSubdirectoryOfSubdirectory
+            type: file
+      - id: subdirectoryOfSubdirectoryWithSameNameAsFile.withdot
+        type: file
   - id: subdirectoryWithIndexFile
     type: directory
     items:
