@@ -1,0 +1,10 @@
+- id: containerFunctionDeclaration
+  items:
+    - - id: caller
+        dependsUpon:
+          - constUsedForArgument
+          - parameter
+    - - id: constUsedForArgument
+        type: variable
+    - - id: parameter
+        type: parameter

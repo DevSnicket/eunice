@@ -28,6 +28,7 @@ module.exports =
 		fileExtensions,
 		isCalleeIgnored,
 		parseJavascript,
+		sortItems,
 	}) => {
 		const
 			declarations = createDeclarations(),
@@ -47,6 +48,7 @@ module.exports =
 					declarations,
 					hasUndeclaredReferenceTo:
 						undeclaredReferences.hasReferenceTo,
+					sortItems,
 				}),
 				...forModules({
 					addDeclarationsIn:
@@ -210,7 +212,11 @@ module.exports =
 					items:
 						stackItemsWhenMultiple({
 							items:
-								declarations.createItemsForAndRemoveDeclarationsIn(null),
+								sortItems(
+									declarations.createItemsForAndRemoveDeclarationsIn(
+										null,
+									),
+								),
 							withSingleInArray:
 								!dependsUponProperty,
 						}),

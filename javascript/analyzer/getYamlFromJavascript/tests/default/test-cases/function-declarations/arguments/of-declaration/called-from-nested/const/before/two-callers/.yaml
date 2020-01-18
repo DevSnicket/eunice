@@ -1,7 +1,5 @@
 - id: container
   items:
-    - - id: variable
-        type: variable
     - - id: caller1
         dependsUpon:
           - called
@@ -10,3 +8,5 @@
         dependsUpon:
           - called
           - variable
+    - - id: variable
+        type: variable

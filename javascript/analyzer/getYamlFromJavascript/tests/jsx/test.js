@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
+// Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 const
 	getYamlFromJavascript = require("../.."),
@@ -10,7 +10,7 @@ test(
 	async() => {
 		const { javascript, yaml } =
 			await readJavascriptAndYamlFromDirectoryPath(
-				path.join(__dirname, "test-cases"),
+				path.join(__dirname, "test-case"),
 			);
 
 		expect(

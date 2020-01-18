@@ -14,6 +14,7 @@ module.exports =
 		createDependsUponProperty,
 		declarations,
 		hasUndeclaredReferenceTo,
+		sortItems,
 	}) => {
 		return (
 			{
@@ -116,6 +117,7 @@ module.exports =
 						declarations.createItemsForAndRemoveDeclarationsIn(
 							functionDeclarationOrExpression,
 						),
+					sortItems,
 					type,
 				})
 			);

@@ -6,7 +6,7 @@ interface Options {
 	readonly babelParserPlugins?: Iterable<ParserPlugin>
 	readonly directoryPath?: DirectoryPath
 	readonly fileExtensions?: string[]
-	readonly isCalleeIgnored?(string): boolean
+	readonly isCalleeIgnored?: boolean
 }
 
 interface DirectoryPath {

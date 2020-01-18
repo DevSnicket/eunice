@@ -1,0 +1,4 @@
+- id: functionDeclaration
+  items:
+    - - nestedFunctionDeclaration2
+    - - nestedFunctionDeclaration1

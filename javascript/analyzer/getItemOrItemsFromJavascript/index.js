@@ -1,6 +1,7 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 const
+	createSortItemForIsBottomUp = require("./createSortItemForIsBottomUp"),
 	createVisitors = require("./createVisitors"),
 	parseJavascriptWithBabelParserPlugins = require("./parseJavascriptWithBabelParserPlugins"),
 	walk = require("./walk");
@@ -10,12 +11,14 @@ module.exports =
 		babelParserPlugins,
 		directoryPath,
 		fileExtensions,
+		isBottomUp,
 		isCalleeIgnored,
 		javascript,
 	}) =>
 		getItemOrItems({
 			directoryPath,
 			fileExtensions,
+			isBottomUp,
 			isCalleeIgnored,
 			javascript,
 			parseJavascript:
@@ -43,6 +46,7 @@ function withBabelParserPlugins(
 function getItemOrItems({
 	directoryPath,
 	fileExtensions,
+	isBottomUp,
 	isCalleeIgnored,
 	javascript,
 	parseJavascript,
@@ -53,6 +57,8 @@ function getItemOrItems({
 			fileExtensions,
 			isCalleeIgnored,
 			parseJavascript,
+			sortItems:
+				createSortItemForIsBottomUp(isBottomUp),
 		});
 
 	walk({

@@ -1,0 +1,6 @@
+- id: parentFunctionDeclaration
+  items:
+    - - id: nestedFunctionDeclaration
+        dependsUpon: parentConst
+    - - id: parentConst
+        type: variable

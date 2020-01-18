@@ -7,6 +7,7 @@ const
 	combineFileAndDirectoryItems = require("./combineFileAndDirectoryItems"),
 	flatMap = require("array.prototype.flatmap"),
 	fs = require("fs"),
+	getItemOrItemsFromJavascript = require("../getItemOrItemsFromJavascript"),
 	getOrCreateItemWhenJavascriptFile = require("./getOrCreateItemWhenJavascriptFile"),
 	getWhenSingle = require("./getWhenSingle"),
 	path = require("path"),
@@ -18,6 +19,7 @@ const
 
 module.exports =
 	async(/** @type {import("./Parameter.d")} */{
+		areFilesBottomUp,
 		babelParserPlugins,
 		directory,
 		fileExtensions = [ ".js" ],
@@ -54,11 +56,20 @@ module.exports =
 			}) {
 				return (
 					getOrCreateItemWhenJavascriptFile({
-						babelParserPlugins,
 						directoryPath,
 						fileExtensions,
 						fileOrSubdirectoryPath,
-						isCalleeIgnored,
+						getItemOrItemsFromJavascript:
+							javascript =>
+								getItemOrItemsFromJavascript({
+									babelParserPlugins,
+									directoryPath,
+									fileExtensions,
+									isBottomUp:
+										areFilesBottomUp,
+									isCalleeIgnored,
+									javascript,
+								}),
 					})
 				);
 			}

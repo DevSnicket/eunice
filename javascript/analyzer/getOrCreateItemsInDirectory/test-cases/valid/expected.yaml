@@ -22,20 +22,20 @@ items:
   - id: commonjsModuleExportsOfFunctionArrowWithNestedFunctionDeclarationThatRequiresAndCallsFunctionInSameDirectory
     type: file
     items:
-      - - id: commonjsModuleExportsOfFunctionArrow1
-          type: variable
-          dependsUpon: commonjsModuleExportsOfFunctionArrow1
       - - type: export
           items:
             id: nestedFunction
             dependsUpon: commonjsModuleExportsOfFunctionArrow1
-  - id: commonjsModuleExportsOfFunctionExpressionWithDifferentNameToFileThatRequiresAndCallsFunctionInSameDirectory
-    type: file
-    items:
       - - id: commonjsModuleExportsOfFunctionArrow1
           type: variable
           dependsUpon: commonjsModuleExportsOfFunctionArrow1
+  - id: commonjsModuleExportsOfFunctionExpressionWithDifferentNameToFileThatRequiresAndCallsFunctionInSameDirectory
+    type: file
+    items:
       - - type: export
+          dependsUpon: commonjsModuleExportsOfFunctionArrow1
+      - - id: commonjsModuleExportsOfFunctionArrow1
+          type: variable
           dependsUpon: commonjsModuleExportsOfFunctionArrow1
   - id: commonjsRequireFunctionArrowWithFileFunctionInSameDirectoryAndDestructureThatIsAssignedToConstAndCalled
     type: file

@@ -2,7 +2,6 @@
 
 const
 	fs = require("fs"),
-	getItemOrItemsFromJavascript = require("../../getItemOrItemsFromJavascript"),
 	getOrCreateFileItem = require("./getOrCreateFileItem"),
 	path = require("path"),
 	{ promisify } = require("util");
@@ -11,11 +10,10 @@ const readFile = promisify(fs.readFile);
 
 module.exports =
 	async({
-		babelParserPlugins,
 		directoryPath,
 		fileExtensions,
 		fileOrSubdirectoryPath,
-		isCalleeIgnored,
+		getItemOrItemsFromJavascript,
 	}) => {
 		const
 			{
@@ -53,15 +51,7 @@ module.exports =
 			javascript,
 		) {
 			try {
-				return (
-					getItemOrItemsFromJavascript({
-						babelParserPlugins,
-						directoryPath,
-						fileExtensions,
-						isCalleeIgnored,
-						javascript,
-					})
-				);
+				return getItemOrItemsFromJavascript(javascript);
 			} catch (error) {
 				throw new Error(`Analysis of file "${path.join(directoryPath.relative, fileOrSubdirectoryPath.name)}" raised the following error.\n\n${error.message}`);
 			}

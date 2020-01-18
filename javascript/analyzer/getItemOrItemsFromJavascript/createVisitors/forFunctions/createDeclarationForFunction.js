@@ -14,6 +14,7 @@ module.exports =
 		hasUndeclaredReferenceTo,
 		identifier,
 		items,
+		sortItems,
 		type,
 	}) => (
 		{
@@ -21,13 +22,15 @@ module.exports =
 			...type && { type },
 			...dependsUponProperty,
 			...createItemsProperty(
-				[
-					...createParameterItemsForFunction({
-						functionDeclarationOrExpression,
-						hasUndeclaredReferenceTo,
-					}),
-					...items || [],
-				],
+				sortItems(
+					[
+						...createParameterItemsForFunction({
+							functionDeclarationOrExpression,
+							hasUndeclaredReferenceTo,
+						}),
+						...items || [],
+					],
+				),
 			),
 		}
 	);

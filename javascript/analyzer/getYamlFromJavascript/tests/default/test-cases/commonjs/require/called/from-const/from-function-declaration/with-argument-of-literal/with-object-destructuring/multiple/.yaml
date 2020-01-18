@@ -1,3 +1,7 @@
+- - id: caller
+    dependsUpon:
+      - variable1
+      - variable2
 - - id: variable1
     type: variable
     dependsUpon:
@@ -8,7 +12,3 @@
     dependsUpon:
       id: called
       items: variable2
-- - id: caller
-    dependsUpon:
-      - variable1
-      - variable2

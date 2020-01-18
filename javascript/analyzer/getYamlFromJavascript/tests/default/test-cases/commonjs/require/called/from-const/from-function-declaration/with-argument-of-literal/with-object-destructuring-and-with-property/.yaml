@@ -1,3 +1,5 @@
+- - id: caller
+    dependsUpon: variable
 - - id: variable
     type: variable
     dependsUpon:
@@ -5,5 +7,3 @@
       items:
         id: property
         items: variable
-- - id: caller
-    dependsUpon: variable
