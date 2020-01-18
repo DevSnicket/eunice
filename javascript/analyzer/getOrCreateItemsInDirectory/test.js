@@ -11,21 +11,24 @@ const
 	getOrCreateItemsInDirectory = require("."),
 	getYamlForItemOrItems = require("../getYamlForItemOrItems");
 
-const testCasesDirectory = path.join(__dirname, "test-cases");
+const
+	rootItemIdentifier = "rootItemIdentifier",
+	testCasesDirectory = path.join(__dirname, "test-cases");
 
 test(
 	"Invalid syntax throws error with file path",
 	async() =>
 		(
 			await expect(
-				getOrCreateItemsInDirectory(
-					{ directory: path.join(testCasesDirectory, "invalid") },
-				),
+				getOrCreateItemsInDirectory({
+					directory: path.join(testCasesDirectory, "invalid"),
+					rootItemIdentifier,
+				}),
 			)
 		)
 		.rejects
 		.toThrowError(
-			`Analysis of file "${path.join("invalid", "index.js")}" raised the following error.\n\nUnexpected token (1:1)`,
+			`Analysis of file "${path.join(rootItemIdentifier, "index.js")}" raised the following error.\n\nUnexpected token (1:1)`,
 		),
 );
 
@@ -57,41 +60,29 @@ test(
 	},
 );
 
-describe(
-	"Root item identifier",
-	() => {
-		const directory =
+test(
+	"Root item identifier ",
+	async() => {
+		const rootItemIdentifierTestCasesDirectory =
 			path.join(
 				testCasesDirectory,
 				"root-item-identifier",
 			);
 
-		test.each(
-			[
-				[ "null-expected.yaml", null ],
-				[ "specified-expected.yaml", "root-item-specified" ],
-			],
-		)(
-			"%s",
-			async(
-				fileName,
-				rootItemIdentifier,
-			) => {
-				expect(
-					getYamlForItemOrItems(
-						await getOrCreateItemsInDirectory({
-							directory,
-							rootItemIdentifier,
-						}),
-					),
-				)
-				.toBe(
-					await readYamlFile({
-						directoryPath: directory,
-						fileName,
-					}),
-				);
-			},
+		expect(
+			getYamlForItemOrItems(
+				await getOrCreateItemsInDirectory({
+					directory:
+						rootItemIdentifierTestCasesDirectory,
+					rootItemIdentifier,
+				}),
+			),
+		)
+		.toBe(
+			await readYamlFile({
+				directoryPath: rootItemIdentifierTestCasesDirectory,
+				fileName: "expected.yaml",
+			}),
 		);
 	},
 );

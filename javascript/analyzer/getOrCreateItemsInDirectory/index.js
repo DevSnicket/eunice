@@ -18,21 +18,16 @@ const
 	readDirectory = promisify(fs.readdir);
 
 module.exports =
-	async(/** @type {import("./Parameter.d")} */{
+	(/** @type {import("./Parameter.d")} */{
 		areFilesBottomUp,
 		babelParserPlugins,
 		directory,
 		fileExtensions = [ ".js" ],
 		isCalleeIgnored,
 		ignorePathPattern,
-		rootItemIdentifier = path.basename(directory),
+		rootItemIdentifier,
 	}) => {
-		return (
-			createRootItemWhenHasIdentifier({
-				identifier: rootItemIdentifier,
-				items: await getOrCreateItemsInRoot(),
-			})
-		);
+		return getOrCreateItemsInRoot();
 
 		function getOrCreateItemsInRoot() {
 			return (
@@ -201,28 +196,6 @@ function withOptionsAndRootDirectory({
 				}
 			}
 		}
-	}
-}
-
-function createRootItemWhenHasIdentifier({
-	identifier,
-	items,
-}) {
-	return (
-		whenHasIdentifier()
-		||
-		getWhenSingle(items)
-	);
-
-	function whenHasIdentifier() {
-		return (
-			identifier
-			&&
-			createDirectoryItem({
-				identifier,
-				items,
-			})
-		);
 	}
 }
 
