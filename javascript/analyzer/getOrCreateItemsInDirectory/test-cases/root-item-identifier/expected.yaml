@@ -1,18 +1,21 @@
-- id: importParent
-  type: file
-  dependsUpon: rootItemIdentifier
-- id: importParentOfRoot
-  type: file
-  dependsUpon: ..
-- id: subdirectory
-  type: directory
-  items:
-    - id: importGrandparent
-      type: file
-      dependsUpon: rootItemIdentifier
-    - id: subdirectoryOfSubdirectory
-      type: directory
-      items:
-        id: importGreatGrandparent
+id: rootItemIdentifier
+type: directory
+items:
+  - id: importParent
+    type: file
+    dependsUpon: rootItemIdentifier
+  - id: importParentOfRoot
+    type: file
+    dependsUpon: ..
+  - id: subdirectory
+    type: directory
+    items:
+      - id: importGrandparent
         type: file
         dependsUpon: rootItemIdentifier
+      - id: subdirectoryOfSubdirectory
+        type: directory
+        items:
+          id: importGreatGrandparent
+          type: file
+          dependsUpon: rootItemIdentifier

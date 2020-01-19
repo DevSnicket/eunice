@@ -18,7 +18,7 @@ const
 	readDirectory = promisify(fs.readdir);
 
 module.exports =
-	(/** @type {import("./Parameter.d")} */{
+	async(/** @type {import("./Parameter.d")} */{
 		areFilesBottomUp,
 		babelParserPlugins,
 		directory,
@@ -27,7 +27,12 @@ module.exports =
 		ignorePathPattern,
 		rootItemIdentifier,
 	}) => {
-		return getOrCreateItemsInRoot();
+		return (
+			createRootItemWhenHasIdentifier({
+				identifier: rootItemIdentifier,
+				items: await getOrCreateItemsInRoot(),
+			})
+		);
 
 		function getOrCreateItemsInRoot() {
 			return (
@@ -199,6 +204,36 @@ function withOptionsAndRootDirectory({
 	}
 }
 
+function createRootItemWhenHasIdentifier({
+	identifier,
+	items,
+}) {
+	return (
+		whenHasIdentifier()
+		||
+		getWhenSingle(items)
+		||
+		whenHasItems()
+		||
+		null
+	);
+
+	function whenHasIdentifier() {
+		return (
+			identifier
+			&&
+			createDirectoryItem({
+				identifier,
+				items,
+			})
+		);
+	}
+
+	function whenHasItems() {
+		return items.length && items;
+	}
+}
+
 function createDirectoryItem({
 	identifier,
 	items,
@@ -209,7 +244,15 @@ function createDirectoryItem({
 			type: "directory",
 			// needs to match expected key order in YAML.
 			// eslint-disable-next-line sort-keys
-			items: getWhenSingle(items) || items,
+			...createItemsPropertyWhenAny(),
 		}
 	);
+
+	function createItemsPropertyWhenAny() {
+		return (
+			items.length
+			&&
+			{ items: getWhenSingle(items) || items }
+		);
+	}
 }

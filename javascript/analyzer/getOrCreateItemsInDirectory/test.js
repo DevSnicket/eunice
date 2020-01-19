@@ -16,6 +16,17 @@ const
 	testCasesDirectory = path.join(__dirname, "test-cases");
 
 test(
+	"Empty directory returns null",
+	async() =>
+		expect(
+			await getOrCreateItemsInDirectory(
+				{ directory: path.join(testCasesDirectory, "empty") },
+			),
+		)
+		.toBeNull(),
+);
+
+test(
 	"Invalid syntax throws error with file path",
 	async() =>
 		(
@@ -61,7 +72,22 @@ test(
 );
 
 test(
-	"Root item identifier ",
+	"Root item identifier and empty directory returns directory item",
+	async() =>
+		expect(
+			getYamlForItemOrItems(
+				await getOrCreateItemsInDirectory({
+					directory:
+						path.join(testCasesDirectory, "empty"),
+					rootItemIdentifier,
+				}),
+			),
+		)
+		.toBe("id: rootItemIdentifier\ntype: directory"),
+);
+
+test(
+	"Root item identifier used in ancestor paths",
 	async() => {
 		const rootItemIdentifierTestCasesDirectory =
 			path.join(
