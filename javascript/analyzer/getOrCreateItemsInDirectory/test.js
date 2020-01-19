@@ -1,26 +1,27 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 const
-	fs = require("fs"),
-	path = require("path"),
-	{ promisify } = require("util");
-
-const readFile = promisify(fs.readFile);
-
-const
+	fs = require("fs-extra"),
 	getOrCreateItemsInDirectory = require("."),
-	getYamlForItemOrItems = require("../getYamlForItemOrItems");
+	getYamlForItemOrItems = require("../getYamlForItemOrItems"),
+	path = require("path");
 
 const
 	rootItemIdentifier = "rootItemIdentifier",
 	testCasesDirectory = path.join(__dirname, "test-cases");
+
+const emptyTestCaseDirectory = path.join(testCasesDirectory, "empty");
+
+beforeAll(
+	() => fs.ensureDir(emptyTestCaseDirectory),
+);
 
 test(
 	"Empty directory returns null",
 	async() =>
 		expect(
 			await getOrCreateItemsInDirectory(
-				{ directory: path.join(testCasesDirectory, "empty") },
+				{ directory: emptyTestCaseDirectory },
 			),
 		)
 		.toBeNull(),
@@ -78,7 +79,7 @@ test(
 			getYamlForItemOrItems(
 				await getOrCreateItemsInDirectory({
 					directory:
-						path.join(testCasesDirectory, "empty"),
+						emptyTestCaseDirectory,
 					rootItemIdentifier,
 				}),
 			),
@@ -118,7 +119,7 @@ function readYamlFile({
 	fileName,
 }) {
 	return (
-		readFile(
+		fs.readFile(
 			path.join(directoryPath, fileName),
 			"utf-8",
 		)
