@@ -1,0 +1,3 @@
+import imported from "."
+
+imported();

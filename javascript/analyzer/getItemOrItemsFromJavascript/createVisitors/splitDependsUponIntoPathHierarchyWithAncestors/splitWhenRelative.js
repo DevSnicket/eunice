@@ -42,7 +42,12 @@ module.exports =
 					&&
 					identifierSegments
 					.reduceRight(
-						getOrCreateParentDependsUpon,
+						(itemsInHierarchy, identifierSegment) =>
+							getOrCreateParentDependsUpon({
+								identifierSegment,
+								items:
+									itemsInHierarchy,
+							}),
 						items,
 					)
 				);
@@ -52,16 +57,20 @@ module.exports =
 				return (
 					directoryPathRelative
 					&&
-					path.basename(directoryPathRelative)
+					getOrCreateParentDependsUpon({
+						identifierSegment:
+							path.basename(directoryPathRelative),
+						items,
+					})
 				);
 			}
 		}
 	};
 
-function getOrCreateParentDependsUpon(
-	items,
+function getOrCreateParentDependsUpon({
 	identifierSegment,
-) {
+	items,
+}) {
 	return (
 		identifierSegment === relativeSegment
 		?
