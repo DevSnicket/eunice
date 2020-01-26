@@ -9,29 +9,29 @@ module.exports =
 	({
 		addDeclarationsIn,
 		assignmentExpression: { left, right },
+		createPathBasedDependsUpon,
 		removeExtensionFromFilePath,
-		splitDependsUponIntoPathHierarchy,
 	}) =>
 		!hasTypeOfFunction(right)
 		&&
 		addDeclarationsIn({
 			declarations:
 				createDeclarationsWithExportIdentifierAndType({
+					createPathBasedDependsUpon,
 					identifierAndType:
 						getIdentifierAndTypeFromAssignmentLeftWhenExport(left),
 					removeExtensionFromFilePath,
 					right,
-					splitDependsUponIntoPathHierarchy,
 				}),
 			parent:
 				null,
 		});
 
 function createDeclarationsWithExportIdentifierAndType({
+	createPathBasedDependsUpon,
 	identifierAndType,
 	removeExtensionFromFilePath,
 	right,
-	splitDependsUponIntoPathHierarchy,
 }) {
 	return (
 		(!identifierAndType && [])
@@ -51,9 +51,9 @@ function createDeclarationsWithExportIdentifierAndType({
 			createDeclarationsWhenCallOfRequire({
 				callOrMemberOfCallExpression:
 					right,
+				createPathBasedDependsUpon,
 				getIsDestructuredAndVariables,
 				removeExtensionFromFilePath,
-				splitDependsUponIntoPathHierarchy,
 			})
 		);
 

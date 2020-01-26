@@ -11,16 +11,17 @@ const
 module.exports =
 	({
 		addDeclarationsIn,
+		createPathBasedDependsUpon,
 		directoryAbsolutePath,
 		getRelativeWhenFileExists,
 		modulePath,
 		parseJavascript,
-		splitDependsUponIntoPathHierarchy,
 	}) =>
 		directoryAbsolutePath
 		&&
 		addWhenHasNamedExports({
 			addDeclarationsIn,
+			createPathBasedDependsUpon,
 			directoryAbsolutePath,
 			modulePath:
 				getRelativeWhenFileExists({
@@ -30,15 +31,14 @@ module.exports =
 						modulePath,
 				}),
 			parseJavascript,
-			splitDependsUponIntoPathHierarchy,
 		});
 
 function addWhenHasNamedExports({
 	addDeclarationsIn,
 	directoryAbsolutePath,
+	createPathBasedDependsUpon,
 	modulePath,
 	parseJavascript,
-	splitDependsUponIntoPathHierarchy,
 }) {
 	if (modulePath)
 		addWhenAnyNamedExports(
@@ -81,9 +81,9 @@ function addWhenHasNamedExports({
 
 			function createDependsUpon() {
 				return (
-					splitDependsUponIntoPathHierarchy({
-						id: modulePath.withoutExtension,
+					createPathBasedDependsUpon({
 						items: namedExport,
+						path: modulePath.withoutExtension,
 					})
 				);
 			}

@@ -1,24 +1,28 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const findBlockOrIdentifiableParentInAncestors = require("../findBlockOrIdentifiableParentInAncestors");
+const
+	createIndexDependsUponWhenDirectory = require("./createIndexDependsUponWhenDirectory"),
+	findBlockOrIdentifiableParentInAncestors = require("../findBlockOrIdentifiableParentInAncestors");
 
 module.exports =
 	({
 		addDependsUponIdentifierToParent,
 		ancestors,
 		callee,
+		createPathBasedDependsUpon,
+		directoryAbsolutePath,
 		removeExtensionFromFilePath,
-		splitDependsUponIntoPathHierarchy,
 	}) =>
 		addWhenPathHasValue({
 			addDependsUponIdentifierToParent,
 			ancestors,
+			createPathBasedDependsUpon,
+			directoryAbsolutePath,
 			path:
 				getPathWhenRequireCallee(
 					callee,
 				),
 			removeExtensionFromFilePath,
-			splitDependsUponIntoPathHierarchy,
 		});
 
 function getPathWhenRequireCallee(
@@ -36,18 +40,26 @@ function getPathWhenRequireCallee(
 function addWhenPathHasValue({
 	addDependsUponIdentifierToParent,
 	ancestors,
+	createPathBasedDependsUpon,
+	directoryAbsolutePath,
 	path,
 	removeExtensionFromFilePath,
-	splitDependsUponIntoPathHierarchy,
 }) {
 	if (path)
 		addDependsUponIdentifierToParent({
 			identifier:
-				splitDependsUponIntoPathHierarchy(
-					removeExtensionFromFilePath(
-						path,
-					),
-				),
+				createPathBasedDependsUpon({
+					items:
+						createIndexDependsUponWhenDirectory({
+							directoryAbsolutePath,
+							fileOrDirectoryPath:
+								path,
+							items:
+								null,
+						}),
+					path:
+						removeExtensionFromFilePath(path),
+				}),
 			parent:
 				findBlockOrIdentifiableParentInAncestors(
 					ancestors,

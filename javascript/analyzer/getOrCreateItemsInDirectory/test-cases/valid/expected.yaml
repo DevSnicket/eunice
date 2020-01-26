@@ -93,7 +93,9 @@
   type: file
   dependsUpon:
     id: ..
-    items: ..
+    items:
+      id: ..
+      items: index
 - id: subdirectory
   type: directory
   items:
@@ -103,10 +105,14 @@
         type: export
     - id: commonjsRequireCurrentDirectoryThatIsCalled
       type: file
-      dependsUpon: subdirectory
+      dependsUpon:
+        id: subdirectory
+        items: index
     - id: commonjsRequireCurrentDirectoryWithTrailingSlashThatIsCalled
       type: file
-      dependsUpon: subdirectory
+      dependsUpon:
+        id: subdirectory
+        items: index
     - id: commonjsRequireFunctionInRootDirectoryThatIsCalled
       type: file
       dependsUpon:
@@ -131,10 +137,14 @@
               items: commonjsModuleExportsOfFunctionArrow1
         - id: commonjsRequireParentDirectoryThatIsCalled
           type: file
-          dependsUpon: subdirectory
+          dependsUpon:
+            id: subdirectory
+            items: index
         - id: commonjsRequireParentDirectoryWithTrailingSlashThatIsCalled
           type: file
-          dependsUpon: subdirectory
+          dependsUpon:
+            id: subdirectory
+            items: index
     - id: subdirectoryOfSubdirectoryWithSameNameAsFile
       type: file
       items:

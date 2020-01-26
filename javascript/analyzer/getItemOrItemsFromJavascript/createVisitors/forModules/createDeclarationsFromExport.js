@@ -5,15 +5,15 @@ require("array.prototype.flatmap")
 
 module.exports =
 	({
+		createPathBasedDependsUpon,
 		removeExtensionFromFilePath,
 		source,
 		specifiers,
-		splitDependsUponIntoPathHierarchy,
 	}) =>
 		specifiers
 		.flatMap(
-			withSplitDependsUponIntoPathHierarchy(
-				splitDependsUponIntoPathHierarchy,
+			withCreatePathBasedDependsUpon(
+				createPathBasedDependsUpon,
 			)
 			.createSelectorWhenHasSource({
 				removeExtensionFromFilePath,
@@ -23,8 +23,8 @@ module.exports =
 			createDeclarationFromSpecifierWhenFunction,
 		);
 
-function withSplitDependsUponIntoPathHierarchy(
-	splitDependsUponIntoPathHierarchy,
+function withCreatePathBasedDependsUpon(
+	createPathBasedDependsUpon,
 ) {
 	return { createSelectorWhenHasSource };
 
@@ -56,9 +56,9 @@ function withSplitDependsUponIntoPathHierarchy(
 			return (
 				{
 					dependsUpon:
-						splitDependsUponIntoPathHierarchy({
-							id: source,
+						createPathBasedDependsUpon({
 							items: local.name,
+							path: source,
 						}),
 					id:
 						exported.name,

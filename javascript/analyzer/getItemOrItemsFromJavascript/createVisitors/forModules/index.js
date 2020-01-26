@@ -9,11 +9,11 @@ const
 module.exports =
 	({
 		addDeclarationsIn,
+		createPathBasedDependsUpon,
 		directoryAbsolutePath,
 		getRelativeWhenFileExists,
 		parseJavascript,
 		removeExtensionFromFilePath,
-		splitDependsUponIntoPathHierarchy,
 	}) => {
 		return (
 			{
@@ -33,11 +33,11 @@ module.exports =
 		) {
 			addExportAll({
 				addDeclarationsIn,
+				createPathBasedDependsUpon,
 				directoryAbsolutePath,
 				getRelativeWhenFileExists,
 				modulePath: value,
 				parseJavascript,
-				splitDependsUponIntoPathHierarchy,
 			});
 		}
 
@@ -80,10 +80,10 @@ module.exports =
 			addDeclarationsIn({
 				declarations:
 					createDeclarationsFromExport({
+						createPathBasedDependsUpon,
 						removeExtensionFromFilePath,
 						source,
 						specifiers,
-						splitDependsUponIntoPathHierarchy,
 					}),
 				parent:
 					null,
@@ -97,12 +97,12 @@ module.exports =
 			addDeclarationsIn({
 				declarations:
 					createDeclarationsFromImport({
+						createPathBasedDependsUpon,
 						from:
 							removeExtensionFromFilePath(
 								source.value,
 							),
 						specifiers,
-						splitDependsUponIntoPathHierarchy,
 					}),
 				parent:
 					null,

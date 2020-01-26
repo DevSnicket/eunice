@@ -1,11 +1,14 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
+const createIndexDependsUponWhenDirectory = require("./createIndexDependsUponWhenDirectory");
+
 module.exports =
 	({
 		callOrMemberOfCallExpression,
+		createPathBasedDependsUpon,
+		directoryAbsolutePath,
 		getIsDestructuredAndVariables,
 		removeExtensionFromFilePath,
-		splitDependsUponIntoPathHierarchy,
 	}) => {
 		return (
 			createFromWhenRequire({
@@ -59,10 +62,11 @@ module.exports =
 				isRequire()
 				&&
 				create({
+					createPathBasedDependsUpon,
+					directoryAbsolutePath,
 					getOrCreateDependsUponForVariableName,
 					path:
 						getPath(),
-					splitDependsUponIntoPathHierarchy,
 					...getIsDestructuredAndVariables(),
 				})
 			);
@@ -86,10 +90,11 @@ module.exports =
 	};
 
 function create({
+	createPathBasedDependsUpon,
+	directoryAbsolutePath,
 	getOrCreateDependsUponForVariableName,
 	isDestructured,
 	path,
-	splitDependsUponIntoPathHierarchy,
 	variables,
 }) {
 	return (
@@ -99,18 +104,21 @@ function create({
 				{
 					...variable,
 					dependsUpon:
-						splitDependsUponIntoPathHierarchy(
-							getOrCreateDependsUpon({
-								identifier:
-									path,
-								items:
-									getOrCreateDependsUponForVariableName(
-										isDestructured
-										&&
-										variable.id,
-									),
-							}),
-						),
+						createPathBasedDependsUpon({
+							items:
+								createIndexDependsUponWhenDirectory({
+									directoryAbsolutePath,
+									fileOrDirectoryPath:
+										path,
+									items:
+										getOrCreateDependsUponForVariableName(
+											isDestructured
+											&&
+											variable.id,
+										),
+								}),
+							path,
+						}),
 				}
 			),
 		)

@@ -12,13 +12,13 @@ const
 	createDependsUponIdentifiers = require("./createDependsUponIdentifiers"),
 	createFileExtensionTransformer = require("./createFileExtensionTransformer"),
 	createFileItemOrItems = require("./createFileItemOrItems"),
+	createRelativeAwarePathBasedDependsUpon = require("./createRelativeAwarePathBasedDependsUpon"),
 	createScopedVariables = require("./createScopedVariables"),
 	createUndeclaredReferences = require("./createUndeclaredReferences"),
 	findBlockOrIdentifiableParentInAncestors = require("./findBlockOrIdentifiableParentInAncestors"),
 	forFunctions = require("./forFunctions"),
 	forModules = require("./forModules"),
 	getParentFromAncestors = require("./getParentFromAncestors"),
-	splitDependsUponIntoPathHierarchyWithAncestors = require("./splitDependsUponIntoPathHierarchyWithAncestors"),
 	stackItemsWhenMultiple = require("./stackItemsWhenMultiple"),
 	throwErrorWhenAnyUnhandled = require("./throwErrorWhenAnyUnhandled");
 
@@ -53,6 +53,7 @@ module.exports =
 				...forModules({
 					addDeclarationsIn:
 						declarations.addDeclarationsIn,
+					createPathBasedDependsUpon,
 					directoryAbsolutePath:
 						directoryPath
 						&&
@@ -60,7 +61,6 @@ module.exports =
 					getRelativeWhenFileExists,
 					parseJavascript,
 					removeExtensionFromFilePath,
-					splitDependsUponIntoPathHierarchy,
 				}),
 				AssignmentExpression:
 					visitAssignmentExpression,
@@ -87,8 +87,8 @@ module.exports =
 				addDeclarationsIn:
 					declarations.addDeclarationsIn,
 				assignmentExpression,
+				createPathBasedDependsUpon,
 				removeExtensionFromFilePath,
-				splitDependsUponIntoPathHierarchy,
 			});
 		}
 
@@ -125,8 +125,12 @@ module.exports =
 				ancestors,
 				callee:
 					callExpression.callee,
+				createPathBasedDependsUpon,
+				directoryAbsolutePath:
+					directoryPath
+					&&
+					directoryPath.absolute,
 				removeExtensionFromFilePath,
-				splitDependsUponIntoPathHierarchy,
 			});
 		}
 
@@ -172,9 +176,13 @@ module.exports =
 					}) =>
 						createDeclarationsWhenCallOfCommonjsRequire({
 							callOrMemberOfCallExpression,
+							createPathBasedDependsUpon,
+							directoryAbsolutePath:
+								directoryPath
+								&&
+								directoryPath.absolute,
 							getIsDestructuredAndVariables,
 							removeExtensionFromFilePath,
-							splitDependsUponIntoPathHierarchy,
 						}),
 				hasUndeclaredReferenceTo:
 					undeclaredReferences.hasReferenceTo,
@@ -186,16 +194,18 @@ module.exports =
 			});
 		}
 
-		function splitDependsUponIntoPathHierarchy(
-			dependsUpon,
-		) {
+		function createPathBasedDependsUpon({
+			items,
+			path: targetPath,
+		}) {
 			return (
-				splitDependsUponIntoPathHierarchyWithAncestors({
-					dependsUpon,
-					directoryPathRelative:
+				createRelativeAwarePathBasedDependsUpon({
+					items,
+					sourceDirectoryRelativePath:
 						directoryPath
 						&&
 						directoryPath.relative,
+					targetPath,
 				})
 			);
 		}

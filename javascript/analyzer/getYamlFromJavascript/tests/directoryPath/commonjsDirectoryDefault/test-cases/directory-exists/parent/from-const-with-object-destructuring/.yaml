@@ -1,0 +1,5 @@
+dependsUpon:
+  id: from-const-with-object-destructuring
+  items:
+    id: index
+    items: variable
