@@ -1,5 +1,0 @@
-dependsUpon:
-  id: sibling
-  items:
-    id: index
-    items: variable

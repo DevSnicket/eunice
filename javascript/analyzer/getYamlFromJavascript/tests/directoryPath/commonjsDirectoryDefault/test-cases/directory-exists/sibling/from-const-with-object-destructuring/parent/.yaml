@@ -1,0 +1,7 @@
+dependsUpon:
+  id: parent
+  items:
+    id: sibling
+    items:
+      id: index
+      items: variable

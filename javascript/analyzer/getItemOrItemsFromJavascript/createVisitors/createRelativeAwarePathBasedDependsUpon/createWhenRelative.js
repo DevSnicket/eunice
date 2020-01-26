@@ -2,49 +2,55 @@
 
 const path = require("path");
 
-const relativeSegment = ".";
-
 module.exports =
 	({
 		items,
 		sourceDirectoryRelativePath,
 		targetPathSegments,
-	}) => {
-		return (
-			targetPathSegments[0] === relativeSegment
-			&&
-			(whenAnyPathSegments() || whenHasDirectory())
+	}) =>
+		isRelativePathSegment(targetPathSegments[0])
+		&&
+		resolveFirstRelativePathSegment({
+			sourceDirectoryRelativePath,
+			targetPathSegments,
+		})
+		.reduceRight(
+			(itemsInHierarchy, pathSegment) =>
+				getOrCreateParentDependsUpon({
+					items:
+						itemsInHierarchy,
+					pathSegment,
+				}),
+			items,
 		);
 
-		function whenAnyPathSegments() {
-			return (
-				targetPathSegments.length > 1
-				&&
-				targetPathSegments
-				.reduceRight(
-					(itemsInHierarchy, pathSegment) =>
-						getOrCreateParentDependsUpon({
-							items:
-								itemsInHierarchy,
-							pathSegment,
-						}),
-					items,
-				)
-			);
-		}
+function resolveFirstRelativePathSegment({
+	sourceDirectoryRelativePath,
+	targetPathSegments,
+}) {
+	return (
+		whenHasIdentifiableParent()
+		||
+		targetPathSegments
+	);
 
-		function whenHasDirectory() {
-			return (
-				sourceDirectoryRelativePath
-				&&
-				getOrCreateParentDependsUpon({
-					items,
-					pathSegment:
-						path.basename(sourceDirectoryRelativePath),
-				})
-			);
+	function whenHasIdentifiableParent() {
+		return (
+			sourceDirectoryRelativePath
+			&&
+			replaceFirstRelativePathSegment()
+		);
+
+		function replaceFirstRelativePathSegment() {
+			const [ , ...tail ] = targetPathSegments;
+
+			return [
+				path.basename(sourceDirectoryRelativePath),
+				...tail,
+			];
 		}
-	};
+	}
+}
 
 function getOrCreateParentDependsUpon({
 	pathSegment,
@@ -60,7 +66,7 @@ function getOrCreateParentDependsUpon({
 
 	function whenRelativeSegment() {
 		return (
-			pathSegment === relativeSegment
+			isRelativePathSegment(pathSegment)
 			&&
 			items
 		);
@@ -76,4 +82,10 @@ function getOrCreateParentDependsUpon({
 			}
 		);
 	}
+}
+
+function isRelativePathSegment(
+	pathSegment,
+) {
+	return pathSegment === ".";
 }
