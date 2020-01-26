@@ -1,78 +1,106 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	getIdentifierFromAssignmentExpressionLeft = require("./getIdentifierFromAssignmentExpressionLeft"),
-	isCommonjsModuleExportProperty = require("./commonjs/isModuleExportProperty");
-
 module.exports =
-	ancestors => {
+	({
+		ancestors,
+		isIdentifiableAssignmentExpressionLeft,
+	}) => {
 		let child = null;
 
 		for (let index = ancestors.length - 2; index; index--) {
 			const parent = ancestors[index];
 
-			if (isChildIdentifiableByParent({ child, parent }))
+			if (isChildIdentifiableByParent(parent))
 				return child;
-			else if (selfIdentifiableTypes.includes(parent.type))
+			else if (isSelfIdentifiableType(parent.type))
 				return parent;
 
 			child = parent;
 		}
 
 		return null;
+
+		function isChildIdentifiableByParent(
+			parent,
+		) {
+			return (
+				withIsIdentifiableAssignmentExpressionLeft(
+					isIdentifiableAssignmentExpressionLeft,
+				)
+				.isChildIdentifiableByParent({
+					child,
+					parent,
+				})
+			);
+		}
 	};
 
-const selfIdentifiableTypes = [ "ClassProperty", "FunctionDeclaration" ];
-
-function isChildIdentifiableByParent({
-	child,
-	parent,
-}) {
-	return (
-		child
-		&&
-		functionExpressionTypes.includes(child.type)
-		&&
-		(child.body.type === "BlockStatement" || isIdentifiableParent(parent))
-	);
-}
-
-const
-	functionExpressionTypes =
-		[
-			"ArrowFunctionExpression",
-			"FunctionExpression",
-		];
-
-function isIdentifiableParent({
-	left,
+function isSelfIdentifiableType(
 	type,
-}) {
+) {
 	return (
 		[
 			"ClassProperty",
-			"ExportDefaultDeclaration",
-			"MethodDefinition",
-			"VariableDeclarator",
+			"FunctionDeclaration",
 		]
 		.includes(type)
-		||
-		whenIdentifiableAssignment()
 	);
+}
 
-	function whenIdentifiableAssignment() {
+function withIsIdentifiableAssignmentExpressionLeft(
+	isIdentifiableAssignmentExpressionLeft,
+) {
+	return { isChildIdentifiableByParent };
+
+	function isChildIdentifiableByParent({
+		child,
+		parent,
+	}) {
 		return (
-			type === "AssignmentExpression"
+			child
 			&&
-			isLeftIdentifiable()
+			isFunctionExpressionType(child.type)
+			&&
+			(child.body.type === "BlockStatement" || isIdentifiableParent(parent))
+		);
+	}
+
+	function isIdentifiableParent({
+		left,
+		type,
+	}) {
+		return (
+			[
+				"ClassProperty",
+				"ExportDefaultDeclaration",
+				"MethodDefinition",
+				"VariableDeclarator",
+			]
+			.includes(type)
+			||
+			whenIdentifiableAssignment()
 		);
 
-		function isLeftIdentifiable() {
+		function whenIdentifiableAssignment() {
 			return (
-				getIdentifierFromAssignmentExpressionLeft(left)
-				||
-				isCommonjsModuleExportProperty(left)
+				type === "AssignmentExpression"
+				&&
+				isIdentifiableAssignmentExpressionLeft(left)
 			);
 		}
 	}
+}
+
+function isFunctionExpressionType(
+	type,
+) {
+	return (
+		[
+			"ArrowFunctionExpression",
+			"FunctionExpression",
+		]
+		.includes(
+			type,
+		)
+	);
 }

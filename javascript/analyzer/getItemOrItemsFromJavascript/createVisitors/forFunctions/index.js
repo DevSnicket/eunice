@@ -2,7 +2,6 @@
 
 const
 	createDeclarationForFunction = require("./createDeclarationForFunction"),
-	findBlockOrIdentifiableParentInAncestors = require("../findBlockOrIdentifiableParentInAncestors"),
 	getIdentifierAndParentAndTypeForFunctionExpression = require("./getIdentifierAndParentAndTypeForFunctionExpression"),
 	getIdentifierAndParentAndTypeForFunctionExpressionParentWhenCommonjsExport = require("../commonjs/getIdentifierAndParentAndTypeForFunctionExpressionParentWhenExport"),
 	getIdentifierAndParentAndTypeForFunctionExpressionWhenModuleExport = require("../forModules/getIdentifierAndParentAndTypeForFunctionExpressionWhenExport"),
@@ -13,6 +12,7 @@ module.exports =
 	({
 		createDependsUponProperty,
 		declarations,
+		findBlockOrIdentifiableParentInAncestors,
 		hasUndeclaredReferenceTo,
 		sortItems,
 	}) => {
@@ -73,6 +73,7 @@ module.exports =
 					||
 					getIdentifierAndParentAndTypeForFunctionExpression({
 						ancestors,
+						findBlockOrIdentifiableParentInAncestors,
 						functionExpression,
 						parent,
 					})

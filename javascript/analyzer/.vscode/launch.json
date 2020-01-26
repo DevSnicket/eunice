@@ -31,7 +31,8 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"getYamlFromJavascript/tests"
+						"getYamlFromJavascript/tests/classFields/test.js",
+						"-t=function.with-call.arrow"
 					],
 				"disableOptimisticBPs": true,
 				"name": "getYamlFromJavascript Jest",

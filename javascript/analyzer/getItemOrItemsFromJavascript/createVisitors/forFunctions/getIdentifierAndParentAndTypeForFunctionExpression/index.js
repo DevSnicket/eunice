@@ -9,6 +9,7 @@ const
 module.exports =
 	({
 		ancestors,
+		findBlockOrIdentifiableParentInAncestors,
 		functionExpression,
 		parent,
 	}) =>
@@ -23,11 +24,13 @@ module.exports =
 		||
 		whenVariableDeclarator({
 			ancestors,
+			findBlockOrIdentifiableParentInAncestors,
 			parent,
 		})
 		||
 		whenBlock({
 			ancestors,
+			findBlockOrIdentifiableParentInAncestors,
 			functionExpression,
 			parent,
 		});

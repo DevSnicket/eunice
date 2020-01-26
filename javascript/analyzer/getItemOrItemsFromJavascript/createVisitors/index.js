@@ -15,10 +15,12 @@ const
 	createRelativeAwarePathBasedDependsUpon = require("./createRelativeAwarePathBasedDependsUpon"),
 	createScopedVariables = require("./createScopedVariables"),
 	createUndeclaredReferences = require("./createUndeclaredReferences"),
-	findBlockOrIdentifiableParentInAncestors = require("./findBlockOrIdentifiableParentInAncestors"),
+	findBlockOrIdentifiableParentInAncestorsEh = require("./findBlockOrIdentifiableParentInAncestors"),
 	forFunctions = require("./forFunctions"),
 	forModules = require("./forModules"),
+	getIdentifierFromAssignmentExpressionLeft = require("./getIdentifierFromAssignmentExpressionLeft"),
 	getParentFromAncestors = require("./getParentFromAncestors"),
+	isCommonjsModuleExportProperty = require("./commonjs/isModuleExportProperty"),
 	stackItemsWhenMultiple = require("./stackItemsWhenMultiple"),
 	throwErrorWhenAnyUnhandled = require("./throwErrorWhenAnyUnhandled");
 
@@ -46,6 +48,7 @@ module.exports =
 					createDependsUponProperty:
 						dependsUponIdentifiers.createPropertyAndRemoveIdentifiers,
 					declarations,
+					findBlockOrIdentifiableParentInAncestors,
 					hasUndeclaredReferenceTo:
 						undeclaredReferences.hasReferenceTo,
 					sortItems,
@@ -108,6 +111,7 @@ module.exports =
 						}),
 				ancestors,
 				callExpression,
+				findBlockOrIdentifiableParentInAncestors,
 				findDeclarationAndParent:
 					declarations.findDeclarationAndParent,
 				isCalleeIgnored,
@@ -130,6 +134,7 @@ module.exports =
 					directoryPath
 					&&
 					directoryPath.absolute,
+				findBlockOrIdentifiableParentInAncestors,
 				removeExtensionFromFilePath,
 			});
 		}
@@ -144,6 +149,7 @@ module.exports =
 				createDependsUponProperty:
 					dependsUponIdentifiers.createPropertyAndRemoveIdentifiers,
 				declarations,
+				findBlockOrIdentifiableParentInAncestors,
 			});
 		}
 
@@ -206,6 +212,21 @@ module.exports =
 						&&
 						directoryPath.relative,
 					targetPath,
+				})
+			);
+		}
+
+		function findBlockOrIdentifiableParentInAncestors(
+			ancestors,
+		) {
+			return (
+				findBlockOrIdentifiableParentInAncestorsEh({
+					ancestors,
+					isIdentifiableAssignmentExpressionLeft:
+						left =>
+							getIdentifierFromAssignmentExpressionLeft(left)
+							||
+							isCommonjsModuleExportProperty(left),
 				})
 			);
 		}

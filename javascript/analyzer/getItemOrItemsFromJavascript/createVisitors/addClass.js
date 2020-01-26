@@ -2,7 +2,6 @@
 
 const
 	createItemsProperty = require("./createItemsProperty"),
-	findBlockOrIdentifiableParentInAncestors = require("./findBlockOrIdentifiableParentInAncestors"),
 	getParentFromAncestors = require("./getParentFromAncestors");
 
 module.exports =
@@ -15,6 +14,7 @@ module.exports =
 				addDeclarationIn,
 				createItemsForAndRemoveDeclarationsIn,
 			},
+		findBlockOrIdentifiableParentInAncestors,
 	}) =>
 		addWhenAnyProperties({
 			addDeclarationIn,
@@ -38,6 +38,7 @@ module.exports =
 						),
 					),
 				},
+			findBlockOrIdentifiableParentInAncestors,
 		});
 
 function createIdentifierProperty({
@@ -73,6 +74,7 @@ function addWhenAnyProperties({
 	addDeclarationIn,
 	ancestors,
 	declaration,
+	findBlockOrIdentifiableParentInAncestors,
 }) {
 	if (Object.entries(declaration).length)
 		addDeclarationIn({

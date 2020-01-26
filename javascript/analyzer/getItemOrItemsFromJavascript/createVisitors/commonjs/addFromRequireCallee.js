@@ -1,8 +1,6 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createIndexDependsUponWhenDirectory = require("./createIndexDependsUponWhenDirectory"),
-	findBlockOrIdentifiableParentInAncestors = require("../findBlockOrIdentifiableParentInAncestors");
+const createIndexDependsUponWhenDirectory = require("./createIndexDependsUponWhenDirectory");
 
 module.exports =
 	({
@@ -11,6 +9,7 @@ module.exports =
 		callee,
 		createPathBasedDependsUpon,
 		directoryAbsolutePath,
+		findBlockOrIdentifiableParentInAncestors,
 		removeExtensionFromFilePath,
 	}) =>
 		addWhenPathHasValue({
@@ -18,6 +17,7 @@ module.exports =
 			ancestors,
 			createPathBasedDependsUpon,
 			directoryAbsolutePath,
+			findBlockOrIdentifiableParentInAncestors,
 			path:
 				getPathWhenRequireCallee(
 					callee,
@@ -42,6 +42,7 @@ function addWhenPathHasValue({
 	ancestors,
 	createPathBasedDependsUpon,
 	directoryAbsolutePath,
+	findBlockOrIdentifiableParentInAncestors,
 	path,
 	removeExtensionFromFilePath,
 }) {

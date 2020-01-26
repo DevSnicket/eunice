@@ -5,7 +5,6 @@ require("array.prototype.flatmap")
 
 const
 	addArgumentsToNestedCallMap = require("./addArgumentsToNestedCallMap"),
-	findBlockOrIdentifiableParentInAncestors = require("../findBlockOrIdentifiableParentInAncestors"),
 	getIdentifierNameFromAndAddOrUpdateReferenceOfParent = require("./getIdentifierNameFromAndAddOrUpdateReferenceOfParent"),
 	getNameFromCallee = require("./getNameFromCallee"),
 	isCalleeIgnoredDefault = require("./isCalleeIgnoredDefault"),
@@ -17,6 +16,7 @@ module.exports =
 		addUndeclaredReference,
 		ancestors,
 		callExpression,
+		findBlockOrIdentifiableParentInAncestors,
 		findDeclarationAndParent,
 		isCalleeIgnored = isCalleeIgnoredDefault,
 		isVariableInBlockScoped,
