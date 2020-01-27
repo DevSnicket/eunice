@@ -1,5 +1,4 @@
-/* Copyright (c) 2018 Graham Dyson. All Rights Reserved.
-Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
+// Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 // istanbul ignore file: test would be a mirror of implementation
 

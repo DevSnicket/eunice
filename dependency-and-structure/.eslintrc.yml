@@ -9,7 +9,7 @@ parserOptions:
   ecmaFeatures:
     impliedStrict: true
   ecmaVersion:
-    2018
+    2020
 plugins:
   - notice
 rules:
@@ -273,12 +273,10 @@ rules:
   notice/notice:
     - error
     - mustMatch: |+
-        /\* Copyright \(c\) [0-9]{4} Graham Dyson\. All Rights Reserved\.
-        Licensed under the MIT license. See LICENSE file in the repository root for full license information. \*/
+        // Copyright \(c\) [0-9]{4} Graham Dyson\. All Rights Reserved\. Unauthorized copying of this file, via any medium is strictly prohibited\. Proprietary and confidential\.
         
       template: |+
-        /* Copyright (c) <%= YEAR %> Graham Dyson. All Rights Reserved.
-        Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
+        // Copyright (c) <%= YEAR %> Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
         
   object-curly-newline:
     - error

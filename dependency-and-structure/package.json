@@ -46,7 +46,7 @@
 		"unice",
 		"yaml"
 	],
-	"license": "MIT",
+	"license": "SEE LICENSE IN LICENSE",
 	"main": "index.js",
 	"name": "@devsnicket/eunice-dependency-and-structure",
 	"publishConfig": {
@@ -63,5 +63,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec cspell {} +",
 		"test": "npx jest --runInBand"
 	},
-	"version": "2.20.0"
+	"version": "3.0.0"
 }
