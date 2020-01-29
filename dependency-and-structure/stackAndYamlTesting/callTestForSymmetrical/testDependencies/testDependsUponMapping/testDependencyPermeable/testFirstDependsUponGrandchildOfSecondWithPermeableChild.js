@@ -5,13 +5,16 @@ const
 	createStackFromLevels = require("../../../../createStackFromLevels");
 
 module.exports =
-	test =>
-		test({
-			stack:
+	/** @type {import("../../../Parameter.d")} */
+	({
+		getActual,
+		getExpected,
+		getName,
+	}) => {
+		const
+			stack =
 				createStack(),
-			stackDescription:
-				"first depends upon grandchild of second with permeable child",
-			yaml:
+			yaml =
 				[
 					createItemYaml({
 						dependsUpon: "grandchildOfSecond",
@@ -29,8 +32,23 @@ module.exports =
 								items: "grandchildOfSecond",
 							}),
 					}),
-				],
-		});
+				];
+
+		test(
+			getName({
+				stackDescription:
+					"first depends upon grandchild of second with permeable child",
+				yaml,
+			}),
+			() =>
+				expect(
+					getActual({ stack, yaml }),
+				)
+				.toEqual(
+					getExpected({ stack, yaml }),
+				),
+		);
+	};
 
 function createStack() {
 	const stack =

@@ -4,16 +4,17 @@ const
 	callTestForSymmetrical = require("../../stackAndYamlTesting/callTestForSymmetrical"),
 	createStackFromYaml = require("..");
 
-callTestForSymmetrical(
-	({
-		stack,
-		stackDescription,
-		yaml,
-	}) =>
-		test(
+callTestForSymmetrical({
+	getActual:
+		({ yaml }) =>
+			createStackFromYaml(yaml),
+	getExpected:
+		({ stack }) =>
+			stack,
+	getName:
+		({
+			stackDescription,
+			yaml,
+		}) =>
 			`${JSON.stringify(yaml)} return "${stackDescription}"`,
-			() =>
-				expect(createStackFromYaml(yaml))
-				.toEqual(stack),
-		),
-);
+});

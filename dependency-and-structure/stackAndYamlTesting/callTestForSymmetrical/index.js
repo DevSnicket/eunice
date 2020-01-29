@@ -10,14 +10,15 @@ const
 	testDependencies = require("./testDependencies");
 
 module.exports =
-	test => {
+	/** @type {import("./Parameter.d")} */
+	stackAndYamlTest => {
 		describe(
 			"symmetrical",
 			() => {
-				createTestCasesWithSimpleLevels()
+				createSimpleLevelsTestCases()
 				.forEach(testSideWithSimpleLevels);
 
-				testDependencies(test);
+				testDependencies(stackAndYamlTest);
 			},
 		);
 
@@ -27,15 +28,19 @@ module.exports =
 		}) {
 			const stack = createStackFromLevels(levels);
 
-			test({
-				stack,
-				stackDescription: formatStackForDescription(stack),
-				yaml,
-			});
+			test(
+				stackAndYamlTest.getName({
+					stackDescription: formatStackForDescription(stack),
+					yaml,
+				}),
+				() =>
+					expect(stackAndYamlTest.getActual({ stack, yaml }))
+					.toEqual(stackAndYamlTest.getExpected({ stack, yaml })),
+			);
 		}
 	};
 
-function createTestCasesWithSimpleLevels() {
+function createSimpleLevelsTestCases() {
 	return (
 		[
 			{

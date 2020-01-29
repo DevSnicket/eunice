@@ -24,30 +24,31 @@ const
 	testFirstDependsUponTwoMissingGrandchildrenInTwoMissingChildInSecond = require("./testFirstDependsUponTwoMissingGrandchildrenInTwoMissingChildInSecond");
 
 module.exports =
-	test =>
+	/** @type {import("../../Parameter.d")} */
+	stackAndYamlTest =>
 		describe(
 			"depends upon mapping",
 			() => {
-				testDependencyPermeable(test);
-				testDependsUponMissingChildInMissingParent(test);
-				testDependsUponMissingGrandchildInMissingChildInMissingParent(test);
-				testDependsUponMissingGreatGrandchildInMssingGrandchildInMissingChildInMissingParent(test);
-				testDependsUponTwoMissingChildrenInMissingParent(test);
-				testFirstDependsUponChildAndMissingChildInSecond(test);
-				testFirstDependsUponChildInSecond(test);
-				testFirstDependsUponChildInSecondAndSecond(test);
-				testFirstDependsUponGrandchildInSecond(test);
-				testFirstDependsUponGrandchildInSecondAndChildInSecond(test);
-				testFirstDependsUponMissingChildInSecond(test);
-				testFirstDependsUponMissingChildInSecondAndSecond(test);
-				testFirstDependsUponMissingGrandchildInMissingChildInSecond(test);
-				testFirstDependsUponMissingGrandchildInSecond(test);
-				testFirstDependsUponMissingGreatGrandchildInMissingGrandchildInMissingChildInSecond(test);
-				testFirstDependsUponTwoChildrenInSecond(test);
-				testFirstDependsUponTwoChildrenInSecondAndSecond(test);
-				testFirstDependsUponTwoGrandchildrenInChildInSecond(test);
-				testFirstDependsUponTwoGrandchildrenInTwoChildrenInSecond(test);
-				testFirstDependsUponTwoMissingGrandchildrenInTwoChildrenInSecond(test);
-				testFirstDependsUponTwoMissingGrandchildrenInTwoMissingChildInSecond(test);
+				testDependencyPermeable(stackAndYamlTest);
+				testDependsUponMissingChildInMissingParent(stackAndYamlTest);
+				testDependsUponMissingGrandchildInMissingChildInMissingParent(stackAndYamlTest);
+				testDependsUponMissingGreatGrandchildInMssingGrandchildInMissingChildInMissingParent(stackAndYamlTest);
+				testDependsUponTwoMissingChildrenInMissingParent(stackAndYamlTest);
+				testFirstDependsUponChildAndMissingChildInSecond(stackAndYamlTest);
+				testFirstDependsUponChildInSecond(stackAndYamlTest);
+				testFirstDependsUponChildInSecondAndSecond(stackAndYamlTest);
+				testFirstDependsUponGrandchildInSecond(stackAndYamlTest);
+				testFirstDependsUponGrandchildInSecondAndChildInSecond(stackAndYamlTest);
+				testFirstDependsUponMissingChildInSecond(stackAndYamlTest);
+				testFirstDependsUponMissingChildInSecondAndSecond(stackAndYamlTest);
+				testFirstDependsUponMissingGrandchildInMissingChildInSecond(stackAndYamlTest);
+				testFirstDependsUponMissingGrandchildInSecond(stackAndYamlTest);
+				testFirstDependsUponMissingGreatGrandchildInMissingGrandchildInMissingChildInSecond(stackAndYamlTest);
+				testFirstDependsUponTwoChildrenInSecond(stackAndYamlTest);
+				testFirstDependsUponTwoChildrenInSecondAndSecond(stackAndYamlTest);
+				testFirstDependsUponTwoGrandchildrenInChildInSecond(stackAndYamlTest);
+				testFirstDependsUponTwoGrandchildrenInTwoChildrenInSecond(stackAndYamlTest);
+				testFirstDependsUponTwoMissingGrandchildrenInTwoChildrenInSecond(stackAndYamlTest);
+				testFirstDependsUponTwoMissingGrandchildrenInTwoMissingChildInSecond(stackAndYamlTest);
 			},
 		);

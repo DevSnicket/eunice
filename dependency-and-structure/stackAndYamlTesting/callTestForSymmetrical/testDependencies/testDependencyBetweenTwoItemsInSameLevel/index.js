@@ -5,11 +5,12 @@ const
 	testSecondDependsUponFirst = require("./testSecondDependsUponFirst");
 
 module.exports =
-	test =>
+	/** @type {import("../../Parameter.d")} */
+	stackAndYamlTest =>
 		describe(
 			"dependency in same level",
 			() => {
-				testFirstDependsUponSecond(test);
-				testSecondDependsUponFirst(test);
+				testFirstDependsUponSecond(stackAndYamlTest);
+				testSecondDependsUponFirst(stackAndYamlTest);
 			},
 		);

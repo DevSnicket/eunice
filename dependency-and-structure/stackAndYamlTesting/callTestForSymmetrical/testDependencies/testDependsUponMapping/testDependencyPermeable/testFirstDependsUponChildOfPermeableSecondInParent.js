@@ -5,13 +5,16 @@ const
 	createStackFromLevels = require("../../../../createStackFromLevels");
 
 module.exports =
-	test =>
-		test({
-			stack:
+	/** @type {import("../../../Parameter.d")} */
+	({
+		getActual,
+		getExpected,
+		getName,
+	}) => {
+		const
+			stack =
 				createStack(),
-			stackDescription:
-				"first depends upon child of permeable second in parent",
-			yaml:
+			yaml =
 				createItemYaml({
 					id:
 						"parent",
@@ -32,8 +35,23 @@ module.exports =
 								items: "childOfSecond",
 							}),
 						],
-				}),
-		});
+				});
+
+		test(
+			getName({
+				stackDescription:
+					"first depends upon child of permeable second in parent",
+				yaml,
+			}),
+			() =>
+				expect(
+					getActual({ stack, yaml }),
+				)
+				.toEqual(
+					getExpected({ stack, yaml }),
+				),
+		);
+	};
 
 function createStack() {
 	const stack =

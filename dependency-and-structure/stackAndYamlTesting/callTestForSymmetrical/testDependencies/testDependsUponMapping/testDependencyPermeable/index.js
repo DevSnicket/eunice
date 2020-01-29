@@ -9,15 +9,16 @@ const
 	testFirstDependsUponSameIdentifierAsGrandchild = require("./testFirstDependsUponSameIdentifierAsGrandchild");
 
 module.exports =
-	test =>
+	/** @type {import("../../../Parameter.d")} */
+	stackAndYamlTest =>
 		describe(
 			"dependency permeable",
 			() => {
-				testFirstDependsUponChildOfPermeableSecondInParent(test);
-				testFirstDependsUponChildOfSecond(test);
-				testFirstDependsUponGrandchildOfPermeableChildOfPermeableSecondInParent(test);
-				testFirstDependsUponGrandchildOfPermeableInChildOfSecondInParent(test);
-				testFirstDependsUponGrandchildOfSecondWithPermeableChild(test);
-				testFirstDependsUponSameIdentifierAsGrandchild(test);
+				testFirstDependsUponChildOfPermeableSecondInParent(stackAndYamlTest);
+				testFirstDependsUponChildOfSecond(stackAndYamlTest);
+				testFirstDependsUponGrandchildOfPermeableChildOfPermeableSecondInParent(stackAndYamlTest);
+				testFirstDependsUponGrandchildOfPermeableInChildOfSecondInParent(stackAndYamlTest);
+				testFirstDependsUponGrandchildOfSecondWithPermeableChild(stackAndYamlTest);
+				testFirstDependsUponSameIdentifierAsGrandchild(stackAndYamlTest);
 			},
 		);

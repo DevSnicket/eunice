@@ -5,21 +5,39 @@ const
 	createStackAndGetFirstAndSecond = require("./createStackAndGetFirstAndSecond");
 
 module.exports =
-	test =>
-		test({
-			stack:
+	/** @type {import("../../Parameter.d")} */
+	({
+		getActual,
+		getExpected,
+		getName,
+	}) => {
+		const
+			stack =
 				createStack(),
-			stackDescription:
-				"first depends upon second",
-			yaml:
+			yaml =
 				[
 					createItemYaml({
 						dependsUpon: "second",
 						id: "first",
 					}),
 					"second",
-				],
-		});
+				];
+
+		test(
+			getName({
+				stackDescription:
+					"first depends upon second",
+				yaml,
+			}),
+			() =>
+				expect(
+					getActual({ stack, yaml }),
+				)
+				.toEqual(
+					getExpected({ stack, yaml }),
+				),
+		);
+	};
 
 function createStack() {
 	const { first, second, stack } = createStackAndGetFirstAndSecond();

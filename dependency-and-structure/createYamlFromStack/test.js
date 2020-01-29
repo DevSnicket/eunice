@@ -7,17 +7,18 @@ const
 describe(
 	"createYamlFromStack",
 	() =>
-		callTestForSymmetrical(
-			({
-				stack,
-				stackDescription,
-				yaml,
-			}) =>
-				test(
+		callTestForSymmetrical({
+			getActual:
+				({ stack }) =>
+					createYamlFromStack(stack),
+			getExpected:
+				({ yaml }) =>
+					yaml,
+			getName:
+				({
+					stackDescription,
+					yaml,
+				}) =>
 					`"${stackDescription}" returns ${JSON.stringify(yaml)}`,
-					() =>
-						expect(createYamlFromStack(stack))
-						.toEqual(yaml),
-				),
-		),
+		}),
 );
