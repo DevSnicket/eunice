@@ -7,50 +7,42 @@ module.exports =
 		items,
 		sourceDirectoryRelativePath,
 		targetPathSegments,
-	}) =>
-		isRelativePathSegment(targetPathSegments[0])
-		&&
-		resolveFirstRelativePathSegment({
-			sourceDirectoryRelativePath,
-			targetPathSegments,
-		})
-		.reduceRight(
-			(itemsInHierarchy, pathSegment) =>
-				getOrCreateParentDependsUpon({
-					items:
-						itemsInHierarchy,
-					pathSegment,
-				}),
-			items,
-		);
-
-function resolveFirstRelativePathSegment({
-	sourceDirectoryRelativePath,
-	targetPathSegments,
-}) {
-	return (
-		whenHasIdentifiableParent()
-		||
-		targetPathSegments
-	);
-
-	function whenHasIdentifiableParent() {
+	}) => {
 		return (
-			sourceDirectoryRelativePath
+			isRelativePathSegment(targetPathSegments[0])
 			&&
-			replaceFirstRelativePathSegment()
+			(whenAnyPathSegments() || whenIsParent())
 		);
 
-		function replaceFirstRelativePathSegment() {
-			const [ , ...tail ] = targetPathSegments;
-
-			return [
-				path.basename(sourceDirectoryRelativePath),
-				...tail,
-			];
+		function whenAnyPathSegments() {
+			return (
+				targetPathSegments.length > 1
+				&&
+				targetPathSegments
+				.reduceRight(
+					(itemsInHierarchy, pathSegment) =>
+						getOrCreateParentDependsUpon({
+							items:
+								itemsInHierarchy,
+							pathSegment,
+						}),
+					items,
+				)
+			);
 		}
-	}
-}
+
+		function whenIsParent() {
+			return (
+				sourceDirectoryRelativePath
+				&&
+				getOrCreateParentDependsUpon({
+					items,
+					pathSegment:
+						path.basename(sourceDirectoryRelativePath),
+				})
+			);
+		}
+	};
 
 function getOrCreateParentDependsUpon({
 	pathSegment,

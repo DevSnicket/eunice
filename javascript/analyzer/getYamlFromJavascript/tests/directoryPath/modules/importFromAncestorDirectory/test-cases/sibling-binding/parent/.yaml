@@ -1,5 +1,3 @@
 dependsUpon:
-  id: parent
-  items:
-    id: sibling
-    items: imported
+  id: sibling
+  items: imported
