@@ -9,6 +9,7 @@ module.exports =
 	({
 		ancestor,
 		dependUponItems,
+		dependent,
 	}) => {
 		return (
 			createWhenNone()
@@ -44,6 +45,7 @@ module.exports =
 				findItemInAncestors({
 					ancestors: [ ancestor ],
 					dependUponItem,
+					dependent,
 				})
 			);
 		}

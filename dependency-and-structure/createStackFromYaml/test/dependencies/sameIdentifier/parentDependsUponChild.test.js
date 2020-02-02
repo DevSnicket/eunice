@@ -32,13 +32,19 @@ function createStack() {
 			sameIdentifier,
 		);
 
-	parent.dependsUpon =
-		[ {
-			item: parent,
-			itemOrFirstAncestorItem: parent,
-		} ];
-
-	parent.dependents = [ parent ];
+	addDependencies();
 
 	return stack;
+
+	function addDependencies() {
+		const child = parent.items[0][0];
+
+		parent.dependsUpon =
+			[ {
+				item: child,
+				itemOrFirstAncestorItem: child,
+			} ];
+
+		child.dependents = [ parent ];
+	}
 }

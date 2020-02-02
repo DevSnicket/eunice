@@ -40,10 +40,10 @@ function createStack() {
 
 		child.dependsUpon =
 			[ {
-				item: child,
-				itemOrFirstAncestorItem: child,
+				item: parent,
+				itemOrFirstAncestorItem: parent,
 			} ];
 
-		child.dependents = [ child ];
+		parent.dependents = [ child ];
 	}
 }

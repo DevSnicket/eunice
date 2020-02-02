@@ -46,6 +46,8 @@ function initializeDependenciesInStack(
 							dependUpon.id,
 						),
 					dependUpon,
+					dependent:
+						item,
 				})
 			);
 
@@ -83,13 +85,12 @@ function initializeDependenciesInStack(
 				identifier,
 			) {
 				return (
-					item.id === identifier
-					?
-					item
-					:
 					findItemWithIdentifierFromStack({
+						dependent:
+							item,
 						identifier,
-						stack: item.items || stack,
+						stack:
+							item.items || stack,
 					})
 				);
 			}

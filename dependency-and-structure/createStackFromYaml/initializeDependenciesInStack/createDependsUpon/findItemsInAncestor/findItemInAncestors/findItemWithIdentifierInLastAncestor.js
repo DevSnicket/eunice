@@ -9,15 +9,15 @@ require("array.prototype.flatmap")
 module.exports =
 	({
 		ancestors,
-		identifier,
+		isItem,
 	}) => {
 		const lastAncestor = ancestors[0];
 
 		return (
 			lastAncestor.items
 			&&
-			withIdentifier(
-				identifier,
+			withIsItem(
+				isItem,
 			)
 			.findInItemsAndPermeableDescendants(
 				lastAncestor.items.flat(),
@@ -25,8 +25,8 @@ module.exports =
 		);
 	};
 
-function withIdentifier(
-	identifier,
+function withIsItem(
+	isItem,
 ) {
 	return { findInItemsAndPermeableDescendants };
 
@@ -42,7 +42,7 @@ function withIdentifier(
 		);
 
 		function findInItems() {
-			return items.find(item => item.id === identifier);
+			return items.find(isItem);
 		}
 
 		function getItemsOfItemsWhenDependencyPermeable() {

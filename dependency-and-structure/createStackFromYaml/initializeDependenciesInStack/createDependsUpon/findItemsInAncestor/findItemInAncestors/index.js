@@ -15,17 +15,20 @@ module.exports = findInAncestors;
 
 function findInAncestors({
 	ancestors,
+	dependent,
 	dependUponItem,
 }) {
 	return (
 		whenIdentifier({
 			ancestors,
 			dependUponItem,
+			dependent,
 		})
 		||
 		whenItemFound({
 			ancestors,
 			dependUponItem,
+			dependent,
 			findInAncestors,
 		})
 		||

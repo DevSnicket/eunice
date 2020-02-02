@@ -6,40 +6,59 @@ module.exports =
 	({
 		ancestors,
 		dependUponItem,
+		dependent,
 		findInAncestors,
 	}) => {
-		const item =
-			findItemWithIdentifierInLastAncestor({
-				ancestors,
-				identifier: dependUponItem.id,
-			});
+		return (
+			fromItemsWhenAny(
+				findItemWithIdentifierInLastAncestor({
+					ancestors,
+					isItem,
+				}),
+			)
+		);
 
-		return item && fromItems();
-
-		function fromItems() {
+		function isItem(
+			item,
+		) {
 			return (
-				whenArray()
-				||
-				createDependsUponFromChildItem(dependUponItem.items)
+				item.id === dependUponItem.id
+				&&
+				item !== dependent
 			);
+		}
 
-			function whenArray() {
-				return (
-					Array.isArray(dependUponItem.items)
-					&&
-					dependUponItem.items.flatMap(createDependsUponFromChildItem)
-				);
-			}
+		function fromItemsWhenAny(
+			item,
+		) {
+			return item && fromItems();
 
-			function createDependsUponFromChildItem(
-				childItem,
-			) {
+			function fromItems() {
 				return (
-					findInAncestors({
-						ancestors: [ item, ...ancestors ],
-						dependUponItem: childItem,
-					})
+					whenArray()
+					||
+					createDependsUponFromChildItem(dependUponItem.items)
 				);
+
+				function whenArray() {
+					return (
+						Array.isArray(dependUponItem.items)
+						&&
+						dependUponItem.items.flatMap(createDependsUponFromChildItem)
+					);
+				}
+
+				function createDependsUponFromChildItem(
+					childItem,
+				) {
+					return (
+						findInAncestors({
+							ancestors: [ item, ...ancestors ],
+							dependUponItem: childItem,
+							dependent,
+						})
+					);
+				}
 			}
 		}
 	};

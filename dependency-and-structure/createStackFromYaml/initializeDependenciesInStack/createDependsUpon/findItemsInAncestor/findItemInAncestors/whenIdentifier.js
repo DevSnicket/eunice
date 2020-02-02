@@ -6,6 +6,7 @@ module.exports =
 	({
 		ancestors,
 		dependUponItem,
+		dependent,
 	}) => {
 		return (
 			typeof dependUponItem === "string"
@@ -17,7 +18,7 @@ module.exports =
 			const item =
 				findItemWithIdentifierInLastAncestor({
 					ancestors,
-					identifier: dependUponItem,
+					isItem,
 				});
 
 			return (
@@ -29,6 +30,16 @@ module.exports =
 					itemOrFirstAncestorItem:
 						item,
 				}
+			);
+		}
+
+		function isItem(
+			item,
+		) {
+			return (
+				item.id === dependUponItem
+				&&
+				item !== dependent
 			);
 		}
 

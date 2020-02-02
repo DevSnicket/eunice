@@ -11,6 +11,7 @@ module.exports =
 	({
 		ancestor,
 		dependUpon,
+		dependent,
 	}) => {
 		return (
 			findItemsWhenHasAncestor()
@@ -25,6 +26,7 @@ module.exports =
 				findItemsInAncestor({
 					ancestor,
 					dependUponItems: dependUpon.items,
+					dependent,
 				})
 			);
 		}

@@ -7,14 +7,20 @@ const findInDescendantsOfItems = require("./findInDescendantsOfItems");
 
 module.exports =
 	({
+		dependent,
 		identifier,
 		stack,
 	}) =>
-		withIdentifier(identifier)
+		withIsItem(
+			item =>
+				item.id === identifier
+				&&
+				item !== dependent,
+		)
 		.findItemInStack(stack);
 
-function withIdentifier(
-	identifier,
+function withIsItem(
+	isItem,
 ) {
 	return { findItemInStack };
 
@@ -46,7 +52,7 @@ function withIdentifier(
 
 		function getWhenParent() {
 			return (
-				parent.id === identifier
+				isItem(parent)
 				&&
 				parent
 			);
@@ -60,6 +66,6 @@ function withIdentifier(
 	function findItems(
 		items,
 	) {
-		return items.find(item => item.id === identifier);
+		return items.find(isItem);
 	}
 }
