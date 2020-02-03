@@ -77,7 +77,19 @@ module.exports =
 							ancestors,
 							name: identifier,
 						})
+						&&
+						!isSelf()
 					);
+
+					function isSelf() {
+						return (
+							parent
+							&&
+							parent.id
+							&&
+							identifier === parent.id.name
+						);
+					}
 				}
 			}
 		}
