@@ -2,17 +2,11 @@
 
 /* istanbul ignore file: test would be a mirror of implementation */
 const
-	replaceDependsUpon = require("./replaceDependsUpon"),
-	replaceDependsUponWithHierarchyFromSeparator = require("./replaceDependsUpon/withHierarchyFromSeparator"),
-	replaceIdentifiers = require("./replaceIdentifiers"),
 	replaceIdentifiersAndItems = require("./replaceIdentifiersAndItems"),
 	replaceIdentifiersAndItemsAndLevelsAndStacks = require("./replaceIdentifiersAndItemsAndLevelsAndStacks");
 
 module.exports =
 	{
-		replaceDependsUpon,
-		replaceDependsUponWithHierarchyFromSeparator,
-		replaceIdentifiers,
 		replaceIdentifiersAndItems,
 		replaceIdentifiersAndItemsAndLevelsAndStacks,
 	};

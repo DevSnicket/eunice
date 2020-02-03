@@ -2,23 +2,11 @@
 
 /* istanbul ignore file: test would be a mirror of implementation */
 const
-	createLinearHierarchyFromIdentifierSeparator = require("./createLinearHierarchyFromIdentifierSeparator"),
-	groupItemsByIdentifierSeparator = require("./groupItemsByIdentifierSeparator"),
-	removeRedundantParentIdentifierPrefix = require("./removeRedundantParentIdentifierPrefix"),
 	replacement = require("./replacement"),
-	setTypeOfRootItems = require("./setTypeOfRootItems"),
-	sorting = require("./sorting"),
-	stacking = require("./stacking"),
-	unstackIndependent = require("./unstackIndependent");
+	stacking = require("./stacking");
 
 module.exports =
 	{
-		createLinearHierarchyFromIdentifierSeparator,
-		groupItemsByIdentifierSeparator,
-		removeRedundantParentIdentifierPrefix,
 		replacement,
-		setTypeOfRootItems,
-		sorting,
 		stacking,
-		unstackIndependent,
 	};

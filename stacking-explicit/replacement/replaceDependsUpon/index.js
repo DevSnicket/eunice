@@ -2,18 +2,18 @@
 
 module.exports =
 	({
-		getDependsUponReplacement,
 		identifierOrItemOrLevelOrStack,
+		replace,
 	}) =>
-		withGetDependsUponReplacement(
-			getDependsUponReplacement,
+		withReplace(
+			replace,
 		)
 		.getIdentifierOrReplaceItemOrItemsInLevelOrStack(
 			identifierOrItemOrLevelOrStack,
 		);
 
-function withGetDependsUponReplacement(
-	getDependsUponReplacement,
+function withReplace(
+	replace,
 ) {
 	return { getIdentifierOrReplaceItemOrItemsInLevelOrStack };
 
@@ -88,7 +88,7 @@ function withGetDependsUponReplacement(
 	function createPropertyFromDependsUpon(
 		dependsUpon,
 	) {
-		const replacement = getDependsUponReplacement(dependsUpon);
+		const replacement = replace(dependsUpon);
 
 		return (
 			replacement

@@ -11,43 +11,6 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"createLinearHierarchyFromIdentifierSeparator/test.js"
-					],
-				"disableOptimisticBPs": true,
-				"name": "createLinearHierarchyFromIdentifierSeparator jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[
-						"--items=",
-						"--identifierSeparator="
-					],
-				"name": "groupItemsByIdentifierSeparator",
-				"program": "${workspaceFolder}/groupItemsByIdentifierSeparator/bin.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
-						"groupItemsByIdentifierSeparator/test.js"
-					],
-				"disableOptimisticBPs": true,
-				"name": "groupItemsByIdentifierSeparator jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
 						"replacement/replaceIdentifiersAndItems/test.js"
 					],
 				"disableOptimisticBPs": true,
@@ -65,54 +28,6 @@
 					],
 				"disableOptimisticBPs": true,
 				"name": "replaceIdentifiersAndItemsAndLevelsAndStacks jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[
-						"--identifierSeparator=",
-						"--items="
-					],
-				"name": "removeRedundantParentIdentifierPrefix",
-				"program": "${workspaceFolder}/removeRedundantParentIdentifierPrefix/bin.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
-						"removeRedundantParentIdentifierPrefix/test.js"
-					],
-				"disableOptimisticBPs": true,
-				"name": "removeRedundantParentIdentifierPrefix jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[
-						"--identifierSeparator=",
-						"--items=",
-					],
-				"name": "replaceDependsUponWithHierarchiesOfIdentifierSeparator",
-				"program": "${workspaceFolder}/replaceDependsUponWithHierarchiesOfIdentifierSeparator/bin.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
-						"replaceDependsUponWithHierarchiesOfIdentifierSeparator/test.js",
-					],
-				"disableOptimisticBPs": true,
-				"name": "replaceDependsUponWithHierarchiesOfIdentifierSeparator jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node"
@@ -139,78 +54,6 @@
 					],
 				"disableOptimisticBPs": true,
 				"name": "replaceIdentifiers jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[
-						"--items=",
-						"--type=",
-					],
-				"name": "setTypeOfRootItems",
-				"program": "${workspaceFolder}/setTypeOfRootItems/bin.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[
-						"--items=",
-					],
-				"name": "sorting orderItemsByIdentifier",
-				"program": "${workspaceFolder}/sorting/orderItemsByIdentifier/bin.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
-						"sorting/orderItemsByIdentifier/test.js"
-					],
-				"disableOptimisticBPs": true,
-				"name": "sorting orderItemsByIdentifier jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[
-						"--collect-coverage=false",
-						"--runInBand",
-						"sorting/orderItemsByIndex/test.js"
-					],
-				"disableOptimisticBPs": true,
-				"name": "sorting orderItemsByIndex jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[
-						"--items=",
-						"--typesInOrder=",
-						"--typesInOrder=",
-					],
-				"name": "sorting orderItemsByIndexOfType",
-				"program": "${workspaceFolder}/sorting/orderItemsByIndexOfType/bin.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
-						"sorting/orderItemsByIndexOfType/test.js"
-					],
-				"disableOptimisticBPs": true,
-				"name": "sorting orderItemsByIndexOfType jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node"
