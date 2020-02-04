@@ -8,28 +8,45 @@ const
 module.exports =
 	({
 		addNewInTarget = true,
-		items,
+		identifierOrItemOrLevelOrStack,
 		keysAndPatterns,
 		targetLevelOrStack,
 	}) =>
 		replaceIdentifiersAndItemsAndLevelsAndStacks({
-			identifierOrItemOrLevelOrStack:
-				items,
+			identifierOrItemOrLevelOrStack,
 			replace:
-				({
-					ancestors,
-					identifierOrItemOrLevelOrStack,
-				}) =>
-					hasParentInAncestors({
-						ancestors,
-						keysAndPatterns,
-					})
-					?
-					createStackWhenIdentifierOrItemOrLevelOrAddWhenStack({
-						addNewInTarget,
-						identifierOrItemOrLevelOrStack,
-						targetLevelOrStack,
-					})
-					:
-					identifierOrItemOrLevelOrStack,
+				withContext({
+					addNewInTarget,
+					keysAndPatterns,
+					targetLevelOrStack,
+				})
+				.replace,
 		});
+
+function withContext({
+	addNewInTarget,
+	keysAndPatterns,
+	targetLevelOrStack,
+}) {
+	return { replace };
+
+	function replace({
+		ancestors,
+		identifierOrItemOrLevelOrStack,
+	}) {
+		return (
+			hasParentInAncestors({
+				ancestors,
+				keysAndPatterns,
+			})
+			?
+			createStackWhenIdentifierOrItemOrLevelOrAddWhenStack({
+				addNewInTarget,
+				identifierOrItemOrLevelOrStack,
+				targetLevelOrStack,
+			})
+			:
+			identifierOrItemOrLevelOrStack
+		);
+	}
+}

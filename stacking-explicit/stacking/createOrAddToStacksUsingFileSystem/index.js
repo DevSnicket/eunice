@@ -9,36 +9,52 @@ module.exports =
 	({
 		addNewInTarget = true,
 		directory,
-		items,
+		identifierOrItemOrLevelOrStack,
 		stackFileName,
 		subsetIdentifierHierarchy,
 	}) =>
 		replaceIdentifiersAndItemsAndLevelsAndStacks({
-			identifierOrItemOrLevelOrStack:
-				items,
+			identifierOrItemOrLevelOrStack,
 			replace:
-				({
-					ancestors,
-					identifierOrItemOrLevelOrStack,
-				}) => {
-					const targetLevelOrStack =
-						getTargetLevelOrStackForAncestorsAndDirectory({
-							ancestors,
-							directory,
-							stackFileName,
-							subsetIdentifierHierarchy,
-						});
-
-					return (
-						targetLevelOrStack
-						?
-						createStackWhenIdentifierOrItemOrLevelOrAddWhenStack({
-							addNewInTarget,
-							identifierOrItemOrLevelOrStack,
-							targetLevelOrStack,
-						})
-						:
-						identifierOrItemOrLevelOrStack
-					);
-				},
+				withContext({
+					addNewInTarget,
+					directory,
+					stackFileName,
+					subsetIdentifierHierarchy,
+				})
+				.replace,
 		});
+
+function withContext({
+	addNewInTarget,
+	directory,
+	stackFileName,
+	subsetIdentifierHierarchy,
+}) {
+	return { replace };
+
+	function replace({
+		ancestors,
+		identifierOrItemOrLevelOrStack,
+	}) {
+		const targetLevelOrStack =
+			getTargetLevelOrStackForAncestorsAndDirectory({
+				ancestors,
+				directory,
+				stackFileName,
+				subsetIdentifierHierarchy,
+			});
+
+		return (
+			targetLevelOrStack
+			?
+			createStackWhenIdentifierOrItemOrLevelOrAddWhenStack({
+				addNewInTarget,
+				identifierOrItemOrLevelOrStack,
+				targetLevelOrStack,
+			})
+			:
+			identifierOrItemOrLevelOrStack
+		);
+	}
+}

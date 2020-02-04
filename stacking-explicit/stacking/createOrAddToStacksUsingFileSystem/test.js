@@ -20,7 +20,7 @@ test(
 						testCasesDirectory,
 						"directoryWithStack",
 					),
-				items:
+				identifierOrItemOrLevelOrStack:
 					[
 						{ id: "parent" },
 						{ id: "directoryWithStack" },
@@ -50,7 +50,7 @@ test(
 						testCasesDirectory,
 						"directoryWithStackOfSubdirectoryWithStackMovedIntoChildren",
 					),
-				items:
+				identifierOrItemOrLevelOrStack:
 					{
 						id:
 							"subdirectoryWithStack",
