@@ -1,7 +1,7 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 const
-	inferStacks = require("."),
+	inferStacks = require(".."),
 	{
 		safeDump: formatYaml,
 		safeLoad: parseYaml,

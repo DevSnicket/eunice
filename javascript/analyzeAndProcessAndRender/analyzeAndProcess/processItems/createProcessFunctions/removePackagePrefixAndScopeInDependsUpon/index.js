@@ -7,7 +7,7 @@ const
 
 module.exports =
 	({
-		items,
+		identifierOrItemOrLevelOrStack,
 		prefix,
 		scope,
 	}) => {
@@ -16,7 +16,7 @@ module.exports =
 			||
 			whenHasPrefix()
 			||
-			items
+			identifierOrItemOrLevelOrStack
 		);
 
 		function whenHasScope() {
@@ -24,7 +24,8 @@ module.exports =
 				scope
 				&&
 				replaceDependsUpon({
-					getDependsUponReplacement:
+					identifierOrItemOrLevelOrStack,
+					replace:
 						dependsUpon =>
 							replaceItemsOfDependsUponWithIdentifier({
 								dependsUpon,
@@ -37,8 +38,6 @@ module.exports =
 											prefix,
 										}),
 							}),
-					identifierOrItemOrLevelOrStack:
-						items,
 				})
 			);
 		}
@@ -48,12 +47,12 @@ module.exports =
 				prefix
 				&&
 				replaceDependsUpon({
-					getDependsUponReplacement,
-					identifierOrItemOrLevelOrStack: items,
+					identifierOrItemOrLevelOrStack,
+					replace,
 				})
 			);
 
-			function getDependsUponReplacement(
+			function replace(
 				dependsUpon,
 			) {
 				return (

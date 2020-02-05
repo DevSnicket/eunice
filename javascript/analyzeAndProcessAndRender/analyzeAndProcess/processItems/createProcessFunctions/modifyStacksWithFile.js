@@ -15,65 +15,89 @@ const
 module.exports =
 	({
 		filePath,
-		items,
+		identifierOrItemOrLevelOrStack,
 		key,
 		pattern,
 	}) => {
-		return whenSpecified() || items;
+		return whenSpecified() || identifierOrItemOrLevelOrStack;
 
 		function whenSpecified() {
 			return (
 				filePath
 				&&
-				withTarget(
-					parseYaml(
-						readFileSync(
-							filePath,
-							"utf-8",
-						),
+				withTargetLevelOrStack(
+					readTargetYaml(),
+				)
+				.modifyStacks({
+					identifierOrItemOrLevelOrStack,
+					key,
+					pattern,
+				})
+			);
+		}
+
+		function readTargetYaml() {
+			return (
+				parseYaml(
+					readFileSync(
+						filePath,
+						"utf-8",
 					),
 				)
 			);
-
-			function withTarget(
-				targetLevelOrStack,
-			) {
-				const addNewInTarget = false;
-
-				return whenHasKeyAndPattern() || uniformly();
-
-				function whenHasKeyAndPattern() {
-					return (
-						key && pattern
-						&&
-						createOrAddToStacksOfParentMatch({
-							addNewInTarget,
-							items,
-							keysAndPatterns:
-								[ {
-									key,
-									pattern,
-								} ],
-							targetLevelOrStack,
-						})
-					);
-				}
-
-				function uniformly() {
-					return (
-						replaceIdentifiersAndItemsAndLevelsAndStacks({
-							identifierOrItemOrLevelOrStack:
-								items,
-							replace:
-								({ identifierOrItemOrLevelOrStack }) =>
-									createStackWhenIdentifierOrItemOrLevelOrAddWhenStack({
-										addNewInTarget,
-										identifierOrItemOrLevelOrStack,
-										targetLevelOrStack,
-									}),
-						})
-					);
-				}
-			}
 		}
 	};
+
+function withTargetLevelOrStack(
+	targetLevelOrStack,
+) {
+	const addNewInTarget = false;
+
+	return { modifyStacks };
+
+	function modifyStacks({
+		identifierOrItemOrLevelOrStack,
+		key,
+		pattern,
+	}) {
+		return whenHasKeyAndPattern() || uniformly();
+
+		function whenHasKeyAndPattern() {
+			return (
+				key && pattern
+				&&
+				createOrAddToStacksOfParentMatch({
+					addNewInTarget,
+					identifierOrItemOrLevelOrStack,
+					keysAndPatterns:
+						[ {
+							key,
+							pattern,
+						} ],
+					targetLevelOrStack,
+				})
+			);
+		}
+
+		function uniformly() {
+			return (
+				replaceIdentifiersAndItemsAndLevelsAndStacks({
+					identifierOrItemOrLevelOrStack,
+					replace: modifyStack,
+				})
+			);
+		}
+	}
+
+	function modifyStack(
+		{ identifierOrItemOrLevelOrStack },
+	) {
+		return (
+			createStackWhenIdentifierOrItemOrLevelOrAddWhenStack({
+				addNewInTarget,
+				identifierOrItemOrLevelOrStack,
+				targetLevelOrStack,
+			})
+		);
+	}
+}

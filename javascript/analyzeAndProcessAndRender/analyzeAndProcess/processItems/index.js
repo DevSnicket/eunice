@@ -6,22 +6,18 @@ module.exports =
 	({
 		dependencyPermeableIdentifiers,
 		directoryToCreateOrAddToStacksFrom,
-		identifierSeparator,
-		isFileContentReversed,
+		identifierOrItemOrLevelOrStack,
 		isInferStacksEnabled,
-		items,
 		modifyStacksFile,
 		packagePrefixAndScope,
 		rootItemIdentifier,
 	}) =>
 		invokeProcessFunctions({
-			items,
+			identifierOrItemOrLevelOrStack,
 			processFunctions:
 				createProcessFunctions({
 					dependencyPermeableIdentifiers,
 					directoryToCreateOrAddToStacksFrom,
-					identifierSeparator,
-					isFileContentReversed,
 					isInferStacksEnabled,
 					modifyStacksFile,
 					packagePrefixAndScope,
@@ -30,14 +26,14 @@ module.exports =
 		});
 
 function invokeProcessFunctions({
-	items,
+	identifierOrItemOrLevelOrStack,
 	processFunctions,
 }) {
 	return (
 		processFunctions.reduce(
-			(itemsAggregation, processFunction) =>
-				processFunction(itemsAggregation),
-			items,
+			(identifierOrItemOrLevelOrStackAggregation, processFunction) =>
+				processFunction(identifierOrItemOrLevelOrStackAggregation),
+			identifierOrItemOrLevelOrStack,
 		)
 	);
 }

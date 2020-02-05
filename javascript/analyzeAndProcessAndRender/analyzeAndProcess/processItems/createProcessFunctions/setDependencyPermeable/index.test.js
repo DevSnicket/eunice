@@ -5,27 +5,27 @@ const setDependencyPermeable = require(".");
 test.each(
 	[
 		[
-			{ items: null },
+			{ identifierOrItemOrLevelOrStack: null },
 			null,
 		],
 		[
 			{
 				dependencyPermeableIdentifiers: [],
-				items: null,
+				identifierOrItemOrLevelOrStack: null,
 			},
 			null,
 		],
 		[
 			{
 				dependencyPermeableIdentifiers: [ ],
-				items: "identifier",
+				identifierOrItemOrLevelOrStack: "identifier",
 			},
 			"identifier",
 		],
 		[
 			{
 				dependencyPermeableIdentifiers: [ "identifier" ],
-				items: "identifier",
+				identifierOrItemOrLevelOrStack: "identifier",
 			},
 			{
 				dependencyPermeable: true,
@@ -35,7 +35,7 @@ test.each(
 		[
 			{
 				dependencyPermeableIdentifiers: [ "identifier" ],
-				items: { id: "identifier" },
+				identifierOrItemOrLevelOrStack: { id: "identifier" },
 			},
 			{
 				dependencyPermeable: true,
@@ -48,14 +48,14 @@ test.each(
 	(
 		{
 			dependencyPermeableIdentifiers,
-			items,
+			identifierOrItemOrLevelOrStack,
 		},
 		expected,
 	) =>
 		expect(
 			setDependencyPermeable({
 				dependencyPermeableIdentifiers,
-				items,
+				identifierOrItemOrLevelOrStack,
 			}),
 		)
 		.toEqual(expected),

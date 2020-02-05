@@ -17,7 +17,7 @@
       - fs-extra
       - id: jest
         dependencyPermeable: true
-        items: [ describe, expect ]
+        items: [ describe, expect, test ]
       - js-yaml
       - minimist
       - monaco-editor

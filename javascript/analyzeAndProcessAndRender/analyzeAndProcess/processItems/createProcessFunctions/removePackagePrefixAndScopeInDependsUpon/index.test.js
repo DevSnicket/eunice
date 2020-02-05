@@ -7,7 +7,7 @@ test(
 	() =>
 		expect(
 			removePackagePrefixAndScopeInDependsUpon({
-				items: null,
+				identifierOrItemOrLevelOrStack: null,
 				prefix: null,
 				scope: null,
 			}),
@@ -20,17 +20,17 @@ test(
 test(
 	"Prefix and scope of null returns item.",
 	() => {
-		const items = {};
+		const identifierOrItemOrLevelOrStack = {};
 
 		expect(
 			removePackagePrefixAndScopeInDependsUpon({
-				items,
+				identifierOrItemOrLevelOrStack,
 				prefix: null,
 				scope: null,
 			}),
 		)
 		.toBe(
-			items,
+			identifierOrItemOrLevelOrStack,
 		);
 	},
 );
@@ -42,7 +42,7 @@ test(
 
 		expect(
 			removePackagePrefixAndScopeInDependsUpon({
-				items:
+				identifierOrItemOrLevelOrStack:
 					{
 						dependsUpon:
 							{
@@ -73,7 +73,7 @@ test(
 
 		expect(
 			removePackagePrefixAndScopeInDependsUpon({
-				items:
+				identifierOrItemOrLevelOrStack:
 					[
 						{
 							dependsUpon:

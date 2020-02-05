@@ -5,12 +5,12 @@ const { replacement: { replaceIdentifiersAndItems } } = require("@devsnicket/eun
 module.exports =
 	({
 		dependencyPermeableIdentifiers,
-		items,
+		identifierOrItemOrLevelOrStack,
 	}) => {
 		return (
 			whenHasIdentifiers()
 			||
-			items
+			identifierOrItemOrLevelOrStack
 		);
 
 		function whenHasIdentifiers() {
@@ -21,7 +21,7 @@ module.exports =
 					dependencyPermeableIdentifiers,
 				)
 				.setDependencyPermeable(
-					items,
+					identifierOrItemOrLevelOrStack,
 				)
 			);
 		}

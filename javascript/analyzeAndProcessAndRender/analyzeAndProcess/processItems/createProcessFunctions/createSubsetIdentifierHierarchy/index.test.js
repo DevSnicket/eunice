@@ -3,11 +3,11 @@
 const createSubsetIdentifierHierarchy = require(".");
 
 test(
-	"Items of null returns rootItemIdentifier in array.",
+	"identifierOrItemOrLevelOrStack of null returns rootItemIdentifier in array.",
 	() =>
 		expect(
 			createSubsetIdentifierHierarchy({
-				items: null,
+				identifierOrItemOrLevelOrStack: null,
 				rootItemIdentifier: "rootItemIdentifier",
 			}),
 		)
@@ -21,12 +21,12 @@ test(
 	() =>
 		expect(
 			createSubsetIdentifierHierarchy({
-				items: {},
+				identifierOrItemOrLevelOrStack: {},
 				rootItemIdentifier: null,
 			}),
 		)
 		.toEqual(
-			// the items id property wont be defined
+			// the identifierOrItemOrLevelOrStack id property wont be defined
 			// eslint-disable-next-line no-undefined
 			[ undefined ],
 		),
@@ -37,7 +37,7 @@ test(
 	() =>
 		expect(
 			createSubsetIdentifierHierarchy({
-				items: { id: "identifier" },
+				identifierOrItemOrLevelOrStack: { id: "identifier" },
 				rootItemIdentifier: null,
 			}),
 		)

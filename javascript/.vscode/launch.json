@@ -38,7 +38,6 @@
 					"--directory-to-create-or-add-to-stacks-from=dogfooding",
 					"--include-service-workers=true",
 					"--ignore-path-pattern=(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$",
-					"--modify-stacks-file=dogfooding/modify-file-stacks.yaml",
 					"--modify-stacks-key=type",
 					"--modify-stacks-pattern=^file$",
 					"--output-base-file-name=index",
@@ -71,7 +70,6 @@
 					"--directory-to-create-or-add-to-stacks-from=dogfooding",
 					"--include-service-workers=true",
 					"--ignore-path-pattern=(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$",
-					"--modify-stacks-file=dogfooding/modify-file-stacks.yaml",
 					"--modify-stacks-key=type",
 					"--modify-stacks-pattern=^file$",
 					"--output-base-file-name=index",
@@ -101,8 +99,7 @@
 			"args":
 				[
 					"--collect-coverage=false",
-					"--runInBand",
-					"-t=All processors except flatten single root item when has only items and type"
+					"--runInBand"
 				],
 			"disableOptimisticBPs": true,
 			"name": "Jest",

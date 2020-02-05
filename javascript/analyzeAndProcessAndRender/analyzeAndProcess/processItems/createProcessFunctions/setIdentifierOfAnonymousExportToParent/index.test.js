@@ -118,12 +118,12 @@ test.each(
 )(
 	"%j returns %j",
 	(
-		items,
+		identifierOrItemOrLevelOrStack,
 		expected,
 	) =>
 		expect(
 			setIdentifierOfAnonymousToParent(
-				items,
+				identifierOrItemOrLevelOrStack,
 			),
 		)
 		.toEqual(expected),

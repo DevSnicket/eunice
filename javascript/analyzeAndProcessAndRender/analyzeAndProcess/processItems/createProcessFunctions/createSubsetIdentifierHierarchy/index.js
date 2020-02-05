@@ -1,21 +1,19 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const isSingleAnonymous = require("../isSingleAnonymous");
-
 module.exports =
 	({
-		items,
+		identifierOrItemOrLevelOrStack,
 		rootItemIdentifier,
 	}) => {
 		return (
-			whenHasRootItem()
+			whenHasRootSpecified()
 			||
 			whenSingleAnonymous()
 			||
 			null
 		);
 
-		function whenHasRootItem() {
+		function whenHasRootSpecified() {
 			return (
 				rootItemIdentifier
 				&&
@@ -25,11 +23,19 @@ module.exports =
 
 		function whenSingleAnonymous() {
 			return (
-				isSingleAnonymous(items)
+				isSingleAnonymous()
 				&&
 				// the items id property wont be defined
 				// eslint-disable-next-line no-undefined
 				[ undefined ]
 			);
+
+			function isSingleAnonymous() {
+				return (
+					!Array.isArray(identifierOrItemOrLevelOrStack)
+					&&
+					!identifierOrItemOrLevelOrStack.id
+				);
+			}
 		}
 	};

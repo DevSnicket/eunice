@@ -4,12 +4,11 @@ const { replacement: { replaceIdentifiersAndItems } } = require("@devsnicket/eun
 
 module.exports =
 	({
-		items,
+		identifierOrItemOrLevelOrStack,
 		type,
 	}) =>
 		replaceIdentifiersAndItems({
-			identifierOrItemOrLevelOrStack:
-				items,
+			identifierOrItemOrLevelOrStack,
 			replace:
 				({ identifierOrItem }) =>
 					removeSelfDependentOfTypes({

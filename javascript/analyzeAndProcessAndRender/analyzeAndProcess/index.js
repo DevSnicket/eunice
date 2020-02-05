@@ -4,7 +4,6 @@ const
 	analyzer = require("@devsnicket/eunice-javascript-analyzer"),
 	babelParserPluginsDefault = require("../../babelParserPluginsDefault"),
 	{ stacking: { createOrAddToStacksUsingFileSystem } } = require("@devsnicket/eunice-processors"),
-	path = require("path"),
 	processItems = require("./processItems");
 
 module.exports =
@@ -42,29 +41,28 @@ module.exports =
 			directory,
 			rootItemIdentifier,
 		}) {
-			const items =
+			const identifierOrItemOrLevelOrStack =
 				await analyzer.getOrCreateItemsInDirectory({
+					areFilesBottomUp: isFileContentReversed,
 					babelParserPlugins,
 					directory,
 					fileExtensions,
 					ignorePathPattern,
+					rootItemIdentifier,
 				});
 
 			return processWhenAnyItems() || [];
 
 			function processWhenAnyItems() {
 				return (
-					items.length
+					identifierOrItemOrLevelOrStack
 					&&
 					processItems({
 						dependencyPermeableIdentifiers,
 						directoryToCreateOrAddToStacksFrom:
 							directory,
-						identifierSeparator:
-							path.sep,
-						isFileContentReversed,
+						identifierOrItemOrLevelOrStack,
 						isInferStacksEnabled,
-						items,
 						modifyStacksFile,
 						packagePrefixAndScope,
 						rootItemIdentifier,
@@ -74,17 +72,17 @@ module.exports =
 		}
 
 		function createOrAddToStacks(
-			items,
+			identifierOrItemOrLevelOrStack,
 		) {
 			return (
 				directoryToCreateOrAddToStacksFrom
 				?
 				createOrAddToStacksUsingFileSystem({
 					directory: directoryToCreateOrAddToStacksFrom,
-					items,
+					identifierOrItemOrLevelOrStack,
 				})
 				:
-				items
+				identifierOrItemOrLevelOrStack
 			);
 		}
 	};

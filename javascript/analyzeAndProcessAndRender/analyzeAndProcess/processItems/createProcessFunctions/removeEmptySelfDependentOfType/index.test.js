@@ -59,10 +59,10 @@ test.each(
 	],
 )(
 	"%j items returns %j",
-	(items, expected) =>
+	(identifierOrItemOrLevelOrStack, expected) =>
 		expect(
 			removeEmptySelfDependentOfType({
-				items,
+				identifierOrItemOrLevelOrStack,
 				type: "type",
 			}),
 		)
