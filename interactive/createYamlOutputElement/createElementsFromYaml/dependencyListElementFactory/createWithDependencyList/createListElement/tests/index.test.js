@@ -3,10 +3,10 @@
 const
 	{ createElement } = require("react"),
 	{ renderToStaticMarkup } = require("react-dom/server"),
-	createListElement = require("../createListElement"),
+	createListElement = require("../../createListElement"),
 	path = require("path"),
-	readTextFile = require("../../../../../readTextFile"),
-	removeWhitespaceFromTestExpected = require("../removeWhitespaceFromTestExpected");
+	readTextFile = require("../../../../../../readTextFile"),
+	removeWhitespaceFromTestExpected = require("../../removeWhitespaceFromTestExpected");
 
 test(
 	"child items with depends upon",
@@ -84,7 +84,7 @@ test(
 		.toEqual(
 			removeWhitespaceFromTestExpected(
 				await readTextFile(
-					path.join(__dirname, "testCase.html"),
+					path.join(__dirname, "test-case.html"),
 				),
 			),
 		),

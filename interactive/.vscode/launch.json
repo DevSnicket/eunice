@@ -69,7 +69,7 @@
 			"args":
 				[ 
 					"--runInBand",
-					"createYamlOutputElement/createElementsFromYaml/test/test.js"
+					"createYamlOutputElement/createElementsFromYaml/tests/test.js"
 				],
 			"disableOptimisticBPs": true,
 			"name": "createYamlOutputElement jest",
@@ -99,7 +99,7 @@
 			"args":
 				[ 
 					"--runInBand",
-					"writeHarness/test/test.js"
+					"writeHarness/tests/test.js"
 				],
 			"disableOptimisticBPs": true,
 			"name": "writeHarness jest",

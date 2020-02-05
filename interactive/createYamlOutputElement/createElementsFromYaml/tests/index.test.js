@@ -2,10 +2,10 @@
 
 const
 	{ createElement } = require("react"),
-	createElementsFromYaml = require("."),
+	createElementsFromYaml = require(".."),
 	{ createHashFromLocation } = require("@devsnicket/eunice-test-harnesses"),
 	path = require("path"),
-	readTextFile = require("../../readTextFile"),
+	readTextFile = require("../../../readTextFile"),
 	{ renderToStaticMarkup } = require("react-dom/server");
 
 const breadcrumbHtmlForRoot = "<div><a href=\"#\">root</a></div>";
@@ -221,7 +221,7 @@ async function testTestCase({
 			expectedHtmlPrefix
 			+
 			await readTextFile(
-				path.join(__dirname, "testCases", expectedFile),
+				path.join(__dirname, "test-cases", expectedFile),
 			),
 		),
 	);

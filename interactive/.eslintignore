@@ -1,4 +1,4 @@
 /dist/
 /tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output/
 /tests/example/output/
-/writeHarness/test/output
+/writeHarness/tests/output
