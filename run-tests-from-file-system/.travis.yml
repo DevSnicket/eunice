@@ -3,9 +3,9 @@ cache:
     - node_modules
 deploy:
   api_key: $NPM_TOKEN
+  edge: true
   email: grahamdyson@hotmail.com
   provider: npm
-  skip_cleanup: true
 install: 
   - npm install
 language: node_js
@@ -15,6 +15,7 @@ notifications:
   email:
     on_success: never
     on_failure: always
+os: linux
 script:
   - npm run all
   - mkdir -p test-coverage && npm install --no-save --prefix test-coverage coveralls@3.0.1 && cat test-coverage/lcov.info | test-coverage/node_modules/coveralls/bin/coveralls.js
