@@ -2,8 +2,8 @@
 
 const
 	fs = require("fs-extra"),
-	getOrCreateItemsInDirectory = require("."),
-	getYamlForItemOrItems = require("../getYamlForItemOrItems"),
+	getOrCreateItemsInDirectory = require(".."),
+	getYamlForItemOrItems = require("../../getYamlForItemOrItems"),
 	path = require("path");
 
 const
