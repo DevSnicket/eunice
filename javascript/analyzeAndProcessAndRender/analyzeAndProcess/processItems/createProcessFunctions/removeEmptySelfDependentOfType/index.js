@@ -5,7 +5,7 @@ const { replacement: { replaceIdentifiersAndItems } } = require("@devsnicket/eun
 module.exports =
 	({
 		identifierOrItemOrLevelOrStack,
-		type,
+		types,
 	}) =>
 		replaceIdentifiersAndItems({
 			identifierOrItemOrLevelOrStack,
@@ -13,13 +13,13 @@ module.exports =
 				({ identifierOrItem }) =>
 					removeSelfDependentOfTypes({
 						identifierOrItem,
-						type,
+						types,
 					}),
 		});
 
 function removeSelfDependentOfTypes({
 	identifierOrItem,
-	type,
+	types,
 }) {
 	return (
 		isOfTypeAndSelfDependent()
@@ -31,7 +31,7 @@ function removeSelfDependentOfTypes({
 
 	function isOfTypeAndSelfDependent() {
 		return (
-			identifierOrItem.type === type
+			types.includes(identifierOrItem.type)
 			&&
 			isEmptyAndSelfDependent(identifierOrItem)
 		);

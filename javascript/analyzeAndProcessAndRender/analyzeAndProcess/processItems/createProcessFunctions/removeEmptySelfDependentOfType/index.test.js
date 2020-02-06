@@ -63,7 +63,7 @@ test.each(
 		expect(
 			removeEmptySelfDependentOfType({
 				identifierOrItemOrLevelOrStack,
-				type: "type",
+				types: [ "type" ],
 			}),
 		)
 		.toEqual(expected),

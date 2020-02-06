@@ -107,5 +107,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dogfooding/output/**\" ! -path \"./dist/*\" ! -path \"./gh-pages/**\" ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest --runInBand"
 	},
-	"version": "7.1.0"
+	"version": "7.2.0"
 }

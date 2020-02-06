@@ -24,7 +24,7 @@ module.exports =
 			identifierOrItemOrLevelOrStack =>
 				removeEmptySelfDependentOfType({
 					identifierOrItemOrLevelOrStack,
-					type: "variable",
+					types: [ "export", "import", "variable" ],
 				}),
 			identifierOrItemOrLevelOrStack =>
 				modifyStacksWithFile({
@@ -43,11 +43,6 @@ module.exports =
 						}),
 				}),
 			setIdentifierOfAnonymousExportToParent,
-			identifierOrItemOrLevelOrStack =>
-				removeEmptySelfDependentOfType({
-					identifierOrItemOrLevelOrStack,
-					type: "export",
-				}),
 			unstackIndependent,
 			identifierOrItemOrLevelOrStack =>
 				removePackagePrefixAndScopeInDependsUpon({
