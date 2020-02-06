@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 7.2.0 on 2020-02-06T12:21:23.816Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 7.2.1 on 2020-02-06T13:41:24.241Z
 - - id: javascript
     type: directory
     items:
@@ -3608,9 +3608,6 @@
                       type: file
                       items:
                         - - id: getNamesFromDestructureOrIdentifier
-                            type: export
-                            dependsUpon: getNamesFromDestructureOrIdentifier
-                        - - id: getNamesFromDestructureOrIdentifier
                             dependsUpon:
                               - getNamesWhenRest
                               - whenArray
@@ -3822,9 +3819,6 @@
                         - - id: readDirectoryPathRecursive
                             type: file
                             items:
-                              - - id: readDirectoryPathRecursive
-                                  type: export
-                                  dependsUpon: readDirectoryPathRecursive
                               - - id: readDirectoryPathRecursive
                                   dependsUpon: readdir
                                   items:
@@ -4467,18 +4461,15 @@
                                             - id: getItemIdentifierHierarchy
                                               type: file
                                               items:
-                                                - - id: getItemIdentifierHierarchy
-                                                    type: export
-                                                    dependsUpon: getItemIdentifierHierarchy
-                                                - - id: getItemIdentifierHierarchy
-                                                    dependsUpon: getAncestorsWhenHasParent
-                                                    items:
-                                                      - - id: getAncestorsWhenHasParent
-                                                          dependsUpon:
-                                                            - getItemIdentifierHierarchy
-                                                            - parent
-                                                      - - id: parent
-                                                          type: parameter
+                                                id: getItemIdentifierHierarchy
+                                                dependsUpon: getAncestorsWhenHasParent
+                                                items:
+                                                  - - id: getAncestorsWhenHasParent
+                                                      dependsUpon:
+                                                        - getItemIdentifierHierarchy
+                                                        - parent
+                                                  - - id: parent
+                                                      type: parameter
                                     - - id: createSubsetOfItem
                                         type: directory
                                         items:
@@ -6517,9 +6508,6 @@
                             type: file
                             items:
                               - - id: countDependenciesOfItemAndDescendants
-                                  type: export
-                                  dependsUpon: countDependenciesOfItemAndDescendants
-                              - - id: countDependenciesOfItemAndDescendants
                                   dependsUpon:
                                     - countDependenciesOfItem
                                     - countDependenciesOfItems
@@ -7567,36 +7555,33 @@
                               - - id: createFromIdentifiers
                                   type: file
                                   items:
-                                    - - id: createFromIdentifiers
-                                        type: export
-                                        dependsUpon: createFromIdentifiers
-                                    - - id: createFromIdentifiers
-                                        dependsUpon: createWhenItems
-                                        items:
-                                          - - id: createWhenItems
-                                              dependsUpon:
-                                                - createFromItem
-                                                - items
-                                                - whenArray
-                                              items:
-                                                - - id: whenArray
-                                                    dependsUpon:
-                                                      - createFromItem
-                                                      - items
-                                                - - id: createFromItem
-                                                    dependsUpon:
-                                                      - whenString
-                                                      - withSubItems
-                                                    items:
-                                                      - - whenString
-                                                        - id: withSubItems
-                                                          dependsUpon:
-                                                            - createFromIdentifiers
-                                                            - item
-                                                      - - id: item
-                                                          type: parameter
-                                          - - id: items
-                                              type: parameter
+                                    id: createFromIdentifiers
+                                    dependsUpon: createWhenItems
+                                    items:
+                                      - - id: createWhenItems
+                                          dependsUpon:
+                                            - createFromItem
+                                            - items
+                                            - whenArray
+                                          items:
+                                            - - id: whenArray
+                                                dependsUpon:
+                                                  - createFromItem
+                                                  - items
+                                            - - id: createFromItem
+                                                dependsUpon:
+                                                  - whenString
+                                                  - withSubItems
+                                                items:
+                                                  - - whenString
+                                                    - id: withSubItems
+                                                      dependsUpon:
+                                                        - createFromIdentifiers
+                                                        - item
+                                                  - - id: item
+                                                      type: parameter
+                                      - - id: items
+                                          type: parameter
                           - id: findItemWithIdentifierFromStack
                             type: directory
                             items:
@@ -7778,9 +7763,6 @@
                                   type: file
                                   items:
                                     - - id: createParent
-                                        type: export
-                                        dependsUpon: createParent
-                                    - - id: createParent
                                         items:
                                           - - id: add
                                               dependsUpon: identifiers
@@ -7901,9 +7883,6 @@
                   - - id: generateAncestors
                       type: file
                       items:
-                        - - id: generateAncestors
-                            type: export
-                            dependsUpon: generateAncestors
                         - - id: generateAncestors
                             dependsUpon: getParents
                         - - id: getParents
@@ -8938,9 +8917,6 @@
                     - id: createStackFromLevels
                       type: file
                       items:
-                        - - id: createStackFromLevels
-                            type: export
-                            dependsUpon: createStackFromLevels
                         - - id: createStackFromLevels
                             dependsUpon:
                               - createLevel
