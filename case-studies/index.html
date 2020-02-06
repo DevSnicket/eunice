@@ -76,7 +76,6 @@ cd react-eunice</code>
         <p>You will be prompted to accept a EULA. Eunice is free to use on open source projects, and its free to use for education and training. Therefore contributions to React and following along with this case study both qualify. There is also an evaluation period to try Eunice out on closed source commercial software.</p>
         <div class="horizontal-menu">
             <a href="#syntax">syntax</a>
-            <a href="#file-order">file order</a>
             <a href="#codebase-conventions">codebase conventions</a>
             <a href="#directory-specific">directory specific</a>
             <a href="#groups">groups</a>
@@ -119,23 +118,6 @@ Unexpected token, expected ";" (14:5)</code>
         <p>An example of software that’s close to having only unidirectional dependencies is Eunice itself, you can see this by looking at its <a href="https://en.wikipedia.org/wiki/Eating_your_own_dog_food" target="_blank">dogfooding</a>:</p>
         <img src="../dogfooding/index.svg" style="background: white; padding: 0.5em;" />
         <p>You can interact with Eunice's dogfooding <a href="../dogfooding" target="_blank">here</a>.</p>
-        <h3 id="file-order">file order</h3>
-        <p>Eunice can infer stacks, in JavaScript this includes the order within a file. In the browser, if for example, dangerfile is selected, the contents of the file dangerfile.js are displayed:</p>
-        <img src="./4-file-sorting-default-dangerfile.png" />
-        <p>The items in the lowest level are all the module import and CommonJS require calls that Eunice automatically moves below the file content. The other two levels have dependencies that don’t match and so have counts shown in red up arrows. By default Eunice expects code within a file to be ordered high level first with more detail as you move down. The option <a href="../javascript/options/#reverse-file">is-file-content-reversed</a> can reverse this:</p>
-        <code>npx eunice \
-<span class="new">--is-file-content-reversed=true \</span>
---ignore-path-pattern="(^(\.|babel.config.js|scripts)|node_modules)" \
---babel-parser-plugins=classPrivateProperties \
---babel-parser-plugins=classProperties \
---babel-parser-plugins=dynamicImport \
---babel-parser-plugins=flow \
---babel-parser-plugins=jsx</code>
-        <p>The file will then show with all matching green dependency counts (after reloading the browser):</p>
-        <img src="./5-file-sorting-reversed-dangerfile.png" />
-        <p>Looking at the root directory, a lot more of Reacts dependencies are now shown as matching in green:</p>
-        <img src="./6-file-sorting-reversed-root.png" />
-        <p>There are still 1,592 dependencies, shown in a red horizontal arrow, that are between items that don’t have a structure defined yet.</p>
         <h3 id="codebase-conventions">codebase conventions</h3>
         <p>There are often conventions in codebases and in React there are many instances of directories that are always either above or below all the other directories. One example is that the __tests__ directory depends on what it tests. Another example is that the rest of the code depends on the shared directory. This is represented below in YAML, with "existing" being used as placeholder for items not specified:</p>
         <code>- [ forks, __tests__ ]
@@ -146,7 +128,6 @@ Unexpected token, expected ";" (14:5)</code>
 
         <code>npx eunice \
 <span class="new">--modify-stacks-file=.eunice-stack-modify.yaml \</span>
---is-file-content-reversed=true \
 --ignore-path-pattern="(^(\.|babel.config.js|scripts)|node_modules)" \
 --babel-parser-plugins=classPrivateProperties \
 --babel-parser-plugins=classProperties \
@@ -196,7 +177,6 @@ Unexpected token, expected ";" (14:5)</code>
         <code>npx eunice \
 --ignore-path-pattern="(^(\.|babel.config.js|scripts<span class="new">|fixtures</span>)|node_modules<span class="new">|__tests__</span>)" \
 --modify-stacks-file=.eunice-stack-modify.yaml \
---is-file-content-reversed=true \
 --babel-parser-plugins=classPrivateProperties \
 --babel-parser-plugins=classProperties \
 --babel-parser-plugins=dynamicImport \
