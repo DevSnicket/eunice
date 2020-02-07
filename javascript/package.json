@@ -101,11 +101,11 @@
 		"build-interactive": "npx webpack -p --config interactive.webpack.config.js",
 		"build-interactive-development": "npx webpack -d --config interactive.webpack.config.js",
 		"build-prepare": "rm -rf dist && mkdir dist",
-		"dogfooding": "(cd dogfooding && rm -rf output && mkdir output && cd .. && node dist/bin.js --accept-license --directory-to-create-or-add-to-stacks-from=dogfooding --include-service-workers=true --ignore-path-pattern=\"(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$\" --infer-stacks --modify-stacks-key=type --modify-stacks-pattern=^file$ --output-base-file-name=index --output-directory-path=dogfooding/output --output-svg --output-yaml --package-names=call-with-process-standard-streams --package-names=dependency-and-structure --package-names=javascript-analyzer --package-names=processors --package-names=renderer --package-names=renderer-test-harness --package-names=run-tests-from-file-system --package-names=test-harnesses --package-prefix=eunice- --package-scope=devsnicket --directories=. --reverseFileContent=false --root-item-identifiers=javascript)",
+		"dogfooding": "(cd dogfooding && rm -rf output && mkdir output && cd .. && node dist/bin.js --accept-license --directory-to-create-or-add-to-stacks-from=dogfooding --include-service-workers=true --ignore-path-pattern=\"(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$\" --modify-stacks-key=type --modify-stacks-pattern=^file$ --output-base-file-name=index --output-directory-path=dogfooding/output --output-svg --output-yaml --package-names=call-with-process-standard-streams --package-names=dependency-and-structure --package-names=javascript-analyzer --package-names=processors --package-names=renderer --package-names=renderer-test-harness --package-names=run-tests-from-file-system --package-names=test-harnesses --package-prefix=eunice- --package-scope=devsnicket --directories=. --reverseFileContent=false --root-item-identifiers=javascript)",
 		"lint": "npx eslint .",
 		"harness": "(cd harness && rm -rf output && mkdir output && npx webpack -p --config webpack.config.js)",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dogfooding/output/**\" ! -path \"./dist/*\" ! -path \"./gh-pages/**\" ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest --runInBand"
 	},
-	"version": "7.2.1"
+	"version": "7.3.0"
 }

@@ -22,7 +22,7 @@ module.exports =
 		ignorePathPattern = null,
 		includeServiceWorkers = false,
 		isFileContentReversed = true,
-		isInferStacksEnabled = false,
+		isInferStacksEnabled = true,
 		modifyStacksFile = null,
 		output,
 		packages = null,
