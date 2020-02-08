@@ -10,14 +10,13 @@
 				"args":
 					[
 						"--collect-coverage=false",
-						"--runInBand",
-						"test.js"
+						"--runInBand"
 					],
 				"disableOptimisticBPs": true,
 				"name": "Jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node"
-			},
+			}
 		],
 }

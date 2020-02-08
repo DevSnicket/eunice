@@ -9,11 +9,14 @@
 	"description": "Runs tests by discovering test cases and expected behavior from the file system. Tests are automatically named based on the directory hierarchy.",
 	"devDependencies": {
 		"@babel/plugin-transform-modules-commonjs": "7.8.3",
+		"@types/fs-extra": "8.0.1",
 		"@types/jest": "24.0.15",
+		"@types/node": "13.7.0",
 		"cspell": "4.0.21",
 		"eslint": "6.2.1",
 		"eslint-plugin-notice": "0.8.9",
-		"jest": "24.8.0"
+		"jest": "24.8.0",
+		"typescript": "3.7.5"
 	},
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
 	"jest": {
@@ -63,11 +66,12 @@
 		"url": "https://github.com/DevSnicket/eunice-run-tests-from-file-system.git"
 	},
 	"scripts": {
-		"all": "npm run spellcheck && npm run lint && npm run test",
+		"all": "npm run spellcheck && npm run lint && npm run test && npm run typescript",
 		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|node_modules|test-coverage)$\" --infer-stacks=true --output-yaml --reverse-file-content=false",
 		"lint": "npx eslint .",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./dist/**/*\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
-		"test": "npx jest --runInBand"
+		"test": "npx jest --runInBand",
+		"typescript": "npx tsc -p jsconfig.json"
 	},
 	"version": "4.4.0"
 }
