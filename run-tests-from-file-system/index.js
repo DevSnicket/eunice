@@ -3,8 +3,8 @@ Licensed under the MIT license. See LICENSE file in the repository root for full
 
 import addTestCaseToJest from "./addTestCaseToJest";
 import discoverTestCases from "./discoverTestCases";
-import { writeFile } from "fs-extra";
 import readTextFile from "./readTextFile";
+import { writeFile } from "fs-extra";
 
 export default ({
 	addTestCase = addTestCaseToJest,

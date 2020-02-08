@@ -145,6 +145,8 @@ rules:
     - error
   no-continue:
     - error
+  no-duplicate-imports:
+    - error
   no-empty-function:
     - error
   no-eq-null:
@@ -170,6 +172,8 @@ rules:
   no-implicit-globals:
     - error
   no-implied-eval:
+    - error
+  no-import-assign:
     - error
   no-invalid-this:
     - error
@@ -257,6 +261,8 @@ rules:
   no-useless-concat:
     - error
   no-useless-constructor:
+    - error
+  no-useless-rename:
     - error
   no-useless-return:
     - error
@@ -355,6 +361,8 @@ rules:
   semi-style:
     - error
   sort-keys:
+    - error
+  sort-imports:
     - error
   sort-vars:
     - error
