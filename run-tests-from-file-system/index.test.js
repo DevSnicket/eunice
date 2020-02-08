@@ -1,10 +1,9 @@
 /* Copyright (c) 2019 Graham Dyson. All Rights Reserved.
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
-const
-	{ copy, emptyDir, readFile } = require("fs-extra"),
-	path = require("path"),
-	runTestsFromFileSystem = require(".");
+import { copy, emptyDir, readFile } from "fs-extra";
+import path from "path";
+import runTestsFromFileSystem from "./index";
 
 const expectedFileName = "expected.txt";
 

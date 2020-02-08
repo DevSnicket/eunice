@@ -1,33 +1,31 @@
 /* Copyright (c) 2018 Graham Dyson. All Rights Reserved.
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
-const
-	addTestCaseToJest = require("./addTestCaseToJest"),
-	discoverTestCases = require("./discoverTestCases"),
-	{ writeFile } = require("fs-extra"),
-	readTextFile = require("./readTextFile");
+import addTestCaseToJest from "./addTestCaseToJest";
+import discoverTestCases from "./discoverTestCases";
+import { writeFile } from "fs-extra";
+import readTextFile from "./readTextFile";
 
-module.exports =
-	({
-		addTestCase = addTestCaseToJest,
-		caseFileName,
-		directoryAbsolutePath,
-		expectedFileName,
+export default ({
+	addTestCase = addTestCaseToJest,
+	caseFileName,
+	directoryAbsolutePath,
+	expectedFileName,
+	getActualForTestCase,
+	processArguments,
+}) =>
+	updateExpectedOfOrCallAddForTestCases({
+		addTestCase,
 		getActualForTestCase,
-		processArguments,
-	}) =>
-		updateExpectedOfOrCallAddForTestCases({
-			addTestCase,
-			getActualForTestCase,
-			isUpdateExpectedFiles:
-				processArguments.includes("update-expected-files"),
-			testCases:
-				discoverTestCases({
-					caseFileName,
-					directoryAbsolutePath,
-					expectedFileName,
-				}),
-		});
+		isUpdateExpectedFiles:
+			processArguments.includes("update-expected-files"),
+		testCases:
+			discoverTestCases({
+				caseFileName,
+				directoryAbsolutePath,
+				expectedFileName,
+			}),
+	});
 
 async function updateExpectedOfOrCallAddForTestCases({
 	addTestCase,
