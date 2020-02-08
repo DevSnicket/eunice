@@ -1,9 +1,9 @@
 cache: { directories: [ node_modules ] }
 deploy:
   api_key: $NPM_TOKEN
+  edge: true
   email: grahamdyson@hotmail.com
   provider: npm
-  skip_cleanup: true
 install: npm install
 language: node_js
 node_js: "8.16.0"
@@ -11,4 +11,5 @@ notifications:
   email:
     on_success: never
     on_failure: always
+os: linux
 script: npm run all
