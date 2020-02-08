@@ -1,16 +1,12 @@
-cache:
-  directories:
-    - node_modules
+cache: { directories: [ node_modules ] }
 deploy:
   api_key: $NPM_TOKEN
   edge: true
   email: grahamdyson@hotmail.com
   provider: npm
-install: 
-  - npm install
+install: npm install
 language: node_js
-node_js:
-  - "8.11.2"
+node_js: 12
 notifications:
   email:
     on_success: never
