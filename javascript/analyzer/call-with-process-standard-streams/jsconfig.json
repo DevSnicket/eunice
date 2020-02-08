@@ -3,6 +3,7 @@
 		"alwaysStrict": true,
 		"checkJs": true,
 		"lib": [ "es2017", "esnext.array" ],
+		"moduleResolution": "node",
 		"noEmit": true,
 		"target": "es2017"
 	}

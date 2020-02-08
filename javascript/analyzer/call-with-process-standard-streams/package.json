@@ -11,7 +11,8 @@
 		"@types/node": "10.12.1",
 		"cspell": "4.0.21",
 		"eslint": "6.2.1",
-		"eslint-plugin-notice": "0.8.9"
+		"eslint-plugin-notice": "0.8.9",
+		"typescript": "3.7.5"
 	},
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
 	"keywords": [
@@ -35,9 +36,10 @@
 		"url": "https://github.com/DevSnicket/eunice-call-with-process-standard-streams.git"
 	},
 	"scripts": {
-		"all": "npm run spellcheck && npm run lint",
+		"all": "npm run spellcheck && npm run lint && npm run typescript",
 		"lint": "npx eslint .",
-		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +"
+		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
+		"typescript": "npx tsc -p jsconfig.json"
 	},
 	"version": "1.5.0"
 }
