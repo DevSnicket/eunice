@@ -32,6 +32,7 @@ export default
 }) =>
 	render(
 		createElement(
+			// @ts-ignore
 			(props, context) => {
 				const componentMixin =
 					{
@@ -46,6 +47,7 @@ export default
 
 				window.addEventListener(
 					"hashchange",
+					// @ts-ignore
 					() => componentMixin.forceUpdate(),
 				);
 

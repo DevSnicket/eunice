@@ -7,5 +7,11 @@
 		"noEmit": true,
 		"resolveJsonModule": true,
 		"target": "es2017"
-	}
+	},
+	"exclude": [
+		"./index.js",
+		"createResizableContainer/tests/test-harness",
+		"createWebpackConfiguration",
+		"test-coverage",
+	]
 }

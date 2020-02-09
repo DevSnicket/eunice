@@ -10,7 +10,12 @@ export default ({
 	createElement(
 		"textarea",
 		{
-			onChange: event => setStateFromValue(event.target.value),
+			onChange:
+				event =>
+					setStateFromValue(
+						// @ts-ignore
+						event.target.value,
+					),
 			value,
 			wrap: "off",
 		},

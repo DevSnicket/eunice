@@ -5,6 +5,7 @@ import formatPackageUrl from "./formatPackageUrl";
 import workers from "./workers.json";
 
 export default () => {
+	// @ts-ignore
 	self.MonacoEnvironment = { getWorkerUrl };
 
 	function getWorkerUrl(
