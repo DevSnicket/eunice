@@ -1,5 +1,8 @@
 {
 	"author": "Graham Dyson",
+	"babel": {
+		"plugins": [ "@babel/plugin-transform-modules-commonjs" ]
+	},
 	"bugs": {
 		"url": "https://github.com/DevSnicket/eunice/issues"
 	},
