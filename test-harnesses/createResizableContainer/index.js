@@ -1,43 +1,39 @@
 /* Copyright (c) 2018 Graham Dyson. All Rights Reserved.
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
-require("array.prototype.flatmap")
-.shim();
+import "react-reflex/styles.css";
+import "./index.css";
 
-const createSplitterIcon = require("./createSplitterIcon");
+import createSplitterIcon from "./createSplitterIcon";
 
-require("react-reflex/styles.css");
-require("./index.css");
-
-module.exports =
-	({
-		createElement,
-		flexKeysAndValues,
-		items,
-		orientation,
-		resizableElementTypes,
-	}) =>
-		createElement(
-			resizableElementTypes.container,
-			{ orientation },
-			createContainerChildElements({
-				createElement,
-				flexKeysAndValues,
-				itemElementType:
-					resizableElementTypes.item,
-				items,
-				splitter:
-					{
-						elementType:
-							resizableElementTypes.splitter,
-						icon:
-							createSplitterIcon({
-								createElement,
-								orientation,
-							}),
-					},
-			}),
-		);
+export default ({
+	createElement,
+	flexKeysAndValues,
+	items,
+	orientation,
+	resizableElementTypes,
+}) =>
+	createElement(
+		resizableElementTypes.container,
+		{ orientation },
+		createContainerChildElements({
+			createElement,
+			flexKeysAndValues,
+			itemElementType:
+				resizableElementTypes.item,
+			items,
+			splitter:
+				{
+					elementType:
+						resizableElementTypes.splitter,
+					icon:
+						createSplitterIcon({
+							createElement,
+							orientation,
+						}),
+				},
+		}),
+	);
 
 function createContainerChildElements({
 	createElement,

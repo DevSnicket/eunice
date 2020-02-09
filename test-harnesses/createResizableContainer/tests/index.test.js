@@ -1,13 +1,12 @@
 /* Copyright (c) 2019 Graham Dyson. All Rights Reserved.
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
-const
-	createResizableContainer = require(".."),
-	{ createElement } = require("react"),
-	{ renderToStaticMarkup } = require("react-dom/server"),
-	path = require("path"),
-	readTextFile = require("./readTextFile"),
-	removeWhitespaceFromTestExpected = require("./removeWhitespaceFromTestExpected");
+import { createElement } from "react";
+import createResizableContainer from "../index";
+import path from "path";
+import readTextFile from "./readTextFile";
+import removeWhitespaceFromTestExpected from "./removeWhitespaceFromTestExpected";
+import { renderToStaticMarkup } from "react-dom/server";
 
 const resizableElementTypes =
 	{

@@ -1,87 +1,86 @@
 /* Copyright (c) 2019 Graham Dyson. All Rights Reserved.
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
-const
-	createUrlSearchParamsFromLocationHash = require("./createUrlSearchParamsFromLocationHash"),
-	createValueObject = require("./createValueObject"),
-	createWithFactoryFromUrlSearchParams = require("./createWithFactoryFromUrlSearchParams");
+import createUrlSearchParamsFromLocationHash from "./createUrlSearchParamsFromLocationHash";
+import createValueObject from "./createValueObject";
+import createWithFactoryFromUrlSearchParams from "./createWithFactoryFromUrlSearchParams";
 
-module.exports =
-	location => {
+export default
+location => {
+	return (
+		{
+			getValueOfKey:
+				key =>
+					createUrlSearchParams()
+					.get(key),
+			getValuesOfKeys:
+				keys =>
+					getValuesOfKeys({
+						keys,
+						urlSearchParams: createUrlSearchParams(),
+					}),
+			getWithKeyAndValue:
+				keyAndValue =>
+					createWithFactory()
+					.getWithKeyAndValue(keyAndValue),
+			getWithKeysAndValues:
+				keysAndValues =>
+					createWithFactory()
+					.getWithKeysAndValues(keysAndValues),
+			getWithoutKeys:
+				keys =>
+					createWithFactory()
+					.getWithoutKeys(keys),
+			setKeyAndValue:
+				keyAndValue =>
+					setHash(
+						createWithFactory()
+						.getWithKeyAndValue(
+							keyAndValue,
+						),
+					),
+			setKeysAndValues:
+				keysAndValues =>
+					setHash(
+						createWithFactory()
+						.getWithKeysAndValues(
+							keysAndValues,
+						),
+					),
+		}
+	);
+
+	function getValuesOfKeys({
+		keys,
+		urlSearchParams,
+	}) {
 		return (
-			{
-				getValueOfKey:
-					key =>
-						createUrlSearchParams()
-						.get(key),
-				getValuesOfKeys:
-					keys =>
-						getValuesOfKeys({
-							keys,
-							urlSearchParams: createUrlSearchParams(),
-						}),
-				getWithKeyAndValue:
-					keyAndValue =>
-						createWithFactory()
-						.getWithKeyAndValue(keyAndValue),
-				getWithKeysAndValues:
-					keysAndValues =>
-						createWithFactory()
-						.getWithKeysAndValues(keysAndValues),
-				getWithoutKeys:
-					keys =>
-						createWithFactory()
-						.getWithoutKeys(keys),
-				setKeyAndValue:
-					keyAndValue =>
-						setHash(
-							createWithFactory()
-							.getWithKeyAndValue(
-								keyAndValue,
-							),
-						),
-				setKeysAndValues:
-					keysAndValues =>
-						setHash(
-							createWithFactory()
-							.getWithKeysAndValues(
-								keysAndValues,
-							),
-						),
-			}
+			createValueObject({
+				getValueForKey: key => urlSearchParams.get(key),
+				keys,
+			})
 		);
+	}
 
-		function getValuesOfKeys({
-			keys,
-			urlSearchParams,
-		}) {
-			return (
-				createValueObject({
-					getValueForKey: key => urlSearchParams.get(key),
-					keys,
-				})
-			);
-		}
+	function createWithFactory() {
+		return (
+			createWithFactoryFromUrlSearchParams(
+				createUrlSearchParams(),
+			)
+		);
+	}
 
-		function createWithFactory() {
-			return (
-				createWithFactoryFromUrlSearchParams(
-					createUrlSearchParams(),
-				)
-			);
-		}
+	function createUrlSearchParams() {
+		return (
+			createUrlSearchParamsFromLocationHash(
+				location.hash,
+			)
+		);
+	}
 
-		function createUrlSearchParams() {
-			return (
-				createUrlSearchParamsFromLocationHash(
-					location.hash,
-				)
-			);
-		}
-
-		function setHash(
-			hash,
-		) {
-			location.hash = hash;
-		}
-	};
+	function setHash(
+		hash,
+	) {
+		location.hash = hash;
+	}
+};

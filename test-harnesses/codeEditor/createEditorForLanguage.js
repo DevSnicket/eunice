@@ -1,115 +1,114 @@
 /* Copyright (c) 2018 Graham Dyson. All Rights Reserved.
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
-const
-	{ editor: { create: createMonacoEditor } } = require("monaco-editor"),
-	{ createElement } = require("react");
+import { createElement } from "react";
+import { editor as monacoEditorFactory } from "monaco-editor";
 
-module.exports =
-	language => {
-		/** @type {import("monaco-editor").editor.IStandaloneCodeEditor} */
-		let monacoEditor = null;
+export default
+language => {
+	/** @type {import("monaco-editor").editor.IStandaloneCodeEditor} */
+	let monacoEditor = null;
 
-		/** @type {{dispose, setStateFromValue}} */
-		let onDidChangeModelContent = null;
+	/** @type {{dispose, setStateFromValue}} */
+	let onDidChangeModelContent = null;
 
-		return { createEditorElement };
+	return { createEditorElement };
 
-		function createEditorElement({
-			foldAll = false,
-			setStateFromValue,
-			value,
-		}) {
-			return (
-				createElement(
-					"div",
-					{
-						ref: setDomContainerElement,
-						// Mitigates automaticLayout property set to true not resizing the height back down to being smaller
-						style: { overflow: "hidden" },
-					},
-				)
-			);
+	function createEditorElement({
+		foldAll = false,
+		setStateFromValue,
+		value,
+	}) {
+		return (
+			createElement(
+				"div",
+				{
+					ref: setDomContainerElement,
+					// Mitigates automaticLayout property set to true not resizing the height back down to being smaller
+					style: { overflow: "hidden" },
+				},
+			)
+		);
 
-			function setDomContainerElement(
-				domElement,
-			) {
-				if (domElement !== null)
-					if (isNewEditorRequired())
-						initializeMonacoEditor();
-					else
-						updateMonacoEditor();
+		function setDomContainerElement(
+			domElement,
+		) {
+			if (domElement !== null)
+				if (isNewEditorRequired())
+					initializeMonacoEditor();
+				else
+					updateMonacoEditor();
 
-				function isNewEditorRequired() {
-					return (
-						!monacoEditor
-						||
-						disposeWhenDomElementHasChanged({
-							disposables:
-								[ monacoEditor, onDidChangeModelContent ],
-							domElement,
-							editor:
-								monacoEditor,
-						})
-					);
-				}
+			function isNewEditorRequired() {
+				return (
+					!monacoEditor
+					||
+					disposeWhenDomElementHasChanged({
+						disposables:
+							[ monacoEditor, onDidChangeModelContent ],
+						domElement,
+						editor:
+							monacoEditor,
+					})
+				);
+			}
 
-				function initializeMonacoEditor() {
-					monacoEditor =
-						createMonacoEditor(
-							domElement,
-							{
-								automaticLayout: true,
-								language,
-								minimap: { enabled: false },
-								scrollBeyondLastLine: false,
-								value,
-							},
-						);
-
-					if (foldAll)
-						monacoEditor.getAction("editor.foldAll")
-						.run();
-
-					initializeOnDidChangeModelContent();
-				}
-
-				function updateMonacoEditor() {
-					updateValue();
-					updateOnDidChangeModelContent();
-
-					function updateValue() {
-						if (monacoEditor.getValue() !== value)
-							monacoEditor.setValue(value);
-					}
-
-					function updateOnDidChangeModelContent() {
-						if (onDidChangeModelContent.setStateFromValue !== setStateFromValue) {
-							if (onDidChangeModelContent)
-								onDidChangeModelContent.dispose();
-
-							initializeOnDidChangeModelContent();
-						}
-					}
-				}
-
-				function initializeOnDidChangeModelContent() {
-					onDidChangeModelContent =
+			function initializeMonacoEditor() {
+				monacoEditor =
+					monacoEditorFactory.create(
+						domElement,
 						{
-							dispose:
-								monacoEditor.onDidChangeModelContent(
-									() =>
-										setStateFromValue(
-											monacoEditor.getValue(),
-										),
-								)
-								.dispose,
-							setStateFromValue,
-						};
+							automaticLayout: true,
+							language,
+							minimap: { enabled: false },
+							scrollBeyondLastLine: false,
+							value,
+						},
+					);
+
+				if (foldAll)
+					monacoEditor.getAction("editor.foldAll")
+					.run();
+
+				initializeOnDidChangeModelContent();
+			}
+
+			function updateMonacoEditor() {
+				updateValue();
+				updateOnDidChangeModelContent();
+
+				function updateValue() {
+					if (monacoEditor.getValue() !== value)
+						monacoEditor.setValue(value);
+				}
+
+				function updateOnDidChangeModelContent() {
+					if (onDidChangeModelContent.setStateFromValue !== setStateFromValue) {
+						if (onDidChangeModelContent)
+							onDidChangeModelContent.dispose();
+
+						initializeOnDidChangeModelContent();
+					}
 				}
 			}
+
+			function initializeOnDidChangeModelContent() {
+				onDidChangeModelContent =
+					{
+						dispose:
+							monacoEditor.onDidChangeModelContent(
+								() =>
+									setStateFromValue(
+										monacoEditor.getValue(),
+									),
+							)
+							.dispose,
+						setStateFromValue,
+					};
+			}
 		}
-	};
+	}
+};
 
 function disposeWhenDomElementHasChanged({
 	domElement,

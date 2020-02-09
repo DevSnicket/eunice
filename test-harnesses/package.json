@@ -1,5 +1,10 @@
 {
 	"author": "Graham Dyson",
+	"babel": {
+		"plugins": [
+			"@babel/plugin-transform-modules-commonjs"
+		]
+	},
 	"bugs": {
 		"url": "https://github.com/DevSnicket/eunice/issues"
 	},
@@ -21,13 +26,14 @@
 		"@babel/plugin-proposal-object-rest-spread": "7.6.2",
 		"@babel/polyfill": "7.6.0",
 		"@babel/preset-env": "7.6.3",
+		"@babel/register": "7.8.3",
 		"@types/jest": "24.0.21",
 		"@types/node": "12.0.2",
 		"@types/react": "16.3.14",
 		"@types/react-dom": "16.0.5",
 		"babel-loader": "8.0.6",
 		"cspell": "4.0.21",
-		"eslint": "6.2.1",
+		"eslint": "6.8.0",
 		"eslint-plugin-notice": "0.8.9",
 		"fs-extra": "8.1.0",
 		"jest": "24.9.0",
@@ -39,6 +45,7 @@
 		"collectCoverageFrom": [
 			"**/*.js",
 			"!**/test-harness/**",
+			"!babel.config.js",
 			"!callOrCreateElementOnError.js",
 			"!codeEditor/**",
 			"!createFillWithTitleElement/**",
@@ -83,10 +90,10 @@
 		"all": "npm run spellcheck && npm run lint && npm run test && npm run resizable-columns-test-harness-production",
 		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|node_modules|output|test-coverage)$\" --infer-stacks --modify-stacks-file=modify-file-stacks.yaml --modify-stacks-key=type --modify-stacks-pattern=^file$ --output-yaml --reverse-file-content=false",
 		"lint": "npx eslint .",
-		"resizable-columns-test-harness-production": "rm -rf createResizableContainer/tests/test-harness/output && npx webpack -p --config createResizableContainer/tests/test-harness/webpack.config.js",
-		"resizable-columns-test-harness-development": "rm -rf createResizableContainer/tests/test-harness/output && npx webpack -d --config createResizableContainer/tests/test-harness/webpack.config.js",
+		"resizable-columns-test-harness-production": "rm -rf createResizableContainer/tests/test-harness/output && npx webpack -p --config createResizableContainer/tests/test-harness/webpack.config.babel.js",
+		"resizable-columns-test-harness-development": "rm -rf createResizableContainer/tests/test-harness/output && npx webpack -d --config createResizableContainer/tests/test-harness/webpack.config.babel.js",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "npx jest"
 	},
-	"version": "8.8.0"
+	"version": "8.9.0"
 }

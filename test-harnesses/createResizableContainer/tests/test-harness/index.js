@@ -1,16 +1,12 @@
 /* Copyright (c) 2019 Graham Dyson. All Rights Reserved.
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
-const
-	{ createElement } = require("react"),
-	createHashFromLocation = require("../../../createHashFromLocation"),
-	createResizableContainer = require("../.."),
-	{
-		ReflexContainer,
-		ReflexElement,
-		ReflexSplitter,
-	} = require("react-reflex"),
-	renderIntoContainerElement = require("../../../renderIntoContainerElement");
+import { ReflexContainer, ReflexElement, ReflexSplitter } from "react-reflex";
+
+import { createElement } from "react";
+import createHashFromLocation from "../../../createHashFromLocation";
+import createResizableContainer from "../..";
+import renderIntoContainerElement from "../../../renderIntoContainerElement";
 
 renderIntoContainerElement({
 	initialState:

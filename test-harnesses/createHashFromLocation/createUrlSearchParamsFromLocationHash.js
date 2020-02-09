@@ -1,15 +1,15 @@
 /* Copyright (c) 2019 Graham Dyson. All Rights Reserved.
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
-const UrlSearchParams = require("@ungap/url-search-params");
+import UrlSearchParams from "@ungap/url-search-params";
 
-module.exports =
-	locationHash =>
-		whenHasValue(
-			locationHash,
-		)
-		||
-		new UrlSearchParams();
+export default
+locationHash =>
+	whenHasValue(
+		locationHash,
+	)
+	||
+	new UrlSearchParams();
 
 function whenHasValue(
 	locationHash,
