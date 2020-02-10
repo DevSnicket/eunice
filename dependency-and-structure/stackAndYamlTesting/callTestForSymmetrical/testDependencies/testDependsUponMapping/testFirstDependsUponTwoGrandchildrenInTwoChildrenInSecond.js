@@ -1,73 +1,72 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createItemYaml = require("../../../createItemYaml"),
-	createStackFromLevels = require("../../../createStackFromLevels");
+import createItemYaml from "../../../createItemYaml";
+import createStackFromLevels from "../../../createStackFromLevels";
 
-module.exports =
-	/** @type {import("../../Parameter.d")} */
-	({
-		getActual,
-		getExpected,
-		getName,
-	}) => {
-		const
-			stack =
-				createStack(),
-			yaml =
-				[
-					createItemYaml({
-						dependsUpon:
-							{
-								id:
-									"second",
-								items:
-									[
-										{
-											id: "firstChildOfSecond",
-											items: "firstGrandchildOfSecond",
-										},
-										{
-											id: "secondChildOfSecond",
-											items: "secondGrandchildOfSecond",
-										},
-									],
-							},
-						id:
-							"first",
-					}),
-					createItemYaml({
-						id:
-							"second",
-						items:
-							[
-								createItemYaml({
-									id: "firstChildOfSecond",
-									items: "firstGrandchildOfSecond",
-								}),
-								createItemYaml({
-									id: "secondChildOfSecond",
-									items: "secondGrandchildOfSecond",
-								}),
-							],
-					}),
-				];
+export default
+/** @type {import("../../Parameter.d")} */
+({
+	getActual,
+	getExpected,
+	getName,
+}) => {
+	const
+		stack =
+			createStack(),
+		yaml =
+			[
+				createItemYaml({
+					dependsUpon:
+						{
+							id:
+								"second",
+							items:
+								[
+									{
+										id: "firstChildOfSecond",
+										items: "firstGrandchildOfSecond",
+									},
+									{
+										id: "secondChildOfSecond",
+										items: "secondGrandchildOfSecond",
+									},
+								],
+						},
+					id:
+						"first",
+				}),
+				createItemYaml({
+					id:
+						"second",
+					items:
+						[
+							createItemYaml({
+								id: "firstChildOfSecond",
+								items: "firstGrandchildOfSecond",
+							}),
+							createItemYaml({
+								id: "secondChildOfSecond",
+								items: "secondGrandchildOfSecond",
+							}),
+						],
+				}),
+			];
 
-		test(
-			getName({
-				stackDescription:
-					"first depends upon two grandchildren in two children in second",
-				yaml,
-			}),
-			() =>
-				expect(
-					getActual({ stack, yaml }),
-				)
-				.toEqual(
-					getExpected({ stack, yaml }),
-				),
-		);
-	};
+	test(
+		getName({
+			stackDescription:
+				"first depends upon two grandchildren in two children in second",
+			yaml,
+		}),
+		() =>
+			expect(
+				getActual({ stack, yaml }),
+			)
+			.toEqual(
+				getExpected({ stack, yaml }),
+			),
+	);
+};
 
 function createStack() {
 	const stack =

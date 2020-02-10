@@ -1,64 +1,63 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const findItemWithIdentifierInLastAncestor = require("./findItemWithIdentifierInLastAncestor");
+import findItemWithIdentifierInLastAncestor from "./findItemWithIdentifierInLastAncestor";
 
-module.exports =
-	({
-		ancestors,
-		dependUponItem,
-		dependent,
-		findInAncestors,
-	}) => {
+export default ({
+	ancestors,
+	dependUponItem,
+	dependent,
+	findInAncestors,
+}) => {
+	return (
+		fromItemsWhenAny(
+			findItemWithIdentifierInLastAncestor({
+				ancestors,
+				isItem,
+			}),
+		)
+	);
+
+	function isItem(
+		item,
+	) {
 		return (
-			fromItemsWhenAny(
-				findItemWithIdentifierInLastAncestor({
-					ancestors,
-					isItem,
-				}),
-			)
+			item.id === dependUponItem.id
+			&&
+			item !== dependent
 		);
+	}
 
-		function isItem(
-			item,
-		) {
+	function fromItemsWhenAny(
+		item,
+	) {
+		return item && fromItems();
+
+		function fromItems() {
 			return (
-				item.id === dependUponItem.id
-				&&
-				item !== dependent
+				whenArray()
+				||
+				createDependsUponFromChildItem(dependUponItem.items)
 			);
-		}
 
-		function fromItemsWhenAny(
-			item,
-		) {
-			return item && fromItems();
-
-			function fromItems() {
+			function whenArray() {
 				return (
-					whenArray()
-					||
-					createDependsUponFromChildItem(dependUponItem.items)
+					Array.isArray(dependUponItem.items)
+					&&
+					dependUponItem.items.flatMap(createDependsUponFromChildItem)
 				);
+			}
 
-				function whenArray() {
-					return (
-						Array.isArray(dependUponItem.items)
-						&&
-						dependUponItem.items.flatMap(createDependsUponFromChildItem)
-					);
-				}
-
-				function createDependsUponFromChildItem(
-					childItem,
-				) {
-					return (
-						findInAncestors({
-							ancestors: [ item, ...ancestors ],
-							dependUponItem: childItem,
-							dependent,
-						})
-					);
-				}
+			function createDependsUponFromChildItem(
+				childItem,
+			) {
+				return (
+					findInAncestors({
+						ancestors: [ item, ...ancestors ],
+						dependUponItem: childItem,
+						dependent,
+					})
+				);
 			}
 		}
-	};
+	}
+};

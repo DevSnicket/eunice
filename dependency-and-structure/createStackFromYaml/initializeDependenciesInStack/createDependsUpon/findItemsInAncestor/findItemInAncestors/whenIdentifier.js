@@ -1,57 +1,56 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const findItemWithIdentifierInLastAncestor = require("./findItemWithIdentifierInLastAncestor");
+import findItemWithIdentifierInLastAncestor from "./findItemWithIdentifierInLastAncestor";
 
-module.exports =
-	({
-		ancestors,
-		dependUponItem,
-		dependent,
-	}) => {
+export default ({
+	ancestors,
+	dependUponItem,
+	dependent,
+}) => {
+	return (
+		typeof dependUponItem === "string"
+		&&
+		[ whenItemFound() || withAncestors() ]
+	);
+
+	function whenItemFound() {
+		const item =
+			findItemWithIdentifierInLastAncestor({
+				ancestors,
+				isItem,
+			});
+
 		return (
-			typeof dependUponItem === "string"
+			item
 			&&
-			[ whenItemFound() || withAncestors() ]
-		);
-
-		function whenItemFound() {
-			const item =
-				findItemWithIdentifierInLastAncestor({
-					ancestors,
-					isItem,
-				});
-
-			return (
-				item
-				&&
-				{
-					ancestors,
+			{
+				ancestors,
+				item,
+				itemOrFirstAncestorItem:
 					item,
-					itemOrFirstAncestorItem:
-						item,
-				}
-			);
-		}
+			}
+		);
+	}
 
-		function isItem(
-			item,
-		) {
-			return (
-				item.id === dependUponItem
-				&&
-				item !== dependent
-			);
-		}
+	function isItem(
+		item,
+	) {
+		return (
+			item.id === dependUponItem
+			&&
+			item !== dependent
+		);
+	}
 
-		function withAncestors() {
-			return (
-				{
-					ancestors,
-					item:
-						dependUponItem,
-					itemOrFirstAncestorItem:
-						ancestors[0],
-				}
-			);
-		}
-	};
+	function withAncestors() {
+		return (
+			{
+				ancestors,
+				item:
+					dependUponItem,
+				itemOrFirstAncestorItem:
+					ancestors[0],
+			}
+		);
+	}
+};

@@ -1,57 +1,56 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createItemYaml = require("../../../../createItemYaml"),
-	createStackFromLevels = require("../../../../createStackFromLevels");
+import createItemYaml from "../../../../createItemYaml";
+import createStackFromLevels from "../../../../createStackFromLevels";
 
-module.exports =
-	/** @type {import("../../../Parameter.d")} */
-	({
-		getActual,
-		getExpected,
-		getName,
-	}) => {
-		const
-			stack =
-				createStack(),
-			yaml =
-				createItemYaml({
-					id:
-						"parent",
-					items:
-						[
-							createItemYaml({
-								dependsUpon:
-									{
-										id: "parent",
-										items: "childOfSecond",
-									},
-								id:
-									"first",
-							}),
-							createItemYaml({
-								dependencyPermeable: true,
-								id: "second",
-								items: "childOfSecond",
-							}),
-						],
-				});
+export default
+/** @type {import("../../../Parameter.d")} */
+({
+	getActual,
+	getExpected,
+	getName,
+}) => {
+	const
+		stack =
+			createStack(),
+		yaml =
+			createItemYaml({
+				id:
+					"parent",
+				items:
+					[
+						createItemYaml({
+							dependsUpon:
+								{
+									id: "parent",
+									items: "childOfSecond",
+								},
+							id:
+								"first",
+						}),
+						createItemYaml({
+							dependencyPermeable: true,
+							id: "second",
+							items: "childOfSecond",
+						}),
+					],
+			});
 
-		test(
-			getName({
-				stackDescription:
-					"first depends upon child of permeable second in parent",
-				yaml,
-			}),
-			() =>
-				expect(
-					getActual({ stack, yaml }),
-				)
-				.toEqual(
-					getExpected({ stack, yaml }),
-				),
-		);
-	};
+	test(
+		getName({
+			stackDescription:
+				"first depends upon child of permeable second in parent",
+			yaml,
+		}),
+		() =>
+			expect(
+				getActual({ stack, yaml }),
+			)
+			.toEqual(
+				getExpected({ stack, yaml }),
+			),
+	);
+};
 
 function createStack() {
 	const stack =

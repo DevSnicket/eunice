@@ -2,19 +2,18 @@
 
 // istanbul ignore file: test would be a mirror of implementation
 
-const
-	createStackStructureFromYaml = require("./createStackStructureFromYaml"),
-	initializeDependenciesInStack = require("./initializeDependenciesInStack");
+import createStackStructureFromYaml from "./createStackStructureFromYaml";
+import initializeDependenciesInStack from "./initializeDependenciesInStack";
 
-module.exports =
-	/**
-	 * @param {import("../index").Yaml} yaml
-	 * @return {import("../index").Stack}
-	 */
-	yaml => {
-		const stack = createStackStructureFromYaml(yaml);
+export default
+/**
+ * @param {import("../index").Yaml} yaml
+ * @return {import("../index").Stack}
+ */
+yaml => {
+	const stack = createStackStructureFromYaml(yaml);
 
-		initializeDependenciesInStack(stack);
+	initializeDependenciesInStack(stack);
 
-		return stack;
-	};
+	return stack;
+};

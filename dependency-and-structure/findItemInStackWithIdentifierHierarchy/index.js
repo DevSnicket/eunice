@@ -23,35 +23,35 @@
  * @param {Item} item
  * @returns {Boolean}
  */
-const formatAncestorIdentifiersOfStackForError = require("./formatAncestorIdentifiersOfStackForError");
+import formatAncestorIdentifiersOfStackForError from "./formatAncestorIdentifiersOfStackForError";
 
-module.exports =
-	/**
-	 * @param {Object} parameter
-	 * @param {String[]} parameter.identifierHierarchy
-	 * @param {Stack} parameter.stack
-	 */
-	({
-		identifierHierarchy,
-		stack,
-	}) =>
-		identifierHierarchy.reduce(
-			/** @param {Item} item */
-			(
-				item,
+export default
+/**
+ * @param {Object} parameter
+ * @param {String[]} parameter.identifierHierarchy
+ * @param {Stack} parameter.stack
+ */
+({
+	identifierHierarchy,
+	stack,
+}) =>
+	identifierHierarchy.reduce(
+		/** @param {Item} item */
+		(
+			item,
+			identifier,
+		) =>
+			findItemWithIdentifierOrThrowError({
 				identifier,
-			) =>
-				findItemWithIdentifierOrThrowError({
-					identifier,
-					stack:
-						item
-						?
-						getItemsOfOrThrowError(item)
-						:
-						stack,
-				}),
-			null,
-		);
+				stack:
+					item
+					?
+					getItemsOfOrThrowError(item)
+					:
+					stack,
+			}),
+		null,
+	);
 
 /** @param {Item} item */
 function getItemsOfOrThrowError(

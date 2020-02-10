@@ -1,29 +1,25 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-require("array.prototype.flat")
-.shim();
+import "core-js/features/array/flat";
+import "core-js/features/array/flat-map";
 
-require("array.prototype.flatmap")
-.shim();
+export default ({
+	ancestors,
+	isItem,
+}) => {
+	const lastAncestor = ancestors[0];
 
-module.exports =
-	({
-		ancestors,
-		isItem,
-	}) => {
-		const lastAncestor = ancestors[0];
-
-		return (
-			lastAncestor.items
-			&&
-			withIsItem(
-				isItem,
-			)
-			.findInItemsAndPermeableDescendants(
-				lastAncestor.items.flat(),
-			)
-		);
-	};
+	return (
+		lastAncestor.items
+		&&
+		withIsItem(
+			isItem,
+		)
+		.findInItemsAndPermeableDescendants(
+			lastAncestor.items.flat(),
+		)
+	);
+};
 
 function withIsItem(
 	isItem,

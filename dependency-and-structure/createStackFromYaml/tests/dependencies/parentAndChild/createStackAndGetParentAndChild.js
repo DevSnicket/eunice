@@ -1,20 +1,18 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createParentChildLevels = require("../../../../stackAndYamlTesting/createParentChildLevels"),
-	createStackFromLevels = require("../../../../stackAndYamlTesting/createStackFromLevels");
+import createParentChildLevels from "../../../../stackAndYamlTesting/createParentChildLevels";
+import createStackFromLevels from "../../../../stackAndYamlTesting/createStackFromLevels";
 
-module.exports =
-	() => {
-		const stack = createStackFromLevels(createParentChildLevels());
+export default () => {
+	const stack = createStackFromLevels(createParentChildLevels());
 
-		const parent = stack[0][0];
+	const parent = stack[0][0];
 
-		return (
-			{
-				child: parent.items[0][0],
-				parent,
-				stack,
-			}
-		);
-	};
+	return (
+		{
+			child: parent.items[0][0],
+			parent,
+			stack,
+		}
+	);
+};

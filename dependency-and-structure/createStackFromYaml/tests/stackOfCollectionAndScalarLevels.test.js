@@ -1,8 +1,7 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createStackFromLevels = require("../../stackAndYamlTesting/createStackFromLevels"),
-	testCreateStackFromYaml = require("./testCreateStackFromYaml");
+import createStackFromLevels from "../../stackAndYamlTesting/createStackFromLevels";
+import testCreateStackFromYaml from "./testCreateStackFromYaml";
 
 testCreateStackFromYaml({
 	stack:

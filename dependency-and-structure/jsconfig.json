@@ -3,12 +3,10 @@
 		"alwaysStrict": true,
 		"checkJs": true,
 		"lib": [ "es2017", "esnext.array" ],
-		"module": "commonjs",
+		"moduleResolution": "node",
 		"noEmit": true,
+		"resolveJsonModule": true,
 		"target": "es2017"
 	},
-	"exclude": [
-		"node_modules",
-		"test-coverage"
-	]
+	"exclude": [ "test-coverage" ]
 }

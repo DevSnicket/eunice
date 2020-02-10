@@ -12,12 +12,12 @@
  * @property {Stack} stack
  */
 
-module.exports =
-	/** @param {Stack} stack */
-	stack =>
-		ofItemWhenHasValue(stack.parent)
-		||
-		"";
+export default
+/** @param {Stack} stack */
+stack =>
+	ofItemWhenHasValue(stack.parent)
+	||
+	"";
 
 /** @param {Item} item */
 function ofItemWhenHasValue(

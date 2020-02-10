@@ -15,36 +15,35 @@
   * @property {function(Level):Number} indexOf
  */
 
-const
-	generateAncestors = require("./generateAncestors"),
-	getDirectionBetweenItemsWhenMutualStack = require("./getDirectionBetweenItemsWhenMutualStack");
+import generateAncestors from "./generateAncestors";
+import getDirectionBetweenItemsWhenMutualStack from "./getDirectionBetweenItemsWhenMutualStack";
 
-module.exports =
-	/**
-	 * @param {Object} parameter
-	 * @param {Item} parameter.from
-	 * @param {Item} parameter.to
-	 * @returns {{direction: "above"|"below"|"same"|"self", stack: Stack}}
-	 */
-	({
+export default
+/**
+ * @param {Object} parameter
+ * @param {Item} parameter.from
+ * @param {Item} parameter.to
+ * @returns {{direction: "above"|"below"|"same"|"self", stack: Stack}}
+ */
+({
+	from,
+	to,
+}) =>
+	getDirectionBetweenItemsWhenMutualStack({
 		from,
 		to,
-	}) =>
-		getDirectionBetweenItemsWhenMutualStack({
-			from,
-			to,
-		})
-		||
-		getDirectionBetweenFirstAncestorOrThrowError(
-			generateAncestors(
-				[
-					{
-						from,
-						to,
-					},
-				],
-			),
-		);
+	})
+	||
+	getDirectionBetweenFirstAncestorOrThrowError(
+		generateAncestors(
+			[
+				{
+					from,
+					to,
+				},
+			],
+		),
+	);
 
 function getDirectionBetweenFirstAncestorOrThrowError(
 	ancestors,

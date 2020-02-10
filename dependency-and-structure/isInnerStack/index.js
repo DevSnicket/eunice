@@ -11,19 +11,19 @@
   * @property {Stack} stack
  */
 
-module.exports =
-	/**
-	 * @param {Object} parameter
-	 * @param {Stack} parameter.source
-	 * @param {Stack} parameter.target
-	 * @returns {Boolean}
-	 */
-	({
-		source,
-		target,
-	}) =>
-		withSource(source)
-		.isInner(target);
+export default
+/**
+ * @param {Object} parameter
+ * @param {Stack} parameter.source
+ * @param {Stack} parameter.target
+ * @returns {Boolean}
+ */
+({
+	source,
+	target,
+}) =>
+	withSource(source)
+	.isInner(target);
 
 function withSource(
 	source,

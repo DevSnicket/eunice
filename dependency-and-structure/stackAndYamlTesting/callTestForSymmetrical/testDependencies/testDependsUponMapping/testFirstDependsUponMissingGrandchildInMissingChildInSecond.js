@@ -1,53 +1,52 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createItemYaml = require("../../../createItemYaml"),
-	createStackFromLevels = require("../../../createStackFromLevels");
+import createItemYaml from "../../../createItemYaml";
+import createStackFromLevels from "../../../createStackFromLevels";
 
-module.exports =
-	/** @type {import("../../Parameter.d")} */
-	({
-		getActual,
-		getExpected,
-		getName,
-	}) => {
-		const
-			stack =
-				createStack(),
-			yaml =
-				[
-					createItemYaml({
-						dependsUpon:
-							{
-								id:
-									"second",
-								items:
-									{
-										id: "missingChild",
-										items: "missingGrandchild",
-									},
-							},
-						id:
-							"first",
-					}),
-					"second",
-				];
+export default
+/** @type {import("../../Parameter.d")} */
+({
+	getActual,
+	getExpected,
+	getName,
+}) => {
+	const
+		stack =
+			createStack(),
+		yaml =
+			[
+				createItemYaml({
+					dependsUpon:
+						{
+							id:
+								"second",
+							items:
+								{
+									id: "missingChild",
+									items: "missingGrandchild",
+								},
+						},
+					id:
+						"first",
+				}),
+				"second",
+			];
 
-		test(
-			getName({
-				stackDescription:
-					"first depends upon missing grandchild in missing child in second",
-				yaml,
-			}),
-			() =>
-				expect(
-					getActual({ stack, yaml }),
-				)
-				.toEqual(
-					getExpected({ stack, yaml }),
-				),
-		);
-	};
+	test(
+		getName({
+			stackDescription:
+				"first depends upon missing grandchild in missing child in second",
+			yaml,
+		}),
+		() =>
+			expect(
+				getActual({ stack, yaml }),
+			)
+			.toEqual(
+				getExpected({ stack, yaml }),
+			),
+	);
+};
 
 function createStack() {
 	const stack =

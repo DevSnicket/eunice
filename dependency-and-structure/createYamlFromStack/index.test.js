@@ -1,8 +1,7 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	callTestForSymmetrical = require("../stackAndYamlTesting/callTestForSymmetrical"),
-	createYamlFromStack = require(".");
+import callTestForSymmetrical from "../stackAndYamlTesting/callTestForSymmetrical";
+import createYamlFromStack from ".";
 
 describe(
 	"createYamlFromStack",

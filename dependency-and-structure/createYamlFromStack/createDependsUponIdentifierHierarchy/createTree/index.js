@@ -1,28 +1,27 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createAncestorsIterator = require("./createAncestorsIterator"),
-	createParent = require("./createParent"),
-	getIdentifierPropertyOrValue = require("../getIdentifierPropertyOrValue"),
-	iterateAncestorsAndAddOrGetWithParents = require("./iterateAncestorsAndAddOrGetWithParents");
+import createAncestorsIterator from "./createAncestorsIterator";
+import createParent from "./createParent";
+import getIdentifierPropertyOrValue from "../getIdentifierPropertyOrValue";
+import iterateAncestorsAndAddOrGetWithParents from "./iterateAncestorsAndAddOrGetWithParents";
 
-module.exports =
-	dependsUpon => {
-		const parent = createParent();
+export default
+dependsUpon => {
+	const parent = createParent();
 
-		let dependsUponWithAncestors =
-			iterateAncestorsAndAddOrGetWithParents(
-				createDependsUponWithAncestorIterator({
-					dependsUpon,
-					parent,
-				}),
-			);
+	let dependsUponWithAncestors =
+		iterateAncestorsAndAddOrGetWithParents(
+			createDependsUponWithAncestorIterator({
+				dependsUpon,
+				parent,
+			}),
+		);
 
-		while (dependsUponWithAncestors.length)
-			dependsUponWithAncestors = iterateAncestorsAndAddOrGetWithParents(dependsUponWithAncestors);
+	while (dependsUponWithAncestors.length)
+		dependsUponWithAncestors = iterateAncestorsAndAddOrGetWithParents(dependsUponWithAncestors);
 
-		return parent.getItems();
-	};
+	return parent.getItems();
+};
 
 function createDependsUponWithAncestorIterator({
 	dependsUpon,

@@ -1,44 +1,43 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createFirstAndSecondLevel = require("./createFirstAndSecondLevel"),
-	createItemYaml = require("../createItemYaml"),
-	createParentChildLevels = require("../createParentChildLevels"),
-	createStackFromLevels = require("../createStackFromLevels"),
-	createUpperAndLowerStack = require("../createUpperAndLowerStack"),
-	formatStackForDescription = require("../formatStackForDescription"),
-	testDependencies = require("./testDependencies");
+import createFirstAndSecondLevel from "./createFirstAndSecondLevel";
+import createItemYaml from "../createItemYaml";
+import createParentChildLevels from "../createParentChildLevels";
+import createStackFromLevels from "../createStackFromLevels";
+import createUpperAndLowerStack from "../createUpperAndLowerStack";
+import formatStackForDescription from "../formatStackForDescription";
+import testDependencies from "./testDependencies";
 
-module.exports =
-	/** @type {import("./Parameter.d")} */
-	stackAndYamlTest => {
-		describe(
-			"symmetrical",
-			() => {
-				createSimpleLevelsTestCases()
-				.forEach(testSideWithSimpleLevels);
+export default
+/** @type {import("./Parameter.d")} */
+stackAndYamlTest => {
+	describe(
+		"symmetrical",
+		() => {
+			createSimpleLevelsTestCases()
+			.forEach(testSideWithSimpleLevels);
 
-				testDependencies(stackAndYamlTest);
-			},
+			testDependencies(stackAndYamlTest);
+		},
+	);
+
+	function testSideWithSimpleLevels({
+		levels,
+		yaml,
+	}) {
+		const stack = createStackFromLevels(levels);
+
+		test(
+			stackAndYamlTest.getName({
+				stackDescription: formatStackForDescription(stack),
+				yaml,
+			}),
+			() =>
+				expect(stackAndYamlTest.getActual({ stack, yaml }))
+				.toEqual(stackAndYamlTest.getExpected({ stack, yaml })),
 		);
-
-		function testSideWithSimpleLevels({
-			levels,
-			yaml,
-		}) {
-			const stack = createStackFromLevels(levels);
-
-			test(
-				stackAndYamlTest.getName({
-					stackDescription: formatStackForDescription(stack),
-					yaml,
-				}),
-				() =>
-					expect(stackAndYamlTest.getActual({ stack, yaml }))
-					.toEqual(stackAndYamlTest.getExpected({ stack, yaml })),
-			);
-		}
-	};
+	}
+};
 
 function createSimpleLevelsTestCases() {
 	return (

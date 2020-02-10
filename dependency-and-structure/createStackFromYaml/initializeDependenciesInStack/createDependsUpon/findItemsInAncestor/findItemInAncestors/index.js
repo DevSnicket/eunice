@@ -1,17 +1,13 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-require("array.prototype.flat")
-.shim();
+import "core-js/features/array/flat";
+import "core-js/features/array/flat-map";
 
-require("array.prototype.flatmap")
-.shim();
+import createFromIdentifiers from "../../createFromIdentifiers";
+import whenIdentifier from "./whenIdentifier";
+import whenItemFound from "./whenItemFound";
 
-const
-	createFromIdentifiers = require("../../createFromIdentifiers"),
-	whenIdentifier = require("./whenIdentifier"),
-	whenItemFound = require("./whenItemFound");
-
-module.exports = findInAncestors;
+export default findInAncestors;
 
 function findInAncestors({
 	ancestors,

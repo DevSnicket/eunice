@@ -1,23 +1,21 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-require("array.prototype.flatmap")
-.shim();
+import "core-js/features/array/flat-map";
 
-const findInDescendantsOfItems = require("./findInDescendantsOfItems");
+import findInDescendantsOfItems from "./findInDescendantsOfItems";
 
-module.exports =
-	({
-		dependent,
-		identifier,
-		stack,
-	}) =>
-		withIsItem(
-			item =>
-				item.id === identifier
-				&&
-				item !== dependent,
-		)
-		.findItemInStack(stack);
+export default ({
+	dependent,
+	identifier,
+	stack,
+}) =>
+	withIsItem(
+		item =>
+			item.id === identifier
+			&&
+			item !== dependent,
+	)
+	.findItemInStack(stack);
 
 function withIsItem(
 	isItem,

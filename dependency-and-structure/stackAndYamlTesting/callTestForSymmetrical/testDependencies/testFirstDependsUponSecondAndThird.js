@@ -1,49 +1,48 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createItemYaml = require("../../createItemYaml"),
-	createStackFromLevels = require("../../createStackFromLevels");
+import createItemYaml from "../../createItemYaml";
+import createStackFromLevels from "../../createStackFromLevels";
 
-module.exports =
-	/** @type {import("../Parameter.d")} */
-	({
-		getActual,
-		getExpected,
-		getName,
-	}) => {
-		const
-			stack =
-				createStack(),
-			yaml =
-				[
-					createItemYaml({
-						dependsUpon:
-							[
-								"second",
-								"third",
-							],
-						id:
-							"first",
-					}),
-					"second",
-					"third",
-				];
+export default
+/** @type {import("../Parameter.d")} */
+({
+	getActual,
+	getExpected,
+	getName,
+}) => {
+	const
+		stack =
+			createStack(),
+		yaml =
+			[
+				createItemYaml({
+					dependsUpon:
+						[
+							"second",
+							"third",
+						],
+					id:
+						"first",
+				}),
+				"second",
+				"third",
+			];
 
-		test(
-			getName({
-				stackDescription:
-					"first depends upon second and third",
-				yaml,
-			}),
-			() =>
-				expect(
-					getActual({ stack, yaml }),
-				)
-				.toEqual(
-					getExpected({ stack, yaml }),
-				),
-		);
-	};
+	test(
+		getName({
+			stackDescription:
+				"first depends upon second and third",
+			yaml,
+		}),
+		() =>
+			expect(
+				getActual({ stack, yaml }),
+			)
+			.toEqual(
+				getExpected({ stack, yaml }),
+			),
+	);
+};
 
 function createStack() {
 	const stack =

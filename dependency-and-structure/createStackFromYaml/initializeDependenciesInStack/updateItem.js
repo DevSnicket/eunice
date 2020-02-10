@@ -1,26 +1,24 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-require("array.prototype.flatmap")
-.shim();
+import "core-js/features/array/flat-map";
 
-module.exports =
-	({
-		dependsUpon,
+export default ({
+	dependsUpon,
+	item,
+}) => {
+	item.dependsUpon = dependsUpon;
+
+	addDependent({
+		dependsUponItems:
+			dependsUpon.flatMap(
+				({ itemOrFirstAncestorItem }) =>
+					itemOrFirstAncestorItem
+					||
+					[],
+			),
 		item,
-	}) => {
-		item.dependsUpon = dependsUpon;
-
-		addDependent({
-			dependsUponItems:
-				dependsUpon.flatMap(
-					({ itemOrFirstAncestorItem }) =>
-						itemOrFirstAncestorItem
-						||
-						[],
-				),
-			item,
-		});
-	};
+	});
+};
 
 function addDependent({
 	dependsUponItems,

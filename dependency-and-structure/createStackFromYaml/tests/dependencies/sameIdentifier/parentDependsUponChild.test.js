@@ -1,9 +1,8 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createItemYaml = require("../../../../stackAndYamlTesting/createItemYaml"),
-	createStackWithIdentifierAndGetParent = require("./createStackWithIdentifierAndGetParent"),
-	testCreateStackFromYaml = require("../../testCreateStackFromYaml");
+import createItemYaml from "../../../../stackAndYamlTesting/createItemYaml";
+import createStackWithIdentifierAndGetParent from "./createStackWithIdentifierAndGetParent";
+import testCreateStackFromYaml from "../../testCreateStackFromYaml";
 
 const sameIdentifier = "same";
 
