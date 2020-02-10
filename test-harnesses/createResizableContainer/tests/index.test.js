@@ -2,7 +2,7 @@
 Licensed under the MIT license. See LICENSE file in the repository root for full license information. */
 
 import { createElement } from "react";
-import createResizableContainer from "../index";
+import createResizableContainer from "..";
 import path from "path";
 import readTextFile from "./readTextFile";
 import removeWhitespaceFromTestExpected from "./removeWhitespaceFromTestExpected";
