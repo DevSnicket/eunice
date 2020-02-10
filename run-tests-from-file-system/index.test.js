@@ -3,7 +3,7 @@ Licensed under the MIT license. See LICENSE file in the repository root for full
 
 import { copy, emptyDir, readFile } from "fs-extra";
 import path from "path";
-import runTestsFromFileSystem from "./index";
+import runTestsFromFileSystem from ".";
 
 const expectedFileName = "expected.txt";
 
