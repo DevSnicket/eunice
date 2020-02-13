@@ -202,9 +202,9 @@ describe(
 );
 
 /**
- * @param {import("./index").Item} parent
- * @returns {import("./index").Item}
- */
+  * @param {import("./Parameter.d").Item} parent
+  * @returns {import("./Parameter.d").Item}
+  */
 function createItemWithParent(
 	parent,
 ) {

@@ -1,25 +1,13 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-/**
- * @typedef Stack
- * @property {Item} [parent]
- *
- * @typedef Item
- * @property {String} [id]
- * @property {Level} level
- *
- * @typedef Level
- * @property {Stack} stack
- */
-
 export default
-/** @param {Stack} stack */
+/** @type {import("./Parameter.d")} */
 stack =>
 	ofItemWhenHasValue(stack.parent)
 	||
 	"";
 
-/** @param {Item} item */
+/** @param {import("./Parameter.d").Item} item */
 function ofItemWhenHasValue(
 	item,
 ) {
@@ -40,7 +28,7 @@ function ofItemWhenHasValue(
 	}
 }
 
-/** @param {Item} item */
+/** @param {import("./Parameter.d").Item} item */
 function * getIdentifiersOfItemAndAncestors(
 	item,
 ) {

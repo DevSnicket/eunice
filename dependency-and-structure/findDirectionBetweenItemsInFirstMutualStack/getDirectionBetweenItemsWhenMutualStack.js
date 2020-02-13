@@ -2,11 +2,11 @@
 
 export default
 /**
- * @param {Object} parameter
- * @param {import("./index").Item} parameter.from
- * @param {import("./index").Item} parameter.to
- * @returns {{direction: "above"|"below"|"same"|"self", stack: import("./index").Stack}}
- */
+  * @param {Object} parameter
+  * @param {import("./Parameter.d").Item} parameter.from
+  * @param {import("./Parameter.d").Item} parameter.to
+  * @returns {{direction: "above"|"below"|"same"|"self", stack: import("./Parameter.d").Stack}}
+  */
 ({
 	from,
 	to,
@@ -23,7 +23,7 @@ export default
 		getWhenFromParent()
 	);
 
-	/** @returns {{direction: "self", stack: import("./index").Stack}} */
+	/** @returns {{direction: "self", stack: import("./Parameter.d").Stack}} */
 	function getWhenSame() {
 		return (
 			from === to
@@ -35,7 +35,7 @@ export default
 		);
 	}
 
-	/** @returns {{direction: "same", stack: import("./index").Stack}} */
+	/** @returns {{direction: "same", stack: import("./Parameter.d").Stack}} */
 	function getWhenSameLevel() {
 		return (
 			from.level === to.level
@@ -55,9 +55,9 @@ export default
 		);
 
 		/**
-			 * @param {import("./index").Items & import("./index").Stack} stack
-			 * @returns {{direction: "above"|"below", stack: import("./index").Stack}}
-			 */
+		  * @param {import("./Parameter.d").Items & import("./Parameter.d").Stack} stack
+		  * @returns {{direction: "above"|"below", stack: import("./Parameter.d").Stack}}
+		  */
 		function getForStack(
 			stack,
 		) {
@@ -81,7 +81,7 @@ export default
 		}
 	}
 
-	/** @returns {{direction: "below", stack: import("./index").Stack}} */
+	/** @returns {{direction: "below", stack: import("./Parameter.d").Stack}} */
 	function getWhenToParent() {
 		const toParent = to.level.stack.parent;
 
@@ -95,7 +95,7 @@ export default
 		);
 	}
 
-	/** @returns {{direction: "above", stack: import("./index").Stack}} */
+	/** @returns {{direction: "above", stack: import("./Parameter.d").Stack}} */
 	function getWhenFromParent() {
 		const fromParent = from.level.stack.parent;
 

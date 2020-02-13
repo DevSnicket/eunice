@@ -58,7 +58,7 @@ function createItem({
 	level,
 	...restOfItem
 }) {
-	/** @type {import("../index").Item} */
+	/** @type {import("../Stack").Item} */
 	const item =
 		{
 			...id && { id },
@@ -66,7 +66,9 @@ function createItem({
 			...restOfItem,
 		};
 
+	// initialization must mutate read-only property as its a reference to its own instance
 	if (items)
+		// @ts-ignore
 		item.items =
 			Object.assign(
 				createStackFromLevels(items),

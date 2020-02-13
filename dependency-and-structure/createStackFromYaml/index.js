@@ -7,9 +7,9 @@ import initializeDependenciesInStack from "./initializeDependenciesInStack";
 
 export default
 /**
- * @param {import("../index").Yaml} yaml
- * @return {import("../index").Stack}
- */
+  * @param {import("../Yaml.d")} yaml
+  * @return {import("../Stack.d")}
+  */
 yaml => {
 	const stack = createStackStructureFromYaml(yaml);
 

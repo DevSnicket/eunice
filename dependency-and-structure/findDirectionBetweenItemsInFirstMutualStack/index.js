@@ -1,31 +1,10 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-/**
-  * @typedef Stack
-  * @property {Item} [parent]
-  *
-  * @typedef Item
-  * @property {Level} level
-  * @property {Stack} [items]
-  *
-  * @typedef Level
-  * @property {Items & Stack} stack
-  *
-  * @typedef Items
-  * @property {function(Level):Number} indexOf
- */
-
 import generateAncestors from "./generateAncestors";
 import getDirectionBetweenItemsWhenMutualStack from "./getDirectionBetweenItemsWhenMutualStack";
 
 export default
-/**
- * @param {Object} parameter
- * @param {Item} parameter.from
- * @param {Item} parameter.to
- * @returns {{direction: "above"|"below"|"same"|"self", stack: Stack}}
- */
-({
+(/** @type {import("./Parameter.d")} */{
 	from,
 	to,
 }) =>

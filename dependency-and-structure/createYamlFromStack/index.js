@@ -5,9 +5,9 @@ import createDependsUponIdentifierHierarchy from "./createDependsUponIdentifierH
 export default createYamlFromStack;
 
 /**
- * @param {import("../index").Stack} stack
- * @returns {import("../index").Yaml}
- */
+  * @param {import("../Stack.d")} stack
+  * @returns {import("../Yaml.d")}
+  */
 function createYamlFromStack(
 	stack,
 ) {

@@ -1,24 +1,7 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-/**
-  * @typedef Stack
-  * @property {Item} [parent]
-  *
-  * @typedef Item
-  * @property {Level} level
-  *
-  * @typedef Level
-  * @property {Stack} stack
- */
-
 export default
-/**
- * @param {Object} parameter
- * @param {Stack} parameter.source
- * @param {Stack} parameter.target
- * @returns {Boolean}
- */
-({
+(/** @type {import("./Parameter.d")} */{
 	source,
 	target,
 }) =>
