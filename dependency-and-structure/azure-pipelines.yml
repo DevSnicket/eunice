@@ -18,7 +18,7 @@ jobs:
     steps:
       - task: NodeTool@0
         displayName: Node install
-        inputs: { versionSpec: $(node_version) }
+        inputs: { versionSpec: 12.16.0 }
       - task: Npm@1
         displayName: NPM install
         inputs: { command: 'install' }
