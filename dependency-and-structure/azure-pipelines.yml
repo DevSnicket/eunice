@@ -15,6 +15,7 @@ jobs:
         node_13: { node_version: 13.8 }
     workspace: { clean: all }
   - job: node_12
+    dependsOn: node_10_and_13
     steps:
       - task: NodeTool@0
         displayName: Node install
