@@ -4,9 +4,7 @@ pool:
 steps:
   - task: NodeTool@0
     displayName: Node install
-    inputs: { versionSpec: '10.x' }
-  - script: npm install -g npm@latest
-    displayName: update NPM
+    inputs: { versionSpec: '10.19' }
   - task: Npm@1
     displayName: NPM install
     inputs: { command: 'install' }
