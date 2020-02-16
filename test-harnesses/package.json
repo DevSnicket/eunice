@@ -91,7 +91,7 @@
 	},
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run test && npm run resizable-columns-test-harness-production && npm run typescript",
-		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|node_modules|output|test-coverage)$\" --infer-stacks --modify-stacks-file=modify-file-stacks.yaml --modify-stacks-key=type --modify-stacks-pattern=^file$ --output-yaml --reverse-file-content=false",
+		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|node_modules|output|test-coverage)$\" --output-yaml --reverse-file-content=false",
 		"lint": "npx eslint .",
 		"resizable-columns-test-harness-production": "rm -rf createResizableContainer/tests/test-harness/output && npx webpack -p --config createResizableContainer/tests/test-harness/webpack.config.babel.js",
 		"resizable-columns-test-harness-development": "rm -rf createResizableContainer/tests/test-harness/output && npx webpack -d --config createResizableContainer/tests/test-harness/webpack.config.babel.js",
