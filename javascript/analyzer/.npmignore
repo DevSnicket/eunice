@@ -11,3 +11,5 @@
 /harness/output
 /test-coverage
 /jsconfig.json
+test-case
+test-cases
