@@ -11,7 +11,7 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"replacement/replaceIdentifiersAndItems/test.js"
+						"replacement/replaceIdentifiersAndItems/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "replaceIdentifiersAndItems jest",
@@ -24,7 +24,7 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"replacement/replaceIdentifiersAndItemsAndLevelsAndStacks/test.js"
+						"replacement/replaceIdentifiersAndItemsAndLevelsAndStacks/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "replaceIdentifiersAndItemsAndLevelsAndStacks jest",
@@ -50,7 +50,7 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"replaceIdentifiers/test.js",
+						"replaceIdentifiers/index.test.js",
 					],
 				"disableOptimisticBPs": true,
 				"name": "replaceIdentifiers jest",
@@ -74,7 +74,7 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"stacking/createOrAddToStacksUsingFileSystem/test.js"
+						"stacking/createOrAddToStacksUsingFileSystem/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "stacking createOrAddToStacksUsingFileSystem jest",
@@ -87,7 +87,7 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"stacking/createOrAddToStacksUsingFileSystem/getTargetLevelOrStackForAncestorsAndDirectory/test.js"
+						"stacking/createOrAddToStacksUsingFileSystem/getTargetLevelOrStackForAncestorsAndDirectory/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "stacking createOrAddToStacksUsingFileSystem getTargetLevelOrStackForAncestorsAndDirectory jest",
@@ -100,7 +100,7 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/createItemLookup/test.js"
+						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/createItemLookup/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack createItemLookup jest",
@@ -113,7 +113,7 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/getExisting/test.js"
+						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/getExisting/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack getExisting jest",
@@ -126,7 +126,7 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/getExisting/getIdentifiersInTargetLevelOrStack/test.js"
+						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/getExisting/getIdentifiersInTargetLevelOrStack/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack getExisting getIdentifiersInTargetLevelOrStack jest",
@@ -139,7 +139,7 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/getStackOrSingleLevelOrSingleItem/test.js"
+						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/getStackOrSingleLevelOrSingleItem/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack getStackOrSingleLevelOrSingleItem jest",
@@ -152,7 +152,7 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/mapAndCreateNewInTargetLevelOrStack/test.js",
+						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/mapAndCreateNewInTargetLevelOrStack/index.test.js",
 					],
 				"disableOptimisticBPs": true,
 				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack mapAndCreateNewInTargetLevelOrStack jest",
@@ -165,7 +165,7 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/mapAndCreateNewInTargetLevelOrStack/mapTargetLevelOrStack/test.js",
+						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/mapAndCreateNewInTargetLevelOrStack/mapTargetLevelOrStack/index.test.js",
 					],
 				"disableOptimisticBPs": true,
 				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack mapAndCreateNewInTargetLevelOrStack mapTargetLevelOrStack jest",
@@ -178,7 +178,7 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/throwErrorWhenIdentifiersNotUsed/test.js",
+						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/throwErrorWhenIdentifiersNotUsed/index.test.js",
 					],
 				"disableOptimisticBPs": true,
 				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack throwErrorWhenIdentifiersNotUsed jest",
@@ -198,7 +198,7 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"unstackIndependent/test.js",
+						"unstackIndependent/index.test.js",
 					],
 				"disableOptimisticBPs": true,
 				"name": "unstackIndependent jest",
