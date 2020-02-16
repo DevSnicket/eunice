@@ -4,4 +4,9 @@
 /.vscode
 /cspell.json
 /devsnicket-eunice-test-harnesses-*.tgz
+/eunice.*
 /jsconfig.json
+/gh-pages
+/styleMock.js
+/test-coverage
+test-cases
