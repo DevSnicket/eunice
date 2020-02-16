@@ -87,7 +87,7 @@
 		"harness-development": "rm -rf harness/output && npx webpack -d --config harness/webpack.config.js",
 		"lint": "eslint .",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./harness/output/*\" ! -path \"./node_modules/**/*\" ! -path \"**/test-cases/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
-		"test": "jest --runInBand"
+		"test": "jest"
 	},
 	"version": "11.26.1"
 }
