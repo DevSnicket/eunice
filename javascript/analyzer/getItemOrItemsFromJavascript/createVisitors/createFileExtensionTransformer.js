@@ -49,13 +49,18 @@ module.exports =
 				function existsWithExtensionAdded() {
 					return (
 						extensions
-						.map(
-							extension => (
-								{
-									withExtension: `${relative}${extension}`,
-									withoutExtension: relative,
-								}
-							),
+						.flatMap(
+							extension =>
+								[
+									{
+										withExtension: path.join(relative, `index${extension}`),
+										withoutExtension: `${relative}/index`,
+									},
+									{
+										withExtension: `${relative}${extension}`,
+										withoutExtension: relative,
+									},
+								],
 						)
 						.find(
 							({ withExtension }) =>
@@ -127,10 +132,13 @@ module.exports =
 			absolute,
 			relative,
 		}) {
+			const resolvedPath = path.join(absolute, relative);
+
 			return (
-				fileSystem.existsSync(
-					path.join(absolute, relative),
-				)
+				fileSystem.existsSync(resolvedPath)
+				&&
+				!fileSystem.lstatSync(resolvedPath)
+				.isDirectory()
 			);
 		}
 	};
