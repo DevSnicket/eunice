@@ -72,7 +72,7 @@
 	},
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run typescript && npm run test && npm run github-pages-copy",
-		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|gh-pages|node_modules|test-cases|test-coverage)$\" --infer-stacks --modify-stacks-file=modify-file-stacks.yaml --modify-stacks-key=type --modify-stacks-pattern=^file$ --output-yaml --reverse-file-content=false",
+		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|gh-pages|node_modules|test-cases|test-coverage)$\" --output-yaml --reverse-file-content=false",
 		"lint": "npx eslint .",
 		"github-pages-copy": "rm -f -rf gh-pages && mkdir gh-pages && bash github-pages-copy.sh",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
