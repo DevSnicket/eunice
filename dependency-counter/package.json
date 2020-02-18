@@ -76,7 +76,7 @@
 		"lint": "npx eslint .",
 		"github-pages-copy": "rm -f -rf gh-pages && mkdir gh-pages && bash github-pages-copy.sh",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
-		"test": "npx jest --runInBand",
+		"test": "npx jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
 	"version": "6.10.0"
