@@ -1,24 +1,20 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Licensed under the MIT license. See LICENSE file in the repository root for full license information.
 
-require("array.prototype.flat")
-.shim();
+import "core-js/features/array/flat";
+import "core-js/features/array/flat-map";
 
-require("array.prototype.flatmap")
-.shim();
+import getStackOrSingleLevelOrSingleItem from "../../getStackOrSingleLevelOrSingleItem";
 
-const getStackOrSingleLevelOrSingleItem = require("../../getStackOrSingleLevelOrSingleItem");
-
-module.exports =
-	({
+export default ({
+	getLevelOrStackForTargetIdentifierOrItem,
+	targetLevelOrStack,
+}) =>
+	withGetLevelOrStackForTargetIdentifierOrItem(
 		getLevelOrStackForTargetIdentifierOrItem,
+	)
+	.mapTargetLevelOrStack(
 		targetLevelOrStack,
-	}) =>
-		withGetLevelOrStackForTargetIdentifierOrItem(
-			getLevelOrStackForTargetIdentifierOrItem,
-		)
-		.mapTargetLevelOrStack(
-			targetLevelOrStack,
-		);
+	);
 
 function withGetLevelOrStackForTargetIdentifierOrItem(
 	getLevelOrStackForTargetIdentifierOrItem,

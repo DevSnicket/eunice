@@ -1,6 +1,6 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Licensed under the MIT license. See LICENSE file in the repository root for full license information.
 
-const throwErrorWhenIdentifiersNotUsed = require(".");
+import throwErrorWhenIdentifiersNotUsed from ".";
 
 test(
 	"Two identifiers not used and empty target, throws error message of the two identifiers comma separated and empty stack.",

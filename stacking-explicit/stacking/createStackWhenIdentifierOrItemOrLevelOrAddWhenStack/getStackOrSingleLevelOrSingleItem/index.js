@@ -1,19 +1,19 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Licensed under the MIT license. See LICENSE file in the repository root for full license information.
 
-module.exports =
-	stack => {
-		return whenSingleItemOrLevel() || stack;
+export default
+stack => {
+	return whenSingleItemOrLevel() || stack;
 
-		function whenSingleItemOrLevel() {
-			const singleItemOrLevel = getWhenSingle(stack);
+	function whenSingleItemOrLevel() {
+		const singleItemOrLevel = getWhenSingle(stack);
 
-			return (
-				singleItemOrLevel
-				&&
-				(getWhenSingle(singleItemOrLevel) || singleItemOrLevel)
-			);
-		}
-	};
+		return (
+			singleItemOrLevel
+			&&
+			(getWhenSingle(singleItemOrLevel) || singleItemOrLevel)
+		);
+	}
+};
 
 function getWhenSingle(
 	value,

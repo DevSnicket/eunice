@@ -1,35 +1,32 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Licensed under the MIT license. See LICENSE file in the repository root for full license information.
 
-require("array.prototype.flat")
-.shim();
+import "core-js/features/array/flat";
 
-const
-	filterIdentifierOrItemOrLevelOrStack = require("./filterIdentifierOrItemOrLevelOrStack"),
-	getIdentifierOrIdentifierOfItem = require("../getIdentifierOrIdentifierOfItem"),
-	getIdentifiersInTargetLevelOrStack = require("./getIdentifiersInTargetLevelOrStack"),
-	getStackOrSingleLevelOrSingleItem = require("../getStackOrSingleLevelOrSingleItem");
+import filterIdentifierOrItemOrLevelOrStack from "./filterIdentifierOrItemOrLevelOrStack";
+import getIdentifierOrIdentifierOfItem from "../getIdentifierOrIdentifierOfItem";
+import getIdentifiersInTargetLevelOrStack from "./getIdentifiersInTargetLevelOrStack";
+import getStackOrSingleLevelOrSingleItem from "../getStackOrSingleLevelOrSingleItem";
 
-module.exports =
-	({
-		identifierOrItemOrLevelOrStack,
-		targetLevelOrStack,
-	}) =>
-		identifierOrItemOrLevelOrStack
-		&&
-		getStackOrSingleLevelOrSingleItem(
-			filterIdentifierOrItemOrLevelOrStack({
-				identifierOrItemOrLevelOrStack,
-				identifierOrItemPredicate:
-					withTargetIdentifiers(
-						new Set(
-							getIdentifiersInTargetLevelOrStack(
-								targetLevelOrStack,
-							),
+export default ({
+	identifierOrItemOrLevelOrStack,
+	targetLevelOrStack,
+}) =>
+	identifierOrItemOrLevelOrStack
+	&&
+	getStackOrSingleLevelOrSingleItem(
+		filterIdentifierOrItemOrLevelOrStack({
+			identifierOrItemOrLevelOrStack,
+			identifierOrItemPredicate:
+				withTargetIdentifiers(
+					new Set(
+						getIdentifiersInTargetLevelOrStack(
+							targetLevelOrStack,
 						),
-					)
-					.isIdentifierOrItemIncluded,
-			}),
-		);
+					),
+				)
+				.isIdentifierOrItemIncluded,
+		}),
+	);
 
 function withTargetIdentifiers(
 	targetIdentifiers,

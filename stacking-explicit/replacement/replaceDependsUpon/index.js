@@ -1,16 +1,15 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Licensed under the MIT license. See LICENSE file in the repository root for full license information.
 
-module.exports =
-	({
-		identifierOrItemOrLevelOrStack,
+export default ({
+	identifierOrItemOrLevelOrStack,
+	replace,
+}) =>
+	withReplace(
 		replace,
-	}) =>
-		withReplace(
-			replace,
-		)
-		.getIdentifierOrReplaceItemOrItemsInLevelOrStack(
-			identifierOrItemOrLevelOrStack,
-		);
+	)
+	.getIdentifierOrReplaceItemOrItemsInLevelOrStack(
+		identifierOrItemOrLevelOrStack,
+	);
 
 function withReplace(
 	replace,

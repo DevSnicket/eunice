@@ -1,18 +1,17 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Licensed under the MIT license. See LICENSE file in the repository root for full license information.
 
-const replaceIdentifiersAndItemsAndLevelsAndStacks = require("../replaceIdentifiersAndItemsAndLevelsAndStacks");
+import replaceIdentifiersAndItemsAndLevelsAndStacks from "../replaceIdentifiersAndItemsAndLevelsAndStacks";
 
-module.exports =
-	({
+export default ({
+	identifierOrItemOrLevelOrStack,
+	replace,
+}) =>
+	replaceIdentifiersAndItemsAndLevelsAndStacks({
 		identifierOrItemOrLevelOrStack,
-		replace,
-	}) =>
-		replaceIdentifiersAndItemsAndLevelsAndStacks({
-			identifierOrItemOrLevelOrStack,
-			replace:
-				withReplaceIdentifierOrItem(replace)
-				.replaceIdentifierOrItemOrLevelOrStack,
-		});
+		replace:
+			withReplaceIdentifierOrItem(replace)
+			.replaceIdentifierOrItemOrLevelOrStack,
+	});
 
 function withReplaceIdentifierOrItem(
 	replaceIdentifierOrItem,

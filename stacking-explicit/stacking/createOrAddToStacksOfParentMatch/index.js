@@ -1,27 +1,25 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Licensed under the MIT license. See LICENSE file in the repository root for full license information.
 
-const
-	createStackWhenIdentifierOrItemOrLevelOrAddWhenStack = require("../createStackWhenIdentifierOrItemOrLevelOrAddWhenStack"),
-	hasParentInAncestors = require("./hasParentInAncestors"),
-	replaceIdentifiersAndItemsAndLevelsAndStacks = require("../../replacement/replaceIdentifiersAndItemsAndLevelsAndStacks");
+import createStackWhenIdentifierOrItemOrLevelOrAddWhenStack from "../createStackWhenIdentifierOrItemOrLevelOrAddWhenStack";
+import hasParentInAncestors from "./hasParentInAncestors";
+import replaceIdentifiersAndItemsAndLevelsAndStacks from "../../replacement/replaceIdentifiersAndItemsAndLevelsAndStacks";
 
-module.exports =
-	({
-		addNewInTarget = true,
+export default ({
+	addNewInTarget = true,
+	identifierOrItemOrLevelOrStack,
+	keysAndPatterns,
+	targetLevelOrStack,
+}) =>
+	replaceIdentifiersAndItemsAndLevelsAndStacks({
 		identifierOrItemOrLevelOrStack,
-		keysAndPatterns,
-		targetLevelOrStack,
-	}) =>
-		replaceIdentifiersAndItemsAndLevelsAndStacks({
-			identifierOrItemOrLevelOrStack,
-			replace:
-				withContext({
-					addNewInTarget,
-					keysAndPatterns,
-					targetLevelOrStack,
-				})
-				.replace,
-		});
+		replace:
+			withContext({
+				addNewInTarget,
+				keysAndPatterns,
+				targetLevelOrStack,
+			})
+			.replace,
+	});
 
 function withContext({
 	addNewInTarget,

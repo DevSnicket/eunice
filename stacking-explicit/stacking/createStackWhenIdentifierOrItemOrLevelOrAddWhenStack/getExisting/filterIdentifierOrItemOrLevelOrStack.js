@@ -1,21 +1,19 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Licensed under the MIT license. See LICENSE file in the repository root for full license information.
 
-require("array.prototype.flatmap")
-.shim();
+import "core-js/features/array/flat-map";
 
-module.exports =
-	({
+export default ({
+	identifierOrItemPredicate,
+	identifierOrItemOrLevelOrStack,
+}) =>
+	withIdentifierOrItemPredicate(
 		identifierOrItemPredicate,
+	)
+	.filterIdentifierOrItemOrLevelOrStack(
 		identifierOrItemOrLevelOrStack,
-	}) =>
-		withIdentifierOrItemPredicate(
-			identifierOrItemPredicate,
-		)
-		.filterIdentifierOrItemOrLevelOrStack(
-			identifierOrItemOrLevelOrStack,
-		)
-		||
-		null;
+	)
+	||
+	null;
 
 function withIdentifierOrItemPredicate(
 	identifierOrItemPredicate,

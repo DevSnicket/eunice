@@ -1,35 +1,34 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Licensed under the MIT license. See LICENSE file in the repository root for full license information.
 
-const
-	createForIdentifierOrItem = require("./createForIdentifierOrItem"),
-	createForLevelOrStack = require("./createForLevelOrStack");
+import createForIdentifierOrItem from "./createForIdentifierOrItem";
+import createForLevelOrStack from "./createForLevelOrStack";
 
-module.exports =
-	identifierOrItemOrLevelOrStack => {
+export default
+identifierOrItemOrLevelOrStack => {
+	return (
+		whenNoValue()
+		||
+		whenLevelOrStack()
+		||
+		createForIdentifierOrItem(identifierOrItemOrLevelOrStack)
+	);
+
+	function whenNoValue() {
 		return (
-			whenNoValue()
-			||
-			whenLevelOrStack()
-			||
-			createForIdentifierOrItem(identifierOrItemOrLevelOrStack)
+			!identifierOrItemOrLevelOrStack
+			&&
+			{
+				getIdentifiersNotUsed: () => null,
+				useItem: () => null,
+			}
 		);
+	}
 
-		function whenNoValue() {
-			return (
-				!identifierOrItemOrLevelOrStack
-				&&
-				{
-					getIdentifiersNotUsed: () => null,
-					useItem: () => null,
-				}
-			);
-		}
-
-		function whenLevelOrStack() {
-			return (
-				Array.isArray(identifierOrItemOrLevelOrStack)
-				&&
-				createForLevelOrStack(identifierOrItemOrLevelOrStack)
-			);
-		}
-	};
+	function whenLevelOrStack() {
+		return (
+			Array.isArray(identifierOrItemOrLevelOrStack)
+			&&
+			createForLevelOrStack(identifierOrItemOrLevelOrStack)
+		);
+	}
+};

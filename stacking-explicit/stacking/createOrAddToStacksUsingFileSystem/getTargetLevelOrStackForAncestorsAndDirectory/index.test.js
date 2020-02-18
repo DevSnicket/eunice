@@ -1,8 +1,7 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Licensed under the MIT license. See LICENSE file in the repository root for full license information.
 
-const
-	getTargetLevelOrStackForAncestorsAndDirectory = require("."),
-	path = require("path");
+import getTargetLevelOrStackForAncestorsAndDirectory from ".";
+import path from "path";
 
 test.each(
 	[

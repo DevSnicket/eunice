@@ -1,68 +1,67 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Licensed under the MIT license. See LICENSE file in the repository root for full license information.
 
-require("array.prototype.flatmap")
-.shim();
+import "core-js/features/array/flat-map";
 
-const getIdentifierOrIdentifierOfItem = require("../getIdentifierOrIdentifierOfItem");
+import getIdentifierOrIdentifierOfItem from "../getIdentifierOrIdentifierOfItem";
 
-module.exports =
-	levelOrStack => {
-		const itemsByIdentifier = new Map(generateKeyValuePairs());
+export default
+levelOrStack => {
+	const itemsByIdentifier = new Map(generateKeyValuePairs());
 
+	return (
+		{
+			getIdentifiersNotUsed,
+			useItem,
+		}
+	);
+
+	function * generateKeyValuePairs() {
+		for (const identifierOrItemOrLevel of levelOrStack)
+			if (Array.isArray(identifierOrItemOrLevel))
+				for (const identifierOrItem of identifierOrItemOrLevel)
+					yield getKeyValuePairForIdentifierOrItem(identifierOrItem);
+			else
+				yield getKeyValuePairForIdentifierOrItem(identifierOrItemOrLevel);
+	}
+
+	function getIdentifiersNotUsed() {
 		return (
-			{
-				getIdentifiersNotUsed,
-				useItem,
-			}
+			getIterableAsArrayWhenHasItems(generate())
+			||
+			null
 		);
 
-		function * generateKeyValuePairs() {
-			for (const identifierOrItemOrLevel of levelOrStack)
-				if (Array.isArray(identifierOrItemOrLevel))
-					for (const identifierOrItem of identifierOrItemOrLevel)
-						yield getKeyValuePairForIdentifierOrItem(identifierOrItem);
-				else
-					yield getKeyValuePairForIdentifierOrItem(identifierOrItemOrLevel);
+		function * generate() {
+			for (const { isUsed, item } of itemsByIdentifier.values())
+				if (!isUsed)
+					yield getIdentifierOrIdentifierOfItem(item);
 		}
 
-		function getIdentifiersNotUsed() {
-			return (
-				getIterableAsArrayWhenHasItems(generate())
-				||
-				null
+		function getIterableAsArrayWhenHasItems(
+			iterable,
+		) {
+			const array = [ ...iterable ];
+
+			return array.length && array;
+		}
+	}
+
+	function useItem(
+		identifierOrItem,
+	) {
+		const itemAndIsUsed =
+			itemsByIdentifier.get(
+				getIdentifierOrIdentifierOfItem(identifierOrItem),
 			);
 
-			function * generate() {
-				for (const { isUsed, item } of itemsByIdentifier.values())
-					if (!isUsed)
-						yield getIdentifierOrIdentifierOfItem(item);
-			}
+		if (itemAndIsUsed) {
+			itemAndIsUsed.isUsed = true;
 
-			function getIterableAsArrayWhenHasItems(
-				iterable,
-			) {
-				const array = [ ...iterable ];
-
-				return array.length && array;
-			}
-		}
-
-		function useItem(
-			identifierOrItem,
-		) {
-			const itemAndIsUsed =
-				itemsByIdentifier.get(
-					getIdentifierOrIdentifierOfItem(identifierOrItem),
-				);
-
-			if (itemAndIsUsed) {
-				itemAndIsUsed.isUsed = true;
-
-				return itemAndIsUsed.item;
-			} else
-				return null;
-		}
-	};
+			return itemAndIsUsed.item;
+		} else
+			return null;
+	}
+};
 
 function getKeyValuePairForIdentifierOrItem(
 	identifierOrItem,

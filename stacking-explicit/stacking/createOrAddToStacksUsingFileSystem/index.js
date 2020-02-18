@@ -1,29 +1,27 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Licensed under the MIT license. See LICENSE file in the repository root for full license information.
 
-const
-	createStackWhenIdentifierOrItemOrLevelOrAddWhenStack = require("../createStackWhenIdentifierOrItemOrLevelOrAddWhenStack"),
-	getTargetLevelOrStackForAncestorsAndDirectory = require("./getTargetLevelOrStackForAncestorsAndDirectory"),
-	replaceIdentifiersAndItemsAndLevelsAndStacks = require("../../replacement/replaceIdentifiersAndItemsAndLevelsAndStacks");
+import createStackWhenIdentifierOrItemOrLevelOrAddWhenStack from "../createStackWhenIdentifierOrItemOrLevelOrAddWhenStack";
+import getTargetLevelOrStackForAncestorsAndDirectory from "./getTargetLevelOrStackForAncestorsAndDirectory";
+import replaceIdentifiersAndItemsAndLevelsAndStacks from "../../replacement/replaceIdentifiersAndItemsAndLevelsAndStacks";
 
-module.exports =
-	({
-		addNewInTarget = true,
-		directory,
+export default ({
+	addNewInTarget = true,
+	directory,
+	identifierOrItemOrLevelOrStack,
+	stackFileName,
+	subsetIdentifierHierarchy,
+}) =>
+	replaceIdentifiersAndItemsAndLevelsAndStacks({
 		identifierOrItemOrLevelOrStack,
-		stackFileName,
-		subsetIdentifierHierarchy,
-	}) =>
-		replaceIdentifiersAndItemsAndLevelsAndStacks({
-			identifierOrItemOrLevelOrStack,
-			replace:
-				withContext({
-					addNewInTarget,
-					directory,
-					stackFileName,
-					subsetIdentifierHierarchy,
-				})
-				.replace,
-		});
+		replace:
+			withContext({
+				addNewInTarget,
+				directory,
+				stackFileName,
+				subsetIdentifierHierarchy,
+			})
+			.replace,
+	});
 
 function withContext({
 	addNewInTarget,

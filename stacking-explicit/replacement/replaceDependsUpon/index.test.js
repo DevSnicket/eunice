@@ -3,7 +3,7 @@
 // Undefined needed to test items without a dependsUpon property
 /* eslint-disable no-undefined */
 
-const replaceDependsUpon = require(".");
+import replaceDependsUpon from ".";
 
 test(
 	"Identifier without replace callback returns identifier.",

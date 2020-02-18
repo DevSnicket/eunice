@@ -1,8 +1,7 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Licensed under the MIT license. See LICENSE file in the repository root for full license information.
 
-const
-	createTestItemWithIdentifier = require("../../createTestItemWithIdentifier"),
-	mapTargetLevelOrStack = require(".");
+import createTestItemWithIdentifier from "../../createTestItemWithIdentifier";
+import mapTargetLevelOrStack from ".";
 
 test(
 	"Target of empty, does not call getLevelOrStackForTargetIdentifierOrItem and returns null.",

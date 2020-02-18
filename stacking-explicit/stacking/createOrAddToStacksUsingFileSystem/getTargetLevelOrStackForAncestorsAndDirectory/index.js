@@ -1,42 +1,40 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Licensed under the MIT license. See LICENSE file in the repository root for full license information.
 
-const
-	fs = require("fs"),
-	getAncestorIdentifiersWhenValid = require("./getAncestorIdentifiersWhenValid"),
-	parseYaml = require("js-yaml").safeLoad,
-	path = require("path");
+import fs from "fs";
+import getAncestorIdentifiersWhenValid from "./getAncestorIdentifiersWhenValid";
+import { safeLoad as parseYaml } from "js-yaml";
+import path from "path";
 
-module.exports =
-	({
-		ancestors,
-		directory,
-		stackFileName = ".eunice-stack.yaml",
-		subsetIdentifierHierarchy,
-	}) => {
-		const ancestorIdentifiers =
-			getAncestorIdentifiersWhenValid({
-				ancestors,
-				subsetIdentifierHierarchy,
-			});
+export default ({
+	ancestors,
+	directory,
+	stackFileName = ".eunice-stack.yaml",
+	subsetIdentifierHierarchy,
+}) => {
+	const ancestorIdentifiers =
+		getAncestorIdentifiersWhenValid({
+			ancestors,
+			subsetIdentifierHierarchy,
+		});
 
+	return (
+		ancestorIdentifiers
+		&&
+		getIdentifiersInNewStackFromPath(
+			getStackFilePath(),
+		)
+	);
+
+	function getStackFilePath() {
 		return (
-			ancestorIdentifiers
-			&&
-			getIdentifiersInNewStackFromPath(
-				getStackFilePath(),
+			path.join(
+				directory,
+				...ancestorIdentifiers,
+				stackFileName,
 			)
 		);
-
-		function getStackFilePath() {
-			return (
-				path.join(
-					directory,
-					...ancestorIdentifiers,
-					stackFileName,
-				)
-			);
-		}
-	};
+	}
+};
 
 function getIdentifiersInNewStackFromPath(
 	stackFilePath,
