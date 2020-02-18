@@ -82,6 +82,7 @@ describe(
 			],
 		)(
 			"%s",
+			// @ts-ignore
 			(description, identifierOrItemOrLevelOrStack, replaceCallArguments) => {
 				const replace = jest.fn(({ identifierOrItem }) => identifierOrItem);
 

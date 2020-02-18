@@ -68,6 +68,7 @@ describe(
 			],
 		)(
 			"Ancestors of %j returns %j",
+			// @ts-ignore
 			(ancestors, expected) =>
 				expect(
 					hasParentInAncestors({

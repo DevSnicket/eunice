@@ -18,8 +18,12 @@ identifierOrItemOrLevelOrStack => {
 			!identifierOrItemOrLevelOrStack
 			&&
 			{
-				getIdentifiersNotUsed: () => null,
-				useItem: () => null,
+				getIdentifiersNotUsed:
+					() => null,
+				useItem:
+					// match other definition
+					// eslint-disable-next-line no-unused-vars
+					identifierOrItem => null,
 			}
 		);
 	}

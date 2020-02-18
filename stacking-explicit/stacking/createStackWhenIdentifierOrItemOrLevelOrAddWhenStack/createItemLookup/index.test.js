@@ -99,7 +99,9 @@ describe(
 			],
 		)(
 			"%j returns %j",
+			// @ts-ignore
 			(
+				// @ts-ignore
 				{ identifierOrItemOrLevelOrStack, targetIdentifierOrItem },
 				existing,
 			) =>
@@ -147,6 +149,7 @@ describe(
 			],
 		)(
 			"%j returns %j",
+			// @ts-ignore
 			(
 				identifierOrItemOrLevelOrStack,
 				identifiersNotUsed,

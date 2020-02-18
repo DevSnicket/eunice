@@ -8,7 +8,7 @@ export default ({
 	addNewInTarget = true,
 	directory,
 	identifierOrItemOrLevelOrStack,
-	stackFileName,
+	stackFileName = ".eunice-stack.yaml",
 	subsetIdentifierHierarchy,
 }) =>
 	replaceIdentifiersAndItemsAndLevelsAndStacks({

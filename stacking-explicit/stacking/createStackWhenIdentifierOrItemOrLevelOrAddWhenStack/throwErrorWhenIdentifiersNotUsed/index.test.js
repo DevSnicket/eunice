@@ -71,6 +71,7 @@ describe(
 			],
 		)(
 			"Target of %j, throws error message of %s.",
+			// @ts-ignore
 			(targetLevelOrStack, targetDescription) =>
 				expect(
 					() =>

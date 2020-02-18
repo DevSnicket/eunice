@@ -55,9 +55,11 @@ test.each(
 	],
 )(
 	"%j with replacement %j returns %j",
+	// @ts-ignore
 	(argument, expected) =>
 		expect(
 			replaceIdentifiersAndItemsAndLevelsAndStacks(
+				// @ts-ignore
 				argument,
 			),
 		)
@@ -147,6 +149,7 @@ test.each(
 	],
 )(
 	"%j calls replace with arguments %j",
+	// @ts-ignore
 	(identifierOrItemOrLevelOrStack, expected) => {
 		const actual = [];
 

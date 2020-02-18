@@ -75,6 +75,7 @@ test.each(
 	],
 )(
 	"%j and replacement of %o calls replace with argument %o and returns %j",
+	// @ts-ignore
 	(identifierOrItemOrLevelOrStack, replacement, replaceCallArgument, expected) => {
 		const replace = jest.fn(() => replacement);
 

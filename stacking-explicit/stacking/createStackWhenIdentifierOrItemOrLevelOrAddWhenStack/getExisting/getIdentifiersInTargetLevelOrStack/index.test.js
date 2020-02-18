@@ -77,6 +77,7 @@ test.each(
 	],
 )(
 	"%j returns %j",
+	// @ts-ignore
 	(targetLevelOrStack, expected) =>
 		expect(getIdentifiersInTargetLevelOrStack(targetLevelOrStack))
 		.toEqual(expected),

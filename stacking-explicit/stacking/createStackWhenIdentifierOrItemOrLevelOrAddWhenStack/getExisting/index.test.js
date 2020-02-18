@@ -58,7 +58,9 @@ test.each(
 	],
 )(
 	"%j returns %j",
+	// @ts-ignore
 	(
+		// @ts-ignore
 		{ identifierOrItemOrLevelOrStack, targetLevelOrStack },
 		existing,
 	) =>

@@ -81,12 +81,15 @@ test.each(
 	],
 )(
 	"%j ancestors with subset identifier hierarchy %j returns %j",
+	// @ts-ignore
 	(ancestors, subsetIdentifierHierarchy, expected) =>
 		expect(
 			getTargetLevelOrStackForAncestorsAndDirectory({
 				ancestors,
 				directory:
 					path.join(__dirname, "testCases"),
+				stackFileName:
+					".eunice-stack.yaml",
 				subsetIdentifierHierarchy,
 			}),
 		)

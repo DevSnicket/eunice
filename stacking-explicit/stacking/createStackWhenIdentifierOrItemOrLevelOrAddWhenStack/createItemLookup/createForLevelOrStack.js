@@ -6,7 +6,11 @@ import getIdentifierOrIdentifierOfItem from "../getIdentifierOrIdentifierOfItem"
 
 export default
 levelOrStack => {
-	const itemsByIdentifier = new Map(generateKeyValuePairs());
+	const itemsByIdentifier =
+		new Map(
+			// @ts-ignore
+			generateKeyValuePairs(),
+		);
 
 	return (
 		{

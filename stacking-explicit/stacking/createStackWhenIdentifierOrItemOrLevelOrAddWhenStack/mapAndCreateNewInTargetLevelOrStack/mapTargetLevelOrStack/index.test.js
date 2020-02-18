@@ -78,6 +78,7 @@ describe(
 			],
 		)(
 			"returns %s",
+			// @ts-ignore
 			(returnDescription, itemOrLevelOrStack) =>
 				expect(
 					mapTargetLevelOrStack({

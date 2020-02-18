@@ -8,7 +8,7 @@ import path from "path";
 export default ({
 	ancestors,
 	directory,
-	stackFileName = ".eunice-stack.yaml",
+	stackFileName,
 	subsetIdentifierHierarchy,
 }) => {
 	const ancestorIdentifiers =
