@@ -1,9 +1,8 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createDownSymbol = require("./createDownSymbol"),
-	createRightSymbol = require("./createRightSymbol"),
-	createUpSymbol = require("./createUpSymbol");
+import createDownSymbol from "./createDownSymbol";
+import createRightSymbol from "./createRightSymbol";
+import createUpSymbol from "./createUpSymbol";
 
 const
 	colorsDefault =
@@ -21,35 +20,34 @@ const
 			paddingRight: 0,
 		};
 
-module.exports =
-	({
-		createElement,
-		colors: { red, green } = colorsDefault,
-		withPrecision,
-	}) =>
-		(
-			{
-				down:
-					createDown({
-						createElement,
-						fill: green,
-						id: formatId("down"),
-					}),
-				right:
-					createRight({
-						createElement,
-						fill: red,
-						id: formatId("right"),
-					}),
-				up:
-					createUp({
-						createElement,
-						fill: red,
-						id: formatId("up"),
-						withPrecision,
-					}),
-			}
-		);
+export default ({
+	createElement,
+	colors: { red, green } = colorsDefault,
+	withPrecision,
+}) =>
+	(
+		{
+			down:
+				createDown({
+					createElement,
+					fill: green,
+					id: formatId("down"),
+				}),
+			right:
+				createRight({
+					createElement,
+					fill: red,
+					id: formatId("right"),
+				}),
+			up:
+				createUp({
+					createElement,
+					fill: red,
+					id: formatId("up"),
+					withPrecision,
+				}),
+		}
+	);
 
 function formatId(
 	id,

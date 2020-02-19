@@ -1,48 +1,47 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-module.exports =
-	({
-		childGroupFactory,
-		createElement,
-		font,
-		namespaces,
-		style,
-		symbols,
-		withPrecision,
-	}) => {
-		return (
-			createFromAttributesAndChildren({
-				...createAttributesWithChildren(),
-				createElement,
-				namespaces,
-			})
-		);
+export default ({
+	childGroupFactory,
+	createElement,
+	font,
+	namespaces,
+	style,
+	symbols,
+	withPrecision,
+}) => {
+	return (
+		createFromAttributesAndChildren({
+			...createAttributesWithChildren(),
+			createElement,
+			namespaces,
+		})
+	);
 
-		function createAttributesWithChildren() {
-			return (
-				childGroupFactory
-				&&
-				{
-					attributes:
-						{
-							height: withPrecision(childGroupFactory.height),
-							width: withPrecision(childGroupFactory.width),
-						},
-					children:
-						[
-							createStyleElementInDefsElement({
-								createElement,
-								style: `${getSvgStyleForFont(font)}${style}`,
-							}),
-							...symbols,
-							...childGroupFactory.createAtPosition({
-								left: 0,
-								top: 0,
-							}),
-						],
-				});
-		}
-	};
+	function createAttributesWithChildren() {
+		return (
+			childGroupFactory
+			&&
+			{
+				attributes:
+					{
+						height: withPrecision(childGroupFactory.height),
+						width: withPrecision(childGroupFactory.width),
+					},
+				children:
+					[
+						createStyleElementInDefsElement({
+							createElement,
+							style: `${getSvgStyleForFont(font)}${style}`,
+						}),
+						...symbols,
+						...childGroupFactory.createAtPosition({
+							left: 0,
+							top: 0,
+						}),
+					],
+			});
+	}
+};
 
 function getSvgStyleForFont(
 	font,

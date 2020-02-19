@@ -1,60 +1,58 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-module.exports =
-	({
-		aggregateGroupFactoriesWithOrientation,
-		createGroupFactoryWhenRequired,
-		dependencies,
-		itemGroupWidth,
-		levelGroupFactory,
-	}) => {
+export default ({
+	aggregateGroupFactoriesWithOrientation,
+	createGroupFactoryWhenRequired,
+	dependencies,
+	itemGroupWidth,
+	levelGroupFactory,
+}) => {
+	return (
+		dependencies && (dependencies.above || dependencies.below)
+		?
+		createGroupFactoryWithDependencies()
+		:
+		levelGroupFactory
+	);
+
+	function createGroupFactoryWithDependencies() {
 		return (
-			dependencies && (dependencies.above || dependencies.below)
-			?
-			createGroupFactoryWithDependencies()
-			:
-			levelGroupFactory
+			aggregateGroupFactoriesWithOrientation.vertical({
+				groupFactories:
+					[
+						...createGroupFactoriesForDependenciesInDirection(
+							dependencies.above,
+						),
+						levelGroupFactory,
+						...createGroupFactoriesForDependenciesInDirection(
+							dependencies.below,
+						),
+					],
+				spacing:
+					0,
+			})
 		);
 
-		function createGroupFactoryWithDependencies() {
-			return (
-				aggregateGroupFactoriesWithOrientation.vertical({
-					groupFactories:
-						[
-							...createGroupFactoriesForDependenciesInDirection(
-								dependencies.above,
-							),
-							levelGroupFactory,
-							...createGroupFactoriesForDependenciesInDirection(
-								dependencies.below,
-							),
-						],
-					spacing:
-						0,
-				})
-			);
+		function createGroupFactoriesForDependenciesInDirection(
+			dependenciesInDirection,
+		) {
+			const groupFactory =
+				createGroupFactoryForDependenciesWhenRequired({
+					aggregateGroupFactoriesHorizontal:
+						aggregateGroupFactoriesWithOrientation.horizontal,
+					createGroupFactoryWhenRequired,
+					dependenciesInDirection,
+					itemGroup:
+						{
+							left: levelGroupFactory.itemGroupLeft,
+							width: itemGroupWidth,
+						},
+				});
 
-			function createGroupFactoriesForDependenciesInDirection(
-				dependenciesInDirection,
-			) {
-				const groupFactory =
-					createGroupFactoryForDependenciesWhenRequired({
-						aggregateGroupFactoriesHorizontal:
-							aggregateGroupFactoriesWithOrientation.horizontal,
-						createGroupFactoryWhenRequired,
-						dependenciesInDirection,
-						itemGroup:
-							{
-								left: levelGroupFactory.itemGroupLeft,
-								width: itemGroupWidth,
-							},
-					});
-
-				return groupFactory ? [ groupFactory ] : [];
-			}
+			return groupFactory ? [ groupFactory ] : [];
 		}
-	};
-
+	}
+};
 
 function createGroupFactoryForDependenciesWhenRequired({
 	aggregateGroupFactoriesHorizontal,

@@ -1,10 +1,9 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	countDependenciesOfItem = require("../countDependenciesOfItem"),
-	sumDependencyCount = require("../sumDependencyCount");
+import countDependenciesOfItem from "../countDependenciesOfItem";
+import sumDependencyCount from "../sumDependencyCount";
 
-module.exports = countDependenciesOfItemAndDescendants;
+export default countDependenciesOfItemAndDescendants;
 
 function countDependenciesOfItemAndDescendants({
 	item,

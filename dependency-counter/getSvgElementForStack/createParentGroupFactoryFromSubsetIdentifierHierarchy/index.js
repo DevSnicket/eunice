@@ -1,38 +1,36 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	aggregateGroupFactoriesWithOrientation = require("../aggregateGroupFactoriesWithOrientation"),
-	countDependenciesOfItem = require("../countDependenciesOfItem"),
-	createDependencyGroupFactoryWhenRequired = require("../createDependencyGroupFactoryWhenRequired"),
-	createOuterDependencyGroupFactory = require("../createOuterDependencyGroupFactory"),
-	createParentGroupFactory = require("./createParentGroupFactory"),
-	findItemInStackWithIdentifierHierarchy = require("@devsnicket/eunice-dependency-and-structure/findItemInStackWithIdentifierHierarchy"),
-	getDependencyCountInBothDirections = require("../getDependencyCountInBothDirections"),
-	sumDependencyCount = require("../sumDependencyCount");
+import aggregateGroupFactoriesWithOrientation from "../aggregateGroupFactoriesWithOrientation";
+import countDependenciesOfItem from "../countDependenciesOfItem";
+import createDependencyGroupFactoryWhenRequired from "../createDependencyGroupFactoryWhenRequired";
+import createOuterDependencyGroupFactory from "../createOuterDependencyGroupFactory";
+import createParentGroupFactory from "./createParentGroupFactory";
+import findItemInStackWithIdentifierHierarchy from "@devsnicket/eunice-dependency-and-structure/findItemInStackWithIdentifierHierarchy";
+import getDependencyCountInBothDirections from "../getDependencyCountInBothDirections";
+import sumDependencyCount from "../sumDependencyCount";
 
-module.exports =
-	({
-		arrows,
-		createGroupFactoryForStack,
-		createTextGroup,
-		font,
-		stack,
-		subsetIdentifierHierarchy,
-	}) =>
-		createOuterDependencyGroupFactory({
-			aggregateGroupFactoriesWithOrientation,
-			...withSubsetStack({
-				arrows,
-				createGroupFactoryForStack,
-				createTextGroup,
-				font,
-				stack:
-					findStackOfSubsetIdentifierHierarchyOrThrowError({
-						stack,
-						subsetIdentifierHierarchy,
-					}),
-			}),
-		});
+export default ({
+	arrows,
+	createGroupFactoryForStack,
+	createTextGroup,
+	font,
+	stack,
+	subsetIdentifierHierarchy,
+}) =>
+	createOuterDependencyGroupFactory({
+		aggregateGroupFactoriesWithOrientation,
+		...withSubsetStack({
+			arrows,
+			createGroupFactoryForStack,
+			createTextGroup,
+			font,
+			stack:
+				findStackOfSubsetIdentifierHierarchyOrThrowError({
+					stack,
+					subsetIdentifierHierarchy,
+				}),
+		}),
+	});
 
 function withSubsetStack({
 	arrows,
