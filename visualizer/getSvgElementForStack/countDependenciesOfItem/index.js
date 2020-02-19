@@ -1,107 +1,106 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const { findDirectionBetweenItemsInFirstMutualStack, isInnerStack } = require("@devsnicket/eunice-dependency-and-structure");
+import { findDirectionBetweenItemsInFirstMutualStack, isInnerStack } from "@devsnicket/eunice-dependency-and-structure";
 
-module.exports =
-	({
-		item,
-		parentStack,
-		sumCount,
-	}) => {
+export default ({
+	item,
+	parentStack,
+	sumCount,
+}) => {
+	return (
+		createWhenDependentsOrDependsUpon({
+			dependents:
+				countDependencies({
+					dependencies: item.dependents,
+					from: item,
+					sumDirectionInStack: sumDirectionInStackWhenOuter,
+				}),
+			dependsUpon:
+				countDependencies({
+					dependencies: item.dependsUpon,
+					from: item,
+					itemSelector: dependUpon => dependUpon.itemOrFirstAncestorItem,
+					sumDirectionInStack: sumDirectionInStackWithScope,
+				}),
+		})
+	);
+
+	function sumDirectionInStackWhenOuter({
+		aggregation,
+		directionInStack,
+	}) {
 		return (
-			createWhenDependentsOrDependsUpon({
-				dependents:
-					countDependencies({
-						dependencies: item.dependents,
-						from: item,
-						sumDirectionInStack: sumDirectionInStackWhenOuter,
-					}),
-				dependsUpon:
-					countDependencies({
-						dependencies: item.dependsUpon,
-						from: item,
-						itemSelector: dependUpon => dependUpon.itemOrFirstAncestorItem,
-						sumDirectionInStack: sumDirectionInStackWithScope,
-					}),
-			})
+			hasSameOrOuterStack(directionInStack)
+			?
+			sumCount(
+				aggregation,
+				getCountFromDirection(directionInStack.direction),
+			)
+			:
+			aggregation
+		);
+	}
+
+	function sumDirectionInStackWithScope({
+		aggregation,
+		directionInStack,
+	}) {
+		const count = getCountFromDirection(directionInStack.direction);
+
+		return (
+			hasSameOrOuterStack(directionInStack)
+			?
+			sumDirectionInOuterStack()
+			:
+			sumDirectionInInnerStack()
 		);
 
-		function sumDirectionInStackWhenOuter({
-			aggregation,
-			directionInStack,
-		}) {
+		function sumDirectionInOuterStack() {
 			return (
-				hasSameOrOuterStack(directionInStack)
-				?
-				sumCount(
-					aggregation,
-					getCountFromDirection(directionInStack.direction),
-				)
-				:
 				aggregation
-			);
-		}
-
-		function sumDirectionInStackWithScope({
-			aggregation,
-			directionInStack,
-		}) {
-			const count = getCountFromDirection(directionInStack.direction);
-
-			return (
-				hasSameOrOuterStack(directionInStack)
 				?
-				sumDirectionInOuterStack()
+				{
+					inner: aggregation.inner,
+					outer: sumCount(aggregation.outer, count),
+				}
 				:
-				sumDirectionInInnerStack()
+				{ outer: count }
 			);
-
-			function sumDirectionInOuterStack() {
-				return (
-					aggregation
-					?
-					{
-						inner: aggregation.inner,
-						outer: sumCount(aggregation.outer, count),
-					}
-					:
-					{ outer: count }
-				);
-			}
-
-			function sumDirectionInInnerStack() {
-				return (
-					aggregation
-					?
-					{
-						inner: sumCount(aggregation.inner, count),
-						outer: aggregation.outer,
-					}
-					:
-					{ inner: count }
-				);
-			}
 		}
 
-		function hasSameOrOuterStack(
-			{ stack },
-		) {
+		function sumDirectionInInnerStack() {
 			return (
-				stack
-				&&
-				isSameOrOuterStack()
+				aggregation
+				?
+				{
+					inner: sumCount(aggregation.inner, count),
+					outer: aggregation.outer,
+				}
+				:
+				{ inner: count }
 			);
-
-			function isSameOrOuterStack() {
-				return (
-					!isInnerStack({
-						source: parentStack,
-						target: stack,
-					})
-				);
-			}
 		}
-	};
+	}
+
+	function hasSameOrOuterStack(
+		{ stack },
+	) {
+		return (
+			stack
+			&&
+			isSameOrOuterStack()
+		);
+
+		function isSameOrOuterStack() {
+			return (
+				!isInnerStack({
+					source: parentStack,
+					target: stack,
+				})
+			);
+		}
+	}
+};
 
 function countDependencies({
 	dependencies,

@@ -9,23 +9,22 @@ const points =
 		[ 0.5, 1 ],
 	];
 
-module.exports =
-	({
-		createElement,
-		fill,
-		transform,
-	}) =>
-		createElement(
-			"polygon",
-			{
-				fill,
-				key: "polygon",
-				points:
-					points
-					.map(point => formatPoint(transform(point)))
-					.join(" "),
-			},
-		);
+export default ({
+	createElement,
+	fill,
+	transform,
+}) =>
+	createElement(
+		"polygon",
+		{
+			fill,
+			key: "polygon",
+			points:
+				points
+				.map(point => formatPoint(transform(point)))
+				.join(" "),
+		},
+	);
 
 function formatPoint(
 	point,

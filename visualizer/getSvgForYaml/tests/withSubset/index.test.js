@@ -1,12 +1,9 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	path = require("path"),
-	{ writeFileSync } = require("fs");
-
-const
-	getSvgForYaml = require("../.."),
-	readTestFile = require("../../readTestFile");
+import getSvgForYaml from "../..";
+import path from "path";
+import readTestFile from "../../readTestFile";
+import { writeFileSync } from "fs";
 
 const isUpdateExpected = process.argv[2] === "update-expected";
 

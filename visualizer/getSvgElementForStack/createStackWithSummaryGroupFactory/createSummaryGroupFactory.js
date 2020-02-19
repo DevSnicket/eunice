@@ -1,57 +1,56 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-module.exports =
-	({
-		arrows,
-		createInlineDependencyGroups,
-		dependencyCounts,
-		stackGroupFactory,
-	}) => {
-		const count = sumCounts(dependencyCounts);
+export default ({
+	arrows,
+	createInlineDependencyGroups,
+	dependencyCounts,
+	stackGroupFactory,
+}) => {
+	const count = sumCounts(dependencyCounts);
+
+	return (
+		count
+		&&
+		count.above + count.below + count.same > 1
+		?
+		create()
+		:
+		stackGroupFactory
+	);
+
+	function create() {
+		const topOffset = stackGroupFactory.height + 15;
 
 		return (
-			count
-			&&
-			count.above + count.below + count.same > 1
-			?
-			create()
-			:
-			stackGroupFactory
+			{
+				createAtPosition,
+				height:
+					topOffset + arrows.right.height,
+				width:
+					stackGroupFactory.width,
+			}
 		);
 
-		function create() {
-			const topOffset = stackGroupFactory.height + 15;
-
+		function createAtPosition({
+			left,
+			top,
+		}) {
 			return (
-				{
-					createAtPosition,
-					height:
-						topOffset + arrows.right.height,
-					width:
-						stackGroupFactory.width,
-				}
+				[
+					...stackGroupFactory.createAtPosition({
+						left,
+						top,
+					}),
+					...createInlineDependencyGroups({
+						center: left + (stackGroupFactory.width / 2),
+						count,
+						top: top + topOffset,
+					}),
+				]
 			);
-
-			function createAtPosition({
-				left,
-				top,
-			}) {
-				return (
-					[
-						...stackGroupFactory.createAtPosition({
-							left,
-							top,
-						}),
-						...createInlineDependencyGroups({
-							center: left + (stackGroupFactory.width / 2),
-							count,
-							top: top + topOffset,
-						}),
-					]
-				);
-			}
 		}
-	};
+	}
+};
 
 function sumCounts(
 	counts,

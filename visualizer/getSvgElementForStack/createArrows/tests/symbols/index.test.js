@@ -1,15 +1,14 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createDownSymbol = require("../../createDownSymbol"),
-	{ createElement } = require("react"),
-	createRightSymbol = require("../../createRightSymbol"),
-	createSvgElement = require("../createSvgElement"),
-	createUpSymbol = require("../../createUpSymbol"),
-	path = require("path"),
-	readTestCaseFile = require("../readTestCaseFile"),
-	{ renderToStaticMarkup } = require("react-dom/server"),
-	withPrecision = require("../../../withPrecision");
+import createDownSymbol from "../../createDownSymbol";
+import { createElement } from "react";
+import createRightSymbol from "../../createRightSymbol";
+import createSvgElement from "../createSvgElement";
+import createUpSymbol from "../../createUpSymbol";
+import path from "path";
+import readTestCaseFile from "../readTestCaseFile";
+import { renderToStaticMarkup } from "react-dom/server";
+import withPrecision from "../../../withPrecision";
 
 test(
 	"down renders SVG",

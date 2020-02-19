@@ -1,9 +1,8 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	assertGetSvgForYaml = require("../assertGetSvgForYaml"),
-	{ createElement } = require("react"),
-	path = require("path");
+import assertGetSvgForYaml from "../assertGetSvgForYaml";
+import { createElement } from "react";
+import path from "path";
 
 test(
 	"dependency count elements can be created in a container",
