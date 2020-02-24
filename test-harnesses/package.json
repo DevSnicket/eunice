@@ -1,10 +1,5 @@
 {
 	"author": "Graham Dyson",
-	"babel": {
-		"plugins": [
-			"@babel/plugin-transform-modules-commonjs"
-		]
-	},
 	"bugs": {
 		"url": "https://github.com/DevSnicket/eunice/issues"
 	},
@@ -22,10 +17,10 @@
 		"webpack": "4.37.0"
 	},
 	"devDependencies": {
-		"@babel/core": "7.6.4",
-		"@babel/plugin-proposal-object-rest-spread": "7.6.2",
-		"@babel/polyfill": "7.6.0",
-		"@babel/preset-env": "7.6.3",
+		"@babel/core": "7.8.4",
+		"@babel/plugin-proposal-object-rest-spread": "7.8.3",
+		"@babel/polyfill": "7.8.3",
+		"@babel/preset-env": "7.8.4",
 		"@babel/register": "7.8.3",
 		"@types/fs-extra": "8.0.1",
 		"@types/jest": "24.9.1",
@@ -70,7 +65,10 @@
 		},
 		"moduleNameMapper": {
 			"\\.css$": "<rootDir>styleMock.js"
-		}
+		},
+		"transformIgnorePatterns": [
+			"node_modules/(?!@devsnicket)"
+		]
 	},
 	"keywords": [
 		"euince",
