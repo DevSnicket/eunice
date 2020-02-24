@@ -75,6 +75,7 @@
 		"type": "git",
 		"url": "https://github.com/DevSnicket/eunice-renderer.git"
 	},
+	"sideEffects": false,
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run typescript && npm run test && npm run github-pages-copy",
 		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|gh-pages|node_modules|test-cases|test-coverage)$\" --output-yaml --reverse-file-content=false",
@@ -85,5 +86,5 @@
 		"typescript": "npx tsc -p jsconfig.json"
 	},
 	"type": "module",
-	"version": "7.10.0"
+	"version": "7.11.0"
 }
