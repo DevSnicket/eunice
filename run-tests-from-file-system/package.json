@@ -68,6 +68,7 @@
 		"type": "git",
 		"url": "https://github.com/DevSnicket/eunice-run-tests-from-file-system.git"
 	},
+	"sideEffects": false,
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run test && npm run typescript",
 		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|node_modules|test-coverage)$\" --output-yaml --reverse-file-content=false",
@@ -77,5 +78,5 @@
 		"typescript": "npx tsc -p jsconfig.json"
 	},
 	"type": "module",
-	"version": "4.5.0"
+	"version": "4.6.0"
 }
