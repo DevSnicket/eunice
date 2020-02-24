@@ -59,6 +59,7 @@
 		"type": "git",
 		"url": "https://github.com/grahandyson/eunice-dependency-and-structure.git"
 	},
+	"sideEffects": false,
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run test && npm run typescript",
 		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|node_modules|output|test-coverage)$\" --output-yaml --reverse-file-content=false",
@@ -67,5 +68,5 @@
 		"test": "npx jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "4.3.1"
+	"version": "4.4.0"
 }
