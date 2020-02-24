@@ -10,7 +10,7 @@
 				"args":
 					[ 
 						"--runInBand",
-						"getSvgForYaml/test.js"
+						"getSvgForYaml/tests/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "getSvgForYaml jest",
@@ -33,7 +33,7 @@
 				"args":
 					[ 
 						"--runInBand",
-						"getSvgForYaml/withElementContainer/forDependencyCount/test.js"
+						"getSvgForYaml/tests/withElementContainer/forDependencyCount/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "getSvgForYaml with group container for dependency count jest",
@@ -46,7 +46,7 @@
 				"args":
 					[ 
 						"--runInBand",
-						"getSvgForYaml/withElementContainer/forItems/test.js"
+						"getSvgForYaml/tests/withElementContainer/forItems/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "getSvgForYaml with group container for items jest",
@@ -58,7 +58,7 @@
 				"args":
 					[ 
 						"--runInBand",
-						"getSvgForYaml/withSubset.test.js"
+						"getSvgForYaml/tests/withSubset/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "getSvgForYaml with subset jest",
