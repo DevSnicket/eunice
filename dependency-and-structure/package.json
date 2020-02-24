@@ -1,10 +1,5 @@
 {
 	"author": "Graham Dyson",
-	"babel": {
-		"plugins": [
-			"@babel/plugin-transform-modules-commonjs"
-		]
-	},
 	"bugs": {
 		"url": "https://github.com/DevSnicket/eunice/issues"
 	},
@@ -13,6 +8,7 @@
 		"core-js": "3.6.4"
 	},
 	"devDependencies": {
+		"@babel/core": "7.8.4",
 		"@babel/plugin-transform-modules-commonjs": "7.8.3",
 		"@types/jest": "24.0.18",
 		"@types/node": "10.12.18",
@@ -39,7 +35,10 @@
 				"functions": 100,
 				"lines": 100
 			}
-		}
+		},
+		"transformIgnorePatterns": [
+			"node_modules/(?!@devsnicket)"
+		]
 	},
 	"keywords": [
 		"architecture",
