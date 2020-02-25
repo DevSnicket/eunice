@@ -1,107 +1,105 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createBreadcrumbElement = require("./createBreadcrumbElement"),
-	createContainerForItemElement = require("./createContainerForItemElement"),
-	createIdentifierAnchor = require("./createIdentifierAnchor"),
-	identifierHierarchyArgument = require("./identifierHierarchyArgument");
+import "./index.css";
 
-require("./index.css");
+import createBreadcrumbElement from "./createBreadcrumbElement";
+import createContainerForItemElement from "./createContainerForItemElement";
+import createIdentifierAnchor from "./createIdentifierAnchor";
+import identifierHierarchyArgument from "./identifierHierarchyArgument";
 
-module.exports =
-	({
-		createElement,
-		getHrefWithKeyAndValue,
-		getValueOfKey,
-	}) => {
-		const subsetIdentifierHierarchy =
-			splitIdentifierHierarchy(
-				getValueOfKey(key),
-			);
-
-		return (
-			{
-				createAncestorSeparatorElement,
-				createBreadcrumbElement:
-					() =>
-						createBreadcrumbElement({
-							createAncestorSeparatorElement,
-							createElement,
-							createIdentifierHierarchyAnchor,
-							subsetIdentifierHierarchy,
-						}),
-				createContainerForItemElement:
-					({
-						element,
-						item,
-					}) =>
-						createContainerForItemElement({
-							createElement,
-							element,
-							getHrefWithIdentifierHierarchy,
-							item,
-							subsetIdentifierHierarchy,
-						}),
-				createIdentifierHierarchyAnchor,
-				identifierHierarchy:
-					subsetIdentifierHierarchy,
-			}
+export default ({
+	createElement,
+	getHrefWithKeyAndValue,
+	getValueOfKey,
+}) => {
+	const subsetIdentifierHierarchy =
+		splitIdentifierHierarchy(
+			getValueOfKey(key),
 		);
 
-		function createAncestorSeparatorElement() {
-			return (
-				createElement(
-					"span",
-					{ className: "ancestor-separator" },
-					"\u2013",
-				)
-			);
+	return (
+		{
+			createAncestorSeparatorElement,
+			createBreadcrumbElement:
+				() =>
+					createBreadcrumbElement({
+						createAncestorSeparatorElement,
+						createElement,
+						createIdentifierHierarchyAnchor,
+						subsetIdentifierHierarchy,
+					}),
+			createContainerForItemElement:
+				({
+					element,
+					item,
+				}) =>
+					createContainerForItemElement({
+						createElement,
+						element,
+						getHrefWithIdentifierHierarchy,
+						item,
+						subsetIdentifierHierarchy,
+					}),
+			createIdentifierHierarchyAnchor,
+			identifierHierarchy:
+				subsetIdentifierHierarchy,
 		}
+	);
 
-		function createIdentifierHierarchyAnchor(
-			identifierHierarchy,
-		) {
+	function createAncestorSeparatorElement() {
+		return (
+			createElement(
+				"span",
+				{ className: "ancestor-separator" },
+				"\u2013",
+			)
+		);
+	}
+
+	function createIdentifierHierarchyAnchor(
+		identifierHierarchy,
+	) {
+		return (
+			createIdentifierAnchor({
+				createElement,
+				href:
+					getHrefWithIdentifierHierarchy(identifierHierarchy),
+				identifier:
+					getIdentifier(),
+			})
+		);
+
+		function getIdentifier() {
 			return (
-				createIdentifierAnchor({
-					createElement,
-					href:
-						getHrefWithIdentifierHierarchy(identifierHierarchy),
-					identifier:
-						getIdentifier(),
-				})
+				whenRoot()
+				||
+				identifierHierarchy[identifierHierarchy.length - 1]
 			);
 
-			function getIdentifier() {
+			function whenRoot() {
 				return (
-					whenRoot()
-					||
-					identifierHierarchy[identifierHierarchy.length - 1]
+					!identifierHierarchy.length
+					&&
+					"root"
 				);
-
-				function whenRoot() {
-					return (
-						!identifierHierarchy.length
-						&&
-						"root"
-					);
-				}
 			}
 		}
+	}
 
-		function getHrefWithIdentifierHierarchy(
-			identifierHierarchy,
-		) {
-			return (
-				getHrefWithKeyAndValue({
-					key,
-					value:
-						identifierHierarchyArgument.format(
-							identifierHierarchy,
-						),
-				})
-			);
-		}
-	};
+	function getHrefWithIdentifierHierarchy(
+		identifierHierarchy,
+	) {
+		return (
+			getHrefWithKeyAndValue({
+				key,
+				value:
+					identifierHierarchyArgument.format(
+						identifierHierarchy,
+					),
+			})
+		);
+	}
+};
 
 function splitIdentifierHierarchy(
 	identifierHierarchy,

@@ -1,12 +1,11 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	{ createElement } = require("react"),
-	createElementsFromYaml = require(".."),
-	{ createHashFromLocation } = require("@devsnicket/eunice-test-harnesses"),
-	path = require("path"),
-	readTextFile = require("../../../readTextFile"),
-	{ renderToStaticMarkup } = require("react-dom/server");
+import { createElement } from "react";
+import createElementsFromYaml from "..";
+import { createHashFromLocation } from "@devsnicket/eunice-test-harnesses";
+import path from "path";
+import readTextFile from "../../../readTextFile";
+import { renderToStaticMarkup } from "react-dom/server";
 
 const breadcrumbHtmlForRoot = "<div><a href=\"#\">root</a></div>";
 

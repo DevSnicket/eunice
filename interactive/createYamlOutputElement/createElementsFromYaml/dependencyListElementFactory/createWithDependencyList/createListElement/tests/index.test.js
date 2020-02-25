@@ -1,12 +1,11 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	{ createElement } = require("react"),
-	{ renderToStaticMarkup } = require("react-dom/server"),
-	createListElement = require("../../createListElement"),
-	path = require("path"),
-	readTextFile = require("../../../../../../readTextFile"),
-	removeWhitespaceFromTestExpected = require("../../removeWhitespaceFromTestExpected");
+import { createElement } from "react";
+import createListElement from "../../createListElement";
+import path from "path";
+import readTextFile from "../../../../../../readTextFile";
+import removeWhitespaceFromTestExpected from "../../removeWhitespaceFromTestExpected";
+import { renderToStaticMarkup } from "react-dom/server";
 
 test(
 	"child items with depends upon",

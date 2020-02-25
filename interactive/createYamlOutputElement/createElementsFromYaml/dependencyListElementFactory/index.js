@@ -1,7 +1,6 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const createWithDependencyList = require("./createWithDependencyList");
-
+import createWithDependencyList from "./createWithDependencyList";
 
 const keys =
 	{
@@ -10,35 +9,47 @@ const keys =
 		relationship: "dependency-list-relationship",
 	};
 
-module.exports =
-	{
-		createForDependencyCount:
-			({
-				createElement,
+export default {
+	createForDependencyCount:
+		({
+			createElement,
+			element,
+			getHrefWithKeysAndValues,
+			identifier,
+			level,
+			relationship,
+		}) =>
+			createElement(
+				"a",
+				{
+					xlinkHref:
+						getHrefWithKeysAndValues({
+							keys,
+							values:
+								{
+									identifier,
+									level,
+									relationship,
+								},
+						}),
+				},
 				element,
-				getHrefWithKeysAndValues,
-				identifier,
-				level,
-				relationship,
-			}) =>
-				createElement(
-					"a",
-					{
-						xlinkHref:
-							getHrefWithKeysAndValues({
-								keys,
-								values:
-									{
-										identifier,
-										level,
-										relationship,
-									},
-							}),
-					},
-					element,
-				),
-		createWithDependencyList:
-			({
+			),
+	createWithDependencyList:
+		({
+			createAncestorSeparatorElement,
+			createElement,
+			createIdentifierHierarchyAnchor,
+			element,
+			locationHash,
+			resizableElementTypes,
+			stack,
+			subsetIdentifierHierarchy,
+		}) =>
+			createWithDependencyList({
+				...locationHash.getValuesOfKeys(keys),
+				closeHref:
+					locationHash.getWithoutKeys(keys),
 				createAncestorSeparatorElement,
 				createElement,
 				createIdentifierHierarchyAnchor,
@@ -47,19 +58,6 @@ module.exports =
 				resizableElementTypes,
 				stack,
 				subsetIdentifierHierarchy,
-			}) =>
-				createWithDependencyList({
-					...locationHash.getValuesOfKeys(keys),
-					closeHref:
-						locationHash.getWithoutKeys(keys),
-					createAncestorSeparatorElement,
-					createElement,
-					createIdentifierHierarchyAnchor,
-					element,
-					locationHash,
-					resizableElementTypes,
-					stack,
-					subsetIdentifierHierarchy,
-				}),
-		keys,
-	};
+			}),
+	keys,
+};

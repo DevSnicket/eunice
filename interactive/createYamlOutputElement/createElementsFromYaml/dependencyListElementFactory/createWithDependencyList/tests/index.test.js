@@ -1,13 +1,12 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	{ createElement } = require("react"),
-	{ createStackFromYaml } = require("@devsnicket/eunice-dependency-and-structure"),
-	createWithDependencyList = require(".."),
-	{ renderToStaticMarkup } = require("react-dom/server"),
-	path = require("path"),
-	readTextFile = require("../../../../../readTextFile"),
-	removeWhitespaceFromTestExpected = require("../removeWhitespaceFromTestExpected");
+import { createElement } from "react";
+import { createStackFromYaml } from "@devsnicket/eunice-dependency-and-structure";
+import createWithDependencyList from "..";
+import path from "path";
+import readTextFile from "../../../../../readTextFile";
+import removeWhitespaceFromTestExpected from "../removeWhitespaceFromTestExpected";
+import { renderToStaticMarkup } from "react-dom/server";
 
 const
 	dependsUponIdentifier = "depends upon",

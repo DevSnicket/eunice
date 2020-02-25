@@ -1,23 +1,22 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createWebpackConfiguration = require("../../createWebpackConfiguration"),
-	path = require("path");
+import createWebpackConfiguration from "../../createWebpackConfiguration";
+import path from "path";
 
-module.exports =
-	(environment, { mode }) =>
-		createWebpackConfiguration({
-			directory:
-				path.join(__dirname, "output"),
-			javascriptSubstitution:
-				{
-					escape:
-						mode !== "production",
-					pattern:
-						new RegExp("(?<=yaml:|yaml: )yamlFromWebpack"),
-					replacementFilePath:
-						path.join("..", "eunice-javascript", "dogfooding", "output", "index.yaml"),
-				},
-			title:
-				"Renderer of dogfooding from eunice-javascript repository",
-		});
+export default
+(environment, { mode }) =>
+	createWebpackConfiguration({
+		directory:
+			path.join(__dirname, "output"),
+		javascriptSubstitution:
+			{
+				escape:
+					mode !== "production",
+				pattern:
+					new RegExp("(?<=yaml:|yaml: )yamlFromWebpack"),
+				replacementFilePath:
+					path.join("..", "eunice-javascript", "dogfooding", "output", "index.yaml"),
+			},
+		title:
+			"Renderer of dogfooding from eunice-javascript repository",
+	});

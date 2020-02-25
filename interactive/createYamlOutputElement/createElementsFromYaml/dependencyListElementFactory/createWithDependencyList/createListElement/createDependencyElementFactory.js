@@ -1,91 +1,90 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-module.exports =
-	({
-		createAncestorSeparatorElement,
-		createIdentifierHierarchyAnchor,
-	}) => {
+export default ({
+	createAncestorSeparatorElement,
+	createIdentifierHierarchyAnchor,
+}) => {
+	return (
+		{
+			createElements:
+				dependency =>
+					createForItem(dependency)
+					.elements,
+		}
+	);
+
+	function createForItem(
+		item,
+	) {
 		return (
-			{
-				createElements:
-					dependency =>
-						createForItem(dependency)
-						.elements,
-			}
+			createForItemWithAncestors(
+				createForAncestors(),
+			)
 		);
 
-		function createForItem(
-			item,
-		) {
+		function createForAncestors() {
 			return (
-				createForItemWithAncestors(
-					createForAncestors(),
-				)
+				createForAncestorsWhenHasParent(item)
+				||
+				{
+					elements: [],
+					identifierHierarchy: [],
+				}
 			);
-
-			function createForAncestors() {
-				return (
-					createForAncestorsWhenHasParent(item)
-					||
-					{
-						elements: [],
-						identifierHierarchy: [],
-					}
-				);
-			}
-
-			function createForItemWithAncestors({
-				elements,
-				identifierHierarchy,
-			}) {
-				return (
-					{
-						elements:
-							[
-								...elements,
-								createIdentifierHierarchyAnchor(
-									[
-										...identifierHierarchy,
-										item.id,
-									],
-								),
-							],
-						identifierHierarchy,
-					}
-				);
-			}
 		}
 
-		function createForAncestorsWhenHasParent(
-			{ level: { stack: { parent } } },
-		) {
+		function createForItemWithAncestors({
+			elements,
+			identifierHierarchy,
+		}) {
 			return (
-				parent
-				&&
-				createAsAncestor()
+				{
+					elements:
+						[
+							...elements,
+							createIdentifierHierarchyAnchor(
+								[
+									...identifierHierarchy,
+									item.id,
+								],
+							),
+						],
+					identifierHierarchy,
+				}
 			);
-
-			function createAsAncestor() {
-				const
-					{
-						elements,
-						identifierHierarchy,
-					} = createForItem(parent);
-
-				return (
-					{
-						elements:
-							[
-								...elements,
-								createAncestorSeparatorElement(),
-							],
-						identifierHierarchy:
-							[
-								...identifierHierarchy,
-								parent.id,
-							],
-					}
-				);
-			}
 		}
-	};
+	}
+
+	function createForAncestorsWhenHasParent(
+		{ level: { stack: { parent } } },
+	) {
+		return (
+			parent
+			&&
+			createAsAncestor()
+		);
+
+		function createAsAncestor() {
+			const
+				{
+					elements,
+					identifierHierarchy,
+				} = createForItem(parent);
+
+			return (
+				{
+					elements:
+						[
+							...elements,
+							createAncestorSeparatorElement(),
+						],
+					identifierHierarchy:
+						[
+							...identifierHierarchy,
+							parent.id,
+						],
+				}
+			);
+		}
+	}
+};

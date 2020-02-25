@@ -1,26 +1,22 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-require("array.prototype.flat")
-.shim();
+import "core-js/features/array/flat";
+import "core-js/features/array/flat-map";
 
-require("array.prototype.flatmap")
-.shim();
-
-module.exports =
-	({
+export default ({
+	isDependencyRelevant,
+	item,
+	relationship,
+}) =>
+	withSubsetCriteriaOf({
 		isDependencyRelevant,
-		item,
 		relationship,
-	}) =>
-		withSubsetCriteriaOf({
-			isDependencyRelevant,
-			relationship,
-		})
-		.createForItem(
-			item,
-		)
-		||
-		null;
+	})
+	.createForItem(
+		item,
+	)
+	||
+	null;
 
 function withSubsetCriteriaOf({
 	isDependencyRelevant,

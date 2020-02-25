@@ -1,23 +1,24 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	{
-		callOrCreateElementOnError,
-		createFillWithTitleElement,
-		createResizableContainer,
-		renderIntoContainerElement,
-	} = require("@devsnicket/eunice-test-harnesses"),
-	createCodeEditorForLanguage = require("@devsnicket/eunice-test-harnesses/codeEditor/createEditorForLanguage"),
-	{ createElement } = require("react"),
-	{ createHashFromLocation } = require("@devsnicket/eunice-test-harnesses"),
-	createYamlInputElement = require("./createYamlInputElement"),
-	createYamlOutputElement = require("./createYamlOutputElement"),
-	initializeCodeEditorGlobal = require("@devsnicket/eunice-test-harnesses/codeEditor/serviceWorkers/initializeGlobal"),
-	{
-		ReflexContainer,
-		ReflexElement,
-		ReflexSplitter,
-	} = require("react-reflex");
+import {
+	ReflexContainer,
+	ReflexElement,
+	ReflexSplitter,
+} from "react-reflex";
+
+import {
+	callOrCreateElementOnError,
+	createFillWithTitleElement,
+	createHashFromLocation,
+	createResizableContainer,
+	renderIntoContainerElement,
+} from "@devsnicket/eunice-test-harnesses";
+
+import createCodeEditorForLanguage from "@devsnicket/eunice-test-harnesses/codeEditor/createEditorForLanguage";
+import { createElement } from "react";
+import createYamlInputElement from "./createYamlInputElement";
+import createYamlOutputElement from "./createYamlOutputElement";
+import initializeCodeEditorGlobal from "@devsnicket/eunice-test-harnesses/codeEditor/serviceWorkers/initializeGlobal";
 
 const resizableElementTypes =
 	{
@@ -34,7 +35,7 @@ const createYamlEditorElement =
 
 renderIntoContainerElement({
 	initialState:
-		// yamlFromWebpack is replaced with literal by harness/webpack.config.js
+		// yamlFromWebpack is replaced with literal by webpack.config.js
 		// eslint-disable-next-line no-undef
 		{ yaml: yamlFromWebpack },
 	renderStateful:

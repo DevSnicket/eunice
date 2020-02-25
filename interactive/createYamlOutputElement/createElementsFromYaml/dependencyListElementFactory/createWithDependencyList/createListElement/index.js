@@ -1,60 +1,58 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createDependencyElementFactory = require("./createDependencyElementFactory"),
-	getItemIdentifierHierarchy = require("./getItemIdentifierHierarchy");
+import "./index.css";
 
-require("./index.css");
+import createDependencyElementFactory from "./createDependencyElementFactory";
+import getItemIdentifierHierarchy from "./getItemIdentifierHierarchy";
 
-module.exports =
-	({
-		closeHref,
-		createAncestorSeparatorElement,
-		createElement,
-		createIdentifierHierarchyAnchor,
-		relationship,
-		subset,
-	}) => {
+export default ({
+	closeHref,
+	createAncestorSeparatorElement,
+	createElement,
+	createIdentifierHierarchyAnchor,
+	relationship,
+	subset,
+}) => {
+	return (
+		subset
+		&&
+		createElement(
+			"div",
+			{ className: `dependency-list ${relationship}` },
+			[
+				createElement(
+					"a",
+					{
+						href: closeHref,
+						id: "close",
+						key: "close",
+					},
+					"\u00D7",
+				),
+				createElement(
+					"div",
+					{ key: "body" },
+					createChildElements(),
+				),
+			],
+		)
+	);
+
+	function createChildElements() {
 		return (
-			subset
-			&&
-			createElement(
-				"div",
-				{ className: `dependency-list ${relationship}` },
-				[
-					createElement(
-						"a",
-						{
-							href: closeHref,
-							id: "close",
-							key: "close",
-						},
-						"\u00D7",
-					),
-					createElement(
-						"div",
-						{ key: "body" },
-						createChildElements(),
-					),
-				],
-			)
+			withElementFactory({
+				createDependencyElements:
+					createDependencyElementFactory({
+						createAncestorSeparatorElement,
+						createIdentifierHierarchyAnchor,
+					}).createElements,
+				createElement,
+				createIdentifierHierarchyAnchor,
+			})
+			.createElementsForSubset(subset)
 		);
-
-		function createChildElements() {
-			return (
-				withElementFactory({
-					createDependencyElements:
-						createDependencyElementFactory({
-							createAncestorSeparatorElement,
-							createIdentifierHierarchyAnchor,
-						}).createElements,
-					createElement,
-					createIdentifierHierarchyAnchor,
-				})
-				.createElementsForSubset(subset)
-			);
-		}
-	};
+	}
+};
 
 function withElementFactory({
 	createDependencyElements,

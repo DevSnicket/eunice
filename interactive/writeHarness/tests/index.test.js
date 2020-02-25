@@ -1,11 +1,10 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	{ emptyDir, pathExists } = require("fs-extra"),
-	path = require("path"),
-	readDirectoryPathRecursive = require("./readDirectoryPathRecursive"),
-	readTextFile = require("../../readTextFile"),
-	writeHarness = require("..");
+import { emptyDir, pathExists } from "fs-extra";
+import path from "path";
+import readDirectoryPathRecursive from "./readDirectoryPathRecursive";
+import readTextFile from "../../readTextFile";
+import writeHarness from "..";
 
 const htmlFileName = "eunice.html";
 

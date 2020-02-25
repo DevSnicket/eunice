@@ -5,9 +5,9 @@
 	},
 	"description": "HTML page that renders Eunice YAML as SVG, so the structure and dependencies can be investigated.",
 	"dependencies": {
-		"@devsnicket/eunice-dependency-and-structure": "^4.0.0",
-		"@devsnicket/eunice-renderer": "^6.9.0",
-		"@devsnicket/eunice-test-harnesses": "^8.5.0",
+		"@devsnicket/eunice-dependency-and-structure": "4.6.0",
+		"@devsnicket/eunice-renderer": "7.12.0",
+		"core-js": "3.6.4",
 		"fs-extra": "7.0.1",
 		"react": "16.4.0",
 		"react-dom": "16.4.2",
@@ -15,16 +15,20 @@
 		"string-pixel-width": "1.7.0"
 	},
 	"devDependencies": {
-		"@babel/polyfill": "7.4.4",
-		"@babel/preset-env": "7.4.4",
-		"@types/jest": "24.0.19",
+		"@babel/core": "7.8.4",
+		"@babel/plugin-transform-modules-commonjs": "7.8.3",
+		"@babel/polyfill": "7.8.3",
+		"@babel/preset-env": "7.8.4",
+		"@babel/register": "7.8.3",
+		"@devsnicket/eunice-test-harnesses": "8.13.1",
+		"@types/jest": "25.1.3",
 		"@types/node": "10.14.5",
 		"@types/react": "16.4.18",
 		"babel-loader": "8.0.6",
 		"cspell": "3.1.3",
-		"eslint": "6.2.2",
+		"eslint": "6.8.0",
 		"eslint-plugin-notice": "0.8.9",
-		"jest": "24.9.0",
+		"jest": "25.1.0",
 		"webpack-cli": "3.3.2"
 	},
 	"homepage": "https://github.com/DevSnicket/eunice-renderer-test-harness#readme",
@@ -53,7 +57,10 @@
 		},
 		"moduleNameMapper": {
 			"\\.css$": "<rootDir>tests/styleMock.js"
-		}
+		},
+		"transformIgnorePatterns": [
+			"node_modules/(?!@devsnicket)"
+		]
 	},
 	"keywords": [
 		"architecture",
@@ -81,16 +88,16 @@
 	},
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run build && npm run test && npm run harness-example-production",
-		"build": "rm -rf dist && npx webpack --config webpack.config.js -p",
+		"build": "rm -rf dist && npx webpack --config webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs -p",
 		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$\" --output-yaml --reverse-file-content=false",
-		"harness-dogfooding-development": "rm -rf tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output && npx webpack --config tests/dogfoodingFromEuniceRepositoryRelativeDirectory/webpack.config.js -d",
-		"harness-dogfooding-production": "rm -rf tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output && npx webpack --config tests/dogfoodingFromEuniceRepositoryRelativeDirectory/webpack.config.js -p",
-		"harness-example-development": "rm -rf tests/example/output && npx webpack --config tests/example/webpack.config.js -d",
-		"harness-example-production": "rm -rf tests/example/output && npx webpack --config tests/example/webpack.config.js -p",
+		"harness-dogfooding-development": "rm -rf tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output && npx webpack --config tests/dogfoodingFromEuniceRepositoryRelativeDirectory/webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs -d",
+		"harness-dogfooding-production": "rm -rf tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output && npx webpack --config tests/dogfoodingFromEuniceRepositoryRelativeDirectory/webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs -p",
+		"harness-example-development": "rm -rf tests/example/output && npx webpack --config tests/example/webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs -d",
+		"harness-example-production": "rm -rf tests/example/output && npx webpack --config tests/example/webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs -p",
 		"lint": "npx eslint .",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./node_modules/*\" ! -path \"./tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output/*\" ! -path \"./tests/example/output/*\" ! -path \"./test-coverage/*\" ! -path \"./writeHarness/tests/output/*\" -exec npx cspell {} +",
 		"test": "npx jest",
-		"watch": "npx webpack --config webpack.config.js -d --watch"
+		"watch": "npx webpack --config webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs -d --watch"
 	},
-	"version": "4.17.0"
+	"version": "4.18.0"
 }

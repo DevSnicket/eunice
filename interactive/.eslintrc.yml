@@ -10,6 +10,7 @@ parserOptions:
     impliedStrict: true
   ecmaVersion:
     2018
+  sourceType: module
 plugins:
   - notice
 rules:
@@ -140,7 +141,11 @@ rules:
     - error
   no-catch-shadow:
     - error
+  no-console:
+    - error
   no-continue:
+    - error
+  no-duplicate-imports:
     - error
   no-empty-function:
     - error
@@ -167,6 +172,8 @@ rules:
   no-implicit-globals:
     - error
   no-implied-eval:
+    - error
+  no-import-assign:
     - error
   no-invalid-this:
     - error
@@ -255,6 +262,8 @@ rules:
     - error
   no-useless-constructor:
     - error
+  no-useless-rename:
+    - error
   no-useless-return:
     - error
   no-var:
@@ -277,7 +286,7 @@ rules:
         
       template: |+
         // Copyright (c) <%= YEAR %> Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
-       
+        
   object-curly-newline:
     - error
     - multiline: true
@@ -350,6 +359,8 @@ rules:
   semi-style:
     - error
   sort-keys:
+    - error
+  sort-imports:
     - error
   sort-vars:
     - error
