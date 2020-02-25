@@ -2,10 +2,5 @@
 
 /* istanbul ignore file: test would be a mirror of implementation */
 
-import getSvgElementForStack from "./getSvgElementForStack";
-import getSvgForYaml from "./getSvgForYaml";
-
-export {
-	getSvgElementForStack,
-	getSvgForYaml,
-};
+export { default as getSvgElementForStack } from "./getSvgElementForStack";
+export { default as getSvgForYaml } from "./getSvgForYaml";

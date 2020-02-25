@@ -85,5 +85,5 @@
 		"typescript": "npx tsc -p jsconfig.json"
 	},
 	"type": "module",
-	"version": "7.11.0"
+	"version": "7.12.0"
 }
