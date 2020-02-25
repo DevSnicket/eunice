@@ -9,6 +9,7 @@
 		"copy-webpack-plugin": "4.6.0",
 		"core-js": "3.6.4",
 		"css-loader": "2.1.1",
+		"lodash": "4.17.15",
 		"monaco-editor": "0.17.0",
 		"react": "16.4.0",
 		"react-dom": "16.4.2",
@@ -98,5 +99,5 @@
 		"test": "npx jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "8.12.0"
+	"version": "8.13.0"
 }
