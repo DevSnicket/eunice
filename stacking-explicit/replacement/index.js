@@ -2,12 +2,6 @@
 
 /* istanbul ignore file: test would be a mirror of implementation */
 
-import replaceDependsUpon from "./replaceDependsUpon";
-import replaceIdentifiersAndItems from "./replaceIdentifiersAndItems";
-import replaceIdentifiersAndItemsAndLevelsAndStacks from "./replaceIdentifiersAndItemsAndLevelsAndStacks";
-
-export {
-	replaceDependsUpon,
-	replaceIdentifiersAndItems,
-	replaceIdentifiersAndItemsAndLevelsAndStacks,
-};
+export { default as replaceDependsUpon } from "./replaceDependsUpon";
+export { default as replaceIdentifiersAndItems } from "./replaceIdentifiersAndItems";
+export { default as replaceIdentifiersAndItemsAndLevelsAndStacks } from "./replaceIdentifiersAndItemsAndLevelsAndStacks";

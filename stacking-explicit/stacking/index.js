@@ -2,12 +2,6 @@
 
 /* istanbul ignore file: test would be a mirror of implementation */
 
-import createOrAddToStacksOfParentMatch from "./createOrAddToStacksOfParentMatch";
-import createOrAddToStacksUsingFileSystem from "./createOrAddToStacksUsingFileSystem";
-import createStackWhenIdentifierOrItemOrLevelOrAddWhenStack from "./createStackWhenIdentifierOrItemOrLevelOrAddWhenStack";
-
-export {
-	createOrAddToStacksOfParentMatch,
-	createOrAddToStacksUsingFileSystem,
-	createStackWhenIdentifierOrItemOrLevelOrAddWhenStack,
-};
+export { default as createOrAddToStacksOfParentMatch } from "./createOrAddToStacksOfParentMatch";
+export { default as createOrAddToStacksUsingFileSystem } from "./createOrAddToStacksUsingFileSystem";
+export { default as createStackWhenIdentifierOrItemOrLevelOrAddWhenStack } from "./createStackWhenIdentifierOrItemOrLevelOrAddWhenStack";
