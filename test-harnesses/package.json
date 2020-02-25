@@ -88,7 +88,9 @@
 		"type": "git",
 		"url": "https://github.com/DevSnicket/eunice-test-harnesses.git"
 	},
-	"sideEffects": false,
+	"sideEffects": [
+		"*.css"
+	],
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run test && npm run resizable-columns-test-harness-production && npm run typescript",
 		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|node_modules|output|test-coverage)$\" --output-yaml --reverse-file-content=false",
@@ -99,5 +101,5 @@
 		"test": "npx jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "8.13.0"
+	"version": "8.13.1"
 }
