@@ -1,19 +1,19 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const createVisitorKeys = require("./createVisitorKeys");
+import createVisitorKeys from "./createVisitorKeys";
 
-module.exports =
-	({
-		node,
+export default
+({
+	node,
+	visitors,
+}) =>
+	withVisitorKeysAndVisitors({
+		visitorKeys: createVisitorKeys(),
 		visitors,
-	}) =>
-		withVisitorKeysAndVisitors({
-			visitorKeys: createVisitorKeys(),
-			visitors,
-		})
-		.visit(
-			node,
-		);
+	})
+	.visit(
+		node,
+	);
 
 function withVisitorKeysAndVisitors({
 	visitorKeys,

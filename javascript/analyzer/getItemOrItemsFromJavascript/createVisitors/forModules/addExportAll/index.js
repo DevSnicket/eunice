@@ -1,37 +1,34 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-require("array.prototype.flatmap")
-.shim();
+import "core-js/features/array/flat-map";
 
-const
-	fileSystem = require("fs"),
-	findNamedExports = require("./findNamedExports"),
-	path = require("path");
+import fileSystem from "fs";
+import findNamedExports from "./findNamedExports";
+import path from "path";
 
-module.exports =
-	({
+export default ({
+	addDeclarationsIn,
+	createPathBasedDependsUpon,
+	directoryAbsolutePath,
+	getRelativeWhenFileExists,
+	modulePath,
+	parseJavascript,
+}) =>
+	directoryAbsolutePath
+	&&
+	addWhenHasNamedExports({
 		addDeclarationsIn,
 		createPathBasedDependsUpon,
 		directoryAbsolutePath,
-		getRelativeWhenFileExists,
-		modulePath,
+		modulePath:
+			getRelativeWhenFileExists({
+				absolute:
+					directoryAbsolutePath,
+				relative:
+					modulePath,
+			}),
 		parseJavascript,
-	}) =>
-		directoryAbsolutePath
-		&&
-		addWhenHasNamedExports({
-			addDeclarationsIn,
-			createPathBasedDependsUpon,
-			directoryAbsolutePath,
-			modulePath:
-				getRelativeWhenFileExists({
-					absolute:
-						directoryAbsolutePath,
-					relative:
-						modulePath,
-				}),
-			parseJavascript,
-		});
+	});
 
 function addWhenHasNamedExports({
 	addDeclarationsIn,

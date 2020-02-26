@@ -1,80 +1,78 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-require("array.prototype.flat")
-.shim();
+import "core-js/features/array/flat";
 
-const
-	combineFileAndDirectoryItems = require("./combineFileAndDirectoryItems"),
-	flatMap = require("array.prototype.flatmap"),
-	fs = require("fs"),
-	getItemOrItemsFromJavascript = require("../getItemOrItemsFromJavascript"),
-	getOrCreateItemWhenJavascriptFile = require("./getOrCreateItemWhenJavascriptFile"),
-	getWhenSingle = require("./getWhenSingle"),
-	path = require("path"),
-	{ promisify } = require("util");
+import combineFileAndDirectoryItems from "./combineFileAndDirectoryItems";
+import flatMap from "core-js/features/array/flat-map";
+import fs from "fs";
+import getItemOrItemsFromJavascript from "../getItemOrItemsFromJavascript";
+import getOrCreateItemWhenJavascriptFile from "./getOrCreateItemWhenJavascriptFile";
+import getWhenSingle from "./getWhenSingle";
+import path from "path";
+import { promisify } from "util";
 
 const
 	getFileStatus = promisify(fs.lstat),
 	readDirectory = promisify(fs.readdir);
 
-module.exports =
-	async(/** @type {import("./Parameter.d")} */{
-		areFilesBottomUp,
-		babelParserPlugins,
-		directory,
-		fileExtensions = [ ".js" ],
-		isCalleeIgnored,
-		ignorePathPattern,
-		rootItemIdentifier,
-	}) => {
+export default
+async(/** @type {import("./Parameter.d")} */{
+	areFilesBottomUp,
+	babelParserPlugins,
+	directory,
+	fileExtensions = [ ".js" ],
+	isCalleeIgnored,
+	ignorePathPattern,
+	rootItemIdentifier,
+}) => {
+	return (
+		createRootItemWhenHasIdentifier({
+			identifier: rootItemIdentifier,
+			items: await getOrCreateItemsInRoot(),
+		})
+	);
+
+	function getOrCreateItemsInRoot() {
 		return (
-			createRootItemWhenHasIdentifier({
-				identifier: rootItemIdentifier,
-				items: await getOrCreateItemsInRoot(),
+			withOptionsAndRootDirectory({
+				getOrCreateItemWhenFile,
+				ignorePathPattern,
+				rootDirectory:
+					{
+						name: rootItemIdentifier,
+						path: directory,
+					},
 			})
+			.getOrCreateItemsInDirectory(
+				"",
+			)
 		);
 
-		function getOrCreateItemsInRoot() {
+		function getOrCreateItemWhenFile({
+			directoryPath,
+			fileOrSubdirectoryPath,
+		}) {
 			return (
-				withOptionsAndRootDirectory({
-					getOrCreateItemWhenFile,
-					ignorePathPattern,
-					rootDirectory:
-						{
-							name: rootItemIdentifier,
-							path: directory,
-						},
+				getOrCreateItemWhenJavascriptFile({
+					directoryPath,
+					fileExtensions,
+					fileOrSubdirectoryPath,
+					getItemOrItemsFromJavascript:
+						javascript =>
+							getItemOrItemsFromJavascript({
+								babelParserPlugins,
+								directoryPath,
+								fileExtensions,
+								isBottomUp:
+									areFilesBottomUp,
+								isCalleeIgnored,
+								javascript,
+							}),
 				})
-				.getOrCreateItemsInDirectory(
-					"",
-				)
 			);
-
-			function getOrCreateItemWhenFile({
-				directoryPath,
-				fileOrSubdirectoryPath,
-			}) {
-				return (
-					getOrCreateItemWhenJavascriptFile({
-						directoryPath,
-						fileExtensions,
-						fileOrSubdirectoryPath,
-						getItemOrItemsFromJavascript:
-							javascript =>
-								getItemOrItemsFromJavascript({
-									babelParserPlugins,
-									directoryPath,
-									fileExtensions,
-									isBottomUp:
-										areFilesBottomUp,
-									isCalleeIgnored,
-									javascript,
-								}),
-					})
-				);
-			}
 		}
-	};
+	}
+};
 
 function withOptionsAndRootDirectory({
 	getOrCreateItemWhenFile,

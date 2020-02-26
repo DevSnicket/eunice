@@ -1,17 +1,16 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const path = require("path");
+import path from "path";
 
-module.exports =
-	({
+export default ({
+	directory,
+	file,
+}) =>
+	createForSubdirectory({
 		directory,
-		file,
-	}) =>
-		createForSubdirectory({
-			directory,
-			subdirectory:
-				path.dirname(file),
-		});
+		subdirectory:
+			path.dirname(file),
+	});
 
 function createForSubdirectory({
 	directory,

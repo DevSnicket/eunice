@@ -1,29 +1,28 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const createIndexDependsUponWhenDirectory = require("./createIndexDependsUponWhenDirectory");
+import createIndexDependsUponWhenDirectory from "./createIndexDependsUponWhenDirectory";
 
-module.exports =
-	({
+export default ({
+	addDependsUponIdentifierToParent,
+	ancestors,
+	callee,
+	createPathBasedDependsUpon,
+	directoryAbsolutePath,
+	findBlockOrIdentifiableParentInAncestors,
+	removeExtensionFromFilePath,
+}) =>
+	addWhenPathHasValue({
 		addDependsUponIdentifierToParent,
 		ancestors,
-		callee,
 		createPathBasedDependsUpon,
 		directoryAbsolutePath,
 		findBlockOrIdentifiableParentInAncestors,
+		path:
+			getPathWhenRequireCallee(
+				callee,
+			),
 		removeExtensionFromFilePath,
-	}) =>
-		addWhenPathHasValue({
-			addDependsUponIdentifierToParent,
-			ancestors,
-			createPathBasedDependsUpon,
-			directoryAbsolutePath,
-			findBlockOrIdentifiableParentInAncestors,
-			path:
-				getPathWhenRequireCallee(
-					callee,
-				),
-			removeExtensionFromFilePath,
-		});
+	});
 
 function getPathWhenRequireCallee(
 	callee,

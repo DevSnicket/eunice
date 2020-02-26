@@ -1,39 +1,38 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-module.exports =
-	({
-		ancestors,
-		isIdentifiableAssignmentExpressionLeft,
-	}) => {
-		let child = null;
+export default ({
+	ancestors,
+	isIdentifiableAssignmentExpressionLeft,
+}) => {
+	let child = null;
 
-		for (let index = ancestors.length - 2; index; index--) {
-			const parent = ancestors[index];
+	for (let index = ancestors.length - 2; index; index--) {
+		const parent = ancestors[index];
 
-			if (isChildIdentifiableByParent(parent))
-				return child;
-			else if (isSelfIdentifiableType(parent.type))
-				return parent;
+		if (isChildIdentifiableByParent(parent))
+			return child;
+		else if (isSelfIdentifiableType(parent.type))
+			return parent;
 
-			child = parent;
-		}
+		child = parent;
+	}
 
-		return null;
+	return null;
 
-		function isChildIdentifiableByParent(
-			parent,
-		) {
-			return (
-				withIsIdentifiableAssignmentExpressionLeft(
-					isIdentifiableAssignmentExpressionLeft,
-				)
-				.isChildIdentifiableByParent({
-					child,
-					parent,
-				})
-			);
-		}
-	};
+	function isChildIdentifiableByParent(
+		parent,
+	) {
+		return (
+			withIsIdentifiableAssignmentExpressionLeft(
+				isIdentifiableAssignmentExpressionLeft,
+			)
+			.isChildIdentifiableByParent({
+				child,
+				parent,
+			})
+		);
+	}
+};
 
 function isSelfIdentifiableType(
 	type,

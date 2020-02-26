@@ -1,9 +1,8 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	getYamlFromJavascript = require("../.."),
-	path = require("path"),
-	readTextFile = require("../readTextFile");
+import getYamlFromJavascript from "../..";
+import path from "path";
+import readTextFile from "../readTextFile";
 
 test(
 	"React JSX enabled and function call in content of element returns depends upon function.",

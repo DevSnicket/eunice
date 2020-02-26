@@ -1,7 +1,8 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-export default
-elements =>
-	elements.length === 1
-	&&
-	elements[0];
+module.exports =
+	{
+		plugins: [ "@babel/plugin-transform-modules-commonjs" ],
+		retainLines: true,
+		sourceMaps: "inline",
+	};

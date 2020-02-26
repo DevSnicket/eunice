@@ -20,9 +20,15 @@
 				"type": "node"
 			},
 			{
-				"args": [ "--javascript=" ],
+				"args":
+					[
+						"-o",
+						"*",
+						"getYamlFromJavascript/bin.js",
+						"--javascript="
+					],
 				"name": "getYamlFromJavascript",
-				"program": "${workspaceFolder}/getYamlFromJavascript/bin.js",
+				"program": "${workspaceFolder}/node_modules/@babel/node/bin/babel-node.js",
 				"request": "launch",
 				"type": "node"
 			},
@@ -43,22 +49,28 @@
 			{
 				"args":
 					[
+						"-o",
+						"*",
+						"getOrCreateItemsInDirectory/bin.js",
 						"--directory=.",
 						"--ignorePathPattern=(^(.git|node_modules|harness/output|test-coverage))|/test-cases"
 					],
 				"name": "getOrCreateItemsInDirectory test dogfooding",
-				"program": "${workspaceFolder}/getOrCreateItemsInDirectory/bin.js",
+				"program": "${workspaceFolder}/node_modules/@babel/node/bin/babel-node.js",
 				"request": "launch",
 				"type": "node"
 			},
 			{
 				"args":
 					[
-						"--directory=getOrCreateItemsInDirectory/test-cases/valid",
+						"-o",
+						"*",
+						"getOrCreateItemsInDirectory/bin.js",
+						"--directory=getOrCreateItemsInDirectory/tests/test-cases/valid",
 						"--ignorePathPattern=^(node_modules|ignoredSubdirectory/ignoredSubdirectoryOfSubdirectory|ignored\\.js)"
 					],
 				"name": "getOrCreateItemsInDirectory test valid",
-				"program": "${workspaceFolder}/getOrCreateItemsInDirectory/bin.js",
+				"program": "${workspaceFolder}/node_modules/@babel/node/bin/babel-node.js",
 				"request": "launch",
 				"type": "node"
 			},

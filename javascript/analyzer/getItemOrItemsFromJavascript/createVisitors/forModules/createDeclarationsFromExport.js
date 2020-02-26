@@ -1,27 +1,25 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-require("array.prototype.flatmap")
-.shim();
+import "core-js/features/array/flat-map";
 
-module.exports =
-	({
-		createPathBasedDependsUpon,
-		removeExtensionFromFilePath,
-		source,
-		specifiers,
-	}) =>
-		specifiers
-		.flatMap(
-			withCreatePathBasedDependsUpon(
-				createPathBasedDependsUpon,
-			)
-			.createSelectorWhenHasSource({
-				removeExtensionFromFilePath,
-				source,
-			})
-			||
-			createDeclarationFromSpecifierWhenFunction,
-		);
+export default ({
+	createPathBasedDependsUpon,
+	removeExtensionFromFilePath,
+	source,
+	specifiers,
+}) =>
+	specifiers
+	.flatMap(
+		withCreatePathBasedDependsUpon(
+			createPathBasedDependsUpon,
+		)
+		.createSelectorWhenHasSource({
+			removeExtensionFromFilePath,
+			source,
+		})
+		||
+		createDeclarationFromSpecifierWhenFunction,
+	);
 
 function withCreatePathBasedDependsUpon(
 	createPathBasedDependsUpon,

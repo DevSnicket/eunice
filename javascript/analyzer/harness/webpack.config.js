@@ -1,12 +1,12 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createCodeEditorWebpackEntryForLanguages = require("@devsnicket/eunice-test-harnesses/codeEditor/serviceWorkers/createWebpackEntryForLanguages"),
-	createWebpackConfiguration = require("@devsnicket/eunice-test-harnesses/createWebpackConfiguration");
+import createCodeEditorWebpackEntryForLanguages from "@devsnicket/eunice-test-harnesses/codeEditor/serviceWorkers/createWebpackEntryForLanguages";
+import createWebpackConfiguration from "@devsnicket/eunice-test-harnesses/createWebpackConfiguration";
 
-module.exports =
-	(environment, { mode }) =>
-		createWebpackConfiguration({
+export default
+(environment, { mode }) => (
+	{
+		...createWebpackConfiguration({
 			directory:
 				`${__dirname}/output/`,
 			entry:
@@ -23,4 +23,6 @@ module.exports =
 				},
 			title:
 				"JavaScript Analyzer",
-		});
+		}),
+	}
+);

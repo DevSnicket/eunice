@@ -1,14 +1,14 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const { groupBy } = require("lodash");
+import groupBy from "lodash/groupBy";
 
-module.exports =
-	isBottomUp =>
-		isBottomUp
-		?
-		reverseItems
-		:
-		sortItemsWithVariablesThenParametersAtBottom;
+export default
+isBottomUp =>
+	isBottomUp
+	?
+	reverseItems
+	:
+	sortItemsWithVariablesThenParametersAtBottom;
 
 function sortItemsWithVariablesThenParametersAtBottom(
 	items,

@@ -1,30 +1,29 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const getWhenSingle = require("../../getWhenSingle");
+import getWhenSingle from "../../getWhenSingle";
 
-module.exports =
-	({
-		name,
-		values,
-	}) => {
-		return whenAny();
+export default ({
+	name,
+	values,
+}) => {
+	return whenAny();
 
-		function whenAny() {
+	function whenAny() {
+		return (
+			values.length
+			&&
+			createProperty()
+		);
+
+		function createProperty() {
 			return (
-				values.length
-				&&
-				createProperty()
+				{
+					[name]:
+						getWhenSingle(values)
+						||
+						values,
+				}
 			);
-
-			function createProperty() {
-				return (
-					{
-						[name]:
-							getWhenSingle(values)
-							||
-							values,
-					}
-				);
-			}
 		}
-	};
+	}
+};

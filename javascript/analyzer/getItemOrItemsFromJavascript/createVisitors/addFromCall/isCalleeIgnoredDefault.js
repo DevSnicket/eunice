@@ -121,7 +121,7 @@ const
 			"WebAssembly",
 		];
 
-module.exports =
-	callee =>
-		new Set([ ...browser, ...commonjs, ...nodejs, ...standard ])
-		.has(callee);
+export default
+callee =>
+	new Set([ ...browser, ...commonjs, ...nodejs, ...standard ])
+	.has(callee);

@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	callWithProcessStandardStreams = require("@devsnicket/eunice-call-with-process-standard-streams"),
-	getOrCreateItemsInDirectory = require("."),
-	getYamlForItemOrItems = require("../getYamlForItemOrItems"),
-	path = require("path");
+import callWithProcessStandardStreams from "@devsnicket/eunice-call-with-process-standard-streams";
+import getOrCreateItemsInDirectory from ".";
+import getYamlForItemOrItems from "../getYamlForItemOrItems";
+import path from "path";
 
 callWithProcessStandardStreams({
 	action:

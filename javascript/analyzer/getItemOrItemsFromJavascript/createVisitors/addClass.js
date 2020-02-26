@@ -1,45 +1,43 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createItemsProperty = require("./createItemsProperty"),
-	getParentFromAncestors = require("./getParentFromAncestors");
+import createItemsProperty from "./createItemsProperty";
+import getParentFromAncestors from "./getParentFromAncestors";
 
-module.exports =
-	({
+export default ({
+	ancestors,
+	classDeclarationOrExpression,
+	createDependsUponProperty,
+	declarations:
+		{
+			addDeclarationIn,
+			createItemsForAndRemoveDeclarationsIn,
+		},
+	findBlockOrIdentifiableParentInAncestors,
+}) =>
+	addWhenAnyProperties({
+		addDeclarationIn,
 		ancestors,
-		classDeclarationOrExpression,
-		createDependsUponProperty,
-		declarations:
+		declaration:
 			{
-				addDeclarationIn,
-				createItemsForAndRemoveDeclarationsIn,
+				...createIdentifierProperty({
+					ancestors,
+					identifier:
+						classDeclarationOrExpression.id,
+				}),
+				...createDependsUponProperty({
+					identifiers:
+						getBaseIdentifiers(classDeclarationOrExpression),
+					parent:
+						classDeclarationOrExpression,
+				}),
+				...createItemsProperty(
+					createItemsForAndRemoveDeclarationsIn(
+						classDeclarationOrExpression,
+					),
+				),
 			},
 		findBlockOrIdentifiableParentInAncestors,
-	}) =>
-		addWhenAnyProperties({
-			addDeclarationIn,
-			ancestors,
-			declaration:
-				{
-					...createIdentifierProperty({
-						ancestors,
-						identifier:
-							classDeclarationOrExpression.id,
-					}),
-					...createDependsUponProperty({
-						identifiers:
-							getBaseIdentifiers(classDeclarationOrExpression),
-						parent:
-							classDeclarationOrExpression,
-					}),
-					...createItemsProperty(
-						createItemsForAndRemoveDeclarationsIn(
-							classDeclarationOrExpression,
-						),
-					),
-				},
-			findBlockOrIdentifiableParentInAncestors,
-		});
+	});
 
 function createIdentifierProperty({
 	ancestors,

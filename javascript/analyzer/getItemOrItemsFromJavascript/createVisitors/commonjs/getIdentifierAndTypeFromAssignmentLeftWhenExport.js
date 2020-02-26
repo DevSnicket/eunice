@@ -1,59 +1,58 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	isModuleExport = require("./isModuleExport"),
-	isModuleExportProperty = require("./isModuleExportProperty");
+import isModuleExport from "./isModuleExport";
+import isModuleExportProperty from "./isModuleExportProperty";
 
-module.exports =
-	assignmentExpressionLeft => {
+export default
+assignmentExpressionLeft => {
+	return (
+		getWhenIdentifier()
+		||
+		getIdentifierWhenMember()
+	);
+
+	function getWhenIdentifier() {
 		return (
-			getWhenIdentifier()
-			||
-			getIdentifierWhenMember()
+			assignmentExpressionLeft.type === "Identifier"
+			&&
+			assignmentExpressionLeft.name === "exports"
+			&&
+			getIdentifierWithType(null)
+		);
+	}
+
+	function getIdentifierWhenMember() {
+		return (
+			assignmentExpressionLeft.type === "MemberExpression"
+			&&
+			getWhenExport()
 		);
 
-		function getWhenIdentifier() {
+		function getWhenExport() {
 			return (
-				assignmentExpressionLeft.type === "Identifier"
-				&&
-				assignmentExpressionLeft.name === "exports"
-				&&
-				getIdentifierWithType(null)
-			);
-		}
-
-		function getIdentifierWhenMember() {
-			return (
-				assignmentExpressionLeft.type === "MemberExpression"
-				&&
-				getWhenExport()
+				whenModuleExport()
+				||
+				whenExportProperty(assignmentExpressionLeft)
 			);
 
-			function getWhenExport() {
+			function whenModuleExport() {
 				return (
-					whenModuleExport()
+					whenDirect()
 					||
-					whenExportProperty(assignmentExpressionLeft)
+					whenModuleExportProperty(assignmentExpressionLeft)
 				);
 
-				function whenModuleExport() {
+				function whenDirect() {
 					return (
-						whenDirect()
-						||
-						whenModuleExportProperty(assignmentExpressionLeft)
+						isModuleExport(assignmentExpressionLeft)
+						&&
+						getIdentifierWithType(null)
 					);
-
-					function whenDirect() {
-						return (
-							isModuleExport(assignmentExpressionLeft)
-							&&
-							getIdentifierWithType(null)
-						);
-					}
 				}
 			}
 		}
-	};
+	}
+};
 
 function whenExportProperty({
 	object,

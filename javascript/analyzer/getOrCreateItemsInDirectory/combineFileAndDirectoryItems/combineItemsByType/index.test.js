@@ -1,6 +1,6 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const combineItemsByType = require(".");
+import combineItemsByType from ".";
 
 test(
 	"Single unknown type throws error with name of type.",

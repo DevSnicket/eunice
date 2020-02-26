@@ -1,86 +1,85 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-require("array.prototype.flatmap")
-.shim();
+import "core-js/features/array/flat-map";
 
-module.exports =
-	declarations => {
-		return (
-			declarations
-			&&
-			declarations.flatMap(createRelevantItemsFromDeclaration)
-		);
+export default
+declarations => {
+	return (
+		declarations
+		&&
+		declarations.flatMap(createRelevantItemsFromDeclaration)
+	);
 
-		function createRelevantItemsFromDeclaration(
-			declaration,
-		) {
-			return whenRelevant() || [];
+	function createRelevantItemsFromDeclaration(
+		declaration,
+	) {
+		return whenRelevant() || [];
 
-			function whenRelevant() {
-				return (
-					isDeclarationRelevant(declaration)
-					&&
-					createItemFromDeclaration({
-						...declaration,
-						dependsUpon:
-							hasPeerFunctionWhenRequired()
-							&&
-							declaration.dependsUpon,
-						type:
-							getOrInferType(),
-					})
-				);
+		function whenRelevant() {
+			return (
+				isDeclarationRelevant(declaration)
+				&&
+				createItemFromDeclaration({
+					...declaration,
+					dependsUpon:
+						hasPeerFunctionWhenRequired()
+						&&
+						declaration.dependsUpon,
+					type:
+						getOrInferType(),
+				})
+			);
 
-				function getOrInferType() {
-					return declaration.type || inferType();
+			function getOrInferType() {
+				return declaration.type || inferType();
 
-					function inferType() {
-						return (
-							hasPeerExport(declaration.id)
-							&&
-							"export"
-						);
-					}
-				}
-
-				function hasPeerFunctionWhenRequired() {
+				function inferType() {
 					return (
-						!declaration.isPeerFunctionRequired
-						||
-						hasPeerFunction(declaration.dependsUpon)
+						hasPeerExport(declaration.id)
+						&&
+						"export"
 					);
 				}
 			}
-		}
 
-		function hasPeerExport(
-			identifier,
-		) {
-			return (
-				identifier
-				&&
-				declarations.some(
-					declaration =>
-						declaration.type === "export"
-						&&
-						declaration.id === identifier,
-				)
-			);
+			function hasPeerFunctionWhenRequired() {
+				return (
+					!declaration.isPeerFunctionRequired
+					||
+					hasPeerFunction(declaration.dependsUpon)
+				);
+			}
 		}
+	}
 
-		function hasPeerFunction(
-			identifier,
-		) {
-			return (
-				declarations.some(
-					declaration =>
-						!declaration.type
-						&&
-						declaration.id === identifier,
-				)
-			);
-		}
-	};
+	function hasPeerExport(
+		identifier,
+	) {
+		return (
+			identifier
+			&&
+			declarations.some(
+				declaration =>
+					declaration.type === "export"
+					&&
+					declaration.id === identifier,
+			)
+		);
+	}
+
+	function hasPeerFunction(
+		identifier,
+	) {
+		return (
+			declarations.some(
+				declaration =>
+					!declaration.type
+					&&
+					declaration.id === identifier,
+			)
+		);
+	}
+};
 
 function isDeclarationRelevant(
 	declaration,

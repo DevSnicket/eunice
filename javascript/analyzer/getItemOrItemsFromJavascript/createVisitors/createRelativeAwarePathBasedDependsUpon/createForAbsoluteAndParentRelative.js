@@ -1,29 +1,28 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	{ initial, last } = require("lodash"),
-	path = require("path");
+import initial from "lodash/initial";
+import last from "lodash/last";
+import path from "path";
 
 const parentSegment = "..";
 
-module.exports =
-	({
-		items,
-		sourceDirectoryRelativePath,
-		targetPathSegments,
-	}) =>
-		targetPathSegments
-		.reduceRight(
-			getOrCreateAbsoluteOrParentRelativeDependsUpon,
-			{
-				ancestorDirectoryNames:
-					getAncestorNamesFromDirectoryPath(
-						sourceDirectoryRelativePath,
-					),
-				items,
-			},
-		)
-		.items;
+export default ({
+	items,
+	sourceDirectoryRelativePath,
+	targetPathSegments,
+}) =>
+	targetPathSegments
+	.reduceRight(
+		getOrCreateAbsoluteOrParentRelativeDependsUpon,
+		{
+			ancestorDirectoryNames:
+				getAncestorNamesFromDirectoryPath(
+					sourceDirectoryRelativePath,
+				),
+			items,
+		},
+	)
+	.items;
 
 function getAncestorNamesFromDirectoryPath(
 	directoryPath,

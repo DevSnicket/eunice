@@ -1,10 +1,9 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	fs = require("fs-extra"),
-	getOrCreateItemsInDirectory = require(".."),
-	getYamlForItemOrItems = require("../../getYamlForItemOrItems"),
-	path = require("path");
+import fs from "fs-extra";
+import getOrCreateItemsInDirectory from "..";
+import getYamlForItemOrItems from "../../getYamlForItemOrItems";
+import path from "path";
 
 const
 	rootItemIdentifier = "rootItemIdentifier",

@@ -1,31 +1,29 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createDeclarationsWhenCallOfRequire = require("./createDeclarationsWhenCallOfRequire"),
-	getIdentifierAndTypeFromAssignmentLeftWhenExport = require("./getIdentifierAndTypeFromAssignmentLeftWhenExport"),
-	hasTypeOfFunction = require("../hasTypeOfFunction");
+import createDeclarationsWhenCallOfRequire from "./createDeclarationsWhenCallOfRequire";
+import getIdentifierAndTypeFromAssignmentLeftWhenExport from "./getIdentifierAndTypeFromAssignmentLeftWhenExport";
+import hasTypeOfFunction from "../hasTypeOfFunction";
 
-module.exports =
-	({
-		addDeclarationsIn,
-		assignmentExpression: { left, right },
-		createPathBasedDependsUpon,
-		removeExtensionFromFilePath,
-	}) =>
-		!hasTypeOfFunction(right)
-		&&
-		addDeclarationsIn({
-			declarations:
-				createDeclarationsWithExportIdentifierAndType({
-					createPathBasedDependsUpon,
-					identifierAndType:
-						getIdentifierAndTypeFromAssignmentLeftWhenExport(left),
-					removeExtensionFromFilePath,
-					right,
-				}),
-			parent:
-				null,
-		});
+export default ({
+	addDeclarationsIn,
+	assignmentExpression: { left, right },
+	createPathBasedDependsUpon,
+	removeExtensionFromFilePath,
+}) =>
+	!hasTypeOfFunction(right)
+	&&
+	addDeclarationsIn({
+		declarations:
+			createDeclarationsWithExportIdentifierAndType({
+				createPathBasedDependsUpon,
+				identifierAndType:
+					getIdentifierAndTypeFromAssignmentLeftWhenExport(left),
+				removeExtensionFromFilePath,
+				right,
+			}),
+		parent:
+			null,
+	});
 
 function createDeclarationsWithExportIdentifierAndType({
 	createPathBasedDependsUpon,

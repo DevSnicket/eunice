@@ -1,27 +1,26 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const formatMessageForTypeWhenAny = require("./formatMessageForTypeWhenAny");
+import formatMessageForTypeWhenAny from "./formatMessageForTypeWhenAny";
 
-module.exports =
-	({
-		declarations,
-		dependsUponIdentifiers,
-	}) => {
-		const message =
-			[
-				formatMessageForDeclarations(
-					declarations,
-				),
-				formatMessageForDependsUponIdentifiers(
-					dependsUponIdentifiers,
-				),
-			]
-			.filter(Boolean)
-			.join("\n\n");
+export default ({
+	declarations,
+	dependsUponIdentifiers,
+}) => {
+	const message =
+		[
+			formatMessageForDeclarations(
+				declarations,
+			),
+			formatMessageForDependsUponIdentifiers(
+				dependsUponIdentifiers,
+			),
+		]
+		.filter(Boolean)
+		.join("\n\n");
 
-		if (message)
-			throw new Error(message);
-	};
+	if (message)
+		throw new Error(message);
+};
 
 function formatMessageForDeclarations(
 	declarations,

@@ -1,64 +1,63 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-module.exports =
-	({
-		identifier,
-		itemOrItems,
-	}) => {
+export default ({
+	identifier,
+	itemOrItems,
+}) => {
+	return (
+		whenNoItemOrItems()
+		||
+		whenArray()
+		||
+		createFileItemFrom(itemOrItems)
+	);
+
+	function whenNoItemOrItems() {
 		return (
-			whenNoItemOrItems()
-			||
-			whenArray()
-			||
-			createFileItemFrom(itemOrItems)
+			!itemOrItems
+			&&
+			createFileItemFrom()
+		);
+	}
+
+	function whenArray() {
+		return (
+			Array.isArray(itemOrItems)
+			&&
+			fromArray()
 		);
 
-		function whenNoItemOrItems() {
+		function fromArray() {
 			return (
-				!itemOrItems
-				&&
-				createFileItemFrom()
-			);
-		}
-
-		function whenArray() {
-			return (
-				Array.isArray(itemOrItems)
-				&&
-				fromArray()
+				whenSingle()
+				||
+				createFileItemFrom({ items: itemOrItems })
 			);
 
-			function fromArray() {
+			function whenSingle() {
 				return (
-					whenSingle()
-					||
-					createFileItemFrom({ items: itemOrItems })
+					itemOrItems.length === 1
+					&&
+					createFileItemFrom(
+						{ items: itemOrItems[0] },
+					)
 				);
-
-				function whenSingle() {
-					return (
-						itemOrItems.length === 1
-						&&
-						createFileItemFrom(
-							{ items: itemOrItems[0] },
-						)
-					);
-				}
 			}
 		}
+	}
 
-		function createFileItemFrom(
-			base,
-		) {
-			return (
-				createItem({
-					...base,
-					identifier,
-					type: "file",
-				})
-			);
-		}
-	};
+	function createFileItemFrom(
+		base,
+	) {
+		return (
+			createItem({
+				...base,
+				identifier,
+				type: "file",
+			})
+		);
+	}
+};
 
 function createItem({
 	dependsUpon = null,

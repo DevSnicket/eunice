@@ -11,21 +11,24 @@
 	"dependencies": {
 		"@babel/parser": "7.5.5",
 		"@babel/types": "7.5.5",
-		"@devsnicket/eunice-call-with-process-standard-streams": "^1.1.0",
-		"array.prototype.flat": "1.2.3",
-		"array.prototype.flatmap": "1.2.1",
+		"@devsnicket/eunice-call-with-process-standard-streams": "1.7.1",
+		"core-js": "3.6.4",
 		"js-yaml": "3.13.1"
 	},
 	"devDependencies": {
-		"@babel/polyfill": "7.4.4",
-		"@babel/preset-env": "7.4.4",
-		"@devsnicket/eunice-run-tests-from-file-system": "4.0.0",
-		"@devsnicket/eunice-test-harnesses": "7.10.0",
+		"@babel/core": "7.8.4",
+		"@babel/node": "7.8.4",
+		"@babel/plugin-transform-modules-commonjs": "7.8.3",
+		"@babel/polyfill": "7.8.3",
+		"@babel/preset-env": "7.8.4",
+		"@babel/register": "7.8.3",
+		"@devsnicket/eunice-run-tests-from-file-system": "4.6.1",
+		"@devsnicket/eunice-test-harnesses": "8.14.0",
 		"@types/jest": "24.0.19",
 		"@types/node": "10.14.7",
 		"babel-loader": "8.0.6",
 		"cspell": "4.0.21",
-		"eslint": "6.2.2",
+		"eslint": "6.8.0",
 		"eslint-plugin-notice": "0.8.9",
 		"fs-extra": "8.1.0",
 		"jest": "24.9.0",
@@ -53,7 +56,10 @@
 				"functions": 100,
 				"lines": 100
 			}
-		}
+		},
+		"transformIgnorePatterns": [
+			"node_modules/(?!@devsnicket)"
+		]
 	},
 	"keywords": [
 		"analyze",
@@ -82,13 +88,13 @@
 	"sideEffects": false,
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run test && npm run harness-production && npm run dogfooding",
-		"dogfooding": "node getOrCreateItemsInDirectory/bin.js --directory=. --ignorePathPattern=\"(^(.git|node_modules|harness/output|test-coverage))|/test-cases\"",
+		"dogfooding": "babel-node -o \"*\" getOrCreateItemsInDirectory/bin.js --directory=. --ignorePathPattern=\"(^(.git|node_modules|harness/output|test-coverage))|/test-cases\"",
 		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|gh-pages|node_modules|output|test-cases|test-coverage)$\" --output-yaml --reverse-file-content=false",
-		"harness-production": "rm -rf harness/output && npx webpack -p --config harness/webpack.config.js",
-		"harness-development": "rm -rf harness/output && npx webpack -d --config harness/webpack.config.js",
+		"harness-production": "rm -rf harness/output && npx webpack -p --config harness/webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs",
+		"harness-development": "rm -rf harness/output && npx webpack -d --config harness/webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs",
 		"lint": "eslint .",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./harness/output/*\" ! -path \"./node_modules/**/*\" ! -path \"**/test-cases/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest"
 	},
-	"version": "11.27.0"
+	"version": "11.28.0"
 }

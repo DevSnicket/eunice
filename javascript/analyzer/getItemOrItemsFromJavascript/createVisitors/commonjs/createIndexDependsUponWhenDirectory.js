@@ -1,45 +1,43 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	fs = require("fs"),
-	path = require("path");
+import fs from "fs";
+import path from "path";
 
-module.exports =
-	({
-		directoryAbsolutePath,
-		fileOrDirectoryPath,
-		items,
-	}) => {
-		return whenIsDirectory() || items;
+export default ({
+	directoryAbsolutePath,
+	fileOrDirectoryPath,
+	items,
+}) => {
+	return whenIsDirectory() || items;
 
-		function whenIsDirectory() {
+	function whenIsDirectory() {
+		return (
+			fileOrDirectoryPath
+			&&
+			fileOrDirectoryPath[0] === "."
+			&&
+			isDirectory()
+			&&
+			addParent({
+				identifier: "index",
+				items,
+			})
+		);
+
+		function isDirectory() {
 			return (
-				fileOrDirectoryPath
+				directoryAbsolutePath
 				&&
-				fileOrDirectoryPath[0] === "."
-				&&
-				isDirectory()
-				&&
-				addParent({
-					identifier: "index",
-					items,
-				})
+				directoryExists(
+					path.join(
+						directoryAbsolutePath,
+						fileOrDirectoryPath,
+					),
+				)
 			);
-
-			function isDirectory() {
-				return (
-					directoryAbsolutePath
-					&&
-					directoryExists(
-						path.join(
-							directoryAbsolutePath,
-							fileOrDirectoryPath,
-						),
-					)
-				);
-			}
 		}
-	};
+	}
+};
 
 function directoryExists(
 	directoryPath,

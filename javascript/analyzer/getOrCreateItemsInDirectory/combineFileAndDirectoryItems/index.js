@@ -1,22 +1,20 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-require("array.prototype.flatmap")
-.shim();
+import "core-js/features/array/flat-map";
 
-const
-	combineItemsByType = require("./combineItemsByType"),
-	getWhenSingle = require("../getWhenSingle"),
-	{ groupBy } = require("lodash");
+import combineItemsByType from "./combineItemsByType";
+import getWhenSingle from "../getWhenSingle";
+import groupBy from "lodash/groupBy";
 
-module.exports =
-	items =>
-		Object.entries(
-			groupBy(
-				items,
-				item => item.id,
-			),
-		)
-		.flatMap(combineItemsGroupedByIdentifier);
+export default
+items =>
+	Object.entries(
+		groupBy(
+			items,
+			item => item.id,
+		),
+	)
+	.flatMap(combineItemsGroupedByIdentifier);
 
 function combineItemsGroupedByIdentifier([
 	id,

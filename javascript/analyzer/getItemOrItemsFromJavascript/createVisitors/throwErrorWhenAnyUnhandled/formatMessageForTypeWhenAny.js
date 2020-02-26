@@ -1,31 +1,30 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-module.exports =
-	({
-		itemIdentifierSelector,
-		itemsSelector,
+export default ({
+	itemIdentifierSelector,
+	itemsSelector,
+	parentsWithItems,
+	type,
+}) =>
+	parentsWithItems.length
+	&&
+	formatMessage({
+		formatParentWithItems:
+			parentWithItems =>
+				combineParentAndItemsFormatted({
+					items:
+						formatItems({
+							itemIdentifierSelector,
+							items: itemsSelector(parentWithItems),
+						}),
+					parent:
+						formatParent(
+							parentWithItems.parent,
+						),
+				}),
 		parentsWithItems,
 		type,
-	}) =>
-		parentsWithItems.length
-		&&
-		formatMessage({
-			formatParentWithItems:
-				parentWithItems =>
-					combineParentAndItemsFormatted({
-						items:
-							formatItems({
-								itemIdentifierSelector,
-								items: itemsSelector(parentWithItems),
-							}),
-						parent:
-							formatParent(
-								parentWithItems.parent,
-							),
-					}),
-			parentsWithItems,
-			type,
-		});
+	});
 
 function formatItems({
 	itemIdentifierSelector,

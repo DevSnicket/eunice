@@ -1,10 +1,9 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createDeclarations = require("../createDeclarations"),
-	createDependsUponIdentifiers = require("../createDependsUponIdentifiers"),
-	{ parse } = require("@babel/parser"),
-	throwErrorWhenAnyUnhandled = require("../throwErrorWhenAnyUnhandled");
+import createDeclarations from "../createDeclarations";
+import createDependsUponIdentifiers from "../createDependsUponIdentifiers";
+import { parse } from "@babel/parser";
+import throwErrorWhenAnyUnhandled from "../throwErrorWhenAnyUnhandled";
 
 test.each([ "id", "key" ])(
 	"Unhandled declaration with parent identifier in \"%s\" throws error.",

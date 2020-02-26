@@ -1,101 +1,100 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const createItemsFromDeclarations = require("./createItemsFromDeclarations");
+import createItemsFromDeclarations from "./createItemsFromDeclarations";
 
-module.exports =
-	() => {
-		const declarationsByParents = new Map();
+export default () => {
+	const declarationsByParents = new Map();
+
+	return (
+		{
+			addDeclarationIn,
+			addDeclarationsIn,
+			createItemsForAndRemoveDeclarationsIn,
+			findDeclarationAndParent,
+			getGroupedByParent,
+		}
+	);
+
+	function addDeclarationIn({
+		declaration,
+		parent,
+	}) {
+		addDeclarationsIn({
+			declarations: [ declaration ],
+			parent,
+		});
+	}
+
+	function addDeclarationsIn({
+		declarations,
+		parent,
+	}) {
+		declarationsByParents.set(
+			parent,
+			[
+				...declarationsByParents.get(parent) || [],
+				...declarations,
+			],
+		);
+	}
+
+	function findDeclarationAndParent(
+		predicate,
+	) {
+		return (
+			[ ...declarationsByParents.keys() ]
+			.reverse()
+			.map(
+				declarationParent => (
+					{
+						declaration:
+							findDeclarationIn({
+								parent: declarationParent,
+								predicate,
+							}),
+						parent:
+							declarationParent,
+					}
+				),
+			)
+			.filter(
+				declarationAndParent =>
+					declarationAndParent.declaration,
+			)[0]
+		);
+	}
+
+	function findDeclarationIn({
+		parent,
+		predicate,
+	}) {
+		const declarationsOfParent =
+			declarationsByParents.get(parent);
 
 		return (
-			{
-				addDeclarationIn,
-				addDeclarationsIn,
-				createItemsForAndRemoveDeclarationsIn,
-				findDeclarationAndParent,
-				getGroupedByParent,
-			}
+			declarationsOfParent
+			&&
+			declarationsOfParent.find(predicate)
 		);
+	}
 
-		function addDeclarationIn({
-			declaration,
-			parent,
-		}) {
-			addDeclarationsIn({
-				declarations: [ declaration ],
-				parent,
-			});
-		}
+	function createItemsForAndRemoveDeclarationsIn(
+		parent,
+	) {
+		const declarations = declarationsByParents.get(parent);
 
-		function addDeclarationsIn({
-			declarations,
-			parent,
-		}) {
-			declarationsByParents.set(
-				parent,
-				[
-					...declarationsByParents.get(parent) || [],
-					...declarations,
-				],
+		declarationsByParents.delete(parent);
+
+		return createItemsFromDeclarations(declarations);
+	}
+
+	function * getGroupedByParent() {
+		for (const [ parent, declarations ] of declarationsByParents.entries())
+			yield (
+				{
+					declarations,
+					parent,
+				}
 			);
-		}
-
-		function findDeclarationAndParent(
-			predicate,
-		) {
-			return (
-				[ ...declarationsByParents.keys() ]
-				.reverse()
-				.map(
-					declarationParent => (
-						{
-							declaration:
-								findDeclarationIn({
-									parent: declarationParent,
-									predicate,
-								}),
-							parent:
-								declarationParent,
-						}
-					),
-				)
-				.filter(
-					declarationAndParent =>
-						declarationAndParent.declaration,
-				)[0]
-			);
-		}
-
-		function findDeclarationIn({
-			parent,
-			predicate,
-		}) {
-			const declarationsOfParent =
-				declarationsByParents.get(parent);
-
-			return (
-				declarationsOfParent
-				&&
-				declarationsOfParent.find(predicate)
-			);
-		}
-
-		function createItemsForAndRemoveDeclarationsIn(
-			parent,
-		) {
-			const declarations = declarationsByParents.get(parent);
-
-			declarationsByParents.delete(parent);
-
-			return createItemsFromDeclarations(declarations);
-		}
-
-		function * getGroupedByParent() {
-			for (const [ parent, declarations ] of declarationsByParents.entries())
-				yield (
-					{
-						declarations,
-						parent,
-					}
-				);
-		}
-	};
+	}
+};

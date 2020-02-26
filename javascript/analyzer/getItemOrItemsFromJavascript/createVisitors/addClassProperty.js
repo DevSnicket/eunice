@@ -1,44 +1,43 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const createItemsProperty = require("./createItemsProperty");
+import createItemsProperty from "./createItemsProperty";
 
-module.exports =
-	({
-		ancestors,
-		classProperty,
-		createDependsUponProperty,
-		declarations:
+export default ({
+	ancestors,
+	classProperty,
+	createDependsUponProperty,
+	declarations:
+		{
+			addDeclarationIn,
+			createItemsForAndRemoveDeclarationsIn,
+		},
+}) => {
+	if (!isFunction(classProperty))
+		addDeclarationIn({
+			declaration: createDeclaration(),
+			parent: getParentClass(),
+		});
+
+	function createDeclaration() {
+		return (
 			{
-				addDeclarationIn,
-				createItemsForAndRemoveDeclarationsIn,
-			},
-	}) => {
-		if (!isFunction(classProperty))
-			addDeclarationIn({
-				declaration: createDeclaration(),
-				parent: getParentClass(),
-			});
-
-		function createDeclaration() {
-			return (
-				{
-					id: classProperty.key.name,
-					...createDependsUponProperty(
-						{ parent: classProperty },
+				id: classProperty.key.name,
+				...createDependsUponProperty(
+					{ parent: classProperty },
+				),
+				...createItemsProperty(
+					createItemsForAndRemoveDeclarationsIn(
+						classProperty,
 					),
-					...createItemsProperty(
-						createItemsForAndRemoveDeclarationsIn(
-							classProperty,
-						),
-					),
-				}
-			);
-		}
+				),
+			}
+		);
+	}
 
-		function getParentClass() {
-			return ancestors[ancestors.length - 3];
-		}
-	};
+	function getParentClass() {
+		return ancestors[ancestors.length - 3];
+	}
+};
 
 function isFunction(
 	{ value },

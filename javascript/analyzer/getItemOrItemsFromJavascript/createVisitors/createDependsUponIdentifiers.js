@@ -1,77 +1,76 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-module.exports =
-	() => {
-		const dependsUponIdentifiersByParent = new Map();
+export default () => {
+	const dependsUponIdentifiersByParent = new Map();
+
+	return (
+		{
+			addIdentifierToParent,
+			createPropertyAndRemoveIdentifiers,
+			getGroupedByParent,
+		}
+	);
+
+	function addIdentifierToParent({
+		identifier,
+		parent,
+	}) {
+		const dependsUponIdentifiers = dependsUponIdentifiersByParent.get(parent);
+
+		if (dependsUponIdentifiers)
+			dependsUponIdentifiers.add(identifier);
+		else
+			dependsUponIdentifiersByParent.set(parent, new Set([ identifier ]));
+	}
+
+	function createPropertyAndRemoveIdentifiers({
+		identifiers = [],
+		parent,
+	}) {
+		const identifiersOfParent =
+			dependsUponIdentifiersByParent.get(parent);
+
+		dependsUponIdentifiersByParent.delete(parent);
 
 		return (
-			{
-				addIdentifierToParent,
-				createPropertyAndRemoveIdentifiers,
-				getGroupedByParent,
-			}
+			createPropertyForIdentifiers(
+				[
+					...identifiers,
+					...identifiersOfParent || [],
+				],
+			)
+		);
+	}
+
+	function createPropertyForIdentifiers(
+		identifiers,
+	) {
+		return (
+			identifiers.length
+			&&
+			{ dependsUpon: getValue() }
 		);
 
-		function addIdentifierToParent({
-			identifier,
-			parent,
-		}) {
-			const dependsUponIdentifiers = dependsUponIdentifiersByParent.get(parent);
+		function getValue() {
+			return whenSingle() || identifiers.sort();
 
-			if (dependsUponIdentifiers)
-				dependsUponIdentifiers.add(identifier);
-			else
-				dependsUponIdentifiersByParent.set(parent, new Set([ identifier ]));
-		}
-
-		function createPropertyAndRemoveIdentifiers({
-			identifiers = [],
-			parent,
-		}) {
-			const identifiersOfParent =
-				dependsUponIdentifiersByParent.get(parent);
-
-			dependsUponIdentifiersByParent.delete(parent);
-
-			return (
-				createPropertyForIdentifiers(
-					[
-						...identifiers,
-						...identifiersOfParent || [],
-					],
-				)
-			);
-		}
-
-		function createPropertyForIdentifiers(
-			identifiers,
-		) {
-			return (
-				identifiers.length
-				&&
-				{ dependsUpon: getValue() }
-			);
-
-			function getValue() {
-				return whenSingle() || identifiers.sort();
-
-				function whenSingle() {
-					return (
-						identifiers.length === 1
-						&&
-						identifiers[0]
-					);
-				}
+			function whenSingle() {
+				return (
+					identifiers.length === 1
+					&&
+					identifiers[0]
+				);
 			}
 		}
+	}
 
-		function * getGroupedByParent() {
-			for (const [ parent, identifiers ] of dependsUponIdentifiersByParent.entries())
-				yield (
-					{
-						identifiers: [ ...identifiers ],
-						parent,
-					}
-				);
-		}
-	};
+	function * getGroupedByParent() {
+		for (const [ parent, identifiers ] of dependsUponIdentifiersByParent.entries())
+			yield (
+				{
+					identifiers: [ ...identifiers ],
+					parent,
+				}
+			);
+	}
+};

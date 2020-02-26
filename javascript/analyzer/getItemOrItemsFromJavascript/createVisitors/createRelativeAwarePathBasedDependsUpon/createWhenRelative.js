@@ -1,48 +1,47 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const path = require("path");
+import path from "path";
 
-module.exports =
-	({
-		items,
-		sourceDirectoryRelativePath,
-		targetPathSegments,
-	}) => {
+export default ({
+	items,
+	sourceDirectoryRelativePath,
+	targetPathSegments,
+}) => {
+	return (
+		isRelativePathSegment(targetPathSegments[0])
+		&&
+		(whenAnyPathSegments() || whenIsParent())
+	);
+
+	function whenAnyPathSegments() {
 		return (
-			isRelativePathSegment(targetPathSegments[0])
+			targetPathSegments.length > 1
 			&&
-			(whenAnyPathSegments() || whenIsParent())
+			targetPathSegments
+			.reduceRight(
+				(itemsInHierarchy, pathSegment) =>
+					getOrCreateParentDependsUpon({
+						items:
+							itemsInHierarchy,
+						pathSegment,
+					}),
+				items,
+			)
 		);
+	}
 
-		function whenAnyPathSegments() {
-			return (
-				targetPathSegments.length > 1
-				&&
-				targetPathSegments
-				.reduceRight(
-					(itemsInHierarchy, pathSegment) =>
-						getOrCreateParentDependsUpon({
-							items:
-								itemsInHierarchy,
-							pathSegment,
-						}),
-					items,
-				)
-			);
-		}
-
-		function whenIsParent() {
-			return (
-				sourceDirectoryRelativePath
-				&&
-				getOrCreateParentDependsUpon({
-					items,
-					pathSegment:
-						path.basename(sourceDirectoryRelativePath),
-				})
-			);
-		}
-	};
+	function whenIsParent() {
+		return (
+			sourceDirectoryRelativePath
+			&&
+			getOrCreateParentDependsUpon({
+				items,
+				pathSegment:
+					path.basename(sourceDirectoryRelativePath),
+			})
+		);
+	}
+};
 
 function getOrCreateParentDependsUpon({
 	pathSegment,

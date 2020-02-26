@@ -1,9 +1,8 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-require("array.prototype.flatmap")
-.shim();
+import "core-js/features/array/flat-map";
 
-module.exports = getNamesFromDestructureOrIdentifier;
+export default getNamesFromDestructureOrIdentifier;
 
 function getNamesFromDestructureOrIdentifier({
 	argument,
