@@ -105,7 +105,7 @@
 		"lint": "npx eslint .",
 		"harness": "(cd harness && rm -rf output && mkdir output && npx webpack -p --config webpack.config.js)",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dogfooding/output/**\" ! -path \"./dist/*\" ! -path \"./gh-pages/**\" ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
-		"test": "jest --runInBand"
+		"test": "jest"
 	},
 	"version": "7.3.0"
 }
