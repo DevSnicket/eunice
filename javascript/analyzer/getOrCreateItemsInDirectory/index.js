@@ -3,17 +3,12 @@
 import "core-js/features/array/flat";
 
 import combineFileAndDirectoryItems from "./combineFileAndDirectoryItems";
+import fileSystem from "fs-extra";
 import flatMap from "core-js/features/array/flat-map";
-import fs from "fs";
 import getItemOrItemsFromJavascript from "../getItemOrItemsFromJavascript";
 import getOrCreateItemWhenJavascriptFile from "./getOrCreateItemWhenJavascriptFile";
 import getWhenSingle from "./getWhenSingle";
 import path from "path";
-import { promisify } from "util";
-
-const
-	getFileStatus = promisify(fs.lstat),
-	readDirectory = promisify(fs.readdir);
 
 export default
 async(/** @type {import("./Parameter.d")} */{
@@ -96,7 +91,7 @@ function withOptionsAndRootDirectory({
 				(
 					await Promise.all(
 						flatMap(
-							(await readDirectory(directoryAbsolutePath))
+							(await fileSystem.readdir(directoryAbsolutePath))
 							.sort(),
 							async fileOrSubdirectoryName =>
 								await createItemFromFileOrSubdirectory(
@@ -164,7 +159,7 @@ function withOptionsAndRootDirectory({
 
 				async function isDirectory() {
 					return (
-						(await getFileStatus(fileOrSubdirectoryAbsolutePath))
+						(await fileSystem.lstat(fileOrSubdirectoryAbsolutePath))
 						.isDirectory()
 					);
 				}

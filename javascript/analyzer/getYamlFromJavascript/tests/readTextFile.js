@@ -1,14 +1,11 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import fs from "fs";
-import { promisify } from "util";
-
-const readFile = promisify(fs.readFile);
+import fileSystem from "fs-extra";
 
 export default
 async filePath =>
 	removeByteOrderMark(
-		await readFile(
+		await fileSystem.readFile(
 			filePath,
 			"utf-8",
 		),

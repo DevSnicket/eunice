@@ -13,6 +13,7 @@
 		"@babel/types": "7.5.5",
 		"@devsnicket/eunice-call-with-process-standard-streams": "1.7.1",
 		"core-js": "3.6.4",
+		"fs-extra": "8.1.0",
 		"js-yaml": "3.13.1"
 	},
 	"devDependencies": {
@@ -24,13 +25,13 @@
 		"@babel/register": "7.8.3",
 		"@devsnicket/eunice-run-tests-from-file-system": "4.6.1",
 		"@devsnicket/eunice-test-harnesses": "8.14.0",
+		"@types/fs-extra": "8.1.0",
 		"@types/jest": "24.0.19",
 		"@types/node": "10.14.7",
 		"babel-loader": "8.0.6",
 		"cspell": "4.0.21",
 		"eslint": "6.8.0",
 		"eslint-plugin-notice": "0.8.9",
-		"fs-extra": "8.1.0",
 		"jest": "24.9.0",
 		"react": "16.4.0",
 		"react-dom": "16.4.2",
@@ -96,5 +97,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./harness/output/*\" ! -path \"./node_modules/**/*\" ! -path \"**/test-cases/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest"
 	},
-	"version": "11.28.0"
+	"version": "11.29.0"
 }

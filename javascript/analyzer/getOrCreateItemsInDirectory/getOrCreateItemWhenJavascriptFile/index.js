@@ -1,11 +1,8 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import fs from "fs";
+import fileSystem from "fs-extra";
 import getOrCreateFileItem from "./getOrCreateFileItem";
 import path from "path";
-import { promisify } from "util";
-
-const readFile = promisify(fs.readFile);
 
 export default async({
 	directoryPath,
@@ -28,7 +25,7 @@ export default async({
 				identifier,
 				itemOrItems:
 					getItemOrItemsFromJavascriptOrRethrowErrorWithPath(
-						await readFile(
+						await fileSystem.readFile(
 							fileOrSubdirectoryPath.absolute,
 							"utf-8",
 						),
