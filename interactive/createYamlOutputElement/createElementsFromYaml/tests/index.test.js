@@ -17,8 +17,12 @@ describe(
 				[
 					"item without items returns item without breadcrumbs, parent and hyperlinks",
 					{
+						expectedHtmlPrefix:
+							"",
 						expectedSvgFile:
 							"without parent and hyperlinks",
+						locationHash:
+							null,
 						yaml:
 							"single",
 					},
@@ -26,8 +30,12 @@ describe(
 				[
 					"item with items returns item with hyperlinks, and without breadcrumbs and parent",
 					{
+						expectedHtmlPrefix:
+							"",
 						expectedSvgFile:
 							"without parent and with hyperlinks",
+						locationHash:
+							null,
 						yaml:
 							"{ id: single, items: nested }",
 					},
@@ -35,8 +43,12 @@ describe(
 				[
 					"anonymous item with items returns item with hyperlinks, and without breadcrumbs and parent",
 					{
+						expectedHtmlPrefix:
+							"",
 						expectedSvgFile:
 							"anonymous without parent and with hyperlinks",
+						locationHash:
+							null,
 						yaml:
 							"{ items: nested }",
 					},
@@ -192,6 +204,10 @@ describe(
 				testTestCase({
 					expectedFile:
 						path.join("dependencyCounts", `${expectedSvgFile}.svg`),
+					expectedHtmlPrefix:
+						"",
+					locationHash:
+						null,
 					yaml,
 				}),
 		),
@@ -199,8 +215,8 @@ describe(
 
 async function testTestCase({
 	expectedFile,
-	expectedHtmlPrefix = "",
-	locationHash = null,
+	expectedHtmlPrefix,
+	locationHash,
 	yaml,
 }) {
 	expect(

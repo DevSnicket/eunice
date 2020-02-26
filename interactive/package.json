@@ -21,14 +21,19 @@
 		"@babel/preset-env": "7.8.4",
 		"@babel/register": "7.8.3",
 		"@devsnicket/eunice-test-harnesses": "8.13.1",
+		"@types/fs-extra": "7.0.0",
 		"@types/jest": "25.1.3",
-		"@types/node": "10.14.5",
+		"@types/node": "12.12.28",
 		"@types/react": "16.4.18",
+		"@types/react-dom": "16.9.5",
+		"@types/string-pixel-width": "1.7.0",
+		"@types/webpack": "4.41.6",
 		"babel-loader": "8.0.6",
 		"cspell": "3.1.3",
 		"eslint": "6.8.0",
 		"eslint-plugin-notice": "0.8.9",
 		"jest": "25.1.0",
+		"typescript": "3.8.2",
 		"webpack-cli": "3.3.2"
 	},
 	"homepage": "https://github.com/DevSnicket/eunice-renderer-test-harness#readme",
@@ -88,7 +93,7 @@
 	},
 	"sideEffects": false,
 	"scripts": {
-		"all": "npm run spellcheck && npm run lint && npm run build && npm run test && npm run harness-example-production",
+		"all": "npm run spellcheck && npm run lint && npm run typescript && npm run build && npm run test && npm run harness-example-production",
 		"build": "rm -rf dist && npx webpack --config webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs -p",
 		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$\" --output-yaml --reverse-file-content=false",
 		"harness-dogfooding-development": "rm -rf tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output && npx webpack --config tests/dogfoodingFromEuniceRepositoryRelativeDirectory/webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs -d",
@@ -98,6 +103,7 @@
 		"lint": "npx eslint .",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./node_modules/*\" ! -path \"./tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output/*\" ! -path \"./tests/example/output/*\" ! -path \"./test-coverage/*\" ! -path \"./writeHarness/tests/output/*\" -exec npx cspell {} +",
 		"test": "npx jest",
+		"typescript": "npx tsc -p jsconfig.json",
 		"watch": "npx webpack --config webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs -d --watch"
 	},
 	"version": "4.19.0"

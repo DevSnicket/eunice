@@ -20,6 +20,8 @@ test(
 		expect(
 			renderToStaticMarkup(
 				createWithDependencyList({
+					closeHref:
+						null,
 					createAncestorSeparatorElement:
 						null,
 					createElement,
