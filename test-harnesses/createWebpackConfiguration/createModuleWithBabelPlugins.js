@@ -10,7 +10,7 @@ babelPlugins =>
 			[
 				{
 					exclude:
-						/node_modules(?!\/@devsnicket\/eunice-test-harnesses)/,
+						/node_modules(?!\/@devsnicket)/,
 					test:
 						/\.js$/,
 					use:
