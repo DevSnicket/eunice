@@ -91,7 +91,9 @@
 		"type": "git",
 		"url": "https://github.com/DevSnicket/eunice-renderer-test-harness.git"
 	},
-	"sideEffects": false,
+	"sideEffects": [
+		"*.css"
+	],
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run typescript && npm run build && npm run test && npm run harness-example-production",
 		"build": "rm -rf dist && npx webpack --config webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs -p",
@@ -106,5 +108,5 @@
 		"typescript": "npx tsc -p jsconfig.json",
 		"watch": "npx webpack --config webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs -d --watch"
 	},
-	"version": "4.19.0"
+	"version": "4.19.1"
 }
