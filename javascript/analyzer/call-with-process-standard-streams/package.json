@@ -42,6 +42,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"type": "module",
-	"version": "1.7.0"
+	"version": "1.7.1"
 }
