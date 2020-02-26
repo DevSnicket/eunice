@@ -50,6 +50,8 @@ function createDeclarationsWithExportIdentifierAndType({
 				callOrMemberOfCallExpression:
 					right,
 				createPathBasedDependsUpon,
+				directoryAbsolutePath:
+					null,
 				getIsDestructuredAndVariables,
 				removeExtensionFromFilePath,
 			})

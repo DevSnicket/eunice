@@ -9,11 +9,13 @@ import path from "path";
 callWithProcessStandardStreams({
 	action:
 		async({
+			directory,
 			ignorePathPattern,
 			...restOfProcessArguments
 		}) =>
 			getYamlForItemOrItems(
 				await getOrCreateItemsInDirectory({
+					directory,
 					ignorePathPattern:
 						createRegularExpressionFromPathPattern(
 							ignorePathPattern,

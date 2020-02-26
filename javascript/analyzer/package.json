@@ -27,7 +27,9 @@
 		"@devsnicket/eunice-test-harnesses": "8.14.0",
 		"@types/fs-extra": "8.1.0",
 		"@types/jest": "24.0.19",
-		"@types/node": "10.14.7",
+		"@types/node": "12.12.28",
+		"@types/react": "16.9.23",
+		"@types/webpack": "4.41.6",
 		"babel-loader": "8.0.6",
 		"cspell": "4.0.21",
 		"eslint": "6.8.0",
@@ -36,6 +38,7 @@
 		"react": "16.4.0",
 		"react-dom": "16.4.2",
 		"react-reflex": "2.2.8",
+		"typescript": "3.8.2",
 		"webpack-cli": "3.3.2"
 	},
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
@@ -88,14 +91,15 @@
 	},
 	"sideEffects": false,
 	"scripts": {
-		"all": "npm run spellcheck && npm run lint && npm run test && npm run harness-production && npm run dogfooding",
+		"all": "npm run spellcheck && npm run lint && npm run typescript && npm run test && npm run harness-production && npm run dogfooding",
 		"dogfooding": "babel-node -o \"*\" getOrCreateItemsInDirectory/bin.js --directory=. --ignorePathPattern=\"(^(.git|node_modules|harness/output|test-coverage))|/test-cases\"",
 		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|gh-pages|node_modules|output|test-cases|test-coverage)$\" --output-yaml --reverse-file-content=false",
 		"harness-production": "rm -rf harness/output && npx webpack -p --config harness/webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs",
 		"harness-development": "rm -rf harness/output && npx webpack -d --config harness/webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs",
 		"lint": "eslint .",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./harness/output/*\" ! -path \"./node_modules/**/*\" ! -path \"**/test-cases/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
-		"test": "jest"
+		"test": "jest",
+		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "11.29.0"
+	"version": "11.30.0"
 }

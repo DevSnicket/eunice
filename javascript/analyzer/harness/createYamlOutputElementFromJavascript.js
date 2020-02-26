@@ -23,10 +23,9 @@ javascript =>
 							createElement(
 								"code",
 								{ id: "yaml" },
-								getYamlFromJavascript({
-									isReactJsxEnabled: true,
-									javascript,
-								}),
+								getYamlFromJavascript(
+									{ javascript },
+								),
 							),
 						),
 				createElement,
