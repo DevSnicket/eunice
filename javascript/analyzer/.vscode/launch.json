@@ -11,7 +11,7 @@
 					[
 						"--collect-coverage=false",
 						"--runInBand",
-						"getItemOrItemsFromJavascript/createVisitors/throwErrorWhenAnyUnhandled/test.js"
+						"getItemOrItemsFromJavascript/createVisitors/throwErrorWhenAnyUnhandled/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "getItemOrItemsFromJavascript createVisitors throwErrorWhenAnyUnhandled Jest",
@@ -37,7 +37,7 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"getYamlFromJavascript/tests/classFields/test.js",
+						"getYamlFromJavascript/tests/classFields/index.test.js",
 						"-t=function.with-call.arrow"
 					],
 				"disableOptimisticBPs": true,
@@ -79,7 +79,7 @@
 					[
 						"--collect-coverage=false",
 						"--runInBand",
-						"getOrCreateItemsInDirectory/test.js",
+						"getYamlFromJavascript/tests/bottomUp/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "getOrCreateItemsInDirectory Jest",
