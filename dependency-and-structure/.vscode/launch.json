@@ -13,7 +13,7 @@
 					[
 						"--runInBand",
 						"--collectCoverage=false",
-						"createStackFromYaml/test/test.js"
+						"createStackFromYaml/test/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "createStackFromYaml jest",
@@ -26,7 +26,7 @@
 					[
 						"--runInBand",
 						"--collectCoverage=false",
-						"createYamlFromStack/test.js"
+						"createYamlFromStack/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "createYamlFromStack jest",
@@ -39,7 +39,7 @@
 					[
 						"--runInBand",
 						"--collectCoverage=false",
-						"findDirectionBetweenItemsInFirstMutualStack/test.js"
+						"findDirectionBetweenItemsInFirstMutualStack/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "findDirectionBetweenItemsInFirstMutualStack jest",
@@ -52,7 +52,7 @@
 					[
 						"--runInBand",
 						"--collectCoverage=false",
-						"findItemInStackWithIdentifierHierarchy/test.js"
+						"findItemInStackWithIdentifierHierarchy/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "findItemInStackWithIdentifierHierarchy jest",
@@ -65,7 +65,7 @@
 					[
 						"--runInBand",
 						"--collectCoverage=false",
-						"isInnerStack/test.js"
+						"isInnerStack/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "isInnerStack jest",
