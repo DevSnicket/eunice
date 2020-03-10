@@ -1,1 +1,3 @@
-dependsUpon: parent
+dependsUpon:
+  id: parent
+  items: index

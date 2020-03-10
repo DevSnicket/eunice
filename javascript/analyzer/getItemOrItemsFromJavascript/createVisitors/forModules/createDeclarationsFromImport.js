@@ -2,7 +2,7 @@
 
 export default ({
 	createPathBasedDependsUpon,
-	from,
+	path,
 	specifiers,
 }) => {
 	return specifiers.map(createFromSpecifier);
@@ -23,7 +23,7 @@ export default ({
 			return (
 				createPathBasedDependsUpon({
 					items: imported && imported.name,
-					path: from,
+					path,
 				})
 			);
 		}

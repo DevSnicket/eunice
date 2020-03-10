@@ -1,3 +1,5 @@
 dependsUpon:
   id: ..
-  items: ..
+  items:
+    id: ..
+    items: index

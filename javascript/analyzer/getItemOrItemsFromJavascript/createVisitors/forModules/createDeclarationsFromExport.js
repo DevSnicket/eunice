@@ -4,67 +4,46 @@ import "core-js/features/array/flat-map";
 
 export default ({
 	createPathBasedDependsUpon,
-	removeExtensionFromFilePath,
 	source,
 	specifiers,
 }) =>
 	specifiers
 	.flatMap(
-		withCreatePathBasedDependsUpon(
+		createSelectorWhenHasSource({
 			createPathBasedDependsUpon,
-		)
-		.createSelectorWhenHasSource({
-			removeExtensionFromFilePath,
 			source,
 		})
 		||
 		createDeclarationFromSpecifierWhenFunction,
 	);
 
-function withCreatePathBasedDependsUpon(
+function createSelectorWhenHasSource({
 	createPathBasedDependsUpon,
-) {
-	return { createSelectorWhenHasSource };
+	source,
+}) {
+	return (
+		source
+		&&
+		createDeclarationFromSpecifier
+	);
 
-	function createSelectorWhenHasSource({
-		removeExtensionFromFilePath,
-		source,
+	function createDeclarationFromSpecifier({
+		exported,
+		local,
 	}) {
 		return (
-			source
-			&&
-			withSource(
-				removeExtensionFromFilePath(
-					source.value,
-				),
-			)
-			.createDeclarationFromSpecifier
+			{
+				dependsUpon:
+					createPathBasedDependsUpon({
+						items: local.name,
+						path: source.value,
+					}),
+				id:
+					exported.name,
+				type:
+					"export",
+			}
 		);
-	}
-
-	function withSource(
-		source,
-	) {
-		return { createDeclarationFromSpecifier };
-
-		function createDeclarationFromSpecifier({
-			exported,
-			local,
-		}) {
-			return (
-				{
-					dependsUpon:
-						createPathBasedDependsUpon({
-							items: local.name,
-							path: source,
-						}),
-					id:
-						exported.name,
-					type:
-						"export",
-				}
-			);
-		}
 	}
 }
 

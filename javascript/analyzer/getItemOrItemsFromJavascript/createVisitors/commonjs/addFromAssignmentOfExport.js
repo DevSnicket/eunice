@@ -8,7 +8,6 @@ export default ({
 	addDeclarationsIn,
 	assignmentExpression: { left, right },
 	createPathBasedDependsUpon,
-	removeExtensionFromFilePath,
 }) =>
 	!hasTypeOfFunction(right)
 	&&
@@ -18,7 +17,6 @@ export default ({
 				createPathBasedDependsUpon,
 				identifierAndType:
 					getIdentifierAndTypeFromAssignmentLeftWhenExport(left),
-				removeExtensionFromFilePath,
 				right,
 			}),
 		parent:
@@ -28,7 +26,6 @@ export default ({
 function createDeclarationsWithExportIdentifierAndType({
 	createPathBasedDependsUpon,
 	identifierAndType,
-	removeExtensionFromFilePath,
 	right,
 }) {
 	return (
@@ -53,7 +50,6 @@ function createDeclarationsWithExportIdentifierAndType({
 				directoryAbsolutePath:
 					null,
 				getIsDestructuredAndVariables,
-				removeExtensionFromFilePath,
 			})
 		);
 

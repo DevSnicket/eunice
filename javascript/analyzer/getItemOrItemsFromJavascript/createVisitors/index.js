@@ -11,6 +11,7 @@ import createDeclarationsWhenCallOfCommonjsRequire from "./commonjs/createDeclar
 import createDependsUponIdentifiers from "./createDependsUponIdentifiers";
 import createFileExtensionTransformer from "./createFileExtensionTransformer";
 import createFileItemOrItems from "./createFileItemOrItems";
+import createIndexDependsUponWhenDirectory from "./createIndexDependsUponWhenDirectory";
 import createRelativeAwarePathBasedDependsUpon from "./createRelativeAwarePathBasedDependsUpon";
 import createScopedVariables from "./createScopedVariables";
 import createUndeclaredReferences from "./createUndeclaredReferences";
@@ -61,7 +62,6 @@ export default ({
 					directoryPath.absolute,
 				getRelativeWhenFileExists,
 				parseJavascript,
-				removeExtensionFromFilePath,
 			}),
 			AssignmentExpression:
 				visitAssignmentExpression,
@@ -89,7 +89,6 @@ export default ({
 				declarations.addDeclarationsIn,
 			assignmentExpression,
 			createPathBasedDependsUpon,
-			removeExtensionFromFilePath,
 		});
 	}
 
@@ -128,12 +127,7 @@ export default ({
 			callee:
 				callExpression.callee,
 			createPathBasedDependsUpon,
-			directoryAbsolutePath:
-				directoryPath
-				&&
-				directoryPath.absolute,
 			findBlockOrIdentifiableParentInAncestors,
-			removeExtensionFromFilePath,
 		});
 	}
 
@@ -186,7 +180,6 @@ export default ({
 							&&
 							directoryPath.absolute,
 						getIsDestructuredAndVariables,
-						removeExtensionFromFilePath,
 					}),
 			hasUndeclaredReferenceTo:
 				undeclaredReferences.hasReferenceTo,
@@ -204,12 +197,22 @@ export default ({
 	}) {
 		return (
 			createRelativeAwarePathBasedDependsUpon({
-				items,
+				items:
+					createIndexDependsUponWhenDirectory({
+						directoryAbsolutePath:
+							directoryPath
+							&&
+							directoryPath.absolute,
+						fileOrDirectoryPath:
+							targetPath,
+						items,
+					}),
 				sourceDirectoryRelativePath:
 					directoryPath
 					&&
 					directoryPath.relative,
-				targetPath,
+				targetPath:
+					removeExtensionFromFilePath(targetPath),
 			})
 		);
 	}

@@ -3,19 +3,27 @@ type: directory
 items:
   - id: importParent
     type: file
-    dependsUpon: rootItemIdentifier
+    dependsUpon:
+      id: rootItemIdentifier
+      items: index
   - id: importParentOfRoot
     type: file
-    dependsUpon: ..
+    dependsUpon:
+      id: ..
+      items: index
   - id: subdirectory
     type: directory
     items:
       - id: importGrandparent
         type: file
-        dependsUpon: rootItemIdentifier
+        dependsUpon:
+          id: rootItemIdentifier
+          items: index
       - id: subdirectoryOfSubdirectory
         type: directory
         items:
           id: importGreatGrandparent
           type: file
-          dependsUpon: rootItemIdentifier
+          dependsUpon:
+            id: rootItemIdentifier
+            items: index

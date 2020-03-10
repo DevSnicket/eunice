@@ -11,7 +11,6 @@ export default ({
 	directoryAbsolutePath,
 	getRelativeWhenFileExists,
 	parseJavascript,
-	removeExtensionFromFilePath,
 }) => {
 	return (
 		{
@@ -79,7 +78,6 @@ export default ({
 			declarations:
 				createDeclarationsFromExport({
 					createPathBasedDependsUpon,
-					removeExtensionFromFilePath,
 					source,
 					specifiers,
 				}),
@@ -96,10 +94,8 @@ export default ({
 			declarations:
 				createDeclarationsFromImport({
 					createPathBasedDependsUpon,
-					from:
-						removeExtensionFromFilePath(
-							source.value,
-						),
+					path:
+						source.value,
 					specifiers,
 				}),
 			parent:
