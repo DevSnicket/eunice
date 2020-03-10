@@ -30,7 +30,7 @@ function sortItemsWithVariablesThenParametersAtBottom(
 
 		function whenSpecified() {
 			return (
-				[ "parameter", "variable" ].includes(type)
+				[ "import", "parameter", "variable" ].includes(type)
 				&&
 				type
 			);
@@ -38,6 +38,7 @@ function sortItemsWithVariablesThenParametersAtBottom(
 	}
 
 	function sortItemsFromTypeGroups({
+		import: _import,
 		other,
 		parameter,
 		variable,
@@ -47,6 +48,7 @@ function sortItemsWithVariablesThenParametersAtBottom(
 				...other,
 				...variable || [],
 				...parameter || [],
+				..._import || [],
 			]
 		);
 	}
