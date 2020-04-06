@@ -56,10 +56,14 @@ renderIntoContainerElement({
 							title:
 								"JavaScript",
 						}),
-						createYamlInputElement({
-							createFillWithTitleElement,
-							createYamlEditorElement,
-							stateful,
+						createFillWithTitleElement({
+							content:
+								createYamlInputElement({
+									createYamlEditorElement,
+									stateful,
+								}),
+							title:
+								"YAML",
 						}),
 						createYamlOutputElement({
 							callOrCreateElementOnError,
