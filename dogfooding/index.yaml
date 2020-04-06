@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 7.5.0 on 2020-04-06T11:22:02.732Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 7.5.0 on 2020-04-06T12:01:45.836Z
 - - id: javascript
     type: directory
     items:
@@ -3749,20 +3749,19 @@
                 dependsUpon:
                   - createYamlInputElement
                   - location
-                  - id: react
-                    items: createElement
                   - id: test-harnesses
                     items:
                       - createHashFromLocation
-                      - createResizableContainer
                       - callOrCreateElementOnError
-                      - createFillWithTitleElement
+                      - createResizableContainer
                       - renderIntoContainerElement
                       - id: codeEditor
                         items:
                           - createEditorForLanguage
                           - id: serviceWorkers
                             items: initializeGlobal
+                  - id: react
+                    items: createElement
                   - id: createYamlOutputElement
                     items: index
               - id: index
