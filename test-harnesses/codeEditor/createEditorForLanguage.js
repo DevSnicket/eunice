@@ -24,8 +24,12 @@ language => {
 				"div",
 				{
 					ref: setDomContainerElement,
-					// Mitigates automaticLayout property set to true not resizing the height back down to being smaller
-					style: { overflow: "hidden" },
+					style:
+						{
+							height: "100%",
+							// Mitigates automaticLayout property set to true not resizing the height back down to being smaller
+							overflow: "hidden",
+						},
 				},
 			)
 		);
