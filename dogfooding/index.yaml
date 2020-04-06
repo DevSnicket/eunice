@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 7.4.0 on 2020-04-06T08:09:06.822Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 7.5.0 on 2020-04-06T11:22:02.732Z
 - - id: javascript
     type: directory
     items:
@@ -3747,6 +3747,7 @@
             - - id: harness
                 type: file
                 dependsUpon:
+                  - createYamlInputElement
                   - location
                   - id: react
                     items: createElement
@@ -3754,16 +3755,14 @@
                     items:
                       - createHashFromLocation
                       - createResizableContainer
-                      - createFillWithTitleElement
                       - callOrCreateElementOnError
+                      - createFillWithTitleElement
                       - renderIntoContainerElement
                       - id: codeEditor
                         items:
                           - createEditorForLanguage
                           - id: serviceWorkers
                             items: initializeGlobal
-                  - id: createYamlInputElement
-                    items: index
                   - id: createYamlOutputElement
                     items: index
               - id: index
@@ -3778,9 +3777,7 @@
                     type: export
                     dependsUpon:
                       id: createYamlInputElement
-                      items:
-                        id: index
-                        items: default
+                      items: default
                   - id: createYamlOutputElement
                     type: export
                     dependsUpon:
@@ -4687,13 +4684,10 @@
                         id: test-harnesses
                         items: createWebpackConfiguration
               - id: createYamlInputElement
-                type: directory
+                type: file
                 items:
-                  id: index
-                  type: file
-                  items:
-                    id: index
-                    type: export
+                  id: createYamlInputElement
+                  type: export
               - id: readTextFile
                 type: file
                 items:
