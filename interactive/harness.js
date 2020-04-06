@@ -8,7 +8,6 @@ import {
 
 import {
 	callOrCreateElementOnError,
-	createFillWithTitleElement,
 	createHashFromLocation,
 	createResizableContainer,
 	renderIntoContainerElement,
@@ -48,12 +47,25 @@ renderIntoContainerElement({
 					[
 						{
 							element:
-								createYamlInputElement({
-									createElement,
-									createFillWithTitleElement,
-									createYamlEditorElement,
-									stateful,
-								}),
+								createElement(
+									"div",
+									{
+										style:
+											{
+												bottom: 0,
+												left: 0,
+												padding: "0.5em",
+												position: "absolute",
+												right: 0,
+												top: 0,
+											},
+									},
+									createYamlInputElement({
+										createElement,
+										createYamlEditorElement,
+										stateful,
+									}),
+								),
 						},
 						{
 							element:
