@@ -1,8 +1,7 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	createSourcesFromPackages = require("."),
-	path = require("path");
+import createSourcesFromPackages from ".";
+import path from "path";
 
 test.each(
 	[

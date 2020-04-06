@@ -2,16 +2,17 @@
 
 // istanbul ignore file: test would be a mirror of implementation
 
+/* eslint-disable no-console */
+
 // index.js is separate to bin.js so WebPack doesn't need to ignore Node.js shebang
 
-const
-	analyzeAndProcessAndRender = require("./analyzeAndProcessAndRender"),
-	createParameterFromCliArguments = require("./createParameterFromCliArguments"),
-	getOrPromptForLicenseAcceptance = require("./getOrPromptForLicenseAcceptance"),
-	minimist = require("minimist"),
-	path = require("path"),
-	supportsColor = require("supports-color"),
-	{ version } = require("./package.json");
+import analyzeAndProcessAndRender from "./analyzeAndProcessAndRender";
+import createParameterFromCliArguments from "./createParameterFromCliArguments";
+import getOrPromptForLicenseAcceptance from "./getOrPromptForLicenseAcceptance";
+import minimist from "minimist";
+import path from "path";
+import supportsColor from "supports-color";
+import { version } from "./package.json";
 
 const cliArguments =
 	minimist(

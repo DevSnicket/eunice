@@ -1,17 +1,16 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-module.exports =
-	({
-		outputBaseFileName,
-		outputDirectoryPath,
-	}) => (
-		{
-			baseFileName:
-				getWhenDefinedOrDefault(outputBaseFileName, "eunice"),
-			directoryPath:
-				getWhenDefinedOrDefault(outputDirectoryPath, "."),
-		}
-	);
+export default ({
+	outputBaseFileName,
+	outputDirectoryPath,
+}) => (
+	{
+		baseFileName:
+			getWhenDefinedOrDefault(outputBaseFileName, "eunice"),
+		directoryPath:
+			getWhenDefinedOrDefault(outputDirectoryPath, "."),
+	}
+);
 
 function getWhenDefinedOrDefault(
 	argument,

@@ -1,39 +1,37 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-require("array.prototype.flatmap")
-.shim();
+import "core-js/features/array/flat-map";
 
-module.exports =
-	({
-		dependsUpon,
-		identifier,
-		replaceDependsUponItems,
-	}) => {
+export default ({
+	dependsUpon,
+	identifier,
+	replaceDependsUponItems,
+}) => {
+	return (
+		dependsUpon
+		&&
+		(whenArray() || replaceDependUpon(dependsUpon))
+	);
+
+	function whenArray() {
 		return (
-			dependsUpon
+			Array.isArray(dependsUpon)
 			&&
-			(whenArray() || replaceDependUpon(dependsUpon))
+			dependsUpon.flatMap(replaceDependUpon)
 		);
+	}
 
-		function whenArray() {
+	function replaceDependUpon(
+		dependUpon,
+	) {
+		return whenHasScope() || dependUpon;
+
+		function whenHasScope() {
 			return (
-				Array.isArray(dependsUpon)
+				dependUpon.id === identifier
 				&&
-				dependsUpon.flatMap(replaceDependUpon)
+				replaceDependsUponItems(dependUpon.items)
 			);
 		}
-
-		function replaceDependUpon(
-			dependUpon,
-		) {
-			return whenHasScope() || dependUpon;
-
-			function whenHasScope() {
-				return (
-					dependUpon.id === identifier
-					&&
-					replaceDependsUponItems(dependUpon.items)
-				);
-			}
-		}
-	};
+	}
+};

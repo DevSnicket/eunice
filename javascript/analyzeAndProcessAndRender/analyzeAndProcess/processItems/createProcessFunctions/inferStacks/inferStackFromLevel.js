@@ -1,20 +1,18 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	{ createYamlFromStack } = require("@devsnicket/eunice-dependency-and-structure"),
-	{ groupBy } = require("lodash");
+import { createYamlFromStack } from "@devsnicket/eunice-dependency-and-structure";
+import groupBy from "lodash/groupBy";
 
-module.exports =
-	({
+export default ({
+	createStackFromYaml,
+	level,
+}) =>
+	withCreateStackFromYaml(
 		createStackFromYaml,
+	)
+	.inferStackFromLevel(
 		level,
-	}) =>
-		withCreateStackFromYaml(
-			createStackFromYaml,
-		)
-		.inferStackFromLevel(
-			level,
-		);
+	);
 
 function withCreateStackFromYaml(
 	createStackFromYaml,

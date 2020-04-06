@@ -1,13 +1,9 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	inferStacks = require(".."),
-	{
-		safeDump: formatYaml,
-		safeLoad: parseYaml,
-	} = require("js-yaml"),
-	path = require("path"),
-	runTestsFromFileSystem = require("@devsnicket/eunice-run-tests-from-file-system");
+import inferStacks from "..";
+import jsYaml from "js-yaml";
+import path from "path";
+import runTestsFromFileSystem from "@devsnicket/eunice-run-tests-from-file-system";
 
 runTestsFromFileSystem({
 	caseFileName:
@@ -18,7 +14,7 @@ runTestsFromFileSystem({
 		"expected.yaml",
 	getActualForTestCase:
 		({ content }) =>
-			formatYaml(inferStacks(parseYaml(content)))
+			jsYaml.safeDump(inferStacks(jsYaml.safeLoad(content)))
 			.trimRight(),
 	processArguments:
 		process.argv,

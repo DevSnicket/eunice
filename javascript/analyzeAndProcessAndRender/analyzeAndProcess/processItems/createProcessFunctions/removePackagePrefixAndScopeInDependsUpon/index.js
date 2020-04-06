@@ -1,66 +1,64 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	removePrefixInDependsUpon = require("./removePrefixInDependsUpon"),
-	{ replacement: { replaceDependsUpon } } = require("@devsnicket/eunice-processors"),
-	replaceItemsOfDependsUponWithIdentifier = require("./replaceItemsOfDependsUponWithIdentifier");
+import removePrefixInDependsUpon from "./removePrefixInDependsUpon";
+import { replaceDependsUpon } from "@devsnicket/eunice-processors/replacement";
+import replaceItemsOfDependsUponWithIdentifier from "./replaceItemsOfDependsUponWithIdentifier";
 
-module.exports =
-	({
-		identifierOrItemOrLevelOrStack,
-		prefix,
-		scope,
-	}) => {
+export default ({
+	identifierOrItemOrLevelOrStack,
+	prefix,
+	scope,
+}) => {
+	return (
+		whenHasScope()
+		||
+		whenHasPrefix()
+		||
+		identifierOrItemOrLevelOrStack
+	);
+
+	function whenHasScope() {
 		return (
-			whenHasScope()
-			||
-			whenHasPrefix()
-			||
-			identifierOrItemOrLevelOrStack
+			scope
+			&&
+			replaceDependsUpon({
+				identifierOrItemOrLevelOrStack,
+				replace:
+					dependsUpon =>
+						replaceItemsOfDependsUponWithIdentifier({
+							dependsUpon,
+							identifier:
+								`@${scope}`,
+							replaceDependsUponItems:
+								dependsUponItem =>
+									removePrefixInDependsUpon({
+										dependsUpon: dependsUponItem,
+										prefix,
+									}),
+						}),
+			})
+		);
+	}
+
+	function whenHasPrefix() {
+		return (
+			prefix
+			&&
+			replaceDependsUpon({
+				identifierOrItemOrLevelOrStack,
+				replace,
+			})
 		);
 
-		function whenHasScope() {
+		function replace(
+			dependsUpon,
+		) {
 			return (
-				scope
-				&&
-				replaceDependsUpon({
-					identifierOrItemOrLevelOrStack,
-					replace:
-						dependsUpon =>
-							replaceItemsOfDependsUponWithIdentifier({
-								dependsUpon,
-								identifier:
-									`@${scope}`,
-								replaceDependsUponItems:
-									dependsUponItem =>
-										removePrefixInDependsUpon({
-											dependsUpon: dependsUponItem,
-											prefix,
-										}),
-							}),
+				removePrefixInDependsUpon({
+					dependsUpon,
+					prefix,
 				})
 			);
 		}
-
-		function whenHasPrefix() {
-			return (
-				prefix
-				&&
-				replaceDependsUpon({
-					identifierOrItemOrLevelOrStack,
-					replace,
-				})
-			);
-
-			function replace(
-				dependsUpon,
-			) {
-				return (
-					removePrefixInDependsUpon({
-						dependsUpon,
-						prefix,
-					})
-				);
-			}
-		}
-	};
+	}
+};

@@ -1,9 +1,8 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	analyzeAndProcess = require(".."),
-	{ ensureDir } = require("fs-extra"),
-	path = require("path");
+import analyzeAndProcess from "..";
+import { ensureDir } from "fs-extra";
+import path from "path";
 
 test(
 	"Source of empty directory returns empty array.",

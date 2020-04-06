@@ -1,9 +1,8 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	getOrPromptForLicenseAcceptance = require("."),
-	path = require("path"),
-	{ readFile } = require("fs-extra");
+import getOrPromptForLicenseAcceptance from ".";
+import path from "path";
+import { readFile } from "fs-extra";
 
 const
 	commercialUseText = "Commercial use (after the evaluation period) requires a subscription, visit the page above for more information.",

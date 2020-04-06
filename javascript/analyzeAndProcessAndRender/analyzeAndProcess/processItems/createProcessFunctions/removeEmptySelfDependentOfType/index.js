@@ -1,21 +1,20 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const { replacement: { replaceIdentifiersAndItems } } = require("@devsnicket/eunice-processors/");
+import { replaceIdentifiersAndItems } from "@devsnicket/eunice-processors/replacement";
 
-module.exports =
-	({
+export default ({
+	identifierOrItemOrLevelOrStack,
+	types,
+}) =>
+	replaceIdentifiersAndItems({
 		identifierOrItemOrLevelOrStack,
-		types,
-	}) =>
-		replaceIdentifiersAndItems({
-			identifierOrItemOrLevelOrStack,
-			replace:
-				({ identifierOrItem }) =>
-					removeSelfDependentOfTypes({
-						identifierOrItem,
-						types,
-					}),
-		});
+		replace:
+			({ identifierOrItem }) =>
+				removeSelfDependentOfTypes({
+					identifierOrItem,
+					types,
+				}),
+	});
 
 function removeSelfDependentOfTypes({
 	identifierOrItem,

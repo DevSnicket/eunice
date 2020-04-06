@@ -1,31 +1,30 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const { replacement: { replaceIdentifiersAndItems } } = require("@devsnicket/eunice-processors");
+import { replaceIdentifiersAndItems } from "@devsnicket/eunice-processors/replacement";
 
-module.exports =
-	({
-		dependencyPermeableIdentifiers,
-		identifierOrItemOrLevelOrStack,
-	}) => {
+export default ({
+	dependencyPermeableIdentifiers,
+	identifierOrItemOrLevelOrStack,
+}) => {
+	return (
+		whenHasIdentifiers()
+		||
+		identifierOrItemOrLevelOrStack
+	);
+
+	function whenHasIdentifiers() {
 		return (
-			whenHasIdentifiers()
-			||
-			identifierOrItemOrLevelOrStack
+			dependencyPermeableIdentifiers
+			&&
+			withDependencyPermeableIdentifiers(
+				dependencyPermeableIdentifiers,
+			)
+			.setDependencyPermeable(
+				identifierOrItemOrLevelOrStack,
+			)
 		);
-
-		function whenHasIdentifiers() {
-			return (
-				dependencyPermeableIdentifiers
-				&&
-				withDependencyPermeableIdentifiers(
-					dependencyPermeableIdentifiers,
-				)
-				.setDependencyPermeable(
-					identifierOrItemOrLevelOrStack,
-				)
-			);
-		}
-	};
+	}
+};
 
 function withDependencyPermeableIdentifiers(
 	dependencyPermeableIdentifiers,

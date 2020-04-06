@@ -1,41 +1,40 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-module.exports =
-	({
-		identifierOrItemOrLevelOrStack,
-		rootItemIdentifier,
-	}) => {
+export default ({
+	identifierOrItemOrLevelOrStack,
+	rootItemIdentifier,
+}) => {
+	return (
+		whenHasRootSpecified()
+		||
+		whenSingleAnonymous()
+		||
+		null
+	);
+
+	function whenHasRootSpecified() {
 		return (
-			whenHasRootSpecified()
-			||
-			whenSingleAnonymous()
-			||
-			null
+			rootItemIdentifier
+			&&
+			[ rootItemIdentifier ]
+		);
+	}
+
+	function whenSingleAnonymous() {
+		return (
+			isSingleAnonymous()
+			&&
+			// the items id property wont be defined
+			// eslint-disable-next-line no-undefined
+			[ undefined ]
 		);
 
-		function whenHasRootSpecified() {
+		function isSingleAnonymous() {
 			return (
-				rootItemIdentifier
+				!Array.isArray(identifierOrItemOrLevelOrStack)
 				&&
-				[ rootItemIdentifier ]
+				!identifierOrItemOrLevelOrStack.id
 			);
 		}
-
-		function whenSingleAnonymous() {
-			return (
-				isSingleAnonymous()
-				&&
-				// the items id property wont be defined
-				// eslint-disable-next-line no-undefined
-				[ undefined ]
-			);
-
-			function isSingleAnonymous() {
-				return (
-					!Array.isArray(identifierOrItemOrLevelOrStack)
-					&&
-					!identifierOrItemOrLevelOrStack.id
-				);
-			}
-		}
-	};
+	}
+};

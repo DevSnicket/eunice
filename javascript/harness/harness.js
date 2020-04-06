@@ -1,28 +1,27 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	babelParserPlugins = require("../babelParserPluginsDefault"),
-	{ createElement } = require("react"),
-	{
-		callOrCreateElementOnError,
-		createFillWithTitleElement,
-		createHashFromLocation,
-	} = require("@devsnicket/eunice-test-harnesses"),
-	createCodeEditorForLanguage = require("@devsnicket/eunice-test-harnesses/codeEditor/createEditorForLanguage"),
-	createJavascriptEditor = require("@devsnicket/eunice-javascript-analyzer/harness/createJavascriptEditor"),
-	{
-		createResizableContainer,
-		renderIntoContainerElement,
-	} = require("@devsnicket/eunice-test-harnesses"),
-	createYamlInputElement = require("@devsnicket/eunice-renderer-test-harness/createYamlInputElement"),
-	createYamlOutputElement = require("@devsnicket/eunice-renderer-test-harness/createYamlOutputElement"),
-	getYamlFromJavascript = require("@devsnicket/eunice-javascript-analyzer/getYamlFromJavascript"),
-	initializeCodeEditorGlobal = require("@devsnicket/eunice-test-harnesses/codeEditor/serviceWorkers/initializeGlobal"),
-	{
-		ReflexContainer,
-		ReflexElement,
-		ReflexSplitter,
-	} = require("react-reflex");
+import {
+	ReflexContainer,
+	ReflexElement,
+	ReflexSplitter,
+} from "react-reflex";
+
+import {
+	callOrCreateElementOnError,
+	createFillWithTitleElement,
+	createHashFromLocation,
+	createResizableContainer,
+	renderIntoContainerElement,
+} from "@devsnicket/eunice-test-harnesses";
+
+import babelParserPlugins from "../babelParserPluginsDefault";
+import createCodeEditorForLanguage from "@devsnicket/eunice-test-harnesses/codeEditor/createEditorForLanguage";
+import { createElement } from "react";
+import createJavascriptEditor from "@devsnicket/eunice-javascript-analyzer/harness/createJavascriptEditor";
+import createYamlInputElement from "@devsnicket/eunice-renderer-test-harness/createYamlInputElement";
+import createYamlOutputElement from "@devsnicket/eunice-renderer-test-harness/createYamlOutputElement";
+import getYamlFromJavascript from "@devsnicket/eunice-javascript-analyzer/getYamlFromJavascript";
+import initializeCodeEditorGlobal from "@devsnicket/eunice-test-harnesses/codeEditor/serviceWorkers/initializeGlobal";
 
 initializeCodeEditorGlobal();
 

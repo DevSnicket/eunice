@@ -1,38 +1,37 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const { createStackFromYaml } = require("@devsnicket/eunice-dependency-and-structure");
+import { createStackFromYaml } from "@devsnicket/eunice-dependency-and-structure";
 
-module.exports =
-	({
-		ancestors,
-		yaml,
-	}) => {
+export default ({
+	ancestors,
+	yaml,
+}) => {
+	return (
+		getDescendantInSingleItemStackHierarchy({
+			depth:
+				ancestors.length,
+			stack:
+				createStackFromYaml(
+					getYamlWithAncestors(),
+				),
+		})
+	);
+
+	function getYamlWithAncestors() {
 		return (
-			getDescendantInSingleItemStackHierarchy({
-				depth:
-					ancestors.length,
-				stack:
-					createStackFromYaml(
-						getYamlWithAncestors(),
-					),
-			})
+			ancestors
+			.reduceRight(
+				(items, ancestor) => (
+					{
+						id: ancestor.id,
+						items,
+					}
+				),
+				yaml,
+			)
 		);
-
-		function getYamlWithAncestors() {
-			return (
-				ancestors
-				.reduceRight(
-					(items, ancestor) => (
-						{
-							id: ancestor.id,
-							items,
-						}
-					),
-					yaml,
-				)
-			);
-		}
-	};
+	}
+};
 
 function getDescendantInSingleItemStackHierarchy({
 	depth,

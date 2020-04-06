@@ -3,7 +3,7 @@
 // Unspecified CLI arguments will be undefined.
 /* eslint-disable no-undefined */
 
-const createParameterFromCliArguments = require(".");
+import createParameterFromCliArguments from ".";
 
 const pathSeparator = "/";
 

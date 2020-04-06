@@ -1,17 +1,17 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-module.exports =
-	cliArguments =>
-		Object.keys(cliArguments)
-		.reduce(
-			(camelCased, key) => (
-				{
-					...camelCased,
-					[formatKey(key)]: cliArguments[key],
-				}
-			),
-			{},
-		);
+export default
+cliArguments =>
+	Object.keys(cliArguments)
+	.reduce(
+		(camelCased, key) => (
+			{
+				...camelCased,
+				[formatKey(key)]: cliArguments[key],
+			}
+		),
+		{},
+	);
 
 function formatKey(
 	kebab,

@@ -1,17 +1,15 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	convertKebabToCamelCase = require("./convertKebabToCamelCase"),
-	createStructureAndEnsureTypes = require("./createStructureAndEnsureTypes");
+import convertKebabToCamelCase from "./convertKebabToCamelCase";
+import createStructureAndEnsureTypes from "./createStructureAndEnsureTypes";
 
-module.exports =
-	({
-		cliArguments,
+export default ({
+	cliArguments,
+	pathSeparator,
+}) =>
+	createStructureAndEnsureTypes({
+		...convertKebabToCamelCase(
+			cliArguments,
+		),
 		pathSeparator,
-	}) =>
-		createStructureAndEnsureTypes({
-			...convertKebabToCamelCase(
-				cliArguments,
-			),
-			pathSeparator,
-		});
+	});

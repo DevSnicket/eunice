@@ -1,9 +1,8 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	analyzeAndProcessAndRender = require(".."),
-	fs = require("fs-extra"),
-	path = require("path");
+import analyzeAndProcessAndRender from "..";
+import fs from "fs-extra";
+import path from "path";
 
 test(
 	"Output enabled for HTML and SVG writes files.",

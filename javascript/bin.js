@@ -3,4 +3,4 @@
 
 /* istanbul ignore file: test would be a mirror of implementation */
 
-require(".");
+import ".";

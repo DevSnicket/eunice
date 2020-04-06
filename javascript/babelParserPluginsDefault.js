@@ -3,26 +3,25 @@
 // cSpell:disable
 
 /** @type {import("@babel/parser").ParserPlugin[]} */
-module.exports =
-	[
-		"asyncGenerators",
-		"bigInt",
-		"classPrivateMethods",
-		"classPrivateProperties",
-		"classProperties",
-		"decorators-legacy",
-		"doExpressions",
-		"dynamicImport",
-		"exportDefaultFrom",
-		"exportNamespaceFrom",
-		"functionBind",
-		"functionSent",
-		"importMeta",
-		"jsx",
-		"nullishCoalescingOperator",
-		"numericSeparator",
-		"objectRestSpread",
-		"optionalCatchBinding",
-		"optionalChaining",
-		"throwExpressions",
-	];
+export default [
+	"asyncGenerators",
+	"bigInt",
+	"classPrivateMethods",
+	"classPrivateProperties",
+	"classProperties",
+	"decorators-legacy",
+	"doExpressions",
+	"dynamicImport",
+	"exportDefaultFrom",
+	"exportNamespaceFrom",
+	"functionBind",
+	"functionSent",
+	"importMeta",
+	"jsx",
+	"nullishCoalescingOperator",
+	"numericSeparator",
+	"objectRestSpread",
+	"optionalCatchBinding",
+	"optionalChaining",
+	"throwExpressions",
+];

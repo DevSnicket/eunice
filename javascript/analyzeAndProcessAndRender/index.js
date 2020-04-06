@@ -1,66 +1,64 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-const
-	analyzeAndProcess = require("./analyzeAndProcess"),
-	createSourcesFromPackages = require("./createSourcesFromPackages"),
-	formatYaml = require("js-yaml").safeDump,
-	fs = require("fs"),
-	{ getSvgForYaml } = require("@devsnicket/eunice-renderer"),
-	path = require("path"),
-	{ promisify } = require("util"),
-	writeHarness = require("@devsnicket/eunice-renderer-test-harness/writeHarness");
+import analyzeAndProcess from "./analyzeAndProcess";
+import createSourcesFromPackages from "./createSourcesFromPackages";
+import { safeDump as formatYaml } from "js-yaml";
+import fs from "fs";
+import { getSvgForYaml } from "@devsnicket/eunice-renderer";
+import path from "path";
+import { promisify } from "util";
+import writeHarness from "@devsnicket/eunice-renderer-test-harness/writeHarness";
 
 const writeFile = promisify(fs.writeFile);
 
-module.exports =
-	async({
-		babelParserPlugins,
-		date,
-		dependencyPermeableIdentifiers = null,
-		directoryToCreateOrAddToStacksFrom = null,
-		fileExtensions,
-		ignorePathPattern = null,
-		includeServiceWorkers = false,
-		isFileContentReversed = true,
-		isInferStacksEnabled = true,
-		modifyStacksFile = null,
-		output,
-		packages = null,
-		sources,
-		version,
-	}) =>
-		renderAndWriteOutput({
-			enabled:
-				output.enabled,
-			header:
-				formatHeader({
-					date,
-					version,
-				}),
-			includeServiceWorkers,
-			...output.path,
-			yaml:
-				formatYaml(
-					await analyzeAndProcess({
-						babelParserPlugins,
-						dependencyPermeableIdentifiers,
-						directoryToCreateOrAddToStacksFrom,
-						fileExtensions,
-						ignorePathPattern,
-						isFileContentReversed,
-						isInferStacksEnabled,
-						modifyStacksFile,
-						packagePrefixAndScope:
+export default async({
+	babelParserPlugins,
+	date,
+	dependencyPermeableIdentifiers = null,
+	directoryToCreateOrAddToStacksFrom = null,
+	fileExtensions,
+	ignorePathPattern = null,
+	includeServiceWorkers = false,
+	isFileContentReversed = true,
+	isInferStacksEnabled = true,
+	modifyStacksFile = null,
+	output,
+	packages = null,
+	sources,
+	version,
+}) =>
+	renderAndWriteOutput({
+		enabled:
+			output.enabled,
+		header:
+			formatHeader({
+				date,
+				version,
+			}),
+		includeServiceWorkers,
+		...output.path,
+		yaml:
+			formatYaml(
+				await analyzeAndProcess({
+					babelParserPlugins,
+					dependencyPermeableIdentifiers,
+					directoryToCreateOrAddToStacksFrom,
+					fileExtensions,
+					ignorePathPattern,
+					isFileContentReversed,
+					isInferStacksEnabled,
+					modifyStacksFile,
+					packagePrefixAndScope:
+						packages,
+					sources:
+						createSourcesWithPackages({
 							packages,
-						sources:
-							createSourcesWithPackages({
-								packages,
-								sources,
-							}),
-					}),
-					{ lineWidth: Number.MAX_SAFE_INTEGER },
-				),
-		});
+							sources,
+						}),
+				}),
+				{ lineWidth: Number.MAX_SAFE_INTEGER },
+			),
+	});
 
 function formatHeader({
 	date,

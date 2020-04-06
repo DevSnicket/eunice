@@ -8,23 +8,25 @@
 	},
 	"description": "Eunice helps improve software architecture by analyzing, measuring, exploring and defining; structure and dependencies. Eunice is based on the premise that software structure and modularity improve when dependencies are unidirectional. Eunice's approach isn't limited to direct dependencies, but includes indirect dependencies as well. With Eunice you define an intended structure/architecture, it shows you dependencies that don't match, and you can further refine the definition or update your code to match.",
 	"devDependencies": {
-		"@babel/core": "7.4.4",
-		"@babel/polyfill": "7.4.4",
-		"@babel/preset-env": "7.4.4",
-		"@devsnicket/eunice-call-with-process-standard-streams": "1.3.0",
-		"@devsnicket/eunice-dependency-and-structure": "4.1.0",
-		"@devsnicket/eunice-javascript-analyzer": "11.25.0",
-		"@devsnicket/eunice-processors": "13.2.0",
-		"@devsnicket/eunice-renderer": "6.10.0",
-		"@devsnicket/eunice-renderer-test-harness": "4.17.0",
-		"@devsnicket/eunice-run-tests-from-file-system": "4.3.0",
-		"@devsnicket/eunice-test-harnesses": "8.8.0",
+		"@babel/core": "7.8.4",
+		"@babel/plugin-transform-modules-commonjs": "7.8.3",
+		"@babel/polyfill": "7.8.3",
+		"@babel/preset-env": "7.8.4",
+		"@babel/register": "7.8.3",
+		"@devsnicket/eunice-call-with-process-standard-streams": "1.7.1",
+		"@devsnicket/eunice-dependency-and-structure": "4.6.0",
+		"@devsnicket/eunice-javascript-analyzer": "11.32.0",
+		"@devsnicket/eunice-processors": "14.3.1",
+		"@devsnicket/eunice-renderer": "7.12.1",
+		"@devsnicket/eunice-renderer-test-harness": "4.19.1",
+		"@devsnicket/eunice-run-tests-from-file-system": "4.6.1",
+		"@devsnicket/eunice-test-harnesses": "8.14.0",
 		"@types/jest": "24.0.9",
 		"@types/node": "12.0.2",
-		"array.prototype.flatmap": "1.2.1",
 		"babel-loader": "8.0.6",
+		"core-js": "3.6.4",
 		"cspell": "4.0.7",
-		"eslint": "6.2.1",
+		"eslint": "6.8.0",
 		"eslint-plugin-notice": "0.8.9",
 		"fs-extra": "8.1.0",
 		"jest": "24.9.0",
@@ -66,7 +68,10 @@
 				"functions": 100,
 				"lines": 100
 			}
-		}
+		},
+		"transformIgnorePatterns": [
+			"node_modules/(?!@devsnicket)"
+		]
 	},
 	"keywords": [
 		"analyze",
@@ -95,17 +100,17 @@
 	},
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run build-prepare && npm run build-interactive && npm run test && npm run build && npm run build-remove-maps && npm run harness && npm run dogfooding",
-		"build": "npx webpack -p --config webpack.config.js",
+		"build": "npx webpack -p --config webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs",
 		"build-remove-maps": "rm dist/bin.js.map && rm dist/interactive/harness.js.map",
-		"build-development": "npx webpack -d --config webpack.config.js",
-		"build-interactive": "npx webpack -p --config interactive.webpack.config.js",
-		"build-interactive-development": "npx webpack -d --config interactive.webpack.config.js",
+		"build-development": "npx webpack -d --config webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs",
+		"build-interactive": "npx webpack -p --config interactive.webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs",
+		"build-interactive-development": "npx webpack -d --config interactive.webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs",
 		"build-prepare": "rm -rf dist && mkdir dist",
 		"dogfooding": "(cd dogfooding && rm -rf output && mkdir output && cd .. && node dist/bin.js --accept-license --directory-to-create-or-add-to-stacks-from=dogfooding --include-service-workers=true --ignore-path-pattern=\"(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$\" --modify-stacks-key=type --modify-stacks-pattern=^file$ --output-base-file-name=index --output-directory-path=dogfooding/output --output-svg --output-yaml --package-names=call-with-process-standard-streams --package-names=dependency-and-structure --package-names=javascript-analyzer --package-names=processors --package-names=renderer --package-names=renderer-test-harness --package-names=run-tests-from-file-system --package-names=test-harnesses --package-prefix=eunice- --package-scope=devsnicket --directories=. --reverseFileContent=false --root-item-identifiers=javascript)",
 		"lint": "npx eslint .",
-		"harness": "(cd harness && rm -rf output && mkdir output && npx webpack -p --config webpack.config.js)",
+		"harness": "(rm -rf harness/output && npx webpack -p --config harness/webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs)",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dogfooding/output/**\" ! -path \"./dist/*\" ! -path \"./gh-pages/**\" ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest"
 	},
-	"version": "7.3.0"
+	"version": "7.4.0"
 }
