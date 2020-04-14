@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 7.5.1 on 2020-04-14T20:21:58.852Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 7.5.2 on 2020-04-14T20:47:42.056Z
 - - id: javascript
     type: directory
     items:
@@ -2366,10 +2366,16 @@
                               - addWhenAnyProperties
                               - createIdentifierProperty
                               - createItemsProperty
-                              - getBaseIdentifiers
+                              - setBaseAsExtensionAndGetIdentifiers
                         - - id: createIdentifierProperty
                             dependsUpon: getParentFromAncestors
-                          - getBaseIdentifiers
+                          - id: setBaseAsExtensionAndGetIdentifiers
+                            dependsUpon: setBaseAsExtension
+                            items:
+                              - - id: setBaseAsExtension
+                                  dependsUpon: findDeclarationIn
+                              - - id: findDeclarationIn
+                                  type: parameter
                           - addWhenAnyProperties
                     - id: addClassProperty
                       type: file
