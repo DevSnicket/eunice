@@ -15,8 +15,8 @@
 		"@babel/preset-env": "7.8.4",
 		"@babel/register": "7.8.3",
 		"@devsnicket/eunice-call-with-process-standard-streams": "1.7.1",
-		"@devsnicket/eunice-dependency-and-structure": "4.6.0",
-		"@devsnicket/eunice-javascript-analyzer": "11.32.0",
+		"@devsnicket/eunice-dependency-and-structure": "4.7.0",
+		"@devsnicket/eunice-javascript-analyzer": "11.32.2",
 		"@devsnicket/eunice-processors": "14.3.1",
 		"@devsnicket/eunice-renderer": "7.12.1",
 		"@devsnicket/eunice-renderer-test-harness": "5.0.1",
@@ -113,5 +113,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dogfooding/output/**\" ! -path \"./dist/*\" ! -path \"./gh-pages/**\" ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"test": "jest"
 	},
-	"version": "7.5.1"
+	"version": "7.5.2"
 }
