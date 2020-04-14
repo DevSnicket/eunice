@@ -180,6 +180,14 @@ body > .header .menu a {
     border-radius: 0.3em;
 }
 
+.box {
+    border-radius: 0.3em;
+}
+
+body > .header .menu a {
+    border-radius: 0.15em;
+}
+
 body > .header .menu a {
     background-color: darkgreen;
     border-color: #7FB17F;
