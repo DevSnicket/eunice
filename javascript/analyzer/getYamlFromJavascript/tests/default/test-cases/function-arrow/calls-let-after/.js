@@ -1,0 +1,3 @@
+(() => variable());
+
+let variable;

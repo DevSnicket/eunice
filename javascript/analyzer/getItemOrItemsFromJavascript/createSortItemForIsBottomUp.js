@@ -45,7 +45,7 @@ function sortItemsWithVariablesThenParametersAtBottom(
 	}) {
 		return (
 			[
-				...other,
+				...other || [],
 				...variable || [],
 				...parameter || [],
 				..._import || [],
