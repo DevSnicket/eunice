@@ -16,6 +16,7 @@
 			"name": "bin this package only",
 			"program": "${workspaceFolder}/bin.js",
 			"request": "launch",
+			"runtimeArgs": [ "${workspaceFolder}/node_modules/@babel/node/bin/babel-node.js", "-o", "*" ],
 			"type": "node",
 		},
 		{
@@ -60,7 +61,8 @@
 				],
 			"name": "bin all packages",
 			"program": "${workspaceFolder}/bin.js",
-			"request": "launch",
+			"request": "launch",			
+			"runtimeArgs": [ "${workspaceFolder}/node_modules/@babel/node/bin/babel-node.js", "-o", "*" ],
 			"type": "node"
 		},
 		{

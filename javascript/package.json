@@ -9,6 +9,7 @@
 	"description": "Eunice helps improve software architecture by analyzing, measuring, exploring and defining; structure and dependencies. Eunice is based on the premise that software structure and modularity improve when dependencies are unidirectional. Eunice's approach isn't limited to direct dependencies, but includes indirect dependencies as well. With Eunice you define an intended structure/architecture, it shows you dependencies that don't match, and you can further refine the definition or update your code to match.",
 	"devDependencies": {
 		"@babel/core": "7.8.4",
+		"@babel/node": "7.8.7",
 		"@babel/plugin-transform-modules-commonjs": "7.8.3",
 		"@babel/polyfill": "7.8.3",
 		"@babel/preset-env": "7.8.4",
