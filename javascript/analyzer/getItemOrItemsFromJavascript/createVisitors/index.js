@@ -142,6 +142,8 @@ export default ({
 				dependsUponIdentifiers.createPropertyAndRemoveIdentifiers,
 			declarations,
 			findBlockOrIdentifiableParentInAncestors,
+			findDeclarationIn:
+				declarations.findDeclarationIn,
 		});
 	}
 

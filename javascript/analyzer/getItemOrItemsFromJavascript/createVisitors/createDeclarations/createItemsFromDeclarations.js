@@ -105,6 +105,8 @@ function isDeclarationRelevant(
 			(declaration.type !== "import" && declaration.type !== "variable")
 			||
 			declaration.isCalledFromNestedFunction
+			||
+			declaration.isExtensionOfClass
 		);
 	}
 }

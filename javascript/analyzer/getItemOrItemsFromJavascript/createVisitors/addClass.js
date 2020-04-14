@@ -13,6 +13,7 @@ export default ({
 			createItemsForAndRemoveDeclarationsIn,
 		},
 	findBlockOrIdentifiableParentInAncestors,
+	findDeclarationIn,
 }) =>
 	addWhenAnyProperties({
 		addDeclarationIn,
@@ -26,7 +27,10 @@ export default ({
 				}),
 				...createDependsUponProperty({
 					identifiers:
-						getBaseIdentifiers(classDeclarationOrExpression),
+						setBaseAsExtensionAndGetIdentifiers({
+							classDeclarationOrExpression,
+							findDeclarationIn,
+						}),
 					parent:
 						classDeclarationOrExpression,
 				}),
@@ -56,16 +60,31 @@ function createIdentifierProperty({
 	}
 }
 
-function * getBaseIdentifiers(
+function * setBaseAsExtensionAndGetIdentifiers({
 	classDeclarationOrExpression,
-) {
+	findDeclarationIn,
+}) {
 	const base =
 		classDeclarationOrExpression.superClass
 		&&
 		classDeclarationOrExpression.superClass.name;
 
-	if (base)
+	if (base) {
+		setBaseAsExtension();
+
 		yield base;
+	}
+
+	function setBaseAsExtension() {
+		const baseDeclaration =
+			findDeclarationIn({
+				parent: null,
+				predicate: declaration => declaration.id === base,
+			});
+
+		if (baseDeclaration)
+			baseDeclaration.isExtensionOfClass = true;
+	}
 }
 
 function addWhenAnyProperties({

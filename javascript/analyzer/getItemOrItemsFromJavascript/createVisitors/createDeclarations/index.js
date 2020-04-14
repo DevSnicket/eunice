@@ -11,6 +11,7 @@ export default () => {
 			addDeclarationsIn,
 			createItemsForAndRemoveDeclarationsIn,
 			findDeclarationAndParent,
+			findDeclarationIn,
 			getGroupedByParent,
 		}
 	);
