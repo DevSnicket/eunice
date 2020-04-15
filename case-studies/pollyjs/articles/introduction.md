@@ -1,0 +1,5 @@
+In this post I'll demonstrate the development tool [Eunice](https://devsnicket.com/eunice) by using it on the JavaScript library Polly.JS.
+
+I've previously posted a case study about using [Eunice on React](https://devsnicket.com/eunice/case-studies/react); however, it wasn't a great introduction to Eunice. It had a few configuration steps, React is more complicated and there was quite a lot to show in Eunice.
+
+There is also a new feature in [Eunice 7.3](https://devsnicket.com/eunice/javascript/releases#7.3.0) that can automatically infer potential structure from dependencies. Before the feature, this structure only existed for files and directories when specified by manually writing YAML. This was the case even when the source code being analyzed already had coordinated uni-directional dependencies.
