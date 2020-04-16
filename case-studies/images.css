@@ -1,0 +1,23 @@
+.content > img,
+.image-right > img {
+	display: block;
+	margin: 0 auto;
+}
+
+@media (min-width: 52em) {
+	.image-right {
+		align-items: flex-start;
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.image-right > :first-child {
+		flex-basis: 0;
+		flex-grow: 1;
+		margin-right: 0.5em;
+	}
+
+	.image-right > img {
+		margin-left: 0.5em;
+	}
+}

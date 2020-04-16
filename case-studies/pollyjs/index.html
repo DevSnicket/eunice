@@ -1,30 +1,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <link href="../arrows-with-descriptions.css" rel="stylesheet" />
+    <link href="../images.css" rel="stylesheet" />
     <link href="../../favicon.ico" rel="icon" type="image/x-icon" />
     <link href="../../index.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        .arrows-with-descriptions {
-            background-image: url(../../arrows/with-descriptions.svg);
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: contain;
-            height: 10em;
-        }
-
-        .content > img {
-            display: block;
-            margin: 0 auto;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .arrows-with-descriptions {
-                background-image: url(../../arrows/dark/with-descriptions.svg);
-            }
-        }
-    </style>
     <title>Polly.JS | Case Studies | Eunice</title>
 </head>
 <body>
@@ -36,8 +18,13 @@
     </div>
     <div class="content">
         <h2 style="margin-bottom: 0">Polly.JS case study</h2>
-        <p>This case study of the JavaScript library <a href="https://netflix.github.io/pollyjs">Polly.JS</a> is intended as an introduction to Eunice because Polly.JS doesn't require any configuration and has uni-directional dependencies.</p>
-        <p>Alternatively, for a demonstration of Eunice on a larger code base, that requires configuration and has bi-directional dependencies, there's also a <a href="../react">React case study</a>.</p>
+        <div class="image-right">
+            <div>
+                <p>This case study of the JavaScript library <a href="https://netflix.github.io/pollyjs">Polly.JS</a> is intended as an introduction to Eunice because Polly.JS doesn't require any configuration and has uni-directional dependencies.</p>
+                <p>Alternatively, for a demonstration of Eunice on a larger code base, that requires configuration and has bi-directional dependencies, there's also a <a href="../react">React case study</a>.</p>
+            </div>
+            <img src="./header.png" style="width:24em" />
+        </div>
         <h3>getting started</h3>
         <p>Eunice analyzes JavaScript source code, so I cloned the <a href="https://github.com/Netflix/pollyjs/commit/0003c0ed5e1ec0253d401ee4e9185406ed6e1b31">0003c0e commit</a> from the GitHub repository <a href="https://github.com/Netflix/pollyjs">https://github.com/Netflix/pollyjs</a>.</p>
         <code>git clone https://github.com/Netflix/pollyjs.git pollyjs-eunice

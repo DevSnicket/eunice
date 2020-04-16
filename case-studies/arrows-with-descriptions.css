@@ -1,0 +1,13 @@
+.arrows-with-descriptions {
+	background-image: url(../../arrows/with-descriptions.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 10em;
+}
+
+@media (prefers-color-scheme: dark) {
+	.arrows-with-descriptions {
+		background-image: url(../../arrows/dark/with-descriptions.svg);
+	}
+}
