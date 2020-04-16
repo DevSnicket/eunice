@@ -53,12 +53,12 @@ git reset --hard 0003c0e</code>
         <p>The 1,102 matching (green) and only 22 (red) mismatching dependencies shows that Eunice has found the vast majority of dependencies in Polly.JS as uni-directional. The few bi-directional dependencies that have been found are deep inside the directory structure (e.g. the 17 in packages) and unlikely to be of much, if any consequence.</p>
         <p>There isn't a stack in the root directory shown above; however, selecting the packages/@pollyjs sub-directory will show one for its contents:</p>
         <img src="./2-packages-pollyjs.png" />
-        <p>The arrangement of 5 levels shown above isn't specified in the source code and has been inferred by Eunice. It will only do this when items only have uni-directional dependencies.</p>
+        <p>The arrangement of 5 levels shown above isn't specified in the source code and has been inferred by Eunice. It will only do this when items have uni-directional dependencies.</p>
         <p>Even without any prior knowledge of how Polly.JS works, the relationship between many of the directories seems intuitive. For example:</p>
         <ul>
-            <li>cli is at the top as its likely to be a way of running other things.</li>
-            <li>core is in the middle level, as its probably built on by other parts of the project.</li>
-            <li>adapter and persister are in the second to bottom level. Their names are less specific than the other adapters and persisters shown above them in Eunice, so the other items probably extend them.</li>
+            <li>cli is in the top level as its likely to be a way of running other things.</li>
+            <li>core is in the middle level, its probably built on by other parts of the project, but also uses some of the lower level functionality it shares with the rest of the project.</li>
+            <li>adapter and persister are in the second to bottom level. Their names are less specific than the other adapters and persisters, so the others probably extend them.</li>
             <li>utils is on its own in the bottom level, as it is used elsewhere, but doesn't use anything itself.</li>
         </ul>
         <p>The dependencies that Eunice has found can be investigated by selecting the count arrows, this lists the dependencies included in them. For example the single dependency below cli is on node-server:</p>
@@ -67,17 +67,17 @@ git reset --hard 0003c0e</code>
         <img src="4-node-server-dependents.png" />
         <p>The dependents arrow above core can also be selected to investigate how its used by the items above:</p>
         <img src="./5-core-dependents.png" />
-        <p>The dependents of core seem to be only using it for integration testing and the items above don't appear to use it at runtime. Looking at the <a href="https://netflix.github.io/pollyjs/#/README?id=getting-started" target="_blank">Polly.JS getting started</a> page, you can see instead the adapters and persisters shown above core in Eunice are registered with core at runtime. This looks like a potential <a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle" target="_blank">inverted dependency</a> in a form of <a href="https://en.wikipedia.org/wiki/Plug-in_(computing)" target="_blank">plug-in</a> relationship.</p>
+        <p>The dependents of core seem to be only using it for integration testing and the items above don't appear to use it at runtime. Looking at the <a href="https://netflix.github.io/pollyjs/#/README?id=getting-started" target="_blank">Polly.JS getting started</a> page, you can see instead the adapters and persisters above are registered with core at runtime. This looks like a potential <a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle" target="_blank">inverted dependency</a> in a form of <a href="https://en.wikipedia.org/wiki/Plug-in_(computing)" target="_blank">plug-in</a> relationship.</p>
         <p>The same kind of investigation of dependents can be done for adapter: </p>
         <img src="./6-adapter-dependents.png" />
         <p>The dependency list shows several of the adapters above use it and looking at the <a href="https://netflix.github.io/pollyjs/#/adapters/custom" target="_blank">Polly.JS custom adapter</a> page confirms at least fetch and xhr extend it.</p>
         <p>There is a dependency from core on adapter, but this is just for testing.</p>
         <p>The packages/@pollyjs directory I've investigated above is used for the creation of NPM packages, so its not surprising to see that, at least at runtime, there are uni-directional dependencies. However, what appear to be integration tests across those packages also have uni-directional dependencies.</p>
-        <p>Eunice could also be used to investigate inside the packages directories. Here there is the potential for runtime bi-directional dependencies across the directory structure. As there doesn't appear to be any in Polly.JS I haven't done that in this case study. If you want a demonstration of this please see the <a href="../react">React case study</a>.</p>
+        <p>Eunice could also be used to investigate inside the sub-directories of packages. Here there is the potential for runtime bi-directional dependencies across the directory structure. As there doesn't appear to be any in Polly.JS I haven't done that in this case study. If you want a demonstration of this please see the <a href="../react">React case study</a>.</p>
         <p>You can interact with the Eunice analysis for this case study <a href="./eunice.html" target="_blank">here</a>.</p>
         <p>Even though Eunice shows Polly.JS as already having uni-directional dependencies, using Eunice can still be beneficial while working on such a project.</p>
         <p>Eunice could show potential for additional structure, making the code more self descriptive, by highlighting commonality that could be named in a new group, for example by moving files and directories into a new directory.</p>
-        <p>People new to the project might not realise that dependencies are coordinated and that coordination is consistent with the source codes directory structure. Viewing the structure and dependencies with Eunice could help make them aware of this.</p>
+        <p>People new to the project might not realise that dependencies are coordinated and consistent with the directory structure. Viewing the structure and dependencies with Eunice could help raise awareness.</p>
         <p>Instead of Eunice inferring stacks, they could be specified in source control, formalizing the relationships and making it clear to everyone they are intentional.</p>
     </div>
     <div class="footer">
