@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 7.6.0 on 2020-04-17T12:56:10.540Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 7.6.1 on 2020-04-17T14:49:21.622Z
 - - id: javascript
     type: directory
     items:
@@ -207,8 +207,8 @@
                   - - id: index
                       type: export
                       dependsUpon:
+                        - addPackagesToSources
                         - analyzeAndProcess
-                        - createSourcesWithPackages
                         - formatHeader
                         - formatYaml
                         - renderAndWriteOutput
@@ -219,25 +219,23 @@
                             dependsUpon: date
                         - - id: date
                             type: parameter
-                    - id: createSourcesWithPackages
-                      dependsUpon: createSourcesFromPackages
                     - id: renderAndWriteOutput
                       dependsUpon:
                         - fileSystem
                         - getSvgForYaml
                         - path
                         - writeHarness
+                    - id: addPackagesToSources
+                      type: import
+                      dependsUpon:
+                        id: addPackagesToSources
+                        items: index
                     - id: analyzeAndProcess
                       type: import
                       dependsUpon:
                         id: analyzeAndProcess
                         items: index
-                  - - id: createSourcesFromPackages
-                      type: import
-                      dependsUpon:
-                        id: createSourcesFromPackages
-                        items: index
-                    - id: fileSystem
+                  - - id: fileSystem
                       type: import
                       dependsUpon: fs-extra
                     - id: formatYaml
@@ -255,7 +253,38 @@
                       dependsUpon:
                         id: renderer-test-harness
                         items: writeHarness
-            - - id: analyzeAndProcess
+            - - id: addPackagesToSources
+                type: directory
+                items:
+                  - - id: index.test
+                      type: file
+                      dependsUpon:
+                        - expect
+                        - path
+                        - test
+                        - id: addPackagesToSources
+                          items: index
+                  - - id: index
+                      type: file
+                      items:
+                        - - id: index
+                            type: export
+                            dependsUpon: whenHasPackageNames
+                            items:
+                              - - id: whenHasPackageNames
+                                  dependsUpon:
+                                    - createSources
+                                    - getBasePath
+                                    - packages
+                              - - id: packages
+                                  type: parameter
+                        - - id: getBasePath
+                            dependsUpon:
+                              - formatScope
+                              - path
+                        - - formatScope
+                          - createSources
+              - id: analyzeAndProcess
                 type: directory
                 items:
                   - - id: tests
@@ -1147,23 +1176,6 @@
                                                 items:
                                                   id: replacement
                                                   items: replaceIdentifiersAndItems
-              - id: createSourcesFromPackages
-                type: directory
-                items:
-                  - - id: index.test
-                      type: file
-                      dependsUpon:
-                        - expect
-                        - path
-                        - test
-                        - id: createSourcesFromPackages
-                          items: index
-                  - - id: index
-                      type: file
-                      items:
-                        id: index
-                        type: export
-                        dependsUpon: path
         - id: babelParserPluginsDefault
           type: file
           items:
