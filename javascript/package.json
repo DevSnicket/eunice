@@ -17,13 +17,16 @@
 		"@devsnicket/eunice-call-with-process-standard-streams": "1.7.1",
 		"@devsnicket/eunice-dependency-and-structure": "4.7.0",
 		"@devsnicket/eunice-javascript-analyzer": "11.32.2",
-		"@devsnicket/eunice-processors": "14.3.1",
+		"@devsnicket/eunice-processors": "14.4.0",
 		"@devsnicket/eunice-renderer": "7.12.1",
 		"@devsnicket/eunice-renderer-test-harness": "5.0.1",
 		"@devsnicket/eunice-run-tests-from-file-system": "4.6.1",
 		"@devsnicket/eunice-test-harnesses": "8.15.0",
+		"@types/fs-extra": "8.1.0",
 		"@types/jest": "24.0.9",
 		"@types/node": "12.0.2",
+		"@types/react": "16.9.34",
+		"@types/webpack": "4.39.9",
 		"babel-loader": "8.0.6",
 		"core-js": "3.6.4",
 		"cspell": "4.0.7",
@@ -36,6 +39,7 @@
 		"minimist": "1.2.0",
 		"supports-color": "7.0.0",
 		"terser": "4.2.1",
+		"typescript": "3.8.3",
 		"webpack-cli": "3.3.6"
 	},
 	"files": [
@@ -100,7 +104,7 @@
 		"url": "https://github.com/devsnicket/eunice.git"
 	},
 	"scripts": {
-		"all": "npm run spellcheck && npm run lint && npm run build-prepare && npm run build-interactive && npm run test && npm run build && npm run build-remove-maps && npm run harness && npm run dogfooding",
+		"all": "npm run spellcheck && npm run lint && npm run typescript && npm run build-prepare && npm run build-interactive && npm run test && npm run build && npm run build-remove-maps && npm run harness && npm run dogfooding",
 		"build": "npx webpack -p --config webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs",
 		"build-remove-maps": "rm dist/bin.js.map && rm dist/interactive/harness.js.map",
 		"build-development": "npx webpack -d --config webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs",
@@ -111,7 +115,8 @@
 		"lint": "npx eslint .",
 		"harness": "(rm -rf harness/output && npx webpack -p --config harness/webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs)",
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dogfooding/output/**\" ! -path \"./dist/*\" ! -path \"./gh-pages/**\" ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
-		"test": "jest"
+		"test": "jest",
+		"typescript": "npx tsc -p jsconfig.json"
 	},
 	"version": "7.5.2"
 }

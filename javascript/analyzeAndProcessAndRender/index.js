@@ -2,28 +2,25 @@
 
 import analyzeAndProcess from "./analyzeAndProcess";
 import createSourcesFromPackages from "./createSourcesFromPackages";
+import fileSystem from "fs-extra";
 import { safeDump as formatYaml } from "js-yaml";
-import fs from "fs";
 import { getSvgForYaml } from "@devsnicket/eunice-renderer";
 import path from "path";
-import { promisify } from "util";
 import writeHarness from "@devsnicket/eunice-renderer-test-harness/writeHarness";
 
-const writeFile = promisify(fs.writeFile);
-
-export default async({
+export default async(/** @type {import("./Parameter.d")} */{
 	babelParserPlugins,
 	date,
-	dependencyPermeableIdentifiers = null,
-	directoryToCreateOrAddToStacksFrom = null,
+	dependencyPermeableIdentifiers,
+	directoryToCreateOrAddToStacksFrom,
 	fileExtensions,
-	ignorePathPattern = null,
+	ignorePathPattern,
 	includeServiceWorkers = false,
 	isFileContentReversed = true,
 	isInferStacksEnabled = true,
-	modifyStacksFile = null,
+	modifyStacksFile,
 	output,
-	packages = null,
+	packages,
 	sources,
 	version,
 }) =>
@@ -109,13 +106,13 @@ async function renderAndWriteOutput({
 			`# ${header}\n${yaml}`;
 
 	if (enabled.yaml)
-		await writeFile(
+		await fileSystem.writeFile(
 			`${baseFilePath}.yaml`,
 			yamlWithHeader,
 		);
 
 	if (enabled.svg)
-		await writeFile(
+		await fileSystem.writeFile(
 			`${baseFilePath}.svg`,
 			`<!-- ${header}-->\n${getSvgForYaml({ yaml })}`,
 		);

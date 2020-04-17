@@ -14,8 +14,6 @@ test(
 		await fs.emptyDir(outputDirectory);
 
 		await analyzeAndProcessAndRender({
-			babelParserPlugins:
-				null,
 			date:
 				new Date(0),
 			output:
@@ -103,8 +101,6 @@ async function testYamlInDirectory({
 	await fs.emptyDir(outputDirectory);
 
 	await analyzeAndProcessAndRender({
-		babelParserPlugins:
-			null,
 		date:
 			new Date(0),
 		output:

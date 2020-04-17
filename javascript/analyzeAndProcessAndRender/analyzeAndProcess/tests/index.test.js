@@ -12,10 +12,9 @@ test(
 		await ensureDir(directory);
 
 		expect(
-			await analyzeAndProcess({
-				directoryToCreateOrAddToStacksFrom: null,
-				sources: [ { directory } ],
-			}),
+			await analyzeAndProcess(
+				{ sources: [ { directory } ] },
+			),
 		)
 		.toEqual(
 			[],
@@ -29,8 +28,6 @@ test(
 	async() =>
 		expect(
 			await analyzeAndProcess({
-				directoryToCreateOrAddToStacksFrom:
-					null,
 				sources:
 					[
 						{ directory: getSourcePath("first") },

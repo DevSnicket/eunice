@@ -5,7 +5,7 @@ import { createOrAddToStacksUsingFileSystem } from "@devsnicket/eunice-processor
 import { getOrCreateItemsInDirectory } from "@devsnicket/eunice-javascript-analyzer";
 import processItems from "./processItems";
 
-export default async({
+export default async(/** @type {import("./Parameter.d")} */{
 	babelParserPlugins = babelParserPluginsDefault,
 	dependencyPermeableIdentifiers,
 	directoryToCreateOrAddToStacksFrom,

@@ -3,7 +3,7 @@
 import createOutputPath from "./createOutputPath";
 import createSources from "./createSources";
 
-export default ({
+export default (/** @type {import("./Parameter.d")} */{
 	babelParserPlugins,
 	dependencyPermeableIdentifiers,
 	directories = ".",
