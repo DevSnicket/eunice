@@ -1,7 +1,7 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
+import addPackagesToSources from "./addPackagesToSources";
 import analyzeAndProcess from "./analyzeAndProcess";
-import createSourcesFromPackages from "./createSourcesFromPackages";
 import fileSystem from "fs-extra";
 import { safeDump as formatYaml } from "js-yaml";
 import { getSvgForYaml } from "@devsnicket/eunice-renderer";
@@ -48,7 +48,7 @@ export default async(/** @type {import("./Parameter.d")} */{
 					packagePrefixAndScope:
 						packages,
 					sources:
-						createSourcesWithPackages({
+						addPackagesToSources({
 							packages,
 							sources,
 						}),
@@ -69,22 +69,6 @@ function formatHeader({
 			.toISOString()
 		);
 	}
-}
-
-function createSourcesWithPackages({
-	packages,
-	sources,
-}) {
-	return (
-		packages
-		?
-		[
-			...createSourcesFromPackages(packages),
-			...sources,
-		]
-		:
-		sources
-	);
 }
 
 async function renderAndWriteOutput({
