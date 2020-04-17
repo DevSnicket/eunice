@@ -59,8 +59,6 @@ test(
 								"subdirectoryWithStackUpper",
 							],
 					},
-				subsetIdentifierHierarchy:
-					null,
 			}),
 		)
 		.toEqual({

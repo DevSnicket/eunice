@@ -9,7 +9,7 @@ export default ({
 	directory,
 	identifierOrItemOrLevelOrStack,
 	stackFileName = ".eunice-stack.yaml",
-	subsetIdentifierHierarchy,
+	subsetIdentifierHierarchy = null,
 }) =>
 	replaceIdentifiersAndItemsAndLevelsAndStacks({
 		identifierOrItemOrLevelOrStack,
