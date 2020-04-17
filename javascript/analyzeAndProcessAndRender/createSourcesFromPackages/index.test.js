@@ -6,31 +6,42 @@ import path from "path";
 test.each(
 	[
 		[
-			{ name: "package", scope: "scope" },
-			path.join("node_modules", "@scope", "package"),
+			{ names: null },
+			null,
 		],
 		[
-			{ name: "package", prefix: "prefix-" },
-			path.join("node_modules", "prefix-package"),
+			{
+				names: [ "package" ],
+				scope: "scope",
+			},
+			[ {
+				directory: path.join("node_modules", "@scope", "package"),
+				rootItemIdentifier: "package",
+			} ],
+		],
+		[
+			{
+				names: [ "package" ],
+				prefix: "prefix-",
+			},
+			[ {
+				directory: path.join("node_modules", "prefix-package"),
+				rootItemIdentifier: "package",
+			} ],
 		],
 	],
 )(
 	"%j returns %s.",
 	(
-		{ name, prefix, scope },
-		directory,
+		{ names, prefix, scope },
+		sources,
 	) =>
 		expect(
 			createSourcesFromPackages({
-				names: [ name ],
+				names,
 				prefix,
 				scope,
 			}),
 		)
-		.toEqual(
-			[ {
-				directory,
-				rootItemIdentifier: "package",
-			} ],
-		),
+		.toEqual(sources),
 );

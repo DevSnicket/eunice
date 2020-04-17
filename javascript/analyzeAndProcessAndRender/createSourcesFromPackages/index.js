@@ -8,6 +8,8 @@ export default ({
 	prefix = "",
 	scope,
 }) =>
+	names
+	&&
 	names.map(
 		name => (
 			{
