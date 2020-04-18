@@ -273,7 +273,8 @@ ul li {
         color: #00A000;
     }
 
-    ul li {
+    ul li,
+    .box ul li {
         list-style-image: url(./arrows/down-10x10-d0l.svg);
     }
     
