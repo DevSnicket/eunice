@@ -28,9 +28,9 @@ function addVersionToIssue({
 		.then(
 			comments => (
 				{
+					...getDateAndVersionFromComments(comments),
 					html_url,
 					title,
-					version: getVersionFromComments(comments),
 				}
 			),
 		)
@@ -43,7 +43,7 @@ function fetchJson(
 	return fetch(url).then(response => response.json());
 }
 
-function getVersionFromComments(
+function getDateAndVersionFromComments(
 	comments,
 ) {
 	return (
@@ -51,18 +51,26 @@ function getVersionFromComments(
 			(version, comment) =>
 				version
 				||
-				getVersionFromCommentWhenRelease(comment),
+				getDateAndVersionFromCommentWhenRelease(comment),
 			null,
 		)
 	);
 }
 
-function getVersionFromCommentWhenRelease({
+function getDateAndVersionFromCommentWhenRelease({
 	body,
+	updated_at,
 }) {
 	const match = body.match(/^released in \[JavaScript (([0-9]*)\.([0-9]*)\.([0-9]*))/);
 
-	return match && createVersionFromMatchGroups(match);
+	return (
+		match
+		&&
+		{
+			date: updated_at.substring(0, 10),
+			version: createVersionFromMatchGroups(match),
+		}
+	);
 }
 
 function createVersionFromMatchGroups([
@@ -91,6 +99,7 @@ function getReleasesForIssues(
 		releasesByVersionText.set(
 			issue.version.text,
 			{
+				date: issue.date,
 				issues: getIssuesOfVersion(issue),
 				version: issue.version,
 			},
@@ -140,20 +149,22 @@ function getHtmlForReleases(
 }
 
 function getHtmlForRelease({
+	date,
 	issues,
 	version
 }) {
 	return (
-		getHtmlForVersion(version)
+		getHtmlForDateAndVersion({ date, version })
 		+
 		issues.map(getHtmlForIssue).join("")
 	);
 }
 
-function getHtmlForVersion({
-	text,
+function getHtmlForDateAndVersion({
+	date,
+	version: { text: version },
 }) {
-	return `<h3 id="${text}">${text}</h3>`;
+	return `<div class="release"><h3 id="${version}">${version}</h3><span>${date}</span></div>`;
 }
 
 function getHtmlForIssue({
