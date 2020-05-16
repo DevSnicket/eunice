@@ -1,0 +1,270 @@
+---
+Sat May 16 13:50:33 2020 +0100
+Git log on website
+publicly show development progress before first release
+
+---
+Fri May 15 09:05:09 2020 +0100
+dependencies don't specify type or namespace for calls within same class
+
+---
+Thu May 14 22:15:43 2020 +0100
+collect sequence replaced with more specific choose option
+
+---
+Thu May 14 20:43:20 2020 +0100
+spaces before brackets
+no unnecessary brackets around discriminated union cases
+
+---
+Thu May 14 16:03:33 2020 +0100
+interface generic parameter constraints
+
+---
+Thu May 14 12:42:46 2020 +0100
+method reference instructions
+e.g. calls
+
+---
+Wed May 13 17:46:18 2020 +0100
+field test case warning suppression
+
+---
+Wed May 13 15:40:08 2020 +0100
+file-system tests fail with full test case path, actual and expected
+
+---
+Wed May 13 07:50:21 2020 +0100
+standardised on singluar test case names
+
+---
+Tue May 12 21:00:56 2020 +0100
+fields of automatic events ignored
+
+---
+Tue May 12 16:54:17 2020 +0100
+ignore fields of automatic properties
+
+---
+Tue May 12 08:41:02 2020 +0100
+test case for operator overload of unary plus
+readability of naming (e.g. op_UnaryPlus) could be improved
+
+---
+Tue May 12 08:39:33 2020 +0100
+methods no longer depend on parent class
+
+---
+Tue May 12 08:27:01 2020 +0100
+used expression body for test case
+
+---
+Tue May 12 07:36:53 2020 +0100
+indexer test case
+
+---
+Tue May 12 07:30:31 2020 +0100
+event items instead of add/remove methods
+
+---
+Mon May 11 16:14:23 2020 +0100
+property items instead of getter/setter methods
+
+---
+Mon May 11 14:56:47 2020 +0100
+fields
+
+---
+Mon May 11 13:26:20 2020 +0100
+added variables types and no duplicate types
+
+---
+Mon May 11 10:17:58 2020 +0100
+generic parameter constraints
+
+---
+Mon May 11 09:04:26 2020 +0100
+generic arguments
+
+---
+Mon May 11 08:40:32 2020 +0100
+teset cases for generic parameters on classes
+
+---
+Mon May 11 08:39:55 2020 +0100
+specified display name for tests
+shorter than inferred name with namespace
+
+---
+Sun May 10 11:12:43 2020 +0100
+removed namespaces from test cases where irrelevant
+makes visual comparison of actual and expected easier
+
+---
+Sun May 10 10:51:39 2020 +0100
+parameterized contructors
+
+---
+Sun May 10 10:26:24 2020 +0100
+base interfaces
+
+---
+Sun May 10 08:13:04 2020 +0100
+reordered f# files top-down
+for readability and more type inference
+
+---
+Sun May 10 08:03:23 2020 +0100
+base classes
+
+---
+Sat May 9 17:15:26 2020 +0100
+parameter and return types of class and interface methods
+
+---
+Sat May 9 16:20:30 2020 +0100
+interface methods test case
+
+---
+Sat May 9 16:01:02 2020 +0100
+alphabetically ordered namespace items and delegate types
+
+---
+Sat May 9 14:52:44 2020 +0100
+delegate parameter types
+
+---
+Sat May 9 06:29:24 2020 +0100
+dependencies for return type of delegates
+
+---
+Fri May 8 19:17:34 2020 +0100
+namespace grouping into hierarchy of items independent of the type items contained inside
+for reuse grouping dependencies into namespaces
+
+---
+Fri May 8 19:00:38 2020 +0100
+ yaml key/value lines mapping separated from items
+doesn't require exposing of private for specific tests
+
+---
+Fri May 8 06:24:15 2020 +0100
+support for identifier only items move to yaml
+
+---
+Thu May 7 19:39:46 2020 +0100
+interface with nested class test case
+
+---
+Thu May 7 19:15:01 2020 +0100
+moved method and nested test cases into class directory
+
+---
+Thu May 7 09:22:19 2020 +0100
+methods
+
+---
+Thu May 7 07:25:01 2020 +0100
+moved namespace test cases into a namespace directory
+
+---
+Wed May 6 12:19:08 2020 +0100
+yaml tests for empty child items
+
+---
+Wed May 6 12:16:20 2020 +0100
+code coverage totals displayed e.g. when not 100%
+
+---
+Wed May 6 11:33:36 2020 +0100
+test script coverage threshold errors raised from report generator instead of altcover
+altcover was only measuring statement and its branch calculation is wrong
+
+---
+Wed May 6 10:30:56 2020 +0100
+test results (trx) has same file name for each run
+
+---
+Wed May 6 09:47:34 2020 +0100
+test script generates report even when code coverage lower than threshold
+
+---
+Wed May 6 07:58:23 2020 +0100
+added test for interfaces
+
+---
+Wed May 6 07:56:36 2020 +0100
+added test for yaml empty block sequences
+pattern for empty cannot to be ignored in isolation from code coverage
+not including pattern and supressing F# warning still generates CIL that is detected by code coverage
+
+---
+Wed May 6 07:36:42 2020 +0100
+test script set to exit on error
+
+---
+Wed May 6 07:06:47 2020 +0100
+test for delegates
+
+---
+Wed May 6 07:04:19 2020 +0100
+added test for enum
+
+---
+Wed May 6 06:58:38 2020 +0100
+removed yaml sequence for single child items
+
+---
+Tue May 5 07:48:37 2020 +0100
+4 space indentation for readability
+
+---
+Tue May 5 07:38:56 2020 +0100
+nested classes
+
+---
+Mon May 4 11:36:14 2020 +0100
+moved types into namespaces and separate files
+
+---
+Mon May 4 11:17:07 2020 +0100
+test case for single class with no namespace
+
+---
+Mon May 4 07:20:20 2020 +0100
+ancestor namespaces
+
+---
+Sun May 3 11:28:03 2020 +0100
+parent namespace
+
+---
+Sun May 3 11:25:29 2020 +0100
+VS Code settings for whitespace
+
+---
+Sat May 2 16:11:09 2020 +0100
+deleted file that was never used
+
+---
+Sat May 2 15:50:46 2020 +0100
+avoided package restore error for test case projects
+
+---
+Sat May 2 14:34:13 2020 +0100
+namespaces as parent item
+avoided type / namespace conflict of "File" between implementation and test projects
+YAML serialization library no longer used as it nor an alternative has support for F# types and .NET Core
+
+---
+Thu Apr 30 17:36:07 2020 +0100
+Azure pipelines
+
+
+---
+Thu Apr 30 17:13:01 2020 +0100
+test script added shebang and reformatted
+
+---
+Thu Apr 30 16:22:57 2020 +0100
+single class without namespace
