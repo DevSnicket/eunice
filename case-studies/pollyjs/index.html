@@ -24,7 +24,7 @@
                 <p>This case study of the JavaScript library <a href="https://netflix.github.io/pollyjs">Polly.JS</a> is intended as an introduction to Eunice because Polly.JS doesn't require any configuration and has uni-directional dependencies.</p>
                 <p>Alternatively, for a demonstration of Eunice on a larger code base, that requires configuration and has bi-directional dependencies, there's also a <a href="../react">React case study</a>.</p>
             </div>
-            <img src="./header.png" style="width:24em" />
+            <img alt="Eunice and Polly.JS logos" src="./header.png" style="width:24em" />
         </div>
         <h3>getting started</h3>
         <p>Eunice analyzes JavaScript source code, so I cloned the <a href="https://github.com/Netflix/pollyjs/commit/0003c0ed5e1ec0253d401ee4e9185406ed6e1b31">0003c0e commit</a> from the GitHub repository <a href="https://github.com/Netflix/pollyjs">https://github.com/Netflix/pollyjs</a>.</p>
@@ -36,14 +36,14 @@ git reset --hard 0003c0e</code>
         <p>You will be prompted to accept a EULA. Eunice is free to use on open source projects, and its free to use for education and training. Therefore contributions to Polly.JS and following along with this case study both qualify. There is also an evaluation period to try Eunice out on closed source commercial software.</p>
         <h3>uni-directional dependencies</h3>
         <p>The analysis will output a eunice.html file. Opening the file in a browser shows the following:</p>
-        <img src="./1-respository.png" />
+        <img alt="Eunice showing the repository root of Polly.JS" src="./1-respository.png" />
         <p>On the left a text editor is displaying 6,927 lines of <a href="../../advanced/yaml">YAML</a> produced by Eunice's analysis of Polly.JS.</p>
         <p>On the right is a graphical representation of all the <a href="../../dependencies">dependencies</a> and the root directories in Polly.JS. The green and red count arrows represent the dependencies, categorized as follows:</p>
         <div class="arrows-with-descriptions"></div>
         <p>The 1,102 matching (green) and only 22 (red) mismatching dependencies shows that Eunice has found the vast majority of dependencies in Polly.JS as uni-directional. The few bi-directional dependencies that have been found are deep inside the directory structure (e.g. the 17 in packages) and unlikely to be of much, if any consequence.</p>
         <h3>stacks</h3>
         <p>There isn't a stack in the root directory shown above; however, selecting the packages/@pollyjs sub-directory will show one for its contents:</p>
-        <img src="./2-packages-pollyjs.png" />
+        <img alt="Eunice showing the packages sub-directory of Polly.JS" src="./2-packages-pollyjs.png" />
         <p>The arrangement of 5 levels shown above isn't specified in the source code and has been inferred by Eunice. It will only do this when items have uni-directional dependencies.</p>
         <h3>investigation</h3>
         <p>Even without any prior knowledge of how Polly.JS works, the relationship between many of the directories seems intuitive. For example:</p>
@@ -54,14 +54,14 @@ git reset --hard 0003c0e</code>
             <li>utils is on its own in the bottom level, as it is used elsewhere, but doesn't use anything itself.</li>
         </ul>
         <p>The dependencies that Eunice has found can be investigated by selecting the count arrows, this lists the dependencies included in them. For example the single dependency below cli is on node-server:</p>
-        <img src="./3-cli-dependencies.png" />
+        <img alt="Eunice listing the dependencies of cli in Polly.JS" src="./3-cli-dependencies.png" />
         <p>Eunice shows count arrows for both sides of a dependency relationship. The dependency in the example above is also included as a dependent in the count of 3 above node-server:</p>
-        <img src="4-node-server-dependents.png" />
+        <img alt="Eunice listing the dependents of node server in Polly.JS" src="./4-node-server-dependents.png" />
         <p>The dependents arrow above core can also be selected to investigate how its used by the items above:</p>
-        <img src="./5-core-dependents.png" />
+        <img alt="Eunice listing the dependents of core in Polly.JS" src="./5-core-dependents.png" />
         <p>The dependents of core seem to be only using it for integration testing and the items above don't appear to use it at runtime. Looking at the <a href="https://netflix.github.io/pollyjs/#/README?id=getting-started" target="_blank">Polly.JS getting started</a> page, you can see instead the adapters and persisters above are registered with core at runtime. This looks like a potential <a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle" target="_blank">inverted dependency</a> in a form of <a href="https://en.wikipedia.org/wiki/Plug-in_(computing)" target="_blank">plug-in</a> relationship.</p>
         <p>The same kind of investigation of dependents can be done for adapter: </p>
-        <img src="./6-adapter-dependents.png" />
+        <img alt="Eunice listing the dependents of adapter in Polly.JS" src="./6-adapter-dependents.png" />
         <p>The dependency list shows several of the adapters above use it and looking at the <a href="https://netflix.github.io/pollyjs/#/adapters/custom" target="_blank">Polly.JS custom adapter</a> page confirms at least fetch and xhr extend it.</p>
         <p>There is a dependency from core on adapter, but this is just for testing.</p>
         <h3 id="packages-tests-and-sub-directories">packages, tests and sub-directories</h3>

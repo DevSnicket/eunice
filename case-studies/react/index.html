@@ -71,24 +71,24 @@ Unexpected token, expected ";" (14:5)</code>
 --babel-parser-plugins=flow \
 --babel-parser-plugins=jsx</code>
         <p>Analysis with the options above should complete successfully and output a eunice.html file. Opening the file in a browser should show the following:</p>
-        <img src="./1-initial-root.png" />
+        <img alt="Eunice showing the repository root of React" src="./1-initial-root.png" />
         <p>On the left a text editor is displaying 77,911 lines of <a href="../../advanced/yaml">YAML</a> produced by Eunice's analysis of React.</p>
         <p>On the right is a graphical representation of all the <a href="../../dependencies">dependencies</a> and the root directories (fixtures and packages) in React. The green and red count arrows represent the dependencies, categorized as follows:</p>
         <div class="arrows-with-descriptions"></div>
         <p>Ideally all dependencies should match and only be in green down arrows. This means Eunice considers all the dependencies to be unidirectional, including indirect dependencies.</p>
-        <img src="../../structure/stacks.svg" style="background: white; padding: 0.5em;" />
+        <img alt="Diagrams of uni-directional, bi-directional, stack, independent, direct and indirect dependencies" src="../../structure/stacks.svg" style="background: white; padding: 0.5em;" />
         <p>An example of software that’s close to having only unidirectional dependencies is Eunice itself. You can see this by looking at its <a href="https://en.wikipedia.org/wiki/Eating_your_own_dog_food" target="_blank">dogfooding</a>:</p>
-        <img src="../../dogfooding/index.svg" style="background: white; padding: 0.5em;" />
+        <img alt="Eunice visualization of Eunice's own structure and dependencies" src="../../dogfooding/index.svg" style="background: white; padding: 0.5em;" />
         <p>You can interact with Eunice's dogfooding <a href="../../dogfooding" target="_blank">here</a>.</p>
         <h3 id="inferred-stacks">inferred stacks</h3>
         <p>When an order isn't defined for items (e.g. the file-system) Eunice can infer stacks for items that only have uni-directional dependencies.</p>
         <p>Selecting the packages directory will open it and show that Eunice has inferred two levels, of three items each:</p>
-        <img src="./2-inferred-stacks-packages.png"/>
+        <img alt="Eunice shown to have inferred stacks for React's packages directory" src="./2-inferred-stacks-packages.png"/>
         <h3 id="directory-specific-stacks">directory specific stacks</h3>
         <p>A stack can also be specified by creating a YAML file in a directory. Eunice automatically looks for files named .eunice-stack.yaml saved with the code.</p>
         <p>I've worked through React, created 13 stack files and committed them to the Git branch.</p>
         <p>The stacks have resolved all the remaining 990 unstructured dependencies; however, I wasn't able to define structures that would make all dependencies go in the same direction. These mismatching dependencies are shown in the red up arrow count of 653 below:</p>
-        <img src="./10-individual-file-stacks-root.png"/>
+        <img alt="Eunice showing total dependency counts of React after adding stacks manually" src="./10-individual-file-stacks-root.png"/>
         <p>You can see more specific dependency count arrows and the structure I chose, by looking inside React's packages sub-directory:</p>
         <code>- [ react-devtools, react-devtools-shell ]
 - [ react-devtools-core, react-devtools-inline ]
@@ -100,13 +100,13 @@ Unexpected token, expected ";" (14:5)</code>
 - [ create-subscription, jest-mock-scheduler, jest-react, react-cache, react-is, react-stream, use-subscription ]
 - [ babel-plugin-react-jsx, eslint-plugin-react-hooks, react, react-debug-tools, scheduler, shared ]</code>
         <br/>
-        <img src="./11-individual-file-stack-packages.png" />
+        <img alt="Eunice showing the package directory of React after adding stacks manually" src="./11-individual-file-stack-packages.png" />
         <p>Stacks were also created for react-dom and its sub-directories client and events. I got better matching counts by putting events in a level below the other items such as client and server:</p>
         <code>- - existing
 - - events
 - - shared</code>
         <br/>
-        <img src="./12-react-dom.png" />
+        <img alt="Eunice showing the React DOM package after adding stacks manually" src="./12-react-dom.png" />
         <p>Another relatively complex stack was created for react-reconciler. This directory has even more items than the packages directory. Although a lot of them had uni-directional dependencies and stacked automatically in the bottom two levels:</p>
         <code>- - ReactFiberWorkLoop
 - [ ReactFiberCompleteWork, ReactFiberThrow, ReactFiberUnwindWork ]
@@ -118,11 +118,11 @@ Unexpected token, expected ";" (14:5)</code>
 - [ ReactFiberNewContext, ReactFiberReconciler ]
 - - existing</code>
         <br/>
-        <img src="13-react-reconciler.png" />
+        <img alt="Eunice showing the React Reconciler package after adding stacks manually" src="13-react-reconciler.png" />
         <h3 id="groups">groups</h3>
         <p>The packages directory has enough items and levels that it can be hard to remember what all the dependency relationships are. This can be improved by grouping items that share concepts and dependency relationships.</p>
         <p>The six sub-directories highlighted below could be grouped, as they all relate to devtools and can be stacked together due to cohesive dependencies:</p>
-        <img src="./14-devtools-highlighted.png" />
+        <img alt="Potential grouping of devtools highlighted in Eunice" src="./14-devtools-highlighted.png" />
         <p>To investigate how this might look the Eunice stack file in the packages directory can be modified. I've added a new item named react-devtools-group and moved the six related items inside it:</p>
         <code><span class="new">- - id: react-devtools-group
     dependencyPermeable: true
@@ -139,9 +139,9 @@ Unexpected token, expected ";" (14:5)</code>
 - [ babel-plugin-react-jsx, eslint-plugin-react-hooks, react, react-debug-tools, scheduler, shared ]</code>
         <p>The new item has been marked in the YAML as dependencyPermeable so that Eunice's dependency resolution will look inside it even though it won't be specified in the code's import statement paths.</p>
         <p>Re-running the analysis and reloading the web page shows that this makes the packages directory clearer without adding any mismatching dependencies:</p>
-        <img src="./15-devtools-group.png" />
+        <img alt="Eunice showing React's packages directory after adding a group for devtools" src="./15-devtools-group.png" />
         <p>Selecting the new react-devtools-group shows its stack:</p>
-        <img src="./16-devtools-group-contents.png" />
+        <img alt="Eunice showing contents of group for React devtools" src="./16-devtools-group-contents.png" />
         <p>To make this grouping more permanent and implicit the Eunice stack above could be replaced with a new sub-directory in the code.</p>
         <p>The example above was an obvious group to create, with the shared concept (devtools) already defined, high cohesion within its items and a simple relationship with the rest of the system. To get the same effect elsewhere, more detailed work might be required, directly in the code, moving small pieces around from across many parts of a system.</p>
         <h3 id="tests">tests</h3>
@@ -154,7 +154,7 @@ Unexpected token, expected ";" (14:5)</code>
 --babel-parser-plugins=flow \
 --babel-parser-plugins=jsx</code>
         <p>Re-running analysis and reloading the web page shows that with tests ignored, there aren't any bi-directional dependencies between package sub-directories. This matches that the NPM packages created from those sub-directories would also only have uni-directional dependencies.</p>
-        <img src="./17-ignore-tests.png" />
+        <img alt="Eunice showing reduced mismatching dependency count if React's tests are ignored" src="./17-ignore-tests.png" />
         <p>Note Eunice has detected that react-test-renderer no longer needs to be stacked in a separate level and so has automatically moved it up into the level above:</p>
         <h3 id="conclusion">conclusion</h3>
         <p>You can interact with the Eunice analysis for this case study <a href="./eunice.html" target="_blank">here</a>.</p>
