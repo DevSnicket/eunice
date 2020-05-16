@@ -83,6 +83,10 @@ body > .footer {
     margin-bottom: 1em;
 }
 
+body > .footer > .links {
+    font-size: 1.25em;
+}
+
 body > .footer > .links > * {
     margin: 0 0.8em;
 }
