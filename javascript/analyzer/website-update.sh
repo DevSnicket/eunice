@@ -1,7 +1,7 @@
 rm -rf website
 
 git submodule add --force \
-	https://$1@github.com/DevSnicket/Eunice.git \
+	https://$1@github.com/DevSnicket/eunice.git \
 	website
 
 rm -f -rf website/javascript/analyzer-harness
