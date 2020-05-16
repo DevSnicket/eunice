@@ -171,7 +171,7 @@ function getHtmlForIssue({
 	html_url,
 	title,
 }) {
-	return `<div><a href="${html_url}" target="_blank">${title}</a></div>`;
+	return `<div><a href="${html_url}" rel="noopener" target="_blank">${title}</a></div>`;
 }
 
 function setListHtml(

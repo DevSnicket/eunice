@@ -61,7 +61,7 @@ function getHtmlForIssues(
 function getHtmlForIssue(
 	issue,
 ) {
-	return `<li><a href="${issue.html_url}" target="_blank">${issue.title}</a></li>`;
+	return `<li><a href="${issue.html_url}" rel="noopener" target="_blank">${issue.title}</a></li>`;
 }
 
 function setIssueListHtml(

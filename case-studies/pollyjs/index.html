@@ -21,13 +21,13 @@
         <h2 style="margin-bottom: 0">Polly.JS case study</h2>
         <div class="image-right">
             <div>
-                <p>This case study of the JavaScript library <a href="https://netflix.github.io/pollyjs">Polly.JS</a> is intended as an introduction to Eunice because Polly.JS doesn't require any configuration and has uni-directional dependencies.</p>
+                <p>This case study of the JavaScript library <a href="https://netflix.github.io/pollyjs" rel="noopener" target="_blank">Polly.JS</a> is intended as an introduction to Eunice because Polly.JS doesn't require any configuration and has uni-directional dependencies.</p>
                 <p>Alternatively, for a demonstration of Eunice on a larger code base, that requires configuration and has bi-directional dependencies, there's also a <a href="../react">React case study</a>.</p>
             </div>
             <img alt="Eunice and Polly.JS logos" src="./header.png" style="width:24em" />
         </div>
         <h3>getting started</h3>
-        <p>Eunice analyzes JavaScript source code, so I cloned the <a href="https://github.com/Netflix/pollyjs/commit/0003c0ed5e1ec0253d401ee4e9185406ed6e1b31">0003c0e commit</a> from the GitHub repository <a href="https://github.com/Netflix/pollyjs">https://github.com/Netflix/pollyjs</a>.</p>
+        <p>Eunice analyzes JavaScript source code, so I cloned the <a href="https://github.com/Netflix/pollyjs/commit/0003c0ed5e1ec0253d401ee4e9185406ed6e1b31" rel="noopener" target="_blank">0003c0e commit</a> from the GitHub repository <a href="https://github.com/Netflix/pollyjs" rel="noopener" target="_blank">https://github.com/Netflix/pollyjs</a>.</p>
         <code>git clone https://github.com/Netflix/pollyjs.git pollyjs-eunice
 cd pollyjs-eunice
 git reset --hard 0003c0e</code>
@@ -59,10 +59,10 @@ git reset --hard 0003c0e</code>
         <img alt="Eunice listing the dependents of node server in Polly.JS" src="./4-node-server-dependents.png" />
         <p>The dependents arrow above core can also be selected to investigate how its used by the items above:</p>
         <img alt="Eunice listing the dependents of core in Polly.JS" src="./5-core-dependents.png" />
-        <p>The dependents of core seem to be only using it for integration testing and the items above don't appear to use it at runtime. Looking at the <a href="https://netflix.github.io/pollyjs/#/README?id=getting-started" target="_blank">Polly.JS getting started</a> page, you can see instead the adapters and persisters above are registered with core at runtime. This looks like a potential <a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle" target="_blank">inverted dependency</a> in a form of <a href="https://en.wikipedia.org/wiki/Plug-in_(computing)" target="_blank">plug-in</a> relationship.</p>
+        <p>The dependents of core seem to be only using it for integration testing and the items above don't appear to use it at runtime. Looking at the <a href="https://netflix.github.io/pollyjs/#/README?id=getting-started" rel="noopener" target="_blank">Polly.JS getting started</a> page, you can see instead the adapters and persisters above are registered with core at runtime. This looks like a potential <a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle" rel="noopener" target="_blank">inverted dependency</a> in a form of <a href="https://en.wikipedia.org/wiki/Plug-in_(computing)" rel="noopener" target="_blank">plug-in</a> relationship.</p>
         <p>The same kind of investigation of dependents can be done for adapter: </p>
         <img alt="Eunice listing the dependents of adapter in Polly.JS" src="./6-adapter-dependents.png" />
-        <p>The dependency list shows several of the adapters above use it and looking at the <a href="https://netflix.github.io/pollyjs/#/adapters/custom" target="_blank">Polly.JS custom adapter</a> page confirms at least fetch and xhr extend it.</p>
+        <p>The dependency list shows several of the adapters above use it and looking at the <a href="https://netflix.github.io/pollyjs/#/adapters/custom" rel="noopener" target="_blank">Polly.JS custom adapter</a> page confirms at least fetch and xhr extend it.</p>
         <p>There is a dependency from core on adapter, but this is just for testing.</p>
         <h3 id="packages-tests-and-sub-directories">packages, tests and sub-directories</h3>
         <p>The packages/@pollyjs directory I've investigated above is used for the creation of NPM packages, so its not surprising to see that, at least at runtime, there are uni-directional dependencies. However, what appear to be integration tests across those packages also have uni-directional dependencies.</p>
@@ -73,14 +73,14 @@ git reset --hard 0003c0e</code>
         <p>Eunice could show potential for additional structure, making the code more self descriptive, by highlighting commonality that could be named in a new group, for example by moving files and directories into a new directory.</p>
         <p>People new to the project might not realise that dependencies are coordinated and consistent with the directory structure. Viewing the structure and dependencies with Eunice could help raise awareness.</p>
         <p>Instead of Eunice inferring stacks, they could be specified in source control, formalizing the relationships and making it clear to everyone they are intentional.</p>
-        <p>comment on <a href="https://dev.to/grahamdyson/eunice-infers-polly-js-1532#comments" target="_blank">dev.to</a></p>
-        <p>also featured on <a href="https://hackernoon.com/how-to-use-pollyjs-dependencies-with-eunice-1a5b3yjv" target="_blank">hackernoon.com</a> <a href="https://medium.com/@grahamdyson/polly-js-dependencies-with-eunice-eb2f42a95625" target="_blank">medium</a></p>
+        <p>comment on <a href="https://dev.to/grahamdyson/eunice-infers-polly-js-1532#comments" rel="noopener" target="_blank">dev.to</a></p>
+        <p>also featured on <a href="https://hackernoon.com/how-to-use-pollyjs-dependencies-with-eunice-1a5b3yjv" rel="noopener" target="_blank">hackernoon.com</a> <a href="https://medium.com/@grahamdyson/polly-js-dependencies-with-eunice-eb2f42a95625" rel="noopener" target="_blank">medium</a></p>
     </div>
     <div class="footer">
         <p class="links">
             <a class="email" href="mailto:eunice@devsnicket.com">eunice@devsnicket.com</a>
-            <a class="twitter" href="https://twitter.com/devsnicket" target="_blank">twitter.com/devsnicket</a>
-            <a class="github" href="https://github.com/DevSnicket" target="_blank">github.com/DevSnicket</a>
+            <a class="twitter" href="https://twitter.com/devsnicket" rel="noopener" target="_blank">twitter.com/devsnicket</a>
+            <a class="github" href="https://github.com/DevSnicket" rel="noopener" target="_blank">github.com/DevSnicket</a>
         </p>
         <p>Copyright © 2020 Graham Dyson</p>
     </div>
