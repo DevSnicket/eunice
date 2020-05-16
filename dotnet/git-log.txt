@@ -1,270 +1,270 @@
 ---
-%as
+2020-05-16
 Git log on website
 publicly show development progress before first release
 
 ---
-%as
+2020-05-15
 dependencies don't specify type or namespace for calls within same class
 
 ---
-%as
+2020-05-14
 collect sequence replaced with more specific choose option
 
 ---
-%as
+2020-05-14
 spaces before brackets
 no unnecessary brackets around discriminated union cases
 
 ---
-%as
+2020-05-14
 interface generic parameter constraints
 
 ---
-%as
+2020-05-14
 method reference instructions
 e.g. calls
 
 ---
-%as
+2020-05-13
 field test case warning suppression
 
 ---
-%as
+2020-05-13
 file-system tests fail with full test case path, actual and expected
 
 ---
-%as
+2020-05-13
 standardised on singluar test case names
 
 ---
-%as
+2020-05-12
 fields of automatic events ignored
 
 ---
-%as
+2020-05-12
 ignore fields of automatic properties
 
 ---
-%as
+2020-05-12
 test case for operator overload of unary plus
 readability of naming (e.g. op_UnaryPlus) could be improved
 
 ---
-%as
+2020-05-12
 methods no longer depend on parent class
 
 ---
-%as
+2020-05-12
 used expression body for test case
 
 ---
-%as
+2020-05-12
 indexer test case
 
 ---
-%as
+2020-05-12
 event items instead of add/remove methods
 
 ---
-%as
+2020-05-11
 property items instead of getter/setter methods
 
 ---
-%as
+2020-05-11
 fields
 
 ---
-%as
+2020-05-11
 added variables types and no duplicate types
 
 ---
-%as
+2020-05-11
 generic parameter constraints
 
 ---
-%as
+2020-05-11
 generic arguments
 
 ---
-%as
+2020-05-11
 teset cases for generic parameters on classes
 
 ---
-%as
+2020-05-11
 specified display name for tests
 shorter than inferred name with namespace
 
 ---
-%as
+2020-05-10
 removed namespaces from test cases where irrelevant
 makes visual comparison of actual and expected easier
 
 ---
-%as
+2020-05-10
 parameterized contructors
 
 ---
-%as
+2020-05-10
 base interfaces
 
 ---
-%as
+2020-05-10
 reordered f# files top-down
 for readability and more type inference
 
 ---
-%as
+2020-05-10
 base classes
 
 ---
-%as
+2020-05-09
 parameter and return types of class and interface methods
 
 ---
-%as
+2020-05-09
 interface methods test case
 
 ---
-%as
+2020-05-09
 alphabetically ordered namespace items and delegate types
 
 ---
-%as
+2020-05-09
 delegate parameter types
 
 ---
-%as
+2020-05-09
 dependencies for return type of delegates
 
 ---
-%as
+2020-05-08
 namespace grouping into hierarchy of items independent of the type items contained inside
 for reuse grouping dependencies into namespaces
 
 ---
-%as
+2020-05-08
  yaml key/value lines mapping separated from items
 doesn't require exposing of private for specific tests
 
 ---
-%as
+2020-05-08
 support for identifier only items move to yaml
 
 ---
-%as
+2020-05-07
 interface with nested class test case
 
 ---
-%as
+2020-05-07
 moved method and nested test cases into class directory
 
 ---
-%as
+2020-05-07
 methods
 
 ---
-%as
+2020-05-07
 moved namespace test cases into a namespace directory
 
 ---
-%as
+2020-05-06
 yaml tests for empty child items
 
 ---
-%as
+2020-05-06
 code coverage totals displayed e.g. when not 100%
 
 ---
-%as
+2020-05-06
 test script coverage threshold errors raised from report generator instead of altcover
 altcover was only measuring statement and its branch calculation is wrong
 
 ---
-%as
+2020-05-06
 test results (trx) has same file name for each run
 
 ---
-%as
+2020-05-06
 test script generates report even when code coverage lower than threshold
 
 ---
-%as
+2020-05-06
 added test for interfaces
 
 ---
-%as
+2020-05-06
 added test for yaml empty block sequences
 pattern for empty cannot to be ignored in isolation from code coverage
 not including pattern and supressing F# warning still generates CIL that is detected by code coverage
 
 ---
-%as
+2020-05-06
 test script set to exit on error
 
 ---
-%as
+2020-05-06
 test for delegates
 
 ---
-%as
+2020-05-06
 added test for enum
 
 ---
-%as
+2020-05-06
 removed yaml sequence for single child items
 
 ---
-%as
+2020-05-05
 4 space indentation for readability
 
 ---
-%as
+2020-05-05
 nested classes
 
 ---
-%as
+2020-05-04
 moved types into namespaces and separate files
 
 ---
-%as
+2020-05-04
 test case for single class with no namespace
 
 ---
-%as
+2020-05-04
 ancestor namespaces
 
 ---
-%as
+2020-05-03
 parent namespace
 
 ---
-%as
+2020-05-03
 VS Code settings for whitespace
 
 ---
-%as
+2020-05-02
 deleted file that was never used
 
 ---
-%as
+2020-05-02
 avoided package restore error for test case projects
 
 ---
-%as
+2020-05-02
 namespaces as parent item
 avoided type / namespace conflict of "File" between implementation and test projects
 YAML serialization library no longer used as it nor an alternative has support for F# types and .NET Core
 
 ---
-%as
+2020-04-30
 Azure pipelines
 
 
 ---
-%as
+2020-04-30
 test script added shebang and reformatted
 
 ---
-%as
+2020-04-30
 single class without namespace
