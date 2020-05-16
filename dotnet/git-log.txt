@@ -1,4 +1,8 @@
 ---
+2020-05-16T20:12:41+01:00
+corrected case of eunice repository used by website update
+
+---
 2020-05-16T20:05:46+01:00
 Git log dates in ISO 8601 format for website
 
