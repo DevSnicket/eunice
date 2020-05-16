@@ -1,1 +1,1 @@
-find . -type f -name "*.html" ! -path ./case-studies/eunice.html ! -path ./dogfooding/index.html ! -path ./javascript/harness/index.html ! -path ./javascript-analyzer/index.html ! -path ./renderer-test-harness/index.html -exec npx cspell@4.0.30 {} +
+find . -type f -name "*.html" ! -path ./case-studies/eunice.html ! -path ./dogfooding/index.html ! -path ./javascript/analyzer-harness/index.html ! -path ./javascript/harness/index.html ! -path ./renderer-test-harness/index.html -exec npx cspell@4.0.30 {} +
