@@ -1,278 +1,270 @@
 ---
-2020-05-16T20:12:41+01:00
-corrected case of eunice repository used by website update
-
----
-2020-05-16T20:05:46+01:00
-Git log dates in ISO 8601 format for website
-
----
-2020-05-16T13:50:33+01:00
+%as
 Git log on website
 publicly show development progress before first release
 
 ---
-2020-05-15T09:05:09+01:00
+%as
 dependencies don't specify type or namespace for calls within same class
 
 ---
-2020-05-14T22:15:43+01:00
+%as
 collect sequence replaced with more specific choose option
 
 ---
-2020-05-14T20:43:20+01:00
+%as
 spaces before brackets
 no unnecessary brackets around discriminated union cases
 
 ---
-2020-05-14T16:03:33+01:00
+%as
 interface generic parameter constraints
 
 ---
-2020-05-14T12:42:46+01:00
+%as
 method reference instructions
 e.g. calls
 
 ---
-2020-05-13T17:46:18+01:00
+%as
 field test case warning suppression
 
 ---
-2020-05-13T15:40:08+01:00
+%as
 file-system tests fail with full test case path, actual and expected
 
 ---
-2020-05-13T07:50:21+01:00
+%as
 standardised on singluar test case names
 
 ---
-2020-05-12T21:00:56+01:00
+%as
 fields of automatic events ignored
 
 ---
-2020-05-12T16:54:17+01:00
+%as
 ignore fields of automatic properties
 
 ---
-2020-05-12T08:41:02+01:00
+%as
 test case for operator overload of unary plus
 readability of naming (e.g. op_UnaryPlus) could be improved
 
 ---
-2020-05-12T08:39:33+01:00
+%as
 methods no longer depend on parent class
 
 ---
-2020-05-12T08:27:01+01:00
+%as
 used expression body for test case
 
 ---
-2020-05-12T07:36:53+01:00
+%as
 indexer test case
 
 ---
-2020-05-12T07:30:31+01:00
+%as
 event items instead of add/remove methods
 
 ---
-2020-05-11T16:14:23+01:00
+%as
 property items instead of getter/setter methods
 
 ---
-2020-05-11T14:56:47+01:00
+%as
 fields
 
 ---
-2020-05-11T13:26:20+01:00
+%as
 added variables types and no duplicate types
 
 ---
-2020-05-11T10:17:58+01:00
+%as
 generic parameter constraints
 
 ---
-2020-05-11T09:04:26+01:00
+%as
 generic arguments
 
 ---
-2020-05-11T08:40:32+01:00
+%as
 teset cases for generic parameters on classes
 
 ---
-2020-05-11T08:39:55+01:00
+%as
 specified display name for tests
 shorter than inferred name with namespace
 
 ---
-2020-05-10T11:12:43+01:00
+%as
 removed namespaces from test cases where irrelevant
 makes visual comparison of actual and expected easier
 
 ---
-2020-05-10T10:51:39+01:00
+%as
 parameterized contructors
 
 ---
-2020-05-10T10:26:24+01:00
+%as
 base interfaces
 
 ---
-2020-05-10T08:13:04+01:00
+%as
 reordered f# files top-down
 for readability and more type inference
 
 ---
-2020-05-10T08:03:23+01:00
+%as
 base classes
 
 ---
-2020-05-09T17:15:26+01:00
+%as
 parameter and return types of class and interface methods
 
 ---
-2020-05-09T16:20:30+01:00
+%as
 interface methods test case
 
 ---
-2020-05-09T16:01:02+01:00
+%as
 alphabetically ordered namespace items and delegate types
 
 ---
-2020-05-09T14:52:44+01:00
+%as
 delegate parameter types
 
 ---
-2020-05-09T06:29:24+01:00
+%as
 dependencies for return type of delegates
 
 ---
-2020-05-08T19:17:34+01:00
+%as
 namespace grouping into hierarchy of items independent of the type items contained inside
 for reuse grouping dependencies into namespaces
 
 ---
-2020-05-08T19:00:38+01:00
+%as
  yaml key/value lines mapping separated from items
 doesn't require exposing of private for specific tests
 
 ---
-2020-05-08T06:24:15+01:00
+%as
 support for identifier only items move to yaml
 
 ---
-2020-05-07T19:39:46+01:00
+%as
 interface with nested class test case
 
 ---
-2020-05-07T19:15:01+01:00
+%as
 moved method and nested test cases into class directory
 
 ---
-2020-05-07T09:22:19+01:00
+%as
 methods
 
 ---
-2020-05-07T07:25:01+01:00
+%as
 moved namespace test cases into a namespace directory
 
 ---
-2020-05-06T12:19:08+01:00
+%as
 yaml tests for empty child items
 
 ---
-2020-05-06T12:16:20+01:00
+%as
 code coverage totals displayed e.g. when not 100%
 
 ---
-2020-05-06T11:33:36+01:00
+%as
 test script coverage threshold errors raised from report generator instead of altcover
 altcover was only measuring statement and its branch calculation is wrong
 
 ---
-2020-05-06T10:30:56+01:00
+%as
 test results (trx) has same file name for each run
 
 ---
-2020-05-06T09:47:34+01:00
+%as
 test script generates report even when code coverage lower than threshold
 
 ---
-2020-05-06T07:58:23+01:00
+%as
 added test for interfaces
 
 ---
-2020-05-06T07:56:36+01:00
+%as
 added test for yaml empty block sequences
 pattern for empty cannot to be ignored in isolation from code coverage
 not including pattern and supressing F# warning still generates CIL that is detected by code coverage
 
 ---
-2020-05-06T07:36:42+01:00
+%as
 test script set to exit on error
 
 ---
-2020-05-06T07:06:47+01:00
+%as
 test for delegates
 
 ---
-2020-05-06T07:04:19+01:00
+%as
 added test for enum
 
 ---
-2020-05-06T06:58:38+01:00
+%as
 removed yaml sequence for single child items
 
 ---
-2020-05-05T07:48:37+01:00
+%as
 4 space indentation for readability
 
 ---
-2020-05-05T07:38:56+01:00
+%as
 nested classes
 
 ---
-2020-05-04T11:36:14+01:00
+%as
 moved types into namespaces and separate files
 
 ---
-2020-05-04T11:17:07+01:00
+%as
 test case for single class with no namespace
 
 ---
-2020-05-04T07:20:20+01:00
+%as
 ancestor namespaces
 
 ---
-2020-05-03T11:28:03+01:00
+%as
 parent namespace
 
 ---
-2020-05-03T11:25:29+01:00
+%as
 VS Code settings for whitespace
 
 ---
-2020-05-02T16:11:09+01:00
+%as
 deleted file that was never used
 
 ---
-2020-05-02T15:50:46+01:00
+%as
 avoided package restore error for test case projects
 
 ---
-2020-05-02T14:34:13+01:00
+%as
 namespaces as parent item
 avoided type / namespace conflict of "File" between implementation and test projects
 YAML serialization library no longer used as it nor an alternative has support for F# types and .NET Core
 
 ---
-2020-04-30T17:36:07+01:00
+%as
 Azure pipelines
 
 
 ---
-2020-04-30T17:13:01+01:00
+%as
 test script added shebang and reformatted
 
 ---
-2020-04-30T16:22:57+01:00
+%as
 single class without namespace
