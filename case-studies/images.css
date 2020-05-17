@@ -1,4 +1,4 @@
-.content > img,
+body > .content > img,
 .image-right > img {
 	display: block;
 	margin: 0 auto;

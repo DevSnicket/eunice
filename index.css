@@ -51,12 +51,10 @@ a:active {
     max-width: calc(100% - 6em);
 }
 
-.content {
-    max-width: 60em;
-}
-
-body > .content {
+body > .content,
+body > .header > .content {
     margin: 1em auto;
+    max-width: 60em;
     padding: 0 1em;
 }
 
@@ -236,11 +234,13 @@ h1 {
     font-size: 2em;
 }
 
-h2 {
+h2,
+.side-menu > a {
     font-size: 1.5em;
 }
 
-h3 {
+h3,
+.side-menu > .side-menu > :not(:first-child) {
     font-size: 1.17em;
 }
 
