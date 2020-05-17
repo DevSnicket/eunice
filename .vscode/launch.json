@@ -1,0 +1,13 @@
+{
+	"configurations": [
+		{
+			"cwd": "${workspaceFolder}\\dotnet",
+			"name": "dotnet updateGitLogInHtmlFile",
+			"program": "${workspaceFolder}\\dotnet\\updateGitLogInHtmlFile.js",
+			"request": "launch",
+			"runtimeArgs": [ "--experimental-modules" ],
+			"type": "node"
+		}
+	],
+	"version": "0.2.0"
+}

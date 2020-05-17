@@ -1,26 +1,14 @@
-import "../array-flat-polyfill.js";
-
-fetch("./git-log.txt")
-.then(response => response.text())
-.then(setHtmlFromLog);
-
-function setHtmlFromLog(
-	log,
-) {
-	return (
-		setHtmlFromCommits(
-			[
-				...getHtmlFragmentsFromCommitMessagesByDates(
-					new Map(
-						getCommitsFromLog(log)
-						.map(getKeyValueFromCommit),
-					),
+export default
+	log =>
+		[
+			...getHtmlFragmentsFromCommitMessagesByDates(
+				new Map(
+					getCommitsFromLog(log)
+					.map(getKeyValueFromCommit),
 				),
-			]
-			.join("")
-		)
-	);
-}
+			),
+		]
+		.join("");
 
 function getCommitsFromLog(
 	log,
@@ -58,10 +46,4 @@ function * getHtmlFragmentsFromCommitMessagesByDates(
 ) {
 	for (const [ date, messages ] of messagesByDates)
 		yield `<p>${[ date, ...messages ].join("<br/>")}</p>`;
-}
-
-function setHtmlFromCommits(
-	commits,
-) {
-	document.getElementById("git-log").innerHTML = commits;
 }

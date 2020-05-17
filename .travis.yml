@@ -1,8 +1,11 @@
 cache: { directories: [ node_modules ] }
 language: node_js
-node_js: "10"
+node_js: 12.16
 notifications:
   email:
     on_success: never
     on_failure: always
-script: bash ./spellcheck.sh
+script:
+  - bash ./spellcheck.sh
+  - (cd dotnet && node --experimental-modules updateGitLogInHtmlFile.js)
+  - bash ./git-push-generated-content.sh $GITHUB_HARNESSES_TOKEN
