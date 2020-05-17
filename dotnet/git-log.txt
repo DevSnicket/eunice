@@ -35,7 +35,7 @@ file-system tests fail with full test case path, actual and expected
 
 ---
 2020-05-13
-standardised on singluar test case names
+standardized on singular test case names
 
 ---
 2020-05-12
