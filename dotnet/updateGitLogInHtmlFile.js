@@ -1,15 +1,15 @@
 import formatHtmlForGitLog from "./formatHtmlForGitLog.js";
-import { readTextFile, updateParagraphInHtmlIndexFile } from "../textFiles.js";
+import { readTextFile, updateInHtmlIndexFile } from "../textFiles.js";
 
 readTextFile(
 	"./git-log.txt",
 	log =>
-		updateParagraphInHtmlIndexFile({
+		updateInHtmlIndexFile({
 			content:
 				formatHtmlForGitLog(
 					log,
 				),
-			paragraphIdentifier:
-				"git-log",
+			tag:
+				"gitLog",
 		}),
 );

@@ -2,9 +2,9 @@ import fileSystem from "fs";
 
 const encoding = "utf-8";
 
-export function updateParagraphInHtmlIndexFile({
+export function updateInHtmlIndexFile({
 	content,
-	paragraphIdentifier,
+	tag,
 }) {
 	const pageFilePath = "./index.html";
 
@@ -14,7 +14,7 @@ export function updateParagraphInHtmlIndexFile({
 			fileSystem.writeFileSync(
 				pageFilePath,
 				pageHtml.replace(
-					new RegExp(`(?<=<p id="${paragraphIdentifier}">).*(?=<\/p>)`),
+					new RegExp(`(?<=<${tag} id=".*">).*(?=<\/${tag}>)`),
 					content,
 				),
 				encoding,

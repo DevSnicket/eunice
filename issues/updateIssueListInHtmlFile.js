@@ -1,7 +1,7 @@
 import formatHtmlForIssues from "./formatHtmlForIssues.js";
 import githubIssuesUrl from "./githubIssuesUrl.js";
 import https from "https";
-import { updateParagraphInHtmlIndexFile } from "../textFiles.js";
+import { updateInHtmlIndexFile } from "../textFiles.js";
 
 https.get(
 	{
@@ -21,13 +21,13 @@ https.get(
 		result.on(
 			"end",
 			() =>
-				updateParagraphInHtmlIndexFile({
+				updateInHtmlIndexFile({
 					content:
 						formatHtmlForIssues(
 							JSON.parse(body),
 						),
-					paragraphIdentifier:
-						"issues-list",
+					tag:
+						"issuesList",
 				}),
 		);
 	}
