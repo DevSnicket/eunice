@@ -1,27 +1,23 @@
 import "../array-flat-polyfill.js";
 
-fetch("https://api.github.com/repos/devsnicket/eunice/issues")
-.then(response => response.json())
-.then(setHtmlFromIssues);
-
-function setHtmlFromIssues(
-	issues,
-) {
-	setIssueListHtml(
+export default
+	issues =>
 		getHtmlForIssues(
 			orderIssuesByNumber(
-				getIssuesByNumber(),
+				getIssuesByNumber(
+					issues,
+				),
 			),
-		),
-	);
-
-	function getIssuesByNumber() {
-		return (
-			new Map(
-				issues.map(issue => [ issue.number, issue ]),
-			)
 		);
-	}
+
+function getIssuesByNumber(
+	issues,
+) {
+	return (
+		new Map(
+			issues.map(issue => [ issue.number, issue ]),
+		)
+	);
 }
 
 function orderIssuesByNumber(
@@ -62,10 +58,4 @@ function getHtmlForIssue(
 	issue,
 ) {
 	return `<li><a href="${issue.html_url}" rel="noopener" target="_blank">${issue.title}</a></li>`;
-}
-
-function setIssueListHtml(
-	html,
-) {
-	document.getElementById("issues-list").innerHTML = html;
 }
