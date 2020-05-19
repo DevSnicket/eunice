@@ -15,6 +15,14 @@
 			"request": "launch",
 			"runtimeArgs": [ "--experimental-modules" ],
 			"type": "node"
+		},
+		{
+			"cwd": "${workspaceFolder}\\javascript\\releases",
+			"name": "javascript releases updateReleasesListInHtmlFile",
+			"program": "${workspaceFolder}\\javascript\\releases\\updateReleasesListInHtmlFile.js",
+			"request": "launch",
+			"runtimeArgs": [ "--experimental-modules" ],
+			"type": "node"
 		}
 	],
 	"version": "0.2.0"

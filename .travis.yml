@@ -9,4 +9,5 @@ script:
   - bash ./spellcheck.sh
   - (cd dotnet && node --experimental-modules updateGitLogInHtmlFile.js)
   - (cd issues && node --experimental-modules updateIssueListInHtmlFile.js)
+  - (cd javascript/releases && node --experimental-modules updateReleasesListInHtmlFile.js)
   - bash ./git-push-generated-content.sh $GITHUB_HARNESSES_TOKEN

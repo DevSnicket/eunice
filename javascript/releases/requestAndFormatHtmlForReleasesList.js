@@ -1,46 +1,38 @@
-import "../../array-flat-polyfill.js";
+export default requestJsonFromUrl =>
+	requestIssuesWithVersions(requestJsonFromUrl)
+	.then(getHtmlForIssues)
 
-fetchJson("https://api.github.com/search/issues?q=released%20in%20javascript+repo:devsnicket/eunice+in:comments")
-.then(setHtmlFromSearchResults);
-
-function setHtmlFromSearchResults({
-	items,
-}) {
-	Promise.all(items.map(addVersionToIssue))
-	.then(
-		issues =>
-			setListHtml(
-				getHtmlForReleases(
-					getReleasesForIssues(issues)
-					.sort(compareRelease),
-				),
-			)
-	);
-}
-
-function addVersionToIssue({
-	comments_url,
-	html_url,
-	title,
-}) {
+function requestIssuesWithVersions(
+	requestJsonFromUrl,
+) {
 	return (
-		fetchJson(comments_url)
+		requestJsonFromUrl(
+			"https://api.github.com/search/issues?q=released%20in%20javascript+repo:devsnicket/eunice+in:comments",
+		)
 		.then(
-			comments => (
-				{
-					...getDateAndVersionFromComments(comments),
-					html_url,
-					title,
-				}
-			),
+			({ items }) =>
+				Promise.all(items.map(addVersionToIssue))
 		)
 	);
-}
 
-function fetchJson(
-	url,
-) {
-	return fetch(url).then(response => response.json());
+	function addVersionToIssue({
+		comments_url,
+		html_url,
+		title,
+	}) {
+		return (
+			requestJsonFromUrl(comments_url)
+			.then(
+				comments => (
+					{
+						...getDateAndVersionFromComments(comments),
+						html_url,
+						title,
+					}
+				),
+			)
+		);
+	}
 }
 
 function getDateAndVersionFromComments(
@@ -53,6 +45,17 @@ function getDateAndVersionFromComments(
 				||
 				getDateAndVersionFromCommentWhenRelease(comment),
 			null,
+		)
+	);
+}
+
+function getHtmlForIssues(
+	issues,
+) {
+	return (
+		getHtmlForReleases(
+			getReleasesForIssues(issues)
+			.sort(compareRelease),
 		)
 	);
 }
@@ -172,10 +175,4 @@ function getHtmlForIssue({
 	title,
 }) {
 	return `<div><a href="${html_url}" rel="noopener" target="_blank">${title}</a></div>`;
-}
-
-function setListHtml(
-	html,
-) {
-	document.getElementById("releases-list").innerHTML = html;
 }
