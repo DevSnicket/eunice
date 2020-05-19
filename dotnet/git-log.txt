@@ -1,4 +1,8 @@
 ---
+2020-05-19
+dependencies on nested classes include parent
+
+---
 2020-05-16
 Git log on website
 publicly show development progress before first release
