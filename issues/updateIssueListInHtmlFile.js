@@ -4,10 +4,8 @@ import https from "https";
 import { updateInHtmlIndexFile } from "../textFiles.js";
 
 https.get(
-	{
-		...githubIssuesUrl,
-		headers: { "User-Agent": "Mozilla/5.0" },
-	},
+	githubIssuesUrl,
+	{ headers: { "User-Agent": "Mozilla/5.0" } },
 	result => {
 		result.setEncoding("utf8");
 		

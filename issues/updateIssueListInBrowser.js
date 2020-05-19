@@ -1,7 +1,7 @@
 import formatHtmlForIssues from "./formatHtmlForIssues.js";
 import githubIssuesUrl from "./githubIssuesUrl.js";
 
-fetch(githubIssuesUrl.absolute)
+fetch(githubIssuesUrl)
 .then(response => response.json())
 .then(setHtmlFromIssues);
 
