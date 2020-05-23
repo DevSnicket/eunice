@@ -1,5 +1,14 @@
 ---
 2020-05-23
+assembly paths in a directory are sorted
+avoids inconsistencies between file and operating systems
+
+---
+2020-05-23
+analysis of directories
+
+---
+2020-05-23
 yaml output line by line
 
 ---
