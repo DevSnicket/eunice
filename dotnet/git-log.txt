@@ -1,4 +1,21 @@
 ---
+2020-05-23
+assembly files are read asynchronously
+
+---
+2020-05-22
+casting of classes
+
+---
+2020-05-22
+file analysis as an executable
+
+---
+2020-05-22
+field references
+dependencies on the field added, but not its type
+
+---
 2020-05-19
 dependencies on nested classes include parent
 
