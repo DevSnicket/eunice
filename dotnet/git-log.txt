@@ -1,5 +1,9 @@
 ---
 2020-05-23
+yaml output line by line
+
+---
+2020-05-23
 C# test projects built in parallel
 
 ---
