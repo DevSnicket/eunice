@@ -1,5 +1,9 @@
 ---
 2020-05-23
+C# test projects built in parallel
+
+---
+2020-05-23
 assembly files are read asynchronously
 
 ---
