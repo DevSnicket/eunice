@@ -1,10 +1,13 @@
+import "../array-flat-polyfill.js";
+import groupBy from "./lodash/groupBy.js";
+
 export default
 	log =>
 		[
-			...getHtmlFragmentsFromCommitMessagesByDates(
-				new Map(
-					getCommitsFromLog(log)
-					.map(getKeyValueFromCommit),
+			...getHtmlFragmentsFromCommitsByDates(
+				groupBy(
+					getCommitsFromLog(log),
+					"date"
 				),
 			),
 		]
@@ -17,33 +20,58 @@ function getCommitsFromLog(
 		log
 		.split("---\n")
 		.filter(commit => commit)
+		.map(getCommitFromLog)
 	);
 }
 
-function getKeyValueFromCommit(
+function getCommitFromLog(
 	commit,
 ) {
 	return (
-		getKeyValueFromCommitLines(
+		getCommitFromLines(
 			commit.split("\n"),
 		)
 	);
 }
 
-function getKeyValueFromCommitLines(
+function getCommitFromLines(
 	[ date, ...messageLines ],
 ) {
 	return (
-		[
+		{
 			date,
-			messageLines.filter(line => line),
-		]
+			messageLines: messageLines.filter(line => line),
+		}
 	);
 }
 
-function * getHtmlFragmentsFromCommitMessagesByDates(
-	messagesByDates,
+function getHtmlFragmentsFromCommitsByDates(
+	commitsByDates,
 ) {
-	for (const [ date, messages ] of messagesByDates)
-		yield `<p>${[ date, ...messages ].join("<br/>")}</p>`;
+	return (
+		Object.entries(commitsByDates)
+		.flatMap(
+			([ date, commits ]) =>
+				[
+					date,
+					`<blockquote>${getHtmlForCommitMessages(commits)}</blockquote>`,
+				]
+		)
+	);
+}
+
+function getHtmlForCommitMessages(
+	commits,
+) {
+	return (
+		commits
+		.map(getHtmlForCommit)
+		.join("")
+	);
+}
+
+function getHtmlForCommit({
+	messageLines,
+}) {
+	return `<p>${messageLines.join("<br/>")}</p>`;
 }
