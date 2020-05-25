@@ -1,4 +1,8 @@
 ---
+2020-05-25
+test case variable declaration class named to match more descriptive file name
+
+---
 2020-05-23
 assembly paths in a directory are sorted
 avoids inconsistencies between file and operating systems
