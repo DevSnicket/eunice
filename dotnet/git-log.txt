@@ -1,5 +1,9 @@
 ---
 2020-05-25
+added spellcheck
+
+---
+2020-05-25
 test case variable declaration class named to match more descriptive file name
 
 ---
