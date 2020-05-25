@@ -130,7 +130,7 @@ generic arguments
 
 ---
 2020-05-11
-teset cases for generic parameters on classes
+test cases for generic parameters on classes
 
 ---
 2020-05-11
@@ -144,7 +144,7 @@ makes visual comparison of actual and expected easier
 
 ---
 2020-05-10
-parameterized contructors
+parameterized constructors
 
 ---
 2020-05-10
@@ -238,7 +238,7 @@ added test for interfaces
 2020-05-06
 added test for yaml empty block sequences
 pattern for empty cannot to be ignored in isolation from code coverage
-not including pattern and supressing F# warning still generates CIL that is detected by code coverage
+not including pattern and suppressing F# warning still generates CIL that is detected by code coverage
 
 ---
 2020-05-06
