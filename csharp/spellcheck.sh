@@ -1,0 +1,1 @@
+find . -type f \( -name "*.fs" \) ! -path "**/obj/**" -exec npx cspell@4.0.30 {} +
