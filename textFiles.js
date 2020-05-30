@@ -14,7 +14,7 @@ export function updateInHtmlIndexFile({
 			fileSystem.writeFileSync(
 				pageFilePath,
 				pageHtml.replace(
-					new RegExp(`(?<=<${tag} id=".*">).*(?=<\/${tag}>)`),
+					new RegExp(`(?<=<${tag}.*>).*(?=<\/${tag}>)`),
 					content,
 				),
 				encoding,
