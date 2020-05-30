@@ -1,0 +1,20 @@
+pool:
+  name: $(pool_name)
+  vmImage: 'ubuntu-latest'
+steps:
+  - task: UseDotNet@2
+    displayName: .NET Core 3.1.x
+    inputs:
+      version: 3.1.x
+      packageType: sdk
+  - task: NodeTool@0
+    displayName: Node install
+    inputs: { versionSpec: '10.x' }
+  - task: ShellScript@2
+    displayName: spellcheck
+    inputs: { scriptPath: spellcheck.sh }
+  - task: ShellScript@2
+    displayName: test
+    inputs: { scriptPath: test.sh }
+trigger: [ master ]
+workspace: { clean: all }
