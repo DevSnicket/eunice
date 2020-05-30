@@ -1,3 +1,5 @@
+#!/bin/bash
+
 mkdir website
 mkdir website/csharp
 
