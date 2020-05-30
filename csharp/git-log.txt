@@ -1,5 +1,17 @@
 ---
 2020-05-30
+website updates of Git log
+
+---
+2020-05-30
+Azure pipelines configuration
+
+---
+2020-05-30
+code coverage of nothing doesn't raise error
+
+---
+2020-05-30
 Git log written to text file
 
 ---
