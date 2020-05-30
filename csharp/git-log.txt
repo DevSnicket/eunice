@@ -1,0 +1,24 @@
+---
+2020-05-30
+Git log written to text file
+
+---
+2020-05-30
+spellcheck
+
+---
+2020-05-30
+unit tests and code coverage
+
+---
+2020-05-30
+VS Code Ionide extension Git ignore
+
+---
+2020-05-30
+created project for implementation
+configured to build an executable
+
+---
+2020-05-30
+VS Code file format settings
