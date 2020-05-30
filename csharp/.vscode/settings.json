@@ -1,5 +1,8 @@
 {
-	"cSpell.enabledLanguageIds": [ "fsharp" ],
+	"cSpell.enabledLanguageIds": [
+		"fsharp",
+		"plaintext"
+	],
 	"files.eol": "\n",
 	"[fsharp]": {
 		"editor.tabSize": 4,
