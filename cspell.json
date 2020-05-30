@@ -1,19 +1,20 @@
 {
-    "version": "0.1",
-    "language": "en",
-    "words": [
-        "altcover",
-        "codebases",
-        "composability",
-        "dangerfile",
-        "decompile",
-        "devsnicket",
-        "devtools",
-        "dogfooding",
-        "hackernoon",
-        "noopener",
-        "react's",
-        "pollyjs",
-        "runtimes"
-    ]
+	"version": "0.1",
+	"language": "en",
+	"words": [
+		"altcover",
+		"codebases",
+		"composability",
+		"dangerfile",
+		"decompile",
+		"devsnicket",
+		"devtools",
+		"dogfooding",
+		"hackernoon",
+		"ionide",
+		"noopener",
+		"react's",
+		"pollyjs",
+		"runtimes"
+	]
 }
