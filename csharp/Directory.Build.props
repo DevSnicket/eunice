@@ -1,0 +1,7 @@
+<Project>
+	<PropertyGroup>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+	</PropertyGroup>
+</Project>

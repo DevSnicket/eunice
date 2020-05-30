@@ -1,11 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<OutputType>Exe</OutputType>
-		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
-		<TargetFramework>netcoreapp3.1</TargetFramework>
 	</PropertyGroup>
 	<ItemGroup>
-		<Compile Include="Program.fs" />
+		<Compile Include="ExecuteProgram/.fs" />
 	</ItemGroup>
 </Project>
