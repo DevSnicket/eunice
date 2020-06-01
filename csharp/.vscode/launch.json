@@ -1,0 +1,27 @@
+{
+	"configurations": [
+		{
+			"args": [ "AnalyzeProjectPath/Tests/TestCases/Class/Empty/TestCase.csproj" ],
+			"justMyCode": false,
+			"name": "program",
+			"program": "${workspaceFolder}/bin/Debug/DevSnicket.Eunice.dll",
+			"request": "launch",
+			"requireExactSource": false,
+			"type": "coreclr"
+		},
+		{
+			"args": [
+				"DevSnicket.Eunice.Tests.dll",
+				"-nologo"
+			],
+			"cwd": "${workspaceFolder}/Tests/bin/Debug",
+			"justMyCode": false,
+			"name": "tests",
+			"program": "xunit.console.dll",
+			"request": "launch",
+			"requireExactSource": false,
+			"type": "coreclr"
+		}
+	],
+	"version": "0.2.0"
+}

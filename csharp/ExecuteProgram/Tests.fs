@@ -1,10 +1,10 @@
-module DevSnicket.Eunice.ExecuteProgram.Test
+module DevSnicket.Eunice.ExecuteProgram.Tests
 
 open DevSnicket.Eunice.ExecuteProgram
 
 [<Xunit.Fact>]
-let emptyArgumentsAnalysePathNotInvokedReturnsExitCodeOfFailAndLinesOfErrorMessage () =
-    let mutable analysePathInvoked = false
+let emptyArgumentsAnalyzePathNotInvokedReturnsExitCodeOfFailAndLinesOfErrorMessage () =
+    let mutable analyzePathInvoked = false
 
     let
         {
@@ -12,28 +12,28 @@ let emptyArgumentsAnalysePathNotInvokedReturnsExitCodeOfFailAndLinesOfErrorMessa
             Lines = lines
         }
         =
-        analyseArgumentsIntoExitCodeAndOutputLines
+        analyzeArgumentsIntoExitCodeAndOutputLines
             {|
-                AnalysePath = (fun _ -> analysePathInvoked <- true)
+                AnalyzePath = (fun _ -> analyzePathInvoked <- true; seq [])
                 Arguments = [| |]
             |}
 
     Xunit.Assert.Equal (
         {|
-            AnalysePathInvoked = false
+            AnalyzePathInvoked = false
             ExitCode = 1
             Lines = seq [ zeroOrManyArgumentsErrorMessage ]
         |},
         {|
-            AnalysePathInvoked = analysePathInvoked
+            AnalyzePathInvoked = analyzePathInvoked
             ExitCode = exitCode
             Lines = lines
         |}
     )
 
 [<Xunit.Fact>]
-let twoArgumentsAnalysePathNotInvokedReturnsExitCodeOfFailAndLinesOfErrorMessage () =
-    let mutable analysePathInvoked = false
+let twoArgumentsAnalyzePathNotInvokedReturnsExitCodeOfFailAndLinesOfErrorMessage () =
+    let mutable analyzePathInvoked = false
 
     let
         {
@@ -41,29 +41,30 @@ let twoArgumentsAnalysePathNotInvokedReturnsExitCodeOfFailAndLinesOfErrorMessage
             Lines = lines
         }
         =
-        analyseArgumentsIntoExitCodeAndOutputLines
+        analyzeArgumentsIntoExitCodeAndOutputLines
             {|
-                AnalysePath = (fun _ -> analysePathInvoked <- true)
+                AnalyzePath = (fun _ -> analyzePathInvoked <- true; seq [])
                 Arguments = [| "argument1"; "argument2" |]
             |}
 
     Xunit.Assert.Equal (
         {|
-            AnalysePathInvoked = false
+            AnalyzePathInvoked = false
             ExitCode = 1
             Lines = seq [ zeroOrManyArgumentsErrorMessage ]
         |},
         {|
-            AnalysePathInvoked = analysePathInvoked
+            AnalyzePathInvoked = analyzePathInvoked
             ExitCode = exitCode
             Lines = lines
         |}
     )
 
 [<Xunit.Fact>]
-let oneArgumentsAnalysePathInvokedReturnsExitCodeOfSuccessAndNoLines () =
+let oneArgumentsAnalyzePathInvokedReturnsExitCodeOfSuccessAndNoLines () =
+    let analysisLines = seq [ "analysis output" ]
     let argument = "argument"
-    let mutable pathAnalysed = ""
+    let mutable pathAnalyzed = ""
 
     let
         {
@@ -71,21 +72,21 @@ let oneArgumentsAnalysePathInvokedReturnsExitCodeOfSuccessAndNoLines () =
             Lines = lines
         }
         =
-        analyseArgumentsIntoExitCodeAndOutputLines
+        analyzeArgumentsIntoExitCodeAndOutputLines
             {|
-                AnalysePath = (fun path -> pathAnalysed <- path)
+                AnalyzePath = (fun path -> pathAnalyzed <- path; analysisLines)
                 Arguments = [| argument |]
             |}
 
     Xunit.Assert.Equal (
         {|
             ExitCode = 0
-            Lines = seq [ ]
-            PathAnalysed = argument
+            Lines = analysisLines
+            PathAnalyzed = argument
         |},
         {|
             ExitCode = exitCode
             Lines = lines
-            PathAnalysed = pathAnalysed
+            PathAnalyzed = pathAnalyzed
         |}
     )

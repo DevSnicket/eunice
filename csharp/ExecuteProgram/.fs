@@ -1,5 +1,6 @@
 module rec DevSnicket.Eunice.ExecuteProgram
 
+open DevSnicket.Eunice.AnalyzeProjectPath
 open System
 
 type LinesAndStatus =
@@ -16,30 +17,32 @@ let executeProgram arguments =
             Lines = lines
         }
         =
-        analyseArgumentsIntoExitCodeAndOutputLines
+        analyzeArgumentsIntoExitCodeAndOutputLines
             {|
-                AnalysePath = (fun _ -> ())
-                Arguments = arguments
+                AnalyzePath =
+                    analyzeProjectPath
+                    >> Async.RunSynchronously
+                Arguments =
+                    arguments
             |}
 
     lines |> Seq.iter Console.WriteLine
 
     exitCode
 
-let analyseArgumentsIntoExitCodeAndOutputLines
+let analyzeArgumentsIntoExitCodeAndOutputLines
     (
         parameters:
             {|
-                AnalysePath: String -> unit
+                AnalyzePath: String -> String seq
                 Arguments: String array
             |}
     ) =
     match parameters.Arguments with
     | [| path |] ->
-        path |> parameters.AnalysePath
         {
             ExitCode = 0
-            Lines = seq []
+            Lines = path |> parameters.AnalyzePath
         }
     | _ ->
         {
