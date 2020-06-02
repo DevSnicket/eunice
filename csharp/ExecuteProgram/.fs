@@ -11,6 +11,9 @@ type LinesAndStatus =
 
 [<EntryPoint>]
 let executeProgram arguments =
+    Microsoft.Build.Locator.MSBuildLocator.RegisterDefaults ()
+    |> ignore
+
     let
         {
             ExitCode = exitCode
