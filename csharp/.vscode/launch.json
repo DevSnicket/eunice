@@ -1,7 +1,8 @@
 {
 	"configurations": [
 		{
-			"args": [ "AnalyzeProjectPath/Tests/TestCases/Class/Empty/TestCase.csproj" ],
+			//"args": [ "AnalyzeProjectPath/Tests/TestCases/Namespace/ParentNamespace/SingleClass/TestCase.csproj" ],
+			"args": [ "AnalyzeProjectPath/Tests/TestCases/Class/Empty/SingleInFile/TestCase.csproj" ],
 			"justMyCode": false,
 			"name": "program",
 			"program": "${workspaceFolder}/bin/Debug/DevSnicket.Eunice.dll",

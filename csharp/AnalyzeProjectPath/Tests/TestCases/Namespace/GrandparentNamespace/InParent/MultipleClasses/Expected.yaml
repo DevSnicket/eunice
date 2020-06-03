@@ -1,0 +1,6 @@
+﻿- id: GrandparentNamespace
+  items:
+    id: ParentNamespace
+    items:
+      - Class1
+      - Class2
