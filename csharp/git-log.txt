@@ -1,4 +1,22 @@
 ---
+2020-06-03
+namespaces
+
+---
+2020-06-02
+test case for multiple classes in same file
+
+---
+2020-06-02
+test case for multiple classes without namespaces
+
+---
+2020-06-02
+ MSBuild locator registration called once
+ previously called for each project
+ multiple registrations per process throws an exception
+
+---
 2020-06-01
  .NET Compiler Platform ("Roslyn") analysis of type names
 
