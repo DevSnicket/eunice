@@ -1,5 +1,9 @@
 ---
 2020-06-03
+test case for class nested in interface
+
+---
+2020-06-03
 test case for interfaces
 
 ---
