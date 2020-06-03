@@ -1,5 +1,9 @@
 ---
 2020-06-03
+test case of parameterless delegate with return of void
+
+---
+2020-06-03
 test case for enum
 
 ---
