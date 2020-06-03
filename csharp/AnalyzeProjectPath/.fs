@@ -30,18 +30,43 @@ let analyzeProjectPath projectPath =
 
 let createItemsFromMembersOfNamespace ``namespace`` =
      ``namespace``.GetMembers ()
-     |> Seq.map createItemFromNamespaceOrType
+     |> Seq.choose createItemWhenNamespaceOrType
 
-let createItemFromNamespaceOrType namespaceOrType =
+let createItemWhenNamespaceOrType namespaceOrType =
+     namespaceOrType
+     |> createItemWhenType
+     |> Option.orElse (namespaceOrType |> createItemWhenNamespace)
+
+let createItemWhenNamespace =
+     function
+     | :? INamespaceSymbol as ``namespace`` ->
+          Some (``namespace`` |> createItemFromNamespace)
+     | _ ->
+          None
+
+let createItemFromNamespace ``namespace`` =
      {
           Identifier =
-               namespaceOrType.Name
+               ``namespace``.Name
           Items =
-               match namespaceOrType with
-               | :? INamespaceSymbol as ``namespace`` ->
-                    ``namespace``
-                    |> createItemsFromMembersOfNamespace
-                    |> Seq.toList
-               | _ ->
-                    []
+               ``namespace``
+               |> createItemsFromMembersOfNamespace
+               |> Seq.toList
+     }
+
+let createItemWhenType: (ISymbol -> Item option) =
+     function
+     | :? ITypeSymbol as ``type`` ->
+          Some (``type`` |> createItemFromType)
+     | _ ->
+          None
+
+let createItemFromType ``type`` =
+     {
+          Identifier =
+               ``type``.Name
+          Items =
+               ``type``.GetMembers ()
+               |> Seq.choose createItemWhenType
+               |> Seq.toList
      }
