@@ -1,0 +1,4 @@
+﻿- id: Class
+  items:
+    id: ParentNestedClass
+    items: ChildNestedClass
