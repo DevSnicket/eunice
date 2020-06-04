@@ -1,4 +1,4 @@
-module rec DevSnicket.Eunice._AnalyzeProjectPath._CreateDependsUponFromTypes.CreateDependUponFromType
+module rec DevSnicket.Eunice._AnalyzeProjectPath.CreateDependUponFromType
 
 open DevSnicket.Eunice._AnalyzeProjectPath
 open Microsoft.CodeAnalysis

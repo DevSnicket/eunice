@@ -1,0 +1,3 @@
+﻿- ConstraintInterface
+- id: Interface`1
+  dependsUpon: ConstraintInterface

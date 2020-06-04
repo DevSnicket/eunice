@@ -1,0 +1,3 @@
+﻿- id: Class`1
+  dependsUpon: ConstraintClass
+- ConstraintClass

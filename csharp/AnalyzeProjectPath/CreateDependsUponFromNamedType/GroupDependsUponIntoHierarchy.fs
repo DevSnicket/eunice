@@ -1,4 +1,4 @@
-module rec DevSnicket.Eunice._AnalyzeProjectPath._CreateDependsUponFromTypes.GroupDependsUponIntoHierarchy
+module rec DevSnicket.Eunice._AnalyzeProjectPath._CreateDependsUponFromNamedType.GroupDependsUponIntoHierarchy
 
 open DevSnicket.Eunice._AnalyzeProjectPath
 

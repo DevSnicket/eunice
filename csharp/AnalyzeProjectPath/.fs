@@ -1,8 +1,8 @@
 module rec DevSnicket.Eunice.AnalyzeProjectPath
 
 open DevSnicket.Eunice._AnalyzeProjectPath
-open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromTypes
-open DevSnicket.Eunice._AnalyzeProjectPath._CreateDependsUponFromTypes.CreateDependUponFromType
+open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromNamedType
+open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependUponFromType
 open DevSnicket.Eunice._AnalyzeProjectPath.FormatItemsAsYaml
 open Microsoft.CodeAnalysis
 
@@ -75,11 +75,7 @@ let createItemFromType ``type`` =
 let createItemFromClassOrInterfaceOrStruct ``type`` =
      {
           DependsUpon =
-               seq [
-                    yield! ``type``.BaseType |> Option.ofObj |> Option.toList
-                    yield! ``type``.Interfaces
-               ]
-               |> createDependsUponFromTypes
+               ``type`` |> createDependsUponFromNamedType
           Identifier =
                ``type``.MetadataName
           Items =
