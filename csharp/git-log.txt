@@ -1,5 +1,9 @@
 ---
 2020-06-04
+generic parameter constraint types
+
+---
+2020-06-04
 generic type arguments
 
 ---
