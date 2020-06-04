@@ -1,5 +1,17 @@
 ---
 2020-06-04
+test case of nested class in nested class
+
+---
+2020-06-04
+added "parameterless" to spellcheck dictionary
+
+---
+2020-06-04
+hierarchy of dependencies in same namespace or type
+
+---
+2020-06-04
 namespaces and types sorted by identifier
 previous implicit order was by filename
 
