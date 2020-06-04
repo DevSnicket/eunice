@@ -32,6 +32,7 @@ let analyzeProjectPath projectPath =
 let createItemsFromMembersOfNamespace ``namespace`` =
      ``namespace``.GetMembers ()
      |> Seq.choose createItemWhenNamespaceOrType
+     |> Seq.sortBy (fun item -> item.Identifier)
 
 let createItemWhenNamespaceOrType namespaceOrType =
      namespaceOrType
