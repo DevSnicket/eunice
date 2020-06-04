@@ -81,7 +81,7 @@ let createItemFromClassOrInterfaceOrStruct ``type`` =
                ]
                |> createDependsUponFromTypes
           Identifier =
-               ``type``.Name
+               ``type``.MetadataName
           Items =
                ``type``.GetMembers ()
                |> Seq.choose createItemWhenFieldOrType
