@@ -1,5 +1,9 @@
 ---
 2020-06-04
+test case of base class and interface in difference namespaces
+
+---
+2020-06-04
 base interfaces
 
 ---
