@@ -1,0 +1,3 @@
+namespace InterfaceNamespace {
+	interface Interface { }
+}
