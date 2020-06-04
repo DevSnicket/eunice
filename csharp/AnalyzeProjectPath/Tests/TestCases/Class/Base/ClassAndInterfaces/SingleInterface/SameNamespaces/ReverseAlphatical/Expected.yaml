@@ -1,0 +1,10 @@
+﻿- id: DerivedClass
+  dependsUpon:
+    id: Namespace
+    items:
+      - AInterface
+      - BaseClass
+- id: Namespace
+  items:
+    - AInterface
+    - BaseClass

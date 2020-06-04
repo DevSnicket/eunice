@@ -10,7 +10,9 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Include="AnalyzeProjectPath/DependUpon.fs" />
-		<Compile Include="AnalyzeProjectPath/CreateDependsUponFromTypes.fs" />
+		<Compile Include="AnalyzeProjectPath/CreateDependsUponFromTypes/CreateDependUponFromType.fs" />
+		<Compile Include="AnalyzeProjectPath/CreateDependsUponFromTypes/GroupDependsUponIntoHierarchy.fs" />
+		<Compile Include="AnalyzeProjectPath/CreateDependsUponFromTypes/.fs" />
 		<Compile Include="AnalyzeProjectPath/Item.fs" />
 		<Compile Include="AnalyzeProjectPath/FormatItemsAsYaml/IndentLines.fs" />
 		<Compile Include="AnalyzeProjectPath/FormatItemsAsYaml/SequenceBlockEntryFromLines/.fs" />

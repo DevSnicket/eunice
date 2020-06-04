@@ -1,0 +1,1 @@
+class DerivedClass : Namespace.BaseClass, Namespace.BaseClass.Interface { }

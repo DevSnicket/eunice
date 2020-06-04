@@ -1,15 +1,9 @@
-module rec DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromTypes
+module rec DevSnicket.Eunice._AnalyzeProjectPath._CreateDependsUponFromTypes.CreateDependUponFromType
 
 open DevSnicket.Eunice._AnalyzeProjectPath
 open Microsoft.CodeAnalysis
 
-let createDependsUponFromTypes (types: INamedTypeSymbol seq) =
-     types
-     |> Seq.choose createDependUponFromType
-     |> Seq.sortBy (fun dependUpon -> dependUpon.Identifier)
-     |> Seq.toList
-
-let createDependUponFromType ``type`` =
+let createDependUponFromType (``type``: INamedTypeSymbol) =
      match ``type``.SpecialType with
      | SpecialType.None ->
           Some (
@@ -23,7 +17,7 @@ let createDependUponFromType ``type`` =
      | _ ->
           None
 
-let createDependUponAncestors (symbol: ISymbol) item =
+let private createDependUponAncestors (symbol: ISymbol) item =
      match symbol.ContainingSymbol.Name with
      | "" ->
           item
