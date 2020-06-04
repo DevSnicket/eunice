@@ -1,6 +1,7 @@
 module rec DevSnicket.Eunice.AnalyzeProjectPath
 
 open DevSnicket.Eunice._AnalyzeProjectPath
+open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromTypes
 open DevSnicket.Eunice._AnalyzeProjectPath.FormatItemsAsYaml
 open Microsoft.CodeAnalysis
 
@@ -66,8 +67,11 @@ let createItemWhenType: (ISymbol -> Item option) =
 let createItemFromType ``type`` =
      {
           DependsUpon =
-               ``type``.BaseType
-               |> createDependsUponFromBaseType
+               seq [
+                    if not <| isNull ``type``.BaseType then yield ``type``.BaseType
+                    yield! ``type``.Interfaces
+               ]
+               |> createDependsUponFromTypes
           Identifier =
                ``type``.Name
           Items =
@@ -75,31 +79,3 @@ let createItemFromType ``type`` =
                |> Seq.choose createItemWhenType
                |> Seq.toList
      }
-
-let createDependsUponFromBaseType =
-     function
-     | null ->
-          []
-     | baseType ->
-          match baseType.SpecialType with
-          | SpecialType.None ->
-               createDependsUponAncestors
-                    baseType
-                    [ {
-                         Identifier = baseType.Name
-                         Items = []
-                    } ]
-          | _ ->
-               []
-
-let createDependsUponAncestors (symbol: ISymbol) items =
-     match symbol.ContainingSymbol.Name with
-     | "" ->
-          items
-     | _ ->
-          createDependsUponAncestors
-               symbol.ContainingSymbol
-               [ {
-                    Identifier = symbol.ContainingSymbol.Name;
-                    Items = items
-               } ]

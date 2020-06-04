@@ -1,0 +1,6 @@
+﻿- BaseClass
+- id: DerivedClass
+  dependsUpon:
+    - BaseClass
+    - Interface
+- Interface

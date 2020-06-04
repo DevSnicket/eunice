@@ -1,0 +1,3 @@
+﻿- id: Class
+  dependsUpon: Interface
+- Interface
