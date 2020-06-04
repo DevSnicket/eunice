@@ -1,5 +1,9 @@
 ---
 2020-06-04
+added "arity" to spellcheck dictionary
+
+---
+2020-06-04
 generic parameter constraint types
 
 ---
