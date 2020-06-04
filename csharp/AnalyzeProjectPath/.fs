@@ -2,6 +2,7 @@ module rec DevSnicket.Eunice.AnalyzeProjectPath
 
 open DevSnicket.Eunice._AnalyzeProjectPath
 open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromTypes
+open DevSnicket.Eunice._AnalyzeProjectPath._CreateDependsUponFromTypes.CreateDependUponFromType
 open DevSnicket.Eunice._AnalyzeProjectPath.FormatItemsAsYaml
 open Microsoft.CodeAnalysis
 
@@ -34,17 +35,12 @@ let createItemsFromMembersOfNamespace ``namespace`` =
      |> Seq.choose createItemWhenNamespaceOrType
      |> Seq.sortBy (fun item -> item.Identifier)
 
-let createItemWhenNamespaceOrType namespaceOrType =
-     namespaceOrType
-     |> createItemWhenType
-     |> Option.orElse (namespaceOrType |> createItemWhenNamespace)
-
-let createItemWhenNamespace =
+let createItemWhenNamespaceOrType =
      function
      | :? INamespaceSymbol as ``namespace`` ->
           Some (``namespace`` |> createItemFromNamespace)
-     | _ ->
-          None
+     | ``type`` ->
+          ``type`` |> createItemWhenType
 
 let createItemFromNamespace ``namespace`` =
      {
@@ -60,16 +56,27 @@ let createItemFromNamespace ``namespace`` =
 
 let createItemWhenType: (ISymbol -> Item option) =
      function
-     | :? ITypeSymbol as ``type`` ->
+     | :? INamedTypeSymbol as ``type`` ->
           Some (``type`` |> createItemFromType)
      | _ ->
           None
 
 let createItemFromType ``type`` =
+     match ``type``.EnumUnderlyingType with
+     | null ->
+          ``type`` |> createItemFromClassOrInterfaceOrStruct
+     | _ ->
+          {
+               DependsUpon = []
+               Identifier = ``type``.Name
+               Items = []
+          }
+
+let createItemFromClassOrInterfaceOrStruct ``type`` =
      {
           DependsUpon =
                seq [
-                    if not <| isNull ``type``.BaseType then yield ``type``.BaseType
+                    yield! ``type``.BaseType |> Option.ofObj |> Option.toList
                     yield! ``type``.Interfaces
                ]
                |> createDependsUponFromTypes
@@ -77,6 +84,25 @@ let createItemFromType ``type`` =
                ``type``.Name
           Items =
                ``type``.GetMembers ()
-               |> Seq.choose createItemWhenType
+               |> Seq.choose createItemWhenFieldOrType
                |> Seq.toList
+     }
+
+let createItemWhenFieldOrType =
+     function
+     | :? IFieldSymbol as field ->
+          Some (field |> createItemFromField)
+     | ``member`` ->
+          ``member`` |> createItemWhenType
+
+let createItemFromField field =
+     {
+          DependsUpon =
+               field.Type
+               |> createDependUponFromType
+               |> Option.toList
+          Identifier =
+               field.Name
+          Items =
+               []
      }

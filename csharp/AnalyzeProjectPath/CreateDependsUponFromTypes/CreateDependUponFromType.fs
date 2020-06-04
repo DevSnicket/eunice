@@ -3,7 +3,7 @@ module rec DevSnicket.Eunice._AnalyzeProjectPath._CreateDependsUponFromTypes.Cre
 open DevSnicket.Eunice._AnalyzeProjectPath
 open Microsoft.CodeAnalysis
 
-let createDependUponFromType (``type``: INamedTypeSymbol) =
+let createDependUponFromType (``type``: ITypeSymbol) =
      match ``type``.SpecialType with
      | SpecialType.None ->
           Some (

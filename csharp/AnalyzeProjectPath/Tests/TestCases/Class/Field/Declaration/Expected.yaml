@@ -1,0 +1,5 @@
+﻿- id: Class
+  items:
+    id: _field
+    dependsUpon: FieldClass
+- FieldClass
