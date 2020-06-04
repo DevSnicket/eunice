@@ -10,7 +10,7 @@ let createDependUponFromType (``type``: ITypeSymbol) =
                createDependUponAncestors
                     ``type``
                     {
-                         Identifier = ``type``.Name
+                         Identifier = ``type``.MetadataName
                          Items = []
                     }
           )
