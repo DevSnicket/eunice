@@ -9,10 +9,12 @@
 		<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="3.6.0" />
 	</ItemGroup>
 	<ItemGroup>
+		<Compile Include="AnalyzeProjectPath/DependUpon.fs" />
 		<Compile Include="AnalyzeProjectPath/Item.fs" />
 		<Compile Include="AnalyzeProjectPath/FormatItemsAsYaml/IndentLines.fs" />
 		<Compile Include="AnalyzeProjectPath/FormatItemsAsYaml/SequenceBlockEntryFromLines/.fs" />
 		<Compile Include="AnalyzeProjectPath/FormatItemsAsYaml/FormatKeyValueLinesMapping.fs" />
+		<Compile Include="AnalyzeProjectPath/FormatItemsAsYaml/FormatDependsUponMapping.fs" />
 		<Compile Include="AnalyzeProjectPath/FormatItemsAsYaml/.fs" />
 		<Compile Include="AnalyzeProjectPath/.fs" />
 		<Compile Include="ExecuteProgram/.fs" />

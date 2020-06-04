@@ -46,6 +46,8 @@ let createItemWhenNamespace =
 
 let createItemFromNamespace ``namespace`` =
      {
+          DependsUpon =
+               []
           Identifier =
                ``namespace``.Name
           Items =
@@ -63,6 +65,9 @@ let createItemWhenType: (ISymbol -> Item option) =
 
 let createItemFromType ``type`` =
      {
+          DependsUpon =
+               ``type``.BaseType
+               |> createDependsUponFromBaseType
           Identifier =
                ``type``.Name
           Items =
@@ -70,3 +75,31 @@ let createItemFromType ``type`` =
                |> Seq.choose createItemWhenType
                |> Seq.toList
      }
+
+let createDependsUponFromBaseType =
+     function
+     | null ->
+          []
+     | baseType ->
+          match baseType.SpecialType with
+          | SpecialType.None ->
+               createDependsUponAncestors
+                    baseType
+                    [ {
+                         Identifier = baseType.Name
+                         Items = []
+                    } ]
+          | _ ->
+               []
+
+let createDependsUponAncestors (symbol: ISymbol) items =
+     match symbol.ContainingSymbol.Name with
+     | "" ->
+          items
+     | _ ->
+          createDependsUponAncestors
+               symbol.ContainingSymbol
+               [ {
+                    Identifier = symbol.ContainingSymbol.Name;
+                    Items = items
+               } ]

@@ -1,0 +1,6 @@
+﻿- id: BaseContainerClass
+  items: BaseClass
+- id: DerivedClass
+  dependsUpon:
+    id: BaseContainerClass
+    items: BaseClass

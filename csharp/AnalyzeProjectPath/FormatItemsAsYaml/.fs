@@ -1,6 +1,7 @@
 module rec DevSnicket.Eunice._AnalyzeProjectPath.FormatItemsAsYaml
 
 open DevSnicket.Eunice._AnalyzeProjectPath
+open DevSnicket.Eunice._AnalyzeProjectPath._FormatItemsAsYaml.FormatDependsUponMapping
 open DevSnicket.Eunice._AnalyzeProjectPath._FormatItemsAsYaml.FormatKeyValueLinesMapping
 open DevSnicket.Eunice._AnalyzeProjectPath._FormatItemsAsYaml.SequenceBlockEntryFromLines
 
@@ -10,8 +11,10 @@ let formatItemsAsYaml items =
 
 let private formatItem item =
     let mappingLines =
-        formatChildItemsMapping item.Items
-        |> Seq.toList
+        [
+            yield! formatDependsUponMapping item.DependsUpon
+            yield! formatChildItemsMapping item.Items
+        ]
 
     match mappingLines with
     | [] ->

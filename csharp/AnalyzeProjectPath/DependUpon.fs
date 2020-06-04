@@ -2,9 +2,8 @@ namespace DevSnicket.Eunice._AnalyzeProjectPath
 
 open System
 
-type Item =
+type DependUpon =
     {
-        DependsUpon: DependUpon list
         Identifier: String
-        Items: Item list
+        Items: DependUpon list
     }

@@ -1,0 +1,3 @@
+class BaseContainerClass {
+	class BaseClass { }
+}
