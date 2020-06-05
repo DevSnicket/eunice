@@ -1,11 +1,10 @@
-module rec DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromNamedType
+module rec DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromTypeDeclaration
 
-open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependUponFromType
-open DevSnicket.Eunice._AnalyzeProjectPath._CreateDependsUponFromNamedType.GroupDependsUponIntoHierarchy
+open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromTypes
 open Microsoft.CodeAnalysis
 
-let createDependsUponFromNamedType (``type``: INamedTypeSymbol) =
-     let rec createDependsUponFromNamedType () =
+let createDependsUponFromTypeDeclaration (``type``: INamedTypeSymbol) =
+     let rec createDependsUponFromTypeDeclaration () =
           seq [
                yield! getTypesWithTypeArguments ()
                yield! getTypeParameters ()
@@ -23,15 +22,10 @@ let createDependsUponFromNamedType (``type``: INamedTypeSymbol) =
           ``type``.TypeParameters
           |> Seq.collect (fun typeParameter -> typeParameter.ConstraintTypes)
 
-     createDependsUponFromNamedType ()
+     createDependsUponFromTypeDeclaration ()
 
 let private getTypeWithTypeArguments ``type`` =
      seq [
           ``type`` :> ITypeSymbol
           yield! ``type``.TypeArguments
      ]
-
-let private createDependsUponFromTypes =
-     Seq.choose createDependUponFromType
-     >> groupDependsUponIntoHierarchy
-     >> Seq.toList

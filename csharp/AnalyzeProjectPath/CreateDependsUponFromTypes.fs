@@ -1,8 +1,14 @@
-module rec DevSnicket.Eunice._AnalyzeProjectPath._CreateDependsUponFromNamedType.GroupDependsUponIntoHierarchy
+module rec DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromTypes
 
-open DevSnicket.Eunice._AnalyzeProjectPath
+open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependUponFromType
 
-let groupDependsUponIntoHierarchy dependsUpon =
+let createDependsUponFromTypes types =
+     types
+     |> Seq.choose createDependUponFromType
+     |> groupDependsUponIntoHierarchy
+     |> Seq.toList
+
+let private groupDependsUponIntoHierarchy dependsUpon =
      dependsUpon
      |> Seq.groupBy (fun dependUpon -> dependUpon.Identifier)
      |> Seq.map groupDependsUponInIdentifierGroup

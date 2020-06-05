@@ -2,7 +2,6 @@
 	"configurations": [
 		{
 			"args": [ "AnalyzeProjectPath/Tests/TestCases/TestCase.csproj" ],
-			"justMyCode": false,
 			"name": "program",
 			"program": "${workspaceFolder}/bin/Debug/DevSnicket.Eunice.dll",
 			"request": "launch",
@@ -15,7 +14,6 @@
 				"-nologo"
 			],
 			"cwd": "${workspaceFolder}/Tests/bin/Debug",
-			"justMyCode": false,
 			"name": "tests",
 			"program": "xunit.console.dll",
 			"request": "launch",

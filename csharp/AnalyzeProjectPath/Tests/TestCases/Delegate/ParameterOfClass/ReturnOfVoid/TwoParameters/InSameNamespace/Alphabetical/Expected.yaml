@@ -1,0 +1,12 @@
+﻿- id: DelegateNamespace
+  items:
+    id: Delegate
+    dependsUpon:
+      id: ParameterNamespace
+      items:
+        - Parameter1Class
+        - Parameter2Class
+- id: ParameterNamespace
+  items:
+    - Parameter1Class
+    - Parameter2Class
