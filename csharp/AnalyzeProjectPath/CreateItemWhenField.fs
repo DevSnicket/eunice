@@ -11,7 +11,7 @@ let createItemWhenField: (ISymbol -> Item option) =
      | _ ->
           None
 
-let createItemFromField field =
+let private createItemFromField field =
      {
           DependsUpon =
                field.Type

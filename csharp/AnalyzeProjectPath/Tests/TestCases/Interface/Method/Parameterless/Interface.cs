@@ -1,0 +1,3 @@
+interface Interface { 
+	void Method() { }
+}

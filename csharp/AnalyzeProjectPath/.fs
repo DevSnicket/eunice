@@ -75,16 +75,9 @@ let private createItemWhenDelegate ``type`` =
 
 let private createItemFromDelegateInvokeMethod method =
      {
-          DependsUpon =
-               seq [
-                    yield! method.Parameters |> Seq.map (fun parameter -> parameter.Type)
-                    method.ReturnType
-               ]
-               |> createDependsUponFromTypes
-          Identifier =
-               method.ContainingType.MetadataName
-          Items =
-               []
+          DependsUpon = method |> createDependsUponFromMethod
+          Identifier = method.ContainingType.MetadataName
+          Items = []
      }
 
 let private createItemFromClassOrInterfaceOrStruct ``type`` =
@@ -101,4 +94,40 @@ let private createItemFromClassOrInterfaceOrStruct ``type`` =
 
 let private createItemFromMember ``member`` =
      ``member`` |> createItemWhenField
+     |> Option.orElseWith (fun _ -> ``member`` |> createItemWhenMethod)
      |> Option.orElseWith (fun _ -> ``member`` |> createItemWhenType)
+
+let private createItemWhenMethod =
+     function
+     | :? IMethodSymbol as method ->
+          method |> createItemFromMethod
+     | _ ->
+          None
+
+let private createItemFromMethod method =
+     match method |> createDependsUponFromMethod with
+     | [] ->
+          match method.Name with
+          | ".ctor" ->
+               None
+          | _ ->
+               Some
+                    {
+                         DependsUpon = []
+                         Identifier = method.MetadataName
+                         Items = []
+                    }
+     | dependsUpon ->
+          Some
+               {
+                    DependsUpon = dependsUpon
+                    Identifier = method.MetadataName
+                    Items = []
+               }
+
+let private createDependsUponFromMethod method =
+    seq [
+         yield! method.Parameters |> Seq.map (fun parameter -> parameter.Type)
+         method.ReturnType
+    ]
+    |> createDependsUponFromTypes

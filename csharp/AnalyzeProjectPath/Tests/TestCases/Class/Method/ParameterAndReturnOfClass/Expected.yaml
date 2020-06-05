@@ -1,0 +1,14 @@
+﻿- id: ClassNamespace
+  items:
+    id: Class
+    items:
+      id: Method
+      dependsUpon:
+        - id: ParameterNamespace
+          items: ParameterClass
+        - id: ReturnNamespace
+          items: ReturnClass
+- id: ParameterNamespace
+  items: ParameterClass
+- id: ReturnNamespace
+  items: ReturnClass
