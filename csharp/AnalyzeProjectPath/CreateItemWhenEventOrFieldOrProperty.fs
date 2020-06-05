@@ -7,13 +7,22 @@ open Microsoft.CodeAnalysis
 let createItemWhenEventOrField: (ISymbol -> Item option) =
      function
      | :? IEventSymbol as event ->
-          Some (event |> createItemFromEventOrFieldWithType event.Type)
+          Some (event |> createItemFromEventOrFieldOrPropertyWithType event.Type)
      | :? IFieldSymbol as field ->
-          Some (field |> createItemFromEventOrFieldWithType field.Type)
+          field |> createItemFromFieldWhenNotProperty
+     | :? IPropertySymbol as property ->
+          Some (property |> createItemFromEventOrFieldOrPropertyWithType property.Type)
      | _ ->
           None
 
-let private createItemFromEventOrFieldWithType ``type`` (eventOrField: ISymbol) =
+let private createItemFromFieldWhenNotProperty field =
+     match field.AssociatedSymbol with
+     | :? IPropertySymbol ->
+          None
+     | _ ->
+          Some (field |> createItemFromEventOrFieldOrPropertyWithType field.Type)
+
+let private createItemFromEventOrFieldOrPropertyWithType ``type`` (eventOrField: ISymbol) =
      {
           DependsUpon =
                ``type``

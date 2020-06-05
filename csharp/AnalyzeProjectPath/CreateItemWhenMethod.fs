@@ -14,7 +14,8 @@ let createItemWhenMethod: (ISymbol -> Item option)=
 let private createItemFromMethod method =
      let rec createItemFromMethod () =
           match method.AssociatedSymbol with
-          | :? IEventSymbol ->
+          | :? IEventSymbol
+          | :? IPropertySymbol ->
                None
           | _ ->
                whenHasDependsUpon ()

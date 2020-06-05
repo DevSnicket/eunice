@@ -16,7 +16,7 @@
 		<Compile Include="AnalyzeProjectPath/CreateDependsUponFromTypeDeclaration.fs" />
 		<Compile Include="AnalyzeProjectPath/Item.fs" />
 		<Compile Include="AnalyzeProjectPath/CreateItemWhenEnum.fs" />
-		<Compile Include="AnalyzeProjectPath/CreateItemWhenEventOrField.fs" />
+		<Compile Include="AnalyzeProjectPath/CreateItemWhenEventOrFieldOrProperty.fs" />
 		<Compile Include="AnalyzeProjectPath/CreateItemWhenMethod.fs" />
 		<Compile Include="AnalyzeProjectPath/FormatItemsAsYaml/IndentLines.fs" />
 		<Compile Include="AnalyzeProjectPath/FormatItemsAsYaml/SequenceBlockEntryFromLines/.fs" />
