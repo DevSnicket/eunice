@@ -12,10 +12,12 @@
 		<Compile Include="AnalyzeProjectPath/DependUpon.fs" />
 		<Compile Include="AnalyzeProjectPath/CreateDependUponFromType.fs" />
 		<Compile Include="AnalyzeProjectPath/CreateDependsUponFromTypes.fs" />
+		<Compile Include="AnalyzeProjectPath/CreateDependsUponFromMethod.fs" />
 		<Compile Include="AnalyzeProjectPath/CreateDependsUponFromTypeDeclaration.fs" />
 		<Compile Include="AnalyzeProjectPath/Item.fs" />
 		<Compile Include="AnalyzeProjectPath/CreateItemWhenEnum.fs" />
-		<Compile Include="AnalyzeProjectPath/CreateItemWhenField.fs" />
+		<Compile Include="AnalyzeProjectPath/CreateItemWhenEventOrField.fs" />
+		<Compile Include="AnalyzeProjectPath/CreateItemWhenMethod.fs" />
 		<Compile Include="AnalyzeProjectPath/FormatItemsAsYaml/IndentLines.fs" />
 		<Compile Include="AnalyzeProjectPath/FormatItemsAsYaml/SequenceBlockEntryFromLines/.fs" />
 		<Compile Include="AnalyzeProjectPath/FormatItemsAsYaml/FormatKeyValueLinesMapping.fs" />

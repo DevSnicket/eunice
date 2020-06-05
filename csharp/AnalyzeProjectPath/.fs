@@ -1,10 +1,11 @@
 module rec DevSnicket.Eunice.AnalyzeProjectPath
 
 open DevSnicket.Eunice._AnalyzeProjectPath
+open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromMethod
 open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromTypeDeclaration
-open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromTypes
 open DevSnicket.Eunice._AnalyzeProjectPath.CreateItemWhenEnum
-open DevSnicket.Eunice._AnalyzeProjectPath.CreateItemWhenField
+open DevSnicket.Eunice._AnalyzeProjectPath.CreateItemWhenEventOrField
+open DevSnicket.Eunice._AnalyzeProjectPath.CreateItemWhenMethod
 open DevSnicket.Eunice._AnalyzeProjectPath.FormatItemsAsYaml
 open Microsoft.CodeAnalysis
 
@@ -93,41 +94,6 @@ let private createItemFromClassOrInterfaceOrStruct ``type`` =
      }
 
 let private createItemFromMember ``member`` =
-     ``member`` |> createItemWhenField
+     ``member`` |> createItemWhenEventOrField
      |> Option.orElseWith (fun _ -> ``member`` |> createItemWhenMethod)
      |> Option.orElseWith (fun _ -> ``member`` |> createItemWhenType)
-
-let private createItemWhenMethod =
-     function
-     | :? IMethodSymbol as method ->
-          method |> createItemFromMethod
-     | _ ->
-          None
-
-let private createItemFromMethod method =
-     match method |> createDependsUponFromMethod with
-     | [] ->
-          match method.Name with
-          | ".ctor" ->
-               None
-          | _ ->
-               Some
-                    {
-                         DependsUpon = []
-                         Identifier = method.MetadataName
-                         Items = []
-                    }
-     | dependsUpon ->
-          Some
-               {
-                    DependsUpon = dependsUpon
-                    Identifier = method.MetadataName
-                    Items = []
-               }
-
-let private createDependsUponFromMethod method =
-    seq [
-         yield! method.Parameters |> Seq.map (fun parameter -> parameter.Type)
-         method.ReturnType
-    ]
-    |> createDependsUponFromTypes

@@ -1,0 +1,5 @@
+﻿- id: Class
+  items:
+    id: Event
+    dependsUpon: EventDelegate
+- EventDelegate
