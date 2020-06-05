@@ -1,0 +1,13 @@
+﻿- id: Class
+  items:
+    - id: Property
+      dependsUpon: PropertyClass
+    - NestedClass
+    - Method
+    - id: _field
+      dependsUpon: FieldClass
+    - id: Event
+      dependsUpon: EventDelegate
+- EventDelegate
+- FieldClass
+- PropertyClass
