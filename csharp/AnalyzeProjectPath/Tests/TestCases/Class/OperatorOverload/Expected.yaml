@@ -1,0 +1,4 @@
+﻿- id: Class
+  items:
+    id: op_UnaryPlus
+    dependsUpon: Class
