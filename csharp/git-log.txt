@@ -1,6 +1,7 @@
 ---
 2020-06-06
-test case for using directives of project reference
+items only created for types in project
+not in assembly or project references
 
 ---
 2020-06-06
