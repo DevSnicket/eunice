@@ -2,6 +2,9 @@
 
 set -e
 
+# https://github.com/dotnet/roslyn/issues/44822
+dotnet restore AnalyzeProjectPath/Tests/TestCases/Generic/Class/Base/IEnumerable
+
 dotnet test \
 Tests \
 -l "trx;LogFileName=.trx" \
