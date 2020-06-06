@@ -25,7 +25,10 @@ let createDependsUponFromTypeDeclaration (``type``: INamedTypeSymbol) =
      createDependsUponFromTypeDeclaration ()
 
 let private getTypeWithTypeArguments ``type`` =
-     seq [
-          ``type`` :> ITypeSymbol
-          yield! ``type``.TypeArguments
-     ]
+     if ``type``.IsGenericType then
+          seq [
+               ``type``.ConstructedFrom
+               yield! ``type``.TypeArguments
+          ]
+     else
+          seq [ ``type`` ]
