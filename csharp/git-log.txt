@@ -1,5 +1,9 @@
 ---
 2020-06-06
+test case for using directive for base class
+
+---
+2020-06-06
 test case for delegate return of nullable
 
 ---
