@@ -1,4 +1,8 @@
 ---
+2020-06-06
+test case for delegate return of nullable
+
+---
 2020-06-05
 test case for method order
 
