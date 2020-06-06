@@ -1,5 +1,17 @@
 ---
 2020-06-06
+underlying type used for dependencies on generics
+e.g. so system types like ienumerable will be ignored
+
+---
+2020-06-06
+test case projects as NET Standard 2.0 with restore
+previously NET Core 3.1 same as implementation
+https://github.com/dotnet/roslyn/issues/44822
+https://github.com/microsoft/msbuild/issues/5390
+
+---
+2020-06-06
 items only created for types in project
 not in assembly or project references
 
