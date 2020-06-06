@@ -1,5 +1,9 @@
 ---
 2020-06-06
+test case for using directives of project reference
+
+---
+2020-06-06
 test case for using directive for base class
 
 ---
