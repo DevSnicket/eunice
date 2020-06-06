@@ -1,0 +1,7 @@
+﻿- id: Namespace
+  items:
+    - BaseClass
+    - id: DerivedClass
+      dependsUpon:
+        id: Namespace
+        items: BaseClass

@@ -28,34 +28,47 @@ let analyzeProjectPath projectPath =
           let! compilation = getCompilation ()
 
           return
-               compilation.GlobalNamespace
-               |> createItemsFromMembersOfNamespace
+               compilation
+               |> createItemsInCompilation
                |> formatItemsAsYaml
      }
 
-let private createItemsFromMembersOfNamespace ``namespace`` =
-     ``namespace``.GetMembers ()
-     |> Seq.choose createItemWhenNamespaceOrType
-     |> Seq.sortBy (fun item -> item.Identifier)
+let private createItemsInCompilation compilation =
+     let rec createItemsInCompilation () =
+          compilation.GlobalNamespace
+          |> createItemsFromMembersOfNamespace
 
-let private createItemWhenNamespaceOrType =
-     function
-     | :? INamespaceSymbol as ``namespace`` ->
-          Some (``namespace`` |> createItemFromNamespace)
-     | ``type`` ->
-          ``type`` |> createItemWhenType
+     and createItemsFromMembersOfNamespace ``namespace`` =
+          ``namespace``.GetMembers ()
+          |> Seq.choose createItemWhenNamespaceOrType
+          |> Seq.sortBy (fun item -> item.Identifier)
 
-let private createItemFromNamespace ``namespace`` =
-     {
-          DependsUpon =
-               []
-          Identifier =
-               ``namespace``.Name
-          Items =
-               ``namespace``
-               |> createItemsFromMembersOfNamespace
-               |> Seq.toList
-     }
+     and createItemWhenNamespaceOrType =
+          function
+          | :? INamespaceSymbol as ``namespace`` ->
+               ``namespace`` |> createItemFromNamespace
+          | ``type`` ->
+               if ``type``.ContainingAssembly = compilation.Assembly then
+                    ``type`` |> createItemWhenType
+               else
+                    None
+
+     and createItemFromNamespace ``namespace`` =
+          ``namespace``
+          |> createItemsFromMembersOfNamespace
+          |> Seq.toList
+          |> function
+               | [] ->
+                    None
+               | items ->
+                    Some
+                         {
+                              DependsUpon = []
+                              Identifier = ``namespace``.Name
+                              Items = items
+                         }
+
+     createItemsInCompilation ()
 
 let private createItemWhenType: (ISymbol -> Item option) =
      function

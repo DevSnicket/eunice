@@ -1,0 +1,2 @@
+﻿- id: DerivedClass
+  dependsUpon: BaseClass

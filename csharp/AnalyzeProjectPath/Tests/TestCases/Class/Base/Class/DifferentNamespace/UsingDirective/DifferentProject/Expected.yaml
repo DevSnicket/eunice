@@ -1,0 +1,6 @@
+﻿- id: DerivedClassNamespace
+  items:
+    id: DerivedClass
+    dependsUpon:
+      id: BaseClassNamespace
+      items: BaseClass
