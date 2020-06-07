@@ -18,31 +18,18 @@ let private createItemFromMethod method =
           | :? IPropertySymbol ->
                None
           | _ ->
-               whenHasDependsUpon ()
-               |> Option.orElseWith whenNotConstructor
-
-     and whenHasDependsUpon () =
-          match method |> createDependsUponFromMethod with
-          | [] ->
-               None
-          | dependsUpon ->
-               Some
-                    {
-                         DependsUpon = dependsUpon
-                         Identifier = method.MetadataName
-                         Items = []
-                    }
-
-     and whenNotConstructor () =
-          match method.Name with
-          | ".ctor" ->
-               None
-          | _ ->
-               Some
-                    {
-                         DependsUpon = []
-                         Identifier = method.MetadataName
-                         Items = []
-                    }
+               match method.IsImplicitlyDeclared with
+               | true ->
+                    None
+               | false ->
+                    Some
+                         {
+                              DependsUpon =
+                                   method |> createDependsUponFromMethod
+                              Identifier =
+                                   method.MetadataName
+                              Items =
+                                   []
+                         }
 
      createItemFromMethod ()

@@ -48,9 +48,10 @@ let private createItemsInCompilation compilation =
           | :? INamespaceSymbol as ``namespace`` ->
                ``namespace`` |> createItemFromNamespace
           | ``type`` ->
-               if ``type``.ContainingAssembly = compilation.Assembly then
+               match ``type``.ContainingAssembly = compilation.Assembly with
+               | true ->
                     ``type`` |> createItemWhenType
-               else
+               | false ->
                     None
 
      and createItemFromNamespace ``namespace`` =
