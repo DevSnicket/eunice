@@ -1,4 +1,12 @@
 ---
+2020-06-07
+added "ienumerable" to spellcheck dictionary
+
+---
+2020-06-07
+replaced ignore of constructors without dependencies with ignore of implicitly declared
+
+---
 2020-06-06
 underlying type used for dependencies on generics
 e.g. so system types like ienumerable will be ignored
