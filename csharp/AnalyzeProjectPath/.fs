@@ -1,11 +1,12 @@
 module rec DevSnicket.Eunice.AnalyzeProjectPath
 
 open DevSnicket.Eunice._AnalyzeProjectPath
-open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromMethod
+open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromTypes
 open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromTypeDeclaration
 open DevSnicket.Eunice._AnalyzeProjectPath.CreateItemWhenEnum
 open DevSnicket.Eunice._AnalyzeProjectPath.CreateItemWhenEventOrField
 open DevSnicket.Eunice._AnalyzeProjectPath.CreateItemWhenMethod
+open DevSnicket.Eunice._AnalyzeProjectPath.GetTypesUsedInMethodDeclaration
 open DevSnicket.Eunice._AnalyzeProjectPath.FormatItemsAsYaml
 open Microsoft.CodeAnalysis
 
@@ -50,7 +51,7 @@ let private createItemsInCompilation compilation =
           | ``type`` ->
                match ``type``.ContainingAssembly = compilation.Assembly with
                | true ->
-                    ``type`` |> createItemWhenType
+                    ``type`` |> createItemWhenType getSymbolInfo
                | false ->
                     None
 
@@ -68,20 +69,26 @@ let private createItemsInCompilation compilation =
                               Identifier = ``namespace``.Name
                               Items = items
                          }
+     
+     and getSymbolInfo (syntaxNode: SyntaxNode) =
+          syntaxNode.SyntaxTree
+          |> compilation.GetSemanticModel
+          |> (fun semanticModel -> syntaxNode |> semanticModel.GetSymbolInfo)
+          |> (fun symbolInfo -> symbolInfo.Symbol)
 
      createItemsInCompilation ()
 
-let private createItemWhenType: (ISymbol -> Item option) =
+let private createItemWhenType getSymbolInfo: (ISymbol -> Item option) =
      function
      | :? INamedTypeSymbol as ``type`` ->
-          Some (``type`` |> createItemFromType)
+          Some (``type`` |> createItemFromType getSymbolInfo)
      | _ ->
           None
 
-let private createItemFromType ``type`` =
+let private createItemFromType getSymbolInfo ``type`` =
      ``type`` |> createItemWhenDelegate
      |> Option.orElseWith (fun _ -> ``type`` |> createItemWhenEnum)
-     |> Option.defaultWith (fun _ -> ``type`` |> createItemFromClassOrInterfaceOrStruct)
+     |> Option.defaultWith (fun _ -> ``type`` |> createItemFromClassOrInterfaceOrStruct getSymbolInfo)
 
 let private createItemWhenDelegate ``type`` =
      ``type``.DelegateInvokeMethod
@@ -90,12 +97,17 @@ let private createItemWhenDelegate ``type`` =
 
 let private createItemFromDelegateInvokeMethod method =
      {
-          DependsUpon = method |> createDependsUponFromMethod
-          Identifier = method.ContainingType.MetadataName
-          Items = []
+          DependsUpon =
+               method
+               |> getTypesUsedInMethodDeclaration
+               |> createDependsUponFromTypes
+          Identifier =
+               method.ContainingType.MetadataName
+          Items =
+               []
      }
 
-let private createItemFromClassOrInterfaceOrStruct ``type`` =
+let private createItemFromClassOrInterfaceOrStruct getSymbolInfo ``type`` =
      {
           DependsUpon =
                ``type`` |> createDependsUponFromTypeDeclaration
@@ -103,11 +115,11 @@ let private createItemFromClassOrInterfaceOrStruct ``type`` =
                ``type``.MetadataName
           Items =
                ``type``.GetMembers ()
-               |> Seq.choose createItemFromMember
+               |> Seq.choose (createItemFromMember getSymbolInfo)
                |> Seq.toList
      }
 
-let private createItemFromMember ``member`` =
+let private createItemFromMember getSymbolInfo ``member`` =
      ``member`` |> createItemWhenEventOrField
-     |> Option.orElseWith (fun _ -> ``member`` |> createItemWhenMethod)
-     |> Option.orElseWith (fun _ -> ``member`` |> createItemWhenType)
+     |> Option.orElseWith (fun _ -> ``member`` |> createItemWhenMethod getSymbolInfo)
+     |> Option.orElseWith (fun _ -> ``member`` |> createItemWhenType getSymbolInfo)
