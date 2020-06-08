@@ -1,4 +1,8 @@
 ---
+2020-06-08
+method dependencies on variable types
+
+---
 2020-06-07
 added "ienumerable" to spellcheck dictionary
 
