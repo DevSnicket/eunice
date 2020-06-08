@@ -54,21 +54,42 @@ let private isEventOrProperty symbol =
 let private getTypesUsedInSyntaxReference syntaxReference =
      match syntaxReference.GetSyntax () with
      | :? MethodDeclarationSyntax as method ->
-          method |> getTypesUsedInBody
+          seq [
+               yield! method.ExpressionBody |> getTypesUsedInExpressionBody
+               yield! method.Body |> getTypesUsedInBody
+          ]
      | _ ->
           seq []
 
-let private getTypesUsedInBody method =
-     match method.Body with
+let private getTypesUsedInBody =
+     function
      | null ->
           seq []
      | body ->
           body.Statements
-          |> Seq.choose getTypeSyntaxUsedInStatement
+          |> Seq.choose getTypeUsedInStatement
 
-let private getTypeSyntaxUsedInStatement =
+let private getTypesUsedInExpressionBody =
      function
+     | null ->
+          []
+     | expressionBody ->
+          expressionBody.Expression
+          |> getTypeUsedInExpression
+          |> Option.toList
+
+let private getTypeUsedInStatement =
+     function
+     | :? ExpressionStatementSyntax as expressionStatement ->
+          expressionStatement.Expression |> getTypeUsedInExpression
      | :? LocalDeclarationStatementSyntax as localDeclaration ->
           Some localDeclaration.Declaration.Type
+     | _ ->
+          None
+
+let private getTypeUsedInExpression =
+     function
+     | :? CastExpressionSyntax as cast ->
+          Some cast.Type
      | _ ->
           None

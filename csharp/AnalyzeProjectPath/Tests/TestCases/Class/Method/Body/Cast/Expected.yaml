@@ -1,0 +1,5 @@
+﻿- CastedClass
+- id: CastingClass
+  items:
+    id: Method
+    dependsUpon: CastedClass
