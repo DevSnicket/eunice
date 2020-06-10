@@ -1,4 +1,9 @@
 ---
+2020-06-10
+method dependencies of anything named
+(e.g. types, fields, properties)
+
+---
 2020-06-08
 type casting
 
