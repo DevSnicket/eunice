@@ -1,3 +1,3 @@
 class BaseContainerClass {
-	class BaseClass { }
+	public class BaseClass { }
 }

@@ -1,0 +1,9 @@
+﻿- id: Class
+  items:
+    - id: Property
+      dependsUpon: PropertyClass
+    - id: Method
+      dependsUpon:
+        id: Class
+        items: Property
+- PropertyClass

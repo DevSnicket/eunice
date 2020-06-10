@@ -1,12 +1,11 @@
 module rec DevSnicket.Eunice.AnalyzeProjectPath
 
 open DevSnicket.Eunice._AnalyzeProjectPath
-open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromTypes
+open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromSymbols
 open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromTypeDeclaration
 open DevSnicket.Eunice._AnalyzeProjectPath.CreateItemWhenEnum
 open DevSnicket.Eunice._AnalyzeProjectPath.CreateItemWhenEventOrField
 open DevSnicket.Eunice._AnalyzeProjectPath.CreateItemWhenMethod
-open DevSnicket.Eunice._AnalyzeProjectPath.GetTypesUsedInMethodDeclaration
 open DevSnicket.Eunice._AnalyzeProjectPath.FormatItemsAsYaml
 open Microsoft.CodeAnalysis
 
@@ -98,9 +97,11 @@ let private createItemWhenDelegate ``type`` =
 let private createItemFromDelegateInvokeMethod method =
      {
           DependsUpon =
-               method
-               |> getTypesUsedInMethodDeclaration
-               |> createDependsUponFromTypes
+               seq [
+                    yield! method.Parameters |> Seq.map (fun parameter -> parameter.Type)
+                    method.ReturnType
+               ]
+               |> createDependsUponFromSymbols
           Identifier =
                method.ContainingType.MetadataName
           Items =

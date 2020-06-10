@@ -1,0 +1,8 @@
+﻿- id: CalleeClass
+  items: CalledMethod
+- id: CallerClass
+  items:
+    id: CallerMethod
+    dependsUpon:
+      id: CalleeClass
+      items: CalledMethod

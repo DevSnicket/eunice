@@ -1,0 +1,7 @@
+﻿- id: Class
+  items:
+    - CalledMethod
+    - id: CallerMethod
+      dependsUpon:
+        id: Class
+        items: CalledMethod

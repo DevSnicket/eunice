@@ -10,13 +10,12 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Include="AnalyzeProjectPath/DependUpon.fs" />
-		<Compile Include="AnalyzeProjectPath/CreateDependUponFromType.fs" />
-		<Compile Include="AnalyzeProjectPath/CreateDependsUponFromTypes.fs" />
+		<Compile Include="AnalyzeProjectPath/CreateDependUponFromSymbol.fs" />
+		<Compile Include="AnalyzeProjectPath/CreateDependsUponFromSymbols.fs" />
 		<Compile Include="AnalyzeProjectPath/CreateDependsUponFromTypeDeclaration.fs" />
 		<Compile Include="AnalyzeProjectPath/Item.fs" />
 		<Compile Include="AnalyzeProjectPath/CreateItemWhenEnum.fs" />
 		<Compile Include="AnalyzeProjectPath/CreateItemWhenEventOrFieldOrProperty.fs" />
-		<Compile Include="AnalyzeProjectPath/GetTypesUsedInMethodDeclaration.fs" />
 		<Compile Include="AnalyzeProjectPath/CreateItemWhenMethod.fs" />
 		<Compile Include="AnalyzeProjectPath/FormatItemsAsYaml/IndentLines.fs" />
 		<Compile Include="AnalyzeProjectPath/FormatItemsAsYaml/SequenceBlockEntryFromLines/.fs" />

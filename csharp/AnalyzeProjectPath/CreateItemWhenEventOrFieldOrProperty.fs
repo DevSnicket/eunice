@@ -1,7 +1,7 @@
 module rec DevSnicket.Eunice._AnalyzeProjectPath.CreateItemWhenEventOrField
 
 open DevSnicket.Eunice._AnalyzeProjectPath
-open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependUponFromType
+open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependUponFromSymbol
 open Microsoft.CodeAnalysis
 
 let createItemWhenEventOrField: (ISymbol -> Item option) =
@@ -26,7 +26,7 @@ let private createItemFromEventOrFieldOrPropertyWithType ``type`` (eventOrField:
      {
           DependsUpon =
                ``type``
-               |> createDependUponFromType
+               |> createDependUponFromSymbol
                |> Option.toList
           Identifier =
                eventOrField.Name

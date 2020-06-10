@@ -1,5 +1,5 @@
 namespace Namespace {
-	class BaseClass {
-		interface Interface { }
+	public class BaseClass {
+		public interface Interface { }
 	}
 }

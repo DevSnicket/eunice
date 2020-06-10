@@ -1,10 +1,10 @@
-module rec DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromTypes
+module rec DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromSymbols
 
-open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependUponFromType
+open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependUponFromSymbol
 
-let createDependsUponFromTypes types =
-     types
-     |> Seq.choose createDependUponFromType
+let createDependsUponFromSymbols symbols =
+     symbols
+     |> Seq.choose createDependUponFromSymbol
      |> groupDependsUponIntoHierarchy
      |> Seq.toList
 

@@ -1,8 +1,7 @@
 module rec DevSnicket.Eunice._AnalyzeProjectPath.CreateItemWhenMethod
 
 open DevSnicket.Eunice._AnalyzeProjectPath
-open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromTypes
-open DevSnicket.Eunice._AnalyzeProjectPath.GetTypesUsedInMethodDeclaration
+open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromSymbols
 open Microsoft.CodeAnalysis
 open Microsoft.CodeAnalysis.CSharp.Syntax
 
@@ -20,11 +19,7 @@ let private createItemFromMethod getSymbolInfo method =
                Some
                     {
                          DependsUpon =
-                              seq [
-                                   yield! method |> getTypesUsedInMethodDeclaration
-                                   yield! getTypesUsedInBody ()
-                              ]
-                              |> createDependsUponFromTypes
+                              createDependsUpon ()
                          Identifier =
                               method.MetadataName
                          Items =
@@ -38,11 +33,11 @@ let private createItemFromMethod getSymbolInfo method =
           &&
           method.AssociatedSymbol |> (not << isEventOrProperty)
 
-     and getTypesUsedInBody () =
+     and createDependsUpon () =
           method.DeclaringSyntaxReferences
-          |> Seq.collect getTypesUsedInSyntaxReference
+          |> Seq.collect getNamesUsedInSyntaxReference
           |> Seq.map getSymbolInfo
-          |> Seq.cast
+          |> createDependsUponFromSymbols
 
      createItemFromMethod ()
 
@@ -51,45 +46,11 @@ let private isEventOrProperty symbol =
      ||
      symbol :? IPropertySymbol
 
-let private getTypesUsedInSyntaxReference syntaxReference =
-     match syntaxReference.GetSyntax () with
-     | :? MethodDeclarationSyntax as method ->
-          seq [
-               yield! method.ExpressionBody |> getTypesUsedInExpressionBody
-               yield! method.Body |> getTypesUsedInBody
-          ]
-     | _ ->
-          seq []
+let private getNamesUsedInSyntaxReference syntaxReference =
+     syntaxReference.GetSyntax().DescendantNodes (isName >> not)
+     |> Seq.filter isName
 
-let private getTypesUsedInBody =
-     function
-     | null ->
-          seq []
-     | body ->
-          body.Statements
-          |> Seq.choose getTypeUsedInStatement
-
-let private getTypesUsedInExpressionBody =
-     function
-     | null ->
-          []
-     | expressionBody ->
-          expressionBody.Expression
-          |> getTypeUsedInExpression
-          |> Option.toList
-
-let private getTypeUsedInStatement =
-     function
-     | :? ExpressionStatementSyntax as expressionStatement ->
-          expressionStatement.Expression |> getTypeUsedInExpression
-     | :? LocalDeclarationStatementSyntax as localDeclaration ->
-          Some localDeclaration.Declaration.Type
-     | _ ->
-          None
-
-let private getTypeUsedInExpression =
-     function
-     | :? CastExpressionSyntax as cast ->
-          Some cast.Type
-     | _ ->
-          None
+let private isName syntaxNode =
+     syntaxNode :? IdentifierNameSyntax
+     ||
+     syntaxNode :? QualifiedNameSyntax

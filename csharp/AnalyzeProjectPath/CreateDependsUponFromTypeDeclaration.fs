@@ -1,6 +1,6 @@
 module rec DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromTypeDeclaration
 
-open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromTypes
+open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromSymbols
 open Microsoft.CodeAnalysis
 
 let createDependsUponFromTypeDeclaration (``type``: INamedTypeSymbol) =
@@ -9,7 +9,7 @@ let createDependsUponFromTypeDeclaration (``type``: INamedTypeSymbol) =
                yield! getTypesWithTypeArguments ()
                yield! getTypeParameters ()
           ]
-          |> createDependsUponFromTypes
+          |> createDependsUponFromSymbols
 
      and getTypesWithTypeArguments () =
           seq [
