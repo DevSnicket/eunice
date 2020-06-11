@@ -1,0 +1,10 @@
+﻿- id: CalleeClass
+  items: CalledMethod
+- ReturnClass
+- id: YieldCallerClass
+  items:
+    id: CallerAndYieldMethod
+    dependsUpon:
+      - id: CalleeClass
+        items: CalledMethod
+      - ReturnClass
