@@ -1,7 +1,7 @@
 module rec DevSnicket.Eunice._AnalyzeProjectPath.CreateItemFromMemberSymbol
 
 open DevSnicket.Eunice._AnalyzeProjectPath
-open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromSymbols
+open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromSymbolsOfReferrer
 open Microsoft.CodeAnalysis
 open Microsoft.CodeAnalysis.CSharp.Syntax
 
@@ -63,7 +63,7 @@ let createItemFromMemberSymbol (getSymbolFromSyntaxNode: SyntaxNode -> ISymbol) 
                                    yield! ``type`` |> Option.toList |> Seq.cast
                                    yield! getDeclaringSymbols ()
                               ]
-                              |> createDependsUponFromSymbols
+                              |> createDependsUponFromSymbolsOfReferrer ``member``
                          Identifier =
                               ``member``.MetadataName
                          Items =

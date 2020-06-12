@@ -2,6 +2,4 @@
   items:
     - BaseClass
     - id: DerivedClass
-      dependsUpon:
-        id: Namespace
-        items: BaseClass
+      dependsUpon: BaseClass

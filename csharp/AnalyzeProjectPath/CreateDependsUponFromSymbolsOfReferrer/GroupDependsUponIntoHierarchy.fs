@@ -1,14 +1,8 @@
-module rec DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromSymbols
+module rec DevSnicket.Eunice._AnalyzeProjectPath._createDependsUponFromSymbolsOfReferrer.GroupDependsUponIntoHierarchy
 
-open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependUponFromSymbol
+open DevSnicket.Eunice._AnalyzeProjectPath
 
-let createDependsUponFromSymbols symbols =
-     symbols
-     |> Seq.choose createDependUponFromSymbol
-     |> groupDependsUponIntoHierarchy
-     |> Seq.toList
-
-let private groupDependsUponIntoHierarchy dependsUpon =
+let groupDependsUponIntoHierarchy dependsUpon =
      dependsUpon
      |> Seq.groupBy (fun dependUpon -> dependUpon.Identifier)
      |> Seq.map groupDependsUponInIdentifierGroup

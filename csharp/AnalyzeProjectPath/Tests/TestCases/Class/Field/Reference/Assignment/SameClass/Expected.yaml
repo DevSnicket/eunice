@@ -3,7 +3,5 @@
     - id: _field
       dependsUpon: FieldClass
     - id: Method
-      dependsUpon:
-        id: Class
-        items: _field
+      dependsUpon: _field
 - FieldClass

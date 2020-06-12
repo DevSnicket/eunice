@@ -10,10 +10,10 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Include="AnalyzeProjectPath/DependUpon.fs" />
-		<Compile Include="AnalyzeProjectPath/CreateDependUponFromSymbol.fs" />
-		<Compile Include="AnalyzeProjectPath/CreateDependsUponFromSymbols.fs" />
-		<Compile Include="AnalyzeProjectPath/CreateDependsUponFromTypeDeclaration.fs" />
+		<Compile Include="AnalyzeProjectPath/CreateDependsUponFromSymbolsOfReferrer/GroupDependsUponIntoHierarchy.fs" />
+		<Compile Include="AnalyzeProjectPath/CreateDependsUponFromSymbolsOfReferrer/.fs" />
 		<Compile Include="AnalyzeProjectPath/Item.fs" />
+		<Compile Include="AnalyzeProjectPath/CreateItemWhenDelegate.fs" />
 		<Compile Include="AnalyzeProjectPath/CreateItemWhenEnum.fs" />
 		<Compile Include="AnalyzeProjectPath/CreateItemFromMemberSymbol/.fs" />
 		<Compile Include="AnalyzeProjectPath/FormatItemsAsYaml/IndentLines.fs" />
@@ -21,6 +21,7 @@
 		<Compile Include="AnalyzeProjectPath/FormatItemsAsYaml/FormatKeyValueLinesMapping.fs" />
 		<Compile Include="AnalyzeProjectPath/FormatItemsAsYaml/FormatDependsUponMapping.fs" />
 		<Compile Include="AnalyzeProjectPath/FormatItemsAsYaml/.fs" />
+		<Compile Include="AnalyzeProjectPath/GetBasesOfTypeDeclaration.fs" />
 		<Compile Include="AnalyzeProjectPath/.fs" />
 		<Compile Include="ExecuteProgram/.fs" />
 	</ItemGroup>

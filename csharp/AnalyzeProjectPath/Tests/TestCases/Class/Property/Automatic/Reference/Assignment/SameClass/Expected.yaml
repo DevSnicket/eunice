@@ -3,7 +3,5 @@
     - id: Property
       dependsUpon: PropertyClass
     - id: Method
-      dependsUpon:
-        id: Class
-        items: Property
+      dependsUpon: Property
 - PropertyClass

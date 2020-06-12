@@ -1,8 +1,9 @@
 module rec DevSnicket.Eunice.AnalyzeProjectPath
 
 open DevSnicket.Eunice._AnalyzeProjectPath
-open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromSymbols
-open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromTypeDeclaration
+open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromSymbolsOfReferrer
+open DevSnicket.Eunice._AnalyzeProjectPath.GetBasesOfTypeDeclaration
+open DevSnicket.Eunice._AnalyzeProjectPath.CreateItemWhenDelegate
 open DevSnicket.Eunice._AnalyzeProjectPath.CreateItemWhenEnum
 open DevSnicket.Eunice._AnalyzeProjectPath.CreateItemFromMemberSymbol
 open DevSnicket.Eunice._AnalyzeProjectPath.FormatItemsAsYaml
@@ -88,29 +89,12 @@ let private createItemFromType getSymbolFromSyntaxNode ``type`` =
      |> Option.orElseWith (fun _ -> ``type`` |> createItemWhenEnum)
      |> Option.defaultWith (fun _ -> ``type`` |> createItemFromClassOrInterfaceOrStruct getSymbolFromSyntaxNode)
 
-let private createItemWhenDelegate ``type`` =
-     ``type``.DelegateInvokeMethod
-     |> Option.ofObj
-     |> Option.map createItemFromDelegateInvokeMethod
-
-let private createItemFromDelegateInvokeMethod method =
-     {
-          DependsUpon =
-               seq [
-                    yield! method.Parameters |> Seq.map (fun parameter -> parameter.Type)
-                    method.ReturnType
-               ]
-               |> createDependsUponFromSymbols
-          Identifier =
-               method.ContainingType.MetadataName
-          Items =
-               []
-     }
-
 let private createItemFromClassOrInterfaceOrStruct getSymbolFromSyntaxNode ``type`` =
      {
           DependsUpon =
-               ``type`` |> createDependsUponFromTypeDeclaration
+               ``type``
+               |> getBasesOfTypeDeclaration
+               |> createDependsUponFromSymbolsOfReferrer ``type``
           Identifier =
                ``type``.MetadataName
           Items =
