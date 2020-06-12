@@ -1,0 +1,14 @@
+﻿- id: CalleeOfGetterClass
+  items: CalleeOfGetterMethod
+- id: CalleeOfSetterClass
+  items: CalleeOfSetterMethod
+- id: Class
+  items:
+    id: Item
+    dependsUpon:
+      - id: CalleeOfGetterClass
+        items: CalleeOfGetterMethod
+      - id: CalleeOfSetterClass
+        items: CalleeOfSetterMethod
+      - IndexerClass
+- IndexerClass

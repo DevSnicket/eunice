@@ -1,0 +1,10 @@
+﻿- id: CalleeClass
+  items: CalleeMethod
+- id: Class
+  items:
+    id: _field
+    dependsUpon:
+      - id: CalleeClass
+        items: CalleeMethod
+      - FieldClass
+- FieldClass

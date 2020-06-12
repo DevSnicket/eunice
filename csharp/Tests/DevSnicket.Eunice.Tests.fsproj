@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
 		<PackageReference Include="altcover" Version="6.8.761" />
+		<PackageReference Include="foq" Version="1.8.0" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
 		<PackageReference Include="xunit" Version="2.4.1" />
 		<PackageReference Include="xunit.console" Version="2.4.1" />
@@ -13,6 +14,7 @@
 		<ProjectReference Include="../DevSnicket.Eunice.fsproj" />
 	</ItemGroup>
 	<ItemGroup>
+		<Compile Include="../AnalyzeProjectPath/CreateItemFromMember/Tests.fs" />
 		<Compile Include="../AnalyzeProjectPath/Tests/FindParametersForTestCasesInDirectoryPath.fs" />
 		<Compile Include="../AnalyzeProjectPath/FormatItemsAsYaml/SequenceBlockEntryFromLines/Tests.fs" />
 		<Compile Include="../AnalyzeProjectPath/Tests/.fs" />

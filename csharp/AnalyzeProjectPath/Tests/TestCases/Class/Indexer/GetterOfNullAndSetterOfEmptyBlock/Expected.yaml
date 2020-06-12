@@ -1,5 +1,5 @@
 ﻿- id: Class
   items:
-    id: this[]
+    id: Item
     dependsUpon: IndexerClass
 - IndexerClass
