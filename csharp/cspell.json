@@ -1,14 +1,17 @@
 {
 	"version": "0.1",
 	"language": "en",
+	"minWordLength": 2,
 	"words": [
 		"arity",
 		"concat",
 		"failwith",
+		"foq",
 		"ienumerable",
 		"ionide",
 		"parameterless",
 		"snicket",
+		"sdk",
 		"struct",
 		"xunit"
 	]
