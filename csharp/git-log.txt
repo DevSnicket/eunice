@@ -1,5 +1,9 @@
 ---
 2020-06-12
+spell check includes 2+ letter words (previously 4+)
+
+---
+2020-06-12
 sibling dependencies are no longer qualified
 e.g. between classes in the same namespace or between members of a class
 
