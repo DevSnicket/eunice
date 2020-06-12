@@ -1,7 +1,7 @@
-module rec DevSnicket.Eunice._AnalyzeProjectPath.CreateItemFromMember.Tests
+module rec DevSnicket.Eunice._AnalyzeProjectPath.CreateItemFromMemberSymbol.Tests
 
 open DevSnicket.Eunice._AnalyzeProjectPath
-open DevSnicket.Eunice._AnalyzeProjectPath.CreateItemFromMember
+open DevSnicket.Eunice._AnalyzeProjectPath.CreateItemFromMemberSymbol
 open Foq
 open Microsoft.CodeAnalysis
 open System.Collections.Immutable
@@ -24,7 +24,7 @@ let memberOfUnexpectedSymbolReturnsItemWithMetadataName () =
                     metadataName
             @>
         )
-        |> createItemFromMember getSymbolFromSyntaxNode
+        |> createItemFromMemberSymbol getSymbolFromSyntaxNode
 
     Xunit.Assert.Equal (
         Some

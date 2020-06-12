@@ -4,7 +4,7 @@ open DevSnicket.Eunice._AnalyzeProjectPath
 open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromSymbols
 open DevSnicket.Eunice._AnalyzeProjectPath.CreateDependsUponFromTypeDeclaration
 open DevSnicket.Eunice._AnalyzeProjectPath.CreateItemWhenEnum
-open DevSnicket.Eunice._AnalyzeProjectPath.CreateItemFromMember
+open DevSnicket.Eunice._AnalyzeProjectPath.CreateItemFromMemberSymbol
 open DevSnicket.Eunice._AnalyzeProjectPath.FormatItemsAsYaml
 open Microsoft.CodeAnalysis
 
@@ -121,4 +121,4 @@ let private createItemFromClassOrInterfaceOrStruct getSymbolFromSyntaxNode ``typ
 
 let private createItemFromMemberOrNestedType getSymbolFromSyntaxNode memberOrNestedType =
      memberOrNestedType |> createItemWhenType getSymbolFromSyntaxNode
-     |> Option.orElseWith (fun _ -> memberOrNestedType |> createItemFromMember getSymbolFromSyntaxNode)
+     |> Option.orElseWith (fun _ -> memberOrNestedType |> createItemFromMemberSymbol getSymbolFromSyntaxNode)

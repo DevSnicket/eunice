@@ -14,7 +14,7 @@
 		<ProjectReference Include="../DevSnicket.Eunice.fsproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<Compile Include="../AnalyzeProjectPath/CreateItemFromMember/Tests.fs" />
+		<Compile Include="../AnalyzeProjectPath/CreateItemFromMemberSymbol/Tests.fs" />
 		<Compile Include="../AnalyzeProjectPath/Tests/FindParametersForTestCasesInDirectoryPath.fs" />
 		<Compile Include="../AnalyzeProjectPath/FormatItemsAsYaml/SequenceBlockEntryFromLines/Tests.fs" />
 		<Compile Include="../AnalyzeProjectPath/Tests/.fs" />

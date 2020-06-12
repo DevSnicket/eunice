@@ -1,0 +1,14 @@
+﻿- id: Part1CalleeClass
+  items: Part1CalleeMethod
+- id: Part2CalleeClass
+  items: Part2CalleeMethod
+- id: PartialCallerClass
+  items:
+    - id: Part1CallerMethod
+      dependsUpon:
+        id: Part1CalleeClass
+        items: Part1CalleeMethod
+    - id: Part2CallerMethod
+      dependsUpon:
+        id: Part2CalleeClass
+        items: Part2CalleeMethod
