@@ -1,5 +1,9 @@
 ---
 2020-06-12
+partial methods
+
+---
+2020-06-12
 dependencies from bodies of events, fields and properties
 
 ---
