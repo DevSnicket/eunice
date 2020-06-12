@@ -1,6 +1,6 @@
 ---
 2020-06-12
-dependencies within the same parent symbol are no longer qualified
+sibling dependencies are no longer qualified
 e.g. between classes in the same namespace or between members of a class
 
 ---
