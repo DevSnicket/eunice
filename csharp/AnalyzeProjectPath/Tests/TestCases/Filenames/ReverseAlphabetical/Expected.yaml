@@ -1,2 +1,4 @@
-﻿- Class1
-- Class2
+﻿- id: TestCase
+  items:
+    - Class1
+    - Class2

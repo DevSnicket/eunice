@@ -1,6 +1,10 @@
-﻿- id: BaseContainerClass
-  items: BaseClass
-- id: DerivedClass
-  dependsUpon:
-    id: BaseContainerClass
-    items: BaseClass
+﻿- id: TestCase
+  items:
+    - id: BaseContainerClass
+      items: BaseClass
+    - id: DerivedClass
+      dependsUpon:
+        id: TestCase
+        items:
+          id: BaseContainerClass
+          items: BaseClass

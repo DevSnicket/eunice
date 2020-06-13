@@ -1,3 +1,5 @@
-﻿- BaseInterface
-- id: DerivedInterface
-  dependsUpon: BaseInterface
+﻿- id: TestCase
+  items:
+    - BaseInterface
+    - id: DerivedInterface
+      dependsUpon: BaseInterface

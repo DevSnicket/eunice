@@ -1,6 +1,8 @@
-﻿- BaseClass
-- id: DerivedClass
-  dependsUpon:
+﻿- id: TestCase
+  items:
     - BaseClass
+    - id: DerivedClass
+      dependsUpon:
+        - BaseClass
+        - Interface
     - Interface
-- Interface

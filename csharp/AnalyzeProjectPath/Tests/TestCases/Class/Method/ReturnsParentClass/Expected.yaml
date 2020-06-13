@@ -2,5 +2,5 @@
   items:
     id: Class
     items:
-      id: op_UnaryPlus
+      id: Method
       dependsUpon: Class

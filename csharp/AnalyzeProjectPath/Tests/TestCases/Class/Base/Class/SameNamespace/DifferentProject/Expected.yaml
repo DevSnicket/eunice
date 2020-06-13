@@ -1,6 +1,10 @@
-﻿- id: Namespace
+﻿- id: TestCase
   items:
-    id: DerivedClass
-    dependsUpon:
-      id: Namespace
-      items: BaseClass
+    id: Namespace
+    items:
+      id: DerivedClass
+      dependsUpon:
+        id: BaseClassProject
+        items:
+          id: Namespace
+          items: BaseClass

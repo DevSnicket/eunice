@@ -1,5 +1,9 @@
-﻿- id: Class
+﻿- id: TestCase
   items:
-    id: .ctor
-    dependsUpon: ParameterClass
-- ParameterClass
+    - id: Class
+      items:
+        id: .ctor
+        dependsUpon:
+          id: TestCase
+          items: ParameterClass
+    - ParameterClass

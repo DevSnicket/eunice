@@ -1,4 +1,6 @@
-﻿- id: Namespace
+﻿- id: TestCase
   items:
-    - Class1
-    - Class2
+    id: Namespace
+    items:
+      - Class1
+      - Class2

@@ -1,8 +1,12 @@
-﻿- id: CalleeClass
-  items: CalledMethod
-- id: CallerClass
+﻿- id: TestCase
   items:
-    id: CallerMethod
-    dependsUpon:
-      id: CalleeClass
+    - id: CalleeClass
       items: CalledMethod
+    - id: CallerClass
+      items:
+        id: CallerMethod
+        dependsUpon:
+          id: TestCase
+          items:
+            id: CalleeClass
+            items: CalledMethod

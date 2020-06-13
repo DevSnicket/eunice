@@ -1,11 +1,17 @@
-﻿- PropertyClass
-- id: ReferencedClass
+﻿- id: TestCase
   items:
-    id: Property
-    dependsUpon: PropertyClass
-- id: ReferrerClass
-  items:
-    id: Method
-    dependsUpon:
-      id: ReferencedClass
-      items: Property
+    - PropertyClass
+    - id: ReferencedClass
+      items:
+        id: Property
+        dependsUpon:
+          id: TestCase
+          items: PropertyClass
+    - id: ReferrerClass
+      items:
+        id: Method
+        dependsUpon:
+          id: TestCase
+          items:
+            id: ReferencedClass
+            items: Property

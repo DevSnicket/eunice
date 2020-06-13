@@ -1,5 +1,9 @@
-﻿- id: DeclarationClass
+﻿- id: TestCase
   items:
-    id: Method
-    dependsUpon: VariableClass
-- VariableClass
+    - id: DeclarationClass
+      items:
+        id: Method
+        dependsUpon:
+          id: TestCase
+          items: VariableClass
+    - VariableClass

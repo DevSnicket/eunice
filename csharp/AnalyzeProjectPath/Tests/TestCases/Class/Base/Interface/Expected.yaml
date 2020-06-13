@@ -1,3 +1,5 @@
-﻿- id: Class
-  dependsUpon: Interface
-- Interface
+﻿- id: TestCase
+  items:
+    - id: Class
+      dependsUpon: Interface
+    - Interface

@@ -1,3 +1,5 @@
-﻿- id: Delegate
-  dependsUpon: ParameterClass
-- ParameterClass
+﻿- id: TestCase
+  items:
+    - id: Delegate
+      dependsUpon: ParameterClass
+    - ParameterClass

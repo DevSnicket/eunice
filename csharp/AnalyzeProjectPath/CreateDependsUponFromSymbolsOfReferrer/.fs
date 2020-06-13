@@ -15,7 +15,7 @@ let createDependsUponFromSymbolsOfReferrer (referrer: ISymbol) =
                match symbol |> hasLocationInSource with
                | true ->
                     Some (
-                         withAncestorHierarchyWhenNotSibling
+                         withAncestorHierarchyWhenRequired
                               {
                                    Identifier = symbol.MetadataName
                                    Items = []
@@ -24,12 +24,17 @@ let createDependsUponFromSymbolsOfReferrer (referrer: ISymbol) =
                | false ->
                     None
 
-          and withAncestorHierarchyWhenNotSibling dependUpon =
-               match symbol.ContainingSymbol = referrer.ContainingSymbol with
+          and withAncestorHierarchyWhenRequired dependUpon =
+               match isAncestorHierarchyRequired () with
                | true ->
-                    dependUpon
-               | false ->
                     dependUpon |> createAncestorHierarchy symbol
+               | false ->
+                    dependUpon
+          
+          and isAncestorHierarchyRequired () =
+               symbol.ContainingSymbol <> referrer.ContainingSymbol
+               &&
+               symbol <> referrer.ContainingSymbol
 
           createWhenInSource()
 
@@ -46,7 +51,10 @@ let private hasLocationInSource =
 let private createAncestorHierarchy symbol item =
      match symbol.ContainingSymbol.Name with
      | "" ->
-          item
+          {
+               Identifier = symbol.ContainingAssembly.MetadataName
+               Items = [ item ]
+          }
      | _ ->
           createAncestorHierarchy
                symbol.ContainingSymbol

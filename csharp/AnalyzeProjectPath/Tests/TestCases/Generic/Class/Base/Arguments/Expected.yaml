@@ -1,6 +1,8 @@
-﻿- ArgumentClass
-- BaseClass`1
-- id: DerivedClass
-  dependsUpon:
+﻿- id: TestCase
+  items:
     - ArgumentClass
     - BaseClass`1
+    - id: DerivedClass
+      dependsUpon:
+        - ArgumentClass
+        - BaseClass`1

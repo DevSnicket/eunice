@@ -1,14 +1,18 @@
-﻿- id: CalleeOfGetterClass
-  items: CalleeOfGetterMethod
-- id: CalleeOfSetterClass
-  items: CalleeOfSetterMethod
-- id: Class
+﻿- id: TestCase
   items:
-    id: Property
-    dependsUpon:
-      - id: CalleeOfGetterClass
-        items: CalleeOfGetterMethod
-      - id: CalleeOfSetterClass
-        items: CalleeOfSetterMethod
-      - PropertyClass
-- PropertyClass
+    - id: CalleeOfGetterClass
+      items: CalleeOfGetterMethod
+    - id: CalleeOfSetterClass
+      items: CalleeOfSetterMethod
+    - id: Class
+      items:
+        id: Property
+        dependsUpon:
+          id: TestCase
+          items:
+            - id: CalleeOfGetterClass
+              items: CalleeOfGetterMethod
+            - id: CalleeOfSetterClass
+              items: CalleeOfSetterMethod
+            - PropertyClass
+    - PropertyClass

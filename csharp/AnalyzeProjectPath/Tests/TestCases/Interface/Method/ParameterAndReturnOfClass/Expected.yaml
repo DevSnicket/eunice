@@ -1,14 +1,18 @@
-﻿- id: InterfaceNamespace
+﻿- id: TestCase
   items:
-    id: Interface
-    items:
-      id: Method
-      dependsUpon:
-        - id: ParameterNamespace
-          items: ParameterClass
-        - id: ReturnNamespace
-          items: ReturnClass
-- id: ParameterNamespace
-  items: ParameterClass
-- id: ReturnNamespace
-  items: ReturnClass
+    - id: InterfaceNamespace
+      items:
+        id: Interface
+        items:
+          id: Method
+          dependsUpon:
+            id: TestCase
+            items:
+              - id: ParameterNamespace
+                items: ParameterClass
+              - id: ReturnNamespace
+                items: ReturnClass
+    - id: ParameterNamespace
+      items: ParameterClass
+    - id: ReturnNamespace
+      items: ReturnClass

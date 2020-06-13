@@ -1,2 +1,4 @@
-﻿- id: Namespace
-  items: Class
+﻿- id: TestCase
+  items:
+    id: Namespace
+    items: Class

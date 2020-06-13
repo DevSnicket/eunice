@@ -1,8 +1,12 @@
-﻿- id: DelegateNamespace
+﻿- id: TestCase
   items:
-    id: Delegate
-    dependsUpon:
-      id: ReturnNamespace
+    - id: DelegateNamespace
+      items:
+        id: Delegate
+        dependsUpon:
+          id: TestCase
+          items:
+            id: ReturnNamespace
+            items: ReturnStruct
+    - id: ReturnNamespace
       items: ReturnStruct
-- id: ReturnNamespace
-  items: ReturnStruct

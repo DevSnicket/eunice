@@ -35,13 +35,21 @@ let analyzeProjectPath projectPath =
 
 let private createItemsInCompilation compilation =
      let rec createItemsInCompilation () =
-          compilation.GlobalNamespace
-          |> createItemsFromMembersOfNamespace
+          seq [ {
+               DependsUpon =
+                    []
+               Identifier =
+                    compilation.AssemblyName
+               Items =
+                    compilation.GlobalNamespace
+                    |> createItemsFromMembersOfNamespace
+          } ]
 
      and createItemsFromMembersOfNamespace ``namespace`` =
           ``namespace``.GetMembers ()
           |> Seq.choose createItemWhenNamespaceOrType
           |> Seq.sortBy (fun item -> item.Identifier)
+          |> Seq.toList
 
      and createItemWhenNamespaceOrType =
           function

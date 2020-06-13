@@ -1,10 +1,14 @@
-﻿- id: CalleeClass
-  items: CalledMethod
-- ReturnClass
-- id: YieldCallerClass
+﻿- id: TestCase
   items:
-    id: CallerAndYieldMethod
-    dependsUpon:
-      - id: CalleeClass
-        items: CalledMethod
-      - ReturnClass
+    - id: CalleeClass
+      items: CalledMethod
+    - ReturnClass
+    - id: YieldCallerClass
+      items:
+        id: CallerAndYieldMethod
+        dependsUpon:
+          id: TestCase
+          items:
+            - id: CalleeClass
+              items: CalledMethod
+            - ReturnClass

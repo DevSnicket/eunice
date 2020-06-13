@@ -1,2 +1,4 @@
-﻿- id: Interface
-  items: NestedClass
+﻿- id: TestCase
+  items:
+    id: Interface
+    items: NestedClass

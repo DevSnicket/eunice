@@ -1,2 +1,4 @@
-﻿- id: Class
-  items: .ctor
+﻿- id: TestCase
+  items:
+    id: Class
+    items: .ctor

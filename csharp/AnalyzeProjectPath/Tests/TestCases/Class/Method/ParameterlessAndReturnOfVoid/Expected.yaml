@@ -1,2 +1,4 @@
-﻿- id: Class
-  items: Method
+﻿- id: TestCase
+  items:
+    id: Class
+    items: Method

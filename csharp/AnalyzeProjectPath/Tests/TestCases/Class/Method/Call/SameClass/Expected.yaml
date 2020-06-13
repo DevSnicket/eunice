@@ -1,5 +1,7 @@
-﻿- id: Class
+﻿- id: TestCase
   items:
-    - CalledMethod
-    - id: CallerMethod
-      dependsUpon: CalledMethod
+    id: Class
+    items:
+      - CalledMethod
+      - id: CallerMethod
+        dependsUpon: CalledMethod

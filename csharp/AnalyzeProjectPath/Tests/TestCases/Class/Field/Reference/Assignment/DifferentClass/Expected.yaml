@@ -1,11 +1,17 @@
-﻿- FieldClass
-- id: ReferencedClass
+﻿- id: TestCase
   items:
-    id: _field
-    dependsUpon: FieldClass
-- id: ReferrerClass
-  items:
-    id: Method
-    dependsUpon:
-      id: ReferencedClass
-      items: _field
+    - FieldClass
+    - id: ReferencedClass
+      items:
+        id: _field
+        dependsUpon:
+          id: TestCase
+          items: FieldClass
+    - id: ReferrerClass
+      items:
+        id: Method
+        dependsUpon:
+          id: TestCase
+          items:
+            id: ReferencedClass
+            items: _field

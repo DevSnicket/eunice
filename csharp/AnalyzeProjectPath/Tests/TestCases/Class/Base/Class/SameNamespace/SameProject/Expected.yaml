@@ -1,5 +1,7 @@
-﻿- id: Namespace
+﻿- id: TestCase
   items:
-    - BaseClass
-    - id: DerivedClass
-      dependsUpon: BaseClass
+    id: Namespace
+    items:
+      - BaseClass
+      - id: DerivedClass
+        dependsUpon: BaseClass

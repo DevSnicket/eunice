@@ -1,14 +1,18 @@
-﻿- id: CalleeOfAddClass
-  items: CalleeOfAddMethod
-- id: CalleeOfRemoveClass
-  items: CalleeOfRemoveMethod
-- id: Class
+﻿- id: TestCase
   items:
-    id: Event
-    dependsUpon:
-      - id: CalleeOfAddClass
-        items: CalleeOfAddMethod
-      - id: CalleeOfRemoveClass
-        items: CalleeOfRemoveMethod
-      - EventDelegate
-- EventDelegate
+    - id: CalleeOfAddClass
+      items: CalleeOfAddMethod
+    - id: CalleeOfRemoveClass
+      items: CalleeOfRemoveMethod
+    - id: Class
+      items:
+        id: Event
+        dependsUpon:
+          id: TestCase
+          items:
+            - id: CalleeOfAddClass
+              items: CalleeOfAddMethod
+            - id: CalleeOfRemoveClass
+              items: CalleeOfRemoveMethod
+            - EventDelegate
+    - EventDelegate

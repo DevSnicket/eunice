@@ -1,2 +1,4 @@
-﻿- id: Class
-  items: _constant
+﻿- id: TestCase
+  items:
+    id: Class
+    items: _constant

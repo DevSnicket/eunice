@@ -1,5 +1,9 @@
-﻿- id: Class
+﻿- id: TestCase
   items:
-    id: Event
-    dependsUpon: EventDelegate
-- EventDelegate
+    - id: Class
+      items:
+        id: Event
+        dependsUpon:
+          id: TestCase
+          items: EventDelegate
+    - EventDelegate

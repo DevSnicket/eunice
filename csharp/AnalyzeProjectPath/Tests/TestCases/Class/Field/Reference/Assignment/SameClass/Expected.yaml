@@ -1,7 +1,11 @@
-﻿- id: Class
+﻿- id: TestCase
   items:
-    - id: _field
-      dependsUpon: FieldClass
-    - id: Method
-      dependsUpon: _field
-- FieldClass
+    - id: Class
+      items:
+        - id: _field
+          dependsUpon:
+            id: TestCase
+            items: FieldClass
+        - id: Method
+          dependsUpon: _field
+    - FieldClass

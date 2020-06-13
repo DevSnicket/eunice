@@ -1,3 +1,5 @@
-﻿- BaseClass
-- id: DerivedClass
-  dependsUpon: BaseClass
+﻿- id: TestCase
+  items:
+    - BaseClass
+    - id: DerivedClass
+      dependsUpon: BaseClass

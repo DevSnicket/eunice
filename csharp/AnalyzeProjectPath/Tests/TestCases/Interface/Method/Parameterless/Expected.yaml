@@ -1,2 +1,4 @@
-﻿- id: Interface
-  items: Method
+﻿- id: TestCase
+  items:
+    id: Interface
+    items: Method

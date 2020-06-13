@@ -1,4 +1,6 @@
-﻿- id: Class
+﻿- id: TestCase
   items:
-    id: ParentNestedClass
-    items: ChildNestedClass
+    id: Class
+    items:
+      id: ParentNestedClass
+      items: ChildNestedClass

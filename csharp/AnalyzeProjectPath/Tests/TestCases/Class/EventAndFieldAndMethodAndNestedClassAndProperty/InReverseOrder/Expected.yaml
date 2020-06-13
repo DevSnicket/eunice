@@ -1,13 +1,21 @@
-﻿- id: Class
+﻿- id: TestCase
   items:
-    - id: Property
-      dependsUpon: PropertyClass
-    - NestedClass
-    - Method
-    - id: _field
-      dependsUpon: FieldClass
-    - id: Event
-      dependsUpon: EventDelegate
-- EventDelegate
-- FieldClass
-- PropertyClass
+    - id: Class
+      items:
+        - id: Property
+          dependsUpon:
+            id: TestCase
+            items: PropertyClass
+        - NestedClass
+        - Method
+        - id: _field
+          dependsUpon:
+            id: TestCase
+            items: FieldClass
+        - id: Event
+          dependsUpon:
+            id: TestCase
+            items: EventDelegate
+    - EventDelegate
+    - FieldClass
+    - PropertyClass

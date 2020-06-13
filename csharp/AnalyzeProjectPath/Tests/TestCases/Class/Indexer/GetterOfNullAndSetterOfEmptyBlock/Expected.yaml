@@ -1,5 +1,9 @@
-﻿- id: Class
+﻿- id: TestCase
   items:
-    id: Item
-    dependsUpon: IndexerClass
-- IndexerClass
+    - id: Class
+      items:
+        id: Item
+        dependsUpon:
+          id: TestCase
+          items: IndexerClass
+    - IndexerClass

@@ -1,5 +1,9 @@
-﻿- CastedClass
-- id: CastingClass
+﻿- id: TestCase
   items:
-    id: Method
-    dependsUpon: CastedClass
+    - CastedClass
+    - id: CastingClass
+      items:
+        id: Method
+        dependsUpon:
+          id: TestCase
+          items: CastedClass

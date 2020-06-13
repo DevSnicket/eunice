@@ -1,11 +1,15 @@
-﻿- id: Namespace
+﻿- id: TestCase
   items:
-    - id: Class
-      items:
-        - id: Method
-          dependsUpon:
-            - id: Namespace
-              items: SameNameClass
-            - SameNameClass
-        - SameNameClass
-    - SameNameClass
+    id: Namespace
+    items:
+      - id: Class
+        items:
+          - id: Method
+            dependsUpon:
+              - SameNameClass
+              - id: TestCase
+                items:
+                  id: Namespace
+                  items: SameNameClass
+          - SameNameClass
+      - SameNameClass

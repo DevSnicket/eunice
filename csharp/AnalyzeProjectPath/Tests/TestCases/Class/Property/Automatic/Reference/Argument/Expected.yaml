@@ -1,7 +1,11 @@
-﻿- id: Class
+﻿- id: TestCase
   items:
-    - id: Property
-      dependsUpon: PropertyClass
-    - id: Method
-      dependsUpon: Property
-- PropertyClass
+    - id: Class
+      items:
+        - id: Property
+          dependsUpon:
+            id: TestCase
+            items: PropertyClass
+        - id: Method
+          dependsUpon: Property
+    - PropertyClass

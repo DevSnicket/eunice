@@ -1,4 +1,6 @@
-﻿- id: GrandparentNamespace
+﻿- id: TestCase
   items:
-    id: ParentNamespace
-    items: Class
+    id: GrandparentNamespace
+    items:
+      id: ParentNamespace
+      items: Class

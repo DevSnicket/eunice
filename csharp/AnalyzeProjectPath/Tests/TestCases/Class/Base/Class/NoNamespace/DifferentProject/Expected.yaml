@@ -1,2 +1,6 @@
-﻿- id: DerivedClass
-  dependsUpon: BaseClass
+﻿- id: TestCase
+  items:
+    id: DerivedClass
+    dependsUpon:
+      id: BaseClassProject
+      items: BaseClass

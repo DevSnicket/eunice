@@ -1,3 +1,5 @@
-﻿- ConstraintInterface
-- id: Interface`1
-  dependsUpon: ConstraintInterface
+﻿- id: TestCase
+  items:
+    - ConstraintInterface
+    - id: Interface`1
+      dependsUpon: ConstraintInterface
