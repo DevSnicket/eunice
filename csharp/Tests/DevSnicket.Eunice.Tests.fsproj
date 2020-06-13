@@ -14,10 +14,10 @@
 		<ProjectReference Include="../DevSnicket.Eunice.fsproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<Compile Include="../AnalyzeProjectPath/CreateItemFromMemberSymbol/Tests.fs" />
-		<Compile Include="../AnalyzeProjectPath/Tests/FindParametersForTestCasesInDirectoryPath.fs" />
-		<Compile Include="../AnalyzeProjectPath/FormatItemsAsYaml/SequenceBlockEntryFromLines/Tests.fs" />
-		<Compile Include="../AnalyzeProjectPath/Tests/.fs" />
+		<Compile Include="../AnalyzeProject/CreateItemFromMemberSymbol/Tests.fs" />
+		<Compile Include="../AnalyzeProject/FormatItemsAsYaml/SequenceBlockEntryFromLines/Tests.fs" />
+		<Compile Include="../AnalyzeProjectOrSolutionPath/Tests/FindParametersForTestCasesInDirectoryPath.fs" />
+		<Compile Include="../AnalyzeProjectOrSolutionPath/Tests/.fs" />
 		<Compile Include="../ExecuteProgram/Tests.fs" />
 	</ItemGroup>
 	<Target AfterTargets="Build" Name="WriteXunitConsoleRuntime">

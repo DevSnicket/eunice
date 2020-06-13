@@ -1,0 +1,14 @@
+﻿- id: BaseClassProject
+  items:
+    id: Namespace
+    items: BaseClass
+- id: DerivedClassProject
+  items:
+    id: Namespace
+    items:
+      id: DerivedClass
+      dependsUpon:
+        id: BaseClassProject
+        items:
+          id: Namespace
+          items: BaseClass

@@ -1,6 +1,6 @@
 module rec DevSnicket.Eunice.ExecuteProgram
 
-open DevSnicket.Eunice.AnalyzeProjectPath
+open DevSnicket.Eunice.AnalyzeProjectOrSolutionPath
 open System
 
 type LinesAndStatus =
@@ -23,7 +23,7 @@ let executeProgram arguments =
         analyzeArgumentsIntoExitCodeAndOutputLines
             {|
                 AnalyzePath =
-                    analyzeProjectPath
+                    analyzeProjectOrSolutionPath
                     >> Async.RunSynchronously
                 Arguments =
                     arguments
@@ -53,4 +53,4 @@ let analyzeArgumentsIntoExitCodeAndOutputLines
             Lines = seq [ zeroOrManyArgumentsErrorMessage ]
         }
 
-let zeroOrManyArgumentsErrorMessage = "Specify the path of a single C# project file."
+let zeroOrManyArgumentsErrorMessage = "Specify the path of a single C# project or solution file."
