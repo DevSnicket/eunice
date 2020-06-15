@@ -1,0 +1,10 @@
+﻿- id: TestCase
+  items:
+    - id: Class
+      items:
+        - Method
+        - id: Method(TestCase.ParameterClass[][])
+          dependsUpon:
+            id: TestCase
+            items: ParameterClass
+    - ParameterClass

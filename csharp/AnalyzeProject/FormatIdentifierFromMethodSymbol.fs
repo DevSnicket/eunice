@@ -46,7 +46,7 @@ let private formatTypeOfParameter parameter =
 let private formatType =
     function
     | :? IArrayTypeSymbol as array ->
-        (array.ElementType |> getQualifiedName)
+        (array.ElementType |> formatType)
         +
         "[]"
     | symbol ->
