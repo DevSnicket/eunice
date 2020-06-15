@@ -35,7 +35,7 @@ let createDependsUponFromSymbolsOfReferrer (referrer: ISymbol) =
           and withAncestorHierarchyWhenRequired dependUpon =
                match isAncestorHierarchyRequired () with
                | true ->
-                    dependUpon |> createAncestorHierarchy symbol
+                    dependUpon |> addAncestorHierarchyOfSymbol  symbol
                | false ->
                     dependUpon
           
@@ -56,17 +56,30 @@ let private hasLocationInSource =
           symbol.Locations
           |> Seq.exists (fun location -> location.IsInSource)
 
-let private createAncestorHierarchy symbol item =
-     match symbol.ContainingSymbol.Name with
-     | "" ->
+let private addAncestorHierarchyOfSymbol  symbol item =
+     match symbol.ContainingSymbol with
+     | null ->
+          item
+     | containingSymbol ->
+          addAncestorHierarchyOfSymbol
+               containingSymbol
+               (item |> addParentOfContainingSymbol containingSymbol)
+
+let private addParentOfContainingSymbol containingSymbol item =
+     match containingSymbol |> isImplicitSymbol with
+     | true ->
+          item
+     | false ->
           {
-               Identifier = symbol.ContainingAssembly.MetadataName
+               Identifier = containingSymbol.MetadataName
                Items = [ item ]
           }
+
+let private isImplicitSymbol =
+     function
+     | :? INamespaceSymbol as ``namespace`` ->
+          ``namespace``.IsGlobalNamespace
+     | :? IModuleSymbol ->
+          true
      | _ ->
-          createAncestorHierarchy
-               symbol.ContainingSymbol
-               {
-                    Identifier = symbol.ContainingSymbol.MetadataName;
-                    Items = [ item ]
-               }
+          false
