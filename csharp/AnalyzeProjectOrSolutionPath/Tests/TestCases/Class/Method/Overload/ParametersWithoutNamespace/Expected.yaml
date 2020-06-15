@@ -1,0 +1,20 @@
+﻿- id: TestCase
+  items:
+    - id: Class
+      items:
+        - id: Method
+          dependsUpon: Method(TestCase.Parameter1Class)
+        - id: Method(TestCase.Parameter1Class)
+          dependsUpon:
+            - Method(TestCase.Parameter1Class,TestCase.Parameter2Class)
+            - id: TestCase
+              items: Parameter1Class
+        - id: Method(TestCase.Parameter1Class,TestCase.Parameter2Class)
+          dependsUpon:
+            - Method
+            - id: TestCase
+              items:
+                - Parameter1Class
+                - Parameter2Class
+    - Parameter1Class
+    - Parameter2Class

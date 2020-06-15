@@ -2,35 +2,36 @@ module rec DevSnicket.Eunice._AnalyzeProject.CreateItemFromMemberSymbol
 
 open DevSnicket.Eunice._AnalyzeProject
 open DevSnicket.Eunice._AnalyzeProject.CreateDependsUponFromSymbolsOfReferrer
+open DevSnicket.Eunice._AnalyzeProject.FormatIdentifierFromMethodSymbol
 open Microsoft.CodeAnalysis
 open Microsoft.CodeAnalysis.CSharp.Syntax
 
 let createItemFromMemberSymbol (getSymbolFromSyntaxNode: SyntaxNode -> ISymbol) =
-     let rec createItemFromMemberSymbol: (ISymbol -> Item option) =
-          function
-          | :? IEventSymbol as event ->
-               Some
-                    event.Type
-                    |> createItemWithTypeFromMemberImplementation event
-          | :? IFieldSymbol as field ->
-               field |> createItemFromField
-          | :? IMethodSymbol as method ->
-               method |> createItemFromMethod
-          | :? IPropertySymbol as property ->
-               Some
-                    property.Type
-                    |> createItemWithTypeFromMemberImplementation property
-          | ``member`` ->
-               createItemFromMemberImplementation ``member``
+     let rec createItemFromMemberSymbol (``member``: ISymbol) =
+          let rec createItemFromMemberSymbol () =
+               match ``member`` with
+               | :? IEventSymbol as event ->
+                    createItemWithType (Some event.Type)
+               | :? IFieldSymbol as field ->
+                    field |> createItemFromField
+               | :? IMethodSymbol as method ->
+                    method |> createItemFromMethod
+               | :? IPropertySymbol as property ->
+                    createItemWithType (Some property.Type)
+               | _ ->
+                    createItemWithType None
 
-     and createItemFromField field =
-          match field.AssociatedSymbol with
-          | :? IPropertySymbol ->
-               None
-          | _ ->
-               Some
-                    field.Type
-                    |> createItemWithTypeFromMemberImplementation field
+          and createItemFromField field =
+               match field.AssociatedSymbol with
+               | :? IPropertySymbol ->
+                    None
+               | _ ->
+                    createItemWithType (Some field.Type)
+
+          and createItemWithType ``type`` =
+               createItemFromIdentifierAndMemberAndType ``member``.MetadataName ``member`` ``type``
+
+          createItemFromMemberSymbol()
 
      and createItemFromMethod method =
           let rec createItemFromMethod () =
@@ -38,9 +39,9 @@ let createItemFromMemberSymbol (getSymbolFromSyntaxNode: SyntaxNode -> ISymbol) 
                | true ->
                     match method.PartialImplementationPart with
                     | null ->
-                         createItemFromMemberImplementation method
+                         createItemFromImplementationMethod method
                     | partialImplementationPart ->
-                         createItemFromMemberImplementation partialImplementationPart
+                         createItemFromImplementationMethod partialImplementationPart
                | false ->
                     None
 
@@ -51,11 +52,14 @@ let createItemFromMemberSymbol (getSymbolFromSyntaxNode: SyntaxNode -> ISymbol) 
 
           createItemFromMethod ()
 
-     and createItemFromMemberImplementation ``member`` =
-          None |> createItemWithTypeFromMemberImplementation ``member``
+     and createItemFromImplementationMethod method =
+          createItemFromIdentifierAndMemberAndType
+               (method |> formatIdentifierFromMethodSymbol)
+               method
+               None
 
-     and createItemWithTypeFromMemberImplementation (``member``: ISymbol) =
-          let rec createItemWithType ``type`` =
+     and createItemFromIdentifierAndMemberAndType identifier ``member`` ``type`` =
+          let rec createItemFromMemberAndMetadataAndType () =
                Some
                     {
                          DependsUpon =
@@ -65,7 +69,7 @@ let createItemFromMemberSymbol (getSymbolFromSyntaxNode: SyntaxNode -> ISymbol) 
                               ]
                               |> createDependsUponFromSymbolsOfReferrer ``member``
                          Identifier =
-                              ``member``.MetadataName
+                              identifier
                          Items =
                               []
                     }
@@ -75,7 +79,7 @@ let createItemFromMemberSymbol (getSymbolFromSyntaxNode: SyntaxNode -> ISymbol) 
                |> Seq.collect getNamesUsedInSyntaxReference
                |> Seq.map getSymbolFromSyntaxNode
 
-          createItemWithType
+          createItemFromMemberAndMetadataAndType()
 
      createItemFromMemberSymbol
 

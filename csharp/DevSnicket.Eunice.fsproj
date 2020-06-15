@@ -10,6 +10,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Include="AnalyzeProject/DependUpon.fs" />
+		<Compile Include="AnalyzeProject/FormatIdentifierFromMethodSymbol.fs" />
 		<Compile Include="AnalyzeProject/CreateDependsUponFromSymbolsOfReferrer/GroupDependsUponIntoHierarchy.fs" />
 		<Compile Include="AnalyzeProject/CreateDependsUponFromSymbolsOfReferrer/.fs" />
 		<Compile Include="AnalyzeProject/Item.fs" />

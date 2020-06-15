@@ -3,6 +3,7 @@ module rec DevSnicket.Eunice._AnalyzeProject.FormatItemsAsYaml
 open DevSnicket.Eunice._AnalyzeProject
 open DevSnicket.Eunice._AnalyzeProject._FormatItemsAsYaml.FormatDependsUponMapping
 open DevSnicket.Eunice._AnalyzeProject._FormatItemsAsYaml.FormatKeyValueLinesMapping
+open DevSnicket.Eunice._AnalyzeProject._FormatItemsAsYaml.IndentLines
 open DevSnicket.Eunice._AnalyzeProject._FormatItemsAsYaml.SequenceBlockEntryFromLines
 
 let formatItemsAsYaml items =

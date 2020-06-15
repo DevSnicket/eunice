@@ -1,6 +1,7 @@
 module rec DevSnicket.Eunice._AnalyzeProject.CreateDependsUponFromSymbolsOfReferrer
 
 open DevSnicket.Eunice._AnalyzeProject._createDependsUponFromSymbolsOfReferrer.GroupDependsUponIntoHierarchy
+open DevSnicket.Eunice._AnalyzeProject.FormatIdentifierFromMethodSymbol
 open Microsoft.CodeAnalysis
 
 let createDependsUponFromSymbolsOfReferrer (referrer: ISymbol) =
@@ -17,12 +18,19 @@ let createDependsUponFromSymbolsOfReferrer (referrer: ISymbol) =
                     Some (
                          withAncestorHierarchyWhenRequired
                               {
-                                   Identifier = symbol.MetadataName
+                                   Identifier = formatIdentifier ()
                                    Items = []
                               }
                     )
                | false ->
                     None
+
+          and formatIdentifier () =
+               match symbol with
+               | :? IMethodSymbol as method ->
+                    method |> formatIdentifierFromMethodSymbol
+               | _ ->
+                    symbol.MetadataName
 
           and withAncestorHierarchyWhenRequired dependUpon =
                match isAncestorHierarchyRequired () with
