@@ -1,5 +1,9 @@
 ---
 2020-06-13
+solution files
+
+---
+2020-06-13
 assembly qualify items and dependencies
 unambigious dependencies on siblings and parents aren't qualified
 
