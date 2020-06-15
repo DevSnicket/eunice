@@ -36,23 +36,32 @@ let private formatParameters =
     | parameters ->
         "("
         +
-        (parameters |> Seq.map formatParameterType |> String.concat ",")
+        (parameters |> Seq.map formatTypeOfParameter |> String.concat ",")
         +
         ")"
 
-let private formatParameterType parameter =
-    parameter.Type |> getQualifiedName
+let private formatTypeOfParameter parameter =
+    parameter.Type |> formatType
+
+let private formatType =
+    function
+    | :? IArrayTypeSymbol as array ->
+        (array.ElementType |> getQualifiedName)
+        +
+        "[]"
+    | symbol ->
+        symbol |> getQualifiedName
 
 let private getQualifiedName (symbol: ISymbol) =
-    (symbol.ContainingSymbol |> getQualifier)
-    +
-    "."
+    (symbol.ContainingSymbol |> getAsQualifier)
     +
     symbol.MetadataName
 
-let private getQualifier (symbol: ISymbol) =
-    match symbol.Name with
+let private getAsQualifier symbol =
+    match symbol.MetadataName with
     | "" ->
         symbol.ContainingAssembly.Name
     | _ ->
         symbol |> getQualifiedName
+    +
+    "."
