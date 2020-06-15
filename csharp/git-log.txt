@@ -1,4 +1,9 @@
 ---
+2020-06-13
+assembly qualify items and dependencies
+unambigious dependencies on siblings and parents aren't qualified
+
+---
 2020-06-12
 spell check includes 2+ letter words (previously 4+)
 
