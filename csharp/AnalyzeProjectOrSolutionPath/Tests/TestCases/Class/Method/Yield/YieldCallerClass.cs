@@ -1,7 +1,5 @@
-using System.Collections.Generic;
-
 class YieldCallerClass {
-	static IEnumerable<ReturnClass> CallerAndYieldMethod() {
+	static System.Collections.Generic.IEnumerable<ReturnClass> CallerAndYieldMethod() {
 		yield return CalleeClass.CalledMethod();
 	}
 }

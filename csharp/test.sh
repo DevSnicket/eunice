@@ -5,6 +5,7 @@ set -e
 # https://github.com/dotnet/roslyn/issues/44822
 dotnet restore AnalyzeProjectOrSolutionPath/Tests/TestCases/Generic/Class/Base/IEnumerable
 dotnet restore AnalyzeProjectOrSolutionPath/Tests/TestCases/Class/Method/Overload/ParameterOfTypeFromAssemblyReference
+dotnet restore AnalyzeProjectOrSolutionPath/Tests/TestCases/Class/Method/Yield
 
 dotnet test \
 Tests \

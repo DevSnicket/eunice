@@ -5,11 +5,26 @@ open DevSnicket.Eunice._AnalyzeProject.FormatIdentifierFromMethodSymbol
 open Microsoft.CodeAnalysis
 
 let createDependsUponFromSymbolsOfReferrer (referrer: ISymbol) =
-     let rec createDependsUponFromSymbols symbols =
+     let rec createDependsUponFromSymbols (symbols: ISymbol seq) =
           symbols
+          |> Seq.collect withTypesOfGenerics
           |> Seq.choose createDependUponWithAncestorHierachyFromSymbol
           |> groupDependsUponIntoHierarchy
           |> Seq.toList
+
+     and withTypesOfGenerics =
+          function
+          | :? INamedTypeSymbol as ``type`` ->
+               match ``type``.IsGenericType with
+               | true ->
+                    seq [
+                         ``type``.ConstructedFrom :> ISymbol
+                         yield! ``type``.TypeArguments |> Seq.map (fun ``type`` -> ``type`` :> ISymbol)
+                    ]
+               | false ->
+                    seq [ ``type`` ]
+          | symbol ->
+               seq [ symbol ]
 
      and createDependUponWithAncestorHierachyFromSymbol (symbol: ISymbol) =
           let rec createWhenInSource () =

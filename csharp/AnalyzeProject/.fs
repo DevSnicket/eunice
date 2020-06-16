@@ -90,6 +90,7 @@ let private createItemFromClassOrInterfaceOrStruct getSymbolFromSyntaxNode ``typ
           DependsUpon =
                ``type``
                |> getBasesOfTypeDeclaration
+               |> Seq.map (fun baseType -> baseType :> ISymbol)
                |> createDependsUponFromSymbolsOfReferrer ``type``
           Identifier =
                ``type``.MetadataName

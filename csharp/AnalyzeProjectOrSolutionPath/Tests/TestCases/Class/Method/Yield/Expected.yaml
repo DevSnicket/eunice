@@ -1,7 +1,11 @@
 ﻿- id: TestCase
   items:
     - id: CalleeClass
-      items: CalledMethod
+      items:
+        id: CalledMethod
+        dependsUpon:
+          id: TestCase
+          items: ReturnClass
     - ReturnClass
     - id: YieldCallerClass
       items:

@@ -13,7 +13,7 @@ let createItemWhenDelegate (``type``: INamedTypeSymbol) =
           {
                DependsUpon =
                     seq [
-                         yield! method.Parameters |> Seq.map (fun parameter -> parameter.Type)
+                         yield! method.Parameters |> Seq.map (fun parameter -> parameter.Type :> ISymbol)
                          method.ReturnType
                     ]
                     |> createDependsUponFromSymbolsOfReferrer ``type``

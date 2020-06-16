@@ -1,4 +1,2 @@
-using System.Collections.Generic;
-
-class Class : IEnumerable<Interface> {
+class Class : System.Collections.Generic.IEnumerable<Interface> {
 }

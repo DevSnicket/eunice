@@ -1,5 +1,3 @@
-using System.Collections;
-
 class Class {
 	PropertyClass Property { get; set; }
 

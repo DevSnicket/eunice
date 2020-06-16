@@ -14,20 +14,10 @@ let getBasesOfTypeDeclaration (``type``: INamedTypeSymbol) =
                yield! ``type``.BaseType |> Option.ofObj |> Option.toList
                yield! ``type``.Interfaces
           ]
-          |> Seq.collect getTypeWithTypeArguments
+          |> Seq.map (fun typeBase -> typeBase :> ITypeSymbol)
 
      and getTypeParameters () =
           ``type``.TypeParameters
           |> Seq.collect (fun typeParameter -> typeParameter.ConstraintTypes)
 
      createDependsUponFromTypeDeclaration ()
-
-let private getTypeWithTypeArguments ``type`` =
-     match ``type``.IsGenericType with
-     | true ->
-          seq [
-               ``type``.ConstructedFrom
-               yield! ``type``.TypeArguments
-          ]
-     | false ->
-          seq [ ``type`` ]

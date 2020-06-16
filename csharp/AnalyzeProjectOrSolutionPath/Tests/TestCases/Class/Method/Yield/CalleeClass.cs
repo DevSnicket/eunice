@@ -1,3 +1,3 @@
 class CalleeClass {
-	public static void CalledMethod() { }
+	public static ReturnClass CalledMethod() => null;
 }
