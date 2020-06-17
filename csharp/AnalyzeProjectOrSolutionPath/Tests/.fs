@@ -11,42 +11,81 @@ type Tests () =
 
     [<Xunit.Theory>]
     [<Xunit.MemberData ("ParametersForTestCases")>]
-    let testsFromFileSystem (projectFilePath: String) =
+    let rec testsFromFileSystem (projectFilePath: String) =
         async {
-            let projectDirectory =
+            let projectDirectoryPath =
                 projectFilePath
                 |> Path.GetDirectoryName
-
-            let expectedPath =
-                match Path.Join (projectDirectory, "Expected.yaml") with
-                | path when path |> File.Exists ->
-                    path
-                | _ ->
-                    Path.Join (projectDirectory, "Expected.yaml")
-
-            let! actualLines =
+            
+            let! actualErrorsAndYamlLines =
                 projectFilePath
                 |> analyzeProjectOrSolutionPath
 
             let actual =
-                actualLines
-                |> String.concat "\n"
+                formatErrorsAndYaml
+                    (actualErrorsAndYamlLines.Errors |> String.concat "\n")
+                    (actualErrorsAndYamlLines.Yaml |> String.concat "\n")
 
             let! expected =
-                expectedPath
-                |> File.ReadAllTextAsync
-                |> Async.AwaitTask
+                projectDirectoryPath
+                |> Path.GetFullPath
+                |> readExpectedInDirectory
 
             if actual <> expected then
                 raise (
                     Xunit.Sdk.AssertActualExpectedException (
-                        "\n" + expected,
-                        "\n" + actual,
-                        projectDirectory
+                        expected,
+                        actual,
+                        projectDirectoryPath
                     )
                 )
         }
-        
+
+    and readExpectedInDirectory directory =
+        async {
+            let! errors =
+                let getPathOfFileName fileName =
+                    [| directory; fileName |]
+                    |> Path.Join
+
+                let errorsPath =
+                    "Expected.errors" |> getPathOfFileName
+
+                match errorsPath |> File.Exists with
+                | true ->
+                    async {
+                        let! errors =
+                            errorsPath
+                            |> File.ReadAllLinesAsync
+                            |> Async.AwaitTask
+
+                        return
+                            errors
+                            |> Seq.map getPathOfFileName
+                            |> String.concat "\n"
+                    }
+                | false ->
+                    async.Return ""
+
+            let! yaml =
+                [| directory; "Expected.yaml" |]
+                |> Path.Join
+                |> File.ReadAllTextAsync
+                |> Async.AwaitTask
+
+            return formatErrorsAndYaml errors yaml
+        }
+
+    and formatErrorsAndYaml errors yaml =
+        seq [
+            ""
+            "Errors:"
+            errors
+            "Yaml:"
+            yaml
+        ]
+        |> String.concat "\n"
+
     static member ParametersForTestCases =
         [| ".."; ".."; ".."; "AnalyzeProjectOrSolutionPath"; "Tests"; "TestCases" |]
         |> Path.Join

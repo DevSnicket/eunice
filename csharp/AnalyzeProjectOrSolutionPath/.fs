@@ -20,12 +20,20 @@ let private analyzeSolutionPath solutionPath =
                |> workspace.OpenSolutionAsync
                |> Async.AwaitTask
           
-          let! yaml =
+          let! errorsAndYamlOfProjects =
                solution.Projects
                |> Seq.map analyzeProject
                |> Async.Parallel
-          
-          return yaml |> Seq.concat
+
+          return
+               {
+                    Errors =
+                         errorsAndYamlOfProjects
+                         |> Seq.collect (fun errorsAndYaml -> errorsAndYaml.Errors)
+                    Yaml =
+                         errorsAndYamlOfProjects
+                         |> Seq.collect (fun errorsAndYaml -> errorsAndYaml.Yaml)
+               }
      }
 
 let private analyzeProjectPath projectPath =

@@ -1,5 +1,0 @@
-﻿- id: TestCase
-  items:
-    - id: Class
-      dependsUpon: Interface
-    - Interface

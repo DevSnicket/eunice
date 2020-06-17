@@ -1,0 +1,17 @@
+﻿- id: TestCase
+  items:
+    - id: Class
+      items:
+        - id: _field
+          dependsUpon:
+            id: TestCase
+            items: FieldClass
+        - id: Method
+          dependsUpon:
+            - Callee
+            - _field
+        - id: Callee
+          dependsUpon:
+            id: TestCase
+            items: FieldClass
+    - FieldClass

@@ -1,0 +1,8 @@
+﻿- id: TestCase
+  items:
+    id: DeclarationClass
+    items:
+      id: DeclarationMethod
+      dependsUpon:
+        id: TestCase
+        items: KnownNamespace

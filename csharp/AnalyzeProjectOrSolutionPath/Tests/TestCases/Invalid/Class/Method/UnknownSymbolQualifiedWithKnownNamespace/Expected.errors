@@ -1,0 +1,2 @@
+DeclarationClass.cs(3,35): error CS1002: ; expected
+DeclarationClass.cs(3,3): error CS0234: The type or namespace name 'UnknownIdentifier' does not exist in the namespace 'KnownNamespace' (are you missing an assembly reference?)

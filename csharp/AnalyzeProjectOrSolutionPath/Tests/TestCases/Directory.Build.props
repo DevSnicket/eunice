@@ -1,5 +1,6 @@
 <Project>
 	<PropertyGroup>
+		<LangVersion>8.0</LangVersion>
 		<!-- https://github.com/microsoft/msbuild/issues/5390 -->
 		<TargetFramework>netstandard2.0</TargetFramework>
 	</PropertyGroup>

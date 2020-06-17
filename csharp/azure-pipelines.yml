@@ -14,6 +14,9 @@ steps:
     displayName: spellcheck
     inputs: { scriptPath: spellcheck.sh }
   - task: ShellScript@2
+    displayName: restore test case C# projects
+    inputs: { scriptPath: AnalyzeProjectOrSolutionPath/Tests/TestCases/restore.sh }
+  - task: ShellScript@2
     displayName: test
     inputs: { scriptPath: test.sh }
   - task: ShellScript@2

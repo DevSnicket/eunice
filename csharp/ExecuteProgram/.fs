@@ -1,12 +1,14 @@
 module rec DevSnicket.Eunice.ExecuteProgram
 
+open DevSnicket.Eunice.AnalyzeProject
 open DevSnicket.Eunice.AnalyzeProjectOrSolutionPath
 open System
 
-type LinesAndStatus =
+type AnalyzeWithArgumentsResult =
     {
+        Errors: String seq
         ExitCode: Int32
-        Lines: String seq
+        Yaml: String seq
     }
 
 [<EntryPoint>]
@@ -16,41 +18,35 @@ let executeProgram arguments =
 
     let
         {
+            Errors = errors
             ExitCode = exitCode
-            Lines = lines
+            Yaml = yaml
         }
         =
-        analyzeArgumentsIntoExitCodeAndOutputLines
-            {|
-                AnalyzePath =
-                    analyzeProjectOrSolutionPath
-                    >> Async.RunSynchronously
-                Arguments =
-                    arguments
-            |}
+        callAnalyzePathWithArguments
+            (analyzeProjectOrSolutionPath >> Async.RunSynchronously)
+            arguments
 
-    lines |> Seq.iter Console.WriteLine
+    errors |> Seq.iter Console.Error.WriteLine
+    yaml |> Seq.iter Console.WriteLine
 
     exitCode
 
-let analyzeArgumentsIntoExitCodeAndOutputLines
-    (
-        parameters:
-            {|
-                AnalyzePath: String -> String seq
-                Arguments: String array
-            |}
-    ) =
-    match parameters.Arguments with
+let callAnalyzePathWithArguments analyzePath arguments =
+    match arguments with
     | [| path |] ->
+        let errorsAndYaml = path |> analyzePath
+
         {
+            Errors = errorsAndYaml.Errors
             ExitCode = 0
-            Lines = path |> parameters.AnalyzePath
+            Yaml = errorsAndYaml.Yaml
         }
     | _ ->
         {
+            Errors = seq [ zeroOrManyArgumentsErrorMessage ]
             ExitCode = 1
-            Lines = seq [ zeroOrManyArgumentsErrorMessage ]
+            Yaml = seq []
         }
 
 let zeroOrManyArgumentsErrorMessage = "Specify the path of a single C# project or solution file."

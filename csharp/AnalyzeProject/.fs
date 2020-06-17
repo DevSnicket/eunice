@@ -16,10 +16,23 @@ let analyzeProject (project: Project) =
                |> Async.AwaitTask
 
           return
-               compilation
-               |> createItemsInCompilation
-               |> formatItemsAsYaml
+               {
+                    Errors =
+                         compilation.GetDiagnostics()
+                         |> Seq.choose formatWhenError
+                    Yaml =
+                         compilation
+                         |> createItemsInCompilation
+                         |> formatItemsAsYaml
+               }
      }
+
+let private formatWhenError diagnostic =
+     match diagnostic.Severity with
+     | DiagnosticSeverity.Error ->
+          Some (diagnostic.ToString())
+     | _ ->
+          None
 
 let private createItemsInCompilation compilation =
      let rec createItemsInCompilation () =

@@ -1,0 +1,11 @@
+﻿- id: TestCase
+  items:
+    - id: Class
+      dependsUpon: Interface
+      items:
+        - System.Collections.IEnumerable.GetEnumerator
+        - id: GetEnumerator
+          dependsUpon:
+            id: TestCase
+            items: Interface
+    - Interface

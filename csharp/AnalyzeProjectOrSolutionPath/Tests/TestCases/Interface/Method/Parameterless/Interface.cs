@@ -1,3 +1,0 @@
-interface Interface { 
-	void Method() { }
-}

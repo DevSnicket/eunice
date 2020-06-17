@@ -9,6 +9,7 @@
 		<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="3.6.0" />
 	</ItemGroup>
 	<ItemGroup>
+		<Compile Include="AnalysisResult.fs" />
 		<Compile Include="AnalyzeProject/DependUpon.fs" />
 		<Compile Include="AnalyzeProject/FormatIdentifierFromMethodSymbol.fs" />
 		<Compile Include="AnalyzeProject/CreateDependsUponFromSymbolsOfReferrer/GroupDependsUponIntoHierarchy.fs" />
