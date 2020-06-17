@@ -1,4 +1,8 @@
 ---
+2020-06-17
+semantic model cache
+
+---
 2020-06-16
 generic types used by members
 
