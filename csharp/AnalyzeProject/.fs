@@ -67,9 +67,25 @@ let private createItemsInCompilation compilation =
      
      and getSymbolFromSyntaxNode (syntaxNode: SyntaxNode) =
           syntaxNode.SyntaxTree
-          |> compilation.GetSemanticModel
+          |> getSemanticModelOfSyntaxTree
           |> (fun semanticModel -> syntaxNode |> semanticModel.GetSymbolInfo)
           |> (fun symbolInfo -> symbolInfo.Symbol)
+
+     and getSemanticModelOfSyntaxTree: (SyntaxTree -> SemanticModel) =
+          let cache = new System.Collections.Generic.Dictionary<_,_>()
+
+          fun syntaxTree ->
+               match syntaxTree |> cache.TryGetValue with
+               | (true, semanticModel) ->
+                    semanticModel
+               | (false, _) ->
+                    let semanticModel =
+                         syntaxTree
+                         |> compilation.GetSemanticModel
+
+                    cache.Add(syntaxTree, semanticModel)
+
+                    semanticModel
 
      createItemsInCompilation ()
 
