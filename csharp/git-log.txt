@@ -1,8 +1,12 @@
 ---
 2020-06-17
+projects with no references are ignored in solutions
+
+---
+2020-06-17
 only the first of each project analyzed from solutions
 multiple instances of the same project due to multiple target frameworks
-matches behaviour of single projects
+matches behavior of single projects
 
 ---
 2020-06-17
