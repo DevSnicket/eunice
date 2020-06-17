@@ -1,5 +1,9 @@
 ---
 2020-06-17
+compilation error logging
+
+---
+2020-06-17
 semantic model cache
 
 ---
