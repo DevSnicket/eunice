@@ -1,5 +1,9 @@
 ---
 2020-06-17
+spellcheck of Git log in CI
+
+---
+2020-06-17
 projects with no references are ignored in solutions
 
 ---
