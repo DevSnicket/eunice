@@ -22,6 +22,7 @@ let private analyzeSolutionPath solutionPath =
           
           let! errorsAndYamlOfProjects =
                solution.Projects
+               |> getFirstOfEachAssemblyInProjects
                |> Seq.map analyzeProject
                |> Async.Parallel
 
@@ -35,6 +36,10 @@ let private analyzeSolutionPath solutionPath =
                          |> Seq.collect (fun errorsAndYaml -> errorsAndYaml.Yaml)
                }
      }
+
+let private getFirstOfEachAssemblyInProjects =
+     Seq.groupBy (fun project -> project.AssemblyName)
+     >> Seq.map (fun (_, projects) -> projects |> Seq.head)
 
 let private analyzeProjectPath projectPath =
      async {
