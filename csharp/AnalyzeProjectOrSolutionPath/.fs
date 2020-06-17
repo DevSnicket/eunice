@@ -37,9 +37,13 @@ let private analyzeSolutionPath solutionPath =
                }
      }
 
-let private getFirstOfEachAssemblyInProjects =
-     Seq.groupBy (fun project -> project.AssemblyName)
-     >> Seq.map (fun (_, projects) -> projects |> Seq.head)
+let private getFirstOfEachAssemblyInProjects projects =
+     projects
+     |> Seq.groupBy (fun project -> project.AssemblyName)
+     |> Seq.choose (fun (_, project) -> project |> getFirstSupportedProject)
+
+let private getFirstSupportedProject =
+     Seq.tryFind (fun project -> project.MetadataReferences.Count > 0)
 
 let private analyzeProjectPath projectPath =
      async {
