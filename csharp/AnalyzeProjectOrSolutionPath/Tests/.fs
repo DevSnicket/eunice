@@ -51,6 +51,11 @@ type Tests () =
                 let errorsPath =
                     "Expected.errors" |> getPathOfFileName
 
+                let prefixErrorWithPath (error: String) =
+                    match ": error CS" |> error.Contains with
+                    | true -> error |> getPathOfFileName
+                    | false -> error
+
                 match errorsPath |> File.Exists with
                 | true ->
                     async {
@@ -61,17 +66,24 @@ type Tests () =
 
                         return
                             errors
-                            |> Seq.map getPathOfFileName
+                            |> Seq.map prefixErrorWithPath
                             |> String.concat "\n"
                     }
                 | false ->
                     async.Return ""
 
             let! yaml =
-                [| directory; "Expected.yaml" |]
-                |> Path.Join
-                |> File.ReadAllTextAsync
-                |> Async.AwaitTask
+                let yamlPath =
+                    [| directory; "Expected.yaml" |]
+                    |> Path.Join
+
+                match yamlPath |> File.Exists with
+                | true ->
+                    yamlPath
+                    |> File.ReadAllTextAsync
+                    |> Async.AwaitTask
+                | false ->
+                    async.Return ""
 
             return formatErrorsAndYaml errors yaml
         }

@@ -19,11 +19,10 @@ let private analyzeSolutionPath solutionPath =
                solutionPath
                |> workspace.OpenSolutionAsync
                |> Async.AwaitTask
-          
+
           let! errorsAndYamlOfProjects =
                solution.Projects
-               |> getFirstOfEachAssemblyInProjects
-               |> Seq.map analyzeProject
+               |> analyzeFirstOfEachAssemblyInSupportedProjects
                |> Async.Parallel
 
           return
@@ -37,13 +36,16 @@ let private analyzeSolutionPath solutionPath =
                }
      }
 
-let private getFirstOfEachAssemblyInProjects projects =
+let private analyzeFirstOfEachAssemblyInSupportedProjects projects =
      projects
      |> Seq.groupBy (fun project -> project.AssemblyName)
-     |> Seq.choose (fun (_, project) -> project |> getFirstSupportedProject)
+     |> Seq.collect (fun (_, projects) -> projects |> analyzeFirstSupportedProject)
 
-let private getFirstSupportedProject =
-     Seq.tryFind (fun project -> project.MetadataReferences.Count > 0)
+let private analyzeFirstSupportedProject projects =
+     projects
+     |> Seq.tryFind isProjectSupported
+     |> Option.map (fun supportedProject -> seq [ supportedProject |> analyzeProject ])
+     |> Option.defaultWith (fun () -> projects |> Seq.map getErrorsAndYamlForProjectNotSupported)
 
 let private analyzeProjectPath projectPath =
      async {
@@ -54,5 +56,20 @@ let private analyzeProjectPath projectPath =
                |> workspace.OpenProjectAsync
                |> Async.AwaitTask
 
-          return! project |> analyzeProject
+          return!
+               match project |> isProjectSupported with
+               | true ->
+                    project |> analyzeProject
+               | false ->
+                    project |> getErrorsAndYamlForProjectNotSupported
      }
+
+let private getErrorsAndYamlForProjectNotSupported project =
+     async.Return
+          {
+               Errors = seq [ "Project " + project.Name + " loaded with no metadata references." ]
+               Yaml = seq []
+          }
+
+let private isProjectSupported project =
+     project.MetadataReferences.Count > 0
