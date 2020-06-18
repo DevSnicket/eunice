@@ -1,4 +1,9 @@
 ---
+2020-06-18
+errors for projects with no metadata references
+when a single project is specified it isn't analyzed when it has no metadata references
+
+---
 2020-06-17
 spellcheck of Git log in CI
 
