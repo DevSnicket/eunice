@@ -1,4 +1,12 @@
 ---
+2020-06-19
+errors from the MSBuild workspace
+
+---
+2020-06-19
+assembly references of NuGet packages
+
+---
 2020-06-18
 errors for projects with no metadata references
 when a single project is specified it isn't analyzed when it has no metadata references
