@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework></TargetFramework>
-		<TargetFrameworks>netstandard2.0;netcoreapp3.1</TargetFrameworks>
+		<TargetFrameworks>madeuptargetframework1;madeuptargetframework2</TargetFrameworks>
 	</PropertyGroup>
 </Project>

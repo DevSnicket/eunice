@@ -1,13 +1,17 @@
 namespace DevSnicket.Eunice.AnalyzeProjectOrSolutionPath
 
 open DevSnicket.Eunice.AnalyzeProjectOrSolutionPath._Tests.FindParametersForTestCasesInDirectoryPath
-open System
-open System.IO
+open DevSnicket.Eunice.AnalyzeProjectOrSolutionPath._Tests.RegisterAndGetPathOfMsbuild
+
+type File = System.IO.File
+type Path = System.IO.Path
+type String = System.String
 
 type Tests () =
+    static let mutable msbuildPath = ""
+
     static do
-        Microsoft.Build.Locator.MSBuildLocator.RegisterDefaults ()
-        |> ignore
+        msbuildPath <- registerAndGetPathOfMsbuild
 
     [<Xunit.Theory>]
     [<Xunit.MemberData ("ParametersForTestCases")>]
@@ -16,15 +20,37 @@ type Tests () =
             let projectDirectoryPath =
                 projectFilePath
                 |> Path.GetDirectoryName
-            
+
             let! actualErrorsAndYamlLines =
                 projectFilePath
                 |> analyzeProjectOrSolutionPath
 
+            let removeProjectDirectoryPathInErrors =
+                let absolutionProjectDirectoryPath =
+                    (projectDirectoryPath |> Path.GetFullPath)
+                    +
+                    string Path.DirectorySeparatorChar
+
+                (fun (errors: String) ->
+                    errors.Replace (
+                        absolutionProjectDirectoryPath,
+                        ""
+                    )
+                )
+
             let actual =
                 formatErrorsAndYaml
-                    (actualErrorsAndYamlLines.Errors |> String.concat "\n")
-                    (actualErrorsAndYamlLines.Yaml |> String.concat "\n")
+                    (
+                        actualErrorsAndYamlLines.Errors
+                        |> formatLines
+                        |> removeProjectDirectoryPathInErrors
+                        |> removeMsbuildPathInErrors
+                        |> replaceBackSlashesWithForwardInErrors
+                    )
+                    (
+                        actualErrorsAndYamlLines.Yaml
+                        |> formatLines
+                    )
 
             let! expected =
                 projectDirectoryPath
@@ -41,49 +67,35 @@ type Tests () =
                 )
         }
 
+    and removeMsbuildPathInErrors errors =
+        errors.Replace (
+            msbuildPath,
+            ""
+        )
+
+    and replaceBackSlashesWithForwardInErrors errors =
+        errors.Replace (
+            "\\",
+            "/"
+        )
+
     and readExpectedInDirectory directory =
         async {
-            let! errors =
-                let getPathOfFileName fileName =
-                    [| directory; fileName |]
+            let readExpectedFileWithExtensionWhenExists extension =
+                let expectedFilePath =
+                    [| directory; "Expected." + extension |]
                     |> Path.Join
 
-                let errorsPath =
-                    "Expected.errors" |> getPathOfFileName
-
-                let prefixErrorWithPath (error: String) =
-                    match ": error CS" |> error.Contains with
-                    | true -> error |> getPathOfFileName
-                    | false -> error
-
-                match errorsPath |> File.Exists with
+                match expectedFilePath |> File.Exists with
                 | true ->
-                    async {
-                        let! errors =
-                            errorsPath
-                            |> File.ReadAllLinesAsync
-                            |> Async.AwaitTask
-
-                        return
-                            errors
-                            |> Seq.map prefixErrorWithPath
-                            |> String.concat "\n"
-                    }
-                | false ->
-                    async.Return ""
-
-            let! yaml =
-                let yamlPath =
-                    [| directory; "Expected.yaml" |]
-                    |> Path.Join
-
-                match yamlPath |> File.Exists with
-                | true ->
-                    yamlPath
+                    expectedFilePath
                     |> File.ReadAllTextAsync
                     |> Async.AwaitTask
                 | false ->
                     async.Return ""
+
+            let! errors = "errors" |> readExpectedFileWithExtensionWhenExists
+            let! yaml = "yaml" |> readExpectedFileWithExtensionWhenExists
 
             return formatErrorsAndYaml errors yaml
         }
@@ -96,7 +108,10 @@ type Tests () =
             "Yaml:"
             yaml
         ]
-        |> String.concat "\n"
+        |> formatLines
+
+    and formatLines =
+        String.concat "\n"
 
     static member ParametersForTestCases =
         [| ".."; ".."; ".."; "AnalyzeProjectOrSolutionPath"; "Tests"; "TestCases" |]

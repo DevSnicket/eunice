@@ -1,40 +1,45 @@
 module rec DevSnicket.Eunice.AnalyzeProjectOrSolutionPath
 
 open DevSnicket.Eunice.AnalyzeProject
-open System
-open System.IO
+
+type List<'T> = System.Collections.Generic.List<'T>
+type String = System.String
+type Path = System.IO.Path
 
 let analyzeProjectOrSolutionPath (projectOrSolutionPath: String) =
-     match projectOrSolutionPath |> Path.GetExtension with
-     | ".sln" -> // cSpell:ignore sln
-          projectOrSolutionPath |> analyzeSolutionPath
-     | _ ->
-          projectOrSolutionPath |> analyzeProjectPath
+    match projectOrSolutionPath |> Path.GetExtension with
+    | ".sln" -> // cSpell:ignore sln
+        projectOrSolutionPath |> analyzeSolutionPath
+    | _ ->
+        projectOrSolutionPath |> analyzeProjectPath
 
 let private analyzeSolutionPath solutionPath =
-     async {
-          use workspace = Microsoft.CodeAnalysis.MSBuild.MSBuildWorkspace.Create ()
+    async {
+         use workspace = Microsoft.CodeAnalysis.MSBuild.MSBuildWorkspace.Create ()
 
-          let! solution =
-               solutionPath
-               |> workspace.OpenSolutionAsync
-               |> Async.AwaitTask
+         let addFailuresToErrors = workspace |> addFailuresToErrorsFromWorkspaceEvent
 
-          let! errorsAndYamlOfProjects =
-               solution.Projects
-               |> analyzeFirstOfEachAssemblyInSupportedProjects
-               |> Async.Parallel
+         let! solution =
+              solutionPath
+              |> workspace.OpenSolutionAsync
+              |> Async.AwaitTask
 
-          return
-               {
-                    Errors =
-                         errorsAndYamlOfProjects
-                         |> Seq.collect (fun errorsAndYaml -> errorsAndYaml.Errors)
-                    Yaml =
-                         errorsAndYamlOfProjects
-                         |> Seq.collect (fun errorsAndYaml -> errorsAndYaml.Yaml)
-               }
-     }
+         let! errorsAndYamlOfProjects =
+              solution.Projects
+              |> analyzeFirstOfEachAssemblyInSupportedProjects
+              |> Async.Parallel
+
+         return
+              {
+                   Errors =
+                        errorsAndYamlOfProjects
+                        |> Seq.collect (fun errorsAndYaml -> errorsAndYaml.Errors)
+                   Yaml =
+                        errorsAndYamlOfProjects
+                        |> Seq.collect (fun errorsAndYaml -> errorsAndYaml.Yaml)
+              }
+              |> addFailuresToErrors
+    }
 
 let private analyzeFirstOfEachAssemblyInSupportedProjects projects =
      projects
@@ -51,25 +56,54 @@ let private analyzeProjectPath projectPath =
      async {
           use workspace = Microsoft.CodeAnalysis.MSBuild.MSBuildWorkspace.Create ()
 
+          let addFailuresToErrors = workspace |> addFailuresToErrorsFromWorkspaceEvent
+
           let! project =
                projectPath
                |> workspace.OpenProjectAsync
                |> Async.AwaitTask
 
-          return!
+          let! result =
                match project |> isProjectSupported with
                | true ->
                     project |> analyzeProject
                | false ->
                     project |> getErrorsAndYamlForProjectNotSupported
+          
+          return result |> addFailuresToErrors
      }
 
+let private addFailuresToErrorsFromWorkspaceEvent workspace =
+    let workspaceFailures = List<String>()
+
+    let rec addEventHandler () =
+        addWorkspaceFailureFromEvent |> workspace.WorkspaceFailed.Add
+
+    and addWorkspaceFailureFromEvent event =
+        event.Diagnostic.Message
+        |> workspaceFailures.Add
+
+    let addFailuresToErrors result =
+        {
+            Errors =
+                seq [
+                     yield! workspaceFailures
+                     yield! result.Errors
+                ]
+            Yaml =
+                result.Yaml
+        }
+
+    addEventHandler ()
+
+    addFailuresToErrors
+
 let private getErrorsAndYamlForProjectNotSupported project =
-     async.Return
-          {
-               Errors = seq [ "Project " + project.Name + " loaded with no metadata references." ]
-               Yaml = seq []
-          }
+    async.Return
+        {
+            Errors = seq [ "Project " + project.Name + " loaded with no metadata references." ]
+            Yaml = seq []
+        }
 
 let private isProjectSupported project =
-     project.MetadataReferences.Count > 0
+    project.MetadataReferences.Count > 0

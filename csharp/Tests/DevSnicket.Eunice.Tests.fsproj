@@ -17,6 +17,7 @@
 		<Compile Include="../AnalyzeProject/CreateItemFromMemberSymbol/Tests.fs" />
 		<Compile Include="../AnalyzeProject/FormatItemsAsYaml/SequenceBlockEntryFromLines/Tests.fs" />
 		<Compile Include="../AnalyzeProjectOrSolutionPath/Tests/FindParametersForTestCasesInDirectoryPath.fs" />
+		<Compile Include="../AnalyzeProjectOrSolutionPath/Tests/RegisterAndGetPathOfMsbuild.fs" />
 		<Compile Include="../AnalyzeProjectOrSolutionPath/Tests/.fs" />
 		<Compile Include="../ExecuteProgram/Tests.fs" />
 	</ItemGroup>
