@@ -18,6 +18,7 @@
 		<Compile Include="AnalyzeProject/Item.fs" />
 		<Compile Include="AnalyzeProject/CreateItemWhenDelegate.fs" />
 		<Compile Include="AnalyzeProject/CreateItemWhenEnum.fs" />
+		<Compile Include="AnalyzeProject/CreateItemFromMemberSymbol/GetNamesUsedInSyntaxReference.fs" />
 		<Compile Include="AnalyzeProject/CreateItemFromMemberSymbol/.fs" />
 		<Compile Include="AnalyzeProject/FormatItemsAsYaml/IndentLines.fs" />
 		<Compile Include="AnalyzeProject/FormatItemsAsYaml/SequenceBlockEntryFromLines/.fs" />

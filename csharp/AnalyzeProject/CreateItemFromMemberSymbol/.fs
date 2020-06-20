@@ -2,9 +2,9 @@ module rec DevSnicket.Eunice._AnalyzeProject.CreateItemFromMemberSymbol
 
 open DevSnicket.Eunice._AnalyzeProject
 open DevSnicket.Eunice._AnalyzeProject.CreateDependsUponFromSymbolsOfReferrer
+open DevSnicket.Eunice._AnalyzeProject._CreateItemFromMemberSymbol.GetNamesUsedInSyntaxReference
 open DevSnicket.Eunice._AnalyzeProject.FormatIdentifierFromMethodSymbol
 open Microsoft.CodeAnalysis
-open Microsoft.CodeAnalysis.CSharp.Syntax
 
 let createItemFromMemberSymbol (getSymbolFromSyntaxNode: SyntaxNode -> ISymbol) =
      let rec createItemFromMemberSymbol (``member``: ISymbol) =
@@ -29,9 +29,12 @@ let createItemFromMemberSymbol (getSymbolFromSyntaxNode: SyntaxNode -> ISymbol) 
                     createItemWithType (Some field.Type)
 
           and createItemWithType ``type`` =
-               createItemFromIdentifierAndMemberAndType ``member``.MetadataName ``member`` ``type``
+               createItemFromIdentifierAndMemberAndType
+                    ``member``.MetadataName
+                    ``member``
+                    ``type``
 
-          createItemFromMemberSymbol()
+          createItemFromMemberSymbol ()
 
      and createItemFromMethod method =
           let rec createItemFromMethod () =
@@ -62,24 +65,25 @@ let createItemFromMemberSymbol (getSymbolFromSyntaxNode: SyntaxNode -> ISymbol) 
           let rec createItemFromMemberAndMetadataAndType () =
                Some
                     {
-                         DependsUpon =
-                              seq [
-                                   yield! ``type`` |> Option.toList |> Seq.cast
-                                   yield! getDeclaringSymbols ()
-                              ]
-                              |> createDependsUponFromSymbolsOfReferrer ``member``
-                         Identifier =
-                              identifier
-                         Items =
-                              []
+                         DependsUpon = dependsUpon
+                         Identifier = identifier
+                         Items = []
                     }
 
-          and getDeclaringSymbols () =
-               ``member``.DeclaringSyntaxReferences
-               |> Seq.collect getNamesUsedInSyntaxReference
-               |> Seq.map getSymbolFromSyntaxNode
+          and dependsUpon =
+               seq [
+                    yield!
+                         ``type``
+                         |> Option.toList
+                         |> Seq.cast
+                    yield!
+                         ``member``.DeclaringSyntaxReferences
+                         |> Seq.collect getNamesUsedInSyntaxReference
+                         |> Seq.map getSymbolFromSyntaxNode
+               ]
+               |> createDependsUponFromSymbolsOfReferrer ``member``
 
-          createItemFromMemberAndMetadataAndType()
+          createItemFromMemberAndMetadataAndType ()
 
      createItemFromMemberSymbol
 
@@ -87,12 +91,3 @@ let private isEventOrProperty symbol =
      symbol :? IEventSymbol
      ||
      symbol :? IPropertySymbol
-
-let private getNamesUsedInSyntaxReference syntaxReference =
-     syntaxReference.GetSyntax().DescendantNodes (not << isName)
-     |> Seq.filter isName
-
-let private isName syntaxNode =
-     syntaxNode :? IdentifierNameSyntax
-     ||
-     syntaxNode :? QualifiedNameSyntax

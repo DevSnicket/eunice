@@ -7,13 +7,21 @@ open Microsoft.CodeAnalysis
 let createDependsUponFromSymbolsOfReferrer (referrer: ISymbol) =
      let rec createDependsUponFromSymbols (symbols: ISymbol seq) =
           symbols
-          |> Seq.collect withTypesOfGenerics
+          |> Seq.collect ignoreLocalAndGetWithTypesOfGenerics
           |> Seq.choose createDependUponWithAncestorHierachyFromSymbol
           |> groupDependsUponIntoHierarchy
           |> Seq.toList
 
-     and withTypesOfGenerics =
+     and ignoreLocalAndGetWithTypesOfGenerics =
           function
+          | :? ILocalSymbol ->
+               seq []
+          | :? IMethodSymbol as method ->
+               match method.MethodKind with
+               | MethodKind.LocalFunction ->
+                    seq []
+               | _ ->
+                    seq [ method :> ISymbol ]
           | :? INamedTypeSymbol as ``type`` ->
                match ``type``.IsGenericType with
                | true ->

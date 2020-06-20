@@ -1,0 +1,9 @@
+﻿- id: TestCase
+  items:
+    - id: Class
+      items:
+        id: Method
+        dependsUpon:
+          id: TestCase
+          items: ReturnVariableClass
+    - ReturnVariableClass
