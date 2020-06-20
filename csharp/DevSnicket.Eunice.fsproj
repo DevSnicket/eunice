@@ -27,6 +27,10 @@
 		<Compile Include="AnalyzeProject/FormatItemsAsYaml/.fs" />
 		<Compile Include="AnalyzeProject/GetBasesOfTypeDeclaration.fs" />
 		<Compile Include="AnalyzeProject/.fs" />
+		<Compile Include="AnalyzeProjectOrSolutionPath/AddFailuresToErrorsFromWorkspaceEvent.fs" />
+		<Compile Include="AnalyzeProjectOrSolutionPath/GetErrorsAndYamlForProjectNotSupported.fs" />
+		<Compile Include="AnalyzeProjectOrSolutionPath/IsProjectSupported.fs" />
+		<Compile Include="AnalyzeProjectOrSolutionPath/AnalyzeSolutionPath.fs" />
 		<Compile Include="AnalyzeProjectOrSolutionPath/.fs" />
 		<Compile Include="ExecuteProgram/.fs" />
 	</ItemGroup>
