@@ -1,0 +1,12 @@
+{
+	"indentation": {
+		"enabled": true
+	},
+	"moduleNames": {
+		"enabled": true,
+		"config": {
+			"naming": "PascalCase",
+			"underscores": "AllowPrefix"
+		}
+	}
+}

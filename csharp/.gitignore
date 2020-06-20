@@ -1,6 +1,7 @@
 \.ionide
 \.store
 \bin
+\dotnet-fsharplint.exe
 \obj
 \reportgenerator.exe
 \website

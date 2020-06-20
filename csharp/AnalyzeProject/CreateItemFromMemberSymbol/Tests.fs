@@ -18,10 +18,8 @@ let memberOfUnexpectedSymbolReturnsItemWithMetadataName () =
         Mock<ISymbol>.With(
             fun symbol ->
             <@
-                symbol.DeclaringSyntaxReferences -->
-                    ImmutableArray.Create<SyntaxReference>()
-                symbol.MetadataName -->
-                    metadataName
+                symbol.DeclaringSyntaxReferences --> ImmutableArray.Create<SyntaxReference>()
+                symbol.MetadataName --> metadataName
             @>
         )
         |> createItemFromMemberSymbol getSymbolFromSyntaxNode

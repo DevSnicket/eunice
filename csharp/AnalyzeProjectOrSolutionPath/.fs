@@ -15,63 +15,63 @@ let analyzeProjectOrSolutionPath (projectOrSolutionPath: String) =
 
 let private analyzeSolutionPath solutionPath =
     async {
-         use workspace = Microsoft.CodeAnalysis.MSBuild.MSBuildWorkspace.Create ()
+        use workspace = Microsoft.CodeAnalysis.MSBuild.MSBuildWorkspace.Create ()
 
-         let addFailuresToErrors = workspace |> addFailuresToErrorsFromWorkspaceEvent
+        let addFailuresToErrors = workspace |> addFailuresToErrorsFromWorkspaceEvent
 
-         let! solution =
-              solutionPath
-              |> workspace.OpenSolutionAsync
-              |> Async.AwaitTask
+        let! solution =
+            solutionPath
+            |> workspace.OpenSolutionAsync
+            |> Async.AwaitTask
 
-         let! errorsAndYamlOfProjects =
-              solution.Projects
-              |> analyzeFirstOfEachAssemblyInSupportedProjects
-              |> Async.Parallel
+        let! errorsAndYamlOfProjects =
+            solution.Projects
+            |> analyzeFirstOfEachAssemblyInSupportedProjects
+            |> Async.Parallel
 
-         return
-              {
-                   Errors =
-                        errorsAndYamlOfProjects
-                        |> Seq.collect (fun errorsAndYaml -> errorsAndYaml.Errors)
-                   Yaml =
-                        errorsAndYamlOfProjects
-                        |> Seq.collect (fun errorsAndYaml -> errorsAndYaml.Yaml)
-              }
-              |> addFailuresToErrors
+        return
+            {
+                Errors =
+                    errorsAndYamlOfProjects
+                    |> Seq.collect (fun errorsAndYaml -> errorsAndYaml.Errors)
+                Yaml =
+                    errorsAndYamlOfProjects
+                    |> Seq.collect (fun errorsAndYaml -> errorsAndYaml.Yaml)
+            }
+            |> addFailuresToErrors
     }
 
 let private analyzeFirstOfEachAssemblyInSupportedProjects projects =
-     projects
-     |> Seq.groupBy (fun project -> project.AssemblyName)
-     |> Seq.collect (fun (_, projects) -> projects |> analyzeFirstSupportedProject)
+    projects
+    |> Seq.groupBy (fun project -> project.AssemblyName)
+    |> Seq.collect (fun (_, projects) -> projects |> analyzeFirstSupportedProject)
 
 let private analyzeFirstSupportedProject projects =
-     projects
-     |> Seq.tryFind isProjectSupported
-     |> Option.map (fun supportedProject -> seq [ supportedProject |> analyzeProject ])
-     |> Option.defaultWith (fun () -> projects |> Seq.map getErrorsAndYamlForProjectNotSupported)
+    projects
+    |> Seq.tryFind isProjectSupported
+    |> Option.map (fun supportedProject -> seq [ supportedProject |> analyzeProject ])
+    |> Option.defaultWith (fun () -> projects |> Seq.map getErrorsAndYamlForProjectNotSupported)
 
 let private analyzeProjectPath projectPath =
-     async {
-          use workspace = Microsoft.CodeAnalysis.MSBuild.MSBuildWorkspace.Create ()
+    async {
+        use workspace = Microsoft.CodeAnalysis.MSBuild.MSBuildWorkspace.Create ()
 
-          let addFailuresToErrors = workspace |> addFailuresToErrorsFromWorkspaceEvent
+        let addFailuresToErrors = workspace |> addFailuresToErrorsFromWorkspaceEvent
 
-          let! project =
-               projectPath
-               |> workspace.OpenProjectAsync
-               |> Async.AwaitTask
+        let! project =
+            projectPath
+            |> workspace.OpenProjectAsync
+            |> Async.AwaitTask
 
-          let! result =
-               match project |> isProjectSupported with
-               | true ->
-                    project |> analyzeProject
-               | false ->
-                    project |> getErrorsAndYamlForProjectNotSupported
-          
-          return result |> addFailuresToErrors
-     }
+        let! result =
+            match project |> isProjectSupported with
+            | true ->
+                project |> analyzeProject
+            | false ->
+                project |> getErrorsAndYamlForProjectNotSupported
+
+        return result |> addFailuresToErrors
+    }
 
 let private addFailuresToErrorsFromWorkspaceEvent workspace =
     let workspaceFailures = List<String>()
@@ -87,8 +87,8 @@ let private addFailuresToErrorsFromWorkspaceEvent workspace =
         {
             Errors =
                 seq [
-                     yield! workspaceFailures
-                     yield! result.Errors
+                    yield! workspaceFailures
+                    yield! result.Errors
                 ]
             Yaml =
                 result.Yaml

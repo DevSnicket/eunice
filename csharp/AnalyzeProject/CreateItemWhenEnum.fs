@@ -4,13 +4,13 @@ open DevSnicket.Eunice._AnalyzeProject
 open Microsoft.CodeAnalysis
 
 let createItemWhenEnum (``type``: INamedTypeSymbol) =
-     match ``type``.EnumUnderlyingType with
-     | null -> None
-     | _ -> Some (``type`` |> createItemFromEnum)
+    match ``type``.EnumUnderlyingType with
+    | null -> None
+    | _ -> Some (``type`` |> createItemFromEnum)
 
 let private createItemFromEnum enum =
-     {
-          DependsUpon = []
-          Identifier = enum.Name
-          Items = []
-     }
+    {
+        DependsUpon = []
+        Identifier = enum.Name
+        Items = []
+    }
