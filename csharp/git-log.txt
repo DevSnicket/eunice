@@ -1,4 +1,9 @@
 ---
+2020-06-20
+dependencies on local functions and symbols are ignored
+neither are represented with corresponding items
+
+---
 2020-06-19
 errors from the MSBuild workspace
 
