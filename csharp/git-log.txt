@@ -1,4 +1,16 @@
 ---
+2020-06-21
+linting after F# project restore
+
+---
+2020-06-20
+solution projects sorted by dependency
+
+---
+2020-06-20
+linting in CI
+
+---
 2020-06-20
 dependencies on local functions and symbols are ignored
 neither are represented with corresponding items
