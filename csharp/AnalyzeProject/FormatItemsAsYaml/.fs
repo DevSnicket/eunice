@@ -1,6 +1,7 @@
 module rec DevSnicket.Eunice._AnalyzeProject.FormatItemsAsYaml
 
 open DevSnicket.Eunice._AnalyzeProject
+open DevSnicket.Eunice._AnalyzeProject._FormatItemsAsYaml.QuoteIdentifier
 open DevSnicket.Eunice._AnalyzeProject._FormatItemsAsYaml.FormatDependsUponMapping
 open DevSnicket.Eunice._AnalyzeProject._FormatItemsAsYaml.FormatKeyValueLinesMapping
 open DevSnicket.Eunice._AnalyzeProject._FormatItemsAsYaml.SequenceBlockEntryFromLines
@@ -10,6 +11,10 @@ let formatItemsAsYaml items =
     |> Seq.collect (formatItem >> sequenceBlockEntryFromLines)
 
 let private formatItem item =
+    let identifier =
+        item.Identifier
+        |> quoteIdentifier
+
     let mappingLines =
         [
             yield! formatDependsUponMapping item.DependsUpon
@@ -18,10 +23,10 @@ let private formatItem item =
 
     match mappingLines with
     | [] ->
-        [ item.Identifier ]
+        [ identifier ]
     | _ ->
         [
-            "id: " + item.Identifier
+            "id: " + identifier
             yield! mappingLines
         ]
 

@@ -20,6 +20,7 @@
 		<Compile Include="AnalyzeProject/CreateItemWhenEnum.fs" />
 		<Compile Include="AnalyzeProject/CreateItemFromMemberSymbol/GetNamesUsedInSyntaxReference.fs" />
 		<Compile Include="AnalyzeProject/CreateItemFromMemberSymbol/.fs" />
+		<Compile Include="AnalyzeProject/FormatItemsAsYaml/QuoteIdentifier.fs" />
 		<Compile Include="AnalyzeProject/FormatItemsAsYaml/IndentLines.fs" />
 		<Compile Include="AnalyzeProject/FormatItemsAsYaml/SequenceBlockEntryFromLines/.fs" />
 		<Compile Include="AnalyzeProject/FormatItemsAsYaml/FormatKeyValueLinesMapping.fs" />

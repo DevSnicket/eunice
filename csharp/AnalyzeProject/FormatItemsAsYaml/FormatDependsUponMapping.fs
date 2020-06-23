@@ -1,6 +1,7 @@
 module rec DevSnicket.Eunice._AnalyzeProject._FormatItemsAsYaml.FormatDependsUponMapping
 
 open DevSnicket.Eunice._AnalyzeProject
+open DevSnicket.Eunice._AnalyzeProject._FormatItemsAsYaml.QuoteIdentifier
 open DevSnicket.Eunice._AnalyzeProject._FormatItemsAsYaml.FormatKeyValueLinesMapping
 open DevSnicket.Eunice._AnalyzeProject._FormatItemsAsYaml.SequenceBlockEntryFromLines
 
@@ -20,12 +21,16 @@ let private formatDependsUpon dependsUpon =
         |> Seq.toList
 
 let private formatDependUpon dependUpon =
+    let identifier =
+        dependUpon.Identifier
+        |> quoteIdentifier
+
     match dependUpon.Items with
     | [] ->
-        [ dependUpon.Identifier ]
+        [ identifier ]
     | items ->
         [
-            "id: " + dependUpon.Identifier
+            "id: " + identifier
             yield! formatDependUponItemsMapping items
         ]
 
