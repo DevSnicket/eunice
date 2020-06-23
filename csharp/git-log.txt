@@ -1,5 +1,10 @@
 ---
 2020-06-23
+dependencies on parameters are ignored
+no represented with a correspond item
+
+---
+2020-06-23
 yaml identifiers of null and boolean are quoted
 
 ---
