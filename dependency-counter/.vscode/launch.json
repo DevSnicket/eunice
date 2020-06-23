@@ -27,6 +27,7 @@
 				"name": "getSvgForYaml",
 				"program": "${workspaceFolder}/getSvgForYaml/bin.js",
 				"request": "launch",
+				"runtimeArgs": [ "${workspaceFolder}/node_modules/@babel/node/bin/babel-node.js", "-o", "*" ],
 				"type": "node"
 			},
 			{
