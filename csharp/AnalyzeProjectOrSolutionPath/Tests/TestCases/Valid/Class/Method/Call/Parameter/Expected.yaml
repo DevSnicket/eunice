@@ -1,0 +1,12 @@
+﻿- id: TestCase
+  items:
+    - id: CalleeParameterClass
+      items: CalleeMethod
+    - id: CallerClass
+      items:
+        id: CallerMethod
+        dependsUpon:
+          id: TestCase
+          items:
+            id: CalleeParameterClass
+            items: CalleeMethod

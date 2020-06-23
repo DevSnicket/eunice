@@ -31,6 +31,8 @@ let createDependsUponFromSymbolsOfReferrer (referrer: ISymbol) =
                 ]
             | false ->
                 seq [ ``type`` ]
+        | :? IParameterSymbol ->
+            seq []
         | symbol ->
             seq [ symbol ]
 
