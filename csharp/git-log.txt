@@ -1,4 +1,8 @@
 ---
+2020-06-23
+yaml identifiers of null and boolean are quoted
+
+---
 2020-06-21
 linting after F# project restore
 
