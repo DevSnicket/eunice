@@ -1,13 +1,14 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import getOrPromptForLicenseAcceptance from ".";
+import getOrPromptForLicenseAcceptance, {
+	commercialUseText,
+	licenseText,
+} from ".";
 import path from "path";
 import { readFile } from "fs-extra";
 
 const
-	commercialUseText = "Commercial use (after the evaluation period) requires a subscription, visit the page above for more information.",
 	distSubdirectoryPath = __dirname,
-	licenseText = "the license http://www.devsnicket.com/eunice/licensing",
 	version = "version";
 
 test(

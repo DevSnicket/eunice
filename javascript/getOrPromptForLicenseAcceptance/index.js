@@ -13,8 +13,6 @@ export default ({
 	standardInputStream,
 	version,
 }) => {
-	const licenseText = "the license http://www.devsnicket.com/eunice/licensing";
-
 	const
 		acceptLicenseParameter = "accept-license",
 		{
@@ -66,7 +64,7 @@ export default ({
 	}
 
 	function logCommercialUse() {
-		log("Commercial use (after the evaluation period) requires a subscription, visit the page above for more information.");
+		log(commercialUseText);
 	}
 
 	function prompt() {
@@ -139,3 +137,7 @@ function logTextFile({
 		),
 	);
 }
+
+export const
+	commercialUseText = "Commercial use (after the evaluation period) requires a subscription, visit the page above for more information.",
+	licenseText = "the license http://www.devsnicket.com/eunice/licensing";
