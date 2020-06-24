@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 7.6.1 on 2020-04-17T14:49:21.622Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 7.6.1 on 2020-06-24T15:02:26.204Z
 - - id: javascript
     type: directory
     items:
@@ -1383,7 +1383,9 @@
                               - logCommercialUse
                               - prompt
                         - - id: logCommercialUse
-                            dependsUpon: log
+                            dependsUpon:
+                              - commercialUseText
+                              - log
                           - id: prompt
                             dependsUpon:
                               - callWithIsAcceptOnKeyPress
@@ -1427,6 +1429,8 @@
                       dependsUpon:
                         - path
                         - readFileSync
+                    - id: commercialUseText
+                      type: variable
                   - - id: readFileSync
                       type: import
                       dependsUpon:
