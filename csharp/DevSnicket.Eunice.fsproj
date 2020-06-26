@@ -33,6 +33,13 @@
 		<Compile Include="AnalyzeProjectOrSolutionPath/IsProjectSupported.fs" />
 		<Compile Include="AnalyzeProjectOrSolutionPath/AnalyzeSolutionPath.fs" />
 		<Compile Include="AnalyzeProjectOrSolutionPath/.fs" />
+		<Compile Include="ExecuteProgram/AcceptLicenseParameter.fs" />
+		<Compile Include="ExecuteProgram/GetOrPromptForLicenseAcceptance/CommercialUseText.fs" />
+		<Compile Include="ExecuteProgram/GetOrPromptForLicenseAcceptance/.fs" />
+		<Compile Include="ExecuteProgram/ParseArguments/.fs" />
+		<Compile Include="ExecuteProgram/ParseArguments/FilePathNotSpecifiedError.fs" />
+		<Compile Include="ExecuteProgram/WriteNameAndVersion/.fs" />
 		<Compile Include="ExecuteProgram/.fs" />
+		<EmbeddedResource Include="LICENSE" />
 	</ItemGroup>
 </Project>

@@ -20,7 +20,9 @@
 		<Compile Include="../AnalyzeProjectOrSolutionPath/Tests/FindParametersForTestCasesInDirectoryPath.fs" />
 		<Compile Include="../AnalyzeProjectOrSolutionPath/Tests/RegisterAndGetPathOfMsbuild.fs" />
 		<Compile Include="../AnalyzeProjectOrSolutionPath/Tests/.fs" />
-		<Compile Include="../ExecuteProgram/Tests.fs" />
+		<Compile Include="../ExecuteProgram/GetOrPromptForLicenseAcceptance/Tests.fs" />
+		<Compile Include="../ExecuteProgram/ParseArguments/Tests.fs" />
+		<Compile Include="../ExecuteProgram/WriteNameAndVersion/Tests.fs" />
 	</ItemGroup>
 	<Target AfterTargets="Build" Name="WriteXunitConsoleRuntime">
 		<Copy DestinationFiles="$(OutputPath)xunit.console.runtimeconfig.json" SourceFiles="$(OutputPath)$(AssemblyName).runtimeconfig.json" />

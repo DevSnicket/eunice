@@ -1,52 +1,62 @@
 module rec DevSnicket.Eunice.ExecuteProgram
 
-open DevSnicket.Eunice.AnalyzeProject
 open DevSnicket.Eunice.AnalyzeProjectOrSolutionPath
-open System
+open DevSnicket.Eunice._ExecuteProgram.GetOrPromptForLicenseAcceptance
+open DevSnicket.Eunice._ExecuteProgram.ParseArguments
+open DevSnicket.Eunice._ExecuteProgram.WriteNameAndVersion
 
-type AnalyzeWithArgumentsResult =
-    {
-        Errors: String seq
-        ExitCode: Int32
-        Yaml: String seq
-    }
+type Assembly = System.Reflection.Assembly
+type Console = System.Console
+type Int32 = System.Int32
+type String = System.String
 
 [<EntryPoint>]
-let executeProgram arguments =
-    Microsoft.Build.Locator.MSBuildLocator.RegisterDefaults ()
-    |> ignore
+let executeProgramWithArguments arguments =
+    writeNameAndVersion
+        {|
+            ResetColor = Console.ResetColor
+            SetForegroundColor = Console.set_ForegroundColor
+            Version = Assembly.GetExecutingAssembly().GetName().Version
+            Write = Console.Write
+            WriteLine = Console.WriteLine
+        |}
 
-    let
-        {
-            Errors = errors
-            ExitCode = exitCode
-            Yaml = yaml
-        }
-        =
-        callAnalyzePathWithArguments
-            (analyzeProjectOrSolutionPath >> Async.RunSynchronously)
-            arguments
+    arguments
+    |> parseArguments
+    |> function
+        | ParsedArguments parsedArguments ->
+            parsedArguments |> executeProgramWithParsedArguments
+        | Error error ->
+            error |> Console.Error.WriteLine
+            1
 
-    errors |> Seq.iter Console.Error.WriteLine
-    yaml |> Seq.iter Console.WriteLine
+let private executeProgramWithParsedArguments (arguments: ParsedArguments) =
+    if getOrPromptForLicenseAcceptance
+        {|
+            IsAcceptedInArguments = arguments.IsLicenseAccepted
+            IsInteractive = not <| Console.IsOutputRedirected
+            ReadKey = consoleReadKeyIntercept
+            WriteLine = Console.WriteLine
+        |}
+    then
+        Microsoft.Build.Locator.MSBuildLocator.RegisterDefaults ()
+        |> ignore
 
-    exitCode
+        let {
+                Errors = errors
+                Yaml = yaml
+            }
+            =
+            arguments.FilePath
+            |> analyzeProjectOrSolutionPath
+            |> Async.RunSynchronously
 
-let callAnalyzePathWithArguments analyzePath arguments =
-    match arguments with
-    | [| path |] ->
-        let errorsAndYaml = path |> analyzePath
+        errors |> Seq.iter Console.Error.WriteLine
+        yaml |> Seq.iter Console.WriteLine
 
-        {
-            Errors = errorsAndYaml.Errors
-            ExitCode = 0
-            Yaml = errorsAndYaml.Yaml
-        }
-    | _ ->
-        {
-            Errors = seq [ zeroOrManyArgumentsErrorMessage ]
-            ExitCode = 1
-            Yaml = seq []
-        }
+        0
+    else
+        1
 
-let zeroOrManyArgumentsErrorMessage = "Specify the path of a single C# project or solution file."
+let private consoleReadKeyIntercept () =
+    Console.ReadKey(true).Key

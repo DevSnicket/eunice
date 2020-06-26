@@ -8,7 +8,7 @@ Tests \
 -p:AltCover=true \
 -p:AltCoverAssemblyFilter="^(?!DevSnicket.Eunice$)" \
 -p:AltCoverForce=true \
--p:AltCoverMethodFilter=executeProgram \
+-p:AltCoverTypeFilter=DevSnicket.Eunice.ExecuteProgram \
 -p:AltCoverXmlReport=TestResults/coverage.xml
 
 dotnet tool install dotnet-reportgenerator-globaltool \
