@@ -15,9 +15,9 @@ steps:
   - script: >-
       rm -rf gh-pages &&
       git submodule add --force https://$(github_access_token)@github.com/DevSnicket/Eunice.git gh-pages &&
-      rm -f -rf gh-pages/renderer-test-harness &&
-      cp -r tests/example/output gh-pages/renderer-test-harness &&
-      rm gh-pages/renderer-test-harness/harness.js.map &&
+      rm -f -rf gh-pages/interactive &&
+      cp -r tests/example/output gh-pages/interactive &&
+      rm gh-pages/interactive/harness.js.map &&
       cd gh-pages &&
       git add . &&
       git config --add user.email grahamdyson@hotmail.com &&

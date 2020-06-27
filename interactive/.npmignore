@@ -5,7 +5,7 @@
 /.vscode
 /azure-pipelines.yml
 /cspell.json
-/devsnicket-eunice-renderer-test-harness-*.tgz
+/devsnicket-eunice-interactive-*.tgz
 /eunice.*
 /gh-pages/
 /jsconfig.json

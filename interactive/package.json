@@ -36,7 +36,7 @@
 		"typescript": "3.8.2",
 		"webpack-cli": "3.3.2"
 	},
-	"homepage": "https://github.com/DevSnicket/eunice-renderer-test-harness#readme",
+	"homepage": "https://devsnicket.com/eunice",
 	"jest": {
 		"collectCoverage": true,
 		"collectCoverageFrom": [
@@ -83,13 +83,13 @@
 	],
 	"license": "SEE LICENSE IN LICENSE",
 	"main": "index.js",
-	"name": "@devsnicket/eunice-renderer-test-harness",
+	"name": "@devsnicket/eunice-interactive",
 	"publishConfig": {
 		"repository": "https://pkgs.dev.azure.com/grahamdyson/_packaging/Eunice/npm/registry/"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/DevSnicket/eunice-renderer-test-harness.git"
+		"url": "https://github.com/DevSnicket/eunice-interactive.git"
 	},
 	"sideEffects": [
 		"*.css"
