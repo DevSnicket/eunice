@@ -23,7 +23,7 @@ steps:
       git config --add user.email grahamdyson@hotmail.com &&
       git config --add user.name "GitHub pages publish" &&
       if [[ `git status --porcelain` ]]; then
-        git commit -m "dogfooding and JavaScript harness";
+        git commit -m "interactive update";
         git push;
       fi
     displayName: GitHub pages publish
