@@ -1,6 +1,6 @@
 # Eunice ![](https://raw.githubusercontent.com/DevSnicket/eunice/master/arrows/default-height.svg?sanitize=true) Test harnesses
 
-This package contains implementation shared between both the [JavaScript analyzer test harnesses](https://github.com/DevSnicket/eunice-javascript-analyzer/tree/master/harness) and [renderer test harnesses](https://github.com/DevSnicket/eunice-renderer-test-harness) of Eunice. The test harnesses use JavaScript, CSS, HTML, [React](https://reactjs.org/), [Webpack](https://webpack.js.org/), [VS Code's Monaco editor](https://github.com/microsoft/monaco-editor) and the [React Re-F|ex](https://github.com/leefsmp/Re-Flex) component.
+This package contains implementation shared between both the [JavaScript analyzer test harnesses](https://github.com/DevSnicket/eunice-javascript-analyzer/tree/master/harness) and the [interactive web page of Eunice](https://github.com/DevSnicket/eunice-interactive). The test harnesses use JavaScript, CSS, HTML, [React](https://reactjs.org/), [Webpack](https://webpack.js.org/), [VS Code's Monaco editor](https://github.com/microsoft/monaco-editor) and the [React Re-F|ex](https://github.com/leefsmp/Re-Flex) component.
 
 For more information [https://devsnicket.com/eunice](https://devsnicket.com/eunice).
 
