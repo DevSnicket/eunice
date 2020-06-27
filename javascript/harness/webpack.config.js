@@ -1,6 +1,6 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import createWebpackConfiguration from "@devsnicket/eunice-renderer-test-harness/createWebpackConfiguration";
+import createWebpackConfiguration from "@devsnicket/eunice-interactive/createWebpackConfiguration";
 import path from "path";
 
 export default

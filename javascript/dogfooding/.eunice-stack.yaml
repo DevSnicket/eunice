@@ -4,7 +4,7 @@
   - id: processors and renderer
     dependencyPermeable: true
     items:
-      - - renderer-test-harness
+      - - interactive
       - [ processors, renderer ]
       - - dependency-and-structure
 -

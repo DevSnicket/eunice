@@ -6,7 +6,7 @@ import fileSystem from "fs-extra";
 import { safeDump as formatYaml } from "js-yaml";
 import { getSvgForYaml } from "@devsnicket/eunice-renderer";
 import path from "path";
-import writeHarness from "@devsnicket/eunice-renderer-test-harness/writeHarness";
+import writeHarness from "@devsnicket/eunice-interactive/writeHarness";
 
 export default async(/** @type {import("./Parameter.d")} */{
 	babelParserPlugins,

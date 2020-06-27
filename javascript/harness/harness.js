@@ -18,8 +18,8 @@ import babelParserPlugins from "../babelParserPluginsDefault";
 import createCodeEditorForLanguage from "@devsnicket/eunice-test-harnesses/codeEditor/createEditorForLanguage";
 import { createElement } from "react";
 import createJavascriptEditor from "@devsnicket/eunice-javascript-analyzer/harness/createJavascriptEditor";
-import createYamlInputElement from "@devsnicket/eunice-renderer-test-harness/createYamlInputElement";
-import createYamlOutputElement from "@devsnicket/eunice-renderer-test-harness/createYamlOutputElement";
+import createYamlInputElement from "@devsnicket/eunice-interactive/createYamlInputElement";
+import createYamlOutputElement from "@devsnicket/eunice-interactive/createYamlOutputElement";
 import getYamlFromJavascript from "@devsnicket/eunice-javascript-analyzer/getYamlFromJavascript";
 import initializeCodeEditorGlobal from "@devsnicket/eunice-test-harnesses/codeEditor/serviceWorkers/initializeGlobal";
 
