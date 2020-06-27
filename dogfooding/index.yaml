@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 7.6.1 on 2020-06-24T15:02:26.204Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 7.6.1 on 2020-06-27T10:36:36.727Z
 - - id: javascript
     type: directory
     items:
@@ -40,7 +40,7 @@
                   items:
                     id: harness
                     items: createJavascriptEditor
-                - id: renderer-test-harness
+                - id: interactive
                   items:
                     - createYamlInputElement
                     - createYamlOutputElement
@@ -79,7 +79,7 @@
                 - - id: createWebpackConfiguration
                     type: import
                     dependsUpon:
-                      id: renderer-test-harness
+                      id: interactive
                       items: createWebpackConfiguration
         - id: index
           type: file
@@ -121,7 +121,7 @@
         - id: interactive.webpack.config
           type: file
           dependsUpon:
-            id: renderer-test-harness
+            id: interactive
             items: createWebpackConfiguration
           items:
             id: interactive.webpack.config
@@ -251,7 +251,7 @@
                     - id: writeHarness
                       type: import
                       dependsUpon:
-                        id: renderer-test-harness
+                        id: interactive
                         items: writeHarness
             - - id: addPackagesToSources
                 type: directory
@@ -3764,7 +3764,7 @@
   - id: processors and renderer
     dependencyPermeable: true
     items:
-      - - id: renderer-test-harness
+      - - id: interactive
           type: directory
           items:
             - - id: harness
@@ -3895,7 +3895,7 @@
                                   - id: readTextFile
                                     type: import
                                     dependsUpon:
-                                      id: renderer-test-harness
+                                      id: interactive
                                       items: readTextFile
                                   - id: renderToStaticMarkup
                                     type: import
@@ -4132,7 +4132,7 @@
                                               - id: readTextFile
                                                 type: import
                                                 dependsUpon:
-                                                  id: renderer-test-harness
+                                                  id: interactive
                                                   items: readTextFile
                                             - - id: removeWhitespaceFromTestExpected
                                                 type: import
@@ -4259,7 +4259,7 @@
                                                     items:
                                                       id: server
                                                       items: renderToStaticMarkup
-                                                  - id: renderer-test-harness
+                                                  - id: interactive
                                                     items: readTextFile
                                                 items:
                                                   - - id: createSubset
@@ -4572,7 +4572,7 @@
                                 - id: readTextFile
                                   type: import
                                   dependsUpon:
-                                    id: renderer-test-harness
+                                    id: interactive
                                     items: readTextFile
                                 - id: writeHarness
                                   type: import
@@ -4675,7 +4675,7 @@
                           - id: readTextFile
                             type: import
                             dependsUpon:
-                              id: renderer-test-harness
+                              id: interactive
                               items: readTextFile
                           - id: writeFile
                             type: import
