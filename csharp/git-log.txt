@@ -1,4 +1,17 @@
 ---
+2020-06-28
+Create package.json
+---
+2020-06-28
+Update azure-pipelines.yml for Azure Pipelines
+---
+2020-06-28
+Update azure-pipelines.yml for Azure Pipelines
+---
+2020-06-28
+yaml is written to interactive web page
+
+---
 2020-06-26
 license acceptance argument and prompt
 
