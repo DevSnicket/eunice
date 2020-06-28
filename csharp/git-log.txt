@@ -1,5 +1,10 @@
 ---
 2020-06-28
+NuGet package pack and push
+release configuration, test run changed to match
+
+---
+2020-06-28
 configured as .NET CLI tool package
 
 ---
