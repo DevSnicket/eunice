@@ -1,6 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
+		<AssemblyName>eunice</AssemblyName>
 		<OutputType>Exe</OutputType>
+		<PackageTags>analyze;analyzer;architecture;dependency;dependencies;csharp;euince;stack;structure;uince;unice</PackageTags>
+		<PackageType>DotNetCliTool</PackageType>
+		<PackAsTool>true</PackAsTool>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Build.Locator" Version="1.2.6" />

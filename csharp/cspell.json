@@ -4,6 +4,7 @@
 	"minWordLength": 2,
 	"words": [
 		"arity",
+		"cli",
 		"concat",
 		"failwith",
 		"foq",
