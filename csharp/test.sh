@@ -4,6 +4,7 @@ set -e
 
 dotnet test \
 Tests \
+-c Release \
 -l "trx;LogFileName=.trx" \
 -p:AltCover=true \
 -p:AltCoverAssemblyFilter="^(?!DevSnicket.Eunice$)" \

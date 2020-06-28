@@ -8,4 +8,5 @@ set -e
 ./lint.sh
 ./git-log-write-file.sh
 ./spellcheck.sh
+./package-pack-and-push.sh
 git push $1

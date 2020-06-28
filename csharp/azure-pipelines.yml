@@ -30,5 +30,8 @@ steps:
   - task: ShellScript@2
     displayName: spellcheck
     inputs: { scriptPath: spellcheck.sh }
+  - task: ShellScript@2
+    displayName: spellcheck
+    inputs: { scriptPath: package-pack-and-push.sh }
 trigger: [ master ]
 workspace: { clean: all }
