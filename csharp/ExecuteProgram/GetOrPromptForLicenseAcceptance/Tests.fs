@@ -27,27 +27,27 @@ type Tests () =
     [<Xunit.Theory>]
     [<Xunit.MemberData ("TestCases")>]
     let testTestCase testCase =
-        let actualWriteLines =
-            new System.Collections.Generic.List<String>()
+        async {
+            let actualWriteLines =
+                new System.Collections.Generic.List<String>()
 
-        let mutable actualIsReadKeyCalled = false
+            let! actualIsAccepted =
+                getOrPromptForLicenseAcceptance
+                    {|
+                        IsAcceptedInArguments = testCase.IsAcceptedInArguments
+                        IsInteractive = testCase.IsInteractive
+                        ReadKey = testCase.ReadKeysQueue.Dequeue
+                        WriteLine = actualWriteLines.Add
+                    |}
 
-        let actualIsAccepted =
-            getOrPromptForLicenseAcceptance
+            Xunit.Assert.Equal (
+                testCase.Expected,
                 {|
-                    IsAcceptedInArguments = testCase.IsAcceptedInArguments
-                    IsInteractive = testCase.IsInteractive
-                    ReadKey = testCase.ReadKeysQueue.Dequeue
-                    WriteLine = actualWriteLines.Add
+                    IsAccepted = actualIsAccepted
+                    WriteLines = actualWriteLines |> Seq.toList
                 |}
-
-        Xunit.Assert.Equal (
-            testCase.Expected,
-            {|
-                IsAccepted = actualIsAccepted
-                WriteLines = actualWriteLines |> Seq.toList
-            |}
-        )
+            )
+        }
 
     static member TestCases =
         let licence =
@@ -110,6 +110,7 @@ type Tests () =
                             [
                                 "By specifying --accept-license you have accepted the license http://www.devsnicket.com/eunice/licensing"
                                 commercialUseText
+                                ""
                             ]
                     |}
                 ReadKeysQueue =

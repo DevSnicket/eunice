@@ -33,6 +33,8 @@
 		<Compile Include="AnalyzeProjectOrSolutionPath/IsProjectSupported.fs" />
 		<Compile Include="AnalyzeProjectOrSolutionPath/AnalyzeSolutionPath.fs" />
 		<Compile Include="AnalyzeProjectOrSolutionPath/.fs" />
+		<Compile Include="ReadTextFromEmbedded.fs" />
+		<Compile Include="WriteInteractiveInDirectoryPathWithYaml/.fs" />
 		<Compile Include="ExecuteProgram/AcceptLicenseParameter.fs" />
 		<Compile Include="ExecuteProgram/GetOrPromptForLicenseAcceptance/CommercialUseText.fs" />
 		<Compile Include="ExecuteProgram/GetOrPromptForLicenseAcceptance/.fs" />
@@ -41,5 +43,6 @@
 		<Compile Include="ExecuteProgram/WriteNameAndVersion/.fs" />
 		<Compile Include="ExecuteProgram/.fs" />
 		<EmbeddedResource Include="LICENSE" />
+		<EmbeddedResource Include="WriteInteractiveInDirectoryPathWithYaml/index.html" />
 	</ItemGroup>
 </Project>

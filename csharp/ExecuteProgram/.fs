@@ -4,6 +4,7 @@ open DevSnicket.Eunice.AnalyzeProjectOrSolutionPath
 open DevSnicket.Eunice._ExecuteProgram.GetOrPromptForLicenseAcceptance
 open DevSnicket.Eunice._ExecuteProgram.ParseArguments
 open DevSnicket.Eunice._ExecuteProgram.WriteNameAndVersion
+open DevSnicket.Eunice.WriteInteractiveInDirectoryPathWithYaml
 
 type Assembly = System.Reflection.Assembly
 type Console = System.Console
@@ -25,38 +26,43 @@ let executeProgramWithArguments arguments =
     |> parseArguments
     |> function
         | ParsedArguments parsedArguments ->
-            parsedArguments |> executeProgramWithParsedArguments
+            parsedArguments
+            |> executeProgramWithParsedArguments
+            |> Async.RunSynchronously
         | Error error ->
             error |> Console.Error.WriteLine
             1
 
 let private executeProgramWithParsedArguments (arguments: ParsedArguments) =
-    if getOrPromptForLicenseAcceptance
-        {|
-            IsAcceptedInArguments = arguments.IsLicenseAccepted
-            IsInteractive = not <| Console.IsOutputRedirected
-            ReadKey = consoleReadKeyIntercept
-            WriteLine = Console.WriteLine
-        |}
-    then
-        Microsoft.Build.Locator.MSBuildLocator.RegisterDefaults ()
-        |> ignore
+    async {
+        let! isLicenseAccepted =
+            getOrPromptForLicenseAcceptance
+                {|
+                    IsAcceptedInArguments = arguments.IsLicenseAccepted
+                    IsInteractive = not <| Console.IsOutputRedirected
+                    ReadKey = consoleReadKeyIntercept
+                    WriteLine = Console.WriteLine
+                |}
 
-        let {
-                Errors = errors
-                Yaml = yaml
-            }
-            =
-            arguments.FilePath
-            |> analyzeProjectOrSolutionPath
-            |> Async.RunSynchronously
+        if isLicenseAccepted then
+            Microsoft.Build.Locator.MSBuildLocator.RegisterDefaults ()
+            |> ignore
 
-        errors |> Seq.iter Console.Error.WriteLine
-        yaml |> Seq.iter Console.WriteLine
+            let! {
+                    Errors = errors
+                    Yaml = yaml
+                }
+                =
+                arguments.FilePath
+                |> analyzeProjectOrSolutionPath
 
-        0
-    else
-        1
+            errors |> Seq.iter Console.Error.WriteLine
+            do! yaml |> writeInteractiveInDirectoryPathWithYaml "."
+
+            return 0
+        else
+            return 1
+    }
 
 let private consoleReadKeyIntercept () =
     Console.ReadKey(true).Key

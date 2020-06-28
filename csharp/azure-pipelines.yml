@@ -11,6 +11,9 @@ steps:
     displayName: Node install
     inputs: { versionSpec: '10.x' }
   - task: ShellScript@2
+    displayName: download and extract interactive package
+    inputs: { scriptPath: WriteInteractiveInDirectoryPathWithYaml/download-and-extract-package.sh }
+  - task: ShellScript@2
     displayName: restore test case C# projects
     inputs: { scriptPath: AnalyzeProjectOrSolutionPath/Tests/TestCases/restore.sh }
   - task: ShellScript@2
