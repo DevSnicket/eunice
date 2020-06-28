@@ -1,5 +1,9 @@
 ---
 2020-06-28
+configured as .NET CLI tool package
+
+---
+2020-06-28
 license acceptance argument and prompt
 
 ---
