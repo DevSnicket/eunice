@@ -1,4 +1,14 @@
 ---
+2020-06-29
+package push version wildcard
+previously hardcoded to 1.0.0
+
+---
+2020-06-29
+global alias operators
+DevSnicket/eunice#127
+
+---
 2020-06-28
 NuGet package pack and push
 release configuration, test run changed to match
