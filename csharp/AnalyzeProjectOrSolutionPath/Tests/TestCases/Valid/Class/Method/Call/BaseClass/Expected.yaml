@@ -1,0 +1,13 @@
+﻿- id: TestCase
+  items:
+    - id: BaseCalleeClass
+      items: BaseCalleeMethod
+    - id: DerivedCallerClass
+      dependsUpon: BaseCalleeClass
+      items:
+        id: DerivedCallerMethod
+        dependsUpon:
+          id: TestCase
+          items:
+            id: BaseCalleeClass
+            items: BaseCalleeMethod
