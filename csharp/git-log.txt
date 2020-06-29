@@ -1,14 +1,4 @@
 ---
-2020-06-29
-package push version wildcard
-previously hardcoded to 1.0.0
-
----
-2020-06-29
-global alias operators
-DevSnicket/eunice#127
-
----
 2020-06-28
 NuGet package pack and push
 release configuration, test run changed to match
@@ -345,7 +335,3 @@ VS Code Ionide extension Git ignore
 2020-05-30
 created project for implementation
 configured to build an executable
-
----
-2020-05-30
-VS Code file format settings
