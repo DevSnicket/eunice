@@ -23,11 +23,6 @@ steps:
     displayName: lint
     inputs: { scriptPath: lint.sh }
   - task: ShellScript@2
-    displayName: website update
-    inputs:
-      args: $(github_access_token)
-      scriptPath: website-update.sh
-  - task: ShellScript@2
     displayName: spellcheck
     inputs: { scriptPath: spellcheck.sh }
   - task: ShellScript@2
