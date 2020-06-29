@@ -4,13 +4,17 @@ open Microsoft.CodeAnalysis
 open Microsoft.CodeAnalysis.CSharp.Syntax
 
 let getNamesUsedInSyntaxReference (syntaxReference: SyntaxReference) =
-    syntaxReference.GetSyntax().DescendantNodes descendIntoChildren
+    syntaxReference.GetSyntax().DescendantNodes (not << areChildrenIgnored)
     |> Seq.filter isName
 
-let private descendIntoChildren syntaxNode =
-    not <| syntaxNode :? QualifiedNameSyntax
+let private areChildrenIgnored syntaxNode =
+    syntaxNode :? AliasQualifiedNameSyntax
+    ||
+    syntaxNode :? QualifiedNameSyntax
 
 let private isName syntaxNode =
+    syntaxNode :? AliasQualifiedNameSyntax
+    ||
     syntaxNode :? IdentifierNameSyntax
     ||
     syntaxNode :? QualifiedNameSyntax

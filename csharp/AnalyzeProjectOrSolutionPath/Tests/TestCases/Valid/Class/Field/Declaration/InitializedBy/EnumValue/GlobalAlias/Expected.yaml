@@ -1,0 +1,14 @@
+﻿- id: TestCase
+  items:
+    - id: Class
+      items:
+        id: _field
+        dependsUpon:
+          id: TestCase
+          items:
+            id: FieldEnumNamespace
+            items:
+              id: FieldEnum
+              items: Value
+    - id: FieldEnumNamespace
+      items: FieldEnum
