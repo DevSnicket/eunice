@@ -10,11 +10,15 @@ let getNamesUsedInSyntaxReference (syntaxReference: SyntaxReference) =
 let private areChildrenIgnored syntaxNode =
     syntaxNode :? AliasQualifiedNameSyntax
     ||
+    syntaxNode :? MemberAccessExpressionSyntax
+    ||
     syntaxNode :? QualifiedNameSyntax
 
 let private isName syntaxNode =
     syntaxNode :? AliasQualifiedNameSyntax
     ||
     syntaxNode :? IdentifierNameSyntax
+    ||
+    syntaxNode :? MemberAccessExpressionSyntax
     ||
     syntaxNode :? QualifiedNameSyntax
