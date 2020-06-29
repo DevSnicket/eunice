@@ -1,9 +1,12 @@
 {
 	"configurations": [
 		{
-			"args": [ "AnalyzeProjectPath/Tests/TestCases/TestCase.csproj" ],
+			"args": [
+				"--accept-license",
+				"AnalyzeProjectOrSolutionPath/Tests/TestCases",
+			],
 			"name": "program",
-			"program": "${workspaceFolder}/bin/Debug/DevSnicket.Eunice.dll",
+			"program": "${workspaceFolder}/bin/Debug/eunice.dll",
 			"request": "launch",
 			"requireExactSource": false,
 			"type": "coreclr"
