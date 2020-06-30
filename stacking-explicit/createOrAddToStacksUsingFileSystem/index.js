@@ -1,30 +1,33 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Licensed under the MIT license. See LICENSE file in the repository root for full license information.
 
 import createStackWhenIdentifierOrItemOrLevelOrAddWhenStack from "../createStackWhenIdentifierOrItemOrLevelOrAddWhenStack";
-import hasParentInAncestors from "./hasParentInAncestors";
-import replaceIdentifiersAndItemsAndLevelsAndStacks from "../../replacement/replaceIdentifiersAndItemsAndLevelsAndStacks";
+import getTargetLevelOrStackForAncestorsAndDirectory from "./getTargetLevelOrStackForAncestorsAndDirectory";
+import replaceIdentifiersAndItemsAndLevelsAndStacks from "../replaceIdentifiersAndItemsAndLevelsAndStacks";
 
 export default ({
 	addNewInTarget = true,
+	directory,
 	identifierOrItemOrLevelOrStack,
-	keysAndPatterns,
-	targetLevelOrStack,
+	stackFileName = ".eunice-stack.yaml",
+	subsetIdentifierHierarchy = null,
 }) =>
 	replaceIdentifiersAndItemsAndLevelsAndStacks({
 		identifierOrItemOrLevelOrStack,
 		replace:
 			withContext({
 				addNewInTarget,
-				keysAndPatterns,
-				targetLevelOrStack,
+				directory,
+				stackFileName,
+				subsetIdentifierHierarchy,
 			})
 			.replace,
 	});
 
 function withContext({
 	addNewInTarget,
-	keysAndPatterns,
-	targetLevelOrStack,
+	directory,
+	stackFileName,
+	subsetIdentifierHierarchy,
 }) {
 	return { replace };
 
@@ -32,11 +35,16 @@ function withContext({
 		ancestors,
 		identifierOrItemOrLevelOrStack,
 	}) {
-		return (
-			hasParentInAncestors({
+		const targetLevelOrStack =
+			getTargetLevelOrStackForAncestorsAndDirectory({
 				ancestors,
-				keysAndPatterns,
-			})
+				directory,
+				stackFileName,
+				subsetIdentifierHierarchy,
+			});
+
+		return (
+			targetLevelOrStack
 			?
 			createStackWhenIdentifierOrItemOrLevelOrAddWhenStack({
 				addNewInTarget,

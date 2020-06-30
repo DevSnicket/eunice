@@ -2,10 +2,6 @@
 
 /* istanbul ignore file: test would be a mirror of implementation */
 
-import * as replacement from "./replacement";
-import * as stacking from "./stacking";
-
-export {
-	replacement,
-	stacking,
-};
+export { default as createOrAddToStacksOfParentMatch } from "./createOrAddToStacksOfParentMatch";
+export { default as createOrAddToStacksUsingFileSystem } from "./createOrAddToStacksUsingFileSystem";
+export { default as createStackWhenIdentifierOrItemOrLevelOrAddWhenStack } from "./createStackWhenIdentifierOrItemOrLevelOrAddWhenStack";

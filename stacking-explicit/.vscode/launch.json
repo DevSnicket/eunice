@@ -11,7 +11,124 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"replacement/replaceIdentifiersAndItems/index.test.js"
+						"createOrAddToStacksUsingFileSystem/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "createOrAddToStacksUsingFileSystem jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--collect-coverage=false",
+						"--runInBand",
+						"createOrAddToStacksUsingFileSystem/getTargetLevelOrStackForAncestorsAndDirectory/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "createOrAddToStacksUsingFileSystem getTargetLevelOrStackForAncestorsAndDirectory jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--collect-coverage=false",
+						"--runInBand",
+						"createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/createItemLookup/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "createStackWhenIdentifierOrItemOrLevelOrAddWhenStack createItemLookup jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--collect-coverage=false",
+						"--runInBand",
+						"createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/getExisting/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "createStackWhenIdentifierOrItemOrLevelOrAddWhenStack getExisting jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--collect-coverage=false",
+						"--runInBand",
+						"createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/getExisting/getIdentifiersInTargetLevelOrStack/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "createStackWhenIdentifierOrItemOrLevelOrAddWhenStack getExisting getIdentifiersInTargetLevelOrStack jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--collect-coverage=false",
+						"--runInBand",
+						"createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/getStackOrSingleLevelOrSingleItem/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "createStackWhenIdentifierOrItemOrLevelOrAddWhenStack getStackOrSingleLevelOrSingleItem jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--collect-coverage=false",
+						"--runInBand",
+						"createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/mapAndCreateNewInTargetLevelOrStack/index.test.js",
+					],
+				"disableOptimisticBPs": true,
+				"name": "createStackWhenIdentifierOrItemOrLevelOrAddWhenStack mapAndCreateNewInTargetLevelOrStack jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--collect-coverage=false",
+						"--runInBand",
+						"createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/mapAndCreateNewInTargetLevelOrStack/mapTargetLevelOrStack/index.test.js",
+					],
+				"disableOptimisticBPs": true,
+				"name": "createStackWhenIdentifierOrItemOrLevelOrAddWhenStack mapAndCreateNewInTargetLevelOrStack mapTargetLevelOrStack jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--collect-coverage=false",
+						"--runInBand",
+						"createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/throwErrorWhenIdentifiersNotUsed/index.test.js",
+					],
+				"disableOptimisticBPs": true,
+				"name": "createStackWhenIdentifierOrItemOrLevelOrAddWhenStack throwErrorWhenIdentifiersNotUsed jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--collect-coverage=false",
+						"--runInBand",
+						"replaceIdentifiersAndItems/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "replaceIdentifiersAndItems jest",
@@ -24,184 +141,10 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"replacement/replaceIdentifiersAndItemsAndLevelsAndStacks/index.test.js"
+						"replaceIdentifiersAndItemsAndLevelsAndStacks/index.test.js"
 					],
 				"disableOptimisticBPs": true,
 				"name": "replaceIdentifiersAndItemsAndLevelsAndStacks jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[
-						"--items=",
-						"--pattern=",
-						"--replacement=",
-						"--rootOnly="
-					],
-				"name": "replaceIdentifiers",
-				"program": "${workspaceFolder}/replaceIdentifiers/bin.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
-						"replaceIdentifiers/index.test.js",
-					],
-				"disableOptimisticBPs": true,
-				"name": "replaceIdentifiers jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[
-						"--directory=",
-						"--items="
-					],
-				"name": "stacking createOrAddToStacksUsingFileSystem",
-				"program": "${workspaceFolder}/stacking/createOrAddToStacksUsingFileSystem/bin.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
-						"stacking/createOrAddToStacksUsingFileSystem/index.test.js"
-					],
-				"disableOptimisticBPs": true,
-				"name": "stacking createOrAddToStacksUsingFileSystem jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
-						"stacking/createOrAddToStacksUsingFileSystem/getTargetLevelOrStackForAncestorsAndDirectory/index.test.js"
-					],
-				"disableOptimisticBPs": true,
-				"name": "stacking createOrAddToStacksUsingFileSystem getTargetLevelOrStackForAncestorsAndDirectory jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
-						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/createItemLookup/index.test.js"
-					],
-				"disableOptimisticBPs": true,
-				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack createItemLookup jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
-						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/getExisting/index.test.js"
-					],
-				"disableOptimisticBPs": true,
-				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack getExisting jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
-						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/getExisting/getIdentifiersInTargetLevelOrStack/index.test.js"
-					],
-				"disableOptimisticBPs": true,
-				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack getExisting getIdentifiersInTargetLevelOrStack jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
-						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/getStackOrSingleLevelOrSingleItem/index.test.js"
-					],
-				"disableOptimisticBPs": true,
-				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack getStackOrSingleLevelOrSingleItem jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
-						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/mapAndCreateNewInTargetLevelOrStack/index.test.js",
-					],
-				"disableOptimisticBPs": true,
-				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack mapAndCreateNewInTargetLevelOrStack jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
-						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/mapAndCreateNewInTargetLevelOrStack/mapTargetLevelOrStack/index.test.js",
-					],
-				"disableOptimisticBPs": true,
-				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack mapAndCreateNewInTargetLevelOrStack mapTargetLevelOrStack jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
-						"stacking/createStackWhenIdentifierOrItemOrLevelOrAddWhenStack/throwErrorWhenIdentifiersNotUsed/index.test.js",
-					],
-				"disableOptimisticBPs": true,
-				"name": "stacking createStackWhenIdentifierOrItemOrLevelOrAddWhenStack throwErrorWhenIdentifiersNotUsed jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args": [ "--items=", ],
-				"name": "unstackIndependent",
-				"program": "${workspaceFolder}/unstackIndependent/bin.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
-						"unstackIndependent/index.test.js",
-					],
-				"disableOptimisticBPs": true,
-				"name": "unstackIndependent jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node"

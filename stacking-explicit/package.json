@@ -49,19 +49,20 @@
 		"process",
 		"processors",
 		"stack",
+		"stacking",
 		"structure",
 		"uince",
 		"unice",
 		"yaml"
 	],
 	"license": "MIT",
-	"name": "@devsnicket/eunice-processors",
+	"name": "@devsnicket/eunice-stacking",
 	"publishConfig": {
 		"access": "public"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/DevSnicket/eunice-processors.git"
+		"url": "https://github.com/DevSnicket/eunice-stacking.git"
 	},
 	"sideEffects": false,
 	"scripts": {
