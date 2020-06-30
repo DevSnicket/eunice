@@ -1,12 +1,16 @@
 - - javascript
 -
   - javascript-analyzer
-  - id: processors and renderer
+  - id: post analysis
     dependencyPermeable: true
     items:
       - - interactive
-      - [ processors, renderer ]
-      - - dependency-and-structure
+      - - id: dependency, render and structure
+          dependencyPermeable: true
+          items:
+            - - renderer
+            - - dependency-and-structure
+        - processors
 -
   - call-with-process-standard-streams
   - run-tests-from-file-system
