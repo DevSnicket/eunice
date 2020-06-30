@@ -1,19 +1,15 @@
-cache:
-  directories: [ node_modules ]
+cache: { directories: [ node_modules ] }
 install: [ npm install ]
 language: node_js
 jobs:
   include:
-    -
-      deploy:
-        - api_key: $NPM_TOKEN
-          email: grahamdyson@hotmail.com
-          provider: npm
+    - deploy:
+        api_key: $NPM_TOKEN
+        email: grahamdyson@hotmail.com
+        provider: npm
       node_js: 12.14.0
-      script:
-        - npm run all
-        - mkdir -p test-coverage && npm install --no-save --prefix test-coverage coveralls@3.0.1 && cat test-coverage/lcov.info | test-coverage/node_modules/coveralls/bin/coveralls.js
-      stage: Node.js 12 & Coveralls & NPM publish
+      script: npm run all
+      stage: Node.js 12 & NPM publish
 node_js: [ 10.18.0, 14.4.0 ]
 notifications:
   email:

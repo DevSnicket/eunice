@@ -1,7 +1,7 @@
 # Eunice ![](https://raw.githubusercontent.com/DevSnicket/eunice/master/arrows/default-height.svg?sanitize=true) Processors
 
 [![NPM](https://img.shields.io/npm/v/@devsnicket/eunice-processors.svg)](https://www.npmjs.com/package/@devsnicket/eunice-processors
-) [![Build Status](https://travis-ci.org/DevSnicket/eunice-processors.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-processors) [![Coverage Status](https://coveralls.io/repos/github/DevSnicket/eunice-processors/badge.svg?branch=master&c=1)](https://coveralls.io/github/DevSnicket/eunice-processors?branch=master) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
+) [![Build Status](https://travis-ci.org/DevSnicket/eunice-processors.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-processors) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
 
 This package contains multiple processors that input and output dependencies defined in YAML. The input can be created by an analyzer or the output from another processor. After final processing the output can be rendered and interacted with. A JavaScript analyzer and SVG/web renderer are included elsewhere in [Eunice](https://www.github.com/DevSnicket/Eunice).
 
