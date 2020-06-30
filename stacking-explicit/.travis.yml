@@ -15,11 +15,11 @@ jobs:
         - npm run all
         - mkdir -p test-coverage && npm install --no-save --prefix test-coverage coveralls@3.0.1 && cat test-coverage/lcov.info | test-coverage/node_modules/coveralls/bin/coveralls.js
       stage: Node.js 12 & Coveralls & NPM publish
-node_js: [ 8.17.0, 9.11.2, 10.18.0, 11.15.0 ]
+node_js: [ 10.18.0, 11.15.0 ]
 notifications:
   email:
     on_success: never
     on_failure: always
 os: linux
 script: npm run all
-stage: Node.js 8 - 11
+stage: Node.js 10 - 11
