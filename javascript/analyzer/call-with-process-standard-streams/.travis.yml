@@ -1,7 +1,6 @@
 cache: { directories: [ node_modules ] }
 deploy:
   api_key: $NPM_TOKEN
-  edge: true
   email: grahamdyson@hotmail.com
   provider: npm
 install: npm install
