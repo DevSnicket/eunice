@@ -30,7 +30,11 @@
         <p>To give Eunice <a href="https://en.wikipedia.org/wiki/Composability" rel="noopener" target="_blank">composability</a> within and between stages, a common data format for structure and dependency is described using <a href="https://yaml.org/" rel="noopener" target="_blank">YAML</a>. The format of YAML supported by Eunice is specified <a href="./yaml">here</a>.</p>
         <h2>analyzers</h2>
         <p>Analyzers are implemented to create the YAML files (e.g. from source code in a specific language, or using a specific framework).</p>
-        <p>An analyzer exists for JavaScript which uses Babel <a href="https://babeljs.io/docs/en/babel-parser" rel="noopener" target="_blank">parser</a> and its <a href="https://babeljs.io/docs/en/babel-parser#plugins" rel="noopener" target="_blank">plug-ins</a>.</p>
+        <p>The following analyzers have been implemented:</p>
+        <ul>
+            <li><a href="../javascript">JavaScript analyzer</a> that uses Babel <a href="https://babeljs.io/docs/en/babel-parser" rel="noopener" target="_blank">parser</a> and its <a href="https://babeljs.io/docs/en/babel-parser#plugins" rel="noopener" target="_blank">plug-ins</a></li>
+            <li><a href="../csharp">C# analyzer</a>that uses <a href="https://docs.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/" rel="noopener" target="_blank">.NET Compiler Platform ("Roslyn")</a></li>
+        </ul>
         <h2>processors</h2>
         <a href="https://www.npmjs.com/package/@devsnicket/eunice-processors" rel="noopener" target="_blank"><img alt="NPM" src="https://img.shields.io/npm/v/@devsnicket/eunice-processors.svg"/></a>
         <a href="https://github.com/DevSnicket/eunice-processors#readme" rel="noopener" target="_blank"><img alt="Git" src="./git.svg"/></a> <img alt="GitHub" src="./github.svg"/></a>
