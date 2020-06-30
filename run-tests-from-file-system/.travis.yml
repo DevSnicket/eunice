@@ -10,11 +10,11 @@ jobs:
       node_js: 12.14.0
       script: npm run all
       stage: Node.js 12 & NPM publish
-node_js: [ 10.18.0, 14.4.0 ]
+node_js: 14.4.0
 notifications:
   email:
     on_success: never
     on_failure: always
 os: linux
 script: npm run all
-stage: Node.js 10 & 14
+stage: Node.js 14
