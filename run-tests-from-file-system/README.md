@@ -7,7 +7,7 @@ Its is used to help create [Jest](https://jestjs.io/) tests for other Eunice pac
 For more information [https://devsnicket.com/eunice](https://devsnicket.com/eunice).
 
 [![NPM](https://img.shields.io/npm/v/@devsnicket/eunice-run-tests-from-file-system.svg)](https://www.npmjs.com/package/@devsnicket/eunice-run-tests-from-file-system
-) [![Build Status](https://travis-ci.org/DevSnicket/eunice-run-tests-from-file-system.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-run-tests-from-file-system) [![Coverage Status](https://coveralls.io/repos/github/DevSnicket/eunice-run-tests-from-file-system/badge.svg?branch=master&c=1)](https://coveralls.io/github/DevSnicket/eunice-run-tests-from-file-system?branch=master) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
+) [![Build Status](https://travis-ci.org/DevSnicket/eunice-run-tests-from-file-system.svg?branch=master)](https://travis-ci.org/DevSnicket/eunice-run-tests-from-file-system) [![![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Gitter chat](https://badges.gitter.im/devsnicket-eunice/gitter.png)](https://gitter.im/devsnicket-eunice)
 
 Install using [`npm`](https://www.npmjs.com/package/@devsnicket/eunice-run-tests-from-file-system):
 
