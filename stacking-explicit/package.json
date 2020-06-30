@@ -17,6 +17,7 @@
 		"eslint": "7.3.1",
 		"eslint-plugin-notice": "0.9.10",
 		"jest": "26.1.0",
+		"minimist": ">=1.2.3",
 		"typescript": "3.7.5"
 	},
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
