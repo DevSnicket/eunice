@@ -1,27 +1,22 @@
 cache: { directories: [ node_modules ] }
-deploy:
-  api_key: $NPM_TOKEN
-  email: grahamdyson@hotmail.com
-  provider: npm
-install: npm install
+install: [ npm install ]
 language: node_js
-node_js: "12"
+jobs:
+  include:
+    - deploy:
+        api_key: $NPM_TOKEN
+        email: grahamdyson@hotmail.com
+        provider: npm
+      node_js: 12.14.0
+      script:
+        - npm run all
+        - bash ./website-update.sh $github_access_token
+      stage: Node.js 12 & NPM publish
+node_js: [ 10.18.0, 14.4.0 ]
 notifications:
   email:
     on_success: never
     on_failure: always
 os: linux
-script: >-
-  npm run all &&
-  rm -rf gh-pages &&
-  git submodule add --force https://$github_access_token@github.com/DevSnicket/Eunice.git gh-pages &&
-  cp -r favicon.ico gh-pages &&
-  cd gh-pages &&
-  git add . &&
-  git config --add user.email grahamdyson@hotmail.com &&
-  git config --add user.name "GitHub pages publish" &&
-  if [[ `git status --porcelain` ]]; then
-    git commit -m "test harnesses favicon update";
-    git push;
-  fi &&
-  cd ..
+script: npm run all
+stage: Node.js 10 & 14
