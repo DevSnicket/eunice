@@ -56,13 +56,13 @@
 		"yaml"
 	],
 	"license": "MIT",
-	"name": "@devsnicket/eunice-stacks-explicit",
+	"name": "@devsnicket/eunice-stacking-explicit",
 	"publishConfig": {
 		"access": "public"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/DevSnicket/eunice-stacks-explicit.git"
+		"url": "https://github.com/DevSnicket/eunice-stacking-explicit.git"
 	},
 	"sideEffects": false,
 	"scripts": {
