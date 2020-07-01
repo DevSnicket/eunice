@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"alwaysStrict": true,
+		"checkJs": true,
+		"lib": [ "es2017", "esnext.array" ],
+		"moduleResolution": "node",
+		"noEmit": true,
+		"resolveJsonModule": true,
+		"target": "es2017"
+	},
+	"exclude": [
+		"test-coverage"
+	]
+}

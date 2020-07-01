@@ -1,0 +1,9 @@
+/devsnicket-eunice-stacking-inference-*.tgz
+/.eslintrc.yml
+/.eslintignore
+/.vscode
+/azure-pipelines.yml
+/cspell.json
+/eunice.*
+/jsconfig.json
+/test-coverage

@@ -1,0 +1,11 @@
+id: grandparent
+items:
+  id: parent
+  items:
+    - - id: first
+        dependsUpon:
+          id: grandparent
+          items:
+            id: parent
+            items: second
+    - - second
