@@ -1,6 +1,0 @@
-- id: first
-  dependsUpon: second
-- id: second
-  item:
-    id: child of second
-    dependsUpon: second

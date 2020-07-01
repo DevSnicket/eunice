@@ -2,7 +2,7 @@
 
 import { createOrAddToStacksUsingFileSystem } from "@devsnicket/eunice-stacking-explicit";
 import createSubsetIdentifierHierarchy from "./createSubsetIdentifierHierarchy";
-import inferStacks from "./inferStacks";
+import inferStacks from "@devsnicket/eunice-stacking-inference";
 import modifyStacksWithFile from "./modifyStacksWithFile";
 import removeEmptySelfDependentOfType from "./removeEmptySelfDependentOfType";
 import removePackagePrefixAndScopeInDependsUpon from "./removePackagePrefixAndScopeInDependsUpon";

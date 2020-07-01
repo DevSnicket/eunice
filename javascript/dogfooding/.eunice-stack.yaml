@@ -5,6 +5,7 @@
     dependencyPermeable: true
     items:
       - - interactive
+        - stacking-inference
       - - id: dependency, render and structure
           dependencyPermeable: true
           items:

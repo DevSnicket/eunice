@@ -1,5 +1,0 @@
-- - id: first
-    dependsUpon: child of second
-- - id: second
-    dependencyPermeable: true
-    items: child of second
