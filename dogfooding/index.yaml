@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 7.6.1 on 2020-07-01T05:51:12.176Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 7.6.1 on 2020-07-01T07:27:17.497Z
 - - id: javascript
     type: directory
     items:
@@ -391,7 +391,7 @@
                         - - id: createOrAddToStacksUsingFileSystem
                             type: import
                             dependsUpon:
-                              id: stacking
+                              id: stacks-explicit
                               items: createOrAddToStacksUsingFileSystem
                           - id: getOrCreateItemsInDirectory
                             type: import
@@ -450,7 +450,7 @@
                                     - - id: createOrAddToStacksUsingFileSystem
                                         type: import
                                         dependsUpon:
-                                          id: stacking
+                                          id: stacks-explicit
                                           items: createOrAddToStacksUsingFileSystem
                                       - id: createSubsetIdentifierHierarchy
                                         type: import
@@ -836,12 +836,12 @@
                                     - - id: createOrAddToStacksOfParentMatch
                                         type: import
                                         dependsUpon:
-                                          id: stacking
+                                          id: stacks-explicit
                                           items: createOrAddToStacksOfParentMatch
                                       - id: createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
                                         type: import
                                         dependsUpon:
-                                          id: stacking
+                                          id: stacks-explicit
                                           items: createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
                                       - id: parseYaml
                                         type: import
@@ -8010,7 +8010,7 @@
         - id: processors
           dependencyPermeable: true
           items:
-            - - id: stacking
+            - - id: stacks-explicit
                 type: directory
                 items:
                   - - id: index
@@ -8073,7 +8073,7 @@
                               - - id: createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
                                   type: import
                                   dependsUpon:
-                                    id: stacking
+                                    id: stacks-explicit
                                     items:
                                       id: createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
                                       items: index
@@ -8150,7 +8150,7 @@
                               - - id: createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
                                   type: import
                                   dependsUpon:
-                                    id: stacking
+                                    id: stacks-explicit
                                     items:
                                       id: createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
                                       items: index
