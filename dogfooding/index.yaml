@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 7.6.1 on 2020-06-30T07:04:08.224Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 7.6.1 on 2020-07-01T05:51:12.176Z
 - - id: javascript
     type: directory
     items:
@@ -391,10 +391,8 @@
                         - - id: createOrAddToStacksUsingFileSystem
                             type: import
                             dependsUpon:
-                              id: processors
-                              items:
-                                id: stacking
-                                items: createOrAddToStacksUsingFileSystem
+                              id: stacking
+                              items: createOrAddToStacksUsingFileSystem
                           - id: getOrCreateItemsInDirectory
                             type: import
                             dependsUpon:
@@ -452,10 +450,8 @@
                                     - - id: createOrAddToStacksUsingFileSystem
                                         type: import
                                         dependsUpon:
-                                          id: processors
-                                          items:
-                                            id: stacking
-                                            items: createOrAddToStacksUsingFileSystem
+                                          id: stacking
+                                          items: createOrAddToStacksUsingFileSystem
                                       - id: createSubsetIdentifierHierarchy
                                         type: import
                                         dependsUpon:
@@ -518,10 +514,8 @@
                                             - id: replaceIdentifiersAndItems
                                               type: import
                                               dependsUpon:
-                                                id: processors
-                                                items:
-                                                  id: replacement
-                                                  items: replaceIdentifiersAndItems
+                                                id: replacement
+                                                items: replaceIdentifiersAndItems
                                 - id: unstackIndependent
                                   type: directory
                                   items:
@@ -660,10 +654,8 @@
                                             - id: replaceIdentifiersAndItemsAndLevelsAndStacks
                                               type: import
                                               dependsUpon:
-                                                id: processors
-                                                items:
-                                                  id: replacement
-                                                  items: replaceIdentifiersAndItemsAndLevelsAndStacks
+                                                id: replacement
+                                                items: replaceIdentifiersAndItemsAndLevelsAndStacks
                                     - - id: createStackFromYamlWithAncestors
                                         type: file
                                         items:
@@ -844,17 +836,13 @@
                                     - - id: createOrAddToStacksOfParentMatch
                                         type: import
                                         dependsUpon:
-                                          id: processors
-                                          items:
-                                            id: stacking
-                                            items: createOrAddToStacksOfParentMatch
+                                          id: stacking
+                                          items: createOrAddToStacksOfParentMatch
                                       - id: createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
                                         type: import
                                         dependsUpon:
-                                          id: processors
-                                          items:
-                                            id: stacking
-                                            items: createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
+                                          id: stacking
+                                          items: createStackWhenIdentifierOrItemOrLevelOrAddWhenStack
                                       - id: parseYaml
                                         type: import
                                         dependsUpon:
@@ -868,10 +856,8 @@
                                       - id: replaceIdentifiersAndItemsAndLevelsAndStacks
                                         type: import
                                         dependsUpon:
-                                          id: processors
-                                          items:
-                                            id: replacement
-                                            items: replaceIdentifiersAndItemsAndLevelsAndStacks
+                                          id: replacement
+                                          items: replaceIdentifiersAndItemsAndLevelsAndStacks
                                 - id: removeEmptySelfDependentOfType
                                   type: directory
                                   items:
@@ -935,10 +921,8 @@
                                             - id: replaceIdentifiersAndItems
                                               type: import
                                               dependsUpon:
-                                                id: processors
-                                                items:
-                                                  id: replacement
-                                                  items: replaceIdentifiersAndItems
+                                                id: replacement
+                                                items: replaceIdentifiersAndItems
                                 - id: removePackagePrefixAndScopeInDependsUpon
                                   type: directory
                                   items:
@@ -1005,10 +989,8 @@
                                             - id: replaceDependsUpon
                                               type: import
                                               dependsUpon:
-                                                id: processors
-                                                items:
-                                                  id: replacement
-                                                  items: replaceDependsUpon
+                                                id: replaceDependsUpon
+                                                items: index
                                             - id: replaceItemsOfDependsUponWithIdentifier
                                               type: import
                                               dependsUpon:
@@ -1066,6 +1048,74 @@
                                                             - - id: identifier
                                                                 type: parameter
                                                       - - id: prefix
+                                                          type: parameter
+                                      - id: replaceDependsUpon
+                                        type: directory
+                                        items:
+                                          - - id: index.test
+                                              type: file
+                                              dependsUpon: test
+                                              items:
+                                                - - dependsUpon:
+                                                      - expect
+                                                      - replaceDependsUpon
+                                                  - dependsUpon:
+                                                      - expect
+                                                      - jest
+                                                      - replaceDependsUpon
+                                                  - dependsUpon:
+                                                      - expect
+                                                      - jest
+                                                      - replaceDependsUpon
+                                                - - id: replaceDependsUpon
+                                                    type: import
+                                                    dependsUpon:
+                                                      id: replaceDependsUpon
+                                                      items: index
+                                          - - id: index
+                                              type: file
+                                              items:
+                                                - - id: index
+                                                    type: export
+                                                    dependsUpon: withReplace
+                                                - - id: withReplace
+                                                    items:
+                                                      - - id: getIdentifierOrReplaceItemOrItemsInLevelOrStack
+                                                          dependsUpon:
+                                                            - getIdentifierOrReplaceInItem
+                                                            - whenLevelOrStack
+                                                          items:
+                                                            - - id: whenLevelOrStack
+                                                                dependsUpon:
+                                                                  - getIdentifierOrReplaceInItemOrLevel
+                                                                  - identifierOrItemOrLevelOrStack
+                                                            - - id: identifierOrItemOrLevelOrStack
+                                                                type: parameter
+                                                      - - id: getIdentifierOrReplaceInItemOrLevel
+                                                          dependsUpon:
+                                                            - getIdentifierOrReplaceInItem
+                                                            - whenLevel
+                                                          items:
+                                                            - - id: whenLevel
+                                                                dependsUpon:
+                                                                  - getIdentifierOrReplaceInItem
+                                                                  - levelOrItemOrIdentifier
+                                                            - - id: levelOrItemOrIdentifier
+                                                                type: parameter
+                                                      - - id: getIdentifierOrReplaceInItem
+                                                          dependsUpon:
+                                                            - replaceItemAndInItems
+                                                            - whenIdentifier
+                                                          items: whenIdentifier
+                                                      - - id: replaceItemAndInItems
+                                                          dependsUpon:
+                                                            - createPropertyFromDependsUpon
+                                                            - createPropertyFromItems
+                                                      - - id: createPropertyFromDependsUpon
+                                                          dependsUpon: replace
+                                                        - id: createPropertyFromItems
+                                                          dependsUpon: getIdentifierOrReplaceItemOrItemsInLevelOrStack
+                                                      - - id: replace
                                                           type: parameter
                                       - id: replaceItemsOfDependsUponWithIdentifier
                                         type: directory
@@ -1172,10 +1222,8 @@
                                           - - id: replaceIdentifiersAndItems
                                               type: import
                                               dependsUpon:
-                                                id: processors
-                                                items:
-                                                  id: replacement
-                                                  items: replaceIdentifiersAndItems
+                                                id: replacement
+                                                items: replaceIdentifiersAndItems
         - id: babelParserPluginsDefault
           type: file
           items:
@@ -7960,11 +8008,9 @@
                                   type: import
                                   dependsUpon: pretty-format
         - id: processors
-          type: directory
+          dependencyPermeable: true
           items:
-            - - id: index
-                type: file
-              - id: stacking
+            - - id: stacking
                 type: directory
                 items:
                   - - id: index
@@ -8039,12 +8085,8 @@
                                 - id: replaceIdentifiersAndItemsAndLevelsAndStacks
                                   type: import
                                   dependsUpon:
-                                    id: processors
-                                    items:
-                                      id: replacement
-                                      items:
-                                        id: replaceIdentifiersAndItemsAndLevelsAndStacks
-                                        items: index
+                                    id: replacement
+                                    items: replaceIdentifiersAndItemsAndLevelsAndStacks
                         - - id: hasParentInAncestors
                             type: directory
                             items:
@@ -8120,12 +8162,8 @@
                                 - id: replaceIdentifiersAndItemsAndLevelsAndStacks
                                   type: import
                                   dependsUpon:
-                                    id: processors
-                                    items:
-                                      id: replacement
-                                      items:
-                                        id: replaceIdentifiersAndItemsAndLevelsAndStacks
-                                        items: index
+                                    id: replacement
+                                    items: replaceIdentifiersAndItemsAndLevelsAndStacks
                         - - id: getTargetLevelOrStackForAncestorsAndDirectory
                             type: directory
                             items:
@@ -8826,13 +8864,6 @@
                   - - id: index
                       type: file
                       items:
-                        - id: replaceDependsUpon
-                          type: export
-                          dependsUpon:
-                            id: replaceDependsUpon
-                            items:
-                              id: index
-                              items: default
                         - id: replaceIdentifiersAndItems
                           type: export
                           dependsUpon:
@@ -8926,75 +8957,7 @@
                                     items:
                                       id: replaceIdentifiersAndItemsAndLevelsAndStacks
                                       items: index
-                  - - id: replaceDependsUpon
-                      type: directory
-                      items:
-                        - - id: index.test
-                            type: file
-                            dependsUpon: test
-                            items:
-                              - - dependsUpon:
-                                    - expect
-                                    - replaceDependsUpon
-                                - dependsUpon:
-                                    - expect
-                                    - jest
-                                    - replaceDependsUpon
-                                - dependsUpon:
-                                    - expect
-                                    - jest
-                                    - replaceDependsUpon
-                              - - id: replaceDependsUpon
-                                  type: import
-                                  dependsUpon:
-                                    id: replaceDependsUpon
-                                    items: index
-                        - - id: index
-                            type: file
-                            items:
-                              - - id: index
-                                  type: export
-                                  dependsUpon: withReplace
-                              - - id: withReplace
-                                  items:
-                                    - - id: getIdentifierOrReplaceItemOrItemsInLevelOrStack
-                                        dependsUpon:
-                                          - getIdentifierOrReplaceInItem
-                                          - whenLevelOrStack
-                                        items:
-                                          - - id: whenLevelOrStack
-                                              dependsUpon:
-                                                - getIdentifierOrReplaceInItemOrLevel
-                                                - identifierOrItemOrLevelOrStack
-                                          - - id: identifierOrItemOrLevelOrStack
-                                              type: parameter
-                                    - - id: getIdentifierOrReplaceInItemOrLevel
-                                        dependsUpon:
-                                          - getIdentifierOrReplaceInItem
-                                          - whenLevel
-                                        items:
-                                          - - id: whenLevel
-                                              dependsUpon:
-                                                - getIdentifierOrReplaceInItem
-                                                - levelOrItemOrIdentifier
-                                          - - id: levelOrItemOrIdentifier
-                                              type: parameter
-                                    - - id: getIdentifierOrReplaceInItem
-                                        dependsUpon:
-                                          - replaceItemAndInItems
-                                          - whenIdentifier
-                                        items: whenIdentifier
-                                    - - id: replaceItemAndInItems
-                                        dependsUpon:
-                                          - createPropertyFromDependsUpon
-                                          - createPropertyFromItems
-                                    - - id: createPropertyFromDependsUpon
-                                        dependsUpon: replace
-                                      - id: createPropertyFromItems
-                                        dependsUpon: getIdentifierOrReplaceItemOrItemsInLevelOrStack
-                                    - - id: replace
-                                        type: parameter
-                    - id: replaceIdentifiersAndItemsAndLevelsAndStacks
+                  - - id: replaceIdentifiersAndItemsAndLevelsAndStacks
                       type: directory
                       items:
                         - - id: index.test
