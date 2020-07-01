@@ -15,12 +15,12 @@ export default
 				),
 			indexFile:
 				"./harness/index.js",
-			javascriptSubstitution:
-				{
+			javascriptSubstitutions:
+				[ {
 					escape: mode !== "production",
-					pattern: new RegExp("(?<=javascript:|javascript: )javascriptFromWebpack"),
+					pattern: "javascriptFromWebpack",
 					replacementFilePath: `${__dirname}/example.js`,
-				},
+				} ],
 			title:
 				"JavaScript Analyzer",
 		}),

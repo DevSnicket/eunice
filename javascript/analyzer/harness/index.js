@@ -24,7 +24,7 @@ const javascriptEditor = createJavascriptEditor();
 
 renderIntoContainerElement({
 	initialState:
-		// javascriptFromWebpack is replaced with literal by harness/webpack.config.js
+		// replaced with literal by harness/webpack.config.js
 		// eslint-disable-next-line no-undef
 		{ javascript: javascriptFromWebpack },
 	renderStateful:
