@@ -3,7 +3,7 @@
 import {
 	createOrAddToStacksOfParentMatch,
 	createStackWhenIdentifierOrItemOrLevelOrAddWhenStack,
-} from "@devsnicket/eunice-stacks-explicit";
+} from "@devsnicket/eunice-stacking-explicit";
 
 import { safeLoad as parseYaml } from "js-yaml";
 import { readFileSync } from "fs";

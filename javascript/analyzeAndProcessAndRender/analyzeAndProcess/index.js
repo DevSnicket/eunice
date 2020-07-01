@@ -1,7 +1,7 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 import babelParserPluginsDefault from "../../babelParserPluginsDefault";
-import { createOrAddToStacksUsingFileSystem } from "@devsnicket/eunice-stacks-explicit";
+import { createOrAddToStacksUsingFileSystem } from "@devsnicket/eunice-stacking-explicit";
 import { getOrCreateItemsInDirectory } from "@devsnicket/eunice-javascript-analyzer";
 import processItems from "./processItems";
 
