@@ -10,7 +10,11 @@
           items:
             - - renderer
             - - dependency-and-structure
-        - processors
+        - id: processors
+          dependencyPermeable: true
+          items:
+            - - stacking
+            - - replacement
 -
   - call-with-process-standard-streams
   - run-tests-from-file-system

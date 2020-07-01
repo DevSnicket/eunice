@@ -2,7 +2,7 @@
 
 import createStackFromYamlWithAncestors from "./createStackFromYamlWithAncestors";
 import inferStackFromLevel from "./inferStackFromLevel";
-import { replaceIdentifiersAndItemsAndLevelsAndStacks } from "@devsnicket/eunice-processors/replacement";
+import { replaceIdentifiersAndItemsAndLevelsAndStacks } from "@devsnicket/eunice-replacement";
 import replaceLevelOrLowestLevelOfStack from "./replaceLevelOrLowestLevelOfStack";
 
 export default

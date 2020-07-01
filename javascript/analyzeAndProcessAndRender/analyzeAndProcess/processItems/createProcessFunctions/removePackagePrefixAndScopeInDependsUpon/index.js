@@ -1,7 +1,7 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 import removePrefixInDependsUpon from "./removePrefixInDependsUpon";
-import { replaceDependsUpon } from "@devsnicket/eunice-processors/replacement";
+import replaceDependsUpon from "./replaceDependsUpon";
 import replaceItemsOfDependsUponWithIdentifier from "./replaceItemsOfDependsUponWithIdentifier";
 
 export default ({

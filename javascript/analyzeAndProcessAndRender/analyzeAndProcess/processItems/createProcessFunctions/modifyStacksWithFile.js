@@ -3,11 +3,11 @@
 import {
 	createOrAddToStacksOfParentMatch,
 	createStackWhenIdentifierOrItemOrLevelOrAddWhenStack,
-} from "@devsnicket/eunice-processors/stacking";
+} from "@devsnicket/eunice-stacking";
 
 import { safeLoad as parseYaml } from "js-yaml";
 import { readFileSync } from "fs";
-import { replaceIdentifiersAndItemsAndLevelsAndStacks } from "@devsnicket/eunice-processors/replacement";
+import { replaceIdentifiersAndItemsAndLevelsAndStacks } from "@devsnicket/eunice-replacement";
 
 export default ({
 	filePath,

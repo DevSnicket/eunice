@@ -4,7 +4,7 @@ import path from "path";
 import processItems from "..";
 
 test(
-	"All processors returns expected YAML",
+	"Processing returns expected YAML",
 	() =>
 		expect(
 			processItems({
