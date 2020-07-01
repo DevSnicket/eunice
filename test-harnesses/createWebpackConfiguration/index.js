@@ -13,7 +13,7 @@ export default ({
 	directory,
 	entry = null,
 	indexFile,
-	javascriptSubstitution = null,
+	javascriptSubstitutions = [],
 	title = "Test Harness",
 }) => (
 	{
@@ -39,7 +39,7 @@ export default ({
 			[
 				createTransformJavascriptToHtmlPlugin({
 					directory,
-					javascriptSubstitution,
+					javascriptSubstitutions,
 					title,
 				}),
 				new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),

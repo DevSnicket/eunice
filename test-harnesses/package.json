@@ -101,5 +101,5 @@
 		"test": "npx jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "8.15.0"
+	"version": "9.0.0"
 }

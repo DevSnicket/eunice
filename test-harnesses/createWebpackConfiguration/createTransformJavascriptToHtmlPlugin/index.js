@@ -15,7 +15,7 @@ const
 
 export default ({
 	directory,
-	javascriptSubstitution,
+	javascriptSubstitutions,
 	title,
 }) => {
 	return { apply };
@@ -63,43 +63,15 @@ export default ({
 			return readTextFile(javascriptPath);
 		}
 
-		async function getJavascriptSubstituted(
+		function getJavascriptSubstituted(
 			javascript,
 		) {
 			return (
-				javascriptSubstitution
-				?
-				javascript.replace(
-					javascriptSubstitution.pattern,
-					await readReplacement(),
+				javascriptSubstitutions.reduce(
+					getJavascriptWithSubstitution,
+					javascript,
 				)
-				:
-				javascript
 			);
-
-			async function readReplacement() {
-				return (
-					escapeStringLiteralWhenSpecified(
-						getStringLiteral(
-							await readTextFile(
-								javascriptSubstitution.replacementFilePath,
-							),
-						),
-					)
-				);
-			}
-
-			function escapeStringLiteralWhenSpecified(
-				stringLiteral,
-			) {
-				return (
-					javascriptSubstitution.escape
-					?
-					escapeStringLiteral(stringLiteral)
-					:
-					stringLiteral
-				);
-			}
 		}
 
 		function formatHtml({
@@ -120,12 +92,6 @@ export default ({
 </html>`;
 		}
 
-		function readTextFile(
-			filePath,
-		) {
-			return readFile(filePath, "utf-8");
-		}
-
 		function writeHtml(html) {
 			return writeFile(getFilePath(), html);
 
@@ -135,3 +101,55 @@ export default ({
 		}
 	}
 };
+
+async function getJavascriptWithSubstitution(
+	javascript,
+	substitution,
+) {
+	return (
+		(await javascript).replace(
+			substitution.pattern,
+			await readOrGetReplacement(),
+		)
+	);
+
+	async function readOrGetReplacement() {
+		return (
+			await readReplacementFileWhenHasPath()
+			||
+			substitution.replacement
+		);
+	}
+
+	async function readReplacementFileWhenHasPath() {
+		return (
+			substitution.replacementFilePath
+			&&
+			escapeStringLiteralWhenSpecified(
+				getStringLiteral(
+					await readTextFile(
+						substitution.replacementFilePath,
+					),
+				),
+			)
+		);
+	}
+
+	function escapeStringLiteralWhenSpecified(
+		stringLiteral,
+	) {
+		return (
+			substitution.escape
+			?
+			escapeStringLiteral(stringLiteral)
+			:
+			stringLiteral
+		);
+	}
+}
+
+function readTextFile(
+	filePath,
+) {
+	return readFile(filePath, "utf-8");
+}
