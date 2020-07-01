@@ -3,7 +3,7 @@
 	"bugs": {
 		"url": "https://github.com/DevSnicket/eunice/issues"
 	},
-	"description": "stacking of Eunice analysis YAML",
+	"description": "creates or adds explicitly stated stack structure to Eunice analysis YAML",
 	"dependencies": {
 		"core-js": "3.6.4",
 		"js-yaml": "3.13.1"
@@ -56,13 +56,13 @@
 		"yaml"
 	],
 	"license": "MIT",
-	"name": "@devsnicket/eunice-stacking",
+	"name": "@devsnicket/eunice-stacks-explicit",
 	"publishConfig": {
 		"access": "public"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/DevSnicket/eunice-stacking.git"
+		"url": "https://github.com/DevSnicket/eunice-stacks-explicit.git"
 	},
 	"sideEffects": false,
 	"scripts": {
