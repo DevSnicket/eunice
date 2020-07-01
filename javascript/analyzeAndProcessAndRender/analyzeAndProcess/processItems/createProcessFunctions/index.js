@@ -1,6 +1,6 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import { createOrAddToStacksUsingFileSystem } from "@devsnicket/eunice-stacking";
+import { createOrAddToStacksUsingFileSystem } from "@devsnicket/eunice-stacks-explicit";
 import createSubsetIdentifierHierarchy from "./createSubsetIdentifierHierarchy";
 import inferStacks from "./inferStacks";
 import modifyStacksWithFile from "./modifyStacksWithFile";

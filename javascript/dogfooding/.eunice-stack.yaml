@@ -13,7 +13,7 @@
         - id: processors
           dependencyPermeable: true
           items:
-            - - stacking
+            - - stacks-explicit
             - - replacement
 -
   - call-with-process-standard-streams
