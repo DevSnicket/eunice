@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 7.6.1 on 2020-07-01T09:36:22.698Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 7.6.1 on 2020-07-01T11:20:07.806Z
 - - id: javascript
     type: directory
     items:
@@ -459,9 +459,7 @@
                                           items: index
                                       - id: inferStacks
                                         type: import
-                                        dependsUpon:
-                                          id: inferStacks
-                                          items: index
+                                        dependsUpon: stacking-inference
                                       - id: removeEmptySelfDependentOfType
                                         type: import
                                         dependsUpon:
@@ -615,177 +613,6 @@
                                                   dependsUpon: identifierOrItemOrLevelOrStack
                                             - - id: identifierOrItemOrLevelOrStack
                                                 type: parameter
-                                - id: inferStacks
-                                  type: directory
-                                  items:
-                                    - - id: tests
-                                        type: directory
-                                        items:
-                                          id: index.test
-                                          type: file
-                                          dependsUpon:
-                                            - js-yaml
-                                            - path
-                                            - run-tests-from-file-system
-                                            - id: inferStacks
-                                              items: index
-                                    - - id: index
-                                        type: file
-                                        items:
-                                          - - id: index
-                                              type: export
-                                              dependsUpon:
-                                                - replaceIdentifierOrItemOrLevelOrStack
-                                                - replaceIdentifiersAndItemsAndLevelsAndStacks
-                                          - - id: replaceIdentifierOrItemOrLevelOrStack
-                                              dependsUpon: whenLevelOrStack
-                                              items:
-                                                - - id: whenLevelOrStack
-                                                    dependsUpon:
-                                                      - ancestors
-                                                      - createStackFromYamlWithAncestors
-                                                      - identifierOrItemOrLevelOrStack
-                                                      - inferStackFromLevel
-                                                      - replaceLevelOrLowestLevelOfStack
-                                                - - id: ancestors
-                                                    type: parameter
-                                                  - id: identifierOrItemOrLevelOrStack
-                                                    type: parameter
-                                            - id: replaceIdentifiersAndItemsAndLevelsAndStacks
-                                              type: import
-                                              dependsUpon:
-                                                id: replacement
-                                                items: replaceIdentifiersAndItemsAndLevelsAndStacks
-                                    - - id: createStackFromYamlWithAncestors
-                                        type: file
-                                        items:
-                                          - - id: createStackFromYamlWithAncestors
-                                              type: export
-                                              dependsUpon:
-                                                - createStackFromYaml
-                                                - getDescendantInSingleItemStackHierarchy
-                                                - getYamlWithAncestors
-                                              items:
-                                                - - id: getYamlWithAncestors
-                                                    dependsUpon:
-                                                      - ancestors
-                                                      - yaml
-                                                - - id: ancestors
-                                                    type: parameter
-                                                  - id: yaml
-                                                    type: parameter
-                                          - - id: getDescendantInSingleItemStackHierarchy
-                                              dependsUpon: whenDeeper
-                                              items:
-                                                id: whenDeeper
-                                                dependsUpon: getDescendantInSingleItemStackHierarchy
-                                            - id: createStackFromYaml
-                                              type: import
-                                              dependsUpon:
-                                                id: dependency-and-structure
-                                                items: createStackFromYaml
-                                      - id: inferStackFromLevel
-                                        type: file
-                                        items:
-                                          - - id: inferStackFromLevel
-                                              type: export
-                                              dependsUpon: withCreateStackFromYaml
-                                          - - id: withCreateStackFromYaml
-                                              items:
-                                                - - id: inferStackFromLevel
-                                                    dependsUpon:
-                                                      - createStackFromLowerAndUpper
-                                                      - createStackFromYaml
-                                                      - getLowerAndUpperFromLevel
-                                                - - id: getLowerAndUpperFromLevel
-                                                    dependsUpon:
-                                                      - getIsItemLowerOrUpper
-                                                      - groupBy
-                                                    items:
-                                                      id: getIsItemLowerOrUpper
-                                                      dependsUpon: canBeLowerLevel
-                                                      items:
-                                                        - - id: canBeLowerLevel
-                                                            dependsUpon:
-                                                              - allDependsUponAndDescendantsWithDependsUponInDifferentLevel
-                                                              - anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel
-                                                        - - id: allDependsUponAndDescendantsWithDependsUponInDifferentLevel
-                                                            dependsUpon:
-                                                              - allDependsUponInDifferentLevel
-                                                              - allDescendantsWithDependsUponInDifferentLevel
-                                                        - - id: allDependsUponInDifferentLevel
-                                                            dependsUpon: isDependencyOfDifferentItemInSameLevel
-                                                          - id: allDescendantsWithDependsUponInDifferentLevel
-                                                            dependsUpon: allDependsUponAndDescendantsWithDependsUponInDifferentLevel
-                                                          - id: anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel
-                                                            dependsUpon:
-                                                              - anyDependentsOfDifferentItemInSameLevel
-                                                              - anyDescendantsInStackWithDependentsOfDifferentItemInSameLevel
-                                                        - - id: anyDependentsOfDifferentItemInSameLevel
-                                                            dependsUpon: isDependencyOfDifferentItemInSameLevel
-                                                        - - id: isDependencyOfDifferentItemInSameLevel
-                                                            dependsUpon: isOrHasAncestor
-                                                            items:
-                                                              - - id: isOrHasAncestor
-                                                                  dependsUpon: hasAncestor
-                                                              - - id: hasAncestor
-                                                                  dependsUpon: isDependencyOfDifferentItemInSameLevel
-                                                          - id: anyDescendantsInStackWithDependentsOfDifferentItemInSameLevel
-                                                            dependsUpon: anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel
-                                                  - id: createStackFromLowerAndUpper
-                                                    dependsUpon: whenHasLower
-                                                    items:
-                                                      id: whenHasLower
-                                                      dependsUpon:
-                                                        - createYamlFromStack
-                                                        - inferStackFromLevel
-                                                  - id: createStackFromYaml
-                                                    type: parameter
-                                          - - id: createYamlFromStack
-                                              type: import
-                                              dependsUpon:
-                                                id: dependency-and-structure
-                                                items: createYamlFromStack
-                                            - id: groupBy
-                                              type: import
-                                              dependsUpon:
-                                                id: lodash
-                                                items: groupBy
-                                      - id: replaceLevelOrLowestLevelOfStack
-                                        type: file
-                                        items:
-                                          - - id: replaceLevelOrLowestLevelOfStack
-                                              type: export
-                                              dependsUpon:
-                                                - createYamlFromStack
-                                                - whenStack
-                                              items:
-                                                - - id: whenStack
-                                                    dependsUpon:
-                                                      - isStack
-                                                      - splitStack
-                                                    items:
-                                                      - id: isStack
-                                                        dependsUpon: levelOrStack
-                                                      - id: splitStack
-                                                        dependsUpon:
-                                                          - createStackFromYaml
-                                                          - levelOrStack
-                                                          - replaceLevelWithStack
-                                                - - id: levelOrStack
-                                                    type: parameter
-                                                  - id: replaceLevelWithStack
-                                                    type: parameter
-                                          - - id: createStackFromYaml
-                                              type: import
-                                              dependsUpon:
-                                                id: dependency-and-structure
-                                                items: createStackFromYaml
-                                            - id: createYamlFromStack
-                                              type: import
-                                              dependsUpon:
-                                                id: dependency-and-structure
-                                                items: createYamlFromStack
                                 - id: modifyStacksWithFile
                                   type: file
                                   items:
@@ -4772,6 +4599,177 @@
                       dependsUpon:
                         id: fs-extra
                         items: readFile
+        - id: stacking-inference
+          type: directory
+          items:
+            - - id: tests
+                type: directory
+                items:
+                  id: index.test
+                  type: file
+                  dependsUpon:
+                    - js-yaml
+                    - path
+                    - run-tests-from-file-system
+                    - id: stacking-inference
+                      items: index
+            - - id: index
+                type: file
+                items:
+                  - - id: index
+                      type: export
+                      dependsUpon:
+                        - replaceIdentifierOrItemOrLevelOrStack
+                        - replaceIdentifiersAndItemsAndLevelsAndStacks
+                  - - id: replaceIdentifierOrItemOrLevelOrStack
+                      dependsUpon: whenLevelOrStack
+                      items:
+                        - - id: whenLevelOrStack
+                            dependsUpon:
+                              - ancestors
+                              - createStackFromYamlWithAncestors
+                              - identifierOrItemOrLevelOrStack
+                              - inferStackFromLevel
+                              - replaceLevelOrLowestLevelOfStack
+                        - - id: ancestors
+                            type: parameter
+                          - id: identifierOrItemOrLevelOrStack
+                            type: parameter
+                    - id: replaceIdentifiersAndItemsAndLevelsAndStacks
+                      type: import
+                      dependsUpon:
+                        id: replacement
+                        items: replaceIdentifiersAndItemsAndLevelsAndStacks
+            - - id: createStackFromYamlWithAncestors
+                type: file
+                items:
+                  - - id: createStackFromYamlWithAncestors
+                      type: export
+                      dependsUpon:
+                        - createStackFromYaml
+                        - getDescendantInSingleItemStackHierarchy
+                        - getYamlWithAncestors
+                      items:
+                        - - id: getYamlWithAncestors
+                            dependsUpon:
+                              - ancestors
+                              - yaml
+                        - - id: ancestors
+                            type: parameter
+                          - id: yaml
+                            type: parameter
+                  - - id: getDescendantInSingleItemStackHierarchy
+                      dependsUpon: whenDeeper
+                      items:
+                        id: whenDeeper
+                        dependsUpon: getDescendantInSingleItemStackHierarchy
+                    - id: createStackFromYaml
+                      type: import
+                      dependsUpon:
+                        id: dependency-and-structure
+                        items: createStackFromYaml
+              - id: inferStackFromLevel
+                type: file
+                items:
+                  - - id: inferStackFromLevel
+                      type: export
+                      dependsUpon: withCreateStackFromYaml
+                  - - id: withCreateStackFromYaml
+                      items:
+                        - - id: inferStackFromLevel
+                            dependsUpon:
+                              - createStackFromLowerAndUpper
+                              - createStackFromYaml
+                              - getLowerAndUpperFromLevel
+                        - - id: getLowerAndUpperFromLevel
+                            dependsUpon:
+                              - getIsItemLowerOrUpper
+                              - groupBy
+                            items:
+                              id: getIsItemLowerOrUpper
+                              dependsUpon: canBeLowerLevel
+                              items:
+                                - - id: canBeLowerLevel
+                                    dependsUpon:
+                                      - allDependsUponAndDescendantsWithDependsUponInDifferentLevel
+                                      - anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel
+                                - - id: allDependsUponAndDescendantsWithDependsUponInDifferentLevel
+                                    dependsUpon:
+                                      - allDependsUponInDifferentLevel
+                                      - allDescendantsWithDependsUponInDifferentLevel
+                                - - id: allDependsUponInDifferentLevel
+                                    dependsUpon: isDependencyOfDifferentItemInSameLevel
+                                  - id: allDescendantsWithDependsUponInDifferentLevel
+                                    dependsUpon: allDependsUponAndDescendantsWithDependsUponInDifferentLevel
+                                  - id: anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel
+                                    dependsUpon:
+                                      - anyDependentsOfDifferentItemInSameLevel
+                                      - anyDescendantsInStackWithDependentsOfDifferentItemInSameLevel
+                                - - id: anyDependentsOfDifferentItemInSameLevel
+                                    dependsUpon: isDependencyOfDifferentItemInSameLevel
+                                - - id: isDependencyOfDifferentItemInSameLevel
+                                    dependsUpon: isOrHasAncestor
+                                    items:
+                                      - - id: isOrHasAncestor
+                                          dependsUpon: hasAncestor
+                                      - - id: hasAncestor
+                                          dependsUpon: isDependencyOfDifferentItemInSameLevel
+                                  - id: anyDescendantsInStackWithDependentsOfDifferentItemInSameLevel
+                                    dependsUpon: anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel
+                          - id: createStackFromLowerAndUpper
+                            dependsUpon: whenHasLower
+                            items:
+                              id: whenHasLower
+                              dependsUpon:
+                                - createYamlFromStack
+                                - inferStackFromLevel
+                          - id: createStackFromYaml
+                            type: parameter
+                  - - id: createYamlFromStack
+                      type: import
+                      dependsUpon:
+                        id: dependency-and-structure
+                        items: createYamlFromStack
+                    - id: groupBy
+                      type: import
+                      dependsUpon:
+                        id: lodash
+                        items: groupBy
+              - id: replaceLevelOrLowestLevelOfStack
+                type: file
+                items:
+                  - - id: replaceLevelOrLowestLevelOfStack
+                      type: export
+                      dependsUpon:
+                        - createYamlFromStack
+                        - whenStack
+                      items:
+                        - - id: whenStack
+                            dependsUpon:
+                              - isStack
+                              - splitStack
+                            items:
+                              - id: isStack
+                                dependsUpon: levelOrStack
+                              - id: splitStack
+                                dependsUpon:
+                                  - createStackFromYaml
+                                  - levelOrStack
+                                  - replaceLevelWithStack
+                        - - id: levelOrStack
+                            type: parameter
+                          - id: replaceLevelWithStack
+                            type: parameter
+                  - - id: createStackFromYaml
+                      type: import
+                      dependsUpon:
+                        id: dependency-and-structure
+                        items: createStackFromYaml
+                    - id: createYamlFromStack
+                      type: import
+                      dependsUpon:
+                        id: dependency-and-structure
+                        items: createYamlFromStack
       - - id: 'dependency, render and structure'
           dependencyPermeable: true
           items:
