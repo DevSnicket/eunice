@@ -50,6 +50,8 @@ test.each(
 			directoryPath,
 			htmlFileName,
 			includeServiceWorkers,
+			isInferStacksEnabled:
+				false,
 			sourceDirectoryPath,
 			yaml:
 				await readTextFile(

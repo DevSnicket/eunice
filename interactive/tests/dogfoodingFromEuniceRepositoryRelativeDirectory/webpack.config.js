@@ -8,15 +8,11 @@ export default
 	createWebpackConfiguration({
 		directory:
 			path.join(__dirname, "output"),
-		javascriptSubstitution:
-			{
-				escape:
-					mode !== "production",
-				pattern:
-					new RegExp("(?<=yaml:|yaml: )yamlFromWebpack"),
-				replacementFilePath:
-					path.join("..", "eunice-javascript", "dogfooding", "output", "index.yaml"),
-			},
+		isInferStacksEnabled:
+			false,
+		mode,
 		title:
-			"Renderer of dogfooding from eunice-javascript repository",
+			"eunice interactive dogfooding from eunice-javascript repository",
+		yamlFilePath:
+			path.join("..", "eunice-javascript", "dogfooding", "output", "index.yaml"),
 	});

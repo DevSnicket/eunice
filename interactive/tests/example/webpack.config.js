@@ -8,15 +8,11 @@ export default
 	createWebpackConfiguration({
 		directory:
 			path.join(__dirname, "output"),
-		javascriptSubstitution:
-			{
-				escape:
-					mode !== "production",
-				pattern:
-					new RegExp("(?<=yaml:|yaml: )yamlFromWebpack"),
-				replacementFilePath:
-					path.join(__dirname, ".yaml"),
-			},
+		isInferStacksEnabled:
+			true,
+		mode,
 		title:
-			"Renderer of example YAML",
+			"eunice interactive example YAML",
+		yamlFilePath:
+			path.join(__dirname, ".yaml"),
 	});

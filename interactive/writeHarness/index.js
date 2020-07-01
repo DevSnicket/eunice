@@ -8,12 +8,14 @@ async({
 	directoryPath,
 	htmlFileName,
 	includeServiceWorkers,
+	isInferStacksEnabled,
 	sourceDirectoryPath,
 	yaml,
 }) => {
 	await writeHtmlWithYaml({
 		directoryPath,
 		htmlFileName,
+		isInferStacksEnabled,
 		templateHtmlDirectoryPath:
 			sourceDirectoryPath,
 		yaml,

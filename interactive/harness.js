@@ -13,10 +13,16 @@ import {
 	renderIntoContainerElement,
 } from "@devsnicket/eunice-test-harnesses";
 
+import {
+	safeDump as formatYaml,
+	safeLoad as parseYaml,
+} from "js-yaml";
+
 import createCodeEditorForLanguage from "@devsnicket/eunice-test-harnesses/codeEditor/createEditorForLanguage";
 import { createElement } from "react";
 import createYamlInputElement from "./createYamlInputElement";
 import createYamlOutputElement from "./createYamlOutputElement";
+import inferStacks from "@devsnicket/eunice-stacking-inference";
 import initializeCodeEditorGlobal from "@devsnicket/eunice-test-harnesses/codeEditor/serviceWorkers/initializeGlobal";
 
 const resizableElementTypes =
@@ -34,9 +40,9 @@ const createYamlEditorElement =
 
 renderIntoContainerElement({
 	initialState:
-		// yamlFromWebpack is replaced with literal by webpack.config.js
+		// replaced with literal
 		// eslint-disable-next-line no-undef
-		{ yaml: yamlFromWebpack },
+		{ yaml: inferStacksWhenConfigured(yamlLiteralPlaceholder) },
 	renderStateful:
 		stateful =>
 			createResizableContainer({
@@ -86,3 +92,25 @@ renderIntoContainerElement({
 				resizableElementTypes,
 			}),
 });
+
+function inferStacksWhenConfigured(
+	yaml,
+) {
+	return whenConfigured() || yaml;
+
+	function whenConfigured() {
+		return (
+			// replaced with literal
+			// eslint-disable-next-line no-undef
+			isInferStacksEnabledLiteralPlaceholder
+			&&
+			formatYaml(
+				inferStacks(
+					parseYaml(
+						yaml,
+					),
+				),
+			)
+		);
+	}
+}

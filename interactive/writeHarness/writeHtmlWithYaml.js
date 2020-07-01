@@ -7,8 +7,9 @@ import { writeFile } from "fs-extra";
 
 export default
 async({
-	htmlFileName,
 	directoryPath,
+	htmlFileName,
+	isInferStacksEnabled,
 	templateHtmlDirectoryPath,
 	yaml,
 }) => {
@@ -33,9 +34,14 @@ async({
 		html,
 	) {
 		return (
-			html.replace(
-				"yamlFromWebpack",
+			html
+			.replace(
+				"yamlLiteralPlaceholder",
 				getStringLiteral(yaml),
+			)
+			.replace(
+				"isInferStacksEnabledLiteralPlaceholder",
+				isInferStacksEnabled,
 			)
 		);
 	}
