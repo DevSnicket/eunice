@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 7.6.1 on 2020-07-01T11:20:07.806Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 7.6.1 on 2020-07-02T07:15:05.850Z
 - - id: javascript
     type: directory
     items:
@@ -3646,22 +3646,49 @@
                 type: file
                 dependsUpon:
                   - createYamlInputElement
+                  - inferStacksWhenConfigured
                   - location
+                  - yamlLiteralPlaceholder
                   - id: test-harnesses
                     items:
-                      - createHashFromLocation
-                      - callOrCreateElementOnError
-                      - createResizableContainer
                       - renderIntoContainerElement
+                      - createResizableContainer
+                      - callOrCreateElementOnError
+                      - createHashFromLocation
                       - id: codeEditor
                         items:
                           - createEditorForLanguage
                           - id: serviceWorkers
                             items: initializeGlobal
-                  - id: react
-                    items: createElement
                   - id: createYamlOutputElement
                     items: index
+                  - id: react
+                    items: createElement
+                items:
+                  - - id: inferStacksWhenConfigured
+                      dependsUpon: whenConfigured
+                      items:
+                        - - id: whenConfigured
+                            dependsUpon:
+                              - formatYaml
+                              - inferStacks
+                              - parseYaml
+                              - yaml
+                        - - id: yaml
+                            type: parameter
+                  - - id: formatYaml
+                      type: import
+                      dependsUpon:
+                        id: js-yaml
+                        items: safeDump
+                    - id: parseYaml
+                      type: import
+                      dependsUpon:
+                        id: js-yaml
+                        items: safeLoad
+                    - id: inferStacks
+                      type: import
+                      dependsUpon: stacking-inference
               - id: index
                 type: file
                 items:
@@ -4534,9 +4561,9 @@
                                   dependsUpon:
                                     - getStringLiteral
                                     - yaml
-                              - - id: htmlFileName
+                              - - id: directoryPath
                                   type: parameter
-                                - id: directoryPath
+                                - id: htmlFileName
                                   type: parameter
                                 - id: templateHtmlDirectoryPath
                                   type: parameter
@@ -4599,7 +4626,7 @@
                       dependsUpon:
                         id: fs-extra
                         items: readFile
-        - id: stacking-inference
+      - - id: stacking-inference
           type: directory
           items:
             - - id: tests
@@ -9725,18 +9752,10 @@
                                           - javascriptPath
                                           - readTextFile
                                       - id: getJavascriptSubstituted
-                                        dependsUpon: readReplacement
-                                        items:
-                                          - - id: readReplacement
-                                              dependsUpon:
-                                                - escapeStringLiteralWhenSpecified
-                                                - getStringLiteral
-                                                - readTextFile
-                                          - - id: escapeStringLiteralWhenSpecified
-                                              dependsUpon: escapeStringLiteral
+                                        dependsUpon:
+                                          - getJavascriptWithSubstitution
+                                          - javascriptSubstitutions
                                       - formatHtml
-                                    - - id: readTextFile
-                                        dependsUpon: readFile
                                       - id: writeHtml
                                         dependsUpon:
                                           - getFilePath
@@ -9746,15 +9765,31 @@
                                           dependsUpon:
                                             - directory
                                             - path
-                                      - id: javascriptPath
+                                    - - id: javascriptPath
                                         type: variable
                               - - id: directory
                                   type: parameter
-                        - - id: deleteFile
+                                - id: javascriptSubstitutions
+                                  type: parameter
+                        - - id: getJavascriptWithSubstitution
+                            dependsUpon: readOrGetReplacement
+                            items:
+                              - - id: readOrGetReplacement
+                                  dependsUpon: readReplacementFileWhenHasPath
+                              - - id: readReplacementFileWhenHasPath
+                                  dependsUpon:
+                                    - escapeStringLiteralWhenSpecified
+                                    - getStringLiteral
+                                    - readTextFile
+                              - - id: escapeStringLiteralWhenSpecified
+                                  dependsUpon: escapeStringLiteral
+                        - - id: readTextFile
+                            dependsUpon: readFile
+                          - id: deleteFile
                             type: variable
                           - id: fileExists
                             type: variable
-                          - id: readFile
+                        - - id: readFile
                             type: variable
                           - id: writeFile
                             type: variable
