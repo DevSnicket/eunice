@@ -109,5 +109,5 @@
 		"typescript": "npx tsc -p jsconfig.json",
 		"watch": "npx webpack --config webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs -d --watch"
 	},
-	"version": "5.1.0"
+	"version": "5.2.0"
 }

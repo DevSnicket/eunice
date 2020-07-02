@@ -9,10 +9,8 @@ export default ({
 	codeEditorLanguages = [],
 	directory,
 	indexFilePath = path.join(__dirname, "harness.js"),
-	isInferStacksEnabled = null,
-	mode = null,
+	javascriptSubstitutions = [],
 	title = null,
-	yamlFilePath = null,
 }) => (
 	{
 		...createWebpackConfiguration({
@@ -22,39 +20,8 @@ export default ({
 				createCodeEditorWebpackEntryForLanguages(codeEditorLanguages),
 			indexFile:
 				indexFilePath,
-			javascriptSubstitutions:
-				[
-					...createJavascriptSubstitutions({
-						isInferStacksEnabled,
-						mode,
-						yamlFilePath,
-					}),
-				],
+			javascriptSubstitutions,
 			title,
 		}),
 	}
 );
-
-function * createJavascriptSubstitutions({
-	isInferStacksEnabled,
-	mode,
-	yamlFilePath,
-}) {
-	if (isInferStacksEnabled !== null)
-		yield {
-			pattern:
-				"isInferStacksEnabledLiteralPlaceholder",
-			replacement:
-				isInferStacksEnabled,
-		};
-
-	if (yamlFilePath !== null)
-		yield {
-			escape:
-				mode !== "production",
-			pattern:
-				"yamlLiteralPlaceholder",
-			replacementFilePath:
-				yamlFilePath,
-		};
-}

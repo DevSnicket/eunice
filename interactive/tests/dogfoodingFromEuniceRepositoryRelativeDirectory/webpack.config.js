@@ -1,5 +1,6 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
+import createJavascriptSubstitutions from "../createJavascriptSubstitutions";
 import createWebpackConfiguration from "../../createWebpackConfiguration";
 import path from "path";
 
@@ -8,11 +9,14 @@ export default
 	createWebpackConfiguration({
 		directory:
 			path.join(__dirname, "output"),
-		isInferStacksEnabled:
-			false,
-		mode,
+		javascriptSubstitutions:
+			createJavascriptSubstitutions({
+				isInferStacksEnabled:
+					false,
+				mode,
+				yamlFilePath:
+					path.join("..", "eunice-javascript", "dogfooding", "output", "index.yaml"),
+			}),
 		title:
 			"eunice interactive dogfooding from eunice-javascript repository",
-		yamlFilePath:
-			path.join("..", "eunice-javascript", "dogfooding", "output", "index.yaml"),
 	});
