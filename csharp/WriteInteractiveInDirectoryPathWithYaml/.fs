@@ -16,8 +16,11 @@ let writeInteractiveInDirectoryPathWithYaml directoryPath yaml =
             File.WriteAllTextAsync (
                 [| directoryPath; "eunice.html" |] |> Path.Join,
                 html.Replace(
-                    "yamlFromWebpack",
+                    "yamlLiteralPlaceholder",
                     yaml |> getStringLiteral
+                ).Replace(
+                    "isInferStacksEnabledLiteralPlaceholder",
+                    "true"
                 )
             )
             |> Async.AwaitTask
