@@ -103,6 +103,21 @@
 		},
 		{
 			"args":
+				[ 
+					"--config",
+					"harness/webpack.config.js",
+					"-p",
+					"-r",
+					"@devsnicket/eunice-test-harnesses/babel.register.cjs"
+				],
+			"disableOptimisticBPs": true,
+			"name": "harness Webpack",
+			"program": "${workspaceFolder}/node_modules/webpack-cli/bin/cli.js",
+			"request": "launch",
+			"type": "node"
+		},
+		{
+			"args":
 				[
 					"--collect-coverage=false",
 					"--runInBand"

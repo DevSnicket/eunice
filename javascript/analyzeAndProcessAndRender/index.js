@@ -107,6 +107,8 @@ async function renderAndWriteOutput({
 			htmlFileName:
 				`${baseFileName || ""}.html`,
 			includeServiceWorkers,
+			isInferStacksEnabled:
+				false,
 			sourceDirectoryPath:
 				path.join(__dirname, "..", "dist", "interactive"),
 			yaml:

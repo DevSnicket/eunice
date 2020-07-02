@@ -12,12 +12,12 @@ export default
 			path.join(__dirname, "output"),
 		indexFilePath:
 			path.join(__dirname, "harness.js"),
-		javascriptSubstitution:
-			{
+		javascriptSubstitutions:
+			[ {
 				escape: mode !== "production",
 				pattern: "javascriptFromWebpack",
 				replacementFilePath: `${__dirname}/example.js`,
-			},
+			} ],
 		title:
 			"JavaScript & YAML",
 	});
