@@ -21,18 +21,18 @@ let private formatDependsUpon dependsUpon =
         |> Seq.toList
 
 let private formatDependUpon dependUpon =
-    let identifier =
-        dependUpon.Identifier
-        |> quoteIdentifier
-
-    match dependUpon.Items with
-    | [] ->
-        [ identifier ]
-    | items ->
-        [
-            "id: " + identifier
-            yield! formatDependUponItemsMapping items
-        ]
+    match dependUpon.Identifier with
+    | "" ->
+        []
+    | identifier ->
+        match dependUpon.Items with
+        | [] ->
+            [ identifier |> quoteIdentifier ]
+        | items ->
+            [
+                "id: " + (identifier |> quoteIdentifier)
+                yield! formatDependUponItemsMapping items
+            ]
 
 let private formatDependUponItemsMapping items =
     formatKeyValueLinesMapping (

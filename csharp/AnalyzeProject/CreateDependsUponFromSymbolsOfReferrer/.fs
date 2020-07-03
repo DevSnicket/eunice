@@ -30,9 +30,19 @@ let createDependsUponFromSymbolsOfReferrer (referrer: ISymbol) =
                     yield! ``type``.TypeArguments |> Seq.map (fun ``type`` -> ``type`` :> ISymbol)
                 ]
             | false ->
-                seq [ ``type`` ]
+                match ``type``.IsAnonymousType with
+                | true ->
+                    seq []
+                | false ->
+                    seq [ ``type`` ]
         | :? IParameterSymbol ->
             seq []
+        | :? IPropertySymbol as property ->
+            match property.ContainingType.IsAnonymousType with
+            | true ->
+                seq []
+            | false ->
+                seq [ property :> ISymbol ]
         | symbol ->
             seq [ symbol ]
 
