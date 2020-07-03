@@ -43,22 +43,27 @@ let createDependsUponFromSymbolsOfReferrer (referrer: ISymbol) =
                 seq []
             | false ->
                 seq [ property :> ISymbol ]
+        | null ->
+            seq []
         | symbol ->
             seq [ symbol ]
 
     and createDependUponWithAncestorHierachyFromSymbol (symbol: ISymbol) =
-        let rec createWhenInSource () =
-            match symbol |> hasLocationInSource with
+        let rec createWhenIdentifiableAndInSource () =
+            match isIdentifiableAndInSource with
             | true ->
-                Some (
-                    withAncestorHierarchyWhenRequired
-                        {
-                            Identifier = formatIdentifier ()
-                            Items = []
-                        }
-                )
+                withAncestorHierarchyWhenRequired
+                    {
+                        Identifier = formatIdentifier ()
+                        Items = []
+                    }
             | false ->
                 None
+
+        and isIdentifiableAndInSource =
+            symbol |> isIdentifiable
+            &&
+            symbol |> hasLocationInSource
 
         and formatIdentifier () =
             match symbol with
@@ -70,45 +75,44 @@ let createDependsUponFromSymbolsOfReferrer (referrer: ISymbol) =
         and withAncestorHierarchyWhenRequired dependUpon =
             match isAncestorHierarchyRequired () with
             | true ->
-                dependUpon |> addAncestorHierarchyOfSymbol  symbol
+                dependUpon |> addAncestorHierarchyOfSymbol symbol
             | false ->
-                dependUpon
+                Some dependUpon
         
         and isAncestorHierarchyRequired () =
             symbol.ContainingSymbol <> referrer.ContainingSymbol
             &&
             symbol <> referrer.ContainingSymbol
 
-        createWhenInSource()
+        createWhenIdentifiableAndInSource()
 
     createDependsUponFromSymbols
 
-let private hasLocationInSource =
-    function
-    | null ->
-        false
-    | symbol ->
-        symbol.Locations
-        |> Seq.exists (fun location -> location.IsInSource)
+let private hasLocationInSource symbol =
+    symbol.Locations
+    |> Seq.exists (fun location -> location.IsInSource)
 
-let private addAncestorHierarchyOfSymbol  symbol item =
+let private addAncestorHierarchyOfSymbol symbol item =
     match symbol.ContainingSymbol with
     | null ->
-        item
+        Some item
     | containingSymbol ->
-        addAncestorHierarchyOfSymbol
-            containingSymbol
-            (item |> addParentOfContainingSymbol containingSymbol)
-
-let private addParentOfContainingSymbol containingSymbol item =
-    match containingSymbol |> isImplicitSymbol with
-    | true ->
-        item
-    | false ->
-        {
-            Identifier = containingSymbol.MetadataName
-            Items = [ item ]
-        }
+        match containingSymbol |> isImplicitSymbol with
+        | true ->
+            addAncestorHierarchyOfSymbol
+                containingSymbol
+                item
+        | false ->
+            match containingSymbol |> isIdentifiable with
+            | true ->
+                addAncestorHierarchyOfSymbol
+                    containingSymbol
+                    {
+                        Identifier = containingSymbol.MetadataName
+                        Items = [ item ]
+                    }
+            | false ->
+                None
 
 let private isImplicitSymbol =
     function
@@ -118,3 +122,6 @@ let private isImplicitSymbol =
         true
     | _ ->
         false
+
+let private isIdentifiable symbol =
+    symbol.MetadataName <> ""
