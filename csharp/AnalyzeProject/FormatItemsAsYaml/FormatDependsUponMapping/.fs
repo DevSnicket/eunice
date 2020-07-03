@@ -8,34 +8,39 @@ open DevSnicket.Eunice._AnalyzeProject._FormatItemsAsYaml.SequenceBlockEntryFrom
 let formatDependsUponMapping (dependsUpon: DependUpon list) =
     formatKeyValueLinesMapping (
         "dependsUpon",
-        formatDependsUpon dependsUpon
+        dependsUpon
+        |> List.filter hasIdentifier
+        |> formatDependsUpon
     )
+
+let private hasIdentifier dependUpon =
+    dependUpon.Identifier <> ""
 
 let private formatDependsUpon dependsUpon =
     match dependsUpon with
     | [ singleDependUpon ] ->
-        formatDependUpon singleDependUpon
+        singleDependUpon |> formatDependUpon
     | _ ->
         dependsUpon
         |> Seq.collect (formatDependUpon >> sequenceBlockEntryFromLines)
         |> Seq.toList
 
 let private formatDependUpon dependUpon =
-    match dependUpon.Identifier with
-    | "" ->
-        []
-    | identifier ->
-        match dependUpon.Items with
-        | [] ->
-            [ identifier |> quoteIdentifier ]
-        | items ->
-            [
-                "id: " + (identifier |> quoteIdentifier)
-                yield! formatDependUponItemsMapping items
-            ]
+    let identifier =
+        dependUpon.Identifier
+        |> quoteIdentifier
+
+    match dependUpon.Items with
+    | [] ->
+        [ identifier ]
+    | items ->
+        [
+            "id: " + identifier
+            yield! items |> formatDependUponItemsMapping
+        ]
 
 let private formatDependUponItemsMapping items =
     formatKeyValueLinesMapping (
         "items",
-        formatDependsUpon items
+        items |> formatDependsUpon
     )

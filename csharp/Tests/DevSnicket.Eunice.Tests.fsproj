@@ -15,6 +15,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Include="../AnalyzeProject/CreateItemFromMemberSymbol/Tests.fs" />
+		<Compile Include="../AnalyzeProject/FormatItemsAsYaml/FormatDependsUponMapping/Tests.fs" />
 		<Compile Include="../AnalyzeProject/FormatItemsAsYaml/SequenceBlockEntryFromLines/Tests.fs" />
 		<Compile Include="../AnalyzeProject/FormatItemsAsYaml/Tests.fs" />
 		<Compile Include="../AnalyzeProjectOrSolutionPath/Tests/FindParametersForTestCasesInDirectoryPath.fs" />
