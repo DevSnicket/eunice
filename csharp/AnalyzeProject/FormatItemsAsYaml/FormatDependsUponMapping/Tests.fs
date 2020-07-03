@@ -43,6 +43,52 @@ let IdentiferWithIdentifierOfEmptyIsSingleValue () =
     )
 
 [<Xunit.Fact>]
+let ChildIdentifierOfEmptyIsRemoved () =
+    let actual =
+        [ {
+            Identifier = "parent"
+            Items =
+                [ {
+                    Identifier = ""
+                    Items = []
+                } ]
+        } ]
+        |> formatDependsUponMapping
+
+    Xunit.Assert.Equal<String seq>(
+        seq [ "dependsUpon: parent" ],
+        actual
+    )
+
+[<Xunit.Fact>]
+let ChildIdentiferWithIdentifierOfEmptyIsSingleValue () =
+    let actual =
+        [ {
+            Identifier = "parent"
+            Items =
+                [
+                    {
+                        Identifier = "identifier"
+                        Items = []
+                    }
+                    {
+                        Identifier = ""
+                        Items = []
+                    }
+                ]
+        } ]
+        |> formatDependsUponMapping
+
+    Xunit.Assert.Equal<String seq>(
+        seq [
+            "dependsUpon:"
+            "  id: parent"
+            "  items: identifier"
+        ],
+        actual
+    )
+
+[<Xunit.Fact>]
 let IdentifierOfNullIsQuoted () =
     let actual =
         [ {
