@@ -18,5 +18,5 @@ export default
 					path.join("..", "eunice-javascript", "dogfooding", "output", "index.yaml"),
 			}),
 		title:
-			"eunice interactive dogfooding from eunice-javascript repository",
+			"interactive dogfooding from eunice-javascript repository",
 	});

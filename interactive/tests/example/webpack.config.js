@@ -18,5 +18,5 @@ export default
 					path.join(__dirname, ".yaml"),
 			}),
 		title:
-			"eunice interactive example YAML",
+			"interactive example YAML",
 	});
