@@ -105,11 +105,8 @@ function inferStacksWhenConfigured(
 			isInferStacksEnabledLiteralPlaceholder
 			&&
 			formatYaml(
-				inferStacks(
-					parseYaml(
-						yaml,
-					),
-				),
+				inferStacks(parseYaml(yaml)),
+				{ lineWidth: Number.MAX_SAFE_INTEGER },
 			)
 		);
 	}
