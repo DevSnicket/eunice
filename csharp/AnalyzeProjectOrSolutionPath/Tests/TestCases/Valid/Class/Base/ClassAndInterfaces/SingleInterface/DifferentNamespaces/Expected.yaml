@@ -4,11 +4,9 @@
       items: BaseClass
     - id: DerivedClass
       dependsUpon:
-        id: TestCase
-        items:
-          - id: BaseClassNamespace
-            items: BaseClass
-          - id: InterfaceNamespace
-            items: Interface
+        - id: BaseClassNamespace
+          items: BaseClass
+        - id: InterfaceNamespace
+          items: Interface
     - id: InterfaceNamespace
       items: Interface

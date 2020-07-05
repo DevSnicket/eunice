@@ -8,7 +8,7 @@ let createDependsUponFromSymbolsOfReferrer (referrer: ISymbol) =
     let rec createDependsUponFromSymbols (symbols: ISymbol seq) =
         symbols
         |> Seq.collect ignoreLocalAndGetWithTypesOfGenerics
-        |> Seq.choose createDependUponWithAncestorHierachyFromSymbol
+        |> Seq.choose createDependUponFromSymbol
         |> groupDependsUponIntoHierarchy
         |> Seq.toList
 
@@ -48,15 +48,15 @@ let createDependsUponFromSymbolsOfReferrer (referrer: ISymbol) =
         | symbol ->
             seq [ symbol ]
 
-    and createDependUponWithAncestorHierachyFromSymbol (symbol: ISymbol) =
+    and createDependUponFromSymbol (symbol: ISymbol) =
         let rec createWhenIdentifiableAndInSource () =
             match isIdentifiableAndInSource with
             | true ->
-                withAncestorHierarchyWhenRequired
-                    {
-                        Identifier = formatIdentifier ()
-                        Items = []
-                    }
+                {
+                    Identifier = formatIdentifier ()
+                    Items = []
+                }
+                |> addAncestorHierarchyOfSymbol symbol
             | false ->
                 None
 
@@ -72,19 +72,33 @@ let createDependsUponFromSymbolsOfReferrer (referrer: ISymbol) =
             | _ ->
                 symbol.MetadataName
 
-        and withAncestorHierarchyWhenRequired dependUpon =
-            match isAncestorHierarchyRequired () with
-            | true ->
-                dependUpon |> addAncestorHierarchyOfSymbol symbol
-            | false ->
-                Some dependUpon
-        
-        and isAncestorHierarchyRequired () =
-            symbol.ContainingSymbol <> referrer.ContainingSymbol
-            &&
-            symbol <> referrer.ContainingSymbol
-
         createWhenIdentifiableAndInSource()
+
+    and addAncestorHierarchyOfSymbol symbol dependUpon =
+        match symbol.ContainingSymbol with
+        | null ->
+            Some dependUpon
+        | containingSymbol ->
+            match referrer |> isSiblingOrHasAncestorSiblingOf symbol with
+            | true ->
+                Some dependUpon
+            | false ->
+                match containingSymbol |> isImplicitSymbol with
+                | true ->
+                    addAncestorHierarchyOfSymbol
+                        containingSymbol
+                        dependUpon
+                | false ->
+                    match containingSymbol |> isIdentifiable with
+                    | true ->
+                        addAncestorHierarchyOfSymbol
+                            containingSymbol
+                            {
+                                Identifier = containingSymbol.MetadataName
+                                Items = [ dependUpon ]
+                            }
+                    | false ->
+                        None
 
     createDependsUponFromSymbols
 
@@ -92,27 +106,34 @@ let private hasLocationInSource symbol =
     symbol.Locations
     |> Seq.exists (fun location -> location.IsInSource)
 
-let private addAncestorHierarchyOfSymbol symbol item =
-    match symbol.ContainingSymbol with
-    | null ->
-        Some item
-    | containingSymbol ->
-        match containingSymbol |> isImplicitSymbol with
-        | true ->
-            addAncestorHierarchyOfSymbol
-                containingSymbol
-                item
-        | false ->
-            match containingSymbol |> isIdentifiable with
-            | true ->
-                addAncestorHierarchyOfSymbol
-                    containingSymbol
-                    {
-                        Identifier = containingSymbol.MetadataName
-                        Items = [ item ]
-                    }
-            | false ->
-                None
+let private isSiblingOrHasAncestorSiblingOf subject =
+    let rec isSiblingOrHasAncestorSibling (potentialSibling: ISymbol) =
+        let noSiblingsWithSameName =
+            match potentialSibling with
+            | :? INamespaceOrTypeSymbol as namespaceOrType ->
+                namespaceOrType.GetMembers()
+                |> Seq.forall isSubjectOrHasDifferentName
+            | _ ->
+                true
+
+        let isSibling =
+            subject.ContainingSymbol = potentialSibling.ContainingSymbol
+
+        let hasAncestorSibling =
+            potentialSibling.ContainingSymbol |> (not << isNull)
+            &&
+            potentialSibling.ContainingSymbol |> isSiblingOrHasAncestorSibling
+
+        noSiblingsWithSameName
+        &&
+        (isSibling || hasAncestorSibling)
+
+    and isSubjectOrHasDifferentName otherSymbol =
+        otherSymbol = subject
+        ||
+        otherSymbol.MetadataName <> subject.MetadataName
+
+    isSiblingOrHasAncestorSibling
 
 let private isImplicitSymbol =
     function

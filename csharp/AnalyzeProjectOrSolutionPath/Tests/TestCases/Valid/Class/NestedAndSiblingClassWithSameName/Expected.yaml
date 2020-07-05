@@ -6,10 +6,8 @@
         items:
           - id: Method
             dependsUpon:
+              - id: Namespace
+                items: SameNameClass
               - SameNameClass
-              - id: TestCase
-                items:
-                  id: Namespace
-                  items: SameNameClass
           - SameNameClass
       - SameNameClass

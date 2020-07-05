@@ -6,12 +6,10 @@
         items:
           id: Method
           dependsUpon:
-            id: TestCase
-            items:
-              - id: ParameterNamespace
-                items: ParameterClass
-              - id: ReturnNamespace
-                items: ReturnClass
+            - id: ParameterNamespace
+              items: ParameterClass
+            - id: ReturnNamespace
+              items: ReturnClass
     - id: ParameterNamespace
       items: ParameterClass
     - id: ReturnNamespace

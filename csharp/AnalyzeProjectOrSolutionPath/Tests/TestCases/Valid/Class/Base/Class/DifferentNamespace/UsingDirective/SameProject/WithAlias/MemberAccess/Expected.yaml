@@ -6,7 +6,5 @@
       items:
         id: DerivedClass
         dependsUpon:
-          id: TestCase
-          items:
-            id: BaseClassNamespace
-            items: BaseClass
+          id: BaseClassNamespace
+          items: BaseClass

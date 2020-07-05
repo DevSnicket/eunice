@@ -4,9 +4,7 @@
       items:
         id: Delegate
         dependsUpon:
-          id: TestCase
-          items:
-            id: ReturnNamespace
-            items: ReturnStruct
+          id: ReturnNamespace
+          items: ReturnStruct
     - id: ReturnNamespace
       items: ReturnStruct

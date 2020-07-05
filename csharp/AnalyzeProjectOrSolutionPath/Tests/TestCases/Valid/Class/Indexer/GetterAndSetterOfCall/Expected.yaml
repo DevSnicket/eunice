@@ -3,24 +3,18 @@
     - id: CalleeOfGetterClass
       items:
         id: CalleeOfGetterMethod
-        dependsUpon:
-          id: TestCase
-          items: IndexerClass
+        dependsUpon: IndexerClass
     - id: CalleeOfSetterClass
       items:
         id: CalleeOfSetterMethod
-        dependsUpon:
-          id: TestCase
-          items: IndexerClass
+        dependsUpon: IndexerClass
     - id: Class
       items:
         id: Item
         dependsUpon:
-          id: TestCase
-          items:
-            - id: CalleeOfGetterClass
-              items: CalleeOfGetterMethod
-            - id: CalleeOfSetterClass
-              items: CalleeOfSetterMethod
-            - IndexerClass
+          - id: CalleeOfGetterClass
+            items: CalleeOfGetterMethod
+          - id: CalleeOfSetterClass
+            items: CalleeOfSetterMethod
+          - IndexerClass
     - IndexerClass

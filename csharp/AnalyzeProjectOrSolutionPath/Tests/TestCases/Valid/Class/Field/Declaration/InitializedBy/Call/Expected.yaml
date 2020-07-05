@@ -3,16 +3,12 @@
     - id: CalleeClass
       items:
         id: CalleeMethod
-        dependsUpon:
-          id: TestCase
-          items: FieldClass
+        dependsUpon: FieldClass
     - id: Class
       items:
         id: _field
         dependsUpon:
-          id: TestCase
-          items:
-            - id: CalleeClass
-              items: CalleeMethod
-            - FieldClass
+          - id: CalleeClass
+            items: CalleeMethod
+          - FieldClass
     - FieldClass

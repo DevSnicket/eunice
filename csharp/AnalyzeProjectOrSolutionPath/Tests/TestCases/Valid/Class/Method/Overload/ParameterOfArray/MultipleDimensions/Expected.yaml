@@ -4,7 +4,5 @@
       items:
         - Method
         - id: Method(TestCase.ParameterClass[][])
-          dependsUpon:
-            id: TestCase
-            items: ParameterClass
+          dependsUpon: ParameterClass
     - ParameterClass

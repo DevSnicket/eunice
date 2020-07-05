@@ -3,7 +3,5 @@
     - id: DeclarationClass
       items:
         id: Method
-        dependsUpon:
-          id: TestCase
-          items: VariableClass
+        dependsUpon: VariableClass
     - VariableClass

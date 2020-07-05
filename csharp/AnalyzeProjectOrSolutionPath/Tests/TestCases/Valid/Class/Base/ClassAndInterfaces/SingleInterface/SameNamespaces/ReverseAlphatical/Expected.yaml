@@ -2,12 +2,10 @@
   items:
     - id: DerivedClass
       dependsUpon:
-        id: TestCase
+        id: Namespace
         items:
-          id: Namespace
-          items:
-            - AInterface
-            - BaseClass
+          - AInterface
+          - BaseClass
     - id: Namespace
       items:
         - AInterface

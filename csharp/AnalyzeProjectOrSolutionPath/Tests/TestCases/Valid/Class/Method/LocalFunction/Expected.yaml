@@ -4,12 +4,10 @@
       items:
         id: Method
         dependsUpon:
-          id: TestCase
-          items:
-            - LocalFunctionParameterClass
-            - LocalFunctionVariableClass
-            - MethodParameterClass
-            - MethodVariableClass
+          - LocalFunctionParameterClass
+          - LocalFunctionVariableClass
+          - MethodParameterClass
+          - MethodVariableClass
     - LocalFunctionParameterClass
     - LocalFunctionVariableClass
     - MethodParameterClass

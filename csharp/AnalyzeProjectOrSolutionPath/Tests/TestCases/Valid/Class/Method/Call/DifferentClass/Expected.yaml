@@ -6,7 +6,5 @@
       items:
         id: CallerMethod
         dependsUpon:
-          id: TestCase
-          items:
-            id: CalleeClass
-            items: CalledMethod
+          id: CalleeClass
+          items: CalledMethod

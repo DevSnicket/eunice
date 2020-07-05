@@ -4,6 +4,4 @@
     - id: CastingClass
       items:
         id: Method
-        dependsUpon:
-          id: TestCase
-          items: CastedClass
+        dependsUpon: CastedClass

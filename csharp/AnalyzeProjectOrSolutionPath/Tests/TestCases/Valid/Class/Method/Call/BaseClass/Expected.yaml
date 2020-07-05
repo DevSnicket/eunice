@@ -7,7 +7,5 @@
       items:
         id: DerivedCallerMethod
         dependsUpon:
-          id: TestCase
-          items:
-            id: BaseCalleeClass
-            items: BaseCalleeMethod
+          id: BaseCalleeClass
+          items: BaseCalleeMethod

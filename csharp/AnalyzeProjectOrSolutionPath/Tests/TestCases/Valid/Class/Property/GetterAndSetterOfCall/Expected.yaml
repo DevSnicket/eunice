@@ -3,24 +3,18 @@
     - id: CalleeOfGetterClass
       items:
         id: CalleeOfGetterMethod
-        dependsUpon:
-          id: TestCase
-          items: PropertyClass
+        dependsUpon: PropertyClass
     - id: CalleeOfSetterClass
       items:
         id: CalleeOfSetterMethod
-        dependsUpon:
-          id: TestCase
-          items: PropertyClass
+        dependsUpon: PropertyClass
     - id: Class
       items:
         id: Property
         dependsUpon:
-          id: TestCase
-          items:
-            - id: CalleeOfGetterClass
-              items: CalleeOfGetterMethod
-            - id: CalleeOfSetterClass
-              items: CalleeOfSetterMethod
-            - PropertyClass
+          - id: CalleeOfGetterClass
+            items: CalleeOfGetterMethod
+          - id: CalleeOfSetterClass
+            items: CalleeOfSetterMethod
+          - PropertyClass
     - PropertyClass

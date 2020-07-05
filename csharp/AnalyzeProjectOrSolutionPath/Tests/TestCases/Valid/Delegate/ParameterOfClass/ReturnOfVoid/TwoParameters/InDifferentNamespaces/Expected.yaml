@@ -4,12 +4,10 @@
       items:
         id: Delegate
         dependsUpon:
-          id: TestCase
-          items:
-            - id: Parameter1Namespace
-              items: Parameter1Class
-            - id: Parameter2Namespace
-              items: Parameter2Class
+          - id: Parameter1Namespace
+            items: Parameter1Class
+          - id: Parameter2Namespace
+            items: Parameter2Class
     - id: Parameter1Namespace
       items: Parameter1Class
     - id: Parameter2Namespace

@@ -7,19 +7,15 @@
         - id: Method(TestCase.ParameterNamespace.Parameter1Class)
           dependsUpon:
             - Method(TestCase.ParameterNamespace.Parameter1Class,TestCase.ParameterNamespace.Parameter2Class)
-            - id: TestCase
-              items:
-                id: ParameterNamespace
-                items: Parameter1Class
+            - id: ParameterNamespace
+              items: Parameter1Class
         - id: Method(TestCase.ParameterNamespace.Parameter1Class,TestCase.ParameterNamespace.Parameter2Class)
           dependsUpon:
             - Method
-            - id: TestCase
+            - id: ParameterNamespace
               items:
-                id: ParameterNamespace
-                items:
-                  - Parameter1Class
-                  - Parameter2Class
+                - Parameter1Class
+                - Parameter2Class
     - id: ParameterNamespace
       items:
         - Parameter1Class

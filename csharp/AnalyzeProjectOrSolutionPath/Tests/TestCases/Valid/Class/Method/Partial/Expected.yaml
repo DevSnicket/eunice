@@ -8,13 +8,9 @@
       items:
         - id: Part1CallerMethod
           dependsUpon:
-            id: TestCase
-            items:
-              id: Part1CalleeClass
-              items: Part1CalleeMethod
+            id: Part1CalleeClass
+            items: Part1CalleeMethod
         - id: Part2CallerMethod
           dependsUpon:
-            id: TestCase
-            items:
-              id: Part2CalleeClass
-              items: Part2CalleeMethod
+            id: Part2CalleeClass
+            items: Part2CalleeMethod

@@ -4,9 +4,7 @@
       items:
         id: Method
         dependsUpon:
-          id: TestCase
-          items:
-            - Parameter1Class
-            - Parameter2Class
+          - Parameter1Class
+          - Parameter2Class
     - Parameter1Class
     - Parameter2Class

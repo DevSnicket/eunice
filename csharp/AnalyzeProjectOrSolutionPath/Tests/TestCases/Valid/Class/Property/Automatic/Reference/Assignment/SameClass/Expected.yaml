@@ -3,9 +3,7 @@
     - id: Class
       items:
         - id: Property
-          dependsUpon:
-            id: TestCase
-            items: PropertyClass
+          dependsUpon: PropertyClass
         - id: Method
           dependsUpon: Property
     - PropertyClass

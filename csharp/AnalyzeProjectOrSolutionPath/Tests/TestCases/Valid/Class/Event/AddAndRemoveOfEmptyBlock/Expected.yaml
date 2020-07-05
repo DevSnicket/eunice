@@ -3,7 +3,5 @@
     - id: Class
       items:
         id: Event
-        dependsUpon:
-          id: TestCase
-          items: EventDelegate
+        dependsUpon: EventDelegate
     - EventDelegate

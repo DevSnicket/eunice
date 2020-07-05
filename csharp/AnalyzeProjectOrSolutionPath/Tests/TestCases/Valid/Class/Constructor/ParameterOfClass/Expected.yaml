@@ -3,7 +3,5 @@
     - id: Class
       items:
         id: .ctor
-        dependsUpon:
-          id: TestCase
-          items: ParameterClass
+        dependsUpon: ParameterClass
     - ParameterClass

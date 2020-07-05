@@ -4,11 +4,9 @@
       items:
         id: _field
         dependsUpon:
-          id: TestCase
+          id: FieldEnumNamespace
           items:
-            id: FieldEnumNamespace
-            items:
-              id: FieldEnum
-              items: Value
+            id: FieldEnum
+            items: Value
     - id: FieldEnumNamespace
       items: FieldEnum

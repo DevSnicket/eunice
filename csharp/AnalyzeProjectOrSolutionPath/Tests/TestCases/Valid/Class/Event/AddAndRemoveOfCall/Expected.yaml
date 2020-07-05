@@ -8,11 +8,9 @@
       items:
         id: Event
         dependsUpon:
-          id: TestCase
-          items:
-            - id: CalleeOfAddClass
-              items: CalleeOfAddMethod
-            - id: CalleeOfRemoveClass
-              items: CalleeOfRemoveMethod
-            - EventDelegate
+          - id: CalleeOfAddClass
+            items: CalleeOfAddMethod
+          - id: CalleeOfRemoveClass
+            items: CalleeOfRemoveMethod
+          - EventDelegate
     - EventDelegate

@@ -3,7 +3,5 @@
     - id: Class
       items:
         id: Method
-        dependsUpon:
-          id: TestCase
-          items: ReturnVariableClass
+        dependsUpon: ReturnVariableClass
     - ReturnVariableClass

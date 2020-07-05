@@ -4,14 +4,10 @@
     - id: ReferencedClass
       items:
         id: Property
-        dependsUpon:
-          id: TestCase
-          items: PropertyClass
+        dependsUpon: PropertyClass
     - id: ReferrerClass
       items:
         id: Method
         dependsUpon:
-          id: TestCase
-          items:
-            id: ReferencedClass
-            items: Property
+          id: ReferencedClass
+          items: Property

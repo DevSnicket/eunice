@@ -5,7 +5,5 @@
       items:
         - System.Collections.IEnumerable.GetEnumerator
         - id: GetEnumerator
-          dependsUpon:
-            id: TestCase
-            items: Interface
+          dependsUpon: Interface
     - Interface
