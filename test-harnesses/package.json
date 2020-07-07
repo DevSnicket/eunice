@@ -6,7 +6,6 @@
 	"description": "Shared implementation for analyzer and renderer test harnesses, using JavaScript, HTML, React and Webpack.",
 	"dependencies": {
 		"@ungap/url-search-params": "0.1.4",
-		"copy-webpack-plugin": "4.6.0",
 		"core-js": "3.6.4",
 		"css-loader": "2.1.1",
 		"lodash": "4.17.15",
@@ -101,5 +100,5 @@
 		"test": "npx jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "9.0.0"
+	"version": "9.0.1"
 }
