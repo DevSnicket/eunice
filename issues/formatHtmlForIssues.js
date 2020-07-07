@@ -32,7 +32,7 @@ function orderIssuesByNumber(
 
 	function getAndDeleteWherePrioritySpecified() {
 		return (
-			[ 47, 125, 106, 107, 52, 83, 84, 37, 16, 43, 45, 48, 49, 44, 69, 46, 56, 42, 50, 38, 12, 14 ]
+			[ 50, 45, 125, 106, 107, 83, 84, 37, 49, 44, 56, 16, 69, 46, 38, 43, 42 ]
 			.flatMap(getAndDeleteWithNumber)
 		);
 
