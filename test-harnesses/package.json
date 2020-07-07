@@ -7,14 +7,14 @@
 	"dependencies": {
 		"@ungap/url-search-params": "0.1.4",
 		"core-js": "3.6.4",
-		"css-loader": "2.1.1",
+		"css-loader": "3.6.0",
 		"lodash": "4.17.15",
 		"monaco-editor": "0.17.0",
 		"react": "16.4.0",
 		"react-dom": "16.4.2",
 		"react-reflex": "2.2.8",
-		"style-loader": "0.23.1",
-		"webpack": "4.37.0"
+		"style-loader": "1.2.1",
+		"webpack": "4.43.0"
 	},
 	"devDependencies": {
 		"@babel/core": "7.10.4",
@@ -27,7 +27,7 @@
 		"@types/node": "14.0.18",
 		"@types/react": "16.9.41",
 		"@types/react-dom": "16.9.8",
-		"@types/webpack": "4.41.20",
+		"@types/webpack": "4.41.21",
 		"babel-loader": "8.1.0",
 		"cspell": "4.0.63",
 		"eslint": "7.4.0",
@@ -100,5 +100,5 @@
 		"test": "npx jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "9.0.1"
+	"version": "9.0.2"
 }
