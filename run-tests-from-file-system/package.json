@@ -8,16 +8,16 @@
 	},
 	"description": "Runs tests by discovering test cases and expected behavior from the file system. Tests are automatically named based on the directory hierarchy.",
 	"devDependencies": {
-		"@babel/core": "7.8.4",
-		"@babel/plugin-transform-modules-commonjs": "7.8.3",
-		"@types/fs-extra": "8.0.1",
-		"@types/jest": "24.0.15",
-		"@types/node": "13.7.0",
-		"cspell": "4.0.21",
-		"eslint": "6.8.0",
-		"eslint-plugin-notice": "0.8.9",
-		"jest": "24.8.0",
-		"typescript": "3.7.5"
+		"@babel/core": "7.10.4",
+		"@babel/plugin-transform-modules-commonjs": "7.10.4",
+		"@types/fs-extra": "9.0.1",
+		"@types/jest": "26.0.4",
+		"@types/node": "14.0.18",
+		"cspell": "4.0.63",
+		"eslint": "7.4.0",
+		"eslint-plugin-notice": "0.9.10",
+		"jest": "26.1.0",
+		"typescript": "3.9.6"
 	},
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
 	"jest": {
