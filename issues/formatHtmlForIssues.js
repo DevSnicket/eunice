@@ -23,10 +23,13 @@ function getIssuesByNumber(
 function orderIssuesByNumber(
 	issuesByNumber,
 ) {
+	const issuesWherePrioritySpecified =
+		getAndDeleteWherePrioritySpecified();
+
 	return (
 		[
-			...getAndDeleteWherePrioritySpecified(),
 			...issuesByNumber.values(),
+			...issuesWherePrioritySpecified,
 		]
 	);
 
