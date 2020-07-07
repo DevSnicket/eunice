@@ -12,7 +12,7 @@ type Path = System.IO.Path
 
 let analyzeProjectOrSolutionPath (projectOrSolutionPath: String) =
     match projectOrSolutionPath |> Path.GetExtension with
-    | ".sln" -> // cSpell:ignore sln
+    | ".sln" ->
         projectOrSolutionPath |> analyzeSolutionPath
     | _ ->
         projectOrSolutionPath |> analyzeProjectPath

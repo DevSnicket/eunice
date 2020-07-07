@@ -21,7 +21,7 @@ let private findParametersInSubdirectoryPath subdirectoryPath =
     and parametersWhenFileExists () =
         seq [
             "csproj"
-            "sln" // cSpell:ignore sln
+            "sln"
         ]
         |> Seq.tryPick parametersWhenFileWithExtensionExists
 

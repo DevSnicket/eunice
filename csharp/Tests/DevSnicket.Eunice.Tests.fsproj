@@ -22,7 +22,7 @@
 		<Compile Include="../AnalyzeProjectOrSolutionPath/Tests/RegisterAndGetPathOfMsbuild.fs" />
 		<Compile Include="../AnalyzeProjectOrSolutionPath/Tests/.fs" />
 		<Compile Include="../ExecuteProgram/GetOrPromptForLicenseAcceptance/Tests.fs" />
-		<Compile Include="../ExecuteProgram/ParseArguments/Tests.fs" />
+		<Compile Include="../ExecuteProgram/ParseArgumentsAndInferFromDirectoryPath/Tests/.fs" />
 		<Compile Include="../ExecuteProgram/WriteNameAndVersion/Tests.fs" />
 		<Compile Include="../WriteInteractiveInDirectoryPathWithYaml/Tests.fs" />
 	</ItemGroup>

@@ -2,7 +2,7 @@ module rec DevSnicket.Eunice.ExecuteProgram
 
 open DevSnicket.Eunice.AnalyzeProjectOrSolutionPath
 open DevSnicket.Eunice._ExecuteProgram.GetOrPromptForLicenseAcceptance
-open DevSnicket.Eunice._ExecuteProgram.ParseArguments
+open DevSnicket.Eunice._ExecuteProgram.ParseArgumentsAndInferFromDirectoryPath
 open DevSnicket.Eunice._ExecuteProgram.WriteNameAndVersion
 open DevSnicket.Eunice.WriteInteractiveInDirectoryPathWithYaml
 
@@ -23,7 +23,7 @@ let executeProgramWithArguments arguments =
         |}
 
     arguments
-    |> parseArguments
+    |> parseArgumentsAndInferFromDirectoryPath "."
     |> function
         | ParsedArguments parsedArguments ->
             parsedArguments
