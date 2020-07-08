@@ -3,7 +3,7 @@
 set -e
 
 ./clean.sh
-./AnalyzeProjectOrSolutionPath/Tests/TestCases/restore.sh
+./AnalyzeProjectOrSolutionPath/Tests/TestCases/build-restore.sh
 ./test.sh
 ./lint.sh
 ./spellcheck.sh

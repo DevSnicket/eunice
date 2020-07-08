@@ -14,8 +14,8 @@ steps:
     displayName: download and extract interactive package
     inputs: { scriptPath: WriteInteractiveInDirectoryPathWithYaml/download-and-extract-package.sh }
   - task: ShellScript@2
-    displayName: restore test case C# projects
-    inputs: { scriptPath: AnalyzeProjectOrSolutionPath/Tests/TestCases/restore.sh }
+    displayName: build/restore test case C# projects
+    inputs: { scriptPath: AnalyzeProjectOrSolutionPath/Tests/TestCases/build-restore.sh }
   - task: ShellScript@2
     displayName: test
     inputs: { scriptPath: test.sh }
