@@ -1,3 +1,4 @@
+[<System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage>]
 module rec DevSnicket.Eunice.ExecuteProgram
 
 open DevSnicket.Eunice.AnalyzeProject

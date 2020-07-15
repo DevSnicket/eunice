@@ -7,9 +7,9 @@ Tests \
 -c Release \
 -l "trx;LogFileName=.trx" \
 -p:AltCover=true \
--p:AltCoverAssemblyFilter="^(?!DevSnicket.Eunice$)" \
+-p:AltCoverAssemblyFilter="^(?!eunice$)" \
+-p:AltCoverAttributeFilter=ExcludeFromCodeCoverageAttribute \
 -p:AltCoverForce=true \
--p:AltCoverTypeFilter=DevSnicket.Eunice.ExecuteProgram \
 -p:AltCoverXmlReport=TestResults/coverage.xml
 
 dotnet tool install dotnet-reportgenerator-globaltool \
