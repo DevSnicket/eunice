@@ -1,9 +1,10 @@
 {
 	"configurations": [
 		{
-			"args": [
+			"args": [ 
 				"--accept-license",
-				"AnalyzeProjectOrSolutionPath/Tests/TestCases",
+				"--members",
+				"Tests/TestCases/"
 			],
 			"name": "program",
 			"program": "${workspaceFolder}/bin/Debug/eunice.dll",
