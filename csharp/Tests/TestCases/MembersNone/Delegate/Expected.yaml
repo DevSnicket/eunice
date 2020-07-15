@@ -1,0 +1,14 @@
+﻿- id: TestCase
+  items:
+    - id: DelegateNamespace
+      items:
+        id: Delegate
+        dependsUpon:
+          - id: ParameterNamespace
+            items: ParameterClass
+          - id: ReturnNamespace
+            items: ReturnClass
+    - id: ParameterNamespace
+      items: ParameterClass
+    - id: ReturnNamespace
+      items: ReturnClass

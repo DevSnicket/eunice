@@ -1,0 +1,5 @@
+﻿- id: TestCase
+  items:
+    - id: DeclarationClass
+      dependsUpon: VariableClass
+    - VariableClass
