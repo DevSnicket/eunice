@@ -1,8 +1,9 @@
 namespace DevSnicket.Eunice._ExecuteProgram._ParseArgumentsAndInferFromDirectoryPath
 
-open DevSnicket.Eunice._ExecuteProgram.AcceptLicenseParameter
+open global.DevSnicket.Eunice._ExecuteProgram
 open DevSnicket.Eunice._ExecuteProgram.ParseArgumentsAndInferFromDirectoryPath
 
+type MemberBehavior = DevSnicket.Eunice._AnalyzeProject._CreateItemWhenNamedType.MemberBehavior
 type Object = System.Object
 type Path = System.IO.Path
 
@@ -60,6 +61,7 @@ type Tests () =
                     ParsedArguments {
                         FilePath = [ "SingleProject"; "SingleProject.csproj" ] |> getPathFromNames
                         IsLicenseAccepted = false
+                        MemberBehavior = MemberBehavior.None
                     }
             |}
             {|
@@ -71,6 +73,7 @@ type Tests () =
                     ParsedArguments {
                         FilePath = [ "SingleProjectAndSingleSolution"; "SingleSolution.sln" ] |> getPathFromNames
                         IsLicenseAccepted = false
+                        MemberBehavior = MemberBehavior.None
                     }
             |}
             {|
@@ -82,6 +85,7 @@ type Tests () =
                     ParsedArguments {
                         FilePath = [ "SingleSolution"; "SingleSolution.sln" ] |> getPathFromNames
                         IsLicenseAccepted = false
+                        MemberBehavior = MemberBehavior.None
                     }
             |}
             {|
@@ -93,6 +97,19 @@ type Tests () =
                     ParsedArguments {
                         FilePath = "filePathArgument"
                         IsLicenseAccepted = false
+                        MemberBehavior = MemberBehavior.None
+                    }
+            |}
+            {|
+                Arguments =
+                    [| ArgumentNames.Members; "filePathArgument" |]
+                DirectoryPath =
+                    [ "Other" ] |> getPathFromNames
+                Expected =
+                    ParsedArguments {
+                        FilePath = "filePathArgument"
+                        IsLicenseAccepted = false
+                        MemberBehavior = MemberBehavior.Level
                     }
             |}
             {|
@@ -104,11 +121,12 @@ type Tests () =
                     ParsedArguments {
                         FilePath = "filePathArgument"
                         IsLicenseAccepted = false
+                        MemberBehavior = MemberBehavior.None
                     }
             |}
             {|
                 Arguments =
-                    [| acceptLicenseParameter |]
+                    [| ArgumentNames.AcceptLicense |]
                 DirectoryPath =
                     [ "Other" ] |> getPathFromNames
                 Expected =
@@ -117,7 +135,7 @@ type Tests () =
             {|
                 Arguments =
                     [|
-                        acceptLicenseParameter
+                        ArgumentNames.AcceptLicense
                         "filePathArgument"
                     |]
                 DirectoryPath =
@@ -126,6 +144,7 @@ type Tests () =
                     ParsedArguments {
                         FilePath = "filePathArgument"
                         IsLicenseAccepted = true
+                        MemberBehavior = MemberBehavior.None
                     }
             |}
         ]

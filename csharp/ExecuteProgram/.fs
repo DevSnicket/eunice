@@ -1,6 +1,7 @@
 module rec DevSnicket.Eunice.ExecuteProgram
 
-open DevSnicket.Eunice.AnalyzeProjectOrSolutionPath
+open DevSnicket.Eunice.AnalyzeProject
+open DevSnicket.Eunice.CallAnalyzeProjectForProjectOrSolutionPath
 open DevSnicket.Eunice._ExecuteProgram.GetOrPromptForLicenseAcceptance
 open DevSnicket.Eunice._ExecuteProgram.ParseArgumentsAndInferFromDirectoryPath
 open DevSnicket.Eunice._ExecuteProgram.WriteNameAndVersion
@@ -53,8 +54,8 @@ let private executeProgramWithParsedArguments (arguments: ParsedArguments) =
                     Yaml = yaml
                 }
                 =
-                arguments.FilePath
-                |> analyzeProjectOrSolutionPath
+                analyzeProject arguments.MemberBehavior
+                |> callAnalyzeProjectForProjectOrSolutionPath arguments.FilePath
 
             errors |> Seq.iter Console.Error.WriteLine
             do! yaml |> writeInteractiveInDirectoryPathWithYaml "."

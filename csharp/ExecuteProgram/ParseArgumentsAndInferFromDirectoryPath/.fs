@@ -1,39 +1,58 @@
 module rec DevSnicket.Eunice._ExecuteProgram.ParseArgumentsAndInferFromDirectoryPath
 
-open DevSnicket.Eunice._ExecuteProgram.AcceptLicenseParameter
-
 type Boolean = System.Boolean
 type Directory = System.IO.Directory
+type MemberBehavior = DevSnicket.Eunice._AnalyzeProject._CreateItemWhenNamedType.MemberBehavior
 type String = System.String
 
 type ParsedArguments =
     {
         FilePath: String
         IsLicenseAccepted: Boolean
+        MemberBehavior: MemberBehavior
     }
 
 type ParsedArgumentsOrError =
-| ParsedArguments of ParsedArguments
-| Error of String
+    | ParsedArguments of ParsedArguments
+    | Error of String
 
 let parseArgumentsAndInferFromDirectoryPath (directoryPath: String) (arguments: String array) =
-    let argumentsNotOfAcceptLicense =
+    let argumentsByName =
         arguments
-        |> Array.filter(fun argument -> argument <> acceptLicenseParameter)
+        |> Seq.groupBy getArgumentNameWhenRecognized
+        |> Map.ofSeq
 
-    argumentsNotOfAcceptLicense
-    |> Array.tryLast
+    let hasArgumentOfName argumentName =
+        argumentsByName.ContainsKey (Some argumentName)
+
+    argumentsByName.TryFind None
+    |> Option.bind Seq.tryLast
     |> Option.orElseWith (fun () -> directoryPath |> inferFileNameWhenInDirectoryPath)
     |> function
         | Some filePath ->
             ParsedArguments
                 {
-                    FilePath = filePath
-                    IsLicenseAccepted = arguments <> argumentsNotOfAcceptLicense
+                    FilePath =
+                        filePath
+                    IsLicenseAccepted =
+                        ArgumentNames.AcceptLicense |> hasArgumentOfName
+                    MemberBehavior =
+                        match ArgumentNames.Members |> hasArgumentOfName with
+                        | true -> MemberBehavior.Level
+                        | false -> MemberBehavior.None
                 }
         | None ->
             Error
                 "The current directory does not contain a single C# project or solution file, specify the filename or path."
+
+let private getArgumentNameWhenRecognized =
+    function
+    | ArgumentNames.AcceptLicense ->
+        Some ArgumentNames.AcceptLicense
+    | ArgumentNames.Members ->
+        Some ArgumentNames.Members
+    | _ ->
+        None
 
 let private inferFileNameWhenInDirectoryPath directoryPath: String option =
     [ "sln"; "csproj" ]

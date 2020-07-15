@@ -1,0 +1,5 @@
+﻿- id: TestCase
+  items:
+    - CalleeClass
+    - id: CallerClass
+      dependsUpon: CalleeClass

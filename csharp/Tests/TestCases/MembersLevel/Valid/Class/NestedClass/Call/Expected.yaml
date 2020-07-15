@@ -1,0 +1,10 @@
+﻿- id: TestCase
+  items:
+    id: Class
+    items:
+      - id: CallerMethod
+        dependsUpon:
+          id: NestedClass
+          items: CalledMethod
+      - id: NestedClass
+        items: CalledMethod

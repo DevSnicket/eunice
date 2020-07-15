@@ -1,15 +1,13 @@
 module rec DevSnicket.Eunice.AnalyzeProject
 
 open DevSnicket.Eunice._AnalyzeProject
-open DevSnicket.Eunice._AnalyzeProject.CreateDependsUponFromSymbolsOfReferrer
-open DevSnicket.Eunice._AnalyzeProject.GetBasesOfTypeDeclaration
-open DevSnicket.Eunice._AnalyzeProject.CreateItemWhenDelegate
-open DevSnicket.Eunice._AnalyzeProject.CreateItemWhenEnum
-open DevSnicket.Eunice._AnalyzeProject.CreateItemFromMemberSymbol
+open DevSnicket.Eunice._AnalyzeProject.CreateItemWhenNamedType
 open DevSnicket.Eunice._AnalyzeProject.FormatItemsAsYaml
 open Microsoft.CodeAnalysis
 
-let analyzeProject (project: Project) =
+type MemberBehavior = DevSnicket.Eunice._AnalyzeProject._CreateItemWhenNamedType.MemberBehavior
+
+let analyzeProject (memberBehavior: MemberBehavior) (project: Project) =
     async {
         let! compilation =
             project.GetCompilationAsync ()
@@ -22,7 +20,7 @@ let analyzeProject (project: Project) =
                     |> Seq.choose formatWhenError
                 Yaml =
                     compilation
-                    |> createItemsInCompilation
+                    |> createItemsInCompilation memberBehavior
                     |> formatItemsAsYaml
             }
     }
@@ -34,7 +32,7 @@ let private formatWhenError diagnostic =
     | _ ->
         None
 
-let private createItemsInCompilation compilation =
+let private createItemsInCompilation memberBehavior compilation =
     let rec createItemsInCompilation () =
         seq [ {
             DependsUpon =
@@ -59,7 +57,7 @@ let private createItemsInCompilation compilation =
         | ``type`` ->
             match ``type``.ContainingAssembly = compilation.Assembly with
             | true ->
-                ``type`` |> createItemWhenType getSymbolFromSyntaxNode
+                ``type`` |> createItemWhenNamedType memberBehavior getSymbolFromSyntaxNode
             | false ->
                 None
 
@@ -101,34 +99,3 @@ let private createItemsInCompilation compilation =
                 semanticModel
 
     createItemsInCompilation ()
-
-let private createItemWhenType getSymbolFromSyntaxNode: (ISymbol -> Item option) =
-    function
-    | :? INamedTypeSymbol as ``type`` ->
-        Some (``type`` |> createItemFromType getSymbolFromSyntaxNode)
-    | _ ->
-        None
-
-let private createItemFromType getSymbolFromSyntaxNode ``type`` =
-    ``type`` |> createItemWhenDelegate
-    |> Option.orElseWith (fun _ -> ``type`` |> createItemWhenEnum)
-    |> Option.defaultWith (fun _ -> ``type`` |> createItemFromClassOrInterfaceOrStruct getSymbolFromSyntaxNode)
-
-let private createItemFromClassOrInterfaceOrStruct getSymbolFromSyntaxNode ``type`` =
-    {
-        DependsUpon =
-            ``type``
-            |> getBasesOfTypeDeclaration
-            |> Seq.map (fun baseType -> baseType :> ISymbol)
-            |> createDependsUponFromSymbolsOfReferrer ``type``
-        Identifier =
-            ``type``.MetadataName
-        Items =
-            ``type``.GetMembers ()
-            |> Seq.choose (createItemFromMemberOrNestedType getSymbolFromSyntaxNode)
-            |> Seq.toList
-    }
-
-let private createItemFromMemberOrNestedType getSymbolFromSyntaxNode memberOrNestedType =
-    memberOrNestedType |> createItemWhenType getSymbolFromSyntaxNode
-    |> Option.orElseWith (fun _ -> memberOrNestedType |> createItemFromMemberSymbol getSymbolFromSyntaxNode)

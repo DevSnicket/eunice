@@ -8,7 +8,7 @@
 		<PackageTags>analyze;analyzer;architecture;dependency;dependencies;csharp;euince;stack;structure;uince;unice</PackageTags>
 		<PackageType>DotNetCliTool</PackageType>
 		<PackAsTool>true</PackAsTool>
-		<Version>1.8.0</Version>
+		<Version>1.9.0</Version>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Build.Locator" Version="1.2.6" />
@@ -20,30 +20,34 @@
 	<ItemGroup>
 		<Compile Include="AnalysisResult.fs" />
 		<Compile Include="AnalyzeProject/DependUpon.fs" />
-		<Compile Include="AnalyzeProject/FormatIdentifierFromMethodSymbol.fs" />
-		<Compile Include="AnalyzeProject/CreateDependsUponFromSymbolsOfReferrer/GroupDependsUponIntoHierarchy.fs" />
-		<Compile Include="AnalyzeProject/CreateDependsUponFromSymbolsOfReferrer/.fs" />
 		<Compile Include="AnalyzeProject/Item.fs" />
-		<Compile Include="AnalyzeProject/CreateItemWhenDelegate.fs" />
-		<Compile Include="AnalyzeProject/CreateItemWhenEnum.fs" />
-		<Compile Include="AnalyzeProject/CreateItemFromMemberSymbol/GetNamesUsedInSyntaxReference.fs" />
-		<Compile Include="AnalyzeProject/CreateItemFromMemberSymbol/.fs" />
+		<Compile Include="AnalyzeProject/CreateItemWhenNamedType/FormatIdentifierOfSymbol.fs" />
+		<Compile Include="AnalyzeProject/CreateItemWhenNamedType/CreateDependsUponFromSymbolsOfReferrer/GroupDependsUponIntoHierarchy.fs" />
+		<Compile Include="AnalyzeProject/CreateItemWhenNamedType/CreateDependsUponFromSymbolsOfReferrer/.fs" />
+		<Compile Include="AnalyzeProject/CreateItemWhenNamedType/CreateItemWhenDelegateOrEnumOrGetNamedType.fs" />
+		<Compile Include="AnalyzeProject/CreateItemWhenNamedType/GetBasesOfTypeDeclaration.fs" />
+		<Compile Include="AnalyzeProject/CreateItemWhenNamedType/GetImplementationOfMember.fs" />
+		<Compile Include="AnalyzeProject/CreateItemWhenNamedType/GetSymbolsReferencedByMember/GetNamesUsedInSyntaxReference.fs" />
+		<Compile Include="AnalyzeProject/CreateItemWhenNamedType/GetSymbolsReferencedByMember/.fs" />
+		<Compile Include="AnalyzeProject/CreateItemWhenNamedType/CreateItemWithMembers.fs" />
+		<Compile Include="AnalyzeProject/CreateItemWhenNamedType/CreateItemWithoutMembers.fs" />
+		<Compile Include="AnalyzeProject/CreateItemWhenNamedType/MemberBehavior.fs" />
+		<Compile Include="AnalyzeProject/CreateItemWhenNamedType/.fs" />
 		<Compile Include="AnalyzeProject/FormatItemsAsYaml/QuoteIdentifier.fs" />
 		<Compile Include="AnalyzeProject/FormatItemsAsYaml/IndentLines.fs" />
 		<Compile Include="AnalyzeProject/FormatItemsAsYaml/SequenceBlockEntryFromLines/.fs" />
 		<Compile Include="AnalyzeProject/FormatItemsAsYaml/FormatKeyValueLinesMapping.fs" />
 		<Compile Include="AnalyzeProject/FormatItemsAsYaml/FormatDependsUponMapping/.fs" />
 		<Compile Include="AnalyzeProject/FormatItemsAsYaml/.fs" />
-		<Compile Include="AnalyzeProject/GetBasesOfTypeDeclaration.fs" />
 		<Compile Include="AnalyzeProject/.fs" />
-		<Compile Include="AnalyzeProjectOrSolutionPath/AddFailuresToErrorsFromWorkspaceEvent.fs" />
-		<Compile Include="AnalyzeProjectOrSolutionPath/GetErrorsAndYamlForProjectNotSupported.fs" />
-		<Compile Include="AnalyzeProjectOrSolutionPath/IsProjectSupported.fs" />
-		<Compile Include="AnalyzeProjectOrSolutionPath/AnalyzeSolutionPath.fs" />
-		<Compile Include="AnalyzeProjectOrSolutionPath/.fs" />
+		<Compile Include="CallAnalyzeProjectForProjectOrSolutionPath/AddFailuresToErrorsFromWorkspaceEvent.fs" />
+		<Compile Include="CallAnalyzeProjectForProjectOrSolutionPath/FormatNotSupportedErrorForProject.fs" />
+		<Compile Include="CallAnalyzeProjectForProjectOrSolutionPath/IsProjectSupported.fs" />
+		<Compile Include="CallAnalyzeProjectForProjectOrSolutionPath/GetErrorsAndProjectsFromSolution.fs" />
+		<Compile Include="CallAnalyzeProjectForProjectOrSolutionPath/.fs" />
 		<Compile Include="ReadTextFromEmbedded.fs" />
 		<Compile Include="WriteInteractiveInDirectoryPathWithYaml/.fs" />
-		<Compile Include="ExecuteProgram/AcceptLicenseParameter.fs" />
+		<Compile Include="ExecuteProgram/ArgumentNames.fs" />
 		<Compile Include="ExecuteProgram/GetOrPromptForLicenseAcceptance/CommercialUseText.fs" />
 		<Compile Include="ExecuteProgram/GetOrPromptForLicenseAcceptance/.fs" />
 		<Compile Include="ExecuteProgram/ParseArgumentsAndInferFromDirectoryPath/.fs" />

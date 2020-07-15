@@ -1,6 +1,5 @@
 module rec DevSnicket.Eunice._ExecuteProgram.GetOrPromptForLicenseAcceptance
 
-open DevSnicket.Eunice._ExecuteProgram.AcceptLicenseParameter
 open DevSnicket.Eunice._ExecuteProgram._GetOrPromptForLicenseAcceptance.CommercialUseText
 open DevSnicket.Eunice.ReadTextFromEmbedded
 
@@ -28,7 +27,7 @@ let getOrPromptForLicenseAcceptance
 let private writeLinesForAcceptedInProcessArguments writeLine =
     for line in
         seq [
-            "By specifying " + acceptLicenseParameter + " you have accepted " + licenseUrlText
+            "By specifying " + ArgumentNames.AcceptLicense + " you have accepted " + licenseUrlText
             commercialUseText
             ""
         ] do
@@ -47,7 +46,7 @@ let private instructOrPrompt parameter =
         if parameter.IsInteractive then
             return! parameter |> prompt
         else
-            "To accept run again with the " + acceptLicenseParameter + " argument."
+            "To accept run again with the " + ArgumentNames.AcceptLicense + " argument."
             |> parameter.WriteLine
 
             return false
@@ -58,7 +57,7 @@ let private prompt parameter =
         async {
             for line in
                 seq [
-                    "To accept, press the A key or run again with the " + acceptLicenseParameter + " argument."
+                    "To accept, press the A key or run again with the " + ArgumentNames.AcceptLicense + " argument."
                     "Press the V key to view the license."
                     "Any other key will exit without accepting the license."
                     ""

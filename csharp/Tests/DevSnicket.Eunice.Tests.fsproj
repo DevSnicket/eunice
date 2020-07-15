@@ -14,17 +14,16 @@
 		<ProjectReference Include="../DevSnicket.Eunice.fsproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<Compile Include="../AnalyzeProject/CreateItemFromMemberSymbol/Tests.fs" />
 		<Compile Include="../AnalyzeProject/FormatItemsAsYaml/FormatDependsUponMapping/Tests.fs" />
 		<Compile Include="../AnalyzeProject/FormatItemsAsYaml/SequenceBlockEntryFromLines/Tests.fs" />
 		<Compile Include="../AnalyzeProject/FormatItemsAsYaml/Tests.fs" />
-		<Compile Include="../AnalyzeProjectOrSolutionPath/Tests/FindParametersForTestCasesInDirectoryPath.fs" />
-		<Compile Include="../AnalyzeProjectOrSolutionPath/Tests/RegisterAndGetPathOfMsbuild.fs" />
-		<Compile Include="../AnalyzeProjectOrSolutionPath/Tests/.fs" />
 		<Compile Include="../ExecuteProgram/GetOrPromptForLicenseAcceptance/Tests.fs" />
 		<Compile Include="../ExecuteProgram/ParseArgumentsAndInferFromDirectoryPath/Tests/.fs" />
 		<Compile Include="../ExecuteProgram/WriteNameAndVersion/Tests.fs" />
 		<Compile Include="../WriteInteractiveInDirectoryPathWithYaml/Tests.fs" />
+		<Compile Include="FindTestCaseSolutionAndProjectFilePathsInDirectoryPath.fs" />
+		<Compile Include="RegisterAndGetPathOfMsbuild.fs" />
+		<Compile Include=".fs" />
 	</ItemGroup>
 	<Target AfterTargets="Build" Name="WriteXunitConsoleRuntime">
 		<Copy DestinationFiles="$(OutputPath)xunit.console.runtimeconfig.json" SourceFiles="$(OutputPath)$(AssemblyName).runtimeconfig.json" />
