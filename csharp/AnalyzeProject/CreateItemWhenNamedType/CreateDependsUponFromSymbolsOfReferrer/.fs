@@ -8,21 +8,13 @@ open Microsoft.CodeAnalysis
 let createDependsUponFromSymbolsOfReferrer referrer =
     let rec createDependsUponFromSymbols (symbols: ISymbol seq) =
         symbols
-        |> Seq.collect ignoreLocalAndGetWithTypesOfGenerics
+        |> Seq.collect getWithTypesOfGenerics
         |> Seq.choose createDependUponFromSymbol
         |> groupDependsUponIntoHierarchy
         |> Seq.toList
 
-    and ignoreLocalAndGetWithTypesOfGenerics =
+    and getWithTypesOfGenerics =
         function
-        | :? ILocalSymbol ->
-            seq []
-        | :? IMethodSymbol as method ->
-            match method.MethodKind with
-            | MethodKind.LocalFunction ->
-                seq []
-            | _ ->
-                seq [ method :> ISymbol ]
         | :? INamedTypeSymbol as ``type`` ->
             match ``type``.IsGenericType with
             | true ->
@@ -36,22 +28,8 @@ let createDependsUponFromSymbolsOfReferrer referrer =
                     seq []
                 | false ->
                     seq [ ``type`` ]
-        | :? IParameterSymbol ->
-            seq []
-        | :? IPropertySymbol as property ->
-            match property.ContainingType.IsAnonymousType with
-            | true ->
-                seq []
-            | false ->
-                seq [ property :> ISymbol ]
-        | null ->
-            seq []
         | symbol ->
-            match symbol.Kind with
-            | SymbolKind.RangeVariable ->
-                seq []
-            | _ ->
-                seq [ symbol ]
+            seq [ symbol ]
 
     and createDependUponFromSymbol symbol =
         let rec createWhenIdentifiableAndInSource () =

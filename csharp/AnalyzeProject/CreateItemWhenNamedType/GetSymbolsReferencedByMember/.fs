@@ -9,6 +9,7 @@ let getSymbolsReferencedByMember (getSymbolFromSyntaxNode: SyntaxNode -> ISymbol
             yield! ``member`` |> getTypesWithoutDeclaringSyntaxFromMember
             yield! typesDeclaredInSyntax
         ]
+        |> Seq.choose (getElementTypeWhenArray >> ignoreIrrelevant)
 
     and typesDeclaredInSyntax =
         ``member``.DeclaringSyntaxReferences
@@ -25,3 +26,37 @@ let private getTypesWithoutDeclaringSyntaxFromMember: (ISymbol -> ISymbol seq) =
         seq [ field.Type ]
     | _ ->
         seq []
+
+let private getElementTypeWhenArray =
+    function
+    | :? IArrayTypeSymbol as array ->
+        array.ElementType |> getElementTypeWhenArray
+    | ``type`` ->
+        ``type``
+
+let private ignoreIrrelevant =
+    function
+    | :? ILocalSymbol ->
+        None
+    | :? IMethodSymbol as method ->
+        match method.MethodKind with
+        | MethodKind.LocalFunction ->
+            None
+        | _ ->
+            Some (method :> ISymbol)
+    | :? IParameterSymbol ->
+        None
+    | :? IPropertySymbol as property ->
+        match property.ContainingType.IsAnonymousType with
+        | true ->
+            None
+        | false ->
+            Some (property :> ISymbol)
+    | null ->
+        None
+    | symbol ->
+        match symbol.Kind with
+        | SymbolKind.RangeVariable ->
+            None
+        | _ ->
+            Some symbol

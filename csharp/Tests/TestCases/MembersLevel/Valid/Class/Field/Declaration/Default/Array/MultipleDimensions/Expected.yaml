@@ -1,0 +1,7 @@
+﻿- id: TestCase
+  items:
+    - id: Class
+      items:
+        id: _field
+        dependsUpon: FieldElementClass
+    - FieldElementClass
