@@ -47,7 +47,11 @@ let createDependsUponFromSymbolsOfReferrer referrer =
         | null ->
             seq []
         | symbol ->
-            seq [ symbol ]
+            match symbol.Kind with
+            | SymbolKind.RangeVariable ->
+                seq []
+            | _ ->
+                seq [ symbol ]
 
     and createDependUponFromSymbol symbol =
         let rec createWhenIdentifiableAndInSource () =
@@ -62,7 +66,7 @@ let createDependsUponFromSymbolsOfReferrer referrer =
                 None
 
         and isIdentifiableAndInSource =
-            symbol |> isIdentifiable
+            symbol.MetadataName <> ""
             &&
             symbol |> hasLocationInSource
 
@@ -80,22 +84,19 @@ let createDependsUponFromSymbolsOfReferrer referrer =
             | true ->
                 Some dependUpon
             | false ->
-                match containingSymbol |> isImplicitSymbol with
-                | true ->
-                    addAncestorHierarchyOfSymbol
-                        containingSymbol
-                        dependUpon
-                | false ->
-                    match containingSymbol |> isIdentifiable with
+                let dependUponWithParent =
+                    match containingSymbol |> isImplicitSymbol with
                     | true ->
-                        addAncestorHierarchyOfSymbol
-                            containingSymbol
-                            {
-                                Identifier = containingSymbol.MetadataName
-                                Items = [ dependUpon ]
-                            }
+                        dependUpon
                     | false ->
-                        None
+                        {
+                            Identifier = containingSymbol.MetadataName
+                            Items = [ dependUpon ]
+                        }
+
+                addAncestorHierarchyOfSymbol
+                    containingSymbol
+                    dependUponWithParent
 
     createDependsUponFromSymbols
 
@@ -140,6 +141,3 @@ let private isImplicitSymbol =
         true
     | _ ->
         false
-
-let private isIdentifiable symbol =
-    symbol.MetadataName <> ""
