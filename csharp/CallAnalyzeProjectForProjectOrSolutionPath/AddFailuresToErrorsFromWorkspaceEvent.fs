@@ -1,4 +1,4 @@
-module DevSnicket.Eunice._AnalyzeProjectOrSolutionPath.AddFailuresToErrorsFromWorkspaceEvent
+module DevSnicket.Eunice._CallAnalyzeProjectForProjectOrSolutionPath.AddFailuresToErrorsFromWorkspaceEvent
 
 open DevSnicket.Eunice
 

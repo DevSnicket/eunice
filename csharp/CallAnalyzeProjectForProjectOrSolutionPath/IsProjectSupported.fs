@@ -1,4 +1,4 @@
-module DevSnicket.Eunice._AnalyzeProjectOrSolutionPath.IsProjectSupported
+module DevSnicket.Eunice._CallAnalyzeProjectForProjectOrSolutionPath.IsProjectSupported
 
 type Project = Microsoft.CodeAnalysis.Project
 

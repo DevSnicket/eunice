@@ -1,4 +1,4 @@
-module DevSnicket.Eunice._AnalyzeProjectOrSolutionPath.FormatNotSupportedErrorForProject
+module DevSnicket.Eunice._CallAnalyzeProjectForProjectOrSolutionPath.FormatNotSupportedErrorForProject
 
 type Project = Microsoft.CodeAnalysis.Project
 

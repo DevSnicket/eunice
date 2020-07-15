@@ -1,7 +1,7 @@
-module rec DevSnicket.Eunice._AnalyzeProjectOrSolutionPath.GetErrorsAndProjectsFromSolution
+module rec DevSnicket.Eunice._CallAnalyzeProjectForProjectOrSolutionPath.GetErrorsAndProjectsFromSolution
 
-open DevSnicket.Eunice._AnalyzeProjectOrSolutionPath.FormatNotSupportedErrorForProject
-open DevSnicket.Eunice._AnalyzeProjectOrSolutionPath.IsProjectSupported
+open DevSnicket.Eunice._CallAnalyzeProjectForProjectOrSolutionPath.FormatNotSupportedErrorForProject
+open DevSnicket.Eunice._CallAnalyzeProjectForProjectOrSolutionPath.IsProjectSupported
 
 type Project = Microsoft.CodeAnalysis.Project
 type Solution = Microsoft.CodeAnalysis.Solution
