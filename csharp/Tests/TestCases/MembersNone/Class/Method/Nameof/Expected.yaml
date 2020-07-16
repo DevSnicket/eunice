@@ -1,0 +1,5 @@
+﻿- id: TestCase
+  items:
+    - id: Class
+      dependsUpon: NameofClass
+    - NameofClass
