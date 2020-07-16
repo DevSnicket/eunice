@@ -44,13 +44,13 @@ let createItemWithoutMembers getSymbolFromSyntaxNode: (ISymbol -> Item option) =
 
     and getNamedTypesReferencedByMember =
         (getSymbolFromSyntaxNode |> getSymbolsReferencedByMember)
-        >> Seq.map getNamedTypeOfSymbol
+        >> Seq.choose getNamedTypeOfSymbol
 
     createItemWhenNamedType
 
 let private getNamedTypeOfSymbol =
     function
     | :? INamedTypeSymbol as namedType ->
-        namedType
+        Some namedType
     | symbol ->
-        symbol.ContainingType
+        symbol.ContainingType |> Option.ofObj
