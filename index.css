@@ -226,6 +226,7 @@ code {
 
 h1,
 h2,
+h3,
 .green {
     color: darkgreen;
 }
@@ -273,6 +274,7 @@ ul li {
 
     h1,
     h2,
+    h3,
     .green {
         color: #00A000;
     }
@@ -300,6 +302,7 @@ ul li {
 
     .box h1,
     .box h2,
+    .box h3,
     .box .green {
         color: #20B020;
     }

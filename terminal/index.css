@@ -16,6 +16,12 @@
 	padding: 0.25em 1em
 }
 
+@media (prefers-color-scheme: dark) {
+	.box .terminal .title-bar {
+		background-color: #505050;
+	}
+}
+
 code,
 .terminal .text {
 	color: #D0D0D0;
@@ -24,15 +30,5 @@ code,
 }
 
 .terminal .text {
-	padding-bottom: 1.5em;
-}
-
-.terminal .caret {
-	animation: blinking-animation 0.8s infinite;
-}
-
-@keyframes blinking-animation {
-	0% { color: transparent }
-	49% { color: transparent }
-	50% { color: unset }
+	padding: 0.5em 3em 1.5em 0.5em;
 }

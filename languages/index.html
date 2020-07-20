@@ -7,6 +7,28 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .languages {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            margin: 1em 0;
+            text-align: center;
+        }
+
+        .languages a {
+            display: block;
+        }
+
+        .languages img {
+            margin: 0.5em;
+            width: 10em;
+        }
+
+        .languages h2 {
+            margin: 0;
+        }
+    </style>
     <title>languages | Eunice</title>
 </head>
 <body>
@@ -17,12 +39,22 @@
         </div>
     </div>
     <div class="content">
-        <div class="side-menu"><a href="../csharp">C#</a><div class="side-menu"><a href="../javascript">JavaScript</a><a href="../javascript/options">options</a><a href="../javascript/releases">releases</a></div></div>
+        <div class="side-menu">
+            <div class="side-menu"><a href="../csharp">C#</a><a href="../csharp/options">options</a><a href="../csharp/releases">releases</a></div>
+            <div class="side-menu"><a href="../javascript">JavaScript</a><a href="../javascript/options">options</a><a href="../javascript/releases">releases</a></div>
+        </div>
         <div>
-            <h2>languages</h2>
-            <p>Eunice can currently analyze:</p>
-            <p><a href="../javascript">JavaScript</a> (supports Flow, JSX and TypeScript)</p>
-            <p><a href="../csharp">C#</a></p>
+            <div>Eunice can analyze the following languages:</div>
+            <div class="languages">
+                <h2><a href="../csharp">
+                    <div>C#</div>
+                    <img src="../csharp/logo.svg" />
+                </a></h2>
+                <h2><a href="../javascript">
+                    <div>JavaScript</div>
+                    <img src="../javascript/logo.svg" />
+                </a></h2>
+            </div>
         </div>
     </div>
     <div class="footer">

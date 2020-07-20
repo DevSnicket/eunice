@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="../../favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="../../index.css" rel="stylesheet" />
+    <link href="../../side-menu.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #releases-list .release {
+            align-items: center;
+            display: flex;
+        }
+        #releases-list .release :first-child {
+            flex: 1;
+        }
+    </style>
+    <title>Releases | C# | Eunice</title>
+</head>
+<body>
+    <div class="header">
+        <div class="content">
+            <h1><a href="../.."><span><span class="red">e</span>uni<span class="red">ce</span></span><div class="arrows"></div></a></h1>
+            <span class="menu"><a href="../..">intro</a><a href="../../structure">structure</a><a href="../../dependencies">dependencies</a><a href="../../case-studies">case studies</a><a class="current" href="../../languages">languages<a href="../../issues">issues</a><a href="../../licensing">licensing</a><a href="../../advanced">advanced</a></span>
+        </div>
+    </div>
+    <div class="content">
+        <div class="side-menu">
+            <div class="side-menu"><a href="..">C#</a><a href="../options">options</a><h3>releases</h3></div>
+            <div class="side-menu"><a href="../../javascript">JavaScript</a><a href="../../javascript/options">options</a><a href="../../javascript/releases">releases</a></div>
+        </div>
+        <div>
+            <div>Recent releases of Eunice's C# <a href="https://www.nuget.org/packages/eunice" rel="noopener" target="_blank">NuGet package</a> and the issues included are listed below.</div>
+            <releasesList id="releases-list"><div class="release"><h3 id="1.10.1">1.10.1</h3><span>2020-07-16</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/140" rel="noopener" target="_blank">dynamic keyword throws exception</a></div><div class="release"><h3 id="1.10.0">1.10.0</h3><span>2020-07-15</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/139" rel="noopener" target="_blank">dependencies for array element types of fields and events</a></div><div class="release"><h3 id="1.9.1">1.9.1</h3><span>2020-07-15</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/138" rel="noopener" target="_blank">items are included for query range variables</a></div><div class="release"><h3 id="1.9.0">1.9.0</h3><span>2020-07-15</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/137" rel="noopener" target="_blank">class level granularity</a></div><div class="release"><h3 id="1.8.0">1.8.0</h3><span>2020-07-05</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/136" rel="noopener" target="_blank">project or solution file could be inferred</a></div><div><a href="https://github.com/DevSnicket/eunice/issues/135" rel="noopener" target="_blank">yaml lines over 80 characters are folded</a></div><div class="release"><h3 id="1.7.0">1.7.0</h3><span>2020-07-05</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/134" rel="noopener" target="_blank">fully qualified dependencies are unnecessary</a></div><div class="release"><h3 id="1.6.0">1.6.0</h3><span>2020-07-03</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/133" rel="noopener" target="_blank">dependencies of containing symbols are not filtered out for anonymous symbols</a></div><div class="release"><h3 id="1.5.2">1.5.2</h3><span>2020-07-03</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/132" rel="noopener" target="_blank">invalid yaml when all but one child dependency is filtered out </a></div><div class="release"><h3 id="1.5.1">1.5.1</h3><span>2020-07-03</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/131" rel="noopener" target="_blank">invalid yaml when all but one dependency is filtered out</a></div><div class="release"><h3 id="1.4.0">1.4.0</h3><span>2020-07-03</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/130" rel="noopener" target="_blank">ignore anonymous types</a></div><div class="release"><h3 id="1.3.0">1.3.0</h3><span>2020-07-02</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/129" rel="noopener" target="_blank">stacks inference available in interactive</a></div><div class="release"><h3 id="1.2.0">1.2.0</h3><span>2020-06-29</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/128" rel="noopener" target="_blank">member expressions as single dependencies</a></div><div class="release"><h3 id="1.0.1">1.0.1</h3><span>2020-06-29</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/127" rel="noopener" target="_blank">global alias operators in members</a></div><div class="release"><h3 id="1.0.0">1.0.0</h3><span>2020-06-28</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/47" rel="noopener" target="_blank">add C# / .NET analysis</a></div></releasesList>
+            <script src="./updateReleasesListInBrowser.js" type="module"></script>
+        </div>
+    </div>
+    <div class="footer">
+        <p class="links">
+            <a class="email" href="mailto:eunice@devsnicket.com">eunice@devsnicket.com</a>
+            <a class="twitter" href="https://twitter.com/devsnicket" rel="noopener" target="_blank">twitter.com/devsnicket</a>
+            <a class="github" href="https://github.com/DevSnicket" rel="noopener" target="_blank">github.com/DevSnicket</a>
+        </p>
+        <p>Copyright © 2019 Graham Dyson</p>
+    </div>
+</body>
+</html>

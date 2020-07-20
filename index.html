@@ -16,6 +16,10 @@
             margin: 0 0.5em;
         }
 
+        .content > p {
+            font-size: 1.17em;
+        }
+
         .headlines .box {
             width: fit-content;
         }
@@ -30,6 +34,13 @@
 
         .headlines .emoji {
             font-size: 1.5em;
+        }
+
+        .language {
+            align-items: center;
+            display:flex;
+            flex-wrap: wrap;
+            text-align: center;
         }
 
         .logo {
@@ -47,19 +58,23 @@
             height: 4.5em;
         }
 
-        @media (prefers-color-scheme: dark) {
-            .javascript-related-logos {
-                background-color: white;
-            }
-
-            .logo .arrows {
-                background-image: url(./arrows/dark/default-height.svg);
-            }
+        .javascript-related-logos {
+            display: flex;
+            flex: 1;
+            flex-basis: 0;
+            flex-wrap: wrap;
         }
 
         .javascript-related-logos img {
-            height: 2em;
-            margin: 0.5em;
+            height: 3em;
+            margin: 1em;
+            min-width: 3em;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .logo .arrows {
+                background-image: url(./arrows/dark/default-height.svg);
+            }
         }
     </style>
     <title>Eunice</title>
@@ -76,8 +91,10 @@
                 <h1 style="font-size: 6em; line-height: 0.8em; margin: 0 0 0.5rem"><span class="red">e</span>uni<span class="red">ce</span></h1>
                 <div class="arrows"></div>
             </div>
-            <h2 style="font-size: 2.5em"><div>structure</div><div>dependencies</div><div>architecture</div></h2>
+            <h2 style="font-size: 2.5em"><div>structure</div><div>dependencies</div><div>modularity</div></h2>
         </div>
+        <p>Eunice is based on the premise that software structure and modularity improve when dependencies are unidirectional.</p>
+        <p>Eunice analyses source code, infers its structure and shows if the dependencies match.</p>
         <div class="headlines">
             <div class="box">
                 <div class="horizontal-container">
@@ -117,9 +134,7 @@
                 <div><div class="emoji">🎆</div><div>dynamic</div><div class="detail">live and applied</div></div>
             </div>
         </div>
-        <h3>Eunice helps improve software architecture by analyzing, measuring, exploring and defining; structure and dependencies.</h3>
-        <h3>Eunice is based on the premise that software structure and modularity improve when dependencies are unidirectional. Eunice's approach isn't limited to direct dependencies, but includes indirect dependencies as well.</h3>
-        <h3>With Eunice you define an intended structure/architecture, it shows you dependencies that don't match, and you can further refine the definition or update your code to match.</h3>
+        <p>Find out more about how Eunice works regarding <a href="./structure">structure</a> and <a href="./dependencies">dependencies</a>, or read a <a href="./case-studies">case study</a>.</p>
         <div class="box horizontal-container" id="dogfooding" style="text-align: center">
             <div>
                 <a href="dogfooding" style="font-size: 1.17em" target="_blank">
@@ -133,22 +148,37 @@
                 <img alt="Eunice visualization of Eunice's own structure and dependencies" src="./dogfooding/index.svg" style="width: 100%" />
             </a>
         </div>
-        <div class="box" style="display:flex; flex-wrap: wrap; text-align: center;">
-            <div>
-                <h2 style="margin-top: 0"><img alt="JavaScript logo" src="./javascript/logo.svg" style="height:4em; margin-right: 1em; vertical-align: middle" />JavaScript</h2>
-                <div class="javascript-related-logos">
-                    <img alt="Node.js" src="./nodejs.svg" /><img alt="TypeScript" src="./typescript.svg" /><img alt="React" src="./react.svg" /><img alt="Flow" src="./flow.svg" />
-                </div>
-            </div>
-            <div style="display: flex; flex-grow: 1; flex-direction: column">
-                <div style="margin: 0.5em"><div>create a eunice.html file</div><div>from your JavaScript source code</div><div>with NPX/NPM (<a href="./javascript">more info</a>)</div></div>
+        <div class="box language">
+            <img alt="c# logo" src="./csharp/logo.svg" style="width: 10em" />
+            <div style="margin: 0">
                 <div class="terminal">
                     <div class="title-bar">terminal</div>
-                    <div class="text">~/my-source-code<br/>$ npx eunice<span class="caret">&#9608;</span></div>
+                    <div class="text">
+                        ~/my-source-code<br/>
+                        $ dotnet tool install --global eunice<br/>
+                        <br/>
+                        ~/my-source-code<br/>
+                        $ eunice mysolution.sln
+                    </div>
                 </div>
             </div>
-            <div style="flex-grow: 1; margin: auto 0.5em; width: min-content">
-                <a href="./javascript/harness" target="_blank">try on a JavaScript fragment in your browser</a>
+            <div style="flex-basis: 0; flex-grow: 1">
+                creates a eunice.html file from a C# solution or project
+            </div>
+        </div>
+        <div class="box language">
+            <img alt="JavaScript logo" src="./javascript/logo.svg" style="width: 10em" />
+            <div class="javascript-related-logos">
+                <img alt="Node.js" src="./nodejs.svg" /><img alt="TypeScript" src="./typescript.svg" /><img alt="React" src="./react.svg" /><img alt="Flow" src="./flow.svg" />
+            </div>
+            <div style="margin: 0">
+                <div class="terminal">
+                    <div class="title-bar">terminal</div>
+                    <div class="text">~/my-source-code<br/>$ npx eunice</div>
+                </div>
+            </div>
+            <div style="flex-basis: 0; flex-grow: 1">
+                creates a eunice.html file from a JavaScript source code directory
             </div>
         </div>
     </div>

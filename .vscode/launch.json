@@ -1,25 +1,25 @@
 {
 	"configurations": [
 		{
-			"cwd": "${workspaceFolder}\\csharp",
-			"name": "csharp updateGitLogInHtmlFile",
-			"program": "${workspaceFolder}\\csharp\\updateGitLogInHtmlFile.js",
+			"cwd": "${workspaceFolder}/csharp/releases",
+			"name": "csharp updateReleasesListInHtmlFile",
+			"program": "updateReleasesListInHtmlFile.js",
 			"request": "launch",
 			"runtimeArgs": [ "--experimental-modules" ],
 			"type": "node"
 		},
 		{
-			"cwd": "${workspaceFolder}\\issues",
+			"cwd": "${workspaceFolder}/issues",
 			"name": "issues updateIssueListInHtmlFile",
-			"program": "${workspaceFolder}\\issues\\updateIssueListInHtmlFile.js",
+			"program": "updateIssueListInHtmlFile.js",
 			"request": "launch",
 			"runtimeArgs": [ "--experimental-modules" ],
 			"type": "node"
 		},
 		{
-			"cwd": "${workspaceFolder}\\javascript\\releases",
-			"name": "javascript releases updateReleasesListInHtmlFile",
-			"program": "${workspaceFolder}\\javascript\\releases\\updateReleasesListInHtmlFile.js",
+			"cwd": "${workspaceFolder}/javascript/releases",
+			"name": "javascript updateReleasesListInHtmlFile",
+			"program": "updateReleasesListInHtmlFile.js",
 			"request": "launch",
 			"runtimeArgs": [ "--experimental-modules" ],
 			"type": "node"
