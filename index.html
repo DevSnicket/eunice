@@ -37,6 +37,10 @@
         }
 
         .language {
+            text-decoration: none;
+        }
+
+        .language .box {
             align-items: center;
             display:flex;
             flex-wrap: wrap;
@@ -148,39 +152,43 @@
                 <img alt="Eunice visualization of Eunice's own structure and dependencies" src="./dogfooding/index.svg" style="width: 100%" />
             </a>
         </div>
-        <div class="box language">
-            <img alt="c# logo" src="./csharp/logo.svg" style="width: 10em" />
-            <div style="margin: 0">
-                <div class="terminal">
-                    <div class="title-bar">terminal</div>
-                    <div class="text">
-                        ~/my-source-code<br/>
-                        $ dotnet tool install --global eunice<br/>
-                        <br/>
-                        ~/my-source-code<br/>
-                        $ eunice mysolution.sln
+        <a class="language" href="./csharp">
+            <div class="box">
+                <img alt="c# logo" src="./csharp/logo.svg" style="width: 10em" />
+                <div style="margin: 0">
+                    <div class="terminal">
+                        <div class="title-bar">terminal</div>
+                        <div class="text">
+                            ~/my-source-code<br/>
+                            $ dotnet tool install --global eunice<br/>
+                            <br/>
+                            ~/my-source-code<br/>
+                            $ eunice mysolution.sln
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div style="flex-basis: 0; flex-grow: 1">
-                creates a eunice.html file from a C# solution or project
-            </div>
-        </div>
-        <div class="box language">
-            <img alt="JavaScript logo" src="./javascript/logo.svg" style="width: 10em" />
-            <div class="javascript-related-logos">
-                <img alt="Node.js" src="./nodejs.svg" /><img alt="TypeScript" src="./typescript.svg" /><img alt="React" src="./react.svg" /><img alt="Flow" src="./flow.svg" />
-            </div>
-            <div style="margin: 0">
-                <div class="terminal">
-                    <div class="title-bar">terminal</div>
-                    <div class="text">~/my-source-code<br/>$ npx eunice</div>
+                <div style="flex-basis: 0; flex-grow: 1">
+                    creates a eunice.html file from a C# solution or project
                 </div>
             </div>
-            <div style="flex-basis: 0; flex-grow: 1">
-                creates a eunice.html file from a JavaScript source code directory
+        </a>
+        <a class="language" href="./javascript">
+            <div class="box">
+                <img alt="JavaScript logo" src="./javascript/logo.svg" style="width: 10em" />
+                <div class="javascript-related-logos">
+                    <img alt="Node.js" src="./nodejs.svg" /><img alt="TypeScript" src="./typescript.svg" /><img alt="React" src="./react.svg" /><img alt="Flow" src="./flow.svg" />
+                </div>
+                <div style="margin: 0">
+                    <div class="terminal">
+                        <div class="title-bar">terminal</div>
+                        <div class="text">~/my-source-code<br/>$ npx eunice</div>
+                    </div>
+                </div>
+                <div style="flex-basis: 0; flex-grow: 1">
+                    creates a eunice.html file from a JavaScript source code directory
+                </div>
             </div>
-        </div>
+        </a>
     </div>
     <div class="footer">
         <p class="links">
