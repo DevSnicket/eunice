@@ -22,7 +22,7 @@
 		"@devsnicket/eunice-replacement": "14.4.0",
 		"@devsnicket/eunice-run-tests-from-file-system": "4.6.1",
 		"@devsnicket/eunice-stacking-explicit": "14.5.0",
-		"@devsnicket/eunice-stacking-inference": "1.1.0",
+		"@devsnicket/eunice-stacking-inference": "1.2.0",
 		"@devsnicket/eunice-test-harnesses": "9.0.2",
 		"@types/fs-extra": "8.1.0",
 		"@types/jest": "26.0.5",
@@ -120,5 +120,5 @@
 		"test": "jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "7.7.0"
+	"version": "7.8.0"
 }
