@@ -5,8 +5,8 @@
 	},
 	"description": "HTML page that renders Eunice YAML as SVG, so the structure and dependencies can be investigated.",
 	"dependencies": {
-		"@devsnicket/eunice-dependency-and-structure": "4.6.0",
-		"@devsnicket/eunice-renderer": "7.12.0",
+		"@devsnicket/eunice-dependency-and-structure": "4.7.0",
+		"@devsnicket/eunice-renderer": "7.12.1",
 		"@devsnicket/eunice-stacking-inference": "1.1.0",
 		"core-js": "3.6.4",
 		"fs-extra": "7.0.1",
