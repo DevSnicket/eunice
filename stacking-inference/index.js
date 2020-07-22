@@ -1,43 +1,18 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import createStackFromYamlWithAncestors from "./createStackFromYamlWithAncestors";
-import inferStackFromLevel from "./inferStackFromLevel";
-import { replaceIdentifiersAndItemsAndLevelsAndStacks } from "@devsnicket/eunice-replacement";
-import replaceLevelOrLowestLevelOfStack from "./replaceLevelOrLowestLevelOfStack";
+import { createStackFromYaml, createYamlFromStack } from "@devsnicket/eunice-dependency-and-structure";
+import inferLevelsFromLevel from "./inferLevelsFromLevel";
+import replaceLowestLevelInStackAndDescendantStacks from "./replaceLowestLevelInStackAndDescendantStacks";
 
 export default
 identifierOrItemOrLevelOrStack =>
-	replaceIdentifiersAndItemsAndLevelsAndStacks({
-		identifierOrItemOrLevelOrStack,
-		replace:
-			replaceIdentifierOrItemOrLevelOrStack,
-	});
-
-function replaceIdentifierOrItemOrLevelOrStack({
-	ancestors,
-	identifierOrItemOrLevelOrStack,
-}) {
-	return whenLevelOrStack() || identifierOrItemOrLevelOrStack;
-
-	function whenLevelOrStack() {
-		return (
-			Array.isArray(identifierOrItemOrLevelOrStack)
-			&&
-			replaceLevelOrLowestLevelOfStack({
-				levelOrStack:
+	createYamlFromStack(
+		replaceLowestLevelInStackAndDescendantStacks({
+			replaceLowestLevelWithLevels:
+				inferLevelsFromLevel,
+			stack:
+				createStackFromYaml(
 					identifierOrItemOrLevelOrStack,
-				replaceLevelWithStack:
-					level =>
-						inferStackFromLevel({
-							createStackFromYaml:
-								yaml =>
-									createStackFromYamlWithAncestors({
-										ancestors,
-										yaml,
-									}),
-							level,
-						}),
-			})
-		);
-	}
-}
+				),
+		}),
+	);
