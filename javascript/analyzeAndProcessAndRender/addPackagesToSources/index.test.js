@@ -79,6 +79,7 @@ test.each(
 )(
 	"%j returns %j.",
 	(
+		// @ts-ignore
 		{ packages, sources },
 		expected,
 	) =>

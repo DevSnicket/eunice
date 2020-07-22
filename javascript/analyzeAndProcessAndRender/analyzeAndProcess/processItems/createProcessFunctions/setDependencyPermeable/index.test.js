@@ -47,6 +47,7 @@ test.each(
 	"%j returns %j",
 	(
 		{
+			// @ts-ignore
 			dependencyPermeableIdentifiers,
 			identifierOrItemOrLevelOrStack,
 		},
