@@ -1,6 +1,5 @@
 {
 	"author": "Graham Dyson",
-	"bin": "getSvgForYaml/bin.js",
 	"bugs": {
 		"url": "https://github.com/DevSnicket/eunice/issues"
 	},
@@ -66,5 +65,5 @@
 		"test": "npx jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "1.0.0"
+	"version": "1.0.1"
 }
