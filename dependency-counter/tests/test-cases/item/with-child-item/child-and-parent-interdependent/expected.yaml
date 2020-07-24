@@ -1,0 +1,14 @@
+id: parent
+dependencyCount:
+  inner:
+    above: 1
+    below: 1
+dependsUpon: child
+items:
+  id: child
+  dependencyCount:
+    outer:
+      above:
+        dependents: 1
+        dependsUpon: 1
+  dependsUpon: parent

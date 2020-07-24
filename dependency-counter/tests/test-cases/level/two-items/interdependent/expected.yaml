@@ -1,0 +1,14 @@
+﻿- id: first
+  dependencyCount:
+    outer:
+      same:
+        dependents: 1
+        dependsUpon: 1
+  dependsUpon: second
+- id: second
+  dependencyCount:
+    outer:
+      same:
+        dependents: 1
+        dependsUpon: 1
+  dependsUpon: first

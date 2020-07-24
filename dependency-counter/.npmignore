@@ -6,7 +6,7 @@
 /.vscode
 /cspell.json
 /azure-pipelines.yml
-/devsnicket-eunice-renderer-*.tgz
+/devsnicket-eunice-dependency-counter-*.tgz
 /eunice.*/
 /jsconfig.json
 /test-coverage

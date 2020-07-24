@@ -10,63 +10,14 @@
 				"args":
 					[ 
 						"--runInBand",
-						"getSvgForYaml/tests/index.test.js"
+						"tests/index.test.js"
 					],
 				"disableOptimisticBPs": true,
-				"name": "getSvgForYaml jest",
+				"name": "test",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node"
 			},
-			{
-				"args":
-				[
-					"--subsetIdentifierHierarchy=",
-					"--yaml="
-				],
-				"name": "getSvgForYaml",
-				"program": "${workspaceFolder}/getSvgForYaml/bin.js",
-				"request": "launch",
-				"runtimeArgs": [ "${workspaceFolder}/node_modules/@babel/node/bin/babel-node.js", "-o", "*" ],
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--runInBand",
-						"getSvgForYaml/tests/withElementContainer/forDependencyCount/index.test.js"
-					],
-				"disableOptimisticBPs": true,
-				"name": "getSvgForYaml with group container for dependency count jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"smartStep": false,
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--runInBand",
-						"getSvgForYaml/tests/withElementContainer/forItems/index.test.js"
-					],
-				"disableOptimisticBPs": true,
-				"name": "getSvgForYaml with group container for items jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--runInBand",
-						"getSvgForYaml/tests/withSubset/index.test.js"
-					],
-				"disableOptimisticBPs": true,
-				"name": "getSvgForYaml with subset jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			}
 		],
 	"version": "0.2.0"
 }

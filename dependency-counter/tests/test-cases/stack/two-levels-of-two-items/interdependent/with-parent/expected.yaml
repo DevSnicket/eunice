@@ -1,0 +1,59 @@
+﻿id: parent
+dependencyCount:
+  inner:
+    above: 4
+    below: 4
+    same: 4
+items:
+  - - id: upper first
+      dependencyCount:
+        outer:
+          below:
+            dependents: 2
+            dependsUpon: 2
+          same:
+            dependents: 1
+            dependsUpon: 1
+      dependsUpon:
+        - upper second
+        - lower first
+        - lower second
+    - id: upper second
+      dependencyCount:
+        outer:
+          below:
+            dependents: 2
+            dependsUpon: 2
+          same:
+            dependents: 1
+            dependsUpon: 1
+      dependsUpon:
+        - upper first
+        - lower first
+        - lower second
+  - - id: lower first
+      dependencyCount:
+        outer:
+          above:
+            dependents: 2
+            dependsUpon: 2
+          same:
+            dependents: 1
+            dependsUpon: 1
+      dependsUpon:
+        - upper first
+        - upper second
+        - lower second
+    - id: lower second
+      dependencyCount:
+        outer:
+          above:
+            dependents: 2
+            dependsUpon: 2
+          same:
+            dependents: 1
+            dependsUpon: 1
+      dependsUpon:
+        - upper first
+        - upper second
+        - lower first
