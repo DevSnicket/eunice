@@ -1,0 +1,6 @@
+id: parent
+items:
+  - - child upper first
+    - child upper second
+  - - child lower first
+    - child lower second

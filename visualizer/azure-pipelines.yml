@@ -21,7 +21,7 @@ steps:
       git config --add user.email grahamdyson@hotmail.com &&
       git config --add user.name "GitHub pages publish" &&
       if [[ `git status --porcelain` ]]; then
-        git commit -m "renderer test case svg";
+        git commit -m "visualizer test case svg";
         git push;
       fi
     displayName: GitHub pages publish

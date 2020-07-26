@@ -1,0 +1,2 @@
+id: item
+dependencyCount: { outer: { above: { dependents: 1 } } }

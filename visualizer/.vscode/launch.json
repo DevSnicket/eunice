@@ -8,36 +8,26 @@
 			},
 			{
 				"args":
-					[ 
+					[
+						"--collect-coverage=false",
 						"--runInBand",
-						"getSvgForYaml/tests/index.test.js"
+						"tests/index.test.js"
 					],
 				"disableOptimisticBPs": true,
-				"name": "getSvgForYaml jest",
+				"name": "test",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node"
 			},
 			{
 				"args":
-				[
-					"--subsetIdentifierHierarchy=",
-					"--yaml="
-				],
-				"name": "getSvgForYaml",
-				"program": "${workspaceFolder}/getSvgForYaml/bin.js",
-				"request": "launch",
-				"runtimeArgs": [ "${workspaceFolder}/node_modules/@babel/node/bin/babel-node.js", "-o", "*" ],
-				"type": "node"
-			},
-			{
-				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
-						"getSvgForYaml/tests/withElementContainer/forDependencyCount/index.test.js"
+						"tests/withElementContainer/forDependencyCount/index.test.js"
 					],
 				"disableOptimisticBPs": true,
-				"name": "getSvgForYaml with group container for dependency count jest",
+				"name": "with element container for dependency count test",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"smartStep": false,
@@ -46,11 +36,12 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
-						"getSvgForYaml/tests/withElementContainer/forItems/index.test.js"
+						"tests/withElementContainer/forItems/index.test.js"
 					],
 				"disableOptimisticBPs": true,
-				"name": "getSvgForYaml with group container for items jest",
+				"name": "with element container for items test",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node"
@@ -58,11 +49,12 @@
 			{
 				"args":
 					[ 
+						"--collect-coverage=false",
 						"--runInBand",
-						"getSvgForYaml/tests/withSubset/index.test.js"
+						"tests/withSubset/index.test.js"
 					],
 				"disableOptimisticBPs": true,
-				"name": "getSvgForYaml with subset jest",
+				"name": "with subset test",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node"
