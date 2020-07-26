@@ -5,28 +5,36 @@ export default createStackFromParsedYaml;
 function createStackFromParsedYaml(
 	yaml,
 ) {
-	const stack =
-		Array.isArray(yaml)
-		?
-		createFromArray()
-		:
-		[ createLevelFromIdentifierOrItem(yaml) ];
+	return (
+		whenLevelOrStack()
+		||
+		[ createLevelFromIdentifierOrItem(yaml) ]
+	);
 
-	for (const level of stack)
-		level.stack = stack;
-
-	return stack;
-
-	function createFromArray() {
+	function whenLevelOrStack() {
 		return (
-			yaml.some(Array.isArray)
-			?
-			yaml
-			.filter(itemOrLevel => itemOrLevel)
-			.map(createLevelFromIdentifierOrItemOrLevel)
-			:
-			[ createLevelFromIdentifierOrItemOrLevel(yaml) ]
+			Array.isArray(yaml)
+			&&
+			createFromLevelOrStack()
 		);
+
+		function createFromLevelOrStack() {
+			return (
+				whenStack()
+				||
+				[ createLevelFromIdentifierOrItemOrLevel(yaml) ]
+			);
+
+			function whenStack() {
+				return (
+					yaml.some(Array.isArray)
+					&&
+					yaml
+					.filter(itemOrLevel => itemOrLevel)
+					.map(createLevelFromIdentifierOrItemOrLevel)
+				);
+			}
+		}
 	}
 }
 
@@ -34,69 +42,62 @@ function createLevelFromIdentifierOrItemOrLevel(
 	identifierOrItemOrLevel,
 ) {
 	return (
-		Array.isArray(identifierOrItemOrLevel)
-		?
-		createLevelFromItems(identifierOrItemOrLevel)
-		:
+		whenLevel()
+		||
 		createLevelFromIdentifierOrItem(identifierOrItemOrLevel)
 	);
+
+	function whenLevel() {
+		return (
+			Array.isArray(identifierOrItemOrLevel)
+			&&
+			identifierOrItemOrLevel.map(createItemFromItemOrIdentifier)
+		);
+	}
 }
 
-function createLevelFromItems(
-	items,
+function createItemFromItemOrIdentifier(
+	identifierOrItem,
 ) {
-	const level =
-		items
-		.map(
-			item =>
-				isString(item)
-				?
-				{ id: item }
-				:
-				createItemFromObject(item),
+	return (
+		whenIdentifier()
+		||
+		createItemFromItem(identifierOrItem)
+	);
+
+	function whenIdentifier() {
+		return (
+			isString(identifierOrItem)
+			&&
+			{ id: identifierOrItem }
 		);
-
-	for (const item of level)
-		item.level = level;
-
-	return level;
+	}
 }
 
 function createLevelFromIdentifierOrItem(
 	identifierOrItem,
 ) {
-	return (
-		isString(identifierOrItem)
-		?
-		createLevelWhenIdentifier(identifierOrItem)
-		:
-		createLevel(createItemFromObject(identifierOrItem))
-	);
-}
+	return [
+		whenString()
+		||
+		createItemFromItem(identifierOrItem),
+	];
 
+	function whenString() {
+		return (
+			isString(identifierOrItem)
+			&&
+			{ id: identifierOrItem }
+		);
+	}
+}
 function isString(
 	value,
 ) {
 	return typeof value === "string";
 }
 
-function createLevelWhenIdentifier(
-	identifier,
-) {
-	return createLevel({ id: identifier });
-}
-
-function createLevel(
-	item,
-) {
-	const level = [ item ];
-
-	item.level = level;
-
-	return level;
-}
-
-function createItemFromObject({
+function createItemFromItem({
 	dependsUpon,
 	id,
 	items,
@@ -120,10 +121,16 @@ function ensureIsArray(
 	item,
 ) {
 	return (
-		Array.isArray(item)
-		?
-		item
-		:
+		whenArray()
+		||
 		[ item ]
 	);
+
+	function whenArray() {
+		return (
+			Array.isArray(item)
+			&&
+			item
+		);
+	}
 }

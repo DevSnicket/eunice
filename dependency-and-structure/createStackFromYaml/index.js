@@ -4,6 +4,7 @@
 
 import createStackStructureFromYaml from "./createStackStructureFromYaml";
 import initializeDependenciesInStack from "./initializeDependenciesInStack";
+import initializeParentReferencesInStack from "../initializeParentReferencesInStack";
 
 export default
 /**
@@ -13,6 +14,7 @@ export default
 yaml => {
 	const stack = createStackStructureFromYaml(yaml);
 
+	initializeParentReferencesInStack(stack);
 	initializeDependenciesInStack(stack);
 
 	return stack;
