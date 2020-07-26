@@ -5,14 +5,14 @@
 	},
 	"description": "Calls a specified function with arguments taken from the process and standard input stream.",
 	"dependencies": {
-		"minimist": "1.2.5"
+		"minimist": "^1.2.5"
 	},
 	"devDependencies": {
-		"@types/node": "10.17.28",
-		"cspell": "4.0.63",
-		"eslint": "7.5.0",
-		"eslint-plugin-notice": "0.9.10",
-		"typescript": "3.9.7"
+		"@types/node": "^10.17.28",
+		"cspell": "^4.0.63",
+		"eslint": "^7.5.0",
+		"eslint-plugin-notice": "^0.9.10",
+		"typescript": "^3.9.7"
 	},
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
 	"keywords": [
@@ -42,5 +42,5 @@
 		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "1.7.2"
+	"version": "1.8.0"
 }
