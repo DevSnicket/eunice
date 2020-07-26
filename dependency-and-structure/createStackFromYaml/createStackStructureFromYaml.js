@@ -103,18 +103,12 @@ function createItemFromItem({
 	items,
 	...restOfObject
 }) {
-	const item =
-		{
-			...id && { id },
-			...dependsUpon && { dependsUpon: ensureIsArray(dependsUpon) },
-			...restOfObject,
-			...items && { items: createStackFromParsedYaml(items) },
-		};
-
-	if (item.items)
-		item.items.parent = item;
-
-	return item;
+	return {
+		...id && { id },
+		...dependsUpon && { dependsUpon: ensureIsArray(dependsUpon) },
+		...restOfObject,
+		...items && { items: createStackFromParsedYaml(items) },
+	};
 }
 
 function ensureIsArray(
