@@ -4,20 +4,20 @@
 		"url": "https://github.com/DevSnicket/eunice/issues"
 	},
 	"dependencies": {
-		"fs-extra": "8.1.0"
+		"fs-extra": "^8.1.0"
 	},
 	"description": "Runs tests by discovering test cases and expected behavior from the file system. Tests are automatically named based on the directory hierarchy.",
 	"devDependencies": {
-		"@babel/core": "7.10.4",
-		"@babel/plugin-transform-modules-commonjs": "7.10.4",
-		"@types/fs-extra": "9.0.1",
-		"@types/jest": "26.0.4",
-		"@types/node": "14.0.18",
-		"cspell": "4.0.63",
-		"eslint": "7.4.0",
-		"eslint-plugin-notice": "0.9.10",
-		"jest": "26.1.0",
-		"typescript": "3.9.6"
+		"@babel/core": "^7.10.5",
+		"@babel/plugin-transform-modules-commonjs": "^7.10.4",
+		"@types/fs-extra": "^9.0.1",
+		"@types/jest": "^26.0.7",
+		"@types/node": "^14.0.26",
+		"cspell": "^4.0.63",
+		"eslint": "^7.5.0",
+		"eslint-plugin-notice": "^0.9.10",
+		"jest": "^26.1.0",
+		"typescript": "^3.9.7"
 	},
 	"homepage": "https://github.com/DevSnicket/Eunice#readme",
 	"jest": {
@@ -78,5 +78,5 @@
 		"test": "npx jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "4.6.1"
+	"version": "4.7.0"
 }
