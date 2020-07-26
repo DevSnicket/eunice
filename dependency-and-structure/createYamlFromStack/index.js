@@ -12,23 +12,37 @@ function createYamlFromStack(
 	stack,
 ) {
 	return (
-		stack.length === 1
-		?
-		createFromLevel(stack[0])
-		:
+		whenSingleLevelOrItem()
+		||
 		stack.map(createFromLevel)
 	);
+
+	function whenSingleLevelOrItem() {
+		return (
+			stack.length === 1
+			&&
+			createFromLevel(stack[0])
+		);
+	}
 
 	function createFromLevel(
 		level,
 	) {
 		return (
-			stack.length === 1 && level.length === 1
-			?
-			createFromItem(level[0])
-			:
+			whenSingleItem()
+			||
 			level.map(createFromItem)
 		);
+
+		function whenSingleItem() {
+			return (
+				stack.length === 1
+				&&
+				level.length === 1
+				&&
+				createFromItem(level[0])
+			);
+		}
 	}
 }
 

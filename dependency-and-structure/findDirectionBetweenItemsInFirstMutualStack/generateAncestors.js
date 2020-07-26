@@ -52,11 +52,15 @@ function getAncestorWhenExists({
 	from,
 	to,
 }) {
-	return (
-		from && to
-		?
-		[ { from, to } ]
-		:
-		[]
-	);
+	return whenHasBoth() || [];
+
+	function whenHasBoth() {
+		return (
+			from
+			&&
+			to
+			&&
+			[ { from, to } ]
+		);
+	}
 }

@@ -16,10 +16,8 @@ export default
 			findItemWithIdentifierOrThrowError({
 				identifier,
 				stack:
-					item
-					?
-					getItemsOfOrThrowError(item)
-					:
+					(item && getItemsOfOrThrowError(item))
+					||
 					stack,
 			}),
 		null,

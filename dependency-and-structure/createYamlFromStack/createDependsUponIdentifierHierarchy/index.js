@@ -4,9 +4,18 @@ import createLinear from "./createLinear";
 import createTree from "./createTree";
 
 export default
-dependsUpon =>
-	dependsUpon.length === 1
-	?
-	createLinear(dependsUpon[0])
-	:
-	createTree(dependsUpon);
+dependsUpon => {
+	return (
+		whenSingle()
+		||
+		createTree(dependsUpon)
+	);
+
+	function whenSingle() {
+		return (
+			dependsUpon.length === 1
+			&&
+			createLinear(dependsUpon[0])
+		);
+	}
+};

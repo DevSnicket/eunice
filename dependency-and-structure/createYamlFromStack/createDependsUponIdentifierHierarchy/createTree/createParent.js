@@ -65,10 +65,16 @@ function getSingleOrArrayWhenMultiple(
 	items,
 ) {
 	return (
-		items.length === 1
-		?
-		items[0]
-		:
+		whenSingle()
+		||
 		items
 	);
+
+	function whenSingle() {
+		return (
+			items.length === 1
+			&&
+			items[0]
+		);
+	}
 }
