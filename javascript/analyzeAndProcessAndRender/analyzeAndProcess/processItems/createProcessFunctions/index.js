@@ -2,7 +2,7 @@
 
 import { createOrAddToStacksUsingFileSystem } from "@devsnicket/eunice-stacking-explicit";
 import createSubsetIdentifierHierarchy from "./createSubsetIdentifierHierarchy";
-import inferStacks from "@devsnicket/eunice-stacking-inference";
+import inferStacks from "./inferStacks";
 import modifyStacksWithFile from "./modifyStacksWithFile";
 import removeEmptySelfDependentOfType from "./removeEmptySelfDependentOfType";
 import removePackagePrefixAndScopeInDependsUpon from "./removePackagePrefixAndScopeInDependsUpon";
@@ -53,9 +53,7 @@ export default ({
 				identifierOrItemOrLevelOrStack,
 			}),
 		identifierOrItemOrLevelOrStack =>
-			isInferStacksEnabled
-			?
-			inferStacks(identifierOrItemOrLevelOrStack)
-			:
+			(isInferStacksEnabled && inferStacks(identifierOrItemOrLevelOrStack))
+			||
 			identifierOrItemOrLevelOrStack,
 	];

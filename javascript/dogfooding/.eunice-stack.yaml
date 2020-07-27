@@ -5,17 +5,15 @@
     dependencyPermeable: true
     items:
       - - interactive
-      - - stacking-inference
-      - - id: dependency, render and structure
-          dependencyPermeable: true
-          items:
-            - - renderer
-            - - dependency-and-structure
-        - id: processors
-          dependencyPermeable: true
-          items:
-            - - stacking-explicit
-            - - replacement
+      - - dependency-counter
+        - stacking-inference
+        - visualizer
+      - - dependency-and-structure
+  - id: processors
+    dependencyPermeable: true
+    items:
+      - - stacking-explicit
+      - - replacement
 -
   - call-with-process-standard-streams
   - run-tests-from-file-system

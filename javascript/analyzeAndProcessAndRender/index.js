@@ -4,7 +4,7 @@ import addPackagesToSources from "./addPackagesToSources";
 import analyzeAndProcess from "./analyzeAndProcess";
 import fileSystem from "fs-extra";
 import { safeDump as formatYaml } from "js-yaml";
-import { getSvgForYaml } from "@devsnicket/eunice-renderer";
+import getSvgForYaml from "./getSvgForYaml";
 import path from "path";
 import writeHarness from "@devsnicket/eunice-interactive/writeHarness";
 
