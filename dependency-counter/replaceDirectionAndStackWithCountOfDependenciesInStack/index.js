@@ -1,7 +1,7 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 import countDirectionsAndScopesOfDependencies from "./countDirectionsAndScopesOfDependencies";
-import createDependencyCountProperty from "./createDependencyCountProperty";
+import createDependencyCount from "./createDependencyCount";
 import getDirectionAndStackOfDependenciesInStack from "./getDirectionAndStackOfDependenciesInStack";
 
 export default replaceInStack;
@@ -9,29 +9,34 @@ export default replaceInStack;
 function replaceInStack(
 	stack,
 ) {
-	return (
-		stack.map(
-			level =>
-				level.map(replaceInItem),
-		)
-	);
+	for (const level of stack)
+		for (const item of level)
+			replaceInItem(item);
 }
 
-function replaceInItem({
-	directionAndStackOfDependencies,
-	...item
-}) {
-	return {
-		...item,
-		...createDependencyCountProperty(
-			countDirectionsAndScopesOfDependencies({
-				...getDirectionAndStackOfDependenciesWithAncestors(),
-				parentStack:
-					item.level.stack,
-			}),
-		),
-		...item.items && { items: replaceInStack(item.items) },
-	};
+function replaceInItem(
+	item,
+) {
+	addDependencyCount();
+
+	if (item.items)
+		replaceInStack(item.items);
+
+	function addDependencyCount() {
+		const dependencyCount =
+			createDependencyCount(
+				countDirectionsAndScopesOfDependencies({
+					...getDirectionAndStackOfDependenciesWithAncestors(),
+					parentStack:
+						item.level.stack,
+				}),
+			);
+
+		delete item.directionAndStackOfDependencies;
+
+		if (dependencyCount)
+			item.dependencyCount = dependencyCount;
+	}
 
 	function getDirectionAndStackOfDependenciesWithAncestors() {
 		return (
@@ -52,7 +57,7 @@ function replaceInItem({
 							...dependsUpon || [],
 						],
 				}),
-				directionAndStackOfDependencies,
+				item.directionAndStackOfDependencies,
 			)
 		);
 	}

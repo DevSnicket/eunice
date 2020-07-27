@@ -3,7 +3,7 @@
 import { createStackFromYaml, createYamlFromStack } from "@devsnicket/eunice-dependency-and-structure";
 import { safeDump as formatYaml, safeLoad as parseYaml } from "js-yaml";
 
-import countInStack from "..";
+import countDependenciesInStack from "..";
 import path from "path";
 import runTestsFromFileSystem from "@devsnicket/eunice-run-tests-from-file-system";
 
@@ -14,18 +14,25 @@ runTestsFromFileSystem({
 		path.join(__dirname, "test-cases/"),
 	expectedFileName:
 		"expected.yaml",
-	getActualForTestCase:
-		({ content }) =>
-			formatStackAsYaml(
-				countInStack(
-					parseStackFromYaml(
-						content,
-					),
-				),
-			),
+	getActualForTestCase,
 	processArguments:
 		process.argv,
 });
+
+function getActualForTestCase(
+	{ content },
+) {
+	const stack =
+		parseStackFromYaml(
+			content,
+		);
+
+	countDependenciesInStack(
+		stack,
+	);
+
+	return formatStackAsYaml(stack);
+}
 
 function parseStackFromYaml(
 	yaml,

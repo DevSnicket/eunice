@@ -8,9 +8,8 @@ export default
 	outerDependents,
 }) => {
 	return (
-		createPropertyWhenHasProperties(
-			"dependencyCount",
-			...createProperties(),
+		createWhenHasProperties(
+			createProperties(),
 		)
 	);
 
@@ -119,9 +118,21 @@ function createPropertyWhenHasProperties(
 	name,
 	...properties
 ) {
+	const property = createWhenHasProperties(properties);
+
+	return (
+		property
+		&&
+		{ [name]: property }
+	);
+}
+
+function createWhenHasProperties(
+	properties,
+) {
 	return (
 		properties.length
 		&&
-		{ [name]: Object.assign({}, ...properties) }
+		Object.assign({}, ...properties)
 	);
 }

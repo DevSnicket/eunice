@@ -9,25 +9,21 @@ export default addToStack;
 function addToStack(
 	stack,
 ) {
-	return (
-		stack.map(
-			level =>
-				level.map(addToItem),
-		)
-	);
+	for (const level of stack)
+		for (const item of level)
+			addToItem(item);
 }
 
 function addToItem(
 	item,
 ) {
-	return {
-		...item,
-		directionAndStackOfDependencies: {
-			...createDependsUponProperty(),
-			...createDependentsProperty(),
-		},
-		...item.items && { items: addToStack(item.items) },
+	item.directionAndStackOfDependencies = {
+		...createDependsUponProperty(),
+		...createDependentsProperty(),
 	};
+
+	if (item.items)
+		addToStack(item.items);
 
 	function createDependsUponProperty() {
 		return (
