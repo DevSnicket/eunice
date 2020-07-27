@@ -3,6 +3,7 @@
 import { createElement } from "react";
 import createElementsFromYaml from "..";
 import { createHashFromLocation } from "@devsnicket/eunice-test-harnesses";
+import createStackWithDependencyCountFromYaml from "../../../createStackWithDependencyCountFromYaml";
 import path from "path";
 import readTextFile from "../../../readTextFile";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -138,8 +139,8 @@ describe(
 									createHashFromLocation({ hash: "no hash prefix" }),
 								resizableElementTypes:
 									null,
-								yaml:
-									"{}",
+								stack:
+									null,
 							}),
 						),
 				)
@@ -227,7 +228,8 @@ async function testTestCase({
 					createHashFromLocation({ hash: locationHash }),
 				resizableElementTypes:
 					null,
-				yaml,
+				stack:
+					createStackWithDependencyCountFromYaml(yaml),
 			}),
 		),
 	)

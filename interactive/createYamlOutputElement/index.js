@@ -8,7 +8,7 @@ export default ({
 	createElement,
 	location,
 	resizableElementTypes,
-	state,
+	stack,
 }) =>
 	callOrInProductionCreateElementOnError({
 		action:
@@ -17,7 +17,7 @@ export default ({
 					createElement,
 					locationHash: createHashFromLocation(location),
 					resizableElementTypes,
-					yaml: state.yaml,
+					stack,
 				}),
 		callOrCreateElementOnError,
 		createElement,

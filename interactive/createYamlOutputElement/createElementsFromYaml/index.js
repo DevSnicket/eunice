@@ -1,46 +1,47 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import { createStackFromYaml } from "@devsnicket/eunice-dependency-and-structure";
 import createSubsetSelection from "./createSubsetSelection";
 import dependencyListElementFactory from "./dependencyListElementFactory";
-import { getSvgElementForStack } from "@devsnicket/eunice-renderer";
+import getSvgElementForStack from "@devsnicket/eunice-visualizer";
 import getTextWidth from "string-pixel-width";
-import { safeLoad as parseYaml } from "js-yaml";
 
 export default ({
 	createElement,
 	locationHash,
 	resizableElementTypes,
-	yaml,
+	stack,
 }) => {
-	const
-		stack =
-			yaml
-			&&
-			createStackFromYaml(parseYaml(yaml)),
-		subsetSelection =
-			createSubsetSelection({
-				createElement,
-				getHrefWithKeyAndValue:
-					({ key, value }) =>
-						locationHash.getWithKeysAndValues({
-							keys:
-								{
-									[key]: key,
-									...dependencyListElementFactory.keys,
-								},
-							values:
-								{ [key]: value },
-						}),
-				getValueOfKey:
-					locationHash.getValueOfKey,
-			});
+	const subsetSelection =
+		createSubsetSelection({
+			createElement,
+			getHrefWithKeyAndValue:
+				getHrefWithKeyAndValueAndNoDependencyList,
+			getValueOfKey:
+				locationHash.getValueOfKey,
+		});
 
 	return (
 		createWithDependencyList(
 			createBreadcrumbAndSvgElement(),
 		)
 	);
+
+	function getHrefWithKeyAndValueAndNoDependencyList({
+		key,
+		value,
+	}) {
+		return (
+			locationHash.getWithKeysAndValues({
+				keys:
+					{
+						[key]: key,
+						...dependencyListElementFactory.keys,
+					},
+				values:
+					{ [key]: value },
+			})
+		);
+	}
 
 	function createWithDependencyList(
 		element,
