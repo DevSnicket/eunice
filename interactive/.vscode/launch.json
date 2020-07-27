@@ -9,7 +9,7 @@
 			"args":
 				[ 
 					"--runInBand",
-					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/createListElement/test.js"
+					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/createListElement/tests/index.test.js"
 				],
 			"disableOptimisticBPs": true,
 			"name": "createYamlOutputElement createListElement jest",
@@ -21,7 +21,7 @@
 			"args":
 				[ 
 					"--runInBand",
-					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/createSubsetOfItem/test.js"
+					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/createSubsetOfItem/index.test.js"
 				],
 			"disableOptimisticBPs": true,
 			"name": "createYamlOutputElement createSubsetOfItem jest",
@@ -33,19 +33,7 @@
 			"args":
 				[ 
 					"--runInBand",
-					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/createVerticalResize/test.js"
-				],
-			"disableOptimisticBPs": true,
-			"name": "createYamlOutputElement createVerticalResize jest",
-			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-			"request": "launch",
-			"type": "node"
-		},
-		{
-			"args":
-				[ 
-					"--runInBand",
-					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/isDependencyRelevant/test.js"
+					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/isDependencyRelevant/index.test.js"
 				],
 			"disableOptimisticBPs": true,
 			"name": "createYamlOutputElement isDependencyRelevant jest",
@@ -57,7 +45,7 @@
 			"args":
 				[ 
 					"--runInBand",
-					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/test.js"
+					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/tests/index.test.js"
 				],
 			"disableOptimisticBPs": true,
 			"name": "createYamlOutputElement createWithDependencyList jest",
@@ -69,7 +57,7 @@
 			"args":
 				[ 
 					"--runInBand",
-					"createYamlOutputElement/createElementsFromYaml/tests/test.js"
+					"createYamlOutputElement/createElementsFromYaml/tests/index.test.js"
 				],
 			"disableOptimisticBPs": true,
 			"name": "createYamlOutputElement jest",
@@ -114,7 +102,7 @@
 			"args":
 				[ 
 					"--runInBand",
-					"writeHarness/tests/test.js"
+					"writeHarness/tests/tests/index.test.js"
 				],
 			"disableOptimisticBPs": true,
 			"name": "writeHarness jest",
