@@ -7,13 +7,15 @@ export default generateAncestors;
 function * generateAncestors(
 	items,
 ) {
-	const parents = items.flatMap(getParents);
+	if (items.length) {
+		const parents = items.flatMap(getParents);
 
-	for (const parent of parents)
-		yield parent;
+		for (const parent of parents)
+			yield parent;
 
-	for (const ancestor of generateAncestors(parents))
-		yield ancestor;
+		for (const ancestor of generateAncestors(parents))
+			yield ancestor;
+	}
 }
 
 function getParents({

@@ -201,6 +201,20 @@ describe(
 		}),
 );
 
+
+test(
+	"No mutual ancestor throws error",
+	() =>
+		expect(
+			() =>
+				findDirectionBetweenItemsInFirstMutualStack({
+					from: { level: { stack: createStackWithoutImplementation() } },
+					to: { level: { stack: createStackWithoutImplementation() } },
+				}),
+		)
+		.toThrowError("Could not find direction between items in first mutual stack."),
+);
+
 /**
   * @param {import("./Parameter.d").Item} parent
   * @returns {import("./Parameter.d").Item}

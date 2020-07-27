@@ -34,6 +34,5 @@ function getDirectionBetweenFirstAncestorOrThrowError(
 			return direction;
 	}
 
-	/* istanbul ignore next: error is only thrown when there is gap in the implementation */
 	throw Error("Could not find direction between items in first mutual stack.");
 }
