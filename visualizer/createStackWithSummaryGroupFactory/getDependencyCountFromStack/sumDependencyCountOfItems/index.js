@@ -7,7 +7,10 @@ items =>
 	getDependencyCountWhenHasMultiple(
 		items
 		.reduce(
-			({ dependencyCount }, item) => {
+			(
+				{ dependencyCount, hasMultiple },
+				item,
+			) => {
 				const dependencyCountOfItem =
 					sumDependencyCountOfItem(item);
 
@@ -19,9 +22,9 @@ items =>
 								dependencyCountOfItem,
 							),
 						hasMultiple:
-							dependencyCount
-							&&
-							dependencyCountOfItem,
+							hasMultiple
+							||
+							(dependencyCount && dependencyCountOfItem),
 					}
 				);
 			},

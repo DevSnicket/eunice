@@ -1,0 +1,11 @@
+﻿- id: first
+  dependencyCount:
+    outer:
+      below:
+        dependsUpon: 1
+- id: second
+  dependencyCount:
+    outer:
+      below:
+        dependsUpon: 2
+- third
