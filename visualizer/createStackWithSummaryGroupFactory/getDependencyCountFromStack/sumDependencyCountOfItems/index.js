@@ -69,12 +69,29 @@ function sumDependencyCount(
 			&&
 			right
 			&&
-			{
-				above: left.above + right.above,
-				below: left.below + right.below,
-				same: left.same + right.same,
-			}
+			Object.assign({}, ...createProperties())
 		);
+
+		function createProperties() {
+			return (
+				[ "above", "below", "same" ]
+				.map(createPropertyForLevelDirection)
+			);
+
+			function createPropertyForLevelDirection(
+				levelDirection,
+			) {
+				return { [levelDirection]: sum() };
+
+				function sum() {
+					return (
+						(left[levelDirection] || 0)
+						+
+						(right[levelDirection] || 0)
+					);
+				}
+			}
+		}
 	}
 }
 

@@ -1,0 +1,13 @@
+﻿- id: first
+  dependencyCount:
+    inner:
+      above: 11
+      same: 12
+    outer:
+      below:
+        dependsUpon: 13
+- id: second
+  dependencyCount:
+    inner:
+      above: 21
+      same: 22
