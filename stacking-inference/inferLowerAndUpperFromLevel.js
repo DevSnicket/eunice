@@ -2,28 +2,10 @@
 
 import groupBy from "lodash/groupBy";
 
-export default inferLevelsFromLevel;
-
-function inferLevelsFromLevel(
-	level,
-) {
-	return (
-		inferLevelsWhenHasLowerLevel({
-			...getLowerAndUpperFromLevel(
-				level,
-			),
-			stack:
-				level.stack,
-		})
-		||
-		[ level ]
-	);
-}
-
+export default
+// ignore lodash groupBy TypeScript return type
 /** @returns {any} */
-function getLowerAndUpperFromLevel(
-	level,
-) {
+level => {
 	return (
 		groupBy(
 			level,
@@ -149,24 +131,4 @@ function getLowerAndUpperFromLevel(
 			);
 		}
 	}
-}
-
-function inferLevelsWhenHasLowerLevel({
-	lower,
-	stack,
-	upper,
-}) {
-	return lower && inferInUpper();
-
-	function inferInUpper() {
-		upper.stack = stack;
-
-		for (const item of upper)
-			item.level = upper;
-
-		return [
-			...inferLevelsFromLevel(upper),
-			lower,
-		];
-	}
-}
+};

@@ -3,7 +3,7 @@
 import { createStackFromYaml, createYamlFromStack } from "@devsnicket/eunice-dependency-and-structure";
 import { safeDump as formatYaml, safeLoad as parseYaml } from "js-yaml";
 
-import inferStacks from "..";
+import inferLevelsInStack from "..";
 import path from "path";
 import runTestsFromFileSystem from "@devsnicket/eunice-run-tests-from-file-system";
 
@@ -22,13 +22,11 @@ runTestsFromFileSystem({
 function getActualForTestCase(
 	{ content },
 ) {
-	return (
-		formatStackAsYaml(
-			inferStacks(
-				parseStackFromYaml(content),
-			),
-		)
-	);
+	const stack = parseStackFromYaml(content);
+
+	inferLevelsInStack(stack);
+
+	return formatStackAsYaml(stack);
 }
 
 function parseStackFromYaml(
