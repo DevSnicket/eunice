@@ -1,0 +1,19 @@
+id: parent
+dependencyCount:
+  inner:
+    above: 12
+    below: 11
+    same: 13
+  outer:
+    above:
+      dependents: 21
+      dependsUpon: 22
+    below:
+      dependents: 32
+      dependsUpon: 31
+    same:
+      dependents: 41
+      dependsUpon: 42
+items:
+  - - child upper
+  - - child lower
