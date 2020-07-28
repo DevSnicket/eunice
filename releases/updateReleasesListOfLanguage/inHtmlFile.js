@@ -1,11 +1,11 @@
-import nodejsJsonRequest from "../../nodejsJsonRequest.js";
+import githubNodejsJsonRequest from "../../githubNodejsJsonRequest.js";
 import requestAndFormatHtmlForReleasesList from "../requestAndFormatHtmlForReleasesList.js"
 import { updateInHtmlIndexFile } from "../../textFiles.js";
 
 export default language =>
 	requestAndFormatHtmlForReleasesList({
 		language,
-		requestJsonFromUrl: nodejsJsonRequest,
+		requestJsonFromUrl: githubNodejsJsonRequest,
 	})
 	.then(
 		html =>

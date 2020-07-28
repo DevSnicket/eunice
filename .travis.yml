@@ -7,7 +7,7 @@ notifications:
     on_failure: always
 script:
   - bash ./spellcheck.sh
-  - (cd csharp/releases && node --experimental-modules updateReleasesListInHtmlFile.js)
-  - (cd issues && node --experimental-modules updateIssueListInHtmlFile.js)
-  - (cd javascript/releases && node --experimental-modules updateReleasesListInHtmlFile.js)
+  - (cd csharp/releases && node --experimental-modules updateReleasesListInHtmlFile.js --access-token=$GITHUB_HARNESSES_TOKEN)
+  - (cd issues && node --experimental-modules updateIssueListInHtmlFile.js --access-token=$GITHUB_HARNESSES_TOKEN)
+  - (cd javascript/releases && node --experimental-modules updateReleasesListInHtmlFile.js --access-token=$GITHUB_HARNESSES_TOKEN)
   - bash ./git-push-generated-content.sh $GITHUB_HARNESSES_TOKEN

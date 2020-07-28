@@ -1,6 +1,7 @@
 {
 	"configurations": [
 		{
+			"args": [ "--access-token=" ],
 			"cwd": "${workspaceFolder}/csharp/releases",
 			"name": "csharp updateReleasesListInHtmlFile",
 			"program": "updateReleasesListInHtmlFile.js",
@@ -9,6 +10,7 @@
 			"type": "node"
 		},
 		{
+			"args": [ "--access-token=" ],
 			"cwd": "${workspaceFolder}/issues",
 			"name": "issues updateIssueListInHtmlFile",
 			"program": "updateIssueListInHtmlFile.js",
@@ -17,6 +19,7 @@
 			"type": "node"
 		},
 		{
+			"args": [ "--access-token=" ],
 			"cwd": "${workspaceFolder}/javascript/releases",
 			"name": "javascript updateReleasesListInHtmlFile",
 			"program": "updateReleasesListInHtmlFile.js",

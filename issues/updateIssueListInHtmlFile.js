@@ -1,9 +1,9 @@
 import formatHtmlForIssues from "./formatHtmlForIssues.js";
 import githubIssuesUrl from "./githubIssuesUrl.js";
-import nodejsJsonRequest from "../nodejsJsonRequest.js";
+import githubNodejsJsonRequest from "../githubNodejsJsonRequest.js";
 import { updateInHtmlIndexFile } from "../textFiles.js";
 
-nodejsJsonRequest(
+githubNodejsJsonRequest(
 	githubIssuesUrl,
 )
 .then(
