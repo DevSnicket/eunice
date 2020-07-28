@@ -124,5 +124,5 @@
 		"test": "jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "7.9.1"
+	"version": "7.9.2"
 }
