@@ -79,12 +79,18 @@ function createInitialStateFromYaml(
 
 		return {
 			stack,
-			yaml: yamlWithInferLevels,
+			yaml: `${getCommentPrefix()}${yamlWithInferLevels}`,
 		};
 	} else {
 		countDependenciesInStack(stack);
 
 		return { stack, yaml };
+	}
+
+	function getCommentPrefix() {
+		const matches = yaml.match(/(?:#.*?\n)*/);
+
+		return matches && matches[0];
 	}
 }
 
