@@ -1,7 +1,7 @@
 // Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 import analyzeAndProcessAndRender from "..";
-import fs from "fs-extra";
+import fileSystem from "fs-extra";
 import path from "path";
 
 test(
@@ -11,7 +11,7 @@ test(
 
 		const outputDirectory = path.join(testDirectory, "output");
 
-		await fs.emptyDir(outputDirectory);
+		await fileSystem.emptyDir(outputDirectory);
 
 		await analyzeAndProcessAndRender({
 			date:
@@ -36,10 +36,23 @@ test(
 		});
 
 		expect(
-			await fs.readdir(outputDirectory),
+			await fileSystem.readdir(outputDirectory),
 		)
 		.toEqual(
 			[ ".html", ".svg" ],
+		);
+
+		expect(
+			await fileSystem.readFile(
+				path.join(outputDirectory, ".svg"),
+				"utf-8",
+			),
+		)
+		.toEqual(
+			await fileSystem.readFile(
+				path.join(testDirectory, "expected.svg"),
+				"utf-8",
+			),
 		);
 	},
 );
@@ -98,7 +111,7 @@ async function testYamlInDirectory({
 }) {
 	const outputDirectory = path.join(testDirectory, "output");
 
-	await fs.emptyDir(outputDirectory);
+	await fileSystem.emptyDir(outputDirectory);
 
 	await analyzeAndProcessAndRender({
 		date:
@@ -131,6 +144,6 @@ async function testYamlInDirectory({
 	function readYamlFile(
 		file,
 	) {
-		return fs.readFile(file, "utf-8");
+		return fileSystem.readFile(file, "utf-8");
 	}
 }

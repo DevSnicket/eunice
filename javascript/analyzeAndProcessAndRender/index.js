@@ -98,7 +98,7 @@ async function renderAndWriteOutput({
 	if (enabled.svg)
 		await fileSystem.writeFile(
 			`${baseFilePath}.svg`,
-			`<!-- ${header}-->\n${getSvgForYaml({ yaml })}`,
+			`<!-- ${header}-->\n${getSvgForYaml(yaml)}`,
 		);
 
 	if (enabled.html)
