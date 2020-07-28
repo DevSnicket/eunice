@@ -3,6 +3,7 @@ module rec DevSnicket.Eunice.ExecuteProgram
 
 open DevSnicket.Eunice.AnalyzeProject
 open DevSnicket.Eunice.CallAnalyzeProjectForProjectOrSolutionPath
+open DevSnicket.Eunice._ExecuteProgram.FormatHeaderComment
 open DevSnicket.Eunice._ExecuteProgram.GetOrPromptForLicenseAcceptance
 open DevSnicket.Eunice._ExecuteProgram.ParseArgumentsAndInferFromDirectoryPath
 open DevSnicket.Eunice._ExecuteProgram.WriteNameAndVersion
@@ -15,11 +16,13 @@ type String = System.String
 
 [<EntryPoint>]
 let executeProgramWithArguments arguments =
+    let version = Assembly.GetExecutingAssembly().GetName().Version
+
     writeNameAndVersion
         {|
             ResetColor = Console.ResetColor
             SetForegroundColor = Console.set_ForegroundColor
-            Version = Assembly.GetExecutingAssembly().GetName().Version
+            Version = version
             Write = Console.Write
             WriteLine = Console.WriteLine
         |}
@@ -28,14 +31,13 @@ let executeProgramWithArguments arguments =
     |> parseArgumentsAndInferFromDirectoryPath "."
     |> function
         | ParsedArguments parsedArguments ->
-            parsedArguments
-            |> executeProgramWithParsedArguments
+            executeProgramWithParsedArguments (parsedArguments, version)
             |> Async.RunSynchronously
         | Error error ->
             error |> Console.Error.WriteLine
             1
 
-let private executeProgramWithParsedArguments (arguments: ParsedArguments) =
+let private executeProgramWithParsedArguments (arguments: ParsedArguments, version) =
     async {
         let! isLicenseAccepted =
             getOrPromptForLicenseAcceptance
@@ -59,7 +61,13 @@ let private executeProgramWithParsedArguments (arguments: ParsedArguments) =
                 |> callAnalyzeProjectForProjectOrSolutionPath arguments.FilePath
 
             errors |> Seq.iter Console.Error.WriteLine
-            do! yaml |> writeInteractiveInDirectoryPathWithYaml "."
+
+            do!
+                seq [
+                    formatHeaderComment (DateTime.Now, version)
+                    yield! yaml
+                ]
+                |> writeInteractiveInDirectoryPathWithYaml "."
 
             return 0
         else
