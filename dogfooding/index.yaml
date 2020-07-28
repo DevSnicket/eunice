@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 7.9.0 on 2020-07-27T19:53:05.865Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 7.9.1 on 2020-07-28T06:45:40.830Z
 - - id: javascript
     type: directory
     items:
@@ -167,7 +167,7 @@
                       - - dependsUpon:
                             - analyzeAndProcessAndRender
                             - expect
-                            - fs
+                            - fileSystem
                             - path
                         - dependsUpon:
                             - path
@@ -182,18 +182,18 @@
                           dependsUpon:
                             - analyzeAndProcessAndRender
                             - expect
-                            - fs
+                            - fileSystem
                             - path
                             - readYamlFile
                           items:
                             id: readYamlFile
-                            dependsUpon: fs
+                            dependsUpon: fileSystem
                       - - id: analyzeAndProcessAndRender
                           type: import
                           dependsUpon:
                             id: analyzeAndProcessAndRender
                             items: index
-                        - id: fs
+                        - id: fileSystem
                           type: import
                           dependsUpon: fs-extra
                   - id: outputEnabledForHtmlAndSvg
