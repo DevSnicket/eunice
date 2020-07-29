@@ -1,9 +1,12 @@
 # header comment
-- upper first
-- id: upper second
-  dependsUpon: lower
-- id: lower
+- lower
+- id: upper first
+  dependsUpon: middle first
+- id: middle first
   dependsUpon:
-    - upper first
-    - child of lower
-  items: child of lower
+    - child of middle
+    - lower
+    - middle second
+  items: child of middle
+- id: middle second
+  dependsUpon: middle first
