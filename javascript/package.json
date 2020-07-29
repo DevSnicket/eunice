@@ -16,12 +16,12 @@
 		"@babel/register": "^7.10.5",
 		"@devsnicket/eunice-call-with-process-standard-streams": "^1.8.0",
 		"@devsnicket/eunice-dependency-and-structure": "^4.10.1",
-		"@devsnicket/eunice-interactive": "^5.6.0",
+		"@devsnicket/eunice-interactive": "^5.8.0",
 		"@devsnicket/eunice-javascript-analyzer": "^11.33.0",
 		"@devsnicket/eunice-replacement": "^14.5.0",
 		"@devsnicket/eunice-run-tests-from-file-system": "^4.6.1",
 		"@devsnicket/eunice-stacking-explicit": "^14.6.0",
-		"@devsnicket/eunice-stacking-inference": "^3.0.0",
+		"@devsnicket/eunice-stacking-inference": "^3.1.0",
 		"@devsnicket/eunice-test-harnesses": "^9.1.0",
 		"@devsnicket/eunice-visualizer": "^1.4.0",
 		"@types/fs-extra": "^8.1.1",
@@ -124,5 +124,5 @@
 		"test": "jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "7.9.2"
+	"version": "7.10.0"
 }
