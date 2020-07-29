@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 7.9.2 on 2020-07-28T07:21:49.247Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 7.10.0 on 2020-07-29T17:34:16.012Z
 - - id: javascript
     type: directory
     items:
@@ -3747,8 +3747,14 @@
                         - createStackFromYaml
                         - createYamlFromStack
                         - formatYaml
+                        - getCommentPrefix
                         - inferStacksInStack
                         - parseYaml
+                      items:
+                        - - id: getCommentPrefix
+                            dependsUpon: yaml
+                        - - id: yaml
+                            type: parameter
                     - id: renderStateful
                       dependsUpon:
                         - callOrCreateElementOnError
@@ -5085,77 +5091,133 @@
                       type: export
                       dependsUpon: inferStacksInStack
                   - - id: inferStacksInStack
-                      dependsUpon: inStack
-                  - - id: inStack
+                      dependsUpon:
+                        - inferFromBottom
+                        - inferFromTop
                       items:
-                        - - id: inferLevelsAndReplaceLowestLevel
-                            dependsUpon:
-                              - inferLevelsFromLevel
-                              - stack
-                        - - id: inferLevelsFromLevel
-                            dependsUpon:
-                              - inferLowerAndUpperFromLevel
-                              - initializeLevelsAndInferLevelsInUpper
-                        - - id: initializeLevelsAndInferLevelsInUpper
-                            dependsUpon: whenHasLower
+                        - - id: inferFromBottom
+                            dependsUpon: withDirection
+                          - id: inferFromTop
+                            dependsUpon: withDirection
+                        - - id: withDirection
                             items:
-                              - - id: whenHasLower
+                              - - id: inferLevels
                                   dependsUpon:
                                     - inferLevelsFromLevel
-                                    - initializeLevel
-                                    - lower
-                                    - upper
-                              - - id: lower
+                                    - stack
+                              - - id: inferLevelsFromLevel
+                                  dependsUpon:
+                                    - dependenciesFromItemSelectors
+                                    - inferNewLevelAndRemaining
+                                    - initializeLevelsAndInferLevelsInRemaining
+                              - - id: initializeLevelsAndInferLevelsInRemaining
+                                  dependsUpon: fromNewLevelsAndRemaining
+                                  items:
+                                    - - id: fromNewLevelsAndRemaining
+                                        dependsUpon:
+                                          - getLevelsFromNewLevelAndRemaining
+                                          - inferLevelsFromLevel
+                                          - initializeLevel
+                                          - newLevel
+                                          - remaining
+                                    - - id: newLevel
+                                        type: parameter
+                                      - id: remaining
+                                        type: parameter
+                                - id: dependenciesFromItemSelectors
                                   type: parameter
-                                - id: upper
+                              - - id: getLevelsFromNewLevelAndRemaining
                                   type: parameter
                         - - initializeLevel
                           - id: stack
                             type: parameter
-            - - id: inferLowerAndUpperFromLevel
-                type: file
-                items:
-                  - - id: inferLowerAndUpperFromLevel
-                      type: export
-                      dependsUpon:
-                        - getIsItemLowerOrUpper
-                        - groupBy
-                      items:
-                        id: getIsItemLowerOrUpper
-                        dependsUpon: canBeInLower
-                        items:
-                          - - id: canBeInLower
-                              dependsUpon:
-                                - allDependsUponAndDescendantsWithDependsUponInDifferentLevel
-                                - anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel
-                          - - id: allDependsUponAndDescendantsWithDependsUponInDifferentLevel
-                              dependsUpon:
-                                - allDependsUponInDifferentLevel
-                                - allDescendantsWithDependsUponInDifferentLevel
-                          - - id: allDependsUponInDifferentLevel
-                              dependsUpon: isDependencyOfDifferentItemInSameLevel
-                            - id: allDescendantsWithDependsUponInDifferentLevel
-                              dependsUpon: allDependsUponAndDescendantsWithDependsUponInDifferentLevel
-                            - id: anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel
-                              dependsUpon:
-                                - anyDependentsOfDifferentItemInSameLevel
-                                - anyDescendantsInStackWithDependentsOfDifferentItemInSameLevel
-                          - - id: anyDependentsOfDifferentItemInSameLevel
-                              dependsUpon: isDependencyOfDifferentItemInSameLevel
-                          - - id: isDependencyOfDifferentItemInSameLevel
-                              dependsUpon: isOrHasAncestor
-                              items:
-                                - - id: isOrHasAncestor
-                                    dependsUpon: hasAncestor
-                                - - id: hasAncestor
-                                    dependsUpon: isDependencyOfDifferentItemInSameLevel
-                            - id: anyDescendantsInStackWithDependentsOfDifferentItemInSameLevel
-                              dependsUpon: anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel
-                  - - id: groupBy
+                    - getDependsUponItemsFromItem
+                  - - id: inferNewLevelAndRemaining
                       type: import
                       dependsUpon:
-                        id: lodash
-                        items: groupBy
+                        id: inferNewLevelAndRemaining
+                        items: index
+            - - id: inferNewLevelAndRemaining
+                type: directory
+                items:
+                  - - id: index
+                      type: file
+                      items:
+                        - - id: index
+                            type: export
+                            dependsUpon:
+                              - getNewLevelOrRemaining
+                              - groupBy
+                            items:
+                              id: getNewLevelOrRemaining
+                              dependsUpon: canBeInNewLevel
+                              items:
+                                - - id: canBeInNewLevel
+                                    dependsUpon:
+                                      - allDependenciesInDifferentLevel
+                                      - anyDependenciesInSameLevel
+                                      - isDependencyOfDifferentItemInSameLevel
+                                      - item
+                                - - id: isDependencyOfDifferentItemInSameLevel
+                                    dependsUpon: isOrHasAncestor
+                                    items:
+                                      - - id: isOrHasAncestor
+                                          dependsUpon: hasAncestor
+                                      - - id: hasAncestor
+                                          dependsUpon: isDependencyOfDifferentItemInSameLevel
+                                  - id: item
+                                    type: parameter
+                        - - id: groupBy
+                            type: import
+                            dependsUpon:
+                              id: lodash
+                              items: groupBy
+                  - - id: allDependenciesInDifferentLevel
+                      type: file
+                      items:
+                        - - id: allDependenciesInDifferentLevel
+                            type: export
+                            dependsUpon: withContext
+                        - - id: withContext
+                            items:
+                              - - id: allInItem
+                                  dependsUpon:
+                                    - allInDependencies
+                                    - allInStack
+                                    - dependenciesFromItemSelector
+                              - - id: allInDependencies
+                                  dependsUpon: isDependencyOfDifferentItemInSameLevel
+                                - id: allInStack
+                                  dependsUpon: allInLevel
+                              - - id: allInLevel
+                                  dependsUpon: allInItem
+                                - id: dependenciesFromItemSelector
+                                  type: parameter
+                                - id: isDependencyOfDifferentItemInSameLevel
+                                  type: parameter
+                    - id: anyDependenciesInSameLevel
+                      type: file
+                      items:
+                        - - id: anyDependenciesInSameLevel
+                            type: export
+                            dependsUpon: withContext
+                        - - id: withContext
+                            items:
+                              - - id: anyInItem
+                                  dependsUpon:
+                                    - anyInDependencies
+                                    - anyInStack
+                                    - dependenciesFromItemSelector
+                              - - id: anyInDependencies
+                                  dependsUpon: isDependencyOfDifferentItemInSameLevel
+                                - id: anyInStack
+                                  dependsUpon: anyInLevel
+                              - - id: anyInLevel
+                                  dependsUpon: anyInItem
+                                - id: dependenciesFromItemSelector
+                                  type: parameter
+                                - id: isDependencyOfDifferentItemInSameLevel
+                                  type: parameter
         - id: visualizer
           type: directory
           items:
