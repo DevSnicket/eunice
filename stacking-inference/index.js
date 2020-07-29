@@ -1,6 +1,6 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import inferLowerAndUpperFromLevel from "./inferLowerAndUpperFromLevel";
+import inferNewLevelAndRemainingFromLevel from "./inferNewLevelAndRemainingFromLevel";
 
 export default inferStacksInStack;
 
@@ -38,27 +38,27 @@ function inStack(
 		level,
 	) {
 		return (
-			initializeLevelsAndInferLevelsInUpper(
-				inferLowerAndUpperFromLevel(
+			initializeLevelsAndInferLevelsInRemaining(
+				inferNewLevelAndRemainingFromLevel(
 					level,
 				),
 			)
 		);
 	}
 
-	function initializeLevelsAndInferLevelsInUpper({
-		lower,
-		upper,
+	function initializeLevelsAndInferLevelsInRemaining({
+		newLevel,
+		remaining,
 	}) {
-		return lower && whenHasLower();
+		return newLevel && fromNewLevelsAndRemaining();
 
-		function whenHasLower() {
-			initializeLevel(lower);
-			initializeLevel(upper);
+		function fromNewLevelsAndRemaining() {
+			initializeLevel(newLevel);
+			initializeLevel(remaining);
 
 			return [
-				...inferLevelsFromLevel(upper) || [ upper ],
-				lower,
+				...inferLevelsFromLevel(remaining) || [ remaining ],
+				newLevel,
 			];
 		}
 	}
