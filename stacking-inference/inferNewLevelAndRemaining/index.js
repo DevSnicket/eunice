@@ -1,13 +1,16 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import allDependsUponAndDescendantsWithDependsUponInDifferentLevel from "./allDependsUponAndDescendantsWithDependsUponInDifferentLevel";
-import anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel from "./anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel";
+import allDependenciesInDifferentLevel from "./allDependenciesInDifferentLevel";
+import anyDependenciesInSameLevel from "./anyDependenciesInSameLevel";
 import groupBy from "lodash/groupBy";
 
 export default
 // ignore lodash groupBy TypeScript return type
 /** @returns {{newLevel, remaining}} */
-level => {
+({
+	dependenciesFromItemSelectors,
+	level,
+}) => {
 	// @ts-ignore
 	return (
 		groupBy(
@@ -27,16 +30,18 @@ level => {
 
 		function canBeInNewLevel() {
 			return (
-				allDependsUponAndDescendantsWithDependsUponInDifferentLevel({
-					dependsUpon: item.dependsUpon,
+				allDependenciesInDifferentLevel({
+					dependenciesFromItemSelector:
+						dependenciesFromItemSelectors.allInDifferentLevel,
 					isDependencyOfDifferentItemInSameLevel,
-					items: item.items,
+					item,
 				})
 				&&
-				anyDependentsOrDescendantsWithDependentsOfDifferentItemInSameLevel({
-					dependents: item.dependents,
+				anyDependenciesInSameLevel({
+					dependenciesFromItemSelector:
+						dependenciesFromItemSelectors.anyInSameLevel,
 					isDependencyOfDifferentItemInSameLevel,
-					items: item.items,
+					item,
 				})
 			);
 		}

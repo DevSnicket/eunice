@@ -1,6 +1,6 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import inferNewLevelAndRemainingFromLevel from "./inferNewLevelAndRemainingFromLevel";
+import inferNewLevelAndRemaining from "./inferNewLevelAndRemaining";
 
 export default inferStacksInStack;
 
@@ -13,53 +13,95 @@ function inferStacksInStack(
 			if (item.items)
 				inferStacksInStack(item.items);
 
-	inStack(stack)
-	.inferLevelsAndReplaceLowestLevel();
-}
+	inferFromBottom();
+	inferFromTop();
 
-function inStack(
-	stack,
-) {
-	return { inferLevelsAndReplaceLowestLevel };
-
-	function inferLevelsAndReplaceLowestLevel() {
-		const newLevels =
-			inferLevelsFromLevel(
-				stack[stack.length - 1],
-			);
-
-		if (newLevels) {
-			stack.pop();
-			stack.push(...newLevels);
-		}
+	function inferFromBottom() {
+		withDirection({
+			dependenciesFromItemSelectors:
+				{
+					allInDifferentLevel: getDependsUponItemsFromItem,
+					anyInSameLevel: ({ dependents }) => dependents,
+				},
+			getLevelsFromNewLevelAndRemaining:
+				({ newLevel, remaining }) =>
+					[ ...remaining, newLevel ],
+		})
+		.inferLevels({
+			fromIndex: stack.length - 1,
+			spliceStart: -1,
+		});
 	}
 
-	function inferLevelsFromLevel(
-		level,
-	) {
-		return (
-			initializeLevelsAndInferLevelsInRemaining(
-				inferNewLevelAndRemainingFromLevel(
-					level,
-				),
-			)
-		);
+	function inferFromTop() {
+		withDirection({
+			dependenciesFromItemSelectors:
+				{
+					allInDifferentLevel: ({ dependents }) => dependents,
+					anyInSameLevel: getDependsUponItemsFromItem,
+				},
+			getLevelsFromNewLevelAndRemaining:
+				({ newLevel, remaining }) =>
+					[ newLevel, ...remaining ],
+		})
+		.inferLevels({
+			fromIndex: 0,
+			spliceStart: 0,
+		});
 	}
 
-	function initializeLevelsAndInferLevelsInRemaining({
-		newLevel,
-		remaining,
+	function withDirection({
+		dependenciesFromItemSelectors,
+		getLevelsFromNewLevelAndRemaining,
 	}) {
-		return newLevel && fromNewLevelsAndRemaining();
+		return { inferLevels };
 
-		function fromNewLevelsAndRemaining() {
-			initializeLevel(newLevel);
-			initializeLevel(remaining);
+		function inferLevels({
+			fromIndex,
+			spliceStart,
+		}) {
+			const newLevels =
+				inferLevelsFromLevel(
+					stack[fromIndex],
+				);
 
-			return [
-				...inferLevelsFromLevel(remaining) || [ remaining ],
-				newLevel,
-			];
+			if (newLevels)
+				stack.splice(spliceStart, 1, ...newLevels);
+		}
+
+		function inferLevelsFromLevel(
+			level,
+		) {
+			return (
+				initializeLevelsAndInferLevelsInRemaining(
+					inferNewLevelAndRemaining({
+						dependenciesFromItemSelectors,
+						level,
+					}),
+				)
+			);
+		}
+
+		function initializeLevelsAndInferLevelsInRemaining({
+			newLevel,
+			remaining,
+		}) {
+			return newLevel && fromNewLevelsAndRemaining();
+
+			function fromNewLevelsAndRemaining() {
+				initializeLevel(newLevel);
+				initializeLevel(remaining);
+
+				return (
+					getLevelsFromNewLevelAndRemaining({
+						newLevel,
+						remaining:
+							inferLevelsFromLevel(remaining)
+							||
+							[ remaining ],
+					})
+				);
+			}
 		}
 	}
 
@@ -72,4 +114,16 @@ function inStack(
 		for (const item of level)
 			item.level = level;
 	}
+}
+
+function getDependsUponItemsFromItem(
+	{ dependsUpon },
+) {
+	return (
+		dependsUpon
+		&&
+		dependsUpon.flatMap(
+			({ itemOrFirstAncestorItem }) => itemOrFirstAncestorItem || [],
+		)
+	);
 }
