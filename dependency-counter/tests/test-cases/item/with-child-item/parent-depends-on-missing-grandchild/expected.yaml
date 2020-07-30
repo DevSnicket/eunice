@@ -1,11 +1,13 @@
 id: parent
 dependencyCount:
   inner:
-    above: 1
+    below: 1
+dependsUpon:
+  id: child
+  items: grandchild
 items:
   id: child
   dependencyCount:
     outer:
       above:
-        dependsUpon: 1
-  dependsUpon: parent
+        dependents: 1

@@ -1,9 +1,17 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import { createStackFromYaml, createYamlFromStack } from "@devsnicket/eunice-dependency-and-structure";
-import { safeDump as formatYaml, safeLoad as parseYaml } from "js-yaml";
+import {
+	addDirectionAndMutualStackToDependenciesInStack,
+	createStackFromYaml,
+	createYamlFromStack,
+} from "@devsnicket/eunice-dependency-and-structure";
 
-import countDependenciesInStack from "..";
+import {
+	safeDump as formatYaml,
+	safeLoad as parseYaml,
+} from "js-yaml";
+
+import countDependenciesOfItem from "..";
 import path from "path";
 import runTestsFromFileSystem from "@devsnicket/eunice-run-tests-from-file-system";
 
@@ -23,28 +31,33 @@ function getActualForTestCase(
 	{ content },
 ) {
 	const stack =
-		parseStackFromYaml(
-			content,
+		createStackFromYaml(
+			// @ts-ignore
+			parseYaml(
+				content,
+			),
 		);
 
-	countDependenciesInStack(
-		stack,
-	);
+	addDirectionAndMutualStackToDependenciesInStack(stack);
+
+	addDependencyCountsInStack(stack);
 
 	return formatStackAsYaml(stack);
 }
 
-function parseStackFromYaml(
-	yaml,
+function addDependencyCountsInStack(
+	stack,
 ) {
-	return (
-		createStackFromYaml(
-			// @ts-ignore
-			parseYaml(
-				yaml,
-			),
-		)
-	);
+	for (const level of stack)
+		for (const item of level) {
+			const dependencyCount = countDependenciesOfItem(item);
+
+			if (dependencyCount)
+				item.dependencyCount = dependencyCount;
+
+			if (item.items)
+				addDependencyCountsInStack(item.items);
+		}
 }
 
 function formatStackAsYaml(

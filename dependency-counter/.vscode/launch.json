@@ -10,7 +10,9 @@
 				"args":
 					[ 
 						"--runInBand",
-						"tests/index.test.js"
+						"tests/index.test.js",
+						"-t",
+						"item.with-child-item.child-depends-on-parent"
 					],
 				"disableOptimisticBPs": true,
 				"name": "test",

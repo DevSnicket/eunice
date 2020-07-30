@@ -1,17 +1,24 @@
-// Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
+// Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import addDirectionAndStackOfDependenciesToStack from "./addDirectionAndStackOfDependenciesToStack";
-import replaceDirectionAndStackWithCountOfDependenciesInStack from "./replaceDirectionAndStackWithCountOfDependenciesInStack";
+import createDependencyCountsFromItem from "./createDependencyCountsFromItem";
+import { isInnerStack } from "@devsnicket/eunice-dependency-and-structure";
+import sumDependencyCounts from "./sumDependencyCounts";
 
-export default (
-	/** @type {import("@devsnicket/eunice-dependency-and-structure/Stack.d")} */
-	stack,
-) => {
-	addDirectionAndStackOfDependenciesToStack(
-		stack,
+
+/**
+  * @param {import("./Item.d")} item
+  * @return {import("./DependencyCount.d")}
+  */
+export default
+item =>
+	sumDependencyCounts(
+		createDependencyCountsFromItem({
+			isInnerStack:
+				stack =>
+					isInnerStack({
+						source: item.level.stack,
+						target: stack,
+					}),
+			item,
+		}),
 	);
-
-	replaceDirectionAndStackWithCountOfDependenciesInStack(
-		stack,
-	);
-};

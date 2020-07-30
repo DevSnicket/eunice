@@ -5,7 +5,7 @@
 	},
 	"description": "counts dependencies into categories and aggregates the counts of descendants",
 	"dependencies": {
-		"@devsnicket/eunice-dependency-and-structure": "^4.10.1",
+		"@devsnicket/eunice-dependency-and-structure": "^6.0.0",
 		"core-js": "^3.6.5"
 	},
 	"devDependencies": {
@@ -65,5 +65,5 @@
 		"test": "npx jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "2.0.0"
+	"version": "3.0.0"
 }
