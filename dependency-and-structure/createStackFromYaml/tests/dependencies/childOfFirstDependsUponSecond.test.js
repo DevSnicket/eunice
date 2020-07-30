@@ -50,6 +50,7 @@ function createStack() {
 				itemOrFirstAncestorItem: second,
 			} ];
 
-		second.dependents = [ child ];
+		second.dependents =
+			[ { item: child } ];
 	}
 }

@@ -86,6 +86,7 @@ function createStack() {
 				},
 			];
 
-		second.dependents = [ first ];
+		second.dependents =
+			[ { item: first } ];
 	}
 }

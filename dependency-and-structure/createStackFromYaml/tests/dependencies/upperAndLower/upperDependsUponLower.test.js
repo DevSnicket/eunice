@@ -28,7 +28,8 @@ function createStack() {
 			itemOrFirstAncestorItem: lower,
 		} ];
 
-	lower.dependents = [ upper ];
+	lower.dependents =
+		[ { item: upper } ];
 
 	return stack;
 }

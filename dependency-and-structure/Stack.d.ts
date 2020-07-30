@@ -5,23 +5,30 @@ interface Stack extends Array<Level> {
 }
 
 export interface Item {
-	readonly dependsUpon?: Array<DependUpon | DependUponMissing>
-	readonly dependents?: Item[]
+	readonly dependsUpon?: Array<DependUpon>
+	readonly dependents?: Array<Dependent>
 	readonly id?: string
 	readonly items?: Stack
 	readonly level: Level
 }
 
-interface Level extends Array<Item> {
-	readonly stack: Stack
+export interface DependUpon {
+	readonly itemOrFirstAncestorItem?: Item
 }
 
-interface DependUpon {
-	readonly ancestor?: Item
+export interface DependUponFound extends DependUpon {
 	readonly item: Item
 }
 
-interface DependUponMissing {
+export interface DependUponMissing extends DependUpon {
 	readonly ancestors?: Array<Item | string>
 	readonly item: string
+}
+
+export interface Dependent {
+	readonly item: Item
+}
+
+export interface Level extends Array<Item> {
+	readonly stack: Stack
 }

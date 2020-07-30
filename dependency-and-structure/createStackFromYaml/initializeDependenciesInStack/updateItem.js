@@ -5,29 +5,42 @@ import "core-js/features/array/flat-map";
 export default ({
 	dependsUpon,
 	item,
-}) => {
-	item.dependsUpon = dependsUpon;
+}) =>
+	withItem(item)
+	.setDependsUpon(dependsUpon);
 
-	addDependent({
-		dependsUponItems:
-			dependsUpon.flatMap(
-				({ itemOrFirstAncestorItem }) =>
-					itemOrFirstAncestorItem
-					||
-					[],
-			),
-		item,
-	});
-};
-
-function addDependent({
-	dependsUponItems,
+function withItem(
 	item,
-}) {
-	for (const dependsUponItem of dependsUponItems)
-		if (dependsUponItem.dependents) {
-			if (!dependsUponItem.dependents.includes(item))
-				dependsUponItem.dependents.push(item);
+) {
+	return { setDependsUpon };
+
+	function setDependsUpon(
+		dependsUpon,
+	) {
+		item.dependsUpon = dependsUpon;
+
+		for (const { itemOrFirstAncestorItem: dependUponItem } of dependsUpon)
+			if (dependUponItem)
+				addDependentToDependUponItem(dependUponItem);
+	}
+
+	function addDependentToDependUponItem(
+		dependUponItem,
+	) {
+		if (dependUponItem.dependents) {
+			if (!isAlreadyAdded())
+				dependUponItem.dependents.push(
+					{ item },
+				);
 		} else
-			dependsUponItem.dependents = [ item ];
+			dependUponItem.dependents = [ { item } ];
+
+		function isAlreadyAdded() {
+			return (
+				dependUponItem.dependents.some(
+					dependent => dependent.item === item,
+				)
+			);
+		}
+	}
 }

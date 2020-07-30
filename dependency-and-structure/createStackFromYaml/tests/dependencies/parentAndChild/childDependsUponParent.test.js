@@ -28,7 +28,8 @@ function createStack() {
 			itemOrFirstAncestorItem: parent,
 		} ];
 
-	parent.dependents = [ child ];
+	parent.dependents =
+		[ { item: child } ];
 
 	return stack;
 }

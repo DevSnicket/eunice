@@ -13,10 +13,36 @@
 					[
 						"--runInBand",
 						"--collectCoverage=false",
-						"createStackFromYaml/test/index.test.js"
+						"addDirectionAndMutualStackToDependenciesInStack/addInStack/index.test.js"
 					],
 				"disableOptimisticBPs": true,
-				"name": "createStackFromYaml jest",
+				"name": "addDirectionAndMutualStackToDependenciesInStack addInStack jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[
+						"--runInBand",
+						"--collectCoverage=false",
+						"addDirectionAndMutualStackToDependenciesInStack/findDirectionBetweenItemsInFirstMutualStack/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "addDirectionAndMutualStackToDependenciesInStack findDirectionBetweenItemsInFirstMutualStack jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[
+						"--runInBand",
+						"--collectCoverage=false",
+						"createStackFromYaml/tests/symmetrical.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "createStackFromYaml jest symmetrical",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node"
@@ -30,19 +56,6 @@
 					],
 				"disableOptimisticBPs": true,
 				"name": "createYamlFromStack jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[
-						"--runInBand",
-						"--collectCoverage=false",
-						"findDirectionBetweenItemsInFirstMutualStack/index.test.js"
-					],
-				"disableOptimisticBPs": true,
-				"name": "findDirectionBetweenItemsInFirstMutualStack jest",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node"

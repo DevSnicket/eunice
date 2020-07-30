@@ -24,7 +24,8 @@ function createStack() {
 			itemOrFirstAncestorItem: child,
 		} ];
 
-	child.dependents = [ parent ];
+	child.dependents =
+		[ { item: parent } ];
 
 	return stack;
 }

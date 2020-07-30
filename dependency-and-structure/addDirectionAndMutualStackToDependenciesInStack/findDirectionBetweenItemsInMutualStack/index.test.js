@@ -18,7 +18,7 @@ test(
 		.toEqual(
 			{
 				direction: "self",
-				stack,
+				mutualStack: stack,
 			},
 		);
 	},
@@ -40,7 +40,7 @@ test(
 		.toEqual(
 			{
 				direction: "same",
-				stack,
+				mutualStack: stack,
 			},
 		);
 	},
@@ -74,7 +74,7 @@ describe(
 				.toEqual(
 					{
 						direction: "below",
-						stack,
+						mutualStack: stack,
 					},
 				);
 			},
@@ -105,7 +105,7 @@ describe(
 				.toEqual(
 					{
 						direction: "above",
-						stack,
+						mutualStack: stack,
 					},
 				);
 			},
@@ -130,7 +130,7 @@ describe(
 				.toEqual(
 					{
 						direction: "below",
-						stack: from.items,
+						mutualStack: from.items,
 					},
 				);
 			},
@@ -150,7 +150,7 @@ describe(
 				.toEqual(
 					{
 						direction: "above",
-						stack: to.items,
+						mutualStack: to.items,
 					},
 				);
 			},
@@ -252,7 +252,7 @@ function testAncestor({
 			.toEqual(
 				{
 					direction: "below",
-					stack: from.items,
+					mutualStack: from.items,
 				},
 			);
 		},
@@ -272,7 +272,7 @@ function testAncestor({
 			.toEqual(
 				{
 					direction: "above",
-					stack: to.items,
+					mutualStack: to.items,
 				},
 			);
 		},

@@ -45,12 +45,17 @@ function createStack() {
 				item: third,
 				itemOrFirstAncestorItem: third,
 			} ];
+
 		second.dependsUpon =
 			[ {
 				item: third,
 				itemOrFirstAncestorItem: third,
 			} ];
 
-		third.dependents = [ first, second ];
+		third.dependents =
+			[
+				{ item: first },
+				{ item: second },
+			];
 	}
 }

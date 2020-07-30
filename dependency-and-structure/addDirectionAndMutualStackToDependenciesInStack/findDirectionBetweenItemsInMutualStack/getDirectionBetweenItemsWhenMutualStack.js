@@ -5,7 +5,7 @@ export default
   * @param {Object} parameter
   * @param {import("./Parameter.d").Item} parameter.from
   * @param {import("./Parameter.d").Item} parameter.to
-  * @returns {{direction: "above"|"below"|"same"|"self", stack: import("./Parameter.d").Stack}}
+  * @returns {{direction: "above" | "below" | "same" | "self", mutualStack: import("./Parameter.d").Stack}}
   */
 ({
 	from,
@@ -23,26 +23,26 @@ export default
 		getWhenFromParent()
 	);
 
-	/** @returns {{direction: "self", stack: import("./Parameter.d").Stack}} */
+	/** @returns {{direction: "self", mutualStack: import("./Parameter.d").Stack}} */
 	function getWhenSame() {
 		return (
 			from === to
 			&&
 			{
 				direction: "self",
-				stack: from.level.stack,
+				mutualStack: from.level.stack,
 			}
 		);
 	}
 
-	/** @returns {{direction: "same", stack: import("./Parameter.d").Stack}} */
+	/** @returns {{direction: "same", mutualStack: import("./Parameter.d").Stack}} */
 	function getWhenSameLevel() {
 		return (
 			from.level === to.level
 			&&
 			{
 				direction: "same",
-				stack: from.level.stack,
+				mutualStack: from.level.stack,
 			}
 		);
 	}
@@ -55,11 +55,11 @@ export default
 		);
 
 		/**
-		  * @param {import("./Parameter.d").Items & import("./Parameter.d").Stack} stack
-		  * @returns {{direction: "above"|"below", stack: import("./Parameter.d").Stack}}
+		  * @param {import("./Parameter.d").Items & import("./Parameter.d").Stack} mutualStack
+		  * @returns {{direction: "above"|"below", mutualStack: import("./Parameter.d").Stack}}
 		  */
 		function getForStack(
-			stack,
+			mutualStack,
 		) {
 			return (
 				{
@@ -69,19 +69,19 @@ export default
 							-
 							getStackIndexOfItem(from),
 						),
-					stack,
+					mutualStack,
 				}
 			);
 
 			function getStackIndexOfItem(
 				{ level },
 			) {
-				return stack.indexOf(level);
+				return mutualStack.indexOf(level);
 			}
 		}
 	}
 
-	/** @returns {{direction: "below", stack: import("./Parameter.d").Stack}} */
+	/** @returns {{direction: "below", mutualStack: import("./Parameter.d").Stack}} */
 	function getWhenToParent() {
 		const toParent = to.level.stack.parent;
 
@@ -90,12 +90,12 @@ export default
 			&&
 			{
 				direction: "below",
-				stack: toParent.items,
+				mutualStack: toParent.items,
 			}
 		);
 	}
 
-	/** @returns {{direction: "above", stack: import("./Parameter.d").Stack}} */
+	/** @returns {{direction: "above", mutualStack: import("./Parameter.d").Stack}} */
 	function getWhenFromParent() {
 		const fromParent = from.level.stack.parent;
 
@@ -104,7 +104,7 @@ export default
 			&&
 			{
 				direction: "above",
-				stack: fromParent.items,
+				mutualStack: fromParent.items,
 			}
 		);
 	}

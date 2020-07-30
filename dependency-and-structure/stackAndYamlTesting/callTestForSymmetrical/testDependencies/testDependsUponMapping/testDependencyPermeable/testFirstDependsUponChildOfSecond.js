@@ -72,6 +72,7 @@ function createStack() {
 				itemOrFirstAncestorItem: child,
 			} ];
 
-		child.dependents = [ first ];
+		child.dependents =
+			[ { item: first } ];
 	}
 }
