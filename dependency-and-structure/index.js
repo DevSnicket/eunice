@@ -4,5 +4,4 @@ export { default as createStackFromYaml } from "./createStackFromYaml";
 export { default as createYamlFromStack } from "./createYamlFromStack";
 export { default as findDirectionBetweenItemsInFirstMutualStack } from "./findDirectionBetweenItemsInFirstMutualStack";
 export { default as findItemInStackWithIdentifierHierarchy } from "./findItemInStackWithIdentifierHierarchy";
-export { default as initializeParentReferencesInStack } from "./initializeParentReferencesInStack";
 export { default as isInnerStack } from "./isInnerStack";
