@@ -13,23 +13,15 @@ import {
 	renderIntoContainerElement,
 } from "@devsnicket/eunice-test-harnesses";
 
-import {
-	createStackFromYaml,
-	createYamlFromStack,
-} from "@devsnicket/eunice-dependency-and-structure";
-
-import {
-	safeDump as formatYaml,
-	safeLoad as parseYaml,
-} from "js-yaml";
-
-import countDependenciesInStack from "@devsnicket/eunice-dependency-counter";
 import createCodeEditorForLanguage from "@devsnicket/eunice-test-harnesses/codeEditor/createEditorForLanguage";
 import { createElement } from "react";
+import { createYamlFromStack } from "@devsnicket/eunice-dependency-and-structure";
 import createYamlInputElement from "./createYamlInputElement";
 import createYamlOutputElement from "./createYamlOutputElement";
+import { safeDump as formatYaml } from "js-yaml";
 import inferStacksInStack from "@devsnicket/eunice-stacking-inference";
 import initializeCodeEditorGlobal from "@devsnicket/eunice-test-harnesses/codeEditor/serviceWorkers/initializeGlobal";
+import parseStackFromYaml from "./parseStackFromYaml";
 
 const resizableElementTypes =
 	{
@@ -57,12 +49,7 @@ renderIntoContainerElement({
 function createInitialStateFromYaml(
 	yaml,
 ) {
-	const stack =
-		createStackFromYaml(
-			parseYaml(
-				yaml,
-			),
-		);
+	const stack = parseStackFromYaml(yaml);
 
 	// replaced with literal
 	// eslint-disable-next-line no-undef
@@ -75,17 +62,12 @@ function createInitialStateFromYaml(
 				{ lineWidth: Number.MAX_SAFE_INTEGER },
 			);
 
-		countDependenciesInStack(stack);
-
 		return {
 			stack,
 			yaml: `${getCommentPrefix()}${yamlWithInferLevels}`,
 		};
-	} else {
-		countDependenciesInStack(stack);
-
+	} else
 		return { stack, yaml };
-	}
 
 	function getCommentPrefix() {
 		const matches = yaml.match(/(?:#.*?\n)*/);

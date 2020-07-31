@@ -1,7 +1,6 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 import {
-	findDirectionBetweenItemsInFirstMutualStack,
 	findItemInStackWithIdentifierHierarchy,
 	isInnerStack,
 } from "@devsnicket/eunice-dependency-and-structure";
@@ -23,7 +22,6 @@ export default ({
 	resizableElementTypes,
 	relationship,
 	stack,
-	subsetIdentifierHierarchy,
 }) => {
 	return (
 		createListInContainerWhenAny()
@@ -63,10 +61,7 @@ export default ({
 		const item =
 			findItemInStackWithIdentifierHierarchy({
 				identifierHierarchy:
-					[
-						...subsetIdentifierHierarchy || [],
-						identifier,
-					],
+					[ identifier ],
 				stack,
 			});
 
@@ -76,10 +71,9 @@ export default ({
 					dependency =>
 						isDependencyRelevant({
 							dependency,
-							findDirectionBetweenItemsInFirstMutualStack,
 							isInnerStack,
 							item,
-							level,
+							levelDirection: level,
 						}),
 				item,
 				relationship,

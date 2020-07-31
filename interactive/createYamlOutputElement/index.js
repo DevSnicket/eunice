@@ -1,6 +1,6 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import createElementsFromYaml from "./createElementsFromYaml";
+import createElementsFromStack from "./createElementsFromStack";
 import { createHashFromLocation } from "@devsnicket/eunice-test-harnesses";
 
 export default ({
@@ -13,7 +13,7 @@ export default ({
 	callOrInProductionCreateElementOnError({
 		action:
 			() =>
-				createElementsFromYaml({
+				createElementsFromStack({
 					createElement,
 					locationHash: createHashFromLocation(location),
 					resizableElementTypes,

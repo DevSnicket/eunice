@@ -3,15 +3,14 @@
 import isDependencyRelevant from ".";
 
 test(
-	"dependency of empty object returns false",
+	"dependency of empty item returns false",
 	() =>
 		expect(
 			isDependencyRelevant({
-				dependency: {},
-				findDirectionBetweenItemsInFirstMutualStack: null,
+				dependency: { item: {} },
 				isInnerStack: null,
 				item: null,
-				level: null,
+				levelDirection: null,
 			}),
 		)
 		.toBe(false),
@@ -24,11 +23,10 @@ test(
 
 		expect(
 			isDependencyRelevant({
-				dependency: { level: { stack: item.items } },
-				findDirectionBetweenItemsInFirstMutualStack: null,
+				dependency: { item: { level: { stack: item.items } } },
 				isInnerStack: null,
 				item,
-				level: null,
+				levelDirection: null,
 			}),
 		)
 		.toBe(false);
@@ -43,11 +41,10 @@ describe(
 			() =>
 				expect(
 					isDependencyRelevant({
-						dependency: { level: { stack: {} } },
-						findDirectionBetweenItemsInFirstMutualStack: null,
+						dependency: { item: { level: { stack: {} } } },
 						isInnerStack: () => true,
 						item: { items: {} },
-						level: null,
+						levelDirection: null,
 					}),
 				)
 				.toBe(false),
@@ -57,19 +54,20 @@ describe(
 			"isInnerStack false",
 			() => {
 				test(
-					"findDirectionBetweenItemsInFirstMutualStack direction is not level returns false",
+					"direction is not level returns false",
 					() =>
 						expect(
 							isDependencyRelevant({
 								dependency:
-									{ level: { stack: {} } },
-								findDirectionBetweenItemsInFirstMutualStack:
-									() => ({ direction: {} }),
+									{
+										direction: {},
+										item: { level: { stack: {} } },
+									},
 								isInnerStack:
 									() => false,
 								item:
 									{ items: {} },
-								level:
+								levelDirection:
 									{},
 							}),
 						)
@@ -77,21 +75,22 @@ describe(
 				);
 
 				test(
-					"findDirectionBetweenItemsInFirstMutualStack direction is level returns true",
+					"direction is level returns true",
 					() => {
-						const level = {};
+						const levelDirection = {};
 
 						expect(
 							isDependencyRelevant({
 								dependency:
-									{ level: { stack: {} } },
-								findDirectionBetweenItemsInFirstMutualStack:
-									() => ({ direction: level }),
+									{
+										direction: levelDirection,
+										item: { level: { stack: {} } },
+									},
 								isInnerStack:
 									() => false,
 								item:
 									{ items: {} },
-								level,
+								levelDirection,
 							}),
 						)
 						.toBe(true);

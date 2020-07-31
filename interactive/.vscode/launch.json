@@ -10,7 +10,7 @@
 				[ 
 					"--collect-coverage=false",
 					"--runInBand",
-					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/createListElement/tests/index.test.js"
+					"createYamlOutputElement/createElementsFromStack/dependencyListElementFactory/createWithDependencyList/createListElement/tests/index.test.js"
 				],
 			"disableOptimisticBPs": true,
 			"name": "createYamlOutputElement createListElement jest",
@@ -23,7 +23,7 @@
 				[ 
 					"--collect-coverage=false",
 					"--runInBand",
-					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/createSubsetOfItem/index.test.js"
+					"createYamlOutputElement/createElementsFromStack/dependencyListElementFactory/createWithDependencyList/createSubsetOfItem/index.test.js"
 				],
 			"disableOptimisticBPs": true,
 			"name": "createYamlOutputElement createSubsetOfItem jest",
@@ -36,7 +36,7 @@
 				[ 
 					"--collect-coverage=false",
 					"--runInBand",
-					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/isDependencyRelevant/index.test.js"
+					"createYamlOutputElement/createElementsFromStack/dependencyListElementFactory/createWithDependencyList/isDependencyRelevant/index.test.js"
 				],
 			"disableOptimisticBPs": true,
 			"name": "createYamlOutputElement isDependencyRelevant jest",
@@ -49,7 +49,7 @@
 				[
 					"--collect-coverage=false",
 					"--runInBand",
-					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/tests/index.test.js"
+					"createYamlOutputElement/createElementsFromStack/dependencyListElementFactory/createWithDependencyList/tests/index.test.js"
 				],
 			"disableOptimisticBPs": true,
 			"name": "createYamlOutputElement createWithDependencyList jest",
@@ -62,7 +62,7 @@
 				[ 
 					"--collect-coverage=false",
 					"--runInBand",
-					"createYamlOutputElement/createElementsFromYaml/tests/index.test.js"
+					"createYamlOutputElement/createElementsFromStack/tests/index.test.js"
 				],
 			"disableOptimisticBPs": true,
 			"name": "createYamlOutputElement jest",

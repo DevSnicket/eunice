@@ -44,7 +44,6 @@ export default {
 			locationHash,
 			resizableElementTypes,
 			stack,
-			subsetIdentifierHierarchy,
 		}) =>
 			createWithDependencyList({
 				...locationHash.getValuesOfKeys(keys),
@@ -57,7 +56,6 @@ export default {
 				locationHash,
 				resizableElementTypes,
 				stack,
-				subsetIdentifierHierarchy,
 			}),
 	keys,
 };

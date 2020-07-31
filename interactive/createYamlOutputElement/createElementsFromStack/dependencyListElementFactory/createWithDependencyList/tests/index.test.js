@@ -1,7 +1,11 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
+import {
+	addDirectionAndMutualStackToDependenciesInStack,
+	createStackFromYaml,
+} from "@devsnicket/eunice-dependency-and-structure";
+
 import { createElement } from "react";
-import { createStackFromYaml } from "@devsnicket/eunice-dependency-and-structure";
 import createWithDependencyList from "..";
 import path from "path";
 import readTextFile from "../../../../../readTextFile";
@@ -40,8 +44,6 @@ test(
 						null,
 					stack:
 						[ [ { id: itemIdentifier } ] ],
-					subsetIdentifierHierarchy:
-						null,
 				}),
 			),
 		)
@@ -55,6 +57,26 @@ test(
 		const
 			childIdentifier = "item",
 			parentIdentifier = "parent";
+
+		const stack =
+			createStackFromYaml(
+				[
+					{
+						id:
+							parentIdentifier,
+						items:
+							[
+								{
+									dependsUpon: dependsUponIdentifier,
+									id: childIdentifier,
+								},
+							],
+					},
+					{ id: dependsUponIdentifier },
+				],
+			);
+
+		addDirectionAndMutualStackToDependenciesInStack(stack);
 
 		expect(
 			renderToStaticMarkup(
@@ -84,24 +106,7 @@ test(
 							/* cSpell:enable */
 						},
 					stack:
-						createStackFromYaml(
-							[
-								{
-									id:
-										parentIdentifier,
-									items:
-										[
-											{
-												dependsUpon: dependsUponIdentifier,
-												id: childIdentifier,
-											},
-										],
-								},
-								{ id: dependsUponIdentifier },
-							],
-						),
-					subsetIdentifierHierarchy:
-						[ parentIdentifier ],
+						stack[0][0].items,
 				}),
 			),
 		)

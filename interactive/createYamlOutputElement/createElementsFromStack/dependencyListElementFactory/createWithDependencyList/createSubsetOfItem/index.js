@@ -37,7 +37,7 @@ function withSubsetCriteriaOf({
 		function getDependencies() {
 			switch (relationship) {
 				case "dependents":
-					return getDependents(item.dependents);
+					return getDependentsItems(item.dependents);
 				case "dependsUpon":
 					return getDependsUponItems(item.dependsUpon);
 				default:
@@ -76,14 +76,28 @@ function withSubsetCriteriaOf({
 		}
 	}
 
-	function getDependents(
+	function getDependentsItems(
 		dependents,
 	) {
 		return (
 			dependents
 			&&
-			dependents.filter(isDependencyRelevant)
+			dependents.flatMap(getDependentItems)
 		);
+	}
+
+	function getDependentItems(
+		dependent,
+	) {
+		return whenRelevant() || [];
+
+		function whenRelevant() {
+			return (
+				isDependencyRelevant(dependent)
+				&&
+				dependent.item
+			);
+		}
 	}
 
 	function getDependsUponItems(
@@ -96,16 +110,20 @@ function withSubsetCriteriaOf({
 		);
 	}
 
-	function getDependUponItems(
-		{ itemOrFirstAncestorItem },
-	) {
-		return whenHasValue() || [];
+	function getDependUponItems({
+		direction,
+		itemOrFirstAncestorItem,
+	}) {
+		return whenRelevant() || [];
 
-		function whenHasValue() {
+		function whenRelevant() {
 			return (
 				itemOrFirstAncestorItem
 				&&
-				isDependencyRelevant(itemOrFirstAncestorItem)
+				isDependencyRelevant({
+					direction,
+					item: itemOrFirstAncestorItem,
+				})
 				&&
 				itemOrFirstAncestorItem
 			);

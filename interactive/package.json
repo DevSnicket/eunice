@@ -5,10 +5,10 @@
 	},
 	"description": "HTML page that renders Eunice YAML as SVG, so the structure and dependencies can be investigated.",
 	"dependencies": {
-		"@devsnicket/eunice-dependency-and-structure": "^4.10.1",
-		"@devsnicket/eunice-dependency-counter": "^2.0.0",
-		"@devsnicket/eunice-stacking-inference": "^3.1.0",
-		"@devsnicket/eunice-visualizer": "^1.4.0",
+		"@devsnicket/eunice-dependency-and-structure": "^6.0.0",
+		"@devsnicket/eunice-dependency-counter": "^3.0.0",
+		"@devsnicket/eunice-stacking-inference": "^4.0.0",
+		"@devsnicket/eunice-visualizer": "^2.0.0",
 		"core-js": "^3.6.4",
 		"fs-extra": "^7.0.1",
 		"react": "^16.4.0",
@@ -110,5 +110,5 @@
 		"typescript": "npx tsc -p jsconfig.json",
 		"watch": "npx webpack --config webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs -d --watch"
 	},
-	"version": "5.8.0"
+	"version": "5.9.0"
 }

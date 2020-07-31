@@ -22,8 +22,11 @@ describe(
 	"Relationship of dependent",
 	() =>
 		testRelationship({
-			createPropertyForDependency:
-				dependency => ({ dependents: [ dependency ] }),
+			createPropertyForDependencyItem:
+				item => ({
+					dependents:
+						[ { item } ],
+				}),
 			otherRelationship:
 				"dependsUpon",
 			relationship:
@@ -35,13 +38,11 @@ describe(
 	"Relationship of depends upon",
 	() =>
 		testRelationship({
-			createPropertyForDependency:
-				dependency => (
-					{
-						dependsUpon:
-							[ { itemOrFirstAncestorItem: dependency } ],
-					}
-				),
+			createPropertyForDependencyItem:
+				itemOrFirstAncestorItem => ({
+					dependsUpon:
+						[ { itemOrFirstAncestorItem } ],
+				}),
 			otherRelationship:
 				"dependents",
 			relationship:
@@ -50,7 +51,7 @@ describe(
 );
 
 function testRelationship({
-	createPropertyForDependency,
+	createPropertyForDependencyItem,
 	relationship,
 	otherRelationship,
 }) {
@@ -58,33 +59,33 @@ function testRelationship({
 		"Dependency is filtered by predicate",
 		() => {
 			const
-				dependenciesFiltered = [],
-				dependency = { level: { stack: {} } };
+				dependencyItem = { level: { stack: {} } },
+				dependencyItemsFiltered = [];
 
 			const result =
 				createSubsetOfItem({
 					isDependencyRelevant,
-					item: createPropertyForDependency(dependency),
+					item: createPropertyForDependencyItem(dependencyItem),
 					relationship,
 				});
 
 			expect(
 				{
-					dependenciesFiltered,
+					dependencyItemsFiltered,
 					result,
 				},
 			)
 			.toEqual(
 				{
-					dependenciesFiltered: [ dependency ],
+					dependencyItemsFiltered: [ dependencyItem ],
 					result: null,
 				},
 			);
 
 			function isDependencyRelevant(
-				item,
+				{ item },
 			) {
-				dependenciesFiltered.push(item);
+				dependencyItemsFiltered.push(item);
 
 				return false;
 			}
@@ -97,7 +98,7 @@ function testRelationship({
 			expect(
 				createSubsetOfItem({
 					isDependencyRelevant: () => true,
-					item: createPropertyForDependency({ level: {} }),
+					item: createPropertyForDependencyItem({ level: {} }),
 					relationship: otherRelationship,
 				}),
 			)
@@ -111,7 +112,7 @@ function testRelationship({
 
 			const item =
 				{
-					...createPropertyForDependency(dependency),
+					...createPropertyForDependencyItem(dependency),
 					level: {},
 				};
 
@@ -138,7 +139,7 @@ function testRelationship({
 
 			const childItem =
 				{
-					...createPropertyForDependency(dependency),
+					...createPropertyForDependencyItem(dependency),
 					level: {},
 				};
 

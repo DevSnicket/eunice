@@ -2,6 +2,8 @@
 
 import createSubsetSelection from "./createSubsetSelection";
 import dependencyListElementFactory from "./dependencyListElementFactory";
+import ensureDependencyCountsInStack from "./ensureDependencyCountsInStack";
+import { findItemInStackWithIdentifierHierarchy } from "@devsnicket/eunice-dependency-and-structure";
 import getSvgElementForStack from "@devsnicket/eunice-visualizer";
 import getTextWidth from "string-pixel-width";
 
@@ -21,9 +23,18 @@ export default ({
 		});
 
 	return (
-		createWithDependencyList(
-			createBreadcrumbAndSvgElement(),
-		)
+		createWithSubset({
+			createElement,
+			locationHash,
+			resizableElementTypes,
+			stack:
+				getOrFindStack({
+					identifierHierarchy:
+						subsetSelection.identifierHierarchy,
+					stack,
+				}),
+			subsetSelection,
+		})
 	);
 
 	function getHrefWithKeyAndValueAndNoDependencyList({
@@ -42,6 +53,51 @@ export default ({
 			})
 		);
 	}
+};
+
+function getOrFindStack({
+	identifierHierarchy,
+	stack,
+}) {
+	return whenHasIdentifierHierarchy() || stack;
+
+	function whenHasIdentifierHierarchy() {
+		return (
+			identifierHierarchy
+			&&
+			getItemsOrThrowError(
+				findItemInStackWithIdentifierHierarchy({
+					identifierHierarchy,
+					stack,
+				}),
+			)
+		);
+
+		function getItemsOrThrowError(
+			item,
+		) {
+			if (item.items)
+				return item.items;
+			else
+				throw new Error(`Final item of subset identifier hierarchy "${identifierHierarchy.join("->")}" has no child items.`);
+		}
+	}
+}
+
+function createWithSubset({
+	createElement,
+	locationHash,
+	resizableElementTypes,
+	stack,
+	subsetSelection,
+}) {
+	ensureDependencyCountsInStack(stack);
+
+	return (
+		createWithDependencyList(
+			createBreadcrumbAndSvgElement(),
+		)
+	);
 
 	function createWithDependencyList(
 		element,
@@ -57,10 +113,7 @@ export default ({
 				locationHash,
 				resizableElementTypes,
 				stack,
-				subsetIdentifierHierarchy:
-					subsetSelection.identifierHierarchy,
 			})
-
 		);
 	}
 
@@ -80,8 +133,6 @@ export default ({
 					stack,
 					style:
 						"a{cursor:pointer}",
-					subsetIdentifierHierarchy:
-						subsetSelection.identifierHierarchy,
 				}),
 			)
 		);
@@ -126,4 +177,4 @@ export default ({
 			);
 		}
 	}
-};
+}
