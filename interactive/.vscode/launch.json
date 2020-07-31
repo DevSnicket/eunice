@@ -8,6 +8,7 @@
 		{
 			"args":
 				[ 
+					"--collect-coverage=false",
 					"--runInBand",
 					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/createListElement/tests/index.test.js"
 				],
@@ -20,6 +21,7 @@
 		{
 			"args":
 				[ 
+					"--collect-coverage=false",
 					"--runInBand",
 					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/createSubsetOfItem/index.test.js"
 				],
@@ -32,6 +34,7 @@
 		{
 			"args":
 				[ 
+					"--collect-coverage=false",
 					"--runInBand",
 					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/isDependencyRelevant/index.test.js"
 				],
@@ -43,7 +46,8 @@
 		},
 		{
 			"args":
-				[ 
+				[
+					"--collect-coverage=false",
 					"--runInBand",
 					"createYamlOutputElement/createElementsFromYaml/dependencyListElementFactory/createWithDependencyList/tests/index.test.js"
 				],
@@ -56,6 +60,7 @@
 		{
 			"args":
 				[ 
+					"--collect-coverage=false",
 					"--runInBand",
 					"createYamlOutputElement/createElementsFromYaml/tests/index.test.js"
 				],
@@ -101,6 +106,7 @@
 		{
 			"args":
 				[ 
+					"--collect-coverage=false",
 					"--runInBand",
 					"writeHarness/tests/tests/index.test.js"
 				],
