@@ -14,7 +14,6 @@ export default (/** @type {import("./Parameter.d")} */{
 	namespaces = null,
 	stack,
 	style = "",
-	subsetIdentifierHierarchy = null,
 }) => {
 	const
 		arrows =
@@ -53,7 +52,6 @@ export default (/** @type {import("./Parameter.d")} */{
 				createTextGroup: createTextGroupWithFontSizeAndPrecision,
 				font,
 				stack,
-				subsetIdentifierHierarchy,
 			})
 			||
 			createGroupFactoryForStack(stack)

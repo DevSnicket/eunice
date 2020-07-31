@@ -1,6 +1,6 @@
+import DependencyCount from "@devsnicket/eunice-dependency-counter/DependencyCount"
 import ElementContainerFactory from "./createStackWithSummaryGroupFactory/ElementContainerFactory";
 import Namespaces from "./Namespaces"
-import Stack from "@devsnicket/eunice-dependency-counter/Stack.d";
 
 export = Parameter
 
@@ -12,4 +12,13 @@ interface Parameter {
 	stack: Stack
 	style?: string
 	subsetIdentifierHierarchy?: string[]
+}
+
+interface Stack extends Array<Array<Item>> {
+	readonly parent?: Item
+}
+
+export interface Item {
+	readonly dependencyCount: DependencyCount
+	readonly id?: string
 }

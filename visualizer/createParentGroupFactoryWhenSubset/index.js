@@ -3,7 +3,6 @@
 import createDependencyGroupFactoryWhenRequired from "../createDependencyGroupFactoryWhenRequired";
 import createOuterDependencyGroupFactory from "../createOuterDependencyGroupFactory";
 import createParentGroupFactory from "./createParentGroupFactory";
-import findItemInStackWithIdentifierHierarchy from "@devsnicket/eunice-dependency-and-structure/findItemInStackWithIdentifierHierarchy";
 
 export default ({
 	arrows,
@@ -11,39 +10,19 @@ export default ({
 	createTextGroup,
 	font,
 	stack,
-	subsetIdentifierHierarchy,
-}) =>
-	subsetIdentifierHierarchy
-	&&
-	createOuterDependencyGroupFactory({
-		arrows,
-		...withSubsetStack({
-			createGroupFactoryForStack,
-			createTextGroup,
-			font,
-			stack:
-				findStackOfSubsetIdentifierHierarchyOrThrowError({
-					stack,
-					subsetIdentifierHierarchy,
-				}),
-		}),
-	});
-
-function withSubsetStack({
-	createGroupFactoryForStack,
-	createTextGroup,
-	font,
-	stack,
-}) {
+}) => {
 	return (
-		{
+		stack.parent
+		&&
+		createOuterDependencyGroupFactory({
+			arrows,
 			createGroupFactoryWhenRequired:
 				createParentOuterDependencyGroupFactoryWhenRequired,
 			dependencyCount:
 				stack.parent.dependencyCount,
 			itemGroupFactory:
 				createParentAndStackGroupFactory(),
-		}
+		})
 	);
 
 	function createParentOuterDependencyGroupFactoryWhenRequired({
@@ -78,20 +57,4 @@ function withSubsetStack({
 			})
 		);
 	}
-}
-
-function findStackOfSubsetIdentifierHierarchyOrThrowError({
-	stack,
-	subsetIdentifierHierarchy,
-}) {
-	const item =
-		findItemInStackWithIdentifierHierarchy({
-			identifierHierarchy: subsetIdentifierHierarchy,
-			stack,
-		});
-
-	if (item.items)
-		return item.items;
-	else
-		throw new Error(`Final item of subset identifier hierarchy "${subsetIdentifierHierarchy.join("->")}" has no child items.`);
-}
+};

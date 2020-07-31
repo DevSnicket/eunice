@@ -1,6 +1,7 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import getSvgForYaml from "./getSvgForYaml";
+import getSvgForStack from "./getSvgForStack";
+import parseStackFromYaml from "./parseStackFromYaml";
 import path from "path";
 import runTestsFromFileSystem from "@devsnicket/eunice-run-tests-from-file-system";
 
@@ -12,7 +13,10 @@ runTestsFromFileSystem({
 	expectedFileName:
 		".svg",
 	getActualForTestCase:
-		({ content }) => getSvgForYaml({ yaml: content }),
+		({ content }) =>
+			getSvgForStack(
+				{ stack: parseStackFromYaml(content) },
+			),
 	processArguments:
 		process.argv,
 });
