@@ -64,9 +64,10 @@ function aggregate(
 
 		function fromDependents() {
 			return (
-				anyInCurrentLevel(
-					{ items: item.dependents },
-				)
+				anyInCurrentLevel({
+					itemSelector: dependent => dependent.item,
+					items: item.dependents,
+				})
 			);
 		}
 
@@ -89,7 +90,7 @@ function aggregate(
 	}
 
 	function anyInCurrentLevel({
-		itemSelector = item => item,
+		itemSelector,
 		items,
 	}) {
 		return (

@@ -1,11 +1,9 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import countDependenciesInStack from "@devsnicket/eunice-dependency-counter";
 import { createElement } from "react";
-import { createStackFromYaml } from "@devsnicket/eunice-dependency-and-structure";
 import getSvgElementForStack from "@devsnicket/eunice-visualizer";
 import getTextWidth from "string-pixel-width";
-import { safeLoad as parseYaml } from "js-yaml";
+import parseStackFromYaml from "../parseStackFromYaml";
 import { renderToStaticMarkup } from "react-dom/server";
 
 export default
@@ -14,25 +12,10 @@ yaml =>
 		getSvgElementForStack({
 			createElement,
 			getTextWidth,
+			// @ts-ignore
 			stack:
 				yaml
 				&&
-				createStackWithDependencyCountsFromYaml(yaml),
+				parseStackFromYaml(yaml),
 		}),
 	);
-
-function createStackWithDependencyCountsFromYaml(
-	yaml,
-) {
-	const stack =
-		createStackFromYaml(
-			// @ts-ignore
-			parseYaml(
-				yaml,
-			),
-		);
-
-	countDependenciesInStack(stack);
-
-	return stack;
-}

@@ -15,16 +15,14 @@ import {
 } from "@devsnicket/eunice-test-harnesses";
 
 import babelParserPlugins from "../babelParserPluginsDefault";
-import countDependenciesInStack from "@devsnicket/eunice-dependency-counter";
 import createCodeEditorForLanguage from "@devsnicket/eunice-test-harnesses/codeEditor/createEditorForLanguage";
 import { createElement } from "react";
 import createJavascriptEditor from "@devsnicket/eunice-javascript-analyzer/harness/createJavascriptEditor";
-import { createStackFromYaml } from "@devsnicket/eunice-dependency-and-structure";
 import createYamlInputElement from "@devsnicket/eunice-interactive/createYamlInputElement";
 import createYamlOutputElement from "@devsnicket/eunice-interactive/createYamlOutputElement";
 import getYamlFromJavascript from "@devsnicket/eunice-javascript-analyzer/getYamlFromJavascript";
 import initializeCodeEditorGlobal from "@devsnicket/eunice-test-harnesses/codeEditor/serviceWorkers/initializeGlobal";
-import { safeLoad as parseYaml } from "js-yaml";
+import parseStackFromYaml from "@devsnicket/eunice-interactive/parseStackFromYaml";
 
 initializeCodeEditorGlobal();
 
@@ -79,7 +77,9 @@ renderIntoContainerElement({
 									splitter: ReflexSplitter,
 								},
 							stack:
-								createStackFromState(stateful.state),
+								parseStackFromYaml(
+									stateful.state.yaml,
+								),
 						}),
 					]
 					.map(element => ({ element })),
@@ -143,19 +143,4 @@ function callOrGetMessageOnError(
 	} catch (error) {
 		return error.message;
 	}
-}
-
-function createStackFromState(
-	{ yaml },
-) {
-	const stack =
-		createStackFromYaml(
-			parseYaml(
-				yaml,
-			),
-		);
-
-	countDependenciesInStack(stack);
-
-	return stack;
 }
