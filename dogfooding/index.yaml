@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 7.10.0 on 2020-07-29T17:34:16.012Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 7.11.0 on 2020-07-31T18:22:02.989Z
 - - id: javascript
     type: directory
     items:
@@ -21,7 +21,6 @@
               type: file
               dependsUpon:
                 - createInitialStateFromJavascript
-                - createStackFromState
                 - createYamlStateFromJavascript
                 - javascriptFromWebpack
                 - location
@@ -45,6 +44,7 @@
                   items:
                     - createYamlOutputElement
                     - createYamlInputElement
+                    - parseStackFromYaml
                 - id: react
                   items: createElement
               items:
@@ -59,34 +59,16 @@
                       - callOrGetMessageOnError
                       - getYamlFromJavascriptWithOptionalEnabled
                 - - callOrGetMessageOnError
-                  - id: createStackFromState
-                    dependsUpon:
-                      - countDependenciesInStack
-                      - createStackFromYaml
-                      - parseYaml
                   - id: babelParserPlugins
                     type: import
                     dependsUpon:
                       id: javascript
                       items: babelParserPluginsDefault
-                - - id: countDependenciesInStack
-                    type: import
-                    dependsUpon: dependency-counter
-                  - id: createStackFromYaml
-                    type: import
-                    dependsUpon:
-                      id: dependency-and-structure
-                      items: createStackFromYaml
                   - id: getYamlFromJavascript
                     type: import
                     dependsUpon:
                       id: javascript-analyzer
                       items: getYamlFromJavascript
-                  - id: parseYaml
-                    type: import
-                    dependsUpon:
-                      id: js-yaml
-                      items: safeLoad
             - id: webpack.config
               type: file
               items:
@@ -1095,39 +1077,26 @@
                       type: export
                       dependsUpon:
                         - createElement
-                        - createStackWithDependencyCountsFromYaml
                         - getSvgElementForStack
                         - getTextWidth
+                        - parseStackFromYaml
                         - renderToStaticMarkup
-                  - - id: createStackWithDependencyCountsFromYaml
-                      dependsUpon:
-                        - countDependenciesInStack
-                        - createStackFromYaml
-                        - parseYaml
-                  - - id: countDependenciesInStack
-                      type: import
-                      dependsUpon: dependency-counter
-                    - id: createElement
+                  - - id: createElement
                       type: import
                       dependsUpon:
                         id: react
                         items: createElement
-                    - id: createStackFromYaml
-                      type: import
-                      dependsUpon:
-                        id: dependency-and-structure
-                        items: createStackFromYaml
                     - id: getSvgElementForStack
                       type: import
                       dependsUpon: visualizer
                     - id: getTextWidth
                       type: import
                       dependsUpon: string-pixel-width
-                    - id: parseYaml
+                    - id: parseStackFromYaml
                       type: import
                       dependsUpon:
-                        id: js-yaml
-                        items: safeLoad
+                        id: javascript
+                        items: parseStackFromYaml
                     - id: renderToStaticMarkup
                       type: import
                       dependsUpon:
@@ -1135,7 +1104,7 @@
                         items:
                           id: server
                           items: renderToStaticMarkup
-        - id: babelParserPluginsDefault
+      - - id: babelParserPluginsDefault
           type: file
           items:
             id: babelParserPluginsDefault
@@ -1417,6 +1386,34 @@
                   - - id: formatWithCodes
                       dependsUpon: formatAnsiEscapeCode
                   - - formatAnsiEscapeCode
+        - id: parseStackFromYaml
+          type: file
+          items:
+            - - id: parseStackFromYaml
+                type: export
+                dependsUpon:
+                  - addDirectionAndMutualStackToDependenciesInStack
+                  - countDependenciesOfItem
+                  - createStackFromYaml
+                  - parseYaml
+            - - id: addDirectionAndMutualStackToDependenciesInStack
+                type: import
+                dependsUpon:
+                  id: dependency-and-structure
+                  items: addDirectionAndMutualStackToDependenciesInStack
+              - id: createStackFromYaml
+                type: import
+                dependsUpon:
+                  id: dependency-and-structure
+                  items: createStackFromYaml
+              - id: countDependenciesOfItem
+                type: import
+                dependsUpon: dependency-counter
+              - id: parseYaml
+                type: import
+                dependsUpon:
+                  id: js-yaml
+                  items: safeLoad
 - - id: javascript-analyzer
     type: directory
     items:
@@ -3743,13 +3740,11 @@
                 items:
                   - - id: createInitialStateFromYaml
                       dependsUpon:
-                        - countDependenciesInStack
-                        - createStackFromYaml
                         - createYamlFromStack
                         - formatYaml
                         - getCommentPrefix
                         - inferStacksInStack
-                        - parseYaml
+                        - parseStackFromYaml
                       items:
                         - - id: getCommentPrefix
                             dependsUpon: yaml
@@ -3785,39 +3780,26 @@
                       dependsUpon:
                         id: test-harnesses
                         items: createResizableContainer
-                    - id: createStackFromYaml
-                      type: import
-                      dependsUpon:
-                        id: dependency-and-structure
-                        items: createStackFromYaml
-                    - id: createYamlFromStack
-                      type: import
-                      dependsUpon:
-                        id: dependency-and-structure
-                        items: createYamlFromStack
-                    - id: formatYaml
-                      type: import
-                      dependsUpon:
-                        id: js-yaml
-                        items: safeDump
-                    - id: parseYaml
-                      type: import
-                      dependsUpon:
-                        id: js-yaml
-                        items: safeLoad
-                    - id: countDependenciesInStack
-                      type: import
-                      dependsUpon: dependency-counter
                     - id: createElement
                       type: import
                       dependsUpon:
                         id: react
                         items: createElement
+                    - id: createYamlFromStack
+                      type: import
+                      dependsUpon:
+                        id: dependency-and-structure
+                        items: createYamlFromStack
                     - id: createYamlOutputElement
                       type: import
                       dependsUpon:
                         id: createYamlOutputElement
                         items: index
+                    - id: formatYaml
+                      type: import
+                      dependsUpon:
+                        id: js-yaml
+                        items: safeDump
                     - id: inferStacksInStack
                       type: import
                       dependsUpon: stacking-inference
@@ -3859,7 +3841,7 @@
                 items:
                   id: createYamlInputElement
                   type: export
-                  dependsUpon: createStackWithDependencyCountFromYaml
+                  dependsUpon: parseStackFromYaml
               - id: createYamlOutputElement
                 type: directory
                 items:
@@ -3870,100 +3852,137 @@
                             type: export
                             dependsUpon:
                               - callOrInProductionCreateElementOnError
-                              - createElementsFromYaml
+                              - createElementsFromStack
                               - createHashFromLocation
                         - - callOrInProductionCreateElementOnError
-                          - id: createElementsFromYaml
+                          - id: createElementsFromStack
                             type: import
                             dependsUpon:
-                              id: createElementsFromYaml
+                              id: createElementsFromStack
                               items: index
                           - id: createHashFromLocation
                             type: import
                             dependsUpon:
                               id: test-harnesses
                               items: createHashFromLocation
-                  - - id: createElementsFromYaml
+                  - - id: createElementsFromStack
                       type: directory
                       items:
                         - - id: tests
                             type: directory
                             items:
-                              id: index.test
-                              type: file
-                              dependsUpon:
-                                - describe
-                                - path
-                                - test
-                                - testTestCase
-                              items:
-                                - - dependsUpon:
-                                      - createElement
-                                      - createElementsFromYaml
-                                      - createHashFromLocation
-                                      - expect
+                              - - id: dependencyCounts
+                                  type: directory
+                                  items:
+                                    id: index.test
+                                    type: file
+                                    dependsUpon:
                                       - path
-                                      - renderToStaticMarkup
                                       - test
-                                      - testTestCase
-                                - - id: testTestCase
+                                      - id: tests
+                                        items: testTestCase
+                                - id: items
+                                  type: directory
+                                  items:
+                                    id: index.test
+                                    type: file
                                     dependsUpon:
-                                      - createElement
-                                      - createElementsFromYaml
-                                      - createHashFromLocation
-                                      - createStackWithDependencyCountFromYaml
                                       - expect
                                       - path
-                                      - readTextFile
-                                      - renderToStaticMarkup
-                                      - wrapInPaddingDiv
-                                - - wrapInPaddingDiv
-                                  - id: createElement
-                                    type: import
-                                    dependsUpon:
-                                      id: react
-                                      items: createElement
-                                  - id: createElementsFromYaml
-                                    type: import
-                                    dependsUpon:
-                                      id: createElementsFromYaml
-                                      items: index
-                                  - id: createHashFromLocation
-                                    type: import
-                                    dependsUpon:
-                                      id: test-harnesses
-                                      items: createHashFromLocation
-                                  - id: createStackWithDependencyCountFromYaml
-                                    type: import
-                                    dependsUpon:
-                                      id: interactive
-                                      items: createStackWithDependencyCountFromYaml
-                                  - id: readTextFile
-                                    type: import
-                                    dependsUpon:
-                                      id: interactive
-                                      items: readTextFile
-                                  - id: renderToStaticMarkup
-                                    type: import
-                                    dependsUpon:
-                                      id: react-dom
-                                      items:
-                                        id: server
-                                        items: renderToStaticMarkup
+                                      - test
+                                      - id: tests
+                                        items: testTestCase
+                                      - id: test-harnesses
+                                        items: createHashFromLocation
+                                      - id: createElementsFromStack
+                                        items: index
+                                      - id: react
+                                        items: createElement
+                              - - id: testTestCase
+                                  type: file
+                                  items:
+                                    - - id: testTestCase
+                                        type: export
+                                        dependsUpon:
+                                          - createElement
+                                          - createElementsFromStack
+                                          - createHashFromLocation
+                                          - expect
+                                          - parseStackFromYaml
+                                          - readTextFile
+                                          - renderToStaticMarkup
+                                          - wrapInPaddingDiv
+                                    - - wrapInPaddingDiv
+                                      - id: createElement
+                                        type: import
+                                        dependsUpon:
+                                          id: react
+                                          items: createElement
+                                      - id: createElementsFromStack
+                                        type: import
+                                        dependsUpon:
+                                          id: createElementsFromStack
+                                          items: index
+                                      - id: createHashFromLocation
+                                        type: import
+                                        dependsUpon:
+                                          id: test-harnesses
+                                          items: createHashFromLocation
+                                      - id: parseStackFromYaml
+                                        type: import
+                                        dependsUpon:
+                                          id: interactive
+                                          items: parseStackFromYaml
+                                      - id: readTextFile
+                                        type: import
+                                        dependsUpon:
+                                          id: interactive
+                                          items: readTextFile
+                                      - id: renderToStaticMarkup
+                                        type: import
+                                        dependsUpon:
+                                          id: react-dom
+                                          items:
+                                            id: server
+                                            items: renderToStaticMarkup
                         - - id: index
                             type: file
                             items:
                               - - id: index
                                   type: export
                                   dependsUpon:
-                                    - createBreadcrumbAndSvgElement
                                     - createSubsetSelection
-                                    - createWithDependencyList
+                                    - createWithSubset
                                     - getHrefWithKeyAndValueAndNoDependencyList
+                                    - getOrFindStack
                                   items:
                                     - - id: getHrefWithKeyAndValueAndNoDependencyList
                                         dependsUpon: locationHash
-                                      - id: createWithDependencyList
+                                    - - id: locationHash
+                                        type: parameter
+                              - - id: getOrFindStack
+                                  dependsUpon: whenHasIdentifierHierarchy
+                                  items:
+                                    - - id: whenHasIdentifierHierarchy
+                                        dependsUpon:
+                                          - findItemInStackWithIdentifierHierarchy
+                                          - getItemsOrThrowError
+                                          - identifierHierarchy
+                                          - stack
+                                        items:
+                                          id: getItemsOrThrowError
+                                          dependsUpon: identifierHierarchy
+                                    - - id: identifierHierarchy
+                                        type: parameter
+                                      - id: stack
+                                        type: parameter
+                                - id: createWithSubset
+                                  dependsUpon:
+                                    - createBreadcrumbAndSvgElement
+                                    - createWithDependencyList
+                                    - ensureDependencyCountsInStack
+                                  items:
+                                    - - id: createWithDependencyList
                                         dependsUpon:
                                           - createElement
                                           - dependencyListElementFactory
@@ -3986,9 +4005,7 @@
                                               - dependencyListElementFactory
                                           - id: createElementContainerForItem
                                             dependsUpon: subsetSelection
-                                    - - id: subsetSelection
-                                        type: variable
-                                      - id: createElement
+                                    - - id: createElement
                                         type: parameter
                                       - id: locationHash
                                         type: parameter
@@ -3996,16 +4013,28 @@
                                         type: parameter
                                       - id: stack
                                         type: parameter
-                              - - id: createSubsetSelection
+                                      - id: subsetSelection
+                                        type: parameter
+                                - id: createSubsetSelection
                                   type: import
                                   dependsUpon:
                                     id: createSubsetSelection
                                     items: index
-                                - id: dependencyListElementFactory
+                              - - id: dependencyListElementFactory
                                   type: import
                                   dependsUpon:
                                     id: dependencyListElementFactory
                                     items: index
+                                - id: ensureDependencyCountsInStack
+                                  type: import
+                                  dependsUpon:
+                                    id: ensureDependencyCountsInStack
+                                    items: index
+                                - id: findItemInStackWithIdentifierHierarchy
+                                  type: import
+                                  dependsUpon:
+                                    id: dependency-and-structure
+                                    items: findItemInStackWithIdentifierHierarchy
                                 - id: getSvgElementForStack
                                   type: import
                                   dependsUpon: visualizer
@@ -4138,6 +4167,7 @@
                                                   - expect
                                                   - renderToStaticMarkup
                                               - dependsUpon:
+                                                  - addDirectionAndMutualStackToDependenciesInStack
                                                   - createElement
                                                   - createStackFromYaml
                                                   - createWithDependencyList
@@ -4149,16 +4179,21 @@
                                                   - renderToStaticMarkup
                                             - - id: element
                                                 type: variable
-                                              - id: createElement
+                                              - id: addDirectionAndMutualStackToDependenciesInStack
                                                 type: import
                                                 dependsUpon:
-                                                  id: react
-                                                  items: createElement
+                                                  id: dependency-and-structure
+                                                  items: addDirectionAndMutualStackToDependenciesInStack
                                               - id: createStackFromYaml
                                                 type: import
                                                 dependsUpon:
                                                   id: dependency-and-structure
                                                   items: createStackFromYaml
+                                              - id: createElement
+                                                type: import
+                                                dependsUpon:
+                                                  id: react
+                                                  items: createElement
                                               - id: createWithDependencyList
                                                 type: import
                                                 dependsUpon:
@@ -4203,7 +4238,6 @@
                                                   - id: createSubset
                                                     dependsUpon:
                                                       - createSubsetOfItem
-                                                      - findDirectionBetweenItemsInFirstMutualStack
                                                       - findItemInStackWithIdentifierHierarchy
                                                       - isDependencyRelevant
                                                       - isInnerStack
@@ -4234,12 +4268,7 @@
                                                     type: parameter
                                                   - id: stack
                                                     type: parameter
-                                          - - id: findDirectionBetweenItemsInFirstMutualStack
-                                              type: import
-                                              dependsUpon:
-                                                id: dependency-and-structure
-                                                items: findDirectionBetweenItemsInFirstMutualStack
-                                            - id: findItemInStackWithIdentifierHierarchy
+                                          - - id: findItemInStackWithIdentifierHierarchy
                                               type: import
                                               dependsUpon:
                                                 id: dependency-and-structure
@@ -4426,27 +4455,27 @@
                                                       - test
                                                     items:
                                                       - - dependsUpon:
-                                                            - createPropertyForDependency
+                                                            - createPropertyForDependencyItem
                                                             - createSubsetOfItem
                                                             - expect
                                                             - isDependencyRelevant
                                                             - relationship
                                                           items:
                                                             - - id: isDependencyRelevant
-                                                                dependsUpon: dependenciesFiltered
-                                                            - - id: dependenciesFiltered
+                                                                dependsUpon: dependencyItemsFiltered
+                                                            - - id: dependencyItemsFiltered
                                                                 type: variable
                                                         - dependsUpon:
-                                                            - createPropertyForDependency
+                                                            - createPropertyForDependencyItem
                                                             - createSubsetOfItem
                                                             - expect
                                                             - relationship
                                                         - dependsUpon:
-                                                            - createPropertyForDependency
+                                                            - createPropertyForDependencyItem
                                                             - createSubsetOfItem
                                                             - expect
                                                             - relationship
-                                                      - - id: createPropertyForDependency
+                                                      - - id: createPropertyForDependencyItem
                                                           type: parameter
                                                         - id: relationship
                                                           type: parameter
@@ -4471,25 +4500,37 @@
                                                           items:
                                                             - - id: getDependencies
                                                                 dependsUpon:
-                                                                  - getDependents
+                                                                  - getDependentsItems
                                                                   - getDependsUponItems
                                                               - id: createForChildItems
                                                                 dependsUpon: item
                                                               - createWhenRelevant
                                                             - - id: item
                                                                 type: parameter
-                                                      - - id: getDependents
-                                                          dependsUpon: isDependencyRelevant
+                                                      - - id: getDependentsItems
+                                                          dependsUpon: getDependentItems
+                                                      - - id: getDependentItems
+                                                          dependsUpon: whenRelevant
+                                                          items:
+                                                            - - id: whenRelevant
+                                                                dependsUpon:
+                                                                  - dependent
+                                                                  - isDependencyRelevant
+                                                            - - id: dependent
+                                                                type: parameter
                                                         - id: getDependsUponItems
                                                           dependsUpon: getDependUponItems
                                                       - - id: getDependUponItems
-                                                          dependsUpon: whenHasValue
+                                                          dependsUpon: whenRelevant
                                                           items:
-                                                            - - id: whenHasValue
+                                                            - - id: whenRelevant
                                                                 dependsUpon:
+                                                                  - direction
                                                                   - isDependencyRelevant
                                                                   - itemOrFirstAncestorItem
-                                                            - - id: itemOrFirstAncestorItem
+                                                            - - id: direction
+                                                                type: parameter
+                                                              - id: itemOrFirstAncestorItem
                                                                 type: parameter
                                                       - - id: isDependencyRelevant
                                                           type: parameter
@@ -4542,27 +4583,40 @@
                                                     - isChild
                                                     - id: isOuter
                                                       dependsUpon: isInnerStack
-                                                    - id: isLevelInDirection
-                                                      dependsUpon: getDirection
-                                                      items:
-                                                        id: getDirection
-                                                        dependsUpon:
-                                                          - dependency
-                                                          - findDirectionBetweenItemsInFirstMutualStack
-                                                          - item
-                                                  - - id: dependency
-                                                      type: parameter
-                                                    - id: findDirectionBetweenItemsInFirstMutualStack
-                                                      type: parameter
-                                                    - id: isInnerStack
-                                                      type: parameter
-                                                    - id: item
+                                                    - isLevelInDirection
+                                                  - - id: isInnerStack
                                                       type: parameter
                                       - id: removeWhitespaceFromTestExpected
                                         type: file
                                         items:
                                           id: removeWhitespaceFromTestExpected
                                           type: export
+                          - id: ensureDependencyCountsInStack
+                            type: directory
+                            items:
+                              - - id: index.test
+                                  type: file
+                                  dependsUpon: test
+                                  items:
+                                    - - dependsUpon:
+                                          - ensureDependencyCountsInStack
+                                          - expect
+                                    - - id: ensureDependencyCountsInStack
+                                        type: import
+                                        dependsUpon:
+                                          id: ensureDependencyCountsInStack
+                                          items: index
+                              - - id: index
+                                  type: file
+                                  items:
+                                    - - id: index
+                                        type: export
+                                        dependsUpon: inItem
+                                    - - id: inItem
+                                        dependsUpon: countDependenciesOfItem
+                                    - - id: countDependenciesOfItem
+                                        type: import
+                                        dependsUpon: dependency-counter
               - id: writeHarness
                 type: directory
                 items:
@@ -4717,29 +4771,7 @@
                             dependsUpon:
                               id: fs-extra
                               items: writeFile
-            - - id: createStackWithDependencyCountFromYaml
-                type: file
-                items:
-                  - - id: createStackWithDependencyCountFromYaml
-                      type: export
-                      dependsUpon:
-                        - countDependenciesInStack
-                        - createStackFromYaml
-                        - parseYaml
-                  - - id: countDependenciesInStack
-                      type: import
-                      dependsUpon: dependency-counter
-                    - id: createStackFromYaml
-                      type: import
-                      dependsUpon:
-                        id: dependency-and-structure
-                        items: createStackFromYaml
-                    - id: parseYaml
-                      type: import
-                      dependsUpon:
-                        id: js-yaml
-                        items: safeLoad
-              - id: createWebpackConfiguration
+            - - id: createWebpackConfiguration
                 type: file
                 items:
                   - - id: createWebpackConfiguration
@@ -4762,6 +4794,30 @@
                       dependsUpon:
                         id: test-harnesses
                         items: createWebpackConfiguration
+              - id: parseStackFromYaml
+                type: file
+                items:
+                  - - id: parseStackFromYaml
+                      type: export
+                      dependsUpon:
+                        - addDirectionAndMutualStackToDependenciesInStack
+                        - createStackFromYaml
+                        - parseYaml
+                  - - id: addDirectionAndMutualStackToDependenciesInStack
+                      type: import
+                      dependsUpon:
+                        id: dependency-and-structure
+                        items: addDirectionAndMutualStackToDependenciesInStack
+                    - id: createStackFromYaml
+                      type: import
+                      dependsUpon:
+                        id: dependency-and-structure
+                        items: createStackFromYaml
+                    - id: parseYaml
+                      type: import
+                      dependsUpon:
+                        id: js-yaml
+                        items: safeLoad
               - id: readTextFile
                 type: file
                 items:
@@ -4791,23 +4847,28 @@
                   items:
                     - - id: getActualForTestCase
                         dependsUpon:
-                          - countDependenciesInStack
-                          - formatStackAsYaml
-                          - parseStackFromYaml
-                    - - id: parseStackFromYaml
-                        dependsUpon:
+                          - addDependencyCountsInStack
+                          - addDirectionAndMutualStackToDependenciesInStack
                           - createStackFromYaml
+                          - formatStackAsYaml
                           - parseYaml
+                    - - id: addDependencyCountsInStack
+                        dependsUpon: countDependenciesOfItem
                       - id: formatStackAsYaml
                         dependsUpon:
                           - createYamlFromStack
                           - formatYaml
-                    - - id: createStackFromYaml
+                      - id: addDirectionAndMutualStackToDependenciesInStack
+                        type: import
+                        dependsUpon:
+                          id: dependency-and-structure
+                          items: addDirectionAndMutualStackToDependenciesInStack
+                      - id: createStackFromYaml
                         type: import
                         dependsUpon:
                           id: dependency-and-structure
                           items: createStackFromYaml
-                      - id: createYamlFromStack
+                    - - id: createYamlFromStack
                         type: import
                         dependsUpon:
                           id: dependency-and-structure
@@ -4822,7 +4883,7 @@
                         dependsUpon:
                           id: js-yaml
                           items: safeLoad
-                      - id: countDependenciesInStack
+                      - id: countDependenciesOfItem
                         type: import
                         dependsUpon:
                           id: dependency-counter
@@ -4833,53 +4894,59 @@
                   - - id: index
                       type: export
                       dependsUpon:
-                        - addDirectionAndStackOfDependenciesToStack
-                        - replaceDirectionAndStackWithCountOfDependenciesInStack
-                  - - id: replaceDirectionAndStackWithCountOfDependenciesInStack
-                      type: import
-                      dependsUpon:
-                        id: replaceDirectionAndStackWithCountOfDependenciesInStack
-                        items: index
-            - - id: addDirectionAndStackOfDependenciesToStack
-                type: file
-                items:
-                  - - id: addDirectionAndStackOfDependenciesToStack
-                      type: export
-                      dependsUpon: addToStack
-                  - - id: addToStack
-                      dependsUpon: addToItem
-                  - - id: addToItem
-                      dependsUpon:
-                        - addToStack
-                        - createDependentsProperty
-                        - createDependsUponProperty
-                      items:
-                        - - id: createDependsUponProperty
-                            dependsUpon:
-                              - addToDependUpon
-                              - item
-                            items:
-                              id: addToDependUpon
-                              dependsUpon:
-                                - findDirectionAndStack
-                                - whenString
-                              items: whenString
-                          - id: createDependentsProperty
-                            dependsUpon:
-                              - findDirectionAndStack
-                              - item
-                        - - id: findDirectionAndStack
-                            dependsUpon:
-                              - findDirectionBetweenItemsInFirstMutualStack
-                              - item
-                        - - id: item
-                            type: parameter
-                  - - id: findDirectionBetweenItemsInFirstMutualStack
+                        - createDependencyCountsFromItem
+                        - isInnerStack
+                        - sumDependencyCounts
+                  - - id: isInnerStack
                       type: import
                       dependsUpon:
                         id: dependency-and-structure
-                        items: findDirectionBetweenItemsInFirstMutualStack
-              - id: replaceDirectionAndStackWithCountOfDependenciesInStack
+                        items: isInnerStack
+                    - id: sumDependencyCounts
+                      type: import
+                      dependsUpon:
+                        id: sumDependencyCounts
+                        items: index
+            - - id: createDependencyCountsFromItem
+                type: file
+                items:
+                  - - id: createDependencyCountsFromItem
+                      type: export
+                      dependsUpon: withIsInnerStack
+                  - - id: withIsInnerStack
+                      items:
+                        - - id: createDependencyCountsFromItem
+                            dependsUpon:
+                              - fromDependents
+                              - fromDependsUpon
+                              - fromItems
+                        - - id: fromDependents
+                            dependsUpon: fromDependent
+                        - - id: fromDependent
+                            dependsUpon:
+                              - createDependencyCountOfOuterOne
+                              - isInnerStack
+                          - id: fromDependsUpon
+                            dependsUpon: fromDependUpon
+                        - - id: fromDependUpon
+                            dependsUpon:
+                              - createDependencyCountOfOuterOne
+                              - whenInner
+                            items:
+                              - - id: whenInner
+                                  dependsUpon:
+                                    - isInnerStack
+                                    - mutualStack
+                              - - id: mutualStack
+                                  type: parameter
+                          - id: fromItems
+                            dependsUpon: createDependencyCountsFromItem
+                        - - id: isInnerStack
+                            type: parameter
+                  - - id: createDependencyCountOfOuterOne
+                      dependsUpon: createOuter
+                      items: createOuter
+              - id: sumDependencyCounts
                 type: directory
                 items:
                   - - id: index
@@ -4887,152 +4954,80 @@
                       items:
                         - - id: index
                             type: export
-                            dependsUpon: replaceInStack
-                        - - id: replaceInStack
-                            dependsUpon: replaceInItem
-                        - - id: replaceInItem
                             dependsUpon:
-                              - addDependencyCount
-                              - replaceInStack
-                            items:
-                              - - id: addDependencyCount
-                                  dependsUpon:
-                                    - countDirectionsAndScopesOfDependencies
-                                    - createDependencyCount
-                                    - getDirectionAndStackOfDependenciesWithAncestors
-                              - - id: getDirectionAndStackOfDependenciesWithAncestors
-                                  dependsUpon: getDirectionAndStackOfDependenciesInStack
-                  - - id: countDirectionsAndScopesOfDependencies
-                      type: file
-                      items:
-                        - - id: countDirectionsAndScopesOfDependencies
-                            type: export
+                              - eitherOrCombine
+                              - sumDependencyCount
+                        - - id: sumDependencyCount
                             dependsUpon:
-                              - countDirectionsOfDependencies
-                              - sumDirectionInStackWhenOuter
-                              - sumDirectionInStackWithScope
+                              - createProperty
+                              - sumInnerDirections
+                              - sumOuterDirections
                             items:
-                              - - id: sumDirectionInStackWhenOuter
-                                  dependsUpon:
-                                    - getCountOfOneFromDirection
-                                    - hasSameOrOuterStack
-                                    - sumCountByDirection
-                                - id: sumDirectionInStackWithScope
-                                  dependsUpon:
-                                    - getCountOfOneFromDirection
-                                    - hasSameOrOuterStack
-                                    - sumDirectionInInnerStack
-                                    - sumDirectionInOuterStack
-                                  items:
-                                    - - id: sumDirectionInOuterStack
-                                        dependsUpon:
-                                          - count
-                                          - sumCountByDirection
-                                      - id: sumDirectionInInnerStack
-                                        dependsUpon:
-                                          - count
-                                          - sumCountByDirection
-                                    - - id: count
-                                        type: variable
-                              - - id: hasSameOrOuterStack
-                                  dependsUpon: isSameOrOuterStack
-                                  items:
-                                    - - id: isSameOrOuterStack
-                                        dependsUpon:
-                                          - isInnerStack
-                                          - parentStack
-                                          - stack
-                                    - - id: stack
-                                        type: parameter
-                              - - id: parentStack
-                                  type: parameter
-                        - - id: countDirectionsOfDependencies
-                            dependsUpon: sumDependency
-                            items:
-                              - - id: sumDependency
-                                  dependsUpon: whenHasTo
-                                  items:
-                                    - - id: whenHasTo
-                                        dependsUpon:
-                                          - aggregation
-                                          - dependency
-                                          - sumDirectionInStack
-                                    - - id: aggregation
-                                        type: parameter
-                                      - id: dependency
-                                        type: parameter
-                              - - id: sumDirectionInStack
-                                  type: parameter
-                          - getCountOfOneFromDirection
-                          - id: sumCountByDirection
-                            dependsUpon: whenHasBoth
-                            items: whenHasBoth
-                          - id: isInnerStack
-                            type: import
-                            dependsUpon:
-                              id: dependency-and-structure
-                              items: isInnerStack
-                    - id: createDependencyCount
-                      type: file
-                      items:
-                        - - id: createDependencyCount
-                            type: export
-                            dependsUpon:
-                              - createProperties
-                              - createWhenHasProperties
-                            items:
-                              - - id: createProperties
-                                  dependsUpon:
-                                    - createInnerProperty
-                                    - createOuterProperty
-                                    - outerDependents
-                              - - id: createInnerProperty
-                                  dependsUpon: createInnerPropertyFromDependsUpon
-                                - id: outerDependents
-                                  type: parameter
-                        - - id: createOuterProperty
-                            dependsUpon:
-                              - createPropertiesForDirections
-                              - createPropertyForDirection
-                              - createPropertyWhenHasProperties
-                            items:
-                              id: createPropertyForDirection
+                              id: createProperty
                               dependsUpon:
-                                - createPropertyWhenHasProperties
-                                - createRelationshipProperties
-                              items: createRelationshipProperties
-                          - id: createInnerPropertyFromDependsUpon
-                            dependsUpon:
-                              - createPropertiesForDirections
-                              - createPropertyForDirection
-                              - createPropertyWhenHasProperties
-                            items:
-                              id: createPropertyForDirection
-                              dependsUpon: whenHasValue
-                              items: whenHasValue
-                        - - createPropertiesForDirections
-                          - id: createPropertyWhenHasProperties
-                            dependsUpon: createWhenHasProperties
-                        - - createWhenHasProperties
-                    - id: getDirectionAndStackOfDependenciesInStack
+                                - createPropertyWhenHasCount
+                                - eitherOrCombine
+                              items: createPropertyWhenHasCount
+                  - - id: sumInnerDirections
                       type: file
                       items:
-                        - - id: getDirectionAndStackOfDependenciesInStack
+                        - - id: sumInnerDirections
                             type: export
-                            dependsUpon: inStack
-                        - - id: inStack
-                            dependsUpon: whenAny
+                            dependsUpon:
+                              - sumDirections
+                              - sumInnerDirection
+                        - - sumInnerDirection
+                    - id: sumOuterDirections
+                      type: file
+                      items:
+                        - - id: sumOuterDirections
+                            type: export
+                            dependsUpon:
+                              - sumDirections
+                              - sumOuterDirection
+                        - - id: sumOuterDirection
+                            dependsUpon: createPropertyForRelationship
                             items:
-                              - - id: whenAny
-                                  dependsUpon:
-                                    - inLevel
-                                    - stack
-                              - - id: stack
-                                  type: parameter
-                        - - id: inLevel
-                            dependsUpon: inItem
-                        - - id: inItem
-                            dependsUpon: inStack
+                              id: createPropertyForRelationship
+                              dependsUpon:
+                                - createPropertyWhenHasCount
+                                - eitherOrCombine
+                                - sumRelationship
+                              items: createPropertyWhenHasCount
+                        - - sumRelationship
+                  - - id: sumDirections
+                      type: file
+                      items:
+                        id: sumDirections
+                        type: export
+                        dependsUpon: createPropertyForDirection
+                        items:
+                          - - id: createPropertyForDirection
+                              dependsUpon:
+                                - createPropertyWhenHasCount
+                                - eitherOrCombine
+                                - sumDirection
+                              items: createPropertyWhenHasCount
+                          - - id: sumDirection
+                              type: parameter
+                  - - id: eitherOrCombine
+                      type: file
+                      items:
+                        id: eitherOrCombine
+                        type: export
+                        dependsUpon: whenHasBoth
+                        items:
+                          - - id: whenHasBoth
+                              dependsUpon:
+                                - left
+                                - right
+                                - valueSelector
+                          - - id: left
+                              type: parameter
+                            - id: right
+                              type: parameter
+                            - id: valueSelector
+                              type: parameter
         - id: stacking-inference
           type: directory
           items:
@@ -5131,6 +5126,7 @@
                         - - initializeLevel
                           - id: stack
                             type: parameter
+                    - getDependentItemsFromItem
                     - getDependsUponItemsFromItem
                   - - id: inferNewLevelAndRemaining
                       type: import
@@ -5227,7 +5223,8 @@
                   - - id: index.test
                       type: file
                       dependsUpon:
-                        - getSvgForYaml
+                        - getSvgForStack
+                        - parseStackFromYaml
                         - path
                         - run-tests-from-file-system
                     - id: withElementContainer
@@ -5264,16 +5261,22 @@
                                   type: export
                                   dependsUpon:
                                     - expect
-                                    - getSvgForYaml
+                                    - getSvgForStack
+                                    - parseStackFromYaml
                                     - path
                                     - readTestFile
                               - - id: readTestFile
                                   dependsUpon: readFile
-                                - id: getSvgForYaml
+                                - id: getSvgForStack
                                   type: import
                                   dependsUpon:
                                     id: tests
-                                    items: getSvgForYaml
+                                    items: getSvgForStack
+                                - id: parseStackFromYaml
+                                  type: import
+                                  dependsUpon:
+                                    id: tests
+                                    items: parseStackFromYaml
                               - - id: readFile
                                   type: import
                                   dependsUpon:
@@ -5285,34 +5288,29 @@
                         id: index.test
                         type: file
                         dependsUpon:
-                          - expect
+                          - getFirstChildStack
                           - path
-                          - test
                           - run-tests-from-file-system
                           - id: tests
-                            items: getSvgForYaml
-                  - - id: getSvgForYaml
+                            items:
+                              - parseStackFromYaml
+                              - getSvgForStack
+                        items: getFirstChildStack
+                  - - id: getSvgForStack
                       type: file
                       items:
-                        - - id: getSvgForYaml
+                        - - id: getSvgForStack
                             type: export
                             dependsUpon:
                               - createElement
-                              - createStackFromYaml
                               - getSvgElementForStack
                               - getTextWidth
-                              - parseYaml
                               - renderToStaticMarkup
                         - - id: createElement
                             type: import
                             dependsUpon:
                               id: react
                               items: createElement
-                          - id: createStackFromYaml
-                            type: import
-                            dependsUpon:
-                              id: dependency-and-structure
-                              items: createStackFromYaml
                           - id: getSvgElementForStack
                             type: import
                             dependsUpon:
@@ -5321,11 +5319,6 @@
                           - id: getTextWidth
                             type: import
                             dependsUpon: string-pixel-width
-                          - id: parseYaml
-                            type: import
-                            dependsUpon:
-                              id: js-yaml
-                              items: safeLoad
                           - id: renderToStaticMarkup
                             type: import
                             dependsUpon:
@@ -5333,6 +5326,24 @@
                               items:
                                 id: server
                                 items: renderToStaticMarkup
+                    - id: parseStackFromYaml
+                      type: file
+                      items:
+                        - - id: parseStackFromYaml
+                            type: export
+                            dependsUpon:
+                              - createStackFromYaml
+                              - parseYaml
+                        - - id: createStackFromYaml
+                            type: import
+                            dependsUpon:
+                              id: dependency-and-structure
+                              items: createStackFromYaml
+                          - id: parseYaml
+                            type: import
+                            dependsUpon:
+                              id: js-yaml
+                              items: safeLoad
             - - id: index
                 type: file
                 items:
@@ -5353,7 +5364,6 @@
                               - createTextGroupWithFontSizeAndPrecision
                               - font
                               - stack
-                              - subsetIdentifierHierarchy
                         - - id: createGroupFactoryForStack
                             dependsUpon:
                               - arrows
@@ -5374,8 +5384,6 @@
                           - id: elementContainerFactory
                             type: parameter
                           - id: stack
-                            type: parameter
-                          - id: subsetIdentifierHierarchy
                             type: parameter
                   - - id: createFont
                       dependsUpon: withPrecision
@@ -5404,10 +5412,8 @@
                             type: export
                             dependsUpon:
                               - createOuterDependencyGroupFactory
-                              - findStackOfSubsetIdentifierHierarchyOrThrowError
-                              - withSubsetStack
-                        - - id: withSubsetStack
-                            dependsUpon: createParentAndStackGroupFactory
+                              - createParentAndStackGroupFactory
+                              - createParentOuterDependencyGroupFactoryWhenRequired
                             items:
                               - - id: createParentOuterDependencyGroupFactoryWhenRequired
                                   dependsUpon:
@@ -5428,8 +5434,6 @@
                                   type: parameter
                                 - id: stack
                                   type: parameter
-                          - id: findStackOfSubsetIdentifierHierarchyOrThrowError
-                            dependsUpon: findItemInStackWithIdentifierHierarchy
                         - - id: createDependencyGroupFactoryWhenRequired
                             type: import
                             dependsUpon:
@@ -5442,11 +5446,6 @@
                               items:
                                 id: createOuterDependencyGroupFactory
                                 items: index
-                          - id: findItemInStackWithIdentifierHierarchy
-                            type: import
-                            dependsUpon:
-                              id: dependency-and-structure
-                              items: findItemInStackWithIdentifierHierarchy
                   - - id: createParentGroupFactory
                       type: file
                       items:
@@ -6201,6 +6200,13 @@
             - - id: index
                 type: file
                 items:
+                  - id: addDirectionAndMutualStackToDependenciesInStack
+                    type: export
+                    dependsUpon:
+                      id: addDirectionAndMutualStackToDependenciesInStack
+                      items:
+                        id: index
+                        items: default
                   - id: createStackFromYaml
                     type: export
                     dependsUpon:
@@ -6215,13 +6221,6 @@
                       items:
                         id: index
                         items: default
-                  - id: findDirectionBetweenItemsInFirstMutualStack
-                    type: export
-                    dependsUpon:
-                      id: findDirectionBetweenItemsInFirstMutualStack
-                      items:
-                        id: index
-                        items: default
                   - id: findItemInStackWithIdentifierHierarchy
                     type: export
                     dependsUpon:
@@ -6229,11 +6228,6 @@
                       items:
                         id: index
                         items: default
-                  - id: initializeParentReferencesInStack
-                    type: export
-                    dependsUpon:
-                      id: initializeParentReferencesInStack
-                      items: default
                   - id: isInnerStack
                     type: export
                     dependsUpon:
@@ -6644,17 +6638,11 @@
                             dependsUpon:
                               - createStackStructureFromYaml
                               - initializeDependenciesInStack
-                              - initializeParentReferencesInStack
                         - - id: initializeDependenciesInStack
                             type: import
                             dependsUpon:
                               id: initializeDependenciesInStack
                               items: index
-                          - id: initializeParentReferencesInStack
-                            type: import
-                            dependsUpon:
-                              id: dependency-and-structure
-                              items: initializeParentReferencesInStack
                   - - id: createStackStructureFromYaml
                       type: file
                       items:
@@ -6663,69 +6651,38 @@
                             dependsUpon: createStackFromParsedYaml
                         - - id: createStackFromParsedYaml
                             dependsUpon:
+                              - createFromArray
                               - createLevelFromIdentifierOrItem
-                              - whenLevelOrStack
                             items:
-                              - - id: whenLevelOrStack
+                              - - id: createFromArray
                                   dependsUpon:
-                                    - createFromLevelOrStack
+                                    - createLevelFromIdentifierOrItemOrLevel
                                     - yaml
-                                  items:
-                                    id: createFromLevelOrStack
-                                    dependsUpon:
-                                      - createLevelFromIdentifierOrItemOrLevel
-                                      - whenStack
-                                      - yaml
-                                    items:
-                                      id: whenStack
-                                      dependsUpon: yaml
                               - - id: yaml
                                   type: parameter
                         - - id: createLevelFromIdentifierOrItemOrLevel
                             dependsUpon:
                               - createLevelFromIdentifierOrItem
-                              - whenLevel
-                            items:
-                              - - id: whenLevel
-                                  dependsUpon:
-                                    - createItemFromItemOrIdentifier
-                                    - identifierOrItemOrLevel
-                              - - id: identifierOrItemOrLevel
-                                  type: parameter
-                        - - id: createItemFromItemOrIdentifier
+                              - createLevelFromItems
+                        - - id: createLevelFromItems
                             dependsUpon:
-                              - createItemFromItem
-                              - whenIdentifier
-                            items:
-                              - - id: whenIdentifier
-                                  dependsUpon:
-                                    - identifierOrItem
-                                    - isString
-                              - - id: identifierOrItem
-                                  type: parameter
+                              - createItemFromObject
+                              - isString
                           - id: createLevelFromIdentifierOrItem
                             dependsUpon:
-                              - createItemFromItem
-                              - whenString
-                            items:
-                              - - id: whenString
-                                  dependsUpon:
-                                    - identifierOrItem
-                                    - isString
-                              - - id: identifierOrItem
-                                  type: parameter
+                              - createItemFromObject
+                              - createLevel
+                              - createLevelWhenIdentifier
+                              - isString
                         - - isString
-                          - id: createItemFromItem
+                          - id: createLevelWhenIdentifier
+                            dependsUpon: createLevel
+                        - - createLevel
+                          - id: createItemFromObject
                             dependsUpon:
                               - createStackFromParsedYaml
                               - ensureIsArray
-                        - - id: ensureIsArray
-                            dependsUpon: whenArray
-                            items:
-                              - - id: whenArray
-                                  dependsUpon: item
-                              - - id: item
-                                  type: parameter
+                        - - ensureIsArray
                     - id: initializeDependenciesInStack
                       type: directory
                       items:
@@ -7021,8 +6978,22 @@
                             items:
                               - - id: updateItem
                                   type: export
-                                  dependsUpon: addDependent
-                              - - addDependent
+                                  dependsUpon: withItem
+                              - - id: withItem
+                                  items:
+                                    - - id: setDependsUpon
+                                        dependsUpon: addDependentToDependUponItem
+                                    - - id: addDependentToDependUponItem
+                                        dependsUpon:
+                                          - isAlreadyAdded
+                                          - item
+                                        items:
+                                          - - id: isAlreadyAdded
+                                              dependsUpon: dependUponItem
+                                          - - id: dependUponItem
+                                              type: parameter
+                                    - - id: item
+                                        type: parameter
               - id: createYamlFromStack
                 type: directory
                 items:
@@ -7200,134 +7171,233 @@
                             items:
                               id: getIdentifierPropertyOrValue
                               type: export
-            - - id: findDirectionBetweenItemsInFirstMutualStack
+            - - id: addDirectionAndMutualStackToDependenciesInStack
                 type: directory
                 items:
-                  - - id: index.test
-                      type: file
-                      dependsUpon:
-                        - createItemWithParent
-                        - createStackWithoutImplementation
-                        - describe
-                        - expect
-                        - test
-                        - testAncestor
-                        - id: findDirectionBetweenItemsInFirstMutualStack
-                          items: index
-                      items:
-                        - - dependsUpon:
-                              - createStackWithoutImplementation
-                              - expect
-                              - findDirectionBetweenItemsInFirstMutualStack
-                          - dependsUpon:
-                              - createStackWithoutImplementation
-                              - expect
-                              - findDirectionBetweenItemsInFirstMutualStack
-                          - dependsUpon: test
-                            items:
-                              - dependsUpon:
-                                  - expect
-                                  - findDirectionBetweenItemsInFirstMutualStack
-                              - dependsUpon:
-                                  - expect
-                                  - findDirectionBetweenItemsInFirstMutualStack
-                          - dependsUpon: test
-                            items:
-                              - dependsUpon:
-                                  - createItemWithParent
-                                  - createItemWithoutImplementation
-                                  - expect
-                                  - findDirectionBetweenItemsInFirstMutualStack
-                              - dependsUpon:
-                                  - createItemWithParent
-                                  - createItemWithoutImplementation
-                                  - expect
-                                  - findDirectionBetweenItemsInFirstMutualStack
-                        - - id: createItemWithParent
-                            dependsUpon: createStack
-                            items: createStack
-                          - id: testAncestor
-                            dependsUpon: test
-                            items:
-                              - - dependsUpon:
-                                    - createItemWithAncestor
-                                    - createItemWithoutImplementation
-                                    - expect
-                                    - findDirectionBetweenItemsInFirstMutualStack
-                                - dependsUpon:
-                                    - createItemWithAncestor
-                                    - createItemWithoutImplementation
-                                    - expect
-                                    - findDirectionBetweenItemsInFirstMutualStack
-                              - - id: createItemWithAncestor
-                                  type: parameter
-                        - - id: createItemWithoutImplementation
-                            dependsUpon: createStackWithoutImplementation
-                        - - createStackWithoutImplementation
-                          - id: findDirectionBetweenItemsInFirstMutualStack
-                            type: import
-                            dependsUpon:
-                              id: findDirectionBetweenItemsInFirstMutualStack
-                              items: index
                   - - id: index
                       type: file
                       items:
                         - - id: index
                             type: export
                             dependsUpon:
-                              - generateAncestors
-                              - getDirectionBetweenFirstAncestorOrThrowError
-                              - getDirectionBetweenItemsWhenMutualStack
-                        - - id: getDirectionBetweenFirstAncestorOrThrowError
-                            dependsUpon: getDirectionBetweenItemsWhenMutualStack
-                  - - id: generateAncestors
-                      type: file
-                      items:
-                        - - id: generateAncestors
-                            dependsUpon: getParents
-                        - - id: getParents
+                              - addInStack
+                              - findDirectionBetweenItemsInMutualStack
+                        - - id: addInStack
+                            type: import
                             dependsUpon:
-                              - getAncestorWhenExists
-                              - getParentItem
-                        - - getParentItem
-                          - id: getAncestorWhenExists
-                            dependsUpon: whenHasBoth
-                            items: whenHasBoth
-                    - id: getDirectionBetweenItemsWhenMutualStack
-                      type: file
-                      items:
-                        - - id: getDirectionBetweenItemsWhenMutualStack
-                            type: export
+                              id: addInStack
+                              items: index
+                          - id: findDirectionBetweenItemsInMutualStack
+                            type: import
                             dependsUpon:
-                              - getWhenFromParent
-                              - getWhenSame
-                              - getWhenSameLevel
-                              - getWhenSameStack
-                              - getWhenToParent
+                              id: findDirectionBetweenItemsInMutualStack
+                              items: index
+                  - - id: addInStack
+                      type: directory
+                      items:
+                        - - id: index.test
+                            type: file
+                            dependsUpon: test
                             items:
-                              - - getWhenSame
-                                - getWhenSameLevel
-                                - id: getWhenSameStack
-                                  dependsUpon: getForStack
+                              - - dependsUpon:
+                                    - addInStack
+                                    - expect
+                                - dependsUpon:
+                                    - addInStack
+                                    - expect
+                                    - findDirectionBetweenItemsInMutualStack
                                   items:
-                                    id: getForStack
-                                    dependsUpon:
-                                      - from
-                                      - getDirectionFromVector
-                                      - getStackIndexOfItem
-                                      - to
-                                    items:
-                                      - - id: getStackIndexOfItem
-                                          dependsUpon: stack
-                                      - - id: stack
-                                          type: parameter
-                                - getWhenToParent
-                                - getWhenFromParent
-                              - - id: from
-                                  type: parameter
-                                - id: to
-                                  type: parameter
-                        - - getDirectionFromVector
+                                    - - id: findDirectionBetweenItemsInMutualStack
+                                        dependsUpon: findDirectionBetweenItemsInMutualStackCalls
+                                    - - id: findDirectionBetweenItemsInMutualStackCalls
+                                        type: variable
+                                - dependsUpon:
+                                    - addInStack
+                                    - expect
+                                - dependsUpon:
+                                    - addInStack
+                                    - expect
+                                    - findDirectionBetweenItemsInMutualStack
+                                  items:
+                                    - - id: findDirectionBetweenItemsInMutualStack
+                                        dependsUpon: findDirectionBetweenItemsInMutualStackCalls
+                                    - - id: findDirectionBetweenItemsInMutualStackCalls
+                                        type: variable
+                                - dependsUpon:
+                                    - addInStack
+                                    - expect
+                              - - id: addInStack
+                                  type: import
+                                  dependsUpon:
+                                    id: addInStack
+                                    items: index
+                        - - id: index
+                            type: file
+                            items:
+                              - - id: index
+                                  type: export
+                                  dependsUpon: withFindDirectionBetweenItemsInMutualStack
+                              - - id: withFindDirectionBetweenItemsInMutualStack
+                                  items:
+                                    - - id: inStack
+                                        dependsUpon: inItem
+                                    - - id: inItem
+                                        dependsUpon:
+                                          - findDirectionBetweenItemsInMutualStack
+                                          - withFindDependencyDirectionInMutualStack
+                                    - - id: findDirectionBetweenItemsInMutualStack
+                                        type: parameter
+                              - - id: withFindDependencyDirectionInMutualStack
+                                  items:
+                                    - - id: inDependencies
+                                        dependsUpon:
+                                          - inDependents
+                                          - inDependsUpon
+                                    - - id: inDependents
+                                        dependsUpon: inDependent
+                                    - - id: inDependent
+                                        dependsUpon:
+                                          - findDependencyDirectionInMutualStack
+                                          - setDirectionAndMutualStackInDependency
+                                      - id: inDependsUpon
+                                        dependsUpon: inDependUpon
+                                    - - id: inDependUpon
+                                        dependsUpon:
+                                          - findDependencyDirectionInMutualStack
+                                          - setDirectionAndMutualStackInDependency
+                                    - - id: findDependencyDirectionInMutualStack
+                                        type: parameter
+                              - - setDirectionAndMutualStackInDependency
+                    - id: findDirectionBetweenItemsInMutualStack
+                      type: directory
+                      items:
+                        - - id: index.test
+                            type: file
+                            dependsUpon:
+                              - createItemWithParent
+                              - createStackWithoutImplementation
+                              - describe
+                              - expect
+                              - test
+                              - testAncestor
+                              - id: findDirectionBetweenItemsInMutualStack
+                                items: index
+                            items:
+                              - - dependsUpon:
+                                    - createStackWithoutImplementation
+                                    - expect
+                                    - findDirectionBetweenItemsInFirstMutualStack
+                                - dependsUpon:
+                                    - createStackWithoutImplementation
+                                    - expect
+                                    - findDirectionBetweenItemsInFirstMutualStack
+                                - dependsUpon: test
+                                  items:
+                                    - dependsUpon:
+                                        - expect
+                                        - findDirectionBetweenItemsInFirstMutualStack
+                                    - dependsUpon:
+                                        - expect
+                                        - findDirectionBetweenItemsInFirstMutualStack
+                                - dependsUpon: test
+                                  items:
+                                    - dependsUpon:
+                                        - createItemWithParent
+                                        - createItemWithoutImplementation
+                                        - expect
+                                        - findDirectionBetweenItemsInFirstMutualStack
+                                    - dependsUpon:
+                                        - createItemWithParent
+                                        - createItemWithoutImplementation
+                                        - expect
+                                        - findDirectionBetweenItemsInFirstMutualStack
+                              - - id: createItemWithParent
+                                  dependsUpon: createStack
+                                  items: createStack
+                                - id: testAncestor
+                                  dependsUpon: test
+                                  items:
+                                    - - dependsUpon:
+                                          - createItemWithAncestor
+                                          - createItemWithoutImplementation
+                                          - expect
+                                          - findDirectionBetweenItemsInFirstMutualStack
+                                      - dependsUpon:
+                                          - createItemWithAncestor
+                                          - createItemWithoutImplementation
+                                          - expect
+                                          - findDirectionBetweenItemsInFirstMutualStack
+                                    - - id: createItemWithAncestor
+                                        type: parameter
+                              - - id: createItemWithoutImplementation
+                                  dependsUpon: createStackWithoutImplementation
+                              - - createStackWithoutImplementation
+                                - id: findDirectionBetweenItemsInFirstMutualStack
+                                  type: import
+                                  dependsUpon:
+                                    id: findDirectionBetweenItemsInMutualStack
+                                    items: index
+                        - - id: index
+                            type: file
+                            items:
+                              - - id: index
+                                  type: export
+                                  dependsUpon:
+                                    - generateAncestorPairs
+                                    - getDirectionBetweenFirstAncestorOrThrowError
+                              - - id: getDirectionBetweenFirstAncestorOrThrowError
+                                  dependsUpon: getDirectionBetweenItemsWhenMutualStack
+                        - - id: generateAncestorPairs
+                            type: file
+                            items:
+                              - - id: generateAncestorPairs
+                                  type: export
+                                  dependsUpon: generateAncestorPairsFromItemPairs
+                              - - id: generateAncestorPairsFromItemPairs
+                                  dependsUpon: getParentPairsOfItemPairs
+                              - - id: getParentPairsOfItemPairs
+                                  dependsUpon: getParentPairsOfItemPair
+                              - - id: getParentPairsOfItemPair
+                                  dependsUpon:
+                                    - getItemPairWhenExists
+                                    - getParentOfItem
+                              - - getParentOfItem
+                                - getItemPairWhenExists
+                          - id: getDirectionBetweenItemsWhenMutualStack
+                            type: file
+                            items:
+                              - - id: getDirectionBetweenItemsWhenMutualStack
+                                  type: export
+                                  dependsUpon:
+                                    - getWhenFromParent
+                                    - getWhenSame
+                                    - getWhenSameLevel
+                                    - getWhenSameStack
+                                    - getWhenToParent
+                                  items:
+                                    - - getWhenSame
+                                      - getWhenSameLevel
+                                      - id: getWhenSameStack
+                                        dependsUpon: getForStack
+                                        items:
+                                          id: getForStack
+                                          dependsUpon:
+                                            - from
+                                            - getDirectionFromVector
+                                            - getStackIndexOfItem
+                                            - to
+                                          items:
+                                            - - id: getStackIndexOfItem
+                                                dependsUpon: mutualStack
+                                            - - id: mutualStack
+                                                type: parameter
+                                      - getWhenToParent
+                                      - getWhenFromParent
+                                    - - id: from
+                                        type: parameter
+                                      - id: to
+                                        type: parameter
+                              - - getDirectionFromVector
               - id: findItemInStackWithIdentifierHierarchy
                 type: directory
                 items:
@@ -7384,9 +7454,6 @@
                                     type: parameter
                           - - getIdentifiersOfItemAndAncestors
                             - joinIdentifiers
-              - id: initializeParentReferencesInStack
-                type: file
-                items: initializeParentReferencesInStack
               - id: isInnerStack
                 type: directory
                 items:
