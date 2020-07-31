@@ -21,7 +21,7 @@ function inferStacksInStack(
 			dependenciesFromItemSelectors:
 				{
 					allInDifferentLevel: getDependsUponItemsFromItem,
-					anyInSameLevel: ({ dependents }) => dependents,
+					anyInSameLevel: getDependentItemsFromItem,
 				},
 			getLevelsFromNewLevelAndRemaining:
 				({ newLevel, remaining }) =>
@@ -37,7 +37,7 @@ function inferStacksInStack(
 		withDirection({
 			dependenciesFromItemSelectors:
 				{
-					allInDifferentLevel: ({ dependents }) => dependents,
+					allInDifferentLevel: getDependentItemsFromItem,
 					anyInSameLevel: getDependsUponItemsFromItem,
 				},
 			getLevelsFromNewLevelAndRemaining:
@@ -114,6 +114,16 @@ function inferStacksInStack(
 		for (const item of level)
 			item.level = level;
 	}
+}
+
+function getDependentItemsFromItem(
+	{ dependents },
+) {
+	return (
+		dependents
+		&&
+		dependents.map(({ item }) => item)
+	);
 }
 
 function getDependsUponItemsFromItem(
