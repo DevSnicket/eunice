@@ -7,6 +7,11 @@ import {
 } from "react-reflex";
 
 import {
+	addDirectionAndMutualStackToDependenciesInStack,
+	createYamlFromStack,
+} from "@devsnicket/eunice-dependency-and-structure";
+
+import {
 	callOrCreateElementOnError,
 	createHashFromLocation,
 	createResizableContainer,
@@ -15,7 +20,6 @@ import {
 
 import createCodeEditorForLanguage from "@devsnicket/eunice-test-harnesses/codeEditor/createEditorForLanguage";
 import { createElement } from "react";
-import { createYamlFromStack } from "@devsnicket/eunice-dependency-and-structure";
 import createYamlInputElement from "./createYamlInputElement";
 import createYamlOutputElement from "./createYamlOutputElement";
 import { safeDump as formatYaml } from "js-yaml";
@@ -62,12 +66,17 @@ function createInitialStateFromYaml(
 				{ lineWidth: Number.MAX_SAFE_INTEGER },
 			);
 
+		addDirectionAndMutualStackToDependenciesInStack(stack);
+
 		return {
 			stack,
 			yaml: `${getCommentPrefix()}${yamlWithInferLevels}`,
 		};
-	} else
+	} else {
+		addDirectionAndMutualStackToDependenciesInStack(stack);
+
 		return { stack, yaml };
+	}
 
 	function getCommentPrefix() {
 		const matches = yaml.match(/(?:#.*?\n)*/);

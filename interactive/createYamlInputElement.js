@@ -1,6 +1,6 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import parseStackFromYaml from "./parseStackFromYaml";
+import parseStackWithDependencyDirectionAndMutualStackFromYaml from "./parseStackWithDependencyDirectionAndMutualStackFromYaml";
 
 export default ({
 	createYamlEditorElement,
@@ -13,7 +13,7 @@ export default ({
 			value =>
 				stateful.setState(
 					{
-						stack: parseStackFromYaml(value),
+						stack: parseStackWithDependencyDirectionAndMutualStackFromYaml(value),
 						yaml: value,
 					},
 				),

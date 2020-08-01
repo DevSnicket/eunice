@@ -3,7 +3,7 @@
 import { createElement } from "react";
 import createElementsFromStack from "../";
 import { createHashFromLocation } from "@devsnicket/eunice-test-harnesses";
-import parseStackFromYaml from "../../../parseStackFromYaml";
+import parseStackWithDependencyDirectionAndMutualStackFromYaml from "../../../parseStackWithDependencyDirectionAndMutualStackFromYaml";
 import readTextFile from "../../../readTextFile";
 import { renderToStaticMarkup } from "react-dom/server";
 
@@ -23,7 +23,7 @@ async({
 				resizableElementTypes:
 					null,
 				stack:
-					parseStackFromYaml(yaml),
+					parseStackWithDependencyDirectionAndMutualStackFromYaml(yaml),
 			}),
 		),
 	)
