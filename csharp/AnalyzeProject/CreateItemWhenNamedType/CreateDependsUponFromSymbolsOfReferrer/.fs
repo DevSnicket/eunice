@@ -68,7 +68,7 @@ let createDependsUponFromSymbolsOfReferrer referrer =
                         dependUpon
                     | false ->
                         {
-                            Identifier = containingSymbol.MetadataName
+                            Identifier = containingSymbol |> formatIdentifierOfSymbol
                             Items = [ dependUpon ]
                         }
 

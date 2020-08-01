@@ -1,0 +1,6 @@
+<Project>
+	<Import Project="../../../Directory.Build.props" />
+	<PropertyGroup>
+		<TargetExt>.exe</TargetExt>
+	</PropertyGroup>
+</Project>

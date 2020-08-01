@@ -1,10 +1,10 @@
-﻿- id: TestCase
+﻿- id: TestCase.dll
   items:
     id: Namespace
     items:
       id: DerivedClass
       dependsUpon:
-        id: BaseClassProject
+        id: BaseClassProject.dll
         items:
           id: Namespace
           items: BaseClass

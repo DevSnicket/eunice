@@ -1,14 +1,14 @@
-﻿- id: BaseClassProject
+﻿- id: BaseClassProject.dll
   items:
     id: BaseClassNamespace
     items: BaseClass
-- id: DerivedClassProject
+- id: DerivedClassProject.dll
   items:
     id: DerivedClassNamespace
     items:
       id: DerivedClass
       dependsUpon:
-        id: BaseClassProject
+        id: BaseClassProject.dll
         items:
           id: BaseClassNamespace
           items: BaseClass

@@ -1,6 +1,6 @@
-﻿- id: TestCase
+﻿- id: TestCase.dll
   items:
     id: DerivedClass
     dependsUpon:
-      id: BaseClassProject
+      id: BaseClassProject.dll
       items: BaseClass

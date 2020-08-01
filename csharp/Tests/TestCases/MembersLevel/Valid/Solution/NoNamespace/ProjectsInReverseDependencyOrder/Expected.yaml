@@ -1,8 +1,8 @@
-﻿- id: BaseClassProject
+﻿- id: BaseClassProject.dll
   items: BaseClass
-- id: DerivedClassProject
+- id: DerivedClassProject.dll
   items:
     id: DerivedClass
     dependsUpon:
-      id: BaseClassProject
+      id: BaseClassProject.dll
       items: BaseClass

@@ -1,9 +1,9 @@
-﻿- id: TestCase
+﻿- id: TestCase.dll
   items:
     - CastedClass
     - id: CastingClass
       items:
         id: Method
         dependsUpon:
-          id: TestCase
+          id: TestCase.dll
           items: CastedClass

@@ -1,4 +1,4 @@
-﻿- id: TestCase
+﻿- id: TestCase.dll
   items:
     id: Class
     items: NestedClass

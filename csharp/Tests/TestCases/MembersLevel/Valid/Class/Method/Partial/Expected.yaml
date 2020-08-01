@@ -1,4 +1,4 @@
-﻿- id: TestCase
+﻿- id: TestCase.dll
   items:
     - id: Part1CalleeClass
       items: Part1CalleeMethod
