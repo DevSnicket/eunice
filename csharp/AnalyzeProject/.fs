@@ -3,7 +3,7 @@ module rec DevSnicket.Eunice.AnalyzeProject
 open DevSnicket.Eunice._AnalyzeProject
 open DevSnicket.Eunice._AnalyzeProject.CreateItemWhenNamedType
 open DevSnicket.Eunice._AnalyzeProject.FormatItemsAsYaml
-open DevSnicket.Eunice._AnalyzeProject.GetIdentifierOfAssemblyFromCompilation
+open DevSnicket.Eunice._AnalyzeProject.GetIdentifierOfAssembly
 open Microsoft.CodeAnalysis
 
 type MemberBehavior = DevSnicket.Eunice._AnalyzeProject._CreateItemWhenNamedType.MemberBehavior
@@ -39,8 +39,8 @@ let private createItemsInCompilation memberBehavior compilation =
             DependsUpon =
                 []
             Identifier =
-                compilation
-                |> getIdentifierOfAssemblyFromCompilation
+                compilation.Assembly
+                |> getIdentifierOfAssembly
             Items =
                 compilation.GlobalNamespace
                 |> createItemsFromMembersOfNamespace

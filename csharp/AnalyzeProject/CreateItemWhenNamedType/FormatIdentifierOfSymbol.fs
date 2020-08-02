@@ -1,15 +1,14 @@
 module rec DevSnicket.Eunice._AnalyzeProject._CreateItemWhenNamedType.FormatIdentifierOfSymbol
 
-open DevSnicket.Eunice._AnalyzeProject.GetIdentifierOfAssemblyFromCompilation
+open DevSnicket.Eunice._AnalyzeProject.GetIdentifierOfAssembly
 open Microsoft.CodeAnalysis
 
 type String = System.String
 
 let formatIdentifierOfSymbol: (ISymbol -> String) =
     function
-    | :? ISourceAssemblySymbol as sourceAssembly ->
-        sourceAssembly.Compilation
-        |> getIdentifierOfAssemblyFromCompilation
+    | :? IAssemblySymbol as assembly ->
+        assembly |> getIdentifierOfAssembly
     | symbol ->
         symbol.MetadataName
         +
