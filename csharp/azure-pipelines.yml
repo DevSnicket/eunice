@@ -13,6 +13,10 @@ steps:
   - task: ShellScript@2
     displayName: download and extract interactive package
     inputs: { scriptPath: WriteInteractiveInDirectoryPathWithYaml/download-and-extract-package.sh }
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: build
+      projects: Tests
   - task: ShellScript@2
     displayName: build/restore test case C# projects
     inputs: { scriptPath: Tests/TestCases/build-restore.sh }

@@ -3,6 +3,7 @@
 set -e
 
 ./clean.sh
+dotnet build Tests
 ./WriteInteractiveInDirectoryPathWithYaml/download-and-extract-package.sh
 ./Tests/TestCases/build-restore.sh
 ./test.sh
