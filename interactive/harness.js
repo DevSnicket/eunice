@@ -57,7 +57,7 @@ function createInitialStateFromYaml(
 
 	// replaced with literal
 	// eslint-disable-next-line no-undef
-	if (isInferStacksEnabledLiteralPlaceholder) {
+	if (isInferStacksEnabledLiteralPlaceholder && stack) {
 		inferStacksInStack(stack);
 
 		const yamlWithInferLevels =

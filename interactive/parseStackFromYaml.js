@@ -5,6 +5,8 @@ import { safeLoad as parseYaml } from "js-yaml";
 
 export default
 yaml =>
+	yaml
+	&&
 	createStackFromYaml(
 		// @ts-ignore
 		parseYaml(
