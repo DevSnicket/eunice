@@ -1,4 +1,4 @@
-# created by Eunice (http://www.devsnicket.com/eunice) version 7.11.0 on 2020-07-31T18:27:47.431Z
+# created by Eunice (http://www.devsnicket.com/eunice) version 7.11.1 on 2020-08-04T09:14:51.147Z
 - - id: javascript
     type: directory
     items:
@@ -3740,6 +3740,7 @@
                 items:
                   - - id: createInitialStateFromYaml
                       dependsUpon:
+                        - addDirectionAndMutualStackToDependenciesInStack
                         - createYamlFromStack
                         - formatYaml
                         - getCommentPrefix
@@ -3765,6 +3766,16 @@
                       type: variable
                     - id: createYamlEditorElement
                       type: variable
+                    - id: addDirectionAndMutualStackToDependenciesInStack
+                      type: import
+                      dependsUpon:
+                        id: dependency-and-structure
+                        items: addDirectionAndMutualStackToDependenciesInStack
+                    - id: createYamlFromStack
+                      type: import
+                      dependsUpon:
+                        id: dependency-and-structure
+                        items: createYamlFromStack
                     - id: callOrCreateElementOnError
                       type: import
                       dependsUpon:
@@ -3785,11 +3796,6 @@
                       dependsUpon:
                         id: react
                         items: createElement
-                    - id: createYamlFromStack
-                      type: import
-                      dependsUpon:
-                        id: dependency-and-structure
-                        items: createYamlFromStack
                     - id: createYamlOutputElement
                       type: import
                       dependsUpon:
@@ -3841,7 +3847,7 @@
                 items:
                   id: createYamlInputElement
                   type: export
-                  dependsUpon: parseStackFromYaml
+                  dependsUpon: parseStackWithDependencyDirectionAndMutualStackFromYaml
               - id: createYamlOutputElement
                 type: directory
                 items:
@@ -3908,7 +3914,7 @@
                                           - createElementsFromStack
                                           - createHashFromLocation
                                           - expect
-                                          - parseStackFromYaml
+                                          - parseStackWithDependencyDirectionAndMutualStackFromYaml
                                           - readTextFile
                                           - renderToStaticMarkup
                                           - wrapInPaddingDiv
@@ -3928,11 +3934,11 @@
                                         dependsUpon:
                                           id: test-harnesses
                                           items: createHashFromLocation
-                                      - id: parseStackFromYaml
+                                      - id: parseStackWithDependencyDirectionAndMutualStackFromYaml
                                         type: import
                                         dependsUpon:
                                           id: interactive
-                                          items: parseStackFromYaml
+                                          items: parseStackWithDependencyDirectionAndMutualStackFromYaml
                                       - id: readTextFile
                                         type: import
                                         dependsUpon:
@@ -4617,6 +4623,19 @@
                                     - - id: countDependenciesOfItem
                                         type: import
                                         dependsUpon: dependency-counter
+            - - id: parseStackWithDependencyDirectionAndMutualStackFromYaml
+                type: file
+                items:
+                  - - id: parseStackWithDependencyDirectionAndMutualStackFromYaml
+                      type: export
+                      dependsUpon:
+                        - addDirectionAndMutualStackToDependenciesInStack
+                        - parseStackFromYaml
+                  - - id: addDirectionAndMutualStackToDependenciesInStack
+                      type: import
+                      dependsUpon:
+                        id: dependency-and-structure
+                        items: addDirectionAndMutualStackToDependenciesInStack
               - id: writeHarness
                 type: directory
                 items:
@@ -4800,15 +4819,9 @@
                   - - id: parseStackFromYaml
                       type: export
                       dependsUpon:
-                        - addDirectionAndMutualStackToDependenciesInStack
                         - createStackFromYaml
                         - parseYaml
-                  - - id: addDirectionAndMutualStackToDependenciesInStack
-                      type: import
-                      dependsUpon:
-                        id: dependency-and-structure
-                        items: addDirectionAndMutualStackToDependenciesInStack
-                    - id: createStackFromYaml
+                  - - id: createStackFromYaml
                       type: import
                       dependsUpon:
                         id: dependency-and-structure
