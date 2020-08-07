@@ -7,7 +7,7 @@
 				"Tests/TestCases/"
 			],
 			"name": "program",
-			"program": "${workspaceFolder}/bin/Debug/eunice.dll",
+			"program": "${workspaceFolder}/bin/Debug/netcoreapp5.0/eunice.dll",
 			"request": "launch",
 			"requireExactSource": false,
 			"type": "coreclr"
@@ -17,7 +17,7 @@
 				"DevSnicket.Eunice.Tests.dll",
 				"-nologo"
 			],
-			"cwd": "${workspaceFolder}/Tests/bin/Debug",
+			"cwd": "${workspaceFolder}/Tests/bin/Debug/netcoreapp5.0",
 			"name": "tests",
 			"program": "xunit.console.dll",
 			"request": "launch",

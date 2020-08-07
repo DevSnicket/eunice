@@ -26,7 +26,16 @@
 		<Compile Include="RegisterAndGetPathOfMsbuild.fs" />
 		<Compile Include=".fs" />
 	</ItemGroup>
-	<Target AfterTargets="Build" Name="WriteXunitConsoleRuntime">
-		<Copy DestinationFiles="$(OutputPath)xunit.console.runtimeconfig.json" SourceFiles="$(OutputPath)$(AssemblyName).runtimeconfig.json" />
+	<Target
+		AfterTargets="Build"
+		Condition="$(TargetFramework)!=''"
+		Name="WriteXunitConsoleRuntime">
+		<Copy
+			DestinationFiles="$(OutputPath)xunit.console.runtimeconfig.json"
+			SourceFiles="$(OutputPath)$(AssemblyName).runtimeconfig.json" />
+		<WriteLinesToFile
+			File="$(OutputPath)global.json"
+			Overwrite="true"
+			Lines="{ &quot;sdk&quot;: { &quot;rollForward&quot;: &quot;latestFeature&quot;, &quot;version&quot;: &quot;$(_ShortFrameworkVersion).0&quot; } }" />
 	</Target>
 </Project>

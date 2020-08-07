@@ -18,7 +18,7 @@ dotnet tool install dotnet-reportgenerator-globaltool \
 || true # ignore error raised when already installed
 
 ./reportgenerator \
--reports:Tests/TestResults/coverage.xml \
+-reports:Tests/TestResults/coverage.netcoreapp3.1.xml \
 -reporttypes:"Html;JsonSummary" \
 -targetdir:Tests/TestResults/CoverageReport
 

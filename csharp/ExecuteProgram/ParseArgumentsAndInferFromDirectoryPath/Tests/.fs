@@ -19,7 +19,7 @@ type Tests () =
     static member TestCases =
         let getPathFromNames names =
             [|
-                ".."; ".."; ".."; "ExecuteProgram"; "ParseArgumentsAndInferFromDirectoryPath"; "Tests"; "TestCases"
+                ".."; ".."; ".."; ".."; "ExecuteProgram"; "ParseArgumentsAndInferFromDirectoryPath"; "Tests"; "TestCases"
                 yield! names
             |]
             |> Path.Join

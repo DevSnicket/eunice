@@ -9,6 +9,7 @@ type File = System.IO.File
 type MemberBehavior = DevSnicket.Eunice._AnalyzeProject._CreateItemWhenNamedType.MemberBehavior
 type Object = System.Object
 type Path = System.IO.Path
+type Regex = System.Text.RegularExpressions.Regex
 type String = System.String
 
 type Tests () =
@@ -50,6 +51,7 @@ type Tests () =
                         |> removeProjectDirectoryPathInErrors
                         |> removeMsbuildPathInErrors
                         |> replaceBackSlashesWithForwardInErrors
+                        |> removeLineNumbersInErrors
                     )
                     (
                         actualErrorsAndYamlLines.Yaml
@@ -81,6 +83,13 @@ type Tests () =
         errors.Replace (
             "\\",
             "/"
+        )
+
+    and removeLineNumbersInErrors errors =
+        Regex.Replace(
+            errors,
+            "\([0-9]+, [0-9]+\): ",
+            ""
         )
 
     and readExpectedInDirectory directory =
@@ -143,7 +152,7 @@ type Tests () =
 
         and findSolutionAndProjectFilePathsForMemberBehavior memberBehavior =
             [|
-                ".."; ".."; "TestCases"
+                ".."; ".."; ".."; "TestCases"
                 "Members" + memberBehavior.ToString()
             |]
             |> Path.Join

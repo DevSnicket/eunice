@@ -51,7 +51,7 @@ type Tests () =
 
     static member TestCases =
         let licence =
-            [| ".."; ".."; ".."; "LICENSE" |]
+            [| ".."; ".."; ".."; ".."; "LICENSE" |]
             |> Path.Join
             |> File.ReadAllLines
 

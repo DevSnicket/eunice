@@ -1,7 +1,6 @@
 <Project>
 	<PropertyGroup>
-		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
-		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<TargetFrameworks>netcoreapp3.1;netcoreapp5.0</TargetFrameworks>
 	</PropertyGroup>
 </Project>
