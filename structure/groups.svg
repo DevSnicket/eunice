@@ -35,23 +35,19 @@
 		<polyline points="7.5,0 7.5,12.5"/>
 		<use href="#arrow-head-down" y="12.5"/>
 	</symbol>
-	<symbol id="item">
+	<symbol id="item" overflow="visible">
 		<rect height="25" width="40"/>
 	</symbol>
-	<symbol id="stack">
-		<g transform="translate(0.5,0.5)">
-			<use href="#item"/>
-			<g transform="translate(0,25)">
-				<use href="#down-arrow" x="12.5"/>
-				<use href="#item" y="20"/>
-			</g>
+	<symbol id="stack" overflow="visible">
+		<use href="#item"/>
+		<g transform="translate(0,25)">
+			<use href="#down-arrow" x="12.5"/>
+			<use href="#item" y="20"/>
 		</g>
 	</symbol>
-	<symbol id="grouped-stack">
-		<g transform="translate(0.5,0.5)">
-			<rect height="90" width="60"/>
-			<use href="#stack" transform="translate(9.5,9.5)"/>
-		</g>
+	<symbol id="grouped-stack" overflow="visible">
+		<rect height="90" width="60"/>
+		<use href="#stack" transform="translate(9.5,9.5)"/>
 	</symbol>
 	<g transform="translate(0.5,0)">
 		<text x="35" y="16">stack</text>
