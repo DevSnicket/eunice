@@ -1,4 +1,4 @@
-<svg height="73" width="555" xmlns="http://www.w3.org/2000/svg">
+<svg height="73" width="568" xmlns="http://www.w3.org/2000/svg">
 	<defs><style type="text/css">polyline{fill:none;stroke:black}rect{fill:lightgray}text{font-family:arial}text.transition{font-size:10px}text.stage{font-size:16px}</style></defs>
 	<symbol id="arrow-head">
 		<polygon points="0,0 0,20 10,10"/>
@@ -28,14 +28,14 @@
 	<use href="#arrow-head" x="240" y="38"/>
 	<use href="#process" x="250" y="21"/>
 	<use href="#yaml-arrow" x="325" y="21"/>
-	<rect x="370" y="21" width="67" height="32"/>
-	<text class="stage" x="380" y="43">render</text>    
-	<polyline points="437,37 478,37"/>
-	<text class="transition" x="442" y="31">SVG</text>
-	<use href="#arrow-head" x="468" y="27"/>
-	<rect x="478" y="21" width="77" height="32"/>
-	<text class="stage" x="488" y="43">browser</text>    
-	<polyline points="516.5,53 516.5,73 400.5,73 400,53"/>
-	<text class="transition" x="464" y="67">interaction</text>
-	<polygon points="410,63 390,63 400,53"/>
+	<rect x="370" y="21" width="80" height="32"/>
+	<text class="stage" x="380" y="43">visualize</text>
+	<polyline points="450,37 491,37"/>
+	<text class="transition" x="455" y="31">SVG</text>
+	<use href="#arrow-head" x="481" y="27"/>
+	<rect x="491" y="21" width="77" height="32"/>
+	<text class="stage" x="501" y="43">browser</text>
+	<polyline points="529.5,53 529.5,73 413.5,73 413,53"/>
+	<text class="transition" x="477" y="67">interaction</text>
+	<polygon points="423,63 403,63 413,53"/>
 </svg>

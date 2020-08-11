@@ -1,16 +1,18 @@
 import githubNodejsJsonRequest from "../../githubNodejsJsonRequest.js";
 import requestAndFormatHtmlForReleasesList from "../requestAndFormatHtmlForReleasesList.js"
-import { updateInHtmlIndexFile } from "../../textFiles.js";
+import updateInHtmlFile from "../../updateInHtmlFile.js";
 
-export default language =>
-	requestAndFormatHtmlForReleasesList({
-		language,
-		requestJsonFromUrl: githubNodejsJsonRequest,
-	})
-	.then(
-		html =>
-			updateInHtmlIndexFile({
-				content: html,
-				tag: "releasesList",
+export default async (
+	language
+) =>
+	await updateInHtmlFile({
+		content:
+			await requestAndFormatHtmlForReleasesList({
+				language,
+				requestJsonFromUrl: githubNodejsJsonRequest,
 			}),
-	);
+		filePath:
+			"./index.html",
+		tag:
+			"releasesList",
+	});

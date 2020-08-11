@@ -26,7 +26,14 @@
 			"request": "launch",
 			"runtimeArgs": [ "--experimental-modules" ],
 			"type": "node"
-		}
+		},
+		{
+			"name": "updateMenus",
+			"program": "updateMenus.js",
+			"request": "launch",
+			"runtimeArgs": [ "--experimental-modules" ],
+			"type": "node"
+		},
 	],
 	"version": "0.2.0"
 }

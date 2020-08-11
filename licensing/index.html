@@ -7,15 +7,19 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        div.usage {
+        div.free-usage {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
         }
-        div.usage .box {
+        @media (max-width: 60em) {
+            div.free-usage {
+                flex-wrap: wrap;
+            }
+        }
+        div.free-usage .box {
             padding: 1em;
         }
-        div.usage h2 {
+        div.free-usage h2 {
             margin: 0 0 0.5em 0;
             text-align: center;
         }
@@ -24,79 +28,58 @@
             margin-left: auto;
             margin-right: auto;
         }
+        .patreon {
+            background-color: #FF424D;
+            height: 2em;
+            padding: 2em;
+        }
+        .sponsor {
+            display: flex;
+        }
+        @media (max-width: 40em) {
+            .sponsor {
+                flex-wrap: wrap;
+            }
+        }
+        .sponsor a {
+            text-decoration: none;
+        }
+        .sponsor .on-patreon {
+            text-align: center;
+        }
     </style>
-    <title>Licensing | Eunice</title>
+    <title>Sponsorship / Licensing | Eunice</title>
 </head>
 <body>
     <div class="header">
         <div class="content">
             <h1><a href=".."><span><span class="red">e</span>uni<span class="red">ce</span></span><div class="arrows"></div></a></h1>
-            <span class="menu"><a href="..">intro</a><a href="../structure">structure</a><a href="../dependencies">dependencies</a><a href="../case-studies">case studies</a><a href="../languages">languages<a href="../issues">issues</a><a class="current" href=".">licensing</a><a href="../advanced">advanced</a></span>
+            <menu><a href="..">intro</a><a href="../structure">structure</a><a href="../dependencies">dependencies</a><a href="../case-studies">case studies</a><a href="../languages">languages</a><a href="../issues">issues</a><a class="current" href="../licensing">sponsor</a><a href="../advanced">advanced</a></menu>
         </div>
     </div>
     <div class="content">
-        <div class="usage">
+        <div class="box sponsor">
+            <a href="https://www.patreon.com/devsnicket_eunice" rel="noopener" target="_blank"><div class="on-patreon"><h1>sponsor on</h1><img class="patreon" src="./patreon-wordmark-white.svg" /></div></a>
             <div>
-                <div class="box">
-                    <h2>free for open source</h2>
-                    <div><div>Open Source Initiative approved licenses</div><a href="https://opensource.org/licenses" rel="noopener" target="_blank">https://opensource.org/licenses</a><p style="font-size:small; font-style: italic">please consider supporting the project by sponsoring</p></div>
-                </div>
-                <div class="box">
-                    <h2>free for academic research</h2>
-                    <div><div>including online or in person</div><div>classroom training and education</div><p style="font-size:small; font-style: italic">please consider supporting the project by sponsoring</p></div>
-                </div>
-                <div class="box">
-                    <h2>90 day evaluation period</h2>
-                    <div>for use on commercial projects</div>
-                </div>
+                <p>use Eunice on commercial projects</p>
+                <p>guidance and technical support</p>
+                <p>prioritize - bugs, enhancements, language support</p>
+                <p>case studies of open source projects</p>
+                <p>your company logo and website link on the Eunice home page</p>
+            </div>
+        </div>
+        <div class="free-usage">
+            <div class="box">
+                <h2>free for open source</h2>
+                <div><p>on projects that have an Open Source Initiative approved license</p><a href="https://opensource.org/licenses" rel="noopener" target="_blank">https://opensource.org/licenses</a><p style="font-size:small; font-style: italic">please consider supporting the project by sponsoring</p></div>
             </div>
             <div class="box">
-                <h2>monthly sponsorship</h2>
-                <p>use on commercial projects</p>
-                <p>guidance and technical support</p>
-                <p>bug fix and enhancement priority</p>
-                <p>decide what sources of analysis Eunice will<br/>support next (e.g. programming languages)</p>
-                <p>sponsor case studies of open source projects</p>
-                <img alt="PayPal" class="block-center" src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-150px.png">
-                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" rel="noopener" target="_blank">
-                    <!--cSpell:disable -->
-                    <input name="cmd" type="hidden" value="_s-xclick">
-                    <!--cSpell:enable -->
-                    <input name="on0" type="hidden" value="name of recipient">
-                    <p>
-                        individual:
-                        <!--cSpell:disable -->
-                        <input name="hosted_button_id" id="usd" required type="radio" value="2F26XVUC36A2G"><label for="usd">$12</label>
-                        <input name="hosted_button_id" id="eur" required type="radio" value="JN5TELXTWEE78"><label for="eur">€11</label>
-                        <input name="hosted_button_id" id="gbp" required type="radio" value="NCFWLTNN32SQS"><label for="gbp">£10</label>
-                        <!--cSpell:enable -->
-                    </p>
-                    <p>
-                            <label>name of recipient</label>
-                            <input maxlength="200" name="os0" type="text">
-                    </p>
-                    <input alt="Subscribe" class="block-center" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribeCC_LG.gif" type="image">
-                </form>
-                <hr/>
-                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" rel="noopener" target="_blank">
-                    <!--cSpell:disable -->
-                    <input name="cmd" type="hidden" value="_s-xclick">
-                    <!--cSpell:enable -->
-                    <input name="on0" type="hidden" value="name of recipients">
-                    <p>
-                        50% discount:
-                        <!--cSpell:disable -->
-                        <input name="hosted_button_id" id="usd5" required type="radio" value="WLRY9UU8VNTE4"><label for="usd5">5 x $6</label>
-                        <input name="hosted_button_id" id="eur5" required type="radio" value="VJ5NTF9FNENF2"><label for="eur5">5 x €5.5</label>
-                        <input name="hosted_button_id" id="gbp5" required type="radio" value="HANKHZ4UPEM7Y"><label for="gbp5">5 x £5</label>
-                        <!--cSpell:enable -->
-                    </p>
-                    <p>
-                            <label>name of recipients</label>
-                            <textarea maxlength="200" name="os0" rows="5" style="vertical-align: middle"></textarea>
-                    </p>
-                    <input alt="Subscribe" class="block-center" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribeCC_LG.gif" type="image">
-                </form>
+                <h2>free for academic research</h2>
+                <div><div>including online or in person</div><div>classroom training and education</div><p style="font-size:small; font-style: italic">please consider supporting the project by sponsoring</p></div>
+            </div>
+            <div class="box">
+                <h2>90 day evaluation period</h2>
+                <div>for use on commercial projects</div>
             </div>
         </div>
         <p>If you have any queries, or would like to discuss alternative licenses or discounts please contact <a href="mailto:licensing@devsnicket.com">licensing@devsnicket.com</a>.</p>
@@ -104,9 +87,9 @@
         <pre style="white-space: pre-wrap;">Copyright (c) 2019 Graham Dyson. All Rights Reserved.
 
 Eunice End-User License Agreement ("Agreement")
-Last updated: 1st September 2019
+Last updated: 10th August 2020
 
-These license terms are an agreement between you and Graham Dyson. They apply to the application named Eunice ("Application"). Read the terms and conditions of this agreement carefully before using the Application. Using the Application indicates your acceptance of these license terms. If you do not accept these license terms, you should not use the Application. The terms also apply to any other method of distributing the Application.
+These license terms are an agreement between you and Graham Dyson.  They apply to the application named Eunice ("Application").  Read the terms and conditions of this agreement carefully before using the Application.  Using the Application indicates your acceptance of these license terms.  If you do not accept these license terms, you should not use the Application.  The terms also apply to any other method of distributing the Application.
 
 1. Use rights.
 
@@ -114,9 +97,9 @@ a. The Application may be used to analyze, investigate, design, develop and test
 
 b. The Application may be used to analyze, investigate, design, develop and test software as part of online or in person classroom training and education, or for performing academic research.
 
-c. Subscription. In consideration of you paying to us the Subscription Fee, we grant you a non-exclusive, non-transferable right to access and use the Application during the Subscription Period in accordance with this Agreement. The Subscription is personal to you. You may not rent, lease, sub-license, sell, pledge, assign the benefit or delegate the burden of this Agreement or Subscription Software or hold this Agreement on trust for any other person. You shall not use the Application to manufacture or distribute a product that is substantially similar to or competitive with our software. Information on how to pay the Subscription Fee can found on the following web page http://www.devsnicket.com/eunice/licensing.
+c. Sponsorship.  In consideration of you paying to us the Sponsorship Fee, we grant you a non-exclusive, non-transferable right to access and use the Application during the Sponsorship Period in accordance with this Agreement. The Sponsorship is personal to you.  You may not rent, lease, sub-license, sell, pledge, assign the benefit or delegate the burden of this Agreement or Application or hold this Agreement on trust for any other person. You shall not use the Application to manufacture or distribute a product that is substantially similar to or competitive with our software.  Information on how to pay the Sponsorship Fee can found on the following web page https://devsnicket.com/eunice/licensing.
 
-c. Evaluation. An individual can use the Application to analyze, investigate, design, develop and test software for an Evaluation Period. The Evaluation Period lasts 90 days from the first use of the Application by an individual. An individual can only commence one trail period per calendar year. You may only use the the Application for internal evaluation purposes, and only during the Evaluation Period, except for: (a) open source, (b) education purposes and (c) with a monthly Subscription as permitted above. The Evaluation Period may be extended by written agreement with us.
+c. Evaluation.  An individual can use the Application to analyze, investigate, design, develop and test software for an Evaluation Period.  The Evaluation Period lasts 90 days from the first use of the Application by an individual. An individual can only commence one Evaluation Period per calendar year.  You may only use the the Application for internal evaluation purposes, and only during the Evaluation Period, except for: (a) open source, (b) education purposes and (c) with a monthly Sponsorship as permitted above.  The Evaluation Period may be extended by written agreement with us.
 
 e. If none of the above apply, individuals, and employees and contractors of an organization may not use the the Application.
 
@@ -126,7 +109,7 @@ The Application includes third party components with separate legal notices or g
 
 3. Scope of license.
 
-The Application is licensed, not sold. These license terms only give you some rights to use the Application. Graham Dyson reserves all other rights. Unless applicable law gives you more rights despite this limitation, you may use the Application only as expressly permitted in these license terms. In doing so, you must comply with any technical limitations in the Application that only allow you to use it in certain ways. In addition, you may not:
+The Application is licensed, not sold.  These license terms only give you some rights to use the Application.  Graham Dyson reserves all other rights.  Unless applicable law gives you more rights despite this limitation, you may use the Application only as expressly permitted in these license terms.  In doing so, you must comply with any technical limitations in the Application that only allow you to use it in certain ways.  In addition, you may not:
 
 · reverse engineer, decompile or disassemble the Application, or otherwise attempt to derive the source code for the Application, except and only to the extent required by third party licensing terms governing use of certain open source components that may be included with the Application;
 
@@ -140,11 +123,11 @@ The Application is licensed, not sold. These license terms only give you some ri
 
 4. Support.
 
-Because the Application is “as is”, we may not provide support services for it. If you have paid for a Subscription, support is given for the Subscription Period.
+Because the Application is “as is”, we may not provide support services for it. If you have paid for a Sponsorship, support is given for the Sponsorship Period.
 
 5. Disclaimer of warranty.
 
-There is no warranty for the Application, to the extent permitted by applicable law. Except when otherwise stated in writing the copyright holders and/or other parties provide the Application “as is” without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose. The entire risk as to the quality and performance of the Application is with you. Should the Application prove defective, you assume the cost of all necessary servicing, repair or correction.
+There is no warranty for the Application, to the extent permitted by applicable law.  Except when otherwise stated in writing the copyright holders and/or other parties provide the Application “as is” without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.  The entire risk as to the quality and performance of the Application is with you.  Should the Application prove defective, you assume the cost of all necessary servicing, repair or correction.
 
 6. Limitation of liability.
 
@@ -156,16 +139,15 @@ If the disclaimer of warranty and limitation of liability provided above cannot 
 
 8. Modifications to Application
 
-Graham Dyson reserves the right to modify, suspend or discontinue, temporarily or permanently, the Application or any service to which it connects, with or without notice and without
-liability to you.
+Graham Dyson reserves the right to modify, suspend or discontinue, temporarily or permanently, the Application or any service to which it connects, with or without notice and without liability to you.
 
 9. Term and Termination
 
-This Agreement shall remain in effect until terminated by you or Graham Dyson. Graham Dyson may, in their sole discretion, at any time and for any or no reason, suspend or terminate this Agreement with or without prior notice. This Agreement will terminate immediately, without prior notice from Graham Dyson, in the event that you fail to comply with any provision of this Agreement. You may also terminate this Agreement by deleting the Application and all copies thereof from your computer.
+This Agreement shall remain in effect until terminated by you or Graham Dyson. Graham Dyson may, in their sole discretion, at any time and for any or no reason, suspend or terminate this Agreement with or without prior notice.  This Agreement will terminate immediately, without prior notice from Graham Dyson, in the event that you fail to comply with any provision of this Agreement.  You may also terminate this Agreement by deleting the Application and all copies thereof from your computer.
 
 10. Amendments to this Agreement
 
-Graham Dyson reserves the right, at their sole discretion, to modify or replace this Agreement at any time. If a revision is material we will provide at least 30 days notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</pre>
+Graham Dyson reserves the right, at their sole discretion, to modify or replace this Agreement at any time.  If a revision is material we will provide at least 30 days notice prior to any new terms taking effect.  What constitutes a material change will be determined at our sole discretion.</pre>
     </div>
     <div class="footer">
         <p class="links">

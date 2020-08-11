@@ -1,19 +1,19 @@
 import formatHtmlForIssues from "./formatHtmlForIssues.js";
 import githubIssuesUrl from "./githubIssuesUrl.js";
 import githubNodejsJsonRequest from "../githubNodejsJsonRequest.js";
-import { updateInHtmlIndexFile } from "../textFiles.js";
+import updateInHtmlFile from "../updateInHtmlFile.js";
 
-githubNodejsJsonRequest(
-	githubIssuesUrl,
-)
-.then(
-	issues =>
-		updateInHtmlIndexFile({
-			content:
-				formatHtmlForIssues(
-					issues,
-				),
-			tag:
-				"issuesList",
-		}),
-);
+(async () => {
+	await updateInHtmlFile({
+		content:
+			formatHtmlForIssues(
+				await githubNodejsJsonRequest(
+					githubIssuesUrl,
+				)
+			),
+		filePath:
+			"./index.html",
+		tag:
+			"issuesList",
+	});
+})();

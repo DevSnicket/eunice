@@ -139,6 +139,7 @@ body > .header > .content {
     align-items: center;
     display: flex;
     margin: 0 auto 0 auto;
+    min-height: 4.5em;
 }
 
 body > .header a {
@@ -167,16 +168,17 @@ body > .header h1 .arrows {
     width: 2.8em;
 }
 
-body > .header .menu {
+body > .header menu {
     display: flex;
     flex-grow: 1;
     flex-wrap: wrap;
     justify-content: flex-end;
     margin: 0.25em;
+    padding: 0;
 }
 
 .box,
-body > .header .menu a {
+body > .header menu a {
     border-width: 1px;
     border-style: solid;
     border-radius: 0.3em;
@@ -186,11 +188,11 @@ body > .header .menu a {
     border-radius: 0.3em;
 }
 
-body > .header .menu a {
+body > .header menu a {
     border-radius: 0.15em;
 }
 
-body > .header .menu a {
+body > .header menu a {
     background-color: darkgreen;
     border-color: #7FB17F;
     color: white;
@@ -198,7 +200,7 @@ body > .header .menu a {
     padding: 0.3em 0.6em;
 }
 
-body > .header .menu a.current {
+body > .header menu a.current {
     background-color: white;
     border-color: #F7F7F7;
     color: unset;
@@ -222,6 +224,10 @@ code {
 .horizontal-menu > * {
     margin-bottom: 0.5rem;
     padding: 0 0.5rem;
+}
+
+html {
+    overflow-y: scroll;
 }
 
 h1,
@@ -256,13 +262,13 @@ ul li {
 
 @media (prefers-color-scheme: dark) {
     body,
-    body > .header .menu a.current {
+    body > .header menu a.current {
         background-color: #303030;
     }
 
     body,
-    body > .header .menu a,
-    body > .header .menu a.current {
+    body > .header menu a,
+    body > .header menu a.current {
         color: #D0D0D0;
     }
 
@@ -311,12 +317,12 @@ ul li {
         background-image: url(./arrows/dark/default-height.svg);
     }
     
-    body > .header .menu a {
+    body > .header menu a {
         border-color: #306230;
     }
 
     body > .header,
-    body > .header .menu a.current,
+    body > .header menu a.current,
     .box {
         border-color: #373737;
     }
