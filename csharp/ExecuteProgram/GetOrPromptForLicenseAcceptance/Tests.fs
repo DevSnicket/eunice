@@ -51,20 +51,23 @@ type Tests () =
 
     static member TestCases =
         let licence =
-            [| ".."; ".."; ".."; ".."; "LICENSE" |]
+            [|
+                ".."; ".."; ".."; ".."
+                "license.txt" // cspell:disable-line
+            |]
             |> Path.Join
             |> File.ReadAllLines
 
         let explanationWriteLines =
             [
-                "To use this program you must accept the license http://www.devsnicket.com/eunice/licensing"
+                "To use this program you must accept the license https://devsnicket.com/eunice/licensing"
                 commercialUseText
                 ""
             ]
 
         let instructionsWriteLines =
             [
-                "To accept, press the A key or run again with the --accept-license argument."
+                "To accept and continue, press the A key or run again with the --accept-license argument."
                 "Press the V key to view the license."
                 "Any other key will exit without accepting the license."
                 ""
@@ -88,10 +91,10 @@ type Tests () =
                             false
                         WriteLines =
                             [
-                                "To use this program you must accept the license http://www.devsnicket.com/eunice/licensing"
+                                "To use this program you must accept the license https://devsnicket.com/eunice/licensing"
                                 commercialUseText
                                 ""
-                                "To accept run again with the --accept-license argument."
+                                "To accept and continue run again with the --accept-license argument."
                             ]
                     |}
                 ReadKeysQueue =
@@ -108,7 +111,7 @@ type Tests () =
                             true
                         WriteLines =
                             [
-                                "By specifying --accept-license you have accepted the license http://www.devsnicket.com/eunice/licensing"
+                                "By specifying --accept-license you have accepted the license https://devsnicket.com/eunice/licensing"
                                 commercialUseText
                                 ""
                             ]

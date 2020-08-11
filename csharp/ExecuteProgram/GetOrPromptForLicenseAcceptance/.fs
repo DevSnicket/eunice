@@ -46,7 +46,7 @@ let private instructOrPrompt parameter =
         if parameter.IsInteractive then
             return! parameter |> prompt
         else
-            "To accept run again with the " + ArgumentNames.AcceptLicense + " argument."
+            "To accept and continue run again with the " + ArgumentNames.AcceptLicense + " argument."
             |> parameter.WriteLine
 
             return false
@@ -57,7 +57,7 @@ let private prompt parameter =
         async {
             for line in
                 seq [
-                    "To accept, press the A key or run again with the " + ArgumentNames.AcceptLicense + " argument."
+                    "To accept and continue, press the A key or run again with the " + ArgumentNames.AcceptLicense + " argument."
                     "Press the V key to view the license."
                     "Any other key will exit without accepting the license."
                     ""
@@ -78,7 +78,7 @@ let private prompt parameter =
     and viewLicense () =
         async {
             let! license =
-                [ "LICENSE" ]
+                [ "license.txt" ] // cspell:disable-line
                 |> readTextFromEmbedded
 
             for line in
@@ -93,4 +93,4 @@ let private prompt parameter =
 
     prompt ()
 
-let licenseUrlText = "the license http://www.devsnicket.com/eunice/licensing"
+let licenseUrlText = "the license https://devsnicket.com/eunice/licensing"

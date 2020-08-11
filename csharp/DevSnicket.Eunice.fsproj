@@ -4,11 +4,12 @@
 		<OutputType>Exe</OutputType>
 		<PackageDescription>Eunice is based on the premise that software structure and modularity improve when dependencies are unidirectional. Eunice analyses source code, infers its structure and shows if the dependencies match.</PackageDescription>
 		<PackageIcon>icon.png</PackageIcon>
+		<PackageLicenseFile>license.txt</PackageLicenseFile>
 		<PackageProjectUrl>https://devsnicket.com/eunice</PackageProjectUrl>
 		<PackageTags>analyze;analyzer;architecture;dependency;dependencies;csharp;euince;stack;structure;uince;unice</PackageTags>
 		<PackageType>DotNetCliTool</PackageType>
 		<PackAsTool>true</PackAsTool>
-		<Version>1.17.0</Version>
+		<Version>1.18.0</Version>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Build.Locator" Version="1.2.6" />
@@ -57,10 +58,11 @@
 		<Compile Include="ExecuteProgram/.fs" />
 	</ItemGroup>
 	<ItemGroup>
-		<EmbeddedResource Include="LICENSE" />
+		<EmbeddedResource Include="license.txt" />
 		<EmbeddedResource Include="WriteInteractiveInDirectoryPathWithYaml/index.html" />
 	</ItemGroup>
 	<ItemGroup>
+		<None Include="license.txt" Pack="true" PackagePath="\"/>
 		<None Include="package/$(PackageIcon)" Pack="true" PackagePath="\" />
 	</ItemGroup>
 </Project>
