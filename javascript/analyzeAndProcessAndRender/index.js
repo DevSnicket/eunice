@@ -61,7 +61,7 @@ function formatHeader({
 	date,
 	version,
 }) {
-	return `created by Eunice (http://www.devsnicket.com/eunice) version ${version} on ${formatDate()}`;
+	return `created by Eunice (https://devsnicket.com/eunice) version ${version} on ${formatDate()}`;
 
 	function formatDate() {
 		return (

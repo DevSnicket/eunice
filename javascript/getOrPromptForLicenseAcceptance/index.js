@@ -57,7 +57,7 @@ export default ({
 		if (standardInputStream.isTTY)
 			return prompt();
 		else {
-			log(`To accept run again with the --${acceptLicenseParameter} argument.`);
+			log(`To accept and continue run again with the --${acceptLicenseParameter} argument.`);
 
 			return false;
 		}
@@ -119,7 +119,7 @@ export default ({
 		}
 
 		function logPrompt() {
-			log(`To accept, press the ${formatBold("A key")} or run again with the ${formatBold(`--${acceptLicenseParameter}`)} argument.`);
+			log(`To accept and continue, press the ${formatBold("A key")} or run again with the ${formatBold(`--${acceptLicenseParameter}`)} argument.`);
 			log(`Press the ${formatBold("V key")} to view the license.`);
 			log("Any other key will exit without accepting the license.");
 		}
@@ -139,5 +139,5 @@ function logTextFile({
 }
 
 export const
-	commercialUseText = "Commercial use (after the evaluation period) requires a subscription, visit the page above for more information.",
-	licenseText = "the license http://www.devsnicket.com/eunice/licensing";
+	commercialUseText = "To support Eunice through sponsorship visit the website above (required for commercial use after evaluation).",
+	licenseText = "the license https://devsnicket.com/eunice/licensing";

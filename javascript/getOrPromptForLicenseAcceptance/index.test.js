@@ -101,7 +101,7 @@ test(
 					[ `To use this program you must accept ${licenseText}` ],
 					[ commercialUseText ],
 					[],
-					[ "To accept run again with the --accept-license argument." ],
+					[ "To accept and continue run again with the --accept-license argument." ],
 				],
 		});
 	},
@@ -127,7 +127,7 @@ describe(
 					[ `To use this program you must accept ${licenseText}` ],
 					[ commercialUseText ],
 					[],
-					[ "To accept, press the A key or run again with the --accept-license argument." ],
+					[ "To accept and continue, press the A key or run again with the --accept-license argument." ],
 					[ "Press the V key to view the license." ],
 					[ "Any other key will exit without accepting the license." ],
 				];
