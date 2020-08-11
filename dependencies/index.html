@@ -5,123 +5,19 @@
     <link href="../index.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <meta charset="utf-8"/>
+    <meta http-equiv="refresh" content="0;URL=../how-it-works#dependencies" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        .arrows-with-descriptions {
-            background-image: url(../arrows/with-descriptions.svg);
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: contain;
-            height: 120px;
-            max-width: 85vw;
-            max-width: calc(100vw - 5em);
-            width: 390px;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .arrows-with-descriptions {
-                background-image: url(../arrows/dark/with-descriptions.svg);
-            }
-        }
-
-        .box {
-            height: fit-content;
-        }
-
-        .example {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .example img {
-            background: white;
-            padding: 0.5em;
-        }
-
-        .example > div {
-            align-items: center;
-            display: flex;
-            width: fit-content;
-        }
-
-        .example.tall > div > div {
-            width: min-content;
-        }
-    </style>
     <title>Dependencies | Eunice</title>
 </head>
 <body>
     <div class="header">
         <div class="content">
             <h1><a href=".."><span><span class="red">e</span>uni<span class="red">ce</span></span><div class="arrows"></div></a></h1>
-            <menu><a href="..">intro</a><a href="../structure">structure</a><a class="current" href="../dependencies">dependencies</a><a href="../case-studies">case studies</a><a href="../languages">languages</a><a href="../issues">issues</a><a href="../licensing">sponsor</a><a href="../advanced">advanced</a></menu>
+            <menu><a href="..">intro</a><a class="current" href="../how-it-works">how it works</a><a href="../case-studies">case studies</a><a href="../languages">languages</a><a href="../issues">issues</a><a href="../licensing">sponsor</a></menu>
         </div>
     </div>
     <div class="content">
-        <h2>arrows</h2>
-        <p>Instead of showing dependencies as lines between items each dependency is counted into the following categories:</p>
-        <div class="box horizontal-container" style="align-items: center; width: fit-content">
-            <div class="arrows-with-descriptions"></div>
-            <div>
-                <div>matches stack<div class="detail green">green down arrow</div></div>
-                <div>does not match stack<div class="detail red">red up arrow</div></div>
-                <div>is not independent<div class="detail red">red horizontal arrow</div></div>
-            </div>
-        </div>
-        <p>Stacks are explained in the <a href="../structure">structure</a> section.</p>
-        <p>Selecting an arrow will list the dependencies counted in it (except arrows inside items which will open the item).</p>
-        <h2>counts</h2>
-        <p>Dependency counts appear for both sides of the dependency, the dependent item and the item depended on. When there are multiple counts a summary of all the counts is shown at the bottom.</p>
-        <div class="example tall">
-            <div class="box">
-                <div>upper depends on lower</div>
-                <img alt="Diagram of a stack where the upper item depends upon the lower item" src="../examples/stack/upper-depends-upon-lower.svg"/>
-            </div>
-            <div class="box">
-                <div>lower depends on upper</div>
-                <img alt="Diagram of a stack where the lower item depends upon the upper item" src="../examples/stack/lower-depends-upon-upper.svg"/>
-            </div>
-            <div class="box">
-                <div>interdependent (stacked)</div>
-                <img alt="Diagram of a stack where the upper and lower items depend on each other" src="../examples/stack/two-interdependent.svg"/>
-            </div>
-        </div>
-        <div class="example">
-            <div class="box">
-                <div>independent</div>
-                <img alt="Diagram of two independent items" src="../examples/two.svg"/>
-            </div>
-            <div class="box">
-                <div><div>first depends</div><div>on second</div></div>
-                <img alt="Diagram of a level where the first item depends on the second" src="../examples/level/first-depends-upon-second.svg"/>
-            </div>
-            <div class="box">
-                <div><div>interdependent</div><div>(not stacked)</div></div>
-                <img alt="Diagram of a level where the first and second items depend on each other" src="../examples/level/two-interdependent.svg"/>
-            </div>
-        </div>
-        <p>Dependencies within an item are also summarized and shown inside the item box, below the identifer text.</p>
-        <div class="example">
-            <div class="box">
-                <div><div>parent</div><div>depends on</div><div>item</div></div>
-                <img alt="Diagram of a parent dependent on one of its child items" src="../examples/parent-depends-upon-item.svg"/>
-            </div>
-            <div class="box">
-                <div><div>item</div><div>depends on</div><div>parent</div></div>
-                <img alt="Diagram of a parent where one of its child items depends on the parent" src="../examples/item-depends-upon-parent.svg"/>
-            </div>
-            <div class="box">
-                <div><div>first item</div><div>depends on</div><div>second item</div><div>(not stacked)</div></div>
-                <img alt="Diagram of a parent where one its child items depends on another child item in the same level" src="../examples/level/first-item-depends-upon-second-item.svg"/>
-            </div>
-        </div>
-        <p>Items and sub-items can also be opened. Selecting an item will show its contents and breadcrumb links for where it is in the hierarchy.</p>
-        <div class="box" style="width: fit-content">
-            <div style="background-color: white;">
-                <div style="font-family: Arial; padding: 0.5em">root > <span style="color: blue; text-decoration: underline">grandparent</span></div>
-                <img alt="Eunice showing breadcrumb links and contents of an opened item containing a stack of child items" src="../examples/upper-item-depends-upon-lower-item-with-parent.svg" style="padding: 0.5em" />
-            </div>
-        </div>
+        Redirecting to the <a href="../how-it-works#dependencies">how it works</a> page.
     </div>
     <div class="footer">
         <p class="links">

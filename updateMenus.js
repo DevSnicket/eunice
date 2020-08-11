@@ -83,13 +83,20 @@ function formatMenuHtml({
 	function formatDirectories() {
 		return (
 			[
-				{ directory: "structure" },
-				{ directory: "dependencies" },
+				{
+					directory: "how-it-works",
+					redirectDirectories: [ "advanced", "dependencies", "structure" ],
+				},
 				{ directory: "case-studies" },
-				{ directory: "languages", redirectDirectories: [ "csharp", "dotnet", "javascript" ] },
+				{
+					directory: "languages",
+					redirectDirectories: [ "csharp", "dotnet", "javascript" ],
+				},
 				{ directory: "issues" },
-				{ directory: "licensing", title: "sponsor" },
-				{ directory: "advanced" },
+				{
+					directory: "licensing",
+					title: "sponsor",
+				},
 			]
 			.map(formatDirectory)
 		);
@@ -97,7 +104,7 @@ function formatMenuHtml({
 		function formatDirectory({
 			directory,
 			redirectDirectories = [],
-			title = directory.replace("-", " "),
+			title = directory.replace(/-/g, " "),
 		}) {
 			return (
 				formatMenuItemHtml({

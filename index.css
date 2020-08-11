@@ -172,6 +172,7 @@ body > .header menu {
     display: flex;
     flex-grow: 1;
     flex-wrap: wrap;
+    font-size: 1.25em;
     justify-content: flex-end;
     margin: 0.25em;
     padding: 0;

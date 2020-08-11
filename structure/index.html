@@ -5,67 +5,19 @@
     <link href="../index.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <meta charset="utf-8"/>
+    <meta http-equiv="refresh" content="0;URL=../how-it-works#structure" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        .stacks-introduction > .diagram {
-            background-color: white;
-            margin: 0 auto 1em;
-            padding: 1em;
-            width: fit-content;
-        }
-
-        .stacks-introduction > .diagram > img {
-            margin: 0;
-            width: 100%;
-        }
-
-        @media (min-width: 52em) {
-            .stacks-introduction {
-                align-items: flex-start;
-                display: flex;
-                flex-wrap: wrap;
-            }
-
-            .stacks-introduction > .diagram-text {
-                flex-basis: 0;
-                flex-grow: 1;
-                margin-right: 0.5em;
-            }
-
-            .stacks-introduction > .diagram {
-                margin-left: 0.5em;
-            }
-        }
-    </style>
     <title>Structure | Eunice</title>
 </head>
 <body>
     <div class="header">
         <div class="content">
             <h1><a href=".."><span><span class="red">e</span>uni<span class="red">ce</span></span><div class="arrows"></div></a></h1>
-            <menu><a href="..">intro</a><a class="current" href="../structure">structure</a><a href="../dependencies">dependencies</a><a href="../case-studies">case studies</a><a href="../languages">languages</a><a href="../issues">issues</a><a href="../licensing">sponsor</a><a href="../advanced">advanced</a></menu>
+            <menu><a href="..">intro</a><a class="current" href="../how-it-works">how it works</a><a href="../case-studies">case studies</a><a href="../languages">languages</a><a href="../issues">issues</a><a href="../licensing">sponsor</a></menu>
         </div>
     </div>
     <div class="content">
-        <h2 style="margin-bottom: 0">stacks</h2>
-        <div class="stacks-introduction">
-            <div class="diagram-text">
-                <p>In Eunice, when it's intended that an item be dependent on another, the first item is placed above the second in a stack. When items are intended to be independent of each other, they can be placed at the same level in a stack.</p>
-                <p>The terminology "stack" is used as dependencies can only be uni-directional (in one direction). Eunice also identifies when there is a indirect bi-directional dependency (see diagram).</p>
-            </div>
-            <div class="box diagram"><img alt="Diagrams of uni-directional, bi-directional, stack, independent, direct and indirect dependencies" src="./stacks.svg" style="max-width: 325px" /></div>
-        </div>
-        <p style="margin-top: 0">Eunice is designed to be non-prescriptive so problem specific stacks can develop naturally and collaboratively. Stacks can also be used to represent more general architectures (e.g. as layers). Learning about such architectures can also be beneficial when defining problem specific Eunice stacks.</p>
-        <p>In some programming languages there are implied stacks, such as the order of functions in a file, or the order of files in a project.</p>
-        <h2 style="margin-bottom: 0">scopes / groups</h2>
-        <div class="stacks-introduction">
-            <div class="diagram-text">
-                <p>Stacks are defined in Eunice with different sized scopes and across boundaries, from individual functions, classes and files; to multiple, large codebases in different languages, frameworks and runtimes.</p>
-                <p>Eunice supports nested groups of items, each group can have its own stack. When Eunice measures whether dependencies match the intended structure, the results for nested groups are summarized (see <a href="../dependencies">dependencies</a>).</p>
-            </div>
-            <div class="box diagram"><img alt="Diagrams of how dependencies cross the boundaries of different scopes and groups" src="./groups.svg" style="max-width: 510.5px" /></div>
-        </div>
-        <p style="margin-top: 0">Programming languages usually include ways of grouping code, such as the directories in a file system, namespaces, classes or nested functions. Groups such as these can be inferred and automatically represented in Eunice. Multiple repositories, packages, services and systems can also be represented as groups and analyzed as a together.</p>
+        Redirecting to the <a href="../how-it-works#structure">how it works</a> page.
     </div>
     <div class="footer">
         <p class="links">
