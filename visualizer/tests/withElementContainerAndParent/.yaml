@@ -1,0 +1,49 @@
+id: parent
+dependencyCount:
+  inner:
+    above: 112
+    below: 111
+    same: 113
+  outer:
+    above:
+      dependents: 121
+      dependsUpon: 122
+    below:
+      dependents: 132
+      dependsUpon: 131
+    same:
+      dependents: 141
+      dependsUpon: 142
+items:
+  - id: child first
+    dependencyCount:
+      inner:
+        above: 212
+        below: 211
+        same: 213
+      outer:
+        above:
+          dependents: 221
+          dependsUpon: 222
+        below:
+          dependents: 232
+          dependsUpon: 231
+        same:
+          dependents: 241
+          dependsUpon: 242
+  - id: child second
+    dependencyCount:
+      inner:
+        above: 312
+        below: 311
+        same: 313
+      outer:
+        above:
+          dependents: 321
+          dependsUpon: 322
+        below:
+          dependents: 332
+          dependsUpon: 331
+        same:
+          dependents: 341
+          dependsUpon: 342

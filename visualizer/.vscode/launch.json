@@ -51,10 +51,10 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"tests/withSubset/index.test.js"
+						"tests/withParent/index.test.js"
 					],
 				"disableOptimisticBPs": true,
-				"name": "with subset test",
+				"name": "with parent test",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node"

@@ -1,7 +1,7 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 import assertGetSvgForYaml from "../assertGetSvgForYaml";
-import { createElement } from "react";
+import createForDependencyCount from "./createForDependencyCount";
 import path from "path";
 
 test(
@@ -9,15 +9,7 @@ test(
 	() =>
 		assertGetSvgForYaml({
 			elementContainerFactory:
-				{
-					createForDependencyCount:
-						({ element, item, level, relationship }) =>
-							createElement(
-								"a",
-								{ href: `#id=${item.id}&level=${level}&relationship=${relationship}` },
-								element,
-							),
-				},
+				{ createForDependencyCount },
 			expectedSvgDirectoryPath:
 				__dirname,
 			yamlDirectory:

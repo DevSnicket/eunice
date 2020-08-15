@@ -79,56 +79,14 @@ export default (/** @type {import("./Parameter.d")} */{
 			return (
 				createOuterDependencyGroupFactory({
 					arrows,
-					createGroupFactoryWhenRequired,
-					dependencyCount:
-						item.dependencyCount,
+					createTextGroup,
+					elementContainerFactory,
+					font,
+					item,
 					itemGroupFactory:
 						createItemGroupFactoryWithDependsUponCounts(),
 				})
 			);
-
-			function createGroupFactoryWhenRequired({
-				arrow,
-				count,
-				keys,
-			}) {
-				return (
-					createDependencyGroupFactoryWhenRequired({
-						arrow,
-						count,
-						createTextGroup:
-							getCreateTextGroupWhenInContainer()
-							||
-							createTextGroup,
-						font,
-						key:
-							`${item.id} dependency count outer ${keys.relationship} ${keys.structure}`,
-					})
-				);
-
-				function getCreateTextGroupWhenInContainer() {
-					return (
-						elementContainerFactory
-						&&
-						elementContainerFactory.createForDependencyCount
-						&&
-						createInContainer
-					);
-
-					function createInContainer(
-						parameters,
-					) {
-						return (
-							elementContainerFactory.createForDependencyCount({
-								element: createTextGroup(parameters),
-								item,
-								level: keys.level,
-								relationship: keys.relationship,
-							})
-						);
-					}
-				}
-			}
 
 			function createItemGroupFactoryWithDependsUponCounts() {
 				return (

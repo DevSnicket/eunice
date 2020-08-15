@@ -11,7 +11,6 @@ interface Parameter {
 	namespaces?: Namespaces
 	stack: Stack
 	style?: string
-	subsetIdentifierHierarchy?: string[]
 }
 
 interface Stack extends Array<Array<Item>> {

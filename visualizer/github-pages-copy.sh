@@ -14,4 +14,4 @@ cp tests/test-cases/examples/stack/lower-depends-upon-upper/.svg gh-pages/exampl
 cp tests/test-cases/examples/stack/two-interdependent/.svg gh-pages/examples/stack/two-interdependent.svg &&
 cp tests/test-cases/examples/stack/upper-depends-upon-lower/.svg gh-pages/examples/stack/upper-depends-upon-lower.svg &&
 cp tests/test-cases/examples/two/.svg gh-pages/examples/two.svg &&
-cp tests/withSubset/test-cases/examples/upper-item-depends-upon-lower-item-with-parent/.svg gh-pages/examples/upper-item-depends-upon-lower-item-with-parent.svg
+cp tests/withParent/test-cases/examples/upper-item-depends-upon-lower-item-with-parent/.svg gh-pages/examples/upper-item-depends-upon-lower-item-with-parent.svg

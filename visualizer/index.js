@@ -1,7 +1,7 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 import createArrows from "./createArrows";
-import createParentGroupFactoryWhenSubset from "./createParentGroupFactoryWhenSubset";
+import createParentGroupFactoryWhenChild from "./createParentGroupFactoryWhenChild";
 import createStackWithSummaryGroupFactory from "./createStackWithSummaryGroupFactory";
 import createSvgElement from "./createSvgElement";
 import createTextGroup from "./createTextGroup";
@@ -27,12 +27,10 @@ export default (/** @type {import("./Parameter.d")} */{
 
 	return (
 		createSvgElement({
-			childGroupFactory:
-				stack
-				&&
-				initializeAndCreateChildGroupFactory(),
 			createElement,
 			font,
+			groupFactory:
+				createGroupFactory(),
 			namespaces,
 			style:
 				/* cspell:disable-next-line */
@@ -44,32 +42,26 @@ export default (/** @type {import("./Parameter.d")} */{
 		})
 	);
 
-	function initializeAndCreateChildGroupFactory() {
+	function createGroupFactory() {
 		return (
-			createParentGroupFactoryWhenSubset({
+			stack
+			&&
+			createParentGroupFactoryWhenChild({
 				arrows,
-				createGroupFactoryForStack,
-				createTextGroup: createTextGroupWithFontSizeAndPrecision,
-				font,
-				stack,
-			})
-			||
-			createGroupFactoryForStack(stack)
-		);
-	}
-
-	function createGroupFactoryForStack(
-		stackOrStackOfSubset,
-	) {
-		return (
-			createStackWithSummaryGroupFactory({
-				arrows,
+				childGroupFactory:
+					createStackWithSummaryGroupFactory({
+						arrows,
+						createTextGroup:
+							createTextGroupWithFontSizeAndPrecision,
+						elementContainerFactory,
+						font,
+						stack,
+					}),
 				createTextGroup:
 					createTextGroupWithFontSizeAndPrecision,
 				elementContainerFactory,
 				font,
-				stack:
-					stackOrStackOfSubset,
+				stack,
 			})
 		);
 	}

@@ -3,7 +3,7 @@
 import getSvgForStack from "../getSvgForStack";
 import parseStackFromYaml from "../parseStackFromYaml";
 import path from "path";
-import { readFile } from "fs-extra";
+import readTestFile from "../readTestFile";
 
 export default async({
 	elementContainerFactory,
@@ -29,21 +29,3 @@ export default async({
 			),
 		),
 	);
-
-async function readTestFile(
-	filePath,
-) {
-	const content =
-		await readFile(
-			filePath,
-			"utf-8",
-		);
-
-	return (
-		content
-		.replace(
-			/^\uFEFF/, // BOM
-			"",
-		)
-	);
-}
