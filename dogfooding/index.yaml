@@ -1,4 +1,4 @@
-# created by Eunice (https://devsnicket.com/eunice) version 7.12.1 on 2020-08-15T08:45:51.692Z
+# created by Eunice (https://devsnicket.com/eunice) version 7.13.0 on 2020-08-15T14:35:57.681Z
 - - id: javascript
     type: directory
     items:
@@ -4164,7 +4164,9 @@
                                         items:
                                           id: index.test
                                           type: file
-                                          dependsUpon: test
+                                          dependsUpon:
+                                            - describe
+                                            - test
                                           items:
                                             - - dependsUpon:
                                                   - createElement
@@ -4173,16 +4175,24 @@
                                                   - expect
                                                   - renderToStaticMarkup
                                               - dependsUpon:
-                                                  - addDirectionAndMutualStackToDependenciesInStack
-                                                  - createElement
-                                                  - createStackFromYaml
-                                                  - createWithDependencyList
-                                                  - element
-                                                  - expect
-                                                  - path
-                                                  - readTextFile
-                                                  - removeWhitespaceFromTestExpected
-                                                  - renderToStaticMarkup
+                                                  - createStack
+                                                  - test
+                                                  - testIdentifierAndStack
+                                                items:
+                                                  - id: createStack
+                                                    dependsUpon:
+                                                      - addDirectionAndMutualStackToDependenciesInStack
+                                                      - createStackFromYaml
+                                                  - id: testIdentifierAndStack
+                                                    dependsUpon:
+                                                      - createElement
+                                                      - createWithDependencyList
+                                                      - element
+                                                      - expect
+                                                      - path
+                                                      - readTextFile
+                                                      - removeWhitespaceFromTestExpected
+                                                      - renderToStaticMarkup
                                             - - id: element
                                                 type: variable
                                               - id: addDirectionAndMutualStackToDependenciesInStack
@@ -4231,25 +4241,29 @@
                                               items:
                                                 - - id: createListInContainerWhenAny
                                                     dependsUpon:
-                                                      - allParametersSpecified
                                                       - closeHref
                                                       - createAncestorSeparatorElement
                                                       - createElement
                                                       - createListElement
-                                                      - createSubset
+                                                      - createSubsetOfItem
                                                       - createVerticalResizeWithLowerElement
+                                                      - findItemOrGetParent
                                                       - getHrefWithIdentifierHierarchy
                                                       - relationship
-                                                - - allParametersSpecified
-                                                  - id: createSubset
+                                                - - id: findItemOrGetParent
+                                                    dependsUpon: whenIdentifierSpecified
+                                                    items:
+                                                      id: whenIdentifierSpecified
+                                                      dependsUpon:
+                                                        - findItemInStackWithIdentifierHierarchy
+                                                        - stack
+                                                  - id: createSubsetOfItem
                                                     dependsUpon:
-                                                      - createSubsetOfItem
-                                                      - findItemInStackWithIdentifierHierarchy
+                                                      - createSubset
                                                       - isDependencyRelevant
                                                       - isInnerStack
                                                       - level
                                                       - relationship
-                                                      - stack
                                                   - id: createVerticalResizeWithLowerElement
                                                     dependsUpon:
                                                       - createElement
@@ -4294,10 +4308,10 @@
                                               dependsUpon:
                                                 id: test-harnesses
                                                 items: createResizableContainer
-                                            - id: createSubsetOfItem
+                                            - id: createSubset
                                               type: import
                                               dependsUpon:
-                                                id: createSubsetOfItem
+                                                id: createSubset
                                                 items: index
                                             - id: isDependencyRelevant
                                               type: import
@@ -4456,7 +4470,7 @@
                                                         - parent
                                                   - - id: parent
                                                       type: parameter
-                                    - - id: createSubsetOfItem
+                                    - - id: createSubset
                                         type: directory
                                         items:
                                           - - id: index.test
@@ -4466,7 +4480,7 @@
                                                 - expect
                                                 - test
                                                 - testRelationship
-                                                - id: createSubsetOfItem
+                                                - id: createSubset
                                                   items: index
                                               items:
                                                 - - id: testRelationship
@@ -4503,7 +4517,7 @@
                                                 - - id: createSubsetOfItem
                                                     type: import
                                                     dependsUpon:
-                                                      id: createSubsetOfItem
+                                                      id: createSubset
                                                       items: index
                                           - - id: index
                                               type: file
@@ -5261,27 +5275,45 @@
                         - - id: forDependencyCount
                             type: directory
                             items:
-                              id: index.test
-                              type: file
-                              dependsUpon:
-                                - path
-                                - test
-                                - id: react
-                                  items: createElement
-                                - id: withElementContainer
-                                  items: assertGetSvgForYaml
+                              - id: createForDependencyCount
+                                type: file
+                                items:
+                                  - - id: createForDependencyCount
+                                      type: export
+                                      dependsUpon: createElement
+                                  - - id: createElement
+                                      type: import
+                                      dependsUpon:
+                                        id: react
+                                        items: createElement
+                              - id: index.test
+                                type: file
+                                dependsUpon:
+                                  - path
+                                  - test
+                                  - id: withElementContainer
+                                    items: assertGetSvgForYaml
                           - id: forItems
                             type: directory
                             items:
-                              id: index.test
-                              type: file
-                              dependsUpon:
-                                - path
-                                - test
-                                - id: react
-                                  items: createElement
-                                - id: withElementContainer
-                                  items: assertGetSvgForYaml
+                              - id: createForItem
+                                type: file
+                                items:
+                                  - - id: createForItem
+                                      type: export
+                                      dependsUpon: createElement
+                                  - - id: createElement
+                                      type: import
+                                      dependsUpon:
+                                        id: react
+                                        items: createElement
+                              - id: index.test
+                                type: file
+                                dependsUpon:
+                                  - path
+                                  - test
+                                  - id: withElementContainer
+                                    items: assertGetSvgForYaml
                         - - id: assertGetSvgForYaml
                             type: file
                             items:
@@ -5293,9 +5325,7 @@
                                     - parseStackFromYaml
                                     - path
                                     - readTestFile
-                              - - id: readTestFile
-                                  dependsUpon: readFile
-                                - id: getSvgForStack
+                              - - id: getSvgForStack
                                   type: import
                                   dependsUpon:
                                     id: tests
@@ -5305,25 +5335,45 @@
                                   dependsUpon:
                                     id: tests
                                     items: parseStackFromYaml
-                              - - id: readFile
+                                - id: readTestFile
                                   type: import
                                   dependsUpon:
-                                    id: fs-extra
-                                    items: readFile
-                    - id: withSubset
+                                    id: tests
+                                    items: readTestFile
+                    - id: withElementContainerAndParent
                       type: directory
                       items:
                         id: index.test
                         type: file
                         dependsUpon:
-                          - getFirstChildStack
+                          - expect
                           - path
-                          - run-tests-from-file-system
+                          - test
                           - id: tests
                             items:
+                              - readTestFile
                               - parseStackFromYaml
                               - getSvgForStack
-                        items: getFirstChildStack
+                              - id: withParent
+                                items: getFirstChildStack
+                  - - id: withParent
+                      type: directory
+                      items:
+                        - - id: index.test
+                            type: file
+                            dependsUpon:
+                              - getFirstChildStack
+                              - path
+                              - run-tests-from-file-system
+                              - id: tests
+                                items:
+                                  - parseStackFromYaml
+                                  - getSvgForStack
+                        - - id: getFirstChildStack
+                            type: file
+                            items:
+                              id: getFirstChildStack
+                              type: export
                   - - id: getSvgForStack
                       type: file
                       items:
@@ -5372,6 +5422,17 @@
                             dependsUpon:
                               id: js-yaml
                               items: safeLoad
+                    - id: readTestFile
+                      type: file
+                      items:
+                        - - id: readTestFile
+                            type: export
+                            dependsUpon: readFile
+                        - - id: readFile
+                            type: import
+                            dependsUpon:
+                              id: fs-extra
+                              items: readFile
             - - id: index
                 type: file
                 items:
@@ -5380,25 +5441,19 @@
                       dependsUpon:
                         - createArrows
                         - createFont
+                        - createGroupFactory
                         - createSvgElement
-                        - initializeAndCreateChildGroupFactory
                         - withPrecision
                       items:
-                        - - id: initializeAndCreateChildGroupFactory
+                        - - id: createGroupFactory
                             dependsUpon:
                               - arrows
-                              - createGroupFactoryForStack
-                              - createParentGroupFactoryWhenSubset
-                              - createTextGroupWithFontSizeAndPrecision
-                              - font
-                              - stack
-                        - - id: createGroupFactoryForStack
-                            dependsUpon:
-                              - arrows
+                              - createParentGroupFactoryWhenChild
                               - createStackWithSummaryGroupFactory
                               - createTextGroupWithFontSizeAndPrecision
                               - elementContainerFactory
                               - font
+                              - stack
                         - - id: createTextGroupWithFontSizeAndPrecision
                             dependsUpon:
                               - createElement
@@ -5420,17 +5475,17 @@
                       dependsUpon:
                         id: createArrows
                         items: index
-                    - id: createParentGroupFactoryWhenSubset
+                    - id: createParentGroupFactoryWhenChild
                       type: import
                       dependsUpon:
-                        id: createParentGroupFactoryWhenSubset
+                        id: createParentGroupFactoryWhenChild
                         items: index
                     - id: createStackWithSummaryGroupFactory
                       type: import
                       dependsUpon:
                         id: createStackWithSummaryGroupFactory
                         items: index
-            - - id: createParentGroupFactoryWhenSubset
+            - - id: createParentGroupFactoryWhenChild
                 type: directory
                 items:
                   - - id: index
@@ -5438,36 +5493,33 @@
                       items:
                         - - id: index
                             type: export
-                            dependsUpon:
-                              - createOuterDependencyGroupFactory
-                              - createParentAndStackGroupFactory
-                              - createParentOuterDependencyGroupFactoryWhenRequired
+                            dependsUpon: whenHasParent
                             items:
-                              - - id: createParentOuterDependencyGroupFactoryWhenRequired
+                              - - id: whenHasParent
                                   dependsUpon:
-                                    - createDependencyGroupFactoryWhenRequired
+                                    - arrows
+                                    - createOuterDependencyGroupFactory
+                                    - createParentAndStackGroupFactory
                                     - createTextGroup
+                                    - elementContainerFactory
                                     - font
-                                - id: createParentAndStackGroupFactory
-                                  dependsUpon:
-                                    - createGroupFactoryForStack
-                                    - createParentGroupFactory
-                                    - createTextGroup
-                                    - stack
-                              - - id: createGroupFactoryForStack
+                                  items:
+                                    id: createParentAndStackGroupFactory
+                                    dependsUpon:
+                                      - childGroupFactory
+                                      - createParentGroupFactory
+                                      - createTextGroup
+                              - - id: arrows
+                                  type: parameter
+                                - id: childGroupFactory
                                   type: parameter
                                 - id: createTextGroup
                                   type: parameter
+                                - id: elementContainerFactory
+                                  type: parameter
                                 - id: font
                                   type: parameter
-                                - id: stack
-                                  type: parameter
-                        - - id: createDependencyGroupFactoryWhenRequired
-                            type: import
-                            dependsUpon:
-                              id: visualizer
-                              items: createDependencyGroupFactoryWhenRequired
-                          - id: createOuterDependencyGroupFactory
+                        - - id: createOuterDependencyGroupFactory
                             type: import
                             dependsUpon:
                               id: visualizer
@@ -5540,24 +5592,13 @@
                                     - - id: createGroupFactoryForItem
                                         dependsUpon:
                                           - arrows
-                                          - createGroupFactoryWhenRequired
                                           - createItemGroupFactoryWithDependsUponCounts
                                           - createOuterDependencyGroupFactory
+                                          - createTextGroup
+                                          - elementContainerFactory
+                                          - font
                                         items:
-                                          - - id: createGroupFactoryWhenRequired
-                                              dependsUpon:
-                                                - createDependencyGroupFactoryWhenRequired
-                                                - font
-                                                - getCreateTextGroupWhenInContainer
-                                              items:
-                                                id: getCreateTextGroupWhenInContainer
-                                                items:
-                                                  id: createInContainer
-                                                  dependsUpon:
-                                                    - createTextGroup
-                                                    - elementContainerFactory
-                                                    - item
-                                            - id: createItemGroupFactoryWithDependsUponCounts
+                                          - - id: createItemGroupFactoryWithDependsUponCounts
                                               dependsUpon:
                                                 - createDependenciesInlineGroupFactoriesForCount
                                                 - createItemGroupFactory
@@ -6019,23 +6060,47 @@
                   - - id: index
                       type: file
                       items:
-                        id: index
-                        type: export
-                        dependsUpon: whenHasDependencyCountOfOuter
-                        items:
-                          - - id: whenHasDependencyCountOfOuter
-                              dependsUpon:
-                                - arrows
-                                - createGroupFactoryWhenRequired
-                                - createLevelGroupFactory
-                                - createStackGroupFactory
-                                - itemGroupFactory
-                          - - id: arrows
-                              type: parameter
-                            - id: createGroupFactoryWhenRequired
-                              type: parameter
-                            - id: itemGroupFactory
-                              type: parameter
+                        - - id: index
+                            type: export
+                            dependsUpon: whenHasDependencyCountOfOuter
+                            items:
+                              - - id: whenHasDependencyCountOfOuter
+                                  dependsUpon:
+                                    - arrows
+                                    - createGroupFactoryWhenRequired
+                                    - createLevelGroupFactory
+                                    - createStackGroupFactory
+                                    - itemGroupFactory
+                              - - id: createGroupFactoryWhenRequired
+                                  dependsUpon:
+                                    - createDependencyGroupFactoryWhenRequired
+                                    - font
+                                    - getCreateTextGroupWhenInContainer
+                                  items:
+                                    id: getCreateTextGroupWhenInContainer
+                                    items:
+                                      id: createInContainer
+                                      dependsUpon:
+                                        - createTextGroup
+                                        - elementContainerFactory
+                                        - item
+                                - id: arrows
+                                  type: parameter
+                              - - id: createTextGroup
+                                  type: parameter
+                                - id: elementContainerFactory
+                                  type: parameter
+                                - id: font
+                                  type: parameter
+                                - id: item
+                                  type: parameter
+                                - id: itemGroupFactory
+                                  type: parameter
+                        - - id: createDependencyGroupFactoryWhenRequired
+                            type: import
+                            dependsUpon:
+                              id: visualizer
+                              items: createDependencyGroupFactoryWhenRequired
                   - - id: createLevelGroupFactory
                       type: file
                       items:
@@ -6193,17 +6258,17 @@
                       items:
                         - - id: createAttributesWithChildren
                             dependsUpon:
-                              - childGroupFactory
                               - createElement
                               - createStyleElementInDefsElement
                               - font
                               - getSvgStyleForFont
+                              - groupFactory
                               - withPrecision
-                        - - id: childGroupFactory
-                            type: parameter
-                          - id: createElement
+                        - - id: createElement
                             type: parameter
                           - id: font
+                            type: parameter
+                          - id: groupFactory
                             type: parameter
                           - id: withPrecision
                             type: parameter
