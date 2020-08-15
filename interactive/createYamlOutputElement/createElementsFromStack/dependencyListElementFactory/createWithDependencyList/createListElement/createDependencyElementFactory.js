@@ -2,7 +2,7 @@
 
 export default ({
 	createAncestorSeparatorElement,
-	createIdentifierHierarchyAnchor,
+	createItemInIdentifierHierarchyElement,
 }) => {
 	return (
 		{
@@ -42,12 +42,14 @@ export default ({
 					elements:
 						[
 							...elements,
-							createIdentifierHierarchyAnchor(
-								[
-									...identifierHierarchy,
-									item.id,
-								],
-							),
+							createItemInIdentifierHierarchyElement({
+								identifierHierarchy:
+									[
+										...identifierHierarchy,
+										item.id,
+									],
+								item,
+							}),
 						],
 					identifierHierarchy,
 				}

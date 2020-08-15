@@ -18,62 +18,98 @@ test(
 					createAncestorSeparatorElement:
 						() => "-",
 					createElement,
-					createIdentifierHierarchyAnchor:
-						identifierHierarchy => `[${identifierHierarchy}]`,
+					getHrefWithIdentifierHierarchy:
+						identifierHierarchy => identifierHierarchy,
 					relationship:
 						"dependsUpon",
 					subset:
 						createSubset({
 							identifier:
-								"item 1",
+								"parent",
 							items:
 								[
+									createSubset({ identifier: "alphabetical sort out of order child 2" }),
+									createSubset({ identifier: "alphabetical sort out of order child 1" }),
 									createSubset({
 										dependencies:
-											[ createItem({ identifier: "dependency 1" }) ],
+											[ createItem({ identifier: "dependency of child with dependency" }) ],
 										identifier:
-											"child 1",
+											"child with dependency",
+									}),
+									createSubset({
+										dependencies:
+											[
+												createItem({
+													identifier: "dependency of anonymous parent",
+													parent: createItem({}),
+												}),
+											],
+										identifier:
+											"child with dependency hierarchy of anonymous parent",
 									}),
 									createSubset({
 										dependencies:
 											[
 												createItem({
 													identifier:
-														"dependency 2",
+														"dependency of identifiable parent",
 													parent:
-														createItem({ identifier: "parent of dependency 2" }),
+														createItem({
+															identifier: "identifiable parent of dependency",
+															items: true,
+														}),
 												}),
 											],
 										identifier:
-											"child 2",
+											"child with dependency hierarchy of identifiable parent",
 									}),
 									createSubset({
 										dependencies:
 											[
 												createItem({
-													identifier: "dependency 3",
-													parent: createItem({}),
+													identifier:
+														"dependency of identifiable parent and grandparent",
+													parent:
+														createItem({
+															identifier:
+																"identifiable parent of dependency",
+															items:
+																true,
+															parent:
+																createItem({
+																	identifier: "identifiable grandparent of dependency",
+																	items: true,
+																}),
+														}),
 												}),
 											],
 										identifier:
-											"child 3",
+											"child with dependency hierarchy of identifiable parent and grandparent",
+									}),
+									createSubset({
+										identifier:
+											"child with parent and grandchild",
+										items:
+											[ createSubset({ identifier: "grandchild in child with parent" }) ],
+										parent:
+											createItem({ identifier: "parent" }),
+									}),
+									createSubset({
+										identifier:
+											"child with two anonymous grandchildren",
+										items:
+											[ createSubset(), createSubset() ],
 									}),
 									createSubset({
 										dependencies:
 											[
-												createItem({ identifier: "dependency 4" }),
-												createItem({ identifier: "dependency 5" }),
+												createItem({ identifier: "dependency 1 of child with two dependencies and grandchild" }),
+												createItem({ identifier: "dependency 2 of child with two dependencies and grandchild" }),
 											],
 										identifier:
-											"child 4",
+											"child with two dependencies and grandchild",
 										items:
-											[ createSubset({ identifier: "grandchild" }) ],
-									}),
-									createSubset({
-										identifier:
-											"child 5",
-										items:
-											[ createSubset(), createSubset() ],
+											[ createSubset({ identifier: "grandchild in child with two dependencies" }) ],
 									}),
 								],
 						}),
@@ -93,11 +129,17 @@ function createSubset({
 	dependencies = null,
 	identifier = null,
 	items = null,
+	parent = null,
 } = {}) {
 	return (
 		{
 			dependencies,
-			item: createItem({ identifier }),
+			item:
+				createItem({
+					identifier,
+					items: Boolean(items),
+					parent,
+				}),
 			items,
 		}
 	);
@@ -106,10 +148,12 @@ function createSubset({
 function createItem({
 	identifier = null,
 	parent = null,
+	items = null,
 }) {
 	return (
 		{
 			id: identifier,
+			items,
 			level: { stack: { parent } },
 		}
 	);

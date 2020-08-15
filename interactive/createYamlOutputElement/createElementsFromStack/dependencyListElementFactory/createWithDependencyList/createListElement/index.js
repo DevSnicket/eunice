@@ -9,7 +9,7 @@ export default ({
 	closeHref,
 	createAncestorSeparatorElement,
 	createElement,
-	createIdentifierHierarchyAnchor,
+	getHrefWithIdentifierHierarchy,
 	relationship,
 	subset,
 }) => {
@@ -44,20 +44,42 @@ export default ({
 				createDependencyElements:
 					createDependencyElementFactory({
 						createAncestorSeparatorElement,
-						createIdentifierHierarchyAnchor,
+						createItemInIdentifierHierarchyElement,
 					}).createElements,
 				createElement,
-				createIdentifierHierarchyAnchor,
+				createItemInIdentifierHierarchyElement,
 			})
 			.createElementsForSubset(subset)
 		);
+	}
+
+	function createItemInIdentifierHierarchyElement({
+		identifierHierarchy,
+		item: { id, items },
+	}) {
+		return whenHasItems() || id;
+
+		function whenHasItems() {
+			return (
+				items
+				&&
+				createElement(
+					"a",
+					{
+						href: getHrefWithIdentifierHierarchy(identifierHierarchy),
+						key: id,
+					},
+					id,
+				)
+			);
+		}
 	}
 };
 
 function withElementFactory({
 	createDependencyElements,
 	createElement,
-	createIdentifierHierarchyAnchor,
+	createItemInIdentifierHierarchyElement,
 }) {
 	return { createElementsForSubset };
 
@@ -66,11 +88,14 @@ function withElementFactory({
 	) {
 		return (
 			[
-				createIdentifierHierarchyAnchor(
-					getItemIdentifierHierarchy(
+				createItemInIdentifierHierarchyElement({
+					identifierHierarchy:
+						getItemIdentifierHierarchy(
+							subset.item,
+						),
+					item:
 						subset.item,
-					),
-				),
+				}),
 				createDependenciesElement(
 					subset.dependencies,
 				),

@@ -1,41 +1,55 @@
 <div class="dependency-list dependsUpon">
 	<a href="close-href" id="close">×</a>
 	<div>
-		[item 1]
+		<a href="parent">parent</a>
 		<ul class="child-items">
+			<li>alphabetical sort out of order child 1</li>
+			<li>alphabetical sort out of order child 2</li>
 			<li>
-				[child 1]
+				child with dependency
 				<ul class="item-dependencies">
-					<li>[dependency 1]</li>
+					<li>dependency of child with dependency</li>
 				</ul>
 			</li>
 			<li>
-				[child 2]
+				child with dependency hierarchy of anonymous parent
 				<ul class="item-dependencies">
-					<li>[parent of dependency 2]-[parent of dependency 2,dependency 2]</li>
+					<li>-dependency of anonymous parent</li>
 				</ul>
 			</li>
 			<li>
-				[child 3]
+				child with dependency hierarchy of identifiable parent
 				<ul class="item-dependencies">
-					<li>[]-[,dependency 3]</li>
+					<li><a href="identifiable parent of dependency">identifiable parent of dependency</a>-dependency of identifiable parent</li>
 				</ul>
 			</li>
 			<li>
-				[child 4]
+				child with dependency hierarchy of identifiable parent and grandparent
 				<ul class="item-dependencies">
-					<li>[dependency 4]</li>
-					<li>[dependency 5]</li>
+					<li><a href="identifiable grandparent of dependency">identifiable grandparent of dependency</a>-<a href="identifiable grandparent of dependency,identifiable parent of dependency">identifiable parent of dependency</a>-dependency of identifiable parent and grandparent</li>
+				</ul>
+			</li>
+			<li>
+				<a href="parent,child with parent and grandchild">child with parent and grandchild</a>
+				<ul class="child-items">
+					<li>grandchild in child with parent</li>
+				</ul>
+			</li>
+			<li>
+				<a href="child with two anonymous grandchildren">child with two anonymous grandchildren</a>
+				<ul class="child-items">
+					<li></li>
+					<li></li>
+				</ul>
+			</li>
+			<li>
+				<a href="child with two dependencies and grandchild">child with two dependencies and grandchild</a>
+				<ul class="item-dependencies">
+					<li>dependency 1 of child with two dependencies and grandchild</li>
+					<li>dependency 2 of child with two dependencies and grandchild</li>
 				</ul>
 				<ul class="child-items">
-					<li>[grandchild]</li>
-				</ul>
-			</li>
-			<li>
-				[child 5]
-				<ul class="child-items">
-					<li>[]</li>
-					<li>[]</li>
+					<li>grandchild in child with two dependencies</li>
 				</ul>
 			</li>
 		</ul>

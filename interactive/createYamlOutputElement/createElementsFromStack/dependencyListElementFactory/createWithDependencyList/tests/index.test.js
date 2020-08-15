@@ -29,9 +29,9 @@ test(
 					createAncestorSeparatorElement:
 						null,
 					createElement,
-					createIdentifierHierarchyAnchor:
-						null,
 					element,
+					getHrefWithIdentifierHierarchy:
+						null,
 					identifier:
 						itemIdentifier,
 					level:
@@ -86,9 +86,9 @@ test(
 					createAncestorSeparatorElement:
 						null,
 					createElement,
-					createIdentifierHierarchyAnchor:
-						identifierHierarchy => `[${identifierHierarchy}]`,
 					element,
+					getHrefWithIdentifierHierarchy:
+						null,
 					identifier:
 						childIdentifier,
 					level:

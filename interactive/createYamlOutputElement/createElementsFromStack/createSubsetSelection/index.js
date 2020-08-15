@@ -40,7 +40,7 @@ export default ({
 						item,
 						subsetIdentifierHierarchy,
 					}),
-			createIdentifierHierarchyAnchor,
+			getHrefWithIdentifierHierarchy,
 			identifierHierarchy:
 				subsetIdentifierHierarchy,
 		}

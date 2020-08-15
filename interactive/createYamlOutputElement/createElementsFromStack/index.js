@@ -107,9 +107,9 @@ function createWithSubset({
 				createAncestorSeparatorElement:
 					subsetSelection.createAncestorSeparatorElement,
 				createElement,
-				createIdentifierHierarchyAnchor:
-					subsetSelection.createIdentifierHierarchyAnchor,
 				element,
+				getHrefWithIdentifierHierarchy:
+					subsetSelection.getHrefWithIdentifierHierarchy,
 				locationHash,
 				resizableElementTypes,
 				stack,

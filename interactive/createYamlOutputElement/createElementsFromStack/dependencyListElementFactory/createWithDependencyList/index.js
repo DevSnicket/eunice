@@ -14,8 +14,8 @@ export default ({
 	closeHref,
 	createAncestorSeparatorElement,
 	createElement,
-	createIdentifierHierarchyAnchor,
 	element,
+	getHrefWithIdentifierHierarchy,
 	identifier,
 	level,
 	locationHash,
@@ -38,7 +38,7 @@ export default ({
 					closeHref,
 					createAncestorSeparatorElement,
 					createElement,
-					createIdentifierHierarchyAnchor,
+					getHrefWithIdentifierHierarchy,
 					relationship,
 					subset:
 						createSubset(),
