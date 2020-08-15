@@ -23,10 +23,10 @@
 				[ 
 					"--collect-coverage=false",
 					"--runInBand",
-					"createYamlOutputElement/createElementsFromStack/dependencyListElementFactory/createWithDependencyList/createSubsetOfItem/index.test.js"
+					"createYamlOutputElement/createElementsFromStack/dependencyListElementFactory/createWithDependencyList/createSubset/index.test.js"
 				],
 			"disableOptimisticBPs": true,
-			"name": "createYamlOutputElement createSubsetOfItem jest",
+			"name": "createYamlOutputElement createSubset jest",
 			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 			"request": "launch",
 			"type": "node"

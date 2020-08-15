@@ -17,7 +17,7 @@ const
 	element = "element";
 
 test(
-	"item not in subset with no dependencies returns only element",
+	"item without dependencies nor parent returns only element",
 	() => {
 		const itemIdentifier = "item";
 
@@ -51,71 +51,101 @@ test(
 	},
 );
 
-test(
-	"subset of child item that depends upon item in same level returns element and dependency list in Reflex resize",
-	async() => {
+describe(
+	"child item that depends upon item in same level returns element and dependency list in Reflex resize",
+	() => {
 		const
-			childIdentifier = "item",
+			childIdentifier = "child",
 			parentIdentifier = "parent";
 
-		const stack =
-			createStackFromYaml(
-				[
-					{
-						id:
-							parentIdentifier,
-						items:
-							[
-								{
-									dependsUpon: dependsUponIdentifier,
-									id: childIdentifier,
-								},
-							],
-					},
-					{ id: dependsUponIdentifier },
-				],
-			);
-
-		addDirectionAndMutualStackToDependenciesInStack(stack);
-
-		expect(
-			renderToStaticMarkup(
-				createWithDependencyList({
-					closeHref:
-						"close-href",
-					createAncestorSeparatorElement:
-						null,
-					createElement,
-					element,
-					getHrefWithIdentifierHierarchy:
-						null,
+		test(
+			"child item identifier specified",
+			() =>
+				testIdentifierAndStack({
 					identifier:
 						childIdentifier,
-					level:
-						"same",
-					locationHash:
-						{ getValueOfKey: () => null },
-					relationship:
-						"dependsUpon",
-					resizableElementTypes:
-						{
-							/* cSpell:disable */
-							container: "resizablecontainer",
-							item: "resizableitem",
-							splitter: "resizablesplitter",
-							/* cSpell:enable */
-						},
 					stack:
-						stack[0][0].items,
+						createStack(),
 				}),
-			),
-		)
-		.toBe(
-			removeWhitespaceFromTestExpected(
-				await readTextFile(
-					path.join(__dirname, "test-case.html"),
-				),
-			),
 		);
+
+		test(
+			"parent with no identifier specified",
+			() =>
+				testIdentifierAndStack({
+					identifier:
+						null,
+					stack:
+						createStack()[0][0].items,
+				}),
+		);
+
+		function createStack() {
+			const stack =
+				createStackFromYaml(
+					[
+						{
+							id:
+								parentIdentifier,
+							items:
+								[
+									{
+										dependsUpon: dependsUponIdentifier,
+										id: childIdentifier,
+										items: "grandchild",
+									},
+								],
+						},
+						{ id: dependsUponIdentifier },
+					],
+				);
+
+			addDirectionAndMutualStackToDependenciesInStack(stack);
+
+			return stack[0][0].items;
+		}
+
+		async function testIdentifierAndStack({
+			identifier,
+			stack,
+		}) {
+			expect(
+				renderToStaticMarkup(
+					createWithDependencyList({
+						closeHref:
+							"close-href",
+						createAncestorSeparatorElement:
+							null,
+						createElement,
+						element,
+						getHrefWithIdentifierHierarchy:
+							identifierHierarchy => identifierHierarchy,
+						identifier,
+						level:
+							"same",
+						locationHash:
+							{ getValueOfKey: () => null },
+						relationship:
+							"dependsUpon",
+						resizableElementTypes:
+							{
+								/* cSpell:disable */
+								container: "resizablecontainer",
+								item: "resizableitem",
+								splitter: "resizablesplitter",
+								/* cSpell:enable */
+							},
+						stack,
+					}),
+				),
+			)
+			.toBe(
+				removeWhitespaceFromTestExpected(
+					await readTextFile(
+						path.join(__dirname, "test-case.html"),
+					),
+				),
+			);
+		}
 	},
 );

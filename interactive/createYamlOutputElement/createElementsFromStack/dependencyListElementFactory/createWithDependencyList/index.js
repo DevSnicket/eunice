@@ -7,7 +7,7 @@ import {
 
 import createListElement from "./createListElement";
 import { createResizableContainer } from "@devsnicket/eunice-test-harnesses";
-import createSubsetOfItem from "./createSubsetOfItem";
+import createSubset from "./createSubset";
 import isDependencyRelevant from "./isDependencyRelevant";
 
 export default ({
@@ -31,7 +31,9 @@ export default ({
 
 	function createListInContainerWhenAny() {
 		return (
-			allParametersSpecified()
+			level
+			&&
+			relationship
 			&&
 			createVerticalResizeWithLowerElement(
 				createListElement({
@@ -41,32 +43,38 @@ export default ({
 					getHrefWithIdentifierHierarchy,
 					relationship,
 					subset:
-						createSubset(),
+						createSubsetOfItem(
+							findItemOrGetParent(),
+						),
 				}),
 			)
 		);
 	}
 
-	function allParametersSpecified() {
+	function findItemOrGetParent() {
 		return (
-			identifier
-			&&
-			level
-			&&
-			relationship
+			whenIdentifierSpecified()
+			||
+			stack.parent
 		);
+
+		function whenIdentifierSpecified() {
+			return (
+				identifier
+				&&
+				findItemInStackWithIdentifierHierarchy({
+					identifierHierarchy: [ identifier ],
+					stack,
+				})
+			);
+		}
 	}
 
-	function createSubset() {
-		const item =
-			findItemInStackWithIdentifierHierarchy({
-				identifierHierarchy:
-					[ identifier ],
-				stack,
-			});
-
+	function createSubsetOfItem(
+		item,
+	) {
 		return (
-			createSubsetOfItem({
+			createSubset({
 				isDependencyRelevant:
 					dependency =>
 						isDependencyRelevant({

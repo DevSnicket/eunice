@@ -158,7 +158,10 @@ function createWithSubset({
 					element,
 					getHrefWithKeysAndValues:
 						locationHash.getWithKeysAndValues,
-					identifier: item.id,
+					identifier:
+						item !== stack.parent
+						&&
+						item.id,
 					level,
 					relationship,
 				})

@@ -8,7 +8,7 @@
 		"@devsnicket/eunice-dependency-and-structure": "^6.0.0",
 		"@devsnicket/eunice-dependency-counter": "^3.0.0",
 		"@devsnicket/eunice-stacking-inference": "^4.0.0",
-		"@devsnicket/eunice-visualizer": "^2.0.0",
+		"@devsnicket/eunice-visualizer": "^2.1.0",
 		"core-js": "^3.6.4",
 		"fs-extra": "^7.0.1",
 		"react": "^16.4.0",
@@ -110,5 +110,5 @@
 		"typescript": "npx tsc -p jsconfig.json",
 		"watch": "npx webpack --config webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs -d --watch"
 	},
-	"version": "5.9.3"
+	"version": "5.10.0"
 }
