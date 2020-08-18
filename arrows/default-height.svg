@@ -1,1 +1,14 @@
-﻿<svg height="24" width="84" xmlns="http://www.w3.org/2000/svg"><symbol id="down-arrow" preserveAspectRatio="xMidYMax slice" viewBox="0,0,1,1"><polygon fill="darkgreen" points="0,0.85 0,0 1,0 1,0.85 0.5,1"></polygon></symbol><symbol id="right-arrow" preserveAspectRatio="xMaxYMid slice" viewBox="0,0,1,1"><polygon fill="darkred" points="0.85,0 0,0 0,1 0.85,1 1,0.5"></polygon></symbol><symbol id="up-arrow" preserveAspectRatio="xMidYMin slice" viewBox="0,0,1,1"><polygon fill="darkred" points="0,0.15 0,1 1,1 1,0.15 0.5,0"></polygon></symbol><use height="24" href="#down-arrow" width="24" x="0"></use><use height="24" href="#up-arrow" width="24" x="28"></use><use height="24" href="#right-arrow" width="24" x="56"></use></svg>
+﻿<svg height="24" width="84" xmlns="http://www.w3.org/2000/svg">
+	<symbol id="down-arrow" preserveAspectRatio="xMidYMax slice" viewBox="0,0,1,1">
+		<polygon fill="darkgreen" points="0,0.85 0,0 1,0 1,0.85 0.5,1"></polygon>
+	</symbol>
+	<symbol id="right-arrow" preserveAspectRatio="xMaxYMid slice" viewBox="0,0,1,1">
+		<polygon fill="darkred" points="0.85,0 0,0 0,1 0.85,1 1,0.5"></polygon>
+	</symbol>
+	<symbol id="up-arrow" preserveAspectRatio="xMidYMin slice" viewBox="0,0,1,1">
+		<polygon fill="darkred" points="0,0.15 0,1 1,1 1,0.15 0.5,0"></polygon>
+	</symbol>
+	<use height="24" href="#down-arrow" width="24" x="0"></use>
+	<use height="24" href="#up-arrow" width="24" x="28"></use>
+	<use height="24" href="#right-arrow" width="24" x="56"></use>
+</svg>
