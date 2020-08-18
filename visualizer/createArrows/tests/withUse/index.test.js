@@ -4,6 +4,7 @@ import createArrows from "../..";
 import { createElement } from "react";
 import createSvgElement from "../createSvgElement";
 import createSymbolAndUseElementsAndGetSize from "./createSymbolAndUseElementsAndGetSize";
+import formatSvg from "../../../tests/formatSvg";
 import path from "path";
 import readTestCaseFile from "../readTestCaseFile";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -175,12 +176,14 @@ async function expectRenderedToBe({
 }) {
 	return (
 		expect(
-			renderToStaticMarkup(
-				createSvgElement({
-					createElement,
-					elements,
-					size,
-				}),
+			formatSvg(
+				renderToStaticMarkup(
+					createSvgElement({
+						createElement,
+						elements,
+						size,
+					}),
+				),
 			),
 		)
 		.toBe(

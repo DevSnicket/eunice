@@ -5,6 +5,7 @@ import { createElement } from "react";
 import createRightSymbol from "../../createRightSymbol";
 import createSvgElement from "../createSvgElement";
 import createUpSymbol from "../../createUpSymbol";
+import formatSvg from "../../../tests/formatSvg";
 import path from "path";
 import readTestCaseFile from "../readTestCaseFile";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -99,7 +100,11 @@ async function assertExpectedFile({
 	testCase,
 }) {
 	expect(
-		renderToStaticMarkup(element),
+		formatSvg(
+			renderToStaticMarkup(
+				element,
+			),
+		),
 	)
 	.toBe(
 		await readTestCaseFile(

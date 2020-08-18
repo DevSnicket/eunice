@@ -1,1 +1,54 @@
-<svg height="88" width="104.08" xmlns="http://www.w3.org/2000/svg"><defs><style type="text/css">text{font-family:arial;font-size:16px}g.anonymous&gt;text{font-style:italic}g.parent&gt;rect{fill:none;stroke:gray}g.item&gt;rect{fill:lightgray}g.item&gt;text{text-anchor:middle}g.dependency&gt;text{fill:white;text-anchor:middle}</style></defs><symbol id="down-arrow" preserveAspectRatio="xMidYMax slice" viewBox="0,0,1,1"><polygon fill="darkgreen" points="0,0.85 0,0 1,0 1,0.85 0.5,1"></polygon></symbol><symbol id="right-arrow" preserveAspectRatio="xMaxYMid slice" viewBox="0,0,1,1"><polygon fill="darkred" points="0.85,0 0,0 0,1 0.85,1 1,0.5"></polygon></symbol><symbol id="up-arrow" preserveAspectRatio="xMidYMin slice" viewBox="0,0,1,1"><polygon fill="darkred" points="0,0.15 0,1 1,1 1,0.15 0.5,0"></polygon></symbol><a href="#id=item&amp;level=above&amp;relationship=dependents"><g class="dependency"><use href="#down-arrow" height="24" width="27.92" x="22.12"></use><text x="36.08" y="17.76">11</text></g></a><a href="#id=item&amp;level=above&amp;relationship=dependsUpon"><g class="dependency"><use href="#up-arrow" height="24" width="27.92" x="54.04"></use><text x="68" y="17.76">12</text></g></a><a href="#id=item&amp;level=same&amp;relationship=dependents"><g class="dependency"><use href="#right-arrow" height="24" width="26.92" y="32"></use><text x="11.96" y="49.76">31</text></g></a><g class="item"><rect height="40" width="50.24" x="26.92" y="24"></rect><text x="52.04" y="49.76">item</text></g><a href="#id=item&amp;level=same&amp;relationship=dependsUpon"><g class="dependency"><use href="#right-arrow" height="24" width="26.92" x="77.16" y="32"></use><text x="89.12" y="49.76">32</text></g></a><a href="#id=item&amp;level=below&amp;relationship=dependsUpon"><g class="dependency"><use href="#down-arrow" height="24" width="27.92" x="22.12" y="64"></use><text x="36.08" y="81.76">21</text></g></a><a href="#id=item&amp;level=below&amp;relationship=dependents"><g class="dependency"><use href="#up-arrow" height="24" width="27.92" x="54.04" y="64"></use><text x="68" y="81.76">22</text></g></a></svg>
+<svg height="88" width="104.08" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		<style type="text/css">text{font-family:arial;font-size:16px}g.anonymous&gt;text{font-style:italic}g.parent&gt;rect{fill:none;stroke:gray}g.item&gt;rect{fill:lightgray}g.item&gt;text{text-anchor:middle}g.dependency&gt;text{fill:white;text-anchor:middle}</style>
+	</defs>
+	<symbol id="down-arrow" preserveAspectRatio="xMidYMax slice" viewBox="0,0,1,1">
+		<polygon fill="darkgreen" points="0,0.85 0,0 1,0 1,0.85 0.5,1"></polygon>
+	</symbol>
+	<symbol id="right-arrow" preserveAspectRatio="xMaxYMid slice" viewBox="0,0,1,1">
+		<polygon fill="darkred" points="0.85,0 0,0 0,1 0.85,1 1,0.5"></polygon>
+	</symbol>
+	<symbol id="up-arrow" preserveAspectRatio="xMidYMin slice" viewBox="0,0,1,1">
+		<polygon fill="darkred" points="0,0.15 0,1 1,1 1,0.15 0.5,0"></polygon>
+	</symbol>
+	<a href="#id=item&amp;level=above&amp;relationship=dependents">
+		<g class="dependency">
+			<use href="#down-arrow" height="24" width="27.92" x="22.12"></use>
+			<text x="36.08" y="17.76">11</text>
+		</g>
+	</a>
+	<a href="#id=item&amp;level=above&amp;relationship=dependsUpon">
+		<g class="dependency">
+			<use href="#up-arrow" height="24" width="27.92" x="54.04"></use>
+			<text x="68" y="17.76">12</text>
+		</g>
+	</a>
+	<a href="#id=item&amp;level=same&amp;relationship=dependents">
+		<g class="dependency">
+			<use href="#right-arrow" height="24" width="26.92" y="32"></use>
+			<text x="11.96" y="49.76">31</text>
+		</g>
+	</a>
+	<g class="item">
+		<rect height="40" width="50.24" x="26.92" y="24"></rect>
+		<text x="52.04" y="49.76">item</text>
+	</g>
+	<a href="#id=item&amp;level=same&amp;relationship=dependsUpon">
+		<g class="dependency">
+			<use href="#right-arrow" height="24" width="26.92" x="77.16" y="32"></use>
+			<text x="89.12" y="49.76">32</text>
+		</g>
+	</a>
+	<a href="#id=item&amp;level=below&amp;relationship=dependsUpon">
+		<g class="dependency">
+			<use href="#down-arrow" height="24" width="27.92" x="22.12" y="64"></use>
+			<text x="36.08" y="81.76">21</text>
+		</g>
+	</a>
+	<a href="#id=item&amp;level=below&amp;relationship=dependents">
+		<g class="dependency">
+			<use href="#up-arrow" height="24" width="27.92" x="54.04" y="64"></use>
+			<text x="68" y="81.76">22</text>
+		</g>
+	</a>
+</svg>

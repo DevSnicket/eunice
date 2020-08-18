@@ -1,1 +1,50 @@
-<svg height="150" width="353.84" xmlns="http://www.w3.org/2000/svg"><defs><style type="text/css">text{font-family:arial;font-size:16px}g.anonymous&gt;text{font-style:italic}g.parent&gt;rect{fill:none;stroke:gray}g.item&gt;rect{fill:lightgray}g.item&gt;text{text-anchor:middle}g.dependency&gt;text{fill:white;text-anchor:middle}</style></defs><symbol id="down-arrow" preserveAspectRatio="xMidYMax slice" viewBox="0,0,1,1"><polygon fill="darkgreen" points="0,0.85 0,0 1,0 1,0.85 0.5,1"></polygon></symbol><symbol id="right-arrow" preserveAspectRatio="xMaxYMid slice" viewBox="0,0,1,1"><polygon fill="darkred" points="0.85,0 0,0 0,1 0.85,1 1,0.5"></polygon></symbol><symbol id="up-arrow" preserveAspectRatio="xMidYMin slice" viewBox="0,0,1,1"><polygon fill="darkred" points="0,0.15 0,1 1,1 1,0.15 0.5,0"></polygon></symbol><g class="item"><rect height="40" width="91.36"></rect><text x="45.68" y="25.76">upper first</text></g><g class="item"><rect height="40" width="117.44" x="106.36"></rect><text x="165.08" y="25.76">upper second</text></g><g class="item"><rect height="40" width="96.8" x="238.8"></rect><text x="287.2" y="25.76">upper third</text></g><g class="item"><rect height="40" width="97.44" y="55"></rect><text x="48.72" y="80.76">middle first</text></g><g class="item"><rect height="40" width="123.52" x="112.44" y="55"></rect><text x="174.2" y="80.76">middle second</text></g><g class="item"><rect height="40" width="102.88" x="250.96" y="55"></rect><text x="302.4" y="80.76">middle third</text></g><g class="item"><rect height="40" width="88.48" y="110"></rect><text x="44.24" y="135.76">lower first</text></g><g class="item"><rect height="40" width="114.56" x="103.48" y="110"></rect><text x="160.76" y="135.76">lower second</text></g><g class="item"><rect height="40" width="93.92" x="233.04" y="110"></rect><text x="280" y="135.76">lower third</text></g></svg>
+<svg height="150" width="353.84" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		<style type="text/css">text{font-family:arial;font-size:16px}g.anonymous&gt;text{font-style:italic}g.parent&gt;rect{fill:none;stroke:gray}g.item&gt;rect{fill:lightgray}g.item&gt;text{text-anchor:middle}g.dependency&gt;text{fill:white;text-anchor:middle}</style>
+	</defs>
+	<symbol id="down-arrow" preserveAspectRatio="xMidYMax slice" viewBox="0,0,1,1">
+		<polygon fill="darkgreen" points="0,0.85 0,0 1,0 1,0.85 0.5,1"></polygon>
+	</symbol>
+	<symbol id="right-arrow" preserveAspectRatio="xMaxYMid slice" viewBox="0,0,1,1">
+		<polygon fill="darkred" points="0.85,0 0,0 0,1 0.85,1 1,0.5"></polygon>
+	</symbol>
+	<symbol id="up-arrow" preserveAspectRatio="xMidYMin slice" viewBox="0,0,1,1">
+		<polygon fill="darkred" points="0,0.15 0,1 1,1 1,0.15 0.5,0"></polygon>
+	</symbol>
+	<g class="item">
+		<rect height="40" width="91.36"></rect>
+		<text x="45.68" y="25.76">upper first</text>
+	</g>
+	<g class="item">
+		<rect height="40" width="117.44" x="106.36"></rect>
+		<text x="165.08" y="25.76">upper second</text>
+	</g>
+	<g class="item">
+		<rect height="40" width="96.8" x="238.8"></rect>
+		<text x="287.2" y="25.76">upper third</text>
+	</g>
+	<g class="item">
+		<rect height="40" width="97.44" y="55"></rect>
+		<text x="48.72" y="80.76">middle first</text>
+	</g>
+	<g class="item">
+		<rect height="40" width="123.52" x="112.44" y="55"></rect>
+		<text x="174.2" y="80.76">middle second</text>
+	</g>
+	<g class="item">
+		<rect height="40" width="102.88" x="250.96" y="55"></rect>
+		<text x="302.4" y="80.76">middle third</text>
+	</g>
+	<g class="item">
+		<rect height="40" width="88.48" y="110"></rect>
+		<text x="44.24" y="135.76">lower first</text>
+	</g>
+	<g class="item">
+		<rect height="40" width="114.56" x="103.48" y="110"></rect>
+		<text x="160.76" y="135.76">lower second</text>
+	</g>
+	<g class="item">
+		<rect height="40" width="93.92" x="233.04" y="110"></rect>
+		<text x="280" y="135.76">lower third</text>
+	</g>
+</svg>

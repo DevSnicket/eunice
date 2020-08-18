@@ -1,1 +1,62 @@
-<svg height="177" width="281.32" xmlns="http://www.w3.org/2000/svg"><defs><style type="text/css">text{font-family:arial;font-size:16px}g.anonymous&gt;text{font-style:italic}g.parent&gt;rect{fill:none;stroke:gray}g.item&gt;rect{fill:lightgray}g.item&gt;text{text-anchor:middle}g.dependency&gt;text{fill:white;text-anchor:middle}</style></defs><symbol id="down-arrow" preserveAspectRatio="xMidYMax slice" viewBox="0,0,1,1"><polygon fill="darkgreen" points="0,0.85 0,0 1,0 1,0.85 0.5,1"></polygon></symbol><symbol id="right-arrow" preserveAspectRatio="xMaxYMid slice" viewBox="0,0,1,1"><polygon fill="darkred" points="0.85,0 0,0 0,1 0.85,1 1,0.5"></polygon></symbol><symbol id="up-arrow" preserveAspectRatio="xMidYMin slice" viewBox="0,0,1,1"><polygon fill="darkred" points="0,0.15 0,1 1,1 1,0.15 0.5,0"></polygon></symbol><g class="dependency"><use href="#down-arrow" height="24" width="27.92" x="110.74"></use><text x="124.7" y="17.76">21</text></g><g class="dependency"><use href="#up-arrow" height="24" width="27.92" x="142.66"></use><text x="156.62" y="17.76">22</text></g><g class="dependency"><use href="#right-arrow" height="24" width="26.92" y="76.5"></use><text x="11.96" y="94.26">41</text></g><g class="parent"><rect height="129" width="227.48" x="26.92" y="24"></rect><text x="36.92" y="49.76">parent</text><g class="item"><rect height="40" width="83.2" x="36.92" y="64"></rect><text x="78.52" y="89.76">child first</text></g><g class="item"><rect height="40" width="109.28" x="135.12" y="64"></rect><text x="189.76" y="89.76">child second</text></g><g class="dependency"><use href="#down-arrow" height="24" width="27.92" x="99.28" y="119"></use><text x="113.24" y="136.76">11</text></g><g class="dependency"><use href="#up-arrow" height="24" width="27.92" x="131.2" y="119"></use><text x="145.16" y="136.76">12</text></g><g class="dependency"><use href="#right-arrow" height="24" width="26.92" x="163.12" y="119"></use><text x="175.08" y="136.76">13</text></g></g><g class="dependency"><use href="#right-arrow" height="24" width="26.92" x="254.4" y="76.5"></use><text x="266.36" y="94.26">42</text></g><g class="dependency"><use href="#down-arrow" height="24" width="27.92" x="110.74" y="153"></use><text x="124.7" y="170.76">31</text></g><g class="dependency"><use href="#up-arrow" height="24" width="27.92" x="142.66" y="153"></use><text x="156.62" y="170.76">32</text></g></svg>
+<svg height="177" width="281.32" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		<style type="text/css">text{font-family:arial;font-size:16px}g.anonymous&gt;text{font-style:italic}g.parent&gt;rect{fill:none;stroke:gray}g.item&gt;rect{fill:lightgray}g.item&gt;text{text-anchor:middle}g.dependency&gt;text{fill:white;text-anchor:middle}</style>
+	</defs>
+	<symbol id="down-arrow" preserveAspectRatio="xMidYMax slice" viewBox="0,0,1,1">
+		<polygon fill="darkgreen" points="0,0.85 0,0 1,0 1,0.85 0.5,1"></polygon>
+	</symbol>
+	<symbol id="right-arrow" preserveAspectRatio="xMaxYMid slice" viewBox="0,0,1,1">
+		<polygon fill="darkred" points="0.85,0 0,0 0,1 0.85,1 1,0.5"></polygon>
+	</symbol>
+	<symbol id="up-arrow" preserveAspectRatio="xMidYMin slice" viewBox="0,0,1,1">
+		<polygon fill="darkred" points="0,0.15 0,1 1,1 1,0.15 0.5,0"></polygon>
+	</symbol>
+	<g class="dependency">
+		<use href="#down-arrow" height="24" width="27.92" x="110.74"></use>
+		<text x="124.7" y="17.76">21</text>
+	</g>
+	<g class="dependency">
+		<use href="#up-arrow" height="24" width="27.92" x="142.66"></use>
+		<text x="156.62" y="17.76">22</text>
+	</g>
+	<g class="dependency">
+		<use href="#right-arrow" height="24" width="26.92" y="76.5"></use>
+		<text x="11.96" y="94.26">41</text>
+	</g>
+	<g class="parent">
+		<rect height="129" width="227.48" x="26.92" y="24"></rect>
+		<text x="36.92" y="49.76">parent</text>
+		<g class="item">
+			<rect height="40" width="83.2" x="36.92" y="64"></rect>
+			<text x="78.52" y="89.76">child first</text>
+		</g>
+		<g class="item">
+			<rect height="40" width="109.28" x="135.12" y="64"></rect>
+			<text x="189.76" y="89.76">child second</text>
+		</g>
+		<g class="dependency">
+			<use href="#down-arrow" height="24" width="27.92" x="99.28" y="119"></use>
+			<text x="113.24" y="136.76">11</text>
+		</g>
+		<g class="dependency">
+			<use href="#up-arrow" height="24" width="27.92" x="131.2" y="119"></use>
+			<text x="145.16" y="136.76">12</text>
+		</g>
+		<g class="dependency">
+			<use href="#right-arrow" height="24" width="26.92" x="163.12" y="119"></use>
+			<text x="175.08" y="136.76">13</text>
+		</g>
+	</g>
+	<g class="dependency">
+		<use href="#right-arrow" height="24" width="26.92" x="254.4" y="76.5"></use>
+		<text x="266.36" y="94.26">42</text>
+	</g>
+	<g class="dependency">
+		<use href="#down-arrow" height="24" width="27.92" x="110.74" y="153"></use>
+		<text x="124.7" y="170.76">31</text>
+	</g>
+	<g class="dependency">
+		<use href="#up-arrow" height="24" width="27.92" x="142.66" y="153"></use>
+		<text x="156.62" y="170.76">32</text>
+	</g>
+</svg>

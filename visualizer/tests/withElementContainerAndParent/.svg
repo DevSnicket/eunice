@@ -1,1 +1,174 @@
-<svg height="249" width="525.56" xmlns="http://www.w3.org/2000/svg"><defs><style type="text/css">text{font-family:arial;font-size:16px}g.anonymous&gt;text{font-style:italic}g.parent&gt;rect{fill:none;stroke:gray}g.item&gt;rect{fill:lightgray}g.item&gt;text{text-anchor:middle}g.dependency&gt;text{fill:white;text-anchor:middle}</style></defs><symbol id="down-arrow" preserveAspectRatio="xMidYMax slice" viewBox="0,0,1,1"><polygon fill="darkgreen" points="0,0.85 0,0 1,0 1,0.85 0.5,1"></polygon></symbol><symbol id="right-arrow" preserveAspectRatio="xMaxYMid slice" viewBox="0,0,1,1"><polygon fill="darkred" points="0.85,0 0,0 0,1 0.85,1 1,0.5"></polygon></symbol><symbol id="up-arrow" preserveAspectRatio="xMidYMin slice" viewBox="0,0,1,1"><polygon fill="darkred" points="0,0.15 0,1 1,1 1,0.15 0.5,0"></polygon></symbol><a href="#id=parent&amp;level=above&amp;relationship=dependents"><g class="dependency"><use href="#down-arrow" height="24" width="36.88" x="223.9"></use><text x="242.34" y="17.76">121</text></g></a><a href="#id=parent&amp;level=above&amp;relationship=dependsUpon"><g class="dependency"><use href="#up-arrow" height="24" width="36.88" x="264.78"></use><text x="283.22" y="17.76">122</text></g></a><a href="#id=parent&amp;level=same&amp;relationship=dependents"><g class="dependency"><use href="#right-arrow" height="24" width="35.88" y="112.5"></use><text x="16.44" y="130.26">141</text></g></a><g class="parent"><rect height="201" width="453.8" x="35.88" y="24"></rect><text x="45.88" y="49.76">parent</text><a href="#id=child first&amp;level=above&amp;relationship=dependents"><g class="dependency"><use href="#down-arrow" height="24" width="36.88" x="111.7" y="64"></use><text x="130.14" y="81.76">221</text></g></a><a href="#id=child first&amp;level=above&amp;relationship=dependsUpon"><g class="dependency"><use href="#up-arrow" height="24" width="36.88" x="152.58" y="64"></use><text x="171.02" y="81.76">222</text></g></a><a href="#id=child first&amp;level=same&amp;relationship=dependents"><g class="dependency"><use href="#right-arrow" height="24" width="35.88" x="45.88" y="108"></use><text x="62.32" y="125.76">241</text></g></a><a href="#child first"><g class="item"><rect height="64" width="137.64" x="81.76" y="88"></rect><text x="150.58" y="113.76">child first</text><g class="dependency"><use href="#down-arrow" height="24" width="36.88" x="95.76" y="122"></use><text x="114.2" y="139.76">211</text></g><g class="dependency"><use href="#up-arrow" height="24" width="36.88" x="136.64" y="122"></use><text x="155.08" y="139.76">212</text></g><g class="dependency"><use href="#right-arrow" height="24" width="35.88" x="177.52" y="122"></use><text x="193.96" y="139.76">213</text></g></g></a><a href="#id=child first&amp;level=same&amp;relationship=dependsUpon"><g class="dependency"><use href="#right-arrow" height="24" width="35.88" x="219.4" y="108"></use><text x="235.84" y="125.76">242</text></g></a><a href="#id=child first&amp;level=below&amp;relationship=dependsUpon"><g class="dependency"><use href="#down-arrow" height="24" width="36.88" x="111.7" y="152"></use><text x="130.14" y="169.76">231</text></g></a><a href="#id=child first&amp;level=below&amp;relationship=dependents"><g class="dependency"><use href="#up-arrow" height="24" width="36.88" x="152.58" y="152"></use><text x="171.02" y="169.76">232</text></g></a><a href="#id=child second&amp;level=above&amp;relationship=dependents"><g class="dependency"><use href="#down-arrow" height="24" width="36.88" x="336.1" y="64"></use><text x="354.54" y="81.76">321</text></g></a><a href="#id=child second&amp;level=above&amp;relationship=dependsUpon"><g class="dependency"><use href="#up-arrow" height="24" width="36.88" x="376.98" y="64"></use><text x="395.42" y="81.76">322</text></g></a><a href="#id=child second&amp;level=same&amp;relationship=dependents"><g class="dependency"><use href="#right-arrow" height="24" width="35.88" x="270.28" y="108"></use><text x="286.72" y="125.76">341</text></g></a><a href="#child second"><g class="item"><rect height="64" width="137.64" x="306.16" y="88"></rect><text x="374.98" y="113.76">child second</text><g class="dependency"><use href="#down-arrow" height="24" width="36.88" x="320.16" y="122"></use><text x="338.6" y="139.76">311</text></g><g class="dependency"><use href="#up-arrow" height="24" width="36.88" x="361.04" y="122"></use><text x="379.48" y="139.76">312</text></g><g class="dependency"><use href="#right-arrow" height="24" width="35.88" x="401.92" y="122"></use><text x="418.36" y="139.76">313</text></g></g></a><a href="#id=child second&amp;level=same&amp;relationship=dependsUpon"><g class="dependency"><use href="#right-arrow" height="24" width="35.88" x="443.8" y="108"></use><text x="460.24" y="125.76">342</text></g></a><a href="#id=child second&amp;level=below&amp;relationship=dependsUpon"><g class="dependency"><use href="#down-arrow" height="24" width="36.88" x="336.1" y="152"></use><text x="354.54" y="169.76">331</text></g></a><a href="#id=child second&amp;level=below&amp;relationship=dependents"><g class="dependency"><use href="#up-arrow" height="24" width="36.88" x="376.98" y="152"></use><text x="395.42" y="169.76">332</text></g></a><g class="dependency"><use href="#down-arrow" height="24" width="36.88" x="207.96" y="191"></use><text x="226.4" y="208.76">111</text></g><g class="dependency"><use href="#up-arrow" height="24" width="36.88" x="248.84" y="191"></use><text x="267.28" y="208.76">112</text></g><g class="dependency"><use href="#right-arrow" height="24" width="35.88" x="289.72" y="191"></use><text x="306.16" y="208.76">113</text></g></g><a href="#id=parent&amp;level=same&amp;relationship=dependsUpon"><g class="dependency"><use href="#right-arrow" height="24" width="35.88" x="489.68" y="112.5"></use><text x="506.12" y="130.26">142</text></g></a><a href="#id=parent&amp;level=below&amp;relationship=dependsUpon"><g class="dependency"><use href="#down-arrow" height="24" width="36.88" x="223.9" y="225"></use><text x="242.34" y="242.76">131</text></g></a><a href="#id=parent&amp;level=below&amp;relationship=dependents"><g class="dependency"><use href="#up-arrow" height="24" width="36.88" x="264.78" y="225"></use><text x="283.22" y="242.76">132</text></g></a></svg>
+<svg height="249" width="525.56" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		<style type="text/css">text{font-family:arial;font-size:16px}g.anonymous&gt;text{font-style:italic}g.parent&gt;rect{fill:none;stroke:gray}g.item&gt;rect{fill:lightgray}g.item&gt;text{text-anchor:middle}g.dependency&gt;text{fill:white;text-anchor:middle}</style>
+	</defs>
+	<symbol id="down-arrow" preserveAspectRatio="xMidYMax slice" viewBox="0,0,1,1">
+		<polygon fill="darkgreen" points="0,0.85 0,0 1,0 1,0.85 0.5,1"></polygon>
+	</symbol>
+	<symbol id="right-arrow" preserveAspectRatio="xMaxYMid slice" viewBox="0,0,1,1">
+		<polygon fill="darkred" points="0.85,0 0,0 0,1 0.85,1 1,0.5"></polygon>
+	</symbol>
+	<symbol id="up-arrow" preserveAspectRatio="xMidYMin slice" viewBox="0,0,1,1">
+		<polygon fill="darkred" points="0,0.15 0,1 1,1 1,0.15 0.5,0"></polygon>
+	</symbol>
+	<a href="#id=parent&amp;level=above&amp;relationship=dependents">
+		<g class="dependency">
+			<use href="#down-arrow" height="24" width="36.88" x="223.9"></use>
+			<text x="242.34" y="17.76">121</text>
+		</g>
+	</a>
+	<a href="#id=parent&amp;level=above&amp;relationship=dependsUpon">
+		<g class="dependency">
+			<use href="#up-arrow" height="24" width="36.88" x="264.78"></use>
+			<text x="283.22" y="17.76">122</text>
+		</g>
+	</a>
+	<a href="#id=parent&amp;level=same&amp;relationship=dependents">
+		<g class="dependency">
+			<use href="#right-arrow" height="24" width="35.88" y="112.5"></use>
+			<text x="16.44" y="130.26">141</text>
+		</g>
+	</a>
+	<g class="parent">
+		<rect height="201" width="453.8" x="35.88" y="24"></rect>
+		<text x="45.88" y="49.76">parent</text>
+		<a href="#id=child first&amp;level=above&amp;relationship=dependents">
+			<g class="dependency">
+				<use href="#down-arrow" height="24" width="36.88" x="111.7" y="64"></use>
+				<text x="130.14" y="81.76">221</text>
+			</g>
+		</a>
+		<a href="#id=child first&amp;level=above&amp;relationship=dependsUpon">
+			<g class="dependency">
+				<use href="#up-arrow" height="24" width="36.88" x="152.58" y="64"></use>
+				<text x="171.02" y="81.76">222</text>
+			</g>
+		</a>
+		<a href="#id=child first&amp;level=same&amp;relationship=dependents">
+			<g class="dependency">
+				<use href="#right-arrow" height="24" width="35.88" x="45.88" y="108"></use>
+				<text x="62.32" y="125.76">241</text>
+			</g>
+		</a>
+		<a href="#child first">
+			<g class="item">
+				<rect height="64" width="137.64" x="81.76" y="88"></rect>
+				<text x="150.58" y="113.76">child first</text>
+				<g class="dependency">
+					<use href="#down-arrow" height="24" width="36.88" x="95.76" y="122"></use>
+					<text x="114.2" y="139.76">211</text>
+				</g>
+				<g class="dependency">
+					<use href="#up-arrow" height="24" width="36.88" x="136.64" y="122"></use>
+					<text x="155.08" y="139.76">212</text>
+				</g>
+				<g class="dependency">
+					<use href="#right-arrow" height="24" width="35.88" x="177.52" y="122"></use>
+					<text x="193.96" y="139.76">213</text>
+				</g>
+			</g>
+		</a>
+		<a href="#id=child first&amp;level=same&amp;relationship=dependsUpon">
+			<g class="dependency">
+				<use href="#right-arrow" height="24" width="35.88" x="219.4" y="108"></use>
+				<text x="235.84" y="125.76">242</text>
+			</g>
+		</a>
+		<a href="#id=child first&amp;level=below&amp;relationship=dependsUpon">
+			<g class="dependency">
+				<use href="#down-arrow" height="24" width="36.88" x="111.7" y="152"></use>
+				<text x="130.14" y="169.76">231</text>
+			</g>
+		</a>
+		<a href="#id=child first&amp;level=below&amp;relationship=dependents">
+			<g class="dependency">
+				<use href="#up-arrow" height="24" width="36.88" x="152.58" y="152"></use>
+				<text x="171.02" y="169.76">232</text>
+			</g>
+		</a>
+		<a href="#id=child second&amp;level=above&amp;relationship=dependents">
+			<g class="dependency">
+				<use href="#down-arrow" height="24" width="36.88" x="336.1" y="64"></use>
+				<text x="354.54" y="81.76">321</text>
+			</g>
+		</a>
+		<a href="#id=child second&amp;level=above&amp;relationship=dependsUpon">
+			<g class="dependency">
+				<use href="#up-arrow" height="24" width="36.88" x="376.98" y="64"></use>
+				<text x="395.42" y="81.76">322</text>
+			</g>
+		</a>
+		<a href="#id=child second&amp;level=same&amp;relationship=dependents">
+			<g class="dependency">
+				<use href="#right-arrow" height="24" width="35.88" x="270.28" y="108"></use>
+				<text x="286.72" y="125.76">341</text>
+			</g>
+		</a>
+		<a href="#child second">
+			<g class="item">
+				<rect height="64" width="137.64" x="306.16" y="88"></rect>
+				<text x="374.98" y="113.76">child second</text>
+				<g class="dependency">
+					<use href="#down-arrow" height="24" width="36.88" x="320.16" y="122"></use>
+					<text x="338.6" y="139.76">311</text>
+				</g>
+				<g class="dependency">
+					<use href="#up-arrow" height="24" width="36.88" x="361.04" y="122"></use>
+					<text x="379.48" y="139.76">312</text>
+				</g>
+				<g class="dependency">
+					<use href="#right-arrow" height="24" width="35.88" x="401.92" y="122"></use>
+					<text x="418.36" y="139.76">313</text>
+				</g>
+			</g>
+		</a>
+		<a href="#id=child second&amp;level=same&amp;relationship=dependsUpon">
+			<g class="dependency">
+				<use href="#right-arrow" height="24" width="35.88" x="443.8" y="108"></use>
+				<text x="460.24" y="125.76">342</text>
+			</g>
+		</a>
+		<a href="#id=child second&amp;level=below&amp;relationship=dependsUpon">
+			<g class="dependency">
+				<use href="#down-arrow" height="24" width="36.88" x="336.1" y="152"></use>
+				<text x="354.54" y="169.76">331</text>
+			</g>
+		</a>
+		<a href="#id=child second&amp;level=below&amp;relationship=dependents">
+			<g class="dependency">
+				<use href="#up-arrow" height="24" width="36.88" x="376.98" y="152"></use>
+				<text x="395.42" y="169.76">332</text>
+			</g>
+		</a>
+		<g class="dependency">
+			<use href="#down-arrow" height="24" width="36.88" x="207.96" y="191"></use>
+			<text x="226.4" y="208.76">111</text>
+		</g>
+		<g class="dependency">
+			<use href="#up-arrow" height="24" width="36.88" x="248.84" y="191"></use>
+			<text x="267.28" y="208.76">112</text>
+		</g>
+		<g class="dependency">
+			<use href="#right-arrow" height="24" width="35.88" x="289.72" y="191"></use>
+			<text x="306.16" y="208.76">113</text>
+		</g>
+	</g>
+	<a href="#id=parent&amp;level=same&amp;relationship=dependsUpon">
+		<g class="dependency">
+			<use href="#right-arrow" height="24" width="35.88" x="489.68" y="112.5"></use>
+			<text x="506.12" y="130.26">142</text>
+		</g>
+	</a>
+	<a href="#id=parent&amp;level=below&amp;relationship=dependsUpon">
+		<g class="dependency">
+			<use href="#down-arrow" height="24" width="36.88" x="223.9" y="225"></use>
+			<text x="242.34" y="242.76">131</text>
+		</g>
+	</a>
+	<a href="#id=parent&amp;level=below&amp;relationship=dependents">
+		<g class="dependency">
+			<use href="#up-arrow" height="24" width="36.88" x="264.78" y="225"></use>
+			<text x="283.22" y="242.76">132</text>
+		</g>
+	</a>
+</svg>

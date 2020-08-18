@@ -1,1 +1,38 @@
-<svg height="184" width="118.56" xmlns="http://www.w3.org/2000/svg"><defs><style type="text/css">text{font-family:arial;font-size:16px}g.anonymous&gt;text{font-style:italic}g.parent&gt;rect{fill:none;stroke:gray}g.item&gt;rect{fill:lightgray}g.item&gt;text{text-anchor:middle}g.dependency&gt;text{fill:white;text-anchor:middle}</style></defs><symbol id="down-arrow" preserveAspectRatio="xMidYMax slice" viewBox="0,0,1,1"><polygon fill="darkgreen" points="0,0.85 0,0 1,0 1,0.85 0.5,1"></polygon></symbol><symbol id="right-arrow" preserveAspectRatio="xMaxYMid slice" viewBox="0,0,1,1"><polygon fill="darkred" points="0.85,0 0,0 0,1 0.85,1 1,0.5"></polygon></symbol><symbol id="up-arrow" preserveAspectRatio="xMidYMin slice" viewBox="0,0,1,1"><polygon fill="darkred" points="0,0.15 0,1 1,1 1,0.15 0.5,0"></polygon></symbol><g class="parent"><rect height="184" width="118.56"></rect><text x="10" y="25.76">parent</text><g class="item"><rect height="40" width="98.56" x="10" y="40"></rect><text x="59.28" y="65.76">child upper</text></g><g class="item"><rect height="40" width="95.68" x="10" y="95"></rect><text x="57.84" y="120.76">child lower</text></g><g class="dependency"><use href="#down-arrow" height="24" width="18.96" x="31.34" y="150"></use><text x="40.82" y="167.76">1</text></g><g class="dependency"><use href="#up-arrow" height="24" width="18.96" x="54.3" y="150"></use><text x="63.78" y="167.76">2</text></g><g class="dependency"><use href="#right-arrow" height="24" width="17.96" x="77.26" y="150"></use><text x="84.74" y="167.76">3</text></g></g></svg>
+<svg height="184" width="118.56" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		<style type="text/css">text{font-family:arial;font-size:16px}g.anonymous&gt;text{font-style:italic}g.parent&gt;rect{fill:none;stroke:gray}g.item&gt;rect{fill:lightgray}g.item&gt;text{text-anchor:middle}g.dependency&gt;text{fill:white;text-anchor:middle}</style>
+	</defs>
+	<symbol id="down-arrow" preserveAspectRatio="xMidYMax slice" viewBox="0,0,1,1">
+		<polygon fill="darkgreen" points="0,0.85 0,0 1,0 1,0.85 0.5,1"></polygon>
+	</symbol>
+	<symbol id="right-arrow" preserveAspectRatio="xMaxYMid slice" viewBox="0,0,1,1">
+		<polygon fill="darkred" points="0.85,0 0,0 0,1 0.85,1 1,0.5"></polygon>
+	</symbol>
+	<symbol id="up-arrow" preserveAspectRatio="xMidYMin slice" viewBox="0,0,1,1">
+		<polygon fill="darkred" points="0,0.15 0,1 1,1 1,0.15 0.5,0"></polygon>
+	</symbol>
+	<g class="parent">
+		<rect height="184" width="118.56"></rect>
+		<text x="10" y="25.76">parent</text>
+		<g class="item">
+			<rect height="40" width="98.56" x="10" y="40"></rect>
+			<text x="59.28" y="65.76">child upper</text>
+		</g>
+		<g class="item">
+			<rect height="40" width="95.68" x="10" y="95"></rect>
+			<text x="57.84" y="120.76">child lower</text>
+		</g>
+		<g class="dependency">
+			<use href="#down-arrow" height="24" width="18.96" x="31.34" y="150"></use>
+			<text x="40.82" y="167.76">1</text>
+		</g>
+		<g class="dependency">
+			<use href="#up-arrow" height="24" width="18.96" x="54.3" y="150"></use>
+			<text x="63.78" y="167.76">2</text>
+		</g>
+		<g class="dependency">
+			<use href="#right-arrow" height="24" width="17.96" x="77.26" y="150"></use>
+			<text x="84.74" y="167.76">3</text>
+		</g>
+	</g>
+</svg>
