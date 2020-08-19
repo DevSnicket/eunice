@@ -11,7 +11,7 @@ export default ({
 		&&
 		createElement(
 			"div",
-			null,
+			{ className: "breadcrumbs" },
 			...createElements(),
 		)
 	);
