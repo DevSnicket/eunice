@@ -1,6 +1,6 @@
-<svg height="151" width="433.8" xmlns="http://www.w3.org/2000/svg">
+<svg height="164" width="433.8" xmlns="http://www.w3.org/2000/svg">
 	<defs>
-		<style type="text/css">text{font-family:arial;font-size:16px}g.anonymous&gt;text{font-style:italic}g.parent&gt;rect{fill:none;stroke:gray}g.item&gt;rect{fill:lightgray}g.item&gt;text{text-anchor:middle}g.dependency&gt;text{fill:white;text-anchor:middle}</style>
+		<style type="text/css">text{font-family:arial;font-size:16px}g.anonymous&gt;text{font-style:italic}g.item&gt;rect{fill:lightgray}g.item&gt;text{text-anchor:middle}g.dependency&gt;text{fill:white;text-anchor:middle}</style>
 	</defs>
 	<symbol id="down-arrow" preserveAspectRatio="xMidYMax slice" viewBox="0,0,1,1">
 		<polygon fill="darkgreen" points="0,0.85 0,0 1,0 1,0.85 0.5,1"></polygon>
@@ -92,15 +92,15 @@
 		<text x="349.54" y="105.76">232</text>
 	</g>
 	<g class="dependency">
-		<use href="#down-arrow" height="24" width="36.88" x="162.08" y="127"></use>
-		<text x="180.52" y="144.76">684</text>
+		<use href="#down-arrow" height="24" width="36.88" x="162.08" y="140"></use>
+		<text x="180.52" y="157.76">684</text>
 	</g>
 	<g class="dependency">
-		<use href="#up-arrow" height="24" width="36.88" x="202.96" y="127"></use>
-		<text x="221.4" y="144.76">668</text>
+		<use href="#up-arrow" height="24" width="36.88" x="202.96" y="140"></use>
+		<text x="221.4" y="157.76">668</text>
 	</g>
 	<g class="dependency">
-		<use href="#right-arrow" height="24" width="35.88" x="243.84" y="127"></use>
-		<text x="260.28" y="144.76">710</text>
+		<use href="#right-arrow" height="24" width="35.88" x="243.84" y="140"></use>
+		<text x="260.28" y="157.76">710</text>
 	</g>
 </svg>

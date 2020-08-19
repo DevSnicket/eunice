@@ -2,7 +2,8 @@
 
 import "core-js/features/array/flat-map";
 
-import * as aggregateGroupFactoriesWithOrientation from "../aggregateGroupFactoriesWithOrientation";
+import * as aggregateGroupFactoriesWithOrientation from "../../aggregateGroupFactoriesWithOrientation";
+import spacing from "../spacing";
 
 export default ({
 	arrows,
@@ -61,8 +62,7 @@ export default ({
 							groupFactories:
 								[ "down", "up" ]
 								.flatMap(createArrowDirectionGroupFactory),
-							spacing:
-								4,
+							spacing,
 						}),
 					)
 				);

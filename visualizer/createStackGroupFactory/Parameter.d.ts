@@ -4,9 +4,9 @@ import ElementContainerFactory from "./ElementContainerFactory";
 export = Parameter
 
 interface Parameter {
-	arrows
 	elementContainerFactory: ElementContainerFactory
 	createTextGroup
+	dependencyGroupFactories,
 	font
 	stack: Stack
 }

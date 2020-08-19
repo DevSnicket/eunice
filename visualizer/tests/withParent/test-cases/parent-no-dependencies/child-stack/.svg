@@ -1,6 +1,6 @@
-<svg height="145" width="318.68" xmlns="http://www.w3.org/2000/svg">
+<svg height="175" width="346.68" xmlns="http://www.w3.org/2000/svg">
 	<defs>
-		<style type="text/css">text{font-family:arial;font-size:16px}g.anonymous&gt;text{font-style:italic}g.parent&gt;rect{fill:none;stroke:gray}g.item&gt;rect{fill:lightgray}g.item&gt;text{text-anchor:middle}g.dependency&gt;text{fill:white;text-anchor:middle}</style>
+		<style type="text/css">text{font-family:arial;font-size:16px}g.anonymous&gt;text{font-style:italic}g.item&gt;rect{fill:lightgray}g.item&gt;text{text-anchor:middle}g.dependency&gt;text{fill:white;text-anchor:middle}</style>
 	</defs>
 	<symbol id="down-arrow" preserveAspectRatio="xMidYMax slice" viewBox="0,0,1,1">
 		<polygon fill="darkgreen" points="0,0.85 0,0 1,0 1,0.85 0.5,1"></polygon>
@@ -11,24 +11,25 @@
 	<symbol id="up-arrow" preserveAspectRatio="xMidYMin slice" viewBox="0,0,1,1">
 		<polygon fill="darkred" points="0,0.15 0,1 1,1 1,0.15 0.5,0"></polygon>
 	</symbol>
-	<g class="parent">
-		<rect height="145" width="318.68"></rect>
-		<text x="10" y="25.76">parent</text>
-		<g class="item">
-			<rect height="40" width="128.8" x="10" y="40"></rect>
-			<text x="74.4" y="65.76">child upper first</text>
-		</g>
-		<g class="item">
-			<rect height="40" width="154.88" x="153.8" y="40"></rect>
-			<text x="231.24" y="65.76">child upper second</text>
-		</g>
-		<g class="item">
-			<rect height="40" width="125.92" x="10" y="95"></rect>
-			<text x="72.96" y="120.76">child lower first</text>
-		</g>
-		<g class="item">
-			<rect height="40" width="152" x="150.92" y="95"></rect>
-			<text x="226.92" y="120.76">child lower second</text>
-		</g>
+	<rect height="167" style="fill:none;stroke:lightgrey;stroke-width:8" width="338.68" x="4" y="4"></rect>
+	<g class="item">
+		<rect style="fill:lightgrey" height="40" width="346.68"></rect>
+		<text x="173.34" y="25.76">parent</text>
+	</g>
+	<g class="item">
+		<rect height="40" width="128.8" x="24" y="56"></rect>
+		<text x="88.4" y="81.76">child upper first</text>
+	</g>
+	<g class="item">
+		<rect height="40" width="154.88" x="167.8" y="56"></rect>
+		<text x="245.24" y="81.76">child upper second</text>
+	</g>
+	<g class="item">
+		<rect height="40" width="125.92" x="24" y="111"></rect>
+		<text x="86.96" y="136.76">child lower first</text>
+	</g>
+	<g class="item">
+		<rect height="40" width="152" x="164.92" y="111"></rect>
+		<text x="240.92" y="136.76">child lower second</text>
 	</g>
 </svg>

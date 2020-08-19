@@ -1,6 +1,6 @@
 rm -f -rf gh-pages/arrows &&
-cp -r createArrows/tests/withUse/test-cases gh-pages/arrows &&
-cp createArrows/tests/symbols/test-cases/down-10x10-*.svg gh-pages/arrows &&
+cp -r createDependencyGroupFactories/createArrows/tests/withUse/test-cases gh-pages/arrows &&
+cp createDependencyGroupFactories/createArrows/tests/symbols/test-cases/down-10x10-*.svg gh-pages/arrows &&
 rm -f -rf gh-pages/examples &&
 mkdir gh-pages/examples &&
 mkdir gh-pages/examples/level &&

@@ -1,6 +1,6 @@
-<svg height="184" width="118.56" xmlns="http://www.w3.org/2000/svg">
+<svg height="207" width="146.56" xmlns="http://www.w3.org/2000/svg">
 	<defs>
-		<style type="text/css">text{font-family:arial;font-size:16px}g.anonymous&gt;text{font-style:italic}g.parent&gt;rect{fill:none;stroke:gray}g.item&gt;rect{fill:lightgray}g.item&gt;text{text-anchor:middle}g.dependency&gt;text{fill:white;text-anchor:middle}</style>
+		<style type="text/css">text{font-family:arial;font-size:16px}g.anonymous&gt;text{font-style:italic}g.item&gt;rect{fill:lightgray}g.item&gt;text{text-anchor:middle}g.dependency&gt;text{fill:white;text-anchor:middle}</style>
 	</defs>
 	<symbol id="down-arrow" preserveAspectRatio="xMidYMax slice" viewBox="0,0,1,1">
 		<polygon fill="darkgreen" points="0,0.85 0,0 1,0 1,0.85 0.5,1"></polygon>
@@ -11,28 +11,30 @@
 	<symbol id="up-arrow" preserveAspectRatio="xMidYMin slice" viewBox="0,0,1,1">
 		<polygon fill="darkred" points="0,0.15 0,1 1,1 1,0.15 0.5,0"></polygon>
 	</symbol>
-	<g class="parent">
-		<rect height="184" width="118.56"></rect>
-		<text x="10" y="25.76">parent</text>
-		<g class="item">
-			<rect height="40" width="98.56" x="10" y="40"></rect>
-			<text x="59.28" y="65.76">child upper</text>
-		</g>
-		<g class="item">
-			<rect height="40" width="95.68" x="10" y="95"></rect>
-			<text x="57.84" y="120.76">child lower</text>
-		</g>
-		<g class="dependency">
-			<use href="#down-arrow" height="24" width="18.96" x="31.34" y="150"></use>
-			<text x="40.82" y="167.76">1</text>
-		</g>
-		<g class="dependency">
-			<use href="#up-arrow" height="24" width="18.96" x="54.3" y="150"></use>
-			<text x="63.78" y="167.76">2</text>
-		</g>
-		<g class="dependency">
-			<use href="#right-arrow" height="24" width="17.96" x="77.26" y="150"></use>
-			<text x="84.74" y="167.76">3</text>
-		</g>
+	<rect height="199" style="fill:none;stroke:lightgrey;stroke-width:8" width="138.56" x="4" y="4"></rect>
+	<g class="item">
+		<rect style="fill:lightgrey" height="40" width="146.56"></rect>
+		<text x="73.28" y="25.76">parent</text>
+	</g>
+	<g class="item">
+		<rect height="40" width="98.56" x="24" y="56"></rect>
+		<text x="73.28" y="81.76">child upper</text>
+	</g>
+	<g class="item">
+		<rect height="40" width="95.68" x="24" y="111"></rect>
+		<text x="71.84" y="136.76">child lower</text>
+	</g>
+	<rect height="40" style="fill:lightgrey" width="146.56" x="0" y="167"></rect>
+	<g class="dependency">
+		<use href="#down-arrow" height="24" width="18.96" x="45.34" y="175"></use>
+		<text x="54.82" y="192.76">1</text>
+	</g>
+	<g class="dependency">
+		<use href="#up-arrow" height="24" width="18.96" x="68.3" y="175"></use>
+		<text x="77.78" y="192.76">2</text>
+	</g>
+	<g class="dependency">
+		<use href="#right-arrow" height="24" width="17.96" x="91.26" y="175"></use>
+		<text x="98.74" y="192.76">3</text>
 	</g>
 </svg>

@@ -1,18 +1,18 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import { horizontal as aggregateGroupFactoriesHorizontally } from "../aggregateGroupFactoriesWithOrientation";
+import { horizontal as aggregateGroupFactoriesHorizontally } from "../../aggregateGroupFactoriesWithOrientation";
 
 export default ({
 	arrow,
+	contentGroupFactory,
 	createGroupFactoryWhenRequired,
 	dependencyCountOuterSame,
-	itemGroupFactory,
 }) => {
 	return (
 		whenHasDependencyCount()
 		||
 		createGroupsFactoryWithoutDependencies(
-			itemGroupFactory,
+			contentGroupFactory,
 		)
 	);
 
@@ -28,7 +28,7 @@ export default ({
 
 	function calculateTopOffset() {
 		return (
-			(itemGroupFactory.height - arrow.height)
+			(contentGroupFactory.height - arrow.height)
 			/
 			2
 		);
@@ -108,7 +108,7 @@ export default ({
 			if (dependentsGroupFactory)
 				yield dependentsGroupFactory;
 
-			yield itemGroupFactory;
+			yield contentGroupFactory;
 
 			if (dependsUponGroupFactory)
 				yield dependsUponGroupFactory;

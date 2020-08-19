@@ -22,7 +22,6 @@ test(
 					getFirstChildStack(
 						parseStackFromYaml(
 							await readTestFile(
-								// path.join(__dirname, "..", "withParent", "test-cases", "parent-with-dependencies", "child-item", "inner-and-outer", ".yaml"),
 								path.join(__dirname, ".yaml"),
 							),
 						),

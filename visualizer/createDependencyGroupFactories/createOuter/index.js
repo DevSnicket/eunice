@@ -6,16 +6,16 @@ import createStackGroupFactory from "./createStackGroupFactory";
 
 export default ({
 	arrows,
+	contentGroupFactory,
 	createTextGroup,
 	elementContainerFactory,
 	font,
 	item,
-	itemGroupFactory,
 }) => {
 	return (
 		whenHasDependencyCountOfOuter()
 		||
-		itemGroupFactory
+		contentGroupFactory
 	);
 
 	function whenHasDependencyCountOfOuter() {
@@ -30,17 +30,17 @@ export default ({
 				dependencyCountOuter:
 					item.dependencyCount.outer,
 				itemGroupWidth:
-					itemGroupFactory.width,
+					contentGroupFactory.width,
 				levelGroupFactory:
 					createLevelGroupFactory({
 						arrow:
-							arrows.right,
+						arrows.right,
+						contentGroupFactory,
 						createGroupFactoryWhenRequired,
 						dependencyCountOuterSame:
 							item.dependencyCount.outer
 							&&
 							item.dependencyCount.outer.same,
-						itemGroupFactory,
 					}),
 			})
 		);
@@ -79,10 +79,13 @@ export default ({
 			) {
 				return (
 					elementContainerFactory.createForDependencyCount({
-						element: createTextGroup(parameters),
+						element:
+							createTextGroup(parameters),
 						item,
-						level: keys.level,
-						relationship: keys.relationship,
+						level:
+							keys.level,
+						relationship:
+							keys.relationship,
 					})
 				);
 			}

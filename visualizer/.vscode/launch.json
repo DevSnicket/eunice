@@ -51,6 +51,19 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
+						"tests/withElementContainerAndParent/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "with element container and parent test",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--collect-coverage=false",
+						"--runInBand",
 						"tests/withParent/index.test.js"
 					],
 				"disableOptimisticBPs": true,

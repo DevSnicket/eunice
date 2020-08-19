@@ -5,11 +5,11 @@ import { createElement } from "react";
 import createRightSymbol from "../../createRightSymbol";
 import createSvgElement from "../createSvgElement";
 import createUpSymbol from "../../createUpSymbol";
-import formatSvg from "../../../tests/formatSvg";
+import formatSvg from "../../../../tests/formatSvg";
 import path from "path";
 import readTestCaseFile from "../readTestCaseFile";
 import { renderToStaticMarkup } from "react-dom/server";
-import withPrecision from "../../../withPrecision";
+import withPrecision from "../../../../withPrecision";
 
 test(
 	"down renders SVG",

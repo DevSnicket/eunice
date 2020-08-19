@@ -1,0 +1,4 @@
+﻿- - id: upper
+    dependencyCount: { outer: { below: { dependents: 1 } } }
+- - id: lower
+    dependencyCount: { outer: { above: { dependsUpon: 1 } } }

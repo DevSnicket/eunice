@@ -1,8 +1,8 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import createArrows from "./createArrows";
-import createParentGroupFactoryWhenChild from "./createParentGroupFactoryWhenChild";
-import createStackWithSummaryGroupFactory from "./createStackWithSummaryGroupFactory";
+import createDependencyGroupFactories from "./createDependencyGroupFactories";
+import createParentOrSummaryGroupFactory from "./createParentOrSummaryGroupFactory";
+import createStackGroupFactory from "./createStackGroupFactory";
 import createSvgElement from "./createSvgElement";
 import createTextGroup from "./createTextGroup";
 import withPrecision from "./withPrecision";
@@ -16,8 +16,6 @@ export default (/** @type {import("./Parameter.d")} */{
 	style = "",
 }) => {
 	const
-		arrows =
-			createArrows({ createElement, withPrecision }),
 		font =
 			createFont({
 				family: "arial",
@@ -25,19 +23,30 @@ export default (/** @type {import("./Parameter.d")} */{
 				size: 16,
 			});
 
+	const dependencyGroupFactories =
+		createDependencyGroupFactories({
+			createElement,
+			createTextGroup:
+				createTextGroupWithFontSizeAndPrecision,
+			elementContainerFactory,
+			font,
+			withPrecision,
+		});
+
 	return (
 		createSvgElement({
 			createElement,
 			font,
 			groupFactory:
+				stack
+				&&
 				createGroupFactory(),
 			namespaces,
 			style:
 				/* cspell:disable-next-line */
-				`g.anonymous>text{font-style:italic}g.parent>rect{fill:none;stroke:gray}g.item>rect{fill:lightgray}g.item>text{text-anchor:middle}g.dependency>text{fill:white;text-anchor:middle}${style}`,
+				`g.anonymous>text{font-style:italic}g.item>rect{fill:lightgray}g.item>text{text-anchor:middle}g.dependency>text{fill:white;text-anchor:middle}${style}`,
 			symbols:
-				Object.values(arrows)
-				.map(arrow => arrow.symbol),
+				dependencyGroupFactories.symbols,
 			withPrecision,
 		})
 	);
@@ -46,22 +55,22 @@ export default (/** @type {import("./Parameter.d")} */{
 		return (
 			stack
 			&&
-			createParentGroupFactoryWhenChild({
-				arrows,
-				childGroupFactory:
-					createStackWithSummaryGroupFactory({
-						arrows,
+			createParentOrSummaryGroupFactory({
+				createElement,
+				createTextGroup:
+					createTextGroupWithFontSizeAndPrecision,
+				dependencyGroupFactories,
+				font,
+				stack,
+				stackGroupFactory:
+					createStackGroupFactory({
 						createTextGroup:
 							createTextGroupWithFontSizeAndPrecision,
+						dependencyGroupFactories,
 						elementContainerFactory,
 						font,
 						stack,
 					}),
-				createTextGroup:
-					createTextGroupWithFontSizeAndPrecision,
-				elementContainerFactory,
-				font,
-				stack,
 			})
 		);
 	}

@@ -21,8 +21,8 @@ const
 		};
 
 export default ({
-	createElement,
 	colors: { red, green } = colorsDefault,
+	createElement,
 	withPrecision,
 }) =>
 	(

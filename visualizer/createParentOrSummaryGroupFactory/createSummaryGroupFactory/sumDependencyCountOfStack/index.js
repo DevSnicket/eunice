@@ -3,9 +3,10 @@
 import getDependsUponOfOuter from "./getDependsUponOfOuter";
 
 export default
-items =>
+stack =>
 	getDependencyCountWhenHasMultiple(
-		items
+		stack
+		.flat(2)
 		.reduce(
 			(
 				{ dependencyCount, hasMultiple },
