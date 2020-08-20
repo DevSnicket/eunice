@@ -58,6 +58,24 @@
             text-decoration: underline;
         }
 
+        .parent-count-examples {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .parent-count-examples .box * {
+            background-color: white;
+        }
+
+        .parent-count-examples .breadcrumbs {
+            font-family: serif;
+            padding: 0.5em;
+        }
+
+        .parent-count-examples .breadcrumbs .ancestor-separator {
+            color: darkgray;
+        }
+
         .stacks-introduction > .diagram {
             background-color: white;
             margin: 0 auto 1em;
@@ -175,11 +193,27 @@
                 <img alt="Diagram of a parent where one its child items depends on another child item in the same level" src="../examples/level/first-item-depends-upon-second-item.svg"/>
             </div>
         </div>
-        <p>Items and sub-items can also be opened. Selecting an item will show its contents and breadcrumb links for where it is in the hierarchy.</p>
-        <div class="box" style="width: fit-content">
-            <div style="background-color: white;">
-                <div style="font-family: serif; padding: 0.5em"><span class="mock-hyperlink">root</span> <span style="color: darkgray;">–</span> <span class="mock-hyperlink">grandparent</span></div>
-                <img alt="Eunice showing breadcrumb links and contents of an opened item containing a stack of child items" src="../examples/parent/upper-child-depends-upon-lower-child.svg" style="padding: 0.5em" />
+        <p>Items and sub-items can also be opened. Selecting an item will show its child items and breadcrumb links for where it is in the hierarchy.</p>
+        <p>An opened item's outer dependencies are shown around the outside of its border.</p>
+        <p>If there are multiple child items a summary of their dependencies is shown in the bottom of the opened item's border.</p>
+        <div class="parent-count-examples">
+            <div class="box">
+                <div>
+                    <div class="breadcrumbs"><span class="mock-hyperlink">root</span> <span class="ancestor-separator">–</span> <span class="mock-hyperlink">grandparent</span></div>
+                    <img alt="Eunice showing breadcrumb links and contents of an opened item containing a stack of child items" src="../examples/parent/upper-child-depends-upon-lower-child.svg" style="padding: 0.5em" />
+                </div>
+            </div>
+            <div class="box">
+                <div>
+                    <div class="breadcrumbs"><span class="mock-hyperlink">root</span> <span class="ancestor-separator">–</span> <span class="mock-hyperlink">grandparent</span></div>
+                    <img alt="Eunice showing parent outer dependencies" src="../examples/parent/outer-dependencies.svg" style="padding: 0.5em" />
+                </div>
+            </div>
+            <div class="box">
+                <div>
+                    <div class="breadcrumbs"><span class="mock-hyperlink">root</span> <span class="ancestor-separator">–</span> <span class="mock-hyperlink">grandparent</span></div>
+                    <img alt="Eunice showing parent outer dependencies" src="../examples/parent/inner-dependencies-of-multiple-children.svg" style="padding: 0.5em" />
+                </div>
             </div>
         </div>
         <h1 id="advanced">advanced</h1>
