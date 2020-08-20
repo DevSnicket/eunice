@@ -1,0 +1,60 @@
+<svg height="310" width="216.52" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		<style type="text/css">text{font-family:arial;font-size:16px}g.anonymous&gt;text{font-style:italic}g.item&gt;rect{fill:lightgray}g.item&gt;text{text-anchor:middle}g.dependency&gt;text{fill:white;text-anchor:middle}</style>
+	</defs>
+	<symbol id="down-arrow" preserveAspectRatio="xMidYMax slice" viewBox="0,0,1,1">
+		<polygon fill="darkgreen" points="0,0.85 0,0 1,0 1,0.85 0.5,1"></polygon>
+	</symbol>
+	<symbol id="right-arrow" preserveAspectRatio="xMaxYMid slice" viewBox="0,0,1,1">
+		<polygon fill="darkred" points="0.85,0 0,0 0,1 0.85,1 1,0.5"></polygon>
+	</symbol>
+	<symbol id="up-arrow" preserveAspectRatio="xMidYMin slice" viewBox="0,0,1,1">
+		<polygon fill="darkred" points="0,0.15 0,1 1,1 1,0.15 0.5,0"></polygon>
+	</symbol>
+	<rect height="302" style="fill:none;stroke:lightgrey;stroke-width:8" width="208.52" x="4" y="4"></rect>
+	<g class="item">
+		<rect style="fill:lightgrey" height="40" width="216.52"></rect>
+		<text x="108.26" y="25.76">parent</text>
+	</g>
+	<g class="item">
+		<rect height="40" width="61.12" x="24" y="56"></rect>
+		<text x="54.56" y="81.76">upper</text>
+	</g>
+	<g class="dependency">
+		<use href="#down-arrow" height="24" width="18.96" x="45.08" y="96"></use>
+		<text x="54.56" y="113.76">1</text>
+	</g>
+	<g class="dependency">
+		<use href="#down-arrow" height="24" width="18.96" x="43.64" y="135"></use>
+		<text x="53.12" y="152.76">1</text>
+	</g>
+	<g class="item">
+		<rect height="40" width="58.24" x="24" y="159"></rect>
+		<text x="53.12" y="184.76">lower</text>
+	</g>
+	<g class="item">
+		<rect height="40" width="45.76" x="24" y="214"></rect>
+		<text x="46.88" y="239.76">first</text>
+	</g>
+	<g class="dependency">
+		<use href="#right-arrow" height="24" width="17.96" x="69.76" y="222"></use>
+		<text x="77.24" y="239.76">1</text>
+	</g>
+	<g class="dependency">
+		<use href="#right-arrow" height="24" width="17.96" x="102.72" y="222"></use>
+		<text x="110.2" y="239.76">1</text>
+	</g>
+	<g class="item">
+		<rect height="40" width="71.84" x="120.68" y="214"></rect>
+		<text x="156.6" y="239.76">second</text>
+	</g>
+	<rect height="40" style="fill:lightgrey" width="216.52" x="0" y="270"></rect>
+	<g class="dependency">
+		<use href="#down-arrow" height="24" width="18.96" x="89.8" y="278"></use>
+		<text x="99.28" y="295.76">1</text>
+	</g>
+	<g class="dependency">
+		<use href="#right-arrow" height="24" width="17.96" x="112.76" y="278"></use>
+		<text x="120.24" y="295.76">1</text>
+	</g>
+</svg>
