@@ -21,5 +21,5 @@ let writeNameAndVersion
     ConsoleColor.Red |> parameter.SetForegroundColor
     "ce" |> parameter.Write
     parameter.ResetColor ()
-    " " + parameter.Version.ToString(3) |> parameter.WriteLine
+    " for C# " + parameter.Version.ToString(3) |> parameter.WriteLine
     "" |> parameter.WriteLine

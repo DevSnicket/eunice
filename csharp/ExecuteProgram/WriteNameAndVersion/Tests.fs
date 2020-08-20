@@ -35,7 +35,7 @@ let writesEuniceWithColorAndThreePartVersion () =
             SetForegroundColor ConsoleColor.Red
             Write "ce"
             ResetColor
-            WriteLine " 1.2.3"
+            WriteLine " for C# 1.2.3"
             WriteLine ""
         ],
         actualSideEffects
