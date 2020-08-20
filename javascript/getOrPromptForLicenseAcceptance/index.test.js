@@ -32,7 +32,7 @@ test(
 		)
 		.toEqual(
 			// cSpell:disable-next-line
-			[ "\x1b[31me\x1b[39m\x1b[32muni\x1b[39m\x1b[31mce\x1b[39m\x1b[1m version\x1b[22m" ],
+			[ "\x1b[31me\x1b[39m\x1b[32muni\x1b[39m\x1b[31mce\x1b[39m\x1b[1m for JavaScript version\x1b[22m" ],
 		);
 	},
 );
@@ -62,7 +62,7 @@ test(
 			logCallsArguments:
 				[
 					[],
-					[ "eunice version" ],
+					[ "eunice for JavaScript version" ],
 					[],
 					[ `By specifying --accept-license you have accepted ${licenseText}` ],
 					[ commercialUseText ],
@@ -96,7 +96,7 @@ test(
 			logCallsArguments:
 				[
 					[],
-					[ "eunice version" ],
+					[ "eunice for JavaScript version" ],
 					[],
 					[ `To use this program you must accept ${licenseText}` ],
 					[ commercialUseText ],
@@ -122,7 +122,7 @@ describe(
 			promptLogCalls =
 				[
 					[],
-					[ "eunice version" ],
+					[ "eunice for JavaScript version" ],
 					[],
 					[ `To use this program you must accept ${licenseText}` ],
 					[ commercialUseText ],

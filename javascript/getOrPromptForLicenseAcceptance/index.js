@@ -29,7 +29,7 @@ export default ({
 		+
 		formatRed("ce")
 		+
-		formatBold(` ${version}`),
+		formatBold(` for JavaScript ${version}`),
 	);
 	log();
 
