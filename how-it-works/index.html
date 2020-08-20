@@ -29,6 +29,10 @@
             height: fit-content;
         }
 
+        .box img {
+            max-width: none;
+        }
+
         .example {
             display: flex;
             flex-wrap: wrap;
@@ -47,6 +51,11 @@
 
         .example.tall > div > div {
             width: min-content;
+        }
+
+        .mock-hyperlink { 
+            color: blue;
+            text-decoration: underline;
         }
 
         .stacks-introduction > .diagram {
@@ -169,7 +178,7 @@
         <p>Items and sub-items can also be opened. Selecting an item will show its contents and breadcrumb links for where it is in the hierarchy.</p>
         <div class="box" style="width: fit-content">
             <div style="background-color: white;">
-                <div style="font-family: Arial; padding: 0.5em">root > <span style="color: blue; text-decoration: underline">grandparent</span></div>
+                <div style="font-family: serif; padding: 0.5em"><span class="mock-hyperlink">root</span> <span style="color: darkgray;">–</span> <span class="mock-hyperlink">grandparent</span></div>
                 <img alt="Eunice showing breadcrumb links and contents of an opened item containing a stack of child items" src="../examples/upper-item-depends-upon-lower-item-with-parent.svg" style="padding: 0.5em" />
             </div>
         </div>
