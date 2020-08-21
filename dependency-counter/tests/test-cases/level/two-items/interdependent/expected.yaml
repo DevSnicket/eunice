@@ -1,13 +1,13 @@
 ﻿- id: first
   dependencyCount:
-    outer:
+    parent:
       same:
         dependents: 1
         dependsUpon: 1
   dependsUpon: second
 - id: second
   dependencyCount:
-    outer:
+    parent:
       same:
         dependents: 1
         dependsUpon: 1

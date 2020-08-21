@@ -1,8 +1,8 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 import eitherOrCombine from "./eitherOrCombine";
-import sumInnerDirections from "./sumInnerDirections";
-import sumOuterDirections from "./sumOuterDirections";
+import sumAncestorDirections from "./sumAncestorDirections";
+import sumDescendantDirections from "./sumDescendantDirections";
 
 export default
 dependencyCounts => {
@@ -24,8 +24,9 @@ function sumDependencyCount(
 	right,
 ) {
 	return {
-		...createProperty("inner", sumInnerDirections),
-		...createProperty("outer", sumOuterDirections),
+		...createProperty("ancestor", sumAncestorDirections),
+		...createProperty("descendant", sumDescendantDirections),
+		...createProperty("parent", sumAncestorDirections),
 	};
 
 	function createProperty(

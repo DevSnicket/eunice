@@ -1,11 +1,11 @@
 ﻿- id: first
   dependencyCount:
-    outer:
+    parent:
       same:
         dependents: 1
 - id: second
   dependencyCount:
-    outer:
+    parent:
       same:
         dependsUpon: 1
   dependsUpon: first

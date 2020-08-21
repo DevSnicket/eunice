@@ -9,10 +9,10 @@ export default (
 	sumDirections(
 		left,
 		right,
-		sumInnerDirection,
+		sumDescendantDirection,
 	);
 
-function sumInnerDirection(
+function sumDescendantDirection(
 	left,
 	right,
 ) {

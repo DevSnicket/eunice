@@ -1,14 +1,18 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-export default ({
-	isInnerStack,
-	item,
-}) =>
-	withIsInnerStack(isInnerStack)
-	.createDependencyCountsFromItem(item);
+import { isInnerStack } from "@devsnicket/eunice-dependency-and-structure";
 
-function withIsInnerStack(
-	isInnerStack,
+export default
+item =>
+	withAncestorStack(
+		item.level.stack,
+	)
+	.createDependencyCountsFromItem(
+		item,
+	);
+
+function withAncestorStack(
+	sourceStack,
 ) {
 	return { createDependencyCountsFromItem };
 
@@ -34,11 +38,14 @@ function withIsInnerStack(
 		direction,
 		mutualStack,
 	}) {
-		if (mutualStack && !isInnerStack(mutualStack))
+		if (mutualStack && !isDescendantStack(mutualStack))
 			yield (
-				createDependencyCountOfOuterOne({
+				createDependencyCountOfOneAncestor({
 					direction,
-					relationship: "dependents",
+					isSourceStack:
+						mutualStack === sourceStack,
+					relationship:
+						"dependents",
 				})
 			);
 	}
@@ -48,30 +55,44 @@ function withIsInnerStack(
 	) {
 		if (dependsUpon)
 			for (const dependUpon of dependsUpon)
-				if (dependUpon.mutualStack)
-					yield fromDependUpon(dependUpon);
+				yield* fromDependUpon(dependUpon);
 	}
 
-	function fromDependUpon({
+	function * fromDependUpon({
 		direction,
 		mutualStack,
 	}) {
-		return (
-			whenInner()
-			||
-			createDependencyCountOfOuterOne({
-				direction,
-				relationship: "dependsUpon",
-			})
-		);
+		if (mutualStack)
+			yield (
+				whenDescendant()
+				||
+				createDependencyCountOfOneAncestor({
+					direction,
+					isSourceStack:
+						mutualStack === sourceStack,
+					relationship:
+						"dependsUpon",
+				})
+			);
 
-		function whenInner() {
+		function whenDescendant() {
 			return (
-				isInnerStack(mutualStack)
+				isDescendantStack(mutualStack)
 				&&
-				{ inner: { [direction]: 1 } }
+				{ descendant: { [direction]: 1 } }
 			);
 		}
+	}
+
+	function isDescendantStack(
+		stack,
+	) {
+		return (
+			isInnerStack({
+				source: sourceStack,
+				target: stack,
+			})
+		);
 	}
 
 	function * fromItems(
@@ -84,13 +105,26 @@ function withIsInnerStack(
 	}
 }
 
-function createDependencyCountOfOuterOne({
+function createDependencyCountOfOneAncestor({
 	direction,
+	isSourceStack,
 	relationship,
 }) {
-	return { outer: createOuter() };
+	return { [getAncestorKey()]: createAncestor() };
 
-	function createOuter() {
+	function getAncestorKey() {
+		return whenSourceStack() || "ancestor";
+
+		function whenSourceStack() {
+			return (
+				isSourceStack
+				&&
+				"parent"
+			);
+		}
+	}
+
+	function createAncestor() {
 		return { [direction]: { [relationship]: 1 } };
 	}
 }

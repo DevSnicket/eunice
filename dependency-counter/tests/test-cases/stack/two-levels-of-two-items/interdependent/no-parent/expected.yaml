@@ -1,6 +1,6 @@
 ﻿- - id: upper first
     dependencyCount:
-      outer:
+      parent:
         below:
           dependents: 2
           dependsUpon: 2
@@ -13,7 +13,7 @@
       - lower second
   - id: upper second
     dependencyCount:
-      outer:
+      parent:
         below:
           dependents: 2
           dependsUpon: 2
@@ -26,7 +26,7 @@
       - lower second
 - - id: lower first
     dependencyCount:
-      outer:
+      parent:
         above:
           dependents: 2
           dependsUpon: 2
@@ -39,7 +39,7 @@
       - lower second
   - id: lower second
     dependencyCount:
-      outer:
+      parent:
         above:
           dependents: 2
           dependsUpon: 2

@@ -1,10 +1,12 @@
 id: parent
 dependencyCount:
   descendant:
-    above: 1
+    above: 2
 items:
   id: child
   dependencyCount:
+    descendant:
+      above: 1
     parent:
       above:
         dependsUpon: 1
@@ -14,4 +16,9 @@ items:
       ancestor:
         above:
           dependsUpon: 1
-    dependsUpon: parent
+      parent:
+        above:
+          dependsUpon: 1
+    dependsUpon:
+      - child
+      - parent

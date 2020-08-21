@@ -1,13 +1,13 @@
 ﻿id: parent
 dependencyCount:
-  inner:
+  descendant:
     above: 4
     below: 4
     same: 4
 items:
   - - id: upper first
       dependencyCount:
-        outer:
+        parent:
           below:
             dependents: 2
             dependsUpon: 2
@@ -20,7 +20,7 @@ items:
         - lower second
     - id: upper second
       dependencyCount:
-        outer:
+        parent:
           below:
             dependents: 2
             dependsUpon: 2
@@ -33,7 +33,7 @@ items:
         - lower second
   - - id: lower first
       dependencyCount:
-        outer:
+        parent:
           above:
             dependents: 2
             dependsUpon: 2
@@ -46,7 +46,7 @@ items:
         - lower second
     - id: lower second
       dependencyCount:
-        outer:
+        parent:
           above:
             dependents: 2
             dependsUpon: 2

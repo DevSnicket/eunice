@@ -10,10 +10,10 @@ export default (
 	sumDirections(
 		left,
 		right,
-		sumOuterDirection,
+		sumAncestorDirection,
 	);
 
-function sumOuterDirection(
+function sumAncestorDirection(
 	left,
 	right,
 ) {
