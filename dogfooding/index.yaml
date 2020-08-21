@@ -1,4 +1,4 @@
-# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 7.15.0 on 2020-08-20T15:50:56.178Z
+# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 7.15.0 on 2020-08-21T13:56:22.186Z
 - - id: javascript
     type: directory
     items:
@@ -44,9 +44,10 @@
                   items:
                     - createYamlOutputElement
                     - createYamlInputElement
-                    - parseStackFromYaml
                 - id: react
                   items: createElement
+                - id: javascript
+                  items: parseStackFromYaml
               items:
                 - - id: createInitialStateFromJavascript
                     dependsUpon: getYamlFromJavascriptWithOptionalEnabled
