@@ -1,0 +1,16 @@
+id: parent
+dependencyCount:
+  descendants:
+    below: 1
+items:
+  id: child
+  dependencyCount:
+    descendants:
+      below: 1
+  dependsUpon: grandchild
+  items:
+    id: grandchild
+    dependencyCount:
+      parent:
+        above:
+          dependents: 1
