@@ -1,14 +1,14 @@
 id: parent
 dependencyCount:
-  inner:
+  descendants:
     below: 1
     same: 1
 items:
   - - id: upper
-      dependencyCount: { outer: { below: { dependsUpon: 1 } } }
+      dependencyCount: { parent: { below: { dependsUpon: 1 } } }
   - - id: lower
-      dependencyCount: { outer: { above: { dependents: 1 } } }
+      dependencyCount: { parent: { above: { dependents: 1 } } }
   - - id: first
-      dependencyCount: { outer: { same: { dependsUpon: 1 } } }
+      dependencyCount: { parent: { same: { dependsUpon: 1 } } }
     - id: second
-      dependencyCount: { outer: { same: { dependents: 1 } } }
+      dependencyCount: { parent: { same: { dependents: 1 } } }

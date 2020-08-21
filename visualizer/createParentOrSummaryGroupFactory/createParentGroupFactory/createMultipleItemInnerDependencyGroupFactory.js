@@ -3,18 +3,16 @@
 import borderThickness from "./borderThickness";
 
 export default ({
-	createInnerDependencyGroupFactory,
+	createInnerDependencyGroupFactoryFromItem,
 	parent,
 }) => {
 	return (
 		hasItemsOfMultiple(parent)
 		&&
 		addTopOffset(
-			createInnerDependencyGroupFactory({
-				count:
-					parent.dependencyCount
-					&&
-					parent.dependencyCount.inner,
+			createInnerDependencyGroupFactoryFromItem({
+				item:
+					parent,
 				keyPrefix:
 					`parent ${parent.identifier}`,
 			}),

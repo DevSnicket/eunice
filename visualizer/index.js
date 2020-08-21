@@ -8,6 +8,7 @@ import createTextGroup from "./createTextGroup";
 import withPrecision from "./withPrecision";
 
 export default (/** @type {import("./Parameter.d")} */{
+	areDependenciesOfAncestorsIncluded = false,
 	createElement,
 	elementContainerFactory = null,
 	getTextWidth,
@@ -25,6 +26,8 @@ export default (/** @type {import("./Parameter.d")} */{
 
 	const dependencyGroupFactories =
 		createDependencyGroupFactories({
+			areAncestorsIncluded:
+				areDependenciesOfAncestorsIncluded,
 			createElement,
 			createTextGroup:
 				createTextGroupWithFontSizeAndPrecision,

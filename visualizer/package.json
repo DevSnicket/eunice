@@ -5,6 +5,7 @@
 	},
 	"description": "visualizes a stack with categorized dependency counts as SVG",
 	"dependencies": {
+		"@devsnicket/eunice-dependency-counter": "^5.0.0",
 		"core-js": "^3.6.5",
 		"string-pixel-width": "^1.10.0"
 	},
@@ -13,7 +14,6 @@
 		"@babel/node": "^7.10.5",
 		"@babel/plugin-transform-modules-commonjs": "^7.10.4",
 		"@devsnicket/eunice-dependency-and-structure": "^6.0.0",
-		"@devsnicket/eunice-dependency-counter": "^3.0.0",
 		"@devsnicket/eunice-run-tests-from-file-system": "^4.6.1",
 		"@types/fs-extra": "^9.0.1",
 		"@types/jest": "^26.0.7",
@@ -72,5 +72,5 @@
 		"test": "npx jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "2.2.0"
+	"version": "3.0.0"
 }

@@ -8,9 +8,9 @@ import spacing from "../spacing";
 export default ({
 	arrows,
 	createGroupFactoryWhenRequired,
-	dependencyCountOuter,
 	itemGroupWidth,
 	levelGroupFactory,
+	outerCount,
 }) => {
 	return (
 		aggregateGroupFactoriesWithOrientation.vertical({
@@ -53,7 +53,7 @@ export default ({
 			relationshipDirections,
 		}) {
 			const dependencyCountInLevelDirection =
-				dependencyCountOuter[levelDirection];
+				outerCount[levelDirection];
 
 			if (dependencyCountInLevelDirection)
 				yield (

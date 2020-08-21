@@ -38,7 +38,7 @@ export default (/** @type {import("./Parameter.d")} */{
 		item,
 	) {
 		return (
-			dependencyGroupFactories.createOuter({
+			dependencyGroupFactories.createOuterFromItem({
 				contentGroupFactory:
 					createItemGroupFactoryWithDependsUponCounts(),
 				item,
@@ -90,11 +90,8 @@ export default (/** @type {import("./Parameter.d")} */{
 
 				function whenHasCount() {
 					return (
-						dependencyGroupFactories.createInner({
-							count:
-								item.dependencyCount
-								&&
-								item.dependencyCount.inner,
+						dependencyGroupFactories.createInnerFromItem({
+							item,
 							keyPrefix:
 								`${item.id} `,
 						})

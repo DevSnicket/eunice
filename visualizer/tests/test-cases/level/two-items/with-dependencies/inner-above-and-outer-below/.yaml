@@ -1,9 +1,9 @@
 ﻿- id: first
   dependencyCount:
-    outer:
+    parent:
       below:
         dependsUpon: 12
 - id: second
   dependencyCount:
-    inner:
+    descendants:
       above: 21

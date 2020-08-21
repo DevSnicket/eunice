@@ -3,15 +3,15 @@
 import "core-js/features/array/flat-map";
 
 export default
-outer =>
+parent =>
 	createWhenHasProperties(
 		createProperties(
-			outer,
+			parent,
 		),
 	);
 
 function createProperties(
-	outer,
+	parent,
 ) {
 	return (
 		[ "above", "below", "same" ]
@@ -24,7 +24,7 @@ function createProperties(
 		return whenHasDirection() || [];
 
 		function whenHasDirection() {
-			const directionValue = outer[direction];
+			const directionValue = parent[direction];
 
 			return (
 				directionValue

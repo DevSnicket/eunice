@@ -1,6 +1,6 @@
 id: item
 dependencyCount:
-  inner:
+  descendants:
     above: 2
     below: 1
     same: 3

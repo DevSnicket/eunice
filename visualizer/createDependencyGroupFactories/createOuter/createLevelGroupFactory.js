@@ -6,7 +6,7 @@ export default ({
 	arrow,
 	contentGroupFactory,
 	createGroupFactoryWhenRequired,
-	dependencyCountOuterSame,
+	outerSameCount,
 }) => {
 	return (
 		whenHasDependencyCount()
@@ -18,7 +18,7 @@ export default ({
 
 	function whenHasDependencyCount() {
 		return (
-			dependencyCountOuterSame
+			outerSameCount
 			&&
 			createGroupFactoryWithTopOffset(
 				calculateTopOffset(),
@@ -60,7 +60,7 @@ export default ({
 			const groupFactory =
 				createGroupFactoryWhenRequired({
 					arrow,
-					count: dependencyCountOuterSame[relationship],
+					count: outerSameCount[relationship],
 					keys: createKeysForRelationship(relationship),
 				});
 

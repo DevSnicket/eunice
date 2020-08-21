@@ -1,2 +1,2 @@
 id: item
-dependencyCount: { outer: { same: { dependsUpon: 1 } } }
+dependencyCount: { parent: { same: { dependsUpon: 1 } } }

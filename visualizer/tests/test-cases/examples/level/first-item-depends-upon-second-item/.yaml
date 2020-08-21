@@ -1,2 +1,2 @@
 id: parent
-dependencyCount: { inner: { same: 1 } }
+dependencyCount: { descendants: { same: 1 } }

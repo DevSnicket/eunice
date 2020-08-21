@@ -1,4 +1,4 @@
 ﻿- - id: upper
-    dependencyCount: { outer: { below: { dependents: 1 } } }
+    dependencyCount: { parent: { below: { dependents: 1 } } }
 - - id: lower
-    dependencyCount: { outer: { above: { dependsUpon: 1 } } }
+    dependencyCount: { parent: { above: { dependsUpon: 1 } } }

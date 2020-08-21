@@ -1,6 +1,6 @@
 id: item
 dependencyCount:
-  outer:
+  parent:
     above:
       dependents: 1
       dependsUpon: 2

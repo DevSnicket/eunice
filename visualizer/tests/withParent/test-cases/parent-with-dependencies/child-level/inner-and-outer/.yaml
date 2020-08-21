@@ -1,10 +1,10 @@
 id: parent
 dependencyCount:
-  inner:
+  descendants:
     above: 12
     below: 11
     same: 13
-  outer:
+  parent:
     above:
       dependents: 21
       dependsUpon: 22

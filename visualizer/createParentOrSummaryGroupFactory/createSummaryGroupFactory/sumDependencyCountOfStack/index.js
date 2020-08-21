@@ -1,31 +1,32 @@
 // Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import getDependsUponOfOuter from "./getDependsUponOfOuter";
+import getDependsUponOfParent from "./getDependsUponOfParent";
+import { sumDirections } from "@devsnicket/eunice-dependency-counter";
 
 export default
 stack =>
-	getDependencyCountWhenHasMultiple(
+	getCountWhenHasMultiple(
 		stack
 		.flat(2)
 		.reduce(
 			(
-				{ dependencyCount, hasMultiple },
+				{ count, hasMultiple },
 				item,
 			) => {
-				const dependencyCountOfItem =
-					sumDependencyCountOfItem(item);
+				const itemCount =
+					sumCountOfItem(item);
 
 				return (
 					{
-						dependencyCount:
-							sumDependencyCount(
-								dependencyCount,
-								dependencyCountOfItem,
+						count:
+							sumDirections(
+								count,
+								itemCount,
 							),
 						hasMultiple:
 							hasMultiple
 							||
-							(dependencyCount && dependencyCountOfItem),
+							(count && itemCount),
 					}
 				);
 			},
@@ -33,79 +34,35 @@ stack =>
 		),
 	);
 
-function sumDependencyCountOfItem(
+function sumCountOfItem(
 	{ dependencyCount },
 ) {
 	return (
 		dependencyCount
 		&&
-		sumDependencyCountOfInnerAndOuter(dependencyCount)
+		sumDescendantsAndParentDependsUpon(dependencyCount)
 	);
 }
 
-function sumDependencyCountOfInnerAndOuter({
-	inner,
-	outer,
+function sumDescendantsAndParentDependsUpon({
+	descendants,
+	parent,
 }) {
 	return (
-		sumDependencyCount(
-			inner,
-			outer && getDependsUponOfOuter(outer),
+		sumDirections(
+			descendants,
+			parent && getDependsUponOfParent(parent),
 		)
 	);
 }
 
-function sumDependencyCount(
-	left,
-	right,
-) {
-	return (
-		whenHasBoth()
-		||
-		left
-		||
-		right
-	);
-
-	function whenHasBoth() {
-		return (
-			left
-			&&
-			right
-			&&
-			Object.assign({}, ...createProperties())
-		);
-
-		function createProperties() {
-			return (
-				[ "above", "below", "same" ]
-				.map(createPropertyForLevelDirection)
-			);
-
-			function createPropertyForLevelDirection(
-				levelDirection,
-			) {
-				return { [levelDirection]: sum() };
-
-				function sum() {
-					return (
-						(left[levelDirection] || 0)
-						+
-						(right[levelDirection] || 0)
-					);
-				}
-			}
-		}
-	}
-}
-
-function getDependencyCountWhenHasMultiple({
-	dependencyCount,
+function getCountWhenHasMultiple({
+	count,
 	hasMultiple,
 }) {
 	return (
 		hasMultiple
 		&&
-		dependencyCount
+		count
 	);
 }

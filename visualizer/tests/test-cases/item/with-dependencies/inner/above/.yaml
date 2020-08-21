@@ -1,2 +1,2 @@
 id: item
-dependencyCount: { inner: { above: 1 } }
+dependencyCount: { descendants: { above: 1 } }

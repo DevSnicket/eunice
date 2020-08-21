@@ -14,7 +14,7 @@ export default ({
 	parent,
 	stackGroupFactory,
 }) =>
-	dependencyGroupFactories.createOuter({
+	dependencyGroupFactories.createOuterFromItem({
 		contentGroupFactory:
 			createParentGroupFactoryWithSize({
 				createElement,
@@ -30,8 +30,8 @@ export default ({
 					},
 				innerDependencyGroupFactory:
 					createMultipleItemInnerDependencyGroupFactory({
-						createInnerDependencyGroupFactory:
-							dependencyGroupFactories.createInner,
+						createInnerDependencyGroupFactoryFromItem:
+							dependencyGroupFactories.createInnerFromItem,
 						parent,
 					}),
 				stackGroupFactory,

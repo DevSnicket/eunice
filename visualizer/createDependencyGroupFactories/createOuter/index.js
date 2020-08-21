@@ -7,6 +7,7 @@ import createStackGroupFactory from "./createStackGroupFactory";
 export default ({
 	arrows,
 	contentGroupFactory,
+	outerCount,
 	createTextGroup,
 	elementContainerFactory,
 	font,
@@ -20,15 +21,11 @@ export default ({
 
 	function whenHasDependencyCountOfOuter() {
 		return (
-			item.dependencyCount
-			&&
-			item.dependencyCount.outer
+			outerCount
 			&&
 			createStackGroupFactory({
 				arrows,
 				createGroupFactoryWhenRequired,
-				dependencyCountOuter:
-					item.dependencyCount.outer,
 				itemGroupWidth:
 					contentGroupFactory.width,
 				levelGroupFactory:
@@ -37,11 +34,12 @@ export default ({
 						arrows.right,
 						contentGroupFactory,
 						createGroupFactoryWhenRequired,
-						dependencyCountOuterSame:
-							item.dependencyCount.outer
+						outerSameCount:
+							outerCount
 							&&
-							item.dependencyCount.outer.same,
+							outerCount.same,
 					}),
+				outerCount,
 			})
 		);
 	}

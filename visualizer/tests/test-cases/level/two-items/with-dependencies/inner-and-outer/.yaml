@@ -1,10 +1,10 @@
 ﻿- id: first
   dependencyCount:
-    inner:
+    descendants:
       above: 112
       below: 111
       same: 113
-    outer:
+    parent:
       above:
         dependents: 121
         dependsUpon: 122
@@ -16,11 +16,11 @@
         dependsUpon: 142
 - id: second
   dependencyCount:
-    inner:
+    descendants:
       above: 212
       below: 211
       same: 213
-    outer:
+    parent:
       above:
         dependents: 221
         dependsUpon: 222

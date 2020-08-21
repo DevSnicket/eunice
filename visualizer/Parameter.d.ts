@@ -1,10 +1,11 @@
-import DependencyCount from "@devsnicket/eunice-dependency-counter/DependencyCount"
+import CountOfItem from "@devsnicket/eunice-dependency-counter/countInItem/CountOfItem"
 import ElementContainerFactory from "./createStackWithSummaryGroupFactory/ElementContainerFactory";
 import Namespaces from "./Namespaces"
 
 export = Parameter
 
 interface Parameter {
+	areDependenciesOfAncestorsIncluded?: boolean
 	createElement
 	elementContainerFactory?: ElementContainerFactory
 	getTextWidth
@@ -18,6 +19,6 @@ interface Stack extends Array<Array<Item>> {
 }
 
 export interface Item {
-	readonly dependencyCount: DependencyCount
+	readonly dependencyCount: CountOfItem
 	readonly id?: string
 }

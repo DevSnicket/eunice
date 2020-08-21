@@ -1,10 +1,10 @@
 ﻿- - id: upper first
     dependencyCount:
-      inner:
+      descendants:
         above: 1112
         below: 1111
         same: 1113
-      outer:
+      parent:
         above:
           dependents: 1121
           dependsUpon: 1122
@@ -16,11 +16,11 @@
           dependsUpon: 1142
   - id: upper second
     dependencyCount:
-      inner:
+      descendants:
         above: 1212
         below: 1211
         same: 1213
-      outer:
+      parent:
         above:
           dependents: 1221
           dependsUpon: 1222
@@ -32,11 +32,11 @@
           dependsUpon: 1242
 - - id: lower first
     dependencyCount:
-      inner:
+      descendants:
         above: 2112
         below: 2111
         same: 2113
-      outer:
+      parent:
         above:
           dependents: 2121
           dependsUpon: 2122
@@ -48,11 +48,11 @@
           dependsUpon: 2142
   - id: lower second
     dependencyCount:
-      inner:
+      descendants:
         above: 2212
         below: 2211
         same: 2213
-      outer:
+      parent:
         above:
           dependents: 2221
           dependsUpon: 2222

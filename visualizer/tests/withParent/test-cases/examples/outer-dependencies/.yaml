@@ -1,6 +1,6 @@
 id: parent
 dependencyCount:
-  outer:
+  parent:
     above:
       dependents: 1
       dependsUpon: 1

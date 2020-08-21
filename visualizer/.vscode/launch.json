@@ -11,7 +11,8 @@
 					[
 						"--collect-coverage=false",
 						"--runInBand",
-						"tests/index.test.js"
+						"tests/index.test.js",
+						"-t=examples.level.first-depends-upon-second"
 					],
 				"disableOptimisticBPs": true,
 				"name": "test",
@@ -55,6 +56,19 @@
 					],
 				"disableOptimisticBPs": true,
 				"name": "with element container and parent test",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--collect-coverage=false",
+						"--runInBand",
+						"tests/withOuterAncestors/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "with outer ancestors test",
 				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 				"request": "launch",
 				"type": "node"
