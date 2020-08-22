@@ -20,6 +20,9 @@ let writeInteractiveInDirectoryPathWithYaml directoryPath yaml =
                     "yamlLiteralPlaceholder",
                     yaml |> getStringLiteral
                 ).Replace(
+                    "areDependenciesOfAncestorsIncludedPlaceholder",
+                    "false"
+                ).Replace(
                     "isInferStacksEnabledLiteralPlaceholder",
                     "true"
                 )
