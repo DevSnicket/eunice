@@ -4,7 +4,7 @@ import createArrows from "../..";
 import { createElement } from "react";
 import createSvgElement from "../createSvgElement";
 import createSymbolAndUseElementsAndGetSize from "./createSymbolAndUseElementsAndGetSize";
-import formatSvg from "../../../../tests/formatSvg";
+import formatSvg from "../../../../formatSvg";
 import path from "path";
 import readTestCaseFile from "../readTestCaseFile";
 import { renderToStaticMarkup } from "react-dom/server";
