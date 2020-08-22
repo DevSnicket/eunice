@@ -36,16 +36,16 @@ export default async({
 		return (
 			html
 			.replace(
-				"yamlLiteralPlaceholder",
-				getStringLiteral(yaml),
-			)
-			.replace(
 				"areDependenciesOfAncestorsIncludedPlaceholder",
 				areDependenciesOfAncestorsIncluded,
 			)
 			.replace(
 				"isInferStacksEnabledLiteralPlaceholder",
 				isInferStacksEnabled,
+			)
+			.replace(
+				"yamlLiteralPlaceholder",
+				getStringLiteral(yaml),
 			)
 		);
 	}
