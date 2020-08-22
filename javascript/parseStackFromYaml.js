@@ -5,7 +5,7 @@ import {
 	createStackFromYaml,
 } from "@devsnicket/eunice-dependency-and-structure";
 
-import countDependenciesOfItem from "@devsnicket/eunice-dependency-counter";
+import { countOfItem as countDependenciesOfItem } from "@devsnicket/eunice-dependency-counter";
 import { safeLoad as parseYaml } from "js-yaml";
 
 export default

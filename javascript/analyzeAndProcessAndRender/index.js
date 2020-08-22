@@ -103,6 +103,8 @@ async function renderAndWriteOutput({
 
 	if (enabled.html)
 		await writeHarness({
+			areDependenciesOfAncestorsIncluded:
+				false,
 			directoryPath,
 			htmlFileName:
 				`${baseFileName || ""}.html`,

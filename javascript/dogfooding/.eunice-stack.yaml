@@ -5,9 +5,9 @@
     dependencyPermeable: true
     items:
       - - interactive
-      - - dependency-counter
-        - stacking-inference
+      - - stacking-inference
         - visualizer
+      - - dependency-counter
       - - dependency-and-structure
   - id: processors
     dependencyPermeable: true
