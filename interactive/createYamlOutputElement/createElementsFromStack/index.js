@@ -1,5 +1,8 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
+import "./index.css";
+
+import createAreDependenciesOfAncestorsIncludedSelection from "./createAreDependenciesOfAncestorsIncludedSelection";
 import createSubsetSelection from "./createSubsetSelection";
 import dependencyListElementFactory from "./dependencyListElementFactory";
 import ensureDependencyCountsInStack from "./ensureDependencyCountsInStack";
@@ -8,6 +11,7 @@ import getSvgElementForStack from "@devsnicket/eunice-visualizer";
 import getTextWidth from "string-pixel-width";
 
 export default ({
+	areDependenciesOfAncestorsIncluded,
 	createElement,
 	locationHash,
 	resizableElementTypes,
@@ -24,6 +28,13 @@ export default ({
 
 	return (
 		createWithSubset({
+			areDependenciesOfAncestorsIncludedSelection:
+				createAreDependenciesOfAncestorsIncludedSelection({
+					areIncludedDefault:
+						areDependenciesOfAncestorsIncluded,
+					getValueOfKey:
+						locationHash.getValueOfKey,
+				}),
 			createElement,
 			locationHash,
 			resizableElementTypes,
@@ -85,6 +96,7 @@ function getOrFindStack({
 }
 
 function createWithSubset({
+	areDependenciesOfAncestorsIncludedSelection,
 	createElement,
 	locationHash,
 	resizableElementTypes,
@@ -95,7 +107,10 @@ function createWithSubset({
 
 	return (
 		createWithDependencyList(
-			createBreadcrumbAndSvgElement(),
+			createVisualizationElement(
+				...createBreadcrumbAndOptionsElement(),
+				getSvgElement(),
+			),
 		)
 	);
 
@@ -117,67 +132,92 @@ function createWithSubset({
 		);
 	}
 
-	function createBreadcrumbAndSvgElement() {
+	function createVisualizationElement(
+		...elements
+	) {
 		return (
 			createElement(
 				"div",
-				{ style: { padding: "0.5em" } },
-				subsetSelection.createBreadcrumbElement(),
-				getSvgElementForStack({
-					createElement,
-					elementContainerFactory:
-						createElementContainerFactory(),
-					getTextWidth,
-					namespaces:
-						{ xmlnsXlink: "http://www.w3.org/1999/xlink" },
-					stack,
-					style:
-						"a{cursor:pointer}",
-				}),
+				{ className: "visualization" },
+				...elements,
 			)
 		);
 	}
 
-	function createElementContainerFactory() {
+	function * createBreadcrumbAndOptionsElement() {
+		if (subsetSelection.identifierHierarchy)
+			yield (
+				createElement(
+					"div",
+					{ className: "breadcrumb-and-options" },
+					subsetSelection.createBreadcrumbElement(),
+					areDependenciesOfAncestorsIncludedSelection.createSelectorElement({
+						createElement,
+						setKeyAndValue:
+							locationHash.setKeyAndValue,
+					}),
+				)
+			);
+	}
+
+	function getSvgElement() {
 		return (
-			{
-				createForDependencyCount: createElementContainerForDependencyCount,
-				createForItem: createElementContainerForItem,
-			}
+			getSvgElementForStack({
+				areDependenciesOfAncestorsIncluded:
+					areDependenciesOfAncestorsIncludedSelection.areIncluded,
+				createElement,
+				elementContainerFactory:
+					createElementContainerFactory(),
+				getTextWidth,
+				namespaces:
+					{ xmlnsXlink: "http://www.w3.org/1999/xlink" },
+				stack,
+				style:
+					"a{cursor:pointer}",
+			})
 		);
 
-		function createElementContainerForDependencyCount({
-			element,
-			item,
-			level,
-			relationship,
-		}) {
+		function createElementContainerFactory() {
 			return (
-				dependencyListElementFactory.createForDependencyCount({
-					createElement,
-					element,
-					getHrefWithKeysAndValues:
-						locationHash.getWithKeysAndValues,
-					identifier:
-						item !== stack.parent
-						&&
-						item.id,
-					level,
-					relationship,
-				})
+				{
+					createForDependencyCount: createElementContainerForDependencyCount,
+					createForItem: createElementContainerForItem,
+				}
 			);
-		}
 
-		function createElementContainerForItem({
-			element,
-			item,
-		}) {
-			return (
-				subsetSelection.createContainerForItemElement({
-					element,
-					item,
-				})
-			);
+			function createElementContainerForDependencyCount({
+				element,
+				item,
+				level,
+				relationship,
+			}) {
+				return (
+					dependencyListElementFactory.createForDependencyCount({
+						createElement,
+						element,
+						getHrefWithKeysAndValues:
+							locationHash.getWithKeysAndValues,
+						identifier:
+							item !== stack.parent
+							&&
+							item.id,
+						level,
+						relationship,
+					})
+				);
+			}
+
+			function createElementContainerForItem({
+				element,
+				item,
+			}) {
+				return (
+					subsetSelection.createContainerForItemElement({
+						element,
+						item,
+					})
+				);
+			}
 		}
 	}
 }

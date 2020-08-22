@@ -4,6 +4,7 @@ import createElementsFromStack from "./createElementsFromStack";
 import { createHashFromLocation } from "@devsnicket/eunice-test-harnesses";
 
 export default ({
+	areDependenciesOfAncestorsIncluded,
 	callOrCreateElementOnError,
 	createElement,
 	location,
@@ -14,8 +15,10 @@ export default ({
 		action:
 			() =>
 				createElementsFromStack({
+					areDependenciesOfAncestorsIncluded,
 					createElement,
-					locationHash: createHashFromLocation(location),
+					locationHash:
+						createHashFromLocation(location),
 					resizableElementTypes,
 					stack,
 				}),

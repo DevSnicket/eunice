@@ -11,6 +11,8 @@ export default
 			path.join(__dirname, "output"),
 		javascriptSubstitutions:
 			createJavascriptSubstitutions({
+				areDependenciesOfAncestorsIncluded:
+					false,
 				isInferStacksEnabled:
 					true,
 				mode,

@@ -10,10 +10,24 @@
 				[ 
 					"--collect-coverage=false",
 					"--runInBand",
+					"createYamlOutputElement/createElementsFromStack/createAreDependenciesOfAncestorsIncludedSelection/index.test.js",
+					"-t=checkbox.with.get.value.of.true.on.changed.sets.value.to.null"
+				],
+			"disableOptimisticBPs": true,
+			"name": "createAreDependenciesOfAncestorsIncludedSelection jest",
+			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+			"request": "launch",
+			"type": "node"
+		},
+		{
+			"args":
+				[ 
+					"--collect-coverage=false",
+					"--runInBand",
 					"createYamlOutputElement/createElementsFromStack/dependencyListElementFactory/createWithDependencyList/createListElement/tests/index.test.js"
 				],
 			"disableOptimisticBPs": true,
-			"name": "createYamlOutputElement createListElement jest",
+			"name": "dependencyListElementFactory createListElement jest",
 			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 			"request": "launch",
 			"type": "node"
@@ -26,7 +40,7 @@
 					"createYamlOutputElement/createElementsFromStack/dependencyListElementFactory/createWithDependencyList/createSubset/index.test.js"
 				],
 			"disableOptimisticBPs": true,
-			"name": "createYamlOutputElement createSubset jest",
+			"name": "dependencyListElementFactory createSubset jest",
 			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 			"request": "launch",
 			"type": "node"
@@ -39,7 +53,7 @@
 					"createYamlOutputElement/createElementsFromStack/dependencyListElementFactory/createWithDependencyList/isDependencyRelevant/index.test.js"
 				],
 			"disableOptimisticBPs": true,
-			"name": "createYamlOutputElement isDependencyRelevant jest",
+			"name": "dependencyListElementFactory isDependencyRelevant jest",
 			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 			"request": "launch",
 			"type": "node"
@@ -52,7 +66,7 @@
 					"createYamlOutputElement/createElementsFromStack/dependencyListElementFactory/createWithDependencyList/tests/index.test.js"
 				],
 			"disableOptimisticBPs": true,
-			"name": "createYamlOutputElement createWithDependencyList jest",
+			"name": "dependencyListElementFactory createWithDependencyList jest",
 			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 			"request": "launch",
 			"type": "node"
@@ -65,7 +79,7 @@
 					"createYamlOutputElement/createElementsFromStack/tests/index.test.js"
 				],
 			"disableOptimisticBPs": true,
-			"name": "createYamlOutputElement jest",
+			"name": "createYamlOutputElement createElementsFromStack jest",
 			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
 			"request": "launch",
 			"type": "node"

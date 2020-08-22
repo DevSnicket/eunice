@@ -119,6 +119,10 @@ function renderStateful(
 					{
 						element:
 							createYamlOutputElement({
+								areDependenciesOfAncestorsIncluded:
+									// replaced with literal
+									// eslint-disable-next-line no-undef
+									areDependenciesOfAncestorsIncludedPlaceholder,
 								callOrCreateElementOnError,
 								createElement,
 								location,

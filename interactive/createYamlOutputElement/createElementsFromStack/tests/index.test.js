@@ -26,6 +26,8 @@ runTestsFromFileSystem({
 			formatHtml(
 				renderToStaticMarkup(
 					createElementsFromStack({
+						areDependenciesOfAncestorsIncluded:
+							false,
 						createElement,
 						locationHash:
 							await readLocationHashForTestCaseFilePath(
@@ -91,6 +93,8 @@ test(
 		expect(
 			() =>
 				createElementsFromStack({
+					areDependenciesOfAncestorsIncluded:
+						false,
 					createElement,
 					locationHash:
 						createHashFromLocation({ hash: "no hash prefix" }),
@@ -111,6 +115,8 @@ test(
 		expect(
 			() =>
 				createElementsFromStack({
+					areDependenciesOfAncestorsIncluded:
+						false,
 					createElement,
 					locationHash:
 						createHashFromLocation({ hash: "#subset-item=grandparent/parent" }),

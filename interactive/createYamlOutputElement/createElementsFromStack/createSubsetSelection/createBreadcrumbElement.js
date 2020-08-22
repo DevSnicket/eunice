@@ -7,8 +7,6 @@ export default ({
 	subsetIdentifierHierarchy,
 }) => {
 	return (
-		subsetIdentifierHierarchy
-		&&
 		createElement(
 			"div",
 			{ className: "breadcrumbs" },

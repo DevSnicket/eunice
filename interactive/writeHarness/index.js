@@ -5,6 +5,7 @@ import writeHtmlWithYaml from "./writeHtmlWithYaml";
 
 export default
 async({
+	areDependenciesOfAncestorsIncluded,
 	directoryPath,
 	htmlFileName,
 	includeServiceWorkers,
@@ -13,6 +14,7 @@ async({
 	yaml,
 }) => {
 	await writeHtmlWithYaml({
+		areDependenciesOfAncestorsIncluded,
 		directoryPath,
 		htmlFileName,
 		isInferStacksEnabled,

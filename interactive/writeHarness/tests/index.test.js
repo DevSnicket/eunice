@@ -47,6 +47,8 @@ test.each(
 		await emptyDir(directoryPath);
 
 		await writeHarness({
+			areDependenciesOfAncestorsIncluded:
+				false,
 			directoryPath,
 			htmlFileName,
 			includeServiceWorkers,

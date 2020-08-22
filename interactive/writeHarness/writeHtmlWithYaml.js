@@ -5,8 +5,8 @@ import path from "path";
 import readTextFile from "../readTextFile";
 import { writeFile } from "fs-extra";
 
-export default
-async({
+export default async({
+	areDependenciesOfAncestorsIncluded,
 	directoryPath,
 	htmlFileName,
 	isInferStacksEnabled,
@@ -38,6 +38,10 @@ async({
 			.replace(
 				"yamlLiteralPlaceholder",
 				getStringLiteral(yaml),
+			)
+			.replace(
+				"areDependenciesOfAncestorsIncludedPlaceholder",
+				areDependenciesOfAncestorsIncluded,
 			)
 			.replace(
 				"isInferStacksEnabledLiteralPlaceholder",
