@@ -1,4 +1,4 @@
-# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 7.15.0 on 2020-08-21T13:56:22.186Z
+# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 7.16.0 on 2020-08-22T17:19:17.937Z
 - - id: javascript
     type: directory
     items:
@@ -1409,7 +1409,9 @@
                   items: createStackFromYaml
               - id: countDependenciesOfItem
                 type: import
-                dependsUpon: dependency-counter
+                dependsUpon:
+                  id: dependency-counter
+                  items: countOfItem
               - id: parseYaml
                 type: import
                 dependsUpon:
@@ -3754,6 +3756,7 @@
                             type: parameter
                     - id: renderStateful
                       dependsUpon:
+                        - areDependenciesOfAncestorsIncludedPlaceholder
                         - callOrCreateElementOnError
                         - createElement
                         - createHashFromLocation
@@ -3933,6 +3936,7 @@
                               - - id: index
                                   type: export
                                   dependsUpon:
+                                    - createAreDependenciesOfAncestorsIncludedSelection
                                     - createSubsetSelection
                                     - createWithSubset
                                     - getHrefWithKeyAndValueAndNoDependencyList
@@ -3960,9 +3964,11 @@
                                         type: parameter
                                 - id: createWithSubset
                                   dependsUpon:
-                                    - createBreadcrumbAndSvgElement
+                                    - createBreadcrumbAndOptionsElement
+                                    - createVisualizationElement
                                     - createWithDependencyList
                                     - ensureDependencyCountsInStack
+                                    - getSvgElement
                                   items:
                                     - - id: createWithDependencyList
                                         dependsUpon:
@@ -3971,23 +3977,32 @@
                                           - locationHash
                                           - resizableElementTypes
                                           - stack
-                                      - id: createBreadcrumbAndSvgElement
+                                      - id: createVisualizationElement
+                                        dependsUpon: createElement
+                                      - id: createBreadcrumbAndOptionsElement
+                                        dependsUpon:
+                                          - areDependenciesOfAncestorsIncludedSelection
+                                          - createElement
+                                          - subsetSelection
+                                      - id: getSvgElement
                                         dependsUpon:
                                           - createElement
                                           - createElementContainerFactory
                                           - getSvgElementForStack
                                           - getTextWidth
                                           - stack
-                                          - subsetSelection
-                                    - - id: createElementContainerFactory
                                         items:
-                                          - id: createElementContainerForDependencyCount
-                                            dependsUpon:
-                                              - createElement
-                                              - dependencyListElementFactory
-                                          - id: createElementContainerForItem
-                                            dependsUpon: subsetSelection
-                                    - - id: createElement
+                                          id: createElementContainerFactory
+                                          items:
+                                            - id: createElementContainerForDependencyCount
+                                              dependsUpon:
+                                                - createElement
+                                                - dependencyListElementFactory
+                                            - id: createElementContainerForItem
+                                              dependsUpon: subsetSelection
+                                    - - id: areDependenciesOfAncestorsIncludedSelection
+                                        type: parameter
+                                      - id: createElement
                                         type: parameter
                                       - id: locationHash
                                         type: parameter
@@ -3997,6 +4012,11 @@
                                         type: parameter
                                       - id: subsetSelection
                                         type: parameter
+                                - id: createAreDependenciesOfAncestorsIncludedSelection
+                                  type: import
+                                  dependsUpon:
+                                    id: createAreDependenciesOfAncestorsIncludedSelection
+                                    items: index
                                 - id: createSubsetSelection
                                   type: import
                                   dependsUpon:
@@ -4023,7 +4043,65 @@
                                 - id: getTextWidth
                                   type: import
                                   dependsUpon: string-pixel-width
-                        - - id: createSubsetSelection
+                        - - id: createAreDependenciesOfAncestorsIncludedSelection
+                            type: directory
+                            items:
+                              - - id: index.test
+                                  type: file
+                                  dependsUpon: test
+                                  items:
+                                    - - dependsUpon:
+                                          - createAreDependenciesOfAncestorsIncludedSelection
+                                          - createElement
+                                          - expect
+                                          - getValueOfKey
+                                        items:
+                                          - getValueOfKey
+                                          - id: createElement
+                                            dependsUpon: isCheckbox
+                                            items: isCheckbox
+                                    - - id: createAreDependenciesOfAncestorsIncludedSelection
+                                        type: import
+                                        dependsUpon:
+                                          id: createAreDependenciesOfAncestorsIncludedSelection
+                                          items:
+                                            id: index
+                                            items: default
+                              - - id: index
+                                  type: file
+                                  items:
+                                    - - id: index
+                                        type: export
+                                        dependsUpon:
+                                          - key
+                                          - withAreIncluded
+                                    - - id: withAreIncluded
+                                        items:
+                                          - - id: createSelectorElement
+                                              dependsUpon: createInput
+                                              items:
+                                                - - id: createInput
+                                                    dependsUpon:
+                                                      - areIncluded
+                                                      - createElement
+                                                      - inputIdentifier
+                                                      - onChange
+                                                    items:
+                                                      id: onChange
+                                                      dependsUpon:
+                                                        - key
+                                                        - setKeyAndValue
+                                                - - id: inputIdentifier
+                                                    type: variable
+                                                  - id: createElement
+                                                    type: parameter
+                                                  - id: setKeyAndValue
+                                                    type: parameter
+                                          - - id: areIncluded
+                                              type: parameter
+                                    - - id: key
+                                        type: variable
+                          - id: createSubsetSelection
                             type: directory
                             items:
                               - - id: index
@@ -4624,10 +4702,12 @@
                                         type: export
                                         dependsUpon: inItem
                                     - - id: inItem
-                                        dependsUpon: countDependenciesOfItem
-                                    - - id: countDependenciesOfItem
+                                        dependsUpon: countOfItem
+                                    - - id: countOfItem
                                         type: import
-                                        dependsUpon: dependency-counter
+                                        dependsUpon:
+                                          id: dependency-counter
+                                          items: countOfItem
             - - id: parseStackWithDependencyDirectionAndMutualStackFromYaml
                 type: file
                 items:
@@ -4770,9 +4850,12 @@
                                     - templateHtmlDirectoryPath
                                 - id: substituteInHtml
                                   dependsUpon:
+                                    - areDependenciesOfAncestorsIncluded
                                     - getStringLiteral
                                     - yaml
-                              - - id: directoryPath
+                              - - id: areDependenciesOfAncestorsIncluded
+                                  type: parameter
+                                - id: directoryPath
                                   type: parameter
                                 - id: htmlFileName
                                   type: parameter
@@ -4850,203 +4933,7 @@
                       dependsUpon:
                         id: fs-extra
                         items: readFile
-      - - id: dependency-counter
-          type: directory
-          items:
-            - - id: tests
-                type: directory
-                items:
-                  id: index.test
-                  type: file
-                  dependsUpon:
-                    - getActualForTestCase
-                    - path
-                    - run-tests-from-file-system
-                  items:
-                    - - id: getActualForTestCase
-                        dependsUpon:
-                          - addDependencyCountsInStack
-                          - addDirectionAndMutualStackToDependenciesInStack
-                          - createStackFromYaml
-                          - formatStackAsYaml
-                          - parseYaml
-                    - - id: addDependencyCountsInStack
-                        dependsUpon: countDependenciesOfItem
-                      - id: formatStackAsYaml
-                        dependsUpon:
-                          - createYamlFromStack
-                          - formatYaml
-                      - id: addDirectionAndMutualStackToDependenciesInStack
-                        type: import
-                        dependsUpon:
-                          id: dependency-and-structure
-                          items: addDirectionAndMutualStackToDependenciesInStack
-                      - id: createStackFromYaml
-                        type: import
-                        dependsUpon:
-                          id: dependency-and-structure
-                          items: createStackFromYaml
-                    - - id: createYamlFromStack
-                        type: import
-                        dependsUpon:
-                          id: dependency-and-structure
-                          items: createYamlFromStack
-                      - id: formatYaml
-                        type: import
-                        dependsUpon:
-                          id: js-yaml
-                          items: safeDump
-                      - id: parseYaml
-                        type: import
-                        dependsUpon:
-                          id: js-yaml
-                          items: safeLoad
-                      - id: countDependenciesOfItem
-                        type: import
-                        dependsUpon:
-                          id: dependency-counter
-                          items: index
-            - - id: index
-                type: file
-                items:
-                  - - id: index
-                      type: export
-                      dependsUpon:
-                        - createDependencyCountsFromItem
-                        - isInnerStack
-                        - sumDependencyCounts
-                  - - id: isInnerStack
-                      type: import
-                      dependsUpon:
-                        id: dependency-and-structure
-                        items: isInnerStack
-                    - id: sumDependencyCounts
-                      type: import
-                      dependsUpon:
-                        id: sumDependencyCounts
-                        items: index
-            - - id: createDependencyCountsFromItem
-                type: file
-                items:
-                  - - id: createDependencyCountsFromItem
-                      type: export
-                      dependsUpon: withIsInnerStack
-                  - - id: withIsInnerStack
-                      items:
-                        - - id: createDependencyCountsFromItem
-                            dependsUpon:
-                              - fromDependents
-                              - fromDependsUpon
-                              - fromItems
-                        - - id: fromDependents
-                            dependsUpon: fromDependent
-                        - - id: fromDependent
-                            dependsUpon:
-                              - createDependencyCountOfOuterOne
-                              - isInnerStack
-                          - id: fromDependsUpon
-                            dependsUpon: fromDependUpon
-                        - - id: fromDependUpon
-                            dependsUpon:
-                              - createDependencyCountOfOuterOne
-                              - whenInner
-                            items:
-                              - - id: whenInner
-                                  dependsUpon:
-                                    - isInnerStack
-                                    - mutualStack
-                              - - id: mutualStack
-                                  type: parameter
-                          - id: fromItems
-                            dependsUpon: createDependencyCountsFromItem
-                        - - id: isInnerStack
-                            type: parameter
-                  - - id: createDependencyCountOfOuterOne
-                      dependsUpon: createOuter
-                      items: createOuter
-              - id: sumDependencyCounts
-                type: directory
-                items:
-                  - - id: index
-                      type: file
-                      items:
-                        - - id: index
-                            type: export
-                            dependsUpon:
-                              - eitherOrCombine
-                              - sumDependencyCount
-                        - - id: sumDependencyCount
-                            dependsUpon:
-                              - createProperty
-                              - sumInnerDirections
-                              - sumOuterDirections
-                            items:
-                              id: createProperty
-                              dependsUpon:
-                                - createPropertyWhenHasCount
-                                - eitherOrCombine
-                              items: createPropertyWhenHasCount
-                  - - id: sumInnerDirections
-                      type: file
-                      items:
-                        - - id: sumInnerDirections
-                            type: export
-                            dependsUpon:
-                              - sumDirections
-                              - sumInnerDirection
-                        - - sumInnerDirection
-                    - id: sumOuterDirections
-                      type: file
-                      items:
-                        - - id: sumOuterDirections
-                            type: export
-                            dependsUpon:
-                              - sumDirections
-                              - sumOuterDirection
-                        - - id: sumOuterDirection
-                            dependsUpon: createPropertyForRelationship
-                            items:
-                              id: createPropertyForRelationship
-                              dependsUpon:
-                                - createPropertyWhenHasCount
-                                - eitherOrCombine
-                                - sumRelationship
-                              items: createPropertyWhenHasCount
-                        - - sumRelationship
-                  - - id: sumDirections
-                      type: file
-                      items:
-                        id: sumDirections
-                        type: export
-                        dependsUpon: createPropertyForDirection
-                        items:
-                          - - id: createPropertyForDirection
-                              dependsUpon:
-                                - createPropertyWhenHasCount
-                                - eitherOrCombine
-                                - sumDirection
-                              items: createPropertyWhenHasCount
-                          - - id: sumDirection
-                              type: parameter
-                  - - id: eitherOrCombine
-                      type: file
-                      items:
-                        id: eitherOrCombine
-                        type: export
-                        dependsUpon: whenHasBoth
-                        items:
-                          - - id: whenHasBoth
-                              dependsUpon:
-                                - left
-                                - right
-                                - valueSelector
-                          - - id: left
-                              type: parameter
-                            - id: right
-                              type: parameter
-                            - id: valueSelector
-                              type: parameter
-        - id: stacking-inference
+      - - id: stacking-inference
           type: directory
           items:
             - - id: tests
@@ -5235,6 +5122,254 @@
         - id: visualizer
           type: directory
           items:
+            - - id: tests
+                type: directory
+                items:
+                  - - id: index.test
+                      type: file
+                      dependsUpon:
+                        - getSvgForStack
+                        - parseStackFromYaml
+                        - path
+                        - run-tests-from-file-system
+                    - id: withElementContainer
+                      type: directory
+                      items:
+                        - - id: forDependencyCount
+                            type: directory
+                            items:
+                              - id: createForDependencyCount
+                                type: file
+                                items:
+                                  - - id: createForDependencyCount
+                                      type: export
+                                      dependsUpon: createElement
+                                  - - id: createElement
+                                      type: import
+                                      dependsUpon:
+                                        id: react
+                                        items: createElement
+                              - id: index.test
+                                type: file
+                                dependsUpon:
+                                  - path
+                                  - test
+                                  - id: withElementContainer
+                                    items: assertGetSvgForYaml
+                          - id: forItems
+                            type: directory
+                            items:
+                              - id: createForItem
+                                type: file
+                                items:
+                                  - - id: createForItem
+                                      type: export
+                                      dependsUpon: createElement
+                                  - - id: createElement
+                                      type: import
+                                      dependsUpon:
+                                        id: react
+                                        items: createElement
+                              - id: index.test
+                                type: file
+                                dependsUpon:
+                                  - path
+                                  - test
+                                  - id: withElementContainer
+                                    items: assertGetSvgForYaml
+                        - - id: assertGetSvgForYaml
+                            type: file
+                            items:
+                              - - id: assertGetSvgForYaml
+                                  type: export
+                                  dependsUpon:
+                                    - expect
+                                    - getSvgForStack
+                                    - parseStackFromYaml
+                                    - path
+                                    - readTestFile
+                              - - id: getSvgForStack
+                                  type: import
+                                  dependsUpon:
+                                    id: tests
+                                    items: getSvgForStack
+                                - id: parseStackFromYaml
+                                  type: import
+                                  dependsUpon:
+                                    id: tests
+                                    items: parseStackFromYaml
+                                - id: readTestFile
+                                  type: import
+                                  dependsUpon:
+                                    id: tests
+                                    items: readTestFile
+                    - id: withElementContainerAndParent
+                      type: directory
+                      items:
+                        id: index.test
+                        type: file
+                        dependsUpon:
+                          - expect
+                          - path
+                          - test
+                          - id: tests
+                            items:
+                              - readTestFile
+                              - parseStackFromYaml
+                              - getSvgForStack
+                              - id: withParent
+                                items: getFirstChildStack
+                    - id: withOuterAncestors
+                      type: directory
+                      items:
+                        id: index.test
+                        type: file
+                        dependsUpon:
+                          - expect
+                          - path
+                          - test
+                          - id: tests
+                            items:
+                              - readTestFile
+                              - parseStackFromYaml
+                              - getSvgForStack
+                  - - id: withParent
+                      type: directory
+                      items:
+                        - - id: index.test
+                            type: file
+                            dependsUpon:
+                              - getFirstChildStack
+                              - path
+                              - run-tests-from-file-system
+                              - id: tests
+                                items:
+                                  - parseStackFromYaml
+                                  - getSvgForStack
+                        - - id: getFirstChildStack
+                            type: file
+                            items:
+                              id: getFirstChildStack
+                              type: export
+                  - - id: getSvgForStack
+                      type: file
+                      items:
+                        - - id: getSvgForStack
+                            type: export
+                            dependsUpon:
+                              - createElement
+                              - formatSvg
+                              - getSvgElementForStack
+                              - getTextWidth
+                              - renderToStaticMarkup
+                        - - id: createElement
+                            type: import
+                            dependsUpon:
+                              id: react
+                              items: createElement
+                          - id: formatSvg
+                            type: import
+                            dependsUpon:
+                              id: visualizer
+                              items: formatSvg
+                          - id: getSvgElementForStack
+                            type: import
+                            dependsUpon:
+                              id: visualizer
+                              items: index
+                          - id: getTextWidth
+                            type: import
+                            dependsUpon: string-pixel-width
+                          - id: renderToStaticMarkup
+                            type: import
+                            dependsUpon:
+                              id: react-dom
+                              items:
+                                id: server
+                                items: renderToStaticMarkup
+                    - id: parseStackFromYaml
+                      type: file
+                      items:
+                        - - id: parseStackFromYaml
+                            type: export
+                            dependsUpon:
+                              - createStackFromYaml
+                              - parseYaml
+                        - - id: createStackFromYaml
+                            type: import
+                            dependsUpon:
+                              id: dependency-and-structure
+                              items: createStackFromYaml
+                          - id: parseYaml
+                            type: import
+                            dependsUpon:
+                              id: js-yaml
+                              items: safeLoad
+                    - id: readTestFile
+                      type: file
+                      items:
+                        - - id: readTestFile
+                            type: export
+                            dependsUpon: readFile
+                        - - id: readFile
+                            type: import
+                            dependsUpon:
+                              id: fs-extra
+                              items: readFile
+            - - id: index
+                type: file
+                items:
+                  - - id: index
+                      type: export
+                      dependsUpon:
+                        - createDependencyGroupFactories
+                        - createFont
+                        - createGroupFactory
+                        - createSvgElement
+                        - createTextGroupWithFontSizeAndPrecision
+                        - withPrecision
+                      items:
+                        - - id: createGroupFactory
+                            dependsUpon:
+                              - createElement
+                              - createParentOrSummaryGroupFactory
+                              - createStackGroupFactory
+                              - createTextGroupWithFontSizeAndPrecision
+                              - dependencyGroupFactories
+                              - elementContainerFactory
+                              - font
+                              - stack
+                        - - id: createTextGroupWithFontSizeAndPrecision
+                            dependsUpon:
+                              - createElement
+                              - createTextGroup
+                          - id: font
+                            type: variable
+                          - id: dependencyGroupFactories
+                            type: variable
+                        - - id: createElement
+                            type: parameter
+                          - id: elementContainerFactory
+                            type: parameter
+                          - id: stack
+                            type: parameter
+                  - - id: createFont
+                      dependsUpon: withPrecision
+                    - id: createDependencyGroupFactories
+                      type: import
+                      dependsUpon:
+                        id: createDependencyGroupFactories
+                        items: index
+                    - id: createParentOrSummaryGroupFactory
+                      type: import
+                      dependsUpon:
+                        id: createParentOrSummaryGroupFactory
+                        items: index
+                    - id: createStackGroupFactory
+                      type: import
+                      dependsUpon:
+                        id: createStackGroupFactory
+                        items: index
             - - id: createDependencyGroupFactories
                 type: directory
                 items:
@@ -5245,14 +5380,43 @@
                             type: export
                             dependsUpon:
                               - createArrows
-                              - createInner
-                              - createOuter
-                        - - id: createArrows
+                              - createGetOuterCountFromAreAncestorsIncluded
+                              - createWithArrowsAndGetOuter
+                        - - id: createWithArrowsAndGetOuter
+                            dependsUpon: createInner
+                            items:
+                              - - id: createInnerFromItem
+                                  dependsUpon:
+                                    - arrows
+                                    - createInner
+                                    - createTextGroup
+                                    - font
+                                - id: createOuterFromItem
+                                  dependsUpon:
+                                    - arrows
+                                    - createOuter
+                                    - createTextGroup
+                                    - elementContainerFactory
+                                    - font
+                                    - getOuterCountFromItem
+                              - - id: getOuterCountFromItem
+                                  dependsUpon: getOuterCount
+                                - id: arrows
+                                  type: parameter
+                                - id: createTextGroup
+                                  type: parameter
+                                - id: elementContainerFactory
+                                  type: parameter
+                                - id: font
+                                  type: parameter
+                              - - id: getOuterCount
+                                  type: parameter
+                          - id: createArrows
                             type: import
                             dependsUpon:
                               id: createArrows
                               items: index
-                          - id: createInner
+                        - - id: createInner
                             type: import
                             dependsUpon:
                               id: createInner
@@ -5321,6 +5485,7 @@
                                           - createGroupFactoryWhenRequired
                                           - createLevelGroupFactory
                                           - createStackGroupFactory
+                                          - outerCount
                                     - - id: createGroupFactoryWhenRequired
                                         dependsUpon:
                                           - createDependencyGroupFactoryWhenRequired
@@ -5337,6 +5502,8 @@
                                       - id: arrows
                                         type: parameter
                                       - id: contentGroupFactory
+                                        type: parameter
+                                      - id: outerCount
                                         type: parameter
                                     - - id: createTextGroup
                                         type: parameter
@@ -5483,9 +5650,7 @@
                                           type: import
                                           dependsUpon:
                                             id: visualizer
-                                            items:
-                                              id: tests
-                                              items: formatSvg
+                                            items: formatSvg
                                         - id: readTestCaseFile
                                           type: import
                                           dependsUpon:
@@ -5565,9 +5730,7 @@
                                               type: import
                                               dependsUpon:
                                                 id: visualizer
-                                                items:
-                                                  id: tests
-                                                  items: formatSvg
+                                                items: formatSvg
                                             - id: readTestCaseFile
                                               type: import
                                               dependsUpon:
@@ -5710,250 +5873,26 @@
                               type: parameter
                             - id: key
                               type: parameter
+                    - id: createGetOuterCountFromAreAncestorsIncluded
+                      type: file
+                      items:
+                        - - id: createGetOuterCountFromAreAncestorsIncluded
+                            type: export
+                            dependsUpon: whenAncestorsIncluded
+                            items: whenAncestorsIncluded
+                          - id: sumAncestorsAndParent
+                            dependsUpon: sumDirectionsAndRelationships
+                        - - id: sumDirectionsAndRelationships
+                            type: import
+                            dependsUpon:
+                              id: dependency-counter
+                              items: sumDirectionsAndRelationships
                     - id: spacing
                       type: file
                       items:
                         id: spacing
                         type: export
-              - id: index
-                type: file
-                items:
-                  - - id: index
-                      type: export
-                      dependsUpon:
-                        - createDependencyGroupFactories
-                        - createFont
-                        - createGroupFactory
-                        - createSvgElement
-                        - createTextGroupWithFontSizeAndPrecision
-                        - withPrecision
-                      items:
-                        - - id: createGroupFactory
-                            dependsUpon:
-                              - createElement
-                              - createParentOrSummaryGroupFactory
-                              - createStackGroupFactory
-                              - createTextGroupWithFontSizeAndPrecision
-                              - dependencyGroupFactories
-                              - elementContainerFactory
-                              - font
-                              - stack
-                        - - id: createTextGroupWithFontSizeAndPrecision
-                            dependsUpon:
-                              - createElement
-                              - createTextGroup
-                          - id: font
-                            type: variable
-                          - id: dependencyGroupFactories
-                            type: variable
-                        - - id: createElement
-                            type: parameter
-                          - id: elementContainerFactory
-                            type: parameter
-                          - id: stack
-                            type: parameter
-                  - - id: createFont
-                      dependsUpon: withPrecision
-                    - id: createDependencyGroupFactories
-                      type: import
-                      dependsUpon:
-                        id: createDependencyGroupFactories
-                        items: index
-                    - id: createParentOrSummaryGroupFactory
-                      type: import
-                      dependsUpon:
-                        id: createParentOrSummaryGroupFactory
-                        items: index
-                    - id: createStackGroupFactory
-                      type: import
-                      dependsUpon:
-                        id: createStackGroupFactory
-                        items: index
-              - id: tests
-                type: directory
-                items:
-                  - - id: index.test
-                      type: file
-                      dependsUpon:
-                        - getSvgForStack
-                        - parseStackFromYaml
-                        - path
-                        - run-tests-from-file-system
-                    - id: withElementContainer
-                      type: directory
-                      items:
-                        - - id: forDependencyCount
-                            type: directory
-                            items:
-                              - id: createForDependencyCount
-                                type: file
-                                items:
-                                  - - id: createForDependencyCount
-                                      type: export
-                                      dependsUpon: createElement
-                                  - - id: createElement
-                                      type: import
-                                      dependsUpon:
-                                        id: react
-                                        items: createElement
-                              - id: index.test
-                                type: file
-                                dependsUpon:
-                                  - path
-                                  - test
-                                  - id: withElementContainer
-                                    items: assertGetSvgForYaml
-                          - id: forItems
-                            type: directory
-                            items:
-                              - id: createForItem
-                                type: file
-                                items:
-                                  - - id: createForItem
-                                      type: export
-                                      dependsUpon: createElement
-                                  - - id: createElement
-                                      type: import
-                                      dependsUpon:
-                                        id: react
-                                        items: createElement
-                              - id: index.test
-                                type: file
-                                dependsUpon:
-                                  - path
-                                  - test
-                                  - id: withElementContainer
-                                    items: assertGetSvgForYaml
-                        - - id: assertGetSvgForYaml
-                            type: file
-                            items:
-                              - - id: assertGetSvgForYaml
-                                  type: export
-                                  dependsUpon:
-                                    - expect
-                                    - getSvgForStack
-                                    - parseStackFromYaml
-                                    - path
-                                    - readTestFile
-                              - - id: getSvgForStack
-                                  type: import
-                                  dependsUpon:
-                                    id: tests
-                                    items: getSvgForStack
-                                - id: parseStackFromYaml
-                                  type: import
-                                  dependsUpon:
-                                    id: tests
-                                    items: parseStackFromYaml
-                                - id: readTestFile
-                                  type: import
-                                  dependsUpon:
-                                    id: tests
-                                    items: readTestFile
-                    - id: withElementContainerAndParent
-                      type: directory
-                      items:
-                        id: index.test
-                        type: file
-                        dependsUpon:
-                          - expect
-                          - path
-                          - test
-                          - id: tests
-                            items:
-                              - readTestFile
-                              - parseStackFromYaml
-                              - getSvgForStack
-                              - id: withParent
-                                items: getFirstChildStack
-                  - - id: withParent
-                      type: directory
-                      items:
-                        - - id: index.test
-                            type: file
-                            dependsUpon:
-                              - getFirstChildStack
-                              - path
-                              - run-tests-from-file-system
-                              - id: tests
-                                items:
-                                  - parseStackFromYaml
-                                  - getSvgForStack
-                        - - id: getFirstChildStack
-                            type: file
-                            items:
-                              id: getFirstChildStack
-                              type: export
-                  - - id: getSvgForStack
-                      type: file
-                      items:
-                        - - id: getSvgForStack
-                            type: export
-                            dependsUpon:
-                              - createElement
-                              - formatSvg
-                              - getSvgElementForStack
-                              - getTextWidth
-                              - renderToStaticMarkup
-                        - - id: createElement
-                            type: import
-                            dependsUpon:
-                              id: react
-                              items: createElement
-                          - id: getSvgElementForStack
-                            type: import
-                            dependsUpon:
-                              id: visualizer
-                              items: index
-                          - id: getTextWidth
-                            type: import
-                            dependsUpon: string-pixel-width
-                          - id: renderToStaticMarkup
-                            type: import
-                            dependsUpon:
-                              id: react-dom
-                              items:
-                                id: server
-                                items: renderToStaticMarkup
-                  - - id: formatSvg
-                      type: file
-                      items:
-                        - - id: formatSvg
-                            type: export
-                            dependsUpon: formatXml
-                        - - id: formatXml
-                            type: import
-                            dependsUpon: xml-formatter
-                    - id: parseStackFromYaml
-                      type: file
-                      items:
-                        - - id: parseStackFromYaml
-                            type: export
-                            dependsUpon:
-                              - createStackFromYaml
-                              - parseYaml
-                        - - id: createStackFromYaml
-                            type: import
-                            dependsUpon:
-                              id: dependency-and-structure
-                              items: createStackFromYaml
-                          - id: parseYaml
-                            type: import
-                            dependsUpon:
-                              id: js-yaml
-                              items: safeLoad
-                    - id: readTestFile
-                      type: file
-                      items:
-                        - - id: readTestFile
-                            type: export
-                            dependsUpon: readFile
-                        - - id: readFile
-                            type: import
-                            dependsUpon:
-                              id: fs-extra
-                              items: readFile
-            - - id: createParentOrSummaryGroupFactory
+              - id: createParentOrSummaryGroupFactory
                 type: directory
                 items:
                   - - id: index
@@ -6127,25 +6066,29 @@
                                   dependsUpon:
                                     - createWhenHasDependencies
                                     - sumDependencyCountOfStack
-                              - - id: createWhenHasDependencies
-                                  dependsUpon: create
-                                  items:
-                                    - - id: create
-                                        items:
-                                          id: createAtPosition
-                                          dependsUpon:
-                                            - innerDependencyGroupFactory
-                                            - stackGroupFactory
-                                    - - id: innerDependencyGroupFactory
-                                        type: parameter
-                                      - id: stackGroupFactory
-                                        type: parameter
-                                - id: sumDependencyCountOfStack
+                              - - id: sumDependencyCountOfStack
                                   type: import
                                   dependsUpon:
                                     id: sumDependencyCountOfStack
                                     items: index
-                        - - id: sumDependencyCountOfStack
+                        - - id: createWhenHasDependencies
+                            type: file
+                            items:
+                              id: createWhenHasDependencies
+                              type: export
+                              dependsUpon: create
+                              items:
+                                - - id: create
+                                    items:
+                                      id: createAtPosition
+                                      dependsUpon:
+                                        - innerDependencyGroupFactory
+                                        - stackGroupFactory
+                                - - id: innerDependencyGroupFactory
+                                    type: parameter
+                                  - id: stackGroupFactory
+                                    type: parameter
+                          - id: sumDependencyCountOfStack
                             type: directory
                             items:
                               - - id: index
@@ -6153,33 +6096,27 @@
                                   items:
                                     - - id: index
                                         type: export
-                                        dependsUpon: getDependencyCountWhenHasMultiple
+                                        dependsUpon: getCountWhenHasMultiple
                                         items:
                                           dependsUpon:
-                                            - sumDependencyCount
-                                            - sumDependencyCountOfItem
-                                    - - id: sumDependencyCountOfItem
-                                        dependsUpon: sumDependencyCountOfInnerAndOuter
-                                    - - id: sumDependencyCountOfInnerAndOuter
+                                            - sumCountOfItem
+                                            - sumDirections
+                                    - - id: sumCountOfItem
+                                        dependsUpon: sumDescendantsAndParentDependsUpon
+                                    - - id: sumDescendantsAndParentDependsUpon
                                         dependsUpon:
-                                          - getDependsUponOfOuter
-                                          - sumDependencyCount
-                                    - - id: sumDependencyCount
-                                        dependsUpon: whenHasBoth
-                                        items:
-                                          id: whenHasBoth
-                                          dependsUpon: createProperties
-                                          items:
-                                            id: createProperties
-                                            items:
-                                              id: createPropertyForLevelDirection
-                                              dependsUpon: sum
-                                              items: sum
-                                      - getDependencyCountWhenHasMultiple
-                              - - id: getDependsUponOfOuter
+                                          - getDependsUponOfParent
+                                          - sumDirections
+                                      - getCountWhenHasMultiple
+                                    - - id: sumDirections
+                                        type: import
+                                        dependsUpon:
+                                          id: dependency-counter
+                                          items: sumDirections
+                              - - id: getDependsUponOfParent
                                   type: file
                                   items:
-                                    - - id: getDependsUponOfOuter
+                                    - - id: getDependsUponOfParent
                                         type: export
                                         dependsUpon:
                                           - createProperties
@@ -6235,7 +6172,9 @@
                                               - whenHasCount
                                             items:
                                               - id: whenHasCount
-                                                dependsUpon: dependencyGroupFactories
+                                                dependsUpon:
+                                                  - dependencyGroupFactories
+                                                  - item
                                               - asEmpty
                                     - - id: item
                                         type: parameter
@@ -6360,6 +6299,15 @@
                   - - getSvgStyleForFont
                     - createStyleElementInDefsElement
                     - createFromAttributesAndChildren
+              - id: formatSvg
+                type: file
+                items:
+                  - - id: formatSvg
+                      type: export
+                      dependsUpon: formatXml
+                  - - id: formatXml
+                      type: import
+                      dependsUpon: xml-formatter
               - id: getIdentifierClassNameAndText
                 type: file
                 items:
@@ -6372,6 +6320,241 @@
                 items:
                   id: withPrecision
                   type: export
+      - - id: dependency-counter
+          type: directory
+          items:
+            - - id: index
+                type: file
+                items:
+                  - id: countOfItem
+                    type: export
+                    dependsUpon:
+                      id: countOfItem
+                      items:
+                        id: index
+                        items: default
+                  - id: sumDirections
+                    type: export
+                    dependsUpon:
+                      id: sumDirections
+                      items: default
+                  - id: sumDirectionsAndRelationships
+                    type: export
+                    dependsUpon:
+                      id: sumDirectionsAndRelationships
+                      items: default
+            - - id: countOfItem
+                type: directory
+                items:
+                  - - id: tests
+                      type: directory
+                      items:
+                        id: index.test
+                        type: file
+                        dependsUpon:
+                          - getActualForTestCase
+                          - path
+                          - run-tests-from-file-system
+                        items:
+                          - - id: getActualForTestCase
+                              dependsUpon:
+                                - addDependencyCountsInStack
+                                - addDirectionAndMutualStackToDependenciesInStack
+                                - createStackFromYaml
+                                - formatStackAsYaml
+                                - parseYaml
+                          - - id: addDependencyCountsInStack
+                              dependsUpon: countOfItem
+                            - id: formatStackAsYaml
+                              dependsUpon:
+                                - createYamlFromStack
+                                - formatYaml
+                            - id: addDirectionAndMutualStackToDependenciesInStack
+                              type: import
+                              dependsUpon:
+                                id: dependency-and-structure
+                                items: addDirectionAndMutualStackToDependenciesInStack
+                            - id: createStackFromYaml
+                              type: import
+                              dependsUpon:
+                                id: dependency-and-structure
+                                items: createStackFromYaml
+                          - - id: createYamlFromStack
+                              type: import
+                              dependsUpon:
+                                id: dependency-and-structure
+                                items: createYamlFromStack
+                            - id: formatYaml
+                              type: import
+                              dependsUpon:
+                                id: js-yaml
+                                items: safeDump
+                            - id: parseYaml
+                              type: import
+                              dependsUpon:
+                                id: js-yaml
+                                items: safeLoad
+                            - id: countOfItem
+                              type: import
+                              dependsUpon:
+                                id: countOfItem
+                                items: index
+                  - - id: index
+                      type: file
+                      items:
+                        id: index
+                        type: export
+                        dependsUpon:
+                          - createCountsForDescendants
+                          - sumItemCounts
+                  - - id: createCountsForDescendants
+                      type: file
+                      items:
+                        - - id: createCountsForDescendants
+                            type: export
+                            dependsUpon: withAncestorStack
+                        - - id: withAncestorStack
+                            items:
+                              - - id: createDependencyCountsFromItem
+                                  dependsUpon:
+                                    - fromDependents
+                                    - fromDependsUpon
+                                    - fromItems
+                              - - id: fromDependents
+                                  dependsUpon: fromDependent
+                              - - id: fromDependent
+                                  dependsUpon:
+                                    - createDependencyCountOfOneAncestor
+                                    - isDescendantStack
+                                - id: fromDependsUpon
+                                  dependsUpon: fromDependUpon
+                              - - id: fromDependUpon
+                                  dependsUpon:
+                                    - createDependencyCountOfOneAncestor
+                                    - whenDescendant
+                                  items:
+                                    - - id: whenDescendant
+                                        dependsUpon:
+                                          - isDescendantStack
+                                          - mutualStack
+                                    - - id: mutualStack
+                                        type: parameter
+                              - - id: isDescendantStack
+                                  dependsUpon:
+                                    - isInnerStack
+                                    - sourceStack
+                                - id: fromItems
+                                  dependsUpon: createDependencyCountsFromItem
+                              - - id: sourceStack
+                                  type: parameter
+                        - - id: createDependencyCountOfOneAncestor
+                            dependsUpon:
+                              - createAncestor
+                              - getAncestorKey
+                            items:
+                              - id: getAncestorKey
+                                dependsUpon: whenSourceStack
+                                items: whenSourceStack
+                              - createAncestor
+                          - id: isInnerStack
+                            type: import
+                            dependsUpon:
+                              id: dependency-and-structure
+                              items: isInnerStack
+                    - id: sumItemCounts
+                      type: file
+                      items:
+                        - - id: sumItemCounts
+                            type: export
+                            dependsUpon:
+                              - eitherOrCombine
+                              - sumDependencyCount
+                        - - id: sumDependencyCount
+                            dependsUpon:
+                              - createProperty
+                              - sumDirections
+                              - sumDirectionsAndRelationships
+                            items:
+                              id: createProperty
+                              dependsUpon: createPropertyWhenHasCount
+                              items: createPropertyWhenHasCount
+                          - id: eitherOrCombine
+                            type: import
+                            dependsUpon:
+                              id: dependency-counter
+                              items: eitherOrCombine
+                        - - id: sumDirections
+                            type: import
+                            dependsUpon:
+                              id: dependency-counter
+                              items: sumDirections
+                          - id: sumDirectionsAndRelationships
+                            type: import
+                            dependsUpon:
+                              id: dependency-counter
+                              items: sumDirectionsAndRelationships
+            - - id: sumDirections
+                type: file
+                items:
+                  - - id: sumDirections
+                      type: export
+                      dependsUpon:
+                        - combineDirections
+                        - eitherOrCombine
+                        - sumDescendantDirection
+                  - - sumDescendantDirection
+              - id: sumDirectionsAndRelationships
+                type: file
+                items:
+                  - - id: sumDirectionsAndRelationships
+                      type: export
+                      dependsUpon:
+                        - combineDirections
+                        - eitherOrCombine
+                        - sumRelationships
+                  - - id: sumRelationships
+                      dependsUpon: createPropertyForRelationship
+                      items:
+                        id: createPropertyForRelationship
+                        dependsUpon:
+                          - createPropertyWhenHasCount
+                          - eitherOrCombine
+                          - sumRelationship
+                        items: createPropertyWhenHasCount
+                  - - sumRelationship
+            - - id: combineDirections
+                type: file
+                items:
+                  id: combineDirections
+                  type: export
+                  dependsUpon: createPropertyForDirection
+                  items:
+                    - - id: createPropertyForDirection
+                        dependsUpon:
+                          - combineDirection
+                          - createPropertyWhenHasCount
+                          - eitherOrCombine
+                        items: createPropertyWhenHasCount
+                    - - id: combineDirection
+                        type: parameter
+            - - id: eitherOrCombine
+                type: file
+                items:
+                  id: eitherOrCombine
+                  type: export
+                  dependsUpon: whenHasBoth
+                  items:
+                    - - id: whenHasBoth
+                        dependsUpon:
+                          - combine
+                          - left
+                          - right
+                    - - id: left
+                        type: parameter
+                      - id: right
+                        type: parameter
+                      - id: combine
+                        type: parameter
       - - id: dependency-and-structure
           type: directory
           items:
