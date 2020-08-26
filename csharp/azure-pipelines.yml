@@ -1,6 +1,6 @@
 pool:
   name: $(pool_name)
-  vmImage: 'ubuntu-latest'
+  vmImage: ubuntu-18.04
 steps:
   - task: UseDotNet@2
     displayName: .NET Core 3.1
