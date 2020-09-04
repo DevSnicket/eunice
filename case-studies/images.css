@@ -1,7 +1,12 @@
 body > .content > img,
+body > .content > a.image,
 .image-right > img {
 	display: block;
 	margin: 0 auto;
+}
+
+body > .content > a.image {
+	text-align: center;
 }
 
 @media (min-width: 52em) {

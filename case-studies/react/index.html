@@ -83,19 +83,15 @@ Unexpected token, expected ";" (14:5)</code>
         <p>You can interact with Eunice's dogfooding <a href="../../dogfooding" target="_blank">here</a>.</p>
         <h3 id="inferred-stacks">inferred stacks</h3>
         <p>When an order isn't defined for items (e.g. the file-system) Eunice can infer stacks for items that only have uni-directional dependencies.</p>
-        <p>Selecting the packages directory will open it and show that Eunice has inferred two levels, of three items each:</p>
+        <p>Selecting the packages directory will open it and show that Eunice has inferred 7 levels. The wider level near the middle has bi-directional dependencies (red horizontal arrows) and so hasn't been split up further:</p>
         <img alt="Eunice shown to have inferred stacks for React's packages directory" src="./2-inferred-stacks-packages.png"/>
         <h3 id="directory-specific-stacks">directory specific stacks</h3>
-        <p>A stack can also be specified by creating a YAML file in a directory. Eunice automatically looks for files named .eunice-stack.yaml saved with the code.</p>
+        <p>As well as inference, a stack can also be specified explicitly by creating a YAML file in a directory. Eunice automatically looks for files named .eunice-stack.yaml saved with the code.</p>
         <p>I've worked through React, created 13 stack files and committed them to the Git branch.</p>
         <p>The stacks have resolved all the remaining 990 unstructured dependencies; however, I wasn't able to define structures that would make all dependencies go in the same direction. These mismatching dependencies are shown in the red up arrow count of 653 below:</p>
         <img alt="Eunice showing total dependency counts of React after adding stacks manually" src="./10-individual-file-stacks-root.png"/>
         <p>You can see more specific dependency count arrows and the structure I chose, by looking inside React's packages sub-directory:</p>
-        <code>- [ react-devtools, react-devtools-shell ]
-- [ react-devtools-core, react-devtools-inline ]
-- - react-devtools-extensions
-- [ react-devtools-shared, react-art, react-interactions, react-refresh ]
-- - react-test-renderer
+        <code>- - existing
 - [ react-dom, react-native-renderer, react-noop-renderer ]
 - [ legacy-events, react-flight, react-reconciler, react-server ]
 - [ create-subscription, jest-mock-scheduler, jest-react, react-cache, react-is, react-stream, use-subscription ]
@@ -119,23 +115,25 @@ Unexpected token, expected ";" (14:5)</code>
 - [ ReactFiberNewContext, ReactFiberReconciler ]
 - - existing</code>
         <br/>
-        <img alt="Eunice showing the React Reconciler package after adding stacks manually" src="13-react-reconciler.png" />
+        <a class="image" href="./13-react-reconciler.png" target="_blank">
+            <img alt="Eunice showing the React Reconciler package after adding stacks manually" src="./13-react-reconciler.png" />
+        </a>
         <h3 id="groups">groups</h3>
         <p>The packages directory has enough items and levels that it can be hard to remember what all the dependency relationships are. This can be improved by grouping items that share concepts and dependency relationships.</p>
         <p>The six sub-directories highlighted below could be grouped, as they all relate to devtools and can be stacked together due to cohesive dependencies:</p>
         <img alt="Potential grouping of devtools highlighted in Eunice" src="./14-devtools-highlighted.png" />
         <p>To investigate how this might look the Eunice stack file in the packages directory can be modified. I've added a new item named react-devtools-group and moved the six related items inside it:</p>
-        <code><span class="new">- - id: react-devtools-group
+        <code><span class="new">- - existing
+- - id: react-devtools-group
     dependencyPermeable: true
     items:
       - [ react-devtools, react-devtools-shell ]
       - [ react-devtools-core, react-devtools-inline ]
       - - react-devtools-extensions
-      - - react-devtools-shared</span>
-- [ react-art, react-interactions, react-refresh ]
+      - - react-devtools-shared
 - - react-test-renderer
 - [ react-dom, react-native-renderer, react-noop-renderer ]
-- [ legacy-events, react-reconciler ]
+- [ legacy-events, react-flight, react-reconciler, react-server ]
 - [ create-subscription, jest-mock-scheduler, jest-react, react-cache, react-is, react-stream, use-subscription ]
 - [ babel-plugin-react-jsx, eslint-plugin-react-hooks, react, react-debug-tools, scheduler, shared ]</code>
         <p>The new item has been marked in the YAML as dependencyPermeable so that Eunice's dependency resolution will look inside it even though it won't be specified in the code's import statement paths.</p>
