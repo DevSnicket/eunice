@@ -17,7 +17,7 @@
 		"@devsnicket/eunice-call-with-process-standard-streams": "^1.8.0",
 		"@devsnicket/eunice-dependency-and-structure": "^6.0.0",
 		"@devsnicket/eunice-dependency-counter": "^5.0.0",
-		"@devsnicket/eunice-interactive": "^6.0.1",
+		"@devsnicket/eunice-interactive": "^6.0.2",
 		"@devsnicket/eunice-javascript-analyzer": "^11.33.0",
 		"@devsnicket/eunice-replacement": "^14.5.0",
 		"@devsnicket/eunice-run-tests-from-file-system": "^4.6.1",
@@ -125,5 +125,5 @@
 		"test": "jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "7.16.0"
+	"version": "7.16.1"
 }
