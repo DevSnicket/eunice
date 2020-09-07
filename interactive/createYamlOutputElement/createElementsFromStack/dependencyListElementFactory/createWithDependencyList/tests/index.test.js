@@ -24,6 +24,8 @@ test(
 		expect(
 			renderToStaticMarkup(
 				createWithDependencyList({
+					areAncestorsIncluded:
+						false,
 					closeHref:
 						null,
 					createAncestorSeparatorElement:
@@ -34,7 +36,7 @@ test(
 						null,
 					identifier:
 						itemIdentifier,
-					level:
+					levelDirection:
 						{},
 					locationHash:
 						{},
@@ -54,9 +56,18 @@ test(
 describe(
 	"child item that depends upon item in same level returns element and dependency list in Reflex resize",
 	() => {
-		const
-			childIdentifier = "child",
-			parentIdentifier = "parent";
+		const childIdentifier = "child";
+
+		test(
+			"root with no identifier specified",
+			() =>
+				testIdentifierAndStack({
+					identifier:
+						null,
+					stack:
+						createStack()[0][0].items,
+				}),
+		);
 
 		test(
 			"child item identifier specified",
@@ -69,40 +80,20 @@ describe(
 				}),
 		);
 
-		test(
-			"parent with no identifier specified",
-			() =>
-				testIdentifierAndStack({
-					identifier:
-						null,
-					stack:
-						createStack()[0][0].items,
-				}),
-		);
-
 		function createStack() {
 			const stack =
-				createStackFromYaml(
-					[
-						{
-							id:
-								parentIdentifier,
-							items:
-								[
-									{
-										dependsUpon: dependsUponIdentifier,
-										id: childIdentifier,
-										items: "grandchild",
-									},
-								],
-						},
-						{ id: dependsUponIdentifier },
-					],
-				);
+				createStackFromYaml([
+					{
+						dependsUpon: dependsUponIdentifier,
+						id: childIdentifier,
+						items: "grandchild",
+					},
+					{ id: dependsUponIdentifier },
+				]);
 
 			addDirectionAndMutualStackToDependenciesInStack(stack);
 
-			return stack[0][0].items;
+			return stack;
 		}
 
 		async function testIdentifierAndStack({
@@ -112,6 +103,8 @@ describe(
 			expect(
 				renderToStaticMarkup(
 					createWithDependencyList({
+						areAncestorsIncluded:
+							true,
 						closeHref:
 							"close-href",
 						createAncestorSeparatorElement:
@@ -121,7 +114,7 @@ describe(
 						getHrefWithIdentifierHierarchy:
 							identifierHierarchy => identifierHierarchy,
 						identifier,
-						level:
+						levelDirection:
 							"same",
 						locationHash:
 							{ getValueOfKey: () => null },

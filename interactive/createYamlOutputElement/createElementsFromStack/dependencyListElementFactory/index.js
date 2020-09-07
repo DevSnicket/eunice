@@ -5,7 +5,7 @@ import createWithDependencyList from "./createWithDependencyList";
 const keys =
 	{
 		identifier: "dependency-list-identifier",
-		level: "dependency-list-level",
+		levelDirection: "dependency-list-level",
 		relationship: "dependency-list-relationship",
 	};
 
@@ -16,7 +16,7 @@ export default {
 			element,
 			getHrefWithKeysAndValues,
 			identifier,
-			level,
+			levelDirection,
 			relationship,
 		}) =>
 			createElement(
@@ -28,7 +28,7 @@ export default {
 							values:
 								{
 									identifier,
-									level,
+									levelDirection,
 									relationship,
 								},
 						}),
@@ -37,6 +37,7 @@ export default {
 			),
 	createWithDependencyList:
 		({
+			areAncestorsIncluded,
 			createAncestorSeparatorElement,
 			createElement,
 			element,
@@ -46,6 +47,7 @@ export default {
 			stack,
 		}) =>
 			createWithDependencyList({
+				areAncestorsIncluded,
 				...locationHash.getValuesOfKeys(keys),
 				closeHref:
 					locationHash.getWithoutKeys(keys),

@@ -29,7 +29,7 @@ function withAreIncluded(
 				"label",
 				{ htmlFor: inputIdentifier },
 				createInput(),
-				"ancestor dependencies",
+				"show outer dependencies",
 			)
 		);
 

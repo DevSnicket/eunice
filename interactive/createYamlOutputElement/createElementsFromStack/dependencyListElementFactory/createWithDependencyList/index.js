@@ -1,23 +1,20 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import {
-	findItemInStackWithIdentifierHierarchy,
-	isInnerStack,
-} from "@devsnicket/eunice-dependency-and-structure";
-
+import createIsDependencyOfItemRelevant from "./createIsDependencyOfItemRelevant";
 import createListElement from "./createListElement";
 import { createResizableContainer } from "@devsnicket/eunice-test-harnesses";
 import createSubset from "./createSubset";
-import isDependencyRelevant from "./isDependencyRelevant";
+import { findItemInStackWithIdentifierHierarchy } from "@devsnicket/eunice-dependency-and-structure";
 
 export default ({
+	areAncestorsIncluded,
 	closeHref,
 	createAncestorSeparatorElement,
 	createElement,
 	element,
 	getHrefWithIdentifierHierarchy,
 	identifier,
-	level,
+	levelDirection,
 	locationHash,
 	resizableElementTypes,
 	relationship,
@@ -31,7 +28,7 @@ export default ({
 
 	function createListInContainerWhenAny() {
 		return (
-			level
+			levelDirection
 			&&
 			relationship
 			&&
@@ -43,9 +40,15 @@ export default ({
 					getHrefWithIdentifierHierarchy,
 					relationship,
 					subset:
-						createSubsetOfItem(
-							findItemOrGetParent(),
-						),
+						createSubsetOfItem({
+							isDependencyOfItemRelevant:
+								createIsDependencyOfItemRelevant({
+									areAncestorsIncluded,
+									levelDirection,
+								}),
+							item:
+								findItemOrGetParent(),
+						}),
 				}),
 			)
 		);
@@ -70,18 +73,17 @@ export default ({
 		}
 	}
 
-	function createSubsetOfItem(
+	function createSubsetOfItem({
+		isDependencyOfItemRelevant,
 		item,
-	) {
+	}) {
 		return (
 			createSubset({
 				isDependencyRelevant:
 					dependency =>
-						isDependencyRelevant({
+						isDependencyOfItemRelevant({
 							dependency,
-							isInnerStack,
 							item,
-							levelDirection: level,
 						}),
 				item,
 				relationship,

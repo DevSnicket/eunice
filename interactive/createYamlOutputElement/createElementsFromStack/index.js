@@ -119,6 +119,8 @@ function createWithSubset({
 	) {
 		return (
 			dependencyListElementFactory.createWithDependencyList({
+				areAncestorsIncluded:
+					areDependenciesOfAncestorsIncludedSelection.areIncluded,
 				createAncestorSeparatorElement:
 					subsetSelection.createAncestorSeparatorElement,
 				createElement,
@@ -201,7 +203,8 @@ function createWithSubset({
 							item !== stack.parent
 							&&
 							item.id,
-						level,
+						levelDirection:
+							level,
 						relationship,
 					})
 				);

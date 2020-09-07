@@ -113,6 +113,7 @@ function withSubsetCriteriaOf({
 	function getDependUponItems({
 		direction,
 		itemOrFirstAncestorItem,
+		mutualStack,
 	}) {
 		return whenRelevant() || [];
 
@@ -122,7 +123,9 @@ function withSubsetCriteriaOf({
 				&&
 				isDependencyRelevant({
 					direction,
-					item: itemOrFirstAncestorItem,
+					item:
+						itemOrFirstAncestorItem,
+					mutualStack,
 				})
 				&&
 				itemOrFirstAncestorItem
