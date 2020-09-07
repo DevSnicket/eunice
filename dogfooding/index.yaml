@@ -1,4 +1,4 @@
-# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 7.16.0 on 2020-08-26T16:59:58.520Z
+# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 7.16.1 on 2020-09-07T11:35:32.300Z
 - - id: javascript
     type: directory
     items:
@@ -4295,14 +4295,17 @@
                                               items:
                                                 - - id: createListInContainerWhenAny
                                                     dependsUpon:
+                                                      - areAncestorsIncluded
                                                       - closeHref
                                                       - createAncestorSeparatorElement
                                                       - createElement
+                                                      - createIsDependencyOfItemRelevant
                                                       - createListElement
                                                       - createSubsetOfItem
                                                       - createVerticalResizeWithLowerElement
                                                       - findItemOrGetParent
                                                       - getHrefWithIdentifierHierarchy
+                                                      - levelDirection
                                                       - relationship
                                                 - - id: findItemOrGetParent
                                                     dependsUpon: whenIdentifierSpecified
@@ -4314,9 +4317,6 @@
                                                   - id: createSubsetOfItem
                                                     dependsUpon:
                                                       - createSubset
-                                                      - isDependencyRelevant
-                                                      - isInnerStack
-                                                      - level
                                                       - relationship
                                                   - id: createVerticalResizeWithLowerElement
                                                     dependsUpon:
@@ -4324,6 +4324,8 @@
                                                       - createResizableContainer
                                                       - locationHash
                                                       - resizableElementTypes
+                                                  - id: areAncestorsIncluded
+                                                    type: parameter
                                                   - id: closeHref
                                                     type: parameter
                                                   - id: createAncestorSeparatorElement
@@ -4332,7 +4334,7 @@
                                                     type: parameter
                                                   - id: getHrefWithIdentifierHierarchy
                                                     type: parameter
-                                                  - id: level
+                                                  - id: levelDirection
                                                     type: parameter
                                                   - id: locationHash
                                                     type: parameter
@@ -4342,16 +4344,11 @@
                                                     type: parameter
                                                   - id: stack
                                                     type: parameter
-                                          - - id: findItemInStackWithIdentifierHierarchy
+                                          - - id: createIsDependencyOfItemRelevant
                                               type: import
                                               dependsUpon:
-                                                id: dependency-and-structure
-                                                items: findItemInStackWithIdentifierHierarchy
-                                            - id: isInnerStack
-                                              type: import
-                                              dependsUpon:
-                                                id: dependency-and-structure
-                                                items: isInnerStack
+                                                id: createIsDependencyOfItemRelevant
+                                                items: index
                                             - id: createListElement
                                               type: import
                                               dependsUpon:
@@ -4367,11 +4364,11 @@
                                               dependsUpon:
                                                 id: createSubset
                                                 items: index
-                                            - id: isDependencyRelevant
+                                            - id: findItemInStackWithIdentifierHierarchy
                                               type: import
                                               dependsUpon:
-                                                id: isDependencyRelevant
-                                                items: index
+                                                id: dependency-and-structure
+                                                items: findItemInStackWithIdentifierHierarchy
                                     - - id: createListElement
                                         type: directory
                                         items:
@@ -4524,7 +4521,86 @@
                                                         - parent
                                                   - - id: parent
                                                       type: parameter
-                                    - - id: createSubset
+                                    - - id: createIsDependencyOfItemRelevant
+                                        type: directory
+                                        items:
+                                          - - id: index.test
+                                              type: file
+                                              dependsUpon:
+                                                - describe
+                                                - expect
+                                                - test
+                                                - id: createIsDependencyOfItemRelevant
+                                                  items: index
+                                              items:
+                                                - - dependsUpon:
+                                                      - createIsDependencyOfItemRelevant
+                                                      - createStackOfItem
+                                                      - expect
+                                                  - dependsUpon: test
+                                                    items:
+                                                      - - dependsUpon:
+                                                            - createIsDependencyOfItemRelevant
+                                                            - createStackOfItem
+                                                            - expect
+                                                            - levelDirection
+                                                      - - id: levelDirection
+                                                          type: variable
+                                                  - dependsUpon: test
+                                                    items:
+                                                      dependsUpon:
+                                                        - createIsDependencyOfItemRelevant
+                                                        - createStackOfItem
+                                                        - expect
+                                                - - id: createStackOfItem
+                                                    dependsUpon:
+                                                      - addDirectionAndMutualStackToDependenciesInStack
+                                                      - createStackFromYaml
+                                                - - id: addDirectionAndMutualStackToDependenciesInStack
+                                                    type: import
+                                                    dependsUpon:
+                                                      id: dependency-and-structure
+                                                      items: addDirectionAndMutualStackToDependenciesInStack
+                                                  - id: createStackFromYaml
+                                                    type: import
+                                                    dependsUpon:
+                                                      id: dependency-and-structure
+                                                      items: createStackFromYaml
+                                                  - id: createIsDependencyOfItemRelevant
+                                                    type: import
+                                                    dependsUpon:
+                                                      id: createIsDependencyOfItemRelevant
+                                                      items: index
+                                          - - id: index
+                                              type: file
+                                              items:
+                                                - - id: index
+                                                    type: export
+                                                    dependsUpon:
+                                                      - createIsDependencyRelevant
+                                                      - createIsStackRelevantFromAreAncestorsIncluded
+                                                - - id: createIsDependencyRelevant
+                                                    items:
+                                                      - - id: isDependencyOfItemRelevant
+                                                          dependsUpon: isStackRelevant
+                                                      - - id: isStackRelevant
+                                                          type: parameter
+                                          - - id: createIsStackRelevantFromAreAncestorsIncluded
+                                              type: file
+                                              items:
+                                                - - id: createIsStackRelevantFromAreAncestorsIncluded
+                                                    type: export
+                                                    dependsUpon: whenIncluded
+                                                    items: whenIncluded
+                                                  - id: isAncestorOrSame
+                                                    dependsUpon: isInnerStack
+                                                  - isSame
+                                                - - id: isInnerStack
+                                                    type: import
+                                                    dependsUpon:
+                                                      id: dependency-and-structure
+                                                      items: isInnerStack
+                                      - id: createSubset
                                         type: directory
                                         items:
                                           - - id: index.test
@@ -4617,64 +4693,15 @@
                                                                   - direction
                                                                   - isDependencyRelevant
                                                                   - itemOrFirstAncestorItem
+                                                                  - mutualStack
                                                             - - id: direction
                                                                 type: parameter
                                                               - id: itemOrFirstAncestorItem
                                                                 type: parameter
+                                                              - id: mutualStack
+                                                                type: parameter
                                                       - - id: isDependencyRelevant
                                                           type: parameter
-                                      - id: isDependencyRelevant
-                                        type: directory
-                                        items:
-                                          - - id: index.test
-                                              type: file
-                                              dependsUpon:
-                                                - describe
-                                                - expect
-                                                - test
-                                                - id: isDependencyRelevant
-                                                  items: index
-                                              items:
-                                                - - dependsUpon:
-                                                      - expect
-                                                      - isDependencyRelevant
-                                                  - dependsUpon:
-                                                      - describe
-                                                      - expect
-                                                      - isDependencyRelevant
-                                                      - test
-                                                    items:
-                                                      dependsUpon:
-                                                        - expect
-                                                        - isDependencyRelevant
-                                                        - test
-                                                      items:
-                                                        dependsUpon:
-                                                          - expect
-                                                          - isDependencyRelevant
-                                                - - id: isDependencyRelevant
-                                                    type: import
-                                                    dependsUpon:
-                                                      id: isDependencyRelevant
-                                                      items: index
-                                          - - id: index
-                                              type: file
-                                              items:
-                                                id: index
-                                                type: export
-                                                dependsUpon:
-                                                  - hasLevel
-                                                  - isChild
-                                                  - isLevelInDirection
-                                                  - isOuter
-                                                items:
-                                                  - - hasLevel
-                                                    - isChild
-                                                    - id: isOuter
-                                                      dependsUpon: isInnerStack
-                                                    - isLevelInDirection
-                                                  - - id: isInnerStack
-                                                      type: parameter
                                       - id: removeWhitespaceFromTestExpected
                                         type: file
                                         items:
