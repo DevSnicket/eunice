@@ -119,12 +119,14 @@
         <h2 id="stacks" style="margin-bottom: 0">stacks</h2>
         <div class="stacks-introduction">
             <div class="diagram-text">
-                <p>In Eunice, when it's intended that an item be dependent on another, the first item is placed above the second in a stack. When items are intended to be independent of each other, they can be placed at the same level in a stack.</p>
-                <p>The terminology "stack" is used as dependencies can only be uni-directional (in one direction). Eunice also identifies when there is a indirect bi-directional dependency (see diagram).</p>
+                <p>In Eunice, when it's intended that an item be dependent on another, the first item is placed above the second in a stack. When items are intended to be independent of each other, they can be placed in the same level.</p>
+                <p>The terminology "stack" is used, as having uni-directional dependencies (i.e. in one direction), means dependent items are placed on top of their dependencies. The lower an item is in a stack, the more dependent items its likely to have. Where an item is in the stack, has implications for concerns such as risk management and independent working.</p>
             </div>
             <div class="box diagram"><img alt="Diagrams of uni-directional, bi-directional, stack, independent, direct and indirect dependencies" src="./stacks.svg" style="max-width: 325px" /></div>
         </div>
-        <p style="margin-top: 0">Eunice is designed to be non-prescriptive so problem specific stacks can develop naturally and collaboratively. Stacks can also be used to represent more general architectures (e.g. as layers). Learning about such architectures can also be beneficial when defining problem specific Eunice stacks.</p>
+        <p style="margin-top: 0">Eunice also identifies when there is a indirect bi-directional/circular dependency (see diagram).</p>
+        <p>Complex systems will require multiple stacks (see <a href="#scopes-groups">scopes / groups</a>). Eunice is designed to be non-prescriptive so problem/domain specific stacks can develop naturally and collaboratively. Stacks can also be used to define technology/implementation based architectures (e.g. stacks levels used as layers).</p>
+        <p>For all dependencies to be uni-directional, some problems will require functionality lower in the stack to support <a href="https://en.wikipedia.org/wiki/Plug-in_(computing)" rel="noopener" target="_blank">plug-ins</a>, that can be implemented higher up in the stack. For example, by following the <a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle" rel="noopener" target="_blank">dependency inversion principle</a> from <a href="https://en.wikipedia.org/wiki/SOLID" rel="noopener" target="_blank">SOLID</a>.</p>
         <p>In some programming languages there are implied stacks, such as the order of functions in a file, or the order of files in a project.</p>
         <h2 id="scopes-groups" style="margin-bottom: 0">scopes / groups</h2>
         <div class="stacks-introduction">
@@ -134,10 +136,10 @@
             </div>
             <div class="box diagram"><img alt="Diagrams of how dependencies cross the boundaries of different scopes and groups" src="./groups.svg" style="max-width: 510.5px" /></div>
         </div>
-        <p style="margin-top: 0">Programming languages usually include ways of grouping code, such as the directories in a file system, namespaces, classes or nested functions. Groups such as these can be inferred and automatically represented in Eunice. Multiple repositories, packages, services and systems can also be represented as groups and analyzed as a together.</p>
+        <p style="margin-top: 0">Programming languages usually include ways of grouping code, such as the directories in a file system, namespaces, classes or nested functions. Groups such as these can be inferred and automatically represented in Eunice. Multiple repositories, packages, services and systems can also be represented as groups and analyzed as a whole.</p>
         <h1 id="dependencies">dependencies</h1>
         <h2 id="arrows">arrows</h2>
-        <p>Instead of showing dependencies as lines between items each dependency is counted into the following categories:</p>
+        <p>Instead of showing dependencies as lines between items, each dependency is counted into the following categories:</p>
         <div class="box horizontal-container" style="align-items: center; width: fit-content">
             <div class="arrows-with-descriptions"></div>
             <div>
