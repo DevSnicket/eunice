@@ -4,11 +4,11 @@ export default
 // x and y are attribute names in SVG
 /* eslint id-length: ["error", { "exceptions": ["x", "y"] }] */
 ({
+	arrowSize,
 	arrows,
 	createElement,
-	height = null,
+	orientation,
 	spacing,
-	width,
 }) => {
 	return (
 		[ arrows.down, arrows.up, arrows.right ]
@@ -19,8 +19,10 @@ export default
 					getArrowSymbols(),
 				size:
 					{
-						height,
-						width: 0,
+						[orientation.size.auto]:
+							arrowSize[orientation.size.auto],
+						[orientation.size.grow]:
+							0,
 					},
 			},
 		)
@@ -55,14 +57,17 @@ export default
 					"use",
 					{
 						height:
-							height || arrow.height,
+							arrowSize.height || arrow.height,
 						href:
 							`#${arrow.id}`,
 						key:
 							arrow.id,
-						width,
-						x:
-							aggregation.size.width,
+						width:
+							arrowSize.width,
+						// dimension can be either x or y
+						// eslint-disable-next-line sort-keys
+						[orientation.dimension.grow]:
+							aggregation.size[orientation.size.grow],
 					},
 				)
 			);
@@ -71,17 +76,17 @@ export default
 		function calculateSize() {
 			return (
 				{
-					height:
-						height
+					[orientation.size.auto]:
+						arrowSize[orientation.size.auto]
 						||
 						Math.max(
-							aggregation.size.height,
-							arrow.height,
+							aggregation.size[orientation.size.auto],
+							arrow[orientation.size.auto],
 						),
-					width:
-						aggregation.size.width
+					[orientation.size.grow]:
+						aggregation.size[orientation.size.grow]
 						+
-						width
+						arrowSize[orientation.size.grow]
 						+
 						spacing,
 				}
