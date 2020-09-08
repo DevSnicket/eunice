@@ -1,7 +1,5 @@
 // Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
-import "core-js/features/array/flat-map";
-
 import createArrows from "../..";
 import { createElement } from "react";
 import createSvgElement from "../createSvgElement";
@@ -26,39 +24,13 @@ const testCases =
 		} ],
 	];
 
-const
-	horizontal = {
-		dimension: {
-			auto: "y",
-			grow: "x",
-		},
-		size: {
-			auto: "height",
-			grow: "width",
-		},
-	},
-	vertical = {
-		dimension: {
-			auto: "x",
-			grow: "y",
-		},
-		size: {
-			auto: "width",
-			grow: "height",
-		},
-	};
-
 test.each(testCases)(
 	"colors %j, default height and width of 24",
-	({ colors, directory }) => {
+	({ colors, directory }) =>
 		expectRenderedToBe({
 			directory,
 			file: "default-height",
 			...createSymbolAndUseElementsAndGetSize({
-				arrowSize: {
-					height: null,
-					width: 24,
-				},
 				arrows:
 					createArrows({
 						colors,
@@ -66,41 +38,26 @@ test.each(testCases)(
 						withPrecision,
 					}),
 				createElement,
-				orientation:
-					horizontal,
 				spacing:
 					4,
+				width:
+					24,
 			}),
-		});
-	},
+		}),
 );
 
-test.each(
-	getWithDescriptionTestCases(),
-)(
+test.each(testCases)(
 	"colors %j with descriptions",
-	async({
-		// @ts-ignore
-		colors,
-		directory,
-		fileNameSuffix,
-		orientation,
-	}) => {
+	async({ colors, directory }) => {
 		const
-			arrowSize = {
-				height: 120,
-				width: 120,
-			},
-			center =
-				60,
-			spacing =
-				10;
+			height = 120,
+			spacing = 10,
+			width = 120;
 
 		const
 			{ elements, size }
 			=
 			createSymbolAndUseElementsAndGetSize({
-				arrowSize,
 				arrows:
 					createArrows({
 						colors,
@@ -108,8 +65,9 @@ test.each(
 						withPrecision,
 					}),
 				createElement,
-				orientation,
+				height,
 				spacing,
+				width,
 			});
 
 		await expectRenderedToBe({
@@ -129,13 +87,17 @@ test.each(
 					...createDescriptionTexts(),
 				],
 			file:
-				`with-descriptions${fileNameSuffix}`,
+				"with-descriptions",
 			size,
 		});
 
 		// dy, x and y are attribute names in SVG
 		/* eslint id-length: ["error", { "exceptions": ["dy", "x", "y"] }] */
 		function createDescriptionTexts() {
+			const
+				center = width / 2,
+				middle = height / 2;
+
 			return (
 				[
 					[ "matches", "stack" ],
@@ -144,52 +106,44 @@ test.each(
 				]
 				.map(
 					(textLines, index) =>
-						// @ts-ignore
 						createText({
 							textLines,
-							[orientation.dimension.grow]:
-								getOffsetFromIndex(index),
-							[orientation.dimension.auto]:
-								center,
+							x: getXFromIndex(index),
 						}),
 				)
 			);
 
-			function getOffsetFromIndex(
-				index,
-			) {
-				return (
-					center
-					+
-					(index * (arrowSize[orientation.size.grow] + spacing))
-				);
-			}
-
 			function createText({
 				textLines,
 				x,
-				y,
 			}) {
 				return (
 					createElement(
 						"text",
 						{
-							dy:
-								"-0.35em",
-							key:
-								textLines.join("\n"),
-							y,
+							dy: "-0.35em",
+							key: textLines.join("\n"),
+							y: middle,
 						},
 						textLines.map(
 							(text, index) =>
 								createTspan({
-									isNotFirst:
-										index,
+									isNotFirst: index,
 									text,
 									x,
 								}),
 						),
 					)
+				);
+			}
+
+			function getXFromIndex(
+				index,
+			) {
+				return (
+					center
+					+
+					(index * (width + spacing))
 				);
 			}
 
@@ -203,10 +157,7 @@ test.each(
 						"tspan",
 						{
 							...isNotFirst && { dy: "1.2em" },
-							key:
-								text,
-							// dimension can be either x or y
-							// eslint-disable-next-line sort-keys
+							key: text,
 							x,
 						},
 						text,
@@ -216,35 +167,6 @@ test.each(
 		}
 	},
 );
-
-function getWithDescriptionTestCases() {
-	return (
-		testCases
-		.flatMap(
-			testCase =>
-				[
-					{
-						fileNameSuffix:
-							"",
-						orientation:
-							horizontal,
-					},
-					{
-						fileNameSuffix:
-							"-vertical",
-						orientation:
-							vertical,
-					},
-				]
-				.map(
-					orientation => [ {
-						...testCase[0],
-						...orientation,
-					} ],
-				),
-		)
-	);
-}
 
 async function expectRenderedToBe({
 	directory,
