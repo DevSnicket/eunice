@@ -6,7 +6,7 @@
 	"bugs": {
 		"url": "https://github.com/DevSnicket/eunice/issues"
 	},
-	"description": "Eunice is based on the premise that software structure and modularity improve when dependencies are unidirectional. Eunice analyses source code, infers its structure and shows if the dependencies match.",
+	"description": "Eunice improves cohesion and modularity in software through hierarchical structure and simplified unidirectional dependencies. Eunice analyses source code, infers its structure and shows if the dependencies match.",
 	"devDependencies": {
 		"@babel/core": "^7.10.5",
 		"@babel/node": "^7.10.5",
@@ -125,5 +125,5 @@
 		"test": "jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "7.16.1"
+	"version": "7.17.0"
 }
