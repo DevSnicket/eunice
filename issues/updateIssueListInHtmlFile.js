@@ -5,15 +5,17 @@ import updateInHtmlFile from "../updateInHtmlFile.js";
 
 (async () => {
 	await updateInHtmlFile({
-		content:
-			formatHtmlForIssues(
-				await githubNodejsJsonRequest(
-					githubIssuesUrl,
-				)
-			),
 		filePath:
 			"./index.html",
-		tag:
-			"issuesList",
+		replacements: [ {
+			content:
+				formatHtmlForIssues(
+					await githubNodejsJsonRequest(
+						githubIssuesUrl,
+					)
+				),
+			tag:
+				"issuesList",
+		} ]
 	});
 })();

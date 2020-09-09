@@ -28,8 +28,8 @@
 			"type": "node"
 		},
 		{
-			"name": "updateMenus",
-			"program": "updateMenus.js",
+			"name": "updateMenusAndFooter",
+			"program": "updateMenusAndFooter/index.js",
 			"request": "launch",
 			"runtimeArgs": [ "--experimental-modules" ],
 			"type": "node"

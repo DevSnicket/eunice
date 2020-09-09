@@ -10,26 +10,16 @@ const
 		};
 
 export default async ({
-	content,
 	filePath,
-	tag,
+	replacements,
 }) => {
 	await writeTextFile(
 		filePath,
-		updateHtml(await readTextFile(filePath)),
+		updateHtml({
+			html: await readTextFile(filePath),
+			replacements,
+		}),
 	);
-
-	function updateHtml(
-		html,
-	) {
-		return (
-			html
-			.replace(
-				new RegExp(`(?<=<${tag}.*>).*(?=<\/${tag}>)`),
-				content,
-			)
-		);
-	}
 }
 
 function readTextFile(
@@ -39,6 +29,32 @@ function readTextFile(
 		fileSystem.readFile(
 			filePath,
 			encoding,
+		)
+	);
+}
+
+function updateHtml({
+	html,
+	replacements,
+}) {
+	return (
+		replacements
+		.reduce(
+			applyReplacementToHtml,
+			html,
+		)
+	);
+}
+
+function applyReplacementToHtml(
+	html,
+	{ content, tag },
+) {
+	return (
+		html
+		.replace(
+			new RegExp(`(?<=<${tag}.*>).*(?=<\/${tag}>)`),
+			content,
 		)
 	);
 }

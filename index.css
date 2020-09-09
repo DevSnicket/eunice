@@ -81,15 +81,15 @@ body > .footer {
     margin-bottom: 1em;
 }
 
-body > .footer > .links {
+body > .footer .links {
     font-size: 1.25em;
 }
 
-body > .footer > .links > * {
+body > .footer .links > * {
     margin: 0 0.8em;
 }
 
-body > .footer > .links > .email::before {
+body > .footer .links > .email::before {
     color: white;
     content: "@";
     display: inline-block;
@@ -97,18 +97,18 @@ body > .footer > .links > .email::before {
     padding-right: 6px;
 }
 
-body > .footer > .links > .github,
-body > .footer > .links > .twitter {
+body > .footer .links > .github,
+body > .footer .links > .twitter {
     background-repeat: no-repeat;
     background-position: left center;
     padding-left: 22px;
 }
 
-body > .footer > .links > .github {
+body > .footer .links > .github {
     background-image: url('./icons/github-small-dark.png');
 }
 
-body > .footer > .links > .twitter {
+body > .footer .links > .twitter {
     background-image: url('./icons/twitter-small.png');
 }
 
@@ -291,7 +291,7 @@ ul li {
         list-style-image: url(./arrows/down-10x10-d0l.svg);
     }
     
-    body > .footer > .links > .github {
+    body > .footer .links > .github {
         background-image: url('./icons/github-small-light.png');
     }
 

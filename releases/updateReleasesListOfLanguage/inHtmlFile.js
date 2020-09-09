@@ -6,13 +6,15 @@ export default async (
 	language
 ) =>
 	await updateInHtmlFile({
-		content:
-			await requestAndFormatHtmlForReleasesList({
-				language,
-				requestJsonFromUrl: githubNodejsJsonRequest,
-			}),
 		filePath:
 			"./index.html",
-		tag:
-			"releasesList",
+		replacements: [ {
+			content:
+				await requestAndFormatHtmlForReleasesList({
+					language,
+					requestJsonFromUrl: githubNodejsJsonRequest,
+				}),
+			tag:
+				"releasesList",
+		} ],
 	});
