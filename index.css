@@ -98,6 +98,7 @@ body .footer .links > .email::before {
 }
 
 body .footer .links > .github,
+body .footer .links > .patreon,
 body .footer .links > .twitter {
 	background-repeat: no-repeat;
 	background-position: left center;
@@ -109,7 +110,7 @@ body .footer .links > .github {
 }
 
 body .footer .links > .patreon {
-	background-image: url('./licensing/patreon-wordmark-white.svg');
+	background-image: url('./icons/patreon-small.png');
 }
 
 body .footer .links > .twitter {
