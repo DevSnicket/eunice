@@ -90,7 +90,7 @@ body .footer .links > * {
 }
 
 body .footer .links > .email::before {
-	color: white;
+	color: black;
 	content: "@";
 	display: inline-block;
 	font-size: 14px;
@@ -295,7 +295,11 @@ ul li {
 	.box ul li {
 		list-style-image: url(./arrows/down-10x10-d0l.svg);
 	}
-	
+
+	body .footer .links > .email::before {
+		color: white;
+	}
+
 	body .footer .links > .github {
 		background-image: url('./icons/github-small-light.png');
 	}
