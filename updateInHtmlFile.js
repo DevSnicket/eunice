@@ -53,7 +53,7 @@ function applyReplacementToHtml(
 	return (
 		html
 		.replace(
-			new RegExp(`(?<=<${tag}.*>).*(?=<\/${tag}>)`),
+			new RegExp(`(?<=<${tag}.*>)(.|\n)*(?=<\/${tag}>)`),
 			content,
 		)
 	);
