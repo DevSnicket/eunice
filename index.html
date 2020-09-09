@@ -1,207 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="favicon.ico" rel="icon" type="image/x-icon" />
-    <link href="index.css" rel="stylesheet" />
-    <link href="terminal/index.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        .box {
-            height: min-content;
-        }
+	<link href="favicon.ico" rel="icon" type="image/x-icon" />
+	<link href="index.css" rel="stylesheet" />
+	<link href="terminal/index.css" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		.box {
+			height: min-content;
+		}
 
-        .box .horizontal-container>* {
-            margin: 0 0.5em;
-        }
+		.box .horizontal-container>* {
+			margin: 0 0.5em;
+		}
 
-        .content > p {
-            font-size: 1.17em;
-        }
+		.content > p {
+			font-size: 1.17em;
+		}
 
-        .headlines .box {
-            width: fit-content;
-        }
+		.headlines .box {
+			width: fit-content;
+		}
 
-        .headlines {
-            display: flex;
-            font-size: 1.17em;
-            flex-wrap: wrap;
-            justify-content: center;
-            text-align: center;
-        }
+		.headlines {
+			display: flex;
+			font-size: 1.17em;
+			flex-wrap: wrap;
+			justify-content: center;
+			text-align: center;
+		}
 
-        .headlines .emoji {
-            font-size: 1.5em;
-        }
+		.headlines .emoji {
+			font-size: 1.5em;
+		}
 
-        .language {
-            text-decoration: none;
-        }
+		.language {
+			text-decoration: none;
+		}
 
-        .language .box {
-            align-items: center;
-            display:flex;
-            flex-wrap: wrap;
-            text-align: center;
-        }
+		.language .box {
+			align-items: center;
+			display:flex;
+			flex-wrap: wrap;
+			text-align: center;
+		}
 
-        .logo {
-            align-items: center;
-            margin: 0 auto;
-            text-align: center;
-            width: fit-content;
-        }
+		.logo {
+			align-items: center;
+			margin: 0 auto;
+			text-align: center;
+			width: fit-content;
+		}
 
-        .logo .arrows {
-            background-image: url(./arrows/default-height.svg);
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: contain;
-            height: 4.5em;
-        }
+		.logo .arrows {
+			background-image: url(./arrows/default-height.svg);
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: contain;
+			height: 4.5em;
+		}
 
-        .javascript-related-logos {
-            display: flex;
-            flex: 1;
-            flex-basis: 0;
-            flex-wrap: wrap;
-        }
+		.javascript-related-logos {
+			display: flex;
+			flex: 1;
+			flex-basis: 0;
+			flex-wrap: wrap;
+		}
 
-        .javascript-related-logos img {
-            height: 3em;
-            margin: 1em;
-            min-width: 3em;
-        }
+		.javascript-related-logos img {
+			height: 3em;
+			margin: 1em;
+			min-width: 3em;
+		}
 
-        @media (prefers-color-scheme: dark) {
-            .logo .arrows {
-                background-image: url(./arrows/dark/default-height.svg);
-            }
-        }
-    </style>
-    <title>Eunice</title>
+		@media (prefers-color-scheme: dark) {
+			.logo .arrows {
+				background-image: url(./arrows/dark/default-height.svg);
+			}
+		}
+	</style>
+	<title>Eunice</title>
 </head>
 <body>
-    <div class="header">
-        <div class="content">
-            <menu><a class="current" href=".">intro</a><a href="./how-it-works">how it works</a><a href="./case-studies">case studies</a><a href="./languages">languages</a><a href="./issues">issues</a><a href="./licensing">sponsor</a></menu>
-        </div>
-    </div>
-    <div class="content">
-        <div class="logo horizontal-center horizontal-container">
-            <div>
-                <h1 style="font-size: 6em; line-height: 0.8em; margin: 0 0 0.5rem"><span class="red">e</span>uni<span class="red">ce</span></h1>
-                <div class="arrows"></div>
-            </div>
-            <h2 style="font-size: 2.5em"><div>structure</div><div>dependencies</div><div>modularity</div></h2>
-        </div>
-        <p>Eunice is based on the premise that software structure and modularity improve when dependencies are unidirectional.</p>
-        <p>Eunice analyses source code, infers its structure and shows if the dependencies match.</p>
-        <p>Take control of spaghetti code and your big ball of mud. Understand the impact of change and release with more confidence. Have an aspect of your architecture that everyone can see and that isn't out of date.</p>
-        <div class="headlines">
-            <div class="box">
-                <div class="horizontal-container">
-                    <div><div class="emoji">🔬🔭</div><div>analyse as-is</div></div>
-                    <div><div class="emoji">📏✏️</div><div>model to-be</div></div>
-                </div>
-                <div style="white-space: nowrap">
-                    <div class="emoji">📊</div>
-                    <div>measure how close</div><div>the two are</div>
-                </div>
-            </div>
-            <div class="box">
-                <div>works across:</div>
-                <div class="horizontal-container">
-                    <div>
-                        <div class="emoji">🐁</div>
-                        <div>small</div>
-                        <div class="detail"><div>functions</div><div>classes</div></div>
-                    </div>
-                    <div>
-                        <div class="emoji">🐈🐘</div>
-                        <div>larger</div>
-                        <div class="detail"><div>services</div><div>systems</div></div>
-                    </div>
-                </div>
-                <div>
-                    <div>different:</div>
-                    <div class="horizontal-container">
-                        <div><div class="emoji">🗨</div><div>languages</div></div>
-                        <div><div class="emoji">🏗</div><div>frameworks</div></div>
-                    </div>
-                </div>
-            </div>
-            <div class="box">
-                <div><div class="emoji">🔗</div><div>collaborative</div><div class="detail">collectively define. share progress</div></div>
-                <div><div class="emoji">🧠</div><div>non-prescriptive</div><div class="detail">problem specific</div></div>
-                <div><div class="emoji">🎆</div><div>dynamic</div><div class="detail">live and applied</div></div>
-            </div>
-        </div>
-        <p>Find out more about how Eunice works regarding <a href="./how-it-works#structure">structure</a> and <a href="./how-it-works#dependencies">dependencies</a>, or read a <a href="./case-studies">case study</a>.</p>
-        <div class="box horizontal-container" id="dogfooding" style="text-align: center">
-            <div>
-                <a href="dogfooding" style="font-size: 1.17em" target="_blank">
-                    <p>try</p>
-                    <p>Eunice on Eunice</p>
-                </a>
-                <div class="emoji" style="font-size: 4rem; text-decoration: none">🐶🥫</div>
-                <a class="detail" href="https://en.wikipedia.org/wiki/Eating_your_own_dog_food" rel="noopener" target="_blank">dogfooding</a>
-            </div>
-            <a href="dogfooding" style="background: white; flex-grow: 1; padding: 0.5em;" target="_blank">
-                <img alt="Eunice visualization of Eunice's own structure and dependencies" src="./dogfooding/index.svg" style="width: 100%" />
-            </a>
-        </div>
-        <p>See results and explorer your code in minutes:</p>
-        <a class="language" id="csharp" href="./csharp">
-            <div class="box">
-                <img alt="c# logo" src="./csharp/logo.svg" style="width: 10em" />
-                <div style="margin: 0">
-                    <div class="terminal">
-                        <div class="title-bar">terminal</div>
-                        <div class="text">
-                            ~/my-source-code<br/>
-                            $ dotnet tool install --global eunice<br/>
-                            <br/>
-                            ~/my-source-code<br/>
-                            $ eunice MySolution.sln
-                        </div>
-                    </div>
-                </div>
-                <div style="flex-basis: 0; flex-grow: 1">
-                    creates a eunice.html file from a C# solution or project
-                </div>
-            </div>
-        </a>
-        <a class="language" id="javascript" href="./javascript">
-            <div class="box">
-                <img alt="JavaScript logo" src="./javascript/logo.svg" style="width: 10em" />
-                <div class="javascript-related-logos">
-                    <img alt="Node.js" src="./nodejs.svg" /><img alt="TypeScript" src="./typescript.svg" /><img alt="React" src="./react.svg" /><img alt="Flow" src="./flow.svg" />
-                </div>
-                <div style="margin: 0">
-                    <div class="terminal">
-                        <div class="title-bar">terminal</div>
-                        <div class="text">~/my-source-code<br/>$ npx eunice</div>
-                    </div>
-                </div>
-                <div style="flex-basis: 0; flex-grow: 1">
-                    creates a eunice.html file from a JavaScript source code directory
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="footer">
-        <footer>
-            <p class="links">
-                <a class="email" href="mailto:eunice@devsnicket.com">eunice@devsnicket.com</a>
-                <a class="twitter" href="https://twitter.com/devsnicket" rel="noopener" target="_blank">twitter.com/devsnicket</a>
-                <a class="github" href="https://github.com/DevSnicket" rel="noopener" target="_blank">github.com/DevSnicket</a>
-            </p>
-            <p>Copyright © 2019 Graham Dyson</p>
-        </footer>
-    </div>
-    <!--Start of Tawk.to Script--><script type="text/javascript">var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();(function(){var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];s1.async=true;s1.src='https://embed.tawk.to/5f3bf3ccb7f44f406e95c17a/default';s1.charset='UTF-8';s1.setAttribute('crossorigin','*');s0.parentNode.insertBefore(s1,s0);})();</script><!--End of Tawk.to Script-->
+	<div class="header">
+		<div class="content">
+			<menu><a class="current" href=".">intro</a><a href="./how-it-works">how it works</a><a href="./case-studies">case studies</a><a href="./languages">languages</a><a href="./issues">issues</a><a href="./licensing">sponsor</a></menu>
+		</div>
+	</div>
+	<div class="content">
+		<div class="logo horizontal-center horizontal-container">
+			<div>
+				<h1 style="font-size: 6em; line-height: 0.8em; margin: 0 0 0.5rem"><span class="red">e</span>uni<span class="red">ce</span></h1>
+				<div class="arrows"></div>
+			</div>
+			<h2 style="font-size: 2.5em"><div>structure</div><div>dependencies</div><div>modularity</div></h2>
+		</div>
+		<p>Eunice is based on the premise that software structure and modularity improve when dependencies are unidirectional.</p>
+		<p>Eunice analyses source code, infers its structure and shows if the dependencies match.</p>
+		<p>Take control of spaghetti code and your big ball of mud. Understand the impact of change and release with more confidence. Have an aspect of your architecture that everyone can see and that isn't out of date.</p>
+		<div class="headlines">
+			<div class="box">
+				<div class="horizontal-container">
+					<div><div class="emoji">🔬🔭</div><div>analyse as-is</div></div>
+					<div><div class="emoji">📏✏️</div><div>model to-be</div></div>
+				</div>
+				<div style="white-space: nowrap">
+					<div class="emoji">📊</div>
+					<div>measure how close</div><div>the two are</div>
+				</div>
+			</div>
+			<div class="box">
+				<div>works across:</div>
+				<div class="horizontal-container">
+					<div>
+						<div class="emoji">🐁</div>
+						<div>small</div>
+						<div class="detail"><div>functions</div><div>classes</div></div>
+					</div>
+					<div>
+						<div class="emoji">🐈🐘</div>
+						<div>larger</div>
+						<div class="detail"><div>services</div><div>systems</div></div>
+					</div>
+				</div>
+				<div>
+					<div>different:</div>
+					<div class="horizontal-container">
+						<div><div class="emoji">🗨</div><div>languages</div></div>
+						<div><div class="emoji">🏗</div><div>frameworks</div></div>
+					</div>
+				</div>
+			</div>
+			<div class="box">
+				<div><div class="emoji">🔗</div><div>collaborative</div><div class="detail">collectively define. share progress</div></div>
+				<div><div class="emoji">🧠</div><div>non-prescriptive</div><div class="detail">problem specific</div></div>
+				<div><div class="emoji">🎆</div><div>dynamic</div><div class="detail">live and applied</div></div>
+			</div>
+		</div>
+		<p>Find out more about how Eunice works regarding <a href="./how-it-works#structure">structure</a> and <a href="./how-it-works#dependencies">dependencies</a>, or read a <a href="./case-studies">case study</a>.</p>
+		<div class="box horizontal-container" id="dogfooding" style="text-align: center">
+			<div>
+				<a href="dogfooding" style="font-size: 1.17em" target="_blank">
+					<p>try</p>
+					<p>Eunice on Eunice</p>
+				</a>
+				<div class="emoji" style="font-size: 4rem; text-decoration: none">🐶🥫</div>
+				<a class="detail" href="https://en.wikipedia.org/wiki/Eating_your_own_dog_food" rel="noopener" target="_blank">dogfooding</a>
+			</div>
+			<a href="dogfooding" style="background: white; flex-grow: 1; padding: 0.5em;" target="_blank">
+				<img alt="Eunice visualization of Eunice's own structure and dependencies" src="./dogfooding/index.svg" style="width: 100%" />
+			</a>
+		</div>
+		<p>See results and explorer your code in minutes:</p>
+		<a class="language" id="csharp" href="./csharp">
+			<div class="box">
+				<img alt="c# logo" src="./csharp/logo.svg" style="width: 10em" />
+				<div style="margin: 0">
+					<div class="terminal">
+						<div class="title-bar">terminal</div>
+						<div class="text">
+							~/my-source-code<br/>
+							$ dotnet tool install --global eunice<br/>
+							<br/>
+							~/my-source-code<br/>
+							$ eunice MySolution.sln
+						</div>
+					</div>
+				</div>
+				<div style="flex-basis: 0; flex-grow: 1">
+					creates a eunice.html file from a C# solution or project
+				</div>
+			</div>
+		</a>
+		<a class="language" id="javascript" href="./javascript">
+			<div class="box">
+				<img alt="JavaScript logo" src="./javascript/logo.svg" style="width: 10em" />
+				<div class="javascript-related-logos">
+					<img alt="Node.js" src="./nodejs.svg" /><img alt="TypeScript" src="./typescript.svg" /><img alt="React" src="./react.svg" /><img alt="Flow" src="./flow.svg" />
+				</div>
+				<div style="margin: 0">
+					<div class="terminal">
+						<div class="title-bar">terminal</div>
+						<div class="text">~/my-source-code<br/>$ npx eunice</div>
+					</div>
+				</div>
+				<div style="flex-basis: 0; flex-grow: 1">
+					creates a eunice.html file from a JavaScript source code directory
+				</div>
+			</div>
+		</a>
+	</div>
+	<div class="footer">
+		<footer>
+			<p class="links">
+				<a class="email" href="mailto:eunice@devsnicket.com">eunice@devsnicket.com</a>
+				<a class="twitter" href="https://twitter.com/devsnicket" rel="noopener" target="_blank">twitter.com/devsnicket</a>
+				<a class="github" href="https://github.com/DevSnicket" rel="noopener" target="_blank">github.com/DevSnicket</a>
+			</p>
+			<p>Copyright © 2019 Graham Dyson</p>
+		</footer>
+	</div>
+	<!--Start of Tawk.to Script--><script type="text/javascript">var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();(function(){var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];s1.async=true;s1.src='https://embed.tawk.to/5f3bf3ccb7f44f406e95c17a/default';s1.charset='UTF-8';s1.setAttribute('crossorigin','*');s0.parentNode.insertBefore(s1,s0);})();</script><!--End of Tawk.to Script-->
 </body>
 </html>

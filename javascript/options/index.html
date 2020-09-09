@@ -1,153 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="../../favicon.ico" rel="icon" type="image/x-icon" />
-    <link href="../../index.css" rel="stylesheet" />
-    <link href="../../side-menu.css" rel="stylesheet" />
-    <link href="../../terminal/index.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Options | JavaScript | Eunice</title>
+	<link href="../../favicon.ico" rel="icon" type="image/x-icon" />
+	<link href="../../index.css" rel="stylesheet" />
+	<link href="../../side-menu.css" rel="stylesheet" />
+	<link href="../../terminal/index.css" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Options | JavaScript | Eunice</title>
 </head>
 <body>
-    <div class="header">
-        <div class="content">
-            <h1><a href="../.."><span><span class="red">e</span>uni<span class="red">ce</span></span><div class="arrows"></div></a></h1>
-            <menu><a href="../..">intro</a><a href="../../how-it-works">how it works</a><a href="../../case-studies">case studies</a><a class="current" href="../../languages">languages</a><a href="../../issues">issues</a><a href="../../licensing">sponsor</a></menu>
-        </div>
-    </div>
-    <div class="content">
-        <div class="side-menu">
-            <div class="side-menu"><a href="../../csharp">C#</a><a href="../../csharp/options">options</a><a href="../../csharp/releases">releases</a></div>
-            <div class="side-menu"><a href="..">JavaScript</a><h3>options</h3><a href="../releases">releases</a></div>
-        </div>
-        <div>
-            <div class="horizontal-menu">
-                <a href="#reverse-file-content">reverse files content</a>
-                <a href="#ignore-paths">ignore paths</a>
-                <a href="#babel-parser-plugins">Babel parser plugins</a>
-                <a href="#source-directories">source directories</a>
-                <a href="#file-extensions">file extensions</a>
-                <a href="#infer-stacks">infer stacks</a>
-                <a href="#stack-from-directory">stack from directory</a>
-                <a href="#modify-stacks">modify stacks</a>
-                <a href="#dependency-permeable">dependency permeable</a>
-                <a href="#root-item">root item</a>
-                <a href="#output-files">output files</a>
-                <a href="#npm-packages">NPM packages</a>
-            </div>
-            <div class="box" id="reverse-file-content">
-                <h3>reverse file content</h3>
-                <p>JavaScript files are expected to be ordered so that calls of a function are after the definition of that function. This is the reverse direction of how Eunice works, but seems to be most popular approach for JavaScript developers. This reversing of file content can be disabled:</p>
-                <code>npx eunice --reverseFileContent=false</code>
-            </div>
-            <div class="box" id="ignore-paths">
-                <h3>ignore paths</h3>
-                <p>Files and sub-directories with names that start with a "." or are named node_modules are ignored by default.</p>
-                <p>A regular expression can be specified to override the default:</p>
-                <code>npx eunice --ignore-path-pattern="(^|/)(\..*|node_modules)$"</code>
-                <p>The forward slash character is converted to an escaped backslash when backslash is the path segment separator.</p>
-            </div>
-            <div class="box" id="babel-parser-plugins">
-                <h3>Babel parser plugins</h3>
-                <p>All non-conflicting <a href="https://babeljs.io/docs/en/plugins" rel="noopener" target="_blank">Babel parser plugins</a> are enabled by default. Plugins such as Flow and TypeScript aren't enabled by default as they conflict with each other. To override:</p>
-                <code>npx eunice
+	<div class="header">
+		<div class="content">
+			<h1><a href="../.."><span><span class="red">e</span>uni<span class="red">ce</span></span><div class="arrows"></div></a></h1>
+			<menu><a href="../..">intro</a><a href="../../how-it-works">how it works</a><a href="../../case-studies">case studies</a><a class="current" href="../../languages">languages</a><a href="../../issues">issues</a><a href="../../licensing">sponsor</a></menu>
+		</div>
+	</div>
+	<div class="content">
+		<div class="side-menu">
+			<div class="side-menu"><a href="../../csharp">C#</a><a href="../../csharp/options">options</a><a href="../../csharp/releases">releases</a></div>
+			<div class="side-menu"><a href="..">JavaScript</a><h3>options</h3><a href="../releases">releases</a></div>
+		</div>
+		<div>
+			<div class="horizontal-menu">
+				<a href="#reverse-file-content">reverse files content</a>
+				<a href="#ignore-paths">ignore paths</a>
+				<a href="#babel-parser-plugins">Babel parser plugins</a>
+				<a href="#source-directories">source directories</a>
+				<a href="#file-extensions">file extensions</a>
+				<a href="#infer-stacks">infer stacks</a>
+				<a href="#stack-from-directory">stack from directory</a>
+				<a href="#modify-stacks">modify stacks</a>
+				<a href="#dependency-permeable">dependency permeable</a>
+				<a href="#root-item">root item</a>
+				<a href="#output-files">output files</a>
+				<a href="#npm-packages">NPM packages</a>
+			</div>
+			<div class="box" id="reverse-file-content">
+				<h3>reverse file content</h3>
+				<p>JavaScript files are expected to be ordered so that calls of a function are after the definition of that function. This is the reverse direction of how Eunice works, but seems to be most popular approach for JavaScript developers. This reversing of file content can be disabled:</p>
+				<code>npx eunice --reverseFileContent=false</code>
+			</div>
+			<div class="box" id="ignore-paths">
+				<h3>ignore paths</h3>
+				<p>Files and sub-directories with names that start with a "." or are named node_modules are ignored by default.</p>
+				<p>A regular expression can be specified to override the default:</p>
+				<code>npx eunice --ignore-path-pattern="(^|/)(\..*|node_modules)$"</code>
+				<p>The forward slash character is converted to an escaped backslash when backslash is the path segment separator.</p>
+			</div>
+			<div class="box" id="babel-parser-plugins">
+				<h3>Babel parser plugins</h3>
+				<p>All non-conflicting <a href="https://babeljs.io/docs/en/plugins" rel="noopener" target="_blank">Babel parser plugins</a> are enabled by default. Plugins such as Flow and TypeScript aren't enabled by default as they conflict with each other. To override:</p>
+				<code>npx eunice
   --babel-parser-plugins=flow
   --babel-parser-plugins=jsx</code>
-            </div>
-            <div class="box" id="source-directories">
-                <h3>source directories</h3>
-                <p>Only the current directory is included in analysis by default. Multiple sources of analysis can be specified:</p>
-                <code>npx eunice
+			</div>
+			<div class="box" id="source-directories">
+				<h3>source directories</h3>
+				<p>Only the current directory is included in analysis by default. Multiple sources of analysis can be specified:</p>
+				<code>npx eunice
   --directories=directory1
   --directories=directory2</code>
-            </div>
-            <div class="box" id="file-extensions">
-                <h3>file extensions</h3>
-                <p>By default files with the .js extension are analysed. The default can be replaced or amended (extensions must be prefixed with .):</p>
-                <code>npx eunice
+			</div>
+			<div class="box" id="file-extensions">
+				<h3>file extensions</h3>
+				<p>By default files with the .js extension are analysed. The default can be replaced or amended (extensions must be prefixed with .):</p>
+				<code>npx eunice
   --file-extensions=.ts</code>
-            </div>
-            <div class="box" id="infer-stacks">
-                <h3>infer stacks</h3>
-                <p>Eunice can infer stacks when none are implied or defined. By default this is disabled, but can be enabled with:</p>
-                <code>npx eunice
+			</div>
+			<div class="box" id="infer-stacks">
+				<h3>infer stacks</h3>
+				<p>Eunice can infer stacks when none are implied or defined. By default this is disabled, but can be enabled with:</p>
+				<code>npx eunice
   --infer-stacks</code>
-            </div>
-            <div class="box" id="stack-from-directory">
-                <h3>stack from directory</h3>
-                <p>When multiple sources of analysis are specified (see <a href="source-directories">source directories</a>), a directory of stack files (.eunice-stack.yaml) can be applied to the combined sources:</p>
-                <code>npx eunice
+			</div>
+			<div class="box" id="stack-from-directory">
+				<h3>stack from directory</h3>
+				<p>When multiple sources of analysis are specified (see <a href="source-directories">source directories</a>), a directory of stack files (.eunice-stack.yaml) can be applied to the combined sources:</p>
+				<code>npx eunice
   --directories=directory1
   --directories=directory2
   --directory-to-create-or-add-to-stacks-from=stacks-directory</code>
-            </div>
-            <div class="box" id="modify-stacks">
-                <h3>modify stacks</h3>
-                <p>A stack file can be specified that will be used to modify the structure of all stacks. It only modifies and does not add new items.</p>
-                <code>npx eunice
+			</div>
+			<div class="box" id="modify-stacks">
+				<h3>modify stacks</h3>
+				<p>A stack file can be specified that will be used to modify the structure of all stacks. It only modifies and does not add new items.</p>
+				<code>npx eunice
   --modify-stacks-file=stacks.yaml</code>
-                <p>Optionally a key and regular expression pattern can also be specified to restrict which items have their stacks modified. For example to only modify items that are in files:</p>
-                <code>npx eunice
+				<p>Optionally a key and regular expression pattern can also be specified to restrict which items have their stacks modified. For example to only modify items that are in files:</p>
+				<code>npx eunice
   --modify-stacks-file=stacks.yaml
   --modify-stacks-key=type
   --modify-stacks-pattern=^file$</code>
-            </div>
-            <div class="box" id="dependency-permeable">
-                <h3>dependency permeable</h3>
-                <p>Item identifiers can be specified so dependencies resolve to their children even though the items weren't specified in the dependency. For example, sub-directories such as, node_modules or src in a mono-repository.</p>
-                <code>npx eunice
+			</div>
+			<div class="box" id="dependency-permeable">
+				<h3>dependency permeable</h3>
+				<p>Item identifiers can be specified so dependencies resolve to their children even though the items weren't specified in the dependency. For example, sub-directories such as, node_modules or src in a mono-repository.</p>
+				<code>npx eunice
   --dependency-permeable-identifiers=node_modules</code>
-            </div>
-            <div class="box" id="root-item">
-                <h3>root item</h3>
-                <p>Identifiers for a parent root items can also be specified for each source directory (see <a href="source-directories">source directories</a>):</p>
-                <code>npx eunice
+			</div>
+			<div class="box" id="root-item">
+				<h3>root item</h3>
+				<p>Identifiers for a parent root items can also be specified for each source directory (see <a href="source-directories">source directories</a>):</p>
+				<code>npx eunice
   --directories=directory1
   --root-item-identifiers=prefixForDirectory1
   --directories=directory2
   --root-item-identifiers=prefixForDirectory2</code>
-            </div>
-            <div class="box" id="output-files">
-                <h3>output files</h3>
-                <p>For additional output files of SVG or YAML:</p>
-                <code>npx eunice
+			</div>
+			<div class="box" id="output-files">
+				<h3>output files</h3>
+				<p>For additional output files of SVG or YAML:</p>
+				<code>npx eunice
   --output-svg
   --output-yaml</code>
-                <p>To name the output files differently or in a different directory:</p>
-                <code>npx eunice
+				<p>To name the output files differently or in a different directory:</p>
+				<code>npx eunice
   --output-base-file-name=eunice-file
   --output-directory-path=eunice-directory</code>
-                <p>To disable the default output file of HTML:</p>
-                <code>npx eunice
+				<p>To disable the default output file of HTML:</p>
+				<code>npx eunice
   --output-html=false</code>
-            </div>
-            <div class="box" id="npm-packages">
-                <h3>NPM packages</h3>
-                <p>Packages installed in the node_modules directory are not analysed by default (see <a href="#ignore-paths">ignore paths</a>). They can included using the "directories" option above or with:</p>
-                <code>npx eunice
+			</div>
+			<div class="box" id="npm-packages">
+				<h3>NPM packages</h3>
+				<p>Packages installed in the node_modules directory are not analysed by default (see <a href="#ignore-paths">ignore paths</a>). They can included using the "directories" option above or with:</p>
+				<code>npx eunice
   --package-names=package1
   --package-names=package2</code>
-                <p>To aid readability a package prefix and scope can also be specified that will not be included in the output:</p>
-                <code>// e.g. @scope/prefix-package
+				<p>To aid readability a package prefix and scope can also be specified that will not be included in the output:</p>
+				<code>// e.g. @scope/prefix-package
 npx eunice
   --package-names=package
   --package-prefix=prefix-
   --package-scope=scope</code>
-            </div>
-        </div>
-    </div>
-    <div class="footer">
-        <footer>
-            <p class="links">
-                <a class="email" href="mailto:eunice@devsnicket.com">eunice@devsnicket.com</a>
-                <a class="twitter" href="https://twitter.com/devsnicket" rel="noopener" target="_blank">twitter.com/devsnicket</a>
-                <a class="github" href="https://github.com/DevSnicket" rel="noopener" target="_blank">github.com/DevSnicket</a>
-            </p>
-            <p>Copyright © 2019 Graham Dyson</p>
-        </footer>
-    </div>
-    <!--Start of Tawk.to Script--><script type="text/javascript">var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();(function(){var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];s1.async=true;s1.src='https://embed.tawk.to/5f3bf3ccb7f44f406e95c17a/default';s1.charset='UTF-8';s1.setAttribute('crossorigin','*');s0.parentNode.insertBefore(s1,s0);})();</script><!--End of Tawk.to Script-->
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<footer>
+			<p class="links">
+				<a class="email" href="mailto:eunice@devsnicket.com">eunice@devsnicket.com</a>
+				<a class="twitter" href="https://twitter.com/devsnicket" rel="noopener" target="_blank">twitter.com/devsnicket</a>
+				<a class="github" href="https://github.com/DevSnicket" rel="noopener" target="_blank">github.com/DevSnicket</a>
+			</p>
+			<p>Copyright © 2019 Graham Dyson</p>
+		</footer>
+	</div>
+	<!--Start of Tawk.to Script--><script type="text/javascript">var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();(function(){var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];s1.async=true;s1.src='https://embed.tawk.to/5f3bf3ccb7f44f406e95c17a/default';s1.charset='UTF-8';s1.setAttribute('crossorigin','*');s0.parentNode.insertBefore(s1,s0);})();</script><!--End of Tawk.to Script-->
 </body>
 </html>

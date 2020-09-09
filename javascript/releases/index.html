@@ -1,51 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="../../favicon.ico" rel="icon" type="image/x-icon" />
-    <link href="../../index.css" rel="stylesheet" />
-    <link href="../../side-menu.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        #releases-list .release {
-            align-items: center;
-            display: flex;
-        }
-        #releases-list .release :first-child {
-            flex: 1;
-        }
-    </style>
-    <title>Releases | JavaScript | Eunice</title>
+	<link href="../../favicon.ico" rel="icon" type="image/x-icon" />
+	<link href="../../index.css" rel="stylesheet" />
+	<link href="../../side-menu.css" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		#releases-list .release {
+			align-items: center;
+			display: flex;
+		}
+		#releases-list .release :first-child {
+			flex: 1;
+		}
+	</style>
+	<title>Releases | JavaScript | Eunice</title>
 </head>
 <body>
-    <div class="header">
-        <div class="content">
-            <h1><a href="../.."><span><span class="red">e</span>uni<span class="red">ce</span></span><div class="arrows"></div></a></h1>
-            <menu><a href="../..">intro</a><a href="../../how-it-works">how it works</a><a href="../../case-studies">case studies</a><a class="current" href="../../languages">languages</a><a href="../../issues">issues</a><a href="../../licensing">sponsor</a></menu>
-        </div>
-    </div>
-    <div class="content">
-        <div class="side-menu">
-            <div class="side-menu"><a href="../../csharp">C#</a><a href="../../csharp/options">options</a><a href="../../csharp/releases">releases</a></div>
-            <div class="side-menu"><a href="..">JavaScript</a><a href="../options">options</a><h3>releases</h3></div>
-        </div>
-        <div>
-            <div>Recent releases of Eunice's JavaScript <a href="https://www.npmjs.com/package/eunice" rel="noopener" target="_blank">NPM package</a> and the issues included are listed below.</div>
-            <releasesList id="releases-list"><div class="release"><h3 id="7.16.1">7.16.1</h3><span>2020-09-07</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/164" rel="noopener" target="_blank">dependency list doesn't use ancestor dependencies option</a></div><div class="release"><h3 id="7.16.0">7.16.0</h3><span>2020-08-22</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/155" rel="noopener" target="_blank">outer dependency counts for parent or all ancestor stacks</a></div><div class="release"><h3 id="7.15.0">7.15.0</h3><span>2020-08-20</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/157" rel="noopener" target="_blank">CLI output / YAML comment don't specify language</a></div><div class="release"><h3 id="7.14.0">7.14.0</h3><span>2020-08-19</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/156" rel="noopener" target="_blank">association between parent and its inner dependencies isn't clear when opening an item</a></div><div class="release"><h3 id="7.13.0">7.13.0</h3><span>2020-08-15</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/154" rel="noopener" target="_blank">dependencies can't be listed for the counts of a parent when viewing its child stack</a></div><div class="release"><h3 id="7.12.1">7.12.1</h3><span>2020-08-15</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/150" rel="noopener" target="_blank">dependency list link for items with no children</a></div><div class="release"><h3 id="7.12.0">7.12.0</h3><span>2020-08-11</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/153" rel="noopener" target="_blank">license terminology change from subscription to sponsorship</a></div><div class="release"><h3 id="7.11.1">7.11.1</h3><span>2020-08-04</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/151" rel="noopener" target="_blank">error in web page when empty yaml </a></div><div class="release"><h3 id="7.11.0">7.11.0</h3><span>2020-07-31</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/145" rel="noopener" target="_blank">initializing all dependency counts up front slows as hierarchies get deeper</a></div><div class="release"><h3 id="7.10.0">7.10.0</h3><span>2020-07-29</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/141" rel="noopener" target="_blank">stacks could also be inferred top down</a></div><div class="release"><h3 id="7.9.2">7.9.2</h3><span>2020-07-28</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/143" rel="noopener" target="_blank">SVG output of a single item "object Object"</a></div><div class="release"><h3 id="7.9.0">7.9.0</h3><span>2020-07-27</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/50" rel="noopener" target="_blank">item navigation unnecessarily re-counts dependencies</a></div><div class="release"><h3 id="7.8.0">7.8.0</h3><span>2020-07-22</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/142" rel="noopener" target="_blank">potentially redundant dependency initialization when inferring stacks</a></div><div class="release"><h3 id="7.6.1">7.6.1</h3><span>2020-04-17</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/124" rel="noopener" target="_blank">no option for scoped packages in a monorepo without scope directory </a></div><div class="release"><h3 id="7.5.2">7.5.2</h3><span>2020-04-14</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/123" rel="noopener" target="_blank">imports that extend classes are ignored</a></div><div><a href="https://github.com/DevSnicket/eunice/issues/122" rel="noopener" target="_blank">error in default sort when variable called from function arrow/expression before declaration</a></div><div class="release"><h3 id="7.5.0">7.5.0</h3><span>2020-04-06</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/120" rel="noopener" target="_blank">title "YAML" uses up space and isn't that relevant</a></div><div class="release"><h3 id="7.4.0">7.4.0</h3><span>2020-04-06</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/119" rel="noopener" target="_blank">index files aren't included for relative directory imports</a></div><div><a href="https://github.com/DevSnicket/eunice/issues/118" rel="noopener" target="_blank">top down file order does not move imports to the bottom</a></div><div><a href="https://github.com/DevSnicket/eunice/issues/117" rel="noopener" target="_blank">analysis of export all throws error when path is a directory</a></div><div class="release"><h3 id="7.3.0">7.3.0</h3><span>2020-02-07</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/116" rel="noopener" target="_blank">stack inference by default</a></div><div class="release"><h3 id="7.2.1">7.2.1</h3><span>2020-02-06</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/115" rel="noopener" target="_blank">default exports removal no longer working</a></div><div class="release"><h3 id="7.2.0">7.2.0</h3><span>2020-02-06</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/114" rel="noopener" target="_blank">module imports with bindings named after the file are unnecessary verbosity</a></div><div class="release"><h3 id="7.1.0">7.1.0</h3><span>2020-02-05</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/113" rel="noopener" target="_blank">self-dependent item support blocks same identifier dependencies</a></div><div><a href="https://github.com/DevSnicket/eunice/issues/100" rel="noopener" target="_blank">directories ordered with files</a></div><div class="release"><h3 id="7.0.2">7.0.2</h3><span>2020-01-14</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/112" rel="noopener" target="_blank">infer stacks doesn't recognize dependencies that go through an ancestor</a></div><div class="release"><h3 id="7.0.1">7.0.1</h3><span>2020-01-13</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/111" rel="noopener" target="_blank">infer stacks does not check descendants for depends upon in different levels</a></div><div class="release"><h3 id="7.0.0">7.0.0</h3><span>2020-01-13</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/110" rel="noopener" target="_blank">JavaScript is more often used with file content reversed</a></div><div class="release"><h3 id="6.37.0">6.37.0</h3><span>2020-01-13</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/109" rel="noopener" target="_blank">infer stacks</a></div><div class="release"><h3 id="6.28.2">6.28.2</h3><span>2019-12-04</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/99" rel="noopener" target="_blank">functions assigned to properties aren't recognized as parents</a></div></releasesList>
-            <script src="./updateReleasesListInBrowser.js" type="module"></script>
-        </div>
-    </div>
-    <div class="footer">
-        <footer>
-            <p class="links">
-                <a class="email" href="mailto:eunice@devsnicket.com">eunice@devsnicket.com</a>
-                <a class="twitter" href="https://twitter.com/devsnicket" rel="noopener" target="_blank">twitter.com/devsnicket</a>
-                <a class="github" href="https://github.com/DevSnicket" rel="noopener" target="_blank">github.com/DevSnicket</a>
-            </p>
-            <p>Copyright © 2019 Graham Dyson</p>
-        </footer>
-    </div>
-    <!--Start of Tawk.to Script--><script type="text/javascript">var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();(function(){var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];s1.async=true;s1.src='https://embed.tawk.to/5f3bf3ccb7f44f406e95c17a/default';s1.charset='UTF-8';s1.setAttribute('crossorigin','*');s0.parentNode.insertBefore(s1,s0);})();</script><!--End of Tawk.to Script-->
+	<div class="header">
+		<div class="content">
+			<h1><a href="../.."><span><span class="red">e</span>uni<span class="red">ce</span></span><div class="arrows"></div></a></h1>
+			<menu><a href="../..">intro</a><a href="../../how-it-works">how it works</a><a href="../../case-studies">case studies</a><a class="current" href="../../languages">languages</a><a href="../../issues">issues</a><a href="../../licensing">sponsor</a></menu>
+		</div>
+	</div>
+	<div class="content">
+		<div class="side-menu">
+			<div class="side-menu"><a href="../../csharp">C#</a><a href="../../csharp/options">options</a><a href="../../csharp/releases">releases</a></div>
+			<div class="side-menu"><a href="..">JavaScript</a><a href="../options">options</a><h3>releases</h3></div>
+		</div>
+		<div>
+			<div>Recent releases of Eunice's JavaScript <a href="https://www.npmjs.com/package/eunice" rel="noopener" target="_blank">NPM package</a> and the issues included are listed below.</div>
+			<releasesList id="releases-list"><div class="release"><h3 id="7.16.1">7.16.1</h3><span>2020-09-07</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/164" rel="noopener" target="_blank">dependency list doesn't use ancestor dependencies option</a></div><div class="release"><h3 id="7.16.0">7.16.0</h3><span>2020-08-22</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/155" rel="noopener" target="_blank">outer dependency counts for parent or all ancestor stacks</a></div><div class="release"><h3 id="7.15.0">7.15.0</h3><span>2020-08-20</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/157" rel="noopener" target="_blank">CLI output / YAML comment don't specify language</a></div><div class="release"><h3 id="7.14.0">7.14.0</h3><span>2020-08-19</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/156" rel="noopener" target="_blank">association between parent and its inner dependencies isn't clear when opening an item</a></div><div class="release"><h3 id="7.13.0">7.13.0</h3><span>2020-08-15</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/154" rel="noopener" target="_blank">dependencies can't be listed for the counts of a parent when viewing its child stack</a></div><div class="release"><h3 id="7.12.1">7.12.1</h3><span>2020-08-15</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/150" rel="noopener" target="_blank">dependency list link for items with no children</a></div><div class="release"><h3 id="7.12.0">7.12.0</h3><span>2020-08-11</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/153" rel="noopener" target="_blank">license terminology change from subscription to sponsorship</a></div><div class="release"><h3 id="7.11.1">7.11.1</h3><span>2020-08-04</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/151" rel="noopener" target="_blank">error in web page when empty yaml </a></div><div class="release"><h3 id="7.11.0">7.11.0</h3><span>2020-07-31</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/145" rel="noopener" target="_blank">initializing all dependency counts up front slows as hierarchies get deeper</a></div><div class="release"><h3 id="7.10.0">7.10.0</h3><span>2020-07-29</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/141" rel="noopener" target="_blank">stacks could also be inferred top down</a></div><div class="release"><h3 id="7.9.2">7.9.2</h3><span>2020-07-28</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/143" rel="noopener" target="_blank">SVG output of a single item "object Object"</a></div><div class="release"><h3 id="7.9.0">7.9.0</h3><span>2020-07-27</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/50" rel="noopener" target="_blank">item navigation unnecessarily re-counts dependencies</a></div><div class="release"><h3 id="7.8.0">7.8.0</h3><span>2020-07-22</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/142" rel="noopener" target="_blank">potentially redundant dependency initialization when inferring stacks</a></div><div class="release"><h3 id="7.6.1">7.6.1</h3><span>2020-04-17</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/124" rel="noopener" target="_blank">no option for scoped packages in a monorepo without scope directory </a></div><div class="release"><h3 id="7.5.2">7.5.2</h3><span>2020-04-14</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/123" rel="noopener" target="_blank">imports that extend classes are ignored</a></div><div><a href="https://github.com/DevSnicket/eunice/issues/122" rel="noopener" target="_blank">error in default sort when variable called from function arrow/expression before declaration</a></div><div class="release"><h3 id="7.5.0">7.5.0</h3><span>2020-04-06</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/120" rel="noopener" target="_blank">title "YAML" uses up space and isn't that relevant</a></div><div class="release"><h3 id="7.4.0">7.4.0</h3><span>2020-04-06</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/119" rel="noopener" target="_blank">index files aren't included for relative directory imports</a></div><div><a href="https://github.com/DevSnicket/eunice/issues/118" rel="noopener" target="_blank">top down file order does not move imports to the bottom</a></div><div><a href="https://github.com/DevSnicket/eunice/issues/117" rel="noopener" target="_blank">analysis of export all throws error when path is a directory</a></div><div class="release"><h3 id="7.3.0">7.3.0</h3><span>2020-02-07</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/116" rel="noopener" target="_blank">stack inference by default</a></div><div class="release"><h3 id="7.2.1">7.2.1</h3><span>2020-02-06</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/115" rel="noopener" target="_blank">default exports removal no longer working</a></div><div class="release"><h3 id="7.2.0">7.2.0</h3><span>2020-02-06</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/114" rel="noopener" target="_blank">module imports with bindings named after the file are unnecessary verbosity</a></div><div class="release"><h3 id="7.1.0">7.1.0</h3><span>2020-02-05</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/113" rel="noopener" target="_blank">self-dependent item support blocks same identifier dependencies</a></div><div><a href="https://github.com/DevSnicket/eunice/issues/100" rel="noopener" target="_blank">directories ordered with files</a></div><div class="release"><h3 id="7.0.2">7.0.2</h3><span>2020-01-14</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/112" rel="noopener" target="_blank">infer stacks doesn't recognize dependencies that go through an ancestor</a></div><div class="release"><h3 id="7.0.1">7.0.1</h3><span>2020-01-13</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/111" rel="noopener" target="_blank">infer stacks does not check descendants for depends upon in different levels</a></div><div class="release"><h3 id="7.0.0">7.0.0</h3><span>2020-01-13</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/110" rel="noopener" target="_blank">JavaScript is more often used with file content reversed</a></div><div class="release"><h3 id="6.37.0">6.37.0</h3><span>2020-01-13</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/109" rel="noopener" target="_blank">infer stacks</a></div><div class="release"><h3 id="6.28.2">6.28.2</h3><span>2019-12-04</span></div><div><a href="https://github.com/DevSnicket/eunice/issues/99" rel="noopener" target="_blank">functions assigned to properties aren't recognized as parents</a></div></releasesList>
+			<script src="./updateReleasesListInBrowser.js" type="module"></script>
+		</div>
+	</div>
+	<div class="footer">
+		<footer>
+			<p class="links">
+				<a class="email" href="mailto:eunice@devsnicket.com">eunice@devsnicket.com</a>
+				<a class="twitter" href="https://twitter.com/devsnicket" rel="noopener" target="_blank">twitter.com/devsnicket</a>
+				<a class="github" href="https://github.com/DevSnicket" rel="noopener" target="_blank">github.com/DevSnicket</a>
+			</p>
+			<p>Copyright © 2019 Graham Dyson</p>
+		</footer>
+	</div>
+	<!--Start of Tawk.to Script--><script type="text/javascript">var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();(function(){var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];s1.async=true;s1.src='https://embed.tawk.to/5f3bf3ccb7f44f406e95c17a/default';s1.charset='UTF-8';s1.setAttribute('crossorigin','*');s0.parentNode.insertBefore(s1,s0);})();</script><!--End of Tawk.to Script-->
 </body>
 </html>
