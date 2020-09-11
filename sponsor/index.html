@@ -3,51 +3,10 @@
 <head>
 	<link href="../favicon.ico" rel="icon" type="image/x-icon" />
 	<link href="../index.css" rel="stylesheet" />
+	<link href="./index.css" rel="stylesheet" />
 	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<style>
-		div.free-usage {
-			display: flex;
-			justify-content: center;
-		}
-		@media (max-width: 60em) {
-			div.free-usage {
-				flex-wrap: wrap;
-			}
-		}
-		div.free-usage .box {
-			padding: 1em;
-		}
-		div.free-usage h2 {
-			margin: 0 0 0.5em 0;
-			text-align: center;
-		}
-		.block-center {
-			display: block; 
-			margin-left: auto;
-			margin-right: auto;
-		}
-		.sponsor {
-			display: flex;
-		}
-		.sponsor .patreon {
-			background-color: #FF424D;
-			height: 2em;
-			padding: 2em;
-		}
-		@media (max-width: 40em) {
-			.sponsor {
-				flex-wrap: wrap;
-			}
-		}
-		.sponsor a {
-			text-decoration: none;
-		}
-		.sponsor .on-patreon {
-			text-align: center;
-		}
-	</style>
 	<title>Sponsor | Eunice</title>
 </head>
 <body>
@@ -58,34 +17,37 @@
 		</div>
 	</div>
 	<div class="content">
-		<div class="box sponsor">
-			<a href="https://www.patreon.com/devsnicket_eunice" rel="noopener" target="_blank"><div class="on-patreon"><h1>sponsor on</h1><img class="patreon" src="./patreon-wordmark-white.svg" /></div></a>
-			<div>
-				<p>use Eunice on commercial projects</p>
-				<p>guidance and technical support</p>
-				<p>prioritize - bugs, enhancements, language support</p>
-				<p>case studies of open source projects</p>
-				<p>your company logo and website link on the Eunice home page</p>
+		<!-- used to duplicate this content on the license page -->
+		<content>
+			<div class="box sponsor">
+				<a href="https://www.patreon.com/devsnicket_eunice" rel="noopener" target="_blank"><div class="on-patreon"><h1>sponsor on</h1><img class="patreon" src="./patreon-wordmark-white.svg" /></div></a>
+				<div>
+					<p>use Eunice on commercial projects</p>
+					<p>guidance and technical support</p>
+					<p>prioritize - bugs, enhancements, language support</p>
+					<p>case studies of open source projects</p>
+					<p>your company logo and website link on the Eunice home page</p>
+				</div>
 			</div>
-		</div>
-		<div class="free-usage">
-			<div class="box">
-				<h2>free for open source</h2>
-				<div><p>on projects that have an Open Source Initiative approved license</p><a href="https://opensource.org/licenses" rel="noopener" target="_blank">https://opensource.org/licenses</a><p style="font-size:small; font-style: italic">please consider supporting the project by sponsoring</p></div>
+			<div class="free-usage">
+				<div class="box">
+					<h2>free for open source</h2>
+					<div><p>on projects that have an Open Source Initiative approved license</p><a href="https://opensource.org/licenses" rel="noopener" target="_blank">https://opensource.org/licenses</a><p style="font-size:small; font-style: italic">please consider supporting the project by sponsoring</p></div>
+				</div>
+				<div class="box">
+					<h2>free for academic research</h2>
+					<div><div>including online or in person</div><div>classroom training and education</div><p style="font-size:small; font-style: italic">please consider supporting the project by sponsoring</p></div>
+				</div>
+				<div class="box">
+					<h2>90 day evaluation period</h2>
+					<div>for use on commercial projects</div>
+				</div>
 			</div>
-			<div class="box">
-				<h2>free for academic research</h2>
-				<div><div>including online or in person</div><div>classroom training and education</div><p style="font-size:small; font-style: italic">please consider supporting the project by sponsoring</p></div>
-			</div>
-			<div class="box">
-				<h2>90 day evaluation period</h2>
-				<div>for use on commercial projects</div>
-			</div>
-		</div>
-		<h3 style="text-align: center;"><a href="../licensing/">licensing</a></h3>
-		<p>After working for nearly two decades in software development, I noticed a consensus on what people considered to be valuable qualities in software and how they can be beneficial to productivity.</p>
-		<p>The difficulty seemed to be in expressing and applying these principles, especially with consistency when working in teams. I realized there was potential to make a new type of development tool that embodied some of these principles related to cohesion, modularity, structure, dependencies and architecture.</p>
-		<p>After leaving my job I started working full-time on the new tool, called Eunice.</p>
+			<h3 style="text-align: center;"><a href="../licensing/">licensing</a></h3>
+			<p>After working for nearly two decades in software development, I noticed a consensus on what people considered to be valuable qualities in software and how they can be beneficial to productivity.</p>
+			<p>The difficulty seemed to be in expressing and applying these principles, especially with consistency when working in teams. I realized there was potential to make a new type of development tool that embodied some of these principles related to cohesion, modularity, structure, dependencies and architecture.</p>
+			<p>After leaving my job I started working full-time on the new tool, called Eunice.</p>
+		</content>
 	</div>
 	<footer>
 		<div class="footer">

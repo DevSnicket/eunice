@@ -28,6 +28,13 @@
 			"type": "node"
 		},
 		{
+			"name": "licensing updateFromSponser",
+			"program": "licensing/updateFromSponsor.js",
+			"request": "launch",
+			"runtimeArgs": [ "--experimental-modules" ],
+			"type": "node"
+		},
+		{
 			"name": "updateMenusAndFooter",
 			"program": "updateMenusAndFooter/index.js",
 			"request": "launch",
