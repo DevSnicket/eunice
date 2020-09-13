@@ -1,0 +1,117 @@
+<svg height="191" width="421" xmlns="http://www.w3.org/2000/svg">
+	<defs><style>
+		polyline,
+		rect {
+			fill: none;
+			stroke: black;
+		}
+
+		text {
+			font-family: arial, sans-serif;
+			font-size: 16px;
+			text-anchor: middle;
+		}
+	</style></defs>
+	<symbol id="arrow-head-down">
+		<polygon points="0,0 15,0 7.5,7.5"/>
+	</symbol>
+	<symbol id="arrow-head-up">
+		<use href="#arrow-head-down" transform="rotate(180 7.5 3.75)"/>
+	</symbol>
+	<symbol id="arrow-head-right">
+		<use href="#arrow-head-down" transform="rotate(270 7.5 7.5)"/>
+	</symbol>
+	<symbol id="item" overflow="visible">
+		<rect height="25" width="40"/>
+	</symbol>
+	<g transform="translate(0.5,0.5)">
+		<rect height="50" width="150"/>
+		<g transform="translate(20,10)">
+			<text y="18">a_</text>
+			<g transform="translate(20,0)">
+				<use href="#item"/>
+				<text x="20" y="18">a1</text>
+				<g transform="translate(60,0)">
+					<use href="#item"/>
+					<text x="20" y="18">a2</text>
+				</g>
+			</g>
+		</g>
+		<g transform="translate(52.5,35)">
+			<polyline points="7.5,0 7.5,35"/>
+			<use href="#arrow-head-down" y="32.5"/>
+		</g>
+		<g transform="translate(112.5,35)">
+			<polyline points="7.5,5 7.5,40"/>
+			<use href="#arrow-head-up"/>
+		</g>
+		<g transform="translate(0,60)">
+			<rect height="50" width="150"/>
+			<g transform="translate(20,15)">
+				<text y="18">b_</text>
+				<g transform="translate(20,0)">
+					<use href="#item"/>
+					<text x="20" y="18">b1</text>
+					<g transform="translate(40,5)">
+						<polyline points="0,7.5 17.5,7.5"/>
+						<use href="#arrow-head-right" x="12.5"/>
+					</g>
+					<g transform="translate(60,0)">
+						<use href="#item"/>
+						<text x="20" y="18">b2</text>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+	<g transform="translate(225.5,0)">
+		<text y="1.2em">3 dependencies</text>
+		<text y="60" style="font-size:200%">➔</text>
+		<g transform="translate(0,130)">
+			<text y="-2.4em">2➔1 inter-group</text>
+			<text y="-1.2em">(less coupling)</text>
+			<text y="1.2em">1➔2 intra-group</text>
+			<text y="2.4em">(more cohesion)</text>
+		</g>
+	</g>
+	<g transform="translate(300.5,0.5)">
+		<rect height="90" width="90"/>
+		<g transform="translate(0,10)">
+			<text x="20" y="40">_1</text>
+			<g transform="translate(40,0)">
+				<use href="#item"/>
+				<text x="20" y="18">a1</text>
+				<g transform="translate(12.5,25)">
+					<polyline points="7.5,0 7.5,15"/>
+					<use href="#arrow-head-down" y="12.5"/>
+				</g>
+				<g transform="translate(0,45)">
+					<use href="#item"/>
+					<text x="20" y="18">b1</text>
+				</g>
+			</g>
+		</g>
+		<g transform="translate(52.5,80)">
+			<polyline points="7.5,0 7.5,70"/>
+			<use href="#arrow-head-down" y="67.5"/>
+		</g>
+		<g transform="translate(10,100)">
+			<rect height="90" width="110"/>
+			<g transform="translate(0,10)">
+				<text x="20" y="40">_2</text>
+				<g transform="translate(60,0)">
+					<use href="#item"/>
+					<text x="20" y="18">a2</text>
+				</g>
+				<g transform="translate(62.5,25)">
+					<polyline points="7.5,0 7.5,15"/>
+					<use href="#arrow-head-down" y="12.5"/>
+				</g>
+				<g transform="translate(40,45)">
+					<use href="#item"/>
+					<text x="20" y="18">b2</text>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>
