@@ -1,9 +1,9 @@
 #releases-list .release {
 	align-items: center;
 	display: flex;
+	margin-top: 2em;
 }
 
 #releases-list .release :first-child {
 	flex: 1;
-	margin-bottom: 0;
 }

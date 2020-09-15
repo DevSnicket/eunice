@@ -177,7 +177,7 @@ function getHtmlForDateAndVersion({
 	date,
 	version: { text: version },
 }) {
-	return `<div class="release"><h3 id="${version}">${version}</h3><span>${date}</span></div>`;
+	return `<div class="release" id="${version}"><span>${version}</span><span>${date}</span></div>`;
 }
 
 function getHtmlForIssue({
