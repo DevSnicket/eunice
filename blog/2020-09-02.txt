@@ -1,0 +1,5 @@
+multi-language analyzer
+As mentioned in my previous post I've started work on a new analyzer that has its level of detail limited to module/file/namespace, but will support multiple languages.
+As this analyzer will support multiple languages it needs to work across different development environments. To make it easy to use, the runtime its based on would need to be included with the tool. Its possible to bundle the runtimes of many languages with software; however, there is a lot of variation in the size of the runtimes.
+The Rust language compiles to native, doesn't have a garbage collector and so has a relatively small runtime. It has support for the major operating systems, memory safety and includes some functional programming features.
+At the moment I'm getting familiar with the language by writing the command line interface. I hope to move onto analysis soon, most likely first by dogfooding my own Rust code and then building up some tests.

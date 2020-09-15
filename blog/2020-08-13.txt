@@ -1,0 +1,3 @@
+first C# open source project analysed
+Now that Eunice's C# analyzer is working, I thought I'd try it out on one of the most ubiquitous open source .NET packages, Newtonsoft Json.NET.
+As you might have noticed from the screenshot Eunice isn't able to infer stack levels for a lot of the classes and namespaces. It has them in quite a long interdependent level. I've counted and there's almost the same amount in the lowest level of uni-directional, dependency-less items.
