@@ -7,5 +7,5 @@ notifications:
     on_failure: always
 script:
   - bash ./spellcheck.sh
-  - bash ./update-all.sh
+  - bash ./update-all.sh $GITHUB_HARNESSES_TOKEN
   - bash ./git-push-generated-content.sh $GITHUB_HARNESSES_TOKEN
