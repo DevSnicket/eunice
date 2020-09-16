@@ -8,6 +8,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Blog | Eunice</title>
 	<style>
+		.content #mc_embed_signup .mc-field-group > div {
+			align-items: center;
+			display: flex;
+			flex-wrap: wrap;
+		}
+		.content #mc_embed_signup .mc-field-group > div :first-child {
+			flex: 1;
+		}
+		.content #mc_embed_signup .mc-field-group > div > span {
+			margin-right: 2em;
+		}
+		.content #mc_embed_signup .mc-field-group > div > * {
+			margin-bottom: 1em;
+		}
+
 		.content .post {
 			margin-bottom: 2em;
 		}
@@ -32,6 +47,35 @@
 		</div>
 	</div>
 	<div class="content">
+		<!-- Begin Mailchimp Signup Form -->
+		<div id="mc_embed_signup">
+			<form action="https://devsnicket.us2.list-manage.com/subscribe/post?u=7bae08d1e5fb6ac4706a79c4f&amp;id=ab31d35caa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+				<div class="mc-field-group">
+					<div>
+						<span>subscribe for automatic updates</span>
+						<span>
+							<label for="mce-EMAIL">email address: </label>
+							<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+						</span>
+						<span>
+							<input type="radio" value="html" name="EMAILTYPE" id="mce-EMAILTYPE-0" checked>
+							<label for="mce-EMAILTYPE-0">html</label>
+							<input type="radio" value="text" name="EMAILTYPE" id="mce-EMAILTYPE-1">
+							<label for="mce-EMAILTYPE-1">text</label>
+						</span>
+						<input type="submit" value="subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+					</div>
+				</div>
+				<div id="mce-responses">
+					<div class="response" id="mce-error-response" style="display:none"></div>
+					<div class="response" id="mce-success-response" style="display:none"></div>
+				</div>
+				<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+				<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_7bae08d1e5fb6ac4706a79c4f_ab31d35caa" tabindex="-1" value=""></div>
+			</form>
+		</div>
+		<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+		<!--End mc_embed_signup-->
 		<posts>
 			<div class="post">
 				<div class="heading" id="2020-09-07"><h2>Rust and a recently introduced bug</h2><span>2020-09-07</span></div>

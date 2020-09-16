@@ -184,7 +184,8 @@ body > .header menu {
 }
 
 .box,
-body > .header menu a {
+body > .header menu a,
+input[type=submit] {
 	border-width: 1px;
 	border-style: solid;
 	border-radius: 0.3em;
@@ -198,12 +199,16 @@ body > .header menu a {
 	border-radius: 0.15em;
 }
 
+input[type=submit],
 body > .header menu a {
 	background-color: darkgreen;
 	border-color: #7FB17F;
 	color: white;
-	margin: 0.25em 0.25em 0.25em;
 	padding: 0.3em 0.6em;
+}
+
+body > .header menu a {
+	margin: 0.25em 0.25em 0.25em;
 }
 
 body > .header menu a.current {
@@ -257,6 +262,16 @@ h3,
 	font-size: 1.17em;
 }
 
+input[type=email] {
+	width: 16em;
+}
+
+input[type=radio],
+input[type=submit],
+label {
+	cursor: pointer;
+}
+
 p {
 	margin-block-start: 1em;
 	margin-block-end: 1em;
@@ -274,7 +289,8 @@ ul li {
 
 	body,
 	body > .header menu a,
-	body > .header menu a.current {
+	body > .header menu a.current,
+	input[type=submit] {
 		color: #D0D0D0;
 	}
 
@@ -327,7 +343,8 @@ ul li {
 		background-image: url(./arrows/dark/default-height.svg);
 	}
 	
-	body > .header menu a {
+	body > .header menu a,
+	input[type=submit] {
 		border-color: #306230;
 	}
 
