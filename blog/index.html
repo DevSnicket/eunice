@@ -14,9 +14,7 @@
 			display: flex;
 			flex-wrap: wrap;
 		}
-		.content #mc_embed_signup .mc-field-group > div :first-child {
-			flex: 1;
-		}
+		.content #mc_embed_signup .mc-field-group > div > a,
 		.content #mc_embed_signup .mc-field-group > div > span {
 			margin-right: 2em;
 		}
@@ -56,6 +54,7 @@
 				<div class="mc-field-group">
 					<div>
 						<span>subscribe for automatic updates</span>
+						<a href="feed.rss" target="_blank" style="height: 1.4em"><img src="rss.svg" style="height: 1.4em; max-width: unset"/></a>
 						<span>
 							<label for="mce-EMAIL">email address: </label>
 							<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">

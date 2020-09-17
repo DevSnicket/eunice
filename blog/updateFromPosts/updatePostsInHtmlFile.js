@@ -1,3 +1,5 @@
+import formatImageUrlAsHtml from "./formatImageUrlAsHtml.js";
+import formatLinesAsHtml from "./formatLinesAsHtml.js";
 import updateInHtmlFile from "../../updateInHtmlFile.js";
 
 export default ({
@@ -25,8 +27,8 @@ function formatPostLines({
 	return (
 		wrapPostContentLines([
 			formatHeading({ date, title }),
-			...formatImageFileName(imageFileName),
-			...lines.map(line => `<p>${line}</p>`),
+			...formatImageUrlAsHtml(imageFileName),
+			...formatLinesAsHtml(lines),
 		])
 	);
 }
@@ -36,13 +38,6 @@ function formatHeading({
 	title,
 }) {
 	return `<div class="heading" id="${date}"><h2>${title}</h2><span>${date}</span></div>`;
-}
-
-function * formatImageFileName(
-	fileName,
-) {
-	if (fileName)
-		yield `<a href="${fileName}" target="_blank"><img src="${fileName}"/></a>`;
 }
 
 function wrapPostContentLines(

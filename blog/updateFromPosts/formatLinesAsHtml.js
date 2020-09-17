@@ -1,0 +1,1 @@
+export default lines => lines.map(line => `<p>${line}</p>`);
