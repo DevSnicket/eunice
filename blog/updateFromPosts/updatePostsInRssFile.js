@@ -54,11 +54,13 @@ function formatItem({
 	description,
 	title,
 }) {
-	return `<item><title>${title}</title><pubDate>${new Date(date).toUTCString()}</pubDate><description><![CDATA[ ${description} ]]></description></item>`;
+	return `<item><description><![CDATA[ ${description} ]]></description><guid>${blogUrl}#${date}</guid><pubDate>${new Date(date).toUTCString()}</pubDate><title>${title}</title></item>`;
 }
 
 function formatItems(
 	items,
 ) {
-	return `<?xml version="1.0"?><rss><channel><image><url>${blogUrl}/feed.png</url></image><link>${siteUrl}</link><title>eunice devsnicket.com</title>${items.join("")}</channel></rss>`;
+	const linkAndTitle = `<link>${siteUrl}</link><title>eunice devsnicket.com</title>`;
+
+	return `<?xml version="1.0"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="${blogUrl}/feed.rss" rel="self" type="application/rss+xml" /><description>blog on eunice recent developments, potential future direction and my thoughts on related concepts</description><image>${linkAndTitle}<url>${blogUrl}/feed.png</url></image>${linkAndTitle}${items.join("")}</channel></rss>`;
 }

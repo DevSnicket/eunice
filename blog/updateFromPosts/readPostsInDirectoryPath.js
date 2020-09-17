@@ -83,9 +83,40 @@ function getTitleAndLinesFromPostText(
 	const [title, ...lines] = text.split("\n");
 
 	return {
-		lines: lines.map(replaceGithubIssuesWithLinks),
-		title,
+		lines:
+			lines.map(formatText),
+		title:
+			escapeXmlContent(title),
 	};
+}
+
+function formatText(
+	text,
+) {
+	return (
+		replaceGithubIssuesWithLinks(
+			escapeXmlContent(
+				text,
+			),
+		)
+	);
+}
+
+function escapeXmlContent(
+	text,
+) {
+	return (
+		text.replace(
+			/[<>&]/g,
+			character => {
+				switch (character) {
+					case '<': return '&lt;';
+					case '>': return '&gt;';
+					case '&': return '&amp;';
+				}
+			}
+		)
+	);
 }
 
 function replaceGithubIssuesWithLinks(
