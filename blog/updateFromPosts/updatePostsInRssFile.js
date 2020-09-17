@@ -27,7 +27,9 @@ function formatPostAsItem(
 	);
 }
 
-const siteUrl = "https://devsnicket.com/eunice";
+const
+	siteUrl = "https://devsnicket.com/eunice",
+	blogUrl = `${siteUrl}/blog`;
 
 function formatDescription({
 	imageFileName,
@@ -43,7 +45,7 @@ function formatDescription({
 
 	function * formatImageHtml() {
 		if (imageFileName)
-			yield formatImageUrlAsHtml(`${siteUrl}/blog/${imageFileName}`);
+			yield formatImageUrlAsHtml(`${blogUrl}/${imageFileName}`);
 	}
 }
 
@@ -58,5 +60,5 @@ function formatItem({
 function formatItems(
 	items,
 ) {
-	return `<?xml version="1.0"?><rss><channel><link>${siteUrl}</link><title>Eunice from devsnicket.com</title>${items.join("")}</channel></rss>`;
+	return `<?xml version="1.0"?><rss><channel><image><url>${blogUrl}/feed.png</url></image><link>${siteUrl}</link><title>eunice devsnicket.com</title>${items.join("")}</channel></rss>`;
 }
