@@ -54,7 +54,9 @@ function formatItem({
 	description,
 	title,
 }) {
-	return `<item><description><![CDATA[ ${description} ]]></description><guid>${blogUrl}#${date}</guid><pubDate>${new Date(date).toUTCString()}</pubDate><title>${title}</title></item>`;
+	const postUrl = `${blogUrl}#${date}`;
+
+	return `<item><description><![CDATA[ ${description} ]]></description><guid>${postUrl}</guid><link>${postUrl}</link><pubDate>${new Date(date).toUTCString()}</pubDate><title>${title}</title></item>`;
 }
 
 function formatItems(
