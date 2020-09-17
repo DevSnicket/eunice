@@ -72,13 +72,12 @@ code {
 }
 
 body .footer {
-	font-size: 0.8em;
 	text-align: center;
 	margin: 2em 0;
 }
 
-body .footer .links {
-	font-size: 1.25em;
+body .footer .copyright {
+	font-size: 0.8em;
 }
 
 body .footer .links > * {
