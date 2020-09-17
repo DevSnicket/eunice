@@ -54,7 +54,7 @@ function formatItem({
 	description,
 	title,
 }) {
-	return `<item><title>${title}</title><pubDate>${date}</pubDate><description><![CDATA[ ${description} ]]></description></item>`;
+	return `<item><title>${title}</title><pubDate>${new Date(date).toUTCString()}</pubDate><description><![CDATA[ ${description} ]]></description></item>`;
 }
 
 function formatItems(
