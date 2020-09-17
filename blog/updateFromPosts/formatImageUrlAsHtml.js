@@ -1,7 +1,1 @@
-export default
-function * (
-	url,
-) {
-	if (url)
-		yield `<a href="${url}" target="_blank"><img src="${url}"/></a>`;
-}
+export default url => `<a href="${url}" target="_blank"><img src="${url}"/></a>`;

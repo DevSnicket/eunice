@@ -35,11 +35,16 @@ function formatDescription({
 }) {
 	return (
 		[
-			...formatImageUrlAsHtml(`${siteUrl}/blog/${imageFileName}`),
+			...formatImageHtml(),
 			...formatLinesAsHtml(lines),
 		]
 		.join("")
 	);
+
+	function * formatImageHtml() {
+		if (imageFileName)
+			yield formatImageUrlAsHtml(`${siteUrl}/blog/${imageFileName}`);
+	}
 }
 
 function formatItem({

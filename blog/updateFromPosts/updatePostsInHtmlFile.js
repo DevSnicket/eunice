@@ -27,10 +27,15 @@ function formatPostLines({
 	return (
 		wrapPostContentLines([
 			formatHeading({ date, title }),
-			...formatImageUrlAsHtml(imageFileName),
+			...formatImageHtml(),
 			...formatLinesAsHtml(lines),
 		])
 	);
+
+	function * formatImageHtml() {
+		if (imageFileName)
+			yield formatImageUrlAsHtml(imageFileName);
+	}
 }
 
 function formatHeading({
