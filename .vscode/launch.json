@@ -1,6 +1,13 @@
 {
 	"configurations": [
 		{
+			"name": "blog updatePostsInRssFile",
+			"program": "blog/updateFromPosts/index.js",
+			"request": "launch",
+			"runtimeArgs": [ "--experimental-modules" ],
+			"type": "node"
+		},
+		{
 			"args": [ "--access-token=" ],
 			"cwd": "${workspaceFolder}/csharp/releases",
 			"name": "csharp updateReleasesListInHtmlFile",

@@ -11,9 +11,12 @@ export default ({
 }) =>
 	fileSystem.writeFile(
 		filePath,
-		formatItems(
-			posts.map(formatPostAsItem),
-		),
+		formatRssFeed({
+			items:
+				posts.map(formatPostAsItem),
+			latestDate:
+				getLatestDateOfPosts(posts),
+		}),
 	);
 
 function formatPostAsItem(
@@ -56,13 +59,32 @@ function formatItem({
 }) {
 	const postUrl = `${blogUrl}#${date}`;
 
-	return `<item><description><![CDATA[ ${description} ]]></description><guid>${postUrl}</guid><link>${postUrl}</link><pubDate>${new Date(date).toUTCString()}</pubDate><title>${title}</title></item>`;
+	return `<item><description><![CDATA[ ${description} ]]></description><guid>${postUrl}</guid><link>${postUrl}</link>${formatPublishedDate(date)}<title>${title}</title></item>`;
 }
 
-function formatItems(
-	items,
+function getLatestDateOfPosts(
+	posts,
 ) {
+	return (
+		posts.reduce(
+			(latestDate, { date }) =>
+				date > latestDate ? date : latestDate,
+			"",
+		)
+	);
+}
+
+function formatRssFeed({
+	latestDate,
+	items,
+}) {
 	const linkAndTitle = `<link>${siteUrl}</link><title>eunice devsnicket.com</title>`;
 
-	return `<?xml version="1.0"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="${blogUrl}/feed.rss" rel="self" type="application/rss+xml" /><description>blog on eunice recent developments, potential future direction and my thoughts on related concepts</description><image>${linkAndTitle}<url>${blogUrl}/feed.png</url></image>${linkAndTitle}${items.join("")}</channel></rss>`;
+	return `<?xml version="1.0"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="${blogUrl}/feed.rss" rel="self" type="application/rss+xml" /><description>blog on eunice recent developments, potential future direction and my thoughts on related concepts</description><image>${linkAndTitle}<url>${blogUrl}/feed.png</url></image>${formatPublishedDate(latestDate)}${linkAndTitle}${items.join("")}</channel></rss>`;
+}
+
+function formatPublishedDate(
+	date,
+) {
+	return `<pubDate>${new Date(date).toUTCString()}</pubDate>`;
 }
