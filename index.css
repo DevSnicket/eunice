@@ -93,20 +93,20 @@ body .footer .links > .email::before {
 	padding-right: 6px;
 }
 
+body .footer .links > .blog,
 body .footer .links > .github,
-body .footer .links > .patreon,
 body .footer .links > .twitter {
 	background-repeat: no-repeat;
 	background-position: left center;
 	padding-left: 22px;
 }
 
-body .footer .links > .github {
-	background-image: url('./icons/github-small-dark.png');
+body .footer .links > .blog {
+	background-image: url('./blog/icon-small-dark.png');
 }
 
-body .footer .links > .patreon {
-	background-image: url('./icons/patreon-small.png');
+body .footer .links > .github {
+	background-image: url('./icons/github-small-dark.png');
 }
 
 body .footer .links > .twitter {
@@ -312,6 +312,9 @@ ul li {
 		color: white;
 	}
 
+	body .footer .links > .blog {
+		background-image: url('./blog/icon-small-light.png');
+	}
 	body .footer .links > .github {
 		background-image: url('./icons/github-small-light.png');
 	}
