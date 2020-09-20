@@ -287,7 +287,7 @@ ul li {
 	body > .header menu a,
 	body > .header menu a.current,
 	input[type=submit] {
-		color: #D0D0D0;
+		color: #EFEFEF;
 	}
 
 	a:link,
@@ -322,7 +322,7 @@ ul li {
 	body > .header,
 	.box {
 		background-color: #404040;
-		color: #E0E0E0;
+		color: #FFFFFF;
 	}
 
 	.box a:link,
