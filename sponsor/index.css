@@ -1,49 +1,82 @@
-div.free-usage {
+.sponsor h1,
+.sponsor h2,
+.sponsor h3 {
+	text-align: center;
+}
+
+.sponsor > .free-usage {
 	display: flex;
 	justify-content: center;
 }
 
-@media (max-width: 60em) {
-	div.free-usage {
-		flex-wrap: wrap;
-	}
-}
-
-div.free-usage .box {
+.sponsor > .free-usage .box {
 	padding: 1em;
 }
 
-div.free-usage h2 {
-	margin: 0 0 0.5em 0;
-	text-align: center;
-}
-
-.block-center {
-	display: block; 
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.sponsor {
+.sponsor .paid-usage {
 	display: flex;
+	justify-content: space-around;
 }
 
-.sponsor .patreon {
-	background-color: #FF424D;
-	height: 2em;
-	padding: 2em;
+.sponsor .paid-usage .duration {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 }
 
-.sponsor a {
-	text-decoration: none;
+.sponsor .paid-usage .duration > :not(:last-child),
+.sponsor .paid-usage .unsubscribe form > :not(:last-child) {
+	margin-right: 1em;
 }
 
-.sponsor .on-patreon {
+.sponsor .paid-usage .duration > *,
+.sponsor .paid-usage .unsubscribe form > * {
+	margin: 0.4em 0;
+}
+
+.sponsor .paid-usage .error {
+	background-color: darkred;
+	color: white;
+	display: none;
+	font-weight: bold;
+	line-height: 1.8em;
+	margin: 1em 0;
 	text-align: center;
 }
 
-@media (max-width: 40em) {
-	.sponsor {
+.sponsor .paid-usage input[type=button] {
+	cursor: pointer;
+}
+
+.sponsor .paid-usage label {
+	white-space: nowrap;
+}
+
+.sponsor .paid-usage .privacy {
+	font-size: 0.7em;
+	text-align: center;
+}
+
+.sponsor .paid-usage .sponsorship-options h3 {
+	margin-bottom: 0.4em;
+}
+
+.sponsor .paid-usage .unsubscribe form {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+@media (max-width: 60em) {
+	.sponsor > .free-usage {
 		flex-wrap: wrap;
+	}
+
+	.sponsor .paid-usage {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: fit-content;
 	}
 }

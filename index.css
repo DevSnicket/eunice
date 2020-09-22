@@ -42,8 +42,17 @@ a:active {
 	list-style-image: url(./arrows/down-10x10-07l.svg);
 }
 
-.box > * {
+.box > :not(h1):not(h2):not(h3) {
 	margin: 0.5rem;
+}
+
+.box > h1:first-child,
+.box > h2:first-child,
+.box > h3:first-child,
+.box :first-child > h1:first-child,
+.box :first-child > h2:first-child,
+.box :first-child > h3:first-child {
+	margin-top: 0;
 }
 
 .box img {
@@ -181,6 +190,7 @@ body > .header menu {
 
 .box,
 body > .header menu a,
+input[type=button],
 input[type=submit] {
 	border-width: 1px;
 	border-style: solid;
@@ -195,6 +205,7 @@ body > .header menu a {
 	border-radius: 0.15em;
 }
 
+input[type=button],
 input[type=submit],
 body > .header menu a {
 	background-color: darkgreen;
@@ -262,6 +273,7 @@ input[type=email] {
 	width: 16em;
 }
 
+input[type=button],
 input[type=radio],
 input[type=submit],
 label {
@@ -286,6 +298,7 @@ ul li {
 	body,
 	body > .header menu a,
 	body > .header menu a.current,
+	input[type=button],
 	input[type=submit] {
 		color: #EFEFEF;
 	}
@@ -343,6 +356,7 @@ ul li {
 	}
 	
 	body > .header menu a,
+	input[type=button],
 	input[type=submit] {
 		border-color: #306230;
 	}
