@@ -1,5 +1,6 @@
 import { fileURLToPath } from "url";
 import path from "path";
+import updateLatestPostInHtmlFile from "./updateLatestPostInHtmlFile.js";
 import readPostsInDirectoryPath from "./readPostsInDirectoryPath.js";
 import updatePostsInHtmlFile from "./updatePostsInHtmlFile.js";
 import updatePostsInRssFile from "./updatePostsInRssFile.js";
@@ -19,6 +20,13 @@ async function updatePostsInDirectoryPath(
 		await readPostsInDirectoryPath(
 			directoryPath,
 		);
+
+	await updateLatestPostInHtmlFile({
+		filePath:
+			path.join(directoryPath, "..", "index.html"),
+		post:
+			posts[0],
+	});
 
 	await updatePostsInHtmlFile({
 		filePath:
