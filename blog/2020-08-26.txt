@@ -1,4 +1,4 @@
-more languages
+how to support analysis for many languages
 Issue #155, that has been mentioned in the last few posts, is complete and hopefully makes the dependencies in stacks of child items less confusing. I have a feeling it could probably be improved, both in the way its described and some potential complimentary enhancements.
 A variation on the recent theme of increasing the likelihood that people will try out Eunice, I would like to make some form of analysis available to most developers. I think the most interesting and helpful way of understanding what Eunice is about is to run it on code people are already familiar with. One barrier to this is that developers use many different languages.
 Currently Eunice has full support for JavaScript and C#. JavaScript analysis builds quite a lot onto a syntactic model (from Babel), whereas C# analysis does less as it uses a semantic model (from Roslyn). My plan is to add module/file/namespace analysis for all the popular languages, before adding comprehensive analysis of individual languages.

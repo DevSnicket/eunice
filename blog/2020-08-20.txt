@@ -1,3 +1,3 @@
-progress making Eunice easier for new users
+progress report on making Eunice easier for new users
 Two of the issues I posted about on 16th are complete (#150 and #154) . I haven't started on the third more nuanced one (#155) as a user created a new issue that would definitely make it easier for people trying to understand what Eunice is visualizing.
 This new issue (#156) has been completed, a before and after is shown in this posts image. I'm used to seeing Eunice visualizations and without feedback I might never have realized this was a problem.

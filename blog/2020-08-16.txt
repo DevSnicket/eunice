@@ -1,4 +1,4 @@
-latest fixes & enhancements
+latest fixes & enhancements targeted at new users
 As I'm looking to encourage more people to try out Eunice, I thought I'd look at some fixes and enhancements that would make this easier.
 There's a couple of issues related to selecting dependencies to be listed (#150 and #154) that shouldn't take long to sort out. The first will remove links that will raise an error and the second adds links that would work but weren't available.
 The other issue (#155), might be a bit more nuanced, relates to outer dependency counts (the ones outside the items box). The current behavior works well for software with unidirectional dependencies, but not on software were Eunice is most needed and likely to be the situation of people first using Eunice. Outer dependency counts currently include the stack being viewed, but also all the ancestor stacks, that won't be displayed. This current behavior means users focused on improving a single stack will be distracted by counts that can't be improved by modifying that single stack.

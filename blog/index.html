@@ -79,7 +79,7 @@
 		<!-- /* spell-checker: enable */ -->
 		<posts>
 			<div class="post">
-				<div class="heading" id="2020-09-18"><h2>cohesion and coupling</h2><span>2020-09-18</span></div>
+				<div class="heading" id="2020-09-18"><h2>how cohesion and coupling relates to Eunice</h2><span>2020-09-18</span></div>
 				<a href="2020-09-18.png" target="_blank"><img src="2020-09-18.png"/></a>
 				<p>In some feedback on Eunice's website it was highlighted how there wasn't an explanation of why it encourages dependencies to be made unidirectional. While developing the ideas behind Eunice and then using it, the benefits have been demonstrated to me. However, this isn't going to be the case for people first visiting the site as potential new users of Eunice.</p>
 				<p>This feedback made me consider what characteristics Eunice was encouraging in software. I realized that cohesion and coupling weren't being mentioned in relation to Eunice. For people with experience in making software these terms are well known and have clear connotations, cohesion good and coupling bad. In practice, when applying these concepts, this can seem like a simplistic way to think about them. Although separate, they can be competing and effort to improve one can be to the detriment of the other. There's a lot of great explanations and diagrams out there to help people realize these two concepts; however, in application they're open to an individuals perception.</p>
@@ -87,41 +87,41 @@
 				<p>This posts image is a generalized diagram showing an example of how Eunice's approach relates to the concepts. I've updated the home page and how it works pages with some references to cohesion and coupling, and the diagram. </p>
 			</div>
 			<div class="post">
-				<div class="heading" id="2020-09-07"><h2>Rust and a recently introduced bug</h2><span>2020-09-07</span></div>
+				<div class="heading" id="2020-09-07"><h2>writing an analyzer in Rust and a recently introduced bug</h2><span>2020-09-07</span></div>
 				<a href="2020-09-07.png" target="_blank"><img src="2020-09-07.png"/></a>
 				<p>Work on what will eventually be a multi-language analyzer is progressing in Rust. I think I've got my head round most of the common ownership scenarios I'll use in Rust e.g. first-class function arguments, iterators.</p>
 				<p>I've been thinking that there are at least two categories of module analysis that will need supporting. The first is for languages that either wholly or mainly base their module system on file-system paths. The second is for languages that use namespaces and that don't use file-system paths. From my use of Rust so far, it fits into the first category, so this is what I'm implementing first.</p>
 				<p>Unfortunately, I've taken a short break from working on the new analyzer. My suspicions in recent posts about issue <a href="https://github.com/DevSnicket/eunice/issues/155" rel="noopener" target="_blank">#155</a> being incomplete turned out to be more significant than I thought. Although the counts appear to be behaving correctly, I'd completely forgotten to implement the changes for the dependency list (see post image). I've created issue <a href="https://github.com/DevSnicket/eunice/issues/164" rel="noopener" target="_blank">#164</a> to add this missing behavior as a top priority bug. Its likely to be very confusing, especially to new users, the opposite of the original enhancement's intent.</p>
 			</div>
 			<div class="post">
-				<div class="heading" id="2020-09-02"><h2>multi-language analyzer</h2><span>2020-09-02</span></div>
+				<div class="heading" id="2020-09-02"><h2>multi-language analyzer design</h2><span>2020-09-02</span></div>
 				<p>As mentioned in my previous post I've started work on a new analyzer that has its level of detail limited to module/file/namespace, but will support multiple languages.</p>
 				<p>As this analyzer will support multiple languages it needs to work across different development environments. To make it easy to use, the runtime its based on would need to be included with the tool. Its possible to bundle the runtimes of many languages with software; however, there is a lot of variation in the size of the runtimes.</p>
 				<p>The Rust language compiles to native, doesn't have a garbage collector and so has a relatively small runtime. It has support for the major operating systems, memory safety and includes some functional programming features.</p>
 				<p>At the moment I'm getting familiar with the language by writing the command line interface. I hope to move onto analysis soon, most likely first by dogfooding my own Rust code and then building up some tests.</p>
 			</div>
 			<div class="post">
-				<div class="heading" id="2020-08-26"><h2>more languages</h2><span>2020-08-26</span></div>
+				<div class="heading" id="2020-08-26"><h2>how to support analysis for many languages</h2><span>2020-08-26</span></div>
 				<p>Issue <a href="https://github.com/DevSnicket/eunice/issues/155" rel="noopener" target="_blank">#155</a>, that has been mentioned in the last few posts, is complete and hopefully makes the dependencies in stacks of child items less confusing. I have a feeling it could probably be improved, both in the way its described and some potential complimentary enhancements.</p>
 				<p>A variation on the recent theme of increasing the likelihood that people will try out Eunice, I would like to make some form of analysis available to most developers. I think the most interesting and helpful way of understanding what Eunice is about is to run it on code people are already familiar with. One barrier to this is that developers use many different languages.</p>
 				<p>Currently Eunice has full support for JavaScript and C#. JavaScript analysis builds quite a lot onto a syntactic model (from Babel), whereas C# analysis does less as it uses a semantic model (from Roslyn). My plan is to add module/file/namespace analysis for all the popular languages, before adding comprehensive analysis of individual languages.</p>
 				<p>I've re-ordered the issue backlog to represent this. The order isn't just based on popularity of the languages, but that I'm going to try implementing/dogfooding it in Rust and how quickly I think each language will take. I've also mixed in a quick JavaScript enhancement to break things up.</p>
 			</div>
 			<div class="post">
-				<div class="heading" id="2020-08-20"><h2>progress making Eunice easier for new users</h2><span>2020-08-20</span></div>
+				<div class="heading" id="2020-08-20"><h2>progress report on making Eunice easier for new users</h2><span>2020-08-20</span></div>
 				<a href="2020-08-20.png" target="_blank"><img src="2020-08-20.png"/></a>
 				<p>Two of the issues I posted about on 16th are complete (<a href="https://github.com/DevSnicket/eunice/issues/150" rel="noopener" target="_blank">#150</a> and <a href="https://github.com/DevSnicket/eunice/issues/154" rel="noopener" target="_blank">#154</a>) . I haven't started on the third more nuanced one (<a href="https://github.com/DevSnicket/eunice/issues/155" rel="noopener" target="_blank">#155</a>) as a user created a new issue that would definitely make it easier for people trying to understand what Eunice is visualizing.</p>
 				<p>This new issue (<a href="https://github.com/DevSnicket/eunice/issues/156" rel="noopener" target="_blank">#156</a>) has been completed, a before and after is shown in this posts image. I'm used to seeing Eunice visualizations and without feedback I might never have realized this was a problem.</p>
 			</div>
 			<div class="post">
-				<div class="heading" id="2020-08-16"><h2>latest fixes &amp; enhancements</h2><span>2020-08-16</span></div>
+				<div class="heading" id="2020-08-16"><h2>latest fixes &amp; enhancements targeted at new users</h2><span>2020-08-16</span></div>
 				<p>As I'm looking to encourage more people to try out Eunice, I thought I'd look at some fixes and enhancements that would make this easier.</p>
 				<p>There's a couple of issues related to selecting dependencies to be listed (<a href="https://github.com/DevSnicket/eunice/issues/150" rel="noopener" target="_blank">#150</a> and <a href="https://github.com/DevSnicket/eunice/issues/154" rel="noopener" target="_blank">#154</a>) that shouldn't take long to sort out. The first will remove links that will raise an error and the second adds links that would work but weren't available.</p>
 				<p>The other issue (<a href="https://github.com/DevSnicket/eunice/issues/155" rel="noopener" target="_blank">#155</a>), might be a bit more nuanced, relates to outer dependency counts (the ones outside the items box). The current behavior works well for software with unidirectional dependencies, but not on software were Eunice is most needed and likely to be the situation of people first using Eunice. Outer dependency counts currently include the stack being viewed, but also all the ancestor stacks, that won't be displayed. This current behavior means users focused on improving a single stack will be distracted by counts that can't be improved by modifying that single stack.</p>
 				<p>All three issues will be available for both analyzers (C# and JavaScript).</p>
 			</div>
 			<div class="post">
-				<div class="heading" id="2020-08-13"><h2>first C# open source project analysed</h2><span>2020-08-13</span></div>
+				<div class="heading" id="2020-08-13"><h2>first C# open source project analysed by Eunice</h2><span>2020-08-13</span></div>
 				<a href="2020-08-13.png" target="_blank"><img src="2020-08-13.png"/></a>
 				<p>Now that Eunice's C# analyzer is working, I thought I'd try it out on one of the most ubiquitous open source .NET packages, Newtonsoft Json.NET.</p>
 				<p>As you might have noticed from the screenshot Eunice isn't able to infer stack levels for a lot of the classes and namespaces. It has them in quite a long interdependent level. I've counted and there's almost the same amount in the lowest level of uni-directional, dependency-less items.</p>
