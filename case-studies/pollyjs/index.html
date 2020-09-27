@@ -65,7 +65,7 @@ git reset --hard 0003c0e</code>
 		<p>The dependency list shows several of the adapters above use it and looking at the <a href="https://netflix.github.io/pollyjs/#/adapters/custom" rel="noopener" target="_blank">Polly.JS custom adapter</a> page confirms at least fetch and xhr extend it.</p>
 		<p>There is a dependency from core on adapter, but this is just for testing.</p>
 		<h3 id="packages-tests-and-sub-directories">packages, tests and sub-directories</h3>
-		<p>The packages/@pollyjs directory I've investigated above is used for the creation of NPM packages, so its not surprising to see that, at least at runtime, there are uni-directional dependencies. However, what appear to be integration tests across those packages also have uni-directional dependencies.</p>
+		<p>The packages/@pollyjs directory I've investigated above is used for the creation of <a href="https://www.npmjs.com/package/@pollyjs/core" rel="noopener" target="_blank">NPM packages</a>, so its not surprising to see that, at least at runtime, there are uni-directional dependencies. However, what appear to be integration tests across those packages also have uni-directional dependencies.</p>
 		<p>Eunice could also be used to investigate inside the sub-directories of packages. Here there is the potential for runtime bi-directional dependencies across the directory structure. As there doesn't appear to be any in Polly.JS I haven't done that in this case study. If you want a demonstration of this please see the <a href="../react">React case study</a>.</p>
 		<h3>You can interact with the Eunice analysis for this case study <a href="./eunice.html" target="_blank">here</a></h3>
 		<h3 id="why-use-eunice">why use Eunice</h3>
