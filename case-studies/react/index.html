@@ -29,14 +29,16 @@
 				<p>This case study demonstrates using Eunice on a larger code base, that requires configuration and has bi-directional dependencies.</p>
 				<p>A simpler introduction to Eunice, that doesn't require any configuration and has mostly uni-directional dependencies, can be found in the <a href="../pollyjs">Polly.JS case study</a>.</p>
 			</div>
-			<img alt="React logo" src="../../react.svg" style="width:8em" />
+			<a href="https://reactjs.org/" rel="noopener" target="_blank">
+				<img alt="React logo" src="../../react.svg" style="width:8em" />
+			</a>
 		</div>
-		<p>I've based this case study on the <a href="https://github.com/DevSnicket/react/commit/0f3838a01b0fda0ac5fd054c6be13166697a113c" rel="noopener" target="_blank">0f3838a</a> commit in the React repository. I've created a fork to make it easier if you want to follow along:</p>
+		<p>I've based this case study on the <a href="https://github.com/DevSnicket/react/commit/0f3838a01b0fda0ac5fd054c6be13166697a113c" rel="noopener" target="_blank">0f3838a</a> commit in the <a href="https://github.com/facebook/react" rel="noopener" target="_blank">React repository</a>. I've created a fork to make it easier if you want to follow along:</p>
 		<code>git clone https://github.com/DevSnicket/react.git react-eunice
 cd react-eunice</code>
 		<p>Eunice can be downloaded from NPM and run without installing using NPX:</p>
 		<code>npx eunice</code>
-		<p>You will be prompted to accept a EULA. Eunice is free to use on open source projects, and its free to use for education and training. Therefore contributions to React and following along with this case study both qualify. There is also an evaluation period to try Eunice out on closed source commercial software.</p>
+		<p>You will be prompted to accept a EULA. Eunice is free to use on open source projects, and its free to use for education and training. Therefore contributions to <a href="https://reactjs.org/" rel="noopener" target="_blank">React</a> and following along with this case study both qualify. There is also an evaluation period to try Eunice out on closed source commercial software.</p>
 		<div class="horizontal-menu">
 			<a href="#configuration">configuration</a>
 			<a href="#inferred-stacks">inferred stacks</a>
@@ -152,7 +154,7 @@ Unexpected token, expected ";" (14:5)</code>
 --babel-parser-plugins=dynamicImport \
 --babel-parser-plugins=flow \
 --babel-parser-plugins=jsx</code>
-		<p>Re-running analysis and reloading the web page shows that with tests ignored, there aren't any bi-directional dependencies between package sub-directories. This matches that the NPM packages created from those sub-directories would also only have uni-directional dependencies.</p>
+		<p>Re-running analysis and reloading the web page shows that with tests ignored, there aren't any bi-directional dependencies between package sub-directories. This matches that the <a href="https://www.npmjs.com/package/react" rel="noopener" target="_blank">NPM packages</a> created from those sub-directories would also only have uni-directional dependencies.</p>
 		<img alt="Eunice showing reduced mismatching dependency count if React's tests are ignored" src="./17-ignore-tests.png" />
 		<p>Note Eunice has detected that react-test-renderer no longer needs to be stacked in a separate level and so has automatically moved it up into the level above:</p>
 		<h3 id="conclusion">conclusion</h3>
