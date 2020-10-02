@@ -36,7 +36,10 @@
 			flex: 1;
 			margin: 0;
 		}
-		.content .post img {
+		.content .post .main-image {
+			text-align: center;
+		}
+		.content .post .main-image img {
 			margin-top: 1em;
 		}
 		@media (max-width: 62em) {
@@ -100,7 +103,7 @@
 			</div>
 			<div class="post">
 				<div class="heading" id="2020-09-18"><h2>how cohesion and coupling relates to Eunice</h2><span>2020-09-18</span></div>
-				<a href="2020-09-18.png" target="_blank"><img src="2020-09-18.png"/></a>
+				<div class="main-image"><a href="2020-09-18.png" target="_blank"><img src="2020-09-18.png"/></a></div>
 				<p>In some feedback on Eunice's website it was highlighted how there wasn't an explanation of why it encourages dependencies to be made unidirectional. While developing the ideas behind Eunice and then using it, the benefits have been demonstrated to me. However, this isn't going to be the case for people first visiting the site as potential new users of Eunice.</p>
 				<p>This feedback made me consider what characteristics Eunice was encouraging in software. I realized that cohesion and coupling weren't being mentioned in relation to Eunice. For people with experience in making software these terms are well known and have clear connotations, cohesion good and coupling bad. In practice, when applying these concepts, this can seem like a simplistic way to think about them. Although separate, they can be competing and effort to improve one can be to the detriment of the other. There's a lot of great explanations and diagrams out there to help people realize these two concepts; however, in application they're open to an individuals perception.</p>
 				<p>Tools that analyse, measure and visualize software structure and dependencies can incorporate cohesion and coupling, and so can help to coordinate their consistent application. There are many tools available that take different approaches to visualizing your software into interactive diagrams, Eunice being only one of them. However, I think Eunice's opinionated, yet non-prescriptive approach regarding the benefits of unidirectional dependencies has a distinct influence on efforts to improve cohesion and coupling.</p>
@@ -108,7 +111,7 @@
 			</div>
 			<div class="post">
 				<div class="heading" id="2020-09-07"><h2>writing an analyzer in Rust and a recently introduced bug</h2><span>2020-09-07</span></div>
-				<a href="2020-09-07.png" target="_blank"><img src="2020-09-07.png"/></a>
+				<div class="main-image"><a href="2020-09-07.png" target="_blank"><img src="2020-09-07.png"/></a></div>
 				<p>Work on what will eventually be a multi-language analyzer is progressing in Rust. I think I've got my head round most of the common ownership scenarios I'll use in Rust e.g. first-class function arguments, iterators.</p>
 				<p>I've been thinking that there are at least two categories of module analysis that will need supporting. The first is for languages that either wholly or mainly base their module system on file-system paths. The second is for languages that use namespaces and that don't use file-system paths. From my use of Rust so far, it fits into the first category, so this is what I'm implementing first.</p>
 				<p>Unfortunately, I've taken a short break from working on the new analyzer. My suspicions in recent posts about issue <a href="https://github.com/DevSnicket/eunice/issues/155" rel="noopener" target="_blank">#155</a> being incomplete turned out to be more significant than I thought. Although the counts appear to be behaving correctly, I'd completely forgotten to implement the changes for the dependency list (see post image). I've created issue <a href="https://github.com/DevSnicket/eunice/issues/164" rel="noopener" target="_blank">#164</a> to add this missing behavior as a top priority bug. Its likely to be very confusing, especially to new users, the opposite of the original enhancement's intent.</p>
@@ -129,7 +132,7 @@
 			</div>
 			<div class="post">
 				<div class="heading" id="2020-08-20"><h2>progress report on making Eunice easier for new users</h2><span>2020-08-20</span></div>
-				<a href="2020-08-20.png" target="_blank"><img src="2020-08-20.png"/></a>
+				<div class="main-image"><a href="2020-08-20.png" target="_blank"><img src="2020-08-20.png"/></a></div>
 				<p>Two of the issues I posted about on 16th are complete (<a href="https://github.com/DevSnicket/eunice/issues/150" rel="noopener" target="_blank">#150</a> and <a href="https://github.com/DevSnicket/eunice/issues/154" rel="noopener" target="_blank">#154</a>) . I haven't started on the third more nuanced one (<a href="https://github.com/DevSnicket/eunice/issues/155" rel="noopener" target="_blank">#155</a>) as a user created a new issue that would definitely make it easier for people trying to understand what Eunice is visualizing.</p>
 				<p>This new issue (<a href="https://github.com/DevSnicket/eunice/issues/156" rel="noopener" target="_blank">#156</a>) has been completed, a before and after is shown in this posts image. I'm used to seeing Eunice visualizations and without feedback I might never have realized this was a problem.</p>
 			</div>
@@ -142,7 +145,7 @@
 			</div>
 			<div class="post">
 				<div class="heading" id="2020-08-13"><h2>first C# open source project analysed by Eunice</h2><span>2020-08-13</span></div>
-				<a href="2020-08-13.png" target="_blank"><img src="2020-08-13.png"/></a>
+				<div class="main-image"><a href="2020-08-13.png" target="_blank"><img src="2020-08-13.png"/></a></div>
 				<p>Now that Eunice's C# analyzer is working, I thought I'd try it out on one of the most ubiquitous open source .NET packages, Newtonsoft Json.NET.</p>
 				<p>As you might have noticed from the screenshot Eunice isn't able to infer stack levels for a lot of the classes and namespaces. It has them in quite a long interdependent level. I've counted and there's almost the same amount in the lowest level of uni-directional, dependency-less items.</p>
 			</div>

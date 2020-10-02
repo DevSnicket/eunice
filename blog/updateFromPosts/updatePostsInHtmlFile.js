@@ -36,7 +36,7 @@ function formatPostLines({
 
 	function * formatImageHtml() {
 		if (imageFileName)
-			yield formatImageUrlAsHtml(imageFileName);
+			yield `<div class="main-image">${formatImageUrlAsHtml(imageFileName)}</div>`;
 		else if (index === 0)
 			yield "<img class=\"default\" src=\"default.png\"/>";
 	}
