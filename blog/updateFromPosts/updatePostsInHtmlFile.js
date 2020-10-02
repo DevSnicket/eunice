@@ -23,7 +23,9 @@ function formatPostLines({
 	imageFileName,
 	lines,
 	title,
-}) {
+},
+	index,
+) {
 	return (
 		wrapPostContentLines([
 			formatHeading({ date, title }),
@@ -35,6 +37,8 @@ function formatPostLines({
 	function * formatImageHtml() {
 		if (imageFileName)
 			yield formatImageUrlAsHtml(imageFileName);
+		else if (index === 0)
+			yield "<img class=\"default\" src=\"default.png\"/>";
 	}
 }
 

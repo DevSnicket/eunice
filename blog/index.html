@@ -23,6 +23,11 @@
 		.content .post {
 			margin-bottom: 2em;
 		}
+		.content .post img.default {
+			float: right;
+			margin: 1em 0 1em 1em;
+			width: 15em;
+		}
 		.content .post .heading {
 			align-items: center;
 			display: flex;
@@ -33,6 +38,11 @@
 		}
 		.content .post img {
 			margin-top: 1em;
+		}
+		@media (max-width: 62em) {
+			.content .post img.default {
+				display: none;
+			}
 		}
 	</style>
 </head>
@@ -80,6 +90,7 @@
 		<posts>
 			<div class="post">
 				<div class="heading" id="2020-09-30"><h2>shelving the multi-language analyzer written in Rust</h2><span>2020-09-30</span></div>
+				<img class="default" src="default.png"/>
 				<p>Although I was making progress, I've decided to shelve the development of the multi-language analyzer I was writing in Rust. The decision wasn't based on the technology choices made (e.g. using Rust), but rather on how productive I believe creating a multi-language analyzer will be.</p>
 				<p>Libraries to analyze the syntax or semantics of a language are often only available to software written in that language, or those that share a runtime. So a new multi-language analyzer was being developed that would be limited to file/module/namespace imports. Basic parsing and regular expressions would be enough to implement this functionality.</p>
 				<p>As Rust was being used to implement the multi-language analyzer, the first language it would analyze was also Rust. However, I was finding that, even while limiting the analysis to file imports, which are syntactically unambiguous in Rust, it was taking a long time to implement.</p>
