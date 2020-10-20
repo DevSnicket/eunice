@@ -1,4 +1,4 @@
-# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 7.17.0 on 2020-09-09T11:57:21.114Z
+# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 7.18.0 on 2020-10-20T20:20:05.454Z
 - - id: javascript
     type: directory
     items:
@@ -91,13 +91,8 @@
                   - analyzeAndProcessAndRender
                   - cliArguments
                   - createParameterFromCliArguments
-                  - isLicenseAccepted
                   - version
-            - - id: isLicenseAccepted
-                dependsUpon:
-                  - cliArguments
-                  - getOrPromptForLicenseAcceptance
-                  - version
+                  - writeNameAndVersion
             - - id: cliArguments
                 type: variable
               - id: analyzeAndProcessAndRender
@@ -110,16 +105,16 @@
                 dependsUpon:
                   id: createParameterFromCliArguments
                   items: index
-              - id: getOrPromptForLicenseAcceptance
-                type: import
-                dependsUpon:
-                  id: getOrPromptForLicenseAcceptance
-                  items: index
               - id: version
                 type: import
                 dependsUpon:
                   id: package.json
                   items: version
+              - id: writeNameAndVersion
+                type: import
+                dependsUpon:
+                  id: writeNameAndVersion
+                  items: index
         - id: interactive.webpack.config
           type: file
           dependsUpon:
@@ -1206,187 +1201,6 @@
                               dependsUpon: iterators
                           - - id: iterators
                               type: variable
-        - id: getOrPromptForLicenseAcceptance
-          type: directory
-          items:
-            - - id: index.test
-                type: file
-                dependsUpon:
-                  - describe
-                  - test
-                items:
-                  - - dependsUpon:
-                        - distSubdirectoryPath
-                        - expect
-                        - getOrPromptForLicenseAcceptance
-                        - jest
-                        - version
-                    - dependsUpon:
-                        - distSubdirectoryPath
-                        - expect
-                        - getOrPromptForLicenseAcceptance
-                        - jest
-                        - version
-                    - dependsUpon:
-                        - distSubdirectoryPath
-                        - expect
-                        - getOrPromptForLicenseAcceptance
-                        - jest
-                        - version
-                    - dependsUpon: test
-                      items:
-                        - - dependsUpon:
-                              - distSubdirectoryPath
-                              - expect
-                              - getOnCallbackPressKeyNames
-                              - getOrPromptForLicenseAcceptance
-                              - isColorSupported
-                              - jest
-                              - processArguments
-                              - version
-                          - dependsUpon:
-                              - distSubdirectoryPath
-                              - expect
-                              - getOnCallbackPressKeyNames
-                              - getOrPromptForLicenseAcceptance
-                              - isColorSupported
-                              - jest
-                              - processArguments
-                              - version
-                          - dependsUpon:
-                              - distSubdirectoryPath
-                              - expect
-                              - getOnCallbackPressKeyNames
-                              - getOrPromptForLicenseAcceptance
-                              - isColorSupported
-                              - processArguments
-                              - version
-                          - dependsUpon:
-                              - distSubdirectoryPath
-                              - expect
-                              - getOnCallbackPressKeyNames
-                              - getOrPromptForLicenseAcceptance
-                              - isColorSupported
-                              - jest
-                              - path
-                              - processArguments
-                              - readFile
-                              - version
-                          - listenerCount
-                        - - getOnCallbackPressKeyNames
-                          - id: isColorSupported
-                            type: variable
-                          - id: processArguments
-                            type: variable
-                  - - id: distSubdirectoryPath
-                      type: variable
-                    - id: version
-                      type: variable
-                    - id: getOrPromptForLicenseAcceptance
-                      type: import
-                      dependsUpon:
-                        id: getOrPromptForLicenseAcceptance
-                        items: index
-                    - id: readFile
-                      type: import
-                      dependsUpon:
-                        id: fs-extra
-                        items: readFile
-            - - id: index
-                type: file
-                items:
-                  - - id: index
-                      type: export
-                      dependsUpon:
-                        - createAnsiEscapeCodeFormatter
-                        - instructOrPrompt
-                        - whenAcceptedInProcessArguments
-                      items:
-                        - - id: whenAcceptedInProcessArguments
-                            dependsUpon:
-                              - log
-                              - logCommercialUse
-                          - id: instructOrPrompt
-                            dependsUpon:
-                              - log
-                              - logCommercialUse
-                              - prompt
-                        - - id: logCommercialUse
-                            dependsUpon:
-                              - commercialUseText
-                              - log
-                          - id: prompt
-                            dependsUpon:
-                              - callWithIsAcceptOnKeyPress
-                              - logPrompt
-                              - readline
-                              - standardInputStream
-                            items:
-                              - - id: callWithIsAcceptOnKeyPress
-                                  dependsUpon:
-                                    - onKeyPress
-                                    - standardInputStream
-                                  items:
-                                    - - id: onKeyPress
-                                        dependsUpon:
-                                          - action
-                                          - getKeyName
-                                          - standardInputStream
-                                          - view
-                                    - - id: action
-                                        type: parameter
-                              - - getKeyName
-                                - id: view
-                                  dependsUpon:
-                                    - distSubdirectoryPath
-                                    - log
-                                    - logPrompt
-                                    - logTextFile
-                              - - id: logPrompt
-                                  dependsUpon:
-                                    - formatBold
-                                    - log
-                        - - id: formatBold
-                            type: variable
-                          - id: distSubdirectoryPath
-                            type: parameter
-                          - id: log
-                            type: parameter
-                          - id: standardInputStream
-                            type: parameter
-                  - - id: logTextFile
-                      dependsUpon:
-                        - path
-                        - readFileSync
-                    - id: commercialUseText
-                      type: variable
-                  - - id: readFileSync
-                      type: import
-                      dependsUpon:
-                        id: fs
-                        items: readFileSync
-            - - id: createAnsiEscapeCodeFormatter
-                type: file
-                items:
-                  - - id: createAnsiEscapeCodeFormatter
-                      type: export
-                      dependsUpon:
-                        - whenSupported
-                        - withNoFormatting
-                      items:
-                        - whenSupported
-                        - withNoFormatting
-                    - id: formatBold
-                      dependsUpon: formatWithCodes
-                    - id: formatGreen
-                      dependsUpon: formatColor
-                    - id: formatRed
-                      dependsUpon: formatColor
-                  - - id: formatColor
-                      dependsUpon: formatWithCodes
-                  - - id: formatWithCodes
-                      dependsUpon: formatAnsiEscapeCode
-                  - - formatAnsiEscapeCode
         - id: parseStackFromYaml
           type: file
           items:
@@ -1417,6 +1231,48 @@
                 dependsUpon:
                   id: js-yaml
                   items: safeLoad
+        - id: writeNameAndVersion
+          type: directory
+          items:
+            - - id: index.test
+                type: file
+                dependsUpon: test
+                items:
+                  - - dependsUpon:
+                        - expect
+                        - jest
+                        - writeNameAndVersion
+                  - - id: writeNameAndVersion
+                      type: import
+                      dependsUpon:
+                        id: writeNameAndVersion
+                        items: index
+            - - id: index
+                type: file
+                items:
+                  id: index
+                  type: export
+                  dependsUpon: createAnsiEscapeCodeFormatter
+            - - id: createAnsiEscapeCodeFormatter
+                type: file
+                items:
+                  - - id: createAnsiEscapeCodeFormatter
+                      type: export
+                      dependsUpon:
+                        - whenSupported
+                        - withNoFormatting
+                      items:
+                        - whenSupported
+                        - withNoFormatting
+                    - id: formatGreen
+                      dependsUpon: formatColor
+                    - id: formatRed
+                      dependsUpon: formatColor
+                  - - id: formatColor
+                      dependsUpon: formatWithCodes
+                  - - id: formatWithCodes
+                      dependsUpon: formatAnsiEscapeCode
+                  - - formatAnsiEscapeCode
 - - id: javascript-analyzer
     type: directory
     items:
