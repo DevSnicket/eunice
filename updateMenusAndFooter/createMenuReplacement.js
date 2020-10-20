@@ -49,7 +49,7 @@ function formatMenuHtml({
 					redirectDirectories: [ "csharp", "dotnet", "javascript" ],
 				},
 				{ directory: "issues" },
-				{ directory: "sponsor" },
+				{ directory: "blog" },
 			]
 			.map(formatDirectory)
 		);

@@ -16,143 +16,126 @@
 	<div class="header">
 		<div class="content">
 			<h1><a href=".."><span><span class="red">e</span>uni<span class="red">ce</span></span><div class="arrows"></div></a></h1>
-			<menu><a href="..">intro</a><a href="../how-it-works">how it works</a><a href="../case-studies">case studies</a><a href="../languages">languages</a><a href="../issues">issues</a><a href="../sponsor">sponsor</a></menu>
+			<menu><a href="..">intro</a><a href="../how-it-works">how it works</a><a href="../case-studies">case studies</a><a href="../languages">languages</a><a href="../issues">issues</a><a href="../blog">blog</a></menu>
 		</div>
 	</div>
 	<div class="content">
-		<sponsorContent>
-			<div class="sponsor">
-				<div class="free-usage">
-					<div class="box">
-						<h2>free for open source</h2>
-						<div><p>on projects that have an Open Source Initiative approved license</p><a href="https://opensource.org/licenses" rel="noopener" target="_blank">https://opensource.org/licenses</a><p style="font-size:small; font-style: italic">please consider supporting the project by sponsoring</p></div>
-					</div>
-					<div class="box">
-						<h2>free for academic research</h2>
-						<div><div>including online or in person classroom training and education</div><p style="font-size:small; font-style: italic">please consider supporting the project by sponsoring</p></div>
-					</div>
-					<div class="box">
-						<h2>90 day evaluation period</h2>
-						<div>for use on commercial projects</div>
-					</div>
-				</div>
-				<div class="box paid-usage">
-					<div>
-						<h1>sponsor / license</h1>
-						<p>use Eunice on commercial projects</p>
-						<p>support future development</p>
-						<p>prioritize - bugs, enhancements, language support</p>
-						<p>case studies of open source projects</p>
-					</div>
-					<div class="sponsorship-options">
-						<div>
-							<h3>individual person</h3>
-							<div class="duration">
-								<span>monthly</span>
-								<label for="individual-monthly-usd"><input id="individual-monthly-usd" name="individual-price" onchange="withProduct('individual').clearError()" type="radio" value="individual-monthly-usd">&dollar;5</label>
-								<label for="individual-monthly-eur"><input id="individual-monthly-eur" name="individual-price" onchange="withProduct('individual').clearError()" type="radio" value="individual-monthly-eur">&euro;4.75</label>
-								<label for="individual-monthly-gbp"><input id="individual-monthly-gbp" name="individual-price" onchange="withProduct('individual').clearError()" type="radio" value="individual-monthly-gbp">&pound;4</label>
-								<input onclick="withProduct('individual').buy('subscription')" type="button" value="subscribe">
-							</div>
-							<div class="error" id="individual-error"></div>
-						</div>
-						<div>
-							<h3>company</h3>
-							<div>license for an unlimited number of company employees</div>
-							<div>
-								<div class="duration">
-									<span>monthly</span>
-									<label for="company-monthly-usd"><input id="company-monthly-usd" name="company-monthly-price" onchange="withProduct('company-monthly').clearError()" type="radio" value="company-monthly-usd">&dollar;30</label>
-									<label for="company-monthly-eur"><input id="company-monthly-eur" name="company-monthly-price" onchange="withProduct('company-monthly').clearError()" type="radio" value="company-monthly-eur">&euro;28.50</label>
-									<label for="company-monthly-gbp"><input id="company-monthly-gbp" name="company-monthly-price" onchange="withProduct('company-monthly').clearError()" type="radio" value="company-monthly-gbp">&pound;24</label>
-									<input onclick="withProduct('company-monthly').buy('subscription')" type="button" value="subscribe">
-								</div>
-								<div class="error" id="company-monthly-error"></div>
-								<div class="duration">
-									<span>one year</span>
-									<label for="company-one-year-usd"><input id="company-one-year-usd" name="company-one-year-price" onchange="withProduct('company-one-year').clearError()" type="radio" value="company-one-year-usd">&dollar;360</label>
-									<label for="company-one-year-eur"><input id="company-one-year-eur" name="company-one-year-price" onchange="withProduct('company-one-year').clearError()" type="radio" value="company-one-year-eur">&euro;342</label>
-									<label for="company-one-year-gbp"><input id="company-one-year-gbp" name="company-one-year-price" onchange="withProduct('company-one-year').clearError()" type="radio" value="company-one-year-gbp">&pound;288</label>
-									<input onclick="withProduct('company-one-year').buy('payment')" type="button" value="purchase">
-								</div>
-								<div class="error" id="company-one-year-error"></div>
-							</div>
-						</div>
-						<div class="unsubscribe">
-							<h3>unsubscribe</h3>
-							<div>unsubscribe at any time by replying to an email</div>
-							<form action="https://rebnblda1m.execute-api.us-east-1.amazonaws.com/dev/unsubscribe" method="POST"><label for="unsubscribe-email-address">email address: </label><input id="unsubscribe-email-address" name="email-address" required type="email" value=""><input type="submit" value="unsubscribe"></form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</sponsorContent>
-		<h2 id="licensing">licensing</h2>
-		<p>If you have any queries, or would like to discuss alternative licenses please contact <a href="mailto:licensing@devsnicket.com">licensing@devsnicket.com</a>.</p>
-		<pre style="white-space: pre-wrap;">Copyright (c) 2019 Graham Dyson. All Rights Reserved.
-
-Eunice End-User License Agreement ("Agreement")
-Last updated: 10th August 2020
-
-These license terms are an agreement between you and Graham Dyson.  They apply to the application named Eunice ("Application").  Read the terms and conditions of this agreement carefully before using the Application.  Using the Application indicates your acceptance of these license terms.  If you do not accept these license terms, you should not use the Application.  The terms also apply to any other method of distributing the Application.
-
-1. Use rights.
-
-a. The Application may be used to analyze, investigate, design, develop and test software released under Open Source Initiative (OSI) approved open source software licenses.
-
-b. The Application may be used to analyze, investigate, design, develop and test software as part of online or in person classroom training and education, or for performing academic research.
-
-c. Sponsorship.  In consideration of you paying to us the Sponsorship Fee, we grant you a non-exclusive, non-transferable right to access and use the Application during the Sponsorship Period in accordance with this Agreement. The Sponsorship is personal to you.  You may not rent, lease, sub-license, sell, pledge, assign the benefit or delegate the burden of this Agreement or Application or hold this Agreement on trust for any other person. You shall not use the Application to manufacture or distribute a product that is substantially similar to or competitive with our software.  Information on how to pay the Sponsorship Fee can found on the following web page https://devsnicket.com/eunice/licensing.
-
-c. Evaluation.  An individual can use the Application to analyze, investigate, design, develop and test software for an Evaluation Period.  The Evaluation Period lasts 90 days from the first use of the Application by an individual. An individual can only commence one Evaluation Period per calendar year.  You may only use the the Application for internal evaluation purposes, and only during the Evaluation Period, except for: (a) open source, (b) education purposes and (c) with a monthly Sponsorship as permitted above.  The Evaluation Period may be extended by written agreement with us.
-
-e. If none of the above apply, individuals, and employees and contractors of an organization may not use the the Application.
-
-2. Licenses for third party components.
-
-The Application includes third party components with separate legal notices or governed by other agreements, as may be described in the third-party-notices.txt file accompanying the Application.
-
-3. Scope of license.
-
-The Application is licensed, not sold.  These license terms only give you some rights to use the Application.  Graham Dyson reserves all other rights.  Unless applicable law gives you more rights despite this limitation, you may use the Application only as expressly permitted in these license terms.  In doing so, you must comply with any technical limitations in the Application that only allow you to use it in certain ways.  In addition, you may not:
-
-· reverse engineer, decompile or disassemble the Application, or otherwise attempt to derive the source code for the Application, except and only to the extent required by third party licensing terms governing use of certain open source components that may be included with the Application;
-
-· remove, minimize, block or modify any notices in the Application;
-
-· use the Application in any way that is against the law;
-
-· share, publish, rent or lease the Application; or
-
-· provide the Application as a stand-alone offering or combine it with any of your applications for others to use, or transfer the Application or this Agreement to any third party.
-
-4. Support.
-
-Because the Application is “as is”, we may not provide support services for it. If you have paid for a Sponsorship, support is given for the Sponsorship Period.
-
-5. Disclaimer of warranty.
-
-There is no warranty for the Application, to the extent permitted by applicable law.  Except when otherwise stated in writing the copyright holders and/or other parties provide the Application “as is” without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.  The entire risk as to the quality and performance of the Application is with you.  Should the Application prove defective, you assume the cost of all necessary servicing, repair or correction.
-
-6. Limitation of liability.
-
-In no event unless required by applicable law or agreed to in writing will any copyright holder, or any other party who modifies and/or conveys the Application as permitted above, be liable to you for damages, including any general, special, incidental or consequential damages arising out of the use or inability to use the Application (including but not limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of the Application to operate with any other applications), even if such holder or other party has been advised of the possibility of such damages.
-
-7. Interpretation of sections 5 and 6.
-
-If the disclaimer of warranty and limitation of liability provided above cannot be given local legal effect according to their terms, reviewing courts shall apply local law that most closely approximates an absolute waiver of all civil liability in connection with the Application, unless a warranty or assumption of liability accompanies a copy of the Application in return for a fee.
-
-8. Modifications to Application
-
-Graham Dyson reserves the right to modify, suspend or discontinue, temporarily or permanently, the Application or any service to which it connects, with or without notice and without liability to you.
-
-9. Term and Termination
-
-This Agreement shall remain in effect until terminated by you or Graham Dyson. Graham Dyson may, in their sole discretion, at any time and for any or no reason, suspend or terminate this Agreement with or without prior notice.  This Agreement will terminate immediately, without prior notice from Graham Dyson, in the event that you fail to comply with any provision of this Agreement.  You may also terminate this Agreement by deleting the Application and all copies thereof from your computer.
-
-10. Amendments to this Agreement
-
-Graham Dyson reserves the right, at their sole discretion, to modify or replace this Agreement at any time.  If a revision is material we will provide at least 30 days notice prior to any new terms taking effect.  What constitutes a material change will be determined at our sole discretion.</pre>
+		<h2>Copyright (c) 2019 Graham Dyson. All Rights Reserved.</h2>
+		<p>Eunice is closed-source freeware with the following license.</p>
+		<h3>Creative Commons Attribution-NoDerivatives 4.0 International Public License</h3>
+		<p>By exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-NoDerivatives 4.0 International Public License ("Public License"). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.</p>
+		<p id="s1"><strong>Section 1 – Definitions.</strong></p>
+		<ol type="a">
+		<li id="s1a"><strong>Adapted Material</strong> means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.</li>
+		<li id="s1b"><strong>Copyright and Similar Rights</strong> means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section <a href="#s2b">2(b)(1)-(2)</a> are not Copyright and Similar Rights.</li>
+		<li id="s1c"><strong>Effective Technological Measures</strong> means those measures that, in the absence of proper authority, may not
+		be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar
+		international agreements.</li>
+		<li id="s1d"><strong>Exceptions and Limitations</strong> means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.</li>
+		<li id="s1e"><strong>Licensed Material</strong> means the artistic or literary work, database, or other material to which the Licensor applied this Public License.</li>
+		<li id="s1f"><strong>Licensed Rights</strong> means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.</li>
+		<li id="s1g"><strong>Licensor</strong> means the individual(s) or entity(ies) granting rights under this Public License.</li>
+		<li id="s1h"><strong>Share</strong> means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.</li>
+		<li id="s1i"><strong>Sui Generis Database Rights</strong> means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.</li>
+		<li id="s1j"><strong>You</strong> means the individual or entity exercising the Licensed Rights under this Public License. <strong>Your</strong> has a corresponding meaning.</li>
+		</ol>
+		<p id="s2"><strong>Section 2 – Scope.</strong></p>
+		<ol type="a">
+		<li id="s2a"><strong>License grant</strong>.
+		<ol>
+		<li id="s2a1">Subject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:
+		<ol type="A">
+		<li id="s2a1A">reproduce and Share the Licensed Material, in whole or in part; and</li>
+		<li id="s2a1B">produce and reproduce, but not Share, Adapted Material.</li>
+		</ol>
+		</li><li id="s2a2"><span style="text-decoration: underline;">Exceptions and Limitations</span>. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.</li>
+		<li id="s2a3"><span style="text-decoration: underline;">Term</span>. The term of this Public License is specified in Section <a href="#s6a">6(a)</a>.</li>
+		<li id="s2a4"><span style="text-decoration: underline;">Media and formats; technical modifications allowed</span>. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section <a href="#s2a4">2(a)(4)</a> never produces Adapted Material.</li>
+		<li id="s2a5"><span style="text-decoration: underline;">Downstream recipients</span>.
+		<div class="para">
+		<ol type="A">
+		<li id="s2a5A"><span style="text-decoration: underline;">Offer from the Licensor – Licensed Material</span>. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.</li>
+		<li id="s2a5B"><span style="text-decoration: underline;">No downstream restrictions</span>. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.</li>
+		</ol>
+		</div>
+		</li><li id="s2a6"><span style="text-decoration: underline;">No endorsement</span>. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section <a href="#s3a1Ai">3(a)(1)(A)(i)</a>.</li>
+		</ol>
+		</li><li id="s2b"><p><strong>Other rights</strong>.</p>
+		<ol>
+		<li id="s2b1">Moral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.</li>
+		<li id="s2b2">Patent and trademark rights are not licensed under this Public License.</li>
+		<li id="s2b3">To the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.</li>
+		</ol>
+		</li>
+		</ol>
+		<p id="s3"><strong>Section 3 – License Conditions.</strong></p>
+		<p>Your exercise of the Licensed Rights is expressly made subject to the following conditions.</p>
+		<ol type="a">
+		<li id="s3a"><p><strong>Attribution</strong>.</p>
+		<ol>
+		<li id="s3a1"><p>If You Share the Licensed Material, You must:</p>
+		<ol type="A">
+		<li id="s3a1A">retain the following if it is supplied by the Licensor with the Licensed Material:
+		<ol type="i">
+		<li id="s3a1Ai">identification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);</li>
+		<li id="s3a1Aii">a copyright notice;</li>
+		<li id="s3a1Aiii">a notice that refers to this Public License; </li>
+		<li id="s3a1Aiv">a notice that refers to the disclaimer of warranties;</li>
+		<li id="s3a1Av">a URI or hyperlink to the Licensed Material to the extent reasonably practicable;</li>
+		</ol>
+		</li><li id="s3a1B">indicate if You modified the Licensed Material and retain an indication of any previous modifications; and</li>
+		<li id="s3a1C">indicate the Licensed Material is licensed under this Public License,
+		and include the text of, or the URI or hyperlink to, this Public
+		License.</li>
+		</ol>
+		For the avoidance of doubt, You do not have permission under this Public License to Share Adapted Material.
+		</li>
+		<li id="s3a2">You may satisfy the conditions in Section <a href="#s3a1">3(a)(1)</a> in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.</li>
+		<li id="s3a3">If requested by the Licensor, You must remove any of the information required by Section <a href="#s3a1A">3(a)(1)(A)</a> to the extent reasonably practicable.</li>
+		</ol>
+		</li>
+		</ol>
+		<p id="s4"><strong>Section 4 – Sui Generis Database Rights.</strong></p>
+		<p>Where the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:</p>
+		<ol type="a">
+		<li id="s4a">for the avoidance of doubt, Section <a href="#s2a1">2(a)(1)</a> grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database, provided You do not Share Adapted Material;</li>
+		<li id="s4b">if You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material; and</li>
+		<li id="s4c">You must comply with the conditions in Section <a href="#s3a">3(a)</a> if You Share all or a substantial portion of the contents of the database.</li>
+		</ol>
+		For the avoidance of doubt, this Section <a href="#s4">4</a> supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.
+		<p id="s5"><strong>Section 5 – Disclaimer of Warranties and Limitation of Liability.</strong></p>
+		<ol style="font-weight: bold;" type="a">
+		<li id="s5a"><strong>Unless otherwise separately undertaken by the Licensor, to the extent possible, the Licensor offers the Licensed Material as-is and as-available, and makes no representations or warranties of any kind concerning the Licensed Material, whether express, implied, statutory, or other. This includes, without limitation, warranties of title, merchantability, fitness for a particular purpose, non-infringement, absence of latent or other defects, accuracy, or the presence or absence of errors, whether or not known or discoverable. Where disclaimers of warranties are not allowed in full or in part, this disclaimer may not apply to You.</strong></li>
+		<li id="s5b"><strong>To the extent possible, in no event will the Licensor be liable to You on any legal theory (including, without limitation, negligence) or otherwise for any direct, special, indirect, incidental, consequential, punitive, exemplary, or other losses, costs, expenses, or damages arising out of this Public License or use of the Licensed Material, even if the Licensor has been advised of the possibility of such losses, costs, expenses, or damages. Where a limitation of liability is not allowed in full or in part, this limitation may not apply to You.</strong></li>
+		</ol>
+		<ol start="3" type="a">
+		<li id="s5c">The disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.</li>
+		</ol>
+		<p id="s6"><strong>Section 6 – Term and Termination.</strong></p>
+		<ol type="a">
+		<li id="s6a">This Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.</li>
+		<li id="s6b">
+		<p>Where Your right to use the Licensed Material has terminated under Section <a href="#s6a">6(a)</a>, it reinstates:</p>
+		<ol>
+		<li id="s6b1">automatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or</li>
+		<li id="s6b2">upon express reinstatement by the Licensor.</li>
+		</ol>
+		For the avoidance of doubt, this Section <a href="#s6b">6(b)</a> does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.</li>
+		<li id="s6c">For the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.</li>
+		<li id="s6d">Sections <a href="#s1">1</a>, <a href="#s5">5</a>, <a href="#s6">6</a>, <a href="#s7">7</a>, and <a href="#s8">8</a> survive termination of this Public License.</li>
+		</ol>
+		<p id="s7"><strong>Section 7 – Other Terms and Conditions.</strong></p>
+		<ol type="a">
+		<li id="s7a">The Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.</li>
+		<li id="s7b">Any arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.</li>
+		</ol>
+		<p id="s8"><strong>Section 8 – Interpretation.</strong></p>
+		<ol type="a">
+		<li id="s8a">For the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.</li>
+		<li id="s8b">To the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.</li>
+		<li id="s8c">No term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.</li>
+		<li id="s8d">Nothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.</li>
+		</ol>
 	</div>
 	<footer>
 		<div class="footer">
