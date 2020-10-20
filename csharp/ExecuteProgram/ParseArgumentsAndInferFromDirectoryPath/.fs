@@ -9,7 +9,6 @@ type String = System.String
 type ParsedArguments =
     {
         FilePath: String
-        IsLicenseAccepted: Boolean
         MemberBehavior: MemberBehavior
     }
 
@@ -35,8 +34,6 @@ let parseArgumentsAndInferFromDirectoryPath (directoryPath: String) (arguments: 
                 {
                     FilePath =
                         filePath
-                    IsLicenseAccepted =
-                        ArgumentNames.AcceptLicense |> hasArgumentOfName
                     MemberBehavior =
                         match ArgumentNames.Members |> hasArgumentOfName with
                         | true -> MemberBehavior.Level
@@ -48,8 +45,6 @@ let parseArgumentsAndInferFromDirectoryPath (directoryPath: String) (arguments: 
 
 let private getArgumentNameWhenRecognized =
     function
-    | ArgumentNames.AcceptLicense ->
-        Some ArgumentNames.AcceptLicense
     | ArgumentNames.Members ->
         Some ArgumentNames.Members
     | _ ->

@@ -61,7 +61,6 @@ type Tests () =
                 Expected =
                     ParsedArguments {
                         FilePath = [ "SingleProject"; "SingleProject.csproj" ] |> getPathFromNames
-                        IsLicenseAccepted = false
                         MemberBehavior = MemberBehavior.None
                     }
             |}
@@ -73,7 +72,6 @@ type Tests () =
                 Expected =
                     ParsedArguments {
                         FilePath = [ "SingleProjectAndSingleSolution"; "SingleSolution.sln" ] |> getPathFromNames
-                        IsLicenseAccepted = false
                         MemberBehavior = MemberBehavior.None
                     }
             |}
@@ -85,7 +83,6 @@ type Tests () =
                 Expected =
                     ParsedArguments {
                         FilePath = [ "SingleSolution"; "SingleSolution.sln" ] |> getPathFromNames
-                        IsLicenseAccepted = false
                         MemberBehavior = MemberBehavior.None
                     }
             |}
@@ -97,7 +94,6 @@ type Tests () =
                 Expected =
                     ParsedArguments {
                         FilePath = "filePathArgument"
-                        IsLicenseAccepted = false
                         MemberBehavior = MemberBehavior.None
                     }
             |}
@@ -109,7 +105,6 @@ type Tests () =
                 Expected =
                     ParsedArguments {
                         FilePath = "filePathArgument"
-                        IsLicenseAccepted = false
                         MemberBehavior = MemberBehavior.Level
                     }
             |}
@@ -121,30 +116,6 @@ type Tests () =
                 Expected =
                     ParsedArguments {
                         FilePath = "filePathArgument"
-                        IsLicenseAccepted = false
-                        MemberBehavior = MemberBehavior.None
-                    }
-            |}
-            {|
-                Arguments =
-                    [| ArgumentNames.AcceptLicense |]
-                DirectoryPath =
-                    [ "Other" ] |> getPathFromNames
-                Expected =
-                    Error projectOrSolutionFileNotFoundOrSpecifiedError
-            |}
-            {|
-                Arguments =
-                    [|
-                        ArgumentNames.AcceptLicense
-                        "filePathArgument"
-                    |]
-                DirectoryPath =
-                    [ "Other" ] |> getPathFromNames
-                Expected =
-                    ParsedArguments {
-                        FilePath = "filePathArgument"
-                        IsLicenseAccepted = true
                         MemberBehavior = MemberBehavior.None
                     }
             |}

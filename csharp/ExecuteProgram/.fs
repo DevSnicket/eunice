@@ -5,7 +5,6 @@ module rec DevSnicket.Eunice.ExecuteProgram
 open DevSnicket.Eunice.AnalyzeProject
 open DevSnicket.Eunice.CallAnalyzeProjectForProjectOrSolutionPath
 open DevSnicket.Eunice._ExecuteProgram.FormatHeaderComment
-open DevSnicket.Eunice._ExecuteProgram.GetOrPromptForLicenseAcceptance
 open DevSnicket.Eunice._ExecuteProgram.ParseArgumentsAndInferFromDirectoryPath
 open DevSnicket.Eunice._ExecuteProgram.WriteNameAndVersion
 open DevSnicket.Eunice.WriteInteractiveInDirectoryPathWithYaml
@@ -40,39 +39,27 @@ let executeProgramWithArguments arguments =
 
 let private executeProgramWithParsedArguments (arguments: ParsedArguments, version) =
     async {
-        let! isLicenseAccepted =
-            getOrPromptForLicenseAcceptance
-                {|
-                    IsAcceptedInArguments = arguments.IsLicenseAccepted
-                    IsInteractive = not <| Console.IsOutputRedirected
-                    ReadKey = consoleReadKeyIntercept
-                    WriteLine = Console.WriteLine
-                |}
+        Microsoft.Build.Locator.MSBuildLocator.RegisterDefaults ()
+        |> ignore
 
-        if isLicenseAccepted then
-            Microsoft.Build.Locator.MSBuildLocator.RegisterDefaults ()
-            |> ignore
+        let! {
+                Errors = errors
+                Yaml = yaml
+            }
+            =
+            analyzeProject arguments.MemberBehavior
+            |> callAnalyzeProjectForProjectOrSolutionPath arguments.FilePath
 
-            let! {
-                    Errors = errors
-                    Yaml = yaml
-                }
-                =
-                analyzeProject arguments.MemberBehavior
-                |> callAnalyzeProjectForProjectOrSolutionPath arguments.FilePath
+        errors |> Seq.iter Console.Error.WriteLine
 
-            errors |> Seq.iter Console.Error.WriteLine
+        do!
+            seq [
+                formatHeaderComment (DateTime.Now, version)
+                yield! yaml
+            ]
+            |> writeInteractiveInDirectoryPathWithYaml "."
 
-            do!
-                seq [
-                    formatHeaderComment (DateTime.Now, version)
-                    yield! yaml
-                ]
-                |> writeInteractiveInDirectoryPathWithYaml "."
-
-            return 0
-        else
-            return 1
+        return 0
     }
 
 let private consoleReadKeyIntercept () =

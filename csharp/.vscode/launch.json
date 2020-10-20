@@ -2,7 +2,6 @@
 	"configurations": [
 		{
 			"args": [ 
-				"--accept-license",
 				"--members",
 				"Tests/TestCases/"
 			],
