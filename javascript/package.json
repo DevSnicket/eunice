@@ -101,7 +101,7 @@
 		"unice",
 		"yaml"
 	],
-	"license": "SEE LICENSE IN LICENSE",
+	"license": "CC-BY-ND-4.0",
 	"name": "eunice",
 	"publishConfig": {
 		"repository": "https://pkgs.dev.azure.com/grahamdyson/_packaging/Eunice/npm/registry/"
@@ -125,5 +125,5 @@
 		"test": "jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "7.17.0"
+	"version": "7.19.0"
 }

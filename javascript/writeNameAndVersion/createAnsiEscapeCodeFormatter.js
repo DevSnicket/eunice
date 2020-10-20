@@ -9,7 +9,6 @@ export default
 			isColorSupported
 			&&
 			{
-				formatBold,
 				formatGreen,
 				formatRed,
 			}
@@ -19,25 +18,12 @@ export default
 	function withNoFormatting() {
 		return (
 			{
-				formatBold: text => text,
 				formatGreen: text => text,
 				formatRed: text => text,
 			}
 		);
 	}
 };
-
-function formatBold(
-	text,
-) {
-	return (
-		formatWithCodes({
-			off: 22,
-			on: 1,
-			text,
-		})
-	);
-}
 
 function formatGreen(
 	text,

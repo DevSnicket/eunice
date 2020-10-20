@@ -8,11 +8,11 @@
 
 import analyzeAndProcessAndRender from "./analyzeAndProcessAndRender";
 import createParameterFromCliArguments from "./createParameterFromCliArguments";
-import getOrPromptForLicenseAcceptance from "./getOrPromptForLicenseAcceptance";
 import minimist from "minimist";
 import path from "path";
 import supportsColor from "supports-color";
 import { version } from "./package.json";
+import writeNameAndVersion from "./writeNameAndVersion";
 
 const cliArguments =
 	minimist(
@@ -21,19 +21,20 @@ const cliArguments =
 
 (async() => {
 	try {
-		if (await isLicenseAccepted()) {
-			console.log();
-			console.log("Analyzing...");
+		writeNameAndVersion({
+			isColorSupported: supportsColor.stdout,
+			log: console.log,
+			version,
+		});
 
-			await analyzeAndProcessAndRender({
-				...createParameterFromCliArguments({
-					cliArguments,
-					pathSeparator: path.sep,
-				}),
-				date: Date.now(),
-				version,
-			});
-		}
+		await analyzeAndProcessAndRender({
+			...createParameterFromCliArguments({
+				cliArguments,
+				pathSeparator: path.sep,
+			}),
+			date: Date.now(),
+			version,
+		});
 	} catch (error) {
 		console.log(error.message);
 	}
@@ -42,16 +43,3 @@ const cliArguments =
 	// eslint-disable-next-line no-process-exit
 	process.exit();
 })();
-
-function isLicenseAccepted() {
-	return (
-		getOrPromptForLicenseAcceptance({
-			distSubdirectoryPath: __dirname,
-			isColorSupported: supportsColor.stdout,
-			log: console.log,
-			processArguments: cliArguments,
-			standardInputStream: process.stdin,
-			version,
-		})
-	);
-}
