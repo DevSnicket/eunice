@@ -1,4 +1,4 @@
-# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 7.19.0 on 2020-10-20T20:42:27.606Z
+# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 7.19.0 on 2020-12-29T11:28:55.146Z
 - - id: javascript
     type: directory
     items:
@@ -135,7 +135,9 @@
       - - id: analyzeAndProcessAndRender
           type: directory
           items:
-            - - id: tests
+            - - id: Parameter.d
+                type: file
+              - id: tests
                 type: directory
                 items:
                   - id: index.test
@@ -192,8 +194,10 @@
                       id: source
                       type: directory
                       items:
-                        id: fileInSingleSource
-                        type: file
+                        - id: javascriptFileInSingleSource
+                          type: file
+                        - id: typescriptFileInSingleSource
+                          type: file
                   - id: singleSourceWithOutputBaseFilename
                     type: directory
                     items:
@@ -283,7 +287,9 @@
               - id: analyzeAndProcess
                 type: directory
                 items:
-                  - - id: tests
+                  - - id: Parameter.d
+                      type: file
+                    - id: tests
                       type: directory
                       items:
                         - id: index.test
@@ -1158,7 +1164,9 @@
               - id: createStructureAndEnsureTypes
                 type: directory
                 items:
-                  - - id: index
+                  - - id: Parameter.d
+                      type: file
+                    - id: index
                       type: file
                       items:
                         - - id: index
@@ -1399,7 +1407,9 @@
       - - id: getOrCreateItemsInDirectory
           type: directory
           items:
-            - - id: bin
+            - - id: Parameter.d
+                type: file
+              - id: bin
                 type: file
                 dependsUpon:
                   - createRegularExpressionFromPathPattern
@@ -1999,7 +2009,11 @@
       - - id: getItemOrItemsFromJavascript
           type: directory
           items:
-            - - id: index
+            - - id: Options.d
+                type: file
+              - id: Parameter.d
+                type: file
+              - id: index
                 type: file
                 items:
                   - - id: index
@@ -5005,7 +5019,11 @@
         - id: visualizer
           type: directory
           items:
-            - - id: tests
+            - - id: Namespaces.d
+                type: file
+              - id: Parameter.d
+                type: file
+              - id: tests
                 type: directory
                 items:
                   - - id: index.test
@@ -6016,7 +6034,11 @@
               - id: createStackGroupFactory
                 type: directory
                 items:
-                  - - id: index
+                  - - id: ElementContainerFactory.d
+                      type: file
+                    - id: Parameter.d
+                      type: file
+                    - id: index
                       type: file
                       items:
                         - - id: index
@@ -6206,7 +6228,9 @@
       - - id: dependency-counter
           type: directory
           items:
-            - - id: index
+            - - id: Counts.d
+                type: file
+              - id: index
                 type: file
                 items:
                   - id: countOfItem
@@ -6229,7 +6253,9 @@
             - - id: countOfItem
                 type: directory
                 items:
-                  - - id: tests
+                  - - id: Item.d
+                      type: file
+                    - id: tests
                       type: directory
                       items:
                         id: index.test
@@ -6441,7 +6467,11 @@
       - - id: dependency-and-structure
           type: directory
           items:
-            - - id: index
+            - - id: Stack.d
+                type: file
+              - id: Yaml.d
+                type: file
+              - id: index
                 type: file
                 items:
                   - id: addDirectionAndMutualStackToDependenciesInStack
@@ -7515,7 +7545,9 @@
                     - id: findDirectionBetweenItemsInMutualStack
                       type: directory
                       items:
-                        - - id: index.test
+                        - - id: Parameter.d
+                            type: file
+                          - id: index.test
                             type: file
                             dependsUpon:
                               - createItemWithParent
@@ -7645,7 +7677,9 @@
               - id: findItemInStackWithIdentifierHierarchy
                 type: directory
                 items:
-                  - - id: index.test
+                  - - id: Parameter.d
+                      type: file
+                    - id: index.test
                       type: file
                       dependsUpon:
                         - createParent
@@ -7680,28 +7714,32 @@
                   - - id: formatAncestorIdentifiersOfStackForError
                       type: directory
                       items:
-                        id: index
-                        type: file
-                        items:
-                          - - id: index
-                              type: export
-                              dependsUpon: ofItemWhenHasValue
-                          - - id: ofItemWhenHasValue
-                              dependsUpon: formatHierarchy
-                              items:
-                                - - id: formatHierarchy
-                                    dependsUpon:
-                                      - getIdentifiersOfItemAndAncestors
-                                      - item
-                                      - joinIdentifiers
-                                - - id: item
-                                    type: parameter
-                          - - getIdentifiersOfItemAndAncestors
-                            - joinIdentifiers
+                        - id: Parameter.d
+                          type: file
+                        - id: index
+                          type: file
+                          items:
+                            - - id: index
+                                type: export
+                                dependsUpon: ofItemWhenHasValue
+                            - - id: ofItemWhenHasValue
+                                dependsUpon: formatHierarchy
+                                items:
+                                  - - id: formatHierarchy
+                                      dependsUpon:
+                                        - getIdentifiersOfItemAndAncestors
+                                        - item
+                                        - joinIdentifiers
+                                  - - id: item
+                                      type: parameter
+                            - - getIdentifiersOfItemAndAncestors
+                              - joinIdentifiers
               - id: isInnerStack
                 type: directory
                 items:
-                  - - id: index.test
+                  - - id: Parameter.d
+                      type: file
+                    - id: index.test
                       type: file
                       dependsUpon:
                         - expect
@@ -7746,7 +7784,9 @@
                   - - id: callTestForSymmetrical
                       type: directory
                       items:
-                        - - id: index
+                        - - id: Parameter.d
+                            type: file
+                          - id: index
                             type: file
                             items:
                               - - id: index
