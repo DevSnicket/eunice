@@ -9,7 +9,7 @@ export default async(/** @type {import("./Parameter.d")} */{
 	babelParserPlugins = babelParserPluginsDefault,
 	dependencyPermeableIdentifiers,
 	directoryToCreateOrAddToStacksFrom,
-	fileExtensions,
+	fileExtensions = [ ".js", ".ts" ],
 	ignorePathPattern,
 	isFileContentReversed,
 	isInferStacksEnabled,

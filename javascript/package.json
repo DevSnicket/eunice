@@ -24,7 +24,7 @@
 		"@devsnicket/eunice-stacking-explicit": "^14.6.0",
 		"@devsnicket/eunice-stacking-inference": "^4.0.0",
 		"@devsnicket/eunice-test-harnesses": "^9.1.0",
-		"@devsnicket/eunice-visualizer": "^3.0.1",
+		"@devsnicket/eunice-visualizer": "^3.0.2",
 		"@types/fs-extra": "^8.1.1",
 		"@types/jest": "^26.0.7",
 		"@types/lodash.deburr": "^4.1.6",
@@ -125,5 +125,5 @@
 		"test": "jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "7.19.0"
+	"version": "7.20.0"
 }

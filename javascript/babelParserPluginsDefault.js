@@ -24,4 +24,5 @@ export default [
 	"optionalCatchBinding",
 	"optionalChaining",
 	"throwExpressions",
+	"typescript",
 ];

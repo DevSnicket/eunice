@@ -1,3 +1,5 @@
 # created by Eunice for JavaScript (https://devsnicket.com/eunice) version 0.0.0 on 1970-01-01T00:00:00.000Z
-id: fileInSingleSource
-type: file
+- id: javascriptFileInSingleSource
+  type: file
+- id: typescriptFileInSingleSource
+  type: file
