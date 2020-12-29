@@ -5,16 +5,16 @@ export = ElementContainerFactory;
 
 interface ElementContainerFactory {
 	createForDependencyCount?:
-		function({
+		(_: {
 			element: ReactSVGElement,
 			item: Item,
 			level: "above" | "below" | "self",
 			relationship: "dependents" | "dependsUpon",
-		}): ReactSVGElement
+		}) => ReactSVGElement;
 
 	createForItem?:
-		function({
+		(_: {
 			element: ReactSVGElement,
 			item: Item,
-		}): ReactSVGElement;
+		}) => ReactSVGElement;
 }

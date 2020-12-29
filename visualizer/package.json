@@ -72,5 +72,5 @@
 		"test": "npx jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "3.0.1"
+	"version": "3.0.2"
 }
