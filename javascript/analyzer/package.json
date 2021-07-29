@@ -103,5 +103,5 @@
 		"test": "jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "11.33.0"
+	"version": "11.34.0"
 }

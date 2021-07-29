@@ -73,6 +73,8 @@ export default ({
 				visitClass,
 			ClassProperty:
 				visitClassProperty,
+			JSXOpeningElement:
+				visitJsxOpeningElement,
 			NewExpression:
 				visitCallExpression,
 			VariableDeclaration:
@@ -157,6 +159,16 @@ export default ({
 			createDependsUponProperty:
 				dependsUponIdentifiers.createPropertyAndRemoveIdentifiers,
 			declarations,
+		});
+	}
+
+	function visitJsxOpeningElement(
+		{ name: { name } },
+		ancestors,
+	) {
+		dependsUponIdentifiers.addIdentifierToParent({
+			identifier: name,
+			parent: findBlockOrIdentifiableParentInAncestors(ancestors),
 		});
 	}
 

@@ -1,40 +1,22 @@
-// Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
+// Copyright (c) 2018 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
 
 import getYamlFromJavascript from "../..";
 import path from "path";
-import readTextFile from "../readTextFile";
+import runTestsFromFileSystem from "@devsnicket/eunice-run-tests-from-file-system";
 
-test(
-	"React JSX enabled and function call in content of element returns depends upon function.",
-	async() => {
-		const { javascript, yaml } =
-			await readJavascriptAndYamlFromDirectoryPath(
-				path.join(__dirname, "test-case"),
-			);
-
-		expect(
+runTestsFromFileSystem({
+	caseFileName:
+		".js",
+	directoryAbsolutePath:
+		path.join(__dirname, "test-cases"),
+	expectedFileName:
+		".yaml",
+	getActualForTestCase:
+		({ content }) =>
 			getYamlFromJavascript({
 				babelParserPlugins: [ "jsx" ],
-				javascript,
+				javascript: content,
 			}),
-		)
-		.toEqual(yaml);
-	},
-);
-
-async function readJavascriptAndYamlFromDirectoryPath(
-	directoryPath,
-) {
-	return (
-		{
-			javascript: await readFileWithExtension("js"),
-			yaml: await readFileWithExtension("yaml"),
-		}
-	);
-
-	function readFileWithExtension(
-		extension,
-	) {
-		return readTextFile(path.join(directoryPath, `.${extension}`));
-	}
-}
+	processArguments:
+		process.argv,
+});
