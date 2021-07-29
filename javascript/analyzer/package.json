@@ -47,6 +47,8 @@
 		"collectCoverageFrom": [
 			"**/*.js",
 			"!**/bin.js",
+			"!**/test-case/**",
+			"!**/test-case/**/.js",
 			"!**/test-cases/**",
 			"!**/test-cases/**/.js",
 			"!node_modules/**",
