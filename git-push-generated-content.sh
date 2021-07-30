@@ -1,4 +1,4 @@
-git checkout master
+git checkout website
 git add .
 
 if [[ `git status --porcelain` ]]; then
