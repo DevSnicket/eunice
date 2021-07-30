@@ -9,6 +9,7 @@
 		"target": "es2017"
 	},
 	"exclude": [
+		"analyzeAndProcessAndRender/tests/singleSource/source",
 		"dist",
 		"dogfooding/output",
 		"harness/harness.js",
