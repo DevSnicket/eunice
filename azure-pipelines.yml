@@ -1,0 +1,24 @@
+pool:
+  name: $(pool_name)
+  vmImage: ubuntu-18.04
+steps:
+  - task: NodeTool@0
+    displayName: Node install
+    inputs: { versionSpec: '12.16' }
+  - task: ShellScript@2
+    displayName: spellcheck
+    inputs:
+      args: $(github_access_token)
+      scriptPath: spellcheck.sh
+  - task: ShellScript@2
+    displayName: update all
+    inputs:
+      args: $(github_access_token)
+      scriptPath: update-all.sh
+  - task: ShellScript@2
+    displayName: Git push generated content
+    inputs:
+      args: $(github_access_token)
+      scriptPath: git-push-generated-content.sh
+trigger: [ website ]
+workspace: { clean: all }
