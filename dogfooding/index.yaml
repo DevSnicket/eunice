@@ -1,4 +1,4 @@
-# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 7.21.0 on 2021-08-01T11:38:21.673Z
+# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 7.22.0 on 2021-08-01T15:20:17.766Z
 - - id: javascript
     type: directory
     items:
@@ -196,6 +196,12 @@
                       items:
                         - id: javascriptFileInSingleSource
                           type: file
+                        - id: jsxFileInSingleSource
+                          type: file
+                          dependsUpon: element
+                        - id: tsxFileInSingleSource
+                          type: file
+                          dependsUpon: element
                         - id: typescriptFileInSingleSource
                           type: file
                   - id: singleSourceWithOutputBaseFilename
