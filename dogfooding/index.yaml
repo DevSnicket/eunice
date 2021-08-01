@@ -1,4 +1,4 @@
-# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 7.20.0 on 2020-12-29T12:00:52.786Z
+# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 7.21.0 on 2021-08-01T11:38:21.673Z
 - - id: javascript
     type: directory
     items:
@@ -1947,6 +1947,16 @@
                       items:
                         id: index.test
                         type: file
+                        dependsUpon:
+                          - path
+                          - run-tests-from-file-system
+                          - id: getYamlFromJavascript
+                            items: index
+                    - id: typescript
+                      type: directory
+                      items:
+                        id: index.test
+                        type: file
                         dependsUpon: test
                         items:
                           - - dependsUpon:
@@ -2106,6 +2116,10 @@
                                   dependsUpon:
                                     - addClassProperty
                                     - declarations
+                                - id: visitJsxOpeningElement
+                                  dependsUpon:
+                                    - dependsUponIdentifiers
+                                    - findBlockOrIdentifiableParentInAncestors
                                 - id: visitVariableDeclaration
                                   dependsUpon:
                                     - addVariables
