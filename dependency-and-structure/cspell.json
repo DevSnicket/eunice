@@ -1,0 +1,11 @@
+{
+	"ignorePaths": [ "test-coverage/**" ],
+	"language": "en",
+	"version": "0.1",
+	"words": [
+		"devsnicket",
+		"dogfooding",
+		"gitter",
+		"snicket"
+	]
+}

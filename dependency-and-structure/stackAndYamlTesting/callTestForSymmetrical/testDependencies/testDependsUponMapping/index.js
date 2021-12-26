@@ -1,0 +1,53 @@
+// Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
+
+import testDependencyPermeable from "./testDependencyPermeable";
+import testDependsUponMissingChildInMissingParent from "./testDependsUponMissingChildInMissingParent";
+import testDependsUponMissingGrandchildInMissingChildInMissingParent from "./testDependsUponMissingGrandchildInMissingChildInMissingParent";
+import testDependsUponMissingGreatGrandchildInMssingGrandchildInMissingChildInMissingParent from "./testDependsUponMissingGreatGrandchildInMissingGrandchildInMissingChildInMissingParent";
+import testDependsUponTwoMissingChildrenInMissingParent from "./testDependsUponTwoMissingChildrenInMissingParent";
+import testFirstDependsUponChildAndMissingChildInSecond from "./testFirstDependsUponChildAndMissingChildInSecond";
+import testFirstDependsUponChildInSecond from "./testFirstDependsUponChildInSecond";
+import testFirstDependsUponChildInSecondAndSecond from "./testFirstDependsUponChildInSecondAndSecond";
+import testFirstDependsUponGrandchildInSecond from "./testFirstDependsUponGrandchildInSecond";
+import testFirstDependsUponGrandchildInSecondAndChildInSecond from "./testFirstDependsUponGrandchildInSecondAndChildInSecond";
+import testFirstDependsUponMissingChildInSecond from "./testFirstDependsUponMissingChildInSecond";
+import testFirstDependsUponMissingChildInSecondAndSecond from "./testFirstDependsUponMissingChildInSecondAndSecond";
+import testFirstDependsUponMissingGrandchildInMissingChildInSecond from "./testFirstDependsUponMissingGrandchildInMissingChildInSecond";
+import testFirstDependsUponMissingGrandchildInSecond from "./testFirstDependsUponMissingGrandchildInSecond";
+import testFirstDependsUponMissingGreatGrandchildInMissingGrandchildInMissingChildInSecond from "./testFirstDependsUponMissingGreatGrandchildInMissingGrandchildInMissingChildInSecond";
+import testFirstDependsUponTwoChildrenInSecond from "./testFirstDependsUponTwoChildrenInSecond";
+import testFirstDependsUponTwoChildrenInSecondAndSecond from "./testFirstDependsUponTwoChildrenInSecondAndSecond";
+import testFirstDependsUponTwoGrandchildrenInChildInSecond from "./testFirstDependsUponTwoGrandchildrenInChildInSecond";
+import testFirstDependsUponTwoGrandchildrenInTwoChildrenInSecond from "./testFirstDependsUponTwoGrandchildrenInTwoChildrenInSecond";
+import testFirstDependsUponTwoMissingGrandchildrenInTwoChildrenInSecond from "./testFirstDependsUponTwoMissingGrandchildrenInTwoChildrenInSecond";
+import testFirstDependsUponTwoMissingGrandchildrenInTwoMissingChildInSecond from "./testFirstDependsUponTwoMissingGrandchildrenInTwoMissingChildInSecond";
+
+export default
+/** @type {import("../../Parameter.d")} */
+stackAndYamlTest =>
+	describe(
+		"depends upon mapping",
+		() => {
+			testDependencyPermeable(stackAndYamlTest);
+			testDependsUponMissingChildInMissingParent(stackAndYamlTest);
+			testDependsUponMissingGrandchildInMissingChildInMissingParent(stackAndYamlTest);
+			testDependsUponMissingGreatGrandchildInMssingGrandchildInMissingChildInMissingParent(stackAndYamlTest);
+			testDependsUponTwoMissingChildrenInMissingParent(stackAndYamlTest);
+			testFirstDependsUponChildAndMissingChildInSecond(stackAndYamlTest);
+			testFirstDependsUponChildInSecond(stackAndYamlTest);
+			testFirstDependsUponChildInSecondAndSecond(stackAndYamlTest);
+			testFirstDependsUponGrandchildInSecond(stackAndYamlTest);
+			testFirstDependsUponGrandchildInSecondAndChildInSecond(stackAndYamlTest);
+			testFirstDependsUponMissingChildInSecond(stackAndYamlTest);
+			testFirstDependsUponMissingChildInSecondAndSecond(stackAndYamlTest);
+			testFirstDependsUponMissingGrandchildInMissingChildInSecond(stackAndYamlTest);
+			testFirstDependsUponMissingGrandchildInSecond(stackAndYamlTest);
+			testFirstDependsUponMissingGreatGrandchildInMissingGrandchildInMissingChildInSecond(stackAndYamlTest);
+			testFirstDependsUponTwoChildrenInSecond(stackAndYamlTest);
+			testFirstDependsUponTwoChildrenInSecondAndSecond(stackAndYamlTest);
+			testFirstDependsUponTwoGrandchildrenInChildInSecond(stackAndYamlTest);
+			testFirstDependsUponTwoGrandchildrenInTwoChildrenInSecond(stackAndYamlTest);
+			testFirstDependsUponTwoMissingGrandchildrenInTwoChildrenInSecond(stackAndYamlTest);
+			testFirstDependsUponTwoMissingGrandchildrenInTwoMissingChildInSecond(stackAndYamlTest);
+		},
+	);

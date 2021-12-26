@@ -1,0 +1,90 @@
+{
+	"configurations":
+		[
+			{
+				"localRoot": "${workspaceFolder}",
+				"name": "attach",
+				"remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
+				"request": "attach",
+				"type": "node"
+			},
+			{
+				"args":
+					[
+						"--runInBand",
+						"--collectCoverage=false",
+						"addDirectionAndMutualStackToDependenciesInStack/addInStack/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "addDirectionAndMutualStackToDependenciesInStack addInStack jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[
+						"--runInBand",
+						"--collectCoverage=false",
+						"addDirectionAndMutualStackToDependenciesInStack/findDirectionBetweenItemsInFirstMutualStack/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "addDirectionAndMutualStackToDependenciesInStack findDirectionBetweenItemsInFirstMutualStack jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[
+						"--runInBand",
+						"--collectCoverage=false",
+						"createStackFromYaml/tests/symmetrical.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "createStackFromYaml jest symmetrical",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[
+						"--runInBand",
+						"--collectCoverage=false",
+						"createYamlFromStack/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "createYamlFromStack jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[
+						"--runInBand",
+						"--collectCoverage=false",
+						"findItemInStackWithIdentifierHierarchy/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "findItemInStackWithIdentifierHierarchy jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[
+						"--runInBand",
+						"--collectCoverage=false",
+						"isInnerStack/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "isInnerStack jest",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+		]
+}
