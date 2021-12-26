@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"alwaysStrict": true,
+		"checkJs": true,
+		"lib": [ "dom", "es2017", "esnext.array" ],
+		"moduleResolution": "node",
+		"noEmit": true,
+		"resolveJsonModule": true,
+		"target": "es2017"
+	},
+	"exclude": [
+		"./index.js",
+		"createResizableContainer/tests/test-harness",
+		"createWebpackConfiguration",
+		"test-coverage",
+	]
+}

@@ -1,0 +1,104 @@
+{
+	"author": "Graham Dyson",
+	"bugs": {
+		"url": "https://github.com/DevSnicket/eunice/issues"
+	},
+	"description": "Shared implementation for analyzer and renderer test harnesses, using JavaScript, HTML, React and Webpack.",
+	"dependencies": {
+		"@ungap/url-search-params": "^0.1.4",
+		"core-js": "^3.6.5",
+		"css-loader": "^3.6.0",
+		"lodash": "^4.17.19",
+		"monaco-editor": "^0.17.1",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1",
+		"react-reflex": "^2.2.9",
+		"style-loader": "^1.2.1",
+		"webpack": "^4.44.0"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.10.5",
+		"@babel/plugin-proposal-object-rest-spread": "^7.10.4",
+		"@babel/polyfill": "^7.10.4",
+		"@babel/preset-env": "^7.10.4",
+		"@babel/register": "^7.10.5",
+		"@types/fs-extra": "^9.0.1",
+		"@types/jest": "^26.0.7",
+		"@types/node": "^14.0.26",
+		"@types/react": "^16.9.43",
+		"@types/react-dom": "^16.9.8",
+		"@types/webpack": "^4.41.21",
+		"babel-loader": "^8.1.0",
+		"cspell": "^4.0.63",
+		"eslint": "^7.5.0",
+		"eslint-plugin-notice": "^0.9.10",
+		"fs-extra": "^9.0.1",
+		"jest": "^26.1.0",
+		"typescript": "^3.9.7",
+		"webpack-cli": "^3.3.12"
+	},
+	"homepage": "https://github.com/DevSnicket/Eunice#readme",
+	"jest": {
+		"collectCoverage": true,
+		"collectCoverageFrom": [
+			"**/*.js",
+			"!**/test-harness/**",
+			"!babel.config.js",
+			"!callOrCreateElementOnError.js",
+			"!codeEditor/**",
+			"!createFillWithTitleElement/**",
+			"!createTextareaElement.js",
+			"!createWebpackConfiguration/**",
+			"!getStringLiteral.js",
+			"!index.js",
+			"!node_modules/**",
+			"!renderIntoContainerElement/**",
+			"!test-coverage/**"
+		],
+		"coverageDirectory": "test-coverage",
+		"coverageThreshold": {
+			"global": {
+				"branches": 100,
+				"functions": 100,
+				"lines": 100
+			}
+		},
+		"moduleNameMapper": {
+			"\\.css$": "<rootDir>styleMock.js"
+		},
+		"transformIgnorePatterns": [
+			"node_modules/(?!@devsnicket)"
+		]
+	},
+	"keywords": [
+		"euince",
+		"harness",
+		"test",
+		"uince",
+		"unice"
+	],
+	"license": "MIT",
+	"main": "index.js",
+	"name": "@devsnicket/eunice-test-harnesses",
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/DevSnicket/eunice-test-harnesses.git"
+	},
+	"sideEffects": [
+		"*.css"
+	],
+	"scripts": {
+		"all": "npm run spellcheck && npm run lint && npm run typescript && npm run test && npm run resizable-columns-test-harness-production",
+		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|node_modules|output|test-coverage)$\" --output-yaml --reverse-file-content=false",
+		"lint": "npx eslint .",
+		"resizable-columns-test-harness-production": "rm -rf createResizableContainer/tests/test-harness/output && npx webpack -p --config createResizableContainer/tests/test-harness/webpack.config.js -r @babel/register",
+		"resizable-columns-test-harness-development": "rm -rf createResizableContainer/tests/test-harness/output && npx webpack -d --config createResizableContainer/tests/test-harness/webpack.config.js -r @babel/register",
+		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
+		"test": "npx jest",
+		"typescript": "npx tsc -p jsconfig.json"
+	},
+	"version": "9.1.0"
+}

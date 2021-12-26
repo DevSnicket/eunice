@@ -1,0 +1,11 @@
+[
+	{
+		"label": "editorWorkerService",
+		"pathWithoutExtension": "editor/editor.worker"
+	},
+	{
+		"label": "javascript",
+		"language": "javascript",
+		"pathWithoutExtension": "language/typescript/ts.worker"
+	}
+]

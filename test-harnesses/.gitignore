@@ -1,0 +1,5 @@
+/devsnicket-eunice-test-harnesses-*.tgz
+/dist
+/eunice.*
+/node_modules/
+/test-coverage/
