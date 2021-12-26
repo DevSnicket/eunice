@@ -1,0 +1,7 @@
+id: parent
+dependsUpon:
+  id: child
+  items: grandchild
+items:
+  id: child
+  items: grandchild

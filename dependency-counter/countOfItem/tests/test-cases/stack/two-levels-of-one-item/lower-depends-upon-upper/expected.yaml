@@ -1,0 +1,11 @@
+﻿- - id: upper
+    dependencyCount:
+      parent:
+        below:
+          dependents: 1
+- - id: lower
+    dependencyCount:
+      parent:
+        above:
+          dependsUpon: 1
+    dependsUpon: upper

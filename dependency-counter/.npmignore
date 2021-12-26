@@ -1,0 +1,12 @@
+*test-cases
+/.eslintrc.yml
+/.eslintignore
+/.gitattributes
+/.gitmodules
+/.vscode
+/cspell.json
+/azure-pipelines.yml
+/devsnicket-eunice-dependency-counter-*.tgz
+/eunice.*/
+/jsconfig.json
+/test-coverage

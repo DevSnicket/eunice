@@ -1,0 +1,4 @@
+id: parent
+items:
+  id: child
+  dependsUpon: parent

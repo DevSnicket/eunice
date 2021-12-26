@@ -1,0 +1,25 @@
+{
+	"configurations":
+		[
+			{
+				"name": "attach",
+				"request": "attach",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--runInBand",
+						"tests/index.test.js",
+						"-t",
+						"item.with-child-item.child-depends-on-parent"
+					],
+				"disableOptimisticBPs": true,
+				"name": "test",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+		],
+	"version": "0.2.0"
+}

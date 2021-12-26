@@ -1,0 +1,18 @@
+﻿- id: first
+  dependencyCount:
+    parent:
+      same:
+        dependsUpon: 2
+  dependsUpon:
+    - second
+    - third
+- id: second
+  dependencyCount:
+    parent:
+      same:
+        dependents: 1
+- id: third
+  dependencyCount:
+    parent:
+      same:
+        dependents: 1
