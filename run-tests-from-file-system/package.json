@@ -1,0 +1,82 @@
+{
+	"author": "Graham Dyson",
+	"bugs": {
+		"url": "https://github.com/DevSnicket/eunice/issues"
+	},
+	"dependencies": {
+		"fs-extra": "^8.1.0"
+	},
+	"description": "Runs tests by discovering test cases and expected behavior from the file system. Tests are automatically named based on the directory hierarchy.",
+	"devDependencies": {
+		"@babel/core": "^7.10.5",
+		"@babel/plugin-transform-modules-commonjs": "^7.10.4",
+		"@types/fs-extra": "^9.0.1",
+		"@types/jest": "^26.0.7",
+		"@types/node": "^14.0.26",
+		"cspell": "^4.0.63",
+		"eslint": "^7.5.0",
+		"eslint-plugin-notice": "^0.9.10",
+		"jest": "^26.1.0",
+		"typescript": "^3.9.7"
+	},
+	"homepage": "https://github.com/DevSnicket/Eunice#readme",
+	"jest": {
+		"collectCoverage": true,
+		"collectCoverageFrom": [
+			"**/*.js",
+			"!babel.config.js",
+			"!node_modules/**",
+			"!test-coverage/**"
+		],
+		"coverageDirectory": "test-coverage",
+		"coverageThreshold": {
+			"global": {
+				"branches": 100,
+				"functions": 100,
+				"lines": 100
+			}
+		},
+		"transformIgnorePatterns": [
+			"node_modules/(?!@devsnicket)"
+		]
+	},
+	"keywords": [
+		"automatic",
+		"directory",
+		"directories",
+		"discovery",
+		"euince",
+		"file",
+		"files",
+		"folder",
+		"folders",
+		"hierarchy",
+		"hierarchical",
+		"jest",
+		"naming",
+		"test",
+		"testing",
+		"uince",
+		"unice"
+	],
+	"license": "MIT",
+	"main": "index.js",
+	"name": "@devsnicket/eunice-run-tests-from-file-system",
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/DevSnicket/eunice-run-tests-from-file-system.git"
+	},
+	"sideEffects": false,
+	"scripts": {
+		"all": "npm run spellcheck && npm run lint && npm run typescript && npm run test",
+		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|node_modules|test-coverage)$\" --output-yaml --reverse-file-content=false",
+		"lint": "npx eslint .",
+		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./dist/**/*\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
+		"test": "npx jest",
+		"typescript": "npx tsc -p jsconfig.json"
+	},
+	"version": "4.7.0"
+}

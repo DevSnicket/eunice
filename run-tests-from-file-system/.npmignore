@@ -1,0 +1,10 @@
+/.eslintrc.yml
+/.gitattributes
+/.travis.yml
+/.vscode
+/cspell.json
+/devsnicket-eunice-run-tests-from-file-system-*.tgz
+/eunice.*
+/jsconfig.json
+/test-coverage
+test-cases
