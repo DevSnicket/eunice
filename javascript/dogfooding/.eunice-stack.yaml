@@ -1,0 +1,35 @@
+- - javascript
+-
+  - javascript-analyzer
+  - id: post analysis
+    dependencyPermeable: true
+    items:
+      - - interactive
+      - - stacking-inference
+        - visualizer
+      - - dependency-counter
+      - - dependency-and-structure
+  - id: processors
+    dependencyPermeable: true
+    items:
+      - - stacking-explicit
+      - - replacement
+-
+  - call-with-process-standard-streams
+  - run-tests-from-file-system
+  - test-harnesses
+- - id: 3rd party packages
+    dependencyPermeable: true
+    items:
+      - fs-extra
+      - id: jest
+        dependencyPermeable: true
+        items: [ describe, expect, test ]
+      - js-yaml
+      - minimist
+      - monaco-editor
+      - pretty-format
+      - react
+      - react-dom
+      - string-pixel-width
+      - webpack

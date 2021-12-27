@@ -1,0 +1,11 @@
+/analyzeAndProcessAndRender/analyzeAndProcess/tests/sources/
+/analyzeAndProcessAndRender/tests/outputEnabledForHtmlAndSvg/source/
+/analyzeAndProcessAndRender/tests/packageSource/node_modules/
+/analyzeAndProcessAndRender/tests/singleSource/source/
+/analyzeAndProcessAndRender/tests/singleSourceWithOutputBaseFilename/source/
+/dist/
+/dogfooding/output/
+/gh-pages/
+/harness/example.js
+/harness/output/
+/test-coverage/

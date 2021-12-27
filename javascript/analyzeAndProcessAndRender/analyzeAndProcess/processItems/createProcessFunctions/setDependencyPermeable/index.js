@@ -1,0 +1,84 @@
+// Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
+
+import { replaceIdentifiersAndItems } from "@devsnicket/eunice-replacement";
+
+export default ({
+	dependencyPermeableIdentifiers,
+	identifierOrItemOrLevelOrStack,
+}) => {
+	return (
+		whenHasIdentifiers()
+		||
+		identifierOrItemOrLevelOrStack
+	);
+
+	function whenHasIdentifiers() {
+		return (
+			dependencyPermeableIdentifiers
+			&&
+			withDependencyPermeableIdentifiers(
+				dependencyPermeableIdentifiers,
+			)
+			.setDependencyPermeable(
+				identifierOrItemOrLevelOrStack,
+			)
+		);
+	}
+};
+
+function withDependencyPermeableIdentifiers(
+	dependencyPermeableIdentifiers,
+) {
+	return { setDependencyPermeable };
+
+	function setDependencyPermeable(
+		identifierOrItemOrLevelOrStack,
+	) {
+		return (
+			replaceIdentifiersAndItems({
+				identifierOrItemOrLevelOrStack,
+				replace,
+			})
+		);
+	}
+
+	function replace(
+		{ identifierOrItem },
+	) {
+		return (
+			whenIdentifier()
+			||
+			whenItem()
+			||
+			identifierOrItem
+		);
+
+		function whenIdentifier() {
+			return (
+				isDependencyPermeableIdentifier(identifierOrItem)
+				&&
+				{
+					dependencyPermeable: true,
+					id: identifierOrItem,
+				}
+			);
+		}
+
+		function whenItem() {
+			return (
+				isDependencyPermeableIdentifier(identifierOrItem.id)
+				&&
+				{
+					...identifierOrItem,
+					dependencyPermeable: true,
+				}
+			);
+		}
+	}
+
+	function isDependencyPermeableIdentifier(
+		identifier,
+	) {
+		return dependencyPermeableIdentifiers.includes(identifier);
+	}
+}
