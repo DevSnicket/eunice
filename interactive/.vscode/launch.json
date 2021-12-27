@@ -1,0 +1,134 @@
+{
+	"configurations": [
+		{
+			"name": "attach",
+			"request": "attach",
+			"type": "node"
+		},
+		{
+			"args":
+				[ 
+					"--collect-coverage=false",
+					"--runInBand",
+					"createYamlOutputElement/createElementsFromStack/createAreDependenciesOfAncestorsIncludedSelection/index.test.js",
+					"-t=checkbox.with.get.value.of.true.on.changed.sets.value.to.null"
+				],
+			"disableOptimisticBPs": true,
+			"name": "createAreDependenciesOfAncestorsIncludedSelection jest",
+			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+			"request": "launch",
+			"type": "node"
+		},
+		{
+			"args":
+				[ 
+					"--collect-coverage=false",
+					"--runInBand",
+					"createYamlOutputElement/createElementsFromStack/dependencyListElementFactory/createWithDependencyList/createListElement/tests/index.test.js"
+				],
+			"disableOptimisticBPs": true,
+			"name": "dependencyListElementFactory createListElement jest",
+			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+			"request": "launch",
+			"type": "node"
+		},
+		{
+			"args":
+				[ 
+					"--collect-coverage=false",
+					"--runInBand",
+					"createYamlOutputElement/createElementsFromStack/dependencyListElementFactory/createWithDependencyList/createSubset/index.test.js"
+				],
+			"disableOptimisticBPs": true,
+			"name": "dependencyListElementFactory createSubset jest",
+			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+			"request": "launch",
+			"type": "node"
+		},
+		{
+			"args":
+				[ 
+					"--collect-coverage=false",
+					"--runInBand",
+					"createYamlOutputElement/createElementsFromStack/dependencyListElementFactory/createWithDependencyList/isDependencyRelevant/index.test.js"
+				],
+			"disableOptimisticBPs": true,
+			"name": "dependencyListElementFactory isDependencyRelevant jest",
+			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+			"request": "launch",
+			"type": "node"
+		},
+		{
+			"args":
+				[
+					"--collect-coverage=false",
+					"--runInBand",
+					"createYamlOutputElement/createElementsFromStack/dependencyListElementFactory/createWithDependencyList/tests/index.test.js"
+				],
+			"disableOptimisticBPs": true,
+			"name": "dependencyListElementFactory createWithDependencyList jest",
+			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+			"request": "launch",
+			"type": "node"
+		},
+		{
+			"args":
+				[ 
+					"--collect-coverage=false",
+					"--runInBand",
+					"createYamlOutputElement/createElementsFromStack/tests/index.test.js"
+				],
+			"disableOptimisticBPs": true,
+			"name": "createYamlOutputElement createElementsFromStack jest",
+			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+			"request": "launch",
+			"type": "node"
+		},
+		{
+			"name": "harness dogfooding in Chrome",
+			"port": 9222,
+			"request": "launch",
+			"sourceMaps": true,
+			"type": "chrome",
+			"url": "file:///${workspaceFolder}/tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output/index.html",
+			"webRoot": "${workspaceFolder}"
+		},
+		{
+			"name": "harness example in Chrome",
+			"port": 9222,
+			"request": "launch",
+			"sourceMaps": true,
+			"type": "chrome",
+			"url": "file:///${workspaceFolder}/tests/example/output/index.html",
+			"webRoot": "${workspaceFolder}"
+		},
+		{
+			"args":
+				[ 
+					"--config",
+					"tests/example/webpack.config.js",
+					"-p",
+					"-r",
+					"@devsnicket/eunice-test-harnesses/babel.register.cjs"
+				],
+			"disableOptimisticBPs": true,
+			"name": "harness example Webpack",
+			"program": "${workspaceFolder}/node_modules/webpack-cli/bin/cli.js",
+			"request": "launch",
+			"type": "node"
+		},
+		{
+			"args":
+				[ 
+					"--collect-coverage=false",
+					"--runInBand",
+					"writeHarness/tests/tests/index.test.js"
+				],
+			"disableOptimisticBPs": true,
+			"name": "writeHarness jest",
+			"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+			"request": "launch",
+			"type": "node"
+		}
+	]
+}

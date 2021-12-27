@@ -1,0 +1,6 @@
+id: grandparent
+items:
+  id: parent
+  items:
+    id: single
+    items: nested

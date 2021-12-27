@@ -1,0 +1,39 @@
+.dependency-list a#close {
+	color: black;
+	float: right;
+	font-size: 1.5em;
+	font-weight: 900;
+	padding: 0.2em 0.4em;
+	text-decoration: none;
+}
+
+.dependency-list > div {
+	padding: 0.5em;
+}
+
+.dependency-list ul {
+	list-style: none;
+	margin: 0;
+}
+
+.dependency-list ul.child-items {
+	border-left: 2px solid darkgray;
+	margin-left: 1ch;
+	padding-left: 1ch;
+}
+
+.dependency-list ul.item-dependencies {
+	padding-left: 1ch;
+}
+
+.dependency-list ul.item-dependencies > li:before {
+	padding-right: 1ch;
+}
+
+.dependency-list.dependents ul.item-dependencies > li:before {
+	content: "<";
+}
+
+.dependency-list.dependsUpon ul.item-dependencies > li:before {
+	content: ">";
+}

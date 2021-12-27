@@ -1,0 +1,57 @@
+<div class="dependency-list dependsUpon">
+	<a href="close-href" id="close">×</a>
+	<div>
+		<a href="parent">parent</a>
+		<ul class="child-items">
+			<li>alphabetical sort out of order child 1</li>
+			<li>alphabetical sort out of order child 2</li>
+			<li>
+				child with dependency
+				<ul class="item-dependencies">
+					<li>dependency of child with dependency</li>
+				</ul>
+			</li>
+			<li>
+				child with dependency hierarchy of anonymous parent
+				<ul class="item-dependencies">
+					<li>-dependency of anonymous parent</li>
+				</ul>
+			</li>
+			<li>
+				child with dependency hierarchy of identifiable parent
+				<ul class="item-dependencies">
+					<li><a href="identifiable parent of dependency">identifiable parent of dependency</a>-dependency of identifiable parent</li>
+				</ul>
+			</li>
+			<li>
+				child with dependency hierarchy of identifiable parent and grandparent
+				<ul class="item-dependencies">
+					<li><a href="identifiable grandparent of dependency">identifiable grandparent of dependency</a>-<a href="identifiable grandparent of dependency,identifiable parent of dependency">identifiable parent of dependency</a>-dependency of identifiable parent and grandparent</li>
+				</ul>
+			</li>
+			<li>
+				<a href="parent,child with parent and grandchild">child with parent and grandchild</a>
+				<ul class="child-items">
+					<li>grandchild in child with parent</li>
+				</ul>
+			</li>
+			<li>
+				<a href="child with two anonymous grandchildren">child with two anonymous grandchildren</a>
+				<ul class="child-items">
+					<li></li>
+					<li></li>
+				</ul>
+			</li>
+			<li>
+				<a href="child with two dependencies and grandchild">child with two dependencies and grandchild</a>
+				<ul class="item-dependencies">
+					<li>dependency 1 of child with two dependencies and grandchild</li>
+					<li>dependency 2 of child with two dependencies and grandchild</li>
+				</ul>
+				<ul class="child-items">
+					<li>grandchild in child with two dependencies</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>

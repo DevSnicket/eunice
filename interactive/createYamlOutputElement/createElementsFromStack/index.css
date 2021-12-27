@@ -1,0 +1,22 @@
+div.visualization {
+	padding: 0.5em;
+}
+
+div.visualization div.breadcrumb-and-options {
+	font-family: arial;
+	display: flex;
+	margin-bottom: 0.5em;
+}
+
+div.visualization div.breadcrumb-and-options input[type="checkbox"] {
+	margin-right: 0.5em;
+	vertical-align: middle;
+}
+
+div.visualization div.breadcrumb-and-options label {
+	user-select: none;
+}
+
+div.visualization div.breadcrumb-and-options div.breadcrumbs {
+	flex: 1;
+}

@@ -1,0 +1,13 @@
+/.eslintignore
+/.eslintrc.yml
+/.gitattributes
+/.gitmodules
+/.vscode
+/azure-pipelines.yml
+/cspell.json
+/devsnicket-eunice-interactive-*.tgz
+/eunice.*
+/gh-pages/
+/jsconfig.json
+/test-coverage/
+/tests/

@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"alwaysStrict": true,
+		"checkJs": true,
+		"lib": [ "dom", "es2017", "esnext.array" ],
+		"moduleResolution": "node",
+		"noEmit": true,
+		"resolveJsonModule": true,
+		"target": "es2017"
+	},
+	"exclude": [
+		"dist",
+		"harness.js",
+		"test-coverage",
+		"tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output",
+		"tests/example/output",
+		"writeHarness/tests/output"
+	]
+}
