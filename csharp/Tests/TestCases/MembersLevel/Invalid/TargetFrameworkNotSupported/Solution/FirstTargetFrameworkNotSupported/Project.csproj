@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+		<TargetFramework></TargetFramework>
+		<TargetFrameworks>madeuptargetframework;netstandard2.0</TargetFrameworks>
+	</PropertyGroup>
+</Project>

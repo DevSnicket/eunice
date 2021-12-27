@@ -1,0 +1,6 @@
+﻿- id: TestCase.dll
+  items:
+    id: Class
+    items:
+      - Method
+      - Method(netstandard.System.Boolean)

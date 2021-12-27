@@ -1,0 +1,9 @@
+﻿- id: TestCase.dll
+  items:
+    - id: Class
+      items:
+        - id: Property
+          dependsUpon: PropertyClass
+        - id: Method
+          dependsUpon: Property
+    - PropertyClass

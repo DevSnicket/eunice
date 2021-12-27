@@ -1,0 +1,5 @@
+﻿- id: TestCase.dll
+  items:
+    id: Class
+    dependsUpon: NestedClass
+    items: NestedClass

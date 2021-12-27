@@ -1,0 +1,7 @@
+﻿- id: TestCase.dll
+  items:
+    - id: Class
+      items:
+        id: Item
+        dependsUpon: IndexerClass
+    - IndexerClass

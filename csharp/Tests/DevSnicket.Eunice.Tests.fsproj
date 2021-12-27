@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<ItemGroup>
+		<PackageReference Include="altcover" Version="6.8.761" />
+		<PackageReference Include="foq" Version="1.8.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+		<PackageReference Include="xunit" Version="2.4.1" />
+		<PackageReference Include="xunit.console" Version="2.4.1" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="../DevSnicket.Eunice.fsproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="../AnalyzeProject/FormatItemsAsYaml/FormatDependsUponMapping/Tests.fs" />
+		<Compile Include="../AnalyzeProject/FormatItemsAsYaml/SequenceBlockEntryFromLines/Tests.fs" />
+		<Compile Include="../AnalyzeProject/FormatItemsAsYaml/Tests.fs" />
+		<Compile Include="../ExecuteProgram/FormatHeaderComment/Tests.fs" />
+		<Compile Include="../ExecuteProgram/ParseArgumentsAndInferFromDirectoryPath/Tests/.fs" />
+		<Compile Include="../ExecuteProgram/WriteNameAndVersion/Tests.fs" />
+		<Compile Include="../WriteInteractiveInDirectoryPathWithYaml/Tests.fs" />
+		<Compile Include="FindTestCaseSolutionAndProjectFilePathsInDirectoryPath.fs" />
+		<Compile Include="RegisterAndGetPathOfMsbuild.fs" />
+		<Compile Include=".fs" />
+	</ItemGroup>
+	<Target
+		AfterTargets="Build"
+		Condition="$(TargetFramework)!=''"
+		Name="WriteXunitConsoleRuntime">
+		<Copy
+			DestinationFiles="$(OutputPath)xunit.console.runtimeconfig.json"
+			SourceFiles="$(OutputPath)$(AssemblyName).runtimeconfig.json" />
+		<WriteLinesToFile
+			File="$(OutputPath)global.json"
+			Overwrite="true"
+			Lines="{ &quot;sdk&quot;: { &quot;rollForward&quot;: &quot;latestFeature&quot;, &quot;version&quot;: &quot;$(_ShortFrameworkVersion).0&quot; } }" />
+	</Target>
+</Project>

@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework></TargetFramework>
+		<TargetFrameworks>madeuptargetframework1;madeuptargetframework2</TargetFrameworks>
+	</PropertyGroup>
+</Project>

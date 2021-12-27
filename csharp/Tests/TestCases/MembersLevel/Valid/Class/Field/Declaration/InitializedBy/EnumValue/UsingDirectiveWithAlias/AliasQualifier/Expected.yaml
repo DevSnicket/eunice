@@ -1,0 +1,12 @@
+﻿- id: TestCase.dll
+  items:
+    - id: Class
+      items:
+        id: _field
+        dependsUpon:
+          id: FieldEnumNamespace
+          items:
+            id: FieldEnum
+            items: Value
+    - id: FieldEnumNamespace
+      items: FieldEnum

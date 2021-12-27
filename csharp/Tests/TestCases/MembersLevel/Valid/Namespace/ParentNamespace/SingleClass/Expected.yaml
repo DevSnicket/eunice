@@ -1,0 +1,4 @@
+﻿- id: TestCase.dll
+  items:
+    id: Namespace
+    items: Class

@@ -1,0 +1,13 @@
+﻿- id: TestCase.dll
+  items:
+    - FieldClass
+    - id: ReferencedClass
+      items:
+        id: _field
+        dependsUpon: FieldClass
+    - id: ReferrerClass
+      items:
+        id: Method
+        dependsUpon:
+          id: ReferencedClass
+          items: _field

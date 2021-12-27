@@ -1,0 +1,3 @@
+namespace ParameterNamespace {
+	class ParameterClass { }
+}

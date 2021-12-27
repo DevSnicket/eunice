@@ -1,0 +1,12 @@
+﻿- id: TestCase.dll
+  items:
+    - id: DerivedClass
+      dependsUpon:
+        id: Namespace
+        items:
+          - AInterface
+          - BaseClass
+    - id: Namespace
+      items:
+        - AInterface
+        - BaseClass

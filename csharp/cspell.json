@@ -1,0 +1,23 @@
+{
+	"version": "0.1",
+	"language": "en",
+	"minWordLength": 2,
+	"words": [
+		"arity",
+		"cli",
+		"concat",
+		"failwith",
+		"forall",
+		"foq",
+		"ienumerable",
+		"ionide",
+		"msbuild",
+		"parameterless",
+		"snicket",
+		"sdk",
+		"sln",
+		"struct",
+		"typeof",
+		"xunit"
+	]
+}

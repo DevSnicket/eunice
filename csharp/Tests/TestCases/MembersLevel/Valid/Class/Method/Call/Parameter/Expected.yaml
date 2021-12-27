@@ -1,0 +1,10 @@
+﻿- id: TestCase.dll
+  items:
+    - id: CalleeParameterClass
+      items: CalleeMethod
+    - id: CallerClass
+      items:
+        id: CallerMethod
+        dependsUpon:
+          id: CalleeParameterClass
+          items: CalleeMethod

@@ -1,0 +1,1 @@
+class DerivedClass : BaseClass<ArgumentClass> { }

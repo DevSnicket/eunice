@@ -1,0 +1,22 @@
+﻿- id: TestCase.dll
+  items:
+    - id: Class
+      items:
+        - id: Method
+          dependsUpon: Method(TestCase.ParameterNamespace.Parameter1Class)
+        - id: Method(TestCase.ParameterNamespace.Parameter1Class)
+          dependsUpon:
+            - Method(TestCase.ParameterNamespace.Parameter1Class,TestCase.ParameterNamespace.Parameter2Class)
+            - id: ParameterNamespace
+              items: Parameter1Class
+        - id: Method(TestCase.ParameterNamespace.Parameter1Class,TestCase.ParameterNamespace.Parameter2Class)
+          dependsUpon:
+            - Method
+            - id: ParameterNamespace
+              items:
+                - Parameter1Class
+                - Parameter2Class
+    - id: ParameterNamespace
+      items:
+        - Parameter1Class
+        - Parameter2Class

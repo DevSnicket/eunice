@@ -1,0 +1,14 @@
+﻿- id: TestCase.dll
+  items:
+    - id: Class
+      items:
+        id: Method
+        dependsUpon:
+          - LocalFunctionParameterClass
+          - LocalFunctionVariableClass
+          - MethodParameterClass
+          - MethodVariableClass
+    - LocalFunctionParameterClass
+    - LocalFunctionVariableClass
+    - MethodParameterClass
+    - MethodVariableClass

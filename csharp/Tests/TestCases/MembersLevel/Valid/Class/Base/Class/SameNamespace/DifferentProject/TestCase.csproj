@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<ItemGroup>
+		<Compile Remove="BaseClassProject/**" />
+		<ProjectReference Include="BaseClassProject/BaseClassProject.csproj" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,13 @@
+﻿- id: TestCase.dll
+  items:
+    - PropertyClass
+    - id: ReferencedClass
+      items:
+        id: Property
+        dependsUpon: PropertyClass
+    - id: ReferrerClass
+      items:
+        id: Method
+        dependsUpon:
+          id: ReferencedClass
+          items: Property

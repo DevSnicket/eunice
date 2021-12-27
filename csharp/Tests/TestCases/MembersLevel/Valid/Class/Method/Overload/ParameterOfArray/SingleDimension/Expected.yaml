@@ -1,0 +1,8 @@
+﻿- id: TestCase.dll
+  items:
+    - id: Class
+      items:
+        - Method
+        - id: Method(TestCase.ParameterClass[])
+          dependsUpon: ParameterClass
+    - ParameterClass

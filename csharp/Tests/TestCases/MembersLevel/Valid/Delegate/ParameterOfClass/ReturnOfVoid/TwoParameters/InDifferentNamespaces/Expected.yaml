@@ -1,0 +1,14 @@
+﻿- id: TestCase.dll
+  items:
+    - id: DelegateNamespace
+      items:
+        id: Delegate
+        dependsUpon:
+          - id: Parameter1Namespace
+            items: Parameter1Class
+          - id: Parameter2Namespace
+            items: Parameter2Class
+    - id: Parameter1Namespace
+      items: Parameter1Class
+    - id: Parameter2Namespace
+      items: Parameter2Class

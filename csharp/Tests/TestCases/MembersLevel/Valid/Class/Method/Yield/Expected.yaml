@@ -1,0 +1,14 @@
+﻿- id: TestCase.dll
+  items:
+    - id: CalleeClass
+      items:
+        id: CalledMethod
+        dependsUpon: ReturnClass
+    - ReturnClass
+    - id: YieldCallerClass
+      items:
+        id: CallerAndYieldMethod
+        dependsUpon:
+          - id: CalleeClass
+            items: CalledMethod
+          - ReturnClass

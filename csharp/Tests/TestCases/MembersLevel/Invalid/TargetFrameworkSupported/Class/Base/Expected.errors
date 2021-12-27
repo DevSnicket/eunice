@@ -1,0 +1,1 @@
+DerivedClass.cs(1,22): error CS0246: The type or namespace name 'UnknownBaseClass' could not be found (are you missing a using directive or an assembly reference?)

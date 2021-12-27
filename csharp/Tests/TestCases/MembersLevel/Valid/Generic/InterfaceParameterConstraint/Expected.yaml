@@ -1,0 +1,5 @@
+﻿- id: TestCase.dll
+  items:
+    - ConstraintInterface
+    - id: Interface`1
+      dependsUpon: ConstraintInterface

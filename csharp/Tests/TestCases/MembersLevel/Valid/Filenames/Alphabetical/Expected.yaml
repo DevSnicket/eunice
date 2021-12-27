@@ -1,0 +1,4 @@
+﻿- id: TestCase.dll
+  items:
+    - Class1
+    - Class2

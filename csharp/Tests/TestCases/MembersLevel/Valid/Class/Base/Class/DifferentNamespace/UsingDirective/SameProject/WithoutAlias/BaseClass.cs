@@ -1,0 +1,3 @@
+namespace BaseClassNamespace {
+	class BaseClass { }
+}

@@ -1,0 +1,6 @@
+﻿- id: TestCase.dll
+  items:
+    id: GrandparentNamespace
+    items:
+      id: ParentNamespace
+      items: Class

@@ -1,0 +1,10 @@
+﻿- id: TestCase.dll
+  items:
+    - id: BaseClassNamespace
+      items: BaseClass
+    - id: DerivedClassNamespace
+      items:
+        id: DerivedClass
+        dependsUpon:
+          id: BaseClassNamespace
+          items: BaseClass

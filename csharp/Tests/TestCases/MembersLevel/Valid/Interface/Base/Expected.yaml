@@ -1,0 +1,5 @@
+﻿- id: TestCase.dll
+  items:
+    - BaseInterface
+    - id: DerivedInterface
+      dependsUpon: BaseInterface

@@ -1,0 +1,13 @@
+﻿- id: TestCase.dll
+  items:
+    - id: Class
+      items:
+        - id: Property
+          dependsUpon: PropertyClass
+        - id: Method
+          dependsUpon:
+            - Callee
+            - Property
+        - id: Callee
+          dependsUpon: PropertyClass
+    - PropertyClass

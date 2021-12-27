@@ -1,0 +1,6 @@
+<Project>
+	<PropertyGroup>
+		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+		<TargetFrameworks>netcoreapp3.1;netcoreapp5.0</TargetFrameworks>
+	</PropertyGroup>
+</Project>

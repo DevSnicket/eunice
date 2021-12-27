@@ -1,0 +1,20 @@
+﻿- id: TestCase.dll
+  items:
+    - id: CalleeOfGetterClass
+      items:
+        id: CalleeOfGetterMethod
+        dependsUpon: IndexerClass
+    - id: CalleeOfSetterClass
+      items:
+        id: CalleeOfSetterMethod
+        dependsUpon: IndexerClass
+    - id: Class
+      items:
+        id: Item
+        dependsUpon:
+          - id: CalleeOfGetterClass
+            items: CalleeOfGetterMethod
+          - id: CalleeOfSetterClass
+            items: CalleeOfSetterMethod
+          - IndexerClass
+    - IndexerClass

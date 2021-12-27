@@ -1,0 +1,7 @@
+﻿- id: TestCase.dll
+  items:
+    - id: DeclarationClass
+      items:
+        id: Method
+        dependsUpon: VariableClass
+    - VariableClass

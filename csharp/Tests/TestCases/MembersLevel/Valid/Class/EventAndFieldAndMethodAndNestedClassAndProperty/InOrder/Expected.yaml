@@ -1,0 +1,15 @@
+﻿- id: TestCase.dll
+  items:
+    - id: Class
+      items:
+        - id: Event
+          dependsUpon: EventDelegate
+        - id: _field
+          dependsUpon: FieldClass
+        - Method
+        - NestedClass
+        - id: Property
+          dependsUpon: PropertyClass
+    - EventDelegate
+    - FieldClass
+    - PropertyClass

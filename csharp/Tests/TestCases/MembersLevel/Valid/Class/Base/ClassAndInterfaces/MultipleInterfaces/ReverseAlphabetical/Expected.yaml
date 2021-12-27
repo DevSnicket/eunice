@@ -1,0 +1,10 @@
+﻿- id: TestCase.dll
+  items:
+    - id: DerivedClass
+      dependsUpon:
+        - Interface1
+        - Interface2
+        - ZBaseClass
+    - Interface1
+    - Interface2
+    - ZBaseClass

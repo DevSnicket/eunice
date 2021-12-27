@@ -1,0 +1,45 @@
+pool:
+  name: $(pool_name)
+  vmImage: ubuntu-18.04
+steps:
+  - task: UseDotNet@2
+    displayName: .NET Core 3.1
+    inputs:
+      packageType: sdk
+      version: 3.1.302
+  - task: UseDotNet@2
+    displayName: .NET Core 5.0
+    inputs:
+      packageType: sdk
+      version: 5.0.100-preview.7.20366.6
+  - task: NodeTool@0
+    displayName: Node install
+    inputs: { versionSpec: '10.x' }
+  - task: ShellScript@2
+    displayName: download and extract interactive package
+    inputs: { scriptPath: WriteInteractiveInDirectoryPathWithYaml/download-and-extract-package.sh }
+  - task: DotNetCoreCLI@2
+    displayName: build default/debug
+    inputs:
+      command: build
+      projects: Tests
+  - task: ShellScript@2
+    displayName: build/restore test case C# projects
+    inputs: { scriptPath: Tests/TestCases/build-restore.sh }
+  - task: ShellScript@2
+    displayName: build/test release
+    inputs: { scriptPath: test.sh }
+  - task: ShellScript@2
+    displayName: lint
+    inputs: { scriptPath: lint.sh }
+  - task: ShellScript@2
+    displayName: spellcheck
+    inputs: { scriptPath: spellcheck.sh }
+  - task: ShellScript@2
+    displayName: package pack
+    inputs: { scriptPath: package/pack.sh }
+  - task: ShellScript@2
+    displayName: package push
+    inputs: { scriptPath: package/push.sh }
+trigger: [ master ]
+workspace: { clean: all }

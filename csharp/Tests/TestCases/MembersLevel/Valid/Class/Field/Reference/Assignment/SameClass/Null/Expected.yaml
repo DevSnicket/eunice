@@ -1,0 +1,9 @@
+﻿- id: TestCase.dll
+  items:
+    - id: Class
+      items:
+        - id: _field
+          dependsUpon: FieldClass
+        - id: Method
+          dependsUpon: _field
+    - FieldClass

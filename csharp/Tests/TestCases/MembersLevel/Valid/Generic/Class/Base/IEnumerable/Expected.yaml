@@ -1,0 +1,9 @@
+﻿- id: TestCase.dll
+  items:
+    - id: Class
+      dependsUpon: Interface
+      items:
+        - System.Collections.IEnumerable.GetEnumerator
+        - id: GetEnumerator
+          dependsUpon: Interface
+    - Interface

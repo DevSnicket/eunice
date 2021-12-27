@@ -1,0 +1,14 @@
+﻿- id: TestCase.dll
+  items:
+    - id: CalleeClass
+      items:
+        id: CalleeMethod
+        dependsUpon: FieldClass
+    - id: Class
+      items:
+        id: _field
+        dependsUpon:
+          - id: CalleeClass
+            items: CalleeMethod
+          - FieldClass
+    - FieldClass

@@ -1,0 +1,16 @@
+﻿- id: TestCase.dll
+  items:
+    - id: InterfaceNamespace
+      items:
+        id: Interface
+        items:
+          id: Method
+          dependsUpon:
+            - id: ParameterNamespace
+              items: ParameterClass
+            - id: ReturnNamespace
+              items: ReturnClass
+    - id: ParameterNamespace
+      items: ParameterClass
+    - id: ReturnNamespace
+      items: ReturnClass
