@@ -1,0 +1,3 @@
+const variable = class {
+	method() { }
+}

@@ -1,0 +1,7 @@
+- - id: caller
+    dependsUpon: alias
+- - id: alias
+    type: import
+    dependsUpon:
+      id: module
+      items: imported

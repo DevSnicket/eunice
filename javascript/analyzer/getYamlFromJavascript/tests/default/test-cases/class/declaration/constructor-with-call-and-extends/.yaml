@@ -1,0 +1,6 @@
+- id: Derived
+  dependsUpon: Base
+  items:
+    id: constructor
+    type: method
+    dependsUpon: called

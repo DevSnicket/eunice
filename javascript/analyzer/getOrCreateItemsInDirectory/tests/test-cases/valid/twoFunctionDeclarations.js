@@ -1,0 +1,3 @@
+function twoFunctionsFirst() { }
+
+function twoFunctionsSecond() { }

@@ -1,0 +1,4 @@
+- - id: alias
+    type: export
+    dependsUpon: exported
+- - exported

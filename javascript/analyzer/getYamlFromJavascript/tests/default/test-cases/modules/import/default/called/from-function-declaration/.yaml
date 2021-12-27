@@ -1,0 +1,5 @@
+- - id: functionDeclaration
+    dependsUpon: imported
+- - id: imported
+    type: import
+    dependsUpon: module

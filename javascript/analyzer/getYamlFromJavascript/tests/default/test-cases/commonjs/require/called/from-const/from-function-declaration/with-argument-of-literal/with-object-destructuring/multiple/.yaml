@@ -1,0 +1,14 @@
+- - id: caller
+    dependsUpon:
+      - variable1
+      - variable2
+- - id: variable1
+    type: variable
+    dependsUpon:
+      id: called
+      items: variable1
+- - id: variable2
+    type: variable
+    dependsUpon:
+      id: called
+      items: variable2

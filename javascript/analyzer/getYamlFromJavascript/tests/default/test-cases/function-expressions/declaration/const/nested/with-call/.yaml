@@ -1,0 +1,6 @@
+- id: parent
+  items:
+    - - id: child
+        dependsUpon: parameter
+    - - id: parameter
+        type: parameter

@@ -1,0 +1,6 @@
+- id: parentFunctionDeclaration
+  items:
+    - - id: nestedFunctionDeclaration
+        dependsUpon: parentParameter
+    - - id: parentParameter
+        type: parameter

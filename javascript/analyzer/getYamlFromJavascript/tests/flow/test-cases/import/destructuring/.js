@@ -1,0 +1,1 @@
+import typeof { Type } from './typeFile';

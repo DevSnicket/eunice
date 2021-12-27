@@ -1,0 +1,1 @@
+var single = function() {}

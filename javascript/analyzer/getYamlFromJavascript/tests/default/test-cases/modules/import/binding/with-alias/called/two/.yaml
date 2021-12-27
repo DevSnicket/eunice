@@ -1,0 +1,5 @@
+dependsUpon:
+  - id: module
+    items: imported1
+  - id: module
+    items: imported2

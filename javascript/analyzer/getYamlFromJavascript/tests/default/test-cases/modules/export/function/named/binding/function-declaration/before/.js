@@ -1,0 +1,3 @@
+export { exported }
+
+function exported() {}

@@ -1,0 +1,9 @@
+- id: containerFunctionDeclaration
+  items:
+    - - constFunctionExpression
+    - - id: caller
+        dependsUpon:
+          - constFunctionExpression
+          - parameter
+    - - id: parameter
+        type: parameter

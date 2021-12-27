@@ -1,0 +1,7 @@
+- id: exported
+  type: export
+  dependsUpon:
+    id: subdirectory
+    items:
+      id: module
+      items: imported

@@ -1,0 +1,5 @@
+dependsUpon:
+  id: grandparent-binding
+  items:
+    id: index
+    items: imported

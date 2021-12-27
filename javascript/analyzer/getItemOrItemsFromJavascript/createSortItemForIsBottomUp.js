@@ -1,0 +1,61 @@
+// Copyright (c) 2020 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
+
+import groupBy from "lodash/groupBy";
+
+export default
+isBottomUp =>
+	isBottomUp
+	?
+	reverseItems
+	:
+	sortItemsWithVariablesThenParametersAtBottom;
+
+function sortItemsWithVariablesThenParametersAtBottom(
+	items,
+) {
+	return (
+		items
+		&&
+		items.length
+		&&
+		sortItemsFromTypeGroups(
+			groupBy(items, getRelevantTypeOf),
+		)
+	);
+
+	function getRelevantTypeOf(
+		{ type },
+	) {
+		return whenSpecified() || "other";
+
+		function whenSpecified() {
+			return (
+				[ "import", "parameter", "variable" ].includes(type)
+				&&
+				type
+			);
+		}
+	}
+
+	function sortItemsFromTypeGroups({
+		import: _import,
+		other,
+		parameter,
+		variable,
+	}) {
+		return (
+			[
+				...other || [],
+				...variable || [],
+				...parameter || [],
+				..._import || [],
+			]
+		);
+	}
+}
+
+function reverseItems(
+	items,
+) {
+	return items && items.reverse();
+}

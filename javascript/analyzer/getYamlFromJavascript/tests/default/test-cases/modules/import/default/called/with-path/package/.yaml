@@ -1,0 +1,3 @@
+dependsUpon:
+  id: package
+  items: module

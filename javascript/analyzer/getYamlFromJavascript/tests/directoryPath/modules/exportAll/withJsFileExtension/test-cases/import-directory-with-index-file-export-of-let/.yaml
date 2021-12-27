@@ -1,0 +1,7 @@
+- id: exported
+  type: export
+  dependsUpon:
+    id: directory
+    items:
+      id: index
+      items: exported

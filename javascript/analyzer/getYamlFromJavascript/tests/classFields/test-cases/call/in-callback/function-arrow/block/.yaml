@@ -1,0 +1,6 @@
+- id: Class
+  items:
+    id: field
+    dependsUpon: called
+    items:
+      dependsUpon: calledByCallback

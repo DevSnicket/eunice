@@ -1,0 +1,15 @@
+/.eslintrc.yml
+/.eslintignore
+/.gitattributes
+/.gitmodules
+/.travis.yml
+/.vscode
+/azure-pipelines.yml
+/devsnicket-eunice-javascript-analyzer-*.tgz
+/cspell.json
+/harness/output
+/test-coverage
+/jsconfig.json
+test-case
+test-cases
+/website/

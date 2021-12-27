@@ -1,0 +1,20 @@
+{
+	"language": "en",
+	"overrides": [
+        {
+            "filename": "README.md",
+            "words": [ "rightarrow" ]
+		}
+	],
+	"version": "0.1",
+	"words": [
+		"destructure",
+		"destructured",
+		"devsnicket",
+		"dogfooding",
+		"estree",
+		"gitter",
+		"stateful",
+		"snicket"
+	]
+}

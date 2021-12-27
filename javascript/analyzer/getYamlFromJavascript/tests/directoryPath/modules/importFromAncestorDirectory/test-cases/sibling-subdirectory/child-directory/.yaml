@@ -1,0 +1,3 @@
+dependsUpon:
+  id: sibling-subdirectory
+  items: module

@@ -1,0 +1,4 @@
+- - id: exported1
+    type: export
+- - id: exported2
+    type: export

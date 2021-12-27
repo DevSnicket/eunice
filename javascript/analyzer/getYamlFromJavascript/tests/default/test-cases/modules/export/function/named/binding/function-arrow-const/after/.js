@@ -1,0 +1,3 @@
+const exported = () => {}
+
+export { exported }

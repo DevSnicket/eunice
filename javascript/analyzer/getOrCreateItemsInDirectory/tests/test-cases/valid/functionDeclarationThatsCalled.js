@@ -1,0 +1,3 @@
+fileFunction();
+
+function fileFunction() {}

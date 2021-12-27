@@ -1,0 +1,10 @@
+- id: parentFunctionDeclaration
+  items:
+    - - id: nestedFunctionDeclaration
+        dependsUpon:
+          - parentConst
+          - parentParameter
+    - - id: parentConst
+        type: variable
+    - - id: parentParameter
+        type: parameter

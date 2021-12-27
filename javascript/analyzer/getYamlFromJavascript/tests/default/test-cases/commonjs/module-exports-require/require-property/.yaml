@@ -1,0 +1,4 @@
+- type: export
+  dependsUpon:
+    id: module
+    items: property

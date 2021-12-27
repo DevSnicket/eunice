@@ -1,0 +1,5 @@
+dependsUpon:
+  id: parent-binding
+  items:
+    id: index
+    items: imported

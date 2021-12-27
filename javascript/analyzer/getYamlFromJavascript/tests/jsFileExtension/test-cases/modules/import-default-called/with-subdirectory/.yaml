@@ -1,0 +1,3 @@
+dependsUpon:
+  id: subdirectory
+  items: module

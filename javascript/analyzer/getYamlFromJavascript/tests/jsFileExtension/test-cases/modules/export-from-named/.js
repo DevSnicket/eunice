@@ -1,0 +1,1 @@
+export { exported } from "subdirectory/module.js";

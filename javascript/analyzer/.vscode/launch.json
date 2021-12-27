@@ -1,0 +1,97 @@
+{
+	"configurations":
+		[
+			{
+				"name": "attach",
+				"request": "attach",
+				"type": "node"
+			},
+			{
+				"args":
+					[
+						"--collect-coverage=false",
+						"--runInBand",
+						"getItemOrItemsFromJavascript/createVisitors/throwErrorWhenAnyUnhandled/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "getItemOrItemsFromJavascript createVisitors throwErrorWhenAnyUnhandled Jest",
+				"program": "${workspaceFolder}/node_modules/jest/node_modules/jest-cli/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args": [ "--javascript=" ],
+				"name": "getYamlFromJavascript",
+				"program": "${workspaceFolder}/getYamlFromJavascript/bin.js",
+				"request": "launch",
+				"runtimeArgs": [ "${workspaceFolder}/node_modules/@babel/node/bin/babel-node.js", "-o", "*" ],
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--collect-coverage=false",
+						"--runInBand",
+						"getYamlFromJavascript/tests/classFields/index.test.js",
+						"-t=function.with-call.arrow"
+					],
+				"disableOptimisticBPs": true,
+				"name": "getYamlFromJavascript Jest",
+				"program": "${workspaceFolder}/node_modules/jest/node_modules/jest-cli/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[
+						"--directory=.",
+						"--ignorePathPattern=(^(.git|node_modules|harness/output|test-coverage))|/test-cases"
+					],
+				"name": "getOrCreateItemsInDirectory test dogfooding",
+				"program": "${workspaceFolder}/getOrCreateItemsInDirectory/bin.js",
+				"request": "launch",
+				"runtimeArgs": [ "${workspaceFolder}/node_modules/@babel/node/bin/babel-node.js", "-o", "*" ],
+				"type": "node"
+			},
+			{
+				"args":
+					[
+						"--directory=getOrCreateItemsInDirectory/tests/test-cases/valid",
+						"--ignorePathPattern=^(node_modules|ignoredSubdirectory/ignoredSubdirectoryOfSubdirectory|ignored\\.js)"
+					],
+				"name": "getOrCreateItemsInDirectory test valid",
+				"program": "${workspaceFolder}/getOrCreateItemsInDirectory/bin.js",
+				"request": "launch",
+				"runtimeArgs": [ "${workspaceFolder}/node_modules/@babel/node/bin/babel-node.js", "-o", "*" ],
+				"type": "node"
+			},
+			{
+				"args":
+					[
+						"--collect-coverage=false",
+						"--runInBand",
+						"getYamlFromJavascript/tests/bottomUp/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "getOrCreateItemsInDirectory Jest",
+				"program": "${workspaceFolder}/node_modules/jest/node_modules/jest-cli/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--config",
+						"harness/webpack.config.js",
+						"-p",
+						"-r",
+						"@devsnicket/eunice-test-harnesses/babel.register.cjs"
+					],
+				"disableOptimisticBPs": true,
+				"name": "harness Webpack",
+				"program": "${workspaceFolder}/node_modules/webpack-cli/bin/cli.js",
+				"request": "launch",
+				"type": "node"
+			},
+		],
+}
