@@ -1,0 +1,2 @@
+id: item
+dependencyCount: { descendants: { above: 1 } }

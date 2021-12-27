@@ -1,0 +1,32 @@
+﻿- id: first
+  dependencyCount:
+    descendants:
+      above: 112
+      below: 111
+      same: 113
+    parent:
+      above:
+        dependents: 121
+        dependsUpon: 122
+      below:
+        dependents: 132
+        dependsUpon: 131
+      same:
+        dependents: 141
+        dependsUpon: 142
+- id: second
+  dependencyCount:
+    descendants:
+      above: 212
+      below: 211
+      same: 213
+    parent:
+      above:
+        dependents: 221
+        dependsUpon: 222
+      below:
+        dependents: 232
+        dependsUpon: 231
+      same:
+        dependents: 241
+        dependsUpon: 242

@@ -1,0 +1,4 @@
+﻿- id: first
+  dependencyCount: { parent: { same: { dependsUpon: 1 } } }
+- id: second
+  dependencyCount: { parent: { same: { dependents: 1 } } }

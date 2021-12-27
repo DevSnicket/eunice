@@ -1,0 +1,13 @@
+﻿- id: first
+  dependencyCount:
+    descendants:
+      above: 11
+      same: 12
+    parent:
+      below:
+        dependsUpon: 13
+- id: second
+  dependencyCount:
+    descendants:
+      above: 21
+      same: 22

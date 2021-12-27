@@ -1,0 +1,8 @@
+{
+    "editor.detectIndentation": false,
+	"editor.insertSpaces": false,
+	"files.eol": "\n",
+    "[xml]" : {
+        "editor.wordWrap": "on"
+	},
+}

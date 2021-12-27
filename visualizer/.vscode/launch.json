@@ -1,0 +1,91 @@
+{
+	"configurations":
+		[
+			{
+				"name": "attach",
+				"request": "attach",
+				"type": "node"
+			},
+			{
+				"args":
+					[
+						"--collect-coverage=false",
+						"--runInBand",
+						"tests/index.test.js",
+						"-t=examples.level.first-depends-upon-second"
+					],
+				"disableOptimisticBPs": true,
+				"name": "test",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--collect-coverage=false",
+						"--runInBand",
+						"tests/withElementContainer/forDependencyCount/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "with element container for dependency count test",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"smartStep": false,
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--collect-coverage=false",
+						"--runInBand",
+						"tests/withElementContainer/forItems/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "with element container for items test",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--collect-coverage=false",
+						"--runInBand",
+						"tests/withElementContainerAndParent/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "with element container and parent test",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--collect-coverage=false",
+						"--runInBand",
+						"tests/withOuterAncestors/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "with outer ancestors test",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			},
+			{
+				"args":
+					[ 
+						"--collect-coverage=false",
+						"--runInBand",
+						"tests/withParent/index.test.js"
+					],
+				"disableOptimisticBPs": true,
+				"name": "with parent test",
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+				"request": "launch",
+				"type": "node"
+			}
+		],
+	"version": "0.2.0"
+}

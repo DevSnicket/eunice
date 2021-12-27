@@ -1,0 +1,54 @@
+<svg height="112" width="164.6" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		<style type="text/css">text{font-family:arial;font-size:16px}g.anonymous&gt;text{font-style:italic}g.item&gt;rect{fill:lightgray}g.item&gt;text{text-anchor:middle}g.dependency&gt;text{fill:white;text-anchor:middle}</style>
+	</defs>
+	<symbol id="down-arrow" preserveAspectRatio="xMidYMax slice" viewBox="0,0,1,1">
+		<polygon fill="darkgreen" points="0,0.85 0,0 1,0 1,0.85 0.5,1"></polygon>
+	</symbol>
+	<symbol id="right-arrow" preserveAspectRatio="xMaxYMid slice" viewBox="0,0,1,1">
+		<polygon fill="darkred" points="0.85,0 0,0 0,1 0.85,1 1,0.5"></polygon>
+	</symbol>
+	<symbol id="up-arrow" preserveAspectRatio="xMidYMin slice" viewBox="0,0,1,1">
+		<polygon fill="darkred" points="0,0.15 0,1 1,1 1,0.15 0.5,0"></polygon>
+	</symbol>
+	<g class="dependency">
+		<use href="#down-arrow" height="24" width="27.92" x="52.38"></use>
+		<text x="66.34" y="17.76">21</text>
+	</g>
+	<g class="dependency">
+		<use href="#up-arrow" height="24" width="27.92" x="84.3"></use>
+		<text x="98.26" y="17.76">22</text>
+	</g>
+	<g class="dependency">
+		<use href="#right-arrow" height="24" width="26.92" y="44"></use>
+		<text x="11.96" y="61.76">41</text>
+	</g>
+	<g class="item">
+		<rect height="64" width="110.76" x="26.92" y="24"></rect>
+		<text x="82.3" y="49.76">item</text>
+		<g class="dependency">
+			<use href="#down-arrow" height="24" width="27.92" x="40.92" y="58"></use>
+			<text x="54.88" y="75.76">11</text>
+		</g>
+		<g class="dependency">
+			<use href="#up-arrow" height="24" width="27.92" x="72.84" y="58"></use>
+			<text x="86.8" y="75.76">12</text>
+		</g>
+		<g class="dependency">
+			<use href="#right-arrow" height="24" width="26.92" x="104.76" y="58"></use>
+			<text x="116.72" y="75.76">13</text>
+		</g>
+	</g>
+	<g class="dependency">
+		<use href="#right-arrow" height="24" width="26.92" x="137.68" y="44"></use>
+		<text x="149.64" y="61.76">42</text>
+	</g>
+	<g class="dependency">
+		<use href="#down-arrow" height="24" width="27.92" x="52.38" y="88"></use>
+		<text x="66.34" y="105.76">31</text>
+	</g>
+	<g class="dependency">
+		<use href="#up-arrow" height="24" width="27.92" x="84.3" y="88"></use>
+		<text x="98.26" y="105.76">32</text>
+	</g>
+</svg>

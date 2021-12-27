@@ -1,0 +1,12 @@
+id: item
+dependencyCount:
+  parent:
+    above:
+      dependents: 11
+      dependsUpon: 12
+    below:
+      dependents: 22
+      dependsUpon: 21
+    same:
+      dependents: 31
+      dependsUpon: 32

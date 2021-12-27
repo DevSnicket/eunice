@@ -1,0 +1,6 @@
+id: item
+dependencyCount:
+  parent:
+    same:
+      dependents: 1
+      dependsUpon: 2

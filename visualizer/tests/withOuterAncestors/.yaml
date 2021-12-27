@@ -1,0 +1,22 @@
+id: item
+dependencyCount:
+  ancestors:
+    above:
+      dependents: 111
+      dependsUpon: 112
+    below:
+      dependents: 122
+      dependsUpon: 121
+    same:
+      dependents: 131
+      dependsUpon: 132
+  parent:
+    above:
+      dependents: 11
+      dependsUpon: 12
+    below:
+      dependents: 22
+      dependsUpon: 21
+    same:
+      dependents: 31
+      dependsUpon: 32

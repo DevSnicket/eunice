@@ -1,0 +1,2 @@
+id: item
+dependencyCount: { parent: { above: { dependents: 1 } } }

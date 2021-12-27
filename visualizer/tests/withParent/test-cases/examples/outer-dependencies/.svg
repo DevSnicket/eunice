@@ -1,0 +1,47 @@
+<svg height="168" width="136.88" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		<style type="text/css">text{font-family:arial;font-size:16px}g.anonymous&gt;text{font-style:italic}g.item&gt;rect{fill:lightgray}g.item&gt;text{text-anchor:middle}g.dependency&gt;text{fill:white;text-anchor:middle}</style>
+	</defs>
+	<symbol id="down-arrow" preserveAspectRatio="xMidYMax slice" viewBox="0,0,1,1">
+		<polygon fill="darkgreen" points="0,0.85 0,0 1,0 1,0.85 0.5,1"></polygon>
+	</symbol>
+	<symbol id="right-arrow" preserveAspectRatio="xMaxYMid slice" viewBox="0,0,1,1">
+		<polygon fill="darkred" points="0.85,0 0,0 0,1 0.85,1 1,0.5"></polygon>
+	</symbol>
+	<symbol id="up-arrow" preserveAspectRatio="xMidYMin slice" viewBox="0,0,1,1">
+		<polygon fill="darkred" points="0,0.15 0,1 1,1 1,0.15 0.5,0"></polygon>
+	</symbol>
+	<g class="dependency">
+		<use href="#down-arrow" height="24" width="18.96" x="47.48"></use>
+		<text x="56.96" y="17.76">1</text>
+	</g>
+	<g class="dependency">
+		<use href="#up-arrow" height="24" width="18.96" x="70.44"></use>
+		<text x="79.92" y="17.76">1</text>
+	</g>
+	<g class="dependency">
+		<use href="#right-arrow" height="24" width="17.96" y="72"></use>
+		<text x="7.48" y="89.76">1</text>
+	</g>
+	<rect height="112" style="fill:none;stroke:lightgrey;stroke-width:8" width="92.96" x="21.96" y="28"></rect>
+	<g class="item">
+		<rect style="fill:lightgrey" height="40" width="100.96" x="17.96" y="24"></rect>
+		<text x="68.44" y="49.76">parent</text>
+	</g>
+	<g class="item">
+		<rect height="40" width="52.96" x="41.96" y="80"></rect>
+		<text x="68.44" y="105.76">child</text>
+	</g>
+	<g class="dependency">
+		<use href="#right-arrow" height="24" width="17.96" x="118.92" y="72"></use>
+		<text x="126.4" y="89.76">1</text>
+	</g>
+	<g class="dependency">
+		<use href="#down-arrow" height="24" width="18.96" x="47.48" y="144"></use>
+		<text x="56.96" y="161.76">1</text>
+	</g>
+	<g class="dependency">
+		<use href="#up-arrow" height="24" width="18.96" x="70.44" y="144"></use>
+		<text x="79.92" y="161.76">1</text>
+	</g>
+</svg>
