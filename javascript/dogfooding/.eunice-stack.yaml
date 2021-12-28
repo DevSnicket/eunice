@@ -15,7 +15,6 @@
       - - stacking-explicit
       - - replacement
 -
-  - call-with-process-standard-streams
   - run-tests-from-file-system
   - test-harnesses
 - - id: 3rd party packages
