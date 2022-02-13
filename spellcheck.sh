@@ -8,4 +8,4 @@ find . \
 	! -path ./javascript/analyzer-harness/index.html \
 	! -path ./javascript/harness/index.html \
 	! -path ./licensing/index.html \
-	-exec npx cspell@4.0.30 {} +
+	-exec npx cspell {} +
