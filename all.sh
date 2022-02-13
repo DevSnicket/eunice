@@ -14,3 +14,5 @@ script=${1:-all}
 (cd stacking-inference && npm run $script)
 (cd visualizer && npm run $script)
 (cd javascript && npm run $script)
+
+./website-update.sh
