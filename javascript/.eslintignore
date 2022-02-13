@@ -1,3 +1,7 @@
+test-cases/
+/analyzer/node_modules
+/analyzer/harness/example.js
+/analyzer/harness/output/
 /analyzeAndProcessAndRender/analyzeAndProcess/tests/sources/
 /analyzeAndProcessAndRender/tests/outputEnabledForHtmlAndSvg/source/
 /analyzeAndProcessAndRender/tests/packageSource/node_modules/

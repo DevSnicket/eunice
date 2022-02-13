@@ -1,19 +1,29 @@
 {
 	"compilerOptions": {
 		"alwaysStrict": true,
+		"baseUrl": ".",
 		"checkJs": true,
 		"lib": [ "dom", "es2017", "esnext.array" ],
 		"moduleResolution": "node",
 		"noEmit": true,
+		"paths": {
+			"@babel/plugin-proposal-object-rest-spread": [ "../test-harnesses/babel-plugin-proposal-object-rest-spread" ],
+			"util": [ "../node_modules/@types/node/util.d.ts" ],
+		},
 		"resolveJsonModule": true,
 		"target": "es2017"
 	},
 	"exclude": [
+		"createWebpackConfiguration.js",
 		"dist",
 		"harness.js",
+		"index.js",
 		"test-coverage",
 		"tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output",
+		"tests/dogfoodingFromEuniceRepositoryRelativeDirectory/webpack.config.js",
 		"tests/example/output",
+		"tests/example/webpack.config.js",
+		"webpack.config.js",
 		"writeHarness/tests/output"
 	]
 }

@@ -109,7 +109,7 @@
 					"tests/example/webpack.config.js",
 					"-p",
 					"-r",
-					"@devsnicket/eunice-test-harnesses/babel.register.cjs"
+					"../test-harnesses/babel.register.cjs"
 				],
 			"disableOptimisticBPs": true,
 			"name": "harness example Webpack",

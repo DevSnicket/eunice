@@ -128,19 +128,6 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"replaceIdentifiersAndItems/index.test.js"
-					],
-				"disableOptimisticBPs": true,
-				"name": "replaceIdentifiersAndItems jest",
-				"program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-				"request": "launch",
-				"type": "node"
-			},
-			{
-				"args":
-					[ 
-						"--collect-coverage=false",
-						"--runInBand",
 						"replaceIdentifiersAndItemsAndLevelsAndStacks/index.test.js"
 					],
 				"disableOptimisticBPs": true,

@@ -1,4 +1,4 @@
-import { Stack } from "@devsnicket/eunice-dependency-and-structure";
+import { Stack } from "../../dependency-and-structure";
 import ElementContainerFactory from "./ElementContainerFactory";
 
 export = Parameter

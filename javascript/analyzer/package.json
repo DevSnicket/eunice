@@ -1,58 +1,20 @@
 {
-	"author": "Graham Dyson",
 	"bin": {
 		"eunice-javascript-analyzer-getOrCreateItemsInDirectory": "getOrCreateItemsInDirectory/bin.js",
 		"eunice-javascript-analyzer-getYamlFromJavascript": "getYamlFromJavascript/bin.js"
 	},
-	"bugs": {
-		"url": "https://github.com/DevSnicket/eunice/issues"
-	},
-	"description": "Analyzes JavaScript files/directories and writes a YAML file of the dependencies which can then be processed, rendered and interacted with using the rest of Eunice.",
-	"dependencies": {
-		"@babel/parser": "^7.10.5",
-		"@babel/types": "^7.10.5",
-		"core-js": "^3.6.5",
-		"fs-extra": "^8.1.0",
-		"js-yaml": "^3.14.0",
-		"minimist": "^1.2.5"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.10.5",
-		"@babel/node": "^7.10.5",
-		"@babel/plugin-transform-modules-commonjs": "^7.10.4",
-		"@babel/polyfill": "^7.10.4",
-		"@babel/preset-env": "^7.10.4",
-		"@babel/register": "^7.10.5",
-		"@devsnicket/eunice-run-tests-from-file-system": "^4.6.1",
-		"@devsnicket/eunice-test-harnesses": "^9.1.0",
-		"@types/fs-extra": "^9.0.1",
-		"@types/jest": "^26.0.7",
-		"@types/node": "^14.0.26",
-		"@types/react": "^16.9.43",
-		"@types/webpack": "^4.41.21",
-		"babel-loader": "^8.1.0",
-		"cspell": "^4.0.63",
-		"eslint": "^7.5.0",
-		"eslint-plugin-notice": "^0.9.10",
-		"jest": "^26.1.0",
-		"react": "^16.13.1",
-		"react-dom": "^16.13.1",
-		"react-reflex": "^2.2.9",
-		"typescript": "^3.9.7",
-		"webpack-cli": "^3.3.12"
-	},
-	"homepage": "https://github.com/DevSnicket/Eunice#readme",
 	"jest": {
 		"collectCoverage": true,
 		"collectCoverageFrom": [
 			"**/*.js",
-			"!**/bin.js",
 			"!**/test-case/**",
 			"!**/test-case/**/.js",
 			"!**/test-cases/**",
 			"!**/test-cases/**/.js",
-			"!node_modules/**",
+			"!getOrCreateItemsInDirectory/bin.js",
+			"!getYamlFromJavascript/bin.js",
 			"!harness/**",
+			"!node_modules/**",
 			"!test-coverage/**"
 		],
 		"coverageDirectory": "test-coverage",
@@ -62,46 +24,17 @@
 				"functions": 100,
 				"lines": 100
 			}
-		},
-		"transformIgnorePatterns": [
-			"node_modules/(?!@devsnicket)"
-		]
+		}
 	},
-	"keywords": [
-		"analyze",
-		"analyzer",
-		"architecture",
-		"dependency",
-		"dependencies",
-		"euince",
-		"javascript",
-		"stack",
-		"structure",
-		"uince",
-		"unice",
-		"yaml"
-	],
-	"license": "SEE LICENSE IN LICENSE",
-	"main": "index.js",
-	"name": "@devsnicket/eunice-javascript-analyzer",
-	"publishConfig": {
-		"repository": "https://pkgs.dev.azure.com/grahamdyson/_packaging/Eunice/npm/registry/"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/DevSnicket/eunice-javascript-analyzer.git"
-	},
-	"sideEffects": false,
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run typescript && npm run test && npm run harness-production && npm run dogfooding",
-		"dogfooding": "babel-node -o \"*\" getOrCreateItemsInDirectory/bin.js --directory=. --ignorePathPattern=\"(^(.git|node_modules|harness/output|test-coverage))|/test-cases\"",
+		"dogfooding": "babel-node -o \"*\" getOrCreateItemsInDirectory/bin.js --directory=. --ignorePathPattern=\"(^(.git|node_modules|harness/output|test-coverage))|/test-cases\" > /dev/null",
 		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|node_modules|output|test-cases|test-coverage|website)$\" --output-yaml --reverse-file-content=false",
-		"harness-production": "rm -rf harness/output && npx webpack -p --config harness/webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs",
-		"harness-development": "rm -rf harness/output && npx webpack -d --config harness/webpack.config.js -r @devsnicket/eunice-test-harnesses/babel.register.cjs",
+		"harness-production": "rm -rf harness/output && npx webpack -p --config harness/webpack.config.js -r ${PWD}/../../test-harnesses/babel.register.cjs",
+		"harness-development": "rm -rf harness/output && npx webpack -d --config harness/webpack.config.js -r ${PWD}/../../test-harnesses/babel.register.cjs",
 		"lint": "eslint .",
-		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./harness/output/*\" ! -path \"./node_modules/**/*\" ! -path \"**/test-cases/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell {} +",
+		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./harness/output/*\" ! -path \"./node_modules/**/*\" ! -path \"**/test-cases/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell --config ../../cspell.json {} +",
 		"test": "jest",
 		"typescript": "npx tsc -p jsconfig.json"
-	},
-	"version": "11.34.0"
+	}
 }

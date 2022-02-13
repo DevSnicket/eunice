@@ -11,7 +11,7 @@
 	"exclude": [
 		"harness/index.js",
 		"harness/output",
-		"node_modules",
+		"harness",
 		"**/test-cases",
 		"test-coverage"
 	]

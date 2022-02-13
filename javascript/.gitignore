@@ -1,5 +1,3 @@
 /devsnicket-eunice-*.tgz
 /dist
 /eunice.*
-/node_modules/
-/test-coverage/

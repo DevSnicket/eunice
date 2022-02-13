@@ -1,4 +1,10 @@
-// Copyright (c) 2019 Graham Dyson. All Rights Reserved. Unauthorized copying of this file, via any medium is strictly prohibited. Proprietary and confidential.
+/* Eunice
+Copyright (c) 2019 Graham Dyson.
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+You should have received a copy of the GNU Affero General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
+SPDX-License-Identifier: AGPL-3.0-or-later
+*/
 
 import {
 	ReflexContainer,
@@ -12,19 +18,19 @@ import {
 	createHashFromLocation,
 	createResizableContainer,
 	renderIntoContainerElement,
-} from "@devsnicket/eunice-test-harnesses";
+} from "../../test-harnesses";
 
 import {
 	createYamlInputElement,
 	createYamlOutputElement,
-} from "@devsnicket/eunice-interactive";
+} from "../../interactive";
 
 import babelParserPlugins from "../babelParserPluginsDefault";
-import createCodeEditorForLanguage from "@devsnicket/eunice-test-harnesses/codeEditor/createEditorForLanguage";
+import createCodeEditorForLanguage from "../../test-harnesses/codeEditor/createEditorForLanguage";
 import { createElement } from "react";
-import createJavascriptEditor from "@devsnicket/eunice-javascript-analyzer/harness/createJavascriptEditor";
-import getYamlFromJavascript from "@devsnicket/eunice-javascript-analyzer/getYamlFromJavascript";
-import initializeCodeEditorGlobal from "@devsnicket/eunice-test-harnesses/codeEditor/serviceWorkers/initializeGlobal";
+import createJavascriptEditor from "../analyzer/harness/createJavascriptEditor";
+import getYamlFromJavascript from "../analyzer/getYamlFromJavascript";
+import initializeCodeEditorGlobal from "../../test-harnesses/codeEditor/serviceWorkers/initializeGlobal";
 import parseStackFromYaml from "../parseStackFromYaml";
 
 initializeCodeEditorGlobal();

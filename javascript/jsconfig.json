@@ -1,14 +1,26 @@
 {
 	"compilerOptions": {
 		"alwaysStrict": true,
+		"baseUrl": ".",
 		"checkJs": true,
 		"lib": [ "es2017", "esnext.array" ],
 		"moduleResolution": "node",
 		"noEmit": true,
+		"paths": {
+			"@babel/plugin-proposal-object-rest-spread": [ "../test-harnesses/babel-plugin-proposal-object-rest-spread" ],
+			"util": [ "../node_modules/@types/node/util.d.ts" ],
+		},
 		"resolveJsonModule": true,
 		"target": "es2017"
 	},
 	"exclude": [
+		"**/test-cases",
+
+		"analyzer/harness",
+		"analyzer/harness/index.js",
+		"analyzer/harness/output",
+		"analyzer/node_modules",
+		"analyzer/test-coverage",
 		"analyzeAndProcessAndRender/tests/singleSource/source",
 		"dist",
 		"dogfooding/output",

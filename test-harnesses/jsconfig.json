@@ -1,17 +1,20 @@
 {
 	"compilerOptions": {
 		"alwaysStrict": true,
+		"baseUrl": ".",
 		"checkJs": true,
 		"lib": [ "dom", "es2017", "esnext.array" ],
 		"moduleResolution": "node",
 		"noEmit": true,
+		"paths": {
+			"@babel/plugin-proposal-object-rest-spread": [ "babel-plugin-proposal-object-rest-spread" ],
+			"react-reflex": [ "react-reflex" ],
+			"util": [ "../node_modules/@types/node/util.d.ts" ],
+		},
 		"resolveJsonModule": true,
 		"target": "es2017"
 	},
 	"exclude": [
-		"./index.js",
-		"createResizableContainer/tests/test-harness",
-		"createWebpackConfiguration",
 		"test-coverage",
 	]
 }

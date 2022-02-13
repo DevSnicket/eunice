@@ -1,4 +1,4 @@
-import CountOfItem from "@devsnicket/eunice-dependency-counter/countInItem/CountOfItem"
+import CountOfItem from "../dependency-counter/countInItem/CountOfItem"
 import ElementContainerFactory from "./createStackWithSummaryGroupFactory/ElementContainerFactory";
 import Namespaces from "./Namespaces"
 

@@ -1,5 +1,5 @@
 import { ReactSVGElement } from "react";
-import { Item } from "@devsnicket/eunice-dependency-and-structure";
+import { Item } from "../../dependency-and-structure";
 
 export = ElementContainerFactory;
 

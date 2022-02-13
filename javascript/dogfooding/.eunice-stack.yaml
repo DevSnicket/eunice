@@ -1,22 +1,4 @@
-- - javascript
--
-  - javascript-analyzer
-  - id: post analysis
-    dependencyPermeable: true
-    items:
-      - - interactive
-      - - stacking-inference
-        - visualizer
-      - - dependency-counter
-      - - dependency-and-structure
-  - id: processors
-    dependencyPermeable: true
-    items:
-      - - stacking-explicit
-      - - replacement
--
-  - run-tests-from-file-system
-  - test-harnesses
+- - existing
 - - id: 3rd party packages
     dependencyPermeable: true
     items:
