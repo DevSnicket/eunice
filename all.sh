@@ -15,4 +15,4 @@ script=${1:-all}
 (cd visualizer && npm run $script)
 (cd javascript && npm run $script)
 
-./website-update.sh
+./website-update.sh $2 $3
