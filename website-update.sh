@@ -1,22 +1,24 @@
-# interactive
+git submodule add -b website --force https://@github.com/DevSnicket/eunice.git website
+
+echo website copy of interactive
 rm -f -rf website/interactive
 cp -r interactive/tests/example/output website/interactive
 
-# javascript
+echo website copy of javascript
 rm -rf website/dogfooding
 cp -r javascript/dogfooding/output website/dogfooding
 mkdir -p website/javascript
 rm -rf website/javascript/harness
 cp -r javascript/harness/output website/javascript/harness
 
-# javascript/analyzer
+echo website copy of javascript/analyzer
 rm -f -rf website/javascript/analyzer-harness
 cp -r javascript/analyzer/harness/output website/javascript/analyzer-harness
 
-# test-harnesses
+echo website copy of test-harnesses
 cp -r test-harnesses/favicon.ico website
 
-# visualizer
+echo website copy of visualizer
 rm -f -rf website/arrows &&
 cp -r visualizer/createDependencyGroupFactories/createArrows/tests/withUse/test-cases website/arrows &&
 cp visualizer/createDependencyGroupFactories/createArrows/tests/symbols/test-cases/down-10x10-*.svg website/arrows &&
@@ -42,10 +44,14 @@ cd website
 
 bash ./spellcheck.sh
 if [ "$1" ]; then
+	echo updating website
+
 	bash ./update-all.sh $1;
 fi
 
 if [ "$2" ]; then
+	echo committing website
+
 	git add .
 
 	git config --add user.email grahamdyson@hotmail.com
