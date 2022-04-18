@@ -9,3 +9,7 @@ jobs:
       - run: npm install -g npm@7
       - run: npm install
       - run: ./all.sh
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          package: ./javascript/package.json
+          token: ${{ secrets.NPM_TOKEN }}
