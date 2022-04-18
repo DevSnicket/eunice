@@ -10,12 +10,21 @@ function requestIssuesWithVersions({
 		requestJsonFromUrl(
 			`https://api.github.com/search/issues?q=released%20in%20${encodeURIComponent(language)}+repo:devsnicket/eunice+in:comments`,
 		)
-		.then(
-			({ items }) =>
+		.then(transformResponse)
+	);
+
+	function transformResponse({
+		items,
+		message,
+	}) {
+		if (message)
+			throw message;
+		else
+			return (
 				Promise.all(items.map(addVersionToIssue))
 				.then(issues => issues.filter(({ date, version }) => date && version))
-		)
-	);
+			);
+	}
 
 	function addVersionToIssue({
 		comments_url,
