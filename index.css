@@ -103,7 +103,6 @@ body .footer .links > .email::before {
 }
 
 body .footer .links > .blog,
-body .footer .links > .discord,
 body .footer .links > .github,
 body .footer .links > .twitter {
 	background-repeat: no-repeat;
@@ -113,10 +112,6 @@ body .footer .links > .twitter {
 
 body .footer .links > .blog {
 	background-image: url('./blog/icon-small-dark.png');
-}
-
-body .footer .links > .discord {
-	background-image: url('./icons/discord-small-dark.png');
 }
 
 body .footer .links > .github {
@@ -332,10 +327,6 @@ ul li {
 
 	body .footer .links > .blog {
 		background-image: url('./blog/icon-small-light.png');
-	}
-	
-	body .footer .links > .discord {
-		background-image: url('./icons/discord-small-light.png');
 	}
 
 	body .footer .links > .github {
