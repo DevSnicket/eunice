@@ -115,9 +115,12 @@
         items: index
     - id: commonjsRequireFunctionInRootDirectoryThatIsCalled
       type: file
+      dependsUpon: commonjsModuleExportsOfFunctionArrow1
+    - id: commonjsRequireFunctionInRootSubdirectoryThatIsCalled
+      type: file
       dependsUpon:
-        id: ..
-        items: commonjsModuleExportsOfFunctionArrow1
+        id: subdirectory
+        items: commonjsModuleExportsOfFunctionArrowInSubdirectory
     - id: emptyInSubdirectory
       type: file
     - id: subdirectoryOfSubdirectory
@@ -130,11 +133,7 @@
             items: commonjsModuleExportsOfFunctionArrowInSubdirectory
         - id: commonjsRequireFunctionInRootDirectoryThatIsCalled
           type: file
-          dependsUpon:
-            id: ..
-            items:
-              id: ..
-              items: commonjsModuleExportsOfFunctionArrow1
+          dependsUpon: commonjsModuleExportsOfFunctionArrow1
         - id: commonjsRequireParentDirectoryThatIsCalled
           type: file
           dependsUpon:

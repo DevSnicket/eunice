@@ -14,5 +14,4 @@ node dist/bin.js \
 --output-directory-path=dogfooding/output \
 --output-svg \
 --output-yaml \
---reverseFileContent=false \
---root-item-identifiers=eunice
+--reverseFileContent=false

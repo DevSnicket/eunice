@@ -106,10 +106,26 @@ function getOrCreateAbsoluteOrParentRelativeDependsUpon(
 						return (
 							pathSegmentIndex === 0
 							&&
-							createDependsUponWithIdentifier(
-								last(ancestorDirectoryNames),
-							)
+							asPathBase()
 						);
+
+						function asPathBase() {
+							return (
+								!isAncestorRoot()
+								&&
+								createDependsUponWithIdentifier(
+									last(ancestorDirectoryNames),
+								)
+							);
+
+							function isAncestorRoot() {
+								return (
+									ancestorDirectoryNames.length === 1
+									&&
+									!ancestorDirectoryNames[0]
+								);
+							}
+						}
 					}
 				}
 			}

@@ -9,6 +9,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 import createDirectoryPathFromAbsolutePaths from "../../createDirectoryPathFromAbsolutePaths";
 import getYamlFromJavascript from "../../../..";
 import path from "path";
+import readTextFile from "../../../readTextFile";
 import runTestsFromFileSystem from "../../../../../../../run-tests-from-file-system";
 
 const directoryAbsolutePath = path.join(__dirname, "test-cases");
@@ -33,3 +34,16 @@ runTestsFromFileSystem({
 	processArguments:
 		process.argv,
 });
+
+test("returns a dependency without reference to root when dependency is on a subdirectory of root and root has rooted path",
+	async() => {
+		const testCaseDirectoryPath = path.join(directoryAbsolutePath, "sibling-subdirectory", "child-directory");
+
+		expect(
+			getYamlFromJavascript({
+				directoryPath: { absolute: testCaseDirectoryPath, relative: "/child-directory" },
+				javascript: await readTextFile(path.join(testCaseDirectoryPath, ".js")),
+			}),
+		)
+		.toEqual("dependsUpon: module");
+	});

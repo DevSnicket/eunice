@@ -188,7 +188,7 @@ function withOptionsAndRootDirectory({
 				return (
 					whenHasRootDirectoryName()
 					||
-					directoryRelativePath
+					`${path.sep}${directoryRelativePath}`
 				);
 
 				function whenHasRootDirectoryName() {
