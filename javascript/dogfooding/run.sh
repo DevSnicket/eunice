@@ -4,7 +4,6 @@ mkdir output
 cd .. 
 node dist/bin.js \
 --directories=.. \
---directory-to-create-or-add-to-stacks-from=dogfooding \
 --ignore-path-pattern="(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage|website)$" \
 --include-service-workers=true \
 --modify-stacks-key=type \
