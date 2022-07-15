@@ -50,15 +50,18 @@ if [ "$1" ]; then
 fi
 
 if [ "$2" ]; then
-	echo committing website
-
+	echo website Git add
 	git add .
 
-	git config --add user.email grahamdyson@hotmail.com
-	git config --add user.name "GitHub pages publish"
+	echo website Git config
+	git config --global user.name "GitHub pages publish"
+	git config --global user.email 'bot@noreply.github.com'
+	git remote set-url origin https://x-access-token:$1@github.com/$2
 
 	if [[ `git status --porcelain` ]]; then
+		echo website Git commit
 		git commit -m "Automatic update from main branch";
+		echo website Git push
 		git push;
 	fi
 fi

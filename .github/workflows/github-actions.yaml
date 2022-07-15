@@ -4,11 +4,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with: { submodules: 'true' }
       - uses: actions/setup-node@v3
         with: { node-version: '14' }
       - run: npm install -g npm@7
       - run: npm install
-      - run: ./all.sh all ${{ secrets.GITHUB_TOKEN }}
+      - run: ./all.sh all ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }}
       - uses: JS-DevTools/npm-publish@v1
         with:
           package: ./javascript/package.json
