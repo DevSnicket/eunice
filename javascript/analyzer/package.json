@@ -29,7 +29,7 @@
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run typescript && npm run test && npm run harness-production && npm run dogfooding",
 		"dogfooding": "babel-node -o \"*\" getOrCreateItemsInDirectory/bin.js --directory=. --ignorePathPattern=\"(^(.git|node_modules|harness/output|test-coverage))|/test-cases\" > /dev/null",
-		"eunice": "npx eunice --accept-license --ignore-path-pattern=\"(^|/)(\\..*|node_modules|output|test-cases|test-coverage|website)$\" --output-yaml --reverse-file-content=false",
+		"eunice": "npx eunice --ignore-path-pattern=\"(^|/)(\\..*|node_modules|output|test-cases|test-coverage|website)$\" --output-yaml --reverse-file-content=false",
 		"harness-production": "rm -rf harness/output && npx webpack -p --config harness/webpack.config.js -r ${PWD}/../../test-harnesses/babel.register.cjs",
 		"harness-development": "rm -rf harness/output && npx webpack -d --config harness/webpack.config.js -r ${PWD}/../../test-harnesses/babel.register.cjs",
 		"lint": "eslint .",
