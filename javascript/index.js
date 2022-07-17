@@ -42,7 +42,7 @@ const cliArguments =
 			version,
 		});
 	} catch (error) {
-		console.log(error.message);
+		console.log(error);
 	}
 
 	// Process exit required as this is a top-level promise

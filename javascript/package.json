@@ -73,9 +73,8 @@
 		"url": "https://github.com/devsnicket/eunice.git"
 	},
 	"scripts": {
-		"all": "npm run spellcheck && npm run lint && npm run typescript && npm run build-prepare && npm run build-interactive && npm run test && npm run build && npm run build-remove-maps && npm run harness && npm run dogfooding",
+		"all": "npm run spellcheck && npm run lint && npm run typescript && npm run build-prepare && npm run build-interactive && npm run test && npm run build && npm run harness && npm run dogfooding",
 		"build": "npx webpack -p --config webpack.config.js -r ${PWD}/../test-harnesses/babel.register.cjs",
-		"build-remove-maps": "rm dist/bin.js.map && rm dist/interactive/harness.js.map",
 		"build-development": "npx webpack -d --config webpack.config.js -r ${PWD}/../test-harnesses/babel.register.cjs",
 		"build-interactive": "npx webpack -p --config interactive.webpack.config.js -r ${PWD}/../test-harnesses/babel.register.cjs",
 		"build-interactive-development": "npx webpack -d --config interactive.webpack.config.js -r ${PWD}/../test-harnesses/babel.register.cjs",
@@ -87,5 +86,5 @@
 		"test": "jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "8.0.1"
+	"version": "8.1.0"
 }

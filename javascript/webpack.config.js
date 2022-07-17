@@ -10,13 +10,12 @@ import { BannerPlugin } from "webpack";
 import path from "path";
 
 export default {
-	// cSpell:words devtool
-	devtool:
-		"source-map",
 	entry:
 		"./index.js",
 	node:
 		{ __dirname: false },
+	optimization:
+		{ minimize: false },
 	output:
 		{
 			filename: "bin.js",
