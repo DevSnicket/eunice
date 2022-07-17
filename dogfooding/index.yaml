@@ -1,4 +1,4 @@
-# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 8.0.1 on 2022-07-16T16:17:57.215Z
+# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 8.1.0 on 2022-07-17T09:16:52.744Z
 - - id: javascript
     type: directory
     items:
@@ -100,6 +100,7 @@
                   - analyzeAndProcessAndRender
                   - cliArguments
                   - createParameterFromCliArguments
+                  - error
                   - version
                   - writeNameAndVersion
             - - id: cliArguments
