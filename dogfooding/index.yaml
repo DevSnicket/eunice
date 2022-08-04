@@ -1,4 +1,4 @@
-# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 8.1.0 on 2022-08-04T15:54:27.346Z
+# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 8.1.1 on 2022-08-04T18:16:12.439Z
 - - id: javascript
     type: directory
     items:
@@ -2172,6 +2172,7 @@
                                           - declarations
                                       - id: visitJsxOpeningElement
                                         dependsUpon:
+                                          - createJsxOpeningElementNameDependsUpon
                                           - dependsUponIdentifiers
                                           - findBlockOrIdentifiableParentInAncestors
                                       - id: visitVariableDeclaration
@@ -3336,6 +3337,24 @@
                                 - id: addParent
                                   dependsUpon: whenHasItems
                                   items: whenHasItems
+                          - id: createJsxOpeningElementNameDependsUpon
+                            type: file
+                            items:
+                              - - id: createJsxOpeningElementNameDependsUpon
+                                  type: export
+                                  dependsUpon:
+                                    - createDependsUponFromDescendants
+                                    - createDescendantsFromElementOrObject
+                              - - id: createDescendantsFromElementOrObject
+                                  dependsUpon: whenHasName
+                                  items: whenHasName
+                                - id: createDependsUponFromDescendants
+                                  dependsUpon: whenHasDescendants
+                                  items:
+                                    id: whenHasDescendants
+                                    dependsUpon:
+                                      - createDependsUponFromDescendants
+                                      - restOfDescendants
                           - id: createRelativeAwarePathBasedDependsUpon
                             type: directory
                             items:
