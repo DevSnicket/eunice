@@ -15,6 +15,7 @@
 					],
 				"disableOptimisticBPs": true,
 				"name": "getItemOrItemsFromJavascript createVisitors throwErrorWhenAnyUnhandled Jest",
+				"outputCapture": "std",
 				"program": "${workspaceFolder}/../../node_modules/jest-cli/bin/jest.js",
 				"request": "launch",
 				"type": "node"
@@ -37,6 +38,7 @@
 					],
 				"disableOptimisticBPs": true,
 				"name": "getYamlFromJavascript Jest",
+				"outputCapture": "std",
 				"program": "${workspaceFolder}/../../node_modules/jest-cli/bin/jest.js",
 				"request": "launch",
 				"type": "node"
@@ -74,6 +76,7 @@
 					],
 				"disableOptimisticBPs": true,
 				"name": "getOrCreateItemsInDirectory Jest",
+				"outputCapture": "std",
 				"program": "${workspaceFolder}/../../node_modules/jest-cli/bin/jest.js",
 				"request": "launch",
 				"type": "node"
