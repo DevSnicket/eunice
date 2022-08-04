@@ -1,0 +1,52 @@
+{
+	"folders": [
+		{
+			"name": "eunice",
+			"path": "."
+		},
+		{
+			"name": "dependency-and-structure",
+			"path": "dependency-and-structure"
+		},
+		{
+			"name": "dependency-counter",
+			"path": "dependency-counter"
+		},
+		{
+			"name": "interactive",
+			"path": "interactive"
+		},
+		{
+			"name": "javascript",
+			"path": "javascript"
+		},
+		{
+			"name": "javascript analyzer",
+			"path": "javascript/analyzer"
+		}
+,
+		{
+			"name": "run-tests-from-file-system",
+			"path": "run-tests-from-file-system"
+		},
+		{
+			"name": "stacking-explicit",
+			"path": "stacking-explicit"
+		},
+		{
+			"name": "stacking-inference",
+			"path": "stacking-inference"
+		},
+		{
+			"name": "test-harnesses",
+			"path": "test-harnesses"
+		},
+		{
+			"name": "visualizer",
+			"path": "visualizer"
+		},
+		{
+			"name": "website",
+			"path": "website"
+		}	]
+}
