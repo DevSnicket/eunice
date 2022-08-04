@@ -18,6 +18,7 @@ import createDependsUponIdentifiers from "./createDependsUponIdentifiers";
 import createFileExtensionTransformer from "./createFileExtensionTransformer";
 import createFileItemOrItems from "./createFileItemOrItems";
 import createIndexDependsUponWhenDirectory from "./createIndexDependsUponWhenDirectory";
+import createJsxOpeningElementNameDependsUpon from "./createJsxOpeningElementNameDependsUpon";
 import createRelativeAwarePathBasedDependsUpon from "./createRelativeAwarePathBasedDependsUpon";
 import createScopedVariables from "./createScopedVariables";
 import createUndeclaredReferences from "./createUndeclaredReferences";
@@ -169,12 +170,14 @@ export default ({
 	}
 
 	function visitJsxOpeningElement(
-		{ name: { name } },
+		{ name },
 		ancestors,
 	) {
 		dependsUponIdentifiers.addIdentifierToParent({
-			identifier: name,
-			parent: findBlockOrIdentifiableParentInAncestors(ancestors),
+			identifier:
+				createJsxOpeningElementNameDependsUpon(name),
+			parent:
+				findBlockOrIdentifiableParentInAncestors(ancestors),
 		});
 	}
 

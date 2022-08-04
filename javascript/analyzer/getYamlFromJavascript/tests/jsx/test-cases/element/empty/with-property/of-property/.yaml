@@ -1,0 +1,5 @@
+dependsUpon:
+  id: Object
+  items:
+    id: Property
+    items: PropertyOfProperty
