@@ -15,7 +15,7 @@
 					],
 				"disableOptimisticBPs": true,
 				"name": "getItemOrItemsFromJavascript createVisitors throwErrorWhenAnyUnhandled Jest",
-				"program": "${workspaceFolder}/node_modules/jest/node_modules/jest-cli/bin/jest.js",
+				"program": "${workspaceFolder}/../../node_modules/jest-cli/bin/jest.js",
 				"request": "launch",
 				"type": "node"
 			},
@@ -24,7 +24,7 @@
 				"name": "getYamlFromJavascript",
 				"program": "${workspaceFolder}/getYamlFromJavascript/bin.js",
 				"request": "launch",
-				"runtimeArgs": [ "${workspaceFolder}/node_modules/@babel/node/bin/babel-node.js", "-o", "*" ],
+				"runtimeArgs": [ "${workspaceFolder}/../../node_modules/@babel/node/bin/babel-node.js", "-o", "*" ],
 				"type": "node"
 			},
 			{
@@ -32,12 +32,12 @@
 					[ 
 						"--collect-coverage=false",
 						"--runInBand",
-						"getYamlFromJavascript/tests/classFields/index.test.js",
-						"-t=function.with-call.arrow"
+						"getYamlFromJavascript/tests/jsx/index.test.js",
+						"-t=element.empty.with-property"
 					],
 				"disableOptimisticBPs": true,
 				"name": "getYamlFromJavascript Jest",
-				"program": "${workspaceFolder}/node_modules/jest/node_modules/jest-cli/bin/jest.js",
+				"program": "${workspaceFolder}/../../node_modules/jest-cli/bin/jest.js",
 				"request": "launch",
 				"type": "node"
 			},
@@ -50,7 +50,7 @@
 				"name": "getOrCreateItemsInDirectory test dogfooding",
 				"program": "${workspaceFolder}/getOrCreateItemsInDirectory/bin.js",
 				"request": "launch",
-				"runtimeArgs": [ "${workspaceFolder}/node_modules/@babel/node/bin/babel-node.js", "-o", "*" ],
+				"runtimeArgs": [ "${workspaceFolder}/../../node_modules/@babel/node/bin/babel-node.js", "-o", "*" ],
 				"type": "node"
 			},
 			{
@@ -62,7 +62,7 @@
 				"name": "getOrCreateItemsInDirectory test valid",
 				"program": "${workspaceFolder}/getOrCreateItemsInDirectory/bin.js",
 				"request": "launch",
-				"runtimeArgs": [ "${workspaceFolder}/node_modules/@babel/node/bin/babel-node.js", "-o", "*" ],
+				"runtimeArgs": [ "${workspaceFolder}/../../node_modules/@babel/node/bin/babel-node.js", "-o", "*" ],
 				"type": "node"
 			},
 			{
@@ -74,7 +74,7 @@
 					],
 				"disableOptimisticBPs": true,
 				"name": "getOrCreateItemsInDirectory Jest",
-				"program": "${workspaceFolder}/node_modules/jest/node_modules/jest-cli/bin/jest.js",
+				"program": "${workspaceFolder}/../../node_modules/jest-cli/bin/jest.js",
 				"request": "launch",
 				"type": "node"
 			},
@@ -89,7 +89,7 @@
 					],
 				"disableOptimisticBPs": true,
 				"name": "harness Webpack",
-				"program": "${workspaceFolder}/node_modules/webpack-cli/bin/cli.js",
+				"program": "${workspaceFolder}/../../node_modules/webpack-cli/bin/cli.js",
 				"request": "launch",
 				"type": "node"
 			},
