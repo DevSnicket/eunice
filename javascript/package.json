@@ -20,12 +20,7 @@
 			"!**/test-case/**/.js",
 			"!**/test-cases/**",
 			"!**/test-cases/**/.js",
-			"!analyzer/getOrCreateItemsInDirectory/bin.js",
-			"!analyzer/getYamlFromJavascript/bin.js",
-			"!analyzer/getYamlFromJavascript/bin.js",
-			"!analyzer/harness/**",
-			"!analyzer/node_modules/**",
-			"!analyzer/test-coverage/**",
+			"!analyzer/**",
 			"!analyzeAndProcessAndRender/analyzeAndProcess/tests/sources/**",
 			"!analyzeAndProcessAndRender/tests/outputEnabledForHtmlAndSvg/source/**",
 			"!analyzeAndProcessAndRender/tests/packageSources/node_modules/**",
@@ -48,7 +43,8 @@
 				"functions": 100,
 				"lines": 100
 			}
-		}
+		},
+		"testPathIgnorePatterns": [ "/analyzer/" ]
 	},
 	"keywords": [
 		"analyze",
