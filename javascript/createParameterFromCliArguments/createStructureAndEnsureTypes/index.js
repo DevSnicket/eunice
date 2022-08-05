@@ -6,6 +6,7 @@ You should have received a copy of the GNU Affero General Public License along w
 SPDX-License-Identifier: AGPL-3.0-or-later
 */
 
+import * as itemSorting from "../../analyzer/getItemOrItemsFromJavascript/itemSorting.js";
 import createOutputPath from "./createOutputPath";
 import createSources from "./createSources";
 
@@ -50,8 +51,6 @@ export default (/** @type {import("./Parameter.d")} */{
 			}),
 		includeServiceWorkers:
 			parseBoolean(includeServiceWorkers),
-		isFileContentReversed:
-			parseBoolean(reverseFileContent),
 		isInferStacksEnabled:
 			parseBoolean(inferStacks),
 		modifyStacksFile:
@@ -89,6 +88,8 @@ export default (/** @type {import("./Parameter.d")} */{
 				prefix: packagePrefix,
 				scope: packageScope,
 			},
+		sortItems:
+			sortItemsByReverseFileContent[parseBoolean(reverseFileContent)],
 		sources:
 			[
 				...createSources({
@@ -146,3 +147,8 @@ function parseBoolean(
 		);
 	}
 }
+
+const sortItemsByReverseFileContent = {
+	false: itemSorting.moveVariablesThenParametersThenImportsToBottom,
+	true: itemSorting.reverse,
+};

@@ -18,13 +18,13 @@ import path from "path";
 
 export default
 async(/** @type {import("./Parameter.d")} */{
-	areFilesBottomUp,
 	babelParserPlugins,
 	directory,
 	fileExtensions = [ ".js" ],
 	isCalleeIgnored,
 	ignorePathPattern,
 	rootItemIdentifier,
+	sortItems,
 }) => {
 	return (
 		createRootItemWhenHasIdentifier({
@@ -64,10 +64,9 @@ async(/** @type {import("./Parameter.d")} */{
 								babelParserPlugins,
 								directoryPath,
 								fileExtensions,
-								isBottomUp:
-									areFilesBottomUp,
 								isCalleeIgnored,
 								javascript,
+								sortItems,
 							}),
 				})
 			);

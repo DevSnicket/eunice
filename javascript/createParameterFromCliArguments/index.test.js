@@ -10,6 +10,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 /* eslint-disable no-undefined */
 
 import createParameterFromCliArguments from ".";
+import { reverse as sortItemsInReverse } from "../analyzer/getItemOrItemsFromJavascript/itemSorting.js";
 
 const pathSeparator = "/";
 
@@ -197,5 +198,21 @@ test(
 					rootItemIdentifier: "rootItemIdentifier2",
 				},
 			],
+		),
+);
+
+test(
+	"\"reverseFileContent\" of true returns sortItems of reverse.",
+	() =>
+		expect(
+			createParameterFromCliArguments({
+				cliArguments:
+					{ reverseFileContent: true },
+				pathSeparator,
+			})
+			.sortItems,
+		)
+		.toEqual(
+			sortItemsInReverse,
 		),
 );

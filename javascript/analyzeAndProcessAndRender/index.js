@@ -12,6 +12,7 @@ import fileSystem from "fs-extra";
 import { safeDump as formatYaml } from "js-yaml";
 import getSvgForYaml from "./getSvgForYaml";
 import path from "path";
+import { reverse as sortItemsInReverse } from "../analyzer/getItemOrItemsFromJavascript/itemSorting.js";
 import writeHarness from "../../interactive/writeHarness";
 
 export default async(/** @type {import("./Parameter.d")} */{
@@ -22,11 +23,11 @@ export default async(/** @type {import("./Parameter.d")} */{
 	fileExtensions,
 	ignorePathPattern,
 	includeServiceWorkers = false,
-	isFileContentReversed = true,
 	isInferStacksEnabled = true,
 	modifyStacksFile,
 	output,
 	packages,
+	sortItems = sortItemsInReverse,
 	sources,
 	version,
 }) =>
@@ -48,11 +49,11 @@ export default async(/** @type {import("./Parameter.d")} */{
 					directoryToCreateOrAddToStacksFrom,
 					fileExtensions,
 					ignorePathPattern,
-					isFileContentReversed,
 					isInferStacksEnabled,
 					modifyStacksFile,
 					packagePrefixAndScope:
 						packages,
+					sortItems,
 					sources:
 						addPackagesToSources({
 							packages,

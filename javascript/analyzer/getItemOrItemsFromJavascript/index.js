@@ -6,8 +6,8 @@ You should have received a copy of the GNU Affero General Public License along w
 SPDX-License-Identifier: AGPL-3.0-or-later
 */
 
-import createSortItemForIsBottomUp from "./createSortItemForIsBottomUp";
 import createVisitors from "./createVisitors";
+import { moveVariablesThenParametersThenImportsToBottom } from "./itemSorting";
 import parseJavascriptWithBabelParserPlugins from "./parseJavascriptWithBabelParserPlugins";
 import walk from "./walk";
 
@@ -16,19 +16,19 @@ export default
 	babelParserPlugins,
 	directoryPath,
 	fileExtensions,
-	isBottomUp,
 	isCalleeIgnored,
 	javascript,
+	sortItems = moveVariablesThenParametersThenImportsToBottom,
 }) =>
 	getItemOrItems({
 		directoryPath,
 		fileExtensions,
-		isBottomUp,
 		isCalleeIgnored,
 		javascript,
 		parseJavascript:
 			withBabelParserPlugins(babelParserPlugins)
 			.parseJavascript,
+		sortItems,
 	});
 
 function withBabelParserPlugins(
@@ -51,10 +51,10 @@ function withBabelParserPlugins(
 function getItemOrItems({
 	directoryPath,
 	fileExtensions,
-	isBottomUp,
 	isCalleeIgnored,
 	javascript,
 	parseJavascript,
+	sortItems,
 }) {
 	const visitors =
 		createVisitors({
@@ -62,8 +62,7 @@ function getItemOrItems({
 			fileExtensions,
 			isCalleeIgnored,
 			parseJavascript,
-			sortItems:
-				createSortItemForIsBottomUp(isBottomUp),
+			sortItems,
 		});
 
 	walk({

@@ -8,15 +8,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 import groupBy from "lodash/groupBy";
 
-export default
-isBottomUp =>
-	isBottomUp
-	?
-	reverseItems
-	:
-	sortItemsWithVariablesThenParametersAtBottom;
-
-function sortItemsWithVariablesThenParametersAtBottom(
+export function moveVariablesThenParametersThenImportsToBottom(
 	items,
 ) {
 	return (
@@ -61,7 +53,7 @@ function sortItemsWithVariablesThenParametersAtBottom(
 	}
 }
 
-function reverseItems(
+export function reverse(
 	items,
 ) {
 	return items && items.reverse();

@@ -17,10 +17,10 @@ export default async(/** @type {import("./Parameter.d")} */{
 	directoryToCreateOrAddToStacksFrom,
 	fileExtensions = [ ".js", ".jsx", ".ts", ".tsx" ],
 	ignorePathPattern,
-	isFileContentReversed,
 	isInferStacksEnabled,
 	modifyStacksFile,
 	packagePrefixAndScope,
+	sortItems,
 	sources,
 }) => {
 	return (
@@ -47,12 +47,12 @@ export default async(/** @type {import("./Parameter.d")} */{
 	}) {
 		const identifierOrItemOrLevelOrStack =
 			await getOrCreateItemsInDirectory({
-				areFilesBottomUp: isFileContentReversed,
 				babelParserPlugins,
 				directory,
 				fileExtensions,
 				ignorePathPattern,
 				rootItemIdentifier,
+				sortItems,
 			});
 
 		return processWhenAnyItems() || [];

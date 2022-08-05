@@ -9,6 +9,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 import getYamlFromJavascript from "../..";
 import path from "path";
 import runTestsFromFileSystem from "../../../../../run-tests-from-file-system";
+import { reverse as sortItemsInReverse } from "../../../getItemOrItemsFromJavascript/itemSorting";
 
 runTestsFromFileSystem({
 	caseFileName:
@@ -20,8 +21,8 @@ runTestsFromFileSystem({
 	getActualForTestCase:
 		({ content }) =>
 			getYamlFromJavascript({
-				isBottomUp: true,
 				javascript: content,
+				sortItems: sortItemsInReverse,
 			}),
 	processArguments:
 		process.argv,

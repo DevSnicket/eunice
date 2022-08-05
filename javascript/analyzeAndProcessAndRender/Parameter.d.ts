@@ -8,11 +8,11 @@ interface Parameter {
 	readonly fileExtensions?
 	readonly ignorePathPattern?
 	readonly includeServiceWorkers?
-	readonly isFileContentReversed?
 	readonly isInferStacksEnabled?
 	readonly modifyStacksFile?
 	readonly output
 	readonly packages?
+	readonly sortItems?
 	readonly sources
 	readonly version
 }
