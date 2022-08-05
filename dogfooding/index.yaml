@@ -1,4 +1,4 @@
-# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 8.1.1 on 2022-08-04T18:16:12.439Z
+# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 8.1.1 on 2022-08-05T16:30:36.260Z
 - - id: javascript
     type: directory
     items:
@@ -367,8 +367,8 @@
                                     - fileExtensions
                                     - getOrCreateItemsInDirectory
                                     - ignorePathPattern
-                                    - isFileContentReversed
                                     - processWhenAnyItems
+                                    - sortItems
                                   items:
                                     - - id: processWhenAnyItems
                                         dependsUpon:
@@ -400,13 +400,13 @@
                                   type: parameter
                                 - id: ignorePathPattern
                                   type: parameter
-                                - id: isFileContentReversed
-                                  type: parameter
                                 - id: isInferStacksEnabled
                                   type: parameter
                                 - id: modifyStacksFile
                                   type: parameter
                                 - id: packagePrefixAndScope
+                                  type: parameter
+                                - id: sortItems
                                   type: parameter
                         - - id: createOrAddToStacksUsingFileSystem
                             type: import
@@ -1493,21 +1493,21 @@
                                   items:
                                     id: getOrCreateItemWhenFile
                                     dependsUpon:
-                                      - areFilesBottomUp
                                       - babelParserPlugins
                                       - fileExtensions
                                       - getItemOrItemsFromJavascript
                                       - getOrCreateItemWhenJavascriptFile
                                       - isCalleeIgnored
-                              - - id: areFilesBottomUp
-                                  type: parameter
-                                - id: babelParserPlugins
+                                      - sortItems
+                              - - id: babelParserPlugins
                                   type: parameter
                                 - id: fileExtensions
                                   type: parameter
                                 - id: isCalleeIgnored
                                   type: parameter
                                 - id: ignorePathPattern
+                                  type: parameter
+                                - id: sortItems
                                   type: parameter
                         - - id: withOptionsAndRootDirectory
                             items:
@@ -1836,6 +1836,12 @@
                                 - path
                                 - id: getYamlFromJavascript
                                   items: index
+                                - id: analyzer
+                                  items:
+                                    id: getItemOrItemsFromJavascript
+                                    items:
+                                      id: itemSorting
+                                      items: reverse
                                 - id: run-tests-from-file-system
                                   items: index
                           - id: classFields
@@ -2095,7 +2101,6 @@
                                   type: parameter
                           - id: getItemOrItems
                             dependsUpon:
-                              - createSortItemForIsBottomUp
                               - createVisitors
                               - walk
                         - - id: createVisitors
@@ -2108,12 +2113,11 @@
                             dependsUpon:
                               id: walk
                               items: index
-                  - - id: createSortItemForIsBottomUp
+                    - id: itemSorting
                       type: file
                       items:
-                        - - id: createSortItemForIsBottomUp
+                        - - id: moveVariablesThenParametersThenImportsToBottom
                             type: export
-                          - id: sortItemsWithVariablesThenParametersAtBottom
                             dependsUpon:
                               - getRelevantTypeOf
                               - groupBy
@@ -2123,13 +2127,14 @@
                                 dependsUpon: whenSpecified
                                 items: whenSpecified
                               - sortItemsFromTypeGroups
-                          - reverseItems
+                          - id: reverse
+                            type: export
                         - - id: groupBy
                             type: import
                             dependsUpon:
                               id: lodash
                               items: groupBy
-                    - id: createVisitors
+                  - - id: createVisitors
                       type: directory
                       items:
                         - - id: index
