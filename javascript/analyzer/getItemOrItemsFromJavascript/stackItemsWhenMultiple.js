@@ -6,10 +6,7 @@ You should have received a copy of the GNU Affero General Public License along w
 SPDX-License-Identifier: AGPL-3.0-or-later
 */
 
-export default ({
-	items,
-	withSingleInArray,
-}) => {
+export default items => {
 	return (
 		any()
 		&&
@@ -28,18 +25,8 @@ export default ({
 		return (
 			items.length === 1
 			&&
-			getSingle()
+			items
 		);
-
-		function getSingle() {
-			return (
-				withSingleInArray
-				?
-				items
-				:
-				items[0]
-			);
-		}
 	}
 
 	function stack() {

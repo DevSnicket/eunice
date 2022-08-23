@@ -6,9 +6,10 @@ You should have received a copy of the GNU Affero General Public License along w
 SPDX-License-Identifier: AGPL-3.0-or-later
 */
 
-import * as itemSorting from "../../analyzer/getItemOrItemsFromJavascript/itemSorting.js";
+import * as itemSorting from "../../analyzer/getItemOrItemsFromJavascript/itemSorting";
 import createOutputPath from "./createOutputPath";
 import createSources from "./createSources";
+import stackItemsWhenMultiple from "../../analyzer/getItemOrItemsFromJavascript/stackItemsWhenMultiple";
 
 export default (/** @type {import("./Parameter.d")} */{
 	babelParserPlugins,
@@ -32,6 +33,7 @@ export default (/** @type {import("./Parameter.d")} */{
 	pathSeparator,
 	reverseFileContent,
 	rootItemIdentifiers,
+	stackFileContent,
 	...restOfOptions
 }) => (
 	{
@@ -97,6 +99,8 @@ export default (/** @type {import("./Parameter.d")} */{
 					rootItemIdentifiers,
 				}),
 			],
+		structureItems:
+			parseBoolean(stackFileContent) && stackItemsWhenMultiple,
 	}
 );
 

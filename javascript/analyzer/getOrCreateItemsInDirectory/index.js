@@ -25,6 +25,7 @@ async(/** @type {import("./Parameter.d")} */{
 	ignorePathPattern,
 	rootItemIdentifier,
 	sortItems,
+	structureItems,
 }) => {
 	return (
 		createRootItemWhenHasIdentifier({
@@ -67,6 +68,7 @@ async(/** @type {import("./Parameter.d")} */{
 								isCalleeIgnored,
 								javascript,
 								sortItems,
+								structureItems,
 							}),
 				})
 			);

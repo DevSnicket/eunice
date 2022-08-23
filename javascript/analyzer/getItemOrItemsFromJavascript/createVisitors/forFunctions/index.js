@@ -15,6 +15,7 @@ import getTypeWhenModuleExportDeclarationType from "../forModules/getTypeWhenExp
 
 export default ({
 	createDependsUponProperty,
+	createItemsProperty,
 	declarations,
 	findBlockOrIdentifiableParentInAncestors,
 	hasUndeclaredReferenceTo,
@@ -111,6 +112,7 @@ export default ({
 	}) {
 		return (
 			createDeclarationForFunction({
+				createItemsProperty,
 				dependsUponProperty:
 					createDependsUponProperty(
 						{ parent: functionDeclarationOrExpression },

@@ -11,4 +11,5 @@ interface Parameter {
 	readonly packagePrefixAndScope?
 	readonly sortItems?
 	readonly sources
+	readonly structureItems?
 }

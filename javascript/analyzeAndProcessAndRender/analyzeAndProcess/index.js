@@ -22,6 +22,7 @@ export default async(/** @type {import("./Parameter.d")} */{
 	packagePrefixAndScope,
 	sortItems,
 	sources,
+	structureItems,
 }) => {
 	return (
 		createOrAddToStacks(
@@ -53,6 +54,7 @@ export default async(/** @type {import("./Parameter.d")} */{
 				ignorePathPattern,
 				rootItemIdentifier,
 				sortItems,
+				structureItems,
 			});
 
 		return processWhenAnyItems() || [];

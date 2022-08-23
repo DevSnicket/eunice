@@ -8,10 +8,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 import "core-js/features/array/flat-map";
 
-import createItemsProperty from "../createItemsProperty";
 import getNamesFromDestructureOrIdentifier from "../getNamesFromDestructureOrIdentifier";
 
 export default ({
+	createItemsProperty,
 	dependsUponProperty,
 	functionDeclarationOrExpression,
 	hasUndeclaredReferenceTo,

@@ -10,7 +10,8 @@
 				"--ignore-path-pattern=(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$",
 				"--output-svg",
 				"--output-yaml",
-				"--reverseFileContent=false"
+				"--reverseFileContent=false",
+				"--stackFileContent=true"
 			],
 			"name": "bin this package only",
 			"program": "${workspaceFolder}/bin.js",
@@ -23,7 +24,8 @@
 				"--ignore-path-pattern=(^|/)(\\..*|dist|gh-pages|node_modules|output|test-cases|test-coverage)$",
 				"--output-svg",
 				"--output-yaml",
-				"--reverseFileContent=false"
+				"--reverseFileContent=false",
+				"--stackFileContent=true"
 			],
 			"name": "bin (dist) this package only",
 			"program": "${workspaceFolder}/dist/bin.js",
@@ -42,7 +44,8 @@
 					"--output-directory-path=dogfooding/output",
 					"--output-svg",
 					"--output-yaml",
-					"--reverseFileContent=false"
+					"--reverseFileContent=false",
+					"--stackFileContent=true"
 				],
 			"name": "bin all packages",
 			"program": "${workspaceFolder}/bin.js",
@@ -62,7 +65,8 @@
 					"--output-directory-path=dogfooding/output",
 					"--output-svg",
 					"--output-yaml",
-					"--reverseFileContent=false"
+					"--reverseFileContent=false",
+					"--stackFileContent=true"
 				],
 			"name": "bin (dist) all packages",
 			"program": "${workspaceFolder}/dist/bin.js",

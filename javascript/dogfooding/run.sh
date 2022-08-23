@@ -12,4 +12,5 @@ node dist/bin.js \
 --output-directory-path=dogfooding/output \
 --output-svg \
 --output-yaml \
---reverseFileContent=false
+--reverseFileContent=false \
+--stackFileContent=true

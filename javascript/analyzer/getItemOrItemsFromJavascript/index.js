@@ -9,6 +9,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 import createVisitors from "./createVisitors";
 import { moveVariablesThenParametersThenImportsToBottom } from "./itemSorting";
 import parseJavascriptWithBabelParserPlugins from "./parseJavascriptWithBabelParserPlugins";
+import stackItemsWhenMultiple from "./stackItemsWhenMultiple";
 import walk from "./walk";
 
 export default
@@ -19,6 +20,7 @@ export default
 	isCalleeIgnored,
 	javascript,
 	sortItems = moveVariablesThenParametersThenImportsToBottom,
+	structureItems = stackItemsWhenMultiple,
 }) =>
 	getItemOrItems({
 		directoryPath,
@@ -29,6 +31,7 @@ export default
 			withBabelParserPlugins(babelParserPlugins)
 			.parseJavascript,
 		sortItems,
+		structureItems,
 	});
 
 function withBabelParserPlugins(
@@ -55,6 +58,7 @@ function getItemOrItems({
 	javascript,
 	parseJavascript,
 	sortItems,
+	structureItems,
 }) {
 	const visitors =
 		createVisitors({
@@ -63,6 +67,7 @@ function getItemOrItems({
 			isCalleeIgnored,
 			parseJavascript,
 			sortItems,
+			structureItems,
 		});
 
 	walk({

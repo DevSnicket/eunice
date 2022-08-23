@@ -29,6 +29,7 @@ export default async(/** @type {import("./Parameter.d")} */{
 	packages,
 	sortItems = sortItemsInReverse,
 	sources,
+	structureItems = items => items,
 	version,
 }) =>
 	renderAndWriteOutput({
@@ -59,6 +60,7 @@ export default async(/** @type {import("./Parameter.d")} */{
 							packages,
 							sources,
 						}),
+					structureItems,
 				}),
 				{ lineWidth: Number.MAX_SAFE_INTEGER },
 			),

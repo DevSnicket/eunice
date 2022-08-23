@@ -13,6 +13,7 @@ interface Parameter {
 	readonly output
 	readonly packages?
 	readonly sortItems?
+	readonly structureItems?
 	readonly sources
 	readonly version
 }

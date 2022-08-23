@@ -8,6 +8,7 @@ interface Options {
 	readonly fileExtensions?: string[]
 	readonly isCalleeIgnored?: boolean
 	readonly sortItems?
+	readonly structureItems?
 }
 
 interface DirectoryPath {

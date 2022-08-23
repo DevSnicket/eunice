@@ -6,6 +6,8 @@ You should have received a copy of the GNU Affero General Public License along w
 SPDX-License-Identifier: AGPL-3.0-or-later
 */
 
+import simplifySingleItemsToItem from "./simplifySingleItemsToItem";
+
 export default ({
 	dependsUponProperty,
 	items,
@@ -22,7 +24,7 @@ export default ({
 			&&
 			{
 				...dependsUponProperty,
-				...items && { items },
+				...items && { items: simplifySingleItemsToItem(items) },
 			}
 		);
 	}

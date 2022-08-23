@@ -6,13 +6,13 @@ You should have received a copy of the GNU Affero General Public License along w
 SPDX-License-Identifier: AGPL-3.0-or-later
 */
 
-import createItemsProperty from "./createItemsProperty";
 import getParentFromAncestors from "./getParentFromAncestors";
 
 export default ({
 	ancestors,
 	classDeclarationOrExpression,
 	createDependsUponProperty,
+	createItemsProperty,
 	declarations:
 		{
 			addDeclarationIn,

@@ -82,5 +82,5 @@
 		"test": "jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	},
-	"version": "8.1.1"
+	"version": "8.2.0"
 }

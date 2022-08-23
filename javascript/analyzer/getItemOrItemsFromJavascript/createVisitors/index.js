@@ -28,7 +28,7 @@ import forModules from "./forModules";
 import getIdentifierFromAssignmentExpressionLeft from "./getIdentifierFromAssignmentExpressionLeft";
 import getParentFromAncestors from "./getParentFromAncestors";
 import isCommonjsModuleExportProperty from "./commonjs/isModuleExportProperty";
-import stackItemsWhenMultiple from "./stackItemsWhenMultiple";
+import simplifySingleItemsToItem from "./simplifySingleItemsToItem";
 import throwErrorWhenAnyUnhandled from "./throwErrorWhenAnyUnhandled";
 
 export default ({
@@ -37,6 +37,7 @@ export default ({
 	isCalleeIgnored,
 	parseJavascript,
 	sortItems,
+	structureItems,
 }) => {
 	const
 		declarations = createDeclarations(),
@@ -53,6 +54,7 @@ export default ({
 			...forFunctions({
 				createDependsUponProperty:
 					dependsUponIdentifiers.createPropertyAndRemoveIdentifiers,
+				createItemsProperty,
 				declarations,
 				findBlockOrIdentifiableParentInAncestors,
 				hasUndeclaredReferenceTo:
@@ -149,6 +151,7 @@ export default ({
 			classDeclarationOrExpression,
 			createDependsUponProperty:
 				dependsUponIdentifiers.createPropertyAndRemoveIdentifiers,
+			createItemsProperty,
 			declarations,
 			findBlockOrIdentifiableParentInAncestors,
 			findDeclarationIn:
@@ -165,6 +168,7 @@ export default ({
 			classProperty,
 			createDependsUponProperty:
 				dependsUponIdentifiers.createPropertyAndRemoveIdentifiers,
+			createItemsProperty,
 			declarations,
 		});
 	}
@@ -240,6 +244,14 @@ export default ({
 		);
 	}
 
+	function createItemsProperty(items) {
+		return (
+			items
+			&&
+			{ items: simplifySingleItemsToItem(structureItems(items)) }
+		);
+	}
+
 	function findBlockOrIdentifiableParentInAncestors(
 		ancestors,
 	) {
@@ -265,16 +277,13 @@ export default ({
 			createFileItemOrItems({
 				dependsUponProperty,
 				items:
-					stackItemsWhenMultiple({
-						items:
-							sortItems(
-								declarations.createItemsForAndRemoveDeclarationsIn(
-									null,
-								),
+					structureItems(
+						sortItems(
+							declarations.createItemsForAndRemoveDeclarationsIn(
+								null,
 							),
-						withSingleInArray:
-							!dependsUponProperty,
-					}),
+						),
+					),
 			});
 
 		throwErrorWhenAnyUnhandled({

@@ -10,7 +10,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 /* eslint-disable no-undefined */
 
 import createParameterFromCliArguments from ".";
-import { reverse as sortItemsInReverse } from "../analyzer/getItemOrItemsFromJavascript/itemSorting.js";
+import { reverse as sortItemsInReverse } from "../analyzer/getItemOrItemsFromJavascript/itemSorting";
+import stackItemsWhenMultiple from "../analyzer/getItemOrItemsFromJavascript/stackItemsWhenMultiple";
 
 const pathSeparator = "/";
 
@@ -214,5 +215,21 @@ test(
 		)
 		.toEqual(
 			sortItemsInReverse,
+		),
+);
+
+test(
+	"\"stackFileContent\" of true returns structureItems of stackItemsWhenMultiple.",
+	() =>
+		expect(
+			createParameterFromCliArguments({
+				cliArguments:
+					{ stackFileContent: true },
+				pathSeparator,
+			})
+			.structureItems,
+		)
+		.toEqual(
+			stackItemsWhenMultiple,
 		),
 );

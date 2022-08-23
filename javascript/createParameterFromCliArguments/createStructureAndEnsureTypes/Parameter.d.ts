@@ -22,4 +22,5 @@ interface Parameter {
 	readonly pathSeparator?
 	readonly reverseFileContent?
 	readonly rootItemIdentifiers?
+	readonly stackFileContent?
 }
