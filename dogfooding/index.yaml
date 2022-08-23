@@ -1,4 +1,4 @@
-# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 8.1.1 on 2022-08-05T16:30:36.260Z
+# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 8.2.0 on 2022-08-23T20:25:39.465Z
 - - id: javascript
     type: directory
     items:
@@ -369,6 +369,7 @@
                                     - ignorePathPattern
                                     - processWhenAnyItems
                                     - sortItems
+                                    - structureItems
                                   items:
                                     - - id: processWhenAnyItems
                                         dependsUpon:
@@ -407,6 +408,8 @@
                                 - id: packagePrefixAndScope
                                   type: parameter
                                 - id: sortItems
+                                  type: parameter
+                                - id: structureItems
                                   type: parameter
                         - - id: createOrAddToStacksUsingFileSystem
                             type: import
@@ -1499,6 +1502,7 @@
                                       - getOrCreateItemWhenJavascriptFile
                                       - isCalleeIgnored
                                       - sortItems
+                                      - structureItems
                               - - id: babelParserPlugins
                                   type: parameter
                                 - id: fileExtensions
@@ -1508,6 +1512,8 @@
                                 - id: ignorePathPattern
                                   type: parameter
                                 - id: sortItems
+                                  type: parameter
+                                - id: structureItems
                                   type: parameter
                         - - id: withOptionsAndRootDirectory
                             items:
@@ -2134,6 +2140,22 @@
                             dependsUpon:
                               id: lodash
                               items: groupBy
+                    - id: stackItemsWhenMultiple
+                      type: file
+                      items:
+                        id: stackItemsWhenMultiple
+                        type: export
+                        dependsUpon:
+                          - any
+                          - getWhenSingle
+                          - stack
+                        items:
+                          - - any
+                            - getWhenSingle
+                            - id: stack
+                              dependsUpon: items
+                          - - id: items
+                              type: parameter
                   - - id: createVisitors
                       type: directory
                       items:
@@ -2146,6 +2168,7 @@
                                     - createDeclarations
                                     - createDependsUponIdentifiers
                                     - createFileExtensionTransformer
+                                    - createItemsProperty
                                     - createPathBasedDependsUpon
                                     - createScopedVariables
                                     - createUndeclaredReferences
@@ -2169,11 +2192,13 @@
                                       - id: visitClass
                                         dependsUpon:
                                           - addClass
+                                          - createItemsProperty
                                           - declarations
                                           - findBlockOrIdentifiableParentInAncestors
                                       - id: visitClassProperty
                                         dependsUpon:
                                           - addClassProperty
+                                          - createItemsProperty
                                           - declarations
                                       - id: visitJsxOpeningElement
                                         dependsUpon:
@@ -2192,6 +2217,10 @@
                                           - createIndexDependsUponWhenDirectory
                                           - createRelativeAwarePathBasedDependsUpon
                                           - removeExtensionFromFilePath
+                                      - id: createItemsProperty
+                                        dependsUpon:
+                                          - simplifySingleItemsToItem
+                                          - structureItems
                                       - id: findBlockOrIdentifiableParentInAncestors
                                         dependsUpon:
                                           - findBlockOrIdentifiableParentInAncestorsEh
@@ -2203,7 +2232,7 @@
                                           - declarations
                                           - dependsUponIdentifiers
                                           - sortItems
-                                          - stackItemsWhenMultiple
+                                          - structureItems
                                           - throwErrorWhenAnyUnhandled
                                     - - id: declarations
                                         type: variable
@@ -2218,6 +2247,8 @@
                                       - id: isCalleeIgnored
                                         type: parameter
                                       - id: sortItems
+                                        type: parameter
+                                      - id: structureItems
                                         type: parameter
                               - - id: addFromAssignmentOfCommonjsExport
                                   type: import
@@ -2277,51 +2308,7 @@
                                   dependsUpon:
                                     id: throwErrorWhenAnyUnhandled
                                     items: index
-                        - - id: addClass
-                            type: file
-                            items:
-                              - - id: addClass
-                                  type: export
-                                  dependsUpon:
-                                    - addWhenAnyProperties
-                                    - createIdentifierProperty
-                                    - createItemsProperty
-                                    - setBaseAsExtensionAndGetIdentifiers
-                              - - id: createIdentifierProperty
-                                  dependsUpon: getParentFromAncestors
-                                - id: setBaseAsExtensionAndGetIdentifiers
-                                  dependsUpon: setBaseAsExtension
-                                  items:
-                                    - - id: setBaseAsExtension
-                                        dependsUpon: findDeclarationIn
-                                    - - id: findDeclarationIn
-                                        type: parameter
-                                - addWhenAnyProperties
-                          - id: addClassProperty
-                            type: file
-                            items:
-                              - - id: addClassProperty
-                                  type: export
-                                  dependsUpon:
-                                    - createDeclaration
-                                    - getParentClass
-                                    - isFunction
-                                  items:
-                                    - - id: createDeclaration
-                                        dependsUpon:
-                                          - classProperty
-                                          - createDependsUponProperty
-                                          - createItemsForAndRemoveDeclarationsIn
-                                          - createItemsProperty
-                                      - getParentClass
-                                    - - id: classProperty
-                                        type: parameter
-                                      - id: createDependsUponProperty
-                                        type: parameter
-                                      - id: createItemsForAndRemoveDeclarationsIn
-                                        type: parameter
-                              - - isFunction
-                          - id: forFunctions
+                        - - id: forFunctions
                             type: directory
                             items:
                               - - id: index
@@ -2364,10 +2351,13 @@
                                               dependsUpon:
                                                 - createDeclarationForFunction
                                                 - createDependsUponProperty
+                                                - createItemsProperty
                                                 - declarations
                                                 - hasUndeclaredReferenceTo
                                                 - sortItems
                                           - - id: createDependsUponProperty
+                                              type: parameter
+                                            - id: createItemsProperty
                                               type: parameter
                                             - id: declarations
                                               type: parameter
@@ -2415,16 +2405,9 @@
                                   items:
                                     - - id: createDeclarationForFunction
                                         type: export
-                                        dependsUpon:
-                                          - createItemsProperty
-                                          - createParameterItemsForFunction
+                                        dependsUpon: createParameterItemsForFunction
                                     - - id: createParameterItemsForFunction
                                         dependsUpon: getNamesFromDestructureOrIdentifier
-                                      - id: createItemsProperty
-                                        type: import
-                                        dependsUpon:
-                                          id: createVisitors
-                                          items: createItemsProperty
                                     - - id: getNamesFromDestructureOrIdentifier
                                         type: import
                                         dependsUpon:
@@ -2476,7 +2459,26 @@
                                         items:
                                           id: whenVariableDeclarator
                                           type: export
-                        - - id: addFromCall
+                        - - id: addClass
+                            type: file
+                            items:
+                              - - id: addClass
+                                  type: export
+                                  dependsUpon:
+                                    - addWhenAnyProperties
+                                    - createIdentifierProperty
+                                    - setBaseAsExtensionAndGetIdentifiers
+                              - - id: createIdentifierProperty
+                                  dependsUpon: getParentFromAncestors
+                                - id: setBaseAsExtensionAndGetIdentifiers
+                                  dependsUpon: setBaseAsExtension
+                                  items:
+                                    - - id: setBaseAsExtension
+                                        dependsUpon: findDeclarationIn
+                                    - - id: findDeclarationIn
+                                        type: parameter
+                                - addWhenAnyProperties
+                          - id: addFromCall
                             type: directory
                             items:
                               - - id: index
@@ -2851,12 +2853,19 @@
                                   items:
                                     id: isModuleExport
                                     type: export
-                          - id: createItemsProperty
+                          - id: createFileItemOrItems
                             type: file
                             items:
-                              id: createItemsProperty
+                              id: createFileItemOrItems
                               type: export
-                              dependsUpon: stackItemsWhenMultiple
+                              dependsUpon: createItemWhenAnyDependsUpon
+                              items:
+                                - - id: createItemWhenAnyDependsUpon
+                                    dependsUpon:
+                                      - items
+                                      - simplifySingleItemsToItem
+                                - - id: items
+                                    type: parameter
                           - id: forModules
                             type: directory
                             items:
@@ -3150,7 +3159,33 @@
                                     - - formatParentIdentifier
                                       - combineParentAndItemsFormatted
                                       - formatMessage
-                        - - id: createDeclarations
+                        - - id: addClassProperty
+                            type: file
+                            items:
+                              - - id: addClassProperty
+                                  type: export
+                                  dependsUpon:
+                                    - createDeclaration
+                                    - getParentClass
+                                    - isFunction
+                                  items:
+                                    - - id: createDeclaration
+                                        dependsUpon:
+                                          - classProperty
+                                          - createDependsUponProperty
+                                          - createItemsForAndRemoveDeclarationsIn
+                                          - createItemsProperty
+                                      - getParentClass
+                                    - - id: classProperty
+                                        type: parameter
+                                      - id: createDependsUponProperty
+                                        type: parameter
+                                      - id: createItemsProperty
+                                        type: parameter
+                                      - id: createItemsForAndRemoveDeclarationsIn
+                                        type: parameter
+                              - - isFunction
+                          - id: createDeclarations
                             type: directory
                             items:
                               - - id: index
@@ -3305,13 +3340,6 @@
                               - - id: fileSystem
                                   type: import
                                   dependsUpon: fs
-                          - id: createFileItemOrItems
-                            type: file
-                            items:
-                              id: createFileItemOrItems
-                              type: export
-                              dependsUpon: createItemWhenAnyDependsUpon
-                              items: createItemWhenAnyDependsUpon
                           - id: createIndexDependsUponWhenDirectory
                             type: file
                             items:
@@ -3604,24 +3632,11 @@
                             items:
                               id: hasTypeOfFunction
                               type: export
-                          - id: stackItemsWhenMultiple
+                          - id: simplifySingleItemsToItem
                             type: file
                             items:
-                              id: stackItemsWhenMultiple
+                              id: simplifySingleItemsToItem
                               type: export
-                              dependsUpon:
-                                - any
-                                - getWhenSingle
-                                - stack
-                              items:
-                                - - any
-                                  - id: getWhenSingle
-                                    dependsUpon: getSingle
-                                    items: getSingle
-                                  - id: stack
-                                    dependsUpon: items
-                                - - id: items
-                                    type: parameter
                     - id: parseJavascriptWithBabelParserPlugins
                       type: file
                       items:
