@@ -25,6 +25,7 @@
 		<div>
 			<div class="horizontal-menu">
 				<a href="#reverse-file-content">reverse files content</a>
+				<a href="#stack-file-content">stack files content</a>
 				<a href="#ignore-paths">ignore paths</a>
 				<a href="#babel-parser-plugins">Babel parser plugins</a>
 				<a href="#source-directories">source directories</a>
@@ -41,6 +42,11 @@
 				<h3>reverse file content</h3>
 				<p>JavaScript files are expected to be ordered so that calls of a function are after the definition of that function. This is the reverse direction of how Eunice works, but seems to be most popular approach for <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" rel="noopener" target="_blank">JavaScript</a> developers. This reversing of file content can be disabled:</p>
 				<code>npx eunice --reverseFileContent=false</code>
+			</div>
+			<div class="box" id="stack-file-content">
+				<h3>stack file content</h3>
+				<p>JavaScript files aren't assumed to be ordered and so all of the contents are put in the same level of a single level stack. The <a href="#infer-stacks">infer stacks</a> functionality will then try and split this into multiple levels based on the dependencies. If your files have, or you would like them to have, a consistent order (e.g. top down or bottom up, see <a href="#reverse-file-content">reverse files content</a>) a multiple levels can be created based on the order within the file (instead of inferring):</p>
+				<code>npx eunice --stack-file-content=true</code>
 			</div>
 			<div class="box" id="ignore-paths">
 				<h3>ignore paths</h3>
@@ -71,9 +77,9 @@
 			</div>
 			<div class="box" id="infer-stacks">
 				<h3>infer stacks</h3>
-				<p>Eunice can infer stacks when none are implied or defined. By default this is disabled, but can be enabled with:</p>
+				<p>Eunice will infer stacks when none are implied or defined. By default this is enabled, but can be disable with:</p>
 				<code>npx eunice
-  --infer-stacks</code>
+  --infer-stacks=false</code>
 			</div>
 			<div class="box" id="stack-from-directory">
 				<h3>stack from directory</h3>
