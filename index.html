@@ -23,7 +23,8 @@
 			margin: 0 0.5em;
 		}
 
-		.content > p {
+		.content > p,
+		.content > div > p {
 			font-size: 1.17em;
 		}
 
@@ -31,20 +32,21 @@
 			font-size: 0.7em;
 		}
 
-		.headlines .box {
-			width: fit-content;
-		}
-
-		.headlines {
+		#how-it-works-images {
+			background-color: white;
 			display: flex;
-			font-size: 1.17em;
-			flex-wrap: wrap;
-			justify-content: center;
-			text-align: center;
+			gap: 20px;
+			height: 14vw;
+			margin: 0 auto;
+			max-width: 800px;
+			padding: 10px;
 		}
 
-		.headlines .emoji {
-			font-size: 1.5em;
+		#how-it-works-images > * {
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: contain;
+			flex: 1;
 		}
 
 		.language {
@@ -137,61 +139,41 @@
 	<div class="content">
 		<p>Eunice improves cohesion, coupling and modularity in software through hierarchical structure and simplified unidirectional dependencies.</p>
 		<p>Eunice analyses source code, infers its structure and shows if the dependencies match.</p>
-		<p>Unravel spaghetti code and grow order from a big ball of mud. Understand the impact of change and release with more confidence. Have an aspect of your architecture that everyone can see and that isn't out of date.</p>
-		<div class="headlines">
-			<div class="box">
-				<div class="horizontal-container">
-					<div><div class="emoji">🔬🔭</div><div>analyse as-is</div></div>
-					<div><div class="emoji">📏✏️</div><div>model to-be</div></div>
-				</div>
-				<div style="white-space: nowrap">
-					<div class="emoji">📊</div>
-					<div>measure how close</div><div>the two are</div>
-				</div>
-			</div>
-			<div class="box">
-				<div>works across:</div>
-				<div class="horizontal-container">
-					<div>
-						<div class="emoji">🐁</div>
-						<div>small</div>
-						<div class="detail"><div>functions</div><div>classes</div></div>
-					</div>
-					<div>
-						<div class="emoji">🐈🐘</div>
-						<div>larger</div>
-						<div class="detail"><div>services</div><div>systems</div></div>
-					</div>
-				</div>
-				<div>
-					<div>different:</div>
-					<div class="horizontal-container">
-						<div><div class="emoji">🗨</div><div>languages</div></div>
-						<div><div class="emoji">🏗</div><div>frameworks</div></div>
-					</div>
-				</div>
-			</div>
-			<div class="box">
-				<div><div class="emoji">🔗</div><div>collaborative</div><div class="detail">collectively define. share progress</div></div>
-				<div><div class="emoji">🧠</div><div>non-prescriptive</div><div class="detail">problem specific</div></div>
-				<div><div class="emoji">🎆</div><div>dynamic</div><div class="detail">live and applied</div></div>
-			</div>
-		</div>
-		<p>Find out more about how Eunice works regarding <a href="./how-it-works#structure">structure</a> and <a href="./how-it-works#dependencies">dependencies</a>, or read a <a href="./case-studies">case study</a>.</p>
 		<div class="box horizontal-container" id="dogfooding" style="text-align: center">
-			<div>
-				<a href="dogfooding" style="font-size: 1.17em" target="_blank">
-					<p>try</p>
-					<p>Eunice on Eunice</p>
-				</a>
-				<div class="emoji" style="font-size: 4rem; text-decoration: none">🐶🥫</div>
-				<a class="detail" href="https://en.wikipedia.org/wiki/Eating_your_own_dog_food" rel="noopener" target="_blank">dogfooding</a>
-			</div>
+			<p>select the image below to try Eunice on Eunice 🐶🥫</p>
+			<p>or read a <a href="./case-studies">case study</a></p>
 			<a href="dogfooding" style="background: white; flex-grow: 1; padding: 0.5em;" target="_blank">
 				<img alt="Eunice visualization of Eunice's own structure and dependencies" src="./dogfooding/index.svg" style="width: 100%" />
 			</a>
 		</div>
-		<p>See results and explorer your code in minutes:</p>
+		<a href="./how-it-works">
+			<div class="box" style="text-align: center">
+				<p>select here to learn how Eunice works</p>
+				<div id="how-it-works-images">
+					<div style="background-image: url(./how-it-works/stacks.svg)"></div>
+					<div style="background-image: url(./how-it-works/groups.svg)"></div>
+					<div style="background-image: url(./how-it-works/coupling-and-cohesion.svg)"></div>
+				</div>
+			</div>
+		</a>
+		<p>See results and explorer your JavaScript and C# code in minutes:</p>
+		<a class="language" id="javascript" href="./javascript">
+			<div class="box">
+				<img alt="JavaScript logo" src="./javascript/logo.svg" style="width: 10em" />
+				<div class="javascript-related-logos">
+					<img alt="Node.js" src="./nodejs.svg" /><img alt="TypeScript" src="./typescript.svg" /><img alt="React" src="./react.svg" /><img alt="Flow" src="./flow.svg" />
+				</div>
+				<div style="margin: 0">
+					<div class="terminal">
+						<div class="title-bar">terminal</div>
+						<div class="text">~/my-source-code<br/>$ npx eunice</div>
+					</div>
+				</div>
+				<div style="flex-basis: 0; flex-grow: 1">
+					creates a eunice.html file from a JavaScript source code directory
+				</div>
+			</div>
+		</a>
 		<a class="language" id="csharp" href="./csharp">
 			<div class="box">
 				<img alt="c# logo" src="./csharp/logo.svg" style="width: 10em" />
@@ -209,23 +191,6 @@
 				</div>
 				<div style="flex-basis: 0; flex-grow: 1">
 					creates a eunice.html file from a C# solution or project
-				</div>
-			</div>
-		</a>
-		<a class="language" id="javascript" href="./javascript">
-			<div class="box">
-				<img alt="JavaScript logo" src="./javascript/logo.svg" style="width: 10em" />
-				<div class="javascript-related-logos">
-					<img alt="Node.js" src="./nodejs.svg" /><img alt="TypeScript" src="./typescript.svg" /><img alt="React" src="./react.svg" /><img alt="Flow" src="./flow.svg" />
-				</div>
-				<div style="margin: 0">
-					<div class="terminal">
-						<div class="title-bar">terminal</div>
-						<div class="text">~/my-source-code<br/>$ npx eunice</div>
-					</div>
-				</div>
-				<div style="flex-basis: 0; flex-grow: 1">
-					creates a eunice.html file from a JavaScript source code directory
 				</div>
 			</div>
 		</a>

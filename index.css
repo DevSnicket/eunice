@@ -4,7 +4,8 @@ body {
 	margin: 0;
 }
 
-body img {
+body > .content > a > img,
+body > .content > img {
 	max-width: 85%;
 	max-width: calc(100% - 4em);
 }
@@ -55,10 +56,10 @@ a:active {
 	margin-top: 0;
 }
 
-.box img {
+/* .box img {
 	max-width: 75%;
 	max-width: calc(100% - 6em);
-}
+} */
 
 body > .content,
 body > .header > .content {
@@ -103,8 +104,7 @@ body .footer .links > .email::before {
 }
 
 body .footer .links > .blog,
-body .footer .links > .github,
-body .footer .links > .twitter {
+body .footer .links > .github {
 	background-repeat: no-repeat;
 	background-position: left center;
 	padding-left: 22px;
@@ -116,10 +116,6 @@ body .footer .links > .blog {
 
 body .footer .links > .github {
 	background-image: url('./icons/github-small-dark.png');
-}
-
-body .footer .links > .twitter {
-	background-image: url('./icons/twitter-small.png');
 }
 
 h1, h2, h3, h4, h5, h6 {
