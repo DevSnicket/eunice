@@ -35,6 +35,6 @@
 		<WriteLinesToFile
 			File="$(OutputPath)global.json"
 			Overwrite="true"
-			Lines="{ &quot;sdk&quot;: { &quot;rollForward&quot;: &quot;latestFeature&quot;, &quot;version&quot;: &quot;$(_ShortFrameworkVersion).0&quot; } }" />
+			Lines="{ &quot;sdk&quot;: { &quot;rollForward&quot;: &quot;latestFeature&quot;, &quot;version&quot;: &quot;$(_TargetFrameworkVersionWithoutV).0&quot; } }" />
 	</Target>
 </Project>

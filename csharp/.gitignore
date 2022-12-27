@@ -1,10 +1,10 @@
 /.ionide
 /.store
 bin/
-/dotnet-fsharplint.exe
+/dotnet-fsharplint*
 /eunice.html
 obj/
-/reportgenerator.exe
+/reportgenerator*
 /Tests/TestResults
 /website
 /WriteInteractiveInDirectoryPathWithYaml/devsnicket-eunice-interactive-*.tgz
