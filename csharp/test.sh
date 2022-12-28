@@ -17,13 +17,17 @@ dotnet tool install dotnet-reportgenerator-globaltool \
 --version 4.5.6 \
 || true # ignore error raised when already installed
 
-./reportgenerator \
--reports:Tests/TestResults/coverage.netcoreapp5.0.xml \
--reporttypes:"Html;JsonSummary" \
--targetdir:Tests/TestResults/CoverageReport
+writeReport () {
+	./reportgenerator \
+	-reports:Tests/TestResults/coverage.netcoreapp$1.xml \
+	-reporttypes:"Html;JsonSummary" \
+	-targetdir:Tests/TestResults/CoverageReport$1
+}
+writeReport 3.1
+writeReport 5.0
 
 getCoverage () {
-	value=$(grep -Po "(?<=\"$1coverage\": )[\.0-9]*" Tests/TestResults/CoverageReport/Summary.json | head -1)
+	value=$(grep -Po "(?<=\"$1coverage\": )[\.0-9]*" Tests/TestResults/CoverageReport5.0/Summary.json | head -1)
 	if [ -z $value ]; then
 		echo 100
 	else
