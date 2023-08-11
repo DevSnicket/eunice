@@ -9,15 +9,11 @@ let getNamesUsedInSyntaxReference (syntaxReference: SyntaxReference) =
     |> Seq.filter isName
 
 let private areChildrenIgnored syntaxNode =
-    syntaxNode :? AliasQualifiedNameSyntax
-    ||
     syntaxNode :? MemberAccessExpressionSyntax
     ||
     syntaxNode :? QualifiedNameSyntax
 
 let private isName syntaxNode =
-    syntaxNode :? AliasQualifiedNameSyntax
-    ||
     syntaxNode :? IdentifierNameSyntax
     ||
     syntaxNode :? MemberAccessExpressionSyntax

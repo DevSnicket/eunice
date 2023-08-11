@@ -1,0 +1,1 @@
+class TupleItem1Class { }

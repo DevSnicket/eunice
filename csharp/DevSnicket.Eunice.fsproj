@@ -4,19 +4,19 @@
 		<OutputType>Exe</OutputType>
 		<PackageDescription>Eunice improves cohesion and modularity in software through hierarchical structure and simplified unidirectional dependencies. Eunice analyses source code, infers its structure and shows if the dependencies match.</PackageDescription>
 		<PackageIcon>icon.png</PackageIcon>
-		<PackageLicenseFile>license.txt</PackageLicenseFile>
+		<PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
 		<PackageProjectUrl>https://devsnicket.com/eunice</PackageProjectUrl>
 		<PackageTags>analyze;analyzer;architecture;dependency;dependencies;csharp;euince;stack;structure;uince;unice</PackageTags>
 		<PackageType>DotNetCliTool</PackageType>
 		<PackAsTool>true</PackAsTool>
-		<Version>1.24.0</Version>
+		<Version>1.25.0</Version>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Build.Locator" Version="1.2.6" />
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.6.0" />
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.6.0" />
-		<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="3.6.0" />
-		<PackageReference Include="NuGet.ProjectModel" Version="5.8.1" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.5.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.5.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="4.5.0" />
+		<PackageReference Include="NuGet.ProjectModel" Version="6.7.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Include="AnalysisResult.fs" />
@@ -56,11 +56,10 @@
 		<Compile Include="ExecuteProgram/.fs" />
 	</ItemGroup>
 	<ItemGroup>
-		<EmbeddedResource Include="license.txt" />
 		<EmbeddedResource Include="WriteInteractiveInDirectoryPathWithYaml/index.html" />
 	</ItemGroup>
 	<ItemGroup>
-		<None Include="license.txt" Pack="true" PackagePath="\"/>
-		<None Include="package/$(PackageIcon)" Pack="true" PackagePath="\" />
+		<None Include="license.txt" Pack="true" PackagePath=""/>
+		<None Include="package/$(PackageIcon)" Pack="true" PackagePath="" />
 	</ItemGroup>
 </Project>

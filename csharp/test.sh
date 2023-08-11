@@ -2,6 +2,7 @@
 
 set -e
 
+echo running Tests
 dotnet test \
 Tests \
 -c Release \
@@ -12,22 +13,25 @@ Tests \
 -p:AltCoverForce=true \
 -p:AltCoverXmlReport=TestResults/coverage.xml
 
-dotnet tool install dotnet-reportgenerator-globaltool \
---tool-path . \
---version 4.5.6 \
-|| true # ignore error raised when already installed
-
 writeReport () {
-	./reportgenerator \
-	-reports:Tests/TestResults/coverage.netcoreapp$1.xml \
-	-reporttypes:"Html;JsonSummary" \
-	-targetdir:Tests/TestResults/CoverageReport$1
+	echo generating coverage report for $1
+	reportFile=Tests/TestResults/coverage.netcoreapp$1.xml
+	if [ -f $reportFile ]; then
+		dotnet reportgenerator \
+		-reports:$reportFile \
+		-reporttypes:"Html;JsonSummary" \
+		-targetdir:Tests/TestResults/CoverageReport$1
+	else
+		echo report file not found $reportFile
+	fi
 }
 writeReport 3.1
 writeReport 5.0
+writeReport 6.0
+writeReport 7.0
 
 getCoverage () {
-	value=$(grep -Po "(?<=\"$1coverage\": )[\.0-9]*" Tests/TestResults/CoverageReport5.0/Summary.json | head -1)
+	value=$(grep -Po "(?<=\"$1coverage\": )[\.0-9]*" Tests/TestResults/CoverageReport7.0/Summary.json | head -1)
 	if [ -z $value ]; then
 		echo 100
 	else

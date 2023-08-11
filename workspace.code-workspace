@@ -5,6 +5,9 @@
 			"path": "."
 		},
 		{
+			"path": "csharp"
+		},
+		{
 			"name": "dependency-and-structure",
 			"path": "dependency-and-structure"
 		},
@@ -23,8 +26,7 @@
 		{
 			"name": "javascript analyzer",
 			"path": "javascript/analyzer"
-		}
-,
+		},
 		{
 			"name": "run-tests-from-file-system",
 			"path": "run-tests-from-file-system"
@@ -48,5 +50,6 @@
 		{
 			"name": "website",
 			"path": "website"
-		}	]
+		}
+	]
 }

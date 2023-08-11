@@ -2,5 +2,11 @@
 
 set -e
 
-apt-get install -y dotnet-sdk-3.1
-apt-get install -y dotnet-sdk-5.0
+curl -o dotnet-install.sh https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh
+
+chmod +x dotnet-install.sh
+
+./dotnet-install.sh --channel 3.1
+./dotnet-install.sh --channel 5.0
+./dotnet-install.sh --channel 6.0
+./dotnet-install.sh --channel 7.0

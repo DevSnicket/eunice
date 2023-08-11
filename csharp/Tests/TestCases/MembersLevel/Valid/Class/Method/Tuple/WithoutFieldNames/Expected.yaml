@@ -1,0 +1,10 @@
+﻿- id: TestCase.dll
+  items:
+    - id: DeclarationClass
+      items:
+        id: Method
+        dependsUpon:
+          - TupleItem1Class
+          - TupleItem2Class
+    - TupleItem1Class
+    - TupleItem2Class

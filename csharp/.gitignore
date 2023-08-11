@@ -2,6 +2,7 @@
 /.store
 bin/
 /dotnet-fsharplint*
+/dotnet-install.sh
 /eunice.html
 obj/
 /reportgenerator*

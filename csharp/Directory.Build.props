@@ -1,6 +1,8 @@
 <Project>
 	<PropertyGroup>
+		<CheckEolTargetFramework>false</CheckEolTargetFramework>
 		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
-		<TargetFrameworks>netcoreapp3.1;netcoreapp5.0</TargetFrameworks>
+		<TargetFrameworks>netcoreapp6.0;netcoreapp7.0</TargetFrameworks>
+		<TargetFrameworks Condition="!$([MSBuild]::IsOsPlatform('MacOS')) OR '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' != 'Arm64'">netcoreapp3.1;netcoreapp5.0;$(TargetFrameworks)</TargetFrameworks>
 	</PropertyGroup>
 </Project>

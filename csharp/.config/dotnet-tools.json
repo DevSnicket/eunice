@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "dotnet-reportgenerator-globaltool": {
+      "version": "5.1.23",
+      "commands": [
+        "reportgenerator"
+      ]
+    },
+    "dotnet-fsharplint": {
+      "version": "0.21.3",
+      "commands": [
+        "dotnet-fsharplint"
+      ]
+    }
+  }
+}
