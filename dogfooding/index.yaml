@@ -1,4 +1,4 @@
-# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 8.2.0 on 2023-10-15T11:20:43.334Z
+# created by Eunice for JavaScript (https://devsnicket.com/eunice) version 8.3.0 on 2023-10-15T13:42:47.831Z
 - - id: javascript
     type: directory
     items:
@@ -2205,6 +2205,7 @@
                                           - createJsxOpeningElementNameDependsUpon
                                           - dependsUponIdentifiers
                                           - findBlockOrIdentifiableParentInAncestors
+                                          - jsxElementsToIgnore
                                       - id: visitVariableDeclaration
                                         dependsUpon:
                                           - addVariables
@@ -2245,6 +2246,8 @@
                                       - id: undeclaredReferences
                                         type: variable
                                       - id: isCalleeIgnored
+                                        type: parameter
+                                      - id: jsxElementsToIgnore
                                         type: parameter
                                       - id: sortItems
                                         type: parameter
