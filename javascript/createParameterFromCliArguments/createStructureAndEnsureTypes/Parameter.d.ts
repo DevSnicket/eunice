@@ -8,6 +8,7 @@ interface Parameter {
 	readonly ignorePathPattern?
 	readonly includeServiceWorkers?
 	readonly inferStacks?
+	readonly jsxElementsToIgnore?
 	readonly modifyStacksFile?
 	readonly modifyStacksKey?
 	readonly modifyStacksPattern?

@@ -35,6 +35,7 @@ export default ({
 	directoryPath,
 	fileExtensions,
 	isCalleeIgnored,
+	jsxElementsToIgnore,
 	parseJavascript,
 	sortItems,
 	structureItems,
@@ -177,12 +178,14 @@ export default ({
 		{ name },
 		ancestors,
 	) {
-		dependsUponIdentifiers.addIdentifierToParent({
-			identifier:
-				createJsxOpeningElementNameDependsUpon(name),
-			parent:
-				findBlockOrIdentifiableParentInAncestors(ancestors),
-		});
+		const identifier = createJsxOpeningElementNameDependsUpon(name);
+
+		if (!jsxElementsToIgnore.includes(identifier))
+			dependsUponIdentifiers.addIdentifierToParent({
+				identifier,
+				parent:
+					findBlockOrIdentifiableParentInAncestors(ancestors),
+			});
 	}
 
 	function visitVariableDeclaration(

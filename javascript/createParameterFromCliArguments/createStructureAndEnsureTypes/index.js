@@ -19,6 +19,7 @@ export default (/** @type {import("./Parameter.d")} */{
 	ignorePathPattern = "(^|/)(\\..*|node_modules)$",
 	includeServiceWorkers,
 	inferStacks,
+	jsxElementsToIgnore,
 	modifyStacksFile,
 	modifyStacksKey,
 	modifyStacksPattern,
@@ -55,6 +56,8 @@ export default (/** @type {import("./Parameter.d")} */{
 			parseBoolean(includeServiceWorkers),
 		isInferStacksEnabled:
 			parseBoolean(inferStacks),
+		jsxElementsToIgnore:
+			ensureArray(jsxElementsToIgnore),
 		modifyStacksFile:
 			modifyStacksFile
 			&&

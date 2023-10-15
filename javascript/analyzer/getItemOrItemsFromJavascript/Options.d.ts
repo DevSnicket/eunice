@@ -7,6 +7,7 @@ interface Options {
 	readonly directoryPath?: DirectoryPath
 	readonly fileExtensions?: string[]
 	readonly isCalleeIgnored?: boolean
+	readonly jsxElementsToIgnore?: string[]
 	readonly sortItems?
 	readonly structureItems?
 }
