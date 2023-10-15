@@ -37,7 +37,7 @@
 		"lint": "npx eslint .",
 		"resizable-columns-test-harness-production": "rm -rf createResizableContainer/tests/test-harness/output && npx webpack -p --config createResizableContainer/tests/test-harness/webpack.config.js -r @babel/register",
 		"resizable-columns-test-harness-development": "rm -rf createResizableContainer/tests/test-harness/output && npx webpack -d --config createResizableContainer/tests/test-harness/webpack.config.js -r @babel/register",
-		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell --config ../cspell.json {} +",
+		"spellcheck": "find . -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell --config ../cspell.json {} +",
 		"test": "npx jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	}

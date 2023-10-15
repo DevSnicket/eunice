@@ -33,7 +33,7 @@
 		"harness-production": "rm -rf harness/output && npx webpack -p --config harness/webpack.config.js -r ${PWD}/../../test-harnesses/babel.register.cjs",
 		"harness-development": "rm -rf harness/output && npx webpack -d --config harness/webpack.config.js -r ${PWD}/../../test-harnesses/babel.register.cjs",
 		"lint": "eslint .",
-		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./harness/output/*\" ! -path \"./node_modules/**/*\" ! -path \"**/test-cases/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell --config ../../cspell.json {} +",
+		"spellcheck": "find . -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./harness/output/*\" ! -path \"./node_modules/**/*\" ! -path \"**/test-cases/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell --config ../../cspell.json {} +",
 		"test": "jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	}

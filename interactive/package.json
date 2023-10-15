@@ -38,7 +38,7 @@
 		"harness-example-development": "rm -rf tests/example/output && npx webpack --config tests/example/webpack.config.js -r ${PWD}/../test-harnesses/babel.register.cjs -d",
 		"harness-example-production": "rm -rf tests/example/output && npx webpack --config tests/example/webpack.config.js -r ${PWD}/../test-harnesses/babel.register.cjs -p",
 		"lint": "npx eslint .",
-		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./node_modules/*\" ! -path \"./tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output/*\" ! -path \"./tests/example/output/*\" ! -path \"./test-coverage/*\" ! -path \"./writeHarness/tests/output/*\" -exec npx cspell --config ../cspell.json {} +",
+		"spellcheck": "find . -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./dist/*\" ! -path \"./node_modules/*\" ! -path \"./tests/dogfoodingFromEuniceRepositoryRelativeDirectory/output/*\" ! -path \"./tests/example/output/*\" ! -path \"./test-coverage/*\" ! -path \"./writeHarness/tests/output/*\" -exec npx cspell --config ../cspell.json {} +",
 		"test": "npx jest",
 		"typescript": "npx tsc -p jsconfig.json",
 		"watch": "npx webpack --config webpack.config.js -r ${PWD}/../test-harnesses/babel.register.cjs -d --watch"

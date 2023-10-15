@@ -21,7 +21,7 @@
 		"all": "npm run spellcheck && npm run lint && npm run typescript && npm run test",
 		"eunice": "npx eunice --ignore-path-pattern=\"(^|/)(\\..*|node_modules|test-coverage)$\" --output-yaml --reverse-file-content=false",
 		"lint": "npx eslint .",
-		"spellcheck": "find -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell --config ../cspell.json {} +",
+		"spellcheck": "find . -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell --config ../cspell.json {} +",
 		"test": "npx jest",
 		"typescript": "npx tsc -p jsconfig.json"
 	}
