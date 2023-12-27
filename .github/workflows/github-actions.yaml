@@ -10,7 +10,7 @@ jobs:
       - run: npm install -g npm@7
       - run: npm install
       - run: ./all.sh all ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }}
-      - if: github.ref == 'refs/heads/master'
+      - if: github.ref == 'refs/heads/main'
         uses: JS-DevTools/npm-publish@v1
         with:
           package: ./javascript/package.json
@@ -36,5 +36,5 @@ jobs:
         with:
           dotnet-version: '8.0.x'
       - run: ./csharp/all.sh
-      - if: github.ref == 'refs/heads/master'
+      - if: github.ref == 'refs/heads/main'
         run: ./csharp/package/push.sh ${{ secrets.NUGET_TOKEN }}
