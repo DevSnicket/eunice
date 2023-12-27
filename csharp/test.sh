@@ -29,9 +29,10 @@ writeReport 3.1
 writeReport 5.0
 writeReport 6.0
 writeReport 7.0
+writeReport 8.0
 
 getCoverage () {
-	value=$(grep -Po "(?<=\"$1coverage\": )[\.0-9]*" Tests/TestResults/CoverageReport7.0/Summary.json | head -1)
+	value=$(grep -Po "(?<=\"$1coverage\": )[\.0-9]*" Tests/TestResults/CoverageReport8.0/Summary.json | head -1)
 	if [ -z $value ]; then
 		echo 100
 	else

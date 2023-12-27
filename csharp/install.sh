@@ -10,3 +10,4 @@ chmod +x dotnet-install.sh
 ./dotnet-install.sh --channel 5.0
 ./dotnet-install.sh --channel 6.0
 ./dotnet-install.sh --channel 7.0
+./dotnet-install.sh --channel 8.0

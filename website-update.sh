@@ -49,7 +49,8 @@ if [ "$1" ]; then
 	bash ./update-all.sh $1;
 fi
 
-if [ "$2" ]; then
+git_branch="$(git branch --show-current)"
+if [ "$2" && "$git_branch" = "main" ]; then
 	echo website Git add
 	git add .
 
