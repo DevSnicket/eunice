@@ -50,7 +50,7 @@ if [ "$1" ]; then
 fi
 
 git_branch="$(git branch --show-current)"
-if [ "$2" && "$git_branch" = "main" ]; then
+if [[ "$2" && "$git_branch" = "main" ]]; then
 	echo website Git add
 	git add .
 
