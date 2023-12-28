@@ -25,7 +25,7 @@
 				"name": "getYamlFromJavascript",
 				"program": "${workspaceFolder}/getYamlFromJavascript/bin.js",
 				"request": "launch",
-				"runtimeArgs": [ "${workspaceFolder}/../../node_modules/@babel/node/bin/babel-node.js", "-o", "*" ],
+				"runtimeArgs": [ "${workspaceFolder}/../../node_modules/@babel/node/lib/babel-node.js", "-o", "." ],
 				"type": "node"
 			},
 			{
@@ -52,7 +52,7 @@
 				"name": "getOrCreateItemsInDirectory test dogfooding",
 				"program": "${workspaceFolder}/getOrCreateItemsInDirectory/bin.js",
 				"request": "launch",
-				"runtimeArgs": [ "${workspaceFolder}/../../node_modules/@babel/node/bin/babel-node.js", "-o", "*" ],
+				"runtimeArgs": [ "${workspaceFolder}/../../node_modules/@babel/node/lib/babel-node.js", "-o", "." ],
 				"type": "node"
 			},
 			{
@@ -64,7 +64,7 @@
 				"name": "getOrCreateItemsInDirectory test valid",
 				"program": "${workspaceFolder}/getOrCreateItemsInDirectory/bin.js",
 				"request": "launch",
-				"runtimeArgs": [ "${workspaceFolder}/../../node_modules/@babel/node/bin/babel-node.js", "-o", "*" ],
+				"runtimeArgs": [ "${workspaceFolder}/../../node_modules/@babel/node/lib/babel-node.js", "-o", "." ],
 				"type": "node"
 			},
 			{

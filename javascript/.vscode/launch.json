@@ -16,7 +16,7 @@
 			"name": "bin this package only",
 			"program": "${workspaceFolder}/bin.js",
 			"request": "launch",
-			"runtimeArgs": [ "${workspaceFolder}/../node_modules/@babel/node/bin/babel-node.js", "-o", "*" ],
+			"runtimeArgs": [ "${workspaceFolder}/../node_modules/@babel/node/lib/babel-node.js", "-o", ".,../dependency-and-structure,../dependency-counter,../stacking-explicit,../interactive,../stacking-inference,../test-harnesses,../visualizer" ],
 			"type": "node",
 		},
 		{
@@ -50,7 +50,7 @@
 			"name": "bin all packages",
 			"program": "${workspaceFolder}/bin.js",
 			"request": "launch",			
-			"runtimeArgs": [ "${workspaceFolder}/../node_modules/@babel/node/bin/babel-node.js", "-o", "*" ],
+			"runtimeArgs": [ "${workspaceFolder}/../node_modules/@babel/node/lib/babel-node.js", "-o", ".,../dependency-and-structure,../dependency-counter,../stacking-explicit,../interactive,../stacking-inference,../test-harnesses,../visualizer" ],
 			"type": "node"
 		},
 		{
