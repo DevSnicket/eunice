@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /* Eunice
 Copyright (c) 2019 Graham Dyson.
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
@@ -6,6 +7,21 @@ You should have received a copy of the GNU Affero General Public License along w
 SPDX-License-Identifier: AGPL-3.0-or-later
 */
 
-export { default as countOfItem } from "./counting/countOfItem";
-export { default as sumDirections } from "./sumDirections";
-export { default as sumDirectionsAndRelationships } from "./sumDirectionsAndRelationships";
+/* istanbul ignore file: test would be a mirror of implementation */
+
+import addDependencyCountsToYamlString from "./counting/addDependencyCountsToYamlString";
+import fileSystem from "fs-extra";
+
+/* eslint-disable no-console */
+
+const yamlFilePath = process.argv[2];
+
+console.log(
+	yamlFilePath
+	?
+	addDependencyCountsToYamlString(
+		fileSystem.readFileSync(yamlFilePath, "utf-8"),
+	)
+	:
+	"Missing argument of YAML file path.",
+);

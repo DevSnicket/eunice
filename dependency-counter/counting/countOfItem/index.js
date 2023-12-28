@@ -11,7 +11,7 @@ import sumItemCounts from "./sumItemCounts";
 
 /**
   * @param {import("./Item.d")} item
-  * @return {import("../Counts.d").OfItem}
+  * @return {import("../../Counts.d").OfItem}
   */
 export default
 item =>

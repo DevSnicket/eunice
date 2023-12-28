@@ -7,6 +7,14 @@
 				"type": "node"
 			},
 			{
+				"args": [ "counting/tests/test-cases/stack/two-levels-of-two-items/interdependent/with-parent/source.yaml" ],
+				"name": "bin",
+				"program": "${workspaceFolder}/bin.js",
+				"request": "launch",
+				"runtimeArgs": [ "${workspaceFolder}/../node_modules/@babel/node/lib/babel-node.js", "-o", ".,../dependency-and-structure" ],
+				"type": "node"
+			},
+			{
 				"args":
 					[ 
 						"--runInBand",

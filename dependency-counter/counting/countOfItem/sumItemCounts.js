@@ -6,9 +6,9 @@ You should have received a copy of the GNU Affero General Public License along w
 SPDX-License-Identifier: AGPL-3.0-or-later
 */
 
-import eitherOrCombine from "../eitherOrCombine";
-import sumDirections from "../sumDirections";
-import sumDirectionsAndRelationships from "../sumDirectionsAndRelationships";
+import eitherOrCombine from "../../eitherOrCombine";
+import sumDirections from "../../sumDirections";
+import sumDirectionsAndRelationships from "../../sumDirectionsAndRelationships";
 
 export default
 dependencyCounts => {

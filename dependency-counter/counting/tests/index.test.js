@@ -6,18 +6,7 @@ You should have received a copy of the GNU Affero General Public License along w
 SPDX-License-Identifier: AGPL-3.0-or-later
 */
 
-import {
-	addDirectionAndMutualStackToDependenciesInStack,
-	createStackFromYaml,
-	createYamlFromStack,
-} from "../../../dependency-and-structure";
-
-import {
-	safeDump as formatYaml,
-	safeLoad as parseYaml,
-} from "js-yaml";
-
-import countOfItem from "..";
+import addDependencyCountsToYamlString from "../addDependencyCountsToYamlString";
 import path from "path";
 import runTestsFromFileSystem from "../../../run-tests-from-file-system";
 
@@ -28,52 +17,8 @@ runTestsFromFileSystem({
 		path.join(__dirname, "test-cases/"),
 	expectedFileName:
 		"expected.yaml",
-	getActualForTestCase,
+	getActualForTestCase:
+		({ content }) => addDependencyCountsToYamlString(content),
 	processArguments:
 		process.argv,
 });
-
-function getActualForTestCase(
-	{ content },
-) {
-	const stack =
-		createStackFromYaml(
-			// @ts-ignore
-			parseYaml(
-				content,
-			),
-		);
-
-	addDirectionAndMutualStackToDependenciesInStack(stack);
-
-	addDependencyCountsInStack(stack);
-
-	return formatStackAsYaml(stack);
-}
-
-function addDependencyCountsInStack(
-	stack,
-) {
-	for (const level of stack)
-		for (const item of level) {
-			const dependencyCount = countOfItem(item);
-
-			if (dependencyCount)
-				item.dependencyCount = dependencyCount;
-
-			if (item.items)
-				addDependencyCountsInStack(item.items);
-		}
-}
-
-function formatStackAsYaml(
-	stack,
-) {
-	return (
-		formatYaml(
-			createYamlFromStack(stack),
-			{ lineWidth: Number.MAX_SAFE_INTEGER },
-		)
-		.trimRight()
-	);
-}

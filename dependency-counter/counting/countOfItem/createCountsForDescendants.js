@@ -6,7 +6,7 @@ You should have received a copy of the GNU Affero General Public License along w
 SPDX-License-Identifier: AGPL-3.0-or-later
 */
 
-import { isInnerStack } from "../../dependency-and-structure";
+import { isInnerStack } from "../../../dependency-and-structure";
 
 export default
 item =>
