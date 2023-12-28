@@ -7,6 +7,14 @@
 				"type": "node"
 			},
 			{
+				"args": [ "tests/test-cases/item/with-dependencies/outer/below/dependsUpon/.yaml" ],
+				"name": "bin",
+				"program": "${workspaceFolder}/bin.js",
+				"request": "launch",
+				"runtimeArgs": [ "${workspaceFolder}/../node_modules/@babel/node/lib/babel-node.js", "-o", ".,../dependency-and-structure,../dependency-counter" ],
+				"type": "node"
+			},
+			{
 				"args":
 					[
 						"--collect-coverage=false",

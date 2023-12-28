@@ -1,4 +1,7 @@
 {
+	"bin": {
+		"eunice-visualizer": "dist/bin.js"
+	},
 	"jest": {
 		"collectCoverage": true,
 		"collectCoverageFrom": [
