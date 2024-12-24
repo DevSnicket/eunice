@@ -9,7 +9,17 @@ jobs:
         with: { node-version: '14' }
       - run: npm install -g npm@7
       - run: npm install
-      - run: ./all.sh all ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }}
+      - run: (cd run-tests-from-file-system && npm run all)
+      - run: (cd test-harnesses && npm run all)
+      - run: (cd dependency-and-structure && npm run all)
+      - run: (cd dependency-counter && npm run all)
+      - run: (cd javascript/analyzer && npm run all)
+      - run: (cd interactive && npm run all)
+      - run: (cd stacking-explicit && npm run all)
+      - run: (cd stacking-inference && npm run all)
+      - run: (cd visualizer && npm run all)
+      - run: (cd javascript && npm run all)
+      - run: ./website-update.sh ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }}
       - if: github.ref == 'refs/heads/main'
         uses: JS-DevTools/npm-publish@v1
         with:
@@ -35,6 +45,15 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
-      - run: ./csharp/all.sh
+      - run: (cd csharp && dotnet tool restore)
+      - run: ./csharp/clean.sh
+      - run: ./csharp/WriteInteractiveInDirectoryPathWithYaml/copy-index-html-from-interactive-dist.sh
+      - run: (cd csharp && dotnet build)
+      - run: (cd csharp && dotnet build Tests)
+      - run: ./csharp/Tests/TestCases/build-restore.sh
+      - run: ./csharp/test.sh
+      - run: ./csharp/lint.sh
+      - run: ./csharp/spellcheck.sh
+      - run: ./csharp/package/pack.sh
       - if: github.ref == 'refs/heads/main'
         run: ./csharp/package/push.sh ${{ secrets.NUGET_TOKEN }}

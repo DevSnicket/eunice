@@ -2,6 +2,8 @@
 
 set -e
 
+cd $(dirname "$0")
+
 echo running Tests
 dotnet test \
 Tests \

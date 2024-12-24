@@ -2,6 +2,8 @@
 
 set -e
 
+cd $(dirname "$0")
+
 echo checking F# source file copyright notices
 for filePath in $(find ! -path "*/obj/*" -name "*.fs"); do
 	read -r firstLine<$filePath
