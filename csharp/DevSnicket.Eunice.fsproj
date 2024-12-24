@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<AssemblyName>eunice</AssemblyName>
 		<OutputType>Exe</OutputType>
-		<PackageDescription>Eunice improves cohesion and modularity in software through hierarchical structure and simplified unidirectional dependencies. Eunice analyses source code, infers its structure and shows if the dependencies match.</PackageDescription>
+		<PackageDescription>Improve cohesion and modularity through hierarchical structure and unidirectional (non-circular) dependencies. Eunice analyses code and shows if dependencies are unidirectional or circular across the hierarchical structure.</PackageDescription>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
 		<PackageProjectUrl>https://devsnicket.com/eunice</PackageProjectUrl>
