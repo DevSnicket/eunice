@@ -1,4 +1,4 @@
-<svg height="215.5" width="510.5" xmlns="http://www.w3.org/2000/svg">
+<svg height="215.5" width="330.5" xmlns="http://www.w3.org/2000/svg">
 	<defs><style>
 		polyline,
 		rect {
@@ -27,9 +27,6 @@
 	</style></defs>
 	<symbol id="arrow-head-down">
 		<polygon points="0,0 15,0 7.5,7.5"/>
-	</symbol>
-	<symbol id="arrow-head-up">
-		<use href="#arrow-head-down" transform="rotate(180 7.5 3.75)"/>
 	</symbol>
 	<symbol id="down-arrow">
 		<polyline points="7.5,0 7.5,12.5"/>
@@ -90,44 +87,6 @@
 					<use href="#stack" transform="translate(9.5,14.5)"/>
 				</g>
 			</g>
-		</g>
-	</g>
-	<g transform="translate(360,0)">
-		<text x="75" y="16">bi-directional</text>
-		<g transform="translate(0,25)">
-			<rect height="50" width="150"/>
-			<use href="#item" x="10" y="10"/>
-			<g transform="translate(22.5,35)">
-				<polyline points="7.5,0 7.5,52.5"/>
-				<use href="#arrow-head-down" y="52.5"/>
-			</g>
-			<use href="#item" x="60" y="10"/>
-			<g transform="translate(72.5,35)">
-				<polyline points="7.5,7.5 7.5,60"/>
-				<use href="#arrow-head-up" y="0"/>
-			</g>
-			<g class="indirect" transform="translate(105,50)">
-				<polyline points="7.5,0 7.5,22.5"/>
-				<use href="#arrow-head-down" x="0" y="22.5"/>
-				<g transform="translate(25,0)">
-					<use href="#arrow-head-up" x="0" y="0"/>
-					<polyline points="7.5,7.5 7.5,30"/>
-				</g>
-			</g>
-			<g transform="translate(0,80)">
-				<rect height="50" width="150"/>
-				<use href="#item" x="10" y="15"/>
-				<use href="#item" x="60" y="15"/>
-			</g>
-		</g>
-	</g>
-	<g class="key" transform="translate(55,175)">
-		<use href="#down-arrow" x="0" y="0"/>
-		<text x="20" y="15">direct</text>
-		<g class="indirect" transform="translate(80,0)">
-			<polyline points="7.5,0 7.5,12"/>
-			<use href="#arrow-head-down" x="0" y="12"/>
-			<text x="20" y="15">indirect</text>
 		</g>
 	</g>
 </svg>

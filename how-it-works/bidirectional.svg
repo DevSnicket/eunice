@@ -1,0 +1,70 @@
+<svg height="115" width="245" xmlns="http://www.w3.org/2000/svg">
+	<defs><style>
+		polyline,
+		rect {
+			fill: none;
+			stroke: black;
+		}
+
+		text {
+			font-family: arial, sans-serif;
+			font-size: 16px;
+			text-anchor: middle;
+		}
+
+		.key text {
+			text-anchor: start;
+		}
+
+		.indirect polyline {
+			stroke-dasharray: 2;
+		}
+
+		.indirect use {
+			fill: transparent;
+			stroke: black;
+		}
+	</style></defs>
+	<symbol id="down-arrow-head">
+		<polygon points="0,0 15,0 7.5,7.5"/>
+	</symbol>
+	<symbol id="up-arrow-head">
+		<use href="#down-arrow-head" transform="rotate(180 7.5 3.75)"/>
+	</symbol>
+	<symbol id="arrow-line">
+		<polyline points="7.5,0 7.5,12.5"/>
+	</symbol>
+	<symbol id="down-arrow">
+		<use href="#arrow-line"/>
+		<use href="#down-arrow-head" x="0" y="12.5"/>
+	</symbol>
+	<rect height="25" width="50"/>
+	<use href="#down-arrow" x="2.5" y="25"/>
+	<g transform="translate(32.5, 25)">
+		<use href="#up-arrow-head"/>
+		<use href="#arrow-line" y="7.5"/>
+	</g>
+	<rect height="25" width="50" y="45"/>
+	<g transform="translate(70, 0)">
+		<rect height="25" width="50" x="30"/>
+		<use href="#down-arrow" x="32.5" y="25"/>
+		<rect height="25" width="50" y="45"/>
+		<use href="#down-arrow" x="32.5" y="70"/>
+		<g class="indirect" transform="translate(50,0)">
+			<polyline points="7.5,25 7.5,82.5"/>
+			<use href="#down-arrow-head" x="0" y="82.5"/>
+		</g>
+		<rect height="24" width="50" x="30" y="90"/>
+		<polyline points="70,30.5 70,90"/>
+		<use href="#up-arrow-head" x="62.5" y="25"/>
+		<g class="key" transform="translate(100,40)">
+			<use href="#down-arrow" x="0" y="0"/>
+			<text x="20" y="15">direct</text>
+			<g class="indirect" transform="translate(0,30)">
+				<polyline points="7.5,0 7.5,12"/>
+				<use href="#down-arrow-head" x="0" y="12"/>
+				<text x="20" y="15">indirect</text>
+			</g>
+		</g>
+	</g>
+</svg>

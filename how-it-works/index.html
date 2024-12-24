@@ -33,9 +33,21 @@
 			max-width: none;
 		}
 
+		.diagram {
+			background-color: white;
+			margin: 0 0 1em;
+			padding: 1em;
+			width: fit-content;
+		}
+
+		.diagram > img {
+			margin: 0;
+		}
+
 		.example {
 			display: flex;
 			flex-wrap: wrap;
+			gap: 0.5em;
 		}
 
 		.example img {
@@ -61,6 +73,7 @@
 		.parent-count-examples {
 			display: flex;
 			flex-wrap: wrap;
+			gap: 0.5em;
 		}
 
 		.parent-count-examples .box * {
@@ -75,36 +88,6 @@
 		.parent-count-examples .breadcrumbs .ancestor-separator {
 			color: darkgray;
 		}
-
-		.stacks-introduction > .diagram {
-			background-color: white;
-			margin: 0 auto 1em;
-			padding: 1em;
-			width: fit-content;
-		}
-
-		.stacks-introduction > .diagram > img {
-			margin: 0;
-			width: 100%;
-		}
-
-		@media (min-width: 52em) {
-			.stacks-introduction {
-				align-items: flex-start;
-				display: flex;
-				flex-wrap: wrap;
-			}
-
-			.stacks-introduction > .diagram-text {
-				flex-basis: 0;
-				flex-grow: 1;
-				margin-right: 0.5em;
-			}
-
-			.stacks-introduction > .diagram {
-				margin-left: 0.5em;
-			}
-		}
 	</style>
 </head>
 <body>
@@ -115,39 +98,19 @@
 		</div>
 	</div>
 	<div class="content">
-		<h1 id="structure">structure</h1>
-		<h2 id="stacks" style="margin-bottom: 0">stacks</h2>
+		<h1 id="stacks" style="margin-bottom: 0">stacks</h2>
 		<div class="stacks-introduction">
-			<div class="diagram-text">
-				<p>In Eunice, when it's intended that an item be dependent on another, the first item is placed above the second in a stack. When items are intended to be independent of each other, they can be placed in the same level.</p>
-				<p>The terminology "stack" is used, as having uni-directional dependencies (i.e. in one direction), means dependent items are placed on top of their dependencies. The lower an item is in a stack, the more dependent items its likely to have. Where an item is in the stack, has implications for concerns such as design, risk management and independent working.</p>
-			</div>
-			<div class="box diagram"><img alt="Diagrams of uni-directional, bi-directional, stack, independent, direct and indirect dependencies" src="./stacks.svg" style="max-width: 325px" /></div>
-		</div>
-		<p style="margin-top: 0">Eunice also identifies when there is a indirect bi-directional/circular dependency (see diagram).</p>
-		<p>All but the simplest of systems will require multiple stacks (see <a href="#scopes-groups">scopes / groups</a>). Eunice is designed to be non-prescriptive so problem/domain specific stacks can develop naturally and collaboratively. Stacks can also be used to define technology/implementation based architectures (e.g. stacks levels used as layers).</p>
-		<p>For all dependencies to be uni-directional, conceptual models may need refining and reorganizing, so that concerns are expressed more independently. Some problems may also require functionality lower in the stack to support <a href="https://en.wikipedia.org/wiki/Plug-in_(computing)" rel="noopener" target="_blank">plug-ins</a>, that can be implemented higher up in the stack. For example, by applying the <a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle" rel="noopener" target="_blank">dependency inversion principle</a> from <a href="https://en.wikipedia.org/wiki/SOLID" rel="noopener" target="_blank">SOLID</a>.</p>
-		<p>In some programming languages there are implied stacks, such as the order of functions in a file, or the order of files in a project.</p>
-		<h2 id="scopes-groups" style="margin-bottom: 0">scopes / groups</h2>
-		<div class="stacks-introduction">
-			<div class="diagram-text">
-				<p>Stacks are defined in Eunice with different sized scopes and across boundaries, from individual functions, classes and files; to multiple, large codebases in different languages, frameworks and runtimes.</p>
-				<p>Eunice uses nested groups of items, each group can have an identifier and its own stack. When Eunice measures whether dependencies match the intended structure, the results for nested groups are summarized (see <a href="../dependencies">dependencies</a>).</p>
-			</div>
-			<div class="box diagram"><img alt="Diagrams of how dependencies cross the boundaries of different scopes and groups" src="./groups.svg" style="max-width: 510.5px" /></div>
-		</div>
-		<p style="margin-top: 0">Programming languages usually include ways of grouping code, such as the directories in a file system, namespaces, classes and closures/nested functions. Groups such as these can be inferred and automatically represented in Eunice. Multiple repositories, packages, services and systems can also be analysed separately and aggregated into a single diagram.</p>
-		<div class="stacks-introduction">
-			<div class="diagram-text">
-				<p>When identifying scopes and grouping code together, its beneficial to consider the dependencies as relationships, and the concepts of <a href="https://en.wikipedia.org/wiki/Cohesion_(computer_science)" rel="noopener" target="_blank">cohesion</a> and <a href="https://en.wikipedia.org/wiki/Coupling_(computer_programming)" rel="noopener" target="_blank">coupling</a>.</p>
-				<p>In Eunice, hierarchical structure and unidirectional dependencies come together to encourage less coupling in inter-group dependencies, replacing them with intra-group dependencies and more cohesion.</p>
-				<p>The following diagram shows an example of how these concepts manifest in Eunice. In the diagram the 4 items and 3 dependencies stay the same, but re-structuring the groups simplifies the relationships.</p>
-			</div>
-			<div class="box diagram"><img alt="Diagram of how coupling is lower and cohesion is higher when dependencies are in uni-directional hierarchies" src="./coupling-and-cohesion.svg" style="max-width: 510.5px" /></div>
+			<p>In Eunice, items are stacked and intentional dependencies point downwards.</p>
+			<div class="box diagram"><img alt="Diagram of a stack" src="./stack.svg" /></div>
+			<p>When its intended that items are independent they can be in the same level.</p>
+			<div class="box diagram"><img alt="Diagram of a level" src="./level.svg" /></div>
+			<p>Multiple dependencies on the same item are modelled by combining the two previous two rules.</p>
+			<div class="box diagram"><img alt="Diagram of independent dependencies" src="./independent.svg" /></div>
+			<p>Eunice uses these rules to help you find circular dependencies, including indirect dependencies.</p>
+			<div class="box diagram"><img alt="Diagram a circular dependency" src="./bidirectional.svg" /></div>
 		</div>
 		<h1 id="dependencies">dependencies</h1>
-		<h2 id="arrows">arrows</h2>
-		<p>Instead of showing dependencies as lines between items, each dependency is counted into the following categories:</p>
+		<p>Representing dependencies with lines can be hard to follow, so instead Eunice counts dependencies into the following categories:</p>
 		<div class="box horizontal-container" style="align-items: center; width: fit-content">
 			<div class="arrows-with-descriptions"></div>
 			<div>
@@ -156,39 +119,45 @@
 				<div>is not independent<div class="red">red horizontal arrow</div></div>
 			</div>
 		</div>
-		<p>Stacks are explained in the <a href="#structure">structure</a> section.</p>
-		<p>Selecting an arrow will list the dependencies counted in it (except arrows inside items which will open the item).</p>
-		<h2 id="counts">counts</h2>
-		<p>Dependency counts appear for both sides of the dependency, the dependent item and the item depended on. When there are multiple counts a summary of all the counts is shown at the bottom.</p>
-		<div class="example tall">
-			<div class="box">
-				<div>upper depends on lower</div>
-				<img alt="Diagram of a stack where the upper item depends upon the lower item" src="../examples/stack/upper-depends-upon-lower.svg"/>
+		<p>Dependency counts appear for both sides of the dependency, the dependent item and the item depended on.</p>
+		<p>
+			<div class="example tall">
+				<div class="box">
+					<div>upper depends on lower</div>
+					<img alt="Diagram of a stack where the upper item depends upon the lower item" src="../examples/stack/upper-depends-upon-lower.svg"/>
+				</div>
+				<div class="box">
+					<div>lower depends on upper</div>
+					<img alt="Diagram of a stack where the lower item depends upon the upper item" src="../examples/stack/lower-depends-upon-upper.svg"/>
+				</div>
 			</div>
-			<div class="box">
-				<div>lower depends on upper</div>
-				<img alt="Diagram of a stack where the lower item depends upon the upper item" src="../examples/stack/lower-depends-upon-upper.svg"/>
+		</p>
+		<p>
+			<div class="example">
+				<div class="box">
+					<div>independent</div>
+					<img alt="Diagram of two independent items" src="../examples/two.svg"/>
+				</div>
+				<div class="box">
+					<div><div>first depends</div><div>on second</div></div>
+					<img alt="Diagram of a level where the first item depends on the second" src="../examples/level/first-depends-upon-second.svg"/>
+				</div>
 			</div>
-			<div class="box">
-				<div>interdependent (stacked)</div>
-				<img alt="Diagram of a stack where the upper and lower items depend on each other" src="../examples/stack/two-interdependent.svg"/>
-			</div>
-		</div>
-		<div class="example">
-			<div class="box">
-				<div>independent</div>
-				<img alt="Diagram of two independent items" src="../examples/two.svg"/>
-			</div>
-			<div class="box">
-				<div><div>first depends</div><div>on second</div></div>
-				<img alt="Diagram of a level where the first item depends on the second" src="../examples/level/first-depends-upon-second.svg"/>
-			</div>
-			<div class="box">
-				<div><div>interdependent</div><div>(not stacked)</div></div>
-				<img alt="Diagram of a level where the first and second items depend on each other" src="../examples/level/two-interdependent.svg"/>
-			</div>
-		</div>
-		<p>Dependencies within an item are also summarized and shown inside the item box, below the identifier text.</p>
+		</p>
+		<p>Clicking on an arrow will list the dependencies counted in it.</p>
+		<h1>Complex Systems</h1>
+		<h2 style="margin-bottom: 0">hierarchy of stacks</h2>
+		<p>To model everything, in systems of any size, Eunice uses a hierarchy of nested stacks.</p>
+		<p>Stacks can be inferred from:
+			<ul>
+				<li>functions in a file</li><li>methods of a class</li><li>files in a directory</li><li>directories in sub-directories</li><li>projects/packages in a repository</li>
+			</ul>
+		</p>
+		<p>Eunice does this by nesting groups of items, each with its own stack, creating a hierarchy.</p>
+		<div class="box diagram"><img alt="Diagrams of how dependencies cross the boundaries of different scopes and groups" src="./groups-independent.svg" style="max-width: 330.5px" /></div>
+		<p>Items that have uni-directional dependencies between each other, but are in groups that create a circular dependency, are automatically detected.</p>
+		<div class="box diagram"><img alt="Diagram of how circular group dependencies are detected" src="./groups-bidirectional.svg" style="max-width: 150.5px" /></div>
+		<p>Dependencies within an item are summarized and shown inside the item box, below the identifier text.</p>
 		<div class="example">
 			<div class="box">
 				<div><div>parent</div><div>depends on</div><div>item</div></div>
@@ -203,9 +172,14 @@
 				<img alt="Diagram of a parent where one its child items depends on another child item in the same level" src="../examples/level/first-item-depends-upon-second-item.svg"/>
 			</div>
 		</div>
-		<p>Items and sub-items can also be opened. Selecting an item will show its child items and breadcrumb links for where it is in the hierarchy.</p>
-		<p>An opened item's outer dependencies are shown around the outside of its border.</p>
-		<p>If there are multiple child items a summary of their dependencies is shown in the bottom of the opened item's border.</p>
+		<p>Clicking on an item will open it and show its child items and their dependency counts.</p>
+		<p>When an item's opened its:
+			<ul>
+				<li>ancestors are displayed as breadcrumbs</li>
+				<li>outer dependencies are shown around the outside of its border</li>
+				<li>total dependency count of its child items are shown in its bottom border</li>
+			</ul>
+		</p>
 		<div class="parent-count-examples">
 			<div class="box">
 				<div>
@@ -226,6 +200,10 @@
 				</div>
 			</div>
 		</div>
+		<h2 id="cohesion-and-coupling">Cohesion and Coupling</h1>
+		<p>In Eunice, hierarchical structure and unidirectional dependencies come together to encourage less coupling across inter-group dependencies, replacing them with intra-group dependencies and more cohesion.</p>
+		<p>In the following example the 4 items and 3 dependencies stay the same, but re-structuring the groups reduces the number of dependencies across the groups from two to one.</p>
+		<div class="box diagram"><img alt="Diagram of how coupling is lower and cohesion is higher when dependencies are in uni-directional hierarchies" src="./coupling-and-cohesion.svg" style="max-width: 510.5px" /></div>
 		<h1 id="advanced">advanced</h1>
 		For information on how Eunice uses YAML, is implemented and can be extended, see the <a href="../advanced">advanced</a> page.
 	</div>

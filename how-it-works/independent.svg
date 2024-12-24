@@ -1,0 +1,21 @@
+<svg height="70" width="110" xmlns="http://www.w3.org/2000/svg">
+	<defs><style>
+		polyline,
+		rect {
+			fill: none;
+			stroke: black;
+		}
+	</style></defs>
+	<symbol id="arrow-head">
+		<polygon points="0,0 15,0 7.5,7.5"/>
+	</symbol>
+	<symbol id="down-arrow">
+		<polyline points="7.5,0 7.5,12.5"/>
+		<use href="#arrow-head" x="0" y="12.5"/>
+	</symbol>
+	<rect height="25" width="50"/>
+	<use href="#down-arrow" x="32.5" y="25"/>
+	<rect height="25" width="50" x="60"/>
+	<use href="#down-arrow" x="62.5" y="25"/>
+	<rect height="25" width="50" x="30" y="45"/>
+</svg>

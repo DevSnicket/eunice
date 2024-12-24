@@ -22,7 +22,7 @@
 		<div class="image-right">
 			<div>
 				<p>This case study of the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" rel="noopener" target="_blank">JavaScript</a> library <a href="https://netflix.github.io/pollyjs" rel="noopener" target="_blank">Polly.JS</a> is intended as an introduction to Eunice because Polly.JS doesn't require any configuration and has uni-directional dependencies.</p>
-				<p>Alternatively, for a demonstration of Eunice on a larger code base, that requires configuration and has bi-directional dependencies, there's also a <a href="../react">React case study</a>.</p>
+				<p>Alternatively, for a demonstration of Eunice on a larger code base, that requires configuration and has circular dependencies, there's also a <a href="../react">React case study</a>.</p>
 			</div>
 			<img alt="Eunice and Polly.JS logos" src="./header.png" style="width:24em" />
 		</div>
@@ -40,7 +40,7 @@ git reset --hard 0003c0e</code>
 		<p>On the left a text editor is displaying 6,927 lines of <a href="../../advanced/yaml">YAML</a> produced by Eunice's analysis of Polly.JS.</p>
 		<p>On the right is a graphical representation of all the <a href="../../dependencies">dependencies</a> and the root directories in Polly.JS. The green and red count arrows represent the dependencies, categorized as follows:</p>
 		<div class="arrows-with-descriptions"></div>
-		<p>The 1,102 matching (green) and only 22 (red) mismatching dependencies shows that Eunice has found the vast majority of dependencies in Polly.JS as uni-directional. The few bi-directional dependencies that have been found are deep inside the directory structure (e.g. the 17 in packages) and unlikely to be of much, if any consequence.</p>
+		<p>The 1,102 matching (green) and only 22 (red) mismatching dependencies shows that Eunice has found the vast majority of dependencies in Polly.JS as uni-directional. The few circular dependencies that have been found are deep inside the directory structure (e.g. the 17 in packages) and unlikely to be of much, if any consequence.</p>
 		<h3>stacks</h3>
 		<p>There isn't a stack in the root directory shown above; however, selecting the packages/@pollyjs sub-directory will show one for its contents:</p>
 		<img alt="Eunice showing the packages sub-directory of Polly.JS" src="./2-packages-pollyjs.png" />
@@ -66,7 +66,7 @@ git reset --hard 0003c0e</code>
 		<p>There is a dependency from core on adapter, but this is just for testing.</p>
 		<h3 id="packages-tests-and-sub-directories">packages, tests and sub-directories</h3>
 		<p>The packages/@pollyjs directory I've investigated above is used for the creation of <a href="https://www.npmjs.com/package/@pollyjs/core" rel="noopener" target="_blank">NPM packages</a>, so its not surprising to see that, at least at runtime, there are uni-directional dependencies. However, what appear to be integration tests across those packages also have uni-directional dependencies.</p>
-		<p>Eunice could also be used to investigate inside the sub-directories of packages. Here there is the potential for runtime bi-directional dependencies across the directory structure. As there doesn't appear to be any in Polly.JS I haven't done that in this case study. If you want a demonstration of this please see the <a href="../react">React case study</a>.</p>
+		<p>Eunice could also be used to investigate inside the sub-directories of packages. Here there is the potential for runtime circular dependencies across the directory structure. As there doesn't appear to be any in Polly.JS I haven't done that in this case study. If you want a demonstration of this please see the <a href="../react">React case study</a>.</p>
 		<h3>You can interact with the Eunice analysis for this case study <a href="./eunice.html" target="_blank">here</a></h3>
 		<h3 id="why-use-eunice">why use Eunice</h3>
 		<p>Even though Eunice shows Polly.JS as already having uni-directional dependencies, using Eunice can still be beneficial while working on such a project.</p>

@@ -1,7 +1,8 @@
 body > .content {
 	display: flex;
 	flex-wrap: wrap;
-	padding: 0 0.5rem;
+	gap: 1em;
+	padding: 0 0.5em;
 }
 
 body > .content > *:first-child {
@@ -13,13 +14,12 @@ body > .content > *:first-child {
 body > .content > *:nth-child(2) {
 	flex-basis: 0;
 	flex-grow: 10;
-	padding: 0.5rem 0.5rem;
 	min-width: 18em;
 }
 
 body > .content .side-menu {
-	align-content: start;
 	display: flex;
+	flex-direction: column;
 }
 
 body > .content .side-menu > * {
@@ -28,9 +28,9 @@ body > .content .side-menu > * {
 
 body > .content .side-menu > :not(.side-menu) {
 	margin: 0;
-	padding: 0.25rem;
+	padding: 0.25em;
 }
 
 body > .content .side-menu > .side-menu > :not(:first-child) {
-	margin-left: 0.5rem;
+	margin-left: 0.5em;
 }

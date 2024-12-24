@@ -42,13 +42,25 @@
 			flex: 1;
 		}
 
-		.language {
+		ul.languages {
+			display: flex;
+			flex-direction: column;
+			gap: 0.5em;
+			margin: 0;
+			padding: 0;
+		}
+
+		ul.languages > li {
+			list-style: none;
+		}
+
+		ul.languages > li > a {
 			text-decoration: none;
 		}
 
-		.language .box {
+		ul.languages > li > a > .box {
 			align-items: center;
-			display:flex;
+			display: flex;
 			flex-wrap: wrap;
 			text-align: center;
 		}
@@ -57,11 +69,6 @@
 			align-items: center;
 			margin: 0 auto;
 			text-align: center;
-		}
-
-		.logo > :first-child,
-		.logo > :last-child {
-			flex: 1;
 		}
 
 		.logo .arrows {
@@ -75,33 +82,6 @@
 		.logo h2 {
 			font-size: 2em;
 			margin: 0 1em;
-		}
-
-		.javascript-related-logos {
-			display: flex;
-			flex: 1;
-			flex-basis: 0;
-			flex-wrap: wrap;
-		}
-
-		.javascript-related-logos img {
-			height: 3em;
-			margin: 1em;
-			min-width: 3em;
-		}
-
-		@media (max-width: 62em) {
-			.blog-latest {
-				max-width: unset;
-			}
-
-			.logo > :first-child {
-				display: none;
-			}
-
-			.logo > :last-child {
-				flex: unset;
-			}
 		}
 
 		@media (prefers-color-scheme: dark) {
@@ -119,72 +99,74 @@
 		</div>
 	</div>
 	<div class="logo horizontal-container">
-		<div></div>
 		<div style="margin: 1.5em">
-			<h1 style="font-size: 6em; line-height: 0.8em; margin: 0 0 0.5rem"><span class="red">e</span>uni<span class="red">ce</span></h1>
+			<h1 style="font-size: 6em; line-height: 0.8em; margin: 0 0 0.1em"><span class="red">e</span>uni<span class="red">ce</span></h1>
 			<div class="arrows"></div>
 		</div>
-		<h2><div>structure</div><div>dependencies</div><div>cohesion/coupling</div><div>modularity</div></h2>
-		<div></div>
 	</div>
 	<div class="content">
-		<p>Eunice improves cohesion, coupling and modularity in software through hierarchical structure and simplified unidirectional (non-circular) dependencies.</p>
-		<p>Eunice analyses source code, infers its structure and shows if the dependencies match.</p>
+		<p>Improve cohesion and modularity through hierarchical structure and unidirectional (non-circular) dependencies.</p>
 		<a href="./how-it-works">
 			<div class="box" style="text-align: center">
 				<p>click here to learn how Eunice works</p>
 				<div id="how-it-works-images">
 					<div style="background-image: url(./how-it-works/stacks.svg)"></div>
-					<div style="background-image: url(./how-it-works/groups.svg)"></div>
+					<div style="background-image: url(./how-it-works/groups-independent.svg)"></div>
 					<div style="background-image: url(./how-it-works/coupling-and-cohesion.svg)"></div>
 				</div>
 			</div>
 		</a>
-		<p>See results and explore your JavaScript and C# code in minutes:</p>
-		<a class="language" id="javascript" href="./javascript">
-			<div class="box">
-				<img alt="JavaScript logo" src="./javascript/logo.svg" style="width: 10em" />
-				<div class="javascript-related-logos">
-					<img alt="Node.js" src="./nodejs.svg" /><img alt="TypeScript" src="./typescript.svg" /><img alt="React" src="./react.svg" /><img alt="Flow" src="./flow.svg" />
-				</div>
-				<div style="margin: 0">
-					<div class="terminal">
-						<div class="title-bar">terminal</div>
-						<div class="text">~/my-source-code<br/>$ npx eunice</div>
-					</div>
-				</div>
-				<div style="flex-basis: 0; flex-grow: 1">
-					creates a eunice.html file from a JavaScript source code directory
-				</div>
-			</div>
-		</a>
-		<a class="language" id="csharp" href="./csharp">
-			<div class="box">
-				<img alt="c# logo" src="./csharp/logo.svg" style="width: 10em" />
-				<div style="margin: 0">
-					<div class="terminal">
-						<div class="title-bar">terminal</div>
-						<div class="text">
-							~/my-source-code<br/>
-							$ dotnet tool install --global eunice<br/>
-							<br/>
-							~/my-source-code<br/>
-							$ eunice MySolution.sln
+		<p>Eunice analyses code and shows if dependencies are unidirectional or circular across the hierarchical structure.</p>
+		<p>Analyze your JavaScript/TypeScript and C# code:</p>
+		<ul class="languages">
+			<li>
+				<a id="javascript" href="./javascript">
+					<div class="box">
+						<img alt="JavaScript" src="./javascript/logo.svg" style="width: 10em" />
+						<img alt="TypeScript" src="./typescript.svg" style="background-color: white; width: 10em" />
+						<div style="margin: 0">
+							<div class="terminal">
+								<div class="title-bar">terminal</div>
+								<div class="text">~/my-source-code<br/>$ npx eunice</div>
+							</div>
+						</div>
+						<div style="flex-basis: 0; flex-grow: 1">
+							creates a eunice.html file from JavaScript/TypeScript in the current directory
 						</div>
 					</div>
-				</div>
-				<div style="flex-basis: 0; flex-grow: 1">
-					creates a eunice.html file from a C# solution or project
-				</div>
+				</a>
+			</li>
+			<li>
+				<a id="csharp" href="./csharp">
+					<div class="box">
+						<img alt="c# logo" src="./csharp/logo.svg" style="width: 10em" />
+						<div style="margin: 0">
+							<div class="terminal">
+								<div class="title-bar">terminal</div>
+								<div class="text">
+									~/my-source-code<br/>
+									$ dotnet tool install --global eunice<br/>
+									<br/>
+									~/my-source-code<br/>
+									$ eunice MySolution.sln
+								</div>
+							</div>
+						</div>
+						<div style="flex-basis: 0; flex-grow: 1">
+							creates a eunice.html file from a C# solution or project
+						</div>
+					</div>
+				</a>
+			</li>
+		</ul>
+		<p>
+			<p>click on the image below to try Eunice analysis of its own code 🐶🥫 or read a <a href="./case-studies">case study</a></p>
+			<div class="box horizontal-container" id="dogfooding" style="text-align: center">
+				<a href="dogfooding" style="background: white; flex-grow: 1; padding: 0.5em;" target="_blank">
+					<img alt="Eunice visualization of Eunice's own structure and dependencies" src="./dogfooding/index.svg" style="width: 100%" />
+				</a>
 			</div>
-		</a>
-		<div class="box horizontal-container" id="dogfooding" style="text-align: center">
-			<p>select the image below to try Eunice on Eunice 🐶🥫</p>
-			<p>or read a <a href="./case-studies">case study</a></p>
-			<a href="dogfooding" style="background: white; flex-grow: 1; padding: 0.5em;" target="_blank">
-				<img alt="Eunice visualization of Eunice's own structure and dependencies" src="./dogfooding/index.svg" style="width: 100%" />
-			</a>
-		</div>
+		</p>
 	</div>
 	<footer>
 		<div class="footer">

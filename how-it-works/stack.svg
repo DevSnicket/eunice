@@ -1,0 +1,17 @@
+<svg height="70" width="50" xmlns="http://www.w3.org/2000/svg">
+	<defs><style>
+		polyline,
+		rect {
+			fill: none;
+			stroke: black;
+		}
+	</style></defs>
+	<rect height="25" width="50"/>
+	<g transform="translate(17.5, 25)">
+		<polyline points="7.5,0 7.5,12.5"/>
+		<g transform="translate(0, 12.5)">
+			<polygon points="0,0 15,0 7.5,7.5"/>
+		</g>
+	</g>
+	<rect height="25" width="50" y="45"/>
+</svg>
