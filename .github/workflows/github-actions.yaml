@@ -1,7 +1,7 @@
 on: [push, workflow_dispatch]
 jobs:
-  ubuntu-latest:
-    runs-on: ubuntu-latest
+  ubuntu:
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
         with: { submodules: 'true' }
@@ -25,26 +25,18 @@ jobs:
         with:
           package: ./javascript/package.json
           token: ${{ secrets.NPM_TOKEN }}
-      - name: setup .NET 3.1
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '3.1.x'
-      - name: setup .NET 5.0
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '5.0.x'
       - name: setup .NET 6.0
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '6.0.x'
+          dotnet-version: '6.0.428'
       - name: setup .NET 7.0
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '7.0.x'
+          dotnet-version: '7.0.410'
       - name: setup .NET 8.0
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '8.0.101'
       - run: (cd csharp && dotnet tool restore)
       - run: ./csharp/clean.sh
       - run: ./csharp/WriteInteractiveInDirectoryPathWithYaml/copy-index-html-from-interactive-dist.sh

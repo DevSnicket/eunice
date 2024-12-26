@@ -32,9 +32,17 @@
 		<Copy
 			DestinationFiles="$(OutputPath)xunit.console.runtimeconfig.json"
 			SourceFiles="$(OutputPath)$(AssemblyName).runtimeconfig.json" />
+		<PropertyGroup>
+			<EuniceTestProjectSdkVersion Condition="$(TargetFrameworkVersion)=='v6.0'">6.0.428</EuniceTestProjectSdkVersion>
+			<EuniceTestProjectSdkVersion Condition="$(TargetFrameworkVersion)=='v7.0'">7.0.410</EuniceTestProjectSdkVersion>
+			<EuniceTestProjectSdkVersion Condition="$(TargetFrameworkVersion)=='v8.0'">8.0.101</EuniceTestProjectSdkVersion>
+		</PropertyGroup>
+		<Error
+			Text="Sdk version map for $(TargetFrameworkVersion) has not been specified in $(MSBuildProjectFile)."
+			Condition="'$(EuniceTestProjectSdkVersion)' == ''" />
 		<WriteLinesToFile
 			File="$(OutputPath)global.json"
 			Overwrite="true"
-			Lines="{ &quot;sdk&quot;: { &quot;rollForward&quot;: &quot;latestFeature&quot;, &quot;version&quot;: &quot;$(_TargetFrameworkVersionWithoutV).0&quot; } }" />
+			Lines="{ &quot;sdk&quot;: { &quot;rollForward&quot;: &quot;disable&quot;, &quot;version&quot;: &quot;$(EuniceTestProjectSdkVersion)&quot; } }" />
 	</Target>
 </Project>
