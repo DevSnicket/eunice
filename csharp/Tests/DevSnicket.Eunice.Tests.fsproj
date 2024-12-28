@@ -35,7 +35,7 @@
 		<PropertyGroup>
 			<EuniceTestProjectSdkVersion Condition="$(TargetFrameworkVersion)=='v6.0'">6.0.428</EuniceTestProjectSdkVersion>
 			<EuniceTestProjectSdkVersion Condition="$(TargetFrameworkVersion)=='v7.0'">7.0.410</EuniceTestProjectSdkVersion>
-			<EuniceTestProjectSdkVersion Condition="$(TargetFrameworkVersion)=='v8.0'">8.0.101</EuniceTestProjectSdkVersion>
+			<EuniceTestProjectSdkVersion Condition="$(TargetFrameworkVersion)=='v8.0'">8.0.404</EuniceTestProjectSdkVersion>
 		</PropertyGroup>
 		<Error
 			Text="Sdk version map for $(TargetFrameworkVersion) has not been specified in $(MSBuildProjectFile)."

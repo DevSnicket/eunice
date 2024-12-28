@@ -36,7 +36,7 @@ jobs:
       - name: setup .NET 8.0
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.101'
+          dotnet-version: '8.0.404'
       - run: (cd csharp && dotnet tool restore)
       - run: ./csharp/clean.sh
       - run: ./csharp/WriteInteractiveInDirectoryPathWithYaml/copy-index-html-from-interactive-dist.sh
