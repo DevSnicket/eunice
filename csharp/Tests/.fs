@@ -111,8 +111,13 @@ type Tests () =
                 | false ->
                     async.Return ""
 
-            let! errors = "errors" |> readExpectedFileWithExtensionWhenExists
-            let! yaml = "yaml" |> readExpectedFileWithExtensionWhenExists
+            let! netVersionSpecificErrors =
+                $"net{System.Environment.Version.Major.ToString()}.errors" |> readExpectedFileWithExtensionWhenExists;
+            let! errors =
+                match netVersionSpecificErrors with
+                | "" -> "errors" |> readExpectedFileWithExtensionWhenExists
+                | _ -> netVersionSpecificErrors |> async.Return
+            let! yaml = readExpectedFileWithExtensionWhenExists "yaml"
 
             return formatErrorsAndYaml errors yaml
         }

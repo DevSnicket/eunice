@@ -4,8 +4,9 @@ module rec DevSnicket.Eunice.AnalyzeProjectOrSolutionPath._Tests.RegisterAndGetP
 type MSBuildLocator = Microsoft.Build.Locator.MSBuildLocator
 
 let registerAndGetPathOfMsbuild =
-    MSBuildLocator.RegisterDefaults ()
-    |> ignore
+    if MSBuildLocator.CanRegister then
+        MSBuildLocator.RegisterDefaults ()
+        |> ignore
 
     MSBuildLocator.QueryVisualStudioInstances()
     |> Seq.head
