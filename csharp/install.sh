@@ -6,8 +6,8 @@ curl -o dotnet-install.sh https://dotnet.microsoft.com/download/dotnet/scripts/v
 
 chmod +x dotnet-install.sh
 
-./dotnet-install.sh --channel 3.1
-./dotnet-install.sh --channel 5.0
-./dotnet-install.sh --channel 6.0
-./dotnet-install.sh --channel 7.0
-./dotnet-install.sh --channel 8.0
+./dotnet-install.sh --version 3.1.426
+./dotnet-install.sh --version 5.0.408
+./dotnet-install.sh --version 6.0.428
+./dotnet-install.sh --version 7.0.410
+./dotnet-install.sh --version 8.0.404

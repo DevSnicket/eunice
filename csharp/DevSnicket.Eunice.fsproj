@@ -9,14 +9,41 @@
 		<PackageTags>analyze;analyzer;architecture;dependency;dependencies;csharp;euince;stack;structure;uince;unice</PackageTags>
 		<PackageType>DotNetCliTool</PackageType>
 		<PackAsTool>true</PackAsTool>
-		<Version>1.26.0</Version>
+		<Version>1.27.0</Version>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Build.Locator" Version="1.2.6" />
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.8.0" />
-		<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="4.8.0" />
-		<PackageReference Include="NuGet.ProjectModel" Version="6.8.0" />
+	</ItemGroup>
+	<ItemGroup Condition="$(TargetFrameworkVersion)=='v3.1'">
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.7.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.7.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="3.7.0" />
+		<PackageReference Include="NuGet.ProjectModel" Version="5.7.3-rtm.5" />
+	</ItemGroup>
+	<ItemGroup Condition="$(TargetFrameworkVersion)=='v5.0'">
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.11.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.11.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="3.11.0" />
+		<PackageReference Include="NuGet.ProjectModel" Version="5.11.2" />
+	</ItemGroup>
+	<ItemGroup Condition="$(TargetFrameworkVersion)=='v6.0'">
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.3.1" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.3.1" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="4.3.1" />
+		<PackageReference Include="NuGet.ProjectModel" Version="6.3.4" />
+	</ItemGroup>
+	<ItemGroup Condition="$(TargetFrameworkVersion)=='v7.0'">
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.7.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.7.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="4.7.0" />
+		<PackageReference Include="NuGet.ProjectModel" Version="6.7.1" />
+	</ItemGroup>
+	<ItemGroup Condition="$(TargetFrameworkVersion)=='v8.0'">
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.11.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.11.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="4.11.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+		<PackageReference Include="NuGet.ProjectModel" Version="6.11.1" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Include="AnalysisResult.fs" />

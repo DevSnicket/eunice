@@ -1,0 +1,1 @@
+Msbuild failed when processing the file 'Project.csproj' with message: The TargetFramework value 'madeuptargetframework' was not recognized. It may be misspelled. If not, then the TargetFrameworkIdentifier and/or TargetFrameworkVersion properties must be specified explicitly.
