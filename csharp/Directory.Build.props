@@ -2,6 +2,6 @@
 	<PropertyGroup>
 		<CheckEolTargetFramework>false</CheckEolTargetFramework>
 		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
-		<TargetFrameworks>netcoreapp6.0;netcoreapp7.0;netcoreapp8.0</TargetFrameworks>
+		<TargetFrameworks>netcoreapp3.1;netcoreapp5.0;netcoreapp6.0;netcoreapp7.0;netcoreapp8.0</TargetFrameworks>
 	</PropertyGroup>
 </Project>

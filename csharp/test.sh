@@ -27,6 +27,8 @@ writeReport () {
 		echo report file not found $reportFile
 	fi
 }
+writeReport 3.1
+writeReport 5.0
 writeReport 6.0
 writeReport 7.0
 writeReport 8.0

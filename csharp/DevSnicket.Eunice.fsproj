@@ -14,6 +14,18 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Build.Locator" Version="1.2.6" />
 	</ItemGroup>
+	<ItemGroup Condition="$(TargetFrameworkVersion)=='v3.1'">
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.7.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.7.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="3.7.0" />
+		<PackageReference Include="NuGet.ProjectModel" Version="5.7.3-rtm.5" />
+	</ItemGroup>
+	<ItemGroup Condition="$(TargetFrameworkVersion)=='v5.0'">
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.11.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.11.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="3.11.0" />
+		<PackageReference Include="NuGet.ProjectModel" Version="5.11.2" />
+	</ItemGroup>
 	<ItemGroup Condition="$(TargetFrameworkVersion)=='v6.0'">
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.3.1" />
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.3.1" />
