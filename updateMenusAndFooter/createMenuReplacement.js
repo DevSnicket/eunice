@@ -49,7 +49,6 @@ function formatMenuHtml({
 					redirectDirectories: [ "csharp", "dotnet", "javascript" ],
 				},
 				{ directory: "issues" },
-				{ directory: "blog" },
 			]
 			.map(formatDirectory)
 		);
