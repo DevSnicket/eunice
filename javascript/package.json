@@ -70,14 +70,14 @@
 	},
 	"scripts": {
 		"all": "npm run spellcheck && npm run lint && npm run typescript && npm run build-prepare && npm run build-interactive && npm run test && npm run build && npm run harness && npm run dogfooding",
-		"build": "npx webpack -p --config webpack.config.js -r ${PWD}/../test-harnesses/babel.register.cjs",
+		"build": "NODE_OPTIONS=--openssl-legacy-provider npx webpack -p --config webpack.config.js -r ${PWD}/../test-harnesses/babel.register.cjs",
 		"build-development": "npx webpack -d --config webpack.config.js -r ${PWD}/../test-harnesses/babel.register.cjs",
-		"build-interactive": "npx webpack -p --config interactive.webpack.config.js -r ${PWD}/../test-harnesses/babel.register.cjs",
+		"build-interactive": "NODE_OPTIONS=--openssl-legacy-provider npx webpack -p --config interactive.webpack.config.js -r ${PWD}/../test-harnesses/babel.register.cjs",
 		"build-interactive-development": "npx webpack -d --config interactive.webpack.config.js -r ${PWD}/../test-harnesses/babel.register.cjs",
 		"build-prepare": "rm -rf dist && mkdir dist",
 		"dogfooding": "(cd dogfooding && bash ./run.sh)",
 		"lint": "npx eslint .",
-		"harness": "(rm -rf harness/output && npx webpack -p --config harness/webpack.config.js -r ${PWD}/../test-harnesses/babel.register.cjs)",
+		"harness": "(rm -rf harness/output && NODE_OPTIONS=--openssl-legacy-provider npx webpack -p --config harness/webpack.config.js -r ${PWD}/../test-harnesses/babel.register.cjs)",
 		"spellcheck": "find . -type f \\( -name \"*.js\" -or -name \"*.md\" \\) ! -path \"**/test-cases/*\" ! -path \"./analyzer/harness/output/*\" ! -path \"./analyzer/node_modules/**/*\" ! -path \"./analyzer/test-coverage/**/*\" ! -path \"./dogfooding/output/**\" ! -path \"./dist/*\" ! -path \"./gh-pages/**\" ! -path \"./harness/output/**\" ! -path \"./node_modules/**/*\" ! -path \"./test-coverage/**/*\" -exec npx cspell --config ../cspell.json {} +",
 		"test": "jest",
 		"typescript": "npx tsc -p jsconfig.json"
