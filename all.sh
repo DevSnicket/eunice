@@ -4,15 +4,13 @@ set -e
 
 script=${1:-all}
 
-(cd run-tests-from-file-system && npm run $script)
-(cd test-harnesses && npm run $script)
-(cd dependency-and-structure && npm run $script)
-(cd dependency-counter && npm run $script)
-(cd javascript/analyzer && npm run $script)
-(cd interactive && npm run $script)
-(cd stacking-explicit && npm run $script)
-(cd stacking-inference && npm run $script)
-(cd visualizer && npm run $script)
-(cd javascript && npm run $script)
+for packageDirectoryName in run-tests-from-file-system test-harnesses dependency-and-structure dependency-counter javascript/analyzer interactive stacking-explicit stacking-inference visualizer javascript
+do
+	echo
+	echo Running \"${script}\" NPM script in $packageDirectoryName package directory
+	echo
+
+	(cd $packageDirectoryName && npm run $script)
+done
 
 ./website-update.sh $2 $3
