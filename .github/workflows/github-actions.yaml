@@ -58,5 +58,9 @@ jobs:
       - run: ./csharp/lint.sh
       - run: ./csharp/spellcheck.sh
       - run: ./csharp/package/pack.sh
+      - id: NuGetLogin
+        if: github.ref == 'refs/heads/main'
+        uses: NuGet/login@v1
+        with: { user: '${{ secrets.NUGET_USER }}' }
       - if: github.ref == 'refs/heads/main'
-        run: ./csharp/package/push.sh ${{ secrets.NUGET_TOKEN }}
+        run: ./csharp/package/push.sh ${{ steps.NuGetLogin.outputs.NUGET_API_KEY }}
