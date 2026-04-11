@@ -1,6 +1,9 @@
 on: [push, workflow_dispatch]
 jobs:
   ubuntu:
+    permissions:
+      contents: read
+      id-token: write
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
@@ -21,10 +24,9 @@ jobs:
       - run: (cd javascript && npm run all)
       - run: ./website-update.sh ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }}
       - if: github.ref == 'refs/heads/main'
-        uses: JS-DevTools/npm-publish@v1
+        uses: JS-DevTools/npm-publish@v4
         with:
           package: ./javascript/package.json
-          token: ${{ secrets.NPM_TOKEN }}
       - name: setup .NET 3.1
         uses: actions/setup-dotnet@v3
         with:
